@@ -7,114 +7,171 @@
       </div>
       <div class="col-sm-7 text-right">
         <label>Costing in</label>
-        <select (change)="onChangeCostingIn($event.target.value)">
+        <select class="select-costing" (change)="onChangeCostingIn($event.target.value)">
           <option *ngFor="let cIn of costIn" [value]="cIn.costInId">{{cIn.costInId}}</option>
         </select>
         <label>Costing per</label>
-        <select (change)="onChangeCostingPer($event.target.value)">
+        <select class="select-costing" (change)="onChangeCostingPer($event.target.value)">
           <option *ngFor="let cPer of costPer" [value]="cPer.costPerId">{{cPer.costPerId}}</option>
         </select>
       </div>
     </div>
     <div class="col-sm-8 col-xs-12">
 
-    <div *ngFor="let building of projectBuildings; let i = index">
+      <div *ngFor="let building of projectBuildings; let i = index">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a (click)="setBuildingId(building._id)" data-toggle="collapse" href="#collapse{{i}}">
+                  {{building.name}} <span class="slab-area"> Total {{defaultCostPer}} : {{building.area}} Sqmt</span>
+                </a>
+              </h4>
+              <div class="dropdown menu-items">
+                <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
+                <ul class = "dropdown-menu">
+                  <li><p  data-toggle="modal" data-target="#myModal" (click)="cloneBuilding(building._id)">Clone</p></li>
+                  <li><p (click)="editBuildingDetails(building._id)">Edit</p></li>
+                  <li><p data-toggle="modal" data-target="#delete" (click)="deleteBuildingFunction(building._id)">Delete</p></li>
+                  <li><p (click)="addBuilding()">Add Building</p></li>
+                </ul>
+              </div>
+            </div>
+            <div id="collapse{{i}}" class="panel-collapse collapse">
+              <div class="panel-body">
+                <table class="table table-row-spacing table-dashboard">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" class="border-left">Cost Head</th>
+                      <th colspan="2" class="border-left">By Thumbrule</th>
+                      <th colspan="2" class="border-left">Estimated <span class="sub-heading">(as per project quantities & rates)</span></th>
+                      <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                      <th><span class="sub-heading">Budgeted Cost</span></th>
+                      <th class="border-left"><span class="sub-heading">{{defaultCostIn}}<br/>{{defaultCostPer}}</span></th>
+                      <th><span class="sub-heading">Estimated Cost</span></th>
+                      <th class="border-left" ><span class="sub-heading">{{defaultCostIn}}<br/>{{defaultCostPer}}</span></th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="(building.thumbRule && building.estimated)" >
+                    <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReport; let i = index">
+                      <td class="border-left">{{thumbRuleItem.name}}</td>
+                      <td>
+                        <div class="edit-field">
+                          <input type="number"
+                                 [(ngModel)]="thumbRuleItem.amount"
+                                 id="thumbRuleItem.amount"
+                                 (blur)="changeBudgetedCost(building._id, thumbRuleItem.name, thumbRuleItem.amount , building.area)"
+                                 class="form-control clear"/>
+                        </div>
+                      </td>
+                      <td class="border-left">{{thumbRuleItem.rate}}</td>
+                      <td>
+                        <div class="edit-field" *ngIf="building.estimated.estimatedCost[i].total != 0"
+                             (click)="getAmount(building.name, building.estimated.estimatedCost[i])">
+                          <input [(ngModel)]="building.estimated.estimatedCost[i].total"
+                                 id="estimatedItem.total"
+                                 class="form-control clear"/>
+                        </div>
+                        <div>
+                          <button *ngIf="building.estimated.estimatedCost[i].total == 0"
+                                  type="button" class="btn btn-get-amount"
+                                  (click)="getAmount(building.name, building.estimated.estimatedCost[i])">Get Amount</button>
+                        </div>
+                      </td>
+                      <td class="border-left">{{building.estimated.estimatedCost[i].rate}}</td>
+                      <td>
+                        <div data-toggle="modal"
+                             data-target="#deleteCosthead"
+                             (click)="deleteCostHeadDetailsfun(building._id, building.estimated.estimatedCost[i].name)" class="delete-cost-head">
+                          <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="showCostHeadList===true && buildingId===building._id">
+                      <td class="border-left">
+                        <select class="select-item" (change)="inactiveCostHeadSelected($event.target.value)">
+                          <option>Select Item</option>
+                          <option *ngFor="let costHeadItem of inActiveCostHeadArray" [value]="costHeadItem.name">{{costHeadItem.name}}</option>
+                        </select>
+                      </td>
+                      <td colspan="5">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6" class="add-items">
+                        <button type="button" class="btn btn-add-item" (click)="showInactiveCostHeadsOnDropDown(building._id)"><span class="glyphicon glyphicon-plus"></span>Add Item</button>
+                      </td>
+                    </tr>
+                  <tr class="total" *ngIf="(building.thumbRule && building.estimated)">
+                    <td>Total</td>
+                    <td>{{building.thumbRule.totalBudgetedCost|number}}</td>
+                    <td>{{building.thumbRule.totalRate|number}}</td>
+                    <td>{{building.estimated.totalEstimatedCost|number}}</td>
+                    <td>{{building.estimated.totalRate|number}}</td>
+                    <td></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="panel-group">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a (click)="setBuildingId(building._id)" data-toggle="collapse" href="#collapse{{i}}">
-                {{building.name}} <span class="slab-area"> Total {{defaultCostPer}} : {{building.area}} Sqmt</span>
+              <a data-toggle="collapse" href="#collapseCommonDevelopment">
+                Common Development <span class="slab-area"> Total {{defaultCostPer}} : 12,130 Sqmt </span>
               </a>
             </h4>
-            <div class="dropdown menu-items">
-              <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
-              <ul class = "dropdown-menu">
-                <li><p  data-toggle="modal" data-target="#myModal" (click)="cloneBuilding(building._id)">Clone</p></li>
-                <li><p (click)="editBuildingDetails(building._id)">Edit</p></li>
-                <li><p data-toggle="modal" data-target="#delete" (click)="deleteBuildingFunction(building._id)">Delete</p></li>
-                <li><p (click)="addBuilding()">Add Building</p></li>
-              </ul>
-            </div>
           </div>
-          <div id="collapse{{i}}" class="panel-collapse collapse">
+          <div id="collapseCommonDevelopment" class="panel-collapse collapse">
             <div class="panel-body">
-              <table class="table table-row-spacing">
+
+              <table class="table table-row-spacing table-dashboard">
                 <thead>
-                  <tr>
-                    <th rowspan="2">Cost Head</th>
-                    <th colspan="2">By Thumbrule</th>
-                    <th colspan="2">Estimated <span class="sub-heading">(as per project quantities & rates)</span></th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <th><span class="sub-heading">Budgeted Cost</span></th>
-                    <th><span class="sub-heading">{{defaultCostIn}}<br/>{{defaultCostPer}}</span></th>
-                    <th><span class="sub-heading">Estimated Cost</span></th>
-                    <th><span class="sub-heading">{{defaultCostIn}}<br/>{{defaultCostPer}}</span></th>
-                    <th></th>
-                  </tr>
+                <tr>
+                  <th rowspan="2" class="border-left">Cost Head</th>
+                  <th colspan="2" class="border-left">By Thumbrule</th>
+                  <th colspan="2" class="border-left">Estimated <span class="sub-heading">(as per project quantities & rates)</span></th>
+                  <th>&nbsp;</th>
+                </tr>
+                <tr>
+                  <th><span class="sub-heading">Budgeted Cost</span></th>
+                  <th class="border-left"><span class="sub-heading">{{defaultCostIn}}<br/>{{defaultCostPer}}</span></th>
+                  <th><span class="sub-heading">Estimated Cost</span></th>
+                  <th class="border-left" ><span class="sub-heading">{{defaultCostIn}}<br/>{{defaultCostPer}}</span></th>
+                  <th>&nbsp;</th>
+                </tr>
                 </thead>
-                <tbody *ngIf="(building.thumbRule && building.estimated)" >
-                  <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReport; let i = index">
-                    <td>{{thumbRuleItem.name}}</td>
-                    <td>
-                      <input type="number"
-                             [(ngModel)]="thumbRuleItem.amount"
-                             id="thumbRuleItem.amount"
-                             (blur)="changeBudgetedCost(building._id, thumbRuleItem.name, thumbRuleItem.amount , building.area)"
-                             class="form-control clear"/>
-                    </td>
-                    <td>{{thumbRuleItem.rate}}</td>
-                    <td>
-                      <div>
-                        <input *ngIf="building.estimated.estimatedCost[i].total != 0"
-                               [(ngModel)]="building.estimated.estimatedCost[i].total"
-                               id="estimatedItem.total"
-                               class="form-control clear"/>
-                      </div>
-                      <div>
-                        <span *ngIf="building.estimated.estimatedCost[i].total != 0"
-                              class="glyphicon glyphicon-pencil"
-                              (click)="getAmount(building.name, building.estimated.estimatedCost[i])"></span>
-                      </div>
-                      <div>
-                        <button *ngIf="building.estimated.estimatedCost[i].total == 0"
-                                type="button" class="btn btn-get-amount"
-                                (click)="getAmount(building.name, building.estimated.estimatedCost[i])">Get Amount</button>
-                      </div>
-                    </td>
-                    <td>{{building.estimated.estimatedCost[i].rate}}</td>
-                    <td>
-                      <div data-toggle="modal"
-                           data-target="#deleteCosthead"
-                           (click)="deleteCostHeadDetailsfun(building._id, building.estimated.estimatedCost[i].name)"
-                           class="glyphicon glyphicon-trash"></div>
-                    </td>
-                  </tr>
-                  <tr *ngIf="showCostHeadList===true && buildingId===building._id">
-                    <td colspan="6">
-                      <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                          <select (change)="inactiveCostHeadSelected($event.target.value)">
-                            <option>Select Item</option>
-                            <option *ngFor="let costHeadItem of inActiveCostHeadArray" [value]="costHeadItem.name">{{costHeadItem.name}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="6">
-                      <button type="button" class="btn btn-add-item" (click)="showInactiveCostHeadsOnDropDown(building._id)"><span class="glyphicon glyphicon-plus"></span>Add Item</button>
-                    </td>
-                  </tr>
-                <tr *ngIf="(building.thumbRule && building.estimated)">
-                  <td>Total</td>
-                  <td>{{building.thumbRule.totalBudgetedCost|number}}</td>
-                  <td>{{building.thumbRule.totalRate|number}}</td>
-                  <td>{{building.estimated.totalEstimatedCost|number}}</td>
-                  <td>{{building.estimated.totalRate|number}}</td>
+                <tbody>
+                <tr>
+                  <td class="border-left">Electric Infrastructure</td>
+                  <td>3,26,790</td>
+                  <td class="border-left">990</td>
+                  <td>19,95,000</td>
+                  <td class="border-left">18</td>
+                  <td>
+                    <div class="delete-cost-head">
+                      <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="6" class="add-items">
+                    <button type="button" class="btn btn-add-item"><span class="glyphicon glyphicon-plus"></span>Add Item</button>
+                  </td>
+                </tr>
+                <tr class="total">
+                  <td class="border-left">Total</td>
+                  <td>3,26,790</td>
+                  <td class="border-left">990</td>
+                  <td>19,95,000</td>
+                  <td class="border-left">18</td>
                   <td></td>
                 </tr>
                 </tbody>
@@ -123,131 +180,48 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="panel-group">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseCommonDevelopment">
-              Common Development <span class="slab-area"> Total {{defaultCostPer}} : 12,130 Sqmt </span>
-            </a>
-          </h4>
-        </div>
-        <div id="collapseCommonDevelopment" class="panel-collapse collapse">
-          <div class="panel-body">
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border: 1px solid black">
-              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Cost Head</div>
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">By Thumbrule</div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Budgeted Cost</div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{defaultCostIn}}<br/>{{defaultCostPer}}</div>
-              </div>
-              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Estimated (as per project quantities & rates)</div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Estimated Cost</div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{defaultCostIn}}<br/>{{defaultCostPer}}</div>
-              </div>
-              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><span class="glyphicon glyphicon-option-vertical"></span></div>
+      <div class="panel-group no-border">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapseTotal">
+                Grand Total <span class="slab-area"> Total {{defaultCostPer}} : {{grandTotalofArea|number}} {{defaultCostIn}}</span>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTotal" class="panel-collapse collapse">
+            <div class="panel-body">
+              <table class="table table-row-spacing table-dashboard">
+                <tbody>
+                  <tr class="grand-total">
+                    <td class="border-left">Total</td>
+                    <td>{{grandTotalofBudgetedCost|number}}</td>
+                    <td class="border-left">{{grandTotalofTotalRate|number}}</td>
+                    <td>-</td>
+                    <td class="border-left">-</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border: 1px solid black">
-
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  Electric Infrastructure
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  3,26,790
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  990
-                </div>
-              </div>
-
-              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
-                  19,95,000
-                  <button type="button"  class="btn btn-get-amount" (click)="getCommonAmenities()">Get Amount</button>
-                  <!--<input *ngIf="estimatedItem.total != 0" [(ngModel)]="estimatedItem.total" id="estimatedItem.total" class="form-control clear"/>
-                  <span *ngIf="estimatedItem.total != 0" class="glyphicon glyphicon-pencil" (click)="getAmount(building._id,estimatedItem.name,building.name)"></span>
-                  <button *ngIf="estimatedItem.total == 0" type="button" class="btn btn-primary" (click)="getAmount(building._id,estimatedItem.name,building.name)">Get Amount</button>-->
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                  18
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                </div>
-
-              </div>
-
-            </div>
-
           </div>
         </div>
       </div>
     </div>
-
-    <div class="panel-group no-border">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseTotal">
-              Grand Total <span class="slab-area"> Total {{defaultCostPer}} : {{grandTotalofArea|number}} {{defaultCostIn}}</span>
-            </a>
-          </h4>
-        </div>
-        <div id="collapseTotal" class="panel-collapse collapse">
-          <div class="panel-body">
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border: 1px solid black">
-
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  <strong>Total</strong>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  {{grandTotalofBudgetedCost|number}}
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  {{grandTotalofTotalRate|number}}
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  -
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2">
-                  -
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2">
-                  -
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
-  </div>
-  <!--modal-->
-  <div class="modal fade" id="deleteCosthead" role="dialog">
-    <div class="modal-dialog modal-sm">
+
+  <!--Delete modal-->
+  <div class="modal fade dashboard-modal" id="deleteCosthead" role="dialog">
+    <div class="modal-dialog modal-md">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title">Delete</h2>
+          <h2 class="modal-title">Delete Cost Head</h2>
         </div>
         <div class="modal-body">
-          <p><small>You Want to Delete a CostHead</small></p>
+          <p>Do you want to delete a CostHead ?</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" type="button" (click)="deleteCostHeadDetails()" data-dismiss="modal">Yes</button>
@@ -256,104 +230,98 @@
       </div>
     </div>
   </div>
+
   <!--Clone Modal -->
-  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-    <div class="modal fade" id="myModal" role="dialog" style="padding-bottom: 500px;">
-      <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title">Clone {{model.name}} Building</h2>
-          </div>
-          <form [formGroup]="cloneBuildingForm" class="profile-form clearfix">
-            <div class="modal-body">
-              <p>Building Name</p>
-              <input type="text" [(ngModel)]="model.name" formControlName="name" size="45"><br>
-              <p>Total Slab area<small>(in sqm)</small></p>
-              <input type="text" [(ngModel)]="model.totalSlabArea" formControlName="totalSlabArea" size="45"><br>
-              <p>Total Carper area<small>(in sqm)</small></p>
-              <input type="text" [(ngModel)]="model.totalCarperAreaOfUnit" formControlName="totalCarperAreaOfUnit" size="45"><br>
-              <p>Total Saleable area<small>(in sqm)</small></p>
-              <input type="text" [(ngModel)]="model.totalSaleableAreaOfUnit" formControlName="totalSaleableAreaOfUnit" size="45"><br>
-              <p>Plinth Area<small>(in sqm)</small></p>
-              <input type="text" [(ngModel)]="model.plinthArea" formControlName="plinthArea" size="45"><br>
-              <p>Total No Of Floors</p>
-              <input type="text" [(ngModel)]="model.totalNoOfFloors" formControlName="totalNoOfFloors" size="45"><br>
-              <p>No Of Parking Floors</p>
-              <input type="text" [(ngModel)]="model.noOfParkingFloors" formControlName="noOfParkingFloors" size="45"><br>
-              <p>Carpet Area Of Parking <small> (In sqft)</small></p>
-              <input type="text" [(ngModel)]="model.carpetAreaOfParking" formControlName="carpetAreaOfParking" size="45"><br>
-              <p>Apartment Configuration</p>
-              <p>No of 1 BHKs</p>
-              <input type="text" [(ngModel)]="model.noOfOneBHK" formControlName="noOfOneBHK" size="20">
-              <p>No of 2 BHKs</p>
-              <input type="text" [(ngModel)]="model.noOfTwoBHK" formControlName="noOfTwoBHK" size="20">
-              <p>No of 3 BHKs</p>
-              <input type="text" [(ngModel)]="model.noOfThreeBHK" formControlName="noOfThreeBHK" size="20">
-              <p>No of 4 BHKs</p>
-              <input type="text" [(ngModel)]="model.noOfFourBHK" formControlName="noOfFourBHK" size="20">
-              <p>No of 5 BHKs</p>
-              <input type="text" [(ngModel)]="model.noOfFiveBHK" formControlName="noOfFiveBHK" size="20">
-              <p>No of lifts</p>
-              <input type="text" [(ngModel)]="model.noOfLift" formControlName="noOfLift" size="45">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button class="btn btn-primary" type="submit" (click)="cloneBuildingBasicDetails()" data-toggle="modal" data-target="#new" data-dismiss="modal">Next</button>
-            </div>
-          </form>
+  <div class="modal fade dashboard-modal" id="myModal" role="dialog" style="padding-bottom: 500px;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title">Clone {{model.name}} Building</h2>
         </div>
+        <form [formGroup]="cloneBuildingForm" class="profile-form clearfix">
+          <div class="modal-body">
+            <p>Building Name</p>
+            <input type="text" [(ngModel)]="model.name" formControlName="name" size="45"><br>
+            <p>Total Slab area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.totalSlabArea" formControlName="totalSlabArea" size="45"><br>
+            <p>Total Carper area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.totalCarperAreaOfUnit" formControlName="totalCarperAreaOfUnit" size="45"><br>
+            <p>Total Saleable area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.totalSaleableAreaOfUnit" formControlName="totalSaleableAreaOfUnit" size="45"><br>
+            <p>Plinth Area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.plinthArea" formControlName="plinthArea" size="45"><br>
+            <p>Total No Of Floors</p>
+            <input type="text" [(ngModel)]="model.totalNoOfFloors" formControlName="totalNoOfFloors" size="45"><br>
+            <p>No Of Parking Floors</p>
+            <input type="text" [(ngModel)]="model.noOfParkingFloors" formControlName="noOfParkingFloors" size="45"><br>
+            <p>Carpet Area Of Parking <small> (In sqft)</small></p>
+            <input type="text" [(ngModel)]="model.carpetAreaOfParking" formControlName="carpetAreaOfParking" size="45"><br>
+            <p>Apartment Configuration</p>
+            <p>No of 1 BHKs</p>
+            <input type="text" [(ngModel)]="model.noOfOneBHK" formControlName="noOfOneBHK" size="20">
+            <p>No of 2 BHKs</p>
+            <input type="text" [(ngModel)]="model.noOfTwoBHK" formControlName="noOfTwoBHK" size="20">
+            <p>No of 3 BHKs</p>
+            <input type="text" [(ngModel)]="model.noOfThreeBHK" formControlName="noOfThreeBHK" size="20">
+            <p>No of 4 BHKs</p>
+            <input type="text" [(ngModel)]="model.noOfFourBHK" formControlName="noOfFourBHK" size="20">
+            <p>No of 5 BHKs</p>
+            <input type="text" [(ngModel)]="model.noOfFiveBHK" formControlName="noOfFiveBHK" size="20">
+            <p>No of lifts</p>
+            <input type="text" [(ngModel)]="model.noOfLift" formControlName="noOfLift" size="45">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" (click)="cloneBuildingBasicDetails()" data-toggle="modal" data-target="#new" data-dismiss="modal">Next</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="new" role="dialog" style="padding-bottom: 500px;">
-      <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title">Clone {{model.name}} Building Details</h2>
-          </div>
-          <div class="modal-body">
-            <div *ngFor="let costHead of clonedBuildingDetails; let i = index">
-              <input type="checkbox" [checked]="costHead.active" (change)="costHead.active = !costHead.active"/>
+  <div class="modal fade dashboard-modal" id="new" role="dialog" style="padding-bottom: 500px;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title">Clone {{model.name}} Building Details</h2>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let costHead of clonedBuildingDetails; let i = index">
+            <input type="checkbox" [checked]="costHead.active" (change)="costHead.active = !costHead.active"/>
 
-              <a href="#subCategory{{i}}" data-toggle="collapse">{{costHead.name}}</a>
+            <a href="#subCategory{{i}}" data-toggle="collapse">{{costHead.name}}</a>
 
-              <div id="subCategory{{i}}" class="collapse">
-                <div *ngFor="let subcategory of costHead.subCategory">
+            <div id="subCategory{{i}}" class="collapse">
+              <div *ngFor="let subcategory of costHead.subCategory">
 
-                  <input type="checkbox" [checked]="(costHead.active && subcategory.active)" (change)="subcategory.active = !subcategory.active" />
-                  {{subcategory.name}}
-                  <div *ngFor="let workitem of subcategory.workitem">
-                    <input type="checkbox" [checked]="(costHead.active && subcategory.active && workitem.active)" (change)="workitem.active = !workitem.active" />{{workitem.name}}
-                  </div>
+                <input type="checkbox" [checked]="(costHead.active && subcategory.active)" (change)="subcategory.active = !subcategory.active" />
+                {{subcategory.name}}
+                <div *ngFor="let workitem of subcategory.workitem">
+                  <input type="checkbox" [checked]="(costHead.active && subcategory.active && workitem.active)" (change)="workitem.active = !workitem.active" />{{workitem.name}}
                 </div>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button class="btn btn-primary" type="button" (click)="updateThisBuilding(clonedBuildingDetails, clonedBuildingDetails._id)" data-toggle="modal" data-dismiss="modal">Clone</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" (click)="updateThisBuilding(clonedBuildingDetails, clonedBuildingDetails._id)" data-toggle="modal" data-dismiss="modal">Clone</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
   </div>
 
-
-
-  <div class="modal fade" id="delete" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <!-- Modal content-->
+  <div class="modal fade dashboard-modal" id="delete" role="dialog">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title">Delete</h2>
+          <h2 class="modal-title">Delete Building</h2>
         </div>
         <div class="modal-body">
-          <p><small>You Want to Delete a Building</small></p>
+          <p>Do you want to delete a Building ?</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" type="button"  (click)="deleteThisBuilding()" data-dismiss="modal">Yes</button>
@@ -362,5 +330,4 @@
       </div>
     </div>
   </div>
-
 </section>
