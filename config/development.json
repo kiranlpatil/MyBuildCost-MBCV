@@ -95,689 +95,507 @@
   {
     "default": [
       {
-      "name": "Concrete",
-      "thumbRuleRate": {
-        "slabArea": {
-          "sqft": 20,
-          "sqmt": 30
-        },
-        "saleableArea": {
-          "sqft": 40,
-          "sqmt": 60
-        }
-      },
-      "active": true,
-      "rateAnalysisId": 21,
-      "subCategory": [
-        {
-        "name": "Plum concrete in cft",
-        "rateAnalysisId": 696,
-        "amount": 0,
-        "workitem": [{
-          "name": "Plum Concrete in cft with M 7.5 grade PCC and plum @ 50: 50, and concrete by conventional volumetric method, using farma and mixer ",
-          "quantity": {
-            "total": 0,
-            "item": [
-              {
-              "item": "Wall 1",
-              "remarks": "internal walls",
-              "nos": 2,
-              "length": 10,
-              "breadth": null,
-              "height": 0,
-              "quantity": 100,
-              "unit": "sqft"
-            },
-              {
-                "item": "Wall 2",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 15,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-              {
-                "item": "Wall 3",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 20,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-              {
-                "item": "Wall 4",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 20,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              }
-            ]
+        "name": "Concrete",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
           },
-          "rateAnalysisId": 50,
-          "unit": "sqft",
-          "rate": {
-            "rateFromRateAnalysis": 0,
-            "total": 0,
-            "quantity": 10,
-            "item": [
-              {
-              "item": "Cement",
-              "rateAnalysisId": null,
-              "remarks": "internal walls",
-              "quantity": 2,
-              "unit": "bags",
-              "rate": 200,
-              "totalAmount": 340,
-              "type": "material"
-            },
-              {
-                "item": "Sand",
-                "rateAnalysisId": null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "cu ft",
-                "rate": 80,
-                "totalAmount": 4550,
-                "type": "material - labour"
-              },
-              {
-                "item": "Labour for Internal Plaster",
-                "rateAnalysisId": null,
-                "remarks": "internal walls",
-                "quantity": 100,
-                "unit": "sqft",
-                "rate": 30,
-                "totalAmount": 880,
-                "type": "labour"
-              }
-            ],
-            "unit": "sqft"
-          },
-          "amount": 0
-        }]
-      },
-        {
-          "name": "Plum concrete in cum",
-          "rateAnalysisId": 688,
-          "amount": 0,
-          "workitem": [
-            {
-            "name": "Plum concrete in cum, with M 7.5 grade PCC and plum @ 50: 50, and concrete by conventional volumetric method, using farma and mixer ",
-            "quantity": {
-              "total": 0,
-              "item": [
-                {
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 10,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 15,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId": 153,
-            "unit": "sqft",
-            "rate": {
-              "rateFromRateAnalysis": 0,
-              "total": 0,
-              "quantity": 10,
-              "item": [
-                {
-                "item": "Cement",
-                "rateAnalysisId": null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 340,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 4550,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 880,
-                  "type": "labour"
-                }
-              ],
-              "unit": "sqft"
-            },
-            "amount": 0
-          }]
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
         },
-        {
-          "name": "Concrete in cft by mix design",
-          "rateAnalysisId": 55,
-          "amount": 0,
-          "workitem": [
-            {
-            "name": "Concrete M 20 in cft, as per mix design, by conventional mixing using weigh batcher and mixer(Only material analysis)",
-            "quantity": {
-              "total": 0,
-              "item": [
-                {
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 10,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 15,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId": 47,
-            "unit": "sqft",
-            "rate": {
-              "rateFromRateAnalysis": 0,
-              "total": 0,
-              "quantity": 10,
-              "item": [
-                {
-                "item": "Cement",
-                "rateAnalysisId": null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 340,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 4550,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 880,
-                  "type": "labour"
-                }
-              ],
-              "unit": "sqft"
-            },
-            "amount": 0
-          }]
-        }
-      ]
-    },
+        "active": true,
+        "rateAnalysisId": 21,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Dado / wall tiling",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 9,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Door Frames",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 19,
+        "subCategory": [
+
+        ]
+      },
       {
         "name": "Doors",
         "thumbRuleRate": {
           "slabArea": {
-            "sqft": 50,
-            "sqmt": 60
+            "sqft": 20,
+            "sqmt": 30
           },
           "saleableArea": {
-            "sqft": 80,
-            "sqmt": 90
+            "sqft": 40,
+            "sqmt": 60
           }
         },
         "active": true,
         "rateAnalysisId": 5,
         "subCategory": [
-          {
-          "name": "Flush doors",
-          "rateAnalysisId": 9,
-          "amount": 0,
-          "workitem": [
-            {
-            "name": " Door shutter 30 mm thick  for door opening size 2'6\" W x 7'0\" H with both side plain laminate",
-            "quantity": {
-              "total": 0,
-              "item": [
-                {
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 10,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 15,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId": 89,
-            "unit": "sqft",
-            "rate": {
-              "rateFromRateAnalysis": 0,
-              "total": 0,
-              "quantity": 10,
-              "item": [
-                {
-                "item": "Cement",
-                "rateAnalysisId": null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 340,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 4550,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 880,
-                  "type": "labour"
-                }
-              ],
-              "unit": "sqft"
-            },
-            "amount": 0
+
+        ]
+      },
+      {
+        "name": "External plaster",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
           },
-            {
-              "name": " Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with both side painted",
-              "quantity": {
-                "total": 0,
-                "item": [{
-                  "item": "Wall 1",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 10,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                  {
-                    "item": "Wall 2",
-                    "remarks": "internal walls",
-                    "nos": 2,
-                    "length": 15,
-                    "breadth": null,
-                    "height": 0,
-                    "quantity": 100,
-                    "unit": "sqft"
-                  },
-                  {
-                    "item": "Wall 3",
-                    "remarks": "internal walls",
-                    "nos": 2,
-                    "length": 20,
-                    "breadth": null,
-                    "height": 0,
-                    "quantity": 100,
-                    "unit": "sqft"
-                  },
-                  {
-                    "item": "Wall 4",
-                    "remarks": "internal walls",
-                    "nos": 2,
-                    "length": 20,
-                    "breadth": null,
-                    "height": 0,
-                    "quantity": 100,
-                    "unit": "sqft"
-                  }
-                ]
-              },
-              "rateAnalysisId": 92,
-              "unit": "sqft",
-              "rate": {
-                "rateFromRateAnalysis": 0,
-                "total": 0,
-                "quantity": 10,
-                "item": [{
-                  "item": "Cement",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "bags",
-                  "rate": 200,
-                  "totalAmount": 340,
-                  "type": "material"
-                },
-                  {
-                    "item": "Sand",
-                    "rateAnalysisId": null,
-                    "remarks": "internal walls",
-                    "quantity": 2,
-                    "unit": "cu ft",
-                    "rate": 80,
-                    "totalAmount": 4550,
-                    "type": "material - labour"
-                  },
-                  {
-                    "item": "Labour for Internal Plaster",
-                    "rateAnalysisId": null,
-                    "remarks": "internal walls",
-                    "quantity": 100,
-                    "unit": "sqft",
-                    "rate": 30,
-                    "totalAmount": 880,
-                    "type": "labour"
-                  }
-                ],
-                "unit": "sqft"
-              },
-              "amount": 0
-            }
-          ]
-        },
-          {
-            "name": "Moulded doors",
-            "rateAnalysisId": 11,
-            "amount": 0,
-            "workitem": [
-              {
-              "name": "Moulded door shutter 30 mm thick with HDF door skin for door opening size 3'0\" W X 7'0\" H ",
-              "quantity": {
-                "total": 0,
-                "item": [
-                  {
-                  "item": "Wall 1",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 10,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                  {
-                    "item": "Wall 2",
-                    "remarks": "internal walls",
-                    "nos": 2,
-                    "length": 15,
-                    "breadth": null,
-                    "height": 0,
-                    "quantity": 100,
-                    "unit": "sqft"
-                  },
-                  {
-                    "item": "Wall 3",
-                    "remarks": "internal walls",
-                    "nos": 2,
-                    "length": 20,
-                    "breadth": null,
-                    "height": 0,
-                    "quantity": 100,
-                    "unit": "sqft"
-                  },
-                  {
-                    "item": "Wall 4",
-                    "remarks": "internal walls",
-                    "nos": 2,
-                    "length": 20,
-                    "breadth": null,
-                    "height": 0,
-                    "quantity": 100,
-                    "unit": "sqft"
-                  }
-                ]
-              },
-              "rateAnalysisId": 295,
-              "unit": "sqft",
-              "rate": {
-                "rateFromRateAnalysis": 0,
-                "total": 0,
-                "quantity": 10,
-                "item": [
-                  {
-                  "item": "Cement",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "bags",
-                  "rate": 200,
-                  "totalAmount": 340,
-                  "type": "material"
-                },
-                  {
-                    "item": "Sand",
-                    "rateAnalysisId": null,
-                    "remarks": "internal walls",
-                    "quantity": 2,
-                    "unit": "cu ft",
-                    "rate": 80,
-                    "totalAmount": 4550,
-                    "type": "material - labour"
-                  },
-                  {
-                    "item": "Labour for Internal Plaster",
-                    "rateAnalysisId": null,
-                    "remarks": "internal walls",
-                    "quantity": 100,
-                    "unit": "sqft",
-                    "rate": 30,
-                    "totalAmount": 880,
-                    "type": "labour"
-                  }
-                ],
-                "unit": "sqft"
-              },
-              "amount": 0
-            },
-              {
-                "name": "Moulded door shutter of opening size 3'0\" W X 7'0\" H with PVC door skin",
-                "quantity": {
-                  "total": 0,
-                  "item": [
-                    {
-                    "item": "Wall 1",
-                    "remarks": "internal walls",
-                    "nos": 2,
-                    "length": 10,
-                    "breadth": null,
-                    "height": 0,
-                    "quantity": 100,
-                    "unit": "sqft"
-                  },
-                    {
-                      "item": "Wall 2",
-                      "remarks": "internal walls",
-                      "nos": 2,
-                      "length": 15,
-                      "breadth": null,
-                      "height": 0,
-                      "quantity": 100,
-                      "unit": "sqft"
-                    },
-                    {
-                      "item": "Wall 3",
-                      "remarks": "internal walls",
-                      "nos": 2,
-                      "length": 20,
-                      "breadth": null,
-                      "height": 0,
-                      "quantity": 100,
-                      "unit": "sqft"
-                    },
-                    {
-                      "item": "Wall 4",
-                      "remarks": "internal walls",
-                      "nos": 2,
-                      "length": 20,
-                      "breadth": null,
-                      "height": 0,
-                      "quantity": 100,
-                      "unit": "sqft"
-                    }
-                  ]
-                },
-                "rateAnalysisId": 296,
-                "unit": "sqft",
-                "rate": {
-                  "rateFromRateAnalysis": 0,
-                  "total": 0,
-                  "quantity": 10,
-                  "item": [
-                    {
-                    "item": "Cement",
-                    "rateAnalysisId": null,
-                    "remarks": "internal walls",
-                    "quantity": 2,
-                    "unit": "bags",
-                    "rate": 200,
-                    "totalAmount": 340,
-                    "type": "material"
-                  },
-                    {
-                      "item": "Sand",
-                      "rateAnalysisId": null,
-                      "remarks": "internal walls",
-                      "quantity": 2,
-                      "unit": "cu ft",
-                      "rate": 80,
-                      "totalAmount": 4550,
-                      "type": "material - labour"
-                    },
-                    {
-                      "item": "Labour for Internal Plaster",
-                      "rateAnalysisId": null,
-                      "remarks": "internal walls",
-                      "quantity": 100,
-                      "unit": "sqft",
-                      "rate": 30,
-                      "totalAmount": 880,
-                      "type": "labour"
-                    }
-                  ],
-                  "unit": "sqft"
-                },
-                "amount": 0
-              }
-            ]
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
           }
+        },
+        "active": true,
+        "rateAnalysisId": 10,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "External plumbing / drainage line",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 12,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Fabrication",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 242,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Fencing / Compound Walls",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 14,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Flooring",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 8,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Gypsum / POP plaster (punning)",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 86,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Internal Plaster",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 4,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Kerbing & Paver",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 71,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Kitchen otta",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 16,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Masonry",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 1,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Painting",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 80,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Plain Cement Concrete ( P.C.C. )",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 20,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "RCC band / patli",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 260,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Roofing",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 89,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Safety measures",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 251,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Skirting",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 17,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Soling",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 18,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Staircase risers",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 27,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Staircase treads",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 15,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Wall panelling",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 74,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Wash basin counters",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 269,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Waterproofing",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 3,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Window jambs",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 68,
+        "subCategory": [
+
+        ]
+      },
+      {
+        "name": "Window Sills",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 13,
+        "subCategory": [
+
         ]
       },
       {
@@ -796,101 +614,34 @@
         "rateAnalysisId": 77,
         "subCategory": [
           {
-          "name": "default",
-          "rateAnalysisId": 0,
-          "amount": 0,
-          "workitem": [
-            {
-            "name": "Salai pointing for UCR masonry in CM 1: 4",
-            "quantity": {
-              "total": 0,
-              "item": [
-                {
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 10,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 15,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
+            "name": "default",
+            "rateAnalysisId": 0,
+            "amount": 0,
+            "workitem": [
+              {
+                "name": "Salai pointing for UCR masonry in CM 1: 4",
+                "quantity": {
+                  "total": 0,
+                  "item": [
+
+                  ]
+                },
+                "rateAnalysisId": 348,
+                "unit": "sqft",
+                "rate": {
+                  "rateFromRateAnalysis": 0,
+                  "total": 0,
+                  "quantity": 10,
+                  "item": [
+
+                  ],
                   "unit": "sqft"
                 },
-                {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 20,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId": 348,
-            "unit": "sqft",
-            "rate": {
-              "rateFromRateAnalysis": 0,
-              "total": 0,
-              "quantity": 10,
-              "item": [
-                {
-                "item": "Cement",
-                "rateAnalysisId": null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 340,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 4550,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId": null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 880,
-                  "type": "labour"
-                }
-              ],
-              "unit": "sqft"
-            },
-            "amount": 0
+                "amount": 0
+              }
+            ]
           }
-          ]
-        }]
+        ]
       }
     ]
   },
