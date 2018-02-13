@@ -398,12 +398,12 @@ export class CostSummaryComponent implements OnInit {
     this.grandTotalofTotalRate = 0;
     this.grandTotalofArea = 0;
     for (let buildindIndex = 0; buildindIndex < this.projectBuildings.length; buildindIndex++) {
-      this.grandTotalofBudgetedCost = (parseFloat( this.grandTotalofBudgetedCost)
-        + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost)).toFixed(2);
-      this.grandTotalofTotalRate = (parseFloat(this.grandTotalofTotalRate)
-        + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalRate)).toFixed(2);
-      this.grandTotalofArea =(parseFloat( this.grandTotalofArea) +
-        parseFloat(this.projectBuildings[buildindIndex].area)).toFixed(2);
+      this.grandTotalofBudgetedCost = (this.grandTotalofBudgetedCost
+        + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost));
+      this.grandTotalofTotalRate = (this.grandTotalofTotalRate
+        + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalRate));
+      this.grandTotalofArea =(this.grandTotalofArea +
+        parseFloat(this.projectBuildings[buildindIndex].area));
     }
   }
 

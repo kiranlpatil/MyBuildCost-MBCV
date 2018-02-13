@@ -228,8 +228,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.subCategoryDetailsTotalAmount=0.0;
 
     for(let i=0;i<this.subCategoryDetails.length;i++) {
-      this.subCategoryDetailsTotalAmount= parseFloat(this.subCategoryDetailsTotalAmount)+
-        parseFloat(this.subCategoryDetails[i].amount);
+      this.subCategoryDetailsTotalAmount= (this.subCategoryDetailsTotalAmount+
+        this.subCategoryDetails[i].amount);
     }
 
 
