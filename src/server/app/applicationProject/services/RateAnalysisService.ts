@@ -48,7 +48,7 @@ class RateAnalysisService {
     });
   }
 
-  getWorkItemsByCostHeadId(costHeadId: number, user: User, url: string, callback: (error: any, result: any) => void) {
+  getWorkItemsByCostHeadId(costHeadId: string, user: User, url: string, callback: (error: any, result: any) => void) {
     logger.info('Rate Analysis Service, getWorkItemsByCostHeadId has been hit');
     let workItems : Array<WorkItem> = [];
     request.get({url: url}, function (error: any, response: any, body: any) {
@@ -59,10 +59,10 @@ class RateAnalysisService {
         if(res) {
 
           for(let workitem of res.SubItemType) {
-            let workitemDetails = new WorkItem;
             if(parseInt(costHeadId) === workitem.C3) {
-              workitemDetails.name = workitem.C2;
-              workitemDetails.rateAnalysisId = workitem.C1;
+              let workitemDetails = new WorkItem(workitem.C2, workitem.C1);
+              /*workitemDetails.name = workitem.C2;
+              workitemDetails.rateAnalysisId = workitem.C1;*/
               workItems.push(workitemDetails);
             }
           }

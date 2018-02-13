@@ -138,6 +138,10 @@ export class DashboardProfileComponent implements OnInit {
   }
   onPictureUpload(imagePath: string) {
     }
+
+  showHideMobileModal() {
+    this.showStyleMobile = !this.showStyleMobile;
+  }
   onMobileNumberChangeComplete() {
     this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
     this.showStyleMobile = !this.showStyleMobile;

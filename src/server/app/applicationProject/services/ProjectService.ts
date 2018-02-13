@@ -565,22 +565,22 @@ class ProjectService {
     if(costPerUnit === 'saleableArea' && costInUnit === 'sqft') {
       newData = { $set : {
         'costHead.$.thumbRuleRate.saleableArea.sqft' : rate,
-        'costHead.$.thumbRuleRate.saleableArea.sqmt' : rate * config.get('SqureMeter')
+        'costHead.$.thumbRuleRate.saleableArea.sqmt' : rate / config.get('SqureMeter')
       } };
     } else if(costPerUnit === 'saleableArea' && costInUnit === 'sqmt') {
       newData = { $set : {
         'costHead.$.thumbRuleRate.saleableArea.sqmt' : rate,
-        'costHead.$.thumbRuleRate.saleableArea.sqft' : rate / config.get('SqureMeter')
+        'costHead.$.thumbRuleRate.saleableArea.sqft' : rate * config.get('SqureMeter')
       } };
     } else if(costPerUnit === 'slabArea' && costInUnit === 'sqft') {
       newData = { $set : {
         'costHead.$.thumbRuleRate.slabArea.sqft' : rate,
-        'costHead.$.thumbRuleRate.slabArea.sqmt' : rate * config.get('SqureMeter')
+        'costHead.$.thumbRuleRate.slabArea.sqmt' : rate / config.get('SqureMeter')
       } };
     } else if(costPerUnit === 'slabArea' && costInUnit === 'sqmt') {
       newData = { $set : {
         'costHead.$.thumbRuleRate.slabArea.sqmt' : rate,
-        'costHead.$.thumbRuleRate.slabArea.sqft' : rate / config.get('SqureMeter')
+        'costHead.$.thumbRuleRate.slabArea.sqft' : rate * config.get('SqureMeter')
       } };
     }
 

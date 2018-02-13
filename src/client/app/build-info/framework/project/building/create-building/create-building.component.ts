@@ -41,12 +41,12 @@ export class CreateBuildingComponent implements OnInit {
       'totalNoOfFloors':['', ValidationService.requiredNoOfFloors],
       'noOfParkingFloors':['', ValidationService.requiredNoOfParkingFloors],
       'carpetAreaOfParking':['', ValidationService.requiredCarpetAreaOfParking],
-      'noOfOneBHK': ['',  ValidationService.requiredOneBHK],
-      'noOfTwoBHK':['', ValidationService.requiredTwoBHK],
-      'noOfThreeBHK':['', ValidationService.requiredThreeBHK],
-      'noOfFourBHK':['', ValidationService.requiredFourBHK],
-      'noOfFiveBHK':['', ValidationService.requiredFiveBHK],
-      'noOfLift':['', ValidationService.requiredNoOfLifts],
+      'noOfOneBHK': [''],
+      'noOfTwoBHK':[''],
+      'noOfThreeBHK':[''],
+      'noOfFourBHK':[''],
+      'noOfFiveBHK':[''],
+      'noOfLift':[''],
    });
 
   }
@@ -59,20 +59,53 @@ export class CreateBuildingComponent implements OnInit {
     //this.projectService
     if(this.addBuildingForm.valid) {
       this.model = this.addBuildingForm.value;
+      if(this.model.noOfOneBHK !== undefined || this.model.noOfTwoBHK !== undefined || this.model.noOfThreeBHK !== undefined ||
+        this.model.noOfFourBHK !== undefined || this.model.noOfFiveBHK !== undefined ) {
+
+        if(this.model.noOfOneBHK === undefined) {
+          this.model.noOfOneBHK=0;
+        }
+
+        if(this.model.noOfTwoBHK === undefined) {
+          this.model.noOfTwoBHK=0;
+        }
+
+        if(this.model.noOfThreeBHK === undefined) {
+          this.model.noOfThreeBHK=0;
+        }
+
+        if(this.model.noOfFourBHK === undefined) {
+          this.model.noOfFourBHK=0;
+        }
+
+        if(this.model.noOfFiveBHK === undefined) {
+          this.model.noOfFiveBHK=0;
+        }
+
+        if(this.model.noOfLift === undefined) {
+          this.model.noOfLift=0;
+        }
+
       this.createBuildingService.addBuilding(this.model)
         .subscribe(
           building => this.addBuildingSuccess(building),
           error => this.addBuildingFailed(error));
+      } else {
+        var message = new Message();
+        message.isError = false;
+        message.custom_message = 'Add at leat one Apartment Configuration';
+        this.messageService.message(message);
+      }
     }
   }
 
   addBuildingSuccess(building : any) {
-    console.log(building);
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
     this.messageService.message(message);
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    this._router.navigate([NavigationRoutes.APP_COST_SUMMARY, projectId]);
   }
 
   addBuildingFailed(error : any) {

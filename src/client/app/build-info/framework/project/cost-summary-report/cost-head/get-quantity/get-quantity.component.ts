@@ -12,7 +12,8 @@ import { API, BaseService, SessionStorage, SessionStorageService,  Message,
   Messages, MessageService } from '../../../../../../shared/index';
 
 import { GetQuantityService } from './get-quantity.service';
-import Rate = require('../../../../../../../../server/app/applicationProject/dataaccess/model/Rate');
+import Quantity = require('../../../../model/Quantity');
+import QuantityItem = require('../../../../model/QuantityItem');
 
 @Component({
   moduleId: module.id,
@@ -22,7 +23,7 @@ import Rate = require('../../../../../../../../server/app/applicationProject/dat
 })
 
 export class GetQuantityComponent implements OnInit {
-  @Input() quantityItems : any;
+  @Input() quantityItems :  Array<QuantityItem>;
   @Input() subCategoryRateAnalysisId : number;
   @Output() refreshDataList = new EventEmitter();
 
@@ -46,80 +47,73 @@ export class GetQuantityComponent implements OnInit {
   quantity:number=0;
   unit:string='';
   workItemId:number;
+  quantityItemsArray:any;
   showSubcategoryListvar: boolean = false;
-  private quantityItemsArray: any;
-  private showWorkItemList:boolean=false;
-
   constructor(private getQuantityService : GetQuantityService, private activatedRoute : ActivatedRoute, private messageService: MessageService) {
   }
 
   ngOnInit() {
-    console.log('quantityItems : '+JSON.stringify(this.quantityItems));
   }
 
   onSubmit() {
   }
+  updateQuantity(quantityItems : any, choice:string ) {
+    switch(choice) {
+       case 'updateNos': {
+                          this.quanitytNumbersTotal =0;
+                          for(let i=0;i<this.quantityItems.length;i++) {
+                              this.quanitytNumbersTotal= this.quanitytNumbersTotal +this.quantityItems[i].nos;
+                              }
+                              this.getQuantityTotal(this.quantityItems);
+       }
+                          break;
+       case 'updateLength': {
+                          this.lengthTotal = 0;
+                           for (let i = 0; i < this.quantityItems.length; i++) {
+                                this.lengthTotal = this.lengthTotal + this.quantityItems[i].length;
+                                }
+                                this.getQuantityTotal(this.quantityItems);
+                            }
+                            break;
+       case 'updateBreadth' : {
+                          this.breadthTotal= 0;
+                          for(let i=0;i<this.quantityItems.length;i++) {
+                                  this.breadthTotal = this.breadthTotal +this.quantityItems[i].breadth;
+                                 }
+                                   this.getQuantityTotal(this.quantityItems);
+                            }
+                            break;
+       case 'updateHeight' : {
+                            this.heightTotal=0;
+                           for(let i=0;i<this.quantityItems.length;i++) {
+                                  this.heightTotal = this.heightTotal +this.quantityItems[i].height;
+                                  }
+                      this.getQuantityTotal(this.quantityItems);
+                            }
+                            break;
+       }
+       }
 
-  getNo(quantityItems : any) {
-    this.quanitytNumbersTotal =0;
-    for(let i=0;i<this.quantityItems.length;i++) {
-      this.quanitytNumbersTotal= this.quanitytNumbersTotal +this.quantityItems[i].nos;
-    }
-  }
-
-  getLength(quantityItems : any) {
-    this.lengthTotal = 0;
-    for (let i = 0; i < this.quantityItems.length; i++) {
-      this.lengthTotal = this.lengthTotal + this.quantityItems[i].length;
-    }
-    this.updateQuantity(this.quantityItems);
-  }
-
-  getBreadth(quantityItems : any) {
-    this.breadthTotal= 0;
-    for(let i=0;i<this.quantityItems.length;i++) {
-      this.breadthTotal = this.breadthTotal +this.quantityItems[i].breadth;
-    }
-    this.updateQuantity(this.quantityItems);
-  }
-
-  getHeight(quantityItems: any) {
-    this.heightTotal=0;
-    for(let i=0;i<this.quantityItems.length;i++) {
-      this.heightTotal = this.heightTotal +this.quantityItems[i].height;
-    }
-    this.updateQuantity(this.quantityItems);
-  }
-
-  updateQuantity(quantityItems : any) {
+  getQuantityTotal(quantityItems : any) {
     this.quantityTotal = 0;
     this.quantityItems = quantityItems;
     for(let i=0;i<this.quantityItems.length;i++) {
-      if(this.quantityItems[i].length === undefined || this.quantityItems[i].length === 'NAN' || this.quantityItems[i].length === null) {
+      if (this.quantityItems[i].length === undefined || this.quantityItems[i].length === 0 || this.quantityItems[i].length === null) {
         var q1 = this.quantityItems[i].height;
         var q2 = this.quantityItems[i].breadth;
-      } else if(this.quantityItems[i].height === undefined || this.quantityItems[i].height === 'NAN' || this.quantityItems[i].height === null) {
+      } else if (this.quantityItems[i].height === undefined || this.quantityItems[i].height === 0 || this.quantityItems[i].height === null) {
         q1 = this.quantityItems[i].length;
         q2 = this.quantityItems[i].breadth;
-      } else if(this.quantityItems[i].breadth === undefined || this.quantityItems[i].breadth === 'NAN' || this.quantityItems[i].breadth === null) {
+      } else if (this.quantityItems[i].breadth === undefined || this.quantityItems[i].breadth === 0 || this.quantityItems[i].breadth === null) {
         q1 = this.quantityItems[i].length;
         q2 = this.quantityItems[i].height;
       } else {
         q1 = this.quantityItems[i].length;
         q2 = this.quantityItems[i].breadth;
-        // q3 = this.quantityItems[i].height;
       }
       this.quantityItems[i].quantity = q1 * q2;
       this.quantityTotal = this.quantityTotal + this.quantityItems[i].quantity;
-    }
-  }
-
-  getQuantityTotal(quantityItems : any) {
-    this.updateQuantity(quantityItems);
-    this.getHeight(quantityItems);
-    this.getLength(quantityItems);
-    this.getNo(quantityItems);
-    this.getBreadth(quantityItems);
+      }
   }
 
 
@@ -133,9 +127,9 @@ export class GetQuantityComponent implements OnInit {
       'remarks': '',
       'nos': 0,
       'length': 0,
-      'breadth': '0',
+      'breadth': 0,
       'height': 0,
-      'quantity': '',
+      'quantity': 0,
       'unit': 'sqft'
     };
     this.quantityItems.push(quantity);
@@ -158,7 +152,6 @@ export class GetQuantityComponent implements OnInit {
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
     this.messageService.message(message);
     this.refreshDataList.emit();
-    //this.getCostHeadComponentDetails(this.projectId, this.costHead);
   }
 
   onSaveCostHeadItemsFail(error: any) {
@@ -181,12 +174,14 @@ export class GetQuantityComponent implements OnInit {
   }
   onDeleteQuantityItemSuccess(costHeadItemDelete: any) {
     this.quantityItems = costHeadItemDelete.data.item;
+    this.updateQuantity(this.quantityItems,'updateNos');
+    this.updateQuantity(this.quantityItems,'updateLength');
+    this.updateQuantity(this.quantityItems,'updateBreadth');
+    this.updateQuantity(this.quantityItems,'updateHeight');
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_ITEM;
     this.messageService.message(message);
-    this.getQuantityTotal(this.quantityItems);
-    // this.getCostHeadComponentDetails(this.projectId, this.costHead);
   }
 
   onDeleteQuantityItemFail(error: any) {

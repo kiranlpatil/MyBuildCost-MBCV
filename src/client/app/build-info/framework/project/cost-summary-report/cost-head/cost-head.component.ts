@@ -20,7 +20,7 @@ import { FormGroup } from '@angular/forms';
 import { Project } from '../../../model/project';
 import { Rate } from '../../../model/rate';
 import { CommonService } from '../../../../../shared/services/common.service';
-import SubCategory = require('../../../../../../../server/app/applicationProject/dataaccess/model/SubCategory');
+//import { SubCategory } from '../../../model/SubCategory';
 
 @Component({
   moduleId: module.id,
@@ -82,7 +82,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private subcategoryListArray : Array<any> = [];
   private alteredArrayList : Array<any> = [];
   private showWorkItemList:boolean=false;
-  private subCategoryObj: SubCategory;
+  private subCategoryObj: any;
 
 
   constructor(private costHeadService : CostHeadService, private activatedRoute : ActivatedRoute
@@ -119,7 +119,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.toggleRate = false;
     }
     this.quantityItemsArray = quantityItems;
-    this.getQuantityTotal(this.quantityItemsArray);
+  // this.getQuantityTotal(this.quantityItemsArray);
     this.workItem = workItem;
   }
 
@@ -133,7 +133,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.workItem=workItem;
     this.workItemId = workItem.rateAnalysisId;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
-    let subCategoryId=this.subCategoryDetails[workItemIndex].rateAnalysisId;
+    let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;
    /* this.loderService.start();*/
     this.costHeadService.getRateItems(this.costheadId, subCategoryId,this.workItemId).subscribe(
         rateItem => {
@@ -228,8 +228,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.subCategoryDetailsTotalAmount=0.0;
 
     for(let i=0;i<this.subCategoryDetails.length;i++) {
-      this.subCategoryDetailsTotalAmount= parseFloat(this.subCategoryDetailsTotalAmount)+
-        parseFloat(this.subCategoryDetails[i].amount);
+      this.subCategoryDetailsTotalAmount= (this.subCategoryDetailsTotalAmount+
+        this.subCategoryDetails[i].amount);
     }
 
 
@@ -321,89 +321,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_ITEM;
     this.messageService.message(message);
-    this.getQuantityTotal(this.quantityItemsArray);
+   // this.getQuantityTotal(this.quantityItemsArray);
   }
 
   onDeleteCostHeadItemsFail(error: any) {
     console.log(error);
   }
-
-  addItem() {
-    console.log('addItems()');
-    let quantity = {
-      'item': '',
-      'remarks': '',
-      'nos': 0,
-      'length': 0,
-      'breadth': '0',
-      'height': 0,
-      'quantity': '',
-      'unit': 'sqft'
-
-    };
-    this.quantityItemsArray.push(quantity);
-  }
-
-  getNo(quantityItems : any) {
-  this.quanitytNumbersTotal =0;
-    for(let i=0;i<this.quantityItemsArray.length;i++) {
-      this.quanitytNumbersTotal= this.quanitytNumbersTotal +this.quantityItemsArray[i].nos;
-    }
-    }
-  getLength(quantityItems : any) {
-  this.lengthTotal = 0;
-   for (let i = 0; i < this.quantityItemsArray.length; i++) {
-      this.lengthTotal = this.lengthTotal + this.quantityItemsArray[i].length;
-        }
-    this.updateQuantity(this.quantityItemsArray);
-  }
-  getBreadth(quantityItems : any) {
-  this.breadthTotal= 0;
-   for(let i=0;i<this.quantityItemsArray.length;i++) {
-      this.breadthTotal = this.breadthTotal +this.quantityItemsArray[i].breadth;
-    }
-    this.updateQuantity(this.quantityItemsArray);
-}
-getHeight(quantityItems: any) {
-  this.heightTotal=0;
-   for(let i=0;i<this.quantityItemsArray.length;i++) {
-      this.heightTotal = this.heightTotal +this.quantityItemsArray[i].height;
-    }
-    this.updateQuantity(this.quantityItemsArray);
-  }
-  updateQuantity(quantityItems : any) {
-    this.quantityTotal = 0;
-    this.quantityItemsArray = quantityItems;
-    for(let i=0;i<this.quantityItemsArray.length;i++) {
-      if(this.quantityItemsArray[i].length === undefined || this.quantityItemsArray[i].length === 'NAN'
-        || this.quantityItemsArray[i].length === null) {
-        var q1 = this.quantityItemsArray[i].height;
-        var q2 = this.quantityItemsArray[i].breadth;
-      } else if(this.quantityItemsArray[i].height === undefined || this.quantityItemsArray[i].height === 'NAN'
-        || this.quantityItemsArray[i].height === null) {
-        q1 = this.quantityItemsArray[i].length;
-        q2 = this.quantityItemsArray[i].breadth;
-      } else if(this.quantityItemsArray[i].breadth === undefined || this.quantityItemsArray[i].breadth === 'NAN'
-        || this.quantityItemsArray[i].breadth === null) {
-        q1 = this.quantityItemsArray[i].length;
-        q2 = this.quantityItemsArray[i].height;
-      } else {
-        q1 = this.quantityItemsArray[i].length;
-        q2 = this.quantityItemsArray[i].breadth;
-       // q3 = this.quantityItemsArray[i].height;
-      }
-      this.quantityItemsArray[i].quantity = q1 * q2;
-      this.quantityTotal = this.quantityTotal + this.quantityItemsArray[i].quantity;
-    }
-  }
- getQuantityTotal(quantityItems : any) {
-    this.updateQuantity(quantityItems);
-   this.getHeight(quantityItems);
-   this.getLength(quantityItems);
-   this.getNo(quantityItems);
-   this.getBreadth(quantityItems);
-   }
-
   updateCostHeadWorkItem(subCategoryId : number, quantityItems : any) {
     this.quantityItemsArray = quantityItems;
     this.costHeadService.saveCostHeadItems(this.costheadId, subCategoryId,

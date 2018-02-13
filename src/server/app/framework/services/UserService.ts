@@ -486,7 +486,7 @@ class UserService {
     });
   }
 
-  updateDetails(data:  UserModel, user: UserModel, callback:(error: any, result: any) => void) {
+  updateDetails(data:  UserModel, user: any, callback:(error: any, result: any) => void) {
     let auth: AuthInterceptor = new AuthInterceptor();
     let query = {'_id': user._id};
     this.userRepository.findOneAndUpdate(query, data, {new: true}, (error, result) => {
