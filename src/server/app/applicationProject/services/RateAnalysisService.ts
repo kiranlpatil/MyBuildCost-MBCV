@@ -109,8 +109,8 @@ class RateAnalysisService {
             let rate = data['RateAnalysisData'];
             let sql = 'SELECT rate.C5 AS quantity, unit.C2 As unit FROM ? AS rate JOIN ? AS unit on unit.C1 =  rate.C8 and' +
               ' rate.C1 = '+ workitemId;
-            let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS item,rate.C7 AS quantity,rate.C3 AS rate,' +
-              ' rate.C3*rate.C7 AS totalAmount, rate.C6 type, unit.C2 As unit FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
+            let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS item,ROUND(rate.C7,2) AS quantity,ROUND(rate.C3,2) AS rate,' +
+              ' ROUND(rate.C3*rate.C7,2) AS totalAmount, rate.C6 type, unit.C2 As unit FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
               '  WHERE rate.C1 = '+ workitemId;
             let sql3 = 'SELECT SUM(rate.C3*rate.C7) / SUM(rate.C7) AS total  FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
               '  WHERE rate.C1 = '+ workitemId;
