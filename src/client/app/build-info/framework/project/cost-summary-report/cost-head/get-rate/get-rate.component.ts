@@ -19,7 +19,8 @@ import Any = jasmine.Any;
 @Component({
   moduleId: module.id,
   selector: 'bi-rate-items',
-  templateUrl: 'get-rate.component.html'
+  templateUrl: 'get-rate.component.html',
+  styleUrls: ['get-rate.component.css'],
 })
 
 export class GetRateComponent implements OnInit {

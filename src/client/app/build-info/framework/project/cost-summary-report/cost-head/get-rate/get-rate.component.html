@@ -1,22 +1,25 @@
-<div *ngIf="rateItemsArray!==undefined">
-  <div class="row col-md-12">
-    <div class="col-md-6" *ngIf="rateItemsArray!==undefined">
-      <div class="col-md-4" style="text-align: right">
+<div *ngIf="rateItemsArray!==undefined" class="get-rate-section">
+  <div class="pull-left">
+    <div class="pull-left" *ngIf="rateItemsArray!==undefined">
+      <div class="pull-left quantity-label">
           Quantity
       </div>
-      <div class="col-md-5">
-                        <input [(ngModel)]="rateItemsArray.quantity" id="rateQuantity" class="form-control clear" (change)="onTotalQuantityChange(rateItemsArray.quantity)" (focus)="getPreviousQuantity(rateItemsArray.quantity)"/>
+      <div class="pull-left">
+        <input [(ngModel)]="rateItemsArray.quantity" id="rateQuantity" class="form-control quantity-count"
+               (change)="onTotalQuantityChange(rateItemsArray.quantity)"
+               (focus)="getPreviousQuantity(rateItemsArray.quantity)"/>
       </div>
-      <div class="col-md-3" style="text-align: left">
-                       {{ rateItemsArray.unit }}
+      <div class="pull-left">
+        <span class="quantity-sqft">
+          {{ rateItemsArray.unit }}
+        </span>
       </div>
-                      </div>
+    </div>
   </div>
-  <div class="row col-md-12">
-    <table class="table">
+  <div class="">
+    <table class="">
         <thead>
         <th>Description</th>
-        <th>Remarks</th>
         <th>Qty.</th>
         <th>Unit</th>
         <th>Rate/Unit</th>
@@ -25,47 +28,46 @@
         <tbody>
         <tr *ngFor="let rateItem of rateItemsArray.item; let k = index">
           <td>
-            <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
+            <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control remark-input"/>
+            <div class="remark-icon">
+              <!--<input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />-->
+              <img title="{{rateItem.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
+            </div>
           </td>
           <td>
-            <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
+            <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control text-right" (change)="changeQuantity(rateItem.quantity,k)"/>
           </td>
           <td>
-            <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear" (change)="changeQuantity(rateItem.quantity,k)"/>
+            <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control" readonly/>
           </td>
           <td>
-            <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear" readonly/>
+            <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control text-right" (change)="changeRate(rateItem.rate,k)"/>
           </td>
           <td>
-            <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear" (change)="changeRate(rateItem.rate,k)"/>
-          </td>
-          <td>
-            <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
+            <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control get-total-amount text-right" readonly/>
           </td>
         </tr>
 
         <tr>
-          <td colspan="2" style="text-align:left">
+          <td class="total-amount text-left">
             <label>Total</label>
           </td>
-          <td>
+          <td class="total-amount">
             {{totalQuantity|number}}
           </td>
-          <td colspan="2" style="text-align:right">
+          <td>
+            &nbsp;
+          </td>
+          <td class="total-amount">
             {{totalRate|number}}
           </td>
-          <td>
+          <td class="total-amount">
             {{totalAmount|number}}
-          </td>
-        </tr>
-
-        <tr>
-          <td colspan="6">
-                <button type="button" class="btn btn-primary" (click)="updateRate(rateItemsArray)">Save</button>
           </td>
         </tr>
 
         </tbody>
       </table>
+    <button type="button" class="save-btn" (click)="updateRate(rateItemsArray)">Save</button>
   </div>
 </div>

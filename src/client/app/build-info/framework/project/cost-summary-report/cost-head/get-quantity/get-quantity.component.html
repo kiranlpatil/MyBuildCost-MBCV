@@ -18,7 +18,7 @@
       </td>
       <td class="remark-icon">
         <!--<input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />-->
-        <img title="Remark" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
+        <img title="{{quantityItem.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
       </td>
       <td>
         <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getNo(quantityItemsArray)" class="form-control" required/>

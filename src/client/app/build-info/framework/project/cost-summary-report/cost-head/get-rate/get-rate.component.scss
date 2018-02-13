@@ -1,0 +1,112 @@
+@import '../../../../../../../css/common';
+
+.get-rate-section {
+  background: $azure;
+  display: inline-block;
+  padding: 5px;
+  width: 100%;
+  table {
+    thead {
+      th {
+        background: $jagged-ice;
+        font-size: 11px;
+        text-align: center;
+        padding: 2px 10px;
+      }
+    }
+    tr {
+      td {
+        padding: 5px;
+        .form-control {
+          display: block;
+          font-size: 11px;
+          height: 27px;
+          margin: 0;
+          padding: 4px 7px;
+          width: 132px;
+        }
+        .unit-input {
+          background: transparent;
+          border: 0;
+          box-shadow: 0 0 0;
+          width: 30px;
+        }
+        input[type='number'] {
+          text-align: right;
+        }
+        .remark-input {
+          float: left;
+          margin: 0;
+        }
+        .get-total-amount {
+          margin: 0;
+        }
+      }
+      td.total-amount {
+        font-size: 11px;
+        padding-right: 12px;
+        text-align: right;
+        label {
+          font-size: 11px;
+        }
+        span {
+          padding-right: 8px;
+        }
+      }
+      td.total-amount.text-left {
+        text-align: left;
+      }
+      .remark-icon {
+        padding: 5px 10px 5px;
+        text-align: left;
+        float: left;
+        img {
+          float: left;
+        }
+      }
+      .glyphicon.glyphicon-trash {
+        cursor: pointer;
+        top: 6px;
+      }
+    }
+  }
+  .quantity-label {
+    float: left;
+    font-size: 11px;
+    padding: 10px 5px 10px 0;
+    text-align: left;
+  }
+  .quantity-count {
+    float: left;
+    font-size: 11px;
+    height: 24px;
+    margin: 5px 4px 10px;
+    padding: 3px;
+    text-align: center;
+    width: 60px;
+  }
+  .quantity-sqft {
+    float: left;
+    font-size: 11px;
+    padding: 10px 5px;
+    text-align: left;
+  }
+  .add-new-btn {
+    background: transparent;
+    border: 1px solid $persian-green;
+    border-radius: 2px;
+    color: $persian-green;
+    font-size: 12px;
+    padding: 2px 4px;
+    height: auto;
+    margin: 5px;
+    float: left;
+  }
+  .save-btn {
+    background: $persian-green;
+    color: $white;
+    @extend .add-new-btn;
+    float: right;
+    padding: 3px 24px;
+  }
+}
