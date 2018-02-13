@@ -54,7 +54,10 @@ export class CreateBuildingComponent implements OnInit {
   ngOnInit() {
     // // this.getProjects();
   }
-
+  goBack() {
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    this._router.navigate([NavigationRoutes.APP_COST_SUMMARY,projectId]);
+  }
   onSubmit() {
     //this.projectService
     if(this.addBuildingForm.valid) {

@@ -90,7 +90,9 @@ export class CreateProjectComponent implements OnInit {
       this.messageService.message(message);
     }
   }
-
+  goBack() {
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+  }
   getMessages() {
     return Messages;
   }

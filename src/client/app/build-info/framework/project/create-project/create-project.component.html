@@ -1,6 +1,6 @@
 <header class="create-new-header">
-  <button class="btn-back"><img src="assets/build-info/create-new-project/back.png" /><span>Back</span></button>
-  <button class="btn-close"><img src="assets/build-info/create-new-project/close.png" /><span>Close</span></button>
+  <button class="btn-back" (click)="goBack()"><img src="assets/build-info/create-new-project/back.png" /><span>Back</span></button>
+  <button class="btn-close" (click)="goBack()"><img src="assets/build-info/create-new-project/close.png" /><span>Close</span></button>
 </header>
 <section class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND_TRANSPARENT + ')'}">
   <div class="inner-content clearfix">
