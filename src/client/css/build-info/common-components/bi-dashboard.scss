@@ -1,0 +1,53 @@
+@import '../../../css/common';
+
+.wrapper {
+  background-color: $page-background;
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 100px;
+  text-align: left;
+  padding-top:30px;
+
+  label {
+    color: $heading;
+    font-weight: 400;
+    font-size: 12px;
+  }
+
+  .select-costing {
+    background: transparent url(../assets/framework/images/form/drop-down.png) no-repeat 92% 50%;
+    border: 1px solid $heading;
+    border-radius: 8px;
+    color: $heading;
+    font-size: 12px;
+    margin-right: 15px;
+    padding: 2px 5px;
+    width: 100px;
+    font-weight: 400;
+
+    &:focus {
+      border: 1px solid $heading;
+    }
+  }
+
+  .btn-get-amount {
+    background: transparent;
+    border: 1px solid $get-amount;
+    color: $get-amount;
+    border-radius: 4px;
+    padding: 1px 4px;
+    height: auto;
+    margin: 5px 0;
+    font-weight: 600;
+    font-size: 12px;
+    min-width: 75px;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: transparent;
+      border: 1px solid $get-amount;
+      color: $get-amount;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-<section class="">
+<section class="wrapper">
 
   <div class="container">
     <div class="col-sm-8 col-xs-12 no-padding">
@@ -17,9 +17,7 @@
       </div>
     </div>
     <div class="col-sm-8 col-xs-12">
-
-      <div *ngFor="let building of projectBuildings; let i = index">
-        <div class="panel-group">
+      <div class="panel-group" *ngFor="let building of projectBuildings; let i = index">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
@@ -75,17 +73,16 @@
                                  id="estimatedItem.total"
                                  class="form-control clear"/>
                         </div>
-                        <div>
-                          <button *ngIf="building.estimated.estimatedCost[i].total == 0"
-                                  type="button" class="btn btn-get-amount"
+                        <button *ngIf="building.estimated.estimatedCost[i].total == 0"
+                                  type="button" class="btn-get-amount"
                                   (click)="getAmount(building.name, building.estimated.estimatedCost[i])">Get Amount</button>
-                        </div>
                       </td>
                       <td class="border-left">{{building.estimated.estimatedCost[i].rate}}</td>
                       <td>
                         <div data-toggle="modal"
                              data-target="#deleteCosthead"
-                             (click)="deleteCostHeadDetailsfun(building._id, building.estimated.estimatedCost[i].name)" class="delete-cost-head">
+                             (click)="deleteCostHeadDetailsfun(building._id, building.estimated.estimatedCost[i].name)"
+                             class="delete-cost-head">
                           <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                         </div>
                       </td>
@@ -94,14 +91,19 @@
                       <td class="border-left">
                         <select class="select-item" (change)="inactiveCostHeadSelected($event.target.value)">
                           <option>Select Item</option>
-                          <option *ngFor="let costHeadItem of inActiveCostHeadArray" [value]="costHeadItem.name">{{costHeadItem.name}}</option>
+                          <option *ngFor="let costHeadItem of inActiveCostHeadArray" [value]="costHeadItem.name">
+                            {{costHeadItem.name}}
+                          </option>
                         </select>
                       </td>
                       <td colspan="5">&nbsp;</td>
                     </tr>
                     <tr>
                       <td colspan="6" class="add-items">
-                        <button type="button" class="btn btn-add-item" (click)="showInactiveCostHeadsOnDropDown(building._id)"><span class="glyphicon glyphicon-plus"></span>Add Item</button>
+                        <button type="button" class="btn btn-add-item"
+                                (click)="showInactiveCostHeadsOnDropDown(building._id)">
+                          <span class="glyphicon glyphicon-plus"></span>Add Item
+                        </button>
                       </td>
                     </tr>
                   <tr class="total" *ngIf="(building.thumbRule && building.estimated)">
@@ -118,7 +120,6 @@
             </div>
           </div>
         </div>
-      </div>
 
       <div class="panel-group">
         <div class="panel panel-default">
@@ -137,7 +138,9 @@
                 <tr>
                   <th rowspan="2" class="border-left">Cost Head</th>
                   <th colspan="2" class="border-left">By Thumbrule</th>
-                  <th colspan="2" class="border-left">Estimated <span class="sub-heading">(as per project quantities & rates)</span></th>
+                  <th colspan="2" class="border-left">
+                    Estimated <span class="sub-heading">(as per project quantities & rates)</span>
+                  </th>
                   <th>&nbsp;</th>
                 </tr>
                 <tr>
