@@ -29,23 +29,24 @@
         <tbody>
         <tr *ngFor="let rateItem of rateItemsArray.item; let k = index">
           <td>
-            <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control remark-input"/>
+            <input [(ngModel)]="rateItem.item" id="itemDescription" class="form-control remark-input"/>
             <div class="remark-icon">
               <!--<input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />-->
               <img title="{{rateItem.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
             </div>
           </td>
           <td>
-            <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control text-right" (change)="changeQuantity(rateItem.quantity,k)"/>
+            <input [(ngModel)]="rateItem.quantity" id="itemQuantity" class="form-control text-right" (change)="changeQuantity(rateItem.quantity,k)"/>
           </td>
           <td>
-            <input type="number" [(ngModel)]="rateItem.quantity" id="itemunit1" class="form-control text-right" (change)="changeQuantity(rateItem.quantity,k)"/>
+            <input [(ngModel)]="rateItem.unit" id="itemUnit" class="form-control text-right" (change)="changeQuantity(rateItem.quantity,k)"/>
           </td>
           <td>
-            <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control text-right" (change)="changeRate(rateItem.rate,k)"/>
+            <input type="number" [(ngModel)]="rateItem.rate" id="itemRate" class="form-control text-right" (change)="changeRate(rateItem.rate,k)"/>
           </td>
           <td>
-            <input type="number" [(ngModel)]="rateItem.rate" id="itemamount1" class="form-control get-total-amount text-right" (change)="changeRate(rateItem.rate,k)"/>
+            <!--{{(rateItem.quantity*rateItem.rate)|number}}-->
+            <input type="number" [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>
           </td>
           <td>
             <input type="number" [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
