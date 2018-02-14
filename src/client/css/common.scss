@@ -191,9 +191,9 @@ select,
   }
 
   option {
-    color: #666;
-    font-weight: 900;
-    font-size: 13px;
+    color: $text-color;
+    font-weight: 400;
+    font-size: 12px;
     padding: 2px 0;
   }
 }

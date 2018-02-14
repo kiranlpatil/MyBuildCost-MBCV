@@ -72,7 +72,7 @@
       width: 120px;
 
       input {
-        border: 0;
+        border: 1px solid transparent;
         box-shadow: none;
         color: $heading;
         font-size: 12px;
@@ -81,8 +81,13 @@
         margin: 0;
         display: inline-block;
         padding: 6px 28px 6px 6px;
-        background: url('../assets/build-info/dashboard/edit.png') no-repeat 100% 46%;
+        background: url('../assets/build-info/dashboard/edit.png') no-repeat 95% 46%;
         cursor: pointer;
+
+        &:focus,
+        &:hover {
+          border: 1px solid $border-color;
+        }
       }
 
       img {

@@ -37,19 +37,6 @@
   }
 }
 
-td{
-  vertical-align: top;
-  padding: 8px;
-}
-th{
-  padding: 0 8px;
-}
-
-.full-width {
-  display: inline-block;
-  width: 100%;
-}
-
 .building-name{
   background-color: $white;
   color: $heading;
@@ -60,4 +47,28 @@ th{
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
   font-weight: 300;
   font-size: 20px;
+}
+
+.add-subcategory {
+  table {
+    tr > td {
+      text-align: center !important;
+    }
+  }
+}
+
+.table-categories {
+  tr > td,
+  tr > th {
+    &:nth-child(2),
+    &:nth-child(5) {
+      width: 140px;
+    }
+
+    &:nth-child(3),
+    &:nth-child(6),
+    &:nth-child(4) {
+      width: 80px;
+    }
+  }
 }

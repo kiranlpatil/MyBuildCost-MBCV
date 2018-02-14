@@ -33,7 +33,7 @@
           <div id="collapse{{i}}" class="panel-collapse collapse">
             <div class="panel-body">
               <div  *ngFor="let workitemObj of subCategoryDetails[subCategory].workitem; let workItemIndex = index">
-                <table class="table table-row-spacing table-dashboard">
+                <table class="table table-row-spacing table-dashboard table-categories">
                   <thead *ngIf="workItemIndex === 0">
                   <tr>
                     <th class="border-left">Item</th>
@@ -130,13 +130,25 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-12" *ngIf="showSubcategoryListvar">
-        <select (change)="onSelectedAddSubCategory($event.target.value)">
-          <option [value]="selectItem">Select Subcategory</option>
-          <option *ngFor="let subCategoryObj of subcategoryArray" [value]="subCategoryObj.rateAnalysisId">{{ subCategoryObj.subCategory }}</option>
-        </select>
+      <div class="col-sm-12 no-padding add-subcategory">
+        <table class="table table-dashboard table-row-spacing">
+          <tbody>
+            <tr *ngIf="showSubcategoryListvar">
+              <td>
+                <select (change)="onSelectedAddSubCategory($event.target.value)">
+                  <option [value]="selectItem">Select Subcategory</option>
+                  <option *ngFor="let subCategoryObj of subcategoryArray" [value]="subCategoryObj.rateAnalysisId">{{ subCategoryObj.subCategory }}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td classs="text-center">
+                <button type="button" class="btn btn-add-item" (click)="showSubcategoryList()"><span class="glyphicon glyphicon-plus"></span>Add Subcategory</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <button type="button" class="btn btn-primary" (click)="showSubcategoryList()"><span class="glyphicon glyphicon-plus"></span>Add Subcategory</button>
     </div>
     <div class="col-xs-4">
       <img src="./assets/build-info/dashboard/ads.png" />
