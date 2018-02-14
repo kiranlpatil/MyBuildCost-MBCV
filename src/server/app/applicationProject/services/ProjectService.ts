@@ -828,69 +828,6 @@ class ProjectService {
     });
   }
 
-  deleteQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string, workitemId:string, user:User, item:string, callback:(error: any, result: any)=> void) {
-   this.buildingRepository.findById(buildingId, (error, building) => {
-     if (error) {
-       callback(error, null);
-     } else {
-       let costHeadList = building.costHead;
-       let quantity: Quantity;
-       let itemList: any [];
-       for (let index = 0; index < costHeadList.length; index++) {
-         if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
-           for (let index1 = 0; index1 < costHeadList[index].subCategory.length; index1++) {
-             if (parseInt(subcategoryId) === costHeadList[index].subCategory[index1].rateAnalysisId) {
-               for (let index2 = 0; index2 < costHeadList[index].subCategory[index1].workitem.length; index2++) {
-                 if (parseInt(workitemId) === costHeadList[index].subCategory[index1].workitem[index2].rateAnalysisId) {
-                   quantity = costHeadList[index].subCategory[index1].workitem[index2].quantity;
-                 }
-               }
-             }
-           }
-         }
-       }
-       for (let index = 0; quantity.item.length > index; index++) {
-         if (quantity.item[index].item === item) {
-           quantity.item.splice(index, 1);
-         }
-       }
-       /* let query = {'_id': buildingId, 'costHead.rateAnalysisId': parseInt(costheadId)};
-        let newData = {'$set': {'costHead.$.subCategory.$.workitem.$.quantity': quantity}};*/
-       let query = { _id : buildingId };
-       this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, building) => {
-         logger.info('Project service, deleteQuantityFromWorkitem has been hit');
-         if (error) {
-           callback(error, null);
-         } else {
-           let costHeadList = building.costHead;
-           let quantity: Quantity;
-           let itemList: any [];
-           for (let index = 0; index < costHeadList.length; index++) {
-             if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
-               for (let index1 = 0; index1 < costHeadList[index].subCategory.length; index1++) {
-                 if (parseInt(subcategoryId) === costHeadList[index].subCategory[index1].rateAnalysisId) {
-                   for (let index2 = 0; index2 < costHeadList[index].subCategory[index1].workitem.length; index2++) {
-                     if (parseInt(workitemId) === costHeadList[index].subCategory[index1].workitem[index2].rateAnalysisId) {
-                       quantity = costHeadList[index].subCategory[index1].workitem[index2].quantity;
-                     }
-                   }
-                 }
-               }
-             }
-           }
-           if (quantity.total === null) {
-             for (let index = 0; quantity.item.length > index; index++) {
-               quantity.total = quantity.item[index].quantity + quantity.total;
-             }
-           }
-           callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
-         }
-       });
-     }
-   });
-  }
-
-
   getSubcategory(projectId:string, buildingId:string, costheadId:number, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, getSubcategory has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
@@ -908,8 +845,8 @@ class ProjectService {
                   let workitem = workitems[workitemsIndex];
                 if(workitem.quantity.total !== null && workitem.rate.total !== null
                   && workitem.quantity.total !== 0 && workitem.rate.total !== 0) {
-                  subCategories[subcategoryIndex].amount = parseFloat((workitem.quantity.total * workitem.rate.total)
-                    + subCategories[subcategoryIndex].amount).toFixed(2);
+                  subCategories[subcategoryIndex].amount = parseFloat((workitem.quantity.total * workitem.rate.total
+                    + subCategories[subcategoryIndex].amount).toFixed(2));
                 } else {
                   subCategories[subcategoryIndex].amount=0;
                   break;
