@@ -370,9 +370,9 @@ export class ImagePath {
   public static FAV_ICON = './assets/framework/images/logo/favicon.ico';
   public static BODY_BACKGROUND = './assets/build-info/page_background/page-bg.png';
   public static BODY_BACKGROUND_TRANSPARENT = './assets/build-info/page_background/page-bg-transparent.png';
-  public static MY_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
+  public static MY_WHITE_LOGO = './assets/build-info/header/buildinfo-logo.png';
   public static HEADER_LOGO = './assets/build-info/header/header-logo.png';
-  public static MOBILE_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
+  public static MOBILE_WHITE_LOGO = './assets/build-info/header/buildinfo-logo.png';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
