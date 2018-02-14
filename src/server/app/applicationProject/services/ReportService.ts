@@ -64,16 +64,16 @@ class ReportService {
           buildingReport.name = buildings[index].name;
           buildingReport._id = buildings[index]._id;
           if (areaType === 'slabArea') {
-            if(projectRate==='sqmt'){
-              buildingReport.area = (parseFloat(buildings[index].totalSlabArea)*config.get('SqureMeter')).toFixed(2);
+            if(projectRate==='sqmt') {
+              buildingReport.area = parseFloat((buildings[index].totalSlabArea * config.get('SqureMeter')).toFixed(2));
             } else {
-              buildingReport.area = (parseFloat(buildings[index].totalSlabArea)).toFixed(2);
+              buildingReport.area = parseFloat((buildings[index].totalSlabArea).toFixed(2));
             }
           } else {
-            if(projectRate==='sqmt'){
-              buildingReport.area = (parseFloat(buildings[index].totalSaleableAreaOfUnit)*config.get('SqureMeter')).toFixed(2);
+            if(projectRate==='sqmt') {
+              buildingReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit * config.get('SqureMeter')).toFixed(2));
             } else {
-              buildingReport.area = (parseFloat(buildings[index].totalSaleableAreaOfUnit)).toFixed(2);
+              buildingReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit).toFixed(2));
             }
           }
           let costHeadArray : any = buildings[index].costHead;
@@ -88,24 +88,24 @@ class ReportService {
               thumbRule.rateAnalysisId = costHeadArray[costHeadIndex].rateAnalysisId;
               estimateReport.rateAnalysisId = costHeadArray[costHeadIndex].rateAnalysisId;
               if (areaType === 'slabArea') {
-                thumbRuleReport.area = parseFloat(buildings[index].totalSlabArea).toFixed(2);
-                estimatedReport.area = parseFloat(buildings[index].totalSlabArea).toFixed(2);
+                thumbRuleReport.area = buildings[index].totalSlabArea;
+                estimatedReport.area = buildings[index].totalSlabArea;
                 if (projectRate === 'sqft') {
-                  thumbRule.rate = parseFloat(costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqft).toFixed(2);
+                  thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqft).toFixed(2));
                 } else {
-                  thumbRule.rate = parseFloat(costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqmt).toFixed(2);
-                  thumbRuleReport.area = (parseFloat(buildings[index].totalSlabArea)*config.get('SqureMeter')).toFixed(2);
-                  estimatedReport.area = (parseFloat(buildings[index].totalSlabArea)*config.get('SqureMeter')).toFixed(2);
+                  thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqmt).toFixed(2));
+                  thumbRuleReport.area = parseFloat((buildings[index].totalSlabArea * config.get('SqureMeter')).toFixed(2));
+                  estimatedReport.area = parseFloat((buildings[index].totalSlabArea * config.get('SqureMeter')).toFixed(2));
                 }
               } else {
-                thumbRuleReport.area = parseFloat(buildings[index].totalSaleableAreaOfUnit).toFixed(2);
-                estimatedReport.area = parseFloat(buildings[index].totalSaleableAreaOfUnit).toFixed(2);
+                thumbRuleReport.area = buildings[index].totalSaleableAreaOfUnit;
+                estimatedReport.area = buildings[index].totalSaleableAreaOfUnit;
                 if (projectRate === 'sqft') {
-                  thumbRule.rate = parseFloat(costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqft).toFixed(2);
+                  thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqft).toFixed(2));
                 } else {
-                  thumbRule.rate =parseFloat( costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqmt).toFixed(2);
-                  thumbRuleReport.area = (parseFloat(buildings[index].totalSaleableAreaOfUnit)*config.get('SqureMeter')).toFixed(2);
-                  estimatedReport.area = (parseFloat(buildings[index].totalSaleableAreaOfUnit)*config.get('SqureMeter')).toFixed(2);
+                  thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqmt).toFixed(2));
+                  thumbRuleReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit * config.get('SqureMeter')).toFixed(2));
+                  estimatedReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit * config.get('SqureMeter')).toFixed(2));
                 }
               }
               let subCategory: Array<SubCategory> = costHeadArray[costHeadIndex].subCategory;
@@ -117,11 +117,10 @@ class ReportService {
                     for (let key in workItem) {
                       if (workItem[key].quantity.total !== null && workItem[key].rate.total !== null
                         && workItem[key].quantity.total !== 0 && workItem[key].rate.total !== 0) {
-                        estimateReport.total = (parseFloat(workItem[key].quantity.total)
-                          * parseFloat(workItem[key].rate.total)
-                          + parseFloat(estimateReport.total)).toFixed(2);
-                        let estimatedRate = parseFloat(estimateReport.total) / parseFloat(buildingReport.area);
-                        estimateReport.rate = estimatedRate.toFixed(2);
+                        estimateReport.total = workItem[key].quantity.total
+                          * workItem[key].rate.total
+                          + estimateReport.total;
+                        estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
                       } else {
                         estimateReport.total = 0.0;
                         estimateReport.rate = 0.0;
@@ -136,36 +135,23 @@ class ReportService {
                 }
 
               }
-              estimatedReport.totalEstimatedCost = parseFloat(estimateReport.total)
-                +parseFloat( estimatedReport.totalEstimatedCost);
-              estimatedReport.totalEstimatedCost=estimatedReport.totalEstimatedCost.toFixed(2);
-              estimatedReport.totalRate = parseFloat( estimatedReport.totalRate) + parseFloat(estimateReport.rate);
-              estimatedReport.totalRate=estimatedReport.totalRate.toFixed(2);
+              estimatedReport.totalEstimatedCost = parseFloat((estimateReport.total + estimatedReport.totalEstimatedCost).toFixed(2));
+              estimatedReport.totalRate = parseFloat((estimatedReport.totalRate +  estimateReport.rate).toFixed(2));
               estimatedReport.estimatedCost.push(estimateReport);
               if( costHeadArray[costHeadIndex].budgetedCostAmount === 0 ||
                 costHeadArray[costHeadIndex].budgetedCostAmount === undefined ) {
-                thumbRule.amount = parseFloat(thumbRuleReport.area )* parseFloat(thumbRule.rate);
-                thumbRule.amount=thumbRule.amount.toFixed(2);
+                thumbRule.amount = parseFloat((thumbRuleReport.area * thumbRule.rate).toFixed(2));
               } else {
-                thumbRule.amount =  parseFloat(costHeadArray[costHeadIndex].budgetedCostAmount);
-                thumbRule.amount=thumbRule.amount.toFixed(2);
+                thumbRule.amount =  parseFloat((costHeadArray[costHeadIndex].budgetedCostAmount).toFixed(2));
               }
               thumbRule.costHeadActive = costHeadArray[costHeadIndex].active;
               thumbRuleReport.thumbRuleReport.push(thumbRule);
-              thumbRuleReport.totalRate = parseFloat(thumbRuleReport.totalRate) + parseFloat(thumbRule.rate);
-              thumbRuleReport.totalRate=thumbRuleReport.totalRate.toFixed(2);
-              thumbRuleReport.totalBudgetedCost = parseFloat(thumbRuleReport.totalBudgetedCost)+ parseFloat(thumbRule.amount);
-              thumbRuleReport.totalBudgetedCost.toFixed(2);
+              thumbRuleReport.totalRate = parseFloat((thumbRuleReport.totalRate + thumbRule.rate).toFixed(2));
+              thumbRuleReport.totalBudgetedCost = parseFloat((thumbRuleReport.totalBudgetedCost + thumbRule.amount).toFixed(2));
               buildingReport.estimated = estimatedReport;
               buildingReport.thumbRule = thumbRuleReport;
-
             }
           }
-
-         /* if(projectRate === 'sqmt') {
-            buildingReport.estimated.totalRate = parseFloat(buildingReport.estimated.totalRate)*config.get('SqureMeter');
-            buildingReport.estimated.totalRate=buildingReport.estimated.totalRate.toFixed(2);
-          }*/
           report.push(buildingReport);
         }
 
