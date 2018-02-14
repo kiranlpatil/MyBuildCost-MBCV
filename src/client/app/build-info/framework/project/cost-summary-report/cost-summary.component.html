@@ -5,7 +5,7 @@
       <div class="col-sm-5">
         <h5>Construction Cost (Material + Labour)</h5>
       </div>
-      <div class="col-sm-7 text-right">
+      <div class="col-sm-7 text-right padding-top-7">
         <label>Costing in</label>
         <select class="select-costing" (change)="onChangeCostingIn($event.target.value)">
           <option *ngFor="let cIn of costIn" [value]="cIn.costInId">{{cIn.costInId}}</option>
@@ -371,7 +371,7 @@
     </div>
   </div>
 
-  <div class="modal fade dashboard-modal" id="delete" role="dialog">
+  <div class="modal fade default-modal" id="delete" role="dialog">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
@@ -379,10 +379,10 @@
           <h2 class="modal-title">Delete Building</h2>
         </div>
         <div class="modal-body">
-          <p>Do you want to delete a Building ?</p>
+          <p class="font-16">Do you want to delete a Building ?</p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary" type="button"  (click)="deleteThisBuilding()" data-dismiss="modal">Yes</button>
+          <button class="btn btn-primary bi-btn" type="button"  (click)="deleteThisBuilding()" data-dismiss="modal">Yes</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </div>
