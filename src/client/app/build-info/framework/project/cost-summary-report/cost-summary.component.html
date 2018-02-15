@@ -35,9 +35,9 @@
                 </ul>
               </div>
             </div>
-            <div id="collapse{{i}}" class="panel-collapse collapse">
+            <div id="collapse{{i}}" class="panel-collapse collapse" [class.in]="i===0">
               <div class="panel-body">
-                <table class="table table-row-spacing table-dashboard" style="position: relative">
+                <table class="table table-row-spacing table-dashboard">
                   <thead>
                     <tr>
                       <th rowspan="2" class="border-left">Cost Head</th>
@@ -249,7 +249,7 @@
         <form [formGroup]="cloneBuildingForm" class="profile-form clearfix">
           <div class="modal-body">
             <div class="form-group">
-              <label>Enter Password</label>
+              <label>Building Name</label>
               <input type="text" [(ngModel)]="model.name" formControlName="name" size="45" class="form-control">
             </div>
             <div class="form-group">
