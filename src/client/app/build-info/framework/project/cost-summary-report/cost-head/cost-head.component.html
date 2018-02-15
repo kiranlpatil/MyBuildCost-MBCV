@@ -51,14 +51,14 @@
                     <td class="border-left">
                       <div class="edit-field"
                            *ngIf="workitemObj.quantity.total"
-                           (click)="getQuantity(i, workitemObj.quantity.item, workitemObj.name, workitemObj.rateAnalysisId)">
+                           (click)="getQuantity(i, workitemObj.quantity.item, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
                         <input  [(ngModel)]="workitemObj.quantity.total" id="quantity"  size="10" class="form-control clear">
                       </div>
                       <button *ngIf="workitemObj.quantity.total == 0"
                               type="button"
                               id="getQuantity{{i}}"
                               class="btn-get-amount"
-                              (click)="getQuantity(i, workitemObj.quantity.item, workitemObj.name, workitemObj.rateAnalysisId)">
+                              (click)="getQuantity(i, workitemObj.quantity.item, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
                         Get Qty.
                       </button>
                     </td>
@@ -91,21 +91,25 @@
                   </tbody>
                 </table>
 
-                <div  *ngIf="toggleRate==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i">
-                  <bi-rate-items [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
+                <div *ngIf="showRate == true">
+                   <div  *ngIf="toggleRate==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i">
+                      <bi-rate-items [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
                                  [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
                                  [totalAmount]="totalAmount"
                                  [totalRate]="totalRate"
                                  [totalQuantity]="totalQuantity"
                                  (refreshDataList)="refreshDataList()">
-                  </bi-rate-items>
+                      </bi-rate-items>
+                   </div>
                 </div>
 
-                <div *ngIf="toggleQty==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i">
+                <div *ngIf="showQuantity== true">
+                  <div *ngIf="toggleQty==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i">
                   <bi-cost-head-get-quantity [quantityItems]="quantityItemsArray"
                                              [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
                                              (refreshDataList)="refreshDataList()">
                   </bi-cost-head-get-quantity>
+                   </div>
                 </div>
               </div>
               <table class="table table-row-spacing table-dashboard">

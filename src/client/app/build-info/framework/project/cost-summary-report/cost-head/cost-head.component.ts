@@ -69,6 +69,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
   alreadySelectedWorkItems:any;
 
 
+  private showQuantity:boolean=true;
+  private showRate:boolean=true;
   private toggleQty:boolean=false;
   private toggleRate:boolean=false;
   private compareWorkItemIndex:number=0;
@@ -110,17 +112,18 @@ export class CostHeadComponent implements OnInit, OnChanges {
   onSubmit() { }
 
 
-  getQuantity(i: number, quantityItems: any, workItem: any ,workitemObjId : number) {
+  getQuantity(i: number, quantityItems: any, workItemIndex: number, workItem: any ,workitemObjId : number) {
+    this.compareSubcategoryIndex=i;
     this.toggleQty = !this.toggleQty;
-    this.compareWorkItemIndex = i;
-    this.workItemId = workitemObjId;
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID,workitemObjId);
+    this.compareWorkItemIndex = workItemIndex;
     if (this.toggleQty === true) {
       this.toggleRate = false;
     }
+    this.workItemId = workitemObjId;
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
     this.quantityItemsArray = quantityItems;
-  // this.getQuantityTotal(this.quantityItemsArray);
     this.workItem = workItem;
+    this.showQuantity = true;
   }
 
   getRate(i:number,workItemIndex: number,workItem:any) {
@@ -171,6 +174,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.totalQuantity=this.totalQuantity+rateItem.data.item[i].quantity;
     }
     this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
+    this.showRate = true;
   }
 
   onGetRateItemsFail(error: any) {
@@ -208,6 +212,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.totalRate= this.totalRate+this.rateItemsArray.item[i].rate;
       this.totalQuantity=this.totalQuantity+this.rateItemsArray.item[i].quantity;
     }
+    this.showRate = true;
   }
 
 
@@ -553,6 +558,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   refreshDataList() {
     this.getSubCategoryDetails(this.projectId, this.costheadId);
+    this.showQuantity = false;
+    this.showRate = false;
   }
 
   getSelectedWorkItems(workItemList:any) {

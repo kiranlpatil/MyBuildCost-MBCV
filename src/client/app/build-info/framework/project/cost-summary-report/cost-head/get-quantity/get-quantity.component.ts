@@ -53,7 +53,11 @@ export class GetQuantityComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    this.updateQuantity(this.quantityItems, 'updateNos');
+    this.updateQuantity(this.quantityItems, 'updateLength');
+    this.updateQuantity(this.quantityItems, 'updateBreadth');
+    this.updateQuantity(this.quantityItems, 'updateHeight');
+    }
 
   onSubmit() {
   }

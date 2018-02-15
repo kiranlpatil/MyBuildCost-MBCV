@@ -1,4 +1,4 @@
-<div class="get-quantity-section">
+ <div *ngIf="quantityItems!==undefined" class="get-quantity-section">
   <table class="table">
     <thead>
     <th>Item</th>
@@ -44,10 +44,10 @@
       <td class="total-amount">
         <label>Total</label>
       </td>
-      <td class="total-amount"><!--{{quanitytNumbersTotal|number}}-->
+      <td class="total-amount">
       </td>
       <td class="total-amount text-right">
-        <span>{{lengthTotal|number}}</span>
+        <span>{{quanitytNumbersTotal|number}}</span>
       </td>
       <td class="total-amount text-right">
         <span>{{lengthTotal|number}}</span>
