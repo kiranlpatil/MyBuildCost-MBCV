@@ -32,9 +32,13 @@ export class CostSummaryComponent implements OnInit {
   cloneBuildingId: string;
   currentBuildingId:string;
   costHeadId: number;
+
   grandTotalofBudgetedCost: number;
   grandTotalofTotalRate: number;
   grandTotalofArea: number;
+  grandTotalofEstimatedCost : number;
+  grandTotalofEstimatedRate : number;
+
   buildingName : string;
   buildingsDetails: any;
   estimatedCost : any;
@@ -399,13 +403,24 @@ export class CostSummaryComponent implements OnInit {
     this.grandTotalofBudgetedCost = 0;
     this.grandTotalofTotalRate = 0;
     this.grandTotalofArea = 0;
+
+    this.grandTotalofEstimatedCost = 0;
+    this.grandTotalofEstimatedRate = 0;
+
     for (let buildindIndex = 0; buildindIndex < this.projectBuildings.length; buildindIndex++) {
-      this.grandTotalofBudgetedCost = (this.grandTotalofBudgetedCost
-        + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost));
-      this.grandTotalofTotalRate = (this.grandTotalofTotalRate
-        + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalRate));
-      this.grandTotalofArea =(this.grandTotalofArea +
-        parseFloat(this.projectBuildings[buildindIndex].area));
+
+      this.grandTotalofBudgetedCost = this.grandTotalofBudgetedCost +
+        parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost);
+
+      this.grandTotalofTotalRate = this.grandTotalofTotalRate + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalRate);
+
+      this.grandTotalofArea =( this.grandTotalofArea + parseFloat(this.projectBuildings[buildindIndex].area));
+
+      this.grandTotalofEstimatedCost = this.grandTotalofEstimatedCost +
+        parseFloat(this.projectBuildings[buildindIndex].estimated.totalEstimatedCost);
+
+      this.grandTotalofEstimatedRate = this.grandTotalofEstimatedRate +
+        parseFloat(this.projectBuildings[buildindIndex].estimated.totalRate);
     }
   }
 
