@@ -1,22 +1,13 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Messages } from '../../../../../../shared/constants';
 import {
-  AppSettings,
-  Label,
-  Button,
-  Headings,
-  NavigationRoutes, Messages
-} from '../../../../../../shared/constants';
-import {
-  API, BaseService, SessionStorage, SessionStorageService,
+  SessionStorage, SessionStorageService,
   Message, MessageService
 } from '../../../../../../shared/index';
-import {GetRateService} from './get-rate.service';
-import {CustomHttp} from '../../../../../../shared/services/http/custom.http';
-import {FormGroup} from '@angular/forms';
-import {Project} from '../../../../model/project';
-import {Rate} from '../../../../model/rate';
-import Any = jasmine.Any;
+import { GetRateService } from './get-rate.service';
+import { Rate } from '../../../../model/rate';
+import { GroupByPipe } from '../../../../../../shared/services/custom-pipes/groupby.pipe';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +16,7 @@ import Any = jasmine.Any;
   styleUrls: ['get-rate.component.css'],
 })
 
-export class GetRateComponent implements OnInit {
+export class GetRateComponent {
 
   @Input() rateItemsArray: any;
   @Input() rateItemsObject: any;
@@ -38,25 +29,23 @@ export class GetRateComponent implements OnInit {
   projectId: string;
   buildingId: string;
   buildingName: string;
-  itemName: string;
+
   costHead: string;
   costheadId: number;
   subCategoryId: number;
   subCategoryDetails: any;
-  workItem: any;
+
   quantityTotal: number = 0;
   quanitytNumbersTotal: number = 0;
   lengthTotal: number = 0;
   breadthTotal: number = 0;
   heightTotal: number = 0;
-  /*totalAmount:number=0;*/
-  /*totalRate:number=0;*/
-  /*totalQuantity:number=0;*/
+
   total: number = 0;
   rateIArray: any;
   quantity: number = 0;
-  /*unit:string='';*/
   workItemId: number;
+
   showSubcategoryListvar: boolean = false;
   rateTotal: number = 0;
   quantityIncrement: number = 1;
@@ -67,25 +56,16 @@ export class GetRateComponent implements OnInit {
               private messageService: MessageService) {
   }
 
-  ngOnInit() {
-  }
-
-  onSubmit() {
-    console.log('Inside getRateService component.');
-  }
-
   changeQuantity(quantity: any, k: number) {
     this.rateItemsArray.item[k].quantity = parseFloat(quantity);
     this.calculateTotal();
   }
 
-  //
   changeRate(rate: any, k: number) {
     this.rateItemsArray.item[k].rate = parseFloat(rate);
     this.calculateTotal();
   }
 
-  //
   calculateTotal() {
     this.totalAmount = 0;
     this.totalRate = 0.0;
@@ -100,7 +80,6 @@ export class GetRateComponent implements OnInit {
     this.rateItemsArray.total = this.totalAmount / this.totalQuantity;
   }
 
-  //
   updateRate(rateItemsArray: any) {
     let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
     let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
@@ -118,7 +97,6 @@ export class GetRateComponent implements OnInit {
     );
   }
 
-  //
   onUpdateRateItemsSuccess(rateItem: any) {
     console.log('Rate updated successfully');
     var message = new Message();
@@ -128,12 +106,10 @@ export class GetRateComponent implements OnInit {
     this.refreshDataList.emit();
   }
 
-  //
   onUpdateRateItemsFail(error: any) {
     console.log(error);
   }
 
-  //
   onTotalQuantityChange(newTotalQuantity: number) {
     if (newTotalQuantity === 0 || newTotalQuantity === null){
       newTotalQuantity=1;
@@ -150,7 +126,6 @@ export class GetRateComponent implements OnInit {
 
   }
 
-  //
   getPreviousQuantity(previousTotalQuantity: number) {
     console.log('previousTotalQuantity : ' + previousTotalQuantity);
     this.previousTotalQuantity = previousTotalQuantity;

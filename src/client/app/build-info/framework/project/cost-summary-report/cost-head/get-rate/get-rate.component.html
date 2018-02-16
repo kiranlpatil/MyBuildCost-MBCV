@@ -26,48 +26,59 @@
         <th>Amount</th>
         </thead>
         <tbody>
-        <tr *ngFor="let rateItem of rateItemsArray.item; let k = index">
+        <tr *ngFor="let rateItem of rateItemsArray.item | groupBy:'type'; let k = index">
           <td>
-            <input [(ngModel)]="rateItem.item" id="itemDescription" class="form-control remark-input"/>
-            <div class="remark-icon">
-              <!--<input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />-->
-              <img title="{{rateItem.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
-            </div>
-          </td>
-          <td>
-            <input [(ngModel)]="rateItem.quantity" id="itemQuantity" class="form-control text-right" (change)="changeQuantity(rateItem.quantity,k)"/>
-          </td>
-          <td>
-            <input [(ngModel)]="rateItem.unit" id="itemUnit" class="form-control text-right" (change)="changeQuantity(rateItem.quantity,k)"/>
-          </td>
-          <td>
-            <input type="number" [(ngModel)]="rateItem.rate" id="itemRate" class="form-control text-right" (change)="changeRate(rateItem.rate,k)"/>
-          </td>
-          <td>
-            <!--{{(rateItem.quantity*rateItem.rate)|number}}-->
-            <input type="number" [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>
+            <table>
+              <thead>
+              {{(rateItem.key === 'M') ? 'Material' : ((rateItem.key === "L") ? "Labour" : "(Material + Labour)")}}
+              </thead>
+              <tbody>
+                    <tr *ngFor="let item of rateItem.value">
+                      <td>
+                        <input [(ngModel)]="item.item" id="itemDescription" class="form-control remark-input"/>
+                        <div class="remark-icon">
+                          <!--<input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />-->
+                          <img title="{{item.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
+                        </div>
+                      </td>
+                      <td>
+                        <input [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right" (change)="changeQuantity(item.quantity,k)"/>
+                      </td>
+                      <td>
+                        <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-right" (change)="changeQuantity(item.quantity,k)"/>
+                      </td>
+                      <td>
+                        <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right" (change)="changeRate(item.rate,k)"/>
+                      </td>
+                      <td>
+                        <!--{{(rateItem.quantity*rateItem.rate)|number}}-->
+                        <input type="number" [(ngModel)]="item.quantity*item.rate" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>
+                      </td>
+                    </tr>
+              </tbody>
+            </table>
           </td>
         </tr>
-
-        <tr>
-          <td class="total-amount text-left">
-            <label>Total</label>
-          </td>
-          <td class="total-amount">
-            {{totalQuantity|number}}
-          </td>
-          <td>
-            &nbsp;
-          </td>
-          <td class="total-amount">
-            {{totalRate|number}}
-          </td>
-          <td class="total-amount">
-            {{totalAmount|number}}
-          </td>
-        </tr>
-
         </tbody>
+        <tfoot>
+      <tr>
+        <td class="total-amount text-left">
+          <label>Total</label>
+        </td>
+        <td class="total-amount">
+          {{totalQuantity|number}}
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <td class="total-amount">
+          {{totalRate|number}}
+        </td>
+        <td class="total-amount">
+          {{totalAmount|number}}
+        </td>
+      </tr>
+      </tfoot>
       </table>
     <button type="button" class="save-btn" (click)="updateRate(rateItemsArray)">Save</button>
   </div>

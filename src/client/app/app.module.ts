@@ -73,7 +73,7 @@ import { GetQuantityComponent } from './build-info/framework/project/cost-summar
 import { GetQuantityService } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.service';
 import { ProjectListHeaderComponent } from './build-info/framework/project/project-header/project-list-header/project-list-header.component';
 import { ProjectListHeaderService } from './build-info/framework/project/project-header/project-list-header/project-list-header.service';
-
+import { GroupByPipe } from '../app/shared/services/custom-pipes/groupby.pipe';
 // Import the Animations module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GetRateComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-rate/get-rate.component';
@@ -128,6 +128,10 @@ import { CreateNewProjectComponent } from './build-info/framework/create-new-pro
     MaterialTakeoffComponent,
     GetRateComponent,
     //MyDashboardComponent,
+
+    //Custom Pipes
+    GroupByPipe,
+
     PageNotFoundComponent,
     CommonAmenitiesComponent
   ],
