@@ -21,8 +21,9 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a (click)="setBuildingId(building._id)" data-toggle="collapse" href="#collapse{{i}}">
-                  {{building.name}} <span class="slab-area"> Total {{defaultCostPer}} : {{building.area}} {{defaultCostIn}}</span>
+                <a (click)="setBuildingId(building._id,i)" data-toggle="collapse" href="#collapse{{i}}">
+                  {{building.name}} <span class="slab-area"> Total {{defaultCostPer}} : {{building.area}} {{defaultCostIn}}
+                  <span *ngIf="compareIndex !== i"> Budgeted Cost : {{building.thumbRule.totalBudgetedCost|number}}</span></span>
                 </a>
               </h4>
               <div class="dropdown menu-items">
@@ -102,7 +103,7 @@
                       <td colspan="6" class="add-items">
                         <button type="button" class="btn btn-add-item"
                                 (click)="showInactiveCostHeadsOnDropDown(building._id)">
-                          <span class="glyphicon glyphicon-plus"></span>Add Item
+                          <span class="glyphicon glyphicon-plus"></span>Add CostHead
                         </button>
                       </td>
                     </tr>

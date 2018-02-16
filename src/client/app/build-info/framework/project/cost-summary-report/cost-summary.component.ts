@@ -49,6 +49,7 @@ export class CostSummaryComponent implements OnInit {
   buildingIndex:number;
   showCostHeadList:boolean=false;
   showGrandTotalPanelBody:boolean=true;
+  compareIndex:number=0;
 
  public inActiveCostHeadArray:any;
   cloneBuildingForm: FormGroup;
@@ -103,7 +104,8 @@ export class CostSummaryComponent implements OnInit {
   }
 
 
-  setBuildingId(buildingId: string) {
+  setBuildingId(buildingId: string, i:number) {
+    this.compareIndex = i;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
   }
 
