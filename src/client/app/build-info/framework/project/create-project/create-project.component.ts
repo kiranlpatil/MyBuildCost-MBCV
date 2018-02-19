@@ -23,7 +23,7 @@ import { SharedService } from '../../../../shared/services/shared-service';
   styleUrls: ['create-project.component.css']
 })
 
-export class CreateProjectComponent implements OnInit {
+export class CreateProjectComponent {
 
   projectForm:  FormGroup;
   projects : any;
@@ -51,9 +51,7 @@ export class CreateProjectComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    console.log('Inside Create Project');
-  }
+
 
   onSubmit() {
     //this.projectService

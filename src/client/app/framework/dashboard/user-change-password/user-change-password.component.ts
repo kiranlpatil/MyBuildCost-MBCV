@@ -47,12 +47,6 @@ export class UserChangePasswordComponent {
     this.CONFIRM_PASSWORD_ICON = ImagePath.CONFIRM_PASSWORD_ICON_GREY;
   }
 
-  ngOnInit() {
-    /*this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.role = params['role'];
-      this._router.navigate([NavigationRoutes.APP_START]);
-    });*/}
-
   makePasswordConfirm(): boolean {
     if (this.model.confirm_password !== this.model.new_password) {
       this.isPasswordConfirm = true;

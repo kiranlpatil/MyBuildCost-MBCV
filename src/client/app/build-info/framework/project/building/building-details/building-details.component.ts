@@ -46,7 +46,6 @@ export class BuildingDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Building details');
     this.activatedRoute.params.subscribe(params => {
       this.buildingId = params['buildingId'];
       if(this.buildingId) {

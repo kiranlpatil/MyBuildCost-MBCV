@@ -70,9 +70,10 @@ export class CostSummaryComponent implements OnInit {
   defaultCostIn:string='Rs/Sqft';
   defaultCostPer:string='SlabArea';
 
-
-  constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute, private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService, private listBuildingService: BuildingListService,
-              private createBuildingService: CreateBuildingService, private viewBuildingService : BuildingDetailsService) {
+  constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
+              private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
+              private listBuildingService: BuildingListService, private createBuildingService: CreateBuildingService,
+              private viewBuildingService : BuildingDetailsService) {
     this.cloneBuildingForm = this.formBuilder.group({
       'name': ['', ValidationService.requiredBuildingName],
       'totalSlabArea':['', ValidationService.requiredSlabArea],
@@ -92,11 +93,8 @@ export class CostSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Inside Project Cost Sumamry Project');
-    /*this.estimatedCost = 1650000;*/
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
-      console.log(' this.projectId ->'+ this.projectId);
       if(this.projectId) {
         this.onChangeCostingIn(this.defaultCostIn);
       }

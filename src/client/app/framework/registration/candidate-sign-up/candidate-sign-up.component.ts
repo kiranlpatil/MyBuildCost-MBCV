@@ -67,10 +67,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    //this._router.navigate([NavigationRoutes.VERIFY_USER]);
-    // this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
-
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if(params['phoneNumber']) {
         this.userForm.controls['mobile_number']

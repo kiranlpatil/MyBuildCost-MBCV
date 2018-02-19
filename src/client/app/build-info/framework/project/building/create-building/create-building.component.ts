@@ -20,7 +20,7 @@ import { SharedService } from '../../../../../shared/services/shared-service';
   styleUrls: ['create-building.component.css'],
 })
 
-export class CreateBuildingComponent implements OnInit {
+export class CreateBuildingComponent {
 
   addBuildingForm:  FormGroup;
   buildings : any;
@@ -51,9 +51,6 @@ export class CreateBuildingComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    // // this.getProjects();
-  }
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
     this._router.navigate([NavigationRoutes.APP_COST_SUMMARY,projectId]);
