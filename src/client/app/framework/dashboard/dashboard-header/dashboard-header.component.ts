@@ -1,9 +1,9 @@
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate, Section } from '../../../user/models/candidate';
-import {AppSettings, ImagePath, SessionStorage, Label, LocalStorage} from '../../../shared/constants';
+import { AppSettings, ImagePath, SessionStorage, Label, LocalStorage } from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
-import {LocalStorageService} from '../../../shared/services/local-storage.service';
+import { LocalStorageService } from '../../../shared/services/local-storage.service';
 
 @Component({
   moduleId: module.id,
