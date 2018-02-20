@@ -41,7 +41,7 @@ export class ProjectListHeaderComponent implements OnInit {
 
   setCurrentProjectId(projectId:any) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT, projectId);
-    this._router.navigate([NavigationRoutes.APP_COST_SUMMARY, projectId]);
+    this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
   }
 
 }

@@ -10,8 +10,6 @@ import { SessionStorage, SessionStorageService } from '../../../../shared/index'
 
 export class ProjectHeaderComponent implements OnInit {
 
-  projectId: string;
-
   constructor(private _router: Router) {
   }
 
@@ -20,6 +18,6 @@ export class ProjectHeaderComponent implements OnInit {
   }
 
   getCurrentProjectId() {
-    return this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    return SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
   }
 }

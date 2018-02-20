@@ -3,13 +3,13 @@
     <div class="col-sm-12">
       <ul>
         <li>
-          <a type="button" [routerLinkActive]="['active']" [routerLink]="['/project/cost-summary', getCurrentProjectId()]" cost-summary>Cost Summary</a>
+          <a type="button" [routerLinkActive]="['active']" [routerLink]="['/project', getCurrentProjectId(),'cost-summary']" cost-summary>Cost Summary</a>
         </li>
         <li>
-          <a type="button"  [routerLinkActive]="['active']" [routerLink]='["/project/material-takeoff",getCurrentProjectId()]'>Material Takeoff</a>
+          <a type="button"  [routerLinkActive]="['active']" [routerLink]="['/project',getCurrentProjectId(),'material-takeoff']">Material Takeoff</a>
         </li>
         <li>
-          <a type="button"  [routerLinkActive]="['active']"  [routerLink]="['/project/details', getCurrentProjectId()]" >Project Details</a>
+          <a type="button"  [routerLinkActive]="['active']"  [routerLink]="['/project', getCurrentProjectId(),'details']" >Project Details</a>
         </li>
       </ul>
     </div>

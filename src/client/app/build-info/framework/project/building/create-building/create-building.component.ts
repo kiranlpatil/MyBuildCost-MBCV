@@ -30,27 +30,27 @@ export class CreateBuildingComponent {
               private _router: Router, private messageService: MessageService,private sharedService: SharedService) {
     this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
     this.addBuildingForm = this.formBuilder.group({
-      'name': ['', ValidationService.requiredBuildingName],
-      'totalSlabArea':['', ValidationService.requiredSlabArea],
-      'totalCarpetAreaOfUnit':['', ValidationService.requiredCarpetArea],
-      'totalSaleableAreaOfUnit':['', ValidationService.requiredSalebleArea],
-      'plinthArea':['', ValidationService.requiredPlinthArea],
-      'totalNumOfFloors':['', ValidationService.requiredNumOfFloors],
-      'numOfParkingFloors':['', ValidationService.requiredNumOfParkingFloors],
-      'carpetAreaOfParking':['', ValidationService.requiredCarpetAreaOfParking],
-      'numOfOneBHK': [''],
-      'numOfTwoBHK':[''],
-      'numOfThreeBHK':[''],
-      'numOfFourBHK':[''],
-      'numOfFiveBHK':[''],
-      'numOfLifts':['']
+      name : ['', ValidationService.requiredBuildingName],
+      totalSlabArea :['', ValidationService.requiredSlabArea],
+      totalCarpetAreaOfUnit :['', ValidationService.requiredCarpetArea],
+      totalSaleableAreaOfUnit :['', ValidationService.requiredSalebleArea],
+      plinthArea :['', ValidationService.requiredPlinthArea],
+      totalNumOfFloors :['', ValidationService.requiredNumOfFloors],
+      numOfParkingFloors :['', ValidationService.requiredNumOfParkingFloors],
+      carpetAreaOfParking :['', ValidationService.requiredCarpetAreaOfParking],
+      numOfOneBHK : [''],
+      numOfTwoBHK :[''],
+      numOfThreeBHK :[''],
+      numOfFourBHK :[''],
+      numOfFiveBHK :[''],
+      numOfLifts :['']
    });
 
   }
 
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    this._router.navigate([NavigationRoutes.APP_COST_SUMMARY,projectId]);
+    this._router.navigate([NavigationRoutes.APP_PROJECT,projectId,NavigationRoutes.APP_COST_SUMMARY]);
   }
   onSubmit() {
     if(this.addBuildingForm.valid) {
@@ -102,7 +102,7 @@ export class CreateBuildingComponent {
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
     this.messageService.message(message);
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    this._router.navigate([NavigationRoutes.APP_COST_SUMMARY, projectId]);
+    this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
   }
 
   onAddNewBuildingFailure(error : any) {

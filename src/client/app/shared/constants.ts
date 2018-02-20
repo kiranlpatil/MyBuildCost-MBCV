@@ -201,6 +201,7 @@ export class NavigationRoutes {
   public static APP_REGISTRATION: string = '/registration';
   public static APP_FORGOTPASSWORD: string = '/forgot-password';
   public static APP_PROJECT: string = '/project';
+  public static APP_BUILDING: string = 'building';
   public static APP_CREATE_NEW_PROJECT: string = '/create-new-project';
   public static APP_CREATE_PROJECT: string = '/create-project';
   public static APP_VIEW_PROJECT: string = 'project/view';
@@ -209,9 +210,9 @@ export class NavigationRoutes {
   public static APP_VIEW_BUILDING_DETAILS: string = 'building/details';
   public static APP_CREATE_BUILDING: string = '/create-building';
   public static APP_LIST_PROJECT: string = 'project/list';
-  public static APP_COST_SUMMARY: string = 'project/cost-summary';
-  public static APP_COST_HEAD: string = 'project/cost-summary/cost-head';
-  public static APP_COMMON_AMENITIES = 'project/cost-summary/common-amenities';
+  public static APP_COST_SUMMARY: string = 'cost-summary';
+  public static APP_COST_HEAD: string = 'cost-head';
+  public static APP_COMMON_AMENITIES = 'cost-summary/common-amenities';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_USER_DASHBOARD: string = '/user';
   public static APP_USER__DETAILS_DASHBOARD: string = '/user/details';
