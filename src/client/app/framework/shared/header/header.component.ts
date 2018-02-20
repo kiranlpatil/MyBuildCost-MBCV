@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
     this.dashboardService.getUserProfile()
       .subscribe(
         userprofile => this.onUserProfileSuccess(userprofile),
-        error => this.OnUserProfileFail(error));
+        error => this.OnUserProfileFailure(error));
   }
 
   onUserProfileSuccess(user: any) {
@@ -72,7 +72,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  OnUserProfileFail(error: any) {
+  OnUserProfileFailure(error: any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;

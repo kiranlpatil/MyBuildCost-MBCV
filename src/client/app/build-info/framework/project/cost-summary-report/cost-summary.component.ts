@@ -321,29 +321,29 @@ export class CostSummaryComponent implements OnInit {
   cloneBuildingBasicDetails() {
     if (this.cloneBuildingForm.valid) {
       this.model = this.cloneBuildingForm.value;
-      this.createBuildingService.addBuilding(this.model)
+      this.createBuildingService.addNewBuilding(this.model)
         .subscribe(
-          building => this.addNewBuildingSuccess(building),
-          error => this.addNewBuildingFailed(error));
+          building => this.onAddNewBuildingSuccess(building),
+          error => this.onAddNewBuildingFailure(error));
     }
   }
 
-  addNewBuildingSuccess(building: any) {
+  onAddNewBuildingSuccess(building: any) {
     this.cloneBuildingId = building.data._id;
   }
 
-  addNewBuildingFailed(error: any) {
+  onAddNewBuildingFailure(error: any) {
     console.log(error);
   }
 
   updateThisBuilding(cloneCostHead: any) {
     this.listBuildingService.updateBuildingByCostHead(cloneCostHead, this.cloneBuildingId).subscribe(
-      project => this.updateBuildingSuccess(project),
-      error => this.updateBuildingFail(error)
+      project => this.onUpdateBuildingByCostHeadSuccess(project),
+      error => this.onUpdateBuildingByCostHeadFailure(error)
     );
   }
 
-  updateBuildingSuccess(project: any) {
+  onUpdateBuildingByCostHeadSuccess(project: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
@@ -351,7 +351,7 @@ export class CostSummaryComponent implements OnInit {
     this.onChangeCostingIn(this.defaultCostIn);
   }
 
-  updateBuildingFail(error: any) {
+  onUpdateBuildingByCostHeadFailure(error: any) {
     console.log(error);
   }
 

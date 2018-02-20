@@ -27,7 +27,7 @@ export class ProjectListHeaderComponent implements OnInit {
   getProjects() {
     this.projectListHeaderService.getProject().subscribe(
       projects => this.onGetProjectSuccess(projects),
-      error => this.onGetProjectFail(error)
+      error => this.onGetProjectFailure(error)
     );
   }
 
@@ -35,7 +35,7 @@ export class ProjectListHeaderComponent implements OnInit {
     this.projectsArray = projects.data;
   }
 
-  onGetProjectFail(error : any) {
+  onGetProjectFailure(error : any) {
     console.log(error);
   }
 

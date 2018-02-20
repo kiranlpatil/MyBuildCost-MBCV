@@ -59,13 +59,13 @@ export class BuildingListComponent implements OnInit {
   onSubmit() {
     if(this.cloneBuildingForm.valid) {
       this.model = this.cloneBuildingForm.value;
-      this.createBuildingService.addBuilding(this.model)
+      this.createBuildingService.addNewBuilding(this.model)
         .subscribe(
-          building => this.addNewBuildingSuccess(building),
-          error => this.addNewBuildingFailed(error));
+          building => this.onAddNewBuildingSuccess(building),
+          error => this.onAdNewBuildingFailure(error));
     }
   }
-  addNewBuildingSuccess(building : any) {
+  onAddNewBuildingSuccess(building : any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
@@ -73,19 +73,19 @@ export class BuildingListComponent implements OnInit {
     this.clonedBuildingId = building.data._id;
   }
 
-  addNewBuildingFailed(error : any) {
+  onAdNewBuildingFailure(error : any) {
     console.log(error);
   }
   updateBuilding(cloneCostHead: any) {
     this.listBuildingService.updateBuildingByCostHead(cloneCostHead, this.clonedBuildingId).subscribe(
-      project => this.updateBuildingSuccess(project),
-      error => this.updateBuildingFail(error)
+      project => this.onUpdateBuildingByCostHeadSuccess(project),
+      error => this.onUpdateBuildingByCostHeadFailure(error)
     );
   }
-  updateBuildingSuccess(project: any) {
+  onUpdateBuildingByCostHeadSuccess(project: any) {
     this.getProjects();
   }
-  updateBuildingFail(error: any) {
+  onUpdateBuildingByCostHeadFailure(error: any) {
     console.log(error);
   }
   addNewBuilding() {
@@ -97,23 +97,8 @@ export class BuildingListComponent implements OnInit {
   deleteBuilding() {
     this.listBuildingService.deleteBuildingById(this.currentbuildingId).subscribe(
       project => this.onDeleteBuildingSuccess(project),
-      error => this.onDeleteBuildingFail(error)
+      error => this.onDeleteBuildingFailure(error)
     );
-  }
-
-  getProjects() {
-    this.listBuildingService.getProject(this.projectId).subscribe(
-      projects => this.onGetProjectSuccess(projects),
-      error => this.onGetProjectFail(error)
-    );
-  }
-
-  onGetProjectSuccess(projects : any) {
-    this.buildings = projects.data[0].building;
-  }
-
-  onGetProjectFail(error : any) {
-    console.log(error);
   }
 
   onDeleteBuildingSuccess(result : any) {
@@ -126,7 +111,22 @@ export class BuildingListComponent implements OnInit {
     }
   }
 
-  onDeleteBuildingFail(error : any) {
+  onDeleteBuildingFailure(error : any) {
+    console.log(error);
+  }
+
+  getProjects() {
+    this.listBuildingService.getProject(this.projectId).subscribe(
+      projects => this.onGetProjectSuccess(projects),
+      error => this.onGetProjectFailure(error)
+    );
+  }
+
+  onGetProjectSuccess(projects : any) {
+    this.buildings = projects.data[0].building;
+  }
+
+  onGetProjectFailure(error : any) {
     console.log(error);
   }
 
@@ -137,12 +137,12 @@ export class BuildingListComponent implements OnInit {
 
   cloneThisBuilding(buildingId : any) {
     this.viewBuildingService.getBuildingDetails(buildingId).subscribe(
-      building => this.onGetBuildingDataSuccess(building),
-      error => this.onGetBuildingDataFail(error)
+      building => this.onGetBuildingDetailsSuccess(building),
+      error => this.onGetBuildingDetailsFailure(error)
     );
   }
 
-  onGetBuildingDataSuccess(building : any) {
+  onGetBuildingDetailsSuccess(building : any) {
     let buildingDetails=building.data;
     this.clonedBuildingDetails = building.data.costHead;
     this.model.name = buildingDetails.name;
@@ -161,7 +161,7 @@ export class BuildingListComponent implements OnInit {
     this.model.numOfLifts = buildingDetails.noOfLift;
   }
 
-  onGetBuildingDataFail(error : any) {
+  onGetBuildingDetailsFailure(error : any) {
     console.log(error);
   }
 }

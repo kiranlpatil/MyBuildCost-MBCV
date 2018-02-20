@@ -101,7 +101,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.candidateService.addCandidate(this.model)
       .subscribe(
         candidate => this.onRegistrationSuccess(candidate),
-        error => this.onRegistrationError(error));
+        error => this.onRegistrationFalure(error));
 
   }
   onRegistrationSuccess(candidate: any) {
@@ -119,11 +119,11 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.loginModel.password = SessionStorageService.getSessionValue(SessionStorage.PASSWORD);
     this.loginService.userLogin(this.loginModel)
       .subscribe(
-        (res:any) => (this.registrationService.onSuccess(res)),
-        (error:any) => (this.registrationService.loginFail(error)));
+        (res:any) => (this.registrationService.onGetUserDataSuccess(res)),
+        (error:any) => (this.registrationService.onLoginFailure(error)));
   }
 
-  onRegistrationError(error: any) {
+  onRegistrationFalure(error: any) {
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
       message.error_msg = error.err_msg;

@@ -36,11 +36,11 @@ export class NotificationComponent implements OnInit {
   getNotification() {
     this.notificationService.getNotification()
       .subscribe(
-        notification => this.onNotificationSuccess(notification),
-        error => this.onNotificationFail(error));
+        notification => this.onGetNotificationSuccess(notification),
+        error => this.onGetNotificationFailure(error));
   }
 
-  onNotificationSuccess(result: any) {
+  onGetNotificationSuccess(result: any) {
     if (result !== null) {
       this.notifications = result.data;
       for (var i = 0; i < result.data.length; i++) {
@@ -52,7 +52,7 @@ export class NotificationComponent implements OnInit {
   }
 
 
-  onNotificationFail(error: any) {
+  onGetNotificationFailure(error: any) {
     var message = new Message();
     message.isError = true;
     message.error_msg = error;

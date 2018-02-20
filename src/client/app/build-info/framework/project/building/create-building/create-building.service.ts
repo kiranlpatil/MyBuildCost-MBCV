@@ -12,7 +12,7 @@ export class CreateBuildingService extends BaseService {
     super();
   }
 
-  addBuilding(building : Building): Observable<Building> {
+  addNewBuilding(building : Building): Observable<Building> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify(building);

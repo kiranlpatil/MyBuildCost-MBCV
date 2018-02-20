@@ -36,16 +36,16 @@ export class BuildingComponent {
       this.model = this.addBuildingForm.value;
       this.buildingService.addBuilding(this.model)
         .subscribe(
-          building => this.addBuildingSuccess(building),
-          error => this.addBuildingFailed(error));
+          building => this.onAddBuildingSuccess(building),
+          error => this.onAddBuildingFailure(error));
     }
   }
 
-  addBuildingSuccess(building : any) {
+  onAddBuildingSuccess(building : any) {
     console.log(building);
   }
 
-  addBuildingFailed(error : any) {
+  onAddBuildingFailure(error : any) {
     console.log(error);
   }
 

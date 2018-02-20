@@ -97,8 +97,8 @@ export class LoginComponent implements OnInit {
     this.loginService.getUserData()
       .subscribe(
         data => {
-          this.registrationService.onSuccess(data);
-        }, error => { this.registrationService.loginFail(error);}
+          this.registrationService.onGetUserDataSuccess(data);
+        }, error => { this.registrationService.onLoginFailure(error);}
       );
   }
 
@@ -120,7 +120,14 @@ export class LoginComponent implements OnInit {
     window.scrollTo(0,0);
   }
 
-  loginSuccess(res: any) {
+  currentPosition(position: any) {
+    this.loginService.userLogin(this.model)
+      .subscribe(
+        res => (this.onUserLoginSuccess(res)),
+        error => (this.onUserLoginFailure(error)));
+  }
+
+  onUserLoginSuccess(res: any) {
     if(this.isRememberPassword) {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
@@ -146,27 +153,7 @@ export class LoginComponent implements OnInit {
     this.successRedirect(res);
   }
 
-  currentPosition(position: any) {
-    this.loginService.userLogin(this.model)
-      .subscribe(
-        res => (this.loginSuccess(res)),
-        error => (this.loginFail(error)));
-  }
-
-  locationError(error: any) {
-    this.loginService.userLogin(this.model)
-      .subscribe(
-        res => (this.loginSuccess(res)),
-        error => (this.loginFail(error)));
-  }
-
-  successRedirect(res: any) {
-    SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
-    SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-  }
-
-  loginFail(error: any) {
+  onUserLoginFailure(error: any) {
 
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
@@ -178,6 +165,19 @@ export class LoginComponent implements OnInit {
       this.isShowErrorMessage = false;
       this.error_msg = error.err_msg;
     }
+  }
+
+  locationError(error: any) {
+    this.loginService.userLogin(this.model)
+      .subscribe(
+        res => (this.onUserLoginSuccess(res)),
+        error => (this.onUserLoginFailure(error)));
+  }
+
+  successRedirect(res: any) {
+    SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
+    SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 
   onSignUp() {

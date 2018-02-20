@@ -94,23 +94,23 @@ export class UserVerificationComponent implements OnInit {
       this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
       this.verifyUserService.verifyUserByMobile(this.model)
         .subscribe(
-          res => (this.verifySuccess(res)),
-          error => (this.verifyFail(error)));
+          res => (this.onVerifySuccess(res)),
+          error => (this.onVerifyFailure(error)));
     } else {
       this.model.email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
       this.isShowLoader = true;
       this.verifyUserService.verifyUserByMail(this.model)
         .subscribe(
           res => {
-            this.verifySuccess(res);
+            this.onVerifySuccess(res);
             this.isShowLoader = false;
           },
-          error => (this.verifyFail(error))
+          error => (this.onVerifyFailure(error))
         );
     }
   }
 
-  verifySuccess(res: any) {
+  onVerifySuccess(res: any) {
     if (!this.chkMobile) {
       SessionStorageService.setSessionValue(SessionStorage.VERIFY_PHONE_VALUE, 'from_registration');
       this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
@@ -125,7 +125,7 @@ export class UserVerificationComponent implements OnInit {
     }
   }
 
-  verifyFail(error: any) {
+  onVerifyFailure(error: any) {
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
       message.error_msg = error.err_msg;

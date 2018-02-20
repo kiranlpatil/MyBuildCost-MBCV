@@ -74,7 +74,7 @@ export class ChangeMobileComponent implements OnInit {
       this.MobileService.changeMobile(this.model)
         .subscribe(
           body => this.changeMobileSuccess(body),
-          error => this.changeMobileFail(error));
+          error => this.changeMobileFailure(error));
     }
     document.body.scrollTop = 0;
   }
@@ -91,7 +91,7 @@ export class ChangeMobileComponent implements OnInit {
      this.showModalStyleVerification=true;
      this.model.id=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
   }
-  changeMobileFail(error: any) {
+  changeMobileFailure(error: any) {
     if (error.err_code === 404 || error.err_code === 0 || error.err_code===401) {
       var message = new Message();
       message.error_msg = error.err_msg;

@@ -132,7 +132,7 @@ export class GetQuantityComponent implements OnInit {
     this.getQuantityService.saveCostHeadItems(parseInt(costHeadId), this.subCategoryRateAnalysisId,
       parseInt(workItemId), quantityItems).subscribe(
       costHeadItemSave => this.onSaveCostHeadItemsSuccess(costHeadItemSave),
-      error => this.onSaveCostHeadItemsFail(error)
+      error => this.onSaveCostHeadItemsFailure(error)
     );
   }
   onSaveCostHeadItemsSuccess(costHeadItemSave: any) {
@@ -144,7 +144,7 @@ export class GetQuantityComponent implements OnInit {
     this.refreshDataList.emit();
   }
 
-  onSaveCostHeadItemsFail(error: any) {
+  onSaveCostHeadItemsFailure(error: any) {
     var message = new Message();
     message.isError = true;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
@@ -159,7 +159,7 @@ export class GetQuantityComponent implements OnInit {
     this.getQuantityService.deleteQuantityItem(parseInt(costHeadId), this.subCategoryRateAnalysisId,
       parseInt(workItemId), this.itemName).subscribe(
       costHeadItemDelete => this.onDeleteQuantityItemSuccess(costHeadItemDelete),
-      error => this.onDeleteQuantityItemFail(error)
+      error => this.onDeleteQuantityItemFailure(error)
     );
   }
   onDeleteQuantityItemSuccess(costHeadItemDelete: any) {
@@ -174,7 +174,7 @@ export class GetQuantityComponent implements OnInit {
     this.messageService.message(message);
   }
 
-  onDeleteQuantityItemFail(error: any) {
+  onDeleteQuantityItemFailure(error: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;

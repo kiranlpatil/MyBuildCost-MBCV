@@ -120,7 +120,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.costHeadService.getRateItems(this.costheadId, subCategoryId,this.workItemId).subscribe(
         rateItem => {
           this.onGetRateItemsSuccess(rateItem, workItem);
-          },error => this.onGetRateItemsFail(error)
+          },error => this.onGetRateItemsFailure(error)
       );
   }
 
@@ -154,7 +154,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showRate = true;
   }
 
-  onGetRateItemsFail(error: any) {
+  onGetRateItemsFailure(error: any) {
     console.log(error);
   }
 
@@ -195,7 +195,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   getSubCategoryDetails(projectId: string, costheadId: number) {
     this.costHeadService.getSubCategory(projectId,costheadId).subscribe(
       subCategoryDetail => this.OnGetSubCategorySuccess(subCategoryDetail),
-      error => this.OnGetSubCategoryFail(error)
+      error => this.OnGetSubCategoryFailure(error)
     );
   }
 
@@ -213,14 +213,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.subcategoryArray = this.commonService.removeDuplicateItmes(subcategoryList, this.subCategoryDetails);
   }
 
-  OnGetSubCategoryFail(error: any) {
+  OnGetSubCategoryFailure(error: any) {
     console.log(error);
   }
 
   getCostHeadComponentDetails(projectId: string, costHead: string) {
     this.costHeadService.getCostHeadDetails(projectId, costHead).subscribe(
       costHeadDetail => this.onGetCostHeadDetailsSuccess(costHeadDetail),
-      error => this.onGetCostHeadDetailsFail(error)
+      error => this.onGetCostHeadDetailsFailure(error)
     );
   }
 
@@ -228,7 +228,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.costHeadDetails = costHeadDetail.data;
   }
 
-  onGetCostHeadDetailsFail(error: any) {
+  onGetCostHeadDetailsFailure(error: any) {
     console.log(error);
   }
 
@@ -241,7 +241,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.costHeadService.deleteWorkItem(parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID)),
       this.subCategoryId, this.workItemId ).subscribe(
       costHeadDetail => this.onDeleteWorkItemSuccess(costHeadDetail),
-      error => this.onDeleteWorkItemFail(error)
+      error => this.onDeleteWorkItemFailure(error)
     );
   }
   onDeleteWorkItemSuccess(workItemDetails: any) {
@@ -254,7 +254,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  onDeleteWorkItemFail(error: any) {
+  onDeleteWorkItemFailure(error: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
@@ -317,13 +317,13 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.comapreWorkItemRateAnalysisId=i;
     this.subcategoryRateAnalysisId=subCategoryId;
     this.costHeadService.showWorkItem(this.costheadId,subCategoryId).subscribe(
-      workItemList => this.onshowWorkItemSuccess(workItemList),
-      error => this.onshowWorkItemFail(error)
+      workItemList => this.onShowWorkItemSuccess(workItemList),
+      error => this.onShowWorkItemFailure(error)
     );
   }
 
 
-  onshowWorkItemSuccess(workItemList:any) {
+  onShowWorkItemSuccess(workItemList:any) {
     let workItemListAfterClone = lodsh.cloneDeep(workItemList.data);
     this.workItemListArray = this.commonService.removeDuplicateItmes(workItemListAfterClone,this.alreadySelectedWorkItems);
     if(this.workItemListArray.length===0) {
@@ -336,7 +336,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  onshowWorkItemFail(error:any) {
+  onShowWorkItemFailure(error:any) {
     console.log('onshowWorkItemFail : '+error);
   }
 
@@ -350,12 +350,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
       });
     let subCategoryId=this.subcategoryRateAnalysisId;
     this.costHeadService.addWorkItem(this.costheadId,subCategoryId,workItemObject[0].rateAnalysisId,workItemObject[0].name).subscribe(
-      workItemList => this.onaddWorkItemSuccess(workItemList),
-      error => this.onaddWorkItemFail(error)
+      workItemList => this.onAddWorkItemSuccess(workItemList),
+      error => this.onAddWorkItemFailure(error)
     );
   }
 
-  onaddWorkItemSuccess(workItemList:any) {
+  onAddWorkItemSuccess(workItemList:any) {
     this.alreadySelectedWorkItems=workItemList.data;
     var message = new Message();
     message.isError = false;
@@ -365,7 +365,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.getSubCategoryDetails(this.projectId, this.costheadId);
   }
 
-  onaddWorkItemFail(error:any) {
+  onAddWorkItemFailure(error:any) {
     console.log('onshowWorkItemFail : '+error);
   }
 
@@ -376,23 +376,23 @@ export class CostHeadComponent implements OnInit, OnChanges {
   deleteSubcategory() {
     let subcategory = this.subCategoryObj;
     this.costHeadService.deleteSubcategoryFromCostHead(this.costheadId, subcategory).subscribe(
-      deleteSubcategory => this.deleteSubcategorySuccess(deleteSubcategory),
-      error => this.deleteSubcategoryFail(error)
+      deleteSubcategory => this.onDeleteSubcategoryFromCostHeadSuccess(deleteSubcategory),
+      error => this.onDeleteSubcategoryFromCostHeadFailure(error)
     );
   }
 
-  deleteSubcategorySuccess(deleteSubcategory : any) {
+  onDeleteSubcategoryFromCostHeadSuccess(deleteSubcategory : any) {
     this.getSubCategoryDetails(this.projectId, this.costheadId);
   }
 
-  deleteSubcategoryFail(error : any) {
+  onDeleteSubcategoryFromCostHeadFailure(error : any) {
     console.log('deleteSubcategory error : '+JSON.stringify(error));
   }
 
   showSubcategoryList() {
     this.costHeadService.getSubCategoryList(this.costheadId).subscribe(
       subcategoryList => this.onGetSubCategoryListSuccess(subcategoryList),
-      error => this.onGetSubCategoryListFail(error)
+      error => this.onGetSubCategoryListFailure(error)
     );
   }
 
@@ -403,7 +403,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showSubcategoryListvar = true;
   }
 
-  onGetSubCategoryListFail(error : any) {
+  onGetSubCategoryListFailure(error : any) {
     console.log('subcategoryList error : '+JSON.stringify(error));
   }
 
@@ -415,7 +415,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     });
     this.costHeadService.addSubCategory( subCategoryObj, this.costheadId).subscribe(
       building => this.onAddSubCategorySuccess(building),
-      error => this.onAddSubCategoryFail(error)
+      error => this.onAddSubCategoryFailure(error)
     );
   }
 
@@ -427,7 +427,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.getSubCategoryDetails(this.projectId, this.costheadId);
   }
 
-  onAddSubCategoryFail(error : any) {
+  onAddSubCategoryFailure(error : any) {
     console.log('building error : '+ JSON.stringify(error));
   }
 

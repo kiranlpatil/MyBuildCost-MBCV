@@ -56,12 +56,12 @@ export class BuildingDetailsComponent implements OnInit {
 
   getBuildingDetails() {
     this.viewBuildingService.getBuildingDetails(this.buildingId).subscribe(
-      building => this.onGetBuildingSuccess(building),
-      error => this.onGetBuildingFail(error)
+      building => this.onGetBuildingDetailsSuccess(building),
+      error => this.onGetBuildingDetailsFailure(error)
     );
   }
 
-  onGetBuildingSuccess(building : any) {
+  onGetBuildingDetailsSuccess(building : any) {
     let buildingDetails = building.data;
     this.buildingModel.name = buildingDetails.name;
     this.buildingModel.totalSlabArea = buildingDetails.totalSlabArea;
@@ -79,8 +79,20 @@ export class BuildingDetailsComponent implements OnInit {
     this.buildingModel.numOfLifts = buildingDetails.numOfLifts;
     }
 
-  onGetBuildingFail(error : any) {
-    console.log(error);
+  onGetBuildingDetailsFailure(error : any) {
+    var message = new Message();
+
+    if (error.err_code === 404 || error.err_code === 0) {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    } else {
+      this.isShowErrorMessage = false;
+      this.error_msg = error.err_msg;
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    }
   }
 
 
@@ -89,7 +101,7 @@ export class BuildingDetailsComponent implements OnInit {
       this.viewBuildingService.updateBuildingDetails(this.buildingModel)
         .subscribe(
           building => this.updateBuildingDetailsSuccess(building),
-          error => this.updateBuildingDetailsError(error));
+          error => this.updateBuildingDetailsFailure(error));
   }
 
   updateBuildingDetailsSuccess(result: any) {
@@ -102,7 +114,7 @@ export class BuildingDetailsComponent implements OnInit {
     }
   }
 
-  updateBuildingDetailsError(error: any) {
+  updateBuildingDetailsFailure(error: any) {
 
     var message = new Message();
 

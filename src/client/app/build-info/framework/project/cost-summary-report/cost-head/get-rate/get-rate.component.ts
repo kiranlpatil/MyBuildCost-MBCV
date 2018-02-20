@@ -94,7 +94,7 @@ export class GetRateComponent {
     this.getRateService.updateRateItems(parseInt(costHeadId), this.subCategoryRateAnalysisId,
       parseInt(workItemId), rate).subscribe(
       rateItem => this.onUpdateRateItemsSuccess(rateItem),
-      error => this.onUpdateRateItemsFail(error)
+      error => this.onUpdateRateItemsFailure(error)
     );
   }
 
@@ -106,7 +106,7 @@ export class GetRateComponent {
     this.refreshDataList.emit();
   }
 
-  onUpdateRateItemsFail(error: any) {
+  onUpdateRateItemsFailure(error: any) {
     console.log(error);
   }
 

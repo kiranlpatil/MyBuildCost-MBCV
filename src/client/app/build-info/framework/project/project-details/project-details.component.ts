@@ -46,16 +46,16 @@ export class ProjectDetailsComponent implements OnInit {
 
   getProjectDetails() {
     this.ViewProjectService.getProjectDetails(this.projectId).subscribe(
-      project => this.onGetProjectSuccess(project),
-      error => this.onGetProjectFail(error)
+      project => this.onGetProjectDetailsSuccess(project),
+      error => this.onGetProjectDetailsFailure(error)
     );
   }
 
-  onGetProjectSuccess(project : any) {
+  onGetProjectDetailsSuccess(project : any) {
     this.projectModel = project.data[0];
   }
 
-  onGetProjectFail(error : any) {
+  onGetProjectDetailsFailure(error : any) {
     console.log(error);
   }
 
@@ -65,12 +65,12 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectModel = this.viewProjectForm.value;
       this.ViewProjectService.updateProjectDetails(this.projectModel)
         .subscribe(
-          user => this.updateProjectDetailsSuccess(user),
-          error => this.updateProjectDetailsError(error));
+          user => this.onUpdateProjectDetailsSuccess(user),
+          error => this.onUpdateProjectDetailsFailure(error));
     }
   }
 
-  updateProjectDetailsSuccess(result: any) {
+  onUpdateProjectDetailsSuccess(result: any) {
 
     if (result !== null) {
       var message = new Message();
@@ -80,7 +80,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
 
-  updateProjectDetailsError(error: any) {
+  onUpdateProjectDetailsFailure(error: any) {
 
     var message = new Message();
 

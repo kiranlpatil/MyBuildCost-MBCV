@@ -46,11 +46,11 @@ export class ContactComponent implements OnInit {
     this.model = this.userForm.value;
     this.contactService.contact(this.model)
       .subscribe(
-        body => this.contactSuccess(body),
-        error => this.contactFail(error));
+        body => this.onContactSuccess(body),
+        error => this.onContactFailure(error));
   }
 
-  contactSuccess(body: Contact) {
+  onContactSuccess(body: Contact) {
     this.userForm.reset();
     var message = new Message();
     message.isError = false;
@@ -58,7 +58,7 @@ export class ContactComponent implements OnInit {
     this.messageService.message(message);
   }
 
-  contactFail(error: any) {
+  onContactFailure(error: any) {
     var message = new Message();
     if (error.err_code === 404 || error.err_code === 0) {
       message.error_msg = error.err_msg;

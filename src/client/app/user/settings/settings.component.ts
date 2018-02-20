@@ -78,23 +78,23 @@ export class SettingsComponent implements OnInit {
     this.themeChangeService.change(this.INITIAL_THEME);
     this.changeThemeServie.chageTheme(this.INITIAL_THEME)
       .subscribe(
-        body => this.changeThemeSuccess(body),
-        error => this.changeThemeFail(error));
+        body => this.onChangeThemeSuccess(body),
+        error => this.onChangeThemeFailure(error));
   }
 
   lightTheme() {
     this.themeChangeService.change(this.INITIAL_THEME);
     this.changeThemeServie.chageTheme(this.INITIAL_THEME)
       .subscribe(
-        body => this.changeThemeSuccess(body),
-        error => this.changeThemeFail(error));
+        body => this.onChangeThemeSuccess(body),
+        error => this.onChangeThemeFailure(error));
   }
 
   goBack() {
     this.commonService.goBack();
   }
 
-  changeThemeSuccess(body: any) {
+  onChangeThemeSuccess(body: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_THEME;
@@ -103,7 +103,7 @@ export class SettingsComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.MY_THEME, body.data.current_theme);
   }
 
-  changeThemeFail(error: any) {
+  onChangeThemeFailure(error: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_ERROR_CHANGE_THEME;

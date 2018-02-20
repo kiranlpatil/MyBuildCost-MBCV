@@ -47,16 +47,16 @@ export class ActivateUserComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.USER_ID, this.id);
     this.activeService.activeUser()
       .subscribe(
-        res => (this.newRegistrationSuccess(res)),
-        error => (this.newRegistrationFail(error)));
+        res => (this.OnNewRegistrationSuccess(res)),
+        error => (this.onNewRegistrationFailure(error)));
   }
 
-  newRegistrationSuccess(res: any) {
+  OnNewRegistrationSuccess(res: any) {
     this.USER_ACTIVATION_STATUS = Messages.MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS;
     this.USER_ACTIVATION_MESSAGE = Messages.MSG_SUCCESS_MAIL_VERIFICATION_BODY;
   }
 
-  newRegistrationFail(error: any) {
+  onNewRegistrationFailure(error: any) {
     this.USER_ACTIVATION_STATUS = Messages.MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS;
     this.USER_ACTIVATION_MESSAGE = Messages.MSG_ERROR_MAIL_VERIFICATION_BODY;
   }

@@ -55,13 +55,13 @@ export class OtpVerificationComponent {
     if (this.actionName===this.getMessages().FROM_REGISTRATION) {
       this.verifyPhoneService.verifyPhone(this.verifyOtpModel,this.userID)
         .subscribe(
-          res => (this.verifySuccess(res)),
-          error => (this.verifyFail(error)));
+          res => (this.onVerifyPhoneSuccess(res)),
+          error => (this.onVerifyPhoneFailure(error)));
     } else {
       this.verifyPhoneService.changeMobile(this.verifyOtpModel,this.changeMobileNumberInfo.id)
         .subscribe(
           res => (this.mobileVerificationSuccess(res)),
-          error => (this.verifyFail(error)));
+          error => (this.onVerifyPhoneFailure(error)));
     }
   }
   resendVerificationCode() {
@@ -69,15 +69,15 @@ export class OtpVerificationComponent {
       this.verifyPhoneService.resendVerificationCode(this.userID,this.mobileNumber)
         .subscribe(
           res => (this.resendOtpSuccess(Messages.MSG_SUCCESS_RESEND_VERIFICATION_CODE)),
-          error => (this.resendOtpFail(error)));
+          error => (this.resendOtpFailure(error)));
     } else {
       this.verifyPhoneService.resendChangeMobileVerificationCode(this.changeMobileNumberInfo)
         .subscribe(res => (this.resendOtpSuccess(Messages.MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP)),
-          error => (this.resendOtpFail(error)));
+          error => (this.resendOtpFailure(error)));
     }
   }
 
-  verifySuccess(res: any) {
+  onVerifyPhoneSuccess(res: any) {
     this.onMobileVerificationSuccess.emit();
     this.navigateToDashboard();
   }
@@ -87,14 +87,14 @@ export class OtpVerificationComponent {
     this.loginModel.password = SessionStorageService.getSessionValue(SessionStorage.PASSWORD);
     this.loginService.userLogin(this.loginModel)
       .subscribe(
-        (res:any) => (this.registrationService.onSuccess(res)),
-        (error:any) => (this.registrationService.loginFail(error)));
+        (res:any) => (this.registrationService.onGetUserDataSuccess(res)),
+        (error:any) => (this.registrationService.onLoginFailure(error)));
   }
   mobileVerificationSuccess(res: any) {
     this.showInformationMessage(Messages.MSG_SUCCESS_CHANGE_MOBILE_NUMBER);
     this.onMobileNumberChangeSuccess.emit();
   }
-  verifyFail(error: any) {
+  onVerifyPhoneFailure(error: any) {
     if (error.err_code === 404 || error.err_code === 0) {
       this.showErrorMessage(error);
     } else {
@@ -106,7 +106,7 @@ export class OtpVerificationComponent {
   resendOtpSuccess(successMessage: any) {
     this.showInformationMessage(successMessage);
   }
-  resendOtpFail(error: any) {
+  resendOtpFailure(error: any) {
     if (error.err_code === 404 || error.err_code === 0) {
       this.showErrorMessage(error);
     } else {

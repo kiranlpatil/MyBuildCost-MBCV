@@ -83,10 +83,10 @@ export class CreateBuildingComponent {
           this.modelBuilding.numOfLifts=0;
         }
 
-      this.createBuildingService.addBuilding(this.modelBuilding)
+      this.createBuildingService.addNewBuilding(this.modelBuilding)
         .subscribe(
-          building => this.addBuildingSuccess(building),
-          error => this.addBuildingFailed(error));
+          building => this.onAddNewBuildingSuccess(building),
+          error => this.onAddNewBuildingFailure(error));
       } else {
         var message = new Message();
         message.isError = false;
@@ -96,7 +96,7 @@ export class CreateBuildingComponent {
     }
   }
 
-  addBuildingSuccess(building : any) {
+  onAddNewBuildingSuccess(building : any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
@@ -105,7 +105,7 @@ export class CreateBuildingComponent {
     this._router.navigate([NavigationRoutes.APP_COST_SUMMARY, projectId]);
   }
 
-  addBuildingFailed(error : any) {
+  onAddNewBuildingFailure(error : any) {
     console.log(error);
   }
 

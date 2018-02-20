@@ -65,19 +65,19 @@ export class UserChangePasswordComponent {
       this.loaderService.start();
       this.passwordService.changePassword(this.model)
         .subscribe(
-          body => this.changePasswordSuccess(body),
-          error => this.changePasswordFail(error));
+          body => this.onChangePasswordSuccess(body),
+          error => this.onChangePasswordFailure(error));
     }
     document.body.scrollTop = 0;
   }
 
-  changePasswordSuccess(body: ChangePassword) {
+  onChangePasswordSuccess(body: ChangePassword) {
     this.loaderService.stop();
     this.showHideModal();
     this.error_msg = '';
   }
 
-  changePasswordFail(error: any) {
+  onChangePasswordFailure(error: any) {
     this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();

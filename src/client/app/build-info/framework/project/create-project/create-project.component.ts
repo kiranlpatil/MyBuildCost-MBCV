@@ -49,12 +49,12 @@ export class CreateProjectComponent {
       this.projectModel = this.projectForm.value;
       this.createProjectService.createProject(this.projectModel)
         .subscribe(
-          project => this.projectCreationSuccess(project),
-          error => this.projectCreationFailed(error));
+          project => this.onCreateProjectSuccess(project),
+          error => this.onCreateProjectFailure(error));
     }
   }
 
-  projectCreationSuccess(project : any) {
+  onCreateProjectSuccess(project : any) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT, project._id);
     var message = new Message();
     message.isError = false;
@@ -63,7 +63,7 @@ export class CreateProjectComponent {
     this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
   }
 
-  projectCreationFailed(error : any) {
+  onCreateProjectFailure(error : any) {
     console.log(error);
     var message = new Message();
     if (error.err_code === 404 || error.err_code === 0) {
