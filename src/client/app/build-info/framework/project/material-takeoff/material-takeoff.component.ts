@@ -4,7 +4,7 @@ import { MaterialTakeoffService } from './material-takeoff.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-material-takeoff',
+  selector: 'bi-material-takeoff-report',
   templateUrl: 'material-takeoff.component.html'
 })
 

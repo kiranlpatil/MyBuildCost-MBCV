@@ -12,7 +12,7 @@ import { SharedService } from '../../../../../shared/services/shared-service';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-add-building-entity',
+  selector: 'bi-create-building',
   templateUrl: 'create-building.component.html',
   styleUrls: ['create-building.component.css'],
 })

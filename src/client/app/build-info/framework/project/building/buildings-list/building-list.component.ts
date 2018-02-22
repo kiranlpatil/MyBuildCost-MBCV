@@ -12,7 +12,7 @@ import { ValidationService } from '../../../../../shared/customvalidations/valid
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-list-building',
+  selector: 'bi-building-list',
   templateUrl: 'building-list.component.html'
 })
 

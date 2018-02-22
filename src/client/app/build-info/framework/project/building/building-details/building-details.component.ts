@@ -10,7 +10,7 @@ import { ValidationService } from '../../../../../shared/customvalidations/valid
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-view-building',
+  selector: 'bi-edit-building',
   templateUrl: 'building-details.component.html'
 })
 

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
-  selector: 'create-new-project',
+  selector: 'bi-create-new-project',
   templateUrl: 'create-new-project.component.html',
   styleUrls: ['create-new-project.component.css'],
 })

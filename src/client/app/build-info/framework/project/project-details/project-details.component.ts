@@ -9,7 +9,7 @@ import { ValidationService } from '../../../../shared/customvalidations/validati
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-view-project',
+  selector: 'bi-edit-project',
   templateUrl: 'project-details.component.html'
 })
 

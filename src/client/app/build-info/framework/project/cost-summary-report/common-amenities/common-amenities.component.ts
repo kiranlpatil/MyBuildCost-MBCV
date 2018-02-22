@@ -6,7 +6,7 @@ import { CommonAmenitiesService } from './common-amenities.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-common-amenities-project-report',
+  selector: 'bi-common-amenities',
   styleUrls: ['common-amenities.component.css'],
   templateUrl: 'common-amenities.component.html'
 })

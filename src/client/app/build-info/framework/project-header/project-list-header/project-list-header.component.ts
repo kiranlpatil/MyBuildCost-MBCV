@@ -7,7 +7,7 @@ import { Project } from './../../model/project';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-project-list-header',
+  selector: 'bi-project-selector',
   templateUrl: 'project-list-header.component.html',
   styleUrls:['./project-list-header.component.css']
 })

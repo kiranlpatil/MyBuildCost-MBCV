@@ -10,7 +10,7 @@ import { CommonService } from '../../../../../shared/services/common.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-cost-head-project-report',
+  selector: 'bi-cost-head',
   styleUrls: ['cost-head.component.css'],
   templateUrl: 'cost-head.component.html'
 })

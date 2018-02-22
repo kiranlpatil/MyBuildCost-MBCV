@@ -91,13 +91,13 @@
 
                 <div *ngIf="showRate == true">
                    <div  *ngIf="toggleRate==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i">
-                      <bi-rate-items [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
-                                 [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
-                                 [totalAmount]="totalAmount"
-                                 [totalRate]="totalRate"
-                                 [totalQuantity]="totalQuantity"
-                                 (refreshSubCategoryList)="refreshSubCategoryList()">
-                      </bi-rate-items>
+                      <bi-cost-head-get-rate [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
+                                             [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
+                                             [totalAmount]="totalAmount"
+                                             [totalRate]="totalRate"
+                                             [totalQuantity]="totalQuantity"
+                                             (refreshSubCategoryList)="refreshSubCategoryList()">
+                      </bi-cost-head-get-rate>
                    </div>
                 </div>
 

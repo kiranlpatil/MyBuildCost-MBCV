@@ -10,7 +10,7 @@ import { Rate } from '../../../../model/rate';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-rate-items',
+  selector: 'bi-cost-head-get-rate',
   templateUrl: 'get-rate.component.html',
   styleUrls: ['get-rate.component.css'],
 })

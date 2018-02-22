@@ -12,7 +12,7 @@ import { CreateBuildingService } from '../building/create-building/create-buildi
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-cost-summary-project-report',
+  selector: 'bi-cost-summary-report',
   templateUrl: 'cost-summary.component.html',
   styleUrls: ['cost-summary.component.css'],
 })
