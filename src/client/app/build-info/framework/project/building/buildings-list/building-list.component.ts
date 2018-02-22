@@ -80,17 +80,17 @@ export class BuildingListComponent implements OnInit {
   }
 
   updateBuildingByCostHead(cloneCostHead: any) {
-    this.listBuildingService.updateBuildingByCostHead(cloneCostHead, this.clonedBuildingId).subscribe(
-      project => this.onUpdateBuildingByCostHeadSuccess(project),
-      error => this.onUpdateBuildingByCostHeadFailure(error)
+    this.listBuildingService.cloneBuildingCostHeads(cloneCostHead, this.clonedBuildingId).subscribe(
+      project => this.onCloneBuildingCostHeadsSuccess(project),
+      error => this.onCloneBuildingCostHeadsFailure(error)
     );
   }
 
-  onUpdateBuildingByCostHeadSuccess(project: any) {
+  onCloneBuildingCostHeadsSuccess(project: any) {
     this.getProject();
   }
 
-  onUpdateBuildingByCostHeadFailure(error: any) {
+  onCloneBuildingCostHeadsFailure(error: any) {
     console.log(error);
   }
 
