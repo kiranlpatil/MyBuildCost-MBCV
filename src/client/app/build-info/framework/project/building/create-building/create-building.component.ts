@@ -35,7 +35,7 @@ export class CreateBuildingComponent {
       totalCarpetAreaOfUnit :['', ValidationService.requiredCarpetArea],
       totalSaleableAreaOfUnit :['', ValidationService.requiredSalebleArea],
       plinthArea :['', ValidationService.requiredPlinthArea],
-      totalNumOfFloors :['', ValidationService.requiredNumOfFloors],
+      totalNumOfFloors :['', ValidationService.requiredTotalNumOfFloors],
       numOfParkingFloors :['', ValidationService.requiredNumOfParkingFloors],
       carpetAreaOfParking :['', ValidationService.requiredCarpetAreaOfParking],
       numOfOneBHK : [''],

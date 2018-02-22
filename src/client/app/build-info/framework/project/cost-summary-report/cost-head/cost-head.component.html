@@ -12,7 +12,7 @@
                   <span class="pull-right">{{ subCategoryDetails[subCategory].amount|number }}</span>
                 </a>
                 <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId === 0" data-toggle="collapse" href="#collapse{{i}}">
-                  <span  class="pull-left">Workitems</span>
+                  <span  class="pull-left">WorkItems</span>
                   <span  class="pull-right">{{ subCategoryDetails[subCategory].amount|number }}</span>
                 </a>
               </div>
@@ -115,7 +115,7 @@
                 <tr *ngIf="showWorkItemList==true && comapreWorkItemRateAnalysisId==i">
                   <td class="border-left">
                     <select  class="select-item" (change)="onChangeWorkItem($event.target.value)">
-                      <option [value]="selectItem">Select Work Item</option>
+                      <option [value]="selectItem">Select Work Items</option>
                       <option *ngFor="let workItems of workItemListArray" [value]="workItems.name">{{ workItems.name }}</option>
                     </select>
                   </td>
@@ -123,7 +123,7 @@
                 </tr>
                 <tr>
                   <td  class="add-items" colspan="7">
-                    <button type="button" class="btn btn-add-item" (click)="showWorkItem(subCategoryDetails[subCategory].rateAnalysisId,i)"><span class="glyphicon glyphicon-plus"></span>Add Workitem</button>
+                    <button type="button" class="btn btn-add-item" (click)="showWorkItem(subCategoryDetails[subCategory].rateAnalysisId,i)"><span class="glyphicon glyphicon-plus"></span>Add WorkItem</button>
                   </td>
                 </tr>
                 </tbody>
@@ -145,7 +145,7 @@
             </tr>
             <tr>
               <td classs="text-center">
-                <button type="button" class="btn btn-add-item" (click)="showSubcategoryList()"><span class="glyphicon glyphicon-plus"></span>Add Subcategory</button>
+                <button type="button" class="btn btn-add-item" (click)="showSubcategoryList()"><span class="glyphicon glyphicon-plus"></span>Add SubCategory</button>
               </td>
             </tr>
           </tbody>

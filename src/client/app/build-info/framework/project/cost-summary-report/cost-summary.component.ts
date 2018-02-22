@@ -71,15 +71,15 @@ export class CostSummaryComponent implements OnInit {
       totalCarpetAreaOfUnit :['', ValidationService.requiredCarpetArea],
       totalSaleableAreaOfUnit :['', ValidationService.requiredSalebleArea],
       plinthArea :['', ValidationService.requiredPlinthArea],
-      totalNumOfFloors :['', ValidationService.requiredNumOfFloors],
+      totalNumOfFloors :['', ValidationService.requiredTotalNumOfFloors],
       numOfParkingFloors :['', ValidationService.requiredNumOfParkingFloors],
       carpetAreaOfParking :['', ValidationService.requiredCarpetAreaOfParking],
-      numOfOneBHK : ['',  ValidationService.requiredOneBHK],
-      numOfTwoBHK :['', ValidationService.requiredTwoBHK],
-      numOfThreeBHK :['', ValidationService.requiredThreeBHK],
-      numOfFourBHK :['', ValidationService.requiredFourBHK],
-      numOfFiveBHK :['', ValidationService.requiredFiveBHK],
-      numOfLifts :['', ValidationService.requiredNumOfLifts]
+      numOfOneBHK : [''],
+      numOfTwoBHK :[''],
+      numOfThreeBHK :[''],
+      numOfFourBHK :[''],
+      numOfFiveBHK :[''],
+      numOfLifts :['']
     });
   }
 

@@ -47,7 +47,7 @@
               <control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus"></control-messages>
               <label>{{getLabel().PASSWORD}}</label>
               <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
-                     class="form-control" required placeholder="Minimum 6 Characters"/>
+                     class="form-control" required placeholder="Minimum 6 characters"/>
             </div>
 
             <div class="col-sm-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">

@@ -12,7 +12,7 @@ export class DashboardUserProfileService extends BaseService {
     super();
   }
 
-  getUserProfile(): Observable<any> { //todo
+  getUserProfile(): Observable<any> {
     var url = API.USER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});

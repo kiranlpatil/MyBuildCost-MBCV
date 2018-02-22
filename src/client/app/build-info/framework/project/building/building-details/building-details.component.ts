@@ -32,7 +32,7 @@ export class BuildingDetailsComponent implements OnInit {
       totalCarpetAreaOfUnit:['', ValidationService.requiredCarpetArea],
       totalSaleableAreaOfUnit:['', ValidationService.requiredSalebleArea],
       plinthArea:['', ValidationService.requiredPlinthArea],
-      totalNumOfFloors :['', ValidationService.requiredNumOfFloors],
+      totalNumOfFloors :['', ValidationService.requiredTotalNumOfFloors],
       numOfParkingFloors :['', ValidationService.requiredNumOfParkingFloors],
       carpetAreaOfParking :['', ValidationService.requiredCarpetAreaOfParking],
       numOfOneBHK : ['',  ValidationService.requiredOneBHK],

@@ -64,7 +64,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_PASSWORD_REQUIRED = 'Enter your password';
   public static MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED = 'Enter a new password';
   public static MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED = 'Confirm your password';
-  public static MSG_ERROR_VALIDATION_CURRENTPASSWORD_REQUIRED = 'Enter a current password';
+  public static MSG_ERROR_VALIDATION_CURRENTPASSWORD_REQUIRED = 'Enter your current password';
   public static MSG_ERROR_VALIDATION_FIRSTNAME_REQUIRED = 'Enter your name';
   public static MSG_ERROR_VALIDATION_LASTNAME_REQUIRED = 'This field can\'t be left blank';
   public static MSG_ERROR_VALIDATION_MOBILE_NUMBER_REQUIRED = 'This field can\'t be left blank';
@@ -89,22 +89,30 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_PIN_NUMBER = 'Pin code should not be greater than 20 characters.';
   public static MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED = 'Please accept the terms and conditions.';
 
-  public static MSG_ERROR_VALIDATION_PROJECT_NAME_REQUIRED = 'Enter project name.';
-  public static MSG_ERROR_VALIDATION_PROJECT_ADDRESS_REQUIRED = 'Enter project address.';
-  public static MSG_ERROR_VALIDATION_PLOT_AREA_REQUIRED = 'Enter plot area.';
-  public static MSG_ERROR_VALIDATION_PROJECT_DURATION_REQUIRED = 'Enter project duration.';
-  public static MSG_ERROR_VALIDATION_PLOT_PERIPHERY_REQUIRED = 'Enter plot periphery.';
+  public static MSG_ERROR_VALIDATION_PROJECT_NAME_REQUIRED = 'Enter project name';
+  public static MSG_ERROR_VALIDATION_PROJECT_ADDRESS_REQUIRED = 'Enter project address';
+  public static MSG_ERROR_VALIDATION_PLOT_AREA_REQUIRED = 'Enter plot area';
+  public static MSG_ERROR_VALIDATION_PROJECT_DURATION_REQUIRED = 'Enter project duration';
+  public static MSG_ERROR_VALIDATION_PLOT_PERIPHERY_REQUIRED = 'Enter plot periphery length';
+  public static MSG_ERROR_VALIDATION_PODIUM_AREA_REQUIRED = 'Enter podium area';
+  public static MSG_ERROR_VALIDATION_OPEN_SPACE_REQUIRED = 'Enter open space';
+  public static MSG_ERROR_VALIDATION_SWIMMING_POOL_CAPACITY_REQUIRED = 'Enter swimming pool capacity';
+  public static MSG_ERROR_VALIDATION_NUM_OF_BUILDINGS_REQUIRED = 'Enter total no. of buildings';
 
-    public static MSG_ERROR_VALIDATION_BUILDING_NAME_REQUIRED = 'Enter Building Name.';
-    public static MSG_ERROR_VALIDATION_SLAB_AREA_REQUIRED = 'Enter Slab Area.';
-    public static MSG_ERROR_VALIDATION_CARPET_AREA_REQUIRED = 'Enter Carpet Area.';
-    public static MSG_ERROR_VALIDATION_PARKING_AREA_REQUIRED  = 'Enter Parking Area.';
-    public static MSG_ERROR_VALIDATION_SALEBLE_AREA_REQUIRED  = 'Enter Saleble Area.';
-    public static MSG_ERROR_VALIDATION_ONE_BHK_REQUIRED = 'Enter No of one BHKs.';
-    public static MSG_ERROR_VALIDATION_TWO_BHK_REQUIRED = 'Enter No of two BHKs.';
-    public static MSG_ERROR_VALIDATION_THREE_BHK_REQUIRED = 'Enter No of three BHKs.';
-    public static MSG_ERROR_VALIDATION_NO_OF_SLABS_REQUIRED = 'Enter No of slabs.';
-    public static MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED = 'Enter No of lifts';
+    public static MSG_ERROR_VALIDATION_BUILDING_NAME_REQUIRED = 'Enter building name';
+    public static MSG_ERROR_VALIDATION_SLAB_AREA_REQUIRED = 'Enter slab area';
+    public static MSG_ERROR_VALIDATION_CARPET_AREA_REQUIRED = 'Enter carpet area';
+    public static MSG_ERROR_VALIDATION_PARKING_AREA_REQUIRED  = 'Enter parking area';
+    public static MSG_ERROR_VALIDATION_SALEBLE_AREA_REQUIRED  = 'Enter saleable area';
+    public static MSG_ERROR_VALIDATION_PLINTH_AREA_REQUIRED  = 'Enter plinth area';
+    public static MSG_ERROR_VALIDATION_NO_OF_FLOORS_REQUIRED  = 'Enter no. of floors';
+    public static MSG_ERROR_VALIDATION_NO_OF_PARKING_FLOORS_REQUIRED  = 'Enter no. of parking floors';
+    public static MSG_ERROR_VALIDATION_CARPET_AREA_OF_PARKING_REQUIRED  = 'Enter carpet area of parking floors';
+    public static MSG_ERROR_VALIDATION_ONE_BHK_REQUIRED = 'Enter no. of one BHKs';
+    public static MSG_ERROR_VALIDATION_TWO_BHK_REQUIRED = 'Enter no. of two BHKs';
+    public static MSG_ERROR_VALIDATION_THREE_BHK_REQUIRED = 'Enter no. of three BHKs';
+    public static MSG_ERROR_VALIDATION_NO_OF_SLABS_REQUIRED = 'Enter no. of slabs';
+    public static MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED = 'Enter no. of lifts';
     public static MSG_ERROR_VALIDATION_ALPHABATES = 'Enter alphabates only';
 
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
@@ -167,7 +175,7 @@ export class Messages {
   public static FAQ_CONTACT_EMAIL = 'support@gmail.com';
   public static FAQ_MESSAGE = 'Have any questions?';
   public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, ' +
-    'we will need your basic information to create your value portrait on JobMosis. Go ahead, ' +
+    'we will need your basic information to create your value portrait on BuildInfo. Go ahead, ' +
     'fill the form and get your value portrait!';
   public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\'t exist<br/>' +
     'or an other error ocourred.';
@@ -175,12 +183,11 @@ export class Messages {
   public static PASSWORD_MESSAGE = 'Password must be alphanumeric having minimum 8 Characters.';
 
   //Application Messages
-  public static MSG_SUCCESS_PROJECT_CREATION: string = 'Project has been successfully created.';
-  public static MSG_SUCCESS_ADD_BUILDING_PROJECT: string = 'Building has been successfully added to Project.';
+  public static MSG_SUCCESS_PROJECT_CREATION: string = 'Project has been created successfully.';
+  public static MSG_SUCCESS_ADD_BUILDING_PROJECT: string = 'Building has been successfully added to project.';
   public static MSG_SUCCESS_UPDATE_PROJECT_DETAILS: string = 'Your project updated successfully.';
   public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details updated successfully.';
   public static MSG_SUCCESS_DELETE_BUILDING: string = 'Your building deleted successfully.';
-
   public static MSG_SUCCESS_ADD_COSTHEAD: string = 'Costhead added successfully.';
   public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Your costhead deleted successfully.';
   public static MSG_SUCCESS_DELETE_ITEM: string = 'Your item deleted successfully.';
@@ -190,10 +197,9 @@ export class Messages {
   public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM: string = 'Your cost head items updated successfully.';
   public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR: string = 'There is error in operation';
   public static MSG_SUCCESS_ADD_SUBCATEGORY: string = 'Subcategory added successfully.';
-  public static MSG_SUCCESS_ADD_WORKITEM: string = 'Work Item added successfully.';
+  public static MSG_SUCCESS_ADD_WORKITEM: string = 'Workitem added successfully.';
   public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
   public static MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM: string = 'Your costhead workitem deleted successfully.';
-
   public static MSG_SUCCESS_UPDATE_BUDGETED_COST_COSTHEAD: string = 'Budgeted cost for costhead updated successfully.';
 }
 
