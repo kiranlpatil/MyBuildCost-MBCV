@@ -22,8 +22,7 @@ export class ProjectDetailsService extends BaseService {
 
   updateProjectDetails(modelProject: Project): Observable<UserProfile> {
     let url = API.VIEW_PROJECT+'/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    let body = JSON.stringify(modelProject);
-    return this.httpDelegateService.putAPI(url, body);
+    return this.httpDelegateService.putAPI(url, modelProject);
   }
 
 }
