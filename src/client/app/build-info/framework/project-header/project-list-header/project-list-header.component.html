@@ -1,4 +1,4 @@
 <select (change)="selectedProject($event.target.value)">
-  <option [value]>My Projects</option>
+  <option value="">My Projects</option>
   <option *ngFor="let project of projects" [value]="project._id">{{project.name}}</option>
 </select>

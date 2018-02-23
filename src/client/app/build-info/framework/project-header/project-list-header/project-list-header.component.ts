@@ -40,9 +40,13 @@ export class ProjectListHeaderComponent implements OnInit {
   }
 
   selectedProject(projectId:any) {
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT, projectId);
-    this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
+    if(projectId==='') {
+      sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT);
+      this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    } else {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT, projectId);
+      this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
+    }
   }
 
 }
-
