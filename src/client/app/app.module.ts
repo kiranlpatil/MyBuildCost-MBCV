@@ -42,14 +42,11 @@ import { HttpDelegateService } from './shared/services/http-delegate-service/htt
 import { ProjectService } from './build-info/framework/project/project.service';
 import { ProjectComponent } from './build-info/framework/project/project.component';
 import { CreateProjectComponent } from './build-info/framework/create-project/create-project.component';
-import { CreateProjectService } from './build-info/framework/create-project/create-project.service';
 import { BuildingComponent } from './build-info/framework/project/building/building.component';
 import { CreateBuildingComponent } from './build-info/framework/project/building/create-building/create-building.component';
 import { BuildingService } from './build-info/framework/project/building/building.service';
 import { ProjectListComponent } from './build-info/framework/project-list/project-list.component';
-import { ProjectListService } from './build-info/framework/project-list/project-list.service';
 import { ProjectDetailsComponent } from './build-info/framework/project/project-details/project-details.component';
-import { ProjectDetailsService } from './build-info/framework/project/project-details/project-details.service';
 import { BuildingListComponent } from './build-info/framework/project/building/buildings-list/building-list.component';
 import { BuildingDetailsComponent } from './build-info/framework/project/building/building-details/building-details.component';
 import { ProjectHeaderComponent } from './build-info/framework/project-header/project-header.component';
@@ -61,7 +58,6 @@ import { CostHeadComponent } from './build-info/framework/project/cost-summary-r
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
 import { GetQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.component';
 import { ProjectListHeaderComponent } from './build-info/framework/project-header/project-list-header/project-list-header.component';
-import { ProjectListHeaderService } from './build-info/framework/project-header/project-list-header/project-list-header.service';
 import { GroupByPipe } from '../app/shared/services/custom-pipes/groupby.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GetRateComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-rate/get-rate.component';
@@ -150,12 +146,8 @@ import { ProjectItemComponent } from './build-info/framework/project-list/projec
     //Application Services
     ProjectService,
     BuildingService,
-    CreateProjectService,
-    ProjectDetailsService,
-    ProjectListService,
     CostSummaryService,
-    MaterialTakeoffService,
-    ProjectListHeaderService
+    MaterialTakeoffService
     // MaterialTakeoffService
   ],
   bootstrap: [AppComponent]

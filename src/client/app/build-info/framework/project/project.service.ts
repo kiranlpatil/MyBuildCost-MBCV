@@ -2,32 +2,35 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Project } from './../model/project';
-import { API, BaseService, MessageService } from '../../../shared/index';
-
+import { API, BaseService, MessageService, SessionStorageService, SessionStorage } from '../../../shared/index';
+import { HttpDelegateService } from './../../../shared/services/http-delegate-service/http-delegate.service';
 
 @Injectable()
 export class ProjectService extends BaseService {
 
-  constructor(protected http: Http, protected messageService: MessageService) {
+  constructor(protected http: Http, protected messageService: MessageService,
+              protected httpDelegateService : HttpDelegateService) {
     super();
   }
 
-  getProject(): Observable<Project> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
+  getAllProjects(): Observable<Project> {
     var url = API.USER_ALL_PROJECTS;
-    return this.http.get(url, options)
-      .map(this.extractData)
-      .catch(this.handleError);
+    return this.httpDelegateService.getAPI(url);
   }
 
   createProject(project : Project): Observable<Project> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    let body = JSON.stringify(project);
-    return this.http.post(API.VIEW_PROJECT, body, options)
-      .map(this.extractData)
-      .catch(this.handleError);
+    let url = API.PROJECT;
+    return this.httpDelegateService.postAPI(url, project);
+  }
+
+  getProject(projectId:string): Observable<Project> {
+    var url = API.PROJECT+'/'+projectId;
+    return this.httpDelegateService.getAPI(url);
+  }
+
+  updateProject(modelProject: Project): Observable<Project> {
+    let url = API.PROJECT+'/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    return this.httpDelegateService.putAPI(url, modelProject);
   }
 
 }

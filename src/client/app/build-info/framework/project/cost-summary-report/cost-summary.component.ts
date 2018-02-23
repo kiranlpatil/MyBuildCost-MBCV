@@ -120,17 +120,18 @@ export class CostSummaryComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+
     this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_BUILDING, buildingName,
-      NavigationRoutes.APP_COST_SUMMARY, NavigationRoutes.APP_COST_HEAD, estimatedItem.name, this.costHeadId]);
+    NavigationRoutes.APP_COST_SUMMARY, NavigationRoutes.APP_COST_HEAD, estimatedItem.name, this.costHeadId]);
   }
 
   getCommonAmenities() {
-   this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
     this._router.navigate([NavigationRoutes.APP_PROJECT,this.projectId,NavigationRoutes.APP_COMMON_AMENITIES]);
   }
 
   getBuildingDetails() {
-    this.costSummaryService.getBuildingDetails(this.projectId).subscribe(
+    this.buildingService.getBuilding(this.projectId).subscribe(
       buildingDetails => this.onGetBuildingDetailsSuccess(buildingDetails),
       error => this.onGetBuildingDetailsFailure(error)
     );
@@ -165,7 +166,6 @@ export class CostSummaryComponent implements OnInit {
 
   onChangeCostingByArea(costPerId:any) {
     this.defaultCostPer=costPerId;
-
     this.costSummaryService.getCostSummaryReport(this.projectId,this.defaultCostIn,this.defaultCostPer).subscribe(
       projectCostPer => this.onGetCostSummaryReportSuccess(projectCostPer),
       error => this.onGetCostSummaryReportFailure(error)
@@ -248,7 +248,7 @@ export class CostSummaryComponent implements OnInit {
     this.currentBuildingId = buildingId;
   }
 
-    deleteBuilding() {
+  deleteBuilding() {
     this.buildingService.deleteBuildingById( this.currentBuildingId).subscribe(
       project => this.onDeleteBuildingByIdSuccess(project),
       error => this.onDeleteBuildingByIdFailure(error)

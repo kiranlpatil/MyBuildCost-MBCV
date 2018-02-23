@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationRoutes } from '../../../../shared/constants';
-import { ProjectListHeaderService } from './project-list-header.service';
+import { ProjectService } from '../../project/project.service';
 import { SessionStorage,SessionStorageService } from '../../../../shared/index';
 import { Project } from './../../model/project';
 
@@ -16,8 +16,7 @@ export class ProjectListHeaderComponent implements OnInit {
 
   projects : Array<Project>;
 
-  constructor(private projectListHeaderService: ProjectListHeaderService, private _router: Router) {
-
+  constructor(private projectService: ProjectService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -25,7 +24,7 @@ export class ProjectListHeaderComponent implements OnInit {
   }
 
   getAllProjects() {
-    this.projectListHeaderService.getAllProjects().subscribe(
+    this.projectService.getAllProjects().subscribe(
       projects => this.onGetAllProjectsSuccess(projects),
       error => this.onGetAllProjectsFailure(error)
     );

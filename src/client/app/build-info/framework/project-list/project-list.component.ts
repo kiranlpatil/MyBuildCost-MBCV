@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationRoutes } from '../../../shared/constants';
-import { ProjectListService } from './project-list.service';
+import { ProjectService } from '../project/project.service';
 import { Project } from './../model/project';
 
 @Component({
@@ -15,7 +15,7 @@ export class ProjectListComponent implements OnInit {
 
   projects : Array<Project>;
 
-  constructor(private projectListService: ProjectListService, private _router: Router) {
+  constructor(private projectService: ProjectService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   getAllProjects() {
-    this.projectListService.getAllProjects().subscribe(
+    this.projectService.getAllProjects().subscribe(
       projects => this.onGetAllProjectSuccess(projects),
       error => this.onGetAllProjectFailure(error)
     );

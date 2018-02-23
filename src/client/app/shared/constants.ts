@@ -342,9 +342,7 @@ export class API {
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
   public static CANDIDATES_FROM_LISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
-  public static JOB = 'job';
   public static FAQ = '/blog/index.php/faq/';
-  public static ACCEPT_TERMS = '/terms-and-conditions.php';
   public static COUNT_OF_USERS = 'countofusers';
   public static FEEDBACK_QUESTIONS = 'userFeedback';
   public static RECRUITER_CANDIDATES_SUMMARY = 'recruiterCandidatesSummary';
@@ -354,11 +352,10 @@ export class API {
 
   //Project
   public static USER_ALL_PROJECTS = 'user/all/project';
-  public static VIEW_PROJECT = 'project';
-  public static PROJECT_BUILDINGS = 'user/all/building';
-  public static ADD_BUILDING = 'building';
-  public static VIEW_BUILDING = 'building';
+  public static PROJECT = 'project';
+  public static BUILDING = 'building';
   public static CLONE = 'clone';
+  public static ALL_BUILDINGS = 'user/all/building';
 
 
   public static THUMBRULE_RULE_RATE='report/thumbRuleRate';

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavigationRoutes, ImagePath } from '../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../shared/index';
-import { CreateProjectService } from './create-project.service';
+import { ProjectService } from '../project/project.service';
 import { Project } from './../model/project';
 import { ValidationService } from './../../../shared/customvalidations/validation.service';
 
@@ -23,7 +23,7 @@ export class CreateProjectComponent {
   projectModel: Project = new Project();
   BODY_BACKGROUND_TRANSPARENT: string;
 
-  constructor(private createProjectService: CreateProjectService, private _router: Router, private formBuilder: FormBuilder,
+  constructor(private projectService: ProjectService, private _router: Router, private formBuilder: FormBuilder,
   private messageService: MessageService ) {
     this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
 
@@ -47,7 +47,7 @@ export class CreateProjectComponent {
   onSubmit() {
     if(this.projectForm.valid) {
       this.projectModel = this.projectForm.value;
-      this.createProjectService.createProject(this.projectModel)
+      this.projectService.createProject(this.projectModel)
         .subscribe(
           project => this.onCreateProjectSuccess(project),
           error => this.onCreateProjectFailure(error));

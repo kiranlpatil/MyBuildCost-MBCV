@@ -35,7 +35,6 @@ export class GetQuantityComponent implements OnInit {
   total:number=0;
   quantity:number=0;
   unit:string='';
-  workItemId:number;
   quantityItemsArray:any;
   showSubcategoryListvar: boolean = false;
 

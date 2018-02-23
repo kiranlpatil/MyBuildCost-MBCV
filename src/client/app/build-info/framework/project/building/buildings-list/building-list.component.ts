@@ -124,7 +124,7 @@ export class BuildingListComponent implements OnInit {
 
   getProject() {
     //change  in projectService
-    this.buildingService.getProject(this.projectId).subscribe(
+    this.projectService.getProject(this.projectId).subscribe(
       projects => this.onGetProjectSuccess(projects),
       error => this.onGetProjectFailure(error)
     );

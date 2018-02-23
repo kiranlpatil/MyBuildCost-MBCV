@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Messages, } from '../../../../shared/constants';
-import { ProjectDetailsService } from './project-details.service';
+import { ProjectService } from '../project.service';
 import { Project } from './../../model/project';
 import { Message, MessageService } from '../../../../shared/index';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
@@ -22,7 +22,7 @@ export class ProjectDetailsComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public error_msg: boolean = false;
 
-  constructor(private ViewProjectService: ProjectDetailsService, private _router: Router, private formBuilder: FormBuilder,
+  constructor(private projectService: ProjectService, private formBuilder: FormBuilder,
               private messageService: MessageService, private activatedRoute:ActivatedRoute) {
 
     this.viewProjectForm = this.formBuilder.group({
@@ -50,17 +50,17 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   getProjectDetails() {
-    this.ViewProjectService.getProjectDetails(this.projectId).subscribe(
-      project => this.onGetProjectDetailsSuccess(project),
-      error => this.onGetProjectDetailsFailure(error)
+    this.projectService.getProject(this.projectId).subscribe(
+      project => this.onGetProjectSuccess(project),
+      error => this.onGetProjectFailure(error)
     );
   }
 
-  onGetProjectDetailsSuccess(project : any) {
+  onGetProjectSuccess(project : any) {
     this.projectModel = project.data[0];
   }
 
-  onGetProjectDetailsFailure(error : any) {
+  onGetProjectFailure(error : any) {
     console.log(error);
   }
 
@@ -68,14 +68,14 @@ export class ProjectDetailsComponent implements OnInit {
   onSubmit() {
     if(this.viewProjectForm.valid) {
       this.projectModel = this.viewProjectForm.value;
-      this.ViewProjectService.updateProjectDetails(this.projectModel)
+      this.projectService.updateProject(this.projectModel)
         .subscribe(
-          user => this.onUpdateProjectDetailsSuccess(user),
-          error => this.onUpdateProjectDetailsFailure(error));
+          user => this.onUpdateProjectSuccess(user),
+          error => this.onUpdateProjectFailure(error));
     }
   }
 
-  onUpdateProjectDetailsSuccess(result: any) {
+  onUpdateProjectSuccess(result: any) {
 
     if (result !== null) {
       var message = new Message();
@@ -85,7 +85,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
 
-  onUpdateProjectDetailsFailure(error: any) {
+  onUpdateProjectFailure(error: any) {
 
     var message = new Message();
 

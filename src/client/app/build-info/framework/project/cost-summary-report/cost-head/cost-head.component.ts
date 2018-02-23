@@ -69,8 +69,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
-              private messageService: MessageService, private commonService : CommonService,
-              private loderService: LoaderService) {
+              private messageService: MessageService, private commonService : CommonService) {
     }
 
   ngOnInit() {
@@ -183,7 +182,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.totalRate=0;
     this.totalQuantity=0;
 
-    for(let i=0;i<this.rateItemsArray.items.length;i++) {
+    for(let i=0; i < this.rateItemsArray.items.length; i++) {
       this.totalAmount = this.totalAmount + ( this.rateItemsArray.items[i].quantity * this.rateItemsArray.items[i].rate );
       this.totalRate = this.totalRate + this.rateItemsArray.items[i].rate;
       this.totalQuantity = this.totalQuantity + this.rateItemsArray.items[i].quantity;
@@ -203,11 +202,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.subCategoryDetailsTotalAmount=0.0;
 
     for(let i=0;i<this.subCategoryDetails.length;i++) {
-      this.subCategoryDetailsTotalAmount= (this.subCategoryDetailsTotalAmount+
-        this.subCategoryDetails[i].amount);
+      this.subCategoryDetailsTotalAmount= ( this.subCategoryDetailsTotalAmount +
+        this.subCategoryDetails[i].amount );
     }
-
-
     let subcategoryList = lodsh.clone(this.subcategoryArrayList);
     this.subcategoryArray = this.commonService.removeDuplicateItmes(subcategoryList, this.subCategoryDetails);
   }
