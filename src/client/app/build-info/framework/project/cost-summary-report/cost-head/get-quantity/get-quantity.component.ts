@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../../../shared/index';
-import { GetQuantityService } from './get-quantity.service';
 import { QuantityItem } from '../../../../model/quantity-item';
+import { CostSummaryService } from '../../cost-summary.service';
 
 @Component({
   moduleId: module.id,
@@ -38,7 +38,8 @@ export class GetQuantityComponent implements OnInit {
   workItemId:number;
   quantityItemsArray:any;
   showSubcategoryListvar: boolean = false;
-  constructor(private getQuantityService : GetQuantityService, private activatedRoute : ActivatedRoute,
+
+  constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private messageService: MessageService) {
   }
 
@@ -125,16 +126,17 @@ export class GetQuantityComponent implements OnInit {
     this.quantityItems.push(quantity);
   }
 
-    updateQuantityItem(quantityItems : any) {
+  updateQuantityItem(quantityItems : any) {
     let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
     let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
 
-    this.getQuantityService.updateQuantityItems(parseInt(costHeadId), this.subCategoryRateAnalysisId,
+    this.costSummaryService.updateQuantityItems(parseInt(costHeadId), this.subCategoryRateAnalysisId,
       parseInt(workItemId), quantityItems).subscribe(
       costHeadItemSave => this.onUpdateQuantityItemsSuccess(costHeadItemSave),
       error => this.onUpdateQuantityItemsFailure(error)
     );
   }
+
   onUpdateQuantityItemsSuccess(costHeadItemSave: any) {
     this.quantityItems = costHeadItemSave.data.item;
     var message = new Message();
@@ -154,15 +156,17 @@ export class GetQuantityComponent implements OnInit {
   setQuantityItemNameForDelete(itemName: string) {
     this.itemName = itemName;
   }
+
   deleteQuantityItem() {
     let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
     let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
-    this.getQuantityService.deleteQuantityItem(parseInt(costHeadId), this.subCategoryRateAnalysisId,
+    this.costSummaryService.deleteQuantityItem(parseInt(costHeadId), this.subCategoryRateAnalysisId,
       parseInt(workItemId), this.itemName).subscribe(
       costHeadItemDelete => this.onDeleteQuantityItemSuccess(costHeadItemDelete),
       error => this.onDeleteQuantityItemFailure(error)
     );
   }
+
   onDeleteQuantityItemSuccess(costHeadItemDelete: any) {
     this.quantityItems = costHeadItemDelete.data.items;
     this.updateQuantity(this.quantityItems,'updateNos');

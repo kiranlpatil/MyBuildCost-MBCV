@@ -31,7 +31,6 @@ import { SharedService } from './shared/services/shared-service';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { AnalyticService } from './shared/services/analytic.service';
 import { CommonAmenitiesComponent } from './build-info/framework/project/cost-summary-report/common-amenities/common-amenities.component';
-import { CommonAmenitiesService } from './build-info/framework/project/cost-summary-report/common-amenities/common-amenities.service';
 import { DashboardHeaderComponent } from './framework/dashboard/dashboard-header/dashboard-header.component';
 import { DashboardUserProfileService } from './framework/dashboard/user-profile/dashboard-user-profile.service';
 import { UserChangePasswordService } from './framework/dashboard/user-change-password/user-change-password.service';
@@ -47,31 +46,25 @@ import { CreateProjectService } from './build-info/framework/create-project/crea
 import { BuildingComponent } from './build-info/framework/project/building/building.component';
 import { CreateBuildingComponent } from './build-info/framework/project/building/create-building/create-building.component';
 import { BuildingService } from './build-info/framework/project/building/building.service';
-import { CreateBuildingService } from './build-info/framework/project/building/create-building/create-building.service';
 import { ProjectListComponent } from './build-info/framework/project-list/project-list.component';
 import { ProjectListService } from './build-info/framework/project-list/project-list.service';
 import { ProjectDetailsComponent } from './build-info/framework/project/project-details/project-details.component';
 import { ProjectDetailsService } from './build-info/framework/project/project-details/project-details.service';
 import { BuildingListComponent } from './build-info/framework/project/building/buildings-list/building-list.component';
 import { BuildingDetailsComponent } from './build-info/framework/project/building/building-details/building-details.component';
-import { BuildingListService } from './build-info/framework/project/building/buildings-list/building-list.service';
-import { BuildingDetailsService } from './build-info/framework/project/building/building-details/building-details.service';
 import { ProjectHeaderComponent } from './build-info/framework/project-header/project-header.component';
 import { CostSummaryComponent } from './build-info/framework/project/cost-summary-report/cost-summary.component';
 import { CostSummaryService } from './build-info/framework/project/cost-summary-report/cost-summary.service';
 import { MaterialTakeoffComponent } from './build-info/framework/project/material-takeoff/material-takeoff.component';
 import { MaterialTakeoffService } from './build-info/framework/project/material-takeoff/material-takeoff.service';
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
-import { CostHeadService } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.service';
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
 import { GetQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.component';
-import { GetQuantityService } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.service';
 import { ProjectListHeaderComponent } from './build-info/framework/project-header/project-list-header/project-list-header.component';
 import { ProjectListHeaderService } from './build-info/framework/project-header/project-list-header/project-list-header.service';
 import { GroupByPipe } from '../app/shared/services/custom-pipes/groupby.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GetRateComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-rate/get-rate.component';
-import { GetRateService } from './build-info/framework/project/cost-summary-report/cost-head/get-rate/get-rate.service';
 import { CreateNewProjectComponent } from './build-info/framework/create-new-project/create-new-project.component';
 import { ProjectItemComponent } from './build-info/framework/project-list/project-item/project-item.component';
 
@@ -157,18 +150,11 @@ import { ProjectItemComponent } from './build-info/framework/project-list/projec
     //Application Services
     ProjectService,
     BuildingService,
-    CreateBuildingService,
     CreateProjectService,
     ProjectDetailsService,
     ProjectListService,
-    BuildingListService,
-    BuildingDetailsService,
     CostSummaryService,
-    CostHeadService,
     MaterialTakeoffService,
-    GetQuantityService,
-    CommonAmenitiesService,
-    GetRateService,
     ProjectListHeaderService
     // MaterialTakeoffService
   ],

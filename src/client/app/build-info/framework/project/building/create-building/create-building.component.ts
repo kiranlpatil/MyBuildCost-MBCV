@@ -5,7 +5,7 @@ import { Messages, NavigationRoutes, ImagePath } from '../../../../../shared/con
 import { SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../../shared/index';
 import { Building } from '../../../model/building';
-import { CreateBuildingService } from './create-building.service';
+import { BuildingService } from './../building.service';
 import { ValidationService } from '../../../../../shared/customvalidations/validation.service';
 import { SharedService } from '../../../../../shared/services/shared-service';
 
@@ -26,7 +26,7 @@ export class CreateBuildingComponent {
   modelBuilding: Building = new Building();
   BODY_BACKGROUND_TRANSPARENT: string;
 
-  constructor(private createBuildingService: CreateBuildingService, private formBuilder: FormBuilder,
+  constructor(private buildingService: BuildingService, private formBuilder: FormBuilder,
               private _router: Router, private messageService: MessageService,private sharedService: SharedService) {
     this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
     this.addBuildingForm = this.formBuilder.group({
@@ -83,20 +83,20 @@ export class CreateBuildingComponent {
           this.modelBuilding.numOfLifts=0;
         }
 
-      this.createBuildingService.addNewBuilding(this.modelBuilding)
+      this.buildingService.createBuilding(this.modelBuilding)
         .subscribe(
-          building => this.onAddNewBuildingSuccess(building),
-          error => this.onAddNewBuildingFailure(error));
+          building => this.onCreateBuildingSuccess(building),
+          error => this.onCreateBuildingFailure(error));
       } else {
         var message = new Message();
         message.isError = false;
-        message.custom_message = 'Add at leat one Apartment Configuration';
+        message.custom_message = 'Add at least one Apartment Configuration';
         this.messageService.message(message);
       }
     }
   }
 
-  onAddNewBuildingSuccess(building : any) {
+  onCreateBuildingSuccess(building : any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
@@ -105,7 +105,7 @@ export class CreateBuildingComponent {
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
   }
 
-  onAddNewBuildingFailure(error : any) {
+  onCreateBuildingFailure(error : any) {
     console.log(error);
   }
 

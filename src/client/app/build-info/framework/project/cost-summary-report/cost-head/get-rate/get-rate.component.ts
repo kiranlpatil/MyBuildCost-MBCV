@@ -1,11 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Messages } from '../../../../../../shared/constants';
 import {
   SessionStorage, SessionStorageService,
   Message, MessageService
 } from '../../../../../../shared/index';
-import { GetRateService } from './get-rate.service';
+import { CostSummaryService } from './../../cost-summary.service';
 import { Rate } from '../../../../model/rate';
 
 @Component({
@@ -27,32 +26,18 @@ export class GetRateComponent {
 
   projectId: string;
   buildingId: string;
-  buildingName: string;
 
   costHead: string;
   costheadId: number;
   subCategoryId: number;
-  subCategoryDetails: any;
-
-  quantityTotal: number = 0;
-  quanitytNumbersTotal: number = 0;
-  lengthTotal: number = 0;
-  breadthTotal: number = 0;
-  heightTotal: number = 0;
 
   total: number = 0;
-  rateIArray: any;
   quantity: number = 0;
-  workItemId: number;
-
-  showSubcategoryListvar: boolean = false;
-  rateTotal: number = 0;
   quantityIncrement: number = 1;
   previousTotalQuantity: number = 1;
   totalItemRateQuantity: number = 0;
 
-  constructor(private getRateService: GetRateService, private activatedRoute: ActivatedRoute,
-              private messageService: MessageService) {
+  constructor(private costSummaryService: CostSummaryService, private messageService: MessageService) {
   }
 
   changeQuantity(quantity: any, k: number) {
@@ -91,7 +76,7 @@ export class GetRateComponent {
     rate.unit = rateItemsArray.unit;
     rate.items = rateItemsArray.items;
 
-    this.getRateService.updateRate(parseInt(costHeadId), this.subCategoryRateAnalysisId,
+    this.costSummaryService.updateRate(parseInt(costHeadId), this.subCategoryRateAnalysisId,
       parseInt(workItemId), rate).subscribe(
       rateItem => this.onUpdateRateSuccess(rateItem),
       error => this.onUpdateRateFailure(error)

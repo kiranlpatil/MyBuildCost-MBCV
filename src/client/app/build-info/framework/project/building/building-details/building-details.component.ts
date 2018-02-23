@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Messages } from '../../../../../shared/constants';
-import { BuildingDetailsService } from './building-details.service';
 import { Building } from './../../../model/building';
 import { MessageService } from '../../../../../shared/index';
 import { Message } from '../../../../../shared/index';
 import { ValidationService } from '../../../../../shared/customvalidations/validation.service';
+import { BuildingService } from '../building.service';
 
 @Component({
   moduleId: module.id,
@@ -23,7 +23,7 @@ export class BuildingDetailsComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public error_msg: boolean = false;
 
-  constructor(private viewBuildingService: BuildingDetailsService, private _router: Router, private formBuilder: FormBuilder,
+  constructor(private buildingService: BuildingService, private _router: Router, private formBuilder: FormBuilder,
               private activatedRoute:ActivatedRoute, private messageService: MessageService) {
 
     this.viewBuildingForm = this.formBuilder.group({
@@ -55,13 +55,13 @@ export class BuildingDetailsComponent implements OnInit {
   }
 
   getBuildingDetails() {
-    this.viewBuildingService.getBuildingDetails(this.buildingId).subscribe(
-      building => this.onGetBuildingDetailsSuccess(building),
-      error => this.onGetBuildingDetailsFailure(error)
+    this.buildingService.getBuilding(this.buildingId).subscribe(
+      building => this.onGetBuildingSuccess(building),
+      error => this.onGetBuildingFailure(error)
     );
   }
 
-  onGetBuildingDetailsSuccess(building : any) {
+  onGetBuildingSuccess(building : any) {
     let buildingDetails = building.data;
     this.buildingModel.name = buildingDetails.name;
     this.buildingModel.totalSlabArea = buildingDetails.totalSlabArea;
@@ -79,7 +79,7 @@ export class BuildingDetailsComponent implements OnInit {
     this.buildingModel.numOfLifts = buildingDetails.numOfLifts;
     }
 
-  onGetBuildingDetailsFailure(error : any) {
+  onGetBuildingFailure(error : any) {
     var message = new Message();
 
     if (error.err_code === 404 || error.err_code === 0) {
@@ -98,13 +98,13 @@ export class BuildingDetailsComponent implements OnInit {
 
   onSubmit() {
       this.buildingModel = this.viewBuildingForm.value;
-      this.viewBuildingService.updateBuildingDetails(this.buildingModel)
+      this.buildingService.updateBuilding(this.buildingModel)
         .subscribe(
-          building => this.updateBuildingDetailsSuccess(building),
-          error => this.updateBuildingDetailsFailure(error));
+          building => this.updateBuildingSuccess(building),
+          error => this.updateBuildingFailure(error));
   }
 
-  updateBuildingDetailsSuccess(result: any) {
+  updateBuildingSuccess(result: any) {
 
     if (result !== null) {
       var message = new Message();
@@ -114,7 +114,7 @@ export class BuildingDetailsComponent implements OnInit {
     }
   }
 
-  updateBuildingDetailsFailure(error: any) {
+  updateBuildingFailure(error: any) {
 
     var message = new Message();
 

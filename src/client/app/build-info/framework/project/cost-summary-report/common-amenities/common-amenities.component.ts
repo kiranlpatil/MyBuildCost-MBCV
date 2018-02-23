@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonAmenitiesService } from './common-amenities.service';
-
-
 
 @Component({
   moduleId: module.id,
@@ -14,7 +11,7 @@ import { CommonAmenitiesService } from './common-amenities.service';
 export class CommonAmenitiesComponent implements OnInit {
   projectId: string;
 
-  constructor(private commonAmenitiesService: CommonAmenitiesService, private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {

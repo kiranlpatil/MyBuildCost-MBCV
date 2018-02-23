@@ -3,12 +3,10 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { NavigationRoutes } from '../../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
-import { BuildingListService } from '../building/buildings-list/building-list.service';
-import { BuildingDetailsService } from '../building/building-details/building-details.service';
 import { Building } from '../../model/building';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
-import { CreateBuildingService } from '../building/create-building/create-building.service';
+import { BuildingService } from '../building/building.service';
 
 @Component({
   moduleId: module.id,
@@ -63,8 +61,8 @@ export class CostSummaryComponent implements OnInit {
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
-              private listBuildingService: BuildingListService, private createBuildingService: CreateBuildingService,
-              private viewBuildingService : BuildingDetailsService) {
+              private buildingService: BuildingService ) {
+
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
       totalSlabArea :['', ValidationService.requiredSlabArea],
@@ -251,7 +249,7 @@ export class CostSummaryComponent implements OnInit {
   }
 
     deleteBuilding() {
-    this.listBuildingService.deleteBuildingById( this.currentBuildingId).subscribe(
+    this.buildingService.deleteBuildingById( this.currentBuildingId).subscribe(
       project => this.onDeleteBuildingByIdSuccess(project),
       error => this.onDeleteBuildingByIdFailure(error)
     );
@@ -281,7 +279,7 @@ export class CostSummaryComponent implements OnInit {
   }
 
   cloneBuilding(buildingId: string) {
-    this.viewBuildingService.getBuildingDetailsForClone(buildingId).subscribe(
+    this.buildingService.getBuildingDetailsForClone(buildingId).subscribe(
       building => this.onGetBuildingDetailsForCloneSuccess(building),
       error => this.onGetBuildingDetailsForCloneFailure(error)
     );
@@ -313,23 +311,23 @@ export class CostSummaryComponent implements OnInit {
   cloneBuildingBasicDetails() {
     if (this.cloneBuildingForm.valid) {
       this.model = this.cloneBuildingForm.value;
-      this.createBuildingService.addNewBuilding(this.model)
+      this.buildingService.createBuilding(this.model)
         .subscribe(
-          building => this.onAddNewBuildingSuccess(building),
-          error => this.onAddNewBuildingFailure(error));
+          building => this.onCreateBuildingSuccess(building),
+          error => this.onCreateBuildingFailure(error));
     }
   }
 
-  onAddNewBuildingSuccess(building: any) {
+  onCreateBuildingSuccess(building: any) {
     this.cloneBuildingId = building.data._id;
   }
 
-  onAddNewBuildingFailure(error: any) {
+  onCreateBuildingFailure(error: any) {
     console.log(error);
   }
 
   cloneBuildingCostHeads(cloneCostHead: any) {
-    this.listBuildingService.cloneBuildingCostHeads(cloneCostHead, this.cloneBuildingId).subscribe(
+    this.buildingService.cloneBuildingCostHeads(cloneCostHead, this.cloneBuildingId).subscribe(
       project => this.onCloneBuildingCostHeadsSuccess(project),
       error => this.onCloneBuildingCostHeadsFailure(error)
     );

@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Messages, NavigationRoutes } from '../../../../../shared/constants';
-import { BuildingListService } from './building-list.service';
-import { BuildingDetailsService } from '../building-details/building-details.service';
 import { Building } from '../../../model/building';
 import { SessionStorage, SessionStorageService,MessageService } from '../../../../../shared/index';
 import { Message } from '../../../../../shared/index';
-import { CreateBuildingService } from '../create-building/create-building.service';
+import { BuildingService } from '../building.service';
 import { ValidationService } from '../../../../../shared/customvalidations/validation.service';
+import { ProjectService } from '../../project.service';
 
 @Component({
   moduleId: module.id,
@@ -25,9 +24,9 @@ export class BuildingListComponent implements OnInit {
   cloneBuildingForm: FormGroup;
   model: Building = new Building();
   clonedBuildingDetails: any;
-  constructor(private listBuildingService: BuildingListService, private viewBuildingService: BuildingDetailsService,
-              private _router: Router, private activatedRoute:ActivatedRoute, private messageService: MessageService,
-              private createBuildingService: CreateBuildingService, private formBuilder: FormBuilder ) {
+
+  constructor(private buildingService: BuildingService, private projectService : ProjectService, private _router: Router, private activatedRoute:ActivatedRoute,
+              private messageService: MessageService, private formBuilder: FormBuilder ) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -60,14 +59,14 @@ export class BuildingListComponent implements OnInit {
   onSubmit() {
     if(this.cloneBuildingForm.valid) {
       this.model = this.cloneBuildingForm.value;
-      this.createBuildingService.addNewBuilding(this.model)
+      this.buildingService.createBuilding(this.model)
         .subscribe(
-          building => this.onAddNewBuildingSuccess(building),
-          error => this.onAdNewBuildingFailure(error));
+          building => this.onCreateBuildingSuccess(building),
+          error => this.onCreateBuildingFailure(error));
     }
   }
 
-  onAddNewBuildingSuccess(building : any) {
+  onCreateBuildingSuccess(building : any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
@@ -75,12 +74,12 @@ export class BuildingListComponent implements OnInit {
     this.clonedBuildingId = building.data._id;
   }
 
-  onAdNewBuildingFailure(error : any) {
+  onCreateBuildingFailure(error : any) {
     console.log(error);
   }
 
   updateBuildingByCostHead(cloneCostHead: any) {
-    this.listBuildingService.cloneBuildingCostHeads(cloneCostHead, this.clonedBuildingId).subscribe(
+    this.buildingService.cloneBuildingCostHeads(cloneCostHead, this.clonedBuildingId).subscribe(
       project => this.onCloneBuildingCostHeadsSuccess(project),
       error => this.onCloneBuildingCostHeadsFailure(error)
     );
@@ -103,7 +102,7 @@ export class BuildingListComponent implements OnInit {
   }
 
   deleteBuilding() {
-    this.listBuildingService.deleteBuildingById(this.currentbuildingId).subscribe(
+    this.buildingService.deleteBuildingById(this.currentbuildingId).subscribe(
       project => this.onDeleteBuildingSuccess(project),
       error => this.onDeleteBuildingFailure(error)
     );
@@ -124,7 +123,8 @@ export class BuildingListComponent implements OnInit {
   }
 
   getProject() {
-    this.listBuildingService.getProject(this.projectId).subscribe(
+    //change  in projectService
+    this.buildingService.getProject(this.projectId).subscribe(
       projects => this.onGetProjectSuccess(projects),
       error => this.onGetProjectFailure(error)
     );
@@ -144,32 +144,32 @@ export class BuildingListComponent implements OnInit {
   }
 
   cloneBuilding(buildingId : any) {
-    this.viewBuildingService.getBuildingDetails(buildingId).subscribe(
-      building => this.onGetBuildingDetailsSuccess(building),
-      error => this.onGetBuildingDetailsFailure(error)
+    this.buildingService.getBuilding(buildingId).subscribe(
+      building => this.onGetBuildingSuccess(building),
+      error => this.onGetBuildingFailure(error)
     );
   }
 
-  onGetBuildingDetailsSuccess(building : any) {
+  onGetBuildingSuccess(building : any) {
     let buildingDetails=building.data;
     this.clonedBuildingDetails = building.data.costHead;
     this.model.name = buildingDetails.name;
     this.model.totalSlabArea = buildingDetails.totalSlabArea;
-    this.model.totalCarpetAreaOfUnit = buildingDetails.totalCarperAreaOfUnit;
+    this.model.totalCarpetAreaOfUnit = buildingDetails.totalCarpetAreaOfUnit;
     this.model.totalSaleableAreaOfUnit = buildingDetails.totalSaleableAreaOfUnit;
     this.model.plinthArea = buildingDetails.plinthArea;
-    this.model.totalNumOfFloors = buildingDetails.totalNoOfFloors;
-    this.model.numOfParkingFloors = buildingDetails.noOfParkingFloors;
+    this.model.totalNumOfFloors = buildingDetails.totalNumOfFloors;
+    this.model.numOfParkingFloors = buildingDetails.numOfParkingFloors;
     this.model.carpetAreaOfParking = buildingDetails.carpetAreaOfParking;
-    this.model.numOfOneBHK = buildingDetails.noOfOneBHK;
-    this.model.numOfTwoBHK = buildingDetails.noOfTwoBHK;
-    this.model.numOfThreeBHK = buildingDetails.noOfThreeBHK;
-    this.model.numOfFourBHK = buildingDetails.noOfFourBHK;
-    this.model.numOfFiveBHK = buildingDetails.noOfFiveBHK;
-    this.model.numOfLifts = buildingDetails.noOfLift;
+    this.model.numOfOneBHK = buildingDetails.numOfOneBHK;
+    this.model.numOfTwoBHK = buildingDetails.numOfTwoBHK;
+    this.model.numOfThreeBHK = buildingDetails.numOfThreeBHK;
+    this.model.numOfFourBHK = buildingDetails.numOfFourBHK;
+    this.model.numOfFiveBHK = buildingDetails.numOfFiveBHK;
+    this.model.numOfLifts = buildingDetails.numOfLifts;
   }
 
-  onGetBuildingDetailsFailure(error : any) {
+  onGetBuildingFailure(error : any) {
     console.log(error);
   }
 }

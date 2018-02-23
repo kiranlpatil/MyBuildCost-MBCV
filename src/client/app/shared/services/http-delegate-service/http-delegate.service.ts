@@ -20,7 +20,9 @@ export class HttpDelegateService extends BaseService {
   }
 
   putAPI(url : string, body : any): Observable<any> {
-    return this.http.put(url, JSON.stringify(body))
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.put(url, JSON.stringify(body), options)
       .map(this.extractData)
       .catch(this.handleError);
   }

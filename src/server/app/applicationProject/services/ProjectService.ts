@@ -600,7 +600,7 @@ class ProjectService {
       } else {
         for(let index = 0; building.costHeads.length > index; index++) {
           if(building.costHeads[index].name === costhead) {
-            let quantityArray :Quantity = building.costHeads[index].workItems[workitem].quantity.items;
+            let quantityArray :Array<Quantity> = building.costHeads[index].workItems[workitem].quantity.items;
             let exist = false;
             let errorMessage ;
             for(let quantityIndex = 0; quantityArray.length > quantityIndex; quantityIndex++ ) {
