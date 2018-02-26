@@ -1,5 +1,5 @@
 import ThumbRule = require('./ThumbRule');
-import Estimate = require('./estimate');
+import Estimate = require('./Estimate');
 
 class BuildingReport {
   _id:string;
