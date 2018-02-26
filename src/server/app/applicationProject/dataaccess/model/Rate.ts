@@ -5,13 +5,13 @@ class Rate {
   total : number;
   quantity: number;
   unit:string;
-  items: Array<RateItem>;
+  rateItems: Array<RateItem>;
 
   constructor() {
     this.rateFromRateAnalysis = 0;
     this.total = 0;
     this.quantity = 0;
-    this.items = new Array<RateItem>();
+    this.rateItems = new Array<RateItem>();
     this.unit = 'sqft';
   }
 }

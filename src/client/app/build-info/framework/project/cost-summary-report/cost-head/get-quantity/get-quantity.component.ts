@@ -154,7 +154,7 @@ export class GetQuantityComponent implements OnInit {
   }
 
   onDeleteQuantityItemSuccess(costHeadItemDelete: any) {
-    this.quantityItems = costHeadItemDelete.data.items;
+    this.quantityItems = costHeadItemDelete.data.quantityItems;
     this.updateQuantity(this.quantityItems,'updateNos');
     this.updateQuantity(this.quantityItems,'updateLength');
     this.updateQuantity(this.quantityItems,'updateBreadth');

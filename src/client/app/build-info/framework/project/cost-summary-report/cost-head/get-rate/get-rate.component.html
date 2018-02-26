@@ -26,7 +26,7 @@
         <th>Amount</th>
         </thead>
         <tbody>
-        <tr *ngFor="let rateItem of rateItemsArray.items | groupBy:'type'; let k = index">
+        <tr *ngFor="let rateItem of rateItemsArray.rateItems | groupBy:'type'; let k = index">
           <td>
             <table>
               <thead>

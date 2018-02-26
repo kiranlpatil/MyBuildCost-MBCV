@@ -39,7 +39,7 @@ export class CostSummaryComponent implements OnInit {
   showGrandTotalPanelBody:boolean=true;
   compareIndex:number=0;
 
- public inActiveCostHeadArray:any;
+ public inActiveCostHeadArray: Array<CostHead>;
   cloneBuildingForm: FormGroup;
   cloneBuildingModel: Building = new Building();
   clonedBuildingDetails: Array<CostHead>;
@@ -311,7 +311,7 @@ export class CostSummaryComponent implements OnInit {
     console.log(error);
   }
 
-  cloneBuildingCostHeads(cloneCostHead: any) {
+  cloneBuildingCostHeads(cloneCostHead: CostHead) {
     this.buildingService.cloneBuildingCostHeads(cloneCostHead, this.cloneBuildingId).subscribe(
       project => this.onCloneBuildingCostHeadsSuccess(project),
       error => this.onCloneBuildingCostHeadsFailure(error)

@@ -159,7 +159,6 @@ class ProjectService {
 
                 let subcategoryList = costHead.subCategory;
                 let resultSubCategoryList = resultCostHead.subCategories;
-
                 for(let resultSubcategoryIndex=0; resultSubcategoryIndex<resultSubCategoryList.length; resultSubcategoryIndex++) {
                   for(let subcategoryIndex=0 ; subcategoryIndex<subcategoryList.length; subcategoryIndex++) {
                     if(subcategoryList[subcategoryIndex].name === resultSubCategoryList[resultSubcategoryIndex].name) {
@@ -169,7 +168,7 @@ class ProjectService {
                         let resultWorkitemList = resultSubCategoryList[resultSubcategoryIndex].workItems;
                         let workItemList = subcategoryList[subcategoryIndex].workItems;
 
-                        for(let resultWorkitemIndex=0;  resultWorkitemIndex < resultWorkitemList.length; resultWorkitemIndex++){
+                        for(let resultWorkitemIndex=0;  resultWorkitemIndex < resultWorkitemList.length; resultWorkitemIndex++) {
                           for(let workitemIndex=0;  workitemIndex < workItemList.length; workitemIndex++) {
                             if(!workItemList[workitemIndex].active) {
                               resultWorkitemList.splice(resultWorkitemIndex, 1);
@@ -336,8 +335,8 @@ class ProjectService {
          }
         }
         if(quantity.total === null) {
-          for(let index = 0; quantity.items.length > index; index ++) {
-            quantity.total = quantity.items[index].quantity + quantity.total;
+          for(let index = 0; quantity.quantityItems.length > index; index ++) {
+            quantity.total = quantity.quantityItems[index].quantity + quantity.total;
           }
         }
         callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
@@ -355,7 +354,7 @@ class ProjectService {
         callback(error, null);
       } else {
         let rate :Rate = new Rate();
-        rate.items = rateData;
+        rate.rateItems = rateData;
         callback(null, {data: rateData, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
@@ -424,9 +423,9 @@ class ProjectService {
             }
           }
 
-        for(let index = 0; quantity.items.length > index; index ++) {
-          if(quantity.items[index].item  === item) {
-            quantity.items.splice(index,1);
+        for(let index = 0; quantity.quantityItems.length > index; index ++) {
+          if(quantity.quantityItems[index].item  === item) {
+            quantity.quantityItems.splice(index,1);
           }
         }
 
@@ -453,9 +452,9 @@ class ProjectService {
             }
 
             if(quantity.total) {
-              if(quantity.items.length !== 0) {
-                for(let index = 0; quantity.items.length > index; index ++) {
-                  quantity.total = quantity.items[index].quantity + quantity.total;
+              if(quantity.quantityItems.length !== 0) {
+                for(let index = 0; quantity.quantityItems.length > index; index ++) {
+                  quantity.total = quantity.quantityItems[index].quantity + quantity.total;
                 }
               }else {
                 quantity.total = 0;
@@ -662,10 +661,10 @@ class ProjectService {
                 for (let index2 = 0; index2 < costHeadList[index].subCategories[index1].workItems.length; index2++) {
                   if (parseInt(workitemId) === costHeadList[index].subCategories[index1].workItems[index2].rateAnalysisId) {
                     quantityArray  = costHeadList[index].subCategories[index1].workItems[index2].quantity;
-                    quantityArray.items = quantity;
+                    quantityArray.quantityItems = quantity;
                     quantityArray.total = 0;
-                    for (let itemIndex = 0; quantityArray.items.length > itemIndex; itemIndex++) {
-                      quantityArray.total = quantityArray.items[itemIndex].quantity + quantityArray.total;
+                    for (let itemIndex = 0; quantityArray.quantityItems.length > itemIndex; itemIndex++) {
+                      quantityArray.total = quantityArray.quantityItems[itemIndex].quantity + quantityArray.total;
                     }
                   }
                 }
@@ -696,8 +695,8 @@ class ProjectService {
                 }
               }
               if (quantity.total === null) {
-                for (let index = 0; index < quantity.items.length; index++) {
-                  quantity.total = quantity.items[index].quantity + quantity.total;
+                for (let index = 0; index < quantity.quantityItems.length; index++) {
+                  quantity.total = quantity.quantityItems[index].quantity + quantity.total;
                 }
               }
               callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});

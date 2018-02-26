@@ -49,14 +49,14 @@
                     <td class="border-left">
                       <div class="edit-field"
                            *ngIf="workitemObj.quantity.total"
-                           (click)="getQuantity(i, workitemObj.quantity.items, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
+                           (click)="getQuantity(i, workitemObj.quantity.quantityItems, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
                         <input  [(ngModel)]="workitemObj.quantity.total" id="quantity"  size="10" class="form-control clear">
                       </div>
                       <button *ngIf="workitemObj.quantity.total == 0"
                               type="button"
                               id="getQuantity{{i}}"
                               class="btn-get-amount"
-                              (click)="getQuantity(i, workitemObj.quantity.items, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
+                              (click)="getQuantity(i, workitemObj.quantity.quantityItems, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
                         Get Qty.
                       </button>
                     </td>

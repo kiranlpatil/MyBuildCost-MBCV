@@ -19,7 +19,6 @@ import { QuantityItem } from '../../../model/quantity-item';
 
 export class CostHeadComponent implements OnInit, OnChanges {
   projectId : string;
-  buildingId: string;
   buildingName: string;
   costHead: string;
   costHeadId:number;
@@ -31,7 +30,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   totalAmount:number=0;
   totalRate:number=0;
   totalQuantity:number=0;
-  subcategoryRateAnalysisId:number;
+  subCategoryRateAnalysisId:number;
   comapreWorkItemRateAnalysisId:number;
   quantity:number=0;
   rateFromRateAnalysis:number=0;
@@ -49,10 +48,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private quantityItemsArray: QuantityItem;
   private rateItemsArray: Rate;
   private subcategoryArray : Array<SubCategory> = [];
-  private subcategoryArrayList : Array<SubCategory> = [];
+  private subCategoryArrayList : Array<SubCategory> = [];
 
   private workItemListArray: Array<WorkItem> = [];
-  private subcategoryListArray : Array<SubCategory> = [];
+  private subCategoryListArray : Array<SubCategory> = [];
   private subCategoryObj: Array<SubCategory>;
 
 
@@ -73,12 +72,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any) {
-    if (changes.subcategoryListArray.currentValue !== undefined) {
-      this.subcategoryListArray = changes.subcategoryListArray.currentValue;
+    if (changes.subCategoryListArray.currentValue !== undefined) {
+      this.subCategoryListArray = changes.subCategoryListArray.currentValue;
     }
   }
 
-  getQuantity(i: number, quantityItems: any, workItemIndex: number, workItem: any ,workitemObjId : number) {
+  getQuantity(i: number, quantityItems: any, workItemIndex: number, workItem: WorkItem ,workitemObjId : number) {
     this.compareSubcategoryIndex=i;
     this.toggleQty = !this.toggleQty;
     this.compareWorkItemIndex = workItemIndex;
@@ -92,7 +91,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showQuantity = true;
   }
 
-  getRateFromRateAnalysis(i:number,workItemIndex: number,workItem:any) {
+  getRateFromRateAnalysis(i:number,workItemIndex: number,workItem:WorkItem) {
     this.compareSubcategoryIndex=i;
     this.toggleRate = !this.toggleRate;
     this.compareWorkItemIndex = workItemIndex;
@@ -131,10 +130,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.unit=rateItem.data.unit;
     this.rateItemsArray = rateItem.data;
 
-    for(let i=0;i<rateItem.data.items.length;i++) {
-      this.totalAmount= this.totalAmount+( rateItem.data.items[i].quantity*rateItem.data.items[i].rate);
-      this.totalRate= this.totalRate+rateItem.data.items[i].rate;
-      this.totalQuantity=this.totalQuantity+rateItem.data.items[i].quantity;
+    for(let i=0;i<rateItem.data.rateItems.length;i++) {
+      this.totalAmount= this.totalAmount+( rateItem.data.rateItems[i].quantity*rateItem.data.rateItems[i].rate);
+      this.totalRate= this.totalRate+rateItem.data.rateItems[i].rate;
+      this.totalQuantity=this.totalQuantity+rateItem.data.rateItems[i].quantity;
     }
     this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
     this.showRate = true;
@@ -145,7 +144,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   //Rate from DB
-  getRateFromDatabase(i:number,workItemIndex:number,itemArray:Rate, workItem : any) {
+  getRateFromDatabase(i:number,workItemIndex:number,itemArray:Rate, workItem : WorkItem) {
     this.compareSubcategoryIndex=i;
     this.toggleRate = !this.toggleRate;
     this.workItem = workItem;
@@ -157,7 +156,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
     this.rateItemsArray=itemArray;
     let rate = new Rate();
-    rate.items = itemArray.items;
+    rate.rateItems = itemArray.rateItems;
     rate.rateFromRateAnalysis = itemArray.rateFromRateAnalysis ;
     rate.total = itemArray.total;
     rate.unit = itemArray.unit;
@@ -167,10 +166,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.totalRate=0;
     this.totalQuantity=0;
 
-    for(let i=0; i < this.rateItemsArray.items.length; i++) {
-      this.totalAmount = this.totalAmount + ( this.rateItemsArray.items[i].quantity * this.rateItemsArray.items[i].rate );
-      this.totalRate = this.totalRate + this.rateItemsArray.items[i].rate;
-      this.totalQuantity = this.totalQuantity + this.rateItemsArray.items[i].quantity;
+    for(let i=0; i < this.rateItemsArray.rateItems.length; i++) {
+      this.totalAmount = this.totalAmount + ( this.rateItemsArray.rateItems[i].quantity * this.rateItemsArray.rateItems[i].rate );
+      this.totalRate = this.totalRate + this.rateItemsArray.rateItems[i].rate;
+      this.totalQuantity = this.totalQuantity + this.rateItemsArray.rateItems[i].quantity;
     }
     this.showRate = true;
   }
@@ -190,7 +189,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.subCategoryDetailsTotalAmount= ( this.subCategoryDetailsTotalAmount +
         this.subCategoryDetails[i].amount );
     }
-    let subcategoryList = lodsh.clone(this.subcategoryArrayList);
+    let subcategoryList = lodsh.clone(this.subCategoryArrayList);
     this.subcategoryArray = this.commonService.removeDuplicateItmes(subcategoryList, this.subCategoryDetails);
   }
 
@@ -231,7 +230,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   getWorkItemList(subCategoryId:number,i:number) {
     this.comapreWorkItemRateAnalysisId=i;
-    this.subcategoryRateAnalysisId=subCategoryId;
+    this.subCategoryRateAnalysisId=subCategoryId;
     this.costSummaryService.getWorkItemList(this.costHeadId,subCategoryId).subscribe(
       workItemList => this.onGetWorkItemListSuccess(workItemList),
       error => this.onGetWorkItemListFailure(error)
@@ -265,7 +264,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
         return workItemObj.name === selectedWorkItem;
       });
 
-    let subCategoryId=this.subcategoryRateAnalysisId;
+    let subCategoryId=this.subCategoryRateAnalysisId;
     this.costSummaryService.addWorkItem(this.costHeadId,subCategoryId,workItemObject[0].rateAnalysisId,workItemObject[0].name).subscribe(
       workItemList => this.onAddWorkItemSuccess(workItemList),
       error => this.onAddWorkItemFailure(error)
@@ -314,7 +313,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   onGetSubCategoryListSuccess(subcategoryList : any) {
-    this.subcategoryArrayList = subcategoryList.data;
+    this.subCategoryArrayList = subcategoryList.data;
     let subCategoryList = lodsh.cloneDeep(subcategoryList.data);
     this.subcategoryArray = this.commonService.removeDuplicateItmes(subCategoryList, this.subCategoryDetails);
     this.showSubcategoryListvar = true;

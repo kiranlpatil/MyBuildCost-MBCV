@@ -622,7 +622,7 @@
                 "name": "Salai pointing for UCR masonry in CM 1: 4",
                 "quantity": {
                   "total": 0,
-                  "items": [
+                  "quantityItems": [
 
                   ]
                 },
@@ -632,7 +632,7 @@
                   "rateFromRateAnalysis": 0,
                   "total": 0,
                   "quantity": 10,
-                  "items": [
+                  "rateItems": [
 
                   ],
                   "unit": "sqft"
