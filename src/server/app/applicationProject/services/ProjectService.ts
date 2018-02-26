@@ -1,6 +1,5 @@
 import ProjectRepository = require('../dataaccess/repository/ProjectRepository');
 import BuildingRepository = require('../dataaccess/repository/BuildingRepository');
-import Messages = require('../shared/messages');
 import UserService = require('./../../framework/services/UserService');
 import ProjectAsset = require('../../framework/shared/projectasset');
 import User = require('../../framework/dataaccess/mongoose/user');
@@ -15,15 +14,13 @@ import ClonedCostHead = require('../dataaccess/model/ClonedCostHead');
 import ClonedWorkItem = require('../dataaccess/model/ClonedWorkItem');
 import CostHead = require('../dataaccess/model/CostHead');
 import WorkItem = require('../dataaccess/model/WorkItem');
-import Item = require('../dataaccess/model/Item');
 import RateAnalysisService = require('./RateAnalysisService');
-import QuantityItem = require('../dataaccess/model/QuantityItem');
 import SubCategory = require('../dataaccess/model/SubCategory');
 let config = require('config');
-var log4js = require('log4js');
+let log4js = require('log4js');
 import alasql = require('alasql');
 import ClonedSubcategory = require('../dataaccess/model/ClonedSubcategory');
-var logger=log4js.getLogger('Project service');
+let logger=log4js.getLogger('Project service');
 
 class ProjectService {
   APP_NAME: string;
@@ -322,28 +319,6 @@ class ProjectService {
     });
   }
 
-  getQuantity(projectId:string, buildingId:string, costhead: string, workItem : any, user : User, callback:(error: any, result: any)=> void) {
-    logger.info('Project service, getQuantity has been hit');
-    this.buildingRepository.findById(buildingId, (error, building:Building) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        let quantity: Quantity;
-        for(let index = 0; building.costHeads.length > index; index++) {
-         if(building.costHeads[index].name === costhead) {
-           quantity = building.costHeads[index].workitem[workItem].quantity;
-         }
-        }
-        if(quantity.total === null) {
-          for(let index = 0; quantity.quantityItems.length > index; index ++) {
-            quantity.total = quantity.quantityItems[index].quantity + quantity.total;
-          }
-        }
-        callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
-      }
-    });
-  }
-
   getRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number, workitemId:number, user : User,
           callback:(error: any, result: any)=> void) {
     logger.info('Project service, getRate has been hit');
@@ -514,25 +489,6 @@ class ProjectService {
     });
   }
 
-  getReportCostHeadDetails( buildingId : string, costHead : string, user: User,callback: (error: any, result: any) => void) {
-    this.buildingRepository.findById(buildingId, (error, result) => {
-      logger.info('Project service, findById has been hit');
-      if (error) {
-        callback(error, null);
-      } else {
-
-        let response = result.costHeads;
-        let costHeadItem: any;
-        for(let costHeadItems of response) {
-          if(costHeadItems.name === costHead) {
-            costHeadItem = costHeadItems.workItems;
-          }
-        }
-        callback(null, {data: costHeadItem, access_token: this.authInterceptor.issueTokenWithUid(user)});
-      }
-    });
-  }
-
   updateBuildingCostHeadStatus( buildingId : string, costHeadId : number, costHeadActiveStatus : string, user: User,
                           callback: (error: any, result: any) => void) {
     let query = {'_id' : buildingId, 'costHeads.rateAnalysisId' : costHeadId};
@@ -586,61 +542,6 @@ class ProjectService {
         callback(err, null);
       } else {
         callback(null, {data: response, access_token: this.authInterceptor.issueTokenWithUid(user)});
-      }
-    });
-  }
-
-  createQuantity(projectId : string, buildingId : string, costhead : string, workitem : any, quantity :any, user : User,
-                 callback:(error: any, result: any)=> void) {
-    this.buildingRepository.findById(buildingId, (error, building:Building) => {
-      logger.info('Project service, findById has been hit');
-      if (error) {
-        callback(error, null);
-      } else {
-        for(let index = 0; building.costHeads.length > index; index++) {
-          if(building.costHeads[index].name === costhead) {
-            let quantityArray :Array<Quantity> = building.costHeads[index].workItems[workitem].quantity.items;
-            let exist = false;
-            let errorMessage ;
-            for(let quantityIndex = 0; quantityArray.length > quantityIndex; quantityIndex++ ) {
-              if(quantityArray[quantityIndex].items === quantity.item ) {
-                exist = true;
-                errorMessage = 'Quantity name already exist. ';
-                if(quantityArray[quantityIndex].remarks === quantity.remarks ) {
-                  exist = true;
-                  errorMessage = errorMessage + 'same remarks is also exist with quantity name.';
-                } else {
-                  exist = false;
-                }
-              }
-            }
-            if(exist) {
-              callback(new CostControllException(errorMessage, errorMessage), null);
-            } else {
-              quantityArray.push(quantity);
-              let query = { _id : buildingId };
-              this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
-                logger.info('Project service, findOneAndUpdate has been hit');
-                if (error) {
-                  callback(error, null);
-                } else {
-                  let quantity: Quantity;
-                  for(let index = 0; building.costHead.length > index; index++){
-                    if(building.costHead[index].name === costhead) {
-                      quantity = building.costHead[index].workitem[workitem].quantity;
-                    }
-                  }
-                  if(quantity.total === null) {
-                    for(let index = 0; quantity.items.length > index; index ++) {
-                      quantity.total = quantity.items[index].quantity + quantity.total;
-                    }
-                  }
-                  callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
-                }
-              });
-            }
-          }
-        }
       }
     });
   }
@@ -835,7 +736,6 @@ class ProjectService {
         for(let index = 0; building.costHeads.length > index; index++) {
           if(building.costHeads[index].rateAnalysisId === costheadId) {
             subCategories = building.costHeads[index].subCategories;
-            let workitems = subCategories;
             for(let subcategoryIndex = 0 ; subcategoryIndex < subCategories.length; subcategoryIndex ++) {
               let workitems = subCategories[subcategoryIndex].workItems;
               for(let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex ++) {

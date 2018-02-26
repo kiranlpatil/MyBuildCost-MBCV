@@ -176,7 +176,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   getSubCategoryDetails(projectId: string, costHeadId: number) {
-    this.costSummaryService.getSubCategoryDetails(projectId,costHeadId).subscribe(
+    this.costSummaryService.getSubCategory(projectId,costHeadId).subscribe(
       subCategoryDetail => this.OnGetSubCategoryDetailsSuccess(subCategoryDetail),
       error => this.OnGetSubCategoryDetailsFailure(error)
     );

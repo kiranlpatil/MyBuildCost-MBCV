@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
 import { API, BaseService, SessionStorage, SessionStorageService, MessageService } from '../../../../shared/index';
 import { HttpDelegateService } from '../../../../shared/services/http-delegate.service';
 
 @Injectable()
 export class CostSummaryService extends BaseService {
 
-  constructor(protected http: Http, protected messageService: MessageService, protected httpDelegateService : HttpDelegateService) {
+  constructor(protected messageService: MessageService, protected httpDelegateService : HttpDelegateService) {
     super();
   }
 
@@ -63,13 +62,6 @@ export class CostSummaryService extends BaseService {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     var url = 'project/'+projectId+'/'+API.BUILDING+'/'+buildingId+'/'+'costhead/'+costheadId+'/'+'subcategorylist';
-
-    return this.httpDelegateService.getAPI(url);
-  }
-
-  getCostHeadDetails(projectId:string, costHead: string) {
-    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    var url = 'project/'+projectId+'/'+API.BUILDING+'/'+buildingId+'/'+'costhead/'+costHead;
 
     return this.httpDelegateService.getAPI(url);
   }
@@ -132,7 +124,7 @@ export class CostSummaryService extends BaseService {
   }
 
   //SubCategory API
-  getSubCategoryDetails(projectId: string,costheadId: number) {
+  getSubCategory(projectId: string, costheadId: number) {
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     var url = 'project/'+projectId+'/'+API.BUILDING+'/'+buildingId+'/'+'costhead/'+costheadId+'/'+'subcategory';
 
