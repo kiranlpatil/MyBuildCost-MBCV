@@ -76,7 +76,7 @@
                               (click)="getRateFromRateAnalysis(i,workItemIndex,workitemObj)">Get Rate</button>
                     </td>
                     <td class="border-left">
-                      {{ (workitemObj.quantity.total*workitemObj.rate.total)|number}}
+                      {{ (workitemObj.amount)|number}}
                     </td>
                     <td>
                       <div data-toggle="modal" data-target="#deleteWorkItem"

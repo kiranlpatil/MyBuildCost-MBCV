@@ -30,17 +30,21 @@ export class GetRateComponent {
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService) {
   }
 
-  calculateTotal(choice:string) {
+  calculateTotal(choice?:string) {
     this.totalAmount = 0;
     this.totalRate = 0.0;
     this.totalQuantity = 0.0;
     for (let i = 0; i < this.rateItemsArray.rateItems.length; i++) {
       if(choice === 'changeTotalQuantity') {
-        this.rateItemsArray.rateItems[i].quantity = this.rateItemsArray.rateItems[i].quantity * this.quantityIncrement;
+        this.rateItemsArray.rateItems[i].quantity =parseFloat((this.rateItemsArray.rateItems[i].quantity *
+          this.quantityIncrement).toFixed(2));
       }
-      this.totalAmount = this.totalAmount + (this.rateItemsArray.rateItems[i].quantity * this.rateItemsArray.rateItems[i].rate);
-      this.totalRate = this.totalRate + this.rateItemsArray.rateItems[i].rate;
-      this.totalQuantity = this.totalQuantity + this.rateItemsArray.rateItems[i].quantity;
+      this.rateItemsArray.rateItems[i].totalAmount=parseFloat((this.rateItemsArray.rateItems[i].quantity*
+        this.rateItemsArray.rateItems[i].rate).toFixed(2));
+      this.totalAmount = parseFloat((this.totalAmount + (this.rateItemsArray.rateItems[i].quantity *
+        this.rateItemsArray.rateItems[i].rate)).toFixed(2));
+      this.totalRate = parseFloat((this.totalRate + this.rateItemsArray.rateItems[i].rate).toFixed(2));
+      this.totalQuantity = parseFloat((this.totalQuantity + this.rateItemsArray.rateItems[i].quantity).toFixed(2));
     }
 
     this.rateItemsArray.total = parseFloat((this.totalAmount / this.totalQuantity).toFixed(2));

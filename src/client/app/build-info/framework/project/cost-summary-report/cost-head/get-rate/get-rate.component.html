@@ -41,16 +41,16 @@
                         </div>
                       </td>
                       <td>
-                        <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right" (change)="calculateTotal('changeQuantity')"/>
+                        <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right" (change)="calculateTotal()"/>
                       </td>
                       <td>
                         <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-right"/>
                       </td>
                       <td>
-                        <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right" (change)="calculateTotal('changeRate')"/>
+                        <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right" (change)="calculateTotal()"/>
                       </td>
                       <td>
-                        <input type="number" [(ngModel)]="item.quantity*item.rate" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>
+                        <input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>
                       </td>
                     </tr>
               </tbody>
@@ -64,16 +64,16 @@
           <label>Total</label>
         </td>
         <td class="total-amount">
-          {{totalQuantity|number}}
+          {{totalQuantity}}
         </td>
         <td>
           &nbsp;
         </td>
         <td class="total-amount">
-          {{totalRate|number}}
+          {{totalRate}}
         </td>
         <td class="total-amount">
-          {{totalAmount|number}}
+          {{totalAmount}}
         </td>
       </tr>
       </tfoot>

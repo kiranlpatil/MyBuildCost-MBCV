@@ -49,7 +49,7 @@ export class GetQuantityComponent implements OnInit {
        case 'updateLength': {
                           this.lengthTotal = 0;
                            for (let i = 0; i < this.quantityItems.length; i++) {
-                                this.lengthTotal = this.lengthTotal + this.quantityItems[i].length;
+                                this.lengthTotal = parseFloat((this.lengthTotal + this.quantityItems[i].length).toFixed(2));
                                 }
                                 this.getQuantityTotal(this.quantityItems);
                             }
@@ -57,7 +57,7 @@ export class GetQuantityComponent implements OnInit {
        case 'updateBreadth' : {
                           this.breadthTotal= 0;
                           for(let i=0;i<this.quantityItems.length;i++) {
-                                  this.breadthTotal = this.breadthTotal +this.quantityItems[i].breadth;
+                                  this.breadthTotal = parseFloat((this.breadthTotal +this.quantityItems[i].breadth).toFixed(2));
                                  }
                                    this.getQuantityTotal(this.quantityItems);
                             }
@@ -65,7 +65,7 @@ export class GetQuantityComponent implements OnInit {
        case 'updateHeight' : {
                             this.heightTotal=0;
                            for(let i=0;i<this.quantityItems.length;i++) {
-                                  this.heightTotal = this.heightTotal +this.quantityItems[i].height;
+                                  this.heightTotal =parseFloat((this.heightTotal +this.quantityItems[i].height).toFixed(2));
                                   }
                       this.getQuantityTotal(this.quantityItems);
                             }
@@ -93,7 +93,7 @@ export class GetQuantityComponent implements OnInit {
         q1 = this.quantityItems[i].length;
         q2 = this.quantityItems[i].breadth;
       }
-      this.quantityItems[i].quantity = q1 * q2;
+      this.quantityItems[i].quantity = parseFloat((q1 * q2).toFixed(2));
       this.quantityTotal = this.quantityTotal + this.quantityItems[i].quantity;
       }
   }

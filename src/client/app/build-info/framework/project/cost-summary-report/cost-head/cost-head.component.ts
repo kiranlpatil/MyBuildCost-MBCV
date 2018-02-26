@@ -131,11 +131,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.rateItemsArray = rateItem.data;
 
     for(let i=0;i<rateItem.data.rateItems.length;i++) {
-      this.totalAmount= this.totalAmount+( rateItem.data.rateItems[i].quantity*rateItem.data.rateItems[i].rate);
-      this.totalRate= this.totalRate+rateItem.data.rateItems[i].rate;
-      this.totalQuantity=this.totalQuantity+rateItem.data.rateItems[i].quantity;
+      this.totalAmount=parseFloat((this.totalAmount+( rateItem.data.rateItems[i].quantity*
+        rateItem.data.rateItems[i].rate)).toFixed(2));
+      this.totalRate=parseFloat((this.totalRate+rateItem.data.rateItems[i].rate).toFixed(2));
+      this.totalQuantity=parseFloat((this.totalQuantity+rateItem.data.rateItems[i].quantity).toFixed(2));
     }
-    this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
+    this.rateItemsArray.total= parseFloat((this.totalAmount/this.totalQuantity).toFixed(2));
     this.showRate = true;
   }
 
@@ -188,6 +189,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
     for(let i=0;i<this.subCategoryDetails.length;i++) {
       this.subCategoryDetailsTotalAmount= ( this.subCategoryDetailsTotalAmount +
         this.subCategoryDetails[i].amount );
+      for(let workItemIdex=0;workItemIdex<this.subCategoryDetails[i].workItems.length;workItemIdex++) {
+        this.subCategoryDetails[i].workItems[workItemIdex].amount=parseFloat((
+          this.subCategoryDetails[i].workItems[workItemIdex].quantity.total*
+          this.subCategoryDetails[i].workItems[workItemIdex].rate.total).toFixed(2));
+      }
     }
     let subcategoryList = lodsh.clone(this.subCategoryArrayList);
     this.subcategoryArray = this.commonService.removeDuplicateItmes(subcategoryList, this.subCategoryDetails);

@@ -117,9 +117,8 @@ class ReportService {
                     for (let key in workItem) {
                       if (workItem[key].quantity.total !== null && workItem[key].rate.total !== null
                         && workItem[key].quantity.total !== 0 && workItem[key].rate.total !== 0) {
-                        estimateReport.total = workItem[key].quantity.total
-                          * workItem[key].rate.total
-                          + estimateReport.total;
+                        estimateReport.total = parseFloat((workItem[key].quantity.total* workItem[key].rate.total
+                          + estimateReport.total).toFixed(2));
                         estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
                       } else {
                         estimateReport.total = 0.0;
