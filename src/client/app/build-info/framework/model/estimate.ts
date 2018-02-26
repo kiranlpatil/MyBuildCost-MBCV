@@ -1,6 +1,6 @@
-import EstimateReport = require('./EstimateReport');
+import { EstimateReport } from './estimate-report';
 
-class Estimated {
+export class Estimate {
   name: string;
   area: number;
   totalRate: number;
@@ -14,4 +14,4 @@ class Estimated {
     this.estimatedCosts = new Array< EstimateReport>();
   }
 }
-export = Estimated;
+

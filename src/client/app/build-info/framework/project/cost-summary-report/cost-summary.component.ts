@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
 import { BuildingService } from '../building/building.service';
 import { CostHead } from '../../model/costhead';
+import { EstimateReport } from '../../model/estimate-report';
+import { BuildingReport } from '../../model/building-report';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +20,7 @@ import { CostHead } from '../../model/costhead';
 
 export class CostSummaryComponent implements OnInit {
 
-  projectBuildings: any;
+  projectBuildings: Array <BuildingReport>;
   projectId: string;
   buildingId: string;
   cloneBuildingId: string;
@@ -34,7 +36,7 @@ export class CostSummaryComponent implements OnInit {
   buildingsDetails: Building;
   costHead: string;
 
-  estimatedItem: any;
+  estimatedItem: EstimateReport;
   showCostHeadList:boolean=false;
   showGrandTotalPanelBody:boolean=true;
   compareIndex:number=0;
@@ -342,17 +344,18 @@ export class CostSummaryComponent implements OnInit {
     for (let buildindIndex = 0; buildindIndex < this.projectBuildings.length; buildindIndex++) {
 
       this.grandTotalofBudgetedCost = this.grandTotalofBudgetedCost +
-        parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost);
+        parseFloat((this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost).toFixed(2));
 
-      this.grandTotalofTotalRate = this.grandTotalofTotalRate + parseFloat(this.projectBuildings[buildindIndex].thumbRule.totalRate);
+      this.grandTotalofTotalRate = this.grandTotalofTotalRate +
+        parseFloat((this.projectBuildings[buildindIndex].thumbRule.totalRate).toFixed(2));
 
-      this.grandTotalofArea =( this.grandTotalofArea + parseFloat(this.projectBuildings[buildindIndex].area));
+      this.grandTotalofArea =( this.grandTotalofArea + parseFloat((this.projectBuildings[buildindIndex].area).toFixed(2)));
 
       this.grandTotalofEstimatedCost = this.grandTotalofEstimatedCost +
-        parseFloat(this.projectBuildings[buildindIndex].estimated.totalEstimatedCost);
+        parseFloat((this.projectBuildings[buildindIndex].estimate.totalEstimatedCost).toFixed(2));
 
       this.grandTotalofEstimatedRate = this.grandTotalofEstimatedRate +
-        parseFloat(this.projectBuildings[buildindIndex].estimated.totalRate);
+        parseFloat((this.projectBuildings[buildindIndex].estimate.totalRate).toFixed(2));
     }
   }
 

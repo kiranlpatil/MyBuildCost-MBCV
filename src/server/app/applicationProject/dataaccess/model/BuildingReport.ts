@@ -1,12 +1,12 @@
 import ThumbRule = require('./ThumbRule');
-import Estimated = require('./Estimated');
+import Estimate = require('./estimate');
 
 class BuildingReport {
   _id:string;
   name:string;
   area:number;
   thumbRule : ThumbRule;
-  estimated: Estimated;
+  estimate: Estimate;
 
 }
 export = BuildingReport;

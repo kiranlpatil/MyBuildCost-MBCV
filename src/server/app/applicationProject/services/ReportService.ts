@@ -14,9 +14,9 @@ import CostHead = require('../dataaccess/mongoose/CostHead');
 import EstimateReport = require('../dataaccess/model/EstimateReport');
 import WorkItem = require('../dataaccess/model/WorkItem');
 import ThumbRule = require('../dataaccess/model/ThumbRule');
-import Estimated = require('../dataaccess/model/Estimated');
+import Estimate = require('../dataaccess/model/estimate');
 import RateAnalysisService = require('./RateAnalysisService');
-import SubCategory = require("../dataaccess/model/SubCategory");
+import SubCategory = require('../dataaccess/model/SubCategory');
 let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Report Service');
@@ -60,7 +60,7 @@ class ReportService {
         for(let index = 0; index < buildings.length; index++) {
           let buildingReport = new BuildingReport;
           let thumbRuleReport: ThumbRule = new ThumbRule();
-          let estimatedReport: Estimated = new Estimated();
+          let estimatedReport: Estimate = new Estimate();
           buildingReport.name = buildings[index].name;
           buildingReport._id = buildings[index]._id;
           if (areaType === 'slabArea') {
@@ -148,7 +148,7 @@ class ReportService {
               thumbRuleReport.thumbRuleReports.push(thumbRule);
               thumbRuleReport.totalRate = parseFloat((thumbRuleReport.totalRate + thumbRule.rate).toFixed(2));
               thumbRuleReport.totalBudgetedCost = parseFloat((thumbRuleReport.totalBudgetedCost + thumbRule.amount).toFixed(2));
-              buildingReport.estimated = estimatedReport;
+              buildingReport.estimate = estimatedReport;
               buildingReport.thumbRule = thumbRuleReport;
             }
           }

@@ -54,7 +54,7 @@
                       <th>&nbsp;</th>
                     </tr>
                   </thead>
-                  <tbody *ngIf="(building.thumbRule && building.estimated)" >
+                  <tbody *ngIf="(building.thumbRule && building.estimate)" >
                     <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index">
                       <td class="border-left">{{thumbRuleItem.name}}</td>
                       <td>
@@ -68,21 +68,21 @@
                       </td>
                       <td class="border-left">{{thumbRuleItem.rate}}</td>
                       <td>
-                        <div class="edit-field" *ngIf="building.estimated.estimatedCosts[i].total != 0"
-                             (click)="getAmount(building.name, building._id, building.estimated.estimatedCosts[i])">
-                          <input [(ngModel)]="building.estimated.estimatedCosts[i].total"
+                        <div class="edit-field" *ngIf="building.estimate.estimatedCosts[i].total != 0"
+                             (click)="getAmount(building.name, building._id, building.estimate.estimatedCosts[i])">
+                          <input [(ngModel)]="building.estimate.estimatedCosts[i].total"
                                  id="estimatedItem.total"
                                  class="form-control clear"/>
                         </div>
-                        <button *ngIf="building.estimated.estimatedCosts[i].total == 0"
+                        <button *ngIf="building.estimate.estimatedCosts[i].total == 0"
                                   type="button" class="btn-get-amount"
-                                  (click)="getAmount(building.name, building._id, building.estimated.estimatedCosts[i])">Get Amount</button>
+                                  (click)="getAmount(building.name, building._id, building.estimate.estimatedCosts[i])">Get Amount</button>
                       </td>
-                      <td class="border-left">{{building.estimated.estimatedCosts[i].rate}}</td>
+                      <td class="border-left">{{building.estimate.estimatedCosts[i].rate}}</td>
                       <td>
                         <div data-toggle="modal"
                              data-target="#deleteCosthead"
-                             (click)="setIdsForInActiveCostHead(building._id, building.estimated.estimatedCosts[i].rateAnalysisId)"
+                             (click)="setIdsForInActiveCostHead(building._id, building.estimate.estimatedCosts[i].rateAnalysisId)"
                              class="delete-cost-head">
                           <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                         </div>
@@ -107,12 +107,12 @@
                         </button>
                       </td>
                     </tr>
-                  <tr class="total" *ngIf="(building.thumbRule && building.estimated)">
+                  <tr class="total" *ngIf="(building.thumbRule && building.estimate)">
                     <td>Total</td>
                     <td>{{building.thumbRule.totalBudgetedCost|number}}</td>
                     <td>{{building.thumbRule.totalRate|number}}</td>
-                    <td>{{building.estimated.totalEstimatedCost|number}}</td>
-                    <td>{{building.estimated.totalRate|number}}</td>
+                    <td>{{building.estimate.totalEstimatedCost|number}}</td>
+                    <td>{{building.estimate.totalRate|number}}</td>
                     <td></td>
                   </tr>
                   </tbody>
