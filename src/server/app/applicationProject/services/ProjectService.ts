@@ -1,6 +1,5 @@
 import ProjectRepository = require('../dataaccess/repository/ProjectRepository');
 import BuildingRepository = require('../dataaccess/repository/BuildingRepository');
-import Messages = require('../shared/messages');
 import UserService = require('./../../framework/services/UserService');
 import ProjectAsset = require('../../framework/shared/projectasset');
 import User = require('../../framework/dataaccess/mongoose/user');
@@ -15,15 +14,13 @@ import ClonedCostHead = require('../dataaccess/model/ClonedCostHead');
 import ClonedWorkItem = require('../dataaccess/model/ClonedWorkItem');
 import CostHead = require('../dataaccess/model/CostHead');
 import WorkItem = require('../dataaccess/model/WorkItem');
-import Item = require('../dataaccess/model/Item');
 import RateAnalysisService = require('./RateAnalysisService');
-import QuantityItem = require('../dataaccess/model/QuantityItem');
 import SubCategory = require('../dataaccess/model/SubCategory');
 let config = require('config');
-var log4js = require('log4js');
+let log4js = require('log4js');
 import alasql = require('alasql');
 import ClonedSubcategory = require('../dataaccess/model/ClonedSubcategory');
-var logger=log4js.getLogger('Project service');
+let logger=log4js.getLogger('Project service');
 
 class ProjectService {
   APP_NAME: string;
@@ -488,25 +485,6 @@ class ProjectService {
         } else {
           callback(error, null);
         }
-      }
-    });
-  }
-
-  getReportCostHeadDetails( buildingId : string, costHead : string, user: User,callback: (error: any, result: any) => void) {
-    this.buildingRepository.findById(buildingId, (error, result) => {
-      logger.info('Project service, findById has been hit');
-      if (error) {
-        callback(error, null);
-      } else {
-
-        let response = result.costHeads;
-        let costHeadItem: any;
-        for(let costHeadItems of response) {
-          if(costHeadItems.name === costHead) {
-            costHeadItem = costHeadItems.workItems;
-          }
-        }
-        callback(null, {data: costHeadItem, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

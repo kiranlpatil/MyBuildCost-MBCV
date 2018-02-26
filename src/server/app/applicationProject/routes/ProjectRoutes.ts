@@ -54,10 +54,6 @@ class ProjectRoutes {
     router.put('/:id/building/:buildingid/costhead/:costheadId/subcategory', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.deleteSubcategoryFromCostHead, this._responseInterceptor.exit);
 
-    router.get('/:id/building/:buildingid/costhead/:costhead',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      controller.getBuildingCostHeadDetails, this._responseInterceptor.exit);
-
     router.put('/:id/building/:buildingId/costHead/:costHeadId/:activeStatus',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.setBuildingCostHeadStatus, this._responseInterceptor.exit);

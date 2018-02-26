@@ -66,13 +66,6 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  getCostHeadDetails(projectId:string, costHead: string) {
-    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    var url = 'project/'+projectId+'/'+API.BUILDING+'/'+buildingId+'/'+'costhead/'+costHead;
-
-    return this.httpDelegateService.getAPI(url);
-  }
-
   // Quantity API
   getQuantity(costHeadName:any,costHeadItem:any) {
     var url = API.PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID)+

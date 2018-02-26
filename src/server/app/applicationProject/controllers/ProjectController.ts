@@ -5,14 +5,11 @@ import Building = require('../dataaccess/mongoose/Building');
 import Response = require('../interceptor/response/Response');
 import CostControllException = require('../exception/CostControllException');
 import CostHead = require('../dataaccess/model/CostHead');
-import QuantityItem = require('../dataaccess/model/QuantityItem');
-import Quantity = require('../dataaccess/model/Quantity');
 import Rate = require('../dataaccess/model/Rate');
-import SubCategory = require('../dataaccess/model/SubCategory');
 import WorkItem = require('../dataaccess/model/WorkItem');
 let config = require('config');
-var log4js = require('log4js');
-var logger=log4js.getLogger('Project Controller');
+let log4js = require('log4js');
+let logger=log4js.getLogger('Project Controller');
 
 
 class ProjectController {
@@ -334,30 +331,6 @@ class ProjectController {
           logger.info('Delete work item '+result.data);
           logger.debug('Deleted  work item of Project ID : '+projectId+', Building ID : '+buildingId+
             ', CostHead : '+costheadId+', SubCategory : '+subcategoryId+', Workitem : '+workitemId);
-          next(new Response(200,result));
-        }
-      });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
-  getBuildingCostHeadDetails(req: express.Request, res: express.Response, next: any): void {
-    try {
-      logger.info('Project controller, deleteWorkitem has been hit');
-      let projectService = new ProjectService();
-      let user = req.user;
-      let projectId =  req.params.id;
-      let buildingId =  req.params.buildingid;
-      let costHead =  req.params.costhead;
-
-      projectService.getReportCostHeadDetails(buildingId, costHead,  user, (error, result) => {
-        if(error) {
-          next(error);
-        } else {
-          logger.info('Get Report Cost Head Details success');
-          logger.debug('Get Report Cost Head Details for Building ID : '+buildingId+
-            ', CostHead : '+costHead);
           next(new Response(200,result));
         }
       });
