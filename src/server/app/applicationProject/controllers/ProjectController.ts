@@ -240,30 +240,6 @@ class ProjectController {
     }
   }
 
-  getQuantity(req: express.Request, res: express.Response, next: any): void {
-    try {
-      logger.info('Project controller, getQuantity has been hit');
-      let user = req.user;
-      let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
-      let costhead = req.params.costhead;
-      let workitem = req.params.workitem;
-      let projectService = new ProjectService();
-      console.log(' workitem => '+ workitem);
-      projectService.getQuantity(projectId, buildingId, costhead, workitem, user, (error, result) => {
-        if(error) {
-          next(error);
-        } else {
-          logger.info('Get Quantity success');
-          logger.debug('Getting Quantity of Project ID : '+projectId+' Building ID : '+buildingId);
-          next(new Response(200,result));
-        }
-      });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
   getRate(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, getRate has been hit');
@@ -449,31 +425,6 @@ class ProjectController {
         } else {
           logger.info('Add CostHead Building success');
           logger.debug('Added CostHead for Building ID : '+buildingId);
-          next(new Response(200,result));
-        }
-      });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
-  createQuantity(req: express.Request, res: express.Response, next: any): void {
-    try {
-      logger.info('Project controller, createQuantity has been hit');
-      let user = req.user;
-      let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
-      let costhead = req.params.costhead;
-      let workitem = req.params.workitem;
-      let quantity = <QuantityItem> req.body;
-      let projectService = new ProjectService();
-      projectService.createQuantity(projectId, buildingId, costhead, workitem, quantity, user, (error, result) => {
-        if(error) {
-          next(error);
-        } else {
-          logger.info('Create Quantity '+result);
-          logger.debug('Quantity Created for Project ID : '+projectId+', Building ID : '+buildingId+
-            ', CostHead : '+costhead+', Workitem : '+workitem+', Quantity : '+quantity);
           next(new Response(200,result));
         }
       });

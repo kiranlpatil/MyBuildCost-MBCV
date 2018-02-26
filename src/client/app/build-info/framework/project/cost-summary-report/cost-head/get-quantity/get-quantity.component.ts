@@ -94,7 +94,7 @@ export class GetQuantityComponent implements OnInit {
         q2 = this.quantityItems[i].breadth;
       }
       this.quantityItems[i].quantity = q1 * q2;
-      this.quantityTotal = this.quantityTotal + this.quantityItems[i].quantity;
+      this.quantityTotal = parseFloat((this.quantityTotal + this.quantityItems[i].quantity).toFixed(2));
       }
   }
 

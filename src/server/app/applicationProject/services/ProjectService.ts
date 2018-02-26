@@ -322,28 +322,6 @@ class ProjectService {
     });
   }
 
-  getQuantity(projectId:string, buildingId:string, costhead: string, workItem : any, user : User, callback:(error: any, result: any)=> void) {
-    logger.info('Project service, getQuantity has been hit');
-    this.buildingRepository.findById(buildingId, (error, building:Building) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        let quantity: Quantity;
-        for(let index = 0; building.costHeads.length > index; index++) {
-         if(building.costHeads[index].name === costhead) {
-           quantity = building.costHeads[index].workitem[workItem].quantity;
-         }
-        }
-        if(quantity.total === null) {
-          for(let index = 0; quantity.quantityItems.length > index; index ++) {
-            quantity.total = quantity.quantityItems[index].quantity + quantity.total;
-          }
-        }
-        callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
-      }
-    });
-  }
-
   getRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number, workitemId:number, user : User,
           callback:(error: any, result: any)=> void) {
     logger.info('Project service, getRate has been hit');
@@ -590,61 +568,6 @@ class ProjectService {
     });
   }
 
-  createQuantity(projectId : string, buildingId : string, costhead : string, workitem : any, quantity :any, user : User,
-                 callback:(error: any, result: any)=> void) {
-    this.buildingRepository.findById(buildingId, (error, building:Building) => {
-      logger.info('Project service, findById has been hit');
-      if (error) {
-        callback(error, null);
-      } else {
-        for(let index = 0; building.costHeads.length > index; index++) {
-          if(building.costHeads[index].name === costhead) {
-            let quantityArray :Array<Quantity> = building.costHeads[index].workItems[workitem].quantity.items;
-            let exist = false;
-            let errorMessage ;
-            for(let quantityIndex = 0; quantityArray.length > quantityIndex; quantityIndex++ ) {
-              if(quantityArray[quantityIndex].items === quantity.item ) {
-                exist = true;
-                errorMessage = 'Quantity name already exist. ';
-                if(quantityArray[quantityIndex].remarks === quantity.remarks ) {
-                  exist = true;
-                  errorMessage = errorMessage + 'same remarks is also exist with quantity name.';
-                } else {
-                  exist = false;
-                }
-              }
-            }
-            if(exist) {
-              callback(new CostControllException(errorMessage, errorMessage), null);
-            } else {
-              quantityArray.push(quantity);
-              let query = { _id : buildingId };
-              this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
-                logger.info('Project service, findOneAndUpdate has been hit');
-                if (error) {
-                  callback(error, null);
-                } else {
-                  let quantity: Quantity;
-                  for(let index = 0; building.costHead.length > index; index++){
-                    if(building.costHead[index].name === costhead) {
-                      quantity = building.costHead[index].workitem[workitem].quantity;
-                    }
-                  }
-                  if(quantity.total === null) {
-                    for(let index = 0; quantity.items.length > index; index ++) {
-                      quantity.total = quantity.items[index].quantity + quantity.total;
-                    }
-                  }
-                  callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
-                }
-              });
-            }
-          }
-        }
-      }
-    });
-  }
-
   updateQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string, workitemId:string,
                  quantity:any, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateQuantity has been hit');
@@ -835,7 +758,6 @@ class ProjectService {
         for(let index = 0; building.costHeads.length > index; index++) {
           if(building.costHeads[index].rateAnalysisId === costheadId) {
             subCategories = building.costHeads[index].subCategories;
-            let workitems = subCategories;
             for(let subcategoryIndex = 0 ; subcategoryIndex < subCategories.length; subcategoryIndex ++) {
               let workitems = subCategories[subcategoryIndex].workItems;
               for(let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex ++) {

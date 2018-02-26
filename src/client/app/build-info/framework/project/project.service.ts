@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Project } from './../model/project';
 import { API, BaseService, MessageService, SessionStorageService, SessionStorage } from '../../../shared/index';
@@ -8,7 +7,7 @@ import { HttpDelegateService } from '../../../shared/services/http-delegate.serv
 @Injectable()
 export class ProjectService extends BaseService {
 
-  constructor(protected http: Http, protected messageService: MessageService,
+  constructor(protected messageService: MessageService,
               protected httpDelegateService : HttpDelegateService) {
     super();
   }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Building } from '../../model/building';
 import { API, BaseService, SessionStorage, SessionStorageService, MessageService } from '../../../../shared/index';
@@ -10,7 +9,7 @@ import { Project } from '../../model/project';
 @Injectable()
 export class BuildingService extends BaseService {
 
-  constructor(protected http: Http, protected messageService: MessageService, protected httpDelegateService : HttpDelegateService) {
+  constructor(protected messageService: MessageService, protected httpDelegateService : HttpDelegateService) {
     super();
   }
 
