@@ -486,4 +486,6 @@ export class ProjectElements {
   public static COST_HEAD = 'CostHead';
   public static WORK_ITEM = 'WorkItem';
   public static BUILDING = 'Building';
+  public static QUANTITY_ITEM = 'Quantity Item';
+  public static SUBCATEGORY = 'SubCategory';
 }

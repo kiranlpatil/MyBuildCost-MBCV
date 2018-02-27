@@ -371,11 +371,11 @@ export class CostSummaryComponent implements OnInit {
     this.showGrandTotalPanelBody=!this.showGrandTotalPanelBody;
   }
 
-  deleteElement(elementName : string) {
-    if(elementName === ProjectElements.COST_HEAD) {
+  deleteElement(elementType : string) {
+    if(elementType === ProjectElements.COST_HEAD) {
       this.inActiveCostHead();
     }
-    if(elementName === ProjectElements.BUILDING) {
+    if(elementType === ProjectElements.BUILDING) {
       this.deleteBuilding();
     }
   }

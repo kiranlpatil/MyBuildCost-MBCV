@@ -221,11 +221,11 @@
 
   <!--Delete modals-->
   <div class="modal fade default-modal" id="deleteCosthead" role="dialog">
-    <bi-delete-confirmation-modal [elementToBeDeleted]="deleteConfirmationCostHead" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
+    <bi-delete-confirmation-modal [elementType]="deleteConfirmationCostHead" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
   </div>
 
   <div class="modal fade default-modal" id="deleteBuilding" role="dialog">
-    <bi-delete-confirmation-modal [elementToBeDeleted]="deleteConfirmationBuilding" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
+    <bi-delete-confirmation-modal [elementType]="deleteConfirmationBuilding" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
   </div>
 
   <!--Clone Modal -->

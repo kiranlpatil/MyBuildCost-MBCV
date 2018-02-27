@@ -1,6 +1,6 @@
 import { Component, OnInit , OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Messages } from '../../../../../shared/constants';
+import { Messages, ProjectElements } from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, MessageService, LoaderService } from '../../../../../shared/index';
 import { Rate } from '../../../model/rate';
 import { CommonService } from '../../../../../shared/services/common.service';
@@ -53,6 +53,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private workItemListArray: Array<WorkItem> = [];
   private subCategoryListArray : Array<SubCategory> = [];
   private subCategoryObj: Array<SubCategory>;
+  private deleteConfirmationSubCategory = ProjectElements.SUBCATEGORY;
+  private deleteConfirmationWorkItem = ProjectElements.WORK_ITEM;
 
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
@@ -389,6 +391,15 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   setAlreadySelectedWorkItems(workItemList:any) {
     this.alreadySelectedWorkItems=workItemList;
+  }
+
+  deleteElement(elementType : string) {
+    if(elementType === ProjectElements.SUBCATEGORY) {
+      this.deleteSubCategory();
+    }
+    if(elementType === ProjectElements.WORK_ITEM) {
+      this.deleteWorkItem();
+    }
   }
 
 }

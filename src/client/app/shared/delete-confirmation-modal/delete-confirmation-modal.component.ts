@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export class DeleteConfirmationModalComponent {
 
-  @Input() elementToBeDeleted: string;
+  @Input() elementType: string;
   @Output() deleteElementEvent = new EventEmitter<string>();
 
 
@@ -16,7 +16,7 @@ export class DeleteConfirmationModalComponent {
   }
 
   deleteElement() {
-    this.deleteElementEvent.emit(this.elementToBeDeleted);
+    this.deleteElementEvent.emit(this.elementType);
   }
 
 }

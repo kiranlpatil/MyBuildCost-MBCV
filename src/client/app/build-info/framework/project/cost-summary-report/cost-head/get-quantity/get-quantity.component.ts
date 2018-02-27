@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../../../shared/index';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { CostSummaryService } from '../../cost-summary.service';
+import { ProjectElements } from '../../../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -24,6 +25,7 @@ export class GetQuantityComponent implements OnInit {
   lengthTotal: number = 0;
   breadthTotal: number = 0;
   heightTotal: number = 0;
+  deleteConfirmationQuantityItem = ProjectElements.QUANTITY_ITEM;
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private messageService: MessageService) {
@@ -177,6 +179,12 @@ export class GetQuantityComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
     this.messageService.message(message);
+  }
+
+  deleteElement(elementType : string) {
+    if(elementType === ProjectElements.QUANTITY_ITEM) {
+      this.deleteQuantityItem();
+    }
   }
 
 }
