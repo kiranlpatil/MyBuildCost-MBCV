@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavigationRoutes, ImagePath } from '../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../shared/index';
 import { ProjectService } from '../project/project.service';
 import { Project } from './../model/project';
-import { ValidationService } from './../../../shared/customvalidations/validation.service';
 
 @Component({
   moduleId: module.id,
@@ -15,41 +13,20 @@ import { ValidationService } from './../../../shared/customvalidations/validatio
 })
 
 export class CreateProjectComponent {
-  projectForm:  FormGroup;
+
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
-  projectModel: Project = new Project();
   BODY_BACKGROUND_TRANSPARENT: string;
 
-  constructor(private projectService: ProjectService, private _router: Router, private formBuilder: FormBuilder,
-  private messageService: MessageService ) {
+  constructor(private _router: Router, private projectService : ProjectService, private messageService : MessageService) {
     this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
-
-    this.projectForm = this.formBuilder.group({
-      name : ['', ValidationService.requiredProjectName],
-      region : ['', ValidationService.requiredProjectAddress],
-      plotArea : ['', ValidationService.requiredPlotArea],
-      plotPeriphery : ['', ValidationService.requiredPlotPeriphery],
-      podiumArea : ['',ValidationService.requiredPodiumArea],
-      openSpace : ['', ValidationService.requiredOpenSpace],
-      slabArea : ['',ValidationService.requiredSlabArea],
-      poolCapacity : ['',ValidationService.requiredSwimmingPoolCapacity],
-      projectDuration : ['', ValidationService.requiredProjectDuration],
-      totalNumOfBuildings : ['', ValidationService.requiredNumOfBuildings]
-    });
-
   }
 
-
-
-  onSubmit() {
-    if(this.projectForm.valid) {
-      this.projectModel = this.projectForm.value;
-      this.projectService.createProject(this.projectModel)
+  onSubmit(projectModel : Project) {
+      this.projectService.createProject(projectModel)
         .subscribe(
           project => this.onCreateProjectSuccess(project),
           error => this.onCreateProjectFailure(error));
-    }
   }
 
   onCreateProjectSuccess(project : any) {

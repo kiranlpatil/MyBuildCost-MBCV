@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Messages, } from '../../../../shared/constants';
 import { ProjectService } from '../project.service';
 import { Project } from './../../model/project';
 import { Message, MessageService } from '../../../../shared/index';
-import { ValidationService } from '../../../../shared/customvalidations/validation.service';
 import { SessionStorage, SessionStorageService } from '../../../../shared/index';
 
 @Component({
@@ -16,28 +15,13 @@ import { SessionStorage, SessionStorageService } from '../../../../shared/index'
 
 export class ProjectDetailsComponent implements OnInit {
 
-  viewProjectForm:  FormGroup;
   projectId : string;
   projectModel: Project = new Project();
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
 
-  constructor(private projectService: ProjectService, private formBuilder: FormBuilder,
+  constructor(private projectService: ProjectService,
               private messageService: MessageService, private activatedRoute:ActivatedRoute) {
-
-    this.viewProjectForm = this.formBuilder.group({
-      name: ['', ValidationService.requiredProjectName],
-      region: ['', ValidationService.requiredProjectAddress],
-      plotArea: ['', ValidationService.requiredPlotArea],
-      plotPeriphery: ['', ValidationService.requiredPlotPeriphery],
-      podiumArea : ['',ValidationService.requiredPodiumArea],
-      openSpace : ['', ValidationService.requiredOpenSpace],
-      slabArea : ['',ValidationService.requiredSlabArea],
-      poolCapacity : ['',ValidationService.requiredSwimmingPoolCapacity],
-      projectDuration: ['', ValidationService.requiredProjectDuration],
-      totalNumOfBuildings : ['', ValidationService.requiredNumOfBuildings]
-    });
-
   }
 
   ngOnInit() {
@@ -65,15 +49,12 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
 
-  onSubmit() {
-    if(this.viewProjectForm.valid) {
-      this.projectModel = this.viewProjectForm.value;
+  onSubmit(projectModel : Project) {
       let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      this.projectService.updateProject(projectId, this.projectModel)
+      this.projectService.updateProject(projectId, projectModel)
         .subscribe(
           user => this.onUpdateProjectSuccess(user),
           error => this.onUpdateProjectFailure(error));
-    }
   }
 
   onUpdateProjectSuccess(result: any) {

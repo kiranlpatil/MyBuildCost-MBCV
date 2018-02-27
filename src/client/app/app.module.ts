@@ -64,6 +64,7 @@ import { GetRateComponent } from './build-info/framework/project/cost-summary-re
 import { CreateNewProjectComponent } from './build-info/framework/create-new-project/create-new-project.component';
 import { ProjectItemComponent } from './build-info/framework/project-list/project-item/project-item.component';
 import { DeleteConfirmationModalComponent } from './shared/delete-confirmation-modal/delete-confirmation-modal.component';
+import { ProjectFormComponent } from './build-info/framework/shared/project-form/project-form.component';
 
 
 @NgModule({
@@ -114,6 +115,7 @@ import { DeleteConfirmationModalComponent } from './shared/delete-confirmation-m
     //Shared Components
     GroupByPipe,
     DeleteConfirmationModalComponent,
+    ProjectFormComponent,
 
     PageNotFoundComponent,
     CommonAmenitiesComponent
