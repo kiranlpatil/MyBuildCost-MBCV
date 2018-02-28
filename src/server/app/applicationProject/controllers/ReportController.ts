@@ -22,9 +22,9 @@ class ReportController {
       let reportService = new ReportService();
       let user = req.user;
       let projectId =  req.params.projectId;
-      let reportType =  req.params.type;
-      let projectRate =  req.params.rate;
-      let projectArea =  req.params.area;
+      let reportType =  req.params.reportType;
+      let projectRate =  req.params.costingUnit;
+      let projectArea =  req.params.costingArea;
 
       reportService.getReport(projectId, reportType, projectRate, projectArea,  user, (error, result) => {
         if(error) {

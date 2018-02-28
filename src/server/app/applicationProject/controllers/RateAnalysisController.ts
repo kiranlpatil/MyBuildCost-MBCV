@@ -57,7 +57,7 @@ class RateAnalysisController {
       logger.info('Rate Analysis Controller, getRateAnalysisWorkItemsByCostHeadId has been hit');
       let rateAnalysisService = new RateAnalysisService();
       let user = req.user;
-      let costHeadId = req.params.id;
+      let costHeadId = req.params.costHeadId;
       let url = config.get('rateAnalysisAPI.workItems');
 
       rateAnalysisService.getWorkItemsByCostHeadId(costHeadId, user, url, (error, result) => {
@@ -79,9 +79,9 @@ class RateAnalysisController {
       let rateAnalysisService = new RateAnalysisService();
       let user = req.user;
       let costHeadId = req.params.costHeadId;
-      let workitemId = req.params.workitemId;
+      let workItemId = req.params.workItemId;
 
-      rateAnalysisService.getRate(workitemId,(error, result) => {
+      rateAnalysisService.getRate(workItemId,(error, result) => {
         if(error) {
           next(error);
         } else {

@@ -32,11 +32,11 @@ class RateAnalysisRoutes {
       controller.getRateAnalysisWorkItems, this._responseInterceptor.exit);
 
     //Provide workitems from RateAnalysis by costheadId
-    router.get('/costHead/:id/workItems', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+    router.get('/costHead/:costHeadId/workItems', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRateAnalysisWorkItemsByCostHeadId, this._responseInterceptor.exit);
 
     //Retrive rate from RateAnalysis for workitem
-    router.get('/costHead/:costHeadId/workItem/:workitemId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+    router.get('/costHead/:costHeadId/workItem/:workItemId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRate, this._responseInterceptor.exit);
     return router;
   }

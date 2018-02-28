@@ -26,7 +26,7 @@ class ReportRoutes {
     var controller = this._reportController;
 
     //Provide all buildings in a Project with thumbrule and estimate report with particular area and unit.
-    router.get('/:type/project/:projectId/rate/:rate/area/:area', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+    router.get('/:reportType/project/:projectId/rate/:costingUnit/area/:costingArea', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getProject, this._responseInterceptor.exit);
 
     //Provide all costheads from rate analysis

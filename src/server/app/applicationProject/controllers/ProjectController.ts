@@ -52,7 +52,7 @@ class ProjectController {
       logger.info('Project controller getProject has been hit');
       let projectService = new ProjectService();
       let user = req.user;
-      let projectId =  req.params.id;
+      let projectId =  req.params.projectId;
       projectService.getProject(projectId, user, (error, result) => {
         if(error) {
           next(error);
@@ -71,7 +71,7 @@ class ProjectController {
     try {
       logger.info('Project controller, updateProjectDetails has been hit');
       let projectDetail = <Project>req.body;
-      projectDetail['_id'] = req.params.id;
+      projectDetail['_id'] = req.params.projectId;
       let user = req.user;
       let projectService = new ProjectService();
       projectService.updateProjectDetails(projectDetail, user, (error, result)=> {
@@ -92,7 +92,7 @@ class ProjectController {
     try {
       logger.info('Project controller, addBuilding has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingDetails = <Building> req.body;
 
       let defaultCategory = config.get('category.default');
@@ -159,7 +159,7 @@ class ProjectController {
     try {
       logger.info('Project controller, getBuilding has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.getBuilding(projectId, buildingId, user, (error, result) => {
@@ -180,7 +180,7 @@ class ProjectController {
     try {
       logger.info('Project controller, getBuildingDetailsForClone has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.getClonedBuilding(projectId, buildingId, user, (error, result) => {
@@ -201,7 +201,7 @@ class ProjectController {
     try {
       logger.info('Project controller, getInActiveCostHead has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.getInActiveCostHead(projectId, buildingId, user, (error, result) => {
@@ -220,7 +220,7 @@ class ProjectController {
     logger.info('Project controller, deleteBuilding has been hit');
     try {
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.deleteBuilding(projectId, buildingId, user, (error, result) => {
@@ -241,7 +241,7 @@ class ProjectController {
     try {
       logger.info('Project controller, getRate has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId =parseInt(req.params.costHeadId);
       let subCategoryId =parseInt(req.params.subCategoryId);
@@ -265,7 +265,7 @@ class ProjectController {
   updateRate(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId =parseInt(req.params.costHeadId);
       let subCategoryId =parseInt(req.params.subCategoryId);
@@ -292,7 +292,7 @@ class ProjectController {
   try {
     logger.info('Project controller, deleteQuantity has been hit');
     let user = req.user;
-    let projectId = req.params.id;
+    let projectId = req.params.projectId;
     let buildingId = req.params.buildingId;
     let costHeadId = req.params.costHeadId;
     let subCategoryId = req.params.subCategoryId;
@@ -317,7 +317,7 @@ class ProjectController {
     try {
       logger.info('Project controller, deleteWorkitem has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = req.params.costHeadId;
       let subCategoryId = req.params.subCategoryId;
@@ -344,7 +344,7 @@ class ProjectController {
     try {
       let projectService = new ProjectService();
       let user = req.user;
-      let projectId =  req.params.id;
+      let projectId =  req.params.projectId;
       let buildingId =  req.params.buildingId;
       let costHeadId =  req.params.costHeadId;
       let costHeadActiveStatus = req.params.activeStatus;
@@ -368,7 +368,7 @@ class ProjectController {
     try {
       let projectService = new ProjectService();
       let user = req.user;
-      let projectId =  req.params.id;
+      let projectId =  req.params.projectId;
       let buildingId =  req.params.buildingId;
       let costHeadBudgetedAmount =  req.body;
 
@@ -410,7 +410,7 @@ class ProjectController {
     try {
       logger.info('Project controller, updateQuantity has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = req.params.costHeadId;
       let subCategoryId =req.params.subCategoryId;
@@ -434,7 +434,7 @@ class ProjectController {
     try {
       logger.info('Project controller, getSubcategoryByCostHeadId has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = req.params.costHeadId;
 
@@ -458,7 +458,7 @@ class ProjectController {
     try {
       logger.info('getWorkitemList has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = req.params.costHeadId;
       let subCategoryId = parseInt(req.params.subCategoryId);
@@ -479,7 +479,7 @@ class ProjectController {
     try {
       logger.info('addWorkitem has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId : number = parseInt(req.params.costHeadId);
       let subCategoryId : number = parseInt(req.params.subCategoryId);
@@ -502,7 +502,7 @@ class ProjectController {
     try {
       logger.info('Project controller, getSubcategoryByCostHeadId has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = req.params.costHeadId;
       let subcategoryObject = req.body;
@@ -527,7 +527,7 @@ class ProjectController {
     try {
       logger.info('getsubcategory has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = parseInt(req.params.costHeadId);
       let projectService = new ProjectService();
@@ -546,14 +546,14 @@ class ProjectController {
     try {
       logger.info('Project controller, deleteSubcategoryToCostHeadId has been hit');
       let user = req.user;
-      let projectId = req.params.id;
+      let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
-      let costhead = req.params.costHeadId;
+      let costHeadId = req.params.costHeadId;
       let subcategoryObject = req.body;
 
       let projectService = new ProjectService();
 
-      projectService.deleteSubcategoryFromCostHead(projectId, buildingId, costhead, subcategoryObject, user, (error, result) => {
+      projectService.deleteSubcategoryFromCostHead(projectId, buildingId, costHeadId, subcategoryObject, user, (error, result) => {
         if(error) {
           next(error);
         } else {
