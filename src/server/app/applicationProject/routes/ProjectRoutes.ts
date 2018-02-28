@@ -66,7 +66,7 @@ class ProjectRoutes {
      /*Building- Routes: CostHead*/
 
     //Add and remove a costhead by setting status of costhead to true and false
-    router.put('/:projectId/building/:buildingId/costHead/:costHeadId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.setBuildingCostHeadStatus, this._responseInterceptor.exit);
     //Retrive list of inactive costheads
     router.get('/:projectId/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,

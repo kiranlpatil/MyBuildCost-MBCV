@@ -13,15 +13,15 @@ export class CostSummaryService extends BaseService {
   getCostSummaryReport(projectId: string,defaultCostIn:string,defaultCostPer:string) {
 
     var url = API.THUMBRULE_RULE_RATE + '/'+ API.PROJECT +'/'+projectId+'/';
-    url =  ( defaultCostIn==='Rs/Sqft' ) ? ( url + 'rate/' + API.SQFT ) : ( url + 'rate/' + API.SQM );
-    url= ( defaultCostPer==='SlabArea' ) ?  ( url + '/area/' + API.SLAB_AREA ) :  ( url + '/area/' + API.SALEABLE_AREA );
+    url =  ( defaultCostIn==='Rs/Sqft' ) ? ( url + API.RATE + '/' + API.SQFT ) : ( url + API.RATE + '/' + API.SQM );
+    url= ( defaultCostPer==='SlabArea' ) ?  ( url + '/'+ API.AREA +'/' + API.SLAB_AREA ) :  ( url + '/'+ API.AREA +'/' + API.SALEABLE_AREA );
 
     return this.httpDelegateService.getAPI(url);
   }
 
   updateRateOfThumbRule(projectId : string, buildingId : string, costHeadName : string,
                         costIn : string, costPer : string, buildingArea : number, amount : number) {
-    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/costhead';
+    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD ;
     var body = {
       budgetedCostAmount : amount,
       costIn : costIn,
@@ -35,28 +35,31 @@ export class CostSummaryService extends BaseService {
 
   // Cost Head CRUD API
   inactiveCostHead(projectId:string, buildingId:string, costHeadId:number) {
-    var url = 'project/'+projectId+'/'+API.BUILDING+'/'+buildingId+'/'+'costHead/'+costHeadId+'/'+'activeStatus'+'/false';
-  let body = {};
+    var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
+      costHeadId +'/'+ API.COSTHEAD_ACTIVE_STATUS +'/'+ API.COSTHEAD_ACTIVE_STATUS_FALSE;
+    let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
   getAllInactiveCostHeads( projectId : string, buildingId : string) {
-    var url = API.PROJECT + '/'+ projectId + '/'+ API.BUILDING + '/' + buildingId + '/costhead';
+    var url = API.PROJECT + '/'+ projectId + '/'+ API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD;
+
     return this.httpDelegateService.getAPI(url);
   }
 
   // Reconsider this method
   activeCostHead( projectId : string, buildingId : string, selectedInactiveCostHeadId : number) {
-    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/costHead/' +
-      selectedInactiveCostHeadId +'/'+'activeStatus'+ '/true';
+    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
+      selectedInactiveCostHeadId +'/'+ API.COSTHEAD_ACTIVE_STATUS + '/' + API.COSTHEAD_ACTIVE_STATUS_TRUE;
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
   getSubCategoryList( projectId : string, buildingId : string, costheadId : number) {
-    var url = 'project/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + 'costhead/' + costheadId + '/' + 'subcategorylist';
+    var url =  API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' +
+      API.COSTHEAD +'/' + costheadId + '/' + API.SUBCATEGORYLIST;
 
     return this.httpDelegateService.getAPI(url);
   }
@@ -65,7 +68,7 @@ export class CostSummaryService extends BaseService {
   getQuantity(costHeadName:any,costHeadItem:any) {
     var url = API.PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID)+
       '/'+ API.BUILDING + '/' +SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)+
-      '/' + API.QUANTITY + '/' + costHeadName + '/workitem/'+costHeadItem ;
+      '/' + API.QUANTITY + '/' + costHeadName + '/' + API.WORKITEM + '/'+costHeadItem ;
 
     return this.httpDelegateService.getAPI(url);
   }
@@ -73,8 +76,8 @@ export class CostSummaryService extends BaseService {
   updateQuantityItems( projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number,
                       quantityItemsArray : any) {
     var body= { item : quantityItemsArray };
-    var url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' + buildingId + '/costhead/' + costHeadId +
-      '/subcategory/'+ subCategoryId +'/workitem/' + workItemId + '/quantity';
+    var url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' + costHeadId +
+      '/'+ API.SUBCATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY;
 
     return this.httpDelegateService.putAPI(url, body);
   }
@@ -82,8 +85,9 @@ export class CostSummaryService extends BaseService {
   deleteQuantityItem( projectId : string, buildingId : string, costHeadId : number, subCategoryId : number,
                       workItemId : number, itemName : string) {
     let body = { item : itemName };
-    let url = API.PROJECT + '/' +  projectId + '/' + API.BUILDING + '/' + buildingId + '/' + 'costhead' + '/' +
-      costHeadId + '/' + 'subcategory' + '/' + subCategoryId + '/' + 'workitem/' + workItemId + '/quantity' + '/item';
+    let url = API.PROJECT + '/' +  projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD + '/' +
+      costHeadId + '/' + API.SUBCATEGORY + '/' + subCategoryId + '/' + API.WORKITEM +
+      '/' + workItemId + '/' + API.QUANTITY + '/' + API.ITEM;
 
     return this.httpDelegateService.postAPI(url, body);
   }
@@ -92,22 +96,23 @@ export class CostSummaryService extends BaseService {
   updateRate( projectId : string, buildingId : string, costheadId : number,subCategoryId : number, workItemId : number,
               rateItemsArray : any) {
     var body=rateItemsArray;
-    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/costhead/' +
-      costheadId + '/subcategory/' + subCategoryId + '/workitem/' + workItemId ;
+    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/' + API.COSTHEAD+ '/' +
+      costheadId + '/' + API.SUBCATEGORY + '/' + subCategoryId + '/' + API.WORKITEM + '/' + workItemId ;
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
   getRateItems( projectId : String, buildingId : string, costheadId : number, subCategoryId : number, workItemId : number) {
-    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/costhead/' +
-      costheadId + '/subcategory/'+subCategoryId + '/workitem/'+workItemId ;
+    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/'+ API.COSTHEAD +'/' +
+      costheadId + '/' + API.SUBCATEGORY + '/'+subCategoryId + '/' + API.WORKITEM + '/'+workItemId ;
 
     return this.httpDelegateService.getAPI(url);
   }
 
   //SubCategory API
   getSubCategory( projectId: string, buildingId : string, costheadId : number) {
-    var url = 'project/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + 'costhead/' + costheadId + '/' + 'subcategory';
+    var url = API.PROJECT +'/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'
+      + API.COSTHEAD+ '/' + costheadId + '/' + API.SUBCATEGORY;
 
     return this.httpDelegateService.getAPI(url);
   }
@@ -117,13 +122,15 @@ export class CostSummaryService extends BaseService {
       name : subcategory.name,
       rateAnalysisId : subcategory.rateAnalysisId
     };
-    let url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' + buildingId + '/costhead/' + costHeadId + '/subcategory';
+    let url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' +
+      buildingId + '/'+ API.COSTHEAD +'/' + costHeadId + '/' + API.SUBCATEGORY;
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
   addSubCategory( projectId : string, buildingId : string, costHeadId : number, selectedSubCategory : any ) {
-    let url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/costhead/' + costHeadId + '/subcategory';
+    let url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' +
+      buildingId + '/'+ API.COSTHEAD +'/' + costHeadId + '/' + API.SUBCATEGORY;
     let body = {
       subCategory : selectedSubCategory[0].subCategory,
       subCategoryId : selectedSubCategory[0].rateAnalysisId
@@ -134,8 +141,8 @@ export class CostSummaryService extends BaseService {
 
   //Workitems API
   getWorkItemList( projectId : string, buildingId : string, costheadId : number, subCategoryId : number) {
-    var url = API.PROJECT + '/' +  projectId + '/' + API.BUILDING + '/' + buildingId + '/costhead/' + costheadId +
-      '/subcategory/' +subCategoryId + '/workitemlist';
+    var url = API.PROJECT + '/' +  projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' + costheadId +
+      '/' + API.SUBCATEGORY +'/' +subCategoryId + '/'+ API.WORKITEMLIST;
 
     return this.httpDelegateService.getAPI(url);
   }
@@ -146,15 +153,15 @@ export class CostSummaryService extends BaseService {
       rateAnalysisId : selectedWorkItemRateAnalysisId,
       name : selectedWorkItemName
     };
-    var url = API.PROJECT + '/'+  projectId + '/' + API.BUILDING + '/' + buildingId + '/costhead/' + costheadId +
-      '/subcategory/' + subCategoryId + '/workitem';
+    var url = API.PROJECT + '/'+  projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' + costheadId +
+      '/' + API.SUBCATEGORY + '/' + subCategoryId + '/' + API.WORKITEM;
 
     return this.httpDelegateService.postAPI(url, body);
   }
 
   deleteWorkItem( projectId : string, buildingId : String, costHeadId : number, subCategoryId : number,workItemId : number) {
     var url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' + buildingId
-      + '/costhead/' + costHeadId + '/subcategory/'+ subCategoryId +'/workitem/' + workItemId;
+      + '/'+ API.COSTHEAD +'/' + costHeadId + '/' + API.SUBCATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId;
 
     return this.httpDelegateService.deleteAPI(url);
   }

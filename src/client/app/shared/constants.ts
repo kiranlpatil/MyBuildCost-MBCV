@@ -350,7 +350,17 @@ export class API {
   public static USER_ALL_PROJECTS = 'user/all/project';
   public static PROJECT = 'project';
   public static BUILDING = 'building';
+  public static COSTHEAD = 'costhead';
+  public static COSTHEAD_ACTIVE_STATUS = 'activeStatus';
+  public static COSTHEAD_ACTIVE_STATUS_FALSE = 'false';
+  public static COSTHEAD_ACTIVE_STATUS_TRUE = 'true';
   public static CLONE = 'clone';
+  public static SUBCATEGORYLIST = 'subcategorylist';
+  public static SUBCATEGORY = 'subcategory';
+  public static WORKITEM = 'workitem';
+  public static WORKITEMLIST = 'workitemlist';
+  public static QUANTITY = 'quantity';
+  public static ITEM = 'item';
   public static ALL_BUILDINGS = 'user/all/building';
 
 
@@ -361,8 +371,6 @@ export class API {
   public static AREA='area';
   public static SLAB_AREA='slabArea';
   public static SALEABLE_AREA='saleableArea';
-
-  public static QUANTITY='quantity/costhead';
 
 }
 
