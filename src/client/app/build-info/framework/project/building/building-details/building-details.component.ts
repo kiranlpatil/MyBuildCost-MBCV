@@ -28,12 +28,12 @@ export class BuildingDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.buildingId = params['buildingId'];
       if(this.buildingId) {
-        this.getBuildingDetails();
+        this.getBuilding();
       }
     });
   }
 
-  getBuildingDetails() {
+  getBuilding() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this.buildingService.getBuilding(projectId,this.buildingId).subscribe(
       building => this.onGetBuildingSuccess(building),
@@ -62,7 +62,7 @@ export class BuildingDetailsComponent implements OnInit {
   }
 
 
-  onSubmit(buildingModel : Building) {
+  updateBuilding(buildingModel : Building) {
       let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
       let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
       this.buildingService.updateBuilding( projectId, buildingId, buildingModel)

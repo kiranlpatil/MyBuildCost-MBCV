@@ -34,17 +34,24 @@ export class GetRateComponent {
     this.totalAmount = 0;
     this.totalRate = 0.0;
     this.totalQuantity = 0.0;
+
     for (let i = 0; i < this.rateItemsArray.rateItems.length; i++) {
+
       if(choice === 'changeTotalQuantity') {
         this.rateItemsArray.rateItems[i].quantity =parseFloat((this.rateItemsArray.rateItems[i].quantity *
           this.quantityIncrement).toFixed(2));
       }
+
       this.rateItemsArray.rateItems[i].totalAmount=parseFloat((this.rateItemsArray.rateItems[i].quantity*
         this.rateItemsArray.rateItems[i].rate).toFixed(2));
+
       this.totalAmount = parseFloat((this.totalAmount + (this.rateItemsArray.rateItems[i].quantity *
         this.rateItemsArray.rateItems[i].rate)).toFixed(2));
+
       this.totalRate = parseFloat((this.totalRate + this.rateItemsArray.rateItems[i].rate).toFixed(2));
+
       this.totalQuantity = parseFloat((this.totalQuantity + this.rateItemsArray.rateItems[i].quantity).toFixed(2));
+
     }
 
     this.rateItemsArray.total = parseFloat((this.totalAmount / this.totalQuantity).toFixed(2));
@@ -83,19 +90,22 @@ export class GetRateComponent {
   }
 
   onTotalQuantityChange(newTotalQuantity: number) {
+
     if (newTotalQuantity === 0 || newTotalQuantity === null) {
-      newTotalQuantity=1;
-      this.totalItemRateQuantity = newTotalQuantity;
-      this.rateItemsArray.quantity = newTotalQuantity;
-      var message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL;
-      this.messageService.message(message);
+
+        newTotalQuantity=1;
+        this.totalItemRateQuantity = newTotalQuantity;
+        this.rateItemsArray.quantity = newTotalQuantity;
+        var message = new Message();
+        message.isError = false;
+        message.custom_message = Messages.MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL;
+        this.messageService.message(message);
+
     } else {
-      this.quantityIncrement = newTotalQuantity / this.previousTotalQuantity;
-      this.calculateTotal('changeTotalQuantity');
-      this.totalItemRateQuantity = newTotalQuantity;
-      this.rateItemsArray.quantity = newTotalQuantity;
+          this.quantityIncrement = newTotalQuantity / this.previousTotalQuantity;
+          this.calculateTotal('changeTotalQuantity');
+          this.totalItemRateQuantity = newTotalQuantity;
+          this.rateItemsArray.quantity = newTotalQuantity;
     }
 
   }

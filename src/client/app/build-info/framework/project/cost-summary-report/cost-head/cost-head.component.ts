@@ -1,7 +1,7 @@
 import { Component, OnInit , OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Messages, ProjectElements } from '../../../../../shared/constants';
-import { SessionStorage, SessionStorageService, Message, MessageService, LoaderService } from '../../../../../shared/index';
+import { SessionStorage, SessionStorageService, Message, MessageService } from '../../../../../shared/index';
 import { Rate } from '../../../model/rate';
 import { CommonService } from '../../../../../shared/services/common.service';
 import { CostSummaryService } from '../cost-summary.service';
@@ -36,7 +36,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
   rateFromRateAnalysis:number=0;
   unit:string='';
   showSubcategoryListvar: boolean = false;
-  alreadySelectedWorkItems: Array<WorkItem>;
+  selectedWorkItems: Array<WorkItem>;
+  deleteConfirmationSubCategory = ProjectElements.SUBCATEGORY;
+  deleteConfirmationWorkItem = ProjectElements.WORK_ITEM;
 
   private showQuantity:boolean=true;
   private showRate:boolean=true;
@@ -53,8 +55,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private workItemListArray: Array<WorkItem> = [];
   private subCategoryListArray : Array<SubCategory> = [];
   private subCategoryObj: Array<SubCategory>;
-  private deleteConfirmationSubCategory = ProjectElements.SUBCATEGORY;
-  private deleteConfirmationWorkItem = ProjectElements.WORK_ITEM;
 
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
@@ -69,8 +69,44 @@ export class CostHeadComponent implements OnInit, OnChanges {
       let costheadIdParams = params['costHeadId'];
       this.costHeadId = parseInt(costheadIdParams);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_ID,this.costHeadId);
-      this.getSubCategoryDetails( this.projectId, this.costHeadId);
+      this.getSubCategory( this.projectId, this.costHeadId);
     });
+  }
+
+  getSubCategory(projectId: string, costHeadId: number) {
+    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+    this.costSummaryService.getSubCategory( projectId, buildingId, costHeadId).subscribe(
+      subCategoryDetails => this.OnGetSubCategorySuccess(subCategoryDetails),
+      error => this.OnGetSubCategoryFailure(error)
+    );
+  }
+
+  OnGetSubCategorySuccess(subCategoryDetails: any) {
+    this.subCategoryDetails = subCategoryDetails.data;
+    this.subCategoryDetailsTotalAmount=0.0;
+
+    for(let subCategoryIndex=0; subCategoryIndex < this.subCategoryDetails.length; subCategoryIndex++) {
+
+      this.subCategoryDetailsTotalAmount = parseFloat(( this.subCategoryDetailsTotalAmount +
+        this.subCategoryDetails[subCategoryIndex].amount).toFixed(2));
+
+      for(let workItemIdex=0; workItemIdex < this.subCategoryDetails[subCategoryIndex].workItems.length; workItemIdex++) {
+
+        this.subCategoryDetails[subCategoryIndex].workItems[workItemIdex].quantity.total =
+          parseFloat((this.subCategoryDetails[subCategoryIndex].workItems[workItemIdex].quantity.total).toFixed(2));
+
+        this.subCategoryDetails[subCategoryIndex].workItems[workItemIdex].amount=
+          parseFloat((this.subCategoryDetails[subCategoryIndex].workItems[workItemIdex].quantity.total *
+            this.subCategoryDetails[subCategoryIndex].workItems[workItemIdex].rate.total).toFixed(2));
+      }
+    }
+
+    let subcategoryList = lodsh.clone(this.subCategoryArrayList);
+    this.subcategoryArray = this.commonService.removeDuplicateItmes(subcategoryList, this.subCategoryDetails);
+  }
+
+  OnGetSubCategoryFailure(error: any) {
+    console.log(error);
   }
 
   ngOnChanges(changes: any) {
@@ -79,8 +115,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  getQuantity( i: number, workItemIndex: number, workItemId : number, workItem: WorkItem, quantityItems: any) {
-    this.compareSubcategoryIndex=i;
+  getQuantity( subCategoryIndex: number, workItemIndex: number, workItemId : number, workItem: WorkItem, quantityItems: any) {
+    this.compareSubcategoryIndex = subCategoryIndex;
     this.toggleQty = !this.toggleQty;
     this.compareWorkItemIndex = workItemIndex;
     if (this.toggleQty === true) {
@@ -93,18 +129,18 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showQuantity = true;
   }
 
-  getRateFromRateAnalysis( i:number, workItemIndex: number, workItem:WorkItem) {
-    this.compareSubcategoryIndex=i;
+  getRateFromRateAnalysis( subCategoryIndex:number, workItemIndex: number, workItem:WorkItem) {
+    this.compareSubcategoryIndex = subCategoryIndex;
     this.toggleRate = !this.toggleRate;
     this.compareWorkItemIndex = workItemIndex;
     if (this.toggleRate === true) {
       this.toggleQty = false;
     }
-    this.workItem=workItem;
+    this.workItem = workItem;
     this.workItemId = workItem.rateAnalysisId;
 
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
-    let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;
+    let subCategoryId=this.subCategoryDetails[subCategoryIndex].rateAnalysisId;
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
@@ -182,37 +218,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showRate = true;
   }
 
-  getSubCategoryDetails(projectId: string, costHeadId: number) {
-    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    this.costSummaryService.getSubCategory( projectId, buildingId, costHeadId).subscribe(
-      subCategoryDetails => this.OnGetSubCategoryDetailsSuccess(subCategoryDetails),
-      error => this.OnGetSubCategoryDetailsFailure(error)
-    );
-  }
-
-  OnGetSubCategoryDetailsSuccess(subCategoryDetails: any) {
-    this.subCategoryDetails = subCategoryDetails.data;
-    this.subCategoryDetailsTotalAmount=0.0;
-
-    for(let i=0;i<this.subCategoryDetails.length;i++) {
-      this.subCategoryDetailsTotalAmount= parseFloat(( this.subCategoryDetailsTotalAmount +
-        this.subCategoryDetails[i].amount).toFixed(2));
-      for(let workItemIdex=0;workItemIdex<this.subCategoryDetails[i].workItems.length;workItemIdex++) {
-        this.subCategoryDetails[i].workItems[workItemIdex].quantity.total=
-          parseFloat((this.subCategoryDetails[i].workItems[workItemIdex].quantity.total).toFixed(2));
-        this.subCategoryDetails[i].workItems[workItemIdex].amount=
-          parseFloat((this.subCategoryDetails[i].workItems[workItemIdex].quantity.total *
-          this.subCategoryDetails[i].workItems[workItemIdex].rate.total).toFixed(2));
-      }
-    }
-    let subcategoryList = lodsh.clone(this.subCategoryArrayList);
-    this.subcategoryArray = this.commonService.removeDuplicateItmes(subcategoryList, this.subCategoryDetails);
-  }
-
-  OnGetSubCategoryDetailsFailure(error: any) {
-    console.log(error);
-  }
-
   setIdsForDeleteWorkItem(subCategoryId: string, workItemId: string) {
     this.subCategoryId = parseInt(subCategoryId);
     this.workItemId =  parseInt(workItemId);
@@ -235,7 +240,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       message.isError = false;
       message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM;
       this.messageService.message(message);
-      this.getSubCategoryDetails( this.projectId, this.costHeadId);
+      this.getSubCategory( this.projectId, this.costHeadId);
     }
   }
 
@@ -244,12 +249,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
     this.messageService.message(message);
-    this.getSubCategoryDetails( this.projectId, this.costHeadId);
+    this.getSubCategory( this.projectId, this.costHeadId);
   }
 
-  getWorkItemList( subCategoryId:number, i:number) {
-    this.comapreWorkItemRateAnalysisId=i;
-    this.subCategoryRateAnalysisId=subCategoryId;
+  getWorkItemList( subCategoryId:number, workItemIndex:number) {
+    this.comapreWorkItemRateAnalysisId = workItemIndex;
+    this.subCategoryRateAnalysisId = subCategoryId;
 
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
@@ -262,7 +267,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onGetWorkItemListSuccess(workItemList:any) {
     let workItemListAfterClone = lodsh.cloneDeep(workItemList.data);
-    this.workItemListArray = this.commonService.removeDuplicateItmes(workItemListAfterClone, this.alreadySelectedWorkItems);
+    this.workItemListArray = this.commonService.removeDuplicateItmes(workItemListAfterClone, this.selectedWorkItems);
     if(this.workItemListArray.length===0) {
       var message = new Message();
       message.isError = false;
@@ -298,13 +303,13 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   onAddWorkItemSuccess(workItemList:any) {
-    this.alreadySelectedWorkItems=workItemList.data;
+    this.selectedWorkItems=workItemList.data;
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_WORKITEM;
     this.messageService.message(message);
     this.showWorkItemList=false;
-    this.getSubCategoryDetails(this.projectId, this.costHeadId);
+    this.getSubCategory(this.projectId, this.costHeadId);
   }
 
   onAddWorkItemFailure(error:any) {
@@ -328,7 +333,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   onDeleteSubCategorySuccess(deleteSubcategory : any) {
-    this.getSubCategoryDetails( this.projectId, this.costHeadId);
+    this.getSubCategory( this.projectId, this.costHeadId);
   }
 
   onDeleteSubCategoryFailure(error : any) {
@@ -359,14 +364,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onChangeAddSelectedSubCategory( selectedSubCategoryId : string ) {
     let subCategoriesList  =  this.subcategoryArray;
-    let subCategoryObj = subCategoriesList.filter(
-      function( subCatObj: any){
-        return subCatObj.rateAnalysisId === parseInt(selectedSubCategoryId);
+    let subCategoryObject = subCategoriesList.filter(
+      function( subCatObject: any){
+        return subCatObject.rateAnalysisId === parseInt(selectedSubCategoryId);
       });
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
-    this.costSummaryService.addSubCategory( projectId, buildingId, this.costHeadId, subCategoryObj).subscribe(
+    this.costSummaryService.addSubCategory( projectId, buildingId, this.costHeadId, subCategoryObject).subscribe(
       building => this.onAddSubCategorySuccess(building),
       error => this.onAddSubCategoryFailure(error)
     );
@@ -377,7 +382,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_SUBCATEGORY;
     this.messageService.message(message);
-    this.getSubCategoryDetails(this.projectId, this.costHeadId);
+    this.getSubCategory(this.projectId, this.costHeadId);
   }
 
   onAddSubCategoryFailure(error : any) {
@@ -385,13 +390,13 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   refreshSubCategoryList() {
-    this.getSubCategoryDetails( this.projectId, this.costHeadId);
+    this.getSubCategory( this.projectId, this.costHeadId);
     this.showQuantity = false;
     this.showRate = false;
   }
 
-  setAlreadySelectedWorkItems(workItemList:any) {
-    this.alreadySelectedWorkItems=workItemList;
+  setSelectedWorkItems(workItemList:any) {
+    this.selectedWorkItems = workItemList;
   }
 
   deleteElement(elementType : string) {

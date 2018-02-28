@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../../../shared/index';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { CostSummaryService } from '../../cost-summary.service';
@@ -19,7 +18,7 @@ export class GetQuantityComponent implements OnInit {
 
   projectId : string;
   buildingId: string;
-  itemName: string;
+  quantityItemName: string;
   quantityTotal: number = 0;
   quanitytNumbersTotal: number = 0;
   lengthTotal: number = 0;
@@ -27,7 +26,7 @@ export class GetQuantityComponent implements OnInit {
   heightTotal: number = 0;
   deleteConfirmationQuantityItem = ProjectElements.QUANTITY_ITEM;
 
-  constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
+  constructor(private costSummaryService : CostSummaryService,
               private messageService: MessageService) {
   }
 
@@ -78,26 +77,38 @@ export class GetQuantityComponent implements OnInit {
   getQuantityTotal(quantityItems : any) {
     this.quantityTotal = 0;
     this.quantityItems = quantityItems;
-    for(let i=0;i<this.quantityItems.length;i++) {
-      if (this.quantityItems[i].length === undefined || this.quantityItems[i].length === 0 ||
-        this.quantityItems[i].length === null) {
-        var q1 = this.quantityItems[i].height;
-        var q2 = this.quantityItems[i].breadth;
-      } else if (this.quantityItems[i].height === undefined || this.quantityItems[i].height === 0 ||
-        this.quantityItems[i].height === null) {
-        q1 = this.quantityItems[i].length;
-        q2 = this.quantityItems[i].breadth;
-      } else if (this.quantityItems[i].breadth === undefined || this.quantityItems[i].breadth === 0 ||
-        this.quantityItems[i].breadth === null) {
-        q1 = this.quantityItems[i].length;
-        q2 = this.quantityItems[i].height;
+
+    for(let quantityIndex=0; quantityIndex < this.quantityItems.length; quantityIndex++) {
+
+      if (this.quantityItems[quantityIndex].length === undefined || this.quantityItems[quantityIndex].length === 0 ||
+        this.quantityItems[quantityIndex].length === null) {
+
+        var q1 = this.quantityItems[quantityIndex].height;
+        var q2 = this.quantityItems[quantityIndex].breadth;
+
+      } else if (this.quantityItems[quantityIndex].height === undefined || this.quantityItems[quantityIndex].height === 0 ||
+        this.quantityItems[quantityIndex].height === null) {
+
+        q1 = this.quantityItems[quantityIndex].length;
+        q2 = this.quantityItems[quantityIndex].breadth;
+
+      } else if (this.quantityItems[quantityIndex].breadth === undefined || this.quantityItems[quantityIndex].breadth === 0 ||
+        this.quantityItems[quantityIndex].breadth === null) {
+
+        q1 = this.quantityItems[quantityIndex].length;
+        q2 = this.quantityItems[quantityIndex].height;
+
       } else {
-        q1 = this.quantityItems[i].length;
-        q2 = this.quantityItems[i].breadth;
+
+        q1 = this.quantityItems[quantityIndex].length;
+        q2 = this.quantityItems[quantityIndex].breadth;
+
       }
-      this.quantityItems[i].quantity = parseFloat((q1 * q2).toFixed(2));
-      this.quantityTotal = parseFloat((this.quantityTotal + this.quantityItems[i].quantity).toFixed(2));
+
+      this.quantityItems[quantityIndex].quantity = parseFloat((q1 * q2).toFixed(2));
+      this.quantityTotal = parseFloat((this.quantityTotal + this.quantityItems[quantityIndex].quantity).toFixed(2));
       }
+
   }
 
   addItem() {
@@ -144,8 +155,8 @@ export class GetQuantityComponent implements OnInit {
     this.messageService.message(message);
   }
 
-  setQuantityItemNameForDelete(itemName: string) {
-    this.itemName = itemName;
+  setQuantityItemNameForDelete(quantityItemName: string) {
+    this.quantityItemName = quantityItemName;
   }
 
   deleteQuantityItem() {
@@ -156,13 +167,14 @@ export class GetQuantityComponent implements OnInit {
     let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
     this.costSummaryService.deleteQuantityItem( projectId, buildingId, costHeadId, this.subCategoryRateAnalysisId,
-      workItemId, this.itemName).subscribe(
+      workItemId, this.quantityItemName).subscribe(
       costHeadItemDelete => this.onDeleteQuantityItemSuccess(costHeadItemDelete),
       error => this.onDeleteQuantityItemFailure(error)
     );
   }
 
   onDeleteQuantityItemSuccess(costHeadItemDelete: any) {
+
     this.quantityItems = costHeadItemDelete.data.quantityItems;
     this.updateQuantity('updateNos');
     this.updateQuantity('updateLength');

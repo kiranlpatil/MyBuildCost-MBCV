@@ -2,16 +2,16 @@
   <div class="container">
     <div class="col-sm-8 col-xs-12 no-padding">
       <h4 class="building-name">{{ buildingName }} : {{ costHead }}</h4>
-      <div class="panel-group" *ngFor=" let subCategory of subCategoryDetails | keys; let i= index ">
+      <div class="panel-group" *ngFor=" let subCategory of subCategoryDetails | keys; let subCategoryIndex= index ">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title clearfix" (click)="setAlreadySelectedWorkItems(subCategoryDetails[i].workItems)">
+            <div class="panel-title clearfix" (click)="setSelectedWorkItems(subCategoryDetails[subCategoryIndex].workItems)">
               <div class="col-sm-11">
-                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0" data-toggle="collapse" href="#collapse{{i}}">
+                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0" data-toggle="collapse" href="#collapse{{subCategoryIndex}}">
                   <span class="pull-left">{{ subCategoryDetails[subCategory].name }}</span>
                   <span class="pull-right">{{ subCategoryDetails[subCategory].amount|number }}</span>
                 </a>
-                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId === 0" data-toggle="collapse" href="#collapse{{i}}">
+                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId === 0" data-toggle="collapse" href="#collapse{{subCategoryIndex}}">
                   <span  class="pull-left">WorkItems</span>
                   <span  class="pull-right">{{ subCategoryDetails[subCategory].amount|number }}</span>
                 </a>
@@ -28,7 +28,7 @@
               </div>
             </div>
           </div>
-          <div id="collapse{{i}}" class="panel-collapse collapse">
+          <div id="collapse{{subCategoryIndex}}" class="panel-collapse collapse">
             <div class="panel-body">
               <div  *ngFor="let workitemObj of subCategoryDetails[subCategory].workItems; let workItemIndex = index">
                 <table class="table table-row-spacing table-dashboard table-categories">
@@ -49,14 +49,14 @@
                     <td class="border-left">
                       <div class="edit-field"
                            *ngIf="workitemObj.quantity.total"
-                           (click)="getQuantity(i, workItemIndex, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
+                           (click)="getQuantity(subCategoryIndex, workItemIndex, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
                         <input  [(ngModel)]="workitemObj.quantity.total" id="quantity"  size="10" class="form-control clear">
                       </div>
                       <button *ngIf="workitemObj.quantity.total == 0"
                               type="button"
-                              id="getQuantity{{i}}"
+                              id="getQuantity{{subCategoryIndex}}"
                               class="btn-get-amount"
-                              (click)="getQuantity(i, workItemIndex, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
+                              (click)="getQuantity(subCategoryIndex, workItemIndex, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
                         Get Qty.
                       </button>
                     </td>
@@ -67,13 +67,13 @@
                     <td class="border-left">
                       <div class="edit-field"
                            *ngIf="workitemObj.rate.total!= 0"
-                           (click)="getRateFromDatabase(i, workItemIndex, workitemObj)">
+                           (click)="getRateFromDatabase(subCategoryIndex, workItemIndex, workitemObj)">
                         <input  [(ngModel)]="workitemObj.rate.total" id="rate"  size="10" class="form-control clear">
                       </div>
                       <button class="btn-get-amount"
                               *ngIf="workitemObj.rate.total == 0"
                               type="button"
-                              (click)="getRateFromRateAnalysis(i, workItemIndex, workitemObj)">Get Rate</button>
+                              (click)="getRateFromRateAnalysis(subCategoryIndex, workItemIndex, workitemObj)">Get Rate</button>
                     </td>
                     <td class="border-left">
                       {{ (workitemObj.amount)|number}}
@@ -90,7 +90,7 @@
                 </table>
 
                 <div *ngIf="showRate == true">
-                   <div  *ngIf="toggleRate==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i">
+                   <div  *ngIf="toggleRate==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===subCategoryIndex">
                       <bi-cost-head-get-rate [rateItemsArray]="rateItemsArray"
                                              [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
                                              [totalAmount]="totalAmount"
@@ -102,7 +102,7 @@
                 </div>
 
                 <div *ngIf="showQuantity== true">
-                  <div *ngIf="toggleQty==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i">
+                  <div *ngIf="toggleQty==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===subCategoryIndex">
                   <bi-cost-head-get-quantity [quantityItems]="quantityItemsArray"
                                              [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
                                              (refreshSubCategoryList)="refreshSubCategoryList()">
@@ -112,7 +112,7 @@
               </div>
               <table class="table table-row-spacing table-dashboard">
                 <tbody>
-                <tr *ngIf="showWorkItemList==true && comapreWorkItemRateAnalysisId==i">
+                <tr *ngIf="showWorkItemList==true && comapreWorkItemRateAnalysisId==subCategoryIndex">
                   <td class="border-left">
                     <select  class="select-item" (change)="onChangeAddSelectedWorkItem($event.target.value)">
                       <option [value]="selectItem">Select Work Items</option>
@@ -123,7 +123,7 @@
                 </tr>
                 <tr>
                   <td  class="add-items" colspan="7">
-                    <button type="button" class="btn btn-add-item" (click)="getWorkItemList(subCategoryDetails[subCategory].rateAnalysisId,i)"><span class="glyphicon glyphicon-plus"></span>Add WorkItem</button>
+                    <button type="button" class="btn btn-add-item" (click)="getWorkItemList(subCategoryDetails[subCategory].rateAnalysisId,subCategoryIndex)"><span class="glyphicon glyphicon-plus"></span>Add WorkItem</button>
                   </td>
                 </tr>
                 </tbody>
