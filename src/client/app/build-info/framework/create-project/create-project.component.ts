@@ -54,6 +54,7 @@ export class CreateProjectComponent {
       this.messageService.message(message);
     }
   }
+
   goBack() {
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }

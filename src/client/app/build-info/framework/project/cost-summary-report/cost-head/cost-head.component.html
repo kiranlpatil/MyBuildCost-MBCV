@@ -49,14 +49,14 @@
                     <td class="border-left">
                       <div class="edit-field"
                            *ngIf="workitemObj.quantity.total"
-                           (click)="getQuantity(i, workitemObj.quantity.quantityItems, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
+                           (click)="getQuantity(i, workItemIndex, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
                         <input  [(ngModel)]="workitemObj.quantity.total" id="quantity"  size="10" class="form-control clear">
                       </div>
                       <button *ngIf="workitemObj.quantity.total == 0"
                               type="button"
                               id="getQuantity{{i}}"
                               class="btn-get-amount"
-                              (click)="getQuantity(i, workitemObj.quantity.quantityItems, workItemIndex, workitemObj.name, workitemObj.rateAnalysisId)">
+                              (click)="getQuantity(i, workItemIndex, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
                         Get Qty.
                       </button>
                     </td>
@@ -67,20 +67,20 @@
                     <td class="border-left">
                       <div class="edit-field"
                            *ngIf="workitemObj.rate.total!= 0"
-                           (click)="getRateFromDatabase(i,workItemIndex,workitemObj.rate,workitemObj)">
+                           (click)="getRateFromDatabase(i, workItemIndex, workitemObj)">
                         <input  [(ngModel)]="workitemObj.rate.total" id="rate"  size="10" class="form-control clear">
                       </div>
                       <button class="btn-get-amount"
                               *ngIf="workitemObj.rate.total == 0"
                               type="button"
-                              (click)="getRateFromRateAnalysis(i,workItemIndex,workitemObj)">Get Rate</button>
+                              (click)="getRateFromRateAnalysis(i, workItemIndex, workitemObj)">Get Rate</button>
                     </td>
                     <td class="border-left">
                       {{ (workitemObj.amount)|number}}
                     </td>
                     <td>
                       <div data-toggle="modal" data-target="#deleteWorkItem"
-                           (click)="setIdsForDeleteWorkItem(i,subCategoryDetails[subCategory].rateAnalysisId,workitemObj.rateAnalysisId )"
+                           (click)="setIdsForDeleteWorkItem(subCategoryDetails[subCategory].rateAnalysisId,workitemObj.rateAnalysisId )"
                            class="delete-cost-head">
                         <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                       </div>

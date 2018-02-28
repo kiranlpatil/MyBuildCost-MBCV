@@ -21,7 +21,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a (click)="setBuildingId(building._id,i)" data-toggle="collapse" href="#collapse{{i}}">
+                <a (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}">
                   {{building.name}} <span class="slab-area"> Total {{defaultCostPer}} : {{building.area}} {{defaultCostIn}}
                   <span *ngIf="compareIndex !== i"> Budgeted Cost : {{building.thumbRule.totalBudgetedCost|number}}</span></span>
                 </a>
@@ -69,14 +69,14 @@
                       <td class="border-left">{{thumbRuleItem.rate}}</td>
                       <td>
                         <div class="edit-field" *ngIf="building.estimate.estimatedCosts[i].total != 0"
-                             (click)="getAmount(building.name, building._id, building.estimate.estimatedCosts[i])">
+                             (click)="getAmount(building._id,building.name, building.estimate.estimatedCosts[i])">
                           <input [(ngModel)]="building.estimate.estimatedCosts[i].total"
                                  id="estimatedItem.total"
                                  class="form-control clear"/>
                         </div>
                         <button *ngIf="building.estimate.estimatedCosts[i].total == 0"
                                   type="button" class="btn-get-amount"
-                                  (click)="getAmount(building.name, building._id, building.estimate.estimatedCosts[i])">Get Amount</button>
+                                  (click)="getAmount(building._id,building.name, building.estimate.estimatedCosts[i])">Get Amount</button>
                       </td>
                       <td class="border-left">{{building.estimate.estimatedCosts[i].rate}}</td>
                       <td>

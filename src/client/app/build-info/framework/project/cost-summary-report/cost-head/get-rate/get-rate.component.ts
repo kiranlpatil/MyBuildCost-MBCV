@@ -51,11 +51,12 @@ export class GetRateComponent {
   }
 
   updateRate(rateItemsArray: Rate) {
+
     let projectID= SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+    let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+    let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
-    let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
-    let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
     let rate = new Rate();
     rate.rateFromRateAnalysis = rateItemsArray.rateFromRateAnalysis;
     rate.total = parseFloat((rateItemsArray.total).toFixed(2));
@@ -63,8 +64,7 @@ export class GetRateComponent {
     rate.unit = rateItemsArray.unit;
     rate.rateItems = rateItemsArray.rateItems;
 
-    this.costSummaryService.updateRate(projectID,buildingId,parseInt(costHeadId), this.subCategoryRateAnalysisId,
-      parseInt(workItemId), rate).subscribe(
+    this.costSummaryService.updateRate( projectID, buildingId, costHeadId, this.subCategoryRateAnalysisId, workItemId, rate).subscribe(
       rateItem => this.onUpdateRateSuccess(rateItem),
       error => this.onUpdateRateFailure(error)
     );

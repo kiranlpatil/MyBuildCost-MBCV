@@ -38,7 +38,7 @@ export class BuildingService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  cloneBuildingCostHeads( projectId : string, cloneCostHead : any, clonedBuildingId : string) {
+  cloneBuildingCostHeads( projectId : string, clonedBuildingId : string, cloneCostHead : any) {
     let updateData = {'costHead' : cloneCostHead};
     var url =  API.PROJECT + '/' + projectId  + '/'+ API.BUILDING + '/' + clonedBuildingId + '/' +API.CLONE;
     return this.httpDelegateService.putAPI(url, updateData);

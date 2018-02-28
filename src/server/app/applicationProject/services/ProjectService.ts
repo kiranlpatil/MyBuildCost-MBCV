@@ -746,6 +746,7 @@ class ProjectService {
                     + subCategories[subcategoryIndex].amount).toFixed(2));
                 } else {
                   subCategories[subcategoryIndex].amount=0;
+                  subCategories[subcategoryIndex].amount=0;
                   break;
                 }
               }

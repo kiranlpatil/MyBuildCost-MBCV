@@ -60,7 +60,7 @@ export class BuildingListComponent implements OnInit {
     if(this.cloneBuildingForm.valid) {
       this.model = this.cloneBuildingForm.value;
       let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      this.buildingService.createBuilding(projectId, this.model)
+      this.buildingService.createBuilding( projectId, this.model)
         .subscribe(
           building => this.onCreateBuildingSuccess(building),
           error => this.onCreateBuildingFailure(error));
@@ -81,7 +81,7 @@ export class BuildingListComponent implements OnInit {
 
   updateBuildingByCostHead(cloneCostHead: any) {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.buildingService.cloneBuildingCostHeads(projectId,cloneCostHead, this.clonedBuildingId).subscribe(
+    this.buildingService.cloneBuildingCostHeads(projectId, this.clonedBuildingId, cloneCostHead).subscribe(
       project => this.onCloneBuildingCostHeadsSuccess(project),
       error => this.onCloneBuildingCostHeadsFailure(error)
     );
@@ -105,7 +105,7 @@ export class BuildingListComponent implements OnInit {
 
   deleteBuilding() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.buildingService.deleteBuildingById(projectId,this.currentbuildingId).subscribe(
+    this.buildingService.deleteBuildingById( projectId, this.currentbuildingId).subscribe(
       project => this.onDeleteBuildingSuccess(project),
       error => this.onDeleteBuildingFailure(error)
     );
@@ -148,7 +148,7 @@ export class BuildingListComponent implements OnInit {
 
   cloneBuilding(buildingId : any) {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.buildingService.getBuilding(projectId,buildingId).subscribe(
+    this.buildingService.getBuilding( projectId, buildingId).subscribe(
       building => this.onGetBuildingSuccess(building),
       error => this.onGetBuildingFailure(error)
     );

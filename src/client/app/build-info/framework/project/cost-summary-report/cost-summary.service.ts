@@ -47,7 +47,7 @@ export class CostSummaryService extends BaseService {
   }
 
   // Reconsider this method
-  activeCostHead(selectedInactiveCostHeadId : number, projectId : string, buildingId : string) {
+  activeCostHead( projectId : string, buildingId : string, selectedInactiveCostHeadId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/costHead/' +
       selectedInactiveCostHeadId + '/true';
     let body = {};
@@ -122,7 +122,7 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  addSubCategory( projectId : string, buildingId : string, selectedSubCategory : any, costHeadId : number ) {
+  addSubCategory( projectId : string, buildingId : string, costHeadId : number, selectedSubCategory : any ) {
     let url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/costhead/' + costHeadId + '/subcategory';
     let body = {
       subCategory : selectedSubCategory[0].subCategory,

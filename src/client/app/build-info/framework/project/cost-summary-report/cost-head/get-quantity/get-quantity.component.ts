@@ -32,48 +32,48 @@ export class GetQuantityComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.updateQuantity(this.quantityItems, 'updateNos');
-    this.updateQuantity(this.quantityItems, 'updateLength');
-    this.updateQuantity(this.quantityItems, 'updateBreadth');
-    this.updateQuantity(this.quantityItems, 'updateHeight');
+    this.updateQuantity('updateNos');
+    this.updateQuantity('updateLength');
+    this.updateQuantity('updateBreadth');
+    this.updateQuantity('updateHeight');
     }
 
-  updateQuantity(quantityItems : any, choice:string ) {
+  updateQuantity(choice:string ) {
     switch(choice) {
-       case 'updateNos': {
-                          this.quanitytNumbersTotal =0;
-                          for(let i=0;i<this.quantityItems.length;i++) {
-                              this.quanitytNumbersTotal= parseFloat((this.quanitytNumbersTotal +this.quantityItems[i].nos).toFixed(2));
-                              }
-                              this.getQuantityTotal(this.quantityItems);
-       }
-                          break;
-       case 'updateLength': {
-                          this.lengthTotal = 0;
-                           for (let i = 0; i < this.quantityItems.length; i++) {
-                                this.lengthTotal = parseFloat((this.lengthTotal + this.quantityItems[i].length).toFixed(2));
-                                }
-                                this.getQuantityTotal(this.quantityItems);
-                            }
-                            break;
-       case 'updateBreadth' : {
-                          this.breadthTotal= 0;
-                          for(let i=0;i<this.quantityItems.length;i++) {
-                                  this.breadthTotal = parseFloat((this.breadthTotal +this.quantityItems[i].breadth).toFixed(2));
-                                 }
-                                   this.getQuantityTotal(this.quantityItems);
-                            }
-                            break;
-       case 'updateHeight' : {
-                            this.heightTotal=0;
-                           for(let i=0;i<this.quantityItems.length;i++) {
-                                  this.heightTotal =parseFloat((this.heightTotal +this.quantityItems[i].height).toFixed(2));
-                                  }
-                      this.getQuantityTotal(this.quantityItems);
-                            }
-                            break;
-       }
-       }
+      case 'updateNos': {
+        this.quanitytNumbersTotal =0;
+        for(let i=0;i<this.quantityItems.length;i++) {
+          this.quanitytNumbersTotal= parseFloat((this.quanitytNumbersTotal +this.quantityItems[i].nos).toFixed(2));
+        }
+        this.getQuantityTotal(this.quantityItems);
+      }
+        break;
+      case 'updateLength': {
+        this.lengthTotal = 0;
+        for (let i = 0; i < this.quantityItems.length; i++) {
+          this.lengthTotal = parseFloat((this.lengthTotal + this.quantityItems[i].length).toFixed(2));
+        }
+        this.getQuantityTotal(this.quantityItems);
+      }
+        break;
+      case 'updateBreadth' : {
+        this.breadthTotal= 0;
+        for(let i=0;i<this.quantityItems.length;i++) {
+          this.breadthTotal = parseFloat((this.breadthTotal +this.quantityItems[i].breadth).toFixed(2));
+        }
+        this.getQuantityTotal(this.quantityItems);
+      }
+        break;
+      case 'updateHeight' : {
+        this.heightTotal=0;
+        for(let i=0;i<this.quantityItems.length;i++) {
+          this.heightTotal =parseFloat((this.heightTotal +this.quantityItems[i].height).toFixed(2));
+        }
+        this.getQuantityTotal(this.quantityItems);
+      }
+        break;
+    }
+  }
 
   getQuantityTotal(quantityItems : any) {
     this.quantityTotal = 0;
@@ -118,11 +118,11 @@ export class GetQuantityComponent implements OnInit {
 
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
-    let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
+    let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+    let workItemId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
-    this.costSummaryService.updateQuantityItems(projectId,buildingId,parseInt(costHeadId), this.subCategoryRateAnalysisId,
-      parseInt(workItemId), quantityItems).subscribe(
+    this.costSummaryService.updateQuantityItems( projectId, buildingId, costHeadId, this.subCategoryRateAnalysisId,
+      workItemId, quantityItems).subscribe(
       costHeadItemSave => this.onUpdateQuantityItemsSuccess(costHeadItemSave),
       error => this.onUpdateQuantityItemsFailure(error)
     );
@@ -152,11 +152,11 @@ export class GetQuantityComponent implements OnInit {
 
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
-    let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
+    let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+    let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
-    this.costSummaryService.deleteQuantityItem(projectId,buildingId,parseInt(costHeadId), this.subCategoryRateAnalysisId,
-      parseInt(workItemId), this.itemName).subscribe(
+    this.costSummaryService.deleteQuantityItem( projectId, buildingId, costHeadId, this.subCategoryRateAnalysisId,
+      workItemId, this.itemName).subscribe(
       costHeadItemDelete => this.onDeleteQuantityItemSuccess(costHeadItemDelete),
       error => this.onDeleteQuantityItemFailure(error)
     );
@@ -164,10 +164,10 @@ export class GetQuantityComponent implements OnInit {
 
   onDeleteQuantityItemSuccess(costHeadItemDelete: any) {
     this.quantityItems = costHeadItemDelete.data.quantityItems;
-    this.updateQuantity(this.quantityItems,'updateNos');
-    this.updateQuantity(this.quantityItems,'updateLength');
-    this.updateQuantity(this.quantityItems,'updateBreadth');
-    this.updateQuantity(this.quantityItems,'updateHeight');
+    this.updateQuantity('updateNos');
+    this.updateQuantity('updateLength');
+    this.updateQuantity('updateBreadth');
+    this.updateQuantity('updateHeight');
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_ITEM;

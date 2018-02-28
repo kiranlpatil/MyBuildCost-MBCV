@@ -57,6 +57,7 @@ class ProjectRoutes {
     router.put('/:id/building/:buildingId/costHead/:costHeadId/:activeStatus',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.setBuildingCostHeadStatus, this._responseInterceptor.exit);
+
     router.put('/:id/building/:buildingid/costhead',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.updateBudgetedCostForCostHead, this._responseInterceptor.exit);

@@ -58,7 +58,6 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   onUpdateProjectSuccess(result: any) {
-
     if (result !== null) {
       var message = new Message();
       message.isError = false;
