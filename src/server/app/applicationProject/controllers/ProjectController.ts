@@ -117,7 +117,7 @@ class ProjectController {
     try {
       logger.info('Project controller, updateBuilding has been hit');
       let user = req.user;
-      let buildingId = req.params.buildingid;
+      let buildingId = req.params.buildingId;
       let buildingDetails = <Building> req.body;
       let projectService = new ProjectService();
       projectService.updateBuilding( buildingId, buildingDetails, user, (error, result) => {
@@ -138,7 +138,7 @@ class ProjectController {
     try {
       logger.info('Project controller, cloneBuilding has been hit');
       let user = req.user;
-      let buildingId = req.params.buildingid;
+      let buildingId = req.params.buildingId;
       let buildingDetails = <Building> req.body;
       let projectService = new ProjectService();
       projectService.cloneBuildingDetails( buildingId, buildingDetails, user, (error, result) => {
@@ -160,7 +160,7 @@ class ProjectController {
       logger.info('Project controller, getBuilding has been hit');
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
+      let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.getBuilding(projectId, buildingId, user, (error, result) => {
         if(error) {
@@ -181,7 +181,7 @@ class ProjectController {
       logger.info('Project controller, getBuildingDetailsForClone has been hit');
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
+      let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.getClonedBuilding(projectId, buildingId, user, (error, result) => {
         if(error) {
@@ -202,7 +202,7 @@ class ProjectController {
       logger.info('Project controller, getInActiveCostHead has been hit');
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
+      let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.getInActiveCostHead(projectId, buildingId, user, (error, result) => {
         if (error) {
@@ -221,7 +221,7 @@ class ProjectController {
     try {
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
+      let buildingId = req.params.buildingId;
       let projectService = new ProjectService();
       projectService.deleteBuilding(projectId, buildingId, user, (error, result) => {
         if(error) {
@@ -242,13 +242,13 @@ class ProjectController {
       logger.info('Project controller, getRate has been hit');
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
-      let costheadId =parseInt(req.params.costheadId);
-      let subcategoryId =parseInt(req.params.subcategoryId);
-      let workitemId =parseInt(req.params.workitemId);
+      let buildingId = req.params.buildingId;
+      let costHeadId =parseInt(req.params.costHeadId);
+      let subCategoryId =parseInt(req.params.subCategoryId);
+      let workItemId =parseInt(req.params.workItemId);
       let projectService = new ProjectService();
-      console.log(' workitemId => '+ workitemId);
-      projectService.getRate(projectId, buildingId, costheadId,subcategoryId ,workitemId, user, (error, result) => {
+      console.log(' workitemId => '+ workItemId);
+      projectService.getRate(projectId, buildingId, costHeadId,subCategoryId ,workItemId, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -266,14 +266,14 @@ class ProjectController {
     try {
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
-      let costheadId =parseInt(req.params.costheadId);
-      let subcategoryId =parseInt(req.params.subcategoryId);
-      let workitemId =parseInt(req.params.workitemId);
+      let buildingId = req.params.buildingId;
+      let costHeadId =parseInt(req.params.costHeadId);
+      let subCategoryId =parseInt(req.params.subCategoryId);
+      let workItemId =parseInt(req.params.workItemId);
       let rate : Rate = <Rate> req.body;
       let projectService = new ProjectService();
-      console.log(' workitemId => '+ workitemId);
-      projectService.updateRate(projectId, buildingId, costheadId,subcategoryId ,workitemId, rate, user, (error, result) => {
+      console.log(' workitemId => '+ workItemId);
+      projectService.updateRate(projectId, buildingId, costHeadId,subCategoryId ,workItemId, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -293,19 +293,19 @@ class ProjectController {
     logger.info('Project controller, deleteQuantity has been hit');
     let user = req.user;
     let projectId = req.params.id;
-    let buildingId = req.params.buildingid;
-    let costheadid = req.params.costheadrateid;
-    let subcategoryid = req.params.subcategoryid;
-    let workitemid = req.params.workitemrateid;
+    let buildingId = req.params.buildingId;
+    let costHeadId = req.params.costHeadId;
+    let subCategoryId = req.params.subCategoryId;
+    let workItemId = req.params.workItemId;
     let item = req.body.item;
     let projectservice = new ProjectService();
-    projectservice.deleteQuantity(projectId, buildingId, costheadid, subcategoryid, workitemid, user, item,(error, result) => {
+    projectservice.deleteQuantity(projectId, buildingId, costHeadId, subCategoryId, workItemId, user, item,(error, result) => {
       if (error) {
         next(error);
       } else {
         logger.info('Delete Quantity ' + result);
            logger.debug('Deleted Quantity of Project ID : '+projectId+', Building ID : '+buildingId+
-             ', CostHead : '+costheadid+', Workitem : '+workitemid+', Item : '+item);
+             ', CostHead : '+costHeadId+', Workitem : '+workItemId+', Item : '+item);
         next(new Response(200, result));
       }
     });
@@ -319,18 +319,18 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingId;
-      let costheadId = req.params.costheadId;
-      let subcategoryId = req.params.subcategoryId;
-      let workitemId = req.params.workitemId;
+      let costHeadId = req.params.costHeadId;
+      let subCategoryId = req.params.subCategoryId;
+      let workItemId = req.params.workItemId;
       let projectService = new ProjectService();
-      console.log(' workitem => '+ workitemId);
-      projectService.deleteWorkitem(projectId, buildingId, parseInt(costheadId), parseInt(subcategoryId), parseInt(workitemId), user, (error, result) => {
+      console.log(' workitem => '+ workItemId);
+      projectService.deleteWorkitem(projectId, buildingId, parseInt(costHeadId), parseInt(subCategoryId), parseInt(workItemId), user, (error, result) => {
         if(error) {
           next(error);
         } else {
           logger.info('Delete work item '+result.data);
           logger.debug('Deleted  work item of Project ID : '+projectId+', Building ID : '+buildingId+
-            ', CostHead : '+costheadId+', SubCategory : '+subcategoryId+', Workitem : '+workitemId);
+            ', CostHead : '+costHeadId+', SubCategory : '+subCategoryId+', Workitem : '+workItemId);
           next(new Response(200,result));
         }
       });
@@ -369,7 +369,7 @@ class ProjectController {
       let projectService = new ProjectService();
       let user = req.user;
       let projectId =  req.params.id;
-      let buildingId =  req.params.buildingid;
+      let buildingId =  req.params.buildingId;
       let costHeadBudgetedAmount =  req.body;
 
       projectService.updateBudgetedCostForCostHead(buildingId, costHeadBudgetedAmount, user,(error, result) => {
@@ -388,7 +388,7 @@ class ProjectController {
     try {
       logger.info('Project controller, addCostHeadBuilding has been hit');
       let user = req.user;
-      let buildingId = req.params.buildingid;
+      let buildingId = req.params.buildingId;
       let costHeadDetails = <CostHead> req.body;
       let projectService = new ProjectService();
       let query = {$push: { costHead : costHeadDetails}};
@@ -412,12 +412,12 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingId;
-      let costheadId = req.params.costheadId;
-      let subcategoryId =req.params.subCategoryId;
-      let workitemId = req.params.workitemId;
+      let costHeadId = req.params.costHeadId;
+      let subCategoryId =req.params.subCategoryId;
+      let workItemId = req.params.workItemId;
       let quantity = req.body.item;
       let projectService = new ProjectService();
-      projectService.updateQuantity(projectId, buildingId, costheadId, subcategoryId, workitemId, quantity, user, (error, result) => {
+      projectService.updateQuantity(projectId, buildingId, costHeadId, subCategoryId, workItemId, quantity, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -435,12 +435,12 @@ class ProjectController {
       logger.info('Project controller, getSubcategoryByCostHeadId has been hit');
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
-      let costhead = req.params.costheadId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = req.params.costHeadId;
 
       let projectService = new ProjectService();
 
-      projectService.getAllSubcategoriesByCostHeadId(projectId, buildingId, costhead, user, (error, result) => {
+      projectService.getAllSubcategoriesByCostHeadId(projectId, buildingId, costHeadId, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -460,10 +460,10 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingId;
-      let costheadId = req.params.costheadId;
+      let costHeadId = req.params.costHeadId;
       let subCategoryId = parseInt(req.params.subCategoryId);
       let projectService = new ProjectService();
-      projectService.getWorkitemList(projectId, buildingId, costheadId, subCategoryId, user, (error, result) => {
+      projectService.getWorkitemList(projectId, buildingId, costHeadId, subCategoryId, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -481,11 +481,11 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingId;
-      let costheadId : number = parseInt(req.params.costheadId);
+      let costHeadId : number = parseInt(req.params.costHeadId);
       let subCategoryId : number = parseInt(req.params.subCategoryId);
       let workitem: WorkItem = new WorkItem(req.body.name, req.body.rateAnalysisId);
       let projectService = new ProjectService();
-      projectService.addWorkitem(projectId, buildingId, costheadId, subCategoryId, workitem, user, (error, result) => {
+      projectService.addWorkitem(projectId, buildingId, costHeadId, subCategoryId, workitem, user, (error, result) => {
         if(error
         ) {
           next(error);
@@ -503,13 +503,13 @@ class ProjectController {
       logger.info('Project controller, getSubcategoryByCostHeadId has been hit');
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
-      let costhead = req.params.costheadId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = req.params.costHeadId;
       let subcategoryObject = req.body;
 
       let projectService = new ProjectService();
 
-      projectService.addSubcategoryToCostHead(projectId, buildingId, costhead, subcategoryObject, user, (error, result) => {
+      projectService.addSubcategoryToCostHead(projectId, buildingId, costHeadId, subcategoryObject, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -529,9 +529,9 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingId;
-      let costheadId = parseInt(req.params.costheadId);
+      let costHeadId = parseInt(req.params.costHeadId);
       let projectService = new ProjectService();
-      projectService.getSubcategory(projectId, buildingId, costheadId, user, (error, result) => {
+      projectService.getSubcategory(projectId, buildingId, costHeadId, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -547,8 +547,8 @@ class ProjectController {
       logger.info('Project controller, deleteSubcategoryToCostHeadId has been hit');
       let user = req.user;
       let projectId = req.params.id;
-      let buildingId = req.params.buildingid;
-      let costhead = req.params.costheadId;
+      let buildingId = req.params.buildingId;
+      let costhead = req.params.costHeadId;
       let subcategoryObject = req.body;
 
       let projectService = new ProjectService();

@@ -24,10 +24,16 @@ class ReportRoutes {
   get routes () : express.Router {
 
     var controller = this._reportController;
-    router.get('/:type/project/:id/rate/:rate/area/:area', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+
+    //Provide all buildings in a Project with thumbrule and estimate report with particular area and unit.
+    router.get('/:type/project/:projectId/rate/:rate/area/:area', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getProject, this._responseInterceptor.exit);
+
+    //Provide all costheads from rate analysis
     router.get('/costHeads', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRateAnalysisCostHeads, this._responseInterceptor.exit);
+
+    //Provide all workitems from rate analysis
     router.get('/workItems', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRateAnalysisWorkItems, this._responseInterceptor.exit);
     return router;

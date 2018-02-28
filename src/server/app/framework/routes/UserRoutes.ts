@@ -77,7 +77,7 @@ class UserRoutes {
         authInterceptor.secureApiCheck, controller.sendVerificationMail);*/
 
       /*router.use(sharedService.errorHandler);*/
-
+      //Retrive list of project
       router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
         return router;
     }

@@ -319,12 +319,12 @@ class ProjectService {
     });
   }
 
-  getRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number, workitemId:number, user : User,
+  getRate(projectId:string, buildingId:string, costHeadId:number,subCategoryId:number, workItemId:number, user : User,
           callback:(error: any, result: any)=> void) {
     logger.info('Project service, getRate has been hit');
 
     let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
-    rateAnalysisServices.getRate(workitemId, (error, rateData) => {
+    rateAnalysisServices.getRate(workItemId, (error, rateData) => {
       if (error) {
         callback(error, null);
       } else {
@@ -335,8 +335,8 @@ class ProjectService {
     });
   }
 
-  updateRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number,
-             workitemId:number, rate :Rate, user : User, callback:(error: any, result: any)=> void) {
+  updateRate(projectId:string, buildingId:string, costHeadId:number,subCategoryId:number,
+             workItemId:number, rate :Rate, user : User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateRate has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       logger.info('Project service, findById has been hit');
@@ -345,12 +345,12 @@ class ProjectService {
       } else {
         let rateAnalysisId: number;
         for(let index = 0; building.costHeads.length > index; index++) {
-          if(building.costHeads[index].rateAnalysisId === costheadId) {
+          if(building.costHeads[index].rateAnalysisId === costHeadId) {
             for(let indexSubcategory = 0; building.costHeads[index].subCategories.length > indexSubcategory; indexSubcategory++) {
-              if (building.costHeads[index].subCategories[indexSubcategory].rateAnalysisId === subcategoryId) {
+              if (building.costHeads[index].subCategories[indexSubcategory].rateAnalysisId === subCategoryId) {
                 for(let indexWorkitem = 0; building.costHeads[index].subCategories[indexSubcategory].workItems.length >
                 indexWorkitem; indexWorkitem++) {
-                  if (building.costHeads[index].subCategories[indexSubcategory].workItems[indexWorkitem].rateAnalysisId === workitemId) {
+                  if (building.costHeads[index].subCategories[indexSubcategory].workItems[indexWorkitem].rateAnalysisId === workItemId) {
                     building.costHeads[index].subCategories[indexSubcategory].workItems[indexWorkitem].rate=rate;
                   }
                 }
@@ -371,8 +371,8 @@ class ProjectService {
     });
   }
 
-  deleteQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string,
-                 workitemId:string, user:User, item:string, callback:(error: any, result: any)=> void) {
+  deleteQuantity(projectId:string, buildingId:string, costHeadId:string, subCategoryId:string,
+                 workItemId:string, user:User, item:string, callback:(error: any, result: any)=> void) {
     logger.info('Project service, deleteQuantity has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error
@@ -380,9 +380,9 @@ class ProjectService {
         callback(error, null);
       } else {
         let quantity: Quantity;
-         this.costHeadId = parseInt(costheadId);
-          this.subCategoryId = parseInt(subcategoryId);
-          this.workItemId = parseInt(workitemId);
+         this.costHeadId = parseInt(costHeadId);
+          this.subCategoryId = parseInt(subCategoryId);
+          this.workItemId = parseInt(workItemId);
 
           for(let index = 0; building.costHeads.length > index; index++) {
             if (building.costHeads[index].rateAnalysisId === this.costHeadId) {
@@ -442,7 +442,7 @@ class ProjectService {
     });
   }
 
-  deleteWorkitem(projectId:string, buildingId:string, costheadId:number, subcategoryId:number, workitemId:number, user:User,
+  deleteWorkitem(projectId:string, buildingId:string, costHeadId:number, subCategoryId:number, workItemId:number, user:User,
                  callback:(error: any, result: any)=> void) {
     logger.info('Project service, delete Workitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
@@ -455,13 +455,13 @@ class ProjectService {
         var flag = 0;
 
         for (let index = 0; index < costHeadList.length; index++) {
-          if (costheadId === costHeadList[index].rateAnalysisId) {
+          if (costHeadId === costHeadList[index].rateAnalysisId) {
             subCategoryList = costHeadList[index].subCategories;
             for (let subcategoryIndex = 0; subcategoryIndex < subCategoryList.length; subcategoryIndex++) {
-              if (subcategoryId === subCategoryList[subcategoryIndex].rateAnalysisId) {
+              if (subCategoryId === subCategoryList[subcategoryIndex].rateAnalysisId) {
                 WorkItemList = subCategoryList[subcategoryIndex].workItems;
                 for (let workitemIndex = 0; workitemIndex < WorkItemList.length; workitemIndex++) {
-                  if (workitemId === WorkItemList[workitemIndex].rateAnalysisId) {
+                  if (workItemId === WorkItemList[workitemIndex].rateAnalysisId) {
                     flag = 1;
                     WorkItemList.splice(workitemIndex, 1);
                   }
@@ -546,7 +546,7 @@ class ProjectService {
     });
   }
 
-  updateQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string, workitemId:string,
+  updateQuantity(projectId:string, buildingId:string, costHeadId:string, subCategoryId:string, workItemId:string,
                  quantity:any, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateQuantity has been hit');
     this.buildingRepository.findById(buildingId, (error, building) => {
@@ -556,11 +556,11 @@ class ProjectService {
         let costHeadList = building.costHeads;
         let quantityArray  : Quantity;
         for (let index = 0; index < costHeadList.length; index++) {
-          if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+          if (parseInt(costHeadId) === costHeadList[index].rateAnalysisId) {
             for (let index1 = 0; index1 < costHeadList[index].subCategories.length; index1++) {
-              if (parseInt(subcategoryId) === costHeadList[index].subCategories[index1].rateAnalysisId) {
+              if (parseInt(subCategoryId) === costHeadList[index].subCategories[index1].rateAnalysisId) {
                 for (let index2 = 0; index2 < costHeadList[index].subCategories[index1].workItems.length; index2++) {
-                  if (parseInt(workitemId) === costHeadList[index].subCategories[index1].workItems[index2].rateAnalysisId) {
+                  if (parseInt(workItemId) === costHeadList[index].subCategories[index1].workItems[index2].rateAnalysisId) {
                     quantityArray  = costHeadList[index].subCategories[index1].workItems[index2].quantity;
                     quantityArray.quantityItems = quantity;
                     quantityArray.total = 0;
@@ -583,11 +583,11 @@ class ProjectService {
               let costHeadList = building.costHeads;
               let quantity  : Quantity;
               for (let index = 0; index < costHeadList.length; index++) {
-                if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+                if (parseInt(costHeadId) === costHeadList[index].rateAnalysisId) {
                   for (let index1 = 0; index1 < costHeadList[index].subCategories.length; index1++) {
-                    if (parseInt(subcategoryId) === costHeadList[index].subCategories[index1].rateAnalysisId) {
+                    if (parseInt(subCategoryId) === costHeadList[index].subCategories[index1].rateAnalysisId) {
                       for (let index2 = 0; index2 < costHeadList[index].subCategories[index1].workItems.length; index2++) {
-                        if (parseInt(workitemId) === costHeadList[index].subCategories[index1].workItems[index2].rateAnalysisId) {
+                        if (parseInt(workItemId) === costHeadList[index].subCategories[index1].workItems[index2].rateAnalysisId) {
                           quantity  = costHeadList[index].subCategories[index1].workItems[index2].quantity;
                         }
                       }
@@ -607,7 +607,7 @@ class ProjectService {
     });
   }
 
-  getAllSubcategoriesByCostHeadId(projectId:string, buildingId:string, costheadId:string, user:User,
+  getAllSubcategoriesByCostHeadId(projectId:string, buildingId:string, costHeadId:string, user:User,
                                   callback:(error: any, result: any)=> void) {
     let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
     let url = config.get('rateAnalysisAPI.subCategories');
@@ -615,7 +615,7 @@ class ProjectService {
       if(error) {
         callback(error, null);
       } else {
-        let costHead = parseInt(costheadId);
+        let costHead = parseInt(costHeadId);
         let subCategoriesList  =  subCategories.SubItemType;
         let sqlQuery = 'SELECT subCategoriesList.C1 AS rateAnalysisId, subCategoriesList.C2 AS subCategory ' +
           'FROM ? AS subCategoriesList WHERE subCategoriesList.C3 = '+ costHead;
@@ -625,11 +625,11 @@ class ProjectService {
     });
   }
 
-  getWorkitemList(projectId:string, buildingId:string, costheadId:number, subCategoryId:number, user:User,
+  getWorkitemList(projectId:string, buildingId:string, costHeadId:number, subCategoryId:number, user:User,
                   callback:(error: any, result: any)=> void) {
     logger.info('Project service, getWorkitemList has been hit');
     let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
-    rateAnalysisServices.getWorkitemList(costheadId, subCategoryId, (error, workitemList)=> {
+    rateAnalysisServices.getWorkitemList(costHeadId, subCategoryId, (error, workitemList)=> {
       if(error) {
         callback(error, null);
       }else {
@@ -638,7 +638,7 @@ class ProjectService {
     });
   }
 
-  addWorkitem(projectId:string, buildingId:string, costheadId:number, subCategoryId:number, workitem: WorkItem,
+  addWorkitem(projectId:string, buildingId:string, costHeadId:number, subCategoryId:number, workitem: WorkItem,
               user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, addWorkitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
@@ -647,7 +647,7 @@ class ProjectService {
       } else {
         let responseWorkitem : Array<WorkItem>= null;
         for(let index = 0; building.costHeads.length > index; index++) {
-          if(building.costHeads[index].rateAnalysisId === costheadId) {
+          if(building.costHeads[index].rateAnalysisId === costHeadId) {
             let subCategory = building.costHeads[index].subCategories;
             for(let subCategoryIndex = 0; subCategory.length > subCategoryIndex; subCategoryIndex++) {
               if(subCategory[subCategoryIndex].rateAnalysisId === subCategoryId) {
@@ -671,12 +671,12 @@ class ProjectService {
     });
   }
 
-  addSubcategoryToCostHead(projectId:string, buildingId:string, costheadId:string, subcategoryObject : any, user:User,
+  addSubcategoryToCostHead(projectId:string, buildingId:string, costHeadId:string, subcategoryObject : any, user:User,
     callback:(error: any, result: any)=> void) {
 
     let subCategoryObj : SubCategory = new SubCategory(subcategoryObject.subCategory, subcategoryObject.subCategoryId);
 
-    let query = {'_id' : buildingId, 'costHeads.rateAnalysisId' : parseInt(costheadId)};
+    let query = {'_id' : buildingId, 'costHeads.rateAnalysisId' : parseInt(costHeadId)};
     let newData = { $push: { 'costHeads.$.subCategories': subCategoryObj }};
 
     this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {
@@ -726,7 +726,7 @@ class ProjectService {
     });
   }
 
-  getSubcategory(projectId:string, buildingId:string, costheadId:number, user:User, callback:(error: any, result: any)=> void) {
+  getSubcategory(projectId:string, buildingId:string, costHeadId:number, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, getSubcategory has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
@@ -734,7 +734,7 @@ class ProjectService {
       } else {
         let subCategories :Array<SubCategory> = null;
         for(let index = 0; building.costHeads.length > index; index++) {
-          if(building.costHeads[index].rateAnalysisId === costheadId) {
+          if(building.costHeads[index].rateAnalysisId === costHeadId) {
             subCategories = building.costHeads[index].subCategories;
             for(let subcategoryIndex = 0 ; subcategoryIndex < subCategories.length; subcategoryIndex ++) {
               let workitems = subCategories[subcategoryIndex].workItems;

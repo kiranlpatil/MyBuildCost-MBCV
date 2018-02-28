@@ -94,7 +94,7 @@ class RateAnalysisService {
     });
   }
 
-  getRate(workitemId: number, callback:(error: any, data:any) => void) {
+  getRate(workItemId: number, callback:(error: any, data:any) => void) {
     let url = config.get('rateAnalysisAPI.unit');
     this.getApiCall(url, (error, unitData) => {
       if(error) {
@@ -108,12 +108,12 @@ class RateAnalysisService {
           } else {
             let rate = data['RateAnalysisData'];
             let sql = 'SELECT rate.C5 AS quantity, unit.C2 As unit FROM ? AS rate JOIN ? AS unit on unit.C1 =  rate.C8 and' +
-              ' rate.C1 = '+ workitemId;
+              ' rate.C1 = '+ workItemId;
             let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS item,ROUND(rate.C7,2) AS quantity,ROUND(rate.C3,2) AS rate,' +
               ' ROUND(rate.C3*rate.C7,2) AS totalAmount, rate.C6 type, unit.C2 As unit FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
-              '  WHERE rate.C1 = '+ workitemId;
+              '  WHERE rate.C1 = '+ workItemId;
             let sql3 = 'SELECT SUM(rate.C3*rate.C7) / SUM(rate.C7) AS total  FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
-              '  WHERE rate.C1 = '+ workitemId;
+              '  WHERE rate.C1 = '+ workItemId;
             let quantityAndUnit = alasql(sql, [rate, unitData]);
             let rateResult : Rate = new Rate();
             let totalrateFromRateAnalysis = alasql(sql3, [rate, unitData]);

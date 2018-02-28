@@ -35,8 +35,8 @@ export class CostSummaryService extends BaseService {
 
   // Cost Head CRUD API
   inActiveCostHead(projectId:string, buildingId:string, costHeadId:number) {
-    var url = 'project/'+projectId+'/'+API.BUILDING+'/'+buildingId+'/'+'costHead/'+costHeadId+'/false';
-    let body = {};
+    var url = 'project/'+projectId+'/'+API.BUILDING+'/'+buildingId+'/'+'costHead/'+costHeadId+'/'+'activeStatus'+'/false';
+  let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
   }
@@ -49,7 +49,7 @@ export class CostSummaryService extends BaseService {
   // Reconsider this method
   activeCostHead( projectId : string, buildingId : string, selectedInactiveCostHeadId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/costHead/' +
-      selectedInactiveCostHeadId + '/true';
+      selectedInactiveCostHeadId +'/'+'activeStatus'+ '/true';
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);

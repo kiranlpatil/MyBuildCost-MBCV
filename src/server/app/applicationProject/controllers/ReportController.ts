@@ -21,7 +21,7 @@ class ReportController {
       logger.info('Report Controller, getProject has been hit');
       let reportService = new ReportService();
       let user = req.user;
-      let projectId =  req.params.id;
+      let projectId =  req.params.projectId;
       let reportType =  req.params.type;
       let projectRate =  req.params.rate;
       let projectArea =  req.params.area;
