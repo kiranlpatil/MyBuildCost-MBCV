@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
 import { Project } from '../../model/project';
+import { Label } from '../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -42,4 +43,9 @@ export class ProjectFormComponent {
       this.onSubmitEvent.emit(this.projectModel);
     }
   }
+
+  getLabels() {
+    return Label;
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavigationRoutes, ImagePath } from '../../../shared/constants';
+import { NavigationRoutes, ImagePath, Headings, Label, Button } from '../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../shared/index';
 import { ProjectService } from '../project/project.service';
 import { Project } from './../model/project';
@@ -57,5 +57,17 @@ export class CreateProjectComponent {
 
   goBack() {
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+  }
+
+  getHeadings() {
+    return Headings;
+  }
+
+  getLabels() {
+    return Label;
+  }
+
+  getButton() {
+    return Button;
   }
 }

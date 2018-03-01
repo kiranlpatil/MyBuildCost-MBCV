@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Label } from '../../../../shared/constants';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
 import { Building } from '../../model/building';
 
@@ -46,4 +47,9 @@ export class BuildingFormComponent {
       this.onSubmitEvent.emit(this.buildingModel);
     }
   }
+
+  getLabels() {
+    return Label;
+  }
+
 }

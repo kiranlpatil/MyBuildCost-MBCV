@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavigationRoutes } from '../../../shared/constants';
+import { NavigationRoutes, Button } from '../../../shared/constants';
 import { ProjectService } from '../project/project.service';
 import { Project } from './../model/project';
 
@@ -39,5 +39,9 @@ export class ProjectListComponent implements OnInit {
 
   onGetAllProjectFailure(error : any) {
     console.log(error);
+  }
+
+  getButton() {
+    return Button;
   }
 }

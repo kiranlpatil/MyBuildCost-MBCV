@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavigationRoutes } from '../../../../shared/constants';
+import { NavigationRoutes, Menus } from '../../../../shared/constants';
 import { ProjectService } from '../../project/project.service';
 import { SessionStorage,SessionStorageService } from '../../../../shared/index';
 import { Project } from './../../model/project';
@@ -62,4 +62,7 @@ export class ProjectListHeaderComponent implements OnInit {
     }
   }
 
+  getMenus() {
+    return Menus;
+  }
 }

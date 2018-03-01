@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ImagePath, NavigationRoutes } from '../../../shared/index';
+import { Headings, Button, Label } from '../../../shared/constants';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,5 +20,17 @@ export class CreateNewProjectComponent {
 
   goToCreateProject() {
     this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+  }
+
+  getHeadings() {
+    return Headings;
+  }
+
+  getLabels() {
+    return Label;
+  }
+
+  getButton() {
+    return Button;
   }
 }

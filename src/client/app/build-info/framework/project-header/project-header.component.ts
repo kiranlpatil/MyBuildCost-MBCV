@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorage, SessionStorageService } from '../../../shared/index';
+import { Menus } from '../../../shared/constants';
+
 @Component({
   moduleId: module.id,
   selector: 'bi-project-header',
@@ -20,4 +22,9 @@ export class ProjectHeaderComponent implements OnInit {
   getCurrentProjectId() {
     return SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
   }
+
+  getMenus() {
+    return Menus;
+  }
+
 }
