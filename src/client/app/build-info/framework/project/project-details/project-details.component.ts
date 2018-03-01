@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Messages, } from '../../../../shared/constants';
+import { Messages } from '../../../../shared/constants';
 import { ProjectService } from '../project.service';
 import { Project } from './../../model/project';
 import { Message, MessageService } from '../../../../shared/index';

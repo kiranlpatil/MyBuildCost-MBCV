@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Messages } from '../../../../../shared/constants';
+import { Messages, Headings } from '../../../../../shared/constants';
 import { Building } from './../../../model/building';
 import { MessageService } from '../../../../../shared/index';
 import { Message } from '../../../../../shared/index';
@@ -96,5 +96,9 @@ export class BuildingDetailsComponent implements OnInit {
       message.isError = true;
       this.messageService.message(message);
     }
+  }
+
+  getHeadings() {
+    return Headings;
   }
 }

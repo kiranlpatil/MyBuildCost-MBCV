@@ -313,6 +313,9 @@ export class Headings {
   public static RESET_PASSWORD_HEADING: string = 'RESET PASSWORD';
   public static CREATE_YOUR_FIRST_PROJECT: string = 'Create Your First Project';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
+  public static EDIT_BUILDING: string = 'Edit Building';
+  public static LIST_BUILDING: string = 'Buildings List';
+  public static ADD_NEW_BUILDING: string = 'Add Building in Project';
 }
 
 export class Label {

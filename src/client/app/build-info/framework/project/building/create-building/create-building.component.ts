@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Messages, NavigationRoutes, ImagePath } from '../../../../../shared/constants';
+import { Messages, NavigationRoutes, ImagePath, Headings, Button } from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../../shared/index';
 import { Building } from '../../../model/building';
@@ -58,4 +58,11 @@ export class CreateBuildingComponent {
     console.log(error);
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
+  getButton() {
+    return Button;
+  }
 }

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MaterialTakeoffService } from './material-takeoff.service';
 
 @Component({
   moduleId: module.id,
@@ -9,8 +7,4 @@ import { MaterialTakeoffService } from './material-takeoff.service';
 })
 
 export class MaterialTakeoffComponent {
-
-  constructor(private materialTakeoffService: MaterialTakeoffService, private _router: Router) {
-
-  }
 }
