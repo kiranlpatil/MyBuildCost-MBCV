@@ -1,4 +1,4 @@
-import Project = require('../../../applicationProject/dataaccess/model/Project');
+import Project = require('../../../applicationProject/dataaccess/model/project/Project');
 
 interface UserModel {
   user_id:string;

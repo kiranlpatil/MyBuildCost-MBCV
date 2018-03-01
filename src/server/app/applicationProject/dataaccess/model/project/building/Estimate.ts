@@ -1,4 +1,4 @@
-import EstimateReport = require('./EstimateReport');
+import EstimateReport = require('../reports/EstimateReport');
 
 class Estimate {
   name: string;

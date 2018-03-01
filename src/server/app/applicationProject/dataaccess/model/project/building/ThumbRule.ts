@@ -1,4 +1,4 @@
-import ThumbRuleReport = require('./ThumbRuleReport');
+import ThumbRuleReport = require('../reports/ThumbRuleReport');
 
 class  ThumbRule {
   name: string;

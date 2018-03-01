@@ -1,6 +1,6 @@
-import Building = require('./Building');
-import Category = require('./CostHead');
-import Rate = require('./Rate');
+import Building = require('./building/Building');
+import Category = require('./building/CostHead');
+import Rate = require('./building/Rate');
 
 class Project {
   _id?:string;

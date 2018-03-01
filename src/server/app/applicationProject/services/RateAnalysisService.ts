@@ -3,13 +3,13 @@ import ProjectAsset = require('../../framework/shared/projectasset');
 import User = require('../../framework/dataaccess/mongoose/user');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import CostControllException = require('../exception/CostControllException');
-import WorkItem = require('../dataaccess/model/WorkItem');
+import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 let request = require('request');
 let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Rate Analysis Service');
 import alasql = require('alasql');
-import Rate = require('../dataaccess/model/Rate');
+import Rate = require('../dataaccess/model/project/building/Rate');
 
 class RateAnalysisService {
   APP_NAME: string;
