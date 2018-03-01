@@ -1,7 +1,6 @@
 import { WorkItem } from './work-item';
 
 export class  SubCategory {
-
   name: string;
   rateAnalysisId: number;
   amount: number;

@@ -3,7 +3,7 @@ import { Estimate }  from './estimate';
 
 
 export class BuildingReport {
-  _id:string;
+  _id?:string;
   name:string;
   area:number;
   thumbRule : ThumbRule;

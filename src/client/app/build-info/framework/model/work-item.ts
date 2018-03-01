@@ -2,7 +2,6 @@ import { Units } from '../../../shared/constants';
 import { Quantity } from './quantity';
 import { Rate } from './rate';
 export class WorkItem {
-
   name: string;
   rateAnalysisId: number;
   quantity: Quantity;

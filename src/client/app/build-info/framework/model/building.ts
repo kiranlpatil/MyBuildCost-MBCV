@@ -1,4 +1,5 @@
 export class Building {
+  _id?:string;
   name: string = '';
   totalSlabArea: number;
   totalCarpetAreaOfUnit: number;

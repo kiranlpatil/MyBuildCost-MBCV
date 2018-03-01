@@ -3,6 +3,7 @@ import Category = require('./CostHead');
 import Rate = require('./Rate');
 
 class Project {
+  _id?:string;
   name: string;
   region: string;
   plotPeriphery: number;

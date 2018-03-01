@@ -1,4 +1,3 @@
-import Item = require('./Item');
 import Quantity = require('./Quantity');
 import Rate = require('./Rate');
 import Constants = require('./../../shared/constants');

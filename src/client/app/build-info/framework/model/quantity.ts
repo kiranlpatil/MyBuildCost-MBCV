@@ -1,7 +1,6 @@
 import { QuantityItem } from './quantity-item';
 
 export class Quantity {
-
   total: number;
   quantityItems: Array<QuantityItem>;
 
