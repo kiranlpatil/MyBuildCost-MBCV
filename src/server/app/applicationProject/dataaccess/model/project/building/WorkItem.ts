@@ -10,6 +10,7 @@ class WorkItem {
   rate: Rate;
   amount: number;
   remarks: string;
+  active: boolean;
 
   constructor(name:string, rateAnalysisId:number) {
     this.name = name;
