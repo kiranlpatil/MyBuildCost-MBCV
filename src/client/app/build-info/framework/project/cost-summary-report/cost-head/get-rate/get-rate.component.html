@@ -2,7 +2,7 @@
   <div class="pull-left">
     <div class="pull-left" *ngIf="rateItemsArray!==undefined">
       <div class="pull-left quantity-label">
-          Quantity
+          {{getHeadings().QUANTITY}}
       </div>
       <div class="pull-left">
         <input [(ngModel)]="rateItemsArray.quantity" id="rateQuantity" type="number" class="form-control quantity-count"
@@ -19,11 +19,11 @@
   <div class="">
     <table class="">
         <thead>
-        <th>Description</th>
-        <th>Qty.</th>
-        <th>Unit</th>
-        <th>Rate/Unit</th>
-        <th>Amount</th>
+        <th>{{getTableHeadings().DESCRIPTION}}</th>
+        <th>{{getTableHeadings().QUANTITY}}</th>
+        <th>{{getTableHeadings().UNIT}}</th>
+        <th>{{getTableHeadings().RATE_PER_UNIT}}</th>
+        <th>{{getTableHeadings().AMOUNT}}</th>
         </thead>
         <tbody>
         <tr *ngFor="let rateItem of rateItemsArray.rateItems | groupBy:'type'; let k = index">
@@ -61,7 +61,7 @@
         <tfoot>
       <tr>
         <td class="total-amount text-left">
-          <label>Total</label>
+          <label>{{getLabel().TOTAL}}</label>
         </td>
         <td class="total-amount">
           {{totalQuantity}}
@@ -78,6 +78,6 @@
       </tr>
       </tfoot>
       </table>
-    <button type="button" class="save-btn" (click)="updateRate(rateItemsArray)">Save</button>
+    <button type="button" class="save-btn" (click)="updateRate(rateItemsArray)">{{getButton().SAVE}}</button>
   </div>
 </div>

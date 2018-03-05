@@ -3,14 +3,14 @@
   <div class="container">
     <div class="col-sm-8 col-xs-12 no-padding">
       <div class="col-sm-5">
-        <h5>Construction Cost (Material + Labour)</h5>
+        <h5>{{getHeadings.CONSTRUCTION_COST}}</h5>
       </div>
       <div class="col-sm-7 text-right padding-top-7">
-        <label>Costing in</label>
+        <label>{{getLabel().COSTING_BY_UNIT}}</label>
         <select class="select-costing" (change)="onChangeCostingByUnit($event.target.value)">
           <option *ngFor="let cIn of costIn" [value]="cIn.costInId">{{cIn.costInId}}</option>
         </select>
-        <label>Costing per</label>
+        <label>{{getLabel().COSTING_PER_AREA}}</label>
         <select class="select-costing" (change)="onChangeCostingByArea($event.target.value)">
           <option *ngFor="let cPer of costPer" [value]="cPer.costPerId">{{cPer.costPerId}}</option>
         </select>
@@ -22,17 +22,17 @@
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}">
-                  {{building.name}} <span class="slab-area"> Total {{defaultCostingByArea}} : {{building.area}} {{defaultCostingByUnit}}
-                  <span *ngIf="compareIndex !== i"> Budgeted Cost : {{building.thumbRule.totalBudgetedCost|number}}</span></span>
+                  {{building.name}} <span class="slab-area"> {{getLabel().TOTAL}} {{defaultCostingByArea}} : {{building.area}} {{defaultCostingByUnit}}
+                  <span *ngIf="compareIndex !== i"> {{getLabel().BUDGETED_COST}} : {{building.thumbRule.totalBudgetedCost|number}}</span></span>
                 </a>
               </h4>
               <div class="dropdown menu-items">
                 <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
                 <ul class = "dropdown-menu">
-                  <li><p  data-toggle="modal" data-target="#myModal" (click)="cloneBuilding(building._id)">Clone</p></li>
-                  <li><p (click)="goToEditBuilding(building._id)">Edit</p></li>
-                  <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">Delete</p></li>
-                  <li><p (click)="goToCreateBuilding()">Add Building</p></li>
+                  <li><p  data-toggle="modal" data-target="#myModal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
+                  <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
+                  <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
+                  <li><p (click)="goToCreateBuilding()">{{getMenus().ADD_BUILDING}}</p></li>
                 </ul>
               </div>
             </div>
@@ -41,15 +41,15 @@
                 <table class="table table-row-spacing table-dashboard">
                   <thead>
                     <tr>
-                      <th rowspan="2" class="border-left">Cost Head</th>
-                      <th colspan="2" class="border-left">By Thumbrule</th>
-                      <th colspan="2" class="border-left">Estimated <span class="sub-heading">(as per project quantities & rates)</span></th>
+                      <th rowspan="2" class="border-left">{{getLabel().COST_HEAD}}</th>
+                      <th colspan="2" class="border-left">{{getLabel().REPORT_BY_THUMBRULE}}</th>
+                      <th colspan="2" class="border-left">{{getLabel().ESTIMATED}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span></th>
                       <th>&nbsp;<div class="white-bg"></div></th>
                     </tr>
                     <tr>
-                      <th><span class="sub-heading">Budgeted Cost</span></th>
+                      <th><span class="sub-heading">{{getLabel().BUDGETED_COST}} </span></th>
                       <th class="border-left"><span class="sub-heading">{{defaultCostingByUnit}}<br/>{{defaultCostingByArea}}</span></th>
-                      <th><span class="sub-heading">Estimated Cost</span></th>
+                      <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}} </span></th>
                       <th class="border-left" ><span class="sub-heading">{{defaultCostingByUnit}}<br/>{{defaultCostingByArea}}</span></th>
                       <th>&nbsp;</th>
                     </tr>
@@ -108,7 +108,7 @@
                       </td>
                     </tr>
                   <tr class="total" *ngIf="(building.thumbRule && building.estimate)">
-                    <td>Total</td>
+                    <td>{{getLabel().TOTAL}}</td>
                     <td>{{building.thumbRule.totalBudgetedCost|number}}</td>
                     <td>{{building.thumbRule.totalRate|number}}</td>
                     <td>{{building.estimate.totalEstimatedCost|number}}</td>
@@ -192,7 +192,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <a>
-                Grand Total <span class="slab-area"> Total Project {{defaultCostingByArea}} : {{grandTotalofArea}} {{defaultCostingByUnit}}</span>
+                {{getLabel().GRAND_TOTAL}} <span class="slab-area">{{getLabel().TOTAL_PROJECT}} {{defaultCostingByArea}} : {{grandTotalofArea}} {{defaultCostingByUnit}}</span>
               </a>
             </h4>
           </div>
@@ -201,7 +201,7 @@
               <table class="table table-row-spacing table-dashboard">
                 <tbody>
                 <tr class="grand-total">
-                  <td class="border-left">Total</td>
+                  <td class="border-left">{{getLabel().TOTAL}}</td>
                   <td>{{grandTotalofBudgetedCost|number}}</td>
                   <td class="border-left">{{grandTotalofTotalRate|number}}</td>
                   <td>{{grandTotalofEstimatedCost|number}}</td>

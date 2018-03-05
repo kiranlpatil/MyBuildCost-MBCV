@@ -34,12 +34,12 @@
                 <table class="table table-row-spacing table-dashboard table-categories">
                   <thead *ngIf="workItemIndex === 0">
                   <tr>
-                    <th class="border-left">Item</th>
-                    <th class="border-left">Qty.</th>
-                    <th class="border-left">Unit</th>
-                    <th class="border-left">Rate</th>
-                    <th class="border-left">RateAnalysis</th>
-                    <th class="border-left">Amount</th>
+                    <th class="border-left">{{getTableHeadings().ITEM}}</th>
+                    <th class="border-left">{{getTableHeadings().QUANTITY}}</th>
+                    <th class="border-left">{{getTableHeadings().UNIT}}</th>
+                    <th class="border-left">{{getTableHeadings().RATE}}</th>
+                    <th class="border-left">{{getTableHeadings().RATEANALYSIS}}</th>
+                    <th class="border-left">{{getTableHeadings().AMOUNT}}</th>
                     <th></th>
                   </tr>
                   </thead>
@@ -103,10 +103,10 @@
 
                 <div *ngIf="showQuantity== true">
                   <div *ngIf="toggleQty==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===subCategoryIndex">
-                  <bi-cost-head-get-quantity [quantityItems]="quantityItemsArray"
-                                             [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
-                                             (refreshSubCategoryList)="refreshSubCategoryList()">
-                  </bi-cost-head-get-quantity>
+                      <bi-cost-head-get-quantity [quantityItems]="quantityItemsArray"
+                                                 [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
+                                                 (refreshSubCategoryList)="refreshSubCategoryList()">
+                      </bi-cost-head-get-quantity>
                    </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@
                 </tr>
                 <tr>
                   <td  class="add-items" colspan="7">
-                    <button type="button" class="btn btn-add-item" (click)="getWorkItemList(subCategoryDetails[subCategory].rateAnalysisId,subCategoryIndex)"><span class="glyphicon glyphicon-plus"></span>Add WorkItem</button>
+                    <button type="button" class="btn btn-add-item" (click)="getWorkItemList(subCategoryDetails[subCategory].rateAnalysisId,subCategoryIndex)"><span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}} {{getButton().WORKITEM}}</button>
                   </td>
                 </tr>
                 </tbody>
@@ -145,7 +145,7 @@
             </tr>
             <tr>
               <td classs="text-center">
-                <button type="button" class="btn btn-add-item" (click)="getSubCategoryList()"><span class="glyphicon glyphicon-plus"></span>Add SubCategory</button>
+                <button type="button" class="btn btn-add-item" (click)="getSubCategoryList()"><span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}} {{getButton().SUBCATEGORY}}</button>
               </td>
             </tr>
           </tbody>

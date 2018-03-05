@@ -316,6 +316,21 @@ export class Headings {
   public static EDIT_BUILDING: string = 'Edit Building';
   public static LIST_BUILDING: string = 'Buildings List';
   public static ADD_NEW_BUILDING: string = 'Add Building in Project';
+  public static COMMON_DEVELOPMENT : string = ' Common Developement : Electric Infrastructure';
+  public static CONSTRUCTION_COST : string = 'Construction Cost (Material + Labour)';
+  public static QUANTITY : string = 'Quantity';
+  }
+
+export class TableHeadings {
+  public static ITEM : string = 'Item';
+  public static QUANTITY : string = 'Qty.';
+  public static UNIT: string = 'Unit';
+  public static RATE : string = 'Rate';
+  public static RATEANALYSIS : string = 'RateAnalysis';
+  public static AMOUNT : string = 'Amount';
+  public static TOTAL: string = 'Total';
+  public static DESCRIPTION: string = 'Description';
+  public static RATE_PER_UNIT: string = 'Rate/Unit';
 }
 
 export class Label {
@@ -374,6 +389,19 @@ export class Label {
   public static AREA_UNIT_IN_SQFT: string = '(In sqft)';
   public static EXCLUDING_PARKING_FLOORS: string = '(Excluding parking floors)';
 
+  //COST-SUMMARY REPORT LABELS
+  public static COSTING_BY_UNIT : string = 'Costing in ';
+  public static COSTING_PER_AREA : string = 'Costing per ';
+  public static TOTAL : string = 'Total ';
+  public static BUDGETED_COST : string = 'Budgeted Cost ';
+  public static ESTIMATED_COST : string = 'Estimated Cost ';
+  public static COST_HEAD : string = 'Cost Head';
+  public static REPORT_BY_THUMBRULE : string = 'By Thumbrule';
+  public static ESTIMATED : string = 'Estimated ';
+  public static AS_PER_PROJECT : string = '(as per project quantities & rates)';
+  public static GRAND_TOTAL : string = 'Grand Total ';
+  public static TOTAL_PROJECT : string = 'Total Project';
+
 }
 
 export class Button {
@@ -389,6 +417,11 @@ export class Button {
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
   public static BACK_TO_HOME: string = 'Back to home';
   public static GO_BACK: string = 'Back';
+  public static SAVE: string = 'Save';
+  public static GET_AMOUNT: string = 'Get Amount';
+  public static ADD: string = 'Add ';
+  public static SUBCATEGORY: string = 'SubCategory';
+  public static WORKITEM: string = 'WorkItem';
 }
 
 export class Units {
@@ -409,4 +442,8 @@ export class Menus {
   public static MATERIAL_TAKEOFF = 'Material Takeoff';
   public static PROJECT_DETAILS = 'Project Details';
   public static MY_PROJECTS = 'My Projects';
+  public static CLONE = 'Clone';
+  public static EDIT = 'Edit';
+  public static DELETE = 'Delete';
+  public static ADD_BUILDING = 'Add Building';
 }

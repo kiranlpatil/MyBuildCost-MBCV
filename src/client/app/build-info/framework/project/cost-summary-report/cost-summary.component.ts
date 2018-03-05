@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
 import { BuildingService } from '../building/building.service';
 import { CostHead } from '../../model/costhead';
+import { Menus, Headings, Label } from '../../../../shared/constants';
 import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 
@@ -360,5 +361,17 @@ export class CostSummaryComponent implements OnInit {
     if(elementType === ProjectElements.BUILDING) {
       this.deleteBuilding();
     }
+  }
+
+  getMenus() {
+    return Menus;
+  }
+
+  getLabel() {
+    return Label;
+  }
+
+  getHeadings() {
+    return Headings;
   }
 }

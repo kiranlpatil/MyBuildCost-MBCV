@@ -1,6 +1,6 @@
 import { Component, OnInit , OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Messages, ProjectElements } from '../../../../../shared/constants';
+import { Messages, ProjectElements, TableHeadings, Button } from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, MessageService } from '../../../../../shared/index';
 import { Rate } from '../../../model/rate';
 import { CommonService } from '../../../../../shared/services/common.service';
@@ -406,6 +406,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
     if(elementType === ProjectElements.WORK_ITEM) {
       this.deleteWorkItem();
     }
+  }
+
+  getTableHeadings() {
+    return TableHeadings;
+  }
+
+  getButton() {
+    return Button;
   }
 
 }

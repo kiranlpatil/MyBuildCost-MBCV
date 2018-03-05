@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Messages } from '../../../../../../shared/constants';
+import { Messages, Button, TableHeadings, Label, Headings } from '../../../../../../shared/constants';
 import {
   SessionStorage, SessionStorageService,
   Message, MessageService
@@ -114,4 +114,19 @@ export class GetRateComponent {
     this.previousTotalQuantity = previousTotalQuantity;
   }
 
+  getButton() {
+    return Button;
+  }
+
+  getTableHeadings() {
+    return TableHeadings;
+  }
+
+  getLabel() {
+    return Label;
+  }
+
+  getHeadings() {
+    return Headings;
+  }
 }

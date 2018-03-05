@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Headings, TableHeadings } from '../../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -19,6 +20,15 @@ export class CommonAmenitiesComponent implements OnInit {
       this.projectId = params['projectId'];
     });
   }
+
+  getHeadings() {
+    return Headings;
+  }
+
+  getTableHeadings() {
+    return TableHeadings;
+  }
+
 }
 
 
