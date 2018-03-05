@@ -1,7 +1,7 @@
 import ClonedWorkItem = require('./ClonedWorkItem');
 
 class ClonedSubCategory {
-  name: String;
+  name: string;
   rateAnalysisId:number;
   active:boolean;
   amount:number;
