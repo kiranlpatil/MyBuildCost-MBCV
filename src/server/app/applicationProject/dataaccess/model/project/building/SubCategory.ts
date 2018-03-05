@@ -4,6 +4,7 @@ class  SubCategory {
   name: string;
   rateAnalysisId: number;
   amount: number;
+  active: boolean;
   workItems : Array<WorkItem>;
 
   constructor(name:string, rateAnalysisId: number) {
