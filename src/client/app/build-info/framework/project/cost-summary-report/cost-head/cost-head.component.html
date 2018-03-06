@@ -23,7 +23,7 @@
                        alt="Delete Workitems"
                        data-toggle="modal"
                        data-target="#deleteSubcategory"
-                       (click)="setSubCategoryDetailsForDelete(subCategoryDetails[subCategory])"/>
+                       (click)="setSubCategoryDetailsForDelete(subCategoryDetails[subCategory].rateAnalysisId)"/>
                 </div>
               </div>
             </div>
@@ -37,8 +37,8 @@
                     <th class="border-left">{{getTableHeadings().ITEM}}</th>
                     <th class="border-left">{{getTableHeadings().QUANTITY}}</th>
                     <th class="border-left">{{getTableHeadings().UNIT}}</th>
-                    <th class="border-left">{{getTableHeadings().RATE}}</th>
                     <th class="border-left">{{getTableHeadings().RATEANALYSIS}}</th>
+                    <th class="border-left">{{getTableHeadings().RATE_UNIT}}</th>
                     <th class="border-left">{{getTableHeadings().AMOUNT}}</th>
                     <th></th>
                   </tr>
@@ -135,11 +135,11 @@
       <div class="col-sm-12 no-padding add-subcategory">
         <table class="table table-dashboard table-row-spacing">
           <tbody>
-            <tr *ngIf="showSubcategoryListvar">
+            <tr *ngIf="showSubcategoryListvar && subcategoryArray.length!==0">
               <td>
                 <select (change)="onChangeAddSelectedSubCategory($event.target.value)">
                   <option [value]="selectItem">Select Subcategory</option>
-                  <option *ngFor="let subCategoryObj of subcategoryArray" [value]="subCategoryObj.rateAnalysisId">{{ subCategoryObj.subCategory }}</option>
+                  <option *ngFor="let subCategoryList of subcategoryArray" [value]="subCategoryList.rateAnalysisId">{{ subCategoryList.name }}</option>
                 </select>
               </td>
             </tr>
@@ -151,6 +151,24 @@
           </tbody>
         </table>
       </div>
+
+      <div class="col-md-12">
+        <div class="col-md-1">
+          Total
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1">{{totalQuantityOfWorkItems|number}}</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1">{{totalRateUnitOfWorkItems|number}}</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1">{{totalAmountOfWorkItems|number}}</div>
+        <div class="col-md-1"></div>
+      </div>
+
     </div>
     <div class="col-xs-4">
       <img src="./assets/build-info/dashboard/ads.png" />

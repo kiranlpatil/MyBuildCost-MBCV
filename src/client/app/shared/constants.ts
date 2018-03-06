@@ -165,6 +165,8 @@ export class Messages {
   public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM: string = 'Your cost head items updated successfully.';
   public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR: string = 'There is error in operation';
   public static MSG_SUCCESS_ADD_SUBCATEGORY: string = 'Subcategory added successfully.';
+  public static MSG_SUCCESS_DELETE_SUBCATEGORY: string = 'Subcategory deleted successfully.';
+  public static MSG_ALREADY_ADDED_ALL_SUBCATEGORIES: string = 'Already added all Categories.';
   public static MSG_SUCCESS_ADD_WORKITEM: string = 'Workitem added successfully.';
   public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
   public static MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM: string = 'Your costhead workitem deleted successfully.';
@@ -330,7 +332,7 @@ export class TableHeadings {
   public static BREADTH : string = 'Breadth';
   public static HEIGHT : string = 'Height';
   public static UNIT: string = 'Unit';
-  public static RATE : string = 'Rate';
+  public static RATE_UNIT : string = 'Rate/Unit';
   public static RATEANALYSIS : string = 'RateAnalysis';
   public static AMOUNT : string = 'Amount';
   public static TOTAL: string = 'Total';

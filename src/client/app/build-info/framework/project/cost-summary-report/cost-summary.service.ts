@@ -128,6 +128,15 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
+  //In Active Category
+  inActiveCategory( projectId : String, buildingId : string, costHeadId : number, subCategoryId : any) {
+    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
+      costHeadId +'/' + API.SUBCATEGORY + '/' + subCategoryId + '/' + API.COSTHEAD_ACTIVE_STATUS + '/' + API.COSTHEAD_ACTIVE_STATUS_FALSE;
+    let body = {};
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
   addSubCategory( projectId : string, buildingId : string, costHeadId : number, selectedSubCategory : any ) {
     let url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' +
       buildingId + '/'+ API.COSTHEAD +'/' + costHeadId + '/' + API.SUBCATEGORY;
@@ -137,6 +146,15 @@ export class CostSummaryService extends BaseService {
     };
 
     return this.httpDelegateService.postAPI(url, body);
+  }
+
+  //Active Category
+  activeCategory( projectId : string, buildingId : string, costHeadId : number, subCategoryId : number) {
+    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
+      costHeadId +'/' + API.SUBCATEGORY + '/' + subCategoryId + '/' + API.COSTHEAD_ACTIVE_STATUS + '/' + API.COSTHEAD_ACTIVE_STATUS_TRUE;
+    let body = {};
+
+    return this.httpDelegateService.putAPI(url, body);
   }
 
   //Workitems API
