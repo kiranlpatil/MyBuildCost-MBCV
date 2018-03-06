@@ -1,14 +1,15 @@
 import RateItem = require('./RateItem');
 
 class Rate {
-  rateFromRateAnalysis: any;
+  rateFromRateAnalysis: number;
   total : number;
   quantity: number;
   unit:string;
   rateItems: Array<RateItem>;
+  notes : string;
+  imageURL : string;
 
   constructor() {
-    this.rateFromRateAnalysis = 0;
     this.total = 0;
     this.quantity = 0;
     this.rateItems = new Array<RateItem>();

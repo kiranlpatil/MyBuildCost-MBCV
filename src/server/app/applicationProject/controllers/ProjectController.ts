@@ -94,9 +94,6 @@ class ProjectController {
       let projectId = req.params.projectId;
       let buildingDetails = <Building> req.body;
 
-      let defaultCategory = config.get('category.default');
-      buildingDetails.costHeads = defaultCategory;
-
       let projectService = new ProjectService();
       projectService.createBuilding( projectId, buildingDetails, user, (error, result) => {
         if(error) {
@@ -647,5 +644,27 @@ class ProjectController {
     }
   }
 
+  syncBuildingWithRateAnalysisData(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, syncBuildingWithRateAnalysisData has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+
+      let projectService = new ProjectService();
+
+      projectService.syncBuildingWithRateAnalysisData( projectId, buildingId, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('syncBuildingWithRateAnalysisData success');
+          logger.debug('Getting syncBuildingWithRateAnalysisData of Project ID : '+projectId+' Building ID : '+buildingId);
+          next(new Response(200,result));
+        }
+      });
+    } catch (e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 export  = ProjectController;

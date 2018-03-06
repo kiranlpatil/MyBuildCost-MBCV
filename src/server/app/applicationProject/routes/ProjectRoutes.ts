@@ -143,6 +143,12 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     //Update rate of workitem
     router.put('/:projectId/building/:buildingId/rate/costhead/:costHeadId/subcategory/:subCategoryId/workitem/:workItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.updateRate, controller.updateRate, this._responseInterceptor.exit);
+
+    /*Building- Routes: Rate Analysis Communication*/
+
+    //sync building with rate Analysis data
+    router.get('/:projectId/building/:buildingId/syncRateAnalysis',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.syncBuildingWithRateAnalysisData, this._responseInterceptor.exit);
     return router;
   }
 }
