@@ -87,15 +87,23 @@ this._requestInterceptor.intercept, interceptor.setCostHeadStatus, controller.se
     //Retrive subcategories for particular costhead
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/subcategory', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, interceptor.getSubCategory, controller.getSubCategory, this._responseInterceptor.exit);
-    //Provide list of subcategories from RateAnalysis
-    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/subcategorylist', this.authInterceptor.requiresAuth,this._requestInterceptor.intercept,
-      interceptor.getAllSubCategoriesByCostHeadId, controller.getAllSubCategoriesByCostHeadId, this._responseInterceptor.exit);
+
+    //Provide list of subcategories from Database
+    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/subcategorylist', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.getSubcategoryByCostHeadId, this._responseInterceptor.exit);
     //Add subcategory to costhead
     router.post('/:projectId/building/:buildingId/costhead/:costHeadId/subcategory', this.authInterceptor.requiresAuth,
-    this._requestInterceptor.intercept,interceptor.addSubCategoryByCostHeadId, controller.addSubCategoryByCostHeadId, this._responseInterceptor.exit);
+    this._requestInterceptor.intercept,interceptor.addSubCategoryByCostHeadId, controller.addSubCategoryByCostHeadId,
+      this._responseInterceptor.exit);
     //Delete subcategory from costhead
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/subcategory', this.authInterceptor.requiresAuth,
-      this._requestInterceptor.intercept, interceptor.deleteSubcategoryFromCostHead, controller.deleteSubcategoryFromCostHead, this._responseInterceptor.exit);
+    /*router.put('/:projectId/building/:buildingId/costhead/:costHeadId/subcategory', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, interceptor.deleteSubcategoryFromCostHead, controller.deleteSubcategoryFromCostHead,
+      this._responseInterceptor.exit);*/
+
+    ////Add and remove a category by setting status of category to true and false
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/subcategory/:subCategoryId/activeStatus/:activeStatus',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.setCategoryStatus,
+      this._responseInterceptor.exit);
 
     /*Building- Routes: WorkItem*/
     ///Add and remove a costhead by setting status of workitems to true and false
@@ -104,7 +112,8 @@ this._requestInterceptor.intercept, interceptor.setCostHeadStatus, controller.se
 
     //Retrive list of inactive workitems
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/subcategory/:subCategoryId/workitem',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.getInactiveWorkItems, controller.getInactiveWorkItems,  this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.getInactiveWorkItems,
+      controller.getInactiveWorkItems,  this._responseInterceptor.exit);
 
     //Provide workitemlist for particular subcategory-----delete API
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/subcategory/:subCategoryId/workitemlist',

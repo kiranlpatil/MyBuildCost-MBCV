@@ -479,7 +479,9 @@ class ProjectController {
     }
   }
 
-  getAllSubCategoriesByCostHeadId(req: express.Request, res: express.Response, next: any): void {
+
+  //getInActiveCategoryFromDatabase
+  getSubcategoryByCostHeadId(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, getSubcategoryByCostHeadId has been hit');
       let user = req.user;
@@ -592,7 +594,7 @@ class ProjectController {
     }
   }
 
-  deleteSubcategoryFromCostHead(req: express.Request, res: express.Response, next: any): void {
+/*  deleteSubcategoryFromCostHead(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, deleteSubcategoryToCostHeadId has been hit');
       let user = req.user;
@@ -612,6 +614,34 @@ class ProjectController {
           next(new Response(200,result));
         }
       });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }*/
+
+
+  setCategoryStatus(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, deleteSubcategoryToCostHeadId has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = req.params.costHeadId;
+      let categoryId =parseFloat(req.params.subCategoryId);
+      let categoryActiveStatus = req.params.activeStatus === 'true' ? true : false;
+
+      let projectService = new ProjectService();
+
+      projectService.updateCategoryStatus( projectId, buildingId, costHeadId, categoryId, categoryActiveStatus,
+        user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('Get Quantity success');
+            logger.debug('Getting Quantity of Project ID : '+projectId+' Building ID : '+buildingId);
+            next(new Response(200,result));
+          }
+        });
     } catch(e) {
       next(new CostControllException(e.message,e.stack));
     }

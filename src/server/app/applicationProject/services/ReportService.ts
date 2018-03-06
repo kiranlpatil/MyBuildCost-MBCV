@@ -121,15 +121,15 @@ class ReportService {
                           + estimateReport.total).toFixed(2));
                         estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
                       } else {
-                        estimateReport.total = 0.0;
+                        /*estimateReport.total = 0.0;
                         estimateReport.rate = 0.0;
-                        break;
+                        break;*/
                       }
                     }
                   } else {
-                    estimateReport.total = 0.0;
+                    /*estimateReport.total = 0.0;
                     estimateReport.rate = 0.0;
-                    break;
+                    break;*/
                   }
                 }
 

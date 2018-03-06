@@ -22,6 +22,7 @@ class ReportController {
       let reportService = new ReportService();
       let user = req.user;
       let projectId =  req.params.projectId;
+      let categoryId =  req.params.projectId;
       let reportType =  req.params.reportType;
       let rateUnit =  req.params.costingUnit;
       let areaType =  req.params.costingArea;

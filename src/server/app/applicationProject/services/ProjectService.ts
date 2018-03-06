@@ -229,7 +229,8 @@ class ProjectService {
       }
     });
   }
-  getInactiveWorkItems(projectId:string, buildingId:string, costHeadId:number, subCategoryId:number, user:User, callback:(error: any, result: any)=> void) {
+  getInactiveWorkItems(projectId:string, buildingId:string, costHeadId:number, subCategoryId:number,
+                       user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, addWorkitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
@@ -532,7 +533,8 @@ class ProjectService {
       }
     });
   }
-setWorkItemStatus( buildingId:string, costHeadId:number, subCategoryId:number, workItemId:number, workItemActiveStatus : boolean, user: User,
+setWorkItemStatus( buildingId:string, costHeadId:number, subCategoryId:number, workItemId:number,
+                   workItemActiveStatus : boolean, user: User,
                                 callback: (error: any, result: any) => void) {
     logger.info('Project service, update Workitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
@@ -680,20 +682,28 @@ setWorkItemStatus( buildingId:string, costHeadId:number, subCategoryId:number, w
     });
   }
 
+  //getInActiveCategoryFromDatabase
   getAllSubCategoriesByCostHeadId(projectId:string, buildingId:string, costHeadId:string, user:User,
                                   callback:(error: any, result: any)=> void) {
-    let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
-    let url = config.get('rateAnalysisAPI.subCategories');
-    rateAnalysisServices.getApiCall(url, (error, subCategories)=> {
-      if(error) {
+
+    this.buildingRepository.findById(buildingId, (error, building) => {
+      logger.info('Project service, getAllSubcategoriesByCostHeadId has been hit');
+      if (error) {
         callback(error, null);
       } else {
-        let costHead = parseInt(costHeadId);
-        let subCategoriesList  =  subCategories.SubItemType;
-        let sqlQuery = 'SELECT subCategoriesList.C1 AS rateAnalysisId, subCategoriesList.C2 AS subCategory ' +
-          'FROM ? AS subCategoriesList WHERE subCategoriesList.C3 = '+ costHead;
-        subCategoriesList = alasql(sqlQuery, [subCategoriesList]);
-        callback(null, {data: subCategoriesList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let costHeadList = building.costHeads;
+        let subCategoryList : Array<SubCategory>=[];
+
+        for(let costHeadIndex=0; costHeadIndex<costHeadList.length; costHeadIndex++) {
+          if(parseInt(costHeadId) === costHeadList[costHeadIndex].rateAnalysisId) {
+            for(let subCategoryIndex=0; subCategoryIndex<costHeadList[costHeadIndex].subCategories.length; subCategoryIndex++) {
+              if(costHeadList[costHeadIndex].subCategories[subCategoryIndex].active === false) {
+                subCategoryList.push(costHeadList[costHeadIndex].subCategories[subCategoryIndex]);
+              }
+            }
+          }
+        }
+        callback(null, {data: subCategoryList, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -762,7 +772,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, subCategoryId:number, w
     });
   }
 
-  deleteSubcategoryFromCostHead(projectId:string, buildingId:string, costHeadId:string, subCategoryDetails : any, user:User,
+/*  deleteSubcategoryFromCostHead(projectId:string, buildingId:string, costHeadId:string, subCategoryDetails : any, user:User,
                            callback:(error: any, result: any)=> void) {
 
     this.buildingRepository.findById(buildingId, (error, building) => {
@@ -797,6 +807,45 @@ setWorkItemStatus( buildingId:string, costHeadId:number, subCategoryId:number, w
         });
       }
     });
+  }*/
+
+  updateCategoryStatus(projectId:string, buildingId:string, costHeadId:string, categoryId:number ,
+                                categoryActiveStatus:boolean, user:User, callback:(error: any, result: any)=> void) {
+
+    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      logger.info('Project service, setSubCategoryStatus has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        let costHeadList = building.costHeads;
+        let subCategoryList : any = [];
+        let subCategoryIndex;
+
+        for(let index=0; index<costHeadList.length; index++) {
+          if(parseInt(costHeadId) === costHeadList[index].rateAnalysisId) {
+            subCategoryList = costHeadList[index].subCategories;
+            subCategoryIndex=index;
+            for(let subcategoryIndex=0; subcategoryIndex<subCategoryList.length; subcategoryIndex++) {
+              if(subCategoryList[subcategoryIndex].rateAnalysisId === categoryId) {
+                subCategoryList[subcategoryIndex].active=categoryActiveStatus;
+              }
+            }
+          }
+        }
+
+        let query = {'_id' : buildingId, 'costHeads.rateAnalysisId' : parseInt(costHeadId)};
+        let newData = {'$set' : {'costHeads.$.subCategories' : subCategoryList }};
+
+        this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, dataList) => {
+          logger.info('Project service, setSubCategoryStatus has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: dataList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
   }
 
   getSubCategory(projectId:string, buildingId:string, costHeadId:number, user:User, callback:(error: any, result: any)=> void) {
@@ -805,22 +854,27 @@ setWorkItemStatus( buildingId:string, costHeadId:number, subCategoryId:number, w
       if (error) {
         callback(error, null);
       } else {
-        let subCategories :Array<SubCategory> = null;
+        let subCategories :Array<SubCategory>=[];
         for(let index = 0; building.costHeads.length > index; index++) {
           if(building.costHeads[index].rateAnalysisId === costHeadId) {
-            subCategories = building.costHeads[index].subCategories;
-            for(let subcategoryIndex = 0 ; subcategoryIndex < subCategories.length; subcategoryIndex ++) {
-              let workitems = subCategories[subcategoryIndex].workItems;
-              for(let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex ++) {
-                  let workitem = workitems[workitemsIndex];
-                if(workitem.quantity.total !== null && workitem.rate.total !== null
-                  && workitem.quantity.total !== 0 && workitem.rate.total !== 0) {
-                  subCategories[subcategoryIndex].amount = parseFloat((workitem.quantity.total * workitem.rate.total
-                    + subCategories[subcategoryIndex].amount).toFixed(2));
-                } else {
-                  subCategories[subcategoryIndex].amount=0;
-                  subCategories[subcategoryIndex].amount=0;
-                  break;
+            for (let subcategoryIndex = 0; subcategoryIndex < building.costHeads[index].subCategories.length; subcategoryIndex++) {
+              if (building.costHeads[index].subCategories[subcategoryIndex].active === true) {
+                subCategories.push(building.costHeads[index].subCategories[subcategoryIndex]);
+                if (building.costHeads[index].subCategories[subcategoryIndex].workItems.length !== 0 ||
+                  building.costHeads[index].subCategories[subcategoryIndex].workItems!==undefined) {
+                  let workitems = building.costHeads[index].subCategories[subcategoryIndex].workItems;
+                  for (let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex++) {
+                    let workitem = workitems[workitemsIndex];
+                    if (workitem.quantity.total !== null && workitem.rate.total !== null
+                      && workitem.quantity.total !== 0 && workitem.rate.total !== 0) {
+                      building.costHeads[index].subCategories[subcategoryIndex].amount = parseFloat((workitem.quantity.total *
+                        workitem.rate.total + building.costHeads[index].subCategories[subcategoryIndex].amount).toFixed(2));
+                    } else {
+                      building.costHeads[index].subCategories[subcategoryIndex].amount = 0;
+                      building.costHeads[index].subCategories[subcategoryIndex].amount = 0;
+                      break;
+                    }
+                  }
                 }
               }
             }
