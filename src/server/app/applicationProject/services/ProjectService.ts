@@ -830,6 +830,28 @@ setWorkItemStatus( buildingId:string, costHeadId:number, subCategoryId:number, w
       }
     });
   }
+
+  syncBuildingWithRateAnalysisData(projectId:string, buildingId:string, user: User, callback: (error:any, result:any)=> void) {
+    let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
+    rateAnalysisServices.getAllDataFromRateAnalysis((error, rateAnalysisData) => {
+      if (error) {
+        callback(error, null);
+      } else {
+
+        let query = {'_id' : buildingId };
+        let newData = { $set: { 'costHeads': rateAnalysisData }};
+
+        this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {
+          logger.info('Project service, getAllDataFromRateAnalysis has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: building, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
 }
 
 Object.seal(ProjectService);

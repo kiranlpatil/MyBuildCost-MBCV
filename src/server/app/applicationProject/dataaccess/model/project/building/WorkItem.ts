@@ -8,6 +8,7 @@ class WorkItem {
   quantity: Quantity;
   unit: string;
   rate: Rate;
+  systemRate: Rate;
   amount: number;
   remarks: string;
   active: boolean;
@@ -17,6 +18,7 @@ class WorkItem {
     this.rateAnalysisId = rateAnalysisId;
     this.quantity = new Quantity();
     this.rate = new Rate();
+    this.systemRate = new Rate();
     this.amount = 0;
     this.unit = Constants.WORKITEM_UNIT;
     this.remarks = '';

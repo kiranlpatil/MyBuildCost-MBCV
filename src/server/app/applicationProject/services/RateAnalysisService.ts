@@ -10,6 +10,8 @@ var log4js = require('log4js');
 var logger=log4js.getLogger('Rate Analysis Service');
 import alasql = require('alasql');
 import Rate = require('../dataaccess/model/project/building/Rate');
+import CostHead = require('../dataaccess/model/project/building/CostHead');
+import SubCategory = require('../dataaccess/model/project/building/SubCategory');
 
 class RateAnalysisService {
   APP_NAME: string;
@@ -28,7 +30,7 @@ class RateAnalysisService {
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(error, null);
-      } else if (!error && response.statusCode === 200) {
+      } else if (!error && response) {
         console.log('RESPONSE JSON : ' + JSON.stringify(JSON.parse(body)));
         let res = JSON.parse(body);
         callback(null, res);
@@ -41,7 +43,7 @@ class RateAnalysisService {
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(error, null);
-      } else if (!error && response.statusCode === 200) {
+      } else if (!error && response) {
         let res = JSON.parse(body);
         callback(null, res);
       }
@@ -54,15 +56,13 @@ class RateAnalysisService {
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(error, null);
-      } else if (!error && response.statusCode === 200) {
+      } else if (!error && response) {
         let res = JSON.parse(body);
         if(res) {
 
           for(let workitem of res.SubItemType) {
             if(parseInt(costHeadId) === workitem.C3) {
               let workitemDetails = new WorkItem(workitem.C2, workitem.C1);
-              /*workitemDetails.name = workitem.C2;
-              workitemDetails.rateAnalysisId = workitem.C1;*/
               workItems.push(workitemDetails);
             }
           }
@@ -76,19 +76,8 @@ class RateAnalysisService {
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(new CostControllException(error.message, error.stack), null);
-      } else if (!error && response.statusCode === 200) {
+      } else if (!error && response) {
         let res = JSON.parse(body);
-        /*if(res) {
-
-          for(let workitem of res.SubItemType) {
-            let workitemDetails = new WorkItem;
-            if(parseInt(costHeadId) === workitem.C3) {
-              workitemDetails.name = workitem.C2;
-              workitemDetails.rateAnalysisId = workitem.C1;
-              workItems.push(workitemDetails);
-            }
-          }
-        }*/
         callback(null, res);
       }
     });
@@ -147,6 +136,122 @@ class RateAnalysisService {
     });
   }
 
+  getAllDataFromRateAnalysis(callback:(error: any, data:any)=> void) {
+
+    let costHeadURL = config.get('rateAnalysisAPI.costHeads');
+    let promiseCostHead = this.createPromise(costHeadURL);
+
+    let categoryURL = config.get('rateAnalysisAPI.subCategories');
+    let promiseCategory = this.createPromise(categoryURL);
+
+    let workItemURL = config.get('rateAnalysisAPI.workItems');
+    let promiseWorkItem = this.createPromise(workItemURL);
+
+    let rateItemURL = config.get('rateAnalysisAPI.rate');
+    let promiseRateItem = this.createPromise(rateItemURL);
+
+    let rateAnalysisNotesURL = config.get('rateAnalysisAPI.rateAnalysisNotes');
+    let promiseRateAnalysisNotes = this.createPromise(rateAnalysisNotesURL); //promise name change
+
+    let allUnitsFromRateAnalysisURL = config.get('rateAnalysisAPI.unit');
+    let promiseRateAnalysisUnits = this.createPromise(allUnitsFromRateAnalysisURL);
+
+    Promise.all([
+      promiseCostHead,
+      promiseCategory,
+      promiseWorkItem,
+      promiseRateItem,
+      promiseRateAnalysisNotes,
+      promiseRateAnalysisUnits
+    ]).then(function(data: Array<any>) {
+
+      let costHeadsRateAnalysis = data[0]['ItemType'];
+      let categoriesRateAnalysis = data[1]['SubItemType'];
+      let workItemsRateAnalysis = data[2]['Items'];
+      let rateItemsRateAnalysis = data[3]['RateAnalysisData'];
+      let notesRateAnalysis = data[4]['RateAnalysisData'];
+      let unitsRateAnalysis = data[5]['UOM'];
+
+      let buildingCostHeads: Array<CostHead> = [];
+
+      for(let costHeadIndex = 0 ; costHeadIndex < costHeadsRateAnalysis.length; costHeadIndex++) {
+
+        let costHead = new CostHead();
+        costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
+        costHead.rateAnalysisId = costHeadsRateAnalysis[costHeadIndex].C1;
+
+        let categoriesRateAnalysisSQL = 'SELECT Category.C1 AS rateAnalysisId, Category.C2 AS name' +
+          ' FROM ? AS Category where Category.C3 = '+costHead.rateAnalysisId;
+
+        let categoriesByCostHead = alasql(categoriesRateAnalysisSQL, [categoriesRateAnalysis]);
+        let buildingCategories: Array<SubCategory> = [];
+
+        for(let categoryIndex=0; categoryIndex < categoriesByCostHead.length; categoryIndex++) {
+
+          let category = new SubCategory(categoriesByCostHead[categoryIndex].name, categoriesByCostHead[categoryIndex].rateAnalysisId);
+
+          let workItemsRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, workItem.C3 AS name' +
+            ' FROM ? AS workItem where workItem.C4 = '+categoriesByCostHead[categoryIndex].rateAnalysisId;
+
+          let workItemsByCategory = alasql(workItemsRateAnalysisSQL, [workItemsRateAnalysis]);
+          let buildingWorkItems : Array<WorkItem> = [];
+
+          for(let workItemIndex = 0; workItemIndex < workItemsByCategory.length; workItemIndex++) {
+
+            let workItem = new WorkItem(workItemsByCategory[workItemIndex].name,
+               workItemsByCategory[workItemIndex].rateAnalysisId);
+
+            let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS item, rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
+               'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
+               'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
+               'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9 where rateItem.C1 = '
+               + workItemsByCategory[workItemIndex].rateAnalysisId;
+            let rateItemsByWorkItem =  alasql(rateItemsRateAnalysisSQL, [rateItemsRateAnalysis, unitsRateAnalysis]);
+
+            let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = 49';
+            //+ rateItemsByWorkItem[notesIndex].notesId;
+            let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
+
+            workItem.rate.rateItems = rateItemsByWorkItem;
+            workItem.rate.quantity = rateItemsByWorkItem[0].totalQuantity;
+            workItem.rate.notes = notesList[0].notes;
+            workItem.rate.imageURL = notesList[0].imageURL;
+
+            workItem.systemRate.rateItems = rateItemsByWorkItem;
+            workItem.systemRate.quantity = rateItemsByWorkItem[0].totalQuantity;
+            workItem.systemRate.notes = notesList[0].notes;
+            workItem.systemRate.imageURL = notesList[0].imageURL;
+
+            workItem.active = true;
+            buildingWorkItems.push(workItem);
+          }
+          category.workItems = buildingWorkItems;
+          category.active = true;
+          buildingCategories.push(category);
+        }
+        costHead.subCategories = buildingCategories;
+        costHead.thumbRuleRate = config.get('thumbRuleRate');
+        costHead.active = true;
+        buildingCostHeads.push(costHead);
+      }
+      callback(null, buildingCostHeads);
+    });
+  }
+
+  createPromise(url: string) {
+      return new Promise(function(resolve, reject){
+        let rateAnalysisService = new RateAnalysisService();
+        rateAnalysisService.getApiCall(url, (error : any, data: any) => {
+          if(error) {
+            console.log('Error in promise : '+error);
+            reject(error);
+          } else {
+            console.log('data from rate analysis : '+data);
+            resolve(data);
+          }
+        });
+      });
+   }
 }
 
 

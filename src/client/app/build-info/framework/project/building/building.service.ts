@@ -44,4 +44,9 @@ export class BuildingService extends BaseService {
     return this.httpDelegateService.putAPI(url, updateData);
   }
 
+  syncBuildingWithRateAnalysis( projectId : string, buildingId : string): Observable<Building> {
+    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.SYNC_RATE_ANALYSIS;
+    return this.httpDelegateService.getAPI(url);
+  }
+
 }

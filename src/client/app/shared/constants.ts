@@ -153,7 +153,8 @@ export class Messages {
 
   //Application Success Messages
   public static MSG_SUCCESS_PROJECT_CREATION: string = 'Project has been created successfully.';
-  public static MSG_SUCCESS_ADD_BUILDING_PROJECT: string = 'Building has been successfully added to project.';
+  public static MSG_SUCCESS_ADD_BUILDING_PROJECT: string = 'Building has been successfully added to project.\n' +
+    'Please wait while we are synching data from rate analysis.';
   public static MSG_SUCCESS_UPDATE_PROJECT_DETAILS: string = 'Your project updated successfully.';
   public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details updated successfully.';
   public static MSG_SUCCESS_DELETE_BUILDING: string = 'Your building deleted successfully.';
@@ -262,6 +263,7 @@ export class API {
   public static WORKITEMLIST = 'workitemlist';
   public static QUANTITY = 'quantity';
   public static ITEM = 'item';
+  public static SYNC_RATE_ANALYSIS = 'syncRateAnalysis';
 
   public static THUMBRULE_RULE_RATE='report/thumbRuleRate';
   public static RATE='rate';
