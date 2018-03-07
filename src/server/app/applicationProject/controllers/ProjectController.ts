@@ -385,7 +385,7 @@ class ProjectController {
   }
 
   setWorkItemStatus(req: express.Request, res: express.Response, next: any): void {
-    logger.info('Project controller, updateBuildingWorkItem has been hit');
+    logger.info('Project controller, update WorkItem has been hit');
     try {
       let user = req.user;
       let projectId = req.params.projectId;
@@ -393,14 +393,14 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      let workItemActiveStatus = Boolean(req.params.activeStatus);
-      let projectService = new ProjectService();
+      let workItemActiveStatus = req.params.activeStatus === 'true' ? true : false;
+      let projectService: ProjectService = new ProjectService();
       projectService.setWorkItemStatus( buildingId, costHeadId, categoryId,workItemId, workItemActiveStatus, user,(error, result) => {
         if(error) {
           next(error);
         } else {
-          logger.info('Update Building workItem Details success ');
-          logger.debug('updateBuildingWorkItemfor Project ID : '+projectId+', Building ID : '+buildingId+
+          logger.info('Update workItem Details success ');
+          logger.debug('update WorkItem for Project ID : '+projectId+', Building ID : '+buildingId+
             ', CostHead : '+costHeadId+', workItemActiveStatus : '+workItemActiveStatus);
           next(new Response(200,result));
         }

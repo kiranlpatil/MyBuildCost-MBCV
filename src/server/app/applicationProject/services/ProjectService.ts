@@ -231,24 +231,24 @@ class ProjectService {
   }
   getInActiveWorkItems(projectId:string, buildingId:string, costHeadId:number, categoryId:number,
                        user:User, callback:(error: any, result: any)=> void) {
-    logger.info('Project service, addWorkitem has been hit');
+    logger.info('Project service, add Workitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
       } else {
         let costHeadList = building.costHeads;
         let categoryList: Category[];
-        let WorkItemList: WorkItem[];
-        let inActiveWorkItems= [];
+        let workItemList: WorkItem[];
+        let inActiveWorkItems = [];
 
         for (let index = 0; index < costHeadList.length; index++) {
           if (costHeadId === costHeadList[index].rateAnalysisId) {
             categoryList = costHeadList[index].categories;
-            for (let categoryIndex = 0; categoryIndex < categoryList.length; categoryIndex++) {
-              if (categoryId === categoryList[categoryIndex].rateAnalysisId) {
-                WorkItemList = categoryList[categoryIndex].workItems;
-                for (let checkWorkItem of WorkItemList) {
-                  if(checkWorkItem.active === false) {
+            for (let subCategoryIndex = 0; subCategoryIndex < categoryList.length; subCategoryIndex++) {
+              if (categoryId === categoryList[subCategoryIndex].rateAnalysisId) {
+                workItemList = categoryList[subCategoryIndex].workItems;
+                for (let checkWorkItem of workItemList) {
+                  if(!checkWorkItem.active) {
                     inActiveWorkItems.push(checkWorkItem);
                   }
                 }
@@ -533,9 +533,8 @@ class ProjectService {
       }
     });
   }
-setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, workItemId:number,
-                   workItemActiveStatus : boolean, user: User,
-                                callback: (error: any, result: any) => void) {
+setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, workItemId:number, workItemActiveStatus : boolean,
+                   user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, update Workitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
@@ -543,19 +542,20 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
       } else {
         let costHeadList = building.costHeads;
         let categoryList: Category[];
-        let WorkItemList: WorkItem[];
-        var flag = 0;
+        let workItemList: WorkItem[];
+        let isWorkItemUpdated : boolean = false;
+        let updateWorkoitemList : Array<WorkItem>;
 
         for (let index = 0; index < costHeadList.length; index++) {
           if (costHeadId === costHeadList[index].rateAnalysisId) {
             categoryList = costHeadList[index].categories;
-            for (let categoryIndex = 0; categoryIndex < categoryList.length; categoryIndex++) {
-              if (categoryId === categoryList[categoryIndex].rateAnalysisId) {
-                WorkItemList = categoryList[categoryIndex].workItems;
-                for (let workitemIndex = 0; workitemIndex < WorkItemList.length; workitemIndex++) {
-                  if (workItemId === WorkItemList[workitemIndex].rateAnalysisId) {
-                    flag = 1;
-                    WorkItemList[workitemIndex].active = workItemActiveStatus;
+            for (let subCategoryIndex = 0; subCategoryIndex < categoryList.length; subCategoryIndex++) {
+              if (categoryId === categoryList[subCategoryIndex].rateAnalysisId) {
+                workItemList = categoryList[subCategoryIndex].workItems;
+                for (let workItemIndex = 0; workItemIndex < workItemList.length; workItemIndex++) {
+                  if (workItemId === workItemList[workItemIndex].rateAnalysisId) {
+                    isWorkItemUpdated = true;
+                    workItemList[workItemIndex].active = workItemActiveStatus;
                   }
                 }
               }
@@ -563,14 +563,14 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
           }
         }
 
-        if(flag === 1) {
+        if(isWorkItemUpdated) {
           let query = {_id: buildingId};
-          this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, WorkItemList) => {
+          this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, response) => {
             logger.info('Project service, findOneAndUpdate has been hit');
             if (error) {
               callback(error, null);
             } else {
-              callback(null, {data: WorkItemList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+              callback(null, {data: workItemList, access_token: this.authInterceptor.issueTokenWithUid(user)});
             }
           });
         } else {
