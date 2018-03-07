@@ -34,7 +34,7 @@ export class CostSummaryService extends BaseService {
   }
 
   // Cost Head CRUD API
-  inactiveCostHead(projectId:string, buildingId:string, costHeadId:number) {
+  inActiveCostHead(projectId:string, buildingId:string, costHeadId:number) {
     var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
       costHeadId +'/'+ API.COSTHEAD_ACTIVE_STATUS +'/'+ API.COSTHEAD_ACTIVE_STATUS_FALSE;
     let body = {};
@@ -42,16 +42,16 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  getAllInactiveCostHeads( projectId : string, buildingId : string) {
+  getAllInActiveCostHeads(projectId : string, buildingId : string) {
     var url = API.PROJECT + '/'+ projectId + '/'+ API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD;
 
     return this.httpDelegateService.getAPI(url);
   }
 
   // Reconsider this method
-  activeCostHead( projectId : string, buildingId : string, selectedInactiveCostHeadId : number) {
+  activeCostHead( projectId : string, buildingId : string, selectedInActiveCostHeadId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
-      selectedInactiveCostHeadId +'/'+ API.COSTHEAD_ACTIVE_STATUS + '/' + API.COSTHEAD_ACTIVE_STATUS_TRUE;
+      selectedInActiveCostHeadId +'/'+ API.COSTHEAD_ACTIVE_STATUS + '/' + API.COSTHEAD_ACTIVE_STATUS_TRUE;
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);

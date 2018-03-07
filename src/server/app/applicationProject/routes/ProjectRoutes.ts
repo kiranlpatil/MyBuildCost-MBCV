@@ -108,8 +108,8 @@ this._requestInterceptor.intercept, interceptor.setCostHeadStatus, controller.se
 
     //Retrive list of inactive workitems
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.getInactiveWorkItems,
-      controller.getInactiveWorkItems,  this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.getInActiveWorkItems,
+      controller.getInActiveWorkItems,  this._responseInterceptor.exit);
 
     //Provide workitemlist for particular category-----delete API
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitemlist',

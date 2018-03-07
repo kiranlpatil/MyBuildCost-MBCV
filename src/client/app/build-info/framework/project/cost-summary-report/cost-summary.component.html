@@ -82,7 +82,7 @@
                       <td>
                         <div data-toggle="modal"
                              data-target="#deleteCosthead"
-                             (click)="setIdsToInactiveCostHead(building._id, building.estimate.estimatedCosts[i].rateAnalysisId)"
+                             (click)="setIdsToInActiveCostHead(building._id, building.estimate.estimatedCosts[i].rateAnalysisId)"
                              class="delete-cost-head">
                           <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                         </div>
@@ -102,7 +102,7 @@
                     <tr>
                       <td colspan="6" class="add-items">
                         <button type="button" class="btn btn-add-item"
-                                (click)="getAllInactiveCostHeads(building._id)">
+                                (click)="getAllInActiveCostHeads(building._id)">
                           <span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}} {{getButton().COSTHEAD}}
                         </button>
                       </td>

@@ -434,7 +434,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
-  getInactiveWorkItems(req: any, res: any, next: any) {
+  getInActiveWorkItems(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;

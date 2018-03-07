@@ -53,16 +53,16 @@ export class CreateBuildingComponent {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
 
     this.buildingService.syncBuildingWithRateAnalysis(projectId, building.data._id).subscribe(
-      building => this.onsyncBuildingWithRateAnalysisSuccess(building),
-      error => this.onsyncBuildingWithRateAnalysisFailure(error));
+      building => this.onSyncBuildingWithRateAnalysisSuccess(building),
+      error => this.onSyncBuildingWithRateAnalysisFailure(error));
   }
 
-  onsyncBuildingWithRateAnalysisSuccess(building : Building) {
+  onSyncBuildingWithRateAnalysisSuccess(building : Building) {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
   }
 
-  onsyncBuildingWithRateAnalysisFailure(error:any) {
+  onSyncBuildingWithRateAnalysisFailure(error:any) {
   console.log(error);
   }
 

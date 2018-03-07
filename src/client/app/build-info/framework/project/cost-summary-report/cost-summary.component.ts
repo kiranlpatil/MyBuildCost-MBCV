@@ -98,20 +98,20 @@ export class CostSummaryComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
   }
 
-  getAllInactiveCostHeads(buildingId: string) {
+  getAllInActiveCostHeads(buildingId: string) {
     this.buildingId=buildingId;
-    this.costSummaryService.getAllInactiveCostHeads( this.projectId, this.buildingId).subscribe(
-      inActiveCostHeads => this.onGetAllInactiveCostHeadsSuccess(inActiveCostHeads),
-      error => this.onGetAllInactiveCostHeadsFailure(error)
+    this.costSummaryService.getAllInActiveCostHeads( this.projectId, this.buildingId).subscribe(
+      inActiveCostHeads => this.onGetAllInActiveCostHeadsSuccess(inActiveCostHeads),
+      error => this.onGetAllInActiveCostHeadsFailure(error)
     );
   }
 
-  onGetAllInactiveCostHeadsSuccess(inActiveCostHeads : any) {
+  onGetAllInActiveCostHeadsSuccess(inActiveCostHeads : any) {
       this.inActiveCostHeadArray=inActiveCostHeads.data;
       this.showCostHeadList=true;
   }
 
-  onGetAllInactiveCostHeadsFailure(error : any) {
+  onGetAllInActiveCostHeadsFailure(error : any) {
     console.log(error);
   }
 
@@ -157,20 +157,20 @@ export class CostSummaryComponent implements OnInit {
     );
   }
 
-  setIdsToInactiveCostHead(buildingId: string, costHeadId: number) {
+  setIdsToInActiveCostHead(buildingId: string, costHeadId: number) {
     this.buildingId = buildingId;
     this.costHeadId = costHeadId;
   }
 
-  inactiveCostHead() {
+  inActiveCostHead() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.costSummaryService.inactiveCostHead( projectId, this.buildingId, this.costHeadId).subscribe(
-        costHeadDetail => this.onInactiveCostHeadSuccess(costHeadDetail),
-        error => this.onInactiveCostHeadFailure(error)
+    this.costSummaryService.inActiveCostHead( projectId, this.buildingId, this.costHeadId).subscribe(
+        costHeadDetail => this.onInActiveCostHeadSuccess(costHeadDetail),
+        error => this.onInActiveCostHeadFailure(error)
       );
     }
 
-  onInactiveCostHeadSuccess(costHeadDetails: any) {
+  onInActiveCostHeadSuccess(costHeadDetails: any) {
      if ( costHeadDetails !== null) {
       var message = new Message();
       message.isError = false;
@@ -180,19 +180,19 @@ export class CostSummaryComponent implements OnInit {
     this.onChangeCostingByUnit(this.defaultCostingByUnit);
   }
 
-  onInactiveCostHeadFailure(error: any) {
+  onInActiveCostHeadFailure(error: any) {
     console.log(error);
   }
 
-  onChangeActiveSelectedCostHead(selectedInactiveCostHeadId:number) {
+  onChangeActiveSelectedCostHead(selectedInActiveCostHeadId:number) {
     this.showCostHeadList=false;
-    this.costSummaryService.activeCostHead( this.projectId, this.buildingId, selectedInactiveCostHeadId).subscribe(
-      inactiveCostHeads => this.onActiveCostHeadSuccess(inactiveCostHeads),
+    this.costSummaryService.activeCostHead( this.projectId, this.buildingId, selectedInActiveCostHeadId).subscribe(
+      inActiveCostHeads => this.onActiveCostHeadSuccess(inActiveCostHeads),
       error => this.onActiveCostHeadFailure(error)
     );
   }
 
-  onActiveCostHeadSuccess(inactiveCostHeads : any) {
+  onActiveCostHeadSuccess(inActiveCostHeads : any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_COSTHEAD;
@@ -201,7 +201,7 @@ export class CostSummaryComponent implements OnInit {
   }
 
   onActiveCostHeadFailure(error : any) {
-    console.log('onAddInactiveCostHeadFailure()'+error);
+    console.log('onActiveCostHeadFailure()'+error);
   }
 
   changeRateOfThumbRule(buildingId: string, costHead: string, amount: number, buildingArea : number) {
@@ -355,7 +355,7 @@ export class CostSummaryComponent implements OnInit {
 
   deleteElement(elementType : string) {
     if(elementType === ProjectElements.COST_HEAD) {
-      this.inactiveCostHead();
+      this.inActiveCostHead();
     }
     if(elementType === ProjectElements.BUILDING) {
       this.deleteBuilding();

@@ -219,17 +219,17 @@ class ProjectService {
         logger.info('Project service, findById has been hit');
         logger.debug('getting InActive CostHead for Building Name : '+result.name);
         let response = result.costHeads;
-        let inactiveCostHead=[];
+        let inActiveCostHead=[];
         for(let costHeadItem of response) {
           if(!costHeadItem.active) {
-            inactiveCostHead.push(costHeadItem);
+            inActiveCostHead.push(costHeadItem);
           }
         }
-        callback(null,{data:inactiveCostHead, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null,{data:inActiveCostHead, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
-  getInactiveWorkItems(projectId:string, buildingId:string, costHeadId:number, categoryId:number,
+  getInActiveWorkItems(projectId:string, buildingId:string, costHeadId:number, categoryId:number,
                        user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, addWorkitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
@@ -239,7 +239,7 @@ class ProjectService {
         let costHeadList = building.costHeads;
         let categoryList: Category[];
         let WorkItemList: WorkItem[];
-        let inactiveWorkItems= [];
+        let inActiveWorkItems= [];
 
         for (let index = 0; index < costHeadList.length; index++) {
           if (costHeadId === costHeadList[index].rateAnalysisId) {
@@ -249,14 +249,14 @@ class ProjectService {
                 WorkItemList = categoryList[categoryIndex].workItems;
                 for (let checkWorkItem of WorkItemList) {
                   if(checkWorkItem.active === false) {
-                    inactiveWorkItems.push(checkWorkItem);
+                    inActiveWorkItems.push(checkWorkItem);
                   }
                 }
               }
             }
           }
         }
-        callback(null,{data:inactiveWorkItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null,{data:inActiveWorkItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
         }
     });
   }

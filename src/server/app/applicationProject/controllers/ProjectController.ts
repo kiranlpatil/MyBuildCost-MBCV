@@ -213,16 +213,16 @@ class ProjectController {
     }
   }
 
-  getInactiveWorkItems(req: express.Request, res: express.Response, next: any): void {
+  getInActiveWorkItems(req: express.Request, res: express.Response, next: any): void {
     try {
-      logger.info('addWorkitem has been hit');
+      logger.info('getInActiveWorkItems has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId : number = parseInt(req.params.costHeadId);
       let categoryId : number = parseInt(req.params.categoryId);
       let projectService = new ProjectService();
-      projectService.getInactiveWorkItems( projectId, buildingId, costHeadId, categoryId, user, (error, result) => {
+      projectService.getInActiveWorkItems( projectId, buildingId, costHeadId, categoryId, user, (error, result) => {
         if(error
         ) {
           next(error);
@@ -573,7 +573,7 @@ class ProjectController {
 
   getCategory(req: express.Request, res: express.Response, next: any): void {
     try {
-      logger.info('getCategory has been hit');
+      logger.info('Project controller, getCategory has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
@@ -608,8 +608,8 @@ class ProjectController {
           if(error) {
             next(error);
           } else {
-            logger.info('Get Quantity success');
-            logger.debug('Getting Quantity of Project ID : '+projectId+' Building ID : '+buildingId);
+            logger.info('Update Category Status success');
+            logger.debug('Update Category Status success of Project ID : '+projectId+' Building ID : '+buildingId);
             next(new Response(200,result));
           }
         });

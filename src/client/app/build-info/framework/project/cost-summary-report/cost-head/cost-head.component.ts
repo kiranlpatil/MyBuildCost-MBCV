@@ -53,7 +53,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   private workItemListArray: Array<WorkItem> = [];
   private categoryListArray : Array<Category> = [];
-  private categoryIdForInactive: number;
+  private categoryIdForInActive: number;
 
   private totalQuantityOfWorkItems:number=0;
   private totalRateUnitOfWorkItems:number=0;
@@ -79,12 +79,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
   getCategory(projectId: string, costHeadId: number) {
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.costSummaryService.getCategory( projectId, buildingId, costHeadId).subscribe(
-      categoryDetails => this.OnGetCategorySuccess(categoryDetails),
-      error => this.OnGetCategoryFailure(error)
+      categoryDetails => this.onGetCategorySuccess(categoryDetails),
+      error => this.onGetCategoryFailure(error)
     );
   }
 
-  OnGetCategorySuccess(categoryDetails: any) {
+  onGetCategorySuccess(categoryDetails: any) {
     this.categoryDetails = categoryDetails.data;
     this.categoryDetailsTotalAmount=0.0;
     this.totalQuantityOfWorkItems=0.0;
@@ -121,7 +121,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryArray = this.commonService.removeDuplicateItmes(categoryList, this.categoryDetails);
   }
 
-  OnGetCategoryFailure(error: any) {
+  onGetCategoryFailure(error: any) {
     console.log(error);
   }
 
@@ -333,14 +333,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   setCategoryDetailsForDelete(categoryId : any) {
-    this.categoryIdForInactive = categoryId;
+    this.categoryIdForInActive = categoryId;
   }
 
   inActiveCategory() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
-    this.costSummaryService.inActiveCategory( projectId, buildingId, this.costHeadId, this.categoryIdForInactive).subscribe(
+    this.costSummaryService.inActiveCategory( projectId, buildingId, this.costHeadId, this.categoryIdForInActive).subscribe(
       deleteCategory => this.onInActiveCategorySuccess(deleteCategory),
       error => this.onInActiveCategoryFailure(error)
     );
