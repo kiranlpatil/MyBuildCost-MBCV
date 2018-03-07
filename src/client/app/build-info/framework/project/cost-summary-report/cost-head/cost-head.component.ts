@@ -385,7 +385,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   onChangeAddSelectedCategory(selectedCategoryId : number ) {
-    let categoriesList  =  this.categoryArray;
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 

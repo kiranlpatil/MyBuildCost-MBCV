@@ -131,7 +131,7 @@ export class CostSummaryService extends BaseService {
   //In Active Category
   inActiveCategory( projectId : String, buildingId : string, costHeadId : number, categoryId : any) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
-      costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.COSTHEAD_ACTIVE_STATUS + '/' + API.COSTHEAD_ACTIVE_STATUS_FALSE;
+      costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.CATEGORY_ACTIVE_STATUS + '/' + API.CATEGORY_ACTIVE_STATUS_FALSE;
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
@@ -151,7 +151,7 @@ export class CostSummaryService extends BaseService {
   //Active Category
   activeCategory( projectId : string, buildingId : string, costHeadId : number, categoryId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
-      costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.COSTHEAD_ACTIVE_STATUS + '/' + API.COSTHEAD_ACTIVE_STATUS_TRUE;
+      costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.CATEGORY_ACTIVE_STATUS + '/' + API.CATEGORY_ACTIVE_STATUS_TRUE;
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
