@@ -6,7 +6,7 @@ import { ProjectElements, Button, TableHeadings, Label, Headings } from '../../.
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-cost-head-get-quantity',
+  selector: 'bi-get-quantity',
   templateUrl: 'get-quantity.component.html',
   styleUrls: ['get-quantity.component.css'],
 })

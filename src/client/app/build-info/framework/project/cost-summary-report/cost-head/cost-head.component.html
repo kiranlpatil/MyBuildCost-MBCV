@@ -91,22 +91,22 @@
 
                 <div *ngIf="showRate == true">
                    <div  *ngIf="toggleRate==true && compareWorkItemIndex==workItemIndex && compareCategoryIndex===categoryIndex">
-                      <bi-cost-head-get-rate [rateItemsArray]="rateItemsArray"
-                                             [categoryRateAnalysisId]="categoryDetails[category].rateAnalysisId"
-                                             [totalAmount]="totalAmount"
-                                             [totalRate]="totalRate"
-                                             [totalQuantity]="totalQuantity"
-                                             (refreshCategoryList)="refreshCategoryList()">
-                      </bi-cost-head-get-rate>
+                      <bi-get-rate [rateItemsArray]="rateItemsArray"
+                                   [categoryRateAnalysisId]="categoryDetails[category].rateAnalysisId"
+                                   [totalAmount]="totalAmount"
+                                   [totalRate]="totalRate"
+                                   [totalQuantity]="totalQuantity"
+                                   (refreshCategoryList)="refreshCategoryList()">
+                      </bi-get-rate>
                    </div>
                 </div>
 
                 <div *ngIf="showQuantity== true">
                   <div *ngIf="toggleQty==true && compareWorkItemIndex==workItemIndex && compareCategoryIndex===categoryIndex">
-                      <bi-cost-head-get-quantity [quantityItems]="quantityItemsArray"
-                                                 [categoryRateAnalysisId]="categoryDetails[category].rateAnalysisId"
-                                                 (refreshCategoryList)="refreshCategoryList()">
-                      </bi-cost-head-get-quantity>
+                      <bi-get-quantity [quantityItems]="quantityItemsArray"
+                                       [categoryRateAnalysisId]="categoryDetails[category].rateAnalysisId"
+                                       (refreshCategoryList)="refreshCategoryList()">
+                      </bi-get-quantity>
                    </div>
                 </div>
               </div>

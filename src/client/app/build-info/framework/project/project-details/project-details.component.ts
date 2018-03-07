@@ -8,7 +8,7 @@ import { SessionStorage, SessionStorageService } from '../../../../shared/index'
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-edit-project',
+  selector: 'bi-project-details',
   templateUrl: 'project-details.component.html'
 })
 

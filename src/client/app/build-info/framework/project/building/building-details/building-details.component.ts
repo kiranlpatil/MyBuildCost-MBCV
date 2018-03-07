@@ -9,7 +9,7 @@ import { SessionStorage, SessionStorageService } from '../../../../../shared/ind
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-edit-building',
+  selector: 'bi-building-details',
   templateUrl: 'building-details.component.html'
 })
 
