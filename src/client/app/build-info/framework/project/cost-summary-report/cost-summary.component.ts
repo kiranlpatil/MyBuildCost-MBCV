@@ -285,7 +285,7 @@ export class CostSummaryComponent implements OnInit {
 
   cloneBuildingBasicDetails() {
     if (this.cloneBuildingForm.valid) {
-      this.cloneBuildingModel = this.cloneBuildingForm.value;
+     // this.cloneBuildingModel = this.cloneBuildingForm.value;
       let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
       this.buildingService.createBuilding( projectId, this.cloneBuildingModel)
         .subscribe(
@@ -295,7 +295,12 @@ export class CostSummaryComponent implements OnInit {
   }
 
   onCreateBuildingSuccess(building: any) {
-    this.cloneBuildingId = building.data._id;
+    //this.cloneBuildingId = building.data._id;
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_CLONED_BUILDING_DETAILS;
+    this.messageService.message(message);
+    this.onChangeCostingByUnit(this.defaultCostingByUnit);
   }
 
   onCreateBuildingFailure(error: any) {

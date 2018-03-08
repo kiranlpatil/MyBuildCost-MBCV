@@ -284,7 +284,7 @@ class ProjectService {
         building.numOfFiveBHK = result.numOfFiveBHK;
         building.numOfLifts = result.numOfLifts;
 
-        let clonedCostHeadArray : Array<ClonedCostHead> = [];
+        /*let clonedCostHeadArray : Array<ClonedCostHead> = [];
 
         for(let costHeadIndex = 0; costHeadIndex < clonedBuilding.length; costHeadIndex++) {
 
@@ -321,8 +321,8 @@ class ProjectService {
           }
           clonedCostHead.categories = clonedCategoryArray;
           clonedCostHeadArray.push(clonedCostHead);
-        }
-        building.costHeads = clonedCostHeadArray;
+        }*/
+        building.costHeads = result.costHeads;
         callback(null, {data: building, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
@@ -544,7 +544,6 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
         let categoryList: Category[];
         let workItemList: WorkItem[];
         let isWorkItemUpdated : boolean = false;
-        let updateWorkoitemList : Array<WorkItem>;
 
         for (let index = 0; index < costHeadList.length; index++) {
           if (costHeadId === costHeadList[index].rateAnalysisId) {
@@ -814,28 +813,34 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
       if (error) {
         callback(error, null);
       } else {
-        let categories :Array<Category>=[];
+        let categories :Array<Category> = new Array<Category>();
+
         for(let costHeadIndex = 0; building.costHeads.length > costHeadIndex; costHeadIndex++) {
           if(building.costHeads[costHeadIndex].rateAnalysisId === costHeadId) {
             for (let categoryIndex = 0; categoryIndex < building.costHeads[costHeadIndex].categories.length; categoryIndex++) {
-              if (building.costHeads[costHeadIndex].categories[categoryIndex].active === true) {
-                categories.push(building.costHeads[costHeadIndex].categories[categoryIndex]);
-                if (building.costHeads[costHeadIndex].categories[categoryIndex].workItems.length !== 0 ||
-                  building.costHeads[costHeadIndex].categories[categoryIndex].workItems!==undefined) {
-                  let workitems = building.costHeads[costHeadIndex].categories[categoryIndex].workItems;
-                  for (let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex++) {
-                    let workitem = workitems[workitemsIndex];
-                    if (workitem.quantity.total !== null && workitem.rate.total !== null
-                      && workitem.quantity.total !== 0 && workitem.rate.total !== 0) {
-                      building.costHeads[costHeadIndex].categories[categoryIndex].amount = parseFloat((workitem.quantity.total *
-                        workitem.rate.total + building.costHeads[costHeadIndex].categories[categoryIndex].amount).toFixed(2));
-                    } else {
-                      building.costHeads[costHeadIndex].categories[categoryIndex].amount = 0;
-                      building.costHeads[costHeadIndex].categories[categoryIndex].amount = 0;
-                      break;
+                if (building.costHeads[costHeadIndex].categories[categoryIndex].active === true) {
+                  let workItems : Array<WorkItem> = new Array<WorkItem>();
+                  let category = building.costHeads[costHeadIndex].categories[categoryIndex];
+                  for(let workitemIndex = 0; workitemIndex < category.workItems.length; workitemIndex ++ ) {
+                    if(category.workItems[workitemIndex].active) {
+                      workItems.push(category.workItems[workitemIndex]);
+                      for(let workItemsIndex1=0; workItemsIndex1 < workItems.length; workItemsIndex1++ ) {
+                        let currentWorkItem = workItems[workItemsIndex1];
+
+                        if (currentWorkItem.quantity.total !== null && currentWorkItem.rate.total !== null
+                          && currentWorkItem.quantity.total !== 0 && currentWorkItem.rate.total !== 0) {
+                          building.costHeads[costHeadIndex].categories[categoryIndex].amount = parseFloat((currentWorkItem.quantity.total *
+                            currentWorkItem.rate.total + building.costHeads[costHeadIndex].categories[categoryIndex].amount).toFixed(2));
+                        } else {
+                          building.costHeads[costHeadIndex].categories[categoryIndex].amount = 0;
+                          building.costHeads[costHeadIndex].categories[categoryIndex].amount = 0;
+                          break;
+                        }
+                      }
                     }
                   }
-                }
+                  category.workItems = workItems;
+                  categories.push(category);
               }
             }
           }
