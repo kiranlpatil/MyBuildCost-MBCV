@@ -239,33 +239,25 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.workItemId =  parseInt(workItemId);
   }
 
-  deleteWorkItem() {
-    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    let costHeadId=parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-
-    this.costSummaryService.deleteWorkItem( projectId, buildingId, costHeadId, this.categoryId, this.workItemId ).subscribe(
-      costHeadDetail => this.onDeleteWorkItemSuccess(costHeadDetail),
-      error => this.onDeleteWorkItemFailure(error)
-    );
-  }
-
-  onDeleteWorkItemSuccess(workItemDetails: any) {
-    if (workItemDetails !== null) {
-      var message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM;
-      this.messageService.message(message);
-      this.getCategory( this.projectId, this.costHeadId);
-    }
-  }
-
-  onDeleteWorkItemFailure(error: any) {
+  inActiveWorkItem() {
+  let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+  let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+  let costHeadId=parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+  this.costSummaryService.inActiveWorkItem( projectId, buildingId, costHeadId, this.categoryId, this.workItemId ).subscribe(
+    costHeadDetail => this.onInActiveWorkItemSuccess(costHeadDetail),
+  error => this.onInActiveWorkItemFailure(error)
+);
+}
+  onInActiveWorkItemSuccess(deleteWorkItem: any) {
     var message = new Message();
     message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
+    message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM;
     this.messageService.message(message);
     this.getCategory( this.projectId, this.costHeadId);
+  }
+
+  onInActiveWorkItemFailure(error: any) {
+    console.log('InActive WorkItem error : '+JSON.stringify(error));
   }
 
   getWorkItemList( categoryId:number, workItemIndex:number) {
@@ -274,51 +266,42 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-
     this.costSummaryService.getWorkItemList( projectId, buildingId, this.costHeadId, categoryId).subscribe(
       workItemList => this.onGetWorkItemListSuccess(workItemList),
       error => this.onGetWorkItemListFailure(error)
     );
   }
-
   onGetWorkItemListSuccess(workItemList:any) {
-    let workItemListAfterClone = lodsh.cloneDeep(workItemList.data);
-    this.workItemListArray = this.commonService.removeDuplicateItmes(workItemListAfterClone, this.selectedWorkItems);
-    if(this.workItemListArray.length===0) {
+    if (workItemList.data.length !== 0) {
+      this.workItemListArray = workItemList.data;
+      this.showWorkItemList = true;
+    } else {
       var message = new Message();
       message.isError = false;
       message.custom_message = Messages.MSG_ALREADY_ADDED_ALL_WORKITEMS;
       this.messageService.message(message);
-    }else {
-      this.showWorkItemList=true;
     }
   }
-
   onGetWorkItemListFailure(error:any) {
-    console.log('onshowWorkItemFail : '+error);
+    console.log('Get WorkItemList error : '+error);
   }
-
   onChangeAddSelectedWorkItem(selectedWorkItem:any) {
     this.showWorkItemList=false;
-
     let workItemList  =  this.workItemListArray;
     let workItemObject = workItemList.filter(
       function( workItemObj: any){
         return workItemObj.name === selectedWorkItem;
       });
-
     let categoryId=this.categoryRateAnalysisId;
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
-    this.costSummaryService.addWorkItem( projectId, buildingId, this.costHeadId, categoryId, workItemObject[0].rateAnalysisId,
-      workItemObject[0].name).subscribe(
-      workItemList => this.onAddWorkItemSuccess(workItemList),
-      error => this.onAddWorkItemFailure(error)
+    this.costSummaryService.activeWorkItem( projectId, buildingId, this.costHeadId, categoryId, workItemObject[0].rateAnalysisId).subscribe(
+      workItemList => this.onActiveWorkItemSuccess(workItemList),
+      error => this.onActiveWorkItemFailure(error)
     );
   }
-
-  onAddWorkItemSuccess(workItemList:any) {
+  onActiveWorkItemSuccess(workItemList:any) {
     this.selectedWorkItems=workItemList.data;
     var message = new Message();
     message.isError = false;
@@ -328,8 +311,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.getCategory(this.projectId, this.costHeadId);
   }
 
-  onAddWorkItemFailure(error:any) {
-    console.log('onshowWorkItemFail : '+error);
+  onActiveWorkItemFailure(error:any) {
+    console.log('Active WorkItem error : '+error);
   }
 
   setCategoryDetailsForDelete(categoryId : any) {
@@ -421,7 +404,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.inActiveCategory();
     }
     if(elementType === ProjectElements.WORK_ITEM) {
-      this.deleteWorkItem();
+      this.inActiveWorkItem();
     }
   }
 

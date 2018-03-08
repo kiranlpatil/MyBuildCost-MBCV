@@ -57,11 +57,37 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  getCategoryList(projectId : string, buildingId : string, costheadId : number) {
+  getCategoryList(projectId : string, buildingId : string, costHeadId : number) {
     var url =  API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' +
-      API.COSTHEAD +'/' + costheadId + '/' + API.CATEGORYLIST;
+      API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORYLIST;
 
     return this.httpDelegateService.getAPI(url);
+  }
+
+  // WorkItem  CRUD API
+  inActiveWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
+    var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
+      costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
+      API.COSTHEAD_ACTIVE_STATUS +'/'+ API.COSTHEAD_ACTIVE_STATUS_FALSE;
+    let body = {};
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
+  getWorkItemList( projectId : string, buildingId : string, costHeadId : number, subCategoryId : number) {
+    var url = API.PROJECT + '/'+ projectId + '/'+ API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD+'/'+
+      costHeadId + '/'+ API.CATEGORY  +'/'+ subCategoryId +'/' + API.WORKITEM ;
+
+    return this.httpDelegateService.getAPI(url);
+  }
+
+  activeWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
+    var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
+      costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
+      API.COSTHEAD_ACTIVE_STATUS +'/'+ API.COSTHEAD_ACTIVE_STATUS_TRUE;
+    let body = {};
+
+    return this.httpDelegateService.putAPI(url, body);
   }
 
   // Quantity API (Not in use)
@@ -155,32 +181,5 @@ export class CostSummaryService extends BaseService {
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
-  }
-
-  //Workitems API
-  getWorkItemList( projectId : string, buildingId : string, costheadId : number, categoryId : number) {
-    var url = API.PROJECT + '/' +  projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' + costheadId +
-      '/' + API.CATEGORY +'/' +categoryId + '/'+ API.WORKITEMLIST;
-
-    return this.httpDelegateService.getAPI(url);
-  }
-
-  addWorkItem( projectId : string, buildingId : String, costheadId : number, categoryId : number,
-               selectedWorkItemRateAnalysisId : number, selectedWorkItemName : string) {
-    let body= {
-      rateAnalysisId : selectedWorkItemRateAnalysisId,
-      name : selectedWorkItemName
-    };
-    var url = API.PROJECT + '/'+  projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' + costheadId +
-      '/' + API.CATEGORY + '/' + categoryId + '/' + API.WORKITEM;
-
-    return this.httpDelegateService.postAPI(url, body);
-  }
-
-  deleteWorkItem( projectId : string, buildingId : String, costHeadId : number, categoryId : number,workItemId : number) {
-    var url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' + buildingId
-      + '/'+ API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId;
-
-    return this.httpDelegateService.deleteAPI(url);
   }
 }
