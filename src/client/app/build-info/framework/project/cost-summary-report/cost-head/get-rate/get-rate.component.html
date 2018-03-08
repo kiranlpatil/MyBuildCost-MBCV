@@ -1,3 +1,4 @@
+<!--Edit enabled-->
 <div *ngIf="rateItemsArray!==undefined" class="get-rate-section">
   <div class="pull-left">
     <div class="pull-left" *ngIf="rateItemsArray!==undefined">
@@ -7,7 +8,8 @@
       <div class="pull-left">
         <input [(ngModel)]="rateItemsArray.quantity" id="rateQuantity" type="number" class="form-control quantity-count"
                (change)="onTotalQuantityChange(rateItemsArray.quantity)"
-               (focus)="getPreviousQuantity(rateItemsArray.quantity)"/>
+               (focus)="getPreviousQuantity(rateItemsArray.quantity)"
+               [disabled]="disableRateField"/>
       </div>
       <div class="pull-left">
         <span class="quantity-sqft">
@@ -23,7 +25,7 @@
         <th>{{getTableHeadings().QUANTITY}}</th>
         <th>{{getTableHeadings().UNIT}}</th>
         <th>{{getTableHeadings().RATE_PER_UNIT}}</th>
-        <th>{{getTableHeadings().AMOUNT}}</th>
+        <th>{{getTableHeadings().COST}}</th>
         </thead>
         <tbody>
         <tr *ngFor="let rateItem of rateItemsArray.rateItems | groupBy:'type'; let k = index">
@@ -35,19 +37,22 @@
               <tbody>
                     <tr *ngFor="let item of rateItem.value">
                       <td>
-                        <input [(ngModel)]="item.item" id="itemDescription" class="form-control remark-input"/>
+                        <input [(ngModel)]="item.item" id="itemDescription" class="form-control remark-input"
+                               [disabled]="disableRateField"/>
                         <div class="remark-icon">
                           <img title="{{item.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
                         </div>
                       </td>
                       <td>
-                        <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right" (change)="calculateTotal()"/>
+                        <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right"
+                               (change)="calculateTotal()" [disabled]="disableRateField"/>
                       </td>
                       <td>
-                        <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-right"/>
+                        <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-right" [disabled]="disableRateField"/>
                       </td>
                       <td>
-                        <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right" (change)="calculateTotal()"/>
+                        <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
+                               (change)="calculateTotal()" [disabled]="disableRateField"/>
                       </td>
                       <td>
                         <input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>
@@ -64,13 +69,13 @@
           <label>{{getLabel().TOTAL}}</label>
         </td>
         <td class="total-amount">
-          {{totalQuantity}}
+          <!--{{totalQuantity}}-->
         </td>
         <td>
           &nbsp;
         </td>
         <td class="total-amount">
-          {{totalRate}}
+         <!-- {{totalRate}}-->
         </td>
         <td class="total-amount">
           {{totalAmount}}
@@ -78,6 +83,26 @@
       </tr>
       </tfoot>
       </table>
-    <button type="button" class="save-btn" (click)="updateRate(rateItemsArray)">{{getButton().SAVE}}</button>
+
+    <table>
+      <thead>
+        <th>Notes</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <textarea rows="4" cols="80" [(ngModel)]="rateItemsArray.notes" id="rateNotes" [disabled]="disableRateField">
+              </textarea>
+          </td>
+          <td>
+            <img id="rateImageURL" src="{{rateItemsArray.imageURL}}">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" *ngIf="!disableRateField" class="save-btn" (click)="updateRate(rateItemsArray)">{{getButton().SAVE}}</button>
   </div>
 </div>
+
+

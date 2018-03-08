@@ -21,6 +21,7 @@ export class GetRateComponent {
   @Input() totalQuantity: number;
   @Input() totalAmount: number;
   @Input() totalRate: number;
+  @Input() disableRateField: boolean;
   @Output() refreshCategoryList = new EventEmitter();
 
   quantityIncrement: number = 1;
@@ -38,11 +39,11 @@ export class GetRateComponent {
     for (let i = 0; i < this.rateItemsArray.rateItems.length; i++) {
 
       if(choice === 'changeTotalQuantity') {
-        this.rateItemsArray.rateItems[i].quantity =parseFloat((this.rateItemsArray.rateItems[i].quantity *
+        this.rateItemsArray.rateItems[i].quantity = parseFloat((this.rateItemsArray.rateItems[i].quantity *
           this.quantityIncrement).toFixed(2));
       }
 
-      this.rateItemsArray.rateItems[i].totalAmount=parseFloat((this.rateItemsArray.rateItems[i].quantity*
+      this.rateItemsArray.rateItems[i].totalAmount = parseFloat((this.rateItemsArray.rateItems[i].quantity*
         this.rateItemsArray.rateItems[i].rate).toFixed(2));
 
       this.totalAmount = parseFloat((this.totalAmount + (this.rateItemsArray.rateItems[i].quantity *
@@ -54,7 +55,7 @@ export class GetRateComponent {
 
     }
 
-    this.rateItemsArray.total = parseFloat((this.totalAmount / this.totalQuantity).toFixed(2));
+    this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.quantity).toFixed(2));
   }
 
   updateRate(rateItemsArray: Rate) {
@@ -70,6 +71,8 @@ export class GetRateComponent {
     rate.quantity = rateItemsArray.quantity;
     rate.unit = rateItemsArray.unit;
     rate.rateItems = rateItemsArray.rateItems;
+    rate.imageURL=rateItemsArray.imageURL;
+    rate.notes=rateItemsArray.notes;
 
     this.costSummaryService.updateRate( projectID, buildingId, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
       rateItem => this.onUpdateRateSuccess(rateItem),

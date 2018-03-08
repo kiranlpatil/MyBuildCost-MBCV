@@ -337,9 +337,9 @@ export class TableHeadings {
   public static BREADTH : string = 'Breadth';
   public static HEIGHT : string = 'Height';
   public static UNIT: string = 'Unit';
-  public static RATE_UNIT : string = 'Rate/Unit';
   public static RATEANALYSIS : string = 'RateAnalysis';
   public static AMOUNT : string = 'Amount';
+  public static COST : string = 'Cost';
   public static TOTAL: string = 'Total';
   public static DESCRIPTION: string = 'Description';
   public static RATE_PER_UNIT: string = 'Rate/Unit';
@@ -414,6 +414,9 @@ export class Label {
   public static GRAND_TOTAL : string = 'Grand Total ';
   public static TOTAL_PROJECT : string = 'Total Project';
   public static WORKITEMS : string = 'WorkItems';
+  public static GET_RATE : string = 'getRate';
+  public static GET_SYSTEM_RATE : string = 'getSystemRate';
+  public static GET_RATE_BY_QUANTITY : string = 'getRateByQuantity';
 
 }
 
@@ -432,6 +435,8 @@ export class Button {
   public static GO_BACK: string = 'Back';
   public static SAVE: string = 'Save';
   public static GET_AMOUNT: string = 'Get Amount';
+  public static GET_RATE: string = 'Get Amount';
+  public static SYSTEM_RA: string = 'System RA';
   public static ADD: string = 'Add ';
   public static CATEGORY: string = 'Category';
   public static WORKITEM: string = 'WorkItem';

@@ -59,6 +59,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private totalRateUnitOfWorkItems:number=0;
   private totalAmountOfWorkItems:number=0;
 
+  private disableRateField:boolean = false;
+
+  private previousRateQuantity:number = 0;
+  private quantityIncrement:number = 1;
+  private displayRateView: string = null;
+
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private messageService: MessageService, private commonService : CommonService) {
@@ -145,93 +151,106 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showQuantity = true;
   }
 
-  getRateFromRateAnalysis( categoryIndex:number, workItemIndex: number, workItem:WorkItem) {
-    this.compareCategoryIndex = categoryIndex;
-    this.toggleRate = !this.toggleRate;
-    this.compareWorkItemIndex = workItemIndex;
-    if (this.toggleRate === true) {
-      this.toggleQty = false;
-    }
-    this.workItem = workItem;
-    this.workItemId = workItem.rateAnalysisId;
-
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
-    let categoryId=this.categoryDetails[categoryIndex].rateAnalysisId;
-    let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-
-    this.costSummaryService.getRateItems( projectId, buildingId, this.costHeadId, categoryId, this.workItemId).subscribe(
-      rateItem => {
-        this.onGetRateItemsSuccess(workItem, rateItem);
-      },error => this.onGetRateItemsFailure(error)
-    );
-  }
-
-  onGetRateItemsSuccess(workItem:any, rateItem: any) {
-    this.totalAmount=0;
-    this.totalRate=0;
-    this.totalQuantity=0;
-
-    this.rateItemsArray=rateItem.data;
-    this.workItem = workItem;
-
-    this.rateFromRateAnalysis = rateItem.data.rateFromRateAnalysis;
-
-    this.workItem.rate.rateFromRateAnalysis=rateItem.data.rateFromRateAnalysis;
-
-    this.rateItemsArray.quantity=rateItem.data.quantity;
-
-    this.rateItemsArray.unit=rateItem.data.unit;
-    this.unit=rateItem.data.unit;
-    this.quantity=rateItem.data.quantity;
-
-    this.unit=rateItem.data.unit;
-    this.rateItemsArray = rateItem.data;
-
-    for(let i=0;i<rateItem.data.rateItems.length;i++) {
-      this.totalAmount=parseFloat((this.totalAmount+( rateItem.data.rateItems[i].quantity*
-        rateItem.data.rateItems[i].rate)).toFixed(2));
-      this.totalRate=parseFloat((this.totalRate+rateItem.data.rateItems[i].rate).toFixed(2));
-      this.totalQuantity=parseFloat((this.totalQuantity+rateItem.data.rateItems[i].quantity).toFixed(2));
-    }
-    this.rateItemsArray.total= parseFloat((this.totalAmount/this.totalQuantity).toFixed(2));
-    this.showRate = true;
-  }
-
-  onGetRateItemsFailure(error: any) {
-    console.log(error);
-  }
-
   //Rate from DB
-  getRateFromDatabase( i:number, workItemIndex:number, workItem : WorkItem) {
-    this.compareCategoryIndex=i;
-    this.toggleRate = !this.toggleRate;
-    this.workItem = workItem;
-    this.workItemId = workItem.rateAnalysisId;
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
-    this.compareWorkItemIndex = workItemIndex;
-    if (this.toggleRate === true) {
-      this.toggleQty = false;
+  getRate(displayRateView : string, categoryIndex:number, workItemIndex:number, workItem : WorkItem, disableRateField : boolean ) {
+    if(this.displayRateView !== displayRateView) {
+
+      this.displayRateView = displayRateView;
+
+      this.compareCategoryIndex = categoryIndex;
+      this.toggleRate = true;
+      this.workItem = workItem;
+      this.workItemId = workItem.rateAnalysisId;
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
+      this.compareWorkItemIndex = workItemIndex;
+      this.rateItemsArray = workItem.rate;
+      this.unit = workItem.rate.unit;
+
+      if (this.quantityIncrement !== 1) {
+        this.quantityIncrement = this.previousRateQuantity / this.rateItemsArray.quantity;
+        this.rateItemsArray.quantity = this.previousRateQuantity;
+        for (let rateItemsIndex = 0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
+          this.rateItemsArray.rateItems[rateItemsIndex].quantity = parseFloat((this.rateItemsArray.rateItems[rateItemsIndex].quantity *
+            this.quantityIncrement).toFixed(2));
+        }
+      }
+
+      this.calculateTotal();
+      this.disableRateField=disableRateField;
     }
-    this.rateItemsArray=workItem.rate;
-    let rate = new Rate();
-    rate.rateItems = workItem.rate.rateItems;
-    rate.rateFromRateAnalysis = workItem.rate.rateFromRateAnalysis ;
-    rate.total = workItem.rate.total;
-    rate.unit = workItem.rate.unit;
-    rate.quantity = workItem.rate.quantity;
-    this.unit=workItem.rate.unit;
+
+  }
+
+  //Rate from DB by Quantity
+  getRateByQuantity(displayRateView : string, categoryIndex:number, workItemIndex:number, workItem : WorkItem,
+                    disableRateField : boolean ) {
+    if(this.displayRateView !== displayRateView) {
+
+      this.displayRateView = displayRateView;
+
+      this.compareCategoryIndex = categoryIndex;
+      this.workItemId = workItem.rateAnalysisId;
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
+      this.compareWorkItemIndex = workItemIndex;
+      this.rateItemsArray = workItem.rate;
+      this.unit = workItem.rate.unit;
+
+      this.previousRateQuantity = this.rateItemsArray.quantity;
+      this.rateItemsArray.quantity = workItem.quantity.total;
+      this.quantityIncrement = this.rateItemsArray.quantity / this.previousRateQuantity;
+      for (let rateItemsIndex = 0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
+        this.rateItemsArray.rateItems[rateItemsIndex].quantity = parseFloat((this.rateItemsArray.rateItems[rateItemsIndex].quantity *
+          this.quantityIncrement).toFixed(2));
+      }
+
+      this.calculateTotal();
+      this.disableRateField=disableRateField;
+    }
+  }
+
+  //System Rate from DB
+  getSystemRate(displayRateView : string, categoryIndex:number, workItemIndex:number, workItem : WorkItem, disableRateField : boolean ) {
+    if(this.displayRateView !== displayRateView) {
+
+      this.displayRateView = displayRateView
+
+      this.compareCategoryIndex = categoryIndex;
+      this.toggleRate = true;
+      this.workItem = workItem;
+      this.workItemId = workItem.rateAnalysisId;
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
+      this.compareWorkItemIndex = workItemIndex;
+      this.rateItemsArray = workItem.systemRate;
+      this.unit = workItem.systemRate.unit;
+
+      this.calculateTotal();
+      this.disableRateField=disableRateField;
+    }
+
+  }
+
+  calculateTotal() {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
+    this.rateItemsArray.total=0;
 
-    for(let i=0; i < this.rateItemsArray.rateItems.length; i++) {
-      this.totalAmount = parseFloat((this.totalAmount + ( this.rateItemsArray.rateItems[i].quantity *
-        this.rateItemsArray.rateItems[i].rate )).toFixed(2));
-      this.totalRate = parseFloat((this.totalRate + this.rateItemsArray.rateItems[i].rate).toFixed(2));
-      this.totalQuantity = parseFloat((this.totalQuantity + this.rateItemsArray.rateItems[i].quantity).toFixed(2));
+    for(let rateItemsIndex=0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
+      this.totalAmount = parseFloat((this.totalAmount + ( this.rateItemsArray.rateItems[rateItemsIndex].quantity *
+        this.rateItemsArray.rateItems[rateItemsIndex].rate )).toFixed(2));
+      this.totalRate = parseFloat((this.totalRate + this.rateItemsArray.rateItems[rateItemsIndex].rate).toFixed(2));
+      this.totalQuantity = parseFloat((this.totalQuantity + this.rateItemsArray.rateItems[rateItemsIndex].quantity).toFixed(2));
     }
+
+    this.rateItemsArray.total= parseFloat((this.totalAmount/this.rateItemsArray.quantity).toFixed(2));
+
     this.showRate = true;
+
+    this.toggleRate = true;
+
+    if (this.toggleRate === true) {
+      this.toggleQty = false;
+    }
   }
 
   setIdsForDeleteWorkItem(categoryId: string, workItemId: string) {

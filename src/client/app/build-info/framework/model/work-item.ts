@@ -7,6 +7,7 @@ export class WorkItem {
   quantity: Quantity;
   unit: string;
   rate: Rate;
+  systemRate: Rate;
   amount: number;
   active: boolean;
   remarks: string;
@@ -16,6 +17,7 @@ export class WorkItem {
     this.rateAnalysisId = rateAnalysisId;
     this.quantity = new Quantity();
     this.rate = new Rate();
+    this.systemRate = new Rate();
     this.amount = 0;
     this.unit = Units.UNIT;
     this.active=false;

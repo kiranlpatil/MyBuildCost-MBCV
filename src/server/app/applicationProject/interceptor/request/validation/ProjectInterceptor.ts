@@ -20,6 +20,15 @@ if((projectId === undefined || buildingId === undefined || costHeadId === undefi
     } else callback(null, true);
   }
 
+  public static validateIdsForUpdateRate(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
+                                         workItemId: number, callback: (error: any, result: any) => void) {
+    if((projectId === undefined || buildingId === undefined || costHeadId === undefined || categoryId === undefined ||
+        workItemId === undefined) || (projectId === '' || buildingId === '' || costHeadId === null || categoryId === null ||
+        workItemId === null)) {
+      callback(null, false);
+    } else callback(null, true);
+  }
+
   public static validateCategoryIds(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
                                     activeStatus: number, callback: (error: any, result: any) => void) {
     if((projectId === undefined || buildingId === undefined || costHeadId === undefined || categoryId === undefined ||
@@ -614,8 +623,10 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
   updateRate(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
-    var costHeadId = req.params.costHeadId;
-    ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId, (error, result) => {
+    var costHeadId = parseInt(req.params.costHeadId);
+    var categoryId = parseInt(req.params.categoryId);
+    var workItemId = parseInt(req.params.workItemId);
+    ProjectInterceptor.validateIdsForUpdateRate(projectId, buildingId, costHeadId, categoryId, workItemId, (error, result) => {
       if (error) {
         next(error);
       } else {
@@ -628,9 +639,9 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
           });
         } else {
           if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) ||(req.body.quantity  === undefined)  ||
-            (req.body.rateFromRateAnalysis === undefined)  || (req.body.rateItems === undefined)  || (req.body.total  === undefined) || (req.body.unit === undefined) ||
-            (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.quantity  === '')  ||
-            (req.body.rateFromRateAnalysis === '')  || (req.body.rateItems === '')  || (req.body.total  === '') || (req.body.unit === '')) {
+            (req.body.rateItems === undefined)  || (req.body.total  === undefined) || (req.body.unit === undefined) ||
+            (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.quantity  === '') ||
+            (req.body.rateItems === '')  || (req.body.total  === '') || (req.body.unit === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
