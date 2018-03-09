@@ -145,7 +145,7 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
 
     //sync building with rate Analysis data
     router.get('/:projectId/building/:buildingId/syncRateAnalysis',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.syncBuildingWithRateAnalysisData, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.syncProjectWithRateAnalysisData, this._responseInterceptor.exit);
     return router;
   }
 }

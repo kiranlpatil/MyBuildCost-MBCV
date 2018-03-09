@@ -229,6 +229,7 @@ class ProjectService {
       }
     });
   }
+
   getInActiveWorkItems(projectId:string, buildingId:string, costHeadId:number, categoryId:number,
                        user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, add Workitem has been hit');
@@ -850,28 +851,70 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
     });
   }
 
-  syncBuildingWithRateAnalysisData(projectId:string, buildingId:string, user: User, callback: (error:any, result:any)=> void) {
-    let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
-    rateAnalysisServices.getAllDataFromRateAnalysis((error, rateAnalysisData) => {
-      if (error) {
-        callback(error, null);
-      } else {
+  syncProjectWithRateAnalysisData(projectId:string, buildingId:string, user: User, callback: (error:any, result:any)=> void) {
+    let syncBuildingCostHeads = this.PromiseForSyncBuildingCostHeads('building',buildingId);
+    let syncProjectCostHeads = this.PromiseForSyncProjectCostHeads('amenities',projectId);
+   Promise.all([
+     syncBuildingCostHeads,
+     syncProjectCostHeads
+   ]).then(function(data: Array<any>) {
+     let buildingCostHeadsData = data[0];
+     let projectCostHeadsData = data[1];
+     callback(null, {status:200});
+   })
+  .catch(() => { logger.info(' Promise failed!');});
+  }
 
-        let query = {'_id' : buildingId };
-        let newData = { $set: { 'costHeads': rateAnalysisData }};
-
-        this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {
-          logger.info('Project service, getAllDataFromRateAnalysis has been hit');
-          if (error) {
-            callback(error, null);
-          } else {
-            callback(null, {data: building, access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-        });
-      }
+  PromiseForSyncBuildingCostHeads(entity: string, buildingId:string) {
+    return new Promise(function(resolve, reject) {
+      let rateAnalysisService = new RateAnalysisService();
+      let buildingRepository = new BuildingRepository();
+      rateAnalysisService.getAllDataFromRateAnalysis(entity, (error: any, buildingCostHeadsData: any) => {
+        if (error) {
+          logger.err('Error in promise : ' + error);
+          reject(error);
+        } else {
+          let query = {'_id': buildingId};
+          let newData = {$set: {'costHeads': buildingCostHeadsData}};
+          buildingRepository.findOneAndUpdate(query, newData, {new: true}, (error:any, response:any) => {
+            logger.info('Project service, getAllDataFromRateAnalysis has been hit');
+            if (error) {
+              logger.err('Error in Update buildingCostHeadsData  : '+error);
+              reject(error);
+            } else {
+              resolve('Done');
+              }
+          });
+        }
+      });
     });
   }
-}
+
+  PromiseForSyncProjectCostHeads(entity: string,projectId:string) {
+    return new Promise(function(resolve, reject){
+      let rateAnalysisService = new RateAnalysisService();
+      let projectRepository = new ProjectRepository();
+      rateAnalysisService.getAllDataFromRateAnalysis(entity, (error : any, projectCostHeadsData: any) => {
+        if(error) {
+          logger.err('Error in promise : ' + error);
+          reject(error);
+        } else {
+            let query = {'_id': projectId};
+            let newData = {$set: {'projectCostHeads': projectCostHeadsData}};
+            projectRepository.findOneAndUpdate(query, newData, {new: true}, (error: any, response: any) => {
+              logger.info('Project service, getAllDataFromRateAnalysis has been hit');
+              if (error) {
+                logger.err('Error in Update buildingCostHeadsData  : '+error);
+                reject(error);
+              } else {
+                resolve('Done');
+              }
+            });
+          }
+      });
+    });
+  }
+ }
 
 Object.seal(ProjectService);
 export = ProjectService;
