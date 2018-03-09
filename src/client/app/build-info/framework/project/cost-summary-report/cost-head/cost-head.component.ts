@@ -78,19 +78,19 @@ export class CostHeadComponent implements OnInit, OnChanges {
       let costheadIdParams = params['costHeadId'];
       this.costHeadId = parseInt(costheadIdParams);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_ID,this.costHeadId);
-      this.getCategory( this.projectId, this.costHeadId);
+      this.getActiveCategories( this.projectId, this.costHeadId);
     });
   }
 
-  getCategory(projectId: string, costHeadId: number) {
+  getActiveCategories(projectId: string, costHeadId: number) {
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    this.costSummaryService.getCategory( projectId, buildingId, costHeadId).subscribe(
-      categoryDetails => this.onGetCategorySuccess(categoryDetails),
-      error => this.onGetCategoryFailure(error)
+    this.costSummaryService.getActiveCategories( projectId, buildingId, costHeadId).subscribe(
+      categoryDetails => this.onGetActiveCategoriesSuccess(categoryDetails),
+      error => this.onGetActiveCategoriesFalure(error)
     );
   }
 
-  onGetCategorySuccess(categoryDetails: any) {
+  onGetActiveCategoriesSuccess(categoryDetails: any) {
     this.categoryDetails = categoryDetails.data;
     this.categoryDetailsTotalAmount=0.0;
     this.totalQuantityOfWorkItems=0.0;
@@ -127,7 +127,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryArray = this.commonService.removeDuplicateItmes(categoryList, this.categoryDetails);
   }
 
-  onGetCategoryFailure(error: any) {
+  onGetActiveCategoriesFalure(error: any) {
     console.log(error);
   }
 
@@ -212,7 +212,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   getSystemRate(displayRateView : string, categoryIndex:number, workItemIndex:number, workItem : WorkItem, disableRateField : boolean ) {
     if(this.displayRateView !== displayRateView) {
 
-      this.displayRateView = displayRateView
+      this.displayRateView = displayRateView;
 
       this.compareCategoryIndex = categoryIndex;
       this.toggleRate = true;
@@ -267,12 +267,13 @@ export class CostHeadComponent implements OnInit, OnChanges {
   error => this.onInActiveWorkItemFailure(error)
 );
 }
+
   onInActiveWorkItemSuccess(deleteWorkItem: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM;
     this.messageService.message(message);
-    this.getCategory( this.projectId, this.costHeadId);
+    this.getActiveCategories( this.projectId, this.costHeadId);
   }
 
   onInActiveWorkItemFailure(error: any) {
@@ -290,6 +291,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       error => this.onGetWorkItemListFailure(error)
     );
   }
+
   onGetWorkItemListSuccess(workItemList:any) {
     if (workItemList.data.length !== 0) {
       this.workItemListArray = workItemList.data;
@@ -301,9 +303,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.messageService.message(message);
     }
   }
+
   onGetWorkItemListFailure(error:any) {
     console.log('Get WorkItemList error : '+error);
   }
+
   onChangeAddSelectedWorkItem(selectedWorkItem:any) {
     this.showWorkItemList=false;
     let workItemList  =  this.workItemListArray;
@@ -320,6 +324,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       error => this.onActiveWorkItemFailure(error)
     );
   }
+
   onActiveWorkItemSuccess(workItemList:any) {
     this.selectedWorkItems=workItemList.data;
     var message = new Message();
@@ -327,50 +332,50 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.custom_message = Messages.MSG_SUCCESS_ADD_WORKITEM;
     this.messageService.message(message);
     this.showWorkItemList=false;
-    this.getCategory(this.projectId, this.costHeadId);
+    this.getActiveCategories(this.projectId, this.costHeadId);
   }
 
   onActiveWorkItemFailure(error:any) {
     console.log('Active WorkItem error : '+error);
   }
 
-  setCategoryDetailsForDelete(categoryId : any) {
+  setCategoryIdForDeactivate(categoryId : any) {
     this.categoryIdForInActive = categoryId;
   }
 
-  inActiveCategory() {
+  deactivateCategory() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
-    this.costSummaryService.inActiveCategory( projectId, buildingId, this.costHeadId, this.categoryIdForInActive).subscribe(
-      deleteCategory => this.onInActiveCategorySuccess(deleteCategory),
-      error => this.onInActiveCategoryFailure(error)
+    this.costSummaryService.deactivateCategory( projectId, buildingId, this.costHeadId, this.categoryIdForInActive).subscribe(
+      deleteCategory => this.onDeactivateCategorySuccess(deleteCategory),
+      error => this.onDeactivateCategoryFailure(error)
     );
   }
 
-  onInActiveCategorySuccess(deleteCategory : any) {
+  onDeactivateCategorySuccess(deleteCategory : any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_CATEGORY;
     this.messageService.message(message);
-    this.getCategory( this.projectId, this.costHeadId);
+    this.getActiveCategories( this.projectId, this.costHeadId);
   }
 
-  onInActiveCategoryFailure(error : any) {
+  onDeactivateCategoryFailure(error : any) {
     console.log('In Active Category error : '+JSON.stringify(error));
   }
 
-  getCategoryList() {
+  getInActiveCategories() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
-    this.costSummaryService.getCategoryList( projectId, buildingId, this.costHeadId).subscribe(
-      categoryList => this.onGetCategoryListSuccess(categoryList),
-      error => this.onGetCategoryListFailure(error)
+    this.costSummaryService.getInActiveCategories( projectId, buildingId, this.costHeadId).subscribe(
+      categoryList => this.onGetInActiveCategoriesSuccess(categoryList),
+      error => this.onGetInActiveCategoriesFailure(error)
     );
   }
 
-  onGetCategoryListSuccess(categoryList : any) {
+  onGetInActiveCategoriesSuccess(categoryList : any) {
     if(categoryList.data.length!==0) {
     this.categoryArray = categoryList.data;
     this.showCategoryList = true;
@@ -382,34 +387,34 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  onGetCategoryListFailure(error : any) {
+  onGetInActiveCategoriesFailure(error : any) {
     console.log('categoryList error : '+JSON.stringify(error));
   }
 
-  onChangeAddSelectedCategory(selectedCategoryId : number ) {
+  onChangeActivateSelectedCategory(selectedCategoryId : number ) {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
-    this.costSummaryService.activeCategory( projectId, buildingId, this.costHeadId, selectedCategoryId).subscribe(
-      building => this.onAddCategorySuccess(building),
-      error => this.onAddCategoryFailure(error)
+    this.costSummaryService.activateCategory( projectId, buildingId, this.costHeadId, selectedCategoryId).subscribe(
+      building => this.onActivateCategorySuccess(building),
+      error => this.onActivateCategoryFailure(error)
     );
   }
 
-  onAddCategorySuccess(building : any) {
+  onActivateCategorySuccess(building : any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_CATEGORY;
     this.messageService.message(message);
-    this.getCategory(this.projectId, this.costHeadId);
+    this.getActiveCategories(this.projectId, this.costHeadId);
   }
 
-  onAddCategoryFailure(error : any) {
+  onActivateCategoryFailure(error : any) {
     console.log('building error : '+ JSON.stringify(error));
   }
 
   refreshCategoryList() {
-    this.getCategory( this.projectId, this.costHeadId);
+    this.getActiveCategories( this.projectId, this.costHeadId);
     this.showQuantity = false;
     this.showRate = false;
   }
@@ -420,7 +425,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   deleteElement(elementType : string) {
     if(elementType === ProjectElements.CATEGORY) {
-      this.inActiveCategory();
+      this.deactivateCategory();
     }
     if(elementType === ProjectElements.WORK_ITEM) {
       this.inActiveWorkItem();

@@ -23,7 +23,7 @@
                        alt="Delete Workitems"
                        data-toggle="modal"
                        data-target="#deleteCategory"
-                       (click)="setCategoryDetailsForDelete(categoryDetails[category].rateAnalysisId)"/>
+                       (click)="setCategoryIdForDeactivate(categoryDetails[category].rateAnalysisId)"/>
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@
           <tbody>
             <tr *ngIf="showCategoryList && categoryArray.length!==0">
               <td>
-                <select (change)="onChangeAddSelectedCategory($event.target.value)">
+                <select (change)="onChangeActivateSelectedCategory($event.target.value)">
                   <option [value]="selectItem">Select Category</option>
                   <option *ngFor="let categoryList of categoryArray" [value]="categoryList.rateAnalysisId">{{
                     categoryList.name }}</option>
@@ -160,7 +160,7 @@
             </tr>
             <tr>
               <td classs="text-center">
-                <button type="button" class="btn btn-add-item" (click)="getCategoryList()"><span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}}
+                <button type="button" class="btn btn-add-item" (click)="getInActiveCategories()"><span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}}
                   {{getButton().CATEGORY}}</button>
               </td>
             </tr>

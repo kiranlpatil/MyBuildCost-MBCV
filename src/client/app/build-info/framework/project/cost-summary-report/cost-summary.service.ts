@@ -58,7 +58,7 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  getCategoryList(projectId : string, buildingId : string, costHeadId : number) {
+  getInActiveCategories(projectId : string, buildingId : string, costHeadId : number) {
     var url =  API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' +
       API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORYLIST;
 
@@ -137,26 +137,15 @@ export class CostSummaryService extends BaseService {
   }
 
   //Category API
-  getCategory(projectId: string, buildingId : string, costheadId : number) {
+  getActiveCategories(projectId: string, buildingId : string, costheadId : number) {
     var url = API.PROJECT +'/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'
       + API.COSTHEAD+ '/' + costheadId + '/' + API.CATEGORY;
 
     return this.httpDelegateService.getAPI(url);
   }
 
-  deleteCategory(projectId : String, buildingId : string, costHeadId : number, category : any) {
-    let body = {
-      name : category.name,
-      rateAnalysisId : category.rateAnalysisId
-    };
-    let url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' +
-      buildingId + '/'+ API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORY;
-
-    return this.httpDelegateService.putAPI(url, body);
-  }
-
   //In Active Category
-  inActiveCategory( projectId : String, buildingId : string, costHeadId : number, categoryId : any) {
+  deactivateCategory(projectId : String, buildingId : string, costHeadId : number, categoryId : any) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
       costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_FALSE;
     let body = {};
@@ -164,19 +153,8 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  addCategory(projectId : string, buildingId : string, costHeadId : number, selectedCategory : any ) {
-    let url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' +
-      buildingId + '/'+ API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORY;
-    let body = {
-      category : selectedCategory[0].category,
-      categoryId : selectedCategory[0].rateAnalysisId
-    };
-
-    return this.httpDelegateService.postAPI(url, body);
-  }
-
   //Active Category
-  activeCategory( projectId : string, buildingId : string, costHeadId : number, categoryId : number) {
+  activateCategory(projectId : string, buildingId : string, costHeadId : number, categoryId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
       costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_TRUE;
     let body = {};
