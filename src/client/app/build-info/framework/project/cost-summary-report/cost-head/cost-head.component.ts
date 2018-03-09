@@ -92,17 +92,23 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onGetActiveCategoriesSuccess(categoryDetails: any) {
     this.categoryDetails = categoryDetails.data;
-    this.categoryDetailsTotalAmount=0.0;
-    this.totalQuantityOfWorkItems=0.0;
-    this.totalRateUnitOfWorkItems=0.0;
-    this.totalAmountOfWorkItems=0.0;
+    this.calculateCategoriesTotal();
+    let categoryList = lodsh.clone(this.categoryArray);
+    this.categoryArray = this.commonService.removeDuplicateItmes(categoryList, this.categoryDetails);
+  }
 
-    for(let categoryIndex=0; categoryIndex < this.categoryDetails.length; categoryIndex++) {
+  calculateCategoriesTotal() {
+    this.categoryDetailsTotalAmount = 0.0;
+    this.totalQuantityOfWorkItems = 0.0;
+    this.totalRateUnitOfWorkItems = 0.0;
+    this.totalAmountOfWorkItems = 0.0;
 
-      this.categoryDetailsTotalAmount = parseFloat(( this.categoryDetailsTotalAmount +
+    for (let categoryIndex = 0; categoryIndex < this.categoryDetails.length; categoryIndex++) {
+
+      this.categoryDetailsTotalAmount = parseFloat((this.categoryDetailsTotalAmount +
         this.categoryDetails[categoryIndex].amount).toFixed(2));
 
-      for(let workItemIndex=0; workItemIndex < this.categoryDetails[categoryIndex].workItems.length; workItemIndex++) {
+      for (let workItemIndex = 0; workItemIndex < this.categoryDetails[categoryIndex].workItems.length; workItemIndex++) {
 
         this.totalQuantityOfWorkItems = parseFloat((this.totalQuantityOfWorkItems +
           this.categoryDetails[categoryIndex].workItems[workItemIndex].quantity.total).toFixed(2));
@@ -112,19 +118,16 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
         this.totalAmountOfWorkItems = parseFloat((this.totalAmountOfWorkItems +
           (this.categoryDetails[categoryIndex].workItems[workItemIndex].quantity.total *
-          this.categoryDetails[categoryIndex].workItems[workItemIndex].rate.total)).toFixed(2));
+            this.categoryDetails[categoryIndex].workItems[workItemIndex].rate.total)).toFixed(2));
 
         this.categoryDetails[categoryIndex].workItems[workItemIndex].quantity.total =
           parseFloat((this.categoryDetails[categoryIndex].workItems[workItemIndex].quantity.total).toFixed(2));
 
-        this.categoryDetails[categoryIndex].workItems[workItemIndex].amount=
+        this.categoryDetails[categoryIndex].workItems[workItemIndex].amount =
           parseFloat((this.categoryDetails[categoryIndex].workItems[workItemIndex].quantity.total *
             this.categoryDetails[categoryIndex].workItems[workItemIndex].rate.total).toFixed(2));
       }
     }
-
-    let categoryList = lodsh.clone(this.categoryArray);
-    this.categoryArray = this.commonService.removeDuplicateItmes(categoryList, this.categoryDetails);
   }
 
   onGetActiveCategoriesFalure(error: any) {
@@ -348,17 +351,20 @@ export class CostHeadComponent implements OnInit, OnChanges {
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
     this.costSummaryService.deactivateCategory( projectId, buildingId, this.costHeadId, this.categoryIdForInActive).subscribe(
-      deleteCategory => this.onDeactivateCategorySuccess(deleteCategory),
+      deactivatedCategory => this.onDeactivateCategorySuccess(deactivatedCategory),
       error => this.onDeactivateCategoryFailure(error)
     );
   }
 
-  onDeactivateCategorySuccess(deleteCategory : any) {
+  onDeactivateCategorySuccess(deactivatedCategory : any) {
+    let categoryList = lodsh.clone(this.categoryDetails);
+    this.categoryDetails = this.commonService.removeDuplicateItmes(categoryList, deactivatedCategory.data);
+    this.calculateCategoriesTotal();
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_CATEGORY;
     this.messageService.message(message);
-    this.getActiveCategories( this.projectId, this.costHeadId);
+/*    this.getActiveCategories( this.projectId, this.costHeadId);*/
   }
 
   onDeactivateCategoryFailure(error : any) {
@@ -401,12 +407,17 @@ export class CostHeadComponent implements OnInit, OnChanges {
     );
   }
 
-  onActivateCategorySuccess(building : any) {
+  onActivateCategorySuccess(activatedCategory : any) {
+    this.categoryDetails = this.categoryDetails.concat(activatedCategory.data);
+    this.calculateCategoriesTotal();
+
+    let categoryList = lodsh.clone(this.categoryArray);
+    this.categoryArray = this.commonService.removeDuplicateItmes(categoryList, this.categoryDetails);
+
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_CATEGORY;
     this.messageService.message(message);
-    this.getActiveCategories(this.projectId, this.costHeadId);
   }
 
   onActivateCategoryFailure(error : any) {
