@@ -136,24 +136,24 @@ class RateAnalysisService {
     });
   }
 
-  getAllDataFromRateAnalysis(callback:(error: any, data:any)=> void) {
+  getAllDataFromRateAnalysis(entity:string, callback:(error: any, data:any)=> void) {
 
-    let costHeadURL = config.get('rateAnalysisAPI.costHeads');
+    let costHeadURL = config.get('rateAnalysisAPI.'+entity+'CostHeads');
     let costHeadRateAnalysisPromise = this.createPromise(costHeadURL);
 
-    let categoryURL = config.get('rateAnalysisAPI.categories');
+    let categoryURL = config.get('rateAnalysisAPI.'+entity+'Categories');
     let categoryRateAnalysisPromise = this.createPromise(categoryURL);
 
-    let workItemURL = config.get('rateAnalysisAPI.workItems');
+    let workItemURL = config.get('rateAnalysisAPI.'+entity+'WorkItems');
     let workItemRateAnalysisPromise = this.createPromise(workItemURL);
 
-    let rateItemURL = config.get('rateAnalysisAPI.rate');
+    let rateItemURL = config.get('rateAnalysisAPI.'+entity+'Rate');
     let rateItemRateAnalysisPromise = this.createPromise(rateItemURL);
 
-    let rateAnalysisNotesURL = config.get('rateAnalysisAPI.rateAnalysisNotes');
+    let rateAnalysisNotesURL = config.get('rateAnalysisAPI.'+entity+'RateAnalysisNotes');
     let notesRateAnalysisPromise = this.createPromise(rateAnalysisNotesURL);
 
-    let allUnitsFromRateAnalysisURL = config.get('rateAnalysisAPI.unit');
+    let allUnitsFromRateAnalysisURL = config.get('rateAnalysisAPI.'+entity+'Unit');
     let unitsRateAnalysisPromise = this.createPromise(allUnitsFromRateAnalysisURL);
 
     Promise.all([

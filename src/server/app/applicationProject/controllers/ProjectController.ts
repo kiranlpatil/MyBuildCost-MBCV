@@ -618,7 +618,7 @@ class ProjectController {
     }
   }
 
-  syncBuildingWithRateAnalysisData(req: express.Request, res: express.Response, next: any): void {
+  syncProjectWithRateAnalysisData(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, syncBuildingWithRateAnalysisData has been hit');
       let user = req.user;
@@ -627,12 +627,12 @@ class ProjectController {
 
       let projectService = new ProjectService();
 
-      projectService.syncBuildingWithRateAnalysisData( projectId, buildingId, user, (error, result) => {
+      projectService.syncProjectWithRateAnalysisData( projectId, buildingId, user, (error, result) => {
         if(error) {
           next(error);
         } else {
-          logger.info('syncBuildingWithRateAnalysisData success');
-          logger.debug('Getting syncBuildingWithRateAnalysisData of Project ID : '+projectId+' Building ID : '+buildingId);
+          logger.info('syncProjectWithRateAnalysisData success');
+          logger.debug('Getting syncProjectWithRateAnalysisData of Project ID : '+projectId+' Building ID : '+buildingId);
           next(new Response(200,result));
         }
       });

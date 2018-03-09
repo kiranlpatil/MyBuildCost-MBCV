@@ -1,6 +1,7 @@
 import Building = require('./building/Building');
 import Category = require('./building/CostHead');
 import Rate = require('./building/Rate');
+import CostHead = require('./building/CostHead');
 
 class Project {
   _id?:string;
@@ -17,5 +18,6 @@ class Project {
   buildings: Array<Building>;
   costHeads: Array<Category>;
   rates: Array<Rate>;
+  projectCostHeads : Array<CostHead>;
 }
 export = Project;

@@ -48,6 +48,7 @@ class ProjectSchema {
         type: Number
       },
       costHeads: [{}],
+      projectCostHeads: [{}],
       rates: [{}],
       projectDuration: {
         type: Number
