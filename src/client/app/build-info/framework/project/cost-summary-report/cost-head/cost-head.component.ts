@@ -31,7 +31,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   totalRate:number=0;
   totalQuantity:number=0;
   categoryRateAnalysisId:number;
-  comapreWorkItemRateAnalysisId:number;
+  compareWorkItemRateAnalysisId:number;
   quantity:number=0;
   rateFromRateAnalysis:number=0;
   unit:string='';
@@ -255,46 +255,53 @@ if(this.displayRateView !== displayRateView || this.compareCategoryIndex !==cate
     }
   }
 
-  setIdsForDeleteWorkItem(categoryId: string, workItemId: string) {
+  setIdsForDeleteWorkItem(categoryId: string, workItemId: string,workItemIndex:number) {
     this.categoryId = parseInt(categoryId);
     this.workItemId =  parseInt(workItemId);
+    this.compareWorkItemIndex = workItemIndex;
   }
 
-  inActiveWorkItem() {
+  deactivateWorkItem() {
   let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
   let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
   let costHeadId=parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-  this.costSummaryService.inActiveWorkItem( projectId, buildingId, costHeadId, this.categoryId, this.workItemId ).subscribe(
-    costHeadDetail => this.onInActiveWorkItemSuccess(costHeadDetail),
-  error => this.onInActiveWorkItemFailure(error)
+  this.costSummaryService.deactivateWorkItem( projectId, buildingId, costHeadId, this.categoryId, this.workItemId ).subscribe(
+    workItemDetails => this.onDeActivateWorkItemSuccess(workItemDetails),
+  error => this.onDeActivateWorkItemFailure(error)
 );
 }
 
-  onInActiveWorkItemSuccess(deleteWorkItem: any) {
+  onDeActivateWorkItemSuccess(workItemDetails: any) {
+    let inActiveWorkItems: Array<WorkItem> = workItemDetails.data;
+    for(let inActiveWorkItemsIndex = 0; inActiveWorkItemsIndex<inActiveWorkItems.length; inActiveWorkItemsIndex++) {
+      if(inActiveWorkItemsIndex === this.compareWorkItemIndex) {
+        inActiveWorkItems.splice(inActiveWorkItemsIndex,1);
+      }
+    }
+    this.workItemListArray = inActiveWorkItems;
     var message = new Message();
     message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM;
+    message.custom_message = Messages.MSG_SUCCESS_DELETE_WORKITEM;
     this.messageService.message(message);
     this.getActiveCategories( this.projectId, this.costHeadId);
   }
-
-  onInActiveWorkItemFailure(error: any) {
+  onDeActivateWorkItemFailure(error: any) {
     console.log('InActive WorkItem error : '+JSON.stringify(error));
   }
 
-  getWorkItemList( categoryId:number, workItemIndex:number) {
-    this.comapreWorkItemRateAnalysisId = workItemIndex;
+  getInActiveWorkItems(categoryId:number, workItemIndex:number) {
+    this.compareWorkItemRateAnalysisId = workItemIndex;
     this.categoryRateAnalysisId = categoryId;
 
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    this.costSummaryService.getWorkItemList( projectId, buildingId, this.costHeadId, categoryId).subscribe(
-      workItemList => this.onGetWorkItemListSuccess(workItemList),
-      error => this.onGetWorkItemListFailure(error)
+    this.costSummaryService.getInActiveWorkItems( projectId, buildingId, this.costHeadId, categoryId).subscribe(
+      workItemList => this.onGetInActiveWorkItemsSuccess(workItemList),
+      error => this.onGetInActiveWorkItemsFailure(error)
     );
   }
 
-  onGetWorkItemListSuccess(workItemList:any) {
+  onGetInActiveWorkItemsSuccess(workItemList:any) {
     if (workItemList.data.length !== 0) {
       this.workItemListArray = workItemList.data;
       this.showWorkItemList = true;
@@ -306,11 +313,11 @@ if(this.displayRateView !== displayRateView || this.compareCategoryIndex !==cate
     }
   }
 
-  onGetWorkItemListFailure(error:any) {
+  onGetInActiveWorkItemsFailure(error:any) {
     console.log('Get WorkItemList error : '+error);
   }
 
-  onChangeAddSelectedWorkItem(selectedWorkItem:any) {
+  onChangeActivateSelectedWorkItem(selectedWorkItem:any) {
     this.showWorkItemList=false;
     let workItemList  =  this.workItemListArray;
     let workItemObject = workItemList.filter(
@@ -321,13 +328,14 @@ if(this.displayRateView !== displayRateView || this.compareCategoryIndex !==cate
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
-    this.costSummaryService.activeWorkItem( projectId, buildingId, this.costHeadId, categoryId, workItemObject[0].rateAnalysisId).subscribe(
-      workItemList => this.onActiveWorkItemSuccess(workItemList),
-      error => this.onActiveWorkItemFailure(error)
+    this.costSummaryService.activateWorkItem( projectId, buildingId, this.costHeadId, categoryId,
+      workItemObject[0].rateAnalysisId).subscribe(
+      workItemList => this.onActivateWorkItemSuccess(workItemList),
+      error => this.onActivateWorkItemFailure(error)
     );
   }
 
-  onActiveWorkItemSuccess(workItemList:any) {
+  onActivateWorkItemSuccess(workItemList:any) {
     this.selectedWorkItems=workItemList.data;
     var message = new Message();
     message.isError = false;
@@ -337,7 +345,7 @@ if(this.displayRateView !== displayRateView || this.compareCategoryIndex !==cate
     this.getActiveCategories(this.projectId, this.costHeadId);
   }
 
-  onActiveWorkItemFailure(error:any) {
+  onActivateWorkItemFailure(error:any) {
     console.log('Active WorkItem error : '+error);
   }
 
@@ -438,7 +446,7 @@ if(this.displayRateView !== displayRateView || this.compareCategoryIndex !==cate
       this.deactivateCategory();
     }
     if(elementType === ProjectElements.WORK_ITEM) {
-      this.inActiveWorkItem();
+      this.deactivateWorkItem();
     }
   }
 

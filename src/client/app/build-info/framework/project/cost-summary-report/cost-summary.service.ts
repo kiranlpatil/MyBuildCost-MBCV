@@ -66,7 +66,7 @@ export class CostSummaryService extends BaseService {
   }
 
   // WorkItem  CRUD API
-  inActiveWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
+  deactivateWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
     var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
       costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
       API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_FALSE;
@@ -75,14 +75,14 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  getWorkItemList( projectId : string, buildingId : string, costHeadId : number, subCategoryId : number) {
+  getInActiveWorkItems( projectId : string, buildingId : string, costHeadId : number, subCategoryId : number) {
     var url = API.PROJECT + '/'+ projectId + '/'+ API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD+'/'+
       costHeadId + '/'+ API.CATEGORY  +'/'+ subCategoryId +'/' + API.WORKITEM ;
 
     return this.httpDelegateService.getAPI(url);
   }
 
-  activeWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
+  activateWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
     var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
       costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
       API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_TRUE;

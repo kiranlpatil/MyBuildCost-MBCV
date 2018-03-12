@@ -93,7 +93,7 @@
                     </td>
                     <td>
                       <div data-toggle="modal" data-target="#deleteWorkItem"
-                           (click)="setIdsForDeleteWorkItem(categoryDetails[category].rateAnalysisId,workitemObj.rateAnalysisId )"
+                           (click)="setIdsForDeleteWorkItem(categoryDetails[category].rateAnalysisId,workitemObj.rateAnalysisId,workItemIndex )"
                            class="delete-cost-head">
                         <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                       </div>
@@ -126,9 +126,9 @@
               </div>
               <table class="table table-row-spacing table-dashboard">
                 <tbody>
-                <tr *ngIf="showWorkItemList==true && comapreWorkItemRateAnalysisId==categoryIndex">
+                <tr *ngIf="showWorkItemList==true && compareWorkItemRateAnalysisId==categoryIndex">
                   <td class="border-left">
-                    <select  class="select-item" (change)="onChangeAddSelectedWorkItem($event.target.value)">
+                    <select  class="select-item" (change)="onChangeActivateSelectedWorkItem($event.target.value)">
                       <option [value]="selectItem">Select Work Items</option>
                       <option *ngFor="let workItems of workItemListArray" [value]="workItems.name">{{ workItems.name }}</option>
                     </select>
@@ -137,7 +137,7 @@
                 </tr>
                 <tr>
                   <td  class="add-items" colspan="7">
-                    <button type="button" class="btn btn-add-item" (click)="getWorkItemList(categoryDetails[category].rateAnalysisId,categoryIndex)"><span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}} {{getButton().ITEM}}</button>
+                    <button type="button" class="btn btn-add-item" (click)="getInActiveWorkItems(categoryDetails[category].rateAnalysisId,categoryIndex)"><span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}} {{getButton().ITEM}}</button>
                   </td>
                 </tr>
                 </tbody>
