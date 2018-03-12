@@ -434,7 +434,7 @@ export class Button {
   public static GO_BACK: string = 'Back';
   public static SAVE: string = 'Save';
   public static GET_AMOUNT: string = 'Get Amount';
-  public static GET_RATE: string = 'Get Amount';
+  public static GET_RATE: string = 'Get Rate';
   public static SYSTEM_RA: string = 'System RA';
   public static ADD: string = 'Add ';
   public static CATEGORY: string = 'Category';
