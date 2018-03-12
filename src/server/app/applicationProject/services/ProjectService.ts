@@ -774,7 +774,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
   }
 
   //Update status ( true/false ) of category
-  updateCategoryStatus(projectId:string, buildingId:string, costHeadId:string, categoryId:number ,
+  updateCategoryStatus(projectId:string, buildingId:string, costHeadId:number, categoryId:number ,
                                 categoryActiveStatus:boolean, user:User, callback:(error: any, result: any)=> void) {
 
    /* this.buildingRepository.findById(buildingId, (error, building:Building) => {*/
@@ -790,7 +790,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
         let index : number;
 
         for(let costHeadIndex=0; costHeadIndex<costHeads.length; costHeadIndex++) {
-          if(parseInt(costHeadId) === costHeads[costHeadIndex].rateAnalysisId) {
+          if(costHeadId === costHeads[costHeadIndex].rateAnalysisId) {
             categories = costHeads[costHeadIndex].categories;
             for(let categoryIndex = 0; categoryIndex<categories.length; categoryIndex++) {
               if(categories[categoryIndex].rateAnalysisId === categoryId) {
@@ -801,7 +801,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
           }
         }
 
-        let query = {'_id' : buildingId, 'costHeads.rateAnalysisId' : parseInt(costHeadId)};
+        let query = {'_id' : buildingId, 'costHeads.rateAnalysisId' : costHeadId};
         let newData = {'$set' : {'costHeads.$.categories' : categories }};
 
         this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {

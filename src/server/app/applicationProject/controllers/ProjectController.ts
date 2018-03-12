@@ -599,7 +599,7 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
-      let costHeadId = req.params.costHeadId;
+      let costHeadId = parseFloat(req.params.costHeadId);
       let categoryId =parseFloat(req.params.categoryId);
       let categoryActiveStatus = req.params.activeStatus === 'true' ? true : false;
 
