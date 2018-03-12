@@ -30,14 +30,13 @@ export class CostSummaryComponent implements OnInit {
   cloneBuildingId: string;
   costHeadId: number;
 
-  grandTotalofBudgetedCost: number;
-  grandTotalofTotalRate: number;
-  grandTotalofArea: number;
-  grandTotalofEstimatedCost : number;
-  grandTotalofEstimatedRate : number;
+  grandTotalOfBudgetedCost: number;
+  grandTotalOfTotalRate: number;
+  grandTotalOfArea: number;
+  grandTotalOfEstimatedCost : number;
+  grandTotalOfEstimatedRate : number;
 
   buildingName : string;
-  buildingsDetails: Building;
   costHead: string;
 
   estimatedItem: EstimateReport;
@@ -335,36 +334,36 @@ export class CostSummaryComponent implements OnInit {
 
   calculateGrandTotal() {
     //ToDo we have to remove this code after
-    this.grandTotalofBudgetedCost = 0;
-    this.grandTotalofTotalRate = 0;
-    this.grandTotalofArea = 0;
+    this.grandTotalOfBudgetedCost = 0;
+    this.grandTotalOfTotalRate = 0;
+    this.grandTotalOfArea = 0;
 
-    this.grandTotalofEstimatedCost = 0;
-    this.grandTotalofEstimatedRate = 0;
+    this.grandTotalOfEstimatedCost = 0;
+    this.grandTotalOfEstimatedRate = 0;
 
     //Calculate total of all building
     for (let buildindIndex = 0; buildindIndex < this.buildingsReport.length; buildindIndex++) {
 
-      this.grandTotalofBudgetedCost = this.grandTotalofBudgetedCost +
+      this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost +
         parseFloat((this.buildingsReport[buildindIndex].thumbRule.totalBudgetedCost).toFixed(2));
 
-      this.grandTotalofTotalRate = this.grandTotalofTotalRate +
+      this.grandTotalOfTotalRate = this.grandTotalOfTotalRate +
         parseFloat((this.buildingsReport[buildindIndex].thumbRule.totalRate).toFixed(2));
 
-      this.grandTotalofArea =( this.grandTotalofArea + parseFloat((this.buildingsReport[buildindIndex].area).toFixed(2)));
+      this.grandTotalOfArea =( this.grandTotalOfArea + parseFloat((this.buildingsReport[buildindIndex].area).toFixed(2)));
 
-      this.grandTotalofEstimatedCost = this.grandTotalofEstimatedCost +
+      this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost +
         parseFloat((this.buildingsReport[buildindIndex].estimate.totalEstimatedCost).toFixed(2));
 
-      this.grandTotalofEstimatedRate = this.grandTotalofEstimatedRate +
+      this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate +
         parseFloat((this.buildingsReport[buildindIndex].estimate.totalRate).toFixed(2));
     }
 
     //Calculate total with amenities data
-    this.grandTotalofBudgetedCost = this.grandTotalofBudgetedCost +
+    this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost +
       parseFloat((this.amenitiesReport.thumbRule.totalBudgetedCost).toFixed(2));
 
-    this.grandTotalofTotalRate = this.grandTotalofTotalRate +
+    this.grandTotalOfTotalRate = this.grandTotalOfTotalRate +
       parseFloat((this.amenitiesReport.thumbRule.totalRate).toFixed(2));
 
   }

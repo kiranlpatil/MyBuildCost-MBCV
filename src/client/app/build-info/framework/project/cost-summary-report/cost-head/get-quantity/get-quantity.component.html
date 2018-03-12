@@ -46,7 +46,7 @@
       <td class="total-amount">
       </td>
       <td class="total-amount text-right">
-        <span>{{quanitytNumbersTotal|number}}</span>
+        <span>{{quantityNumbersTotal|number}}</span>
       </td>
       <td class="total-amount text-right">
         <span>{{lengthTotal|number}}</span>
@@ -67,7 +67,7 @@
     </tbody>
   </table>
 
-  <button type="button" class="add-new-btn" (click)="addItem()">+ {{getButton().ADD}} {{getButton().ITEM}}</button>
+  <button type="button" class="add-new-btn" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ITEM}}</button>
   <button type="submit" class="save-btn" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
 
 </div>
