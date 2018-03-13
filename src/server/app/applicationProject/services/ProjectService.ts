@@ -10,8 +10,6 @@ import AuthInterceptor = require('../../framework/interceptor/auth.interceptor')
 import CostControllException = require('../exception/CostControllException');
 import Quantity = require('../dataaccess/model/project/building/Quantity');
 import Rate = require('../dataaccess/model/project/building/Rate');
-import ClonedCostHead = require('../dataaccess/model/project/building/ClonedCostHead');
-import ClonedWorkItem = require('../dataaccess/model/project/building/ClonedWorkItem');
 import CostHead = require('../dataaccess/model/project/building/CostHead');
 import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 import RateAnalysisService = require('./RateAnalysisService');
@@ -893,46 +891,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
 
         if(projectData.projectCostHeads.length > 0 ) {
 
-          let rateAnalysisService = new RateAnalysisService();
-          let buildingRepository = new BuildingRepository();
-          let projectRepository = new ProjectRepository();
-
-          rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING,
-            (error: any, buildingCostHeadsData: any) => {
-            if (error) {
-              logger.err('Error in promise : ' + error);
-              callback(error, null);
-            } else {
-
-              let projectService = new ProjectService();
-              let data = projectService.calculateBudgetCost(Constants.BUILDING, buildingCostHeadsData, projectData, buildingData);
-              let queryForBuilding = {'_id': buildingId};
-              let updateCostHead = {$set: {'costHeads': data}};
-              buildingRepository.findOneAndUpdate(queryForBuilding, updateCostHead, {new: true}, (error:any, response:any) => {
-                logger.info('Project service, getAllDataFromRateAnalysis has been hit');
-                if (error) {
-                  logger.err('Error in Update buildingCostHeadsData  : '+error);
-                  callback(error, null);
-                } else {
-                  //callback(null, response);
-                  let projectCostHeads = projectService.calculateBudgetCost(Constants.AMENITIES,
-                    projectData.projectCostHeads, projectData, buildingData);
-                  let queryForProject = {'_id': projectId};
-                  let updateProjectCostHead = {$set: {'projectCostHeads': projectCostHeads}};
-                  projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
-                    (error: any, response: any) => {
-                      logger.info('Project service, getAllDataFromRateAnalysis has been hit');
-                      if (error) {
-                        logger.err('Error in Update buildingCostHeadsData  : '+error);
-                        callback(error, null);
-                      } else {
-                        callback(null, response);
-                      }
-                    });
-                }
-              });
-            }
-          });
+          this.updateCostHeadsForBuildingAndProject(callback, projectData, buildingData, buildingId, projectId);
 
         } else {
 
@@ -955,6 +914,49 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
     });
   }
 
+  updateCostHeadsForBuildingAndProject(callback: (error: any, result: any) => void,
+                                       projectData: any, buildingData: any, buildingId: string, projectId: string) {
+
+    let rateAnalysisService = new RateAnalysisService();
+    let buildingRepository = new BuildingRepository();
+    let projectRepository = new ProjectRepository();
+
+    rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING,
+      (error: any, buildingCostHeadsData: any) => {
+        if (error) {
+          logger.err('Error in promise : ' + error);
+          callback(error, null);
+        } else {
+
+          let projectService = new ProjectService();
+          let data = projectService.calculateBudgetCostForBuilding(buildingCostHeadsData, projectData, buildingData);
+          let queryForBuilding = {'_id': buildingId};
+          let updateCostHead = {$set: {'costHeads': data}};
+          buildingRepository.findOneAndUpdate(queryForBuilding, updateCostHead, {new: true}, (error: any, response: any) => {
+            logger.info('Project service, getAllDataFromRateAnalysis has been hit');
+            if (error) {
+              logger.err('Error in Update buildingCostHeadsData  : ' + error);
+              callback(error, null);
+            } else {
+              let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(projectData.projectCostHeads, projectData, buildingData);
+              let queryForProject = {'_id': projectId};
+              let updateProjectCostHead = {$set: {'projectCostHeads': projectCostHeads}};
+              projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
+                (error: any, response: any) => {
+                  logger.info('Project service, getAllDataFromRateAnalysis has been hit');
+                  if (error) {
+                    logger.err('Error in Update buildingCostHeadsData  : ' + error);
+                    callback(error, null);
+                  } else {
+                    callback(null, response);
+                  }
+                });
+            }
+          });
+        }
+      });
+  }
+
   updateBudgetRatesForBuildingCostHeads(entity: string, buildingId:string, projectDetails : Project, buildingDetails : Building) {
     return new Promise(function(resolve, reject) {
       let rateAnalysisService = new RateAnalysisService();
@@ -966,7 +968,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
         } else {
 
           let projectService = new ProjectService();
-          let buildingCostHeads = projectService.calculateBudgetCost(entity, buildingCostHeadsData, projectDetails, buildingDetails);
+          let buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeadsData, projectDetails, buildingDetails);
           let query = {'_id': buildingId};
           let newData = {$set: {'costHeads': buildingCostHeads}};
           buildingRepository.findOneAndUpdate(query, newData, {new: true}, (error:any, response:any) => {
@@ -993,7 +995,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
           reject(error);
         } else {
             let projectService = new ProjectService();
-            let projectCostHeads = projectService.calculateBudgetCost(entity, projectCostHeadsData, projectDetails, buildingDetails);
+            let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(projectCostHeadsData, projectDetails, buildingDetails);
             let query = {'_id': projectId};
             let newData = {$set: {'projectCostHeads': projectCostHeads}};
             projectRepository.findOneAndUpdate(query, newData, {new: true}, (error: any, response: any) => {
@@ -1010,13 +1012,101 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
     });
   }
 
-  calculateBudgetCost(entity: string, costHeadsRateAnalysis: any, projectDetails : Project, buildingDetails : any) {
+  calculateBudgetCostForBuilding(costHeadsRateAnalysis: any, projectDetails : Project, buildingDetails : any) {
     let costHeads:Array<CostHead> = new Array<CostHead>();
     let budgetedCostAmount: number;
+    let calculateBudgtedCost : string;
 
     for(let costHead of costHeadsRateAnalysis) {
 
-      if(entity === Constants.AMENITIES) {
+      let budgetCostFormulae:string;
+
+      switch(costHead.name) {
+
+          case Constants.RCC_BAND_OR_PATLI : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.SLAB_AREA, projectDetails.slabArea);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.EXTERNAL_PLASTER : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.FABRICATION : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.POINTING : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.KITCHEN_OTTA : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+              .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+              .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+              .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+              .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.SOLING : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.PLINTH_AREA, buildingDetails.plinthArea);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.MASONRY : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.INTERNAL_PLASTER : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.GYPSUM_OR_POP_PLASTER : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          default : {
+            break;
+          }
+        }
+
+    }
+    return costHeads;
+  }
+
+  calculateBudgetCostForCommonAmmenities(costHeadsRateAnalysis: any, projectDetails : Project, buildingDetails : any) {
+    let costHeads:Array<CostHead> = new Array<CostHead>();
+    let budgetedCostAmount: number;
+    let budgetCostFormulae:string;
+    let calculateBudgtedCost :string;
+
+    for(let costHead of costHeadsRateAnalysis) {
 
         let calculateProjectData = 'SELECT SUM(building.totalCarpetAreaOfUnit) AS totalCarpetArea, ' +
           'SUM(building.totalSlabArea) AS totalSlabAreaProject,' +
@@ -1026,74 +1116,20 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
         let totalSaleableAreaOfProject : number = projectData[0].totalSaleableArea;
         let totalCarpetAreaOfProject : number = projectData[0].totalCarpetArea;
 
-        switch(costHead.name) {
+      switch(costHead.name) {
 
-          case 'Safety measures' : {
-            budgetedCostAmount = (totalCarpetAreaOfProject * 1.35 * 10);
+          case Constants.SAFETY_MEASURES : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, totalCarpetAreaOfProject);
+            budgetedCostAmount = eval(calculateBudgtedCost);
             this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
             break;
           }
           default : {
             break;
           }
-        }
-
-      } else {
-
-        switch(costHead.name) {
-
-          case 'RCC band / patli' : {
-            budgetedCostAmount = projectDetails.slabArea * 500;
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'External plaster' : {
-            budgetedCostAmount = buildingDetails.totalCarpetAreaOfUnit * 2.5 * 45;
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'Fabrication' : {
-            budgetedCostAmount = buildingDetails.totalCarpetAreaOfUnit * 1.35 * 40;
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'Pointing' : {
-            budgetedCostAmount = buildingDetails.totalCarpetAreaOfUnit * 1.35 * 55;
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'Kitchen otta' : {
-            budgetedCostAmount = (( buildingDetails.numOfOneBHK +  buildingDetails.numOfTwoBHK + buildingDetails.numOfThreeBHK
-              + buildingDetails.numOfFourBHK + buildingDetails.numOfFiveBHK ) * 15 * 1500);
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'Soling' : {
-            budgetedCostAmount = (buildingDetails.plinthArea * 2.5 * 45);
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'Masonry' : {
-            budgetedCostAmount = (buildingDetails.totalCarpetAreaOfUnit * 1.6 * 70);
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'Internal Plaster' : {
-            budgetedCostAmount = ( buildingDetails.totalCarpetAreaOfUnit * 3.5 * 20 );
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          case 'Gypsum / POP plaster (punning)' : {
-            budgetedCostAmount = (buildingDetails.totalCarpetAreaOfUnit * 2.5 * 18);
-            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
-            break;
-          }
-          default : {
-            break;
-          }
-        }
-
       }
+
     }
     return costHeads;
   }
@@ -1101,8 +1137,7 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
   private calculateThumbRuleReportForCostHead(budgetedCostAmount: number, costHeadFromRateAnalysis: any,
                                               buildingData: any, costHeads: Array<CostHead>) {
     if (budgetedCostAmount) {
-      let costHead: CostHead = new CostHead();
-      costHead = costHeadFromRateAnalysis;
+      let costHead: CostHead = costHeadFromRateAnalysis;
       costHead.budgetedCostAmount = budgetedCostAmount;
       let thumbRuleRate = new ThumbRuleRate();
 

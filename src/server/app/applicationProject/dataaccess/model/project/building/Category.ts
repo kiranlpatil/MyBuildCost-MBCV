@@ -11,6 +11,7 @@ class  Category {
     this.name = name;
     this.rateAnalysisId = rateAnalysisId;
     this.amount = 0;
+    this.active = true;
     this.workItems = new Array<WorkItem>();
   }
 }

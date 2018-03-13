@@ -8,6 +8,10 @@ class CostHead {
   active: boolean;
   thumbRuleRate: ThumbRuleRate;
   categories: Array<Category>;
+
+  constructor() {
+    this.active = true;
+  }
 }
 
 export = CostHead;

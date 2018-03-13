@@ -221,7 +221,6 @@ class RateAnalysisService {
 
       costHead.categories = buildingCategories;
       costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
-      costHead.active = true;
       buildingCostHeads.push(costHead);
     }
   }
@@ -244,7 +243,6 @@ class RateAnalysisService {
         unitsRateAnalysis, notesRateAnalysis, buildingWorkItems);
 
       category.workItems = buildingWorkItems;
-      category.active = true;
       buildingCategories.push(category);
     }
   }
@@ -264,6 +262,7 @@ class RateAnalysisService {
         + workItemsByCategory[workItemIndex].rateAnalysisId;
       let rateItemsByWorkItem = alasql(rateItemsRateAnalysisSQL, [rateItemsRateAnalysis, unitsRateAnalysis]);
 
+      //TODO : Remove HardCoding for notes API
       let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = 49';
       //+ rateItemsByWorkItem[notesIndex].notesId;
       let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
@@ -278,7 +277,6 @@ class RateAnalysisService {
       workItem.systemRate.notes = notesList[0].notes;
       workItem.systemRate.imageURL = notesList[0].imageURL;
 
-      workItem.active = true;
       buildingWorkItems.push(workItem);
     }
   }
