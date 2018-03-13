@@ -213,11 +213,15 @@ class RateAnalysisService {
         ' FROM ? AS Category where Category.C3 = ' + costHead.rateAnalysisId;
 
       let categoriesByCostHead = alasql(categoriesRateAnalysisSQL, [categoriesRateAnalysis]);
-
       let buildingCategories: Array<Category> = new Array<Category>();
 
-      this.getCategoriesFromRateAnalysis(categoriesByCostHead, workItemsRateAnalysis,
-        rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories);
+      if(categoriesByCostHead.length === 0 ) {
+        this.getWorkItemsWithoutCategoryFromRateAnalysis(costHead.rateAnalysisId, categoriesByCostHead, workItemsRateAnalysis,
+          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories);
+      } else {
+        this.getCategoriesFromRateAnalysis(categoriesByCostHead, workItemsRateAnalysis,
+          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories);
+      }
 
       costHead.categories = buildingCategories;
       costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
@@ -245,6 +249,24 @@ class RateAnalysisService {
       category.workItems = buildingWorkItems;
       buildingCategories.push(category);
     }
+  }
+
+  getWorkItemsWithoutCategoryFromRateAnalysis( costHeadRateAnalysisId: number, categoriesByCostHead: any, workItemsRateAnalysis: any,
+                                 rateItemsRateAnalysis: any, unitsRateAnalysis: any,
+                                 notesRateAnalysis: any, buildingCategories: Array<Category>) {
+
+      let workItemsWithoutCategoriesRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, workItem.C3 AS name' +
+        ' FROM ? AS workItem where NOT workItem.C4 AND workItem.C1 = '+costHeadRateAnalysisId;
+      let workItemsWithoutCategories = alasql(workItemsWithoutCategoriesRateAnalysisSQL, [workItemsRateAnalysis]);
+
+      let buildingWorkItems: Array<WorkItem> = new Array<WorkItem>();
+      let category = new Category('default', 0);
+
+      this.getWorkItemsFromRateAnalysis(workItemsWithoutCategories, rateItemsRateAnalysis,
+        unitsRateAnalysis, notesRateAnalysis, buildingWorkItems);
+
+      category.workItems = buildingWorkItems;
+      buildingCategories.push(category);
   }
 
   getWorkItemsFromRateAnalysis(workItemsByCategory: any, rateItemsRateAnalysis: any,

@@ -938,7 +938,8 @@ setWorkItemStatus( buildingId:string, costHeadId:number, categoryId:number, work
               logger.err('Error in Update buildingCostHeadsData  : ' + error);
               callback(error, null);
             } else {
-              let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(projectData.projectCostHeads, projectData, buildingData);
+              let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(
+                projectData.projectCostHeads,projectData, buildingData);
               let queryForProject = {'_id': projectId};
               let updateProjectCostHead = {$set: {'projectCostHeads': projectCostHeads}};
               projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
