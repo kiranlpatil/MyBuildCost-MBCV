@@ -5,6 +5,7 @@ import { SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../../shared/index';
 import { Building } from '../../../model/building';
 import { BuildingService } from './../building.service';
+import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +18,7 @@ export class CreateBuildingComponent {
 
   BODY_BACKGROUND_TRANSPARENT: string;
 
-  constructor(private buildingService: BuildingService,
+  constructor(private buildingService: BuildingService, private loaderService: LoaderService,
               private _router: Router, private messageService: MessageService) {
     this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
   }
@@ -31,7 +32,7 @@ export class CreateBuildingComponent {
 
       if((buildingModel.numOfOneBHK !== 0) || (buildingModel.numOfTwoBHK  !== 0 ) ||
         (buildingModel.numOfThreeBHK !== 0) || (buildingModel.numOfFourBHK !== 0) || (buildingModel.numOfFiveBHK !== 0)) {
-
+      this.loaderService.start();
       let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
       this.buildingService.createBuilding(projectId, buildingModel)
         .subscribe(
@@ -59,6 +60,7 @@ export class CreateBuildingComponent {
 
   onSyncBuildingWithRateAnalysisSuccess(building : Building) {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.loaderService.stop();
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
   }
 

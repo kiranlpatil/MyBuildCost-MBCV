@@ -12,7 +12,7 @@
           <a type="button"  [routerLinkActive]="['active']"  [routerLink]="['/project', getCurrentProjectId(),'details']" >{{getMenus().PROJECT_DETAILS}}</a>
         </li>
         <li>
-          <a><span class="glyphicon glyphicon-plus"></span> Add Building</a>
+          <a (click)="goToCreateBuilding()"><span class="glyphicon glyphicon-plus"></span>{{getMenus().ADD_BUILDING}}</a>
         </li>
       </ul>
     </div>

@@ -262,10 +262,6 @@ export class CostSummaryComponent implements OnInit {
     console.log(error);
   }
 
-  goToCreateBuilding() {
-    this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
-  }
-
   goToEditBuilding(buildingId: string) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     this._router.navigate([NavigationRoutes.APP_VIEW_BUILDING_DETAILS, buildingId]);

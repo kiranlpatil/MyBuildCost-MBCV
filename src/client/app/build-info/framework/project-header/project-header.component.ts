@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorage, SessionStorageService } from '../../../shared/index';
-import { Menus } from '../../../shared/constants';
+import { Menus, NavigationRoutes } from '../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -21,6 +21,10 @@ export class ProjectHeaderComponent implements OnInit {
 
   getCurrentProjectId() {
     return SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+  }
+
+  goToCreateBuilding() {
+    this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
   }
 
   getMenus() {
