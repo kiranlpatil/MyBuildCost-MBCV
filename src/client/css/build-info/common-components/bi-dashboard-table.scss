@@ -32,7 +32,11 @@
   thead > tr,
   tbody > tr {
     background-color: $white;
-    box-shadow: 10px 10px 10px $panel-shadow;
+    border: 1px solid $white;
+    /*box-shadow: 10px 10px 10px $panel-shadow;*/
+    &:hover {
+      border: 1px solid $theme-orange;
+    }
 
     th {
       color: $heading;
@@ -66,7 +70,7 @@
 
       &:first-child {
         text-align: left;
-        width: 190px;
+        width: 350px;
       }
 
 
@@ -104,11 +108,11 @@
         padding: 3px;
         width: 100%;
         text-align: center;
-        //background: url('../assets/build-info/dashboard/edit.png') no-repeat 95% 46%;
+        background: url('../assets/build-info/dashboard/edit.png') no-repeat 95% 46%;
 
         &:focus,
         &:hover {
-          border: 1px solid transparent;
+          border: 1px solid $gray;
         }
       }
 

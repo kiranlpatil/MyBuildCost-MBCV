@@ -1,8 +1,7 @@
  <div *ngIf="quantityItems!==undefined" class="get-quantity-section">
-  <table class="table">
+   <table class="table">
     <thead>
     <th>{{getTableHeadings().ITEM}}</th>
-    <th>&nbsp;</th>
     <th>{{getTableHeadings().NUMBERS}}</th>
     <th>{{getTableHeadings().LENGTH}}</th>
     <th>{{getTableHeadings().BREADTH}}</th>
@@ -10,40 +9,47 @@
     <th>{{getTableHeadings().QUANTITY}}</th>
     <th class="text-left">{{getTableHeadings().UNIT}}</th>
     <th>&nbsp;</th>
+    <th>&nbsp;</th>
     </thead>
     <tbody>
     <tr *ngFor="let quantityItem of quantityItems">
-      <td>
+      <td class="get-amount-value">
         <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control"/>
       </td>
-      <td class="remark-icon">
+      <!--<td class="remark-icon">
         <img title="{{quantityItem.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
-      </td>
-      <td>
+      </td>-->
+      <td  class="get-amount-value">
         <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="updateQuantity('updateNos')" class="form-control" required/>
       </td>
-      <td>
+      <td class="get-amount-value">
         <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="updateQuantity('updateLength')" class="form-control" required/>
       </td>
-      <td>
+      <td class="get-amount-value">
         <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="updateQuantity('updateBreadth')" class="form-control" />
       </td>
-      <td>
+      <td class="get-amount-value">
         <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="updateQuantity('updateHeight')" class="form-control" required/>
       </td>
-      <td>
+      <td class="get-amount-value">
         <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" required/>
       </td>
-      <td>
-        <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control unit-input" required/>
+      <td class="get-amount-value text-center get-unit">
+        <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control unit-input text-center" required/>
       </td>
-      <td><span title="Delete" data-toggle="modal" data-target="#deleteQuantity" (click)="setQuantityItemNameForDelete(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
+      <td colspan="2" class="get-amount-value get-delete text-center">
+        <div class="col-xs-2"> <img src="assets/build-info/dashboard/attachment.png" /> </div>
+       <!-- <div class="col-xs-2"> <img src="assets/build-info/dashboard/attachment.png" /> </div>-->
+        <div class="col-xs-2">
+        <span title="Delete" data-toggle="modal" data-target="#deleteQuantity"
+              (click)="setQuantityItemNameForDelete(quantityItem.item)" class="glyphicon glyphicon-trash"></span>
+        </div>
+
+      </td>
     </tr>
     <tr>
-      <td class="total-amount">
+      <td class="total-amount text-center">
         <label>{{getTableHeadings().TOTAL}}</label>
-      </td>
-      <td class="total-amount">
       </td>
       <td class="total-amount text-right">
         <span>{{quantityNumbersTotal|number}}</span>
@@ -62,6 +68,9 @@
       </td>
       <td class="total-amount text-center">
         sqft
+      </td>
+      <td colspan="2" class="total-amount">
+        &nbsp;
       </td>
     </tr>
     </tbody>

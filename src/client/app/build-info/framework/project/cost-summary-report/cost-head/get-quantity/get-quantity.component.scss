@@ -2,9 +2,12 @@
 
 .get-quantity-section {
   background: $azure;
-  display: inline-block;
+  border: 1px solid $table-border;
+  display: table;
+  margin: 0 auto 15px;
   padding: 5px;
-  width: 100%;
+  position: relative;
+  width: calc(100% - 250px);
   table {
     thead {
       th {
@@ -16,22 +19,47 @@
     }
     tr {
       td {
-        padding: 5px;
+        padding: 0;
+        border-right: 1px solid $jagged-ice;
+        border-top: 0 solid transparent;
         .form-control {
+          background: transparent;
+          border: 0;
+          border-radius: 0;
           display: block;
           font-size: 11px;
+          font-weight: bold;
           height: 27px;
           padding: 4px 7px;
-          width: 96px;
+          width: 100px;
+          &:focus {
+            box-shadow: 0 0 0 transparent;
+          }
         }
         .unit-input {
           background: transparent;
           border: 0;
           box-shadow: 0 0 0;
+          display: table;
+          margin: 0 auto;
           width: 30px;
         }
         input[type='number'] {
           text-align: right;
+        }
+        .unit-input {
+          width: 60px;
+        }
+      }
+      .get-delete {
+        border: 0;
+        float: left;
+        height: 28px;
+        padding: 2px;
+        width: 75px;
+        span {
+          color: $table-btn-bg;
+          float: left;
         }
       }
       td.remark-icon {
@@ -42,12 +70,18 @@
         cursor: pointer;
         top: 6px;
       }
+      .get-amount-value {
+        background: $white;
+      }
     }
     .total-amount {
+      background: $jagged-ice;
       font-size: 11px;
+      font-weight: bold;
       width: 98px;
       label {
         font-size: 11px;
+        font-weight: bold;
       }
       span {
         padding-right: 8px;
@@ -72,4 +106,39 @@
     float: right;
     padding: 3px 24px;
   }
+}
+
+.arrow-up {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid $azure;
+  left: 50%;
+  margin-top: -14px;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.get-quantity-section:after, .get-quantity-section:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.get-quantity-section:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: $azure;
+  border-width: 8px;
+  margin-left: -18px;
+}
+.get-quantity-section:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: $table-border;
+  border-width: 10px;
+  margin-left: -20px;
 }

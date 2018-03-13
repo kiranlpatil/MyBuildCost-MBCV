@@ -1,15 +1,18 @@
 <section class="wrapper">
   <div class="container">
-    <div class="col-sm-8 col-xs-12 no-padding">
-      <h4 class="building-name">{{ buildingName }} : {{ costHead }}</h4>
+    <div class="col-xs-12 no-padding">
+      <h4 class="building-name">
+        <span class=""> {{ buildingName }} </span>
+        <span class=""> {{ costHead }} </span>
+      </h4>
       <div class="panel-group" *ngFor=" let category of categoryDetails; let categoryIndex= index ">
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title clearfix" (click)="setSelectedWorkItems(categoryDetails[categoryIndex].workItems)">
               <div class="col-sm-11">
                 <a *ngIf="category.rateAnalysisId !== 0" data-toggle="collapse" href="#collapse{{categoryIndex}}">
-                  <span class="pull-left">{{ category.name }}</span>
-                  <span class="pull-right">{{ category.amount|number }}</span>
+                  <span class="">{{ category.name }}</span>
+                  <span class="text-right">{{ category.amount|number }}</span>
                 </a>
                 <a *ngIf="category.rateAnalysisId === 0" data-toggle="collapse" href="#collapse{{categoryIndex}}">
                   <span  class="pull-left">{{getLabel().WORKITEMS}}</span>
@@ -30,23 +33,27 @@
           </div>
           <div id="collapse{{categoryIndex}}" class="panel-collapse collapse">
             <div class="panel-body">
-              <div  *ngFor="let workitemObj of category.workItems; let workItemIndex = index">
+              <div class="bg-white"  *ngFor="let workitemObj of category.workItems; let workItemIndex = index">
                 <table class="table table-row-spacing table-dashboard table-categories">
                   <thead *ngIf="workItemIndex === 0">
                   <tr>
-                    <th class="border-left">{{getTableHeadings().ITEM}}</th>
-                    <th class="border-left">{{getTableHeadings().QUANTITY}}</th>
-                    <th class="border-left">{{getTableHeadings().UNIT}}</th>
-                    <th class="border-left">{{getTableHeadings().RATE_PER_UNIT}}</th>
-                    <th class="border-left">{{getTableHeadings().COST}}</th>
-                    <th class="border-left">{{getTableHeadings().RATEANALYSIS}}</th>
-                    <th></th>
+                    <th class="">{{getTableHeadings().ITEM}}</th>
+                    <th class="">Details</th>
+                    <th class="">{{getTableHeadings().QUANTITY}}</th>
+                    <th class="">{{getTableHeadings().UNIT}}</th>
+                    <th class="">{{getTableHeadings().RATE_PER_UNIT}}</th>
+                    <th class="">{{getTableHeadings().COST}}</th>
+                    <th class="">{{getTableHeadings().RATEANALYSIS}}</th>
+                    <!--<th></th>-->
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td class="border-left"> {{ workitemObj.name }}</td>
-                    <td class="border-left">
+                    <td class=""> {{ workitemObj.name }}</td>
+                    <td class="">
+                      <button class="add-more-details-btn"> Add more details </button>
+                    </td>
+                    <td class="">
                       <div class="edit-field"
                            *ngIf="workitemObj.quantity.total"
                            (click)="getQuantity(categoryIndex, workItemIndex, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
@@ -60,8 +67,8 @@
                         Get Qty.
                       </button>
                     </td>
-                    <td class="border-left">{{ workitemObj.unit }}</td>
-                    <td class="border-left">
+                    <td class="">{{ workitemObj.unit }}</td>
+                    <td class="">
                       <div class="edit-field"
                            *ngIf="workitemObj.rate.total!= 0"
                            (click)="getRate( getLabel().GET_RATE, categoryIndex, workItemIndex, workitemObj, false)">
@@ -74,7 +81,7 @@
                     </td>
 
                     <!--Cost-->
-                    <td class="border-left">
+                    <td class="">
                       <div *ngIf="workitemObj.amount == 0">
                         -
                       </div>
@@ -86,18 +93,20 @@
                     </td>
 
                     <!--RateAnalysis-->
-                    <td class="border-left">
+                    <td class="">
                       <button class="btn-get-amount"
                               type="button"
                               (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, categoryIndex, workItemIndex, workitemObj, true)">{{getButton().SYSTEM_RA}}</button>
                     </td>
-                    <td>
+                    <!--<td>
                       <div data-toggle="modal" data-target="#deleteWorkItem"
                            (click)="setIdsForDeleteWorkItem(category.rateAnalysisId,workitemObj.rateAnalysisId,workItemIndex )"
                            class="delete-cost-head">
                         <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
+                        <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
+                        <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                       </div>
-                    </td>
+                    </td>-->
                   </tr>
                   </tbody>
                 </table>
@@ -181,9 +190,9 @@
       </div>
 
     </div>
-    <div class="col-xs-4">
+    <!--<div class="col-xs-4">
       <img src="./assets/build-info/dashboard/ads.png" />
-    </div>
+    </div>-->
   </div>
 </section>
 
