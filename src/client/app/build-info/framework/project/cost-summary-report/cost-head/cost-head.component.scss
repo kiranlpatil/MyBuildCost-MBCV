@@ -10,7 +10,7 @@
   }
 
   .panel-heading {
-    height: 40px;
+    min-height: 40px;
 
     a {
       color: $heading;
