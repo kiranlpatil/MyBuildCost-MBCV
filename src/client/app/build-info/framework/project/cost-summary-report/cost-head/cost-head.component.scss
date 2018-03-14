@@ -42,14 +42,15 @@
 
 .building-name{
   background-color: $white;
-  color: $heading;
-  padding: 10px 15px;
-  width: 100%;
-  text-align: left;
   border-radius: 8px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 6px 6px 7px rgba(0, 0, 0, 0.05);
+  color: $heading;
   font-weight: 300;
   font-size: 20px;
+  margin-bottom: 5px;
+  padding: 10px 15px;
+  text-align: left;
+  width: 100%;
   .building-label {
     color: #434C5E;
     font-size: 21px;
