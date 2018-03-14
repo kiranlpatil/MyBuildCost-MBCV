@@ -20,6 +20,12 @@ if((projectId === undefined || buildingId === undefined || costHeadId === undefi
     } else callback(null, true);
   }
 
+  public static validateProjectCostHeadIds(projectId: string, costHeadId: number, callback: (error: any, result: any) => void) {
+    if((projectId === undefined || costHeadId === undefined) || (projectId === '' || costHeadId === null)) {
+      callback(null, false);
+    } else callback(null, true);
+  }
+
   public static validateIdsForUpdateRate(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
                                          workItemId: number, callback: (error: any, result: any) => void) {
     if((projectId === undefined || buildingId === undefined || costHeadId === undefined || categoryId === undefined ||
@@ -220,6 +226,26 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     ProjectInterceptor.validateIds(projectId, buildingId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        }
+        next();
+      }
+    });
+  }
+
+  getProjectCostHeadCategories(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = req.params.costHeadId;
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
       if (error) {
         next(error);
       } else {
@@ -497,6 +523,39 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
+  updateWorkItemStatusOfProjectCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = parseInt(req.params.costHeadId);
+    var categoryId = parseInt(req.params.category);
+    var workItemId = parseInt(req.params.costHeadId);
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if( (categoryId === undefined) || (categoryId === null) ||
+             (workItemId === undefined) || (workItemId === null) ||
+            (req.params.activeStatus === undefined) || (req.params.activeStatus === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
   getInActiveWorkItems(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
@@ -514,6 +573,36 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
           });
         } else {
           if ((req.params.categoryId === undefined) || (req.params.categoryId === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
+  getInActiveWorkItemsOfProjectCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = parseInt(req.params.costHeadId);
+    let categoryId = parseInt(req.params.categoryId);
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((categoryId === undefined) || (categoryId === null)) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -589,6 +678,39 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
+  updateQuantityOfProjectCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = parseInt(req.params.costHeadId);
+    var categoryId = parseInt(req.params.categoryId);
+    var workItemId = parseInt(req.params.workItemId);
+
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((categoryId === undefined) || (workItemId === undefined) || (req.body.item === undefined) ||
+            (categoryId === null) || (workItemId === null) || (req.body.item === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
   deleteQuantityByName(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
@@ -607,6 +729,38 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
         } else {
           if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (req.body.item === undefined) ||
             (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.item === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
+  deleteQuantityOfProjectCostHeadsByName(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = parseInt(req.params.costHeadId);
+    var categoryId = parseInt(req.params.costHeadId);
+    var workItemId = parseInt(req.params.costHeadId);
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((categoryId === undefined) || (workItemId === undefined) || (req.body.item === undefined) ||
+            (categoryId === null) || (workItemId === null) || (req.body.item === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -641,6 +795,40 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
           if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) ||(req.body.quantity  === undefined)  ||
             (req.body.rateItems === undefined)  || (req.body.total  === undefined) || (req.body.unit === undefined) ||
             (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.quantity  === '') ||
+            (req.body.rateItems === '')  || (req.body.total  === '') || (req.body.unit === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
+  updateRateOfProjectCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = parseInt(req.params.costHeadId);
+    var categoryId = parseInt(req.params.categoryId);
+    var workItemId = parseInt(req.params.workItemId);
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((categoryId === undefined) || (workItemId === undefined) ||(req.body.quantity  === undefined)  ||
+            (req.body.rateItems === undefined)  || (req.body.total  === undefined) || (req.body.unit === undefined) ||
+            (categoryId === null) || (workItemId === null) || (req.body.quantity  === '') ||
             (req.body.rateItems === '')  || (req.body.total  === '') || (req.body.unit === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,

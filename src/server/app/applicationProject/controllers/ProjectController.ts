@@ -234,6 +234,29 @@ class ProjectController {
     }
   }
 
+  // Get In Active WorkItems Of Project Cost Heads
+  getInActiveWorkItemsOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project Controller, Get In-Active WorkItems Of Project Cost Heads has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId : number = parseInt(req.params.costHeadId);
+      let categoryId : number = parseInt(req.params.categoryId);
+      let projectService = new ProjectService();
+      projectService.getInActiveWorkItemsOfProjectCostHeads( projectId, costHeadId, categoryId, user, (error, result) => {
+        if(error
+        ) {
+          next(error);
+        } else {
+          logger.info('Get In-Active WorkItems Of Project Cost Heads success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   deleteBuildingById(req: express.Request, res: express.Response, next: any): void {
     logger.info('Project controller, deleteBuilding has been hit');
     try {
@@ -305,6 +328,30 @@ class ProjectController {
     }
   }
 
+  updateRateOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId =parseInt(req.params.costHeadId);
+      let categoryId =parseInt(req.params.categoryId);
+      let workItemId =parseInt(req.params.workItemId);
+      let rate : Rate = <Rate> req.body;
+      let projectService = new ProjectService();
+      console.log(' workitemId => '+ workItemId);
+      projectService.updateRateOfProjectCostHeads( projectId, costHeadId,categoryId ,workItemId, rate, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get Rate Success');
+          logger.debug('Getting Rate of Project ID : '+projectId);
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   deleteQuantityByName(req: express.Request, res: express.Response, next: any): void {
   try {
     logger.info('Project controller, deleteQuantity has been hit');
@@ -329,6 +376,32 @@ class ProjectController {
   }catch(e) {
     next(new CostControllException(e.message,e.stack));
   }
+  }
+
+  deleteQuantityOfProjectCostHeadsByName(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, deleteQuantity has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = req.params.costHeadId;
+      let categoryId = req.params.categoryId;
+      let workItemId = req.params.workItemId;
+      let item = req.body.item;
+      let projectservice = new ProjectService();
+      projectservice.deleteQuantityOfProjectCostHeadsByName( projectId, costHeadId, categoryId, workItemId, item,
+        user, (error, result) => {
+        if (error) {
+          next(error);
+        } else {
+          logger.info('Delete Quantity ' + result);
+          logger.debug('Deleted Quantity of Project ID : '+projectId+', CostHead : '+costHeadId+', ' +
+            'Workitem : '+workItemId+', Item : '+item);
+          next(new Response(200, result));
+        }
+      });
+    }catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
   }
 
   deleteWorkitem(req: express.Request, res: express.Response, next: any): void {
@@ -408,6 +481,33 @@ class ProjectController {
     }
   }
 
+ // Update WorkItem Status Of Project CostHeads
+  updateWorkItemStatusOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
+    logger.info('Project controller, Update WorkItem Status Of Project Cost Heads has been hit');
+    try {
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let workItemActiveStatus = req.params.activeStatus === 'true' ? true : false;
+      let projectService: ProjectService = new ProjectService();
+      projectService.updateWorkItemStatusOfProjectCostHeads( projectId, costHeadId, categoryId,workItemId,
+        workItemActiveStatus, user,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Update WorkItem Status Of Project Cost Heads success ');
+          logger.debug('Update WorkItem Status Of Project Cost Heads for Project ID : '+projectId+' CostHead : '+costHeadId+', ' +
+            'workItemActiveStatus : '+workItemActiveStatus);
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   updateBudgetedCostForCostHead(req: express.Request, res: express.Response, next: any): void {
     try {
       let projectService = new ProjectService();
@@ -462,6 +562,29 @@ class ProjectController {
       let quantity = req.body.item;
       let projectService = new ProjectService();
       projectService.updateQuantity( projectId, buildingId, costHeadId, categoryId, workItemId, quantity, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Update Quantity success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateQuantityOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, updateQuantity has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let quantity = req.body.item;
+      let projectService = new ProjectService();
+      projectService.updateQuantityOfProjectCostHeads( projectId, costHeadId, categoryId, workItemId, quantity, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -579,6 +702,26 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let projectService = new ProjectService();
       projectService.getActiveCategories(projectId, buildingId, costHeadId, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  //Get categories of projectCostHeads from database
+  getCategoriesOfProjectCostHead(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, Get Project CostHead Categories has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let projectService = new ProjectService();
+      projectService.getCategoriesOfProjectCostHead(projectId, costHeadId, user, (error, result) => {
         if(error) {
           next(error);
         } else {
