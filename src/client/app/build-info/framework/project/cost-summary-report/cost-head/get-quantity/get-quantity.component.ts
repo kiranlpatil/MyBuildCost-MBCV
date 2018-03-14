@@ -6,6 +6,7 @@ import {
   ProjectElements, Button, TableHeadings, Label, Headings,
   ValueConstant
 } from '../../../../../../shared/constants';
+import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 
 @Component({
   moduleId: module.id,
@@ -29,7 +30,7 @@ export class GetQuantityComponent implements OnInit {
   heightTotal: number = 0;
   deleteConfirmationQuantityItem = ProjectElements.QUANTITY_ITEM;
 
-  constructor(private costSummaryService : CostSummaryService,
+  constructor(private costSummaryService : CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService) {
   }
 
@@ -133,7 +134,7 @@ export class GetQuantityComponent implements OnInit {
   }
 
   updateQuantityItem(quantityItems : QuantityItem) {
-
+    this.loaderService.start();
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
@@ -153,6 +154,7 @@ export class GetQuantityComponent implements OnInit {
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
     this.messageService.message(message);
     this.refreshCategoryList.emit();
+    this.loaderService.stop();
   }
 
   onUpdateQuantityItemsFailure(error: any) {
@@ -160,6 +162,7 @@ export class GetQuantityComponent implements OnInit {
     message.isError = true;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
     this.messageService.message(message);
+    this.loaderService.stop();
   }
 
   setQuantityItemNameForDelete(quantityItemName: string) {
@@ -167,7 +170,7 @@ export class GetQuantityComponent implements OnInit {
   }
 
   deleteQuantityItem() {
-
+    this.loaderService.start();
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
@@ -191,6 +194,7 @@ export class GetQuantityComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_ITEM;
     this.messageService.message(message);
+    this.loaderService.stop();
   }
 
   onDeleteQuantityItemFailure(error: any) {
@@ -198,6 +202,7 @@ export class GetQuantityComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
     this.messageService.message(message);
+    this.loaderService.stop();
   }
 
   deleteElement(elementType : string) {

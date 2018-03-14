@@ -6,6 +6,7 @@ import {
 } from '../../../../../../shared/index';
 import { CostSummaryService } from './../../cost-summary.service';
 import { Rate } from '../../../../model/rate';
+import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 
 @Component({
   moduleId: module.id,
@@ -26,7 +27,8 @@ export class GetRateComponent {
   previousTotalQuantity: number = 1;
   totalItemRateQuantity: number = 0;
 
-  constructor(private costSummaryService: CostSummaryService, private messageService: MessageService) {
+  constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
+              private messageService: MessageService) {
   }
 
   calculateTotal(choice?:string) {
@@ -51,7 +53,7 @@ export class GetRateComponent {
   }
 
   updateRate(rateItemsArray: Rate) {
-
+    this.loaderService.start();
     let projectID= SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
@@ -78,10 +80,12 @@ export class GetRateComponent {
     message.custom_message = Messages.MSG_SUCCESS_UPDATE_RATE;
     this.messageService.message(message);
     this.refreshCategoryList.emit();
+    this.loaderService.stop();
   }
 
   onUpdateRateFailure(error: any) {
     console.log(error);
+    this.loaderService.stop();
   }
 
   onTotalQuantityChange(newTotalQuantity: number) {

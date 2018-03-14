@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Messages, NavigationRoutes } from '../../../../../shared/constants';
+import { LoaderService } from '../../../../../shared/loader/loaders.service';
 import { Building } from '../../../model/building';
 import { SessionStorage, SessionStorageService,MessageService } from '../../../../../shared/index';
 import { Message } from '../../../../../shared/index';
@@ -26,7 +27,8 @@ export class BuildingListComponent implements OnInit {
   clonedBuildingDetails: any;
 
   constructor(private buildingService: BuildingService, private projectService : ProjectService, private _router: Router,
-              private activatedRoute:ActivatedRoute,private messageService: MessageService, private formBuilder: FormBuilder ) {
+              private activatedRoute:ActivatedRoute,private messageService: MessageService, private formBuilder: FormBuilder,
+              private loaderService: LoaderService) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -104,6 +106,7 @@ export class BuildingListComponent implements OnInit {
   }
 
   deleteBuilding() {
+    this.loaderService.start();
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this.buildingService.deleteBuilding( projectId, this.currentbuildingId).subscribe(
       project => this.onDeleteBuildingSuccess(project),
@@ -117,12 +120,14 @@ export class BuildingListComponent implements OnInit {
       message.isError = false;
       message.custom_message = Messages.MSG_SUCCESS_DELETE_BUILDING;
       this.messageService.message(message);
+      this.loaderService.stop();
       this.getProject();
     }
   }
 
   onDeleteBuildingFailure(error : any) {
     console.log(error);
+    this.loaderService.stop();
   }
 
   getProject() {
@@ -147,6 +152,7 @@ export class BuildingListComponent implements OnInit {
   }
 
   cloneBuilding(buildingId : any) {
+    this.loaderService.start();
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this.buildingService.getBuilding( projectId, buildingId).subscribe(
       building => this.onGetBuildingSuccess(building),
@@ -171,9 +177,11 @@ export class BuildingListComponent implements OnInit {
     this.model.numOfFourBHK = buildingDetails.numOfFourBHK;
     this.model.numOfFiveBHK = buildingDetails.numOfFiveBHK;
     this.model.numOfLifts = buildingDetails.numOfLifts;
+    this.loaderService.stop();
   }
 
   onGetBuildingFailure(error : any) {
     console.log(error);
+    this.loaderService.stop();
   }
 }
