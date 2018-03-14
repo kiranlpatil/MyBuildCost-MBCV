@@ -38,8 +38,9 @@
         <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control unit-input text-center" required/>
       </td>
       <td colspan="2" class="get-amount-value get-delete text-center">
-        <div class="col-xs-2"> <img src="assets/build-info/dashboard/attachment.png" /> </div>
-       <!-- <div class="col-xs-2"> <img src="assets/build-info/dashboard/attachment.png" /> </div>-->
+        <div class="col-xs-2 padding-top-2">
+          <img src="assets/build-info/dashboard/attachment.png" />
+        </div>
         <div class="col-xs-2">
         <span title="Delete" data-toggle="modal" data-target="#deleteQuantity"
               (click)="setQuantityItemNameForDelete(quantityItem.item)" class="glyphicon glyphicon-trash"></span>
