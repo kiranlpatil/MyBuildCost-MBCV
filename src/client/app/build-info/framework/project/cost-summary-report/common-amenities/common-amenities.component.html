@@ -27,9 +27,9 @@
               </th>
             </tr>
             <tr>
-              <th><span class="sub-heading">{{costingByUnit}}<br/>{{costingByArea}}</span></th>
+              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea ==='SlabArea') ? 'Slab Area' : ((costingByArea ==='SalebleArea') ? 'Saleable Area' : 'Carpet Area')}}</span></th>
               <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
-              <th><span class="sub-heading">{{costingByUnit}}<br/>{{costingByArea}}</span></th>
+              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea ==='SlabArea') ? 'Slab Area' : ((costingByArea ==='SalebleArea') ? 'Saleable Area' : 'Carpet Area')}}</span></th>
               <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
             </tr>
           </thead>

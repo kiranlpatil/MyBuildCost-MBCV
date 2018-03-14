@@ -1,6 +1,6 @@
 import { Component, OnInit , OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Messages, ProjectElements, TableHeadings, Button, Label, ValueConstant } from '../../../../../shared/constants';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Messages, ProjectElements, NavigationRoutes, TableHeadings, Button, Label, ValueConstant } from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, MessageService } from '../../../../../shared/index';
 import { Rate } from '../../../model/rate';
 import { CommonService } from '../../../../../shared/services/common.service';
@@ -62,7 +62,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
-              private messageService: MessageService, private commonService : CommonService) {
+              private _router: Router, private messageService: MessageService, private commonService : CommonService) {
   }
 
   ngOnInit() {
@@ -431,6 +431,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
     if(elementType === ProjectElements.WORK_ITEM) {
       this.deactivateWorkItem();
     }
+  }
+
+  goBack() {
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this._router.navigate([NavigationRoutes.APP_PROJECT,projectId,NavigationRoutes.APP_COST_SUMMARY]);
   }
 
   getTableHeadings() {
