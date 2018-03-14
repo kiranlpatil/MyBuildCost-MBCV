@@ -7,8 +7,9 @@
     <div class="col-xs-12 no-padding">
       <h4 class="building-name">
         <span class="building-label"> {{ buildingName }} </span>
+        <span class="text-left"> ( {{ costHead }} ) </span>
         <div class="col-md-6 text-right pull-right">
-          <span class="text-left"> ( {{ costHead }} ) </span>
+          <span class="text-left total-amount-work"> {{totalAmountOfWorkItems|number}} </span>
         </div>
       </h4>
       <div class="panel-group" *ngFor=" let category of categoryDetails; let categoryIndex= index ">
@@ -29,7 +30,7 @@
                   <span  class="pull-right">{{ category.amount|number }}</span>
                 </a>
               </div>
-<!--              <div class="col-sm-1">
+              <div class="col-sm-1">
                 <div class="delete-workitems">
                   <img *ngIf="category.rateAnalysisId !== 0"
                        src="assets/build-info/dashboard/delete.png"
@@ -38,7 +39,7 @@
                        data-target="#deleteCategory"
                        (click)="setCategoryIdForDeactivate(category.rateAnalysisId)"/>
                 </div>
-              </div>-->
+              </div>
             </div>
           </div>
           <div id="collapse{{categoryIndex}}" class="panel-collapse collapse" [class.in]="categoryIndex===0">
@@ -154,7 +155,9 @@
                 </tr>
                 <tr>
                   <td  class="add-items" colspan="7">
-                    <button type="button" class="btn-add-item" (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)"><span class="glyphicon glyphicon-plus"></span>{{getButton().ADD}} {{getButton().ITEM}}</button>
+                    <button type="button" class="btn-add-item"
+                            (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)">
+                      <span class="glyphicon glyphicon-plus"></span> x{{getButton().ADD}} {{getButton().ITEM}}</button>
                   </td>
                 </tr>
                 </tbody>
@@ -185,7 +188,7 @@
         </table>
       </div>-->
 
-      <div class="col-md-12">
+      <!--<div class="col-md-12">
         <div class="col-md-1">
           Total
         </div>
@@ -195,7 +198,7 @@
         <div class="col-md-2">{{totalRateUnitOfWorkItems|number}}</div>
         <div class="col-md-2">{{totalAmountOfWorkItems|number}}</div>
         <div class="col-md-2"></div>
-      </div>
+      </div>-->
 
     </div>
     <!--<div class="col-xs-4">

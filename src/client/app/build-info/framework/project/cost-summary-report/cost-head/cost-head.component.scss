@@ -5,8 +5,8 @@
   padding-top: 0;
 
   .panel-group {
-    padding: 7px 0;
     border: 0;
+    padding: 3px 0;
   }
 
   .panel-heading {
@@ -57,6 +57,9 @@
   .text-left {
     color: #434C5E;
     font-size: 14px;
+  }
+  .total-amount-work {
+    font-weight: bold;
   }
 }
 
