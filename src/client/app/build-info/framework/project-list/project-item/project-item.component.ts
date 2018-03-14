@@ -7,8 +7,7 @@ import { Project } from '../../model/project';
 @Component({
   moduleId: module.id,
   selector: 'bi-project-item',
-  templateUrl: 'project-item.component.html',
- /* styleUrls: ['project-item.component.scss']*/
+  templateUrl: 'project-item.component.html'
 })
 
 export class ProjectItemComponent {
