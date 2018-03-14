@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Headings, Label, TableHeadings } from '../../../../../shared/constants';
+import { Button, Headings, Label, TableHeadings } from '../../../../../shared/constants';
 import { BuildingReport } from '../../../model/building-report';
 
 @Component({
@@ -35,6 +35,9 @@ export class CommonAmenitiesComponent implements OnInit {
 
   getLabel() {
     return Label;
+  }
+  getButton() {
+    return Button;
   }
 
 }

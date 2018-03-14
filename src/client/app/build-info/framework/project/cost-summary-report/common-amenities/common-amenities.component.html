@@ -29,7 +29,7 @@
             <th>&nbsp;</th>
           </tr>
           </thead>
-          <tbody *ngIf="amenitiesReport.thumbRule" >
+          <tbody *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate" >
           <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let thumbRuleItemIndex = index">
             <td class="border-left">{{thumbRuleItem.name}}</td>
             <td>
@@ -39,6 +39,14 @@
             </td>
             <td class="border-left">{{thumbRuleItem.rate}}</td>
             <td>
+              <div class="edit-field" *ngIf="amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].total != 0">
+                <input [(ngModel)]="amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].total"
+                       id="estimatedItem.total">
+              </div>
+              <button type="button" *ngIf="amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].total == 0"
+                      class="btn-get-amount">{{getButton().GET_AMOUNT}}</button>
+            </td>
+            <td>{{amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].rate}}
             </td>
             <td>
               <div data-toggle="modal"
@@ -57,12 +65,12 @@
 
     <table class="table table-row-spacing table-dashboard">
       <tbody>
-      <tr class="total" *ngIf="amenitiesReport.thumbRule">
+      <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
         <td>{{getLabel().TOTAL}}</td>
         <td>{{amenitiesReport.thumbRule.totalBudgetedCost|number}}</td>
         <td>{{amenitiesReport.thumbRule.totalRate|number}}</td>
-        <td></td>
-        <td></td>
+        <td>{{amenitiesReport.estimate.totalEstimatedCost|number}}</td>
+        <td>{{amenitiesReport.estimate.totalRate|number}}</td>
         <td></td>
       </tr>
       </tbody>
