@@ -1,9 +1,0 @@
-"use strict";
-var Subscription = (function () {
-    function Subscription() {
-    }
-    return Subscription;
-}());
-module.exports = Subscription;
-
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9hcHBsaWNhdGlvblByb2plY3QvZGF0YWFjY2Vzcy9tb2RlbC9TdWJzY3JpcHRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBO0lBQUE7SUFJQSxDQUFDO0lBQUQsbUJBQUM7QUFBRCxDQUpBLEFBSUMsSUFBQTtBQUNELGlCQUFTLFlBQVksQ0FBQyIsImZpbGUiOiJhcHAvYXBwbGljYXRpb25Qcm9qZWN0L2RhdGFhY2Nlc3MvbW9kZWwvU3Vic2NyaXB0aW9uLmpzIiwic291cmNlc0NvbnRlbnQiOlsiY2xhc3MgU3Vic2NyaXB0aW9uIHtcclxuICBwcmljZTogbnVtYmVyO1xyXG4gIGRheXM6IG51bWJlcjtcclxuICBwcm9qZWN0OiBudW1iZXI7XHJcbn1cclxuZXhwb3J0ID0gU3Vic2NyaXB0aW9uO1xyXG4iXX0=

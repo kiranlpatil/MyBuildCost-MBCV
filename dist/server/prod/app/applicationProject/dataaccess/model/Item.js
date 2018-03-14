@@ -1,9 +1,0 @@
-"use strict";
-var Item = (function () {
-    function Item() {
-    }
-    return Item;
-}());
-module.exports = Item;
-
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9hcHBsaWNhdGlvblByb2plY3QvZGF0YWFjY2Vzcy9tb2RlbC9JdGVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFFQTtJQUFBO0lBSUEsQ0FBQztJQUFELFdBQUM7QUFBRCxDQUpBLEFBSUMsSUFBQTtBQUNELGlCQUFTLElBQUksQ0FBQyIsImZpbGUiOiJhcHAvYXBwbGljYXRpb25Qcm9qZWN0L2RhdGFhY2Nlc3MvbW9kZWwvSXRlbS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSYXRlSXRlbSA9IHJlcXVpcmUoJy4vUmF0ZUl0ZW0nKTtcclxuXHJcbmNsYXNzIEl0ZW0ge1xyXG4gIHRvdGFsOiBudW1iZXI7XHJcbiAgcXVhbnRpdHk6IG51bWJlcjtcclxuICBpdGVtOiBBcnJheTxSYXRlSXRlbT47XHJcbn1cclxuZXhwb3J0ID0gSXRlbTtcclxuIl19
