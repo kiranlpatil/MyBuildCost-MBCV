@@ -180,7 +180,7 @@ class RateAnalysisService {
       rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
         rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
 
-          callback(null, buildingCostHeads);
+      callback(null, {'buildingCostHeads' : buildingCostHeads, 'rates' : rateItemsRateAnalysis, 'units' : unitsRateAnalysis});
     });
   }
 
@@ -201,7 +201,8 @@ class RateAnalysisService {
 
   getCostHeadsFromRateAnalysis(costHeadsRateAnalysis: any, categoriesRateAnalysis: any,
                                workItemsRateAnalysis: any, rateItemsRateAnalysis: any,
-                               unitsRateAnalysis: any, notesRateAnalysis: any, buildingCostHeads: Array<CostHead>) {
+                               unitsRateAnalysis: any, notesRateAnalysis: any,
+                               buildingCostHeads: Array<CostHead>) {
 
     for (let costHeadIndex = 0; costHeadIndex < costHeadsRateAnalysis.length; costHeadIndex++) {
 
@@ -270,7 +271,8 @@ class RateAnalysisService {
   }
 
   getWorkItemsFromRateAnalysis(workItemsByCategory: any, rateItemsRateAnalysis: any,
-                                        unitsRateAnalysis: any, notesRateAnalysis: any, buildingWorkItems: Array<WorkItem>) {
+                                        unitsRateAnalysis: any, notesRateAnalysis: any,
+                               buildingWorkItems: Array<WorkItem>) {
 
     for (let workItemIndex = 0; workItemIndex < workItemsByCategory.length; workItemIndex++) {
 

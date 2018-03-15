@@ -53,6 +53,7 @@ class BuildingSchema {
         type: Number
       },
       costHeads: [{}],
+      rates: [{}],
       activation_date: {
         type: Date,
       }

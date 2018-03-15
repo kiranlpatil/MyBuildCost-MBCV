@@ -85,14 +85,17 @@ class ProjectService {
   }
 
   getProjectAndBuildingDetails( projectId : string, buildingId: string, callback: (error: any, result: any) => void) {
+    logger.info('Inside getProjectAndBuildingDetails service');
     let query = { _id: projectId};
     let populate = {path : 'buildings'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
       logger.info('Project service, findAndPopulate has been hit');
       logger.debug('Project Name : '+result[0].name);
       if(error) {
+        logger.error('Inside getProjectAndBuildingDetails service failure : ' +JSON.stringify(error));
         callback(error, null);
       } else {
+        logger.info('Inside getProjectAndBuildingDetails service success : ' +JSON.stringify(result));
         callback(null,{ data: result });
       }
     });
@@ -1167,12 +1170,13 @@ class ProjectService {
   }
 
   syncProjectWithRateAnalysisData(projectId:string, buildingId:string, user: User, callback: (error:any, result:any)=> void) {
-
+    logger.info('Inside syncProjectWithRateAnalysisData service');
     this.getProjectAndBuildingDetails(projectId, buildingId,(error, projectAndBuildingDetails) => {
       if (error) {
+        logger.info('Inside getProjectAndBuildingDetails callback service failed : ' +JSON.stringify(error));
         callback(error, null);
       } else {
-
+        logger.info('starting to updateCostHeadsForBuildingAndProject : ' +JSON.stringify(projectAndBuildingDetails));
         let projectData = projectAndBuildingDetails.data[0];
         let buildings = projectAndBuildingDetails.data[0].buildings;
         let buildingData: any;
@@ -1185,11 +1189,11 @@ class ProjectService {
         }
 
         if(projectData.projectCostHeads.length > 0 ) {
-
+          logger.info('Synching building costheads and updating project costheads');
           this.updateCostHeadsForBuildingAndProject(callback, projectData, buildingData, buildingId, projectId);
 
         } else {
-
+          logger.info('Synching building and project costheads');
           let syncBuildingCostHeadsPromise = this.updateBudgetRatesForBuildingCostHeads(Constants.BUILDING,
             buildingId, projectData, buildingData);
           let syncProjectCostHeadsPromise = this.updateBudgetRatesForProjectCostHeads(Constants.AMENITIES,
@@ -1217,16 +1221,17 @@ class ProjectService {
     let projectRepository = new ProjectRepository();
 
     rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING,
-      (error: any, buildingCostHeadsData: any) => {
+      (error: any, result: any) => {
         if (error) {
           logger.err('Error in promise : ' + error);
           callback(error, null);
         } else {
 
           let projectService = new ProjectService();
-          let data = projectService.calculateBudgetCostForBuilding(buildingCostHeadsData, projectData, buildingData);
+          let data = projectService.calculateBudgetCostForBuilding(result.buildingCostHeads, projectData, buildingData);
+          let rates  =  this.getRates(result, data);
           let queryForBuilding = {'_id': buildingId};
-          let updateCostHead = {$set: {'costHeads': data}};
+          let updateCostHead = {$set: {'costHeads': data, 'rates': rates }};
           buildingRepository.findOneAndUpdate(queryForBuilding, updateCostHead, {new: true}, (error: any, response: any) => {
             logger.info('Project service, getAllDataFromRateAnalysis has been hit');
             if (error) {
@@ -1256,17 +1261,20 @@ class ProjectService {
   updateBudgetRatesForBuildingCostHeads(entity: string, buildingId:string, projectDetails : Project, buildingDetails : Building) {
     return new Promise(function(resolve, reject) {
       let rateAnalysisService = new RateAnalysisService();
+      let projectService = new ProjectService();
       let buildingRepository = new BuildingRepository();
-      rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(entity, (error: any, buildingCostHeadsData: any) => {
+      logger.info('Inside updateBudgetRatesForBuildingCostHeads');
+      rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(entity, (error: any, result: any) => {
         if (error) {
           logger.err('Error in promise : ' + error);
           reject(error);
         } else {
-
+          logger.info('Inside updateBudgetRatesForBuildingCostHeads success');
           let projectService = new ProjectService();
-          let buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeadsData, projectDetails, buildingDetails);
+          let buildingCostHeads = projectService.calculateBudgetCostForBuilding(result.buildingCostHeads, projectDetails, buildingDetails);
+          let rates  = projectService.getRates(result, buildingCostHeads);
           let query = {'_id': buildingId};
-          let newData = {$set: {'costHeads': buildingCostHeads}};
+          let newData = {$set: {'costHeads': buildingCostHeads, 'rates': rates}};
           buildingRepository.findOneAndUpdate(query, newData, {new: true}, (error:any, response:any) => {
             logger.info('Project service, getAllDataFromRateAnalysis has been hit');
             if (error) {
@@ -1281,19 +1289,36 @@ class ProjectService {
     });
   }
 
+  getRates(result: any, costHeads: Array<CostHead>) {
+    let getRatesListSQL = 'SELECT * FROM ? AS q WHERE q.C4 IN (SELECT t.rateAnalysisId ' +
+      'FROM ? AS t)';
+    let rateItems = alasql(getRatesListSQL, [result.rates, costHeads]);
+
+    let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS item, rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
+      'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
+      'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
+      'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9';
+
+    let rateItemsList = alasql(rateItemsRateAnalysisSQL, [rateItems, result.units]);
+
+    return rateItemsList;
+  }
+
   updateBudgetRatesForProjectCostHeads(entity: string, projectId:string, projectDetails : Project, buildingDetails : Building) {
     return new Promise(function(resolve, reject){
       let rateAnalysisService = new RateAnalysisService();
       let projectRepository = new ProjectRepository();
-      rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(entity, (error : any, projectCostHeadsData: any) => {
+      logger.info('Inside updateBudgetRatesForProjectCostHeads');
+      rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(entity, (error : any, result: any) => {
         if(error) {
           logger.err('Error in promise : ' + error);
           reject(error);
         } else {
             let projectService = new ProjectService();
-            let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(projectCostHeadsData, projectDetails, buildingDetails);
+            let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(result.buildingCostHeads, projectDetails, buildingDetails);
+            let rates  = projectService.getRates(result, projectCostHeads);
             let query = {'_id': projectId};
-            let newData = {$set: {'projectCostHeads': projectCostHeads}};
+            let newData = {$set: {'projectCostHeads': projectCostHeads, 'rates': rates}};
             projectRepository.findOneAndUpdate(query, newData, {new: true}, (error: any, response: any) => {
               logger.info('Project service, getAllDataFromRateAnalysis has been hit');
               if (error) {
@@ -1397,6 +1422,7 @@ class ProjectService {
   }
 
   calculateBudgetCostForCommonAmmenities(costHeadsRateAnalysis: any, projectDetails : Project, buildingDetails : any) {
+    logger.info('Inside calculateBudgetCostForCommonAmmenities');
     let costHeads:Array<CostHead> = new Array<CostHead>();
     let budgetedCostAmount: number;
     let budgetCostFormulae:string;
@@ -1449,6 +1475,8 @@ class ProjectService {
   private calculateThumbRuleReportForProjectCostHead(budgetedCostAmount: number, costHeadFromRateAnalysis: any,
                                               projectDetails: any, costHeads: Array<CostHead>) {
     if (budgetedCostAmount) {
+      logger.info('Inside calculateThumbRuleReportForProjectCostHead');
+
       let calculateProjectData = 'SELECT SUM(building.totalCarpetAreaOfUnit) AS totalCarpetArea, ' +
         'SUM(building.totalSlabArea) AS totalSlabAreaProject,' +
         'SUM(building.totalSaleableAreaOfUnit) AS totalSaleableArea  FROM ? AS building';
@@ -1471,6 +1499,7 @@ class ProjectService {
   }
 
   private calculateThumbRuleRateForArea(budgetedCostAmount: number, area: number) {
+    logger.info('Inside calculateThumbRuleRateForArea');
     let budgetCostRates = new BudgetCostRates();
     budgetCostRates.sqft = (budgetedCostAmount / area);
     budgetCostRates.sqmt = (budgetCostRates.sqft * config.get(Constants.SQUARE_METER));
