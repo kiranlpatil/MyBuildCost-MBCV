@@ -139,7 +139,7 @@ class RateAnalysisService {
   }
 
   convertCostHeadsFromRateAnalysisToCostControl(entity:string, callback:(error: any, data:any)=> void) {
-
+    logger.info('convertCostHeadsFromRateAnalysisToCostControl has been hit');
     let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS);
     let costHeadRateAnalysisPromise = this.createPromise(costHeadURL);
 
@@ -166,7 +166,7 @@ class RateAnalysisService {
       notesRateAnalysisPromise,
       unitsRateAnalysisPromise
     ]).then(function(data: Array<any>) {
-
+      logger.info('convertCostHeadsFromRateAnalysisToCostControl promise for all API is success.');
       let costHeadsRateAnalysis = data[0][Constants.RATE_ANALYSIS_ITEM_TYPE];
       let categoriesRateAnalysis = data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE];
       let workItemsRateAnalysis = data[2][Constants.RATE_ANALYSIS_ITEMS];
@@ -179,20 +179,21 @@ class RateAnalysisService {
 
       rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
         rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
-
-          callback(null, buildingCostHeads);
+      logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
+      callback(null, buildingCostHeads);
     });
   }
 
   createPromise(url: string) {
       return new Promise(function(resolve, reject){
+        logger.info('createPromise has been hit for : '+url);
         let rateAnalysisService = new RateAnalysisService();
         rateAnalysisService.getApiCall(url, (error : any, data: any) => {
           if(error) {
-            console.log('Error in promise : '+error);
+            console.log('Error in createPromise get data from rate analysis: '+JSON.stringify(error));
             reject(error);
           } else {
-            console.log('data from rate analysis : '+data);
+            console.log('createPromise data from rate analysis success.');
             resolve(data);
           }
         });
@@ -202,7 +203,7 @@ class RateAnalysisService {
   getCostHeadsFromRateAnalysis(costHeadsRateAnalysis: any, categoriesRateAnalysis: any,
                                workItemsRateAnalysis: any, rateItemsRateAnalysis: any,
                                unitsRateAnalysis: any, notesRateAnalysis: any, buildingCostHeads: Array<CostHead>) {
-
+    logger.info('getCostHeadsFromRateAnalysis has been hit.');
     for (let costHeadIndex = 0; costHeadIndex < costHeadsRateAnalysis.length; costHeadIndex++) {
 
       let costHead = new CostHead();
@@ -233,6 +234,8 @@ class RateAnalysisService {
                                 rateItemsRateAnalysis: any, unitsRateAnalysis: any,
                                 notesRateAnalysis: any, buildingCategories: Array<Category>) {
 
+    logger.info('getCategoriesFromRateAnalysis has been hit.');
+
     for (let categoryIndex = 0; categoryIndex < categoriesByCostHead.length; categoryIndex++) {
 
       let category = new Category(categoriesByCostHead[categoryIndex].name, categoriesByCostHead[categoryIndex].rateAnalysisId);
@@ -255,6 +258,8 @@ class RateAnalysisService {
                                  rateItemsRateAnalysis: any, unitsRateAnalysis: any,
                                  notesRateAnalysis: any, buildingCategories: Array<Category>) {
 
+      logger.info('getWorkItemsWithoutCategoryFromRateAnalysis has been hit.');
+
       let workItemsWithoutCategoriesRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, workItem.C3 AS name' +
         ' FROM ? AS workItem where NOT workItem.C4 AND workItem.C1 = '+costHeadRateAnalysisId;
       let workItemsWithoutCategories = alasql(workItemsWithoutCategoriesRateAnalysisSQL, [workItemsRateAnalysis]);
@@ -271,6 +276,8 @@ class RateAnalysisService {
 
   getWorkItemsFromRateAnalysis(workItemsByCategory: any, rateItemsRateAnalysis: any,
                                         unitsRateAnalysis: any, notesRateAnalysis: any, buildingWorkItems: Array<WorkItem>) {
+
+    logger.info('getWorkItemsFromRateAnalysis has been hit.');
 
     for (let workItemIndex = 0; workItemIndex < workItemsByCategory.length; workItemIndex++) {
 
