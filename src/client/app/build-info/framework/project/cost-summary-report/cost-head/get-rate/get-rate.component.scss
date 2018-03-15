@@ -1,10 +1,14 @@
 @import '../../../../../../../css/common';
 
-.get-rate-section {
+.get-rate-section,
+.get-cost-section,
+.get-systemRA-section {
   background: $azure;
   border: 1px solid $table-border;
   display: table;
-  margin: 0 auto 15px;
+  display: table;
+  float: right;
+  margin: 0 15px 15px;
   padding: 10px 30px;
   position: relative;
   max-width: calc(100% - 250px);
@@ -186,9 +190,11 @@
   }
 }
 
-.get-rate-section:after, .get-rate-section:before {
+.get-rate-section:after, .get-rate-section:before,
+.get-cost-section:after, .get-cost-section:before,
+.get-systemRA-section:after, .get-systemRA-section:before {
   bottom: 100%;
-  left: 75%;
+  left: 61%;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -197,15 +203,31 @@
   pointer-events: none;
 }
 
-.get-rate-section:after {
+.get-rate-section:after,
+.get-cost-section:after,
+.get-systemRA-section:after {
   border-color: rgba(136, 183, 213, 0);
   border-bottom-color: $azure;
   border-width: 8px;
   margin-left: -18px;
 }
-.get-rate-section:before {
+.get-rate-section:before,
+.get-cost-section:before,
+.get-systemRA-section:before {
   border-color: rgba(194, 225, 245, 0);
   border-bottom-color: $table-border;
   border-width: 10px;
   margin-left: -20px;
+}
+
+.alignment-top {
+  vertical-align: top;
+}
+
+.get-cost-section:after, .get-cost-section:before {
+  left: 80% !important;
+}
+
+.get-systemRA-section:after, .get-systemRA-section:before {
+  left: 95% !important;
 }

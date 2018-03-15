@@ -1,5 +1,5 @@
 <!--Edit enabled-->
-<div *ngIf="rateItemsArray!==undefined" class="get-rate-section">
+<div *ngIf="rateItemsArray!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost') ? 'get-cost-section' : 'get-systemRA-section')">
   <div class="pull-left">
     <div class="pull-left" *ngIf="rateItemsArray!==undefined">
       <div class="pull-left quantity-label">
@@ -88,7 +88,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>
+        <td class="alignment-top">
           <textarea rows="4" cols="80" [(ngModel)]="rateItemsArray.notes" id="rateNotes" [disabled]="disableRateField">
             </textarea>
         </td>

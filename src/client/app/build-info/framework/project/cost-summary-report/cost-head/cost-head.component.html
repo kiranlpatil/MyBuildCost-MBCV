@@ -48,23 +48,23 @@
                 <table class="table table-row-spacing table-dashboard table-categories">
                   <thead *ngIf="workItemIndex === 0">
                   <tr>
-                    <th class="">{{getTableHeadings().ITEM}}</th>
-                    <th class="">Details</th>
-                    <th class="">{{getTableHeadings().QUANTITY}}</th>
-                    <th class="">{{getTableHeadings().UNIT}}</th>
-                    <th class="">{{getTableHeadings().RATE_PER_UNIT}}</th>
-                    <th class="">{{getTableHeadings().COST}}</th>
-                    <th class="">{{getTableHeadings().RATEANALYSIS}}</th>
+                    <th>{{getTableHeadings().ITEM}}</th>
+                    <th>Details</th>
+                    <th>{{getTableHeadings().QUANTITY}}</th>
+                    <th>{{getTableHeadings().UNIT}}</th>
+                    <th>{{getTableHeadings().RATE_PER_UNIT}}</th>
+                    <th>{{getTableHeadings().COST}}</th>
+                    <th>{{getTableHeadings().RATEANALYSIS}}</th>
                     <!--<th></th>-->
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td class=""> {{ workitemObj.name }}</td>
-                    <td class="">
+                    <td> {{ workitemObj.name }}</td>
+                    <td>
                       <button class="add-more-details-btn"> Add more details </button>
                     </td>
-                    <td class="">
+                    <td>
                       <div class="edit-field"
                            *ngIf="workitemObj.quantity.total"
                            (click)="getQuantity(category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
@@ -78,8 +78,8 @@
                         Get Qty.
                       </button>
                     </td>
-                    <td class="">{{ workitemObj.unit }}</td>
-                    <td class="">
+                    <td>{{ workitemObj.unit }}</td>
+                    <td>
                       <div class="edit-field"
                            *ngIf="workitemObj.rate.total!= 0"
                            (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, false)">
@@ -92,7 +92,7 @@
                     </td>
 
                     <!--Cost-->
-                    <td class="">
+                    <td>
                       <div *ngIf="workitemObj.amount == 0">
                         -
                       </div>
@@ -125,6 +125,7 @@
                 <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB">
                    <div class="get-rate-component" *ngIf="compareWorkItemId == workitemObj.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                       <bi-get-rate [rateItemsArray]="rateItemsArray"
+                                   [rateView]="rateView"
                                    [categoryRateAnalysisId]="category.rateAnalysisId"
                                    [totalAmount]="totalAmount"
                                    [disableRateField]="disableRateField"
@@ -201,9 +202,6 @@
       </div>-->
 
     </div>
-    <!--<div class="col-xs-4">
-      <img src="./assets/build-info/dashboard/ads.png" />
-    </div>-->
   </div>
 </section>
 

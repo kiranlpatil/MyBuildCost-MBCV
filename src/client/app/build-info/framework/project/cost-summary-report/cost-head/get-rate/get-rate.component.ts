@@ -20,6 +20,7 @@ export class GetRateComponent {
   @Input() rateItemsArray: Rate;
   @Input() categoryRateAnalysisId: number;
   @Input() totalAmount: number;
+  @Input() rateView: string;
   @Input() disableRateField: boolean;
   @Output() refreshCategoryList = new EventEmitter();
 

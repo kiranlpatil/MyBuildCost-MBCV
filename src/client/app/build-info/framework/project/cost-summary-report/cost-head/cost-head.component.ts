@@ -55,7 +55,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private totalAmountOfWorkItems:number=0;
 
   private disableRateField:boolean = false;
-
+  private rateView : string;
   private previousRateQuantity:number = 0;
   private quantityIncrement:number = 1;
   private displayRateView: string = null;
@@ -159,6 +159,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.rate);
       this.calculateTotalForRateView();
+      this.rateView = 'rate';
       this.setRateFlags(displayRateView, disableRateField);
     } else {
       this.showWorkItemTab = null;
@@ -176,6 +177,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.calculateQuantity(workItem);
       this.calculateTotalForRateView();
       this.setRateFlags(displayRateView, disableRateField);
+      this.rateView = 'cost';
     } else {
       this.showWorkItemTab = null;
       this.displayRateView = null;
@@ -190,6 +192,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.systemRate);
       this.calculateTotalForRateView();
+      this.rateView = 'systemRA';
       this.setRateFlags(displayRateView, disableRateField);
     } else {
       this.showWorkItemTab = null;
