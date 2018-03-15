@@ -46,7 +46,7 @@ class ProjectRoutes {
 
     //Retrive categories for particular costhead
     router.get('/:projectId/costhead/:costHeadId/category', this.authInterceptor.requiresAuth,
-      this._requestInterceptor.intercept, interceptor.getProjectCostHeadCategories, controller.getCategoriesOfProjectCostHead,
+      this._requestInterceptor.intercept, interceptor.getCategoriesOfProjectCostHead, controller.getCategoriesOfProjectCostHead,
       this._responseInterceptor.exit);
 
     /*Project- Routes: WorkItem*/
@@ -70,7 +70,7 @@ class ProjectRoutes {
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.updateQuantityOfProjectCostHeads,
       controller.updateQuantityOfProjectCostHeads, this._responseInterceptor.exit);
 
-    //Delete quantityitem from  quantity
+    //Delete quantityitem from  quantity    //We don't use this API
     router.post('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.deleteQuantityOfProjectCostHeadsByName,
       controller.deleteQuantityOfProjectCostHeadsByName, this._responseInterceptor.exit);

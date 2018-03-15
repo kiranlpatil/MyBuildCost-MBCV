@@ -242,7 +242,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
-  getProjectCostHeadCategories(req: any, res: any, next: any) {
+  getCategoriesOfProjectCostHead(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var costHeadId = req.params.costHeadId;
     ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {

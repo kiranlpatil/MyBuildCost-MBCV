@@ -453,21 +453,20 @@ class ProjectService {
   //Update rate of project cost heads
   updateRateOfProjectCostHeads(projectId:string, costHeadId:number,categoryId:number,
              workItemId:number, rate :Rate, user : User, callback:(error: any, result: any)=> void) {
-    logger.info('Project service, updateRate has been hit');
+    logger.info('Project service, Update rate of project cost heads has been hit');
     this.projectRepository.findById(projectId, (error, project : Project) => {
       logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
         let projectCostHeads = project.projectCostHeads;
-        for(let index = 0; projectCostHeads.length > index; index++) {
-          if(projectCostHeads[index].rateAnalysisId === costHeadId) {
-            for(let indexCategory = 0; projectCostHeads[index].categories.length > indexCategory; indexCategory++) {
-              if (projectCostHeads[index].categories[indexCategory].rateAnalysisId === categoryId) {
-                for(let indexWorkitem = 0; projectCostHeads[index].categories[indexCategory].workItems.length >
-                indexWorkitem; indexWorkitem++) {
-                  if (projectCostHeads[index].categories[indexCategory].workItems[indexWorkitem].rateAnalysisId === workItemId) {
-                    projectCostHeads[index].categories[indexCategory].workItems[indexWorkitem].rate=rate;
+        for(let costHeadData of projectCostHeads) {
+          if(costHeadData.rateAnalysisId === costHeadId) {
+            for(let categoryData of costHeadData.categories) {
+              if (categoryData.rateAnalysisId === categoryId) {
+                for(let workItemData of categoryData.workItems) {
+                  if (workItemData.rateAnalysisId === workItemId) {
+                    workItemData.rate=rate;
                   }
                 }
               }
@@ -557,10 +556,10 @@ class ProjectService {
       }
     });
   }
-
+  //Delete Quantity Of Project Cost Heads By Name
   deleteQuantityOfProjectCostHeadsByName(projectId:string, costHeadId:string, categoryId:string,
-                       workItemId:string, item:string, user:User, callback:(error: any, result: any)=> void) {
-    logger.info('Project service, deleteQuantity has been hit');
+                                         workItemId:string, item:string, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, Delete Quantity Of Project Cost Heads By Name has been hit');
     this.projectRepository.findById(projectId, (error, project : Project) => {
       if (error
       ) {
@@ -578,6 +577,11 @@ class ProjectService {
                 for (let index2 = 0; project.projectCostHeads[index].categories[index1].workItems.length > index2; index2++) {
                   if (project.projectCostHeads[index].categories[index1].workItems[index2].rateAnalysisId === this.workItemId) {
                     quantity = project.projectCostHeads[index].categories[index1].workItems[index2].quantity;
+                    for(let index = 0; quantity.quantityItems.length > index; index ++) {
+                      if(quantity.quantityItems[index].item  === item) {
+                        quantity.quantityItems.splice(index,1);
+                      }
+                    }
                   }
                 }
               }
@@ -585,11 +589,6 @@ class ProjectService {
           }
         }
 
-        for(let index = 0; quantity.quantityItems.length > index; index ++) {
-          if(quantity.quantityItems[index].item  === item) {
-            quantity.quantityItems.splice(index,1);
-          }
-        }
 
         let query = { _id : projectId };
         this.projectRepository.findOneAndUpdate(query, project,{new: true}, (error, project : Project) => {
@@ -628,6 +627,7 @@ class ProjectService {
       }
     });
   }
+
 
   deleteWorkitem(projectId:string, buildingId:string, costHeadId:number, categoryId:number, workItemId:number, user:User,
                  callback:(error: any, result: any)=> void) {
@@ -701,7 +701,7 @@ class ProjectService {
         let costHeadList = building.costHeads;
         let categoryList: Category[];
         let workItemList: WorkItem[];
-        let isWorkItemUpdated : boolean = false;
+        let updatedWorkItemList: Array<WorkItem>= new Array<WorkItem>();
 
         for (let index = 0; index < costHeadList.length; index++) {
           if (costHeadId === costHeadList[index].rateAnalysisId) {
@@ -711,8 +711,8 @@ class ProjectService {
                 workItemList = categoryList[subCategoryIndex].workItems;
                 for (let workItemIndex = 0; workItemIndex < workItemList.length; workItemIndex++) {
                   if (workItemId === workItemList[workItemIndex].rateAnalysisId) {
-                    isWorkItemUpdated = true;
                     workItemList[workItemIndex].active = workItemActiveStatus;
+                    updatedWorkItemList.push(workItemList[workItemIndex]);
                   }
                 }
               }
@@ -720,19 +720,15 @@ class ProjectService {
           }
         }
 
-        if(isWorkItemUpdated) {
           let query = {_id: buildingId};
           this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, response) => {
             logger.info('Project service, findOneAndUpdate has been hit');
             if (error) {
               callback(error, null);
             } else {
-              callback(null, {data: workItemList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
             }
           });
-        } else {
-          callback(error, null);
-        }
       }
     });
   }
@@ -773,7 +769,7 @@ class ProjectService {
             if (error) {
               callback(error, null);
             } else {
-              callback(null, {data: updatedWorkItemList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
             }
           });
       }
@@ -883,26 +879,27 @@ class ProjectService {
     });
   }
 
+  //Update Quantity Of Project Cost Heads
   updateQuantityOfProjectCostHeads(projectId:string, costHeadId:number, categoryId:number, workItemId:number,
                  quantity: any, user:User, callback:(error: any, result: any)=> void) {
-    logger.info('Project service, updateQuantity has been hit');
+    logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
     this.projectRepository.findById(projectId, (error, project) => {
       if (error) {
         callback(error, null);
       } else {
         let costHeadList = project.projectCostHeads;
         let quantityArray  : Quantity;
-        for (let index = 0; index < costHeadList.length; index++) {
-          if (costHeadId === costHeadList[index].rateAnalysisId) {
-            for (let index1 = 0; index1 < costHeadList[index].categories.length; index1++) {
-              if (categoryId === costHeadList[index].categories[index1].rateAnalysisId) {
-                for (let index2 = 0; index2 < costHeadList[index].categories[index1].workItems.length; index2++) {
-                  if (workItemId === costHeadList[index].categories[index1].workItems[index2].rateAnalysisId) {
-                    quantityArray  = costHeadList[index].categories[index1].workItems[index2].quantity;
-                    quantityArray.quantityItems = quantityArray.quantityItems.concat(quantity);
+        for (let costHead of costHeadList) {
+          if (costHeadId === costHead.rateAnalysisId) {
+            for (let categoryData of costHead.categories) {
+              if (categoryId === categoryData.rateAnalysisId) {
+                for (let workItemData of categoryData.workItems) {
+                  if (workItemId === workItemData.rateAnalysisId) {
+                    quantityArray  = workItemData.quantity;
+                    quantityArray.quantityItems = quantity;
                     quantityArray.total = 0;
-                    for (let itemIndex = 0; quantityArray.quantityItems.length > itemIndex; itemIndex++) {
-                      quantityArray.total = quantityArray.quantityItems[itemIndex].quantity + quantityArray.total;
+                    for (let quantityData of quantityArray.quantityItems) {
+                      quantityArray.total = quantityData.quantity + quantityArray.total;
                     }
                   }
                 }
@@ -913,30 +910,10 @@ class ProjectService {
 
         let query = {_id: projectId};
         this.projectRepository.findOneAndUpdate(query, project, {new: true}, (error, project) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
+          logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
           if (error) {
             callback(error, null);
           } else {
-            let costHeadList = project.projectCostHeads;
-            let quantity  : Quantity;
-            for (let index = 0; index < costHeadList.length; index++) {
-              if (costHeadId === costHeadList[index].rateAnalysisId) {
-                for (let index1 = 0; index1 < costHeadList[index].categories.length; index1++) {
-                  if (categoryId === costHeadList[index].categories[index1].rateAnalysisId) {
-                    for (let index2 = 0; index2 < costHeadList[index].categories[index1].workItems.length; index2++) {
-                      if (workItemId === costHeadList[index].categories[index1].workItems[index2].rateAnalysisId) {
-                        quantity  = costHeadList[index].categories[index1].workItems[index2].quantity;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            if (quantity.total === null) {
-              for (let index = 0; index < quantity.quantityItems.length; index++) {
-                quantity.total = quantity.quantityItems[index].quantity + quantity.total;
-              }
-            }
             callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
           }
         });

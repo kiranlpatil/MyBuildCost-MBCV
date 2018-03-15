@@ -328,8 +328,10 @@ class ProjectController {
     }
   }
 
+  //Update rate of project cost heads
   updateRateOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
     try {
+      logger.info('Project Controller, Update rate of project cost heads has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
       let costHeadId =parseInt(req.params.costHeadId);
@@ -337,13 +339,12 @@ class ProjectController {
       let workItemId =parseInt(req.params.workItemId);
       let rate : Rate = <Rate> req.body;
       let projectService = new ProjectService();
-      console.log(' workitemId => '+ workItemId);
       projectService.updateRateOfProjectCostHeads( projectId, costHeadId,categoryId ,workItemId, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
-          logger.info('Get Rate Success');
-          logger.debug('Getting Rate of Project ID : '+projectId);
+          logger.info('Update rate of project cost heads Success');
+          logger.debug('Update rate of project cost heads of Project ID : '+projectId);
           next(new Response(200,result));
         }
       });
@@ -378,9 +379,10 @@ class ProjectController {
   }
   }
 
+  //Delete Quantity Of Project Cost Heads By Name
   deleteQuantityOfProjectCostHeadsByName(req: express.Request, res: express.Response, next: any): void {
     try {
-      logger.info('Project controller, deleteQuantity has been hit');
+      logger.info('Project controller, Delete Quantity Of Project Cost Heads By Name has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
       let costHeadId = req.params.costHeadId;
@@ -393,8 +395,8 @@ class ProjectController {
         if (error) {
           next(error);
         } else {
-          logger.info('Delete Quantity ' + result);
-          logger.debug('Deleted Quantity of Project ID : '+projectId+', CostHead : '+costHeadId+', ' +
+          logger.info('Delete Quantity Of Project Cost Heads By Name ' + result);
+          logger.debug('Delete Quantity Of Project Cost Heads By Name of Project ID : '+projectId+', CostHead : '+costHeadId+', ' +
             'Workitem : '+workItemId+', Item : '+item);
           next(new Response(200, result));
         }
@@ -574,9 +576,10 @@ class ProjectController {
     }
   }
 
+  //Update Quantity Of Project Cost Heads
   updateQuantityOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
     try {
-      logger.info('Project controller, updateQuantity has been hit');
+      logger.info('Project controller, Update Quantity Of Project Cost Heads has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
       let costHeadId = parseInt(req.params.costHeadId);
@@ -588,7 +591,7 @@ class ProjectController {
         if(error) {
           next(error);
         } else {
-          logger.info('Update Quantity success');
+          logger.info('Update Quantity Of Project Cost Heads success');
           next(new Response(200,result));
         }
       });
