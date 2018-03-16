@@ -7,6 +7,7 @@ import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 let request = require('request');
 let config = require('config');
 var log4js = require('log4js');
+var Promise = require('promise');
 var logger=log4js.getLogger('Rate Analysis Service');
 import alasql = require('alasql');
 import Rate = require('../dataaccess/model/project/building/Rate');
@@ -74,6 +75,7 @@ class RateAnalysisService {
   }
 
   getApiCall(url : string, callback:(error : any, response: any) => void) {
+    logger.info('getApiCall for rateAnalysis has bee hit for url : '+url);
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(new CostControllException(error.message, error.stack), null);
@@ -140,24 +142,32 @@ class RateAnalysisService {
 
   convertCostHeadsFromRateAnalysisToCostControl(entity:string, callback:(error: any, data:any)=> void) {
     logger.info('convertCostHeadsFromRateAnalysisToCostControl has been hit');
+
     let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS);
     let costHeadRateAnalysisPromise = this.createPromise(costHeadURL);
+    logger.info('costHeadRateAnalysisPromise for has been hit');
 
     let categoryURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_CATEGORIES);
     let categoryRateAnalysisPromise = this.createPromise(categoryURL);
+    logger.info('categoryRateAnalysisPromise for has been hit');
 
     let workItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_WORKITEMS);
     let workItemRateAnalysisPromise = this.createPromise(workItemURL);
+    logger.info('workItemRateAnalysisPromise for has been hit');
 
     let rateItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_RATE);
     let rateItemRateAnalysisPromise = this.createPromise(rateItemURL);
+    logger.info('rateItemRateAnalysisPromise for has been hit');
 
     let rateAnalysisNotesURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_NOTES);
     let notesRateAnalysisPromise = this.createPromise(rateAnalysisNotesURL);
+    logger.info('notesRateAnalysisPromise for has been hit');
 
     let allUnitsFromRateAnalysisURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_UNIT);
     let unitsRateAnalysisPromise = this.createPromise(allUnitsFromRateAnalysisURL);
+    logger.info('unitsRateAnalysisPromise for has been hit');
 
+    logger.info('calling Promise.all');
     Promise.all([
       costHeadRateAnalysisPromise,
       categoryRateAnalysisPromise,
@@ -166,7 +176,7 @@ class RateAnalysisService {
       notesRateAnalysisPromise,
       unitsRateAnalysisPromise
     ]).then(function(data: Array<any>) {
-      logger.info('convertCostHeadsFromRateAnalysisToCostControl promise for all API is success.');
+      logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
       let costHeadsRateAnalysis = data[0][Constants.RATE_ANALYSIS_ITEM_TYPE];
       let categoriesRateAnalysis = data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE];
       let workItemsRateAnalysis = data[2][Constants.RATE_ANALYSIS_ITEMS];
@@ -181,6 +191,8 @@ class RateAnalysisService {
         rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
       logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
       callback(null, buildingCostHeads);
+    }).catch((e) => {
+      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
     });
   }
 

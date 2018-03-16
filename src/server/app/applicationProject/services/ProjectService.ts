@@ -17,6 +17,7 @@ import Category = require('../dataaccess/model/project/building/Category');
 let config = require('config');
 let log4js = require('log4js');
 import alasql = require('alasql');
+var Promise = require('promise');
 import BudgetCostRates = require('../dataaccess/model/project/reports/BudgetCostRates');
 import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRate');
 import Constants = require('../../applicationProject/shared/constants');
@@ -1149,7 +1150,7 @@ class ProjectService {
             let projectCostHeadsData = data[1];
             callback(null, {status:200});
           })
-            .catch((e) => { logger.error(' Promise failed! :' +JSON.stringify(e));});
+            .catch((e) => { logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e));});
         }
         }
     });
