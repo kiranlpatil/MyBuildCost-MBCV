@@ -5,8 +5,7 @@
 .get-systemRA-section {
   background: $azure;
   border: 1px solid $table-border;
-  display: table;
-  display: table;
+  display: block;
   float: right;
   margin: 0 15px 15px;
   padding: 10px 30px;
@@ -33,6 +32,8 @@
       }
     }
     tr {
+      background: transparent;
+      border: 1px solid transparent;
       td {
         padding: 5px 10px;
         width: 17.5%;
@@ -95,12 +96,16 @@
         cursor: pointer;
         top: 6px;
       }
+      &:hover {
+        border: 1px solid transparent;
+      }
     }
   }
 
   .get-rate-table {
-    border-top: 1px solid $gray;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid $gray-light;
+    border-top: 1px solid $gray-light;
+    display: block;
 
     .rate-item {
       padding: 0 !important;
@@ -194,13 +199,13 @@
 .get-cost-section:after, .get-cost-section:before,
 .get-systemRA-section:after, .get-systemRA-section:before {
   bottom: 100%;
-  left: 61%;
   border: solid transparent;
   content: " ";
   height: 0;
-  width: 0;
+  left: 57%;
   position: absolute;
   pointer-events: none;
+  width: 0;
 }
 
 .get-rate-section:after,
@@ -225,9 +230,16 @@
 }
 
 .get-cost-section:after, .get-cost-section:before {
-  left: 80% !important;
+  left: 73% !important;
 }
 
 .get-systemRA-section:after, .get-systemRA-section:before {
-  left: 95% !important;
+  left: 88% !important;
+}
+
+input[disabled],
+input[readonly],
+textarea[disabled] {
+  background: $white;
+  color: $text-disabled;
 }

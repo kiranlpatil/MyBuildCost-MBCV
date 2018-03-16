@@ -84,8 +84,8 @@
                         <div *ngIf="building.estimate.estimatedCosts[i].total != 0"
                              (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">
                           <span class="estimated-cost"
-                            [class.high-estimated-cost]="building.estimate.estimatedCosts[i].total > thumbRuleItem.amount"
-                            [class.low-estimated-cost]="building.estimate.estimatedCosts[i].total < thumbRuleItem.amount">
+                            [class.above-cost]="building.estimate.estimatedCosts[i].total > thumbRuleItem.amount"
+                            [class.below-cost]="building.estimate.estimatedCosts[i].total < thumbRuleItem.amount">
                             {{ building.estimate.estimatedCosts[i].total }}
                           </span>
                         </div>

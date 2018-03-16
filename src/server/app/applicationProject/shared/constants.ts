@@ -40,5 +40,8 @@ class Constants {
   public static MASONRY : string = 'Masonry';
   public static INTERNAL_PLASTER : string = 'Internal Plaster';
   public static GYPSUM_OR_POP_PLASTER : string = 'Gypsum / POP plaster (punning)';
+
+  // Value Constant
+  public static NUMBER_OF_FRACTION_DIGIT = 2;
 }
 export=Constants;

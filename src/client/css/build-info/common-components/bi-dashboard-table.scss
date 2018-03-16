@@ -15,17 +15,18 @@
   }
 
   .delete-cost-head {
-    background: $white;
+    background: $delete-cost-head-bg;
     border-radius: 0 5px 5px 0;
     color: $dashboard-link;
     cursor: pointer;
     display: block;
+    margin-top: 6px;
     opacity: 0;
-    padding: 5px;
+    padding: 5px 2px 5px 1px;
     position: absolute;
-    right: -25px;
+    right: -20px;
     transition: opacity 0.5s ease-in-out;
-    width: 25px;
+    width: 20px;
   }
 
   thead > tr,
@@ -39,6 +40,10 @@
       font-weight: 800;
       text-align: center;
       vertical-align: middle;
+
+      &:first-child {
+        text-align: left;
+      }
     }
 
     th > .sub-heading {
@@ -64,23 +69,29 @@
     }
 
     .border-left {
-      border-right: 1px solid #e8e8e8;
+      border-right: 1px solid #f3f3f3;
     }
 
-    td > .above-cost {
-      color: $above-cost;
+    .above-cost {
+      color: $above-cost !important;
+      cursor: pointer;
+      text-decoration: underline;
     }
 
-    td > .below-cost {
-      color: $below-cost;
+    .below-cost {
+      color: $below-cost !important;
+      cursor: pointer;
+      text-decoration: underline;
     }
 
     td > .edit-field {
+      cursor: pointer;
       margin: 0 auto;
       position: relative;
       width: 120px;
 
       input {
+        background: url('../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
         border: 1px solid transparent;
         box-shadow: none;
         color: $heading;
@@ -92,7 +103,7 @@
         padding: 3px 28px 3px 3px;
         width: 100%;
         text-align: center;
-        background: $white;
+        transition: opacity 0.5s ease-in-out;
       }
 
       img {
@@ -103,7 +114,6 @@
     }
 
     &:hover {
-      border: 1px solid $theme-orange;
       .delete-cost-head {
         opacity: 1;
       }
@@ -111,10 +121,17 @@
       td > .edit-field {
         input {
           background: url('../assets/build-info/dashboard/edit.png') no-repeat 95% 46%;
-          border: 1px solid $gray;
+          border: 1px solid $border-color;
         }
 
       }
+    }
+  }
+
+  tbody > tr {
+    &:hover {
+      background: $table-row-hover;
+      border: 1px solid transparent;
     }
   }
 
@@ -125,6 +142,9 @@
   .add-item-row {
     background-color: transparent;
     box-shadow: none !important;
+    &:hover {
+      background-color: transparent;
+    }
   }
 
   .estimated-cost {
@@ -208,12 +228,3 @@
   }
 }
 
-
-.low-estimated-cost {
-  color: $above-cost !important;
-  text-decoration: underline;
-}
-.high-estimated-cost {
-  color: $below-cost !important;
-  text-decoration: underline;
-}

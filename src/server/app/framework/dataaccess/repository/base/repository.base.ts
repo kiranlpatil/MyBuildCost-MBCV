@@ -100,6 +100,16 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
+  aggregate(field :any, callback: (error:any, result : any)=> void ) {
+    this._model.aggregate( field).exec((error, result) => {
+      if(error) {
+        callback(new CostControllException('aggregate Failed. '+error.message, error, 500), null);
+      } else {
+        callback(null, result);
+      }
+    });
+  }
+
   /*create(item: T, callback: (error: any, result: any) => void) {
     this._model.create(item, callback);
   }

@@ -3,7 +3,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'bi-delete-confirmation-modal',
-  templateUrl: 'delete-confirmation-modal.component.html'
+  templateUrl: 'delete-confirmation-modal.component.html',
+  styleUrls: ['delete-confirmation-modal.component.css']
 })
 
 export class DeleteConfirmationModalComponent {

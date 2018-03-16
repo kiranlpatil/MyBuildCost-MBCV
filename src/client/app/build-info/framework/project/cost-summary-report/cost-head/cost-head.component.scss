@@ -2,6 +2,7 @@
 
 .wrapper {
   margin-top: 80px;
+  min-height: calc(100vh - 80px);
   padding-top: 0;
 
   .panel-group {
@@ -73,12 +74,15 @@
 }
 
 .table-categories {
+  border-bottom: 1px solid $border-color;
+
   tr {
-    margin: -5px 0;
     display: inline-block;
     width: 100%;
 
     .delete-cost-head {
+      background: transparent;
+      margin-top: 4px;
       opacity: 0;
       position: relative;
       right: 0;
@@ -90,37 +94,40 @@
       }
     }
   }
+  thead > tr {
+    border-top: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
+    //margin: -4px 0;
+  }
+
   tr > td,
   tr > th {
+    float: left;
+
     &:nth-child(1) {
-      width: 290px;
-      float: left;
+      width: 260px;
     }
 
     &:nth-child(2){
       width: 120px;
-      float: left;
     }
 
     &:nth-child(3){
       width: 120px;
-      float: left;
     }
 
     &:nth-child(4) {
       width: 60px;
-      float: left;
     }
 
     &:nth-child(5) {
       width: 110px;
-      float: left;
     }
 
     &:nth-child(6){
       width: 107px;
-      float: left;
     }
+
     &:last-child {
       vertical-align: top;
     }
@@ -129,18 +136,42 @@
     }
   }
   tr > td {
-    &:nth-child(4),
-    &:nth-child(6){
+    &:nth-child(4) {
       padding-top: 13px;
     }
+
+    &:nth-child(6){
+      padding-top: 10px;
+    }
+
     .edit-field {
-      input {
-        margin: 2px;
-      }
+      margin: 2px;
     }
   }
   .btn-get-amount {
     height: 23px;
+  }
+
+  .edit-cost {
+    padding: 5px;
+  }
+
+  .show-embedded-table {
+    display: block;
+    padding: 0;
+    width: 100%;
+  }
+  .active {
+    background: $azure;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: $dashboard-link;
+  }
+
+  .hide-hover {
+    &:hover {
+      background: transparent;
+    }
   }
 }
 
@@ -183,7 +214,26 @@
     }
   }
 }
-/*.get-rate-component {
-  padding: 0 20px 20px;
-}*/
+
+.bg-white {
+  margin-top: -5px;
+  padding: 0 15px;
+  position: relative;
+  z-index: 10;
+}
+
+.add-item-table{
+  margin-top: -5px;
+  tr {
+    td {
+      border-top: 1px solid $border-color;
+    }
+    .select-item {
+      padding: 2px 5px 2px 0;
+    }
+    &:hover {
+      background: $white;
+    }
+  }
+}
 

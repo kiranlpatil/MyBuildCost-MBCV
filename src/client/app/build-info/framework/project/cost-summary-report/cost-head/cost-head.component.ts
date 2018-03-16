@@ -52,6 +52,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private workItemListArray: Array<WorkItem> = [];
   private categoryListArray : Array<Category> = [];
   private categoryIdForInActive: number;
+  private currentCategoryIndex: number;
+  private currentWorkItemIndex: number;
 
   private disableRateField:boolean = false;
   private rateView : string;
@@ -134,7 +136,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  getQuantity( categoryId: number, workItemId : number, workItem: WorkItem, quantityItems: any) {
+  getQuantity( categoryId: number, workItemId : number, workItem: WorkItem, quantityItems: any, categoryIndex: number, workItemIndex:number) {
     if( this.showWorkItemTab !== Label.WORKITEM_QUANTITY_TAB || this.compareCategoryId !== categoryId ||
       this.compareWorkItemId !== workItemId) {
 
@@ -144,6 +146,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
       this.quantityItemsArray = quantityItems;
       this.workItem = workItem;
+      this.rateView = 'quantity';
+      this.currentCategoryIndex = categoryIndex;
+      this.currentWorkItemIndex = workItemIndex;
       this.showWorkItemTab = Label.WORKITEM_QUANTITY_TAB;
     } else {
       this.showWorkItemTab = null;
@@ -151,13 +156,16 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   // Get Rate
-  getRate(displayRateView : string, categoryId:number, workItemId:number, workItem : WorkItem, disableRateField : boolean ) {
+  getRate(displayRateView : string, categoryId:number, workItemId:number, workItem : WorkItem, disableRateField : boolean,
+          categoryIndex : number, workItemIndex : number ) {
     if(this.showWorkItemTab !== Label.WORKITEM_RATE_TAB || this.displayRateView !== displayRateView ||
       this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
 
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.rate);
       this.calculateTotalForRateView();
+      this.currentCategoryIndex = categoryIndex;
+      this.currentWorkItemIndex = workItemIndex;
       this.rateView = 'rate';
       this.setRateFlags(displayRateView, disableRateField);
     } else {
@@ -167,7 +175,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   // Get Rate by quantity
-  getRateByQuantity(displayRateView : string, categoryId:number, workItemId:number, workItem : WorkItem, disableRateField : boolean ) {
+  getRateByQuantity(displayRateView : string, categoryId:number, workItemId:number, workItem : WorkItem,
+                    disableRateField : boolean , categoryIndex:number, workItemIndex : number) {
     if(this.showWorkItemTab !== Label.WORKITEM_RATE_TAB || this.displayRateView !== displayRateView ||
       this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
 
@@ -177,6 +186,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.calculateTotalForRateView();
       this.setRateFlags(displayRateView, disableRateField);
       this.rateView = 'cost';
+      this.currentCategoryIndex = categoryIndex;
+      this.currentWorkItemIndex = workItemIndex;
     } else {
       this.showWorkItemTab = null;
       this.displayRateView = null;
@@ -184,7 +195,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   // Get System rate
-  getSystemRate(displayRateView : string, categoryId:number, workItemId:number, workItem : WorkItem, disableRateField : boolean ) {
+  getSystemRate(displayRateView : string, categoryId:number, workItemId:number, workItem : WorkItem,
+                disableRateField : boolean, categoryIndex:number, workItemIndex : number) {
     if(this.showWorkItemTab !== Label.WORKITEM_RATE_TAB || this.displayRateView !== displayRateView ||
       this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
 
@@ -192,6 +204,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.systemRate);
       this.calculateTotalForRateView();
       this.rateView = 'systemRA';
+      this.currentCategoryIndex = categoryIndex;
+      this.currentWorkItemIndex = workItemIndex;
       this.setRateFlags(displayRateView, disableRateField);
     } else {
       this.showWorkItemTab = null;

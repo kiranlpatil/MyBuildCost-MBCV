@@ -4,7 +4,7 @@
   .panel-group {
     margin: 0;
     padding: 20px 0;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid $gray-light;
   }
 }
 
@@ -67,7 +67,7 @@
     .menu-items {
       position: absolute;
       right: 5px;
-      top: 15px;
+      top: 23px;
       width: 16px;
     }
 
@@ -76,12 +76,12 @@
       border-radius: 0;
       box-shadow: 10px 10px 10px $panel-shadow;
       min-width: 105px;
-      padding: 5px 0 0;
+      padding: 0;
       z-index: 98;
     }
 
     .menu-items > .dropdown-menu li {
-      padding: 2px 10px;
+      padding: 0 10px;
       &:hover {
         background: $page-background;
       }
@@ -109,10 +109,10 @@
     }
 
     .menu-items > a {
-      padding: 0;
-      width: 16px;
-      height: 30px;
       border-radius: 2px;
+      height: 24px;
+      padding: 0;
+      width: 11px;
 
       &:focus,
       &:hover,
@@ -123,15 +123,15 @@
 
     .menu-items > a > img {
       display: block;
-      padding: 6px;
+      padding: 3px 4px;
       position: relative;
       top: 2px;
     }
 
     .menu-items > ul {
       left: inherit;
-      right: -6px;
-      top: 38px;
+      right: 6px;
+      top: 30px;
     }
   }
 

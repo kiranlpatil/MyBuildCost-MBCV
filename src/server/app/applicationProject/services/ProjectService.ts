@@ -14,6 +14,7 @@ import CostHead = require('../dataaccess/model/project/building/CostHead');
 import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 import RateAnalysisService = require('./RateAnalysisService');
 import Category = require('../dataaccess/model/project/building/Category');
+import constant = require('../shared/constants');
 let config = require('config');
 let log4js = require('log4js');
 import alasql = require('alasql');
@@ -21,6 +22,9 @@ var Promise = require('promise');
 import BudgetCostRates = require('../dataaccess/model/project/reports/BudgetCostRates');
 import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRate');
 import Constants = require('../../applicationProject/shared/constants');
+import * as mongoose from 'mongoose';
+import QuantityItem = require("../dataaccess/model/project/building/QuantityItem");
+let ObjectId = mongoose.Types.ObjectId;
 let logger=log4js.getLogger('Project service');
 
 class ProjectService {
@@ -256,19 +260,15 @@ class ProjectService {
         callback(error, null);
       } else {
         let costHeadList = building.costHeads;
-        let categoryList: Category[];
-        let workItemList: WorkItem[];
-        let inActiveWorkItems = [];
+        let inActiveWorkItems : Array<WorkItem> = new Array<WorkItem>();
 
-        for (let index = 0; index < costHeadList.length; index++) {
-          if (costHeadId === costHeadList[index].rateAnalysisId) {
-            categoryList = costHeadList[index].categories;
-            for (let subCategoryIndex = 0; subCategoryIndex < categoryList.length; subCategoryIndex++) {
-              if (categoryId === categoryList[subCategoryIndex].rateAnalysisId) {
-                workItemList = categoryList[subCategoryIndex].workItems;
-                for (let checkWorkItem of workItemList) {
-                  if(!checkWorkItem.active) {
-                    inActiveWorkItems.push(checkWorkItem);
+        for (let costHeadData of costHeadList) {
+          if (costHeadId === costHeadData.rateAnalysisId) {
+            for (let categoryData of costHeadData.categories) {
+              if (categoryId === categoryData.rateAnalysisId) {
+                for (let workItemData of categoryData.workItems) {
+                  if(!workItemData.active) {
+                    inActiveWorkItems.push(workItemData);
                   }
                 }
               }
@@ -289,19 +289,15 @@ class ProjectService {
         callback(error, null);
       } else {
         let costHeadList = project.projectCostHeads;
-        let categoryList: Category[];
-        let workItemList: WorkItem[];
-        let inActiveWorkItems = [];
+        let inActiveWorkItems : Array<WorkItem> = new Array<WorkItem>();
 
-        for (let costHead of costHeadList) {
-          if (costHeadId === costHead.rateAnalysisId) {
-            categoryList = costHead.categories;
-            for (let category of categoryList) {
-              if (categoryId === category.rateAnalysisId) {
-                workItemList = category.workItems;
-                for (let checkWorkItem of workItemList) {
-                  if(!checkWorkItem.active) {
-                    inActiveWorkItems.push(checkWorkItem);
+        for (let costHeadData of costHeadList) {
+          if (costHeadId === costHeadData.rateAnalysisId) {
+            for (let categoryData of costHeadData.categories) {
+              if (categoryId === categoryData.rateAnalysisId) {
+                for (let workItemData of categoryData.workItems) {
+                  if(!workItemData.active) {
+                    inActiveWorkItems.push(workItemData);
                   }
                 }
               }
@@ -434,10 +430,13 @@ class ProjectService {
                 for(let workItemData of categoryData.workItems) {
                   if (workItemData.rateAnalysisId === workItemId) {
                     workItemData.rate=rate;
+                    break;
                   }
                 }
+                break;
               }
             }
+            break;
           }
         }
         let query = {'_id' : buildingId};
@@ -470,10 +469,13 @@ class ProjectService {
                 for(let workItemData of categoryData.workItems) {
                   if (workItemData.rateAnalysisId === workItemId) {
                     workItemData.rate=rate;
+                    break;
                   }
                 }
+                break;
               }
             }
+            break;
           }
         }
         let query = {'_id' : projectId};
@@ -810,25 +812,25 @@ class ProjectService {
   }
 
   updateQuantityOfBuildingCostHeads(projectId:string, buildingId:string, costHeadId:number, categoryId:number, workItemId:number,
-                                    quantity:any, user:User, callback:(error: any, result: any)=> void) {
+                                    quantityItems:Array<QuantityItem>, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateQuantityOfBuildingCostHeads has been hit');
     this.buildingRepository.findById(buildingId, (error, building) => {
       if (error) {
         callback(error, null);
       } else {
         let costHeadList = building.costHeads;
-        let quantityArray  : Quantity;
+        let quantity  : Quantity;
         for (let costHead of costHeadList) {
           if (costHeadId === costHead.rateAnalysisId) {
             for (let categoryData of costHead.categories) {
               if (categoryId === categoryData.rateAnalysisId) {
                 for (let workItemData of categoryData.workItems) {
                   if (workItemId === workItemData.rateAnalysisId) {
-                    quantityArray  = workItemData.quantity;
-                    quantityArray.quantityItems = quantity;
-                    quantityArray.total = 0;
-                    for (let quantityData of quantityArray.quantityItems) {
-                      quantityArray.total = quantityData.quantity + quantityArray.total;
+                    quantity  = workItemData.quantity;
+                    quantity.quantityItems = quantityItems;
+                    quantity.total = 0;
+                    for (let quantityData of quantity.quantityItems) {
+                      quantity.total = quantityData.quantity + quantity.total;
                     }
                   }
                 }
@@ -852,25 +854,25 @@ class ProjectService {
 
   //Update Quantity Of Project Cost Heads
   updateQuantityOfProjectCostHeads(projectId:string, costHeadId:number, categoryId:number, workItemId:number,
-                 quantity: any, user:User, callback:(error: any, result: any)=> void) {
+                                   quantityItems: Array<QuantityItem>, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
     this.projectRepository.findById(projectId, (error, project) => {
       if (error) {
         callback(error, null);
       } else {
         let costHeadList = project.projectCostHeads;
-        let quantityArray  : Quantity;
+        let quantity  : Quantity;
         for (let costHead of costHeadList) {
           if (costHeadId === costHead.rateAnalysisId) {
             for (let categoryData of costHead.categories) {
               if (categoryId === categoryData.rateAnalysisId) {
                 for (let workItemData of categoryData.workItems) {
                   if (workItemId === workItemData.rateAnalysisId) {
-                    quantityArray  = workItemData.quantity;
-                    quantityArray.quantityItems = quantity;
-                    quantityArray.total = 0;
-                    for (let quantityData of quantityArray.quantityItems) {
-                      quantityArray.total = quantityData.quantity + quantityArray.total;
+                    quantity  = workItemData.quantity;
+                    quantity.quantityItems = quantityItems;
+                    quantity.total = 0;
+                    for (let quantityData of quantity.quantityItems) {
+                      quantity.total = quantityData.quantity + quantity.total;
                     }
                   }
                 }
@@ -1030,7 +1032,7 @@ class ProjectService {
       if (error) {
         callback(error, null);
       } else {
-        let categories :Array<Category> = new Array<Category>();
+        let categories : Array<Category> = new Array<Category>();
         let buildingCostHeads = building.costHeads;
 
         for(let costHeadData of buildingCostHeads) {
@@ -1038,15 +1040,14 @@ class ProjectService {
             for (let categoryData of costHeadData.categories) {
                 if (categoryData.active === true) {
                   let workItems : Array<WorkItem> = new Array<WorkItem>();
-                  let category = categoryData;
-                  for(let workItemData of category.workItems) {
+                  for(let workItemData of categoryData.workItems) {
                     if(workItemData.active) {
                     workItems.push(workItemData);
                     for (let singleWorkItem of workItems) {
                       if (singleWorkItem.quantity.total !== null && singleWorkItem.rate.total !== null
                         && singleWorkItem.quantity.total !== 0 && singleWorkItem.rate.total !== 0) {
                         categoryData.amount = parseFloat((singleWorkItem.quantity.total *
-                          singleWorkItem.rate.total + categoryData.amount).toFixed(2));
+                          singleWorkItem.rate.total + categoryData.amount).toFixed(constant.NUMBER_OF_FRACTION_DIGIT));
                       } else {
                         categoryData.amount = 0;
                         categoryData.amount = 0;
@@ -1055,8 +1056,8 @@ class ProjectService {
                     }
                   }
                   }
-                  category.workItems = workItems;
-                  categories.push(category);
+                  categoryData.workItems = workItems;
+                  categories.push(categoryData);
               }
             }
           }
@@ -1068,31 +1069,28 @@ class ProjectService {
 
   //Get categories of projectCostHeads from database
   getCategoriesOfProjectCostHead(projectId:string, costHeadId:number, user:User, callback:(error: any, result: any)=> void) {
+
     logger.info('Project service, Get Project CostHead Categories has been hit');
     this.projectRepository.findById(projectId, (error, project:Project) => {
       if (error) {
         callback(error, null);
       } else {
-        let categories :Array<Category> = new Array<Category>();
+        let categories : Array<Category> = new Array<Category>();
         let projectCostHeads = project.projectCostHeads;
 
-        for(let costHead of projectCostHeads) {
-          if(costHead.rateAnalysisId === costHeadId) {
-            for (let singleCategory of costHead.categories) {
-              let categoryData = singleCategory;
+        for(let costHeadData of projectCostHeads) {
+          if(costHeadData.rateAnalysisId === costHeadId) {
+            for (let categoryData of costHeadData.categories) {
+              if (categoryData.active === true) {
                 let workItems : Array<WorkItem> = new Array<WorkItem>();
-                let category = categoryData;
-                for(let workItem of category.workItems) {
-                  let workItemData = workItem;
+                for(let workItemData of categoryData.workItems) {
                   if(workItemData.active) {
                     workItems.push(workItemData);
-                    for(let singleWorkItem of workItems) {
+                    for (let singleWorkItem of workItems) {
                       if (singleWorkItem.quantity.total !== null && singleWorkItem.rate.total !== null
                         && singleWorkItem.quantity.total !== 0 && singleWorkItem.rate.total !== 0) {
-                        categoryData.amount =
-                          parseFloat((singleWorkItem.quantity.total *
-                            singleWorkItem.rate.total +
-                            categoryData.amount).toFixed(2));
+                        categoryData.amount = parseFloat((singleWorkItem.quantity.total *
+                          singleWorkItem.rate.total + categoryData.amount).toFixed(constant.NUMBER_OF_FRACTION_DIGIT));
                       } else {
                         categoryData.amount = 0;
                         categoryData.amount = 0;
@@ -1101,8 +1099,9 @@ class ProjectService {
                     }
                   }
                 }
-                category.workItems = workItems;
-                categories.push(category);
+                categoryData.workItems = workItems;
+                categories.push(categoryData);
+              }
             }
           }
         }

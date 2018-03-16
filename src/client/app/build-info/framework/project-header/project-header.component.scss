@@ -31,6 +31,10 @@
           border: 1px solid $dashboard-link;
           border-radius: 15px;
 
+          span {
+            padding-right: 5px;
+          }
+
           &:hover,
           &:active,
           &:focus {
