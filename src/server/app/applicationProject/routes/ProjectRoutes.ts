@@ -46,7 +46,7 @@ class ProjectRoutes {
 
     //Retrive categories for particular costhead
     router.get('/:projectId/costhead/:costHeadId/category', this.authInterceptor.requiresAuth,
-      this._requestInterceptor.intercept, interceptor.getProjectCostHeadCategories, controller.getCategoriesOfProjectCostHead,
+      this._requestInterceptor.intercept, interceptor.getCategoriesOfProjectCostHead, controller.getCategoriesOfProjectCostHead,
       this._responseInterceptor.exit);
 
     /*Project- Routes: WorkItem*/
@@ -70,7 +70,7 @@ class ProjectRoutes {
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.updateQuantityOfProjectCostHeads,
       controller.updateQuantityOfProjectCostHeads, this._responseInterceptor.exit);
 
-    //Delete quantityitem from  quantity
+    //Delete quantityitem from  quantity    //We don't use this API
     router.post('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.deleteQuantityOfProjectCostHeadsByName,
       controller.deleteQuantityOfProjectCostHeadsByName, this._responseInterceptor.exit);
@@ -127,7 +127,7 @@ this._requestInterceptor.intercept, interceptor.setCostHeadStatus, controller.se
 
     //Retrive categories for particular costhead
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category', this.authInterceptor.requiresAuth,
-      this._requestInterceptor.intercept, interceptor.getActiveCategories, controller.getActiveCategories, this._responseInterceptor.exit);
+      this._requestInterceptor.intercept, interceptor.getCategoriesOfBuildingCostHead, controller.getCategoriesOfBuildingCostHead, this._responseInterceptor.exit);
 
     //Provide list of categories from Database
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/categorylist', this.authInterceptor.requiresAuth,
@@ -146,12 +146,12 @@ this._requestInterceptor.intercept, interceptor.setCostHeadStatus, controller.se
     /*Building- Routes: WorkItem*/
     ///Add and remove a costhead by setting status of workitems to true and false
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
-      this._requestInterceptor.intercept, interceptor.setWorkItemStatus, controller.setWorkItemStatus, this._responseInterceptor.exit);
+      this._requestInterceptor.intercept, interceptor.updateWorkItemStatusOfBuildingCostHeads, controller.updateWorkItemStatusOfBuildingCostHeads, this._responseInterceptor.exit);
 
     //Retrieve list of inactive workitems
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.getInActiveWorkItems,
-      controller.getInActiveWorkItems,  this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.getInActiveWorkItemsOfBuildingCostHeads,
+      controller.getInActiveWorkItemsOfBuildingCostHeads,  this._responseInterceptor.exit);
 
     //Provide workitemlist for particular category-----delete API
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitemlist',
@@ -168,10 +168,13 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
 
     //Add quantityitem in quantity
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.updateQuantity, controller.updateQuantity, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.updateQuantityOfBuildingCostHeads,
+      controller.updateQuantityOfBuildingCostHeads, this._responseInterceptor.exit);
+
     //Delete quantityitem from  quantity
     router.post('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.deleteQuantityByName, controller.deleteQuantityByName, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.deleteQuantityOfBuildingCostHeadsByName,
+      controller.deleteQuantityOfBuildingCostHeadsByName, this._responseInterceptor.exit);
 
     /*Building- Routes: Rate*/
 
@@ -180,7 +183,8 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.getRate, controller.getRate, this._responseInterceptor.exit);
     //Update rate of workitem
     router.put('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.updateRate, controller.updateRate, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, interceptor.updateRateOfBuildingCostHeads,
+      controller.updateRateOfBuildingCostHeads, this._responseInterceptor.exit);
 
     /*Building- Routes: Rate Analysis Communication*/
 

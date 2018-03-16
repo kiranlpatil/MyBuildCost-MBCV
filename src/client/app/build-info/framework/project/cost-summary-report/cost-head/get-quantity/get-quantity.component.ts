@@ -18,6 +18,7 @@ import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 export class GetQuantityComponent implements OnInit {
   @Input() quantityItems :  Array<QuantityItem>;
   @Input() categoryRateAnalysisId : number;
+  @Input() baseUrl : string;
   @Output() refreshCategoryList = new EventEmitter();
 
   projectId : string;
@@ -135,20 +136,17 @@ export class GetQuantityComponent implements OnInit {
 
   updateQuantityItem(quantityItems : QuantityItem) {
     this.loaderService.start();
-    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
     let workItemId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
-    this.costSummaryService.updateQuantityItems( projectId, buildingId, costHeadId, this.categoryRateAnalysisId,
+    this.costSummaryService.updateQuantityItems( this.baseUrl, costHeadId, this.categoryRateAnalysisId,
       workItemId, quantityItems).subscribe(
-      costHeadItemSave => this.onUpdateQuantityItemsSuccess(costHeadItemSave),
+      success => this.onUpdateQuantityItemsSuccess(success),
       error => this.onUpdateQuantityItemsFailure(error)
     );
   }
 
-  onUpdateQuantityItemsSuccess(costHeadItemSave: any) {
-    this.quantityItems = costHeadItemSave.data.item;
+  onUpdateQuantityItemsSuccess(success : string) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
