@@ -20,6 +20,7 @@ export class GetRateComponent {
   @Input() rateItemsArray: Rate;
   @Input() categoryRateAnalysisId: number;
   @Input() totalAmount: number;
+  @Input() baseUrl : string;
   @Input() rateView: string;
   @Input() disableRateField: boolean;
   @Output() refreshCategoryList = new EventEmitter();
@@ -50,14 +51,12 @@ export class GetRateComponent {
 
     }
 
-    this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.quantity).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.quantity).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
   }
 
   updateRate(rateItemsArray: Rate) {
     this.loaderService.start();
-    let projectID= SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+     let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
     let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
     let rate = new Rate();
@@ -69,7 +68,7 @@ export class GetRateComponent {
     rate.imageURL=rateItemsArray.imageURL;
     rate.notes=rateItemsArray.notes;
 
-    this.costSummaryService.updateRate( projectID, buildingId, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
+    this.costSummaryService.updateRate( this.baseUrl, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
       rateItem => this.onUpdateRateSuccess(rateItem),
       error => this.onUpdateRateFailure(error)
     );

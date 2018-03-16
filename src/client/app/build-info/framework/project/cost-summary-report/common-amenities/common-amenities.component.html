@@ -33,19 +33,20 @@
               <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
             </tr>
           </thead>
-          <tbody *ngIf="amenitiesReport.thumbRule" >
-            <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let thumbRuleItemIndex = index" class="delete-cost-head-cell">
+          <tbody *ngIf="amenitiesReport.thumbRule  && amenitiesReport.estimate" >
+            <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index" class="delete-cost-head-cell">
               <td class="border-left">{{thumbRuleItem.name}}</td>
               <td class="border-left"><span class="estimated-cost">{{thumbRuleItem.rate}}</span></td>
               <td class="border-left">{{thumbRuleItem.amount}}</td>
-              <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].rate}}</span></td>
+              <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate}}</span></td>
               <td>
-                <div class="edit-field" *ngIf="amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].total != 0">
-                  <input [(ngModel)]="amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].total"
+                <div class="edit-field" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
+                     (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
+                  <input [(ngModel)]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total"
                          id="estimatedItem.total">
                 </div>
-                <button type="button" *ngIf="amenitiesReport.estimate.estimatedCosts[thumbRuleItemIndex].total == 0"
-                        class="btn-get-amount">{{getButton().GET_AMOUNT}}</button>
+                <button type="button" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
+                        class="btn-get-amount" (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
               </td>
               <td class="delete-cost-head">
                 <div data-toggle="modal"

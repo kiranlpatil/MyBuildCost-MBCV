@@ -33,9 +33,6 @@ class ReportService {
   private userService : UserService;
   private rateAnalysisService : RateAnalysisService;
 
-  private category:any=[];
-  private reportThumbrule:any = [];
-
   constructor() {
     this.projectRepository = new ProjectRepository();
     this.buildingRepository = new BuildingRepository();
@@ -137,24 +134,28 @@ class ReportService {
           if (category.length !== 0) {
 
             for (let categoryKey in category) {
-              let workItem = category[categoryKey].workItems;
-              if (workItem.length !== 0) {
-                for (let key in workItem) {
-                  if (workItem[key].quantity.total !== null && workItem[key].rate.total !== null
-                    && workItem[key].quantity.total !== 0 && workItem[key].rate.total !== 0) {
-                    estimateReport.total = parseFloat((workItem[key].quantity.total * workItem[key].rate.total
-                      + estimateReport.total).toFixed(2));
-                    estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
-                  } else {
-                    /*estimateReport.total = 0.0;
-                        estimateReport.rate = 0.0;
-                        break;*/
+              if (category[categoryKey].active) {
+                let workItem = category[categoryKey].workItems;
+                if (workItem.length !== 0) {
+                  for (let key in workItem) {
+                    if (workItem[key].active) {
+                      if (workItem[key].quantity.total !== null && workItem[key].rate.total !== null
+                        && workItem[key].quantity.total !== 0 && workItem[key].rate.total !== 0) {
+                        estimateReport.total = parseFloat((workItem[key].quantity.total * workItem[key].rate.total
+                          + estimateReport.total).toFixed(2));
+                        estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
+                      } else {
+                        /*estimateReport.total = 0.0;
+                            estimateReport.rate = 0.0;
+                            break;*/
+                      }
+                    }
                   }
+                } else {
+                  /*estimateReport.total = 0.0;
+                      estimateReport.rate = 0.0;
+                      break;*/
                 }
-              } else {
-                /*estimateReport.total = 0.0;
-                    estimateReport.rate = 0.0;
-                    break;*/
               }
             }
 
@@ -186,14 +187,14 @@ generateReportForProjectCostHeads( reportType : string, projectCostHeads:  Array
 
       let projectCostHeadArray: Array<CostHead> = projectCostHeads;
       let projectReport = new BuildingReport;
-      let thumbRuleReport: ThumbRule = new ThumbRule();
-      let estimatedReport : Estimate = new Estimate();
-
        for (let projectCostHeadIndex in projectCostHeadArray) {
 
-         if (projectCostHeadArray[projectCostHeadIndex].active === true) {
+         let thumbRule: ThumbRule = new ThumbRule();
+         let estimate : Estimate = new Estimate();
 
-          let thumbRule: ThumbRuleReport = new ThumbRuleReport();
+         if (projectCostHeadArray[projectCostHeadIndex].active) {
+
+          let thumbRuleReport: ThumbRuleReport = new ThumbRuleReport();
           let estimateReport: EstimateReport = new EstimateReport();
 
            estimateReport.name = projectCostHeadArray[projectCostHeadIndex].name;
@@ -201,41 +202,45 @@ generateReportForProjectCostHeads( reportType : string, projectCostHeads:  Array
 
           let categoryArray : Array<Category> = projectCostHeadArray[projectCostHeadIndex].categories;
           for (let categoryIndex in categoryArray) {
-            let workItemArray = categoryArray[categoryIndex].workItems;
-            if (workItemArray.length !== 0) {
-              for (let workItemIndex in workItemArray) {
-                if (workItemArray[workItemIndex].quantity.total !== null && workItemArray[workItemIndex].rate.total !== null
-                  && workItemArray[workItemIndex].quantity.total !== 0 && workItemArray[workItemIndex].rate.total !== 0) {
-                  estimateReport.total = parseFloat((workItemArray[workItemIndex].quantity.total * workItemArray[workItemIndex].rate.total
-                    + estimateReport.total).toFixed(2));
-                  estimateReport.rate = parseFloat((estimateReport.total /totalArea).toFixed(2));
-                } else {
-                  estimateReport.total = 0.0;
-                  estimateReport.rate = 0.0;
-                  break;
+            if (categoryArray[categoryIndex].active) {
+              let workItemArray = categoryArray[categoryIndex].workItems;
+              if (workItemArray.length !== 0) {
+                for (let workItemIndex in workItemArray) {
+                  if (workItemArray[workItemIndex].active) {
+                    if (workItemArray[workItemIndex].quantity.total !== null && workItemArray[workItemIndex].rate.total !== null
+                      && workItemArray[workItemIndex].quantity.total !== 0 && workItemArray[workItemIndex].rate.total !== 0) {
+                      estimateReport.total = parseFloat((workItemArray[workItemIndex].quantity.total *
+                        workItemArray[workItemIndex].rate.total + estimateReport.total).toFixed(2));
+                      estimateReport.rate = parseFloat((estimateReport.total / totalArea).toFixed(2));
+                    } else {
+                      /*  estimateReport.total = 0.0;
+                        estimateReport.rate = 0.0;
+                        break;*/
+                    }
+                  }
                 }
               }
             }
           }
-          estimatedReport.totalEstimatedCost = parseFloat((estimateReport.total + estimatedReport.totalEstimatedCost).toFixed(2));
-          estimatedReport.totalRate = parseFloat((estimatedReport.totalRate + estimateReport.rate).toFixed(2));
-          estimatedReport.estimatedCosts.push(estimateReport);
+          estimate.totalEstimatedCost = parseFloat((estimateReport.total + estimate.totalEstimatedCost).toFixed(2));
+          estimate.totalRate = parseFloat((estimate.totalRate + estimateReport.rate).toFixed(2));
+          estimate.estimatedCosts.push(estimateReport);
 
-           thumbRule.name = projectCostHeadArray[projectCostHeadIndex].name;
-           thumbRule.rateAnalysisId = projectCostHeadArray[projectCostHeadIndex].rateAnalysisId;
-           thumbRule.amount = parseFloat((projectCostHeadArray[projectCostHeadIndex].budgetedCostAmount).toFixed(2));
+           thumbRuleReport.name = projectCostHeadArray[projectCostHeadIndex].name;
+           thumbRuleReport.rateAnalysisId = projectCostHeadArray[projectCostHeadIndex].rateAnalysisId;
+           thumbRuleReport.amount = parseFloat((projectCostHeadArray[projectCostHeadIndex].budgetedCostAmount).toFixed(2));
 
             if (rateUnit === Constants.WORKITEM_UNIT) {
-              thumbRule.rate =  parseFloat((thumbRule.amount/totalArea).toFixed(2));
+              thumbRuleReport.rate =  parseFloat((thumbRuleReport.amount/totalArea).toFixed(2));
             } else  {
-              thumbRuleReport.area = thumbRule.amount * config.get(Constants.SQUARE_METER);
-              thumbRule.rate = parseFloat((thumbRule.amount/thumbRuleReport.area).toFixed(2));
+              thumbRule.area = thumbRuleReport.amount * config.get(Constants.SQUARE_METER);
+              thumbRuleReport.rate = parseFloat((thumbRuleReport.amount/thumbRule.area).toFixed(2));
             }
-          thumbRuleReport.totalRate = parseFloat((thumbRuleReport.totalRate + thumbRule.rate).toFixed(2));
-          thumbRuleReport.totalBudgetedCost = parseFloat((thumbRuleReport.totalBudgetedCost + thumbRule.amount).toFixed(2));
-          thumbRuleReport.thumbRuleReports.push(thumbRule);
-          projectReport.thumbRule = thumbRuleReport;
-          projectReport.estimate = estimatedReport;
+          thumbRule.totalRate = parseFloat((thumbRule.totalRate + thumbRuleReport.rate).toFixed(2));
+          thumbRule.totalBudgetedCost = parseFloat((thumbRule.totalBudgetedCost + thumbRuleReport.amount).toFixed(2));
+          thumbRule.thumbRuleReports.push(thumbRuleReport);
+          projectReport.thumbRule = thumbRule;
+          projectReport.estimate = estimate;
         }
       }
       report.push(projectReport);

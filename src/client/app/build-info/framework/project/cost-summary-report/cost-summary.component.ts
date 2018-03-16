@@ -122,14 +122,13 @@ export class CostSummaryComponent implements OnInit {
   }
 
   goToCostHeadView( buildingId : string, buildingName:string, estimatedItem :any) {
-    this.estimatedItem = estimatedItem;
-    this.costHeadId = estimatedItem.rateAnalysisId;
+
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
 
-    this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_BUILDING, buildingName,
-    NavigationRoutes.APP_COST_SUMMARY, NavigationRoutes.APP_COST_HEAD, estimatedItem.name, this.costHeadId]);
+    this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, buildingName, NavigationRoutes.APP_COST_SUMMARY,
+      NavigationRoutes.APP_BUILDING, NavigationRoutes.APP_COST_HEAD, estimatedItem.name,  estimatedItem.rateAnalysisId]);
   }
 
   goToCommonAmenities() {

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { API, BaseService, SessionStorage, SessionStorageService, MessageService } from '../../../../shared/index';
 import { HttpDelegateService } from '../../../../shared/services/http-delegate.service';
+import { QuantityItem } from '../../model/quantity-item';
+import { Rate } from '../../model/rate';
 
 @Injectable()
 export class CostSummaryService extends BaseService {
@@ -66,8 +68,8 @@ export class CostSummaryService extends BaseService {
   }
 
   // WorkItem  CRUD API
-  deactivateWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
-    var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
+  deactivateWorkItem( baseUrl: string, costHeadId : number, subCategoryId : number, workItemId : number) {
+    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+
       costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
       API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_FALSE;
     let body = {};
@@ -75,15 +77,15 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  getInActiveWorkItems( projectId : string, buildingId : string, costHeadId : number, subCategoryId : number) {
-    var url = API.PROJECT + '/'+ projectId + '/'+ API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD+'/'+
+  getInActiveWorkItems( baseUrl: string, costHeadId : number, subCategoryId : number) {
+    var url = baseUrl + '/' + API.COSTHEAD+'/'+
       costHeadId + '/'+ API.CATEGORY  +'/'+ subCategoryId +'/' + API.WORKITEM ;
 
     return this.httpDelegateService.getAPI(url);
   }
 
-  activateWorkItem(projectId : string, buildingId : string, costHeadId : number, subCategoryId : number, workItemId : number) {
-    var url =  API.PROJECT + '/'+ projectId +'/'+ API.BUILDING +'/'+ buildingId +'/'+ API.COSTHEAD +'/'+
+  activateWorkItem(baseUrl : string, costHeadId : number, subCategoryId : number, workItemId : number) {
+    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+
       costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
       API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_TRUE;
     let body = {};
@@ -100,10 +102,10 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  updateQuantityItems( projectId : string, buildingId : string, costHeadId : number, categoryId : number, workItemId : number,
-                      quantityItemsArray : any) {
+  updateQuantityItems( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                      quantityItemsArray : QuantityItem) {
     var body= { item : quantityItemsArray };
-    var url = API.PROJECT + '/' + projectId + '/'+ API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' + costHeadId +
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
       '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY;
 
     return this.httpDelegateService.putAPI(url, body);
@@ -120,11 +122,11 @@ export class CostSummaryService extends BaseService {
   }
 
   //Rate API
-  updateRate( projectId : string, buildingId : string, costheadId : number,categoryId : number, workItemId : number,
-              rateItemsArray : any) {
+  updateRate( baseUrl: string, costHeadId : number,categoryId : number, workItemId : number,
+              rateItemsArray : Rate) {
     var body=rateItemsArray;
-    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/' + API.COSTHEAD+ '/' +
-      costheadId + '/' + API.CATEGORY + '/' + categoryId + '/' + API.WORKITEM + '/' + workItemId ;
+    var url = baseUrl + '/' + API.RATE + '/' + API.COSTHEAD+ '/' +
+      costHeadId + '/' + API.CATEGORY + '/' + categoryId + '/' + API.WORKITEM + '/' + workItemId ;
 
     return this.httpDelegateService.putAPI(url, body);
   }
@@ -137,10 +139,8 @@ export class CostSummaryService extends BaseService {
   }
 
   //Category API
-  getActiveCategories(projectId: string, buildingId : string, costheadId : number) {
-    var url = API.PROJECT +'/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'
-      + API.COSTHEAD+ '/' + costheadId + '/' + API.CATEGORY;
-
+  getActiveCategories(baseUrl: string, costHeadId : number) {
+    var url = baseUrl +'/'+ API.COSTHEAD+ '/' + costHeadId + '/' + API.CATEGORY;
     return this.httpDelegateService.getAPI(url);
   }
 
@@ -161,4 +161,6 @@ export class CostSummaryService extends BaseService {
 
     return this.httpDelegateService.putAPI(url, body);
   }
+
+
 }

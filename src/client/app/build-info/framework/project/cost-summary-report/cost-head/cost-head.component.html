@@ -6,8 +6,8 @@
   <div class="container">
     <div class="col-xs-12 no-padding">
       <h4 class="building-name">
-        <span class="building-label"> {{ buildingName }} </span>
-        <span class="text-left"> ( {{ costHead }} ) </span>
+        <span class="building-label"> {{ currentParamName }} </span>
+        <span class="text-left"> ( {{ costHeadName }} ) </span>
         <div class="col-md-6 text-right pull-right">
           <span class="text-left total-amount-work"> {{categoryDetailsTotalAmount|number}} </span>
         </div>
@@ -125,6 +125,7 @@
                                    [rateView]="rateView"
                                    [categoryRateAnalysisId]="category.rateAnalysisId"
                                    [totalAmount]="totalAmount"
+                                   [baseUrl] = "baseUrl"
                                    [disableRateField]="disableRateField"
                                    (refreshCategoryList)="refreshCategoryList()">
                       </bi-get-rate>
@@ -135,6 +136,7 @@
                   <div *ngIf="compareWorkItemId == workitemObj.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                       <bi-get-quantity [quantityItems]="quantityItemsArray"
                                        [categoryRateAnalysisId]="category.rateAnalysisId"
+                                       [baseUrl] = "baseUrl"
                                        (refreshCategoryList)="refreshCategoryList()">
                       </bi-get-quantity>
                    </div>

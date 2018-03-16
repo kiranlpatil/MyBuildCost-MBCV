@@ -188,7 +188,7 @@ export class NavigationRoutes {
   public static APP_LIST_PROJECT: string = 'project/list';
   public static APP_COST_SUMMARY: string = 'cost-summary';
   public static APP_COST_HEAD: string = 'cost-head';
-  public static APP_COMMON_AMENITIES = 'cost-summary/common-amenities';
+  public static APP_COMMON_AMENITIES = 'common-amenities';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
