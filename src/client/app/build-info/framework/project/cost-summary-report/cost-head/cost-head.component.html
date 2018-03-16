@@ -55,30 +55,30 @@
                       <button class="add-more-details-btn"> Add more details </button>
                     </td>
                     <td>
-                      <div class="edit-field" [class.active]="rateView==='quantity'"
+                      <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                            *ngIf="workitemObj.quantity.total"
-                           (click)="getQuantity(category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
+                           (click)="getQuantity(category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems, categoryIndex, workItemIndex)">
                         <input  [(ngModel)]="workitemObj.quantity.total" id="quantity"  size="10" class="form-control clear">
                       </div>
                       <button *ngIf="workitemObj.quantity.total == 0"
                               type="button"
                               id="getQuantity{{categoryIndex}}"
-                              class="btn-get-amount" [class.active]="rateView==='quantity'"
-                              (click)="getQuantity(category.rateAnalysisId,workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems)">
+                              class="btn-get-amount" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
+                              (click)="getQuantity(category.rateAnalysisId,workitemObj.rateAnalysisId, workitemObj.name, workitemObj.quantity.quantityItems, categoryIndex, workItemIndex)">
                         Get Qty.
                       </button>
                     </td>
                     <td>{{ workitemObj.unit }}</td>
                     <td>
-                      <div class="edit-field" [class.active]="rateView==='rate'"
+                      <div class="edit-field" [class.active]="(rateView==='rate' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                            *ngIf="workitemObj.rate.total!= 0"
-                           (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, false)">
+                           (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, false, categoryIndex, workItemIndex)">
                         <input  [(ngModel)]="workitemObj.rate.total" id="rate"  size="10" class="form-control clear">
                       </div>
-                      <button class="btn-get-amount" [class.active]="rateView==='rate'"
+                      <button class="btn-get-amount" [class.active]="(rateView==='rate' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                               *ngIf="workitemObj.rate.total == 0"
                               type="button"
-                              (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, false)">{{getButton().GET_RATE}}</button>
+                              (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, false, categoryIndex, workItemIndex)">{{getButton().GET_RATE}}</button>
                     </td>
 
                     <!--Cost-->
@@ -86,18 +86,18 @@
                       <div class="edit-cost" *ngIf="workitemObj.amount == 0">
                         -
                       </div>
-                      <div class="edit-cost" [class.active]="rateView==='cost'"
+                      <div class="edit-cost" [class.active]="(rateView==='cost' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                            *ngIf="workitemObj.amount != 0"
-                           (click)="getRateByQuantity( getLabel().GET_RATE_BY_QUANTITY, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, true)">
+                           (click)="getRateByQuantity( getLabel().GET_RATE_BY_QUANTITY, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, true, categoryIndex, workItemIndex)">
                         {{ (workitemObj.amount)|number}}
                       </div>
                     </td>
 
                     <!--RateAnalysis-->
                     <td>
-                      <button class="btn-get-amount" [class.active]="rateView==='systemRA'"
+                      <button class="btn-get-amount" [class.active]="(rateView==='systemRA' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                               type="button"
-                              (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, true)">{{getButton().SYSTEM_RA}}</button>
+                              (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workitemObj.rateAnalysisId, workitemObj, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}</button>
                     </td>
                     <td>
                       <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head"
