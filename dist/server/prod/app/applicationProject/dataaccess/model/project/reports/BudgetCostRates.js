@@ -1,0 +1,11 @@
+"use strict";
+var BudgetCostRates = (function () {
+    function BudgetCostRates() {
+        this.sqft = 0;
+        this.sqmt = 0;
+    }
+    return BudgetCostRates;
+}());
+module.exports = BudgetCostRates;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9hcHBsaWNhdGlvblByb2plY3QvZGF0YWFjY2Vzcy9tb2RlbC9wcm9qZWN0L3JlcG9ydHMvQnVkZ2V0Q29zdFJhdGVzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTtJQUtFO1FBQ0UsSUFBSSxDQUFDLElBQUksR0FBRyxDQUFDLENBQUM7UUFDZCxJQUFJLENBQUMsSUFBSSxHQUFHLENBQUMsQ0FBQztJQUNoQixDQUFDO0lBQ0gsc0JBQUM7QUFBRCxDQVRBLEFBU0MsSUFBQTtBQUVELGlCQUFTLGVBQWUsQ0FBQyIsImZpbGUiOiJhcHAvYXBwbGljYXRpb25Qcm9qZWN0L2RhdGFhY2Nlc3MvbW9kZWwvcHJvamVjdC9yZXBvcnRzL0J1ZGdldENvc3RSYXRlcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImNsYXNzIEJ1ZGdldENvc3RSYXRlcyB7XHJcblxyXG4gIHNxbXQ6IG51bWJlcjtcclxuICBzcWZ0OiBudW1iZXI7XHJcblxyXG4gIGNvbnN0cnVjdG9yKCkge1xyXG4gICAgdGhpcy5zcWZ0ID0gMDtcclxuICAgIHRoaXMuc3FtdCA9IDA7XHJcbiAgfVxyXG59XHJcblxyXG5leHBvcnQgPSBCdWRnZXRDb3N0UmF0ZXM7XHJcblxyXG4iXX0=
