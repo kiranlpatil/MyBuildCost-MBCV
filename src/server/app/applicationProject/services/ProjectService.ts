@@ -1149,7 +1149,7 @@ class ProjectService {
             let projectCostHeadsData = data[1];
             callback(null, {status:200});
           })
-            .catch((e) => { logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e));});
+            .catch((e:any) => { logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e));});
         }
         }
     });
@@ -1202,7 +1202,7 @@ class ProjectService {
   }
 
   updateBudgetRatesForBuildingCostHeads(entity: string, buildingId:string, projectDetails : Project, buildingDetails : Building) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve:any, reject:any) {
       let rateAnalysisService = new RateAnalysisService();
       let buildingRepository = new BuildingRepository();
       logger.info('Project service, updateBudgetRatesForBuildingCostHeads promise.');
@@ -1232,7 +1232,7 @@ class ProjectService {
   }
 
   updateBudgetRatesForProjectCostHeads(entity: string, projectId:string, projectDetails : Project, buildingDetails : Building) {
-    return new Promise(function(resolve, reject){
+    return new Promise(function(resolve:any, reject:any){
       let rateAnalysisService = new RateAnalysisService();
       let projectRepository = new ProjectRepository();
       logger.info('Project service, updateBudgetRatesForProjectCostHeads promise.');

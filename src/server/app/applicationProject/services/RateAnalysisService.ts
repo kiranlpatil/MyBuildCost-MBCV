@@ -191,13 +191,13 @@ class RateAnalysisService {
         rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
       logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
       callback(null, buildingCostHeads);
-    }).catch((e) => {
+    }).catch((e:any) => {
       logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
     });
   }
 
   createPromise(url: string) {
-      return new Promise(function(resolve, reject){
+      return new Promise(function(resolve : any, reject : any){
         logger.info('createPromise has been hit for : '+url);
         let rateAnalysisService = new RateAnalysisService();
         rateAnalysisService.getApiCall(url, (error : any, data: any) => {
