@@ -18,12 +18,12 @@ import constant = require('../shared/constants');
 let config = require('config');
 let log4js = require('log4js');
 import alasql = require('alasql');
-var CCPromise = require('promise');
 import BudgetCostRates = require('../dataaccess/model/project/reports/BudgetCostRates');
 import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRate');
 import Constants = require('../../applicationProject/shared/constants');
 import * as mongoose from 'mongoose';
 import QuantityItem = require('../dataaccess/model/project/building/QuantityItem');
+let CCPromise = require('promise/lib/es6-extensions');
 let ObjectId = mongoose.Types.ObjectId;
 let logger=log4js.getLogger('Project service');
 
@@ -1148,8 +1148,9 @@ class ProjectService {
             let buildingCostHeadsData = data[0];
             let projectCostHeadsData = data[1];
             callback(null, {status:200});
-          })
-            .catch((e:any) => { logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e));});
+          }).catch(function(e:any) {
+            logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e));
+          });
         }
         }
     });
@@ -1228,6 +1229,8 @@ class ProjectService {
           });
         }
       });
+    }).catch(function(e:any){
+      logger.error('Error in updateBudgetRatesForBuildingCostHeads :'+e);
     });
   }
 
@@ -1257,6 +1260,8 @@ class ProjectService {
             });
           }
       });
+    }).catch(function(e:any){
+      logger.error('Error in updateBudgetRatesForProjectCostHeads :'+e);
     });
   }
 
