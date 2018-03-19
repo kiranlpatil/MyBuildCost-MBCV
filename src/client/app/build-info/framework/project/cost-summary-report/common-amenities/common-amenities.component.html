@@ -64,10 +64,10 @@
       <tbody>
       <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
         <td>{{getLabel().TOTAL}}</td>
-        <td>{{amenitiesReport.thumbRule.totalBudgetedCost|number}}</td>
-        <td><span class="estimated-cost">{{amenitiesReport.thumbRule.totalRate|number}}</span></td>
-        <td>{{amenitiesReport.estimate.totalEstimatedCost|number}}</td>
-        <td><span class="estimated-cost">{{amenitiesReport.estimate.totalRate|number}}</span></td>
+        <td>{{amenitiesReport.thumbRule.totalRate|number}}</td>
+        <td><span class="estimated-cost">{{amenitiesReport.thumbRule.totalBudgetedCost|number}}</span></td>
+        <td>{{amenitiesReport.estimate.totalRate|number}}</td>
+        <td><span class="estimated-cost">{{amenitiesReport.estimate.totalEstimatedCost|number}}</span></td>
       </tr>
       </tbody>
     </table>
