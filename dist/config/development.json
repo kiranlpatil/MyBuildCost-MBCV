@@ -1,0 +1,740 @@
+{
+  "application": {
+    "database": {
+      "host": "127.0.0.1",
+      "name": "Appication-backend",
+      "username": "",
+      "password": "",
+      "mongoExport": "/usr/bin/mongoexport"
+    },
+    "exportFileNames": {
+      "candidateProfilesCSV": "candidate-profiles.csv",
+      "candidateCapabilitiesCSV": "candidate-capabilities.csv",
+      "candidateAccountDetailsCSV": "candidate-account-details.csv",
+      "companyDetailsCSV": "company-details.csv",
+      "jobDetailsCSV": "job-details.csv",
+      "companyAccountDetailsCSV": "company-account-details.csv",
+      "usageTrackingCSV": "usage-tracking.csv",
+      "masterKeySkillsCSV": "master-key-skills.csv",
+      "recruiterCandidatesCSV": "my-candidates-detail.csv"
+    },
+    "exportFilePathServer": "/src/server/public/exported-files/",
+    "downloadFilePathClient": "/public/exported-files/",
+    "publicPath":"/src/server/app/framework/public/",
+    "profilePath":"/src/server/public/profileImage",
+    "profilePathForClient":"/public/profileImage/",
+    "limitForQuery" : 10,
+    "mail": {
+      "host": "http://localhost:8080/",
+      //"host":"http://7a4647ae.ngrok.io/"
+      "MAIL_SENDER": "redminestatus@techprimelab.com",
+      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
+      "ADMIN_MAIL": "swapnil.nakhate@techprimelab.com",
+      "TPLGROUP_MAIL":"",
+      "MAIL_SERVICE": "Gmail",
+      "MAILCHIMP_CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
+      "MAILCHIMP_RECRUITER_SIGN_IN_SUCCESS_LISTID": "222f48cf94",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_SUCCESS_LISTID": "a1b8d070ce",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_25%_LISTID": "bd22dce604",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_50%_LISTID": "9856839bad",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_75%_LISTID": "a82db1bff5",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_95%_LISTID": "24cd79227b",
+      "MAIL_CHIMP_SERVICE_KEY": "7ed37fe28217d97fe5785a01207a494e-us16"
+    },
+    "facebookIds":{
+      "clientId" : "1802774049959105",
+      "clientSecretId" : "5bc0ff0093f79d67fcdf02d87a219206"
+    },
+    "googlePlusIds":{
+      "clientId" : " 377995296702-0tr9nbma4lgekn5690r1f4bn3q1in5mm.apps.googleusercontent.com",
+      "clientSecretId" : "-EHuNLqtYrRuwS_ZZ48PGHJC"
+    },
+    "messaging": {
+      "authKey": "152516A0pwPFRp59198cd9",
+      "senderId": "JOBMOS",
+      "routerNumber": "4"
+    },
+    "filePathForMasterDataExcel" : "/src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "filePathForProfileImage" : "/src/server/app/framework/public/profileimage"
+
+  },
+  /*"logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
+  },*/
+  "logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {    "type": "dateFile",
+        "filename": "logs/application",    // specify the path where u want logs folder error.log
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
+  },
+  "category" :
+  {
+    "default": [
+      {
+        "name": "Concrete",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 21,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Dado / wall tiling",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 9,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Door Frames",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 19,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Doors",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 5,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "External plaster",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 10,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "External plumbing / drainage line",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 12,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Fabrication",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 242,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Fencing / Compound Walls",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 14,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Flooring",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 8,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Gypsum / POP plaster (punning)",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 86,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Internal Plaster",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 4,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Kerbing & Paver",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 71,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Kitchen otta",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 16,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Masonry",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 1,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Painting",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 80,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Plain Cement Concrete ( P.C.C. )",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 20,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "RCC band / patli",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 260,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Roofing",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 89,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Safety measures",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 251,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Skirting",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 17,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Soling",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 18,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Staircase risers",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 27,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Staircase treads",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 15,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Wall panelling",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 74,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Wash basin counters",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 269,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Waterproofing",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 3,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Window jambs",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 68,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Window Sills",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 13,
+        "categories": [
+
+        ]
+      },
+      {
+        "name": "Pointing",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 77,
+        "categories": [
+          {
+            "name": "default",
+            "rateAnalysisId": 0,
+            "amount": 0,
+            "active": true,
+            "workItems": [
+              {
+                "active": true,
+                "name": "Salai pointing for UCR masonry in CM 1: 4",
+                "quantity": {
+                  "total": 0,
+                  "quantityItems": [
+
+                  ]
+                },
+                "rateAnalysisId": 348,
+                "unit": "sqft",
+                "rate": {
+                  "rateFromRateAnalysis": 0,
+                  "total": 0,
+                  "quantity": 10,
+                  "rateItems": [
+
+                  ],
+                  "unit": "sqft"
+                },
+                "amount": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "thumbRuleRate": {
+    "slabArea": {
+      "sqft": 20,
+      "sqmt": 30
+    },
+    "saleableArea": {
+      "sqft": 40,
+      "sqmt": 60
+    }
+  },
+  "rate": {
+    "default": [
+      {
+        "item": "Cement",
+        "rateAnalysisId" : null,
+        "remarks": "internal walls",
+        "quantity": 2,
+        "unit": "bags",
+        "rate": 200
+      },
+      {
+        "item": "Sand",
+        "rateAnalysisId" : null,
+        "remarks": "internal walls",
+        "quantity": 2,
+        "unit": "cu ft",
+        "rate": 80
+      },
+      {
+        "item": "Labour for Internal Plaster",
+        "rateAnalysisId" : null,
+        "remarks": "internal walls",
+        "quantity": 100,
+        "unit": "sqft",
+        "rate": 30
+      }
+    ]
+  },
+  "SqureMeter":0.0929,
+  "budgetedCostFormulae" : {
+    "excavation" : "plinthArea * 7 * 1.15 / 35.28 * 150",
+    "dewatering" : "saleableArea * 1",
+    "backfiliing" : "plinthArea * 7 * 1 * 1.15 / 35.28 * 90",
+    "Soling" : "plinthArea * 40",  //a
+    "RCC band / patli" : "slabArea * 500", //a
+    "Masonry" : "carpetArea * 1.6 * 70",
+    "Internal Plaster" : "carpetArea * 3.5 * 20",  //a
+    "Gypsum / POP plaster (punning)" : "carpetArea * 2.5 * 18",  //a
+    "External plaster" : "carpetArea * 2.5 * 45",
+    "Waterproofing" : "carpetArea * 1.35 * 30",
+    "Dado / wall tiling" : "carpetArea * 1.35 * 110",   //a
+    "windowSills/Jambs" : "carpetArea * 0.07 * 85", //both
+    "windowsAndGlassDoors" : "250 * (carpetArea * 0.2)",
+    "electrification" : "carpetArea * 1.35 * 110",
+    "Fabrication" : "carpetArea * 1.35 * 40",   //a
+    "Pointing" : "carpetArea * 1.35 * 55",    // a
+    "Kitchen otta" : "(numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) * 15 * 1500",    //a
+    "Door Frames" : "10000 * (3 * numOfOneBHK + 4 * numOfTwoBHK + 6 * numOfThreeBHK + 8 * numOfFourBHK + 10 * numOfFiveBHK) + 1500 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)", //a door frames
+    "External plumbing / drainage line" : "5000 * (numOfOneBHK * 1 + numOfTwoBHK * 2 + numOfThreeBHK * 3 + numOfFourBHK * 4 + numOfFiveBHK * 5) + 6000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",   //plumbing
+    "lift" : "(150000 * numOfFloors * numOfLifts)",
+    "electricalLightFittings" : "((carpetArea / 400) * 500 + ((projectPeriphery / 40) * 5000 + ( numOfFloors * 3) * 700)",
+    "garbageChute" : "(60000 * (numOfFloors - numOfParkingFloors))",
+    "modularKitchenOrFurniture" : "(numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) * 125000",
+    "pestControl" : "carpetArea * 1.35 * 2",
+    "solarWater" : "carpetArea * 1.35 * 20",
+    "pipedGasSystem" : "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
+    "skyLounge" : "(slabArea / (numOfFloors + numfOfParkingFloors)) * 150",
+    "fireFightingSystem" : "( 50000 * numOfFloors)",
+    "securityAutomation" : "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 3500 * numOfBuildings + 3500 * 2 + 15000",
+    "showerInclosure" : "15000 * (1 * numOfOneBHK + 1 * numOfTwoBHK + 2 * numOfThreeBHK + 3 * numOfFourBHK + 4 * numOfFiveBHK)",
+    "falseCeiling" : "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
+    "specialElevationalFeatures" : "carpetArea * 1.35 * 25",
+    "boardsAndSignagsInsideBuilding" : "700 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 60000 + 100 * numOfFloors",
+    "Safety measures" : "carpetArea * 1.35 * 5"
+  },
+  "rateAnalysisAPI" : {
+    "buildingCostHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "buildingCategories" : "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "buildingWorkItems" : "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "buildingRate" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "buildingUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "buildingRateAnalysisNotes" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+
+    "amenitiesCostHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "amenitiesCategories" : "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "amenitiesWorkItems" : "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "amenitiesRate" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "amenitiesUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "amenitiesRateAnalysisNotes" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA"
+  }
+}
