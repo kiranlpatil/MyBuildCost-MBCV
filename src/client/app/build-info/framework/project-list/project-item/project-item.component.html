@@ -1,6 +1,9 @@
-<div class="building-image-container" (click)="navigateToSelectedProject(project._id,project.name)">
+<div class="building-image-container">
   <div class="building-image">
     <img src="assets/build-info/create-new-project/create-new-project.png" />
+    <div class="project-actions">
+      <button class="btn btn-view" (click)="navigateToSelectedProject(project._id,project.name)">View</button>
+    </div>
   </div>
 </div>
 <h4 (click)="navigateToSelectedProject(project._id,project.name)">{{project.name}}</h4>
