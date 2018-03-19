@@ -10,7 +10,8 @@ import { SessionStorage, SessionStorageService } from '../../../../../shared/ind
 @Component({
   moduleId: module.id,
   selector: 'bi-building-details',
-  templateUrl: 'building-details.component.html'
+  templateUrl: 'building-details.component.html',
+  styleUrls: ['building-details.component.css']
 })
 
 export class BuildingDetailsComponent implements OnInit {

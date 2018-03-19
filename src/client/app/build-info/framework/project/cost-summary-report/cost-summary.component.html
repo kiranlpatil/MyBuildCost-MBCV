@@ -128,10 +128,10 @@
               <tbody>
                 <tr *ngIf="(building.thumbRule && building.estimate)">
                   <td>{{ getLabel().TOTAL }}</td>
-                  <td>{{ building.thumbRule.totalBudgetedCost|number }}</td>
-                  <td><span class="estimated-cost">{{ building.thumbRule.totalRate|number }}</span></td>
-                  <td>{{ building.estimate.totalEstimatedCost|number }}</td>
-                  <td><span class="estimated-cost">{{ building.estimate.totalRate|number }}</span></td>
+                  <td>{{ building.thumbRule.totalRate|number }}</td>
+                  <td><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number }}</span></td>
+                  <td>{{ building.estimate.totalRate|number }}</td>
+                  <td><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number }}</span></td>
                 </tr>
               </tbody>
             </table>

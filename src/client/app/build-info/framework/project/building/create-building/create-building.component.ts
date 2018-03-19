@@ -65,11 +65,13 @@ export class CreateBuildingComponent {
   }
 
   onSyncBuildingWithRateAnalysisFailure(error:any) {
-  console.log(error);
+    console.log(error);
+    this.loaderService.stop();
   }
 
   onCreateBuildingFailure(error : any) {
     console.log(error);
+    this.loaderService.stop();
   }
 
   getHeadings() {

@@ -7,7 +7,8 @@ import { Label } from '../../../../shared/constants';
 @Component({
   moduleId: module.id,
   selector: 'bi-project-form',
-  templateUrl: 'project-form-component.html'
+  templateUrl: 'project-form.component.html',
+  styleUrls: ['project-form.component.css']
 })
 
 export class ProjectFormComponent {

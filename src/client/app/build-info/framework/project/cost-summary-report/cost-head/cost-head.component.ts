@@ -9,6 +9,7 @@ import * as lodsh from 'lodash';
 import { Category } from '../../../model/category';
 import { WorkItem } from '../../../model/work-item';
 import { QuantityItem } from '../../../model/quantity-item';
+import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
 
 @Component({
@@ -65,7 +66,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
-              private _router: Router, private messageService: MessageService, private commonService : CommonService) {
+              private _router: Router, private messageService: MessageService, private commonService : CommonService,
+              private loaderService: LoaderService) {
   }
 
   ngOnInit() {
@@ -124,10 +126,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.categoryDetailsTotalAmount = parseFloat(( this.categoryDetailsTotalAmount + categoryData.amount).toFixed(
         ValueConstant.NUMBER_OF_FRACTION_DIGIT));
     }
+    this.loaderService.stop();
   }
 
   onGetActiveCategoriesFalure(error: any) {
     console.log(error);
+    this.loaderService.stop();
   }
 
   ngOnChanges(changes: any) {
@@ -136,7 +140,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  getQuantity( categoryId: number, workItemId : number, workItem: WorkItem, quantityItems: any, categoryIndex: number, workItemIndex:number) {
+  getQuantity( categoryId: number, workItemId : number, workItem: WorkItem,
+               quantityItems: any, categoryIndex: number, workItemIndex:number) {
     if( this.showWorkItemTab !== Label.WORKITEM_QUANTITY_TAB || this.compareCategoryId !== categoryId ||
       this.compareWorkItemId !== workItemId) {
 
@@ -261,6 +266,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   deactivateWorkItem() {
+    this.loaderService.start();
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let costHeadId=parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
@@ -272,6 +278,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onDeActivateWorkItemSuccess(success: string) {
 
+    this.showWorkItemList = false;
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_WORKITEM;
@@ -292,6 +299,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onDeActivateWorkItemFailure(error: any) {
     console.log('InActive WorkItem error : '+JSON.stringify(error));
+    this.loaderService.stop();
   }
 
   getInActiveWorkItems(categoryId:number, workItemIndex:number) {
@@ -323,6 +331,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   onChangeActivateSelectedWorkItem(selectedWorkItem:any) {
+    this.loaderService.start();
     this.showWorkItemList=false;
     let workItemList  =  this.workItemListArray;
     let workItemObject = workItemList.filter(
@@ -361,6 +370,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onActivateWorkItemFailure(error:any) {
     console.log('Active WorkItem error : '+error);
+    this.loaderService.stop();
   }
 
   setCategoryIdForDeactivate(categoryId : any) {

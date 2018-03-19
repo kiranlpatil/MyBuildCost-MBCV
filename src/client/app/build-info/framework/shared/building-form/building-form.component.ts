@@ -7,7 +7,8 @@ import { Building } from '../../model/building';
 @Component({
   moduleId: module.id,
   selector: 'bi-building-form',
-  templateUrl: 'building-form.component.html'
+  templateUrl: 'building-form.component.html',
+  styleUrls: ['building-form.component.css']
 })
 
 export class BuildingFormComponent {

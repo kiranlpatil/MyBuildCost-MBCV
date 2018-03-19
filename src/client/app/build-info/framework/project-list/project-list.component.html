@@ -2,16 +2,16 @@
   <div class="container">
     <div class="col-sm-12 no-padding">
       <ul>
-        <li *ngFor="let project of projects">
-          <bi-project-item [project]="project"></bi-project-item>
-        </li>
-        <li (click)="createProject()">
+        <li>
           <div class="building-image-container">
-            <div class="building-image">
-              <span class="glyphicon glyphicon-plus"></span>
+            <div class="building-image" (click)="createProject()">
+              <img src="assets/build-info/create-new-project/plus-sign.png" />
             </div>
           </div>
-          <h4>{{getButton().CREATE_NEW_PROJECT}}</h4>
+          <h4 (click)="createProject()">{{getButton().CREATE_NEW_PROJECT}}</h4>
+        </li>
+        <li *ngFor="let project of projects">
+          <bi-project-item [project]="project"></bi-project-item>
         </li>
       </ul>
     </div>

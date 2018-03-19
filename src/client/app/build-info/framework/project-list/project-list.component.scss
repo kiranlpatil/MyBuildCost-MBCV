@@ -13,7 +13,6 @@
     list-style: none;
 
     li {
-      cursor: pointer;
       display: inline-block;
       margin-bottom: 30px;
       position: relative;
@@ -24,12 +23,14 @@
 
     h4 {
       color: $heading;
-      font-size: 21px;
+      cursor: pointer;
+      font-size: 18px;
     }
   }
 }
 
 .building-image-container {
+  cursor: pointer;
   padding: 0;
   position: relative;
   text-align: center;
@@ -50,15 +51,6 @@
   .building-image > img {
     border-radius: 0;
     height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .building-image > span {
-    color: $gray;
-    font-size: 30px;
     position: absolute;
     top: 50%;
     left: 50%;
