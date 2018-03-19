@@ -1,0 +1,78 @@
+{
+  "application": {
+    "database": {
+      "host":"127.0.0.1",
+      "name": "Appication-production",
+      "username": "productionadmin",
+      "password": "productionadminjobmosis123",
+      "mongoExport": "/usr/bin/mongoexport"
+    },
+    "exportFileNames": {
+      "candidateProfilesCSV": "candidate-profiles.csv",
+      "candidateCapabilitiesCSV": "candidate-capabilities.csv",
+      "candidateAccountDetailsCSV": "candidate-account-details.csv",
+      "companyDetailsCSV": "company-details.csv",
+      "jobDetailsCSV": "job-details.csv",
+      "companyAccountDetailsCSV": "company-account-details.csv",
+      "usageTrackingCSV": "usage-tracking.csv",
+      "masterKeySkillsCSV": "master-key-skills.csv",
+      "recruiterCandidatesCSV": "my-candidates-detail.csv"
+    },
+    "exportFilePathServer": "/server/prod/public/exported-files/",
+    "downloadFilePathClient": "/public/exported-files/",
+    "publicPath":"/server/prod/app/framework/public/",
+    "profilePath":"/server/prod/public/profileImage",
+    "profilePathForClient":"/public/profileImage/",
+    "limitForQuery" : 10,
+    "mail": {
+      "host":"http://52.41.194.37/",
+      "MAIL_SENDER": "notifications@jobmosis.com",
+      "MAIL_SENDER_PASSWORD": "notify123+",
+      "ADMIN_MAIL": "support@jobmosis.com",
+      "TPLGROUP_MAIL": "Jobmosis_TPL@techprimelab.com",
+      "MAIL_SERVICE": "Zoho",
+      "MAILCHIMP_CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_SUCCESS_LISTID": "a1b8d070ce",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_25%_LISTID": "bd22dce604",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_50%_LISTID": "9856839bad",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_75%_LISTID": "a82db1bff5",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_95%_LISTID": "24cd79227b",
+
+      "MAIL_CHIMP_SERVICE_KEY": "7ed37fe28217d97fe5785a01207a494e-us16"
+
+    },
+    "facebookIds":{
+      "clientId" : "1000308350087499",
+      "clientSecretId" : "fdd2b77c78273fc8f7dd6b2dd2dcdac9"
+    },
+    "googlePlusIds":{
+      "clientId" : "391892261476-q9crj1efbg4fvgovklkffrimtdva9baf.apps.googleusercontent.com",
+      "clientSecretId" : "R1u0P7kDcUy2zeWQJVuN4j03"
+    },
+    "messaging": {
+      "authKey": "152516A0pwPFRp59198cd9",
+      "senderId": "JOBMOS",
+      "routerNumber": "4"
+    },
+    "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
+
+  },
+  "logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
+  }
+}
