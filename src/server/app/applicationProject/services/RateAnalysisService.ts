@@ -7,13 +7,13 @@ import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 let request = require('request');
 let config = require('config');
 var log4js = require('log4js');
-var CCPromise = require('promise');
 var logger=log4js.getLogger('Rate Analysis Service');
 import alasql = require('alasql');
 import Rate = require('../dataaccess/model/project/building/Rate');
 import CostHead = require('../dataaccess/model/project/building/CostHead');
 import Category = require('../dataaccess/model/project/building/Category');
 import Constants = require('../shared/constants');
+let CCPromise = require('promise/lib/es6-extensions');
 
 class RateAnalysisService {
   APP_NAME: string;
@@ -191,7 +191,7 @@ class RateAnalysisService {
         rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
       logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
       callback(null, buildingCostHeads);
-    }).catch((e:any) => {
+    }).catch(function(e:any) {
       logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
     });
   }
@@ -209,6 +209,8 @@ class RateAnalysisService {
             resolve(data);
           }
         });
+      }).catch(function(e:any) {
+        logger.error('Promise failed for individual ! url:'+url+ ':\n error :' +JSON.stringify(e));
       });
    }
 
