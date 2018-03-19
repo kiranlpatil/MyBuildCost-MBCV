@@ -14,6 +14,7 @@ import { CostHead } from '../../model/costhead';
 import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
+import { LoaderService } from '../../../../shared/loader/loaders.service';
 
 
 @Component({
@@ -70,7 +71,7 @@ export class CostSummaryComponent implements OnInit {
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
-              private buildingService: BuildingService ) {
+              private buildingService: BuildingService, private loaderService : LoaderService) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -170,6 +171,7 @@ export class CostSummaryComponent implements OnInit {
   }
 
   inActiveCostHead() {
+    this.loaderService.start();
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this.costSummaryService.inActiveCostHead( projectId, this.buildingId, this.costHeadId).subscribe(
         costHeadDetail => this.onInActiveCostHeadSuccess(costHeadDetail),
@@ -178,7 +180,9 @@ export class CostSummaryComponent implements OnInit {
     }
 
   onInActiveCostHeadSuccess(costHeadDetails: any) {
+    this.loaderService.stop();
      if ( costHeadDetails !== null) {
+      this.showCostHeadList = false;
       var message = new Message();
       message.isError = false;
       message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD;
@@ -189,10 +193,12 @@ export class CostSummaryComponent implements OnInit {
 
   onInActiveCostHeadFailure(error: any) {
     console.log(error);
+    this.loaderService.stop();
   }
 
   onChangeActiveSelectedCostHead(selectedInActiveCostHeadId:number) {
     this.showCostHeadList=false;
+    this.loaderService.start();
     this.costSummaryService.activeCostHead( this.projectId, this.buildingId, selectedInActiveCostHeadId).subscribe(
       inActiveCostHeads => this.onActiveCostHeadSuccess(inActiveCostHeads),
       error => this.onActiveCostHeadFailure(error)
@@ -200,6 +206,7 @@ export class CostSummaryComponent implements OnInit {
   }
 
   onActiveCostHeadSuccess(inActiveCostHeads : any) {
+    this.loaderService.stop();
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_COSTHEAD;
@@ -209,6 +216,7 @@ export class CostSummaryComponent implements OnInit {
 
   onActiveCostHeadFailure(error : any) {
     console.log('onActiveCostHeadFailure()'+error);
+    this.loaderService.stop();
   }
 
   changeRateOfThumbRule(buildingId: string, costHead: string, amount: number, buildingArea : number) {
