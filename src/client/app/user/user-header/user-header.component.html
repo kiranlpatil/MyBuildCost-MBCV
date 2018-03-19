@@ -4,8 +4,8 @@
   </div>
   <nav *ngIf="!(MainHeaderMenuHideShow == 'hiringManger')">
     <ul>
-      <li *ngIf="!(MainHeaderMenuHideShow == 'signin')"><a (click)="onLogin()">Sign In</a></li>
-      <li *ngIf="!(MainHeaderMenuHideShow == 'applicant')"><a (click)="onSignUp()">Sign Up</a></li>
+     <!-- <li *ngIf="!(MainHeaderMenuHideShow == 'signin')"><a (click)="onLogin()">Sign In</a></li>-->
+      <li *ngIf="!(MainHeaderMenuHideShow == 'applicant')">Don't Have account? <a (click)="onSignUp()">Signup Here</a></li>
     </ul>
   </nav>
   <span class="glyphicon glyphicon-log-out" (click)="onHomePage()" *ngIf="MainHeaderMenuHideShow === 'hiringManger'"></span>

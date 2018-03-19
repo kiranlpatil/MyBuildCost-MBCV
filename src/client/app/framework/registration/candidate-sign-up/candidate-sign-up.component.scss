@@ -47,4 +47,14 @@
   }
 }
 
+.container {
+  width: 1170px;
+}
+
+@media screen and (max-width: 1170px) {
+  .container {
+    width: 100%;
+  }
+}
+
 

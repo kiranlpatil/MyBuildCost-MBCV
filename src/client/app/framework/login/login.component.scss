@@ -1,4 +1,8 @@
 @import '../../framework/landing-page/landing-page.component';
+
+.container {
+  width: 1170px;
+}
 .page-background {
   .content-background {
     background-repeat: no-repeat;
@@ -12,5 +16,11 @@
     .btn-primary {
       margin: 10px 0;
     }
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .container {
+    width: 100%;
   }
 }

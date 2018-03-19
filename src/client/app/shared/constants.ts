@@ -109,7 +109,7 @@ export class Messages {
     'immediately.';
   public static MSG_CONTACT_US = 'Please provide the following details and we will get back to you soon.';
   public static MSG_YEAR_NO_MATCH_FOUND = 'The year doesn\'t look right. Be sure to use your actual year of birth.';
-  public static MSG_FORGOT_PASSWORD = 'Enter your account e-mail address and we\'ll help you create a new password.';
+  public static MSG_FORGOT_PASSWORD = 'Enter your e-mail address below and we\'ll get you back on track.';
   public static MSG_CONFIRM_PASSWORD = 'Passwords are not matching.';
   public static MSG_CHANGE_PASSWORD_SUCCESS ='Password changed successfully. ' +
     'You can Sign In again with new password by clicking on "YES" button, Please click on "No" button to continue the session.';
