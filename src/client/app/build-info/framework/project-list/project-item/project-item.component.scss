@@ -40,6 +40,12 @@
       top: 50%;
       transform: translate(-50%, -50%);
       width: 95px;
+
+      &:active,
+      &:focus,
+      &:hover {
+        @extend .btn-view;
+      }
     }
 
     &:hover {

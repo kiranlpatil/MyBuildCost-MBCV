@@ -273,6 +273,7 @@ select,
 
   textarea {
     height: 70px !important;
+    resize: none;
   }
 }
 
@@ -497,6 +498,20 @@ control-messages {
       margin-top: 57px;
       padding: 0;
       text-align: left;
+    }
+  }
+}
+
+.form-details {
+  control-messages {
+    div {
+      margin: 59px 0 6px;
+    }
+  }
+
+  .project-address-field > control-messages {
+    div {
+      margin: 89px 0 6px;
     }
   }
 }

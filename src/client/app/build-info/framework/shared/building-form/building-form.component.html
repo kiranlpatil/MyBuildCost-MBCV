@@ -1,4 +1,4 @@
-<form [formGroup]="buildingForm" (submit)="submitForm()">
+<form class="form-details" [formGroup]="buildingForm" (submit)="submitForm()">
 
   <div  class="form-group">
     <control-messages [control]="buildingForm.controls.name" [submitStatus] = "submitStatus"></control-messages>
