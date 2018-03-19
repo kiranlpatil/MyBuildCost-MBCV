@@ -326,8 +326,9 @@ select,
   &:focus,
   &:active,
   &:hover {
-    background: $theme-color-hover;
-    border: $theme-color-hover 1px solid;
+    background: $theme-color-hover !important;
+    border: $theme-color-hover 1px solid !important;
+    color: $heading important;
   }
 }
 
@@ -502,7 +503,7 @@ control-messages {
   }
 }
 
-.form-details {
+.details-page {
   control-messages {
     div {
       margin: 59px 0 6px;
@@ -512,6 +513,14 @@ control-messages {
   .project-address-field > control-messages {
     div {
       margin: 89px 0 6px;
+    }
+  }
+}
+
+.project-address-field {
+  control-messages {
+    div {
+      margin: 95px 0 6px;
     }
   }
 }

@@ -14,7 +14,7 @@
 
   <div  class="form-group">
     <control-messages [control]="projectForm.controls.plotArea" [submitStatus] = "submitStatus"></control-messages>
-    <label>{{getLabels().PLOT_AREA}}<small>{{getLabels().AREA_UNIT_IN_SQFT}}</small></label>
+    <label>{{getLabels().PLOT_AREA}}<small> {{getLabels().AREA_UNIT_IN_SQFT}}</small></label>
     <input type="number" [(ngModel)]="projectModel.plotArea" formControlName="plotArea" id="plotArea" class="form-control" placeholder="Enter plot area" required/>
   </div>
 
