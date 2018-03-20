@@ -291,6 +291,7 @@ export class API {
   public static SLAB_AREA='slabArea';
   public static SALEABLE_AREA='saleableArea';
   public static CARPET_AREA='carpetArea';
+  public static BUDGETED_COST ='budgetedCost';
 
 }
 

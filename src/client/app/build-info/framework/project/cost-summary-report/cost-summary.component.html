@@ -73,7 +73,7 @@
                           <input type="number"
                                  [(ngModel)]="thumbRuleItem.amount"
                                  id="thumbRuleItem.amount"
-                                 (blur)="changeRateOfThumbRule(building._id, thumbRuleItem.name, thumbRuleItem.amount , building.area)"
+                                 (blur)="changeBudgetedCostAmountOfBuildingCostHead(building._id, thumbRuleItem.name, thumbRuleItem.amount)"
                                  class="form-control clear"/>
                         </div>
                       </td>
@@ -142,7 +142,8 @@
       <bi-common-amenities
         [amenitiesReport]="amenitiesReport"
         [costingByUnit]="defaultCostingByUnit"
-        [costingByArea]="defaultCostingByArea">
+        [costingByArea]="defaultCostingByArea"
+        (getReportDetails)="getCostSummaryReport($event)">
       </bi-common-amenities>
 
 

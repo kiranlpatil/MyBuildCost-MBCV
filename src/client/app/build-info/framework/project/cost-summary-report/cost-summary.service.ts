@@ -24,15 +24,22 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  updateRateOfThumbRule(projectId : string, buildingId : string, costHeadName : string,
-                        costIn : string, costPer : string, buildingArea : number, amount : number) {
+  changeBudgetedCostAmountOfBuildingCostHead(projectId : string, buildingId : string, costHeadName : string, amount : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD ;
     var body = {
       budgetedCostAmount : amount,
-      costIn : costIn,
-      costPer : costPer,
-      costHead : costHeadName,
-      buildingArea : buildingArea
+      costHead : costHeadName
+    };
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
+  changeBudgetedCostAmountOfProjectCostHead(projectId : string, costHeadName : string, amount : number) {
+
+    var url = API.PROJECT + '/' + projectId + '/' + API.COSTHEAD + '/' + API.BUDGETED_COST;
+    var body = {
+      budgetedCostAmount : amount,
+      costHead : costHeadName
     };
 
     return this.httpDelegateService.putAPI(url, body);

@@ -530,6 +530,25 @@ class ProjectController {
     }
   }
 
+  updateBudgetedCostForProjectCostHead(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let projectService = new ProjectService();
+      let user = req.user;
+      let projectId =  req.params.projectId;
+      let costHeadBudgetedAmount =  req.body;
+
+      projectService.updateBudgetedCostForProjectCostHead( projectId, costHeadBudgetedAmount, user,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   addCostHeadBuilding(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, addCostHeadBuilding has been hit');

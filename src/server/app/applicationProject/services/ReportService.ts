@@ -1,19 +1,15 @@
 import ProjectRepository = require('../dataaccess/repository/ProjectRepository');
 import BuildingRepository = require('../dataaccess/repository/BuildingRepository');
-import Messages = require('../shared/messages');
 import UserService = require('./../../framework/services/UserService');
 import ProjectAsset = require('../../framework/shared/projectasset');
 import User = require('../../framework/dataaccess/mongoose/user');
-import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
 import BuildingReport = require('../dataaccess/model/project/reports/BuildingReport');
 import ThumbRuleReport = require('../dataaccess/model/project/reports/ThumbRuleReport');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
-import CostControllException = require('../exception/CostControllException');
 import CostHead = require('../dataaccess/mongoose/CostHead');
 import EstimateReport = require('../dataaccess/model/project/reports/EstimateReport');
 import ProjectReport = require('../dataaccess/model/project/reports/ProjectReport');
-import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 import ThumbRule = require('../dataaccess/model/project/building/ThumbRule');
 import Estimate = require('../dataaccess/model/project/building/Estimate');
 import RateAnalysisService = require('./RateAnalysisService');
@@ -40,7 +36,6 @@ class ReportService {
     this.authInterceptor = new AuthInterceptor();
     this.userService = new UserService();
     this.rateAnalysisService = new RateAnalysisService();
-    //this.categoryDetails = new categoryDetails();
   }
 
   getReport( projectId : any, reportType : string, rateUnit : string, areaType : string,  user: User,
@@ -79,148 +74,99 @@ class ReportService {
 
   generateReportByCostHeads( reportType : string, buildings:  Array<Building> , areaType: string, rateUnit: string,
                              report: Array<BuildingReport>) {
-    for (let index = 0; index < buildings.length; index++) {
+    for (let building of buildings) {
+      let buildingAreaType: string;
+      let reportUnitType: string;
+
+      if(areaType === 'slabArea') {
+        buildingAreaType = 'totalSlabArea';
+      } else if(areaType === 'saleableArea') {
+        buildingAreaType = 'totalSaleableAreaOfUnit';
+      } else if(areaType === 'carpetArea') {
+        buildingAreaType = 'totalCarpetAreaOfUnit';
+      }
+
       let buildingReport = new BuildingReport;
-      let thumbRuleReport: ThumbRule = new ThumbRule();
-      let estimatedReport: Estimate = new Estimate();
-      buildingReport.name = buildings[index].name;
-      buildingReport._id = buildings[index]._id;
-      if (areaType === Constants.SLAB_AREA) {
-        if (rateUnit === Constants.SQUREMETER_UNIT) {
-          buildingReport.area = parseFloat((buildings[index].totalSlabArea * config.get(Constants.SQUARE_METER)).toFixed(
-            Constants.NUMBER_OF_FRACTION_DIGIT));
-        } else {
-          buildingReport.area = parseFloat((buildings[index].totalSlabArea).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-        }
-      } else if (areaType === Constants.CARPET_AREA) {
-        if (rateUnit === Constants.SQUREMETER_UNIT) {
-          buildingReport.area = parseFloat((buildings[index].totalCarpetAreaOfUnit * config.get(Constants.SQUARE_METER)).toFixed(
-            Constants.NUMBER_OF_FRACTION_DIGIT));
-        } else {
-          buildingReport.area = parseFloat((buildings[index].totalCarpetAreaOfUnit).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-        }
-      } else {
-        if (rateUnit === Constants.SQUREMETER_UNIT) {
-          buildingReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit * config.get(Constants.SQUARE_METER)
-          ).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-        } else {
-          buildingReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-        }
+      buildingReport.name = building.name;
+      buildingReport._id = building._id;
+      buildingReport.area = building[buildingAreaType];
+
+      let thumbRule  = new ThumbRule();
+      let estimate  = new Estimate();
+      let thumbRuleReports = new Array<ThumbRuleReport>();
+      let estimatedReports = new Array<EstimateReport>();
+
+
+      this.getThumbRuleAndEstimatedReport(building, buildingReport, thumbRuleReports, estimatedReports, rateUnit);
+
+      let totalRates = alasql('SELECT SUM(amount) AS totalAmount, SUM(rate) AS totalRate FROM ?',[thumbRuleReports]);
+      thumbRule.totalRate = totalRates[0].totalRate;
+      if(rateUnit === Constants.SQUREMETER_UNIT) {
+        thumbRule.totalRate =  parseFloat((thumbRule.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
       }
-      let costHeadArray: any = buildings[index].costHeads;
-      for (let costHeadIndex = 0; costHeadIndex < costHeadArray.length; costHeadIndex++) {
+      thumbRule.totalBudgetedCost = totalRates[0].totalAmount;
+      thumbRule.thumbRuleReports = thumbRuleReports;
 
-        if (costHeadArray[costHeadIndex].active === true) {
-
-          let thumbRule: ThumbRuleReport = new ThumbRuleReport();
-          let estimateReport: EstimateReport = new EstimateReport();
-          thumbRule.name = costHeadArray[costHeadIndex].name;
-          estimateReport.name = costHeadArray[costHeadIndex].name;
-          thumbRule.rateAnalysisId = costHeadArray[costHeadIndex].rateAnalysisId;
-          estimateReport.rateAnalysisId = costHeadArray[costHeadIndex].rateAnalysisId;
-          if (areaType === Constants.SLAB_AREA) {
-            //Slab Area
-            thumbRuleReport.area = buildings[index].totalSlabArea;
-            estimatedReport.area = buildings[index].totalSlabArea;
-            if (rateUnit === Constants.SQUREFEET_UNIT) {
-              thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqft).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-            } else {
-              thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqmt).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-              thumbRuleReport.area = parseFloat((buildings[index].totalSlabArea * config.get(Constants.SQUARE_METER)).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-              estimatedReport.area = parseFloat((buildings[index].totalSlabArea * config.get(Constants.SQUARE_METER)).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-            }
-          } else if (areaType === Constants.CARPET_AREA) {
-            //Carpet Area
-            thumbRuleReport.area = buildings[index].totalCarpetAreaOfUnit;
-            estimatedReport.area = buildings[index].totalCarpetAreaOfUnit;
-            if (rateUnit === Constants.SQUREFEET_UNIT) {
-              thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.carpetArea.sqft).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-            } else {
-              thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.carpetArea.sqmt).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-              thumbRuleReport.area = parseFloat((buildings[index].totalCarpetAreaOfUnit * config.get(Constants.SQUARE_METER)
-              ).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-              estimatedReport.area = parseFloat((buildings[index].totalCarpetAreaOfUnit * config.get(Constants.SQUARE_METER)
-              ).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-            }
-          } else {
-            //Saleable Area
-            thumbRuleReport.area = buildings[index].totalSaleableAreaOfUnit;
-            estimatedReport.area = buildings[index].totalSaleableAreaOfUnit;
-            if (rateUnit === Constants.SQUREFEET_UNIT) {
-              thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqft).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-            } else {
-              thumbRule.rate = parseFloat((costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqmt).toFixed(
-                Constants.NUMBER_OF_FRACTION_DIGIT));
-              thumbRuleReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit * config.get(
-                Constants.SQUARE_METER)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-              estimatedReport.area = parseFloat((buildings[index].totalSaleableAreaOfUnit * config.get(
-                Constants.SQUARE_METER)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-            }
-          }
-          let category: Array<Category> = costHeadArray[costHeadIndex].categories;
-          if (category.length !== 0) {
-
-            for (let categoryKey in category) {
-              if (category[categoryKey].active) {
-                let workItem = category[categoryKey].workItems;
-                if (workItem.length !== 0) {
-                  for (let key in workItem) {
-                    if (workItem[key].active) {
-                      if (workItem[key].quantity.total !== null && workItem[key].rate.total !== null
-                        && workItem[key].quantity.total !== 0 && workItem[key].rate.total !== 0) {
-                        estimateReport.total = parseFloat((workItem[key].quantity.total * workItem[key].rate.total
-                          + estimateReport.total).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-                        estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(
-                          Constants.NUMBER_OF_FRACTION_DIGIT));
-                      } else {
-                        /*estimateReport.total = 0.0;
-                            estimateReport.rate = 0.0;
-                            break;*/
-                      }
-                    }
-                  }
-                } else {
-                  /*estimateReport.total = 0.0;
-                      estimateReport.rate = 0.0;
-                      break;*/
-                }
-              }
-            }
-
-          }
-          estimatedReport.totalEstimatedCost = parseFloat((estimateReport.total + estimatedReport.totalEstimatedCost).toFixed(
-            Constants.NUMBER_OF_FRACTION_DIGIT));
-          estimatedReport.totalRate = parseFloat((estimatedReport.totalRate + estimateReport.rate).toFixed(
-            Constants.NUMBER_OF_FRACTION_DIGIT));
-          estimatedReport.estimatedCosts.push(estimateReport);
-          if (costHeadArray[costHeadIndex].budgetedCostAmount === 0 ||
-            costHeadArray[costHeadIndex].budgetedCostAmount === undefined) {
-            thumbRule.amount = parseFloat((thumbRuleReport.area * thumbRule.rate).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-          } else {
-            thumbRule.amount = parseFloat((costHeadArray[costHeadIndex].budgetedCostAmount).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-          }
-          thumbRule.costHeadActive = costHeadArray[costHeadIndex].active;
-          thumbRuleReport.thumbRuleReports.push(thumbRule);
-          thumbRuleReport.totalRate = parseFloat((thumbRuleReport.totalRate + thumbRule.rate).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
-          thumbRuleReport.totalBudgetedCost = parseFloat((thumbRuleReport.totalBudgetedCost + thumbRule.amount).toFixed(
-            Constants.NUMBER_OF_FRACTION_DIGIT));
-          buildingReport.estimate = estimatedReport;
-          buildingReport.thumbRule = thumbRuleReport;
-        }
+      let totalEstimatedRates = alasql('SELECT SUM(total) AS totalAmount, SUM(rate) AS totalRate FROM ?',[estimatedReports]);
+      estimate.totalRate = totalEstimatedRates[0].totalRate;
+      if(rateUnit === Constants.SQUREMETER_UNIT) {
+        estimate.totalRate =  parseFloat((estimate.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
       }
+      estimate.totalEstimatedCost = totalEstimatedRates[0].totalAmount;
+      estimate.estimatedCosts = estimatedReports;
+
+      buildingReport.thumbRule = thumbRule;
+      buildingReport.estimate = estimate;
       report.push(buildingReport);
     }
   }
 
 
-generateReportForProjectCostHeads( reportType : string, projectCostHeads:  Array<CostHead>, totalArea: number,
+  getThumbRuleAndEstimatedReport(building :Building, buildingReport: BuildingReport,
+                                 thumbRuleReports: ThumbRuleReport[], estimatedReports: EstimateReport[], rateUnit:string) {
+
+    for (let costHead of building.costHeads) {
+
+      if(costHead.active) {
+        //ThumbRule Report
+        let thumbRuleReport = new ThumbRuleReport();
+        thumbRuleReport.name = costHead.name;
+        thumbRuleReport.rateAnalysisId = costHead.rateAnalysisId;
+        thumbRuleReport.amount = costHead.budgetedCostAmount;
+        thumbRuleReport.costHeadActive = costHead.active;
+        thumbRuleReport.rate = parseFloat((costHead.budgetedCostAmount / buildingReport.area).toFixed(2));
+        if(rateUnit === Constants.SQUREMETER_UNIT) {
+          thumbRuleReport.rate = parseFloat((thumbRuleReport.rate * config.get(Constants.SQUARE_METER)).toFixed(2));
+        }
+        thumbRuleReports.push(thumbRuleReport);
+
+        //Estimated cost Report
+        let estimateReport = new EstimateReport();
+        estimateReport.name = costHead.name;
+        estimateReport.rateAnalysisId = costHead.rateAnalysisId;
+
+        let costHeadCategories: Array<Category> = costHead.categories;
+        for (let category of costHeadCategories) {
+          let workItemList = category.workItems;
+          if (workItemList.length !== 0) {
+            for (let workItem of workItemList) {
+              if (workItem.quantity.total !== null && workItem.rate.total !== null
+                && workItem.quantity.total !== 0 && workItem.rate.total !== 0) {
+                estimateReport.total = parseFloat((workItem.quantity.total * workItem.rate.total + estimateReport.total).toFixed(2));
+                estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
+              }
+            }
+          }
+        }
+        if(rateUnit === Constants.SQUREMETER_UNIT) {
+          estimateReport.rate = parseFloat((estimateReport.rate * config.get(Constants.SQUARE_METER)).toFixed(2));
+        }
+        estimatedReports.push(estimateReport);
+      }
+      }
+  }
+
+  generateReportForProjectCostHeads( reportType : string, projectCostHeads:  Array<CostHead>, totalArea: number,
                                    areaType: string, rateUnit: string, report: Array<BuildingReport>) {
 
       let projectCostHeadArray: Array<CostHead> = projectCostHeads;
@@ -250,10 +196,6 @@ generateReportForProjectCostHeads( reportType : string, projectCostHeads:  Array
                       estimateReport.total = parseFloat((workItemArray[workItemIndex].quantity.total *
                         workItemArray[workItemIndex].rate.total + estimateReport.total).toFixed(2));
                       estimateReport.rate = parseFloat((estimateReport.total / totalArea).toFixed(2));
-                    } else {
-                      /*  estimateReport.total = 0.0;
-                        estimateReport.rate = 0.0;
-                        break;*/
                     }
                   }
                 }
