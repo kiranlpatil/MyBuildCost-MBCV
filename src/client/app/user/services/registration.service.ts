@@ -10,7 +10,7 @@ import { MessageService } from '../../shared/services/message.service';
 export class RegistrationService {
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
-constructor(private _router: Router, private themeChangeService: ThemeChangeService, private messageService: MessageService){}
+constructor(private _router: Router, private themeChangeService: ThemeChangeService, private messageService: MessageService){ }
 
   onGetUserDataSuccess(res: any) {
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
@@ -31,6 +31,7 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
 
   successRedirect(res: any) {
     SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
+    SessionStorageService.setSessionValue(SessionStorage.IS_USER_SIGN_IN, 0);
     SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
       this._router.navigate([NavigationRoutes.APP_CREATE_NEW_PROJECT]);
   }

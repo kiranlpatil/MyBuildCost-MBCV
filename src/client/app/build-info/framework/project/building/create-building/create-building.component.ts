@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Messages, NavigationRoutes, ImagePath, Headings, Button } from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message,
@@ -14,15 +14,19 @@ import { LoaderService } from '../../../../../shared/loader/loaders.service';
   styleUrls: ['create-building.component.css'],
 })
 
-export class CreateBuildingComponent {
+export class CreateBuildingComponent  implements  OnInit {
 
   BODY_BACKGROUND_TRANSPARENT: string;
+  public isUserSignIn:number;
 
   constructor(private buildingService: BuildingService, private loaderService: LoaderService,
               private _router: Router, private messageService: MessageService) {
     this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
   }
-
+  ngOnInit() {
+    this.isUserSignIn = parseFloat(SessionStorageService.getSessionValue(SessionStorage.IS_USER_SIGN_IN));
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'createBuilding');
+  }
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this._router.navigate([NavigationRoutes.APP_PROJECT,projectId,NavigationRoutes.APP_COST_SUMMARY]);

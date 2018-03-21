@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationRoutes, ImagePath, Headings, Label, Button } from '../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../shared/index';
@@ -12,14 +12,19 @@ import { Project } from './../model/project';
   styleUrls: ['create-project.component.css']
 })
 
-export class CreateProjectComponent {
+export class CreateProjectComponent implements  OnInit {
 
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
+  public isUserSignIn: number;
   BODY_BACKGROUND_TRANSPARENT: string;
 
   constructor(private _router: Router, private projectService : ProjectService, private messageService : MessageService) {
     this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
+  }
+  ngOnInit() {
+    this.isUserSignIn = parseFloat(SessionStorageService.getSessionValue(SessionStorage.IS_USER_SIGN_IN));
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'createProject');
   }
 
   onSubmit(projectModel : Project) {
@@ -56,6 +61,7 @@ export class CreateProjectComponent {
   }
 
   goBack() {
+    sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 

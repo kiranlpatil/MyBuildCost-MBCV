@@ -16,13 +16,15 @@ export class ProjectListHeaderComponent implements OnInit {
 
   projects : Array<Project>;
   selectedProjectName : string;
+  currentView : string;
 
   constructor(private projectService: ProjectService, private _router: Router) {
   }
 
   ngOnInit() {
+    this.currentView = SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
     if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) === undefined ||
-          SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) === null) {
+      SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) === null) {
       this.selectedProjectName='My Projects';
     } else {
       this.selectedProjectName=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);

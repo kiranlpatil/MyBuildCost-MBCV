@@ -169,6 +169,7 @@ export class Messages {
   public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR: string = 'There is error in operation';
   public static MSG_SUCCESS_ADD_CATEGORY: string = 'Category added successfully.';
   public static MSG_SUCCESS_DELETE_CATEGORY: string = 'Category deleted successfully.';
+  public static MSG_SUCCESS_DELETE_QUANTITY_ITEM: string = 'Quantity item deleted successfully.';
   public static MSG_ALREADY_ADDED_ALL_CATEGORIES: string = 'Already added all Categories.';
   public static MSG_SUCCESS_ADD_WORKITEM: string = 'Workitem added successfully.';
   public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
@@ -213,6 +214,8 @@ export class SessionStorage {
   public static IS_SOCIAL_LOGIN = 'is_social_login';
   public static PROFILE_PICTURE = 'profile_picture';
   public static IS_LOGGED_IN = 'is_user_logged_in';
+  public static IS_USER_SIGN_IN = 'is_user_register';
+  public static CURRENT_VIEW = 'current_view';
   public static USER_ID = 'user_id';
   public static MOBILE_NUMBER = 'mobile_number';
   public static VERIFIED_MOBILE_NUMBER = 'verified_mobile_number';
@@ -491,6 +494,8 @@ export class Menus {
   public static EDIT = 'Edit';
   public static DELETE = 'Delete';
   public static ADD_BUILDING = 'Add Building';
+  public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
+  public static CREATE_NEW_PROJECT: string = 'Create New Project';
 }
 
 export class ValueConstant {

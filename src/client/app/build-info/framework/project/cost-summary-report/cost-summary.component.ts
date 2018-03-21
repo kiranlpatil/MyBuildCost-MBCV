@@ -92,6 +92,7 @@ export class CostSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'costSummary');
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
       if(this.projectId) {
