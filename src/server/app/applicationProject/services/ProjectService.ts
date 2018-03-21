@@ -17,14 +17,14 @@ import Category = require('../dataaccess/model/project/building/Category');
 import constant = require('../shared/constants');
 let config = require('config');
 let log4js = require('log4js');
+import * as mongoose from 'mongoose';
+let ObjectId = mongoose.Types.ObjectId;
 import alasql = require('alasql');
 import BudgetCostRates = require('../dataaccess/model/project/reports/BudgetCostRates');
 import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRate');
 import Constants = require('../../applicationProject/shared/constants');
-import * as mongoose from 'mongoose';
 import QuantityItem = require('../dataaccess/model/project/building/QuantityItem');
 let CCPromise = require('promise/lib/es6-extensions');
-let ObjectId = mongoose.Types.ObjectId;
 let logger=log4js.getLogger('Project service');
 
 class ProjectService {
@@ -920,12 +920,23 @@ class ProjectService {
   getWorkitemList(projectId:string, buildingId:string, costHeadId:number, categoryId:number, user:User,
                   callback:(error: any, result: any)=> void) {
     logger.info('Project service, getWorkitemList has been hit');
-    let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
-    rateAnalysisServices.getWorkitemList(costHeadId, categoryId, (error, workitemList)=> {
-      if(error) {
+
+    let query = [
+      { $match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId }},
+      { $unwind: '$costHeads'},
+      { $project : {'costHeads':1}},
+      { $unwind: '$costHeads.categories'},
+      { $match: {'costHeads.categories.rateAnalysisId':categoryId}},
+      { $project : {'costHeads.categories.workItems':1}}
+    ];
+
+    this.buildingRepository.aggregate(query, (error, result) => {
+      logger.info('Project service, Get workitems By Cost Head & category Id has been hit');
+      if (error) {
         callback(error, null);
-      }else {
-        callback(null, {data: workitemList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      } else {
+        let workItemsOfCategory = result[0].costHeads.categories.workItems;
+        callback(null, {data: workItemsOfCategory, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

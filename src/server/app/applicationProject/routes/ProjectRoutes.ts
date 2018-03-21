@@ -158,7 +158,7 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
       controller.getInActiveWorkItemsOfBuildingCostHeads,  this._responseInterceptor.exit);
 
     //Provide workitemlist for particular category-----delete API
-    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitemlist',
+    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/all',
     this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.getWorkitemList,  this._responseInterceptor.exit);
     //Add worktitem to category-----delete API
     router.post('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem',
