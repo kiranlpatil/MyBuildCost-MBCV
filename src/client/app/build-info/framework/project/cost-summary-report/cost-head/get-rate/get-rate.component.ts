@@ -46,8 +46,8 @@ export class GetRateComponent {
       this.rateItemsArray.rateItems[i].totalAmount = parseFloat((this.rateItemsArray.rateItems[i].quantity*
         this.rateItemsArray.rateItems[i].rate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
 
-      this.totalAmount = parseFloat((this.totalAmount + (this.rateItemsArray.rateItems[i].quantity *
-        this.rateItemsArray.rateItems[i].rate)).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.totalAmount = parseFloat((this.totalAmount + this.rateItemsArray.rateItems[i].totalAmount
+      ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
 
     }
 

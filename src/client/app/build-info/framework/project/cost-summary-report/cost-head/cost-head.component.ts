@@ -255,8 +255,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.rateItemsArray.total=0;
 
     for(let rateItemsIndex=0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
-      this.totalAmount = parseFloat((this.totalAmount + ( this.rateItemsArray.rateItems[rateItemsIndex].quantity *
-        this.rateItemsArray.rateItems[rateItemsIndex].rate )).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+
+      this.rateItemsArray.rateItems[rateItemsIndex].totalAmount = parseFloat((this.rateItemsArray.rateItems[rateItemsIndex].quantity*
+        this.rateItemsArray.rateItems[rateItemsIndex].rate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+
+      this.totalAmount = parseFloat((this.totalAmount + this.rateItemsArray.rateItems[rateItemsIndex].totalAmount
+      ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
      }
 
     this.rateItemsArray.total= parseFloat((this.totalAmount/this.rateItemsArray.quantity).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
