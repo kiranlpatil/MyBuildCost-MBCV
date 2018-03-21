@@ -969,7 +969,7 @@ class ProjectService {
 
                   let rateItemsRateAnalysisSQL = 'SELECT rateItem.item, rateItem.originalName, rateItem.rateAnalysisId, rateItem.type,' +
                     'rateItem.quantity, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
-                    'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.rateAnalysisId = centralizedRates.rateAnalysisId';
+                    'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.originalName = centralizedRates.originalName';
                   let rateItemsByWorkItemForQuantityOne = alasql(rateItemsRateAnalysisSQL, [rates, response.rates]);
                   workItem.rate.rateItems = rateItemsByWorkItemForQuantityOne;
                   workItemsListWithRates.push(workItem);
@@ -1300,7 +1300,10 @@ class ProjectService {
 
     let rateItemsList = alasql(rateItemsRateAnalysisSQL, [rateItems, result.units]);
 
-    return rateItemsList;
+    let distinctItemsSQL = 'select DISTINCT item,originalName,rate FROM ?';
+    var distinctRates = alasql (distinctItemsSQL, [rateItemsList]);
+
+    return distinctRates;
   }
 
   updateBudgetRatesForProjectCostHeads(entity: string, projectId:string, projectDetails : Project, buildingDetails : Building) {
