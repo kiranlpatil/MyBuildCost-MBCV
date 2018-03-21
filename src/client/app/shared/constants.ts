@@ -346,6 +346,7 @@ export class Headings {
   public static ELECTRIC_INFRASTRUCTURE : string = 'Electric Infrastructure ';
   public static CONSTRUCTION_COST : string = 'Construction Cost (Material + Labour)';
   public static QUANTITY : string = 'Quantity';
+  public static ITEM : string = 'Item';
   }
 
 export class TableHeadings {
@@ -463,6 +464,7 @@ export class Button {
   public static CATEGORY: string = 'Category';
   public static WORKITEM: string = 'WorkItem';
   public static ITEM: string = 'Item';
+  public static ROW: string = 'Row';
   public static COSTHEAD: string = 'CostHead';
 }
 
