@@ -200,16 +200,22 @@ export class GetQuantityComponent implements OnInit {
      this.quantityIndex= quantityIndex;
   }
 
-  deleteQuantityItem() {
-        this.quantityItems.splice(this.quantityIndex,1);
-      this.updateAllQuantity();
+  deleteQuantityItem(quantityIndex: number) {
+
+     this.quantityIndex= quantityIndex;
+     this.quantityItems.splice(this.quantityIndex,1);
+     var message = new Message();
+     message.isError = false;
+     message.custom_message = Messages.MSG_SUCCESS_DELETE_QUANTITY_ITEM;
+     this.messageService.message(message);
+     this.updateAllQuantity();
       }
 
-  deleteElement(elementType : string) {
+ /* deleteElement(elementType : string) {
     if(elementType === ProjectElements.QUANTITY_ITEM) {
       this.deleteQuantityItem();
     }
-  }
+  }*/
 
   getButton() {
     return Button;
