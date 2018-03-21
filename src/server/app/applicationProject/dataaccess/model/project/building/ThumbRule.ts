@@ -2,7 +2,6 @@ import ThumbRuleReport = require('../reports/ThumbRuleReport');
 
 class  ThumbRule {
   name: string;
-  area: number;
   totalRate: number;
   totalBudgetedCost: number;
   thumbRuleReports: Array<ThumbRuleReport>;

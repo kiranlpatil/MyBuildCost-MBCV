@@ -21,9 +21,9 @@ import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
 export class CostHeadComponent implements OnInit, OnChanges {
   projectId : string;
-  currentParamName: string;
+  viewTypeValue: string;
   baseUrl:string;
-  currentParam:string;
+  viewType:string;
   costHeadName: string;
   costHeadId:number;
   workItemId: number;
@@ -74,36 +74,38 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.activatedRoute.params.subscribe(params => {
 
       this.projectId = params['projectId'];
-      this.currentParamName = params['currentParamName'];
+      this.viewType = params['viewType'];
+      this.viewTypeValue = params['viewTypeValue'];
       this.costHeadName = params['costHeadName'];
-        this.currentParam = params['currentParam'];
       this.costHeadId = parseInt(params['costHeadId']);
 
-      let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-      if(this.currentParam ===  API.BUILDING ) {
+
+      if(this.viewType ===  API.BUILDING ) {
+        let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
         this.baseUrl = '' +API.PROJECT + '/' + this.projectId + '/' + '' +  API.BUILDING+ '/' + buildingId;
-      } else {
+      } else if(this.viewType === API.COMMON_AMENITIES) {
         this.baseUrl = '' +API.PROJECT + '/' + this.projectId;
+      } else {
+        console.log('Error');
       }
 
-      SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_ID, this.costHeadId);
-      this.getActiveCategories( this.projectId, this.costHeadId);
+   SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_ID, this.costHeadId);
+      this.getCategories( this.projectId, this.costHeadId);
 
     });
   }
 
-  getActiveCategories(projectId: string, costHeadId: number) {
-    this.costSummaryService.getActiveCategories(this.baseUrl, costHeadId).subscribe(
-      categoryDetails => this.onGetActiveCategoriesSuccess(categoryDetails),
-      error => this.onGetActiveCategoriesFalure(error)
+  getCategories(projectId: string, costHeadId: number) {
+
+    this.costSummaryService.getCategories(this.baseUrl, costHeadId).subscribe(
+      categoryDetails => this.onGetCategoriesSuccess(categoryDetails),
+      error => this.onGetCategoriesFailure(error)
     );
   }
 
-  onGetActiveCategoriesSuccess(categoryDetails: any) {
+  onGetCategoriesSuccess(categoryDetails: any) {
     this.categoryDetails = categoryDetails.data;
     this.calculateCategoriesTotal();
-    let categoryList = lodsh.clone(this.categoryArray);
-    this.categoryArray = this.commonService.removeDuplicateItmes(categoryList, this.categoryDetails);
   }
 
   calculateCategoriesTotal() {
@@ -119,7 +121,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
         workItemData.amount = parseFloat(( workItemData.quantity.total * workItemData.rate.total).toFixed(
           ValueConstant.NUMBER_OF_FRACTION_DIGIT));
 
-        categoryData.amount = parseFloat(( categoryData.amount +  workItemData.amount).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT))
+        categoryData.amount = parseFloat(( categoryData.amount +  workItemData.amount).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
 
       }
 
@@ -129,7 +131,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.loaderService.stop();
   }
 
-  onGetActiveCategoriesFalure(error: any) {
+  onGetCategoriesFailure(error: any) {
     console.log(error);
     this.loaderService.stop();
   }
@@ -145,10 +147,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
     if( this.showWorkItemTab !== Label.WORKITEM_QUANTITY_TAB || this.compareCategoryId !== categoryId ||
       this.compareWorkItemId !== workItemId) {
 
-      this.compareCategoryId = categoryId;
-      this.compareWorkItemId = workItemId;
+      this.setItemId(categoryId, workItemId);
+
       this.workItemId = workItemId;
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
+
       this.quantityItemsArray = quantityItems;
       this.workItem = workItem;
       this.rateView = 'quantity';
@@ -267,10 +270,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   deactivateWorkItem() {
     this.loaderService.start();
-    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let costHeadId=parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-      this.costSummaryService.deactivateWorkItem( this.baseUrl, costHeadId, this.categoryId, this.workItemId ).subscribe(
+    this.costSummaryService.deactivateWorkItem( this.baseUrl, costHeadId, this.categoryId, this.workItemId ).subscribe(
         success => this.onDeActivateWorkItemSuccess(success),
       error => this.onDeActivateWorkItemFailure(error)
     );
@@ -303,11 +304,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   getInActiveWorkItems(categoryId:number, workItemIndex:number) {
+
     this.compareWorkItemRateAnalysisId = workItemIndex;
     this.categoryRateAnalysisId = categoryId;
 
-    let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-    let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.costSummaryService.getInActiveWorkItems( this.baseUrl, this.costHeadId, categoryId).subscribe(
       workItemList => this.onGetInActiveWorkItemsSuccess(workItemList),
       error => this.onGetInActiveWorkItemsFailure(error)
@@ -342,8 +342,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.selectedWorkItemData[0] = workItemObject[0];
 
     let categoryId=this.categoryRateAnalysisId;
-    let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
     this.costSummaryService.activateWorkItem( this.baseUrl, this.costHeadId, categoryId,
       workItemObject[0].rateAnalysisId).subscribe(
@@ -377,7 +375,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryIdForInActive = categoryId;
   }
 
-  deactivateCategory() {
+/*  deactivateCategory() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
@@ -395,14 +393,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_CATEGORY;
     this.messageService.message(message);
-/*    this.getActiveCategories( this.projectId, this.costHeadId);*/
+/!*    this.getCategories( this.projectId, this.costHeadId);*!/
   }
 
   onDeactivateCategoryFailure(error : any) {
     console.log('In Active Category error : '+JSON.stringify(error));
-  }
+  }*/
 
-  getInActiveCategories() {
+ /* getInActiveCategories() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
@@ -426,9 +424,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onGetInActiveCategoriesFailure(error : any) {
     console.log('categoryList error : '+JSON.stringify(error));
-  }
+  }*/
 
-  onChangeActivateSelectedCategory(selectedCategoryId : number ) {
+  /*onChangeActivateSelectedCategory(selectedCategoryId : number ) {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 
@@ -454,9 +452,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
   onActivateCategoryFailure(error : any) {
     console.log('building error : '+ JSON.stringify(error));
   }
-
+*/
   refreshCategoryList() {
-    this.getActiveCategories( this.projectId, this.costHeadId);
+    this.getCategories( this.projectId, this.costHeadId);
     this.showWorkItemTab = null;
     this.displayRateView = null;
   }
@@ -466,9 +464,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   deleteElement(elementType : string) {
-    if(elementType === ProjectElements.CATEGORY) {
+   /* if(elementType === ProjectElements.CATEGORY) {
       this.deactivateCategory();
-    }
+    }*/
     if(elementType === ProjectElements.WORK_ITEM) {
       this.deactivateWorkItem();
     }

@@ -27,9 +27,9 @@
               </th>
             </tr>
             <tr>
-              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea ==='SlabArea') ? 'Slab Area' : ((costingByArea ==='SalebleArea') ? 'Saleable Area' : 'Carpet Area')}}</span></th>
+              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
               <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
-              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea ==='SlabArea') ? 'Slab Area' : ((costingByArea ==='SalebleArea') ? 'Saleable Area' : 'Carpet Area')}}</span></th>
+              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
               <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
             </tr>
           </thead>
@@ -37,7 +37,15 @@
             <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index" class="delete-cost-head-cell">
               <td class="border-left">{{thumbRuleItem.name}}</td>
               <td class="border-left"><span class="estimated-cost">{{thumbRuleItem.rate}}</span></td>
-              <td class="border-left">{{thumbRuleItem.amount}}</td>
+              <td class="border-left">
+                <div class="edit-field">
+                  <input type="number"
+                         [(ngModel)]="thumbRuleItem.amount"
+                         id="thumbRuleItem.amount"
+                         (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
+                         class="form-control clear"/>
+                </div>
+              </td>
               <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate}}</span></td>
               <td>
                 <div class="edit-field" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"

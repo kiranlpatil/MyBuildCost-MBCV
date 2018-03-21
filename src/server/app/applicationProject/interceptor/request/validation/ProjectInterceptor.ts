@@ -312,7 +312,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
-  updateBudgetedCostForCostHead(req: any, res: any, next: any) {
+  updateBudgetedCostForBuildingCostHead(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     ProjectInterceptor.validateIds(projectId, buildingId, (error, result) => {
@@ -327,10 +327,8 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         } else {
-          if ((req.body.budgetedCostAmount === undefined) || (req.body.buildingArea === undefined) || (req.body.costHead === undefined) ||
-            (req.body.costIn === undefined) || (req.body.costPer === undefined) ||
-            (req.body.budgetedCostAmount === '') || (req.body.buildingArea === '') || (req.body.costHead === '') ||
-            (req.body.costIn === '') || (req.body.costPer === '')) {
+          if ((req.body.budgetedCostAmount === undefined) || (req.body.costHead === undefined) ||
+            (req.body.budgetedCostAmount === '') || (req.body.costHead === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -342,6 +340,21 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
         next();
       }
     });
+  }
+
+  updateBudgetedCostForProjectCostHead(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    if ((projectId === undefined) || (projectId === '') || (req.body.budgetedCostAmount === undefined) ||
+      (req.body.costHead === undefined) || (req.body.budgetedCostAmount === '') || (req.body.costHead === '')) {
+      next({
+        reason: Messages.MSG_ERROR_EMPTY_FIELD,
+        message: Messages.MSG_ERROR_EMPTY_FIELD,
+        stackTrace: new Error(),
+        code: 400
+      });
+    } else {
+      next();
+    }
   }
 
   getCategoriesOfBuildingCostHead(req: any, res: any, next: any) {

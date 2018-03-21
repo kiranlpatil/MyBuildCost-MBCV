@@ -773,35 +773,31 @@ class ProjectService {
                                  callback: (error: any, result: any) => void) {
     logger.info('Project service, updateBudgetedCostForCostHead has been hit');
     let query = {'_id' : buildingId, 'costHeads.name' : costHeadBudgetedAmount.costHead};
-    let costInUnit = costHeadBudgetedAmount.costIn;
-    let costPerUnit = costHeadBudgetedAmount.costPer;
-    let rate = 0;
-    let newData;
-    rate = costHeadBudgetedAmount.budgetedCostAmount / costHeadBudgetedAmount.buildingArea;
 
-    if(costPerUnit === 'saleableArea' && costInUnit === 'sqft') {
-      newData = { $set : {
-        'costHeads.$.thumbRuleRate.saleableArea.sqft' : rate,
-        'costHeads.$.thumbRuleRate.saleableArea.sqmt' : rate / config.get(Constants.SQUARE_METER)
-      } };
-    } else if(costPerUnit === 'saleableArea' && costInUnit === 'sqmt') {
-      newData = { $set : {
-        'costHeads.$.thumbRuleRate.saleableArea.sqmt' : rate,
-        'costHeads.$.thumbRuleRate.saleableArea.sqft' : rate * config.get(Constants.SQUARE_METER)
-      } };
-    } else if(costPerUnit === 'slabArea' && costInUnit === 'sqft') {
-      newData = { $set : {
-        'costHeads.$.thumbRuleRate.slabArea.sqft' : rate,
-        'costHeads.$.thumbRuleRate.slabArea.sqmt' : rate / config.get(Constants.SQUARE_METER)
-      } };
-    } else if(costPerUnit === 'slabArea' && costInUnit === 'sqmt') {
-      newData = { $set : {
-        'costHeads.$.thumbRuleRate.slabArea.sqmt' : rate,
-        'costHeads.$.thumbRuleRate.slabArea.sqft' : rate * config.get(Constants.SQUARE_METER)
-      } };
-    }
+    let newData = { $set : {
+      'costHeads.$.budgetedCostAmount' : costHeadBudgetedAmount.budgetedCostAmount,
+    } };
 
     this.buildingRepository.findOneAndUpdate(query, newData, {new:true},(err, response) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if(err) {
+        callback(err, null);
+      } else {
+        callback(null, {data: response, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  updateBudgetedCostForProjectCostHead( projectId : string, costHeadBudgetedAmount : any, user: User,
+                                 callback: (error: any, result: any) => void) {
+    logger.info('Project service, updateBudgetedCostForCostHead has been hit');
+    let query = {'_id' : projectId, 'projectCostHeads.name' : costHeadBudgetedAmount.costHead};
+
+    let newData = { $set : {
+      'projectCostHeads.$.budgetedCostAmount' : costHeadBudgetedAmount.budgetedCostAmount,
+    } };
+
+    this.projectRepository.findOneAndUpdate(query, newData, {new:true},(err, response) => {
       logger.info('Project service, findOneAndUpdate has been hit');
       if(err) {
         callback(err, null);

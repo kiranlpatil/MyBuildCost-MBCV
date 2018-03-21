@@ -13,19 +13,19 @@
         </select>
         <label>{{ getLabel().COSTING_PER_AREA }}</label>
         <select class="select-costing no-margin" (change)="onChangeCostingByArea($event.target.value)">
-          <option *ngFor="let cPer of costPer" [value]="cPer.costPerId">{{(cPer.costPerId ==='SlabArea') ? 'Slab Area' : ((cPer.costPerId ==='SalebleArea') ? 'Saleable Area' : 'Carpet Area')}}</option>
+          <option *ngFor="let cPer of costPer" [value]="cPer.costPerId">{{(cPer.costPerId === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((cPer.costPerId === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</option>
         </select>
       </div>
     </div>
     <div class="col-sm-9 col-xs-12 padding-right30">
+      <div class="panel panel-default">
       <div class="panel-group" *ngFor="let building of buildingsReport; let i = index">
-          <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}" [class.collapsed]="i!=0">
                   {{ building.name }}
                   <span class="slab-area">
-                    {{ getLabel().TOTAL }} {{(defaultCostingByArea ==='SlabArea') ? 'Slab Area' : ((defaultCostingByArea ==='SalebleArea') ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area }} {{ (defaultCostingByUnit ==='Rs/Sqft') ? 'Sqft' : 'Sqmt' }}
+                    {{ getLabel().TOTAL }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area }} {{ (defaultCostingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
                   </span>
                   <!--<span class="slab-area" *ngIf="compareIndex !== i">
                     {{ getLabel().BUDGETED_COST }} : {{ building.thumbRule.totalBudgetedCost|number }}
@@ -60,7 +60,7 @@
                     <tr>
                       <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
                       <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
-                      <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea ==='SlabArea') ? 'Slab Area' : ((defaultCostingByArea ==='SalebleArea') ? 'Saleable Area' : 'Carpet Area')}}</span></th>
+                      <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}}</span></th>
                       <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
                     </tr>
                   </thead>
@@ -73,7 +73,7 @@
                           <input type="number"
                                  [(ngModel)]="thumbRuleItem.amount"
                                  id="thumbRuleItem.amount"
-                                 (blur)="changeRateOfThumbRule(building._id, thumbRuleItem.name, thumbRuleItem.amount , building.area)"
+                                 (blur)="changeBudgetedCostAmountOfBuildingCostHead(building._id, thumbRuleItem.name, thumbRuleItem.amount)"
                                  class="form-control clear"/>
                         </div>
                       </td>
@@ -142,7 +142,8 @@
       <bi-common-amenities
         [amenitiesReport]="amenitiesReport"
         [costingByUnit]="defaultCostingByUnit"
-        [costingByArea]="defaultCostingByArea">
+        [costingByArea]="defaultCostingByArea"
+        (getReportDetails)="getCostSummaryReport($event)">
       </bi-common-amenities>
 
 

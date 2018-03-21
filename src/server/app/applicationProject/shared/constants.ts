@@ -1,5 +1,6 @@
 class Constants {
-  public static WORKITEM_UNIT: string = 'sqft';
+  public static SQUREFEET_UNIT: string = 'sqft';
+  public static SQUREMETER_UNIT: string = 'sqmt';
   public static AMENITIES : string = 'amenities';
   public static BUILDING : string = 'building';
   public static SQUARE_METER : string = 'SqureMeter';
@@ -19,7 +20,11 @@ class Constants {
 
   public static BUDGETED_COST_FORMULAE : string = 'budgetedCostFormulae.';
   public static CARPET_AREA : string = 'carpetArea';
+  public static TOTAL_CARPET_AREA : string = 'totalCarpetAreaOfUnit';
   public static SLAB_AREA : string = 'slabArea';
+  public static TOTAL_SLAB_AREA : string = 'totalSlabArea';
+  public static SALEABLE_AREA : string = 'saleableArea';
+  public static TOTAL_SALEABLE_AREA : string = 'totalSaleableAreaOfUnit';
   public static PLINTH_AREA : string = 'plinthArea';
   public static NUM_OF_ONE_BHK : string = 'numOfOneBHK';
   public static NUM_OF_TWO_BHK : string = 'numOfTwoBHK';

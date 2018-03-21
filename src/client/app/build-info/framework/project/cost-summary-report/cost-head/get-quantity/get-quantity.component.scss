@@ -30,7 +30,7 @@
         border-top: 0 solid transparent;
         .form-control {
           background: transparent;
-          border: 0;
+          border: 1px solid transparent;
           border-radius: 0;
           display: block;
           font-size: 11px;
@@ -159,5 +159,9 @@
   border-bottom-color: $table-border;
   border-width: 10px;
   margin-left: -20px;
+}
+
+.required-field {
+  border: 1px solid $error !important;
 }
 

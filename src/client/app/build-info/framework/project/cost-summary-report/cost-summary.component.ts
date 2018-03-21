@@ -54,18 +54,18 @@ export class CostSummaryComponent implements OnInit {
   clonedBuildingDetails: Array<CostHead>;
 
   public costIn: any[] = [
-    { 'costInId': 'Rs/Sqft'},
-    { 'costInId': 'Rs/Sqmt'}
+    { 'costInId': ProjectElements.RS_PER_SQFT},
+    { 'costInId': ProjectElements.RS_PER_SQMT}
   ];
 
   public costPer: any[] = [
-    { 'costPerId': 'SlabArea'},
-    { 'costPerId': 'SalebleArea'},
-    { 'costPerId': 'CarpetArea'},
+    { 'costPerId': ProjectElements.SLAB_AREA},
+    { 'costPerId': ProjectElements.SALEABLE_AREA},
+    { 'costPerId': ProjectElements.CARPET_AREA},
   ];
 
-  defaultCostingByUnit:string='Rs/Sqft';
-  defaultCostingByArea:string='SlabArea';
+  defaultCostingByUnit:string = ProjectElements.RS_PER_SQFT;
+  defaultCostingByArea:string = ProjectElements.SLAB_AREA;
   deleteConfirmationCostHead = ProjectElements.COST_HEAD;
   deleteConfirmationBuilding = ProjectElements.BUILDING;
 
@@ -128,8 +128,8 @@ export class CostSummaryComponent implements OnInit {
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
 
-    this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, buildingName, NavigationRoutes.APP_COST_SUMMARY,
-      NavigationRoutes.APP_BUILDING, NavigationRoutes.APP_COST_HEAD, estimatedItem.name,  estimatedItem.rateAnalysisId]);
+    this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_BUILDING,
+      buildingName, NavigationRoutes.APP_COST_HEAD, estimatedItem.name,  estimatedItem.rateAnalysisId, NavigationRoutes.APP_CATEGORY]);
   }
 
   goToCommonAmenities() {
@@ -219,15 +219,10 @@ export class CostSummaryComponent implements OnInit {
     this.loaderService.stop();
   }
 
-  changeRateOfThumbRule(buildingId: string, costHead: string, amount: number, buildingArea : number) {
+  changeBudgetedCostAmountOfBuildingCostHead(buildingId: string, costHead: string, amount: number) {
     if (amount !== null) {
-      let costingByUnit : string;
-      let costingByArea : string;
-      (this.defaultCostingByUnit==='Rs/Sqft') ? costingByUnit = 'sqft' : costingByUnit = 'sqmt';
-      (this.defaultCostingByArea==='SlabArea') ? costingByArea = 'slabArea' : costingByArea = 'saleableArea';
       let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      this.costSummaryService.updateRateOfThumbRule( projectId, buildingId, costHead,
-        costingByUnit, costingByArea, buildingArea, amount).subscribe(
+      this.costSummaryService.changeBudgetedCostAmountOfBuildingCostHead( projectId, buildingId, costHead, amount).subscribe(
         buildingDetails => this.onUpdateRateOfThumbRuleSuccess(buildingDetails),
         error => this.onUpdateRateOfThumbRuleFailure(error)
       );
@@ -393,6 +388,10 @@ export class CostSummaryComponent implements OnInit {
     }
   }
 
+  getCostSummaryReport() {
+    this.onChangeCostingByUnit(this.defaultCostingByUnit);
+  }
+
   getMenus() {
     return Menus;
   }
@@ -407,5 +406,9 @@ export class CostSummaryComponent implements OnInit {
 
   getHeadings() {
     return Headings;
+  }
+
+  getProjectElements() {
+    return ProjectElements;
   }
 }

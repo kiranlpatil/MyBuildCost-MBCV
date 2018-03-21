@@ -21,7 +21,7 @@ class WorkItem {
     this.systemRate = new Rate();
     this.amount = 0;
     this.active = true;
-    this.unit = Constants.WORKITEM_UNIT;
+    this.unit = Constants.SQUREFEET_UNIT;
     this.remarks = '';
   }
 }

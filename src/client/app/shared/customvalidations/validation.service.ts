@@ -56,6 +56,15 @@ export class ValidationService {
       'requiredNoOfLifts': Messages.MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED,
       'requireAlphabates': Messages.MSG_ERROR_VALIDATION_ALPHABATES,
 
+      //Quantiry
+      'requireItem': Messages.MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED,
+      'requireNumbers': Messages.MSG_ERROR_VALIDATION_QUANTITY_NUMBERS_REQUIRED,
+      'requireLength': Messages.MSG_ERROR_VALIDATION_QUANTITY_LENGTH_REQUIRED,
+      'requireBreadth': Messages.MSG_ERROR_VALIDATION_QUANTITY_BREADTH_REQUIRED,
+      'requireHeight': Messages.MSG_ERROR_VALIDATION_QUANTITY_HEIGHT_REQUIRED,
+      'requireQuantity': Messages.MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED,
+      'requireUnit': Messages.MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED,
+
 
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
       'minlength': `Minimum ${validatorValue.requiredLength} characters`
@@ -499,6 +508,62 @@ export class ValidationService {
   static requiredNumOfLifts(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredNumOfLifts': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredItemName(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredItemName': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredNumbers(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requireNumbers': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredLength(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requireLength': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredBreadth(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredBreadth': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredHeight(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredHeight': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredQuantity(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredQuantity': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredUnit(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredUnit': true};
     } else {
       return null;
     }
