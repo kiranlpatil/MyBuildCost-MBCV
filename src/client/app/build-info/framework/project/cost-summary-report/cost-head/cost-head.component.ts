@@ -276,17 +276,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.custom_message = Messages.MSG_SUCCESS_DELETE_WORKITEM;
     this.messageService.message(message);
 
-    for(let category of this.categoryDetails) {
-      if(category.rateAnalysisId === this.categoryId) {
-        for(let workItem of category.workItems) {
-          if(workItem.rateAnalysisId === this.workItemId) {
-            category.workItems = category.workItems.filter(item => item !== workItem);
-          }
-        }
-      }
-    }
+    this.workItemsList.splice(this.compareWorkItemId, 1);
 
-    this.calculateCategoriesTotal();
+    this.categoryDetailsTotalAmount = this.commonService.totalCalculationOfCategories(this.categoryDetails,
+      this.categoryRateAnalysisId, this.workItemsList);
+    this.loaderService.stop();
   }
 
   onDeActivateWorkItemFailure(error: any) {
@@ -294,9 +288,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.loaderService.stop();
   }
 
-  getInActiveWorkItems(categoryId:number, workItemIndex:number) {
+  getInActiveWorkItems(categoryId:number, categoryIndex:number) {
 
-    this.compareWorkItemRateAnalysisId = workItemIndex;
+    this.compareWorkItemRateAnalysisId = categoryIndex;
     this.categoryRateAnalysisId = categoryId;
 
     this.costSummaryService.getInActiveWorkItems( this.baseUrl, this.costHeadId, categoryId).subscribe(
@@ -350,8 +344,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
 
     this.workItemsList = this.workItemsList.concat(this.calculateWorkItemAmount(this.selectedWorkItemData));
-
-    this.calculateCategoriesTotal();
+    this.categoryDetailsTotalAmount = this.commonService.totalCalculationOfCategories(this.categoryDetails,
+      this.categoryRateAnalysisId, this.workItemsList);
     this.loaderService.stop();
   }
 
@@ -457,6 +451,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
       let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.categoryId = categoryId;
+      this.categoryRateAnalysisId = categoryId;
       this.costSummaryService.getAllWorkItemsOfCategory( projectId, buildingId, costHeadId, this.categoryId).subscribe(
         workItemsList => this.onGetAllWorkItemsOfCategorySuccess(workItemsList),
         error => this.onGetAllWorkItemsOfCategoryFailure(error)
@@ -506,4 +501,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     return Label;
   }
 
+  setCategoriesTotal( categoriesTotal : number) {
+    this.categoryDetailsTotalAmount = categoriesTotal;
+  }
 }

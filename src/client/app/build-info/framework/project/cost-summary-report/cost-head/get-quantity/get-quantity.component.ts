@@ -27,7 +27,7 @@ export class GetQuantityComponent implements OnInit {
   @Input() workItemsList : Array<WorkItem>;
   @Input() baseUrl : string;
 
-  @Output() categoryDetailsTotalAmount = new EventEmitter<number>();
+  @Output() categoriesTotalAmount = new EventEmitter<number>();
   @Output() refreshCategoryList = new EventEmitter();
 
   projectId : string;
@@ -191,7 +191,7 @@ export class GetQuantityComponent implements OnInit {
 
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
       this.categoryRateAnalysisId, this.workItemsList);
-    this.categoryDetailsTotalAmount.emit(categoriesTotal);
+    this.categoriesTotalAmount.emit(categoriesTotal);
 
       this.loaderService.stop();
   }

@@ -31,7 +31,7 @@ export class GetRateComponent {
   @Input() rateView: string;
   @Input() disableRateField: boolean;
 
-  @Output() categoryDetailsTotalAmount = new EventEmitter<number>();
+  @Output() categoriesTotalAmount = new EventEmitter<number>();
   @Output() refreshCategoryList = new EventEmitter();
 
   quantityIncrement: number = 1;
@@ -101,7 +101,7 @@ this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.q
 
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
       this.categoryRateAnalysisId, this.workItemsList);
-    this.categoryDetailsTotalAmount.emit(categoriesTotal);
+    this.categoriesTotalAmount.emit(categoriesTotal);
 
 
       this.loaderService.stop();

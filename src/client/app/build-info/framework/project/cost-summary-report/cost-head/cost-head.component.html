@@ -108,6 +108,7 @@
                                        [categoryRateAnalysisId]="category.rateAnalysisId"
                                        [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                        [totalAmount]="totalAmount"
+                                       (categoriesTotalAmount)="setCategoriesTotal($event)"
                                        [baseUrl] = "baseUrl"
                                        [disableRateField]="disableRateField">
                           </bi-get-rate>
@@ -119,6 +120,7 @@
                           <bi-get-quantity [quantityItems]="quantityItemsArray"
                                            [categoryDetails] ="categoryDetails"
                                            [workItemsList] ="workItemsList"
+                                           (categoriesTotalAmount)="setCategoriesTotal($event)"
                                            [categoryRateAnalysisId]="category.rateAnalysisId"
                                            [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                            [baseUrl] = "baseUrl">
