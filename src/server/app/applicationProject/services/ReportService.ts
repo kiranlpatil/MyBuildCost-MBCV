@@ -155,10 +155,12 @@ class ReportService {
           let workItemList = category.workItems;
           if (workItemList.length !== 0) {
             for (let workItem of workItemList) {
-              if (workItem.quantity.total !== null && workItem.rate.total !== null
-                && workItem.quantity.total !== 0 && workItem.rate.total !== 0) {
-                estimateReport.total = parseFloat((workItem.quantity.total * workItem.rate.total + estimateReport.total).toFixed(2));
-                estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
+              if(workItem.active) {
+                if (workItem.quantity.total !== null && workItem.rate.total !== null
+                  && workItem.quantity.total !== 0 && workItem.rate.total !== 0) {
+                  estimateReport.total = parseFloat((workItem.quantity.total * workItem.rate.total + estimateReport.total).toFixed(2));
+                  estimateReport.rate = parseFloat((estimateReport.total / buildingReport.area).toFixed(2));
+                }
               }
             }
           }

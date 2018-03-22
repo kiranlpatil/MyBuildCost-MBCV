@@ -51,9 +51,10 @@ class ProjectRoutes {
 
     /*Project- Routes: WorkItem*/
 
-    //Provide workitemlist for particular category-----delete API
-    router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/all',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.getWorkitemListOfProjectCostHead,  this._responseInterceptor.exit);
+    //Provide workitemlist for particular category
+    router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/all', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, validator.getWorkitemListOfProjectCostHead,
+      controller.getWorkitemListOfProjectCostHead,  this._responseInterceptor.exit);
 
 
     ///Add and remove a costhead by setting status of workitems to true and false
@@ -165,7 +166,7 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.getInActiveWorkItemsOfBuildingCostHeads,
       controller.getInActiveWorkItemsOfBuildingCostHeads,  this._responseInterceptor.exit);
 
-    //Provide workitemlist for particular category-----delete API
+    //Provide workitemlist for particular category
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/all',
     this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.getWorkitemList,  this._responseInterceptor.exit);
     //Add worktitem to category-----delete API
