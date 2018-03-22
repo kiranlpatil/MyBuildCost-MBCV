@@ -248,6 +248,20 @@ class ProjectService {
     });
   }
 
+  getProjectRateItemsByName(projectId: string, rateItemName: string, user: User, callback: (error: any, result: any) => void) {
+    this.projectRepository.findById(projectId, (error, project:Project) => {
+      logger.info('Project Service, getProjectRateItemsByName has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        let rateItemsArray = project.rates;
+        let newRateItemsArray: Array<RateItem> = new Array<RateItem>();
+        newRateItemsArray = alasql('SELECT * FROM ? where originalName = ?', [rateItemsArray,rateItemName]);
+        callback(null,{ data: newRateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
   getInActiveCostHead(projectId: string, buildingId: string, user: User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, getInActiveCostHead has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
