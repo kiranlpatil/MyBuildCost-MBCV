@@ -314,7 +314,8 @@ class ProjectController {
       let rate : Rate = <Rate> req.body;
       let projectService = new ProjectService();
       console.log(' workitemId => '+ workItemId);
-      projectService.updateRateOfBuildingCostHeads( projectId, buildingId, costHeadId,categoryId ,workItemId, rate, user, (error, result) => {
+      projectService.updateRateOfBuildingCostHeads( projectId, buildingId, costHeadId,categoryId ,
+        workItemId, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -827,6 +828,7 @@ class ProjectController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+
   getRateItemsByName(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, getRateItemsByName has been hit');

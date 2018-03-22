@@ -453,6 +453,7 @@ class ProjectService {
         callback(error, null);
       } else {
         let costHeads = building.costHeads;
+        let centralizedRates = building.rates;
         for(let costHeadData of costHeads) {
           if(costHeadData.rateAnalysisId === costHeadId) {
             for(let categoryData of costHeadData.categories) {
@@ -472,11 +473,48 @@ class ProjectService {
         }
         let query = {'_id' : buildingId};
         let newData = { $set : {'costHeads' : costHeads}};
+
         this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, result) => {
           if (error) {
             callback(error, null);
           } else {
-            callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            if(result) {
+              console.log('building CostHeads Updated');
+
+              let rateItems = rate.rateItems;
+              let promiseArrayForCentralizedRates =[];
+
+              for(let rate of rateItems) {
+
+                let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.item= '"+rate.item+"'";
+                let rateExistArray = alasql(rateObjectExistSQL,[centralizedRates]);
+                if(rateExistArray.length > 0) {
+                  if(rateExistArray[0].rate !== rate.rate) {
+                    //update rate of rateItem
+                    let updateRatePromise = this.createPromiseForRateUpdate(buildingId, rate.item, rate.rate);
+                    promiseArrayForCentralizedRates.push(updateRatePromise);
+                  }
+                } else {
+                  //create new rateItem
+                  let rateItem = {
+                    'item' :rate.item,
+                    'originalName' : rate.originalName,
+                    'rate':rate.rate
+                  }
+                  let addNewRateItemPromise = this.createPromiseForAddingNewRateItem(buildingId, rateItem);
+                  promiseArrayForCentralizedRates.push(addNewRateItemPromise);
+                }
+              }
+
+              CCPromise.all(promiseArrayForCentralizedRates).then(function(data: Array<any>) {
+
+                console.log('Rates Array updated : '+JSON.stringify(centralizedRates));
+                callback(null, { 'success' : 'success' });
+
+              }).catch(function(e:any) {
+                logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
+              });
+            }
           }
         });
       }
@@ -986,7 +1024,7 @@ class ProjectService {
 
                     let rateItemsRateAnalysisSQL = 'SELECT rateItem.item, rateItem.originalName, rateItem.rateAnalysisId, rateItem.type,' +
                       'rateItem.quantity, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
-                      'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.originalName = centralizedRates.originalName';
+                      'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.item = centralizedRates.item';
                     let rateItemsByWorkItemForQuantityOne = alasql(rateItemsRateAnalysisSQL, [rates, response.rates]);
                     workItem.rate.rateItems = rateItemsByWorkItemForQuantityOne;
                     workItemsListWithRates.push(workItem);
@@ -1525,6 +1563,45 @@ class ProjectService {
     return costHeads;
   }
 
+  createPromiseForAddingNewRateItem(buildingId: string, rateItem:any) {
+    return new CCPromise(function(resolve : any, reject : any){
+      logger.info('createPromiseForAddingNewRateItem has been hit for buildingId: '+buildingId+', rateItem : '+rateItem);
+
+      let buildingRepository = new BuildingRepository();
+      let queryAddNewRateItem = {'_id' : buildingId};
+      let addNewRateRateData = { $push : {'rates' : rateItem } };
+      buildingRepository.findOneAndUpdate(queryAddNewRateItem, addNewRateRateData,{new: true}, (error:Error, result:Building) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      });
+    }).catch(function(e:any) {
+      logger.error('Promise failed for individual createPromiseForAddingNewRateItem! error :' +JSON.stringify(e));
+    });
+  }
+
+  createPromiseForRateUpdate(buildingId: string, rateItem :string, rateItemRate : number) {
+    return new CCPromise(function(resolve : any, reject : any){
+      logger.info('createPromiseForRateUpdate has been hit for buildingId : '+buildingId+', rateItem : '+rateItem);
+      //update rate
+      let buildingRepository = new BuildingRepository();
+      let queryUpdateRate = {'_id' : buildingId, 'rates.item':rateItem};
+      let updateRate = { $set : {'rates.$.rate' : rateItemRate} };
+      buildingRepository.findOneAndUpdate(queryUpdateRate, updateRate,{new: true}, (error:Error, result:Building) => {
+        if (error) {
+          reject(error);
+        } else {
+          console.log('Rate Updated');
+          resolve(result);
+        }
+      });
+    }).catch(function(e:any) {
+      logger.error('Promise failed for individual createPromiseForRateUpdate ! Error: ' +JSON.stringify(e));
+    });
+  }
+
   private calculateThumbRuleReportForCostHead(budgetedCostAmount: number, costHeadFromRateAnalysis: any,
                                               buildingData: any, costHeads: Array<CostHead>) {
     if (budgetedCostAmount) {
@@ -1575,7 +1652,8 @@ class ProjectService {
     budgetCostRates.sqft = (budgetedCostAmount / area);
     budgetCostRates.sqmt = (budgetCostRates.sqft * config.get(Constants.SQUARE_METER));
     return budgetCostRates;
-  }}
+  }
+}
 
 Object.seal(ProjectService);
 export = ProjectService;
