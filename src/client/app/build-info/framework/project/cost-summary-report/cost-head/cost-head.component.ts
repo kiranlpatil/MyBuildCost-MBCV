@@ -457,7 +457,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
 
   onGetAllWorkItemsOfCategorySuccess(workItemsList : any) {
-    this.workItemsList = this.calculateWorkItemAmount(workItemsList.data);
+    this.workItemsList = workItemsList.data;
   }
 
   // calculation of Quantity * Rate
