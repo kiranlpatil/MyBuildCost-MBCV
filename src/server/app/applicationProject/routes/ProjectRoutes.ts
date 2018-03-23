@@ -55,7 +55,7 @@ class ProjectRoutes {
     /*Project- Routes: WorkItem*/
 
     //Provide workitemlist for particular category
-    router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/all', this.authInterceptor.requiresAuth,
+    router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitemlist', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, validator.getWorkitemListOfProjectCostHead,
       controller.getWorkitemListOfProjectCostHead,  this._responseInterceptor.exit);
 
@@ -99,15 +99,19 @@ class ProjectRoutes {
    //Create new building
     router.post('/:projectId/building', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.createBuilding, controller.createBuilding, this._responseInterceptor.exit);
+
     //Retrive details of building
     router.get('/:projectId/building/:buildingId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.getBuildingById, controller.getBuildingById, this._responseInterceptor.exit);
+
     //Update building details
     router.put('/:projectId/building/:buildingId',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.updateBuildingById, controller.updateBuildingById, this._responseInterceptor.exit);
+
     //Delete a building
     router.delete('/:projectId/building/:buildingId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.deleteBuildingById, controller.deleteBuildingById, this._responseInterceptor.exit);
+
     //Fetch rateItem names having same original name
     router.get('/:projectId/building/:buildingId/rates/rateItem/:rateItemName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.getRateItemsByName, controller.getRateItemsByName, this._responseInterceptor.exit);
@@ -117,6 +121,7 @@ class ProjectRoutes {
     //Retrive details of building for cloning
     router.get('/:projectId/building/:buildingId/clone', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.getBuildingByIdForClone, controller.getBuildingByIdForClone, this._responseInterceptor.exit);
+
     //Update details of cloned building
     router.put('/:projectId/building/:buildingId/clone',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.cloneBuildingById, this._responseInterceptor.exit);
@@ -126,12 +131,15 @@ class ProjectRoutes {
     //Add and remove a costhead by setting status of costhead to true and false
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
 this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setCostHeadStatus, this._responseInterceptor.exit);
+
     //Retrive list of inactive costheads
     router.get('/:projectId/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.getInActiveCostHead, controller.getInActiveCostHead, this._responseInterceptor.exit);
+
     //Add new costhead in building
     router.put('/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.addCostHeadBuilding, this._responseInterceptor.exit);
+
     //Update budgeted cost for costhead
     router.put('/:projectId/building/:buildingId/costhead',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.updateBudgetedCostForBuildingCostHead, controller.updateBudgetedCostForCostHead, this._responseInterceptor.exit);
@@ -149,6 +157,7 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/categorylist', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, validator.getInActiveCategoriesByCostHeadId, controller.getInActiveCategoriesByCostHeadId,
       this._responseInterceptor.exit);
+
     //Add category to costhead
     router.post('/:projectId/building/:buildingId/costhead/:costHeadId/category', this.authInterceptor.requiresAuth,
     this._requestInterceptor.intercept,validator.addCategoryByCostHeadId, controller.addCategoryByCostHeadId,
@@ -170,12 +179,15 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
       controller.getInActiveWorkItemsOfBuildingCostHeads,  this._responseInterceptor.exit);
 
     //Provide workitemlist for particular category
-    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/all',
-    this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.getWorkitemListForBuildingCategory,  this._responseInterceptor.exit);
+    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitemlist',
+    this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.getWorkitemListOfBuildingCostHead,
+      controller.getWorkitemListOfBuildingCostHead,  this._responseInterceptor.exit);
+
     //Add worktitem to category-----delete API
     router.post('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.addWorkitem,
       this._responseInterceptor.exit);
+
     //Delete workitem from category-----delete API
     router.delete('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
 this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.deleteWorkitem, this._responseInterceptor.exit);

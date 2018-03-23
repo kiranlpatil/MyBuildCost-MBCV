@@ -109,6 +109,7 @@
                                        [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                        [totalAmount]="totalAmount"
                                        (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                       (showWorkItemTabName)="setShowWorkItemTab($event)"
                                        [baseUrl] = "baseUrl"
                                        [disableRateField]="disableRateField">
                           </bi-get-rate>

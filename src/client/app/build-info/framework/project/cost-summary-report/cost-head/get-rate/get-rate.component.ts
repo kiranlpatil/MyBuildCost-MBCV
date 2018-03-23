@@ -33,6 +33,7 @@ export class GetRateComponent {
   @Input() disableRateField: boolean;
 
   @Output() categoriesTotalAmount = new EventEmitter<number>();
+  @Output() showWorkItemTabName = new EventEmitter<string>();
   @Output() refreshCategoryList = new EventEmitter();
 
   quantityIncrement: number = 1;
@@ -107,7 +108,7 @@ this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.q
       this.categoryRateAnalysisId, this.workItemsList);
     this.categoriesTotalAmount.emit(categoriesTotal);
 
-
+    this.showWorkItemTabName = null;
       this.loaderService.stop();
   }
 

@@ -1007,7 +1007,6 @@ class ProjectService {
       } else {
         let costHeads = building.costHeads;
         let categories : Array<Category>= new Array<Category>();
-
         for(let costHeadIndex = 0; costHeadIndex<costHeads.length; costHeadIndex++) {
           if(parseInt(costHeadId) === costHeads[costHeadIndex].rateAnalysisId) {
             let categoriesList = costHeads[costHeadIndex].categories;
@@ -1023,9 +1022,9 @@ class ProjectService {
     });
   }
 
-  getWorkitemListForBuildingCategory(projectId:string, buildingId:string, costHeadId:number, categoryId:number, user:User,
-                  callback:(error: any, result: any)=> void) {
-    logger.info('Project service, getWorkitemList has been hit');
+  getWorkitemListOfBuildingCostHead(projectId:string, buildingId:string, costHeadId:number, categoryId:number, user:User,
+                                    callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getWorkitemListOfBuildingCostHead has been hit');
 
     let query = [
       { $match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId }},
