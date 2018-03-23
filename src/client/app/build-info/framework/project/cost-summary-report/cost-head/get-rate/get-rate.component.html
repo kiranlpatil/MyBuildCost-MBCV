@@ -3,7 +3,7 @@
   <div class="pull-left">
     <div class="pull-left" *ngIf="rateItemsArray!==undefined">
       <div class="pull-left quantity-label">
-          {{ getHeadings().QUANTITY }} {{ getHeadings().ITEM }}
+        {{ getHeadings().ITEM }} {{ getHeadings().QUANTITY }}{{ getHeadings().COLON }}
       </div>
       <div class="pull-left">
         <input [(ngModel)]="rateItemsArray.quantity" id="rateQuantity" type="number" class="form-control quantity-count"
