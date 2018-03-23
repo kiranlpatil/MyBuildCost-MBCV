@@ -25,6 +25,7 @@ import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRat
 import Constants = require('../../applicationProject/shared/constants');
 import QuantityItem = require('../dataaccess/model/project/building/QuantityItem');
 import RateItem = require('../dataaccess/model/project/building/RateItem');
+import {ValueConstant} from "../../../../client/app/shared/constants";
 let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
 
@@ -1282,10 +1283,10 @@ class ProjectService {
       categoryData.workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates);
       let workItemsAmount = 0 ;
       for(let workItem of categoryData.workItems) {
-        workItemsAmount = workItemsAmount + workItem.amount;
+        workItemsAmount = parseFloat((workItemsAmount + workItem.amount).toFixed(constant.NUMBER_OF_FRACTION_DIGIT));
       }
       categoryData.amount = workItemsAmount;
-      categoriesAmount = categoriesAmount + workItemsAmount;
+      categoriesAmount = parseFloat((categoriesAmount + workItemsAmount).toFixed(constant.NUMBER_OF_FRACTION_DIGIT));
       categoriesListWithRates.categories.push(categoryData);
     }
     categoriesListWithRates.categoriesAmount = categoriesAmount;
