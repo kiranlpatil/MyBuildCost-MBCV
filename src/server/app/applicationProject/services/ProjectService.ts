@@ -1257,7 +1257,7 @@ class ProjectService {
           categories : new Array<Category>(),
           categoriesAmount : 0,
         };
-
+        logger.info('Project service, Get Project CostHead Categories success');
         for(let costHeadData of projectCostHeads) {
           if (costHeadData.rateAnalysisId === costHeadId) {
             categoriesListWithBuildingRates = this.getCategoriesListWithCentralizedRates(costHeadData.categories, project.rates);
