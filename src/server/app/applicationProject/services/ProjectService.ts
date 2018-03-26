@@ -25,7 +25,7 @@ import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRat
 import Constants = require('../../applicationProject/shared/constants');
 import QuantityItem = require('../dataaccess/model/project/building/QuantityItem');
 import RateItem = require('../dataaccess/model/project/building/RateItem');
-import CategoriesListWithRates = require('../dataaccess/model/project/building/CategoriesListWithRates');
+import CategoriesListWithRatesDTO = require('../dataaccess/dto/project/CategoriesListWithRatesDTO');
 import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
 import messages  = require('../../applicationProject/shared/messages');
 import { CommonService } from '../../applicationProject/shared/CommonService';
@@ -1251,7 +1251,7 @@ class ProjectService {
         callback(error, null);
       } else {
         let buildingCostHeads = building.costHeads;
-        let categoriesListWithCentralizedRates : CategoriesListWithRates;
+        let categoriesListWithCentralizedRates : CategoriesListWithRatesDTO;
 
         for(let costHeadData of buildingCostHeads) {
           if(costHeadData.rateAnalysisId === costHeadId) {
@@ -1273,7 +1273,7 @@ class ProjectService {
         callback(error, null);
       } else {
         let projectCostHeads = project.projectCostHeads;
-        let categoriesListWithCentralizedRates : CategoriesListWithRates;
+        let categoriesListWithCentralizedRates : CategoriesListWithRatesDTO;
 
         for(let costHeadData of projectCostHeads) {
           if (costHeadData.rateAnalysisId === costHeadId) {
@@ -1290,7 +1290,7 @@ class ProjectService {
   getCategoriesListWithCentralizedRates(categoriesOfCostHead: Array<Category>, centralizedRates: Array<CentralizedRate>) {
     let categoriesTotalAmount = 0 ;
 
-    let categoriesListWithRates : CategoriesListWithRates = new CategoriesListWithRates;
+    let categoriesListWithRates : CategoriesListWithRatesDTO = new CategoriesListWithRatesDTO;
 
     for (let categoryData of categoriesOfCostHead) {
       let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates);

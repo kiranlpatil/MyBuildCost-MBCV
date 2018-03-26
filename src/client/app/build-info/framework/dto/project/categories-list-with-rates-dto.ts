@@ -1,6 +1,7 @@
-import { Category } from './category';
+import { Category } from '../../model/category';
 
-class CategoriesListWithRates {
+
+class CategoriesListWithRatesDTO {
   categories : Array<Category>;
   categoriesAmount : number;
 
@@ -10,4 +11,4 @@ class CategoriesListWithRates {
   }
 }
 
-export  = CategoriesListWithRates;
+export  = CategoriesListWithRatesDTO;

@@ -1,7 +1,7 @@
-import Category = require('./Category');
+import Category = require('../../model/project/building/Category');
 
 
-class CategoriesListWithRates {
+class CategoriesListWithRatesDTO {
   categories : Array<Category>;
   categoriesAmount : number;
 
@@ -11,4 +11,4 @@ class CategoriesListWithRates {
   }
 }
 
-export  = CategoriesListWithRates;
+export  = CategoriesListWithRatesDTO;
