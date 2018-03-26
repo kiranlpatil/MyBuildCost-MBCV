@@ -39,4 +39,8 @@ export class CommonService {
     }
     return categoryDetailsTotalAmount;
   }
+
+  floatingPointCalculation(value : number) {
+    return parseFloat((value).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+  }
 }

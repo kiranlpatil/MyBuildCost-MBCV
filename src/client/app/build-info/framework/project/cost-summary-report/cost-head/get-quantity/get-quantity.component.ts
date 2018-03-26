@@ -56,8 +56,8 @@ export class GetQuantityComponent implements OnInit {
       case 'updateNos': {
         this.quantityNumbersTotal =0;
         for(let quantityIndex in this.quantityItems) {
-          this.quantityNumbersTotal= parseFloat((this.quantityNumbersTotal +
-            this.quantityItems[quantityIndex].nos).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+          this.quantityNumbersTotal= this.commonService.floatingPointCalculation(this.quantityNumbersTotal +
+            this.quantityItems[quantityIndex].nos);
         }
         this.getQuantityTotal(this.quantityItems);
       }
@@ -65,8 +65,8 @@ export class GetQuantityComponent implements OnInit {
       case 'updateLength': {
         this.lengthTotal = 0;
         for(let quantityIndex in this.quantityItems)  {
-          this.lengthTotal = parseFloat((this.lengthTotal +
-            this.quantityItems[quantityIndex].length).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+          this.lengthTotal = this.commonService.floatingPointCalculation(this.lengthTotal +
+            this.quantityItems[quantityIndex].length);
         }
         this.getQuantityTotal(this.quantityItems);
       }
@@ -74,8 +74,8 @@ export class GetQuantityComponent implements OnInit {
       case 'updateBreadth' : {
         this.breadthTotal= 0;
         for(let quantityIndex in this.quantityItems)  {
-          this.breadthTotal = parseFloat((this.breadthTotal +
-            this.quantityItems[quantityIndex].breadth).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+          this.breadthTotal = this.commonService.floatingPointCalculation(this.breadthTotal +
+            this.quantityItems[quantityIndex].breadth);
         }
         this.getQuantityTotal(this.quantityItems);
       }
@@ -83,8 +83,8 @@ export class GetQuantityComponent implements OnInit {
       case 'updateHeight' : {
         this.heightTotal=0;
         for(let quantityIndex in this.quantityItems)  {
-          this.heightTotal =parseFloat((this.heightTotal +
-            this.quantityItems[quantityIndex].height).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+          this.heightTotal = this.commonService.floatingPointCalculation(this.heightTotal +
+            this.quantityItems[quantityIndex].height);
         }
         this.getQuantityTotal(this.quantityItems);
       }
@@ -123,9 +123,9 @@ export class GetQuantityComponent implements OnInit {
 
       }
 
-      this.quantityItems[quantityIndex].quantity = parseFloat((multiplier * multiplicand).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
-      this.quantityTotal = parseFloat((this.quantityTotal +
-        this.quantityItems[quantityIndex].quantity).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.quantityItems[quantityIndex].quantity = this.commonService.floatingPointCalculation(multiplier * multiplicand);
+      this.quantityTotal = this.commonService.floatingPointCalculation(this.quantityTotal +
+        this.quantityItems[quantityIndex].quantity);
       }
 
   }
@@ -187,8 +187,8 @@ export class GetQuantityComponent implements OnInit {
         if(workItemData.quantity.total !== 0) {
           workItemData.quantity.isEstimated = true;
           if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
-            workItemData.amount = parseFloat((workItemData.quantity.total * workItemData.rate.total
-            ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+            workItemData.amount = this.commonService.floatingPointCalculation(workItemData.quantity.total *
+              workItemData.rate.total);
           }
         } else {
           workItemData.quantity.isEstimated = false;

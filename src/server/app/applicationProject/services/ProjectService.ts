@@ -28,6 +28,8 @@ import RateItem = require('../dataaccess/model/project/building/RateItem');
 import CategoriesListWithRates = require('../dataaccess/model/project/building/CategoriesListWithRates');
 import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
 import messages  = require('../../applicationProject/shared/messages');
+import { CommonService } from '../../applicationProject/shared/CommonService';
+
 let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
 
@@ -41,6 +43,7 @@ class ProjectService {
   private buildingRepository: BuildingRepository;
   private authInterceptor: AuthInterceptor;
   private userService : UserService;
+  private commonService : CommonService;
 
   constructor() {
     this.projectRepository = new ProjectRepository();
@@ -48,6 +51,7 @@ class ProjectService {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.authInterceptor = new AuthInterceptor();
     this.userService = new UserService();
+    this.commonService = new CommonService();
   }
 
   createProject(data: Project, user : User, callback: (error: any, result: any) => void) {
@@ -1129,7 +1133,7 @@ class ProjectService {
         workItem.quantity.total = totalOfQuantityItems;
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
-           workItem.amount = parseFloat((workItem.rate.total * workItem.quantity.total).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
+           workItem.amount = this.commonService.floatingPointCalculation(workItem.rate.total * workItem.quantity.total);
          }
       workItemsListWithRates.push(workItem);
       }
@@ -1296,7 +1300,7 @@ class ProjectService {
     }
 
     if(categoriesTotalAmount !== 0) {
-      categoriesListWithRates.categoriesAmount = parseFloat((categoriesTotalAmount).toFixed(constant.NUMBER_OF_FRACTION_DIGIT));
+      categoriesListWithRates.categoriesAmount = this.commonService.floatingPointCalculation(categoriesTotalAmount);
     }
 
     return categoriesListWithRates;

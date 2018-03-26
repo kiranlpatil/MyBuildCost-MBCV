@@ -113,8 +113,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryDetailsTotalAmount = 0.0;
 
     for (let categoryData of this.categoryDetails) {
-      this.categoryDetailsTotalAmount = parseFloat((this.categoryDetailsTotalAmount + categoryData.amount
-      ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.categoryDetailsTotalAmount = this.commonService.floatingPointCalculation(this.categoryDetailsTotalAmount
+        + categoryData.amount);
     }
     this.loaderService.stop();
   }

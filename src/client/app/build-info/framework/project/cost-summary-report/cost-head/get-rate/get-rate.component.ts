@@ -53,19 +53,19 @@ export class GetRateComponent {
     for (let i = 0; i < this.rateItemsArray.rateItems.length; i++) {
 
       if(choice === 'changeTotalQuantity') {
-        this.rateItemsArray.rateItems[i].quantity = parseFloat((this.rateItemsArray.rateItems[i].quantity *
-          this.quantityIncrement).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+        this.rateItemsArray.rateItems[i].quantity = this.commonService.floatingPointCalculation(this.rateItemsArray.rateItems[i].quantity *
+          this.quantityIncrement);
       }
 
-      this.rateItemsArray.rateItems[i].totalAmount = parseFloat((this.rateItemsArray.rateItems[i].quantity*
-        this.rateItemsArray.rateItems[i].rate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.rateItemsArray.rateItems[i].totalAmount = this.commonService.floatingPointCalculation(this.rateItemsArray.rateItems[i].quantity*
+        this.rateItemsArray.rateItems[i].rate);
 
-      this.totalAmount = parseFloat((this.totalAmount + this.rateItemsArray.rateItems[i].totalAmount
-      ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.totalAmount = this.commonService.floatingPointCalculation(this.totalAmount +
+        this.rateItemsArray.rateItems[i].totalAmount);
 
     }
 
-this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.quantity).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+this.rateItemsArray.total = this.commonService.floatingPointCalculation(this.totalAmount / this.rateItemsArray.quantity);
   }
 
   updateRate(rateItemsArray: Rate) {
@@ -75,7 +75,7 @@ this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.q
 
     let rate = new Rate();
     rate.rateFromRateAnalysis = rateItemsArray.rateFromRateAnalysis;
-    rate.total = parseFloat((rateItemsArray.total).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+    rate.total = this.commonService.floatingPointCalculation(rateItemsArray.total);
     rate.quantity = rateItemsArray.quantity;
     rate.unit = rateItemsArray.unit;
     rate.rateItems = rateItemsArray.rateItems;
@@ -96,13 +96,13 @@ this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.q
 
     for(let workItemData of this.workItemsList) {
       if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
-        workItemData.rate.total = parseFloat((this.totalAmount / workItemData.rate.quantity
-        ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+        workItemData.rate.total = this.commonService.floatingPointCalculation(this.totalAmount /
+          workItemData.rate.quantity);
         if(workItemData.rate.total !== 0) {
           workItemData.rate.isEstimated = true;
           if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
-            workItemData.amount = parseFloat((workItemData.quantity.total * workItemData.rate.total
-            ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+            workItemData.amount = this.commonService.floatingPointCalculation(workItemData.quantity.total *
+              workItemData.rate.total);
           }
         } else {
           workItemData.rate.isEstimated = false;
