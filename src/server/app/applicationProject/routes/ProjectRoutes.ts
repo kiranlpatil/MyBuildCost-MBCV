@@ -42,8 +42,8 @@ class ProjectRoutes {
     router.put('/:projectId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.updateProjectById, controller.updateProjectById, this._responseInterceptor.exit);
     //Fetch rateItem names having same original name
-    router.get('/:projectId/rates/rateItem/:rateItemName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      validator.getProjectRateItemsByName, controller.getProjectRateItemsByName, this._responseInterceptor.exit);
+    router.get('/:projectId/rates/rateItem/:originalRateItemName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      validator.getProjectRateItemsByOriginalName, controller.getProjectRateItemsByOriginalName, this._responseInterceptor.exit);
 
     /*Project- Routes: Category*/
 
@@ -113,8 +113,8 @@ class ProjectRoutes {
      validator.deleteBuildingById, controller.deleteBuildingById, this._responseInterceptor.exit);
 
     //Fetch rateItem names having same original name
-    router.get('/:projectId/building/:buildingId/rates/rateItem/:rateItemName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-     validator.getRateItemsByName, controller.getRateItemsByName, this._responseInterceptor.exit);
+    router.get('/:projectId/building/:buildingId/rates/rateItem/:originalRateItemName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+     validator.getBuildingRateItemsByOriginalName, controller.getBuildingRateItemsByOriginalName, this._responseInterceptor.exit);
 
     /*Building- Routes: Building Clone*/
 

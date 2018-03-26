@@ -829,22 +829,22 @@ class ProjectController {
     }
   }
 
-  getRateItemsByName(req: express.Request, res: express.Response, next: any): void {
+  getBuildingRateItemsByOriginalName(req: express.Request, res: express.Response, next: any): void {
     try {
-      logger.info('Project controller, getRateItemsByName has been hit');
+      logger.info('Project controller, getBuildingRateItemsByOriginalName has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
-      let rateItemName = req.params.rateItemName;
+      let originalRateItemName = req.params.originalRateItemName;
       let projectService = new ProjectService();
 
-      projectService.getRateItemsByName( projectId, buildingId, rateItemName, user, (error, result) => {
+      projectService.getBuildingRateItemsByOriginalName( projectId, buildingId, originalRateItemName, user, (error, result) => {
         if(error) {
-          logger.error('getRateItemsByName failure');
+          logger.error('getBuildingRateItemsByOriginalName failure');
           next(error);
         } else {
-          logger.info('getRateItemsByName success');
-          logger.debug('Getting getRateItemsByName of Project ID : '+projectId+' Building ID : '+buildingId);
+          logger.info('getBuildingRateItemsByOriginalName success');
+          logger.debug('Getting getBuildingRateItemsByOriginalName of Project ID : '+projectId+' Building ID : '+buildingId);
           next(new Response(200,result));
         }
       });
@@ -853,21 +853,21 @@ class ProjectController {
     }
   }
 
-  getProjectRateItemsByName(req: express.Request, res: express.Response, next: any): void {
+  getProjectRateItemsByOriginalName(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, getProjectRateItemsByName has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
-      let rateItemName = req.params.rateItemName;
+      let originalRateItemName = req.params.originalRateItemName;
       let projectService = new ProjectService();
 
-      projectService.getProjectRateItemsByName( projectId, rateItemName, user, (error, result) => {
+      projectService.getProjectRateItemsByOriginalName( projectId, originalRateItemName, user, (error, result) => {
         if(error) {
-          logger.error('getProjectRateItemsByName failure');
+          logger.error('getProjectRateItemsByOriginalName failure');
           next(error);
         } else {
-          logger.info('getProjectRateItemsByName success');
-          logger.debug('Getting getProjectRateItemsByName of Project ID : '+projectId);
+          logger.info('getProjectRateItemsByOriginalName success');
+          logger.debug('Getting getProjectRateItemsByOriginalName of Project ID : '+projectId);
           next(new Response(200,result));
         }
       });

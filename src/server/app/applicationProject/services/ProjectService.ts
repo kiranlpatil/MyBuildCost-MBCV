@@ -25,7 +25,7 @@ import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRat
 import Constants = require('../../applicationProject/shared/constants');
 import QuantityItem = require('../dataaccess/model/project/building/QuantityItem');
 import RateItem = require('../dataaccess/model/project/building/RateItem');
-import {ValueConstant} from "../../../../client/app/shared/constants";
+import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
 let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
 
@@ -234,31 +234,37 @@ class ProjectService {
     });
   }
 
-  getRateItemsByName(projectId: string, buildingId: string, rateItemName: string, user: User,
-                     callback: (error: any, result: any) => void) {
+  getBuildingRateItemsByOriginalName(projectId: string, buildingId: string, originalRateItemName: string, user: User,
+                                     callback: (error: any, result: any) => void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
-      logger.info('Project Service, getRateItemsByName has been hit');
+      logger.info('Project Service, getBuildingRateItemsByOriginalName has been hit');
       if (error) {
         callback(error, null);
       } else {
-        let rateItemsArray = building.rates;
-          let newRateItemsArray: Array<RateItem> = new Array<RateItem>();
-        newRateItemsArray = alasql('SELECT * FROM ? where originalName = ?', [rateItemsArray,rateItemName]);
-        callback(null,{ data: newRateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let buildingRateItemsArray = building.rates;
+        let rateItemsArray = this.getRateItemsArray(buildingRateItemsArray, originalRateItemName);
+        callback(null,{ data: rateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
 
-  getProjectRateItemsByName(projectId: string, rateItemName: string, user: User, callback: (error: any, result: any) => void) {
+  getRateItemsArray(originalRateItemsArray: Array<CentralizedRate>, originalRateItemName: string) {
+
+    let rateItemsArray: Array<RateItem> = new Array<RateItem>();
+    rateItemsArray = alasql('SELECT * FROM ? where TRIM(originalName) = ?', [originalRateItemsArray, originalRateItemName]);
+    return rateItemsArray;
+  }
+
+  getProjectRateItemsByOriginalName(projectId: string, originalRateItemName: string, user: User,
+                                    callback: (error: any, result: any) => void) {
     this.projectRepository.findById(projectId, (error, project:Project) => {
-      logger.info('Project Service, getProjectRateItemsByName has been hit');
+      logger.info('Project Service, getProjectRateItemsByOriginalName has been hit');
       if (error) {
         callback(error, null);
       } else {
-        let rateItemsArray = project.rates;
-        let newRateItemsArray: Array<RateItem> = new Array<RateItem>();
-        newRateItemsArray = alasql('SELECT * FROM ? where originalName = ?', [rateItemsArray,rateItemName]);
-        callback(null,{ data: newRateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let projectRateItemsArray = project.rates;
+        let rateItemsArray = this.getRateItemsArray(projectRateItemsArray, originalRateItemName);
+        callback(null,{ data: rateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
