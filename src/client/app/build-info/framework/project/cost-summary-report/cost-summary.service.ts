@@ -170,8 +170,8 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
 }
 
-  getRateItemsData(baseUrl: string, rateItemName:string) {
-    var url = baseUrl +'/'+ API.RATES+ '/' +API.RATE_ITEM + '/'+ rateItemName;
+  getRateItemsByOriginalName(baseUrl: string, originalRateItemName:string) {
+    var url = baseUrl +'/'+ API.RATES+ '/' +API.RATE_ITEM + '/'+ originalRateItemName;
     return this.httpDelegateService.getAPI(url);
   }
 }

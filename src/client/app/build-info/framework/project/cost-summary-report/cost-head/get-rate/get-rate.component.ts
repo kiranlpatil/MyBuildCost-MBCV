@@ -41,7 +41,7 @@ export class GetRateComponent {
   totalItemRateQuantity: number = 0;
   arrayOfRateItems: Array<RateItem>;
   selectedRateItem:RateItem;
-  currentRateItem:number;
+  selectedRateItemIndex:number;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private commonService: CommonService) {
@@ -142,23 +142,28 @@ this.rateItemsArray.total = parseFloat((this.totalAmount / this.rateItemsArray.q
     this.previousTotalQuantity = previousTotalQuantity;
   }
 
-  getRateItemsData(rateItem: any, index:number) {
+  getRateItemsByOriginalName(rateItem: any, index:number) {
     this.selectedRateItem = rateItem;
-    this.currentRateItem = index;
+    this.selectedRateItemIndex = index;
 
-    this.costSummaryService.getRateItemsData( this.baseUrl,rateItem.originalName).subscribe(
-      rateItemsData => this.onGetRateItemsDataSuccess(rateItemsData),
+    this.costSummaryService.getRateItemsByOriginalName( this.baseUrl,rateItem.originalName).subscribe(
+      rateItemsData => this.onGetRateItemsDataSuccess(rateItemsData.data),
       error => this.onGetRateItemsDataFailure(error)
     );
   }
 
   onGetRateItemsDataSuccess(rateItemsData: any) {
-    this.arrayOfRateItems = rateItemsData.data;
+    this.arrayOfRateItems = rateItemsData;
 
-    for(let rateObj of rateItemsData.data) {
-      if(rateObj.item === this.selectedRateItem.item) {
-        this.rateItemsArray.rateItems[this.currentRateItem].rate = rateObj.rate;
+    for(let rateItemData of rateItemsData) {
+      if(rateItemData.item === this.selectedRateItem.item) {
+         this.rateItemsArray.rateItems[this.selectedRateItemIndex].rate = rateItemData.rate;
         this.calculateTotal();
+      }
+    }
+    for(let workItemData of this.workItemsList) {
+      if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
+        workItemData.rate = this.rateItemsArray;
       }
     }
   }
