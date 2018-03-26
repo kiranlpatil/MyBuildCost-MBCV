@@ -1133,7 +1133,7 @@ class ProjectService {
         workItem.quantity.total = totalOfQuantityItems;
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
-           workItem.amount = this.commonService.floatingPointCalculation(workItem.rate.total * workItem.quantity.total);
+           workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
          }
       workItemsListWithRates.push(workItem);
       }
@@ -1300,7 +1300,7 @@ class ProjectService {
     }
 
     if(categoriesTotalAmount !== 0) {
-      categoriesListWithRates.categoriesAmount = this.commonService.floatingPointCalculation(categoriesTotalAmount);
+      categoriesListWithRates.categoriesAmount = this.commonService.decimalConversion(categoriesTotalAmount);
     }
 
     return categoriesListWithRates;

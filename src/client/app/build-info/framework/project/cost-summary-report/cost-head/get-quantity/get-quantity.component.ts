@@ -56,7 +56,7 @@ export class GetQuantityComponent implements OnInit {
       case 'updateNos': {
         this.quantityNumbersTotal =0;
         for(let quantityIndex in this.quantityItems) {
-          this.quantityNumbersTotal= this.commonService.floatingPointCalculation(this.quantityNumbersTotal +
+          this.quantityNumbersTotal= this.commonService.decimalConversion(this.quantityNumbersTotal +
             this.quantityItems[quantityIndex].nos);
         }
         this.getQuantityTotal(this.quantityItems);
@@ -65,7 +65,7 @@ export class GetQuantityComponent implements OnInit {
       case 'updateLength': {
         this.lengthTotal = 0;
         for(let quantityIndex in this.quantityItems)  {
-          this.lengthTotal = this.commonService.floatingPointCalculation(this.lengthTotal +
+          this.lengthTotal = this.commonService.decimalConversion(this.lengthTotal +
             this.quantityItems[quantityIndex].length);
         }
         this.getQuantityTotal(this.quantityItems);
@@ -74,7 +74,7 @@ export class GetQuantityComponent implements OnInit {
       case 'updateBreadth' : {
         this.breadthTotal= 0;
         for(let quantityIndex in this.quantityItems)  {
-          this.breadthTotal = this.commonService.floatingPointCalculation(this.breadthTotal +
+          this.breadthTotal = this.commonService.decimalConversion(this.breadthTotal +
             this.quantityItems[quantityIndex].breadth);
         }
         this.getQuantityTotal(this.quantityItems);
@@ -83,7 +83,7 @@ export class GetQuantityComponent implements OnInit {
       case 'updateHeight' : {
         this.heightTotal=0;
         for(let quantityIndex in this.quantityItems)  {
-          this.heightTotal = this.commonService.floatingPointCalculation(this.heightTotal +
+          this.heightTotal = this.commonService.decimalConversion(this.heightTotal +
             this.quantityItems[quantityIndex].height);
         }
         this.getQuantityTotal(this.quantityItems);
@@ -123,8 +123,8 @@ export class GetQuantityComponent implements OnInit {
 
       }
 
-      this.quantityItems[quantityIndex].quantity = this.commonService.floatingPointCalculation(multiplier * multiplicand);
-      this.quantityTotal = this.commonService.floatingPointCalculation(this.quantityTotal +
+      this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion(multiplier * multiplicand);
+      this.quantityTotal = this.commonService.decimalConversion(this.quantityTotal +
         this.quantityItems[quantityIndex].quantity);
       }
 
@@ -187,7 +187,7 @@ export class GetQuantityComponent implements OnInit {
         if(workItemData.quantity.total !== 0) {
           workItemData.quantity.isEstimated = true;
           if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
-            workItemData.amount = this.commonService.floatingPointCalculation(workItemData.quantity.total *
+            workItemData.amount = this.commonService.decimalConversion(workItemData.quantity.total *
               workItemData.rate.total);
           }
         } else {

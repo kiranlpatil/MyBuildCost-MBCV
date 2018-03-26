@@ -113,7 +113,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryDetailsTotalAmount = 0.0;
 
     for (let categoryData of this.categoryDetails) {
-      this.categoryDetailsTotalAmount = this.commonService.floatingPointCalculation(this.categoryDetailsTotalAmount
+      this.categoryDetailsTotalAmount = this.commonService.decimalConversion(this.categoryDetailsTotalAmount
         + categoryData.amount);
     }
     this.loaderService.stop();

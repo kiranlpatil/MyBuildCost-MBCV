@@ -53,19 +53,19 @@ export class GetRateComponent {
     for (let i = 0; i < this.rateItemsArray.rateItems.length; i++) {
 
       if(choice === 'changeTotalQuantity') {
-        this.rateItemsArray.rateItems[i].quantity = this.commonService.floatingPointCalculation(this.rateItemsArray.rateItems[i].quantity *
+        this.rateItemsArray.rateItems[i].quantity = this.commonService.decimalConversion(this.rateItemsArray.rateItems[i].quantity *
           this.quantityIncrement);
       }
 
-      this.rateItemsArray.rateItems[i].totalAmount = this.commonService.floatingPointCalculation(this.rateItemsArray.rateItems[i].quantity*
+      this.rateItemsArray.rateItems[i].totalAmount = this.commonService.decimalConversion(this.rateItemsArray.rateItems[i].quantity*
         this.rateItemsArray.rateItems[i].rate);
 
-      this.totalAmount = this.commonService.floatingPointCalculation(this.totalAmount +
+      this.totalAmount = this.commonService.decimalConversion(this.totalAmount +
         this.rateItemsArray.rateItems[i].totalAmount);
 
     }
 
-this.rateItemsArray.total = this.commonService.floatingPointCalculation(this.totalAmount / this.rateItemsArray.quantity);
+this.rateItemsArray.total = this.commonService.decimalConversion(this.totalAmount / this.rateItemsArray.quantity);
   }
 
   updateRate(rateItemsArray: Rate) {
@@ -75,7 +75,7 @@ this.rateItemsArray.total = this.commonService.floatingPointCalculation(this.tot
 
     let rate = new Rate();
     rate.rateFromRateAnalysis = rateItemsArray.rateFromRateAnalysis;
-    rate.total = this.commonService.floatingPointCalculation(rateItemsArray.total);
+    rate.total = this.commonService.decimalConversion(rateItemsArray.total);
     rate.quantity = rateItemsArray.quantity;
     rate.unit = rateItemsArray.unit;
     rate.rateItems = rateItemsArray.rateItems;
@@ -96,12 +96,12 @@ this.rateItemsArray.total = this.commonService.floatingPointCalculation(this.tot
 
     for(let workItemData of this.workItemsList) {
       if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
-        workItemData.rate.total = this.commonService.floatingPointCalculation(this.totalAmount /
+        workItemData.rate.total = this.commonService.decimalConversion(this.totalAmount /
           workItemData.rate.quantity);
         if(workItemData.rate.total !== 0) {
           workItemData.rate.isEstimated = true;
           if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
-            workItemData.amount = this.commonService.floatingPointCalculation(workItemData.quantity.total *
+            workItemData.amount = this.commonService.decimalConversion(workItemData.quantity.total *
               workItemData.rate.total);
           }
         } else {
