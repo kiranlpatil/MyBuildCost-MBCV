@@ -143,6 +143,9 @@ class Messages {
   public static MSG_ERROR_EXPORTING_MANAGED_CANDIDATES = 'Error In exporting managed candidates by recruiter';
 
   public static MSG_ERROR_CREATE_PROJECT = 'Error in creating Project.';
+
+  // Empty response
+  public static MSG_ERROR_EMPTY_RESPONSE = 'Empty response';
 }
 export=Messages;
 

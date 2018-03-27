@@ -1,5 +1,5 @@
 import CostHead = require('./CostHead');
-import RateItem = require('./RateItem');
+import CentralizedRate = require('../CentralizedRate');
 
 class Building {
   _id?:string;
@@ -8,7 +8,7 @@ class Building {
   totalCarpetAreaOfUnit: number;
   totalSaleableAreaOfUnit: number;
   plinthArea:number;
-  rates : Array<RateItem>;
+  rates : Array<CentralizedRate>;
   totalNumOfFloors:number;
   numOfParkingFloors:number;
   carpetAreaOfParking:number;

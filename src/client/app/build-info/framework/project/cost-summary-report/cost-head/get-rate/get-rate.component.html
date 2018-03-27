@@ -1,19 +1,19 @@
 <!--Edit enabled-->
-<div *ngIf="rateItemsArray!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost') ? 'get-cost-section' : 'get-systemRA-section')">
+<div *ngIf="rate!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost') ? 'get-cost-section' : 'get-systemRA-section')">
   <div class="pull-left">
-    <div class="pull-left" *ngIf="rateItemsArray!==undefined">
+    <div class="pull-left" *ngIf="rate!==undefined">
       <div class="pull-left quantity-label">
-          {{ getHeadings().QUANTITY }} {{ getHeadings().ITEM }}
+        {{ getHeadings().ITEM }} {{ getHeadings().QUANTITY }}{{ getHeadings().COLON }}
       </div>
       <div class="pull-left">
-        <input [(ngModel)]="rateItemsArray.quantity" id="rateQuantity" type="number" class="form-control quantity-count"
-               (change)="onTotalQuantityChange(rateItemsArray.quantity)"
-               (focus)="getPreviousQuantity(rateItemsArray.quantity)"
+        <input [(ngModel)]="rate.quantity" id="rateQuantity" type="number" class="form-control quantity-count"
+               (change)="onTotalQuantityChange(rate.quantity)"
+               (focus)="getPreviousQuantity(rate.quantity)"
                [disabled]="disableRateField"/>
       </div>
       <div class="pull-left">
         <span class="quantity-sqft">
-          {{ rateItemsArray.unit }}
+          {{ rate.unit }}
         </span>
       </div>
     </div>
@@ -30,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rateItem of rateItemsArray.rateItems | groupBy:'type'; let k = index">
+        <tr *ngFor="let rateItem of rate.rateItems | groupBy:'type'; let k = index">
           <td class="rate-item" colspan="5">
             <table>
               <thead>
@@ -41,10 +41,10 @@
               <tbody>
                 <tr *ngFor="let item of rateItem.value; let i=index">
                   <td>
-                    <input  id="itemDescription"  class="form-control remark-input"  (blur)="getRateItemsData(item, i)"
-                           list="RateItems" [(ngModel)]="item.item"/>
+                    <input  id="itemDescription"  class="form-control remark-input"  (blur)="getRateItemsByOriginalName(item, i)"
+                           list="RateItems" [(ngModel)]="item.itemName"/>
                           <datalist id="RateItems" >
-                            <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.item}}"></option>    
+                            <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}"></option>    
                      </datalist>
                     <div class="remark-icon">
                       <img title="{{item.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
@@ -78,7 +78,7 @@
         <td class="total-amount" colspan="3">
         </td>
         <td class="total-amount">
-          {{ totalAmount }}
+          {{ totalAmount|number}}
         </td>
       </tr>
       </tfoot>
@@ -92,16 +92,16 @@
     <tbody>
       <tr>
         <td class="alignment-top">
-          <textarea rows="4" cols="80" [(ngModel)]="rateItemsArray.notes" id="rateNotes" [disabled]="disableRateField">
+          <textarea rows="4" cols="80" [(ngModel)]="rate.notes" id="rateNotes" [disabled]="disableRateField">
             </textarea>
         </td>
         <td>
-          <img id="rateImageURL" src="{{rateItemsArray.imageURL}}">
+          <img id="rateImageURL" src="{{rate.imageURL}}">
         </td>
       </tr>
     </tbody>
   </table>
-  <button type="button" *ngIf="!disableRateField" class="save-btn" (click)="updateRate(rateItemsArray)">{{ getButton().SAVE }}</button>
+  <button type="button" *ngIf="!disableRateField" class="save-btn" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
 
 </div>
 

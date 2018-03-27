@@ -39,4 +39,12 @@ export class CommonService {
     }
     return categoryDetailsTotalAmount;
   }
+
+  calculateAmountOfWorkItem(totalQuantity : number, totalRate : number) {
+    return this.decimalConversion(totalQuantity * totalRate);
+  }
+
+  decimalConversion(value : number) {
+    return parseFloat((value).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+  }
 }

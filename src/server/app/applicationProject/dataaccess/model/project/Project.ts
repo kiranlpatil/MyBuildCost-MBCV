@@ -2,6 +2,7 @@ import Building = require('./building/Building');
 import Category = require('./building/CostHead');
 import Rate = require('./building/Rate');
 import CostHead = require('./building/CostHead');
+import CentralizedRate = require('./CentralizedRate');
 
 class Project {
   _id?:string;
@@ -16,7 +17,7 @@ class Project {
   poolCapacity:number;
   totalNumOfBuildings:number;
   buildings: Array<Building>;
-  rates: Array<Rate>;
+  rates: Array<CentralizedRate>;
   projectCostHeads : Array<CostHead>;
 }
 export = Project;

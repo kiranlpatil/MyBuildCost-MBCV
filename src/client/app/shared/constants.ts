@@ -348,6 +348,7 @@ export class Headings {
   public static ELECTRIC_INFRASTRUCTURE : string = 'Electric Infrastructure ';
   public static CONSTRUCTION_COST : string = 'Construction Cost (Material + Labour)';
   public static QUANTITY : string = 'Quantity';
+  public static COLON : string = ':';
   public static ITEM : string = 'Item';
   }
 

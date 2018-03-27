@@ -1,5 +1,6 @@
 export class RateItem {
-  item: string ='';
+  itemName: string ='';
+  originalItemName: string;
   type: string ='';
   unit: string ='';
   rate: number;

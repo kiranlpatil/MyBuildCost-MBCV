@@ -112,7 +112,7 @@ export class CostSummaryService extends BaseService {
   }
 
   updateQuantityItems( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
-                      quantityItemsArray : Array<QuantityItem>) {
+                      quantityItemsArray : any) {
     var body= { item : quantityItemsArray };
     var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
       '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY;
@@ -165,13 +165,13 @@ export class CostSummaryService extends BaseService {
 */
 
   //Get All WorkItems Of Category
-  getAllWorkItemsOfCategory(baseUrl: string, costHeadId : number, categoryId : number) {
+  getActiveWorkItemsOfCategory(baseUrl: string, costHeadId : number, categoryId : number) {
     var url = baseUrl +'/'+ API.COSTHEAD+ '/' + costHeadId + '/' + API.CATEGORY + '/' + categoryId + '/' + API.WORKITEMLIST;
     return this.httpDelegateService.getAPI(url);
 }
 
-  getRateItemsData(baseUrl: string, rateItemName:string) {
-    var url = baseUrl +'/'+ API.RATES+ '/' +API.RATE_ITEM + '/'+ rateItemName;
+  getRateItemsByOriginalName(baseUrl: string, originalRateItemName:string) {
+    var url = baseUrl +'/'+ API.RATES+ '/' +API.RATE_ITEM + '/'+ originalRateItemName;
     return this.httpDelegateService.getAPI(url);
   }
 }

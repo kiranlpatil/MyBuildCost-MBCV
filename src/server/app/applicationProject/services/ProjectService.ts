@@ -25,7 +25,11 @@ import ThumbRuleRate = require('../dataaccess/model/project/reports/ThumbRuleRat
 import Constants = require('../../applicationProject/shared/constants');
 import QuantityItem = require('../dataaccess/model/project/building/QuantityItem');
 import RateItem = require('../dataaccess/model/project/building/RateItem');
-import {ValueConstant} from "../../../../client/app/shared/constants";
+import CategoriesListWithRatesDTO = require('../dataaccess/dto/project/CategoriesListWithRatesDTO');
+import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
+import messages  = require('../../applicationProject/shared/messages');
+import { CommonService } from '../../applicationProject/shared/CommonService';
+
 let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
 
@@ -39,6 +43,7 @@ class ProjectService {
   private buildingRepository: BuildingRepository;
   private authInterceptor: AuthInterceptor;
   private userService : UserService;
+  private commonService : CommonService;
 
   constructor() {
     this.projectRepository = new ProjectRepository();
@@ -46,6 +51,7 @@ class ProjectService {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.authInterceptor = new AuthInterceptor();
     this.userService = new UserService();
+    this.commonService = new CommonService();
   }
 
   createProject(data: Project, user : User, callback: (error: any, result: any) => void) {
@@ -234,31 +240,39 @@ class ProjectService {
     });
   }
 
-  getRateItemsByName(projectId: string, buildingId: string, rateItemName: string, user: User,
-                     callback: (error: any, result: any) => void) {
-    this.buildingRepository.findById(buildingId, (error, building:Building) => {
-      logger.info('Project Service, getRateItemsByName has been hit');
+  getBuildingRateItemsByOriginalName(projectId: string, buildingId: string, originalRateItemName: string, user: User,
+                                     callback: (error: any, result: any) => void) {
+    let projection = {'rates':1, _id: 0};
+    this.buildingRepository.findByIdWithProjection(buildingId, projection, (error, building) => {
+      logger.info('Project Service, getBuildingRateItemsByOriginalName has been hit');
       if (error) {
         callback(error, null);
       } else {
-        let rateItemsArray = building.rates;
-          let newRateItemsArray: Array<RateItem> = new Array<RateItem>();
-        newRateItemsArray = alasql('SELECT * FROM ? where originalName = ?', [rateItemsArray,rateItemName]);
-        callback(null,{ data: newRateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let buildingRateItemsArray = building.rates;
+        let centralizedRateItemsArray = this.getRateItemsArray(buildingRateItemsArray, originalRateItemName);
+        callback(null,{ data: centralizedRateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
 
-  getProjectRateItemsByName(projectId: string, rateItemName: string, user: User, callback: (error: any, result: any) => void) {
-    this.projectRepository.findById(projectId, (error, project:Project) => {
-      logger.info('Project Service, getProjectRateItemsByName has been hit');
+  getRateItemsArray(originalRateItemsArray: Array<CentralizedRate>, originalRateItemName: string) {
+
+    let centralizedRateItemsArray: Array<CentralizedRate>;
+    centralizedRateItemsArray = alasql('SELECT * FROM ? where TRIM(originalItemName) = ?', [originalRateItemsArray, originalRateItemName]);
+    return centralizedRateItemsArray;
+  }
+
+  getProjectRateItemsByOriginalName(projectId: string, originalRateItemName: string, user: User,
+                                    callback: (error: any, result: any) => void) {
+   let projection = {'rates':1, _id: 0};
+    this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
+      logger.info('Project Service, getProjectRateItemsByOriginalName has been hit');
       if (error) {
         callback(error, null);
       } else {
-        let rateItemsArray = project.rates;
-        let newRateItemsArray: Array<RateItem> = new Array<RateItem>();
-        newRateItemsArray = alasql('SELECT * FROM ? where originalName = ?', [rateItemsArray,rateItemName]);
-        callback(null,{ data: newRateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let projectRateItemsArray = project.rates;
+        let centralizedRateItemsArray = this.getRateItemsArray(projectRateItemsArray, originalRateItemName);
+        callback(null,{ data: centralizedRateItemsArray, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -487,21 +501,17 @@ class ProjectService {
 
               for(let rate of rateItems) {
 
-                let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.item= '"+rate.item+"'";
+                let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.itemName= '"+rate.itemName+"'";
                 let rateExistArray = alasql(rateObjectExistSQL,[centralizedRates]);
                 if(rateExistArray.length > 0) {
                   if(rateExistArray[0].rate !== rate.rate) {
                     //update rate of rateItem
-                    let updateRatePromise = this.createPromiseForRateUpdate(buildingId, rate.item, rate.rate);
+                    let updateRatePromise = this.createPromiseForRateUpdate(buildingId, rate.itemName, rate.rate);
                     promiseArrayForUpdateBuildingCentralizedRates.push(updateRatePromise);
                   }
                 } else {
                   //create new rateItem
-                  let rateItem = {
-                    'item' :rate.item,
-                    'originalName' : rate.originalName,
-                    'rate':rate.rate
-                  }
+                  let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
                   let addNewRateItemPromise = this.createPromiseForAddingNewRateItem(buildingId, rateItem);
                   promiseArrayForUpdateBuildingCentralizedRates.push(addNewRateItemPromise);
                 }
@@ -562,21 +572,17 @@ class ProjectService {
 
             for(let rate of rateItems) {
 
-              let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.item= '"+rate.item+"'";
+              let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.itemName= '"+rate.itemName+"'";
               let rateExistArray = alasql(rateObjectExistSQL,[centralizedRatesOfProjects]);
               if(rateExistArray.length > 0) {
                 if(rateExistArray[0].rate !== rate.rate) {
                   //update rate of rateItem
-                  let updateRateOfProjectPromise = this.createPromiseForRateUpdateOfProjectRates(projectId, rate.item, rate.rate);
+                  let updateRateOfProjectPromise = this.createPromiseForRateUpdateOfProjectRates(projectId, rate.itemName, rate.rate);
                   promiseArrayForProjectCentralizedRates.push(updateRateOfProjectPromise);
                 }
               } else {
                 //create new rateItem
-                let rateItem = {
-                  'item' :rate.item,
-                  'originalName' : rate.originalName,
-                  'rate':rate.rate
-                };
+                let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
                 let addNewRateOfProjectPromise = this.createPromiseForAddingNewRateItemInProjectRates(projectId, rateItem);
                 promiseArrayForProjectCentralizedRates.push(addNewRateOfProjectPromise);
               }
@@ -913,7 +919,7 @@ class ProjectService {
   }
 
   updateQuantityOfBuildingCostHeads(projectId:string, buildingId:string, costHeadId:number, categoryId:number, workItemId:number,
-                                    quantityItems:Array<QuantityItem>, user:User, callback:(error: any, result: any)=> void) {
+                                    quantityItems:Map<string,Array<QuantityItem>>, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateQuantityOfBuildingCostHeads has been hit');
     this.buildingRepository.findById(buildingId, (error, building) => {
       if (error) {
@@ -923,7 +929,8 @@ class ProjectService {
         let quantity  : Quantity;
         for (let costHead of costHeadList) {
           if (costHeadId === costHead.rateAnalysisId) {
-            for (let categoryData of costHead.categories) {
+            let categoriesOfCostHead = costHead.categories;
+            for (let categoryData of categoriesOfCostHead) {
               if (categoryId === categoryData.rateAnalysisId) {
                 for (let workItemData of categoryData.workItems) {
                   if (workItemId === workItemData.rateAnalysisId) {
@@ -931,8 +938,11 @@ class ProjectService {
                     quantity.isEstimated = true;
                     quantity.quantityItems = quantityItems;
                     quantity.total = 0;
-                    for (let quantityData of quantity.quantityItems) {
-                      quantity.total = quantityData.quantity + quantity.total;
+                    for(let keyQuantity in quantityItems) {
+                      let quantityArray = quantityItems[keyQuantity];
+                      for(let quantityObj of quantityArray) {
+                        quantity.total = quantity.total + quantityObj.quantity;
+                      }
                     }
                   }
                 }
@@ -1023,74 +1033,63 @@ class ProjectService {
     });
   }
 
-  getWorkitemListOfBuildingCostHead(projectId:string, buildingId:string, costHeadId:number, categoryId:number, user:User,
+  getWorkItemListOfBuildingCategory(projectId:string, buildingId:string, costHeadId:number, categoryId:number, user:User,
                                     callback:(error: any, result: any)=> void) {
-    logger.info('Project service, getWorkitemListOfBuildingCostHead has been hit');
+    logger.info('Project service, getWorkItemListOfBuildingCategory has been hit');
 
     let query = [
       { $match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId }},
       { $unwind: '$costHeads'},
-      { $project : {'costHeads':1}},
+      { $project : {'costHeads':1,'rates':1}},
       { $unwind: '$costHeads.categories'},
       { $match: {'costHeads.categories.rateAnalysisId':categoryId}},
-      { $project : {'costHeads.categories.workItems':1}}
+      { $project : {'costHeads.categories.workItems':1, 'rates':1}}
     ];
 
-    this.buildingRepository.findById(buildingId, (error, response) => {
-      logger.info('Project service, Get workitems By Cost Head & category Id has been hit');
+    this.buildingRepository.aggregate(query, (error, result) => {
+      logger.info('Project service, Get workitems for specific category has been hit');
       if (error) {
         callback(error, null);
       } else {
-        if(response) {
-          this.buildingRepository.aggregate(query, (error, result) => {
-            logger.info('Project service, Get workitems for specific category has been hit');
-            if (error) {
-              callback(error, null);
-            } else {
-              if(result.length > 0) {
-                let workItemsOfBuildingCategory = result[0].costHeads.categories.workItems;
-                let workItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(workItemsOfBuildingCategory, response.rates);
-                callback(null, {data: workItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
-              }
-            }
-          });
+        if(result.length > 0) {
+          let workItemsOfBuildingCategory = result[0].costHeads.categories.workItems;
+          let workItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(workItemsOfBuildingCategory, result[0].rates);
+          callback(null, {data: workItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        } else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
+          callback(error, null);
         }
       }
     });
   }
 
-  getWorkitemListOfProjectCostHead(projectId:string, costHeadId:number, categoryId:number, user:User,
+  getWorkItemListOfProjectCategory(projectId:string, costHeadId:number, categoryId:number, user:User,
                                    callback:(error: any, result: any)=> void) {
-    logger.info('Project service, getWorkitemListOfProjectCostHead has been hit');
+    logger.info('Project service, getWorkItemListOfProjectCategory has been hit');
 
     let query = [
       { $match: {'_id': ObjectId(projectId), 'projectCostHeads.rateAnalysisId': costHeadId }},
       { $unwind: '$projectCostHeads'},
-      { $project : {'projectCostHeads':1}},
+      { $project : {'projectCostHeads':1,'rates':1}},
       { $unwind: '$projectCostHeads.categories'},
       { $match: {'projectCostHeads.categories.rateAnalysisId':categoryId}},
-      { $project : {'projectCostHeads.categories.workItems':1}}
+      { $project : {'projectCostHeads.categories.workItems':1,'rates':1}}
     ];
 
-    this.projectRepository.findById(projectId, (error, response) => {
+    this.projectRepository.aggregate(query, (error, result) => {
       logger.info('Project service, Get workitems By Cost Head & category Id has been hit');
       if (error) {
         callback(error, null);
       } else {
-        if(response) {
-          console.log('result : '+JSON.stringify(response.rates));
-          this.projectRepository.aggregate(query, (error, result) => {
-            logger.info('Project service, Get workitems By Cost Head & category Id has been hit');
-            if (error) {
-              callback(error, null);
-            } else {
-              if(result.length > 0) {
-                let workItemsOfCategory = result[0].projectCostHeads.categories.workItems;
-                let workItemsListWithRates = this.getWorkItemListWithCentralizedRates(workItemsOfCategory, response.rates);
-                callback(null, {data: workItemsListWithRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
-              }
-            }
-          });
+        if(result.length > 0) {
+          let workItemsOfCategory = result[0].projectCostHeads.categories.workItems;
+          let workItemsListWithRates = this.getWorkItemListWithCentralizedRates(workItemsOfCategory, result[0].rates);
+          callback(null, {data: workItemsListWithRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        } else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
+          callback(error, null);
         }
       }
     });
@@ -1108,12 +1107,15 @@ class ProjectService {
         let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?',[arrayOfRateItems]);
         workItem.rate.total = parseFloat((totalOfAllRateItems/workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
 
-        let arrayOfQuantityItems = workItem.quantity.quantityItems;
-        let totalOfQuantityItems = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[arrayOfQuantityItems]);
-        workItem.quantity.total = totalOfQuantityItems;
+        let quantityItems = workItem.quantity.quantityItems;
+
+        for(let keyQuantity in quantityItems) {
+          let quantityArray = quantityItems[keyQuantity];
+          workItem.quantity.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityArray]);
+        }
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
-           workItem.amount = parseFloat((workItem.rate.total * workItem.quantity.total).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
+           workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
          }
       workItemsListWithRates.push(workItem);
       }
@@ -1122,9 +1124,9 @@ class ProjectService {
   }
 
   getRatesFromCentralizedrates(rateItemsOfWorkItem: Array<RateItem>, centralizedRates:Array<any>) {
-    let rateItemsSQL = 'SELECT rateItem.item, rateItem.originalName, rateItem.rateAnalysisId, rateItem.type,' +
+    let rateItemsSQL = 'SELECT rateItem.itemName, rateItem.originalItemName, rateItem.rateAnalysisId, rateItem.type,' +
       'rateItem.quantity, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
-      'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.item = centralizedRates.item';
+      'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.itemName = centralizedRates.itemName';
     let rateItemsForWorkItem = alasql(rateItemsSQL, [rateItemsOfWorkItem, centralizedRates]);
     return rateItemsForWorkItem;
   }
@@ -1229,17 +1231,15 @@ class ProjectService {
         callback(error, null);
       } else {
         let buildingCostHeads = building.costHeads;
-        let categoriesListWithBuildingRates = {
-          categories : new Array<Category>(),
-          categoriesAmount : 0,
-        };
+        let categoriesListWithCentralizedRates : CategoriesListWithRatesDTO;
 
         for(let costHeadData of buildingCostHeads) {
           if(costHeadData.rateAnalysisId === costHeadId) {
-            categoriesListWithBuildingRates = this.getCategoriesListWithCentralizedRates(costHeadData.categories, building.rates);
+            categoriesListWithCentralizedRates = this.getCategoriesListWithCentralizedRates(costHeadData.categories, building.rates);
+            break;
           }
         }
-        callback(null, {data: categoriesListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null, {data: categoriesListWithCentralizedRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -1253,38 +1253,38 @@ class ProjectService {
         callback(error, null);
       } else {
         let projectCostHeads = project.projectCostHeads;
-        let categoriesListWithBuildingRates = {
-          categories : new Array<Category>(),
-          categoriesAmount : 0,
-        };
-        logger.info('Project service, Get Project CostHead Categories success');
+        let categoriesListWithCentralizedRates : CategoriesListWithRatesDTO;
+
         for(let costHeadData of projectCostHeads) {
           if (costHeadData.rateAnalysisId === costHeadId) {
-            categoriesListWithBuildingRates = this.getCategoriesListWithCentralizedRates(costHeadData.categories, project.rates);
+            categoriesListWithCentralizedRates = this.getCategoriesListWithCentralizedRates(costHeadData.categories, project.rates);
+            break;
           }
         }
-        callback(null, {data: categoriesListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null, {data: categoriesListWithCentralizedRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
 
   //Get category list with centralized rate
-  getCategoriesListWithCentralizedRates(categoriesOfCostHead: Array<Category>, centralizedRates: Array<any>) {
+  getCategoriesListWithCentralizedRates(categoriesOfCostHead: Array<Category>, centralizedRates: Array<CentralizedRate>) {
     let categoriesTotalAmount = 0 ;
 
-    let categoriesListWithRates = {
-      categories : new Array<Category>(),
-      categoriesAmount : 0
-    };
+    let categoriesListWithRates : CategoriesListWithRatesDTO = new CategoriesListWithRatesDTO;
 
     for (let categoryData of categoriesOfCostHead) {
-      categoryData.workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates);
-      let calculateWorkItemTotalAmount =  alasql('VALUE OF SELECT SUM(amount) FROM ?',[categoryData.workItems]);
+      let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates);
+      let calculateWorkItemTotalAmount =  alasql('VALUE OF SELECT SUM(amount) FROM ?',[workItems]);
       categoryData.amount = calculateWorkItemTotalAmount;
       categoriesTotalAmount = categoriesTotalAmount + calculateWorkItemTotalAmount;
+      delete categoryData.workItems;
       categoriesListWithRates.categories.push(categoryData);
     }
-    categoriesListWithRates.categoriesAmount =  parseFloat((categoriesTotalAmount).toFixed(2));
+
+    if(categoriesTotalAmount !== 0) {
+      categoriesListWithRates.categoriesAmount = this.commonService.decimalConversion(categoriesTotalAmount);
+    }
+
     return categoriesListWithRates;
   }
 
@@ -1420,7 +1420,7 @@ class ProjectService {
       'FROM ? AS t)';
     let rateItems = alasql(getRatesListSQL, [result.rates, costHeads]);
 
-    let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS item, rateItem.C2 AS originalName,' +
+    let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
       'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
       'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
       'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
@@ -1428,7 +1428,7 @@ class ProjectService {
 
     let rateItemsList = alasql(rateItemsRateAnalysisSQL, [rateItems, result.units]);
 
-    let distinctItemsSQL = 'select DISTINCT item,originalName,rate FROM ?';
+    let distinctItemsSQL = 'select DISTINCT itemName,originalItemName,rate FROM ?';
     var distinctRates = alasql (distinctItemsSQL, [rateItemsList]);
 
     return distinctRates;
@@ -1638,7 +1638,8 @@ class ProjectService {
       let projectRepository = new ProjectRepository();
       let addNewRateItemQueryProject = {'_id' : projectId};
       let addNewRateRateDataProject = { $push : {'rates' : rateItem } };
-      projectRepository.findOneAndUpdate(addNewRateItemQueryProject, addNewRateRateDataProject,{new: true}, (error:Error, result:Building) => {
+      projectRepository.findOneAndUpdate(addNewRateItemQueryProject, addNewRateRateDataProject,
+        {new: true}, (error:Error, result:Building) => {
         if (error) {
           reject(error);
         } else {

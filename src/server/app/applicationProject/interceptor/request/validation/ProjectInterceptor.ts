@@ -84,8 +84,9 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
       }
     });
   }
-  getProjectRateItemsByName(req: any, res: any, next: any) {
+  getProjectRateItemsByOriginalName(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
+    var originalRateItemName = req.params.originalRateItemName;
     ProjectInterceptor.validateProjectId(projectId, (error, result) => {
       if (error) {
         next(error);
@@ -98,7 +99,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         }else {
-          if ((req.params.rateItemName === undefined) || (req.params.rateItemName === '')) {
+          if ((originalRateItemName === undefined) || (originalRateItemName=== '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -288,7 +289,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
-  getWorkitemListOfProjectCostHead(req: any, res: any, next: any) {
+  getWorkItemListOfProjectCategory(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var costHeadId = req.params.costHeadId;
     ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
@@ -654,7 +655,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
-  getWorkitemListOfBuildingCostHead(req: any, res: any, next: any) {
+  getWorkItemListOfBuildingCategory(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;
@@ -960,9 +961,10 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
       }
     });
   }
-  getRateItemsByName(req: any, res: any, next: any) {
+  getBuildingRateItemsByOriginalName(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
+    var originalRateItemName = req.params.originalRateItemName;
     ProjectInterceptor.validateIds(projectId, buildingId, (error, result) => {
       if (error) {
         next(error);
@@ -975,7 +977,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         } else {
-          if ((req.params.rateItemName === undefined) || (req.params.rateItemName === '')) {
+          if ((originalRateItemName === undefined) || (originalRateItemName=== '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,

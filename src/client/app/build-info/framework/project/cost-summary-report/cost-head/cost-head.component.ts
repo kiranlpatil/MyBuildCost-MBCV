@@ -113,8 +113,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryDetailsTotalAmount = 0.0;
 
     for (let categoryData of this.categoryDetails) {
-      this.categoryDetailsTotalAmount = parseFloat((this.categoryDetailsTotalAmount + categoryData.amount
-      ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.categoryDetailsTotalAmount = this.commonService.decimalConversion(this.categoryDetailsTotalAmount
+        + categoryData.amount);
     }
     this.loaderService.stop();
   }
@@ -139,7 +139,16 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.workItemId = workItem.rateAnalysisId;
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
 
-      this.quantityItemsArray = workItem.quantity.quantityItems;
+      let quantityMap = workItem.quantity.quantityItems;
+      if(lodsh.isEmpty(quantityMap)) {
+        this.quantityItemsArray = [];
+      } else {
+        for (let key in quantityMap) {
+          if(key === 'default') {
+            this.quantityItemsArray = quantityMap[key];
+          }
+        }
+      }
       this.workItem = workItem;
       this.rateView = 'quantity';
       this.currentCategoryIndex = categoryIndex;
@@ -343,7 +352,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.messageService.message(message);
 
 
-    this.workItemsList = this.workItemsList.concat(this.calculateWorkItemAmount(this.selectedWorkItemData));
+    this.workItemsList = this.workItemsList.concat(this.totalCalculationOfWorkItemsList(this.selectedWorkItemData));
     this.categoryDetailsTotalAmount = this.commonService.totalCalculationOfCategories(this.categoryDetails,
       this.categoryRateAnalysisId, this.workItemsList);
     this.loaderService.stop();
@@ -446,30 +455,30 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.selectedWorkItems = workItemList;
   }*/
 
-    getAllWorkItemsOfCategory( categoryId : number) {
+    getActiveWorkItemsOfCategory(categoryId : number) {
       let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.categoryId = categoryId;
       this.categoryRateAnalysisId = categoryId;
-      this.costSummaryService.getAllWorkItemsOfCategory( this.baseUrl, costHeadId, this.categoryId).subscribe(
-        workItemsList => this.onGetAllWorkItemsOfCategorySuccess(workItemsList),
-        error => this.onGetAllWorkItemsOfCategoryFailure(error)
+      this.costSummaryService.getActiveWorkItemsOfCategory( this.baseUrl, costHeadId, this.categoryId).subscribe(
+        workItemsList => this.onGetActiveWorkItemsOfCategorySuccess(workItemsList),
+        error => this.onGetActiveWorkItemsOfCategoryFailure(error)
       );
     }
 
-  onGetAllWorkItemsOfCategorySuccess(workItemsList : any) {
+  onGetActiveWorkItemsOfCategorySuccess(workItemsList : any) {
     this.workItemsList = workItemsList.data;
   }
 
   // calculation of Quantity * Rate
-  calculateWorkItemAmount(workItemsList : any) {
+  totalCalculationOfWorkItemsList(workItemsList : any) {
       for(let workItemData of workItemsList) {
-        workItemData.amount = workItemData.quantity.total * workItemData.rate.total;
+        workItemData.amount = this.commonService.calculateAmountOfWorkItem(workItemData.quantity.total, workItemData.rate.total);
       }
       return workItemsList;
   }
 
-  onGetAllWorkItemsOfCategoryFailure(error : any) {
-    console.log('onGetAllWorkItemsOfCategoryFailure error : '+JSON.stringify(error));
+  onGetActiveWorkItemsOfCategoryFailure(error : any) {
+    console.log('onGetActiveWorkItemsOfCategoryFailure error : '+JSON.stringify(error));
   }
 
 
