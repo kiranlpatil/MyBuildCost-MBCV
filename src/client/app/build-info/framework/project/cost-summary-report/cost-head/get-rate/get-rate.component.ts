@@ -154,7 +154,7 @@ this.rate.total = this.commonService.decimalConversion(this.totalAmount / this.r
     this.selectedRateItem = rateItem;
     this.selectedRateItemIndex = index;
 
-    this.costSummaryService.getRateItemsByOriginalName( this.baseUrl,rateItem.originalName).subscribe(
+    this.costSummaryService.getRateItemsByOriginalName( this.baseUrl,rateItem.originalItemName).subscribe(
       rateItemsData => this.onGetRateItemsByOriginalNameSuccess(rateItemsData.data),
       error => this.onGetRateItemsByOriginalNameFailure(error)
     );
@@ -164,7 +164,7 @@ this.rate.total = this.commonService.decimalConversion(this.totalAmount / this.r
     this.arrayOfRateItems = rateItemsData;
 
     for(let rateItemData of rateItemsData) {
-      if(rateItemData.item === this.selectedRateItem.item) {
+      if(rateItemData.itemName === this.selectedRateItem.itemName) {
          this.rate.rateItems[this.selectedRateItemIndex].rate = rateItemData.rate;
         this.calculateTotal();
       }

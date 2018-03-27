@@ -258,7 +258,7 @@ class ProjectService {
   getRateItemsArray(originalRateItemsArray: Array<CentralizedRate>, originalRateItemName: string) {
 
     let centralizedRateItemsArray: Array<CentralizedRate>;
-    centralizedRateItemsArray = alasql('SELECT * FROM ? where TRIM(originalName) = ?', [originalRateItemsArray, originalRateItemName]);
+    centralizedRateItemsArray = alasql('SELECT * FROM ? where TRIM(originalItemName) = ?', [originalRateItemsArray, originalRateItemName]);
     return centralizedRateItemsArray;
   }
 
@@ -501,17 +501,17 @@ class ProjectService {
 
               for(let rate of rateItems) {
 
-                let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.item= '"+rate.item+"'";
+                let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.itemName= '"+rate.itemName+"'";
                 let rateExistArray = alasql(rateObjectExistSQL,[centralizedRates]);
                 if(rateExistArray.length > 0) {
                   if(rateExistArray[0].rate !== rate.rate) {
                     //update rate of rateItem
-                    let updateRatePromise = this.createPromiseForRateUpdate(buildingId, rate.item, rate.rate);
+                    let updateRatePromise = this.createPromiseForRateUpdate(buildingId, rate.itemName, rate.rate);
                     promiseArrayForUpdateBuildingCentralizedRates.push(updateRatePromise);
                   }
                 } else {
                   //create new rateItem
-                  let rateItem : CentralizedRate = new CentralizedRate(rate.item,rate.originalName, rate.rate);
+                  let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
                   let addNewRateItemPromise = this.createPromiseForAddingNewRateItem(buildingId, rateItem);
                   promiseArrayForUpdateBuildingCentralizedRates.push(addNewRateItemPromise);
                 }
@@ -572,17 +572,17 @@ class ProjectService {
 
             for(let rate of rateItems) {
 
-              let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.item= '"+rate.item+"'";
+              let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.itemName= '"+rate.itemName+"'";
               let rateExistArray = alasql(rateObjectExistSQL,[centralizedRatesOfProjects]);
               if(rateExistArray.length > 0) {
                 if(rateExistArray[0].rate !== rate.rate) {
                   //update rate of rateItem
-                  let updateRateOfProjectPromise = this.createPromiseForRateUpdateOfProjectRates(projectId, rate.item, rate.rate);
+                  let updateRateOfProjectPromise = this.createPromiseForRateUpdateOfProjectRates(projectId, rate.itemName, rate.rate);
                   promiseArrayForProjectCentralizedRates.push(updateRateOfProjectPromise);
                 }
               } else {
                 //create new rateItem
-                let rateItem : CentralizedRate = new CentralizedRate(rate.item,rate.originalName, rate.rate);
+                let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
                 let addNewRateOfProjectPromise = this.createPromiseForAddingNewRateItemInProjectRates(projectId, rateItem);
                 promiseArrayForProjectCentralizedRates.push(addNewRateOfProjectPromise);
               }
@@ -1118,9 +1118,9 @@ class ProjectService {
   }
 
   getRatesFromCentralizedrates(rateItemsOfWorkItem: Array<RateItem>, centralizedRates:Array<any>) {
-    let rateItemsSQL = 'SELECT rateItem.item, rateItem.originalName, rateItem.rateAnalysisId, rateItem.type,' +
+    let rateItemsSQL = 'SELECT rateItem.itemName, rateItem.originalItemName, rateItem.rateAnalysisId, rateItem.type,' +
       'rateItem.quantity, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
-      'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.item = centralizedRates.item';
+      'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.itemName = centralizedRates.itemName';
     let rateItemsForWorkItem = alasql(rateItemsSQL, [rateItemsOfWorkItem, centralizedRates]);
     return rateItemsForWorkItem;
   }
@@ -1414,7 +1414,7 @@ class ProjectService {
       'FROM ? AS t)';
     let rateItems = alasql(getRatesListSQL, [result.rates, costHeads]);
 
-    let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS item, rateItem.C2 AS originalName,' +
+    let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
       'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
       'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
       'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
@@ -1422,7 +1422,7 @@ class ProjectService {
 
     let rateItemsList = alasql(rateItemsRateAnalysisSQL, [rateItems, result.units]);
 
-    let distinctItemsSQL = 'select DISTINCT item,originalName,rate FROM ?';
+    let distinctItemsSQL = 'select DISTINCT itemName,originalItemName,rate FROM ?';
     var distinctRates = alasql (distinctItemsSQL, [rateItemsList]);
 
     return distinctRates;

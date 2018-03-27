@@ -101,7 +101,7 @@ class RateAnalysisService {
             let rate = data['RateAnalysisData'];
             let sql = 'SELECT rate.C5 AS quantity, unit.C2 As unit FROM ? AS rate JOIN ? AS unit on unit.C1 =  rate.C8 and' +
               ' rate.C1 = '+ workItemId;
-            let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS item,ROUND(rate.C7,2) AS quantity,ROUND(rate.C3,2) AS rate,' +
+            let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS itemName,ROUND(rate.C7,2) AS quantity,ROUND(rate.C3,2) AS rate,' +
               ' ROUND(rate.C3*rate.C7,2) AS totalAmount, rate.C6 type, unit.C2 As unit FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
               '  WHERE rate.C1 = '+ workItemId;
             let sql3 = 'SELECT SUM(rate.C3*rate.C7) / SUM(rate.C7) AS total  FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
@@ -300,7 +300,7 @@ class RateAnalysisService {
       let workItem = new WorkItem(workItemsByCategory[workItemIndex].name,
         workItemsByCategory[workItemIndex].rateAnalysisId);
 
-      let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS item, rateItem.C2 AS originalName,' +
+      let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
         'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
         'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
         'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
@@ -321,7 +321,7 @@ class RateAnalysisService {
 
       //Query for System rate quantity should be One
 
-      let rateItemsRateAnalysisSQLForQuantityOne = 'SELECT item, rateAnalysisId, type,' +
+      let rateItemsRateAnalysisSQLForQuantityOne = 'SELECT itemName, rateAnalysisId, type,' +
         'ROUND(quantity / totalQuantity,2) AS quantity,'+
         'rate, unit, ROUND(quantity / totalQuantity * rate,2) AS totalAmount,' +
         'ROUND(totalQuantity / totalQuantity,2) AS totalQuantity FROM ?';

@@ -42,9 +42,9 @@
                 <tr *ngFor="let item of rateItem.value; let i=index">
                   <td>
                     <input  id="itemDescription"  class="form-control remark-input"  (blur)="getRateItemsByOriginalName(item, i)"
-                           list="RateItems" [(ngModel)]="item.item"/>
+                           list="RateItems" [(ngModel)]="item.itemName"/>
                           <datalist id="RateItems" >
-                            <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.item}}"></option>    
+                            <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}"></option>    
                      </datalist>
                     <div class="remark-icon">
                       <img title="{{item.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />

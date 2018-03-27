@@ -1,11 +1,11 @@
 class CentralizedRate {
-  item: string;
-  originalName: string;
+  itemName: string;
+  originalItemName: string;
   rate: number;
 
   constructor(itemName : string, originalItemName:string, rate:number) {
-    this.item = itemName;
-    this.originalName = originalItemName;
+    this.itemName = itemName;
+    this.originalItemName = originalItemName;
     this.rate = rate;
   }
 }
