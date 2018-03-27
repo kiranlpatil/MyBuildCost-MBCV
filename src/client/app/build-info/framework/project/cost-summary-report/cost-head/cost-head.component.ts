@@ -139,7 +139,16 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.workItemId = workItem.rateAnalysisId;
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
 
-      this.quantityItemsArray = workItem.quantity.quantityItems;
+      let quantityMap = workItem.quantity.quantityItems;
+      if(lodsh.isEmpty(quantityMap)) {
+        this.quantityItemsArray = [];
+      } else {
+        for (let key in quantityMap) {
+          if(key === 'default') {
+            this.quantityItemsArray = quantityMap[key];
+          }
+        }
+      }
       this.workItem = workItem;
       this.rateView = 'quantity';
       this.currentCategoryIndex = categoryIndex;

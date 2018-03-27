@@ -151,10 +151,13 @@ export class GetQuantityComponent implements OnInit {
 
   updateQuantityItem(quantityItems : Array<QuantityItem>) {
     if(this.validateQuantityIteamName(quantityItems)) {
+      let quantityObj = {
+        'default' : quantityItems
+      };
       this.loaderService.start();
       let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.costSummaryService.updateQuantityItems(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
-        this.workItemId, quantityItems).subscribe(
+        this.workItemId, quantityObj).subscribe(
         success => this.onUpdateQuantityItemsSuccess(success),
         error => this.onUpdateQuantityItemsFailure(error)
       );

@@ -112,7 +112,7 @@ export class CostSummaryService extends BaseService {
   }
 
   updateQuantityItems( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
-                      quantityItemsArray : Array<QuantityItem>) {
+                      quantityItemsArray : any) {
     var body= { item : quantityItemsArray };
     var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
       '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY;

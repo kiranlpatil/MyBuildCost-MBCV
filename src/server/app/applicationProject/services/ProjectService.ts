@@ -919,7 +919,7 @@ class ProjectService {
   }
 
   updateQuantityOfBuildingCostHeads(projectId:string, buildingId:string, costHeadId:number, categoryId:number, workItemId:number,
-                                    quantityItems:Array<QuantityItem>, user:User, callback:(error: any, result: any)=> void) {
+                                    quantityItems:Map<string,Array<QuantityItem>>, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateQuantityOfBuildingCostHeads has been hit');
     this.buildingRepository.findById(buildingId, (error, building) => {
       if (error) {
@@ -938,8 +938,11 @@ class ProjectService {
                     quantity.isEstimated = true;
                     quantity.quantityItems = quantityItems;
                     quantity.total = 0;
-                    for (let quantityData of quantity.quantityItems) {
-                      quantity.total = quantityData.quantity + quantity.total;
+                    for(let keyQuantity in quantityItems) {
+                      let quantityArray = quantityItems[keyQuantity];
+                      for(let quantityObj of quantityArray) {
+                        quantity.total = quantity.total + quantityObj.quantity;
+                      }
                     }
                   }
                 }
@@ -1104,9 +1107,12 @@ class ProjectService {
         let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?',[arrayOfRateItems]);
         workItem.rate.total = parseFloat((totalOfAllRateItems/workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
 
-        let arrayOfQuantityItems = workItem.quantity.quantityItems;
-        let totalOfQuantityItems = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[arrayOfQuantityItems]);
-        workItem.quantity.total = totalOfQuantityItems;
+        let quantityItems = workItem.quantity.quantityItems;
+
+        for(let keyQuantity in quantityItems) {
+          let quantityArray = quantityItems[keyQuantity];
+          workItem.quantity.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityArray]);
+        }
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
            workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
