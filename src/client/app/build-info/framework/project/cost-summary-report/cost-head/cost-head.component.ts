@@ -9,6 +9,7 @@ import * as lodsh from 'lodash';
 import { Category } from '../../../model/category';
 import { WorkItem } from '../../../model/work-item';
 import { QuantityItem } from '../../../model/quantity-item';
+import { QuantityDetails } from '../../../model/quantity-details';
 import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
 
@@ -24,6 +25,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
   viewTypeValue: string;
   baseUrl:string;
   viewType:string;
+  keyQuantity:string;
+  currentKey:string;
   costHeadName: string;
   costHeadId:number;
   workItemId: number;
@@ -44,6 +47,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   private showWorkItemList:boolean=false;
   private showWorkItemTab : string = null;
+  private showQuantityTab : string = null;
   private compareWorkItemId:number=0;
   private compareCategoryId:number=0;
   private quantityItemsArray: Array<QuantityItem>;
@@ -130,6 +134,36 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
+  getDetailedQuantity( categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
+    if( this.showQuantityTab !== Label.WORKITEM_DETAILED_QUANTITY_TAB || this.compareCategoryId !== categoryId ||
+      this.compareWorkItemId !== workItem.rateAnalysisId) {
+
+      this.setItemId(categoryId, workItem.rateAnalysisId);
+
+      this.workItemId = workItem.rateAnalysisId;
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
+
+      let quantityDetails: any = workItem.quantity.quantityItemDetails;
+      if(quantityDetails.length ===0) {
+        this.quantityItemsArray = [];
+      } else if(quantityDetails.name !== 'default') {
+          this.quantityItemsArray = quantityDetails;
+      }
+      this.workItem = workItem;
+      this.currentCategoryIndex = categoryIndex;
+      this.currentWorkItemIndex = workItemIndex;
+      this.showQuantityTab = Label.WORKITEM_DETAILED_QUANTITY_TAB;
+
+    } else if (this.showQuantityTab === Label.WORKITEM_DETAILED_QUANTITY_TAB) {
+
+      let quantityDetail :QuantityDetails = new QuantityDetails();
+      quantityDetail.name='';
+      quantityDetail.quantityItems= [];
+
+      this.workItem.quantity.quantityItemDetails.push(quantityDetail);
+    }
+  }
+
   getQuantity( categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
     if( this.showWorkItemTab !== Label.WORKITEM_QUANTITY_TAB || this.compareCategoryId !== categoryId ||
       this.compareWorkItemId !== workItem.rateAnalysisId) {
@@ -139,14 +173,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.workItemId = workItem.rateAnalysisId;
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
 
-      let quantityMap = workItem.quantity.quantityItems;
-      if(lodsh.isEmpty(quantityMap)) {
+      let quantityDetails: any = workItem.quantity.quantityItemDetails;
+      if(quantityDetails.length ===0) {
         this.quantityItemsArray = [];
       } else {
-        for (let key in quantityMap) {
-          if(key === 'default') {
-            this.quantityItemsArray = quantityMap[key];
-          }
+        for (let key of quantityDetails) {
+          this.quantityItemsArray = key.quantityItems;
         }
       }
       this.workItem = workItem;

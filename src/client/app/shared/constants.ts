@@ -443,6 +443,7 @@ export class Label {
   public static GET_RATE_BY_QUANTITY : string = 'getRateByQuantity';
   public static WORKITEM_RATE_TAB : string = 'rate';
   public static WORKITEM_QUANTITY_TAB : string = 'quantity';
+  public static WORKITEM_DETAILED_QUANTITY_TAB : string = 'detailedQuantity';
 
 }
 
@@ -464,6 +465,7 @@ export class Button {
   public static GET_RATE: string = 'Get Rate';
   public static SYSTEM_RA: string = 'System RA';
   public static ADD: string = 'Add ';
+  public static ADD_MORE_DETAILS: string = 'Add More Details';
   public static CATEGORY: string = 'Category';
   public static WORKITEM: string = 'WorkItem';
   public static ITEM: string = 'Item';

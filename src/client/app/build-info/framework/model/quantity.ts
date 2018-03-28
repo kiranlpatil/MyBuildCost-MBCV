@@ -1,12 +1,14 @@
-import { QuantityItem } from './quantity-item';
+import { QuantityDetails } from './quantity-details';
 
 export class Quantity {
   total: number;
   isEstimated : boolean;
-  quantityItems = new Map<string, Array<QuantityItem>>();
+  quantityItemDetails = Array<QuantityDetails>();
 
   constructor() {
     this.total = 0;
     this.isEstimated = false;
+    this.quantityItemDetails = new Array<QuantityDetails>();
+
   }
 }

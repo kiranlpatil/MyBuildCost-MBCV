@@ -67,6 +67,7 @@ import { DeleteConfirmationModalComponent } from './shared/delete-confirmation-m
 import { ProjectFormComponent } from './build-info/framework/shared/project-form/project-form.component';
 import { BuildingFormComponent } from './build-info/framework/shared/building-form/building-form.component';
 import { SharePrintPageComponent } from './build-info/framework/project-header/share-print-page/share-print-page.component';
+import { QuantityDetailsComponent } from './build-info/framework/project/cost-summary-report/cost-head/quantity-details/quantity-details.component';
 
 
 @NgModule({
@@ -113,6 +114,7 @@ import { SharePrintPageComponent } from './build-info/framework/project-header/s
     MaterialTakeoffComponent,
     GetRateComponent,
     ProjectItemComponent,
+    QuantityDetailsComponent,
     //MyDashboardComponent,
 
     //Shared Components

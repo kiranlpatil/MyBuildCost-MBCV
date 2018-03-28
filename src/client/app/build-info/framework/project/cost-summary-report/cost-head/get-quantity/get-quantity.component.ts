@@ -11,6 +11,7 @@ import { Category } from '../../../../model/category';
 import { WorkItem } from '../../../../model/work-item';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
+import { QuantityDetails } from '../../../../model/quantity-details';
 
 @Component({
   moduleId: module.id,
@@ -26,6 +27,7 @@ export class GetQuantityComponent implements OnInit {
   @Input() workItemRateAnalysisId : number;
   @Input() workItemsList : Array<WorkItem>;
   @Input() baseUrl : string;
+  @Input() keyQuantity : string;
 
   @Output() showWorkItemTabName = new EventEmitter<string>();
   @Output() categoriesTotalAmount = new EventEmitter<number>();
@@ -151,10 +153,9 @@ export class GetQuantityComponent implements OnInit {
 
   updateQuantityItem(quantityItems : Array<QuantityItem>) {
     if(this.validateQuantityIteamName(quantityItems)) {
-      let quantityObj = {
-        'name' : 'default',
-        'quantityItems' : quantityItems
-      };
+      let quantityObj : QuantityDetails = new QuantityDetails();
+      quantityObj.name = this.keyQuantity;
+      quantityObj.quantityItems = quantityItems;
       this.loaderService.start();
       let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.costSummaryService.updateQuantityItems(this.baseUrl, costHeadId, this.categoryRateAnalysisId,

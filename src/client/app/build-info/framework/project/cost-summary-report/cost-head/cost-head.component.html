@@ -45,7 +45,7 @@
                   <tr [class.hide-hover]="rateView==='systemRA' || rateView==='rate' || rateView==='cost' || rateView==='quantity'">
                     <td> {{ workItem.name }}</td>
                     <td>
-                      <button class="add-more-details-btn"> Add more details </button>
+                      <button class="add-more-details-btn">{{getButton().ADD_MORE_DETAILS}} </button>
                     </td>
                     <td>
                       <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
@@ -93,6 +93,9 @@
                               (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}</button>
                     </td>
                     <td>
+                      <a (click)="getDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                    </td>
+                    <td>
                       <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head"
                            (click)="setIdsForDeleteWorkItem(category.rateAnalysisId,workItem.rateAnalysisId,workItemIndex )">
                         <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete-blue.png" />
@@ -125,8 +128,23 @@
                                            (showWorkItemTabName)="setShowWorkItemTab($event)"
                                            [categoryRateAnalysisId]="category.rateAnalysisId"
                                            [workItemRateAnalysisId]="workItem.rateAnalysisId"
+                                           [keyQuantity]="'default'"
                                            [baseUrl] = "baseUrl">
                           </bi-get-quantity>
+                        </div>
+                      </div>
+
+                      <div *ngIf="showQuantityTab == getLabel().WORKITEM_DETAILED_QUANTITY_TAB">
+                        <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+                          <bi-quantity-details
+                                            [quantityItems]="workItem.quantity.quantityItemDetails"
+                                            [workItem] ="workItem"
+                                            [workItemsList] ="workItemsList"
+                                            [categoryDetails] ="categoryDetails"
+                                            (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                            [categoryRateAnalysisId]="category.rateAnalysisId"
+                                            [baseUrl] = "baseUrl">
+                          </bi-quantity-details>
                         </div>
                       </div>
                     </td>
