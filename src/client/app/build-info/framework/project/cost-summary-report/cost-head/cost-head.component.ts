@@ -50,7 +50,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private showQuantityTab : string = null;
   private compareWorkItemId:number=0;
   private compareCategoryId:number=0;
-  private quantityItemsArray: Array<QuantityItem>;
+  private quantityItemsArray: Array<QuantityItem> = [];
   private rateItemsArray: Rate;
   private categoryArray : Array<Category> = [];
 
@@ -143,13 +143,19 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.workItemId = workItem.rateAnalysisId;
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
 
-      let quantityDetails: any = workItem.quantity.quantityItemDetails;
-      if(quantityDetails.length ===0) {
+      let quantityDetails: Array<QuantityDetails> = workItem.quantity.quantityItemDetails;
+      this.workItem = workItem;
+      this.workItem.quantity.quantityItemDetails = [];
+      for(let quantityDetail of quantityDetails) {
+        if(quantityDetail.name !== 'default') {
+          this.workItem.quantity.quantityItemDetails.push(quantityDetail);
+        }
+      }
+/*      if(quantityDetails.length ===0) {
         this.quantityItemsArray = [];
       } else if(quantityDetails.name !== 'default') {
           this.quantityItemsArray = quantityDetails;
-      }
-      this.workItem = workItem;
+      }*/
       this.currentCategoryIndex = categoryIndex;
       this.currentWorkItemIndex = workItemIndex;
       this.showQuantityTab = Label.WORKITEM_DETAILED_QUANTITY_TAB;
@@ -157,8 +163,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
     } else if (this.showQuantityTab === Label.WORKITEM_DETAILED_QUANTITY_TAB) {
 
       let quantityDetail :QuantityDetails = new QuantityDetails();
-      quantityDetail.name='';
-      quantityDetail.quantityItems= [];
 
       this.workItem.quantity.quantityItemDetails.push(quantityDetail);
     }
@@ -173,8 +177,19 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.workItemId = workItem.rateAnalysisId;
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
 
-      let quantityDetails: any = workItem.quantity.quantityItemDetails;
-      if(quantityDetails.length ===0) {
+      this.workItem = workItem;
+
+      let quantityDetails: Array<QuantityDetails> = workItem.quantity.quantityItemDetails;
+
+      for(let quantityDetail of quantityDetails) {
+        if(quantityDetail.name === 'default') {
+          this.workItem.quantity.quantityItemDetails.push(quantityDetail);
+          this.quantityItemsArray = quantityDetail.quantityItems;
+          break;
+        }
+      }
+
+      /*if(quantityDetails.length ===0) {
         this.quantityItemsArray = [];
       } else {
         if(quantityDetails[0].name === 'default') {
@@ -183,8 +198,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
           this.showWorkItemTab = null;
           this.quantityItemsArray = [];
         }
-      }
-      this.workItem = workItem;
+      }*/
       this.rateView = 'quantity';
       this.currentCategoryIndex = categoryIndex;
       this.currentWorkItemIndex = workItemIndex;

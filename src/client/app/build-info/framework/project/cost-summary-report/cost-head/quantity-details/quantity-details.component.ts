@@ -36,10 +36,11 @@ export class QuantityDetailsComponent implements OnInit {
     console.log(this.quantityDetails);
   }
 
-  getQuantity(quantityItems:Array<QuantityItem>) {
+  getQuantity(quantityDetails: QuantityDetails) {
     if(this.showWorkItemTabName !==  Label.WORKITEM_QUANTITY_TAB) {
-      if(quantityItems !== undefined) {
-        this.quantityItemsArray = quantityItems;
+      if(quantityDetails.quantityItems !== undefined) {
+        this.quantityItemsArray = quantityDetails.quantityItems;
+    /*    this.keyQuantity = quantityDetails.name;*/
       } else {
         this.quantityItemsArray = [];
 

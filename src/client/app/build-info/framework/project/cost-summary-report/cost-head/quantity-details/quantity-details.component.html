@@ -8,10 +8,10 @@
     </td>
 
     <td>
-      <div *ngIf="quantity.total != 0" (click)="getQuantity(quantity.quantityItems)">
+      <div *ngIf="quantity.total != 0" (click)="getQuantity(quantity)">
         <input [ngModel]="quantity.total" id="quantity" size="10" class="form-control clear">
       </div>
-      <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity.quantityItems)">
+      <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity)">
         Get Qty.
       </button>
     </td>
