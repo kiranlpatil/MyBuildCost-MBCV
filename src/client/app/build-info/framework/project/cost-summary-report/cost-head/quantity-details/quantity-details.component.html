@@ -21,11 +21,21 @@
     </td>
 
     <td>
-      {{workItemData.rate.total}}
+      <div *ngIf="workItemData.rate.isEstimated">
+          {{workItemData.rate.total}}
+      </div>
+      <div *ngIf="!workItemData.rate.isEstimated">
+        -
+      </div>
     </td>
 
     <td>
-      {{(quantity.total*workItemData.rate.total)| number}}
+      <div *ngIf="workItemData.rate.isEstimated">
+        {{ workItemData.quantity.total * workItemData.rate.total}}
+      </div>
+      <div *ngIf="!workItemData.rate.isEstimated">
+        -
+      </div>
     </td>
 
     <td>
