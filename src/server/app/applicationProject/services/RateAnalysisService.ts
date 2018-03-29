@@ -223,6 +223,16 @@ class RateAnalysisService {
 
       let costHead = new CostHead();
       costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
+      let configCostHeads = config.get('costHeads');
+      let categories= new Array<Category>();
+
+      if(configCostHeads.length > 0) {
+        for(let configCostHead of configCostHeads) {
+          if(configCostHead.name === costHead.name) {
+            categories = configCostHead.categories;
+          }
+        }
+      }
       costHead.rateAnalysisId = costHeadsRateAnalysis[costHeadIndex].C1;
 
       let categoriesRateAnalysisSQL = 'SELECT Category.C1 AS rateAnalysisId, Category.C2 AS name' +
@@ -233,10 +243,10 @@ class RateAnalysisService {
 
       if(categoriesByCostHead.length === 0 ) {
         this.getWorkItemsWithoutCategoryFromRateAnalysis(costHead.rateAnalysisId, workItemsRateAnalysis,
-          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories);
+          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories, categories);
       } else {
         this.getCategoriesFromRateAnalysis(categoriesByCostHead, workItemsRateAnalysis,
-          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories);
+          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories, categories);
       }
 
       costHead.categories = buildingCategories;
@@ -247,13 +257,22 @@ class RateAnalysisService {
 
   getCategoriesFromRateAnalysis(categoriesByCostHead: any, workItemsRateAnalysis: any,
                                 rateItemsRateAnalysis: any, unitsRateAnalysis: any,
-                                notesRateAnalysis: any, buildingCategories: Array<Category>) {
+                                notesRateAnalysis: any, buildingCategories: Array<Category>, configCategories: Array<Category>) {
 
     logger.info('getCategoriesFromRateAnalysis has been hit.');
 
     for (let categoryIndex = 0; categoryIndex < categoriesByCostHead.length; categoryIndex++) {
 
       let category = new Category(categoriesByCostHead[categoryIndex].name, categoriesByCostHead[categoryIndex].rateAnalysisId);
+      let configWorkItems = new Array<WorkItem>();
+
+      if(configCategories.length > 0) {
+        for (let configCategory of configCategories) {
+          if(configCategory.name === categoriesByCostHead[categoryIndex].name) {
+            configWorkItems = configCategory.workItems;
+          }
+        }
+      }
 
       let workItemsRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, workItem.C3 AS name' +
         ' FROM ? AS workItem where workItem.C4 = ' + categoriesByCostHead[categoryIndex].rateAnalysisId;
@@ -262,7 +281,7 @@ class RateAnalysisService {
       let buildingWorkItems: Array<WorkItem> = new Array<WorkItem>();
 
       this.getWorkItemsFromRateAnalysis(workItemsByCategory, rateItemsRateAnalysis,
-        unitsRateAnalysis, notesRateAnalysis, buildingWorkItems);
+        unitsRateAnalysis, notesRateAnalysis, buildingWorkItems, configWorkItems);
 
       category.workItems = buildingWorkItems;
       buildingCategories.push(category);
@@ -271,7 +290,7 @@ class RateAnalysisService {
 
   getWorkItemsWithoutCategoryFromRateAnalysis( costHeadRateAnalysisId: number, workItemsRateAnalysis: any,
                                  rateItemsRateAnalysis: any, unitsRateAnalysis: any,
-                                 notesRateAnalysis: any, buildingCategories: Array<Category>) {
+                                 notesRateAnalysis: any, buildingCategories: Array<Category>, configCategories: Array<Category>) {
 
       logger.info('getWorkItemsWithoutCategoryFromRateAnalysis has been hit.');
 
@@ -281,9 +300,17 @@ class RateAnalysisService {
 
       let buildingWorkItems: Array<WorkItem> = new Array<WorkItem>();
       let category = new Category('default', 0);
+      let configWorkItems = new Array<WorkItem>();
 
+      if(configCategories.length > 0) {
+        for (let configCategory of configCategories) {
+          if(configCategory.name === 'default') {
+            configWorkItems = configCategory.workItems;
+          }
+        }
+      }
       this.getWorkItemsFromRateAnalysis(workItemsWithoutCategories, rateItemsRateAnalysis,
-        unitsRateAnalysis, notesRateAnalysis, buildingWorkItems);
+        unitsRateAnalysis, notesRateAnalysis, buildingWorkItems, configWorkItems);
 
       category.workItems = buildingWorkItems;
       buildingCategories.push(category);
@@ -291,7 +318,7 @@ class RateAnalysisService {
 
   getWorkItemsFromRateAnalysis(workItemsByCategory: any, rateItemsRateAnalysis: any,
                                         unitsRateAnalysis: any, notesRateAnalysis: any,
-                               buildingWorkItems: Array<WorkItem>) {
+                               buildingWorkItems: Array<WorkItem>, configWorkItems :  Array<any>) {
 
     logger.info('getWorkItemsFromRateAnalysis has been hit.');
 
@@ -299,6 +326,14 @@ class RateAnalysisService {
 
       let workItem = new WorkItem(workItemsByCategory[workItemIndex].name,
         workItemsByCategory[workItemIndex].rateAnalysisId);
+
+      if(configWorkItems.length > 0) {
+        for(let configWorkItem of configWorkItems) {
+          if(configWorkItem.name === workItemsByCategory[workItemIndex].name) {
+            workItem.unit = configWorkItem.measurementUnit;
+          }
+        }
+      }
 
       let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
         'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
