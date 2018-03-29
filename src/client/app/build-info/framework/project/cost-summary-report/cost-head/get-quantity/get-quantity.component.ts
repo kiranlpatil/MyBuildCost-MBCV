@@ -32,7 +32,6 @@ export class GetQuantityComponent implements OnInit {
 
   @Output() showWorkItemTabName = new EventEmitter<string>();
   @Output() categoriesTotalAmount = new EventEmitter<number>();
-  @Output() refreshCategoryList = new EventEmitter();
 
   projectId : string;
   buildingId: string;

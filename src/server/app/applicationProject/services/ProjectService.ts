@@ -633,43 +633,39 @@ class ProjectService {
 
         let query = { _id : buildingId };
         let data = { $set : {'costHeads' : building.costHeads }};
-        this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+        this.buildingRepository.findOneAndUpdate(query, data,{new: true}, (error, building) => {
           logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
-            callback(null, {'success' :'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            callback(null, {data :'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
           }
         });
       }
     });
   }
   //Delete Quantity Of Project Cost Heads By Name
-  deleteQuantityOfProjectCostHeadsByName(projectId:string, costHeadId:string, categoryId:string,
-                                         workItemId:string, item:string, user:User, callback:(error: any, result: any)=> void) {
-    logger.info('Project service, Delete Quantity Of Project Cost Heads By Name has been hit');
-    this.projectRepository.findById(projectId, (error, project : Project) => {
-      if (error
-      ) {
+  deleteQuantityOfProjectCostHeadsByName(projectId:string, costHeadId:number, categoryId:number,
+                                         workItemId:number, itemName:string, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, deleteQuantity has been hit');
+    this.projectRepository.findById(projectId, (error, project:Project) => {
+      if (error) {
         callback(error, null);
       } else {
-        let quantity: Quantity;
-        this.costHeadId = parseInt(costHeadId);
-        this.categoryId = parseInt(categoryId);
-        this.workItemId = parseInt(workItemId);
-
-        for(let index = 0; project.projectCostHeads.length > index; index++) {
-          if (project.projectCostHeads[index].rateAnalysisId === this.costHeadId) {
-            for (let index1 = 0; project.projectCostHeads[index].categories.length > index1; index1++) {
-              if (project.projectCostHeads[index].categories[index1].rateAnalysisId === this.categoryId) {
-                for (let index2 = 0; project.projectCostHeads[index].categories[index1].workItems.length > index2; index2++) {
-                  if (project.projectCostHeads[index].categories[index1].workItems[index2].rateAnalysisId === this.workItemId) {
-                    quantity = project.projectCostHeads[index].categories[index1].workItems[index2].quantity;
-                    for(let index = 0; quantity.quantityItems.length > index; index ++) {
-                      if(quantity.quantityItems[index].item  === item) {
-                        quantity.quantityItems.splice(index,1);
+        let quantityItems: Array<QuantityDetails>;
+        for(let costHead of project.projectCostHeads) {
+          if(costHead.rateAnalysisId === costHeadId) {
+            for (let category of costHead.categories) {
+              if(category.rateAnalysisId === categoryId) {
+                for (let workItem of category.workItems) {
+                  if(workItem.rateAnalysisId === workItemId) {
+                    quantityItems = workItem.quantity.quantityItemDetails;
+                    for (let quantityIndex=0; quantityIndex < quantityItems.length; quantityIndex++) {
+                      if(quantityItems[quantityIndex].name === itemName) {
+                        quantityItems.splice(quantityIndex,1);
                       }
                     }
+                    workItem.quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantityItems]);
                   }
                 }
               }
@@ -677,39 +673,14 @@ class ProjectService {
           }
         }
 
-
         let query = { _id : projectId };
-        this.projectRepository.findOneAndUpdate(query, project,{new: true}, (error, project : Project) => {
+        let data = { $set : {'costHeads' : project.projectCostHeads }};
+        this.projectRepository.findOneAndUpdate(query, data,{new: true}, (error, project) => {
           logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
-            let quantity: Quantity;
-
-            for(let index = 0; project.projectCostHeads.length > index; index++) {
-              if (project.projectCostHeads[index].rateAnalysisId === this.costHeadId) {
-                for (let index1 = 0; project.projectCostHeads[index].categories.length > index1; index1++) {
-                  if (project.projectCostHeads[index].categories[index1].rateAnalysisId === this.categoryId) {
-                    for (let index2 = 0; project.projectCostHeads[index].categories[index1].workItems.length > index2; index2++) {
-                      if (project.projectCostHeads[index].categories[index1].workItems[index2].rateAnalysisId === this.workItemId) {
-                        quantity = project.projectCostHeads[index].categories[index1].workItems[index2].quantity;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-
-            if(quantity.total) {
-              if(quantity.quantityItems.length !== 0) {
-                for(let index = 0; quantity.quantityItems.length > index; index ++) {
-                  quantity.total = quantity.quantityItems[index].quantity + quantity.total;
-                }
-              }else {
-                quantity.total = 0;
-              }
-            }
-            callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            callback(null, {data :'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
           }
         });
       }

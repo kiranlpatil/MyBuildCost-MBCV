@@ -2,7 +2,7 @@
 <table>
   <tbody>
 
-  <div *ngFor="let quantity of quantityDetails">
+  <div *ngFor="let quantity of quantityDetails; let quantityIndex = index ">
     <td>
       <input type="text" [ngModel]="quantity.name"  (blur)="onInputKeyQuantity($event.target.value)">
     </td>
@@ -25,11 +25,13 @@
     </td>
 
     <td>
-      {{(workItemData.quantity.total*workItemData.rate.total)| number}}
+      {{(quantity.total*workItemData.rate.total)| number}}
     </td>
 
     <td>
+      <div (click)="deleteQuantityByName(quantity.name,quantityIndex)">
       <img alt="Delete Quantity" src="assets/build-info/dashboard/delete-blue.png" />
+      </div>
     </td>
   </div>
 
@@ -40,6 +42,7 @@
                      [categoryDetails] ="categoryDetails"
                      [keyQuantity]="keyQuantity"
                      [workItemsList] ="workItemsList"
+                     (showWorkItemTabName)="setShowWorkItemTab($event)"
                      [baseUrl] = "baseUrl">
     </bi-get-quantity>
   </div>

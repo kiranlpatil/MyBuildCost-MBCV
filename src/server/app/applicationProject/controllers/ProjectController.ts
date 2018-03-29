@@ -388,19 +388,20 @@ class ProjectController {
       logger.info('Project controller, Delete Quantity Of Project Cost Heads By Name has been hit');
       let user = req.user;
       let projectId = req.params.projectId;
-      let costHeadId = req.params.costHeadId;
-      let categoryId = req.params.categoryId;
-      let workItemId = req.params.workItemId;
-      let item = req.body.item;
-      let projectservice = new ProjectService();
-      projectservice.deleteQuantityOfProjectCostHeadsByName( projectId, costHeadId, categoryId, workItemId, item,
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let itemName = req.body.item.name;
+
+      let projectService = new ProjectService();
+      projectService.deleteQuantityOfProjectCostHeadsByName( projectId, costHeadId, categoryId, workItemId, itemName,
         user, (error, result) => {
         if (error) {
           next(error);
         } else {
           logger.info('Delete Quantity Of Project Cost Heads By Name ' + result);
           logger.debug('Delete Quantity Of Project Cost Heads By Name of Project ID : '+projectId+', CostHead : '+costHeadId+', ' +
-            'Workitem : '+workItemId+', Item : '+item);
+            'Workitem : '+workItemId+', Item : '+itemName);
           next(new Response(200, result));
         }
       });
@@ -583,9 +584,9 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      let quantityItems = req.body.item;
+      let quantityDetails = req.body.item;
       let projectService = new ProjectService();
-      projectService.updateQuantityOfBuildingCostHeads( projectId, buildingId, costHeadId, categoryId, workItemId, quantityItems, user, (error, result) => {
+      projectService.updateQuantityOfBuildingCostHeads( projectId, buildingId, costHeadId, categoryId, workItemId, quantityDetails, user, (error, result) => {
         if(error) {
           next(error);
         } else {

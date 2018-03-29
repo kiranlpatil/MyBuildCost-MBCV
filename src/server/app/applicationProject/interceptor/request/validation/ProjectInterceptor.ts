@@ -826,8 +826,8 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         } else {
-          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (req.body.item === undefined) ||
-            (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.item === '')) {
+          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (req.body.item.name === undefined) ||
+            (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.item.name === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
