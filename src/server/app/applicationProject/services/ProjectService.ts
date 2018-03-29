@@ -674,7 +674,7 @@ class ProjectService {
         }
 
         let query = { _id : projectId };
-        let data = { $set : {'costHeads' : project.projectCostHeads }};
+        let data = { $set : {'projectCostHeads' : project.projectCostHeads }};
         this.projectRepository.findOneAndUpdate(query, data,{new: true}, (error, project) => {
           logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
@@ -918,7 +918,7 @@ class ProjectService {
 
   //Update Quantity Of Project Cost Heads
   updateQuantityOfProjectCostHeads(projectId:string, costHeadId:number, categoryId:number, workItemId:number,
-                                   quantityItems: Array<QuantityItem>, user:User, callback:(error: any, result: any)=> void) {
+                                   quantityDetail:QuantityDetails, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
     this.projectRepository.findById(projectId, (error, project) => {
       if (error) {
@@ -928,17 +928,30 @@ class ProjectService {
         let quantity  : Quantity;
         for (let costHead of costHeadList) {
           if (costHeadId === costHead.rateAnalysisId) {
-            for (let categoryData of costHead.categories) {
+            let categoriesOfCostHead = costHead.categories;
+            for (let categoryData of categoriesOfCostHead) {
               if (categoryId === categoryData.rateAnalysisId) {
-                for (let workItemData of categoryData.workItems) {
+                 let workItemsOfCategory = categoryData.workItems;
+                   for (let workItemData of workItemsOfCategory ) {
                   if (workItemId === workItemData.rateAnalysisId) {
                     quantity  = workItemData.quantity;
                     quantity.isEstimated = true;
-                    quantity.quantityItems = quantityItems;
-                    quantity.total = 0;
-                    for (let quantityData of quantity.quantityItems) {
-                      quantity.total = quantityData.quantity + quantity.total;
+
+                    let isExistSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="'+quantityDetail.name+'"';
+                    let isExistQuantityDetail = alasql(isExistSQL,[quantity.quantityItemDetails]);
+
+                    if(isExistQuantityDetail.length === 0) {
+                      quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
+                      quantity.quantityItemDetails.push(quantityDetail);
+                    } else {
+                      for(let quantityDetailObj of quantity.quantityItemDetails) {
+                        if(quantityDetailObj.name === quantityDetail.name) {
+                          quantityDetailObj.quantityItems = quantityDetail.quantityItems;
+                          quantityDetailObj.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
+                        }
+                      }
                     }
+                    quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantity.quantityItemDetails]);
                   }
                 }
               }
@@ -947,8 +960,9 @@ class ProjectService {
         }
 
         let query = {_id: projectId};
-        this.projectRepository.findOneAndUpdate(query, project, {new: true}, (error, project) => {
-          logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
+        let data = {$set : {'projectCostHeads' : costHeadList}};
+        this.projectRepository.findOneAndUpdate(query, data, {new: true}, (error, project) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
