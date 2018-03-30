@@ -924,8 +924,10 @@ class ProjectService {
 
           if (isItemAlreadyExists.length > 0) {
             for (let quantityindex = 0; quantityindex < quantity.quantityItemDetails.length; quantityindex++) {
-              quantity.quantityItemDetails[quantityindex].quantityItems = quantityDetail.quantityItems;
-              quantity.quantityItemDetails[quantityindex].total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+              if(quantity.quantityItemDetails[quantityindex].name === quantityDetail.name) {
+                quantity.quantityItemDetails[quantityindex].quantityItems = quantityDetail.quantityItems;
+                quantity.quantityItemDetails[quantityindex].total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+              }
             }
           } else {
             quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
@@ -933,6 +935,7 @@ class ProjectService {
           }
         } else {
           quantity.quantityItemDetails = [];
+          quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
           quantity.quantityItemDetails.push(quantityDetail);
         }
       }
