@@ -221,8 +221,7 @@ class ProjectController {
       let categoryId : number = parseInt(req.params.categoryId);
       let projectService = new ProjectService();
       projectService.getInActiveWorkItemsOfBuildingCostHeads( projectId, buildingId, costHeadId, categoryId, user, (error, result) => {
-        if(error
-        ) {
+        if(error) {
           next(error);
         } else {
           logger.info('Get InActive WorkItem success');

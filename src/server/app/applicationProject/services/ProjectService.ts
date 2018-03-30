@@ -321,7 +321,8 @@ class ProjectService {
             }
           }
         }
-        callback(null,{data:inActiveWorkItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let inActiveWorkItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, building.rates, false);
+        callback(null,{data:inActiveWorkItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
         }
     });
   }
@@ -350,7 +351,8 @@ class ProjectService {
             }
           }
         }
-        callback(null,{data:inActiveWorkItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let inActiveWorkItemsListWithProjectRates = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, project.rates, false);
+        callback(null,{data:inActiveWorkItemsListWithProjectRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -507,25 +509,30 @@ class ProjectService {
                 if(rateExistArray.length > 0) {
                   if(rateExistArray[0].rate !== rate.rate) {
                     //update rate of rateItem
-                    let updateRatePromise = this.createPromiseForRateUpdate(buildingId, rate.itemName, rate.rate);
+                    let updateRatePromise = this.updateCentralizedRateForBuilding(buildingId, rate.itemName, rate.rate);
                     promiseArrayForUpdateBuildingCentralizedRates.push(updateRatePromise);
                   }
                 } else {
                   //create new rateItem
                   let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
-                  let addNewRateItemPromise = this.createPromiseForAddingNewRateItem(buildingId, rateItem);
+                  let addNewRateItemPromise = this.addNewCentralizedRateForBuilding(buildingId, rateItem);
                   promiseArrayForUpdateBuildingCentralizedRates.push(addNewRateItemPromise);
                 }
               }
 
-              CCPromise.all(promiseArrayForUpdateBuildingCentralizedRates).then(function(data: Array<any>) {
+              if(promiseArrayForUpdateBuildingCentralizedRates.length !== 0){
+                CCPromise.all(promiseArrayForUpdateBuildingCentralizedRates).then(function(data: Array<any>) {
 
-                console.log('Rates Array updated : '+JSON.stringify(centralizedRates));
-                callback(null, { 'success' : 'success' });
+                  console.log('Rates Array updated : '+JSON.stringify(centralizedRates));
+                  callback(null, { 'data' : 'success' });
 
-              }).catch(function(e:any) {
-                logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
-              });
+                }).catch(function(e:any) {
+                  logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
+                  CCPromise.reject(e);
+                });
+              } else {
+                callback(null, { 'data' : 'success' });
+              }
             }
           }
         });
@@ -578,25 +585,34 @@ class ProjectService {
               if(rateExistArray.length > 0) {
                 if(rateExistArray[0].rate !== rate.rate) {
                   //update rate of rateItem
-                  let updateRateOfProjectPromise = this.createPromiseForRateUpdateOfProjectRates(projectId, rate.itemName, rate.rate);
+                  let updateRateOfProjectPromise = this.updateCentralizedRateForProject(projectId, rate.itemName, rate.rate);
                   promiseArrayForProjectCentralizedRates.push(updateRateOfProjectPromise);
                 }
               } else {
                 //create new rateItem
                 let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
-                let addNewRateOfProjectPromise = this.createPromiseForAddingNewRateItemInProjectRates(projectId, rateItem);
+                let addNewRateOfProjectPromise = this.addNewCentralizedRateForProject(projectId, rateItem);
                 promiseArrayForProjectCentralizedRates.push(addNewRateOfProjectPromise);
               }
             }
 
-            CCPromise.all(promiseArrayForProjectCentralizedRates).then(function(data: Array<any>) {
+            if(promiseArrayForProjectCentralizedRates.length !== 0) {
 
-              console.log('Rates Array updated : '+JSON.stringify(centralizedRatesOfProjects));
-              callback(null, { 'success' : 'success' });
+              CCPromise.all(promiseArrayForProjectCentralizedRates).then(function(data: Array<any>) {
 
-            }).catch(function(e:any) {
-              logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
-            });
+                console.log('Rates Array updated : '+JSON.stringify(centralizedRatesOfProjects));
+                callback(null, { 'data' : 'success' });
+
+              }).catch(function(e:any) {
+                logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
+                let errorObj = new Error();
+                errorObj.message = e;
+                callback(errorObj, null);
+              });
+
+            } else {
+              callback(null, { 'data' : 'success' });
+            }
           }
         });
       }
@@ -1031,7 +1047,7 @@ class ProjectService {
       } else {
         if(result.length > 0) {
           let workItemsOfBuildingCategory = result[0].costHeads.categories.workItems;
-          let workItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(workItemsOfBuildingCategory, result[0].rates);
+          let workItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(workItemsOfBuildingCategory, result[0].rates, true);
           callback(null, {data: workItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
         } else {
           let error = new Error();
@@ -1062,7 +1078,7 @@ class ProjectService {
       } else {
         if(result.length > 0) {
           let workItemsOfCategory = result[0].projectCostHeads.categories.workItems;
-          let workItemsListWithRates = this.getWorkItemListWithCentralizedRates(workItemsOfCategory, result[0].rates);
+          let workItemsListWithRates = this.getWorkItemListWithCentralizedRates(workItemsOfCategory, result[0].rates, true);
           callback(null, {data: workItemsListWithRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
         } else {
           let error = new Error();
@@ -1073,10 +1089,10 @@ class ProjectService {
     });
   }
 
-  getWorkItemListWithCentralizedRates(workItemsOfCategory: Array<WorkItem>, centralizedRates: Array<any>) {
+  getWorkItemListWithCentralizedRates(workItemsOfCategory: Array<WorkItem>, centralizedRates: Array<any>, isWorkItemActive:boolean) {
     let workItemsListWithRates = new Array<WorkItem>();
     for (let workItemObj of workItemsOfCategory) {
-      if (workItemObj.active === true) {
+      if (workItemObj.active === isWorkItemActive) {
         let workItem: WorkItem = workItemObj;
         let rateItemsOfWorkItem = workItemObj.rate.rateItems;
         workItem.rate.rateItems = this.getRatesFromCentralizedrates(rateItemsOfWorkItem, centralizedRates);
@@ -1247,7 +1263,7 @@ class ProjectService {
     let categoriesListWithRates : CategoriesListWithRatesDTO = new CategoriesListWithRatesDTO;
 
     for (let categoryData of categoriesOfCostHead) {
-      let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates);
+      let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates, true);
       let calculateWorkItemTotalAmount =  alasql('VALUE OF SELECT SUM(amount) FROM ?',[workItems]);
       categoryData.amount = calculateWorkItemTotalAmount;
       categoriesTotalAmount = categoriesTotalAmount + calculateWorkItemTotalAmount;
@@ -1566,7 +1582,7 @@ class ProjectService {
     return costHeads;
   }
 
-  createPromiseForAddingNewRateItem(buildingId: string, rateItem:any) {
+  addNewCentralizedRateForBuilding(buildingId: string, rateItem:any) {
     return new CCPromise(function(resolve : any, reject : any){
       logger.info('createPromiseForAddingNewRateItem has been hit for buildingId: '+buildingId+', rateItem : '+rateItem);
 
@@ -1582,15 +1598,16 @@ class ProjectService {
       });
     }).catch(function(e:any) {
       logger.error('Promise failed for individual createPromiseForAddingNewRateItem! error :' +JSON.stringify(e));
+      CCPromise.reject(e);
     });
   }
 
-  createPromiseForRateUpdate(buildingId: string, rateItem :string, rateItemRate : number) {
+  updateCentralizedRateForBuilding(buildingId: string, rateItem :string, rateItemRate : number) {
     return new CCPromise(function(resolve : any, reject : any){
       logger.info('createPromiseForRateUpdate has been hit for buildingId : '+buildingId+', rateItem : '+rateItem);
       //update rate
       let buildingRepository = new BuildingRepository();
-      let queryUpdateRate = {'_id' : buildingId, 'rates.item':rateItem};
+      let queryUpdateRate = {'_id' : buildingId, 'rates.itemName':rateItem};
       let updateRate = { $set : {'rates.$.rate' : rateItemRate} };
       buildingRepository.findOneAndUpdate(queryUpdateRate, updateRate,{new: true}, (error:Error, result:Building) => {
         if (error) {
@@ -1602,10 +1619,11 @@ class ProjectService {
       });
     }).catch(function(e:any) {
       logger.error('Promise failed for individual createPromiseForRateUpdate ! Error: ' +JSON.stringify(e));
+      CCPromise.reject(e);
     });
   }
 
-  createPromiseForAddingNewRateItemInProjectRates(projectId: string, rateItem:any) {
+  addNewCentralizedRateForProject(projectId: string, rateItem:any) {
     return new CCPromise(function(resolve : any, reject : any){
       logger.info('createPromiseForAddingNewRateItemInProjectRates has been hit for projectId : '+projectId+', rateItem : '+rateItem);
 
@@ -1622,10 +1640,11 @@ class ProjectService {
       });
     }).catch(function(e:any) {
       logger.error('Promise failed for individual createPromiseForAddingNewRateItemInProjectRates ! error :' +JSON.stringify(e));
+      CCPromise.reject(e);
     });
   }
 
-  createPromiseForRateUpdateOfProjectRates(projectId: string, rateItem :string, rateItemRate : number) {
+  updateCentralizedRateForProject(projectId: string, rateItem :string, rateItemRate : number) {
     return new CCPromise(function(resolve : any, reject : any){
       logger.info('createPromiseForRateUpdateOfProjectRates has been hit for projectId : '+projectId+', rateItem : '+rateItem);
       //update rate
@@ -1642,6 +1661,7 @@ class ProjectService {
       });
     }).catch(function(e:any) {
       logger.error('Promise failed for individual createPromiseForRateUpdateOfProjectRates ! Error: ' +JSON.stringify(e));
+      CCPromise.reject(e);
     });
   }
 

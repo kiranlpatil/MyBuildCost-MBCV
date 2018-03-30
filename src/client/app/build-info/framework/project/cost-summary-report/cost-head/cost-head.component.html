@@ -93,7 +93,7 @@
                               (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}</button>
                     </td>
                     <td>
-                      <a (click)="getDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                      <a (click)="addNewDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"><span class="glyphicon glyphicon-plus-sign"></span></a>
                     </td>
                     <td>
                       <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head"

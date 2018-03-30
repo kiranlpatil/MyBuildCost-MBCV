@@ -443,6 +443,7 @@ export class Label {
   public static GET_RATE_BY_QUANTITY : string = 'getRateByQuantity';
   public static WORKITEM_RATE_TAB : string = 'rate';
   public static WORKITEM_QUANTITY_TAB : string = 'quantity';
+  public static QUANTITY_VIEW : string = 'default';
   public static WORKITEM_DETAILED_QUANTITY_TAB : string = 'detailedQuantity';
 
   //Quantity View
