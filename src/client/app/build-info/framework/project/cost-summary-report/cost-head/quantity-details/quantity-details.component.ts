@@ -83,6 +83,7 @@ export class QuantityDetailsComponent implements OnInit {
        message.isError = false;
        message.custom_message = Messages.MSG_SUCCESS_DELETE_QUANTITY_ITEM;
        this.messageService.message(message);
+       this.refreshWorkItemList.emit(this.categoryRateAnalysisId);
   }
 
   onDeleteQuantityByNameFailure(error: any) {

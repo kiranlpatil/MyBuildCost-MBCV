@@ -49,11 +49,11 @@
                     </td>
                     <td>
                       <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
-                           *ngIf="workItem.quantity.isEstimated === true"
+                           *ngIf="workItem.quantity.total != 0"
                            (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
                         <input [(ngModel)]="workItem.quantity.total" id="quantity" size="10" class="form-control clear">
                       </div>
-                      <button *ngIf="workItem.quantity.isEstimated === false"
+                      <button *ngIf="workItem.quantity.total == 0"
                               type="button"
                               id="getQuantity{{categoryIndex}}"
                               class="btn-get-amount" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
@@ -126,6 +126,7 @@
                                            [workItemsList] ="workItemsList"
                                            (categoriesTotalAmount)="setCategoriesTotal($event)"
                                            (showWorkItemTabName)="setShowWorkItemTab($event)"
+                                           (refreshWorkItemList)="refreshWorkItemList($event)"
                                            [categoryRateAnalysisId]="category.rateAnalysisId"
                                            [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                            [keyQuantity]="keyQuantity"
@@ -142,6 +143,7 @@
                                             [workItemsList] ="workItemsList"
                                             [categoryDetails] ="categoryDetails"
                                             (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                            (refreshWorkItemList)="refreshWorkItemList($event)"
                                             [categoryRateAnalysisId]="category.rateAnalysisId"
                                             [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                             [baseUrl] = "baseUrl">

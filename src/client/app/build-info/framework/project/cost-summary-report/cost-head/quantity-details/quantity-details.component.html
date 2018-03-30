@@ -31,7 +31,7 @@
 
     <td>
       <div *ngIf="workItemData.rate.isEstimated">
-        {{ workItemData.quantity.total * workItemData.rate.total}}
+        {{ quantity.total * workItemData.rate.total}}
       </div>
       <div *ngIf="!workItemData.rate.isEstimated">
         -

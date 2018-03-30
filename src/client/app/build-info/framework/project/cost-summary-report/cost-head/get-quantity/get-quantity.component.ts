@@ -31,6 +31,7 @@ export class GetQuantityComponent implements OnInit {
   @Input() keyQuantity : string;
 
   @Output() showWorkItemTabName = new EventEmitter<string>();
+  @Output() refreshWorkItemList = new EventEmitter();
   @Output() categoriesTotalAmount = new EventEmitter<number>();
 
   projectId : string;
@@ -181,12 +182,13 @@ export class GetQuantityComponent implements OnInit {
   }
 
   onUpdateQuantityItemsSuccess(success : string) {
+    this.refreshWorkItemList.emit(this.categoryRateAnalysisId);
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
     this.messageService.message(message);
 
-    for(let workItemData of this.workItemsList) {
+/*    for(let workItemData of this.workItemsList) {
       if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
         workItemData.quantity.total = this.quantityTotal;
         if(workItemData.quantity.total !== 0) {
@@ -205,7 +207,7 @@ export class GetQuantityComponent implements OnInit {
 
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
       this.categoryRateAnalysisId, this.workItemsList);
-    this.categoriesTotalAmount.emit(categoriesTotal);
+    this.categoriesTotalAmount.emit(categoriesTotal);*/
     this.showWorkItemTabName.emit('');
       this.loaderService.stop();
   }

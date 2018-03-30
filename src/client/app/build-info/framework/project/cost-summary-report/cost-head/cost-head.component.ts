@@ -134,9 +134,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  getDetailedQuantity( categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
-    if( this.showQuantityTab !== Label.WORKITEM_DETAILED_QUANTITY_TAB || this.compareCategoryId !== categoryId ||
-      this.compareWorkItemId !== workItem.rateAnalysisId) {
+  getDetailedQuantity(categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
+    if( this.showQuantityTab !== Label.WORKITEM_DETAILED_QUANTITY_TAB ||
+      this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItem.rateAnalysisId) {
 
       this.setItemId(categoryId, workItem.rateAnalysisId);
 
@@ -496,6 +496,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.getCategories( this.projectId, this.costHeadId);
     this.showWorkItemTab = null;
     this.displayRateView = null;
+  }
+
+  refreshWorkItemList() {
+    this.getActiveWorkItemsOfCategory(this.categoryId);
   }
 
 /*  setSelectedWorkItems(workItemList:any) {

@@ -750,6 +750,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;
+    var projectDetails = req.body.item;
     ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId, (error, result) => {
       if (error) {
         next(error);
@@ -762,8 +763,8 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         } else {
-          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (req.body.item === undefined) ||
-            (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.item === '')) {
+          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (projectDetails === undefined) ||
+            (req.params.categoryId === '') || (req.params.workItemId === '') || (projectDetails === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -782,7 +783,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     var costHeadId = parseInt(req.params.costHeadId);
     var categoryId = parseInt(req.params.categoryId);
     var workItemId = parseInt(req.params.workItemId);
-
+    var quantityDetails = req.body.item;
     ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
       if (error) {
         next(error);
@@ -795,8 +796,8 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         } else {
-          if ((categoryId === undefined) || (workItemId === undefined) || (req.body.item === undefined) ||
-            (categoryId === null) || (workItemId === null) || (req.body.item === '')) {
+          if ((categoryId === undefined) || (workItemId === undefined) || (quantityDetails === undefined) ||
+            (categoryId === null) || (workItemId === null) || (quantityDetails === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -814,6 +815,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;
+    var itemName = req.body.item.name;
     ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId, (error, result) => {
       if (error) {
         next(error);
@@ -826,8 +828,8 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         } else {
-          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (req.body.item.name === undefined) ||
-            (req.params.categoryId === '') || (req.params.workItemId === '') || (req.body.item.name === '')) {
+          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || ( itemName === undefined) ||
+            (req.params.categoryId === '') || (req.params.workItemId === '') || (itemName === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -846,6 +848,8 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     var costHeadId = parseInt(req.params.costHeadId);
     var categoryId = parseInt(req.params.costHeadId);
     var workItemId = parseInt(req.params.costHeadId);
+    var itemName = req.body.item;
+
     ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
       if (error) {
         next(error);
@@ -858,8 +862,8 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
             code: 400
           });
         } else {
-          if ((categoryId === undefined) || (workItemId === undefined) || (req.body.item === undefined) ||
-            (categoryId === null) || (workItemId === null) || (req.body.item === '')) {
+          if ((categoryId === undefined) || (workItemId === undefined) || ( itemName === undefined) ||
+            (categoryId === null) || (workItemId === null) || (itemName === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,

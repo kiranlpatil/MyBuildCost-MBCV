@@ -942,7 +942,7 @@ class ProjectService {
 
 //Update Quantity Of Project Cost Heads
   updateQuantityOfProjectCostHeads(projectId:string, costHeadId:number, categoryId:number, workItemId:number,
-                                   quantityDetail:QuantityDetails, user:User, callback:(error: any, result: any)=> void) {
+                                   quantityDetails:QuantityDetails, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
     this.projectRepository.findById(projectId, (error, project) => {
       if (error) {
@@ -955,27 +955,12 @@ class ProjectService {
             let categoriesOfCostHead = costHead.categories;
             for (let categoryData of categoriesOfCostHead) {
               if (categoryId === categoryData.rateAnalysisId) {
-                 let workItemsOfCategory = categoryData.workItems;
-                   for (let workItemData of workItemsOfCategory ) {
+                let workItemsOfCategory = categoryData.workItems;
+                for (let workItemData of workItemsOfCategory) {
                   if (workItemId === workItemData.rateAnalysisId) {
-                    quantity  = workItemData.quantity;
+                    quantity = workItemData.quantity;
                     quantity.isEstimated = true;
-
-                    let isExistSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="'+quantityDetail.name+'"';
-                    let isExistQuantityDetail = alasql(isExistSQL,[quantity.quantityItemDetails]);
-
-                    if(isExistQuantityDetail.length === 0) {
-                      quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
-                      quantity.quantityItemDetails.push(quantityDetail);
-                    } else {
-                      for(let quantityDetailObj of quantity.quantityItemDetails) {
-                        if(quantityDetailObj.name === quantityDetail.name) {
-                          quantityDetailObj.quantityItems = quantityDetail.quantityItems;
-                          quantityDetailObj.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
-                        }
-                      }
-                    }
-                    quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantity.quantityItemDetails]);
+                    this.updateQuantityItemsOfWorkItem( quantity, quantityDetails);
                   }
                 }
               }
