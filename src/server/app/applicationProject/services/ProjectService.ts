@@ -879,27 +879,7 @@ class ProjectService {
                   if (workItemId === workItemData.rateAnalysisId) {
                     quantity  = workItemData.quantity;
                     quantity.isEstimated = true;
-
-                    let isExistSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="'+quantityDetail.name+'"';
-                    let isExistQuantityDetail = alasql(isExistSQL,[quantity.quantityItemDetails]);
-
-                    if(isExistQuantityDetail.length === 0) {
-                      quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
-                      quantity.quantityItemDetails.push(quantityDetail);
-                    } else {
-                      let quantityDetailIndex = 0;
-                      for(let quantityDetailObj of quantity.quantityItemDetails) {
-                        if(quantity.quantityItemDetails.length > 1 && quantityDetailObj.name === 'default') {
-                          quantity.quantityItemDetails.splice(quantityDetailIndex, 1);
-                        }
-                        if(quantityDetailObj.name === quantityDetail.name) {
-                          quantityDetailObj.quantityItems = quantityDetail.quantityItems;
-                          quantityDetailObj.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
-                        }
-                        quantityDetailIndex++;
-                      }
-                    }
-                    quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantity.quantityItemDetails]);
+                    this.updateQuantityItemsOfWorkItem( quantity, quantityDetail);
                   }
                 }
               }
@@ -921,7 +901,46 @@ class ProjectService {
     });
   }
 
-  //Update Quantity Of Project Cost Heads
+  updateQuantityItemsOfWorkItem(quantity: Quantity, quantityDetail: QuantityDetails) {
+
+    quantity.isEstimated = true;
+
+    if (quantity.quantityItemDetails.length === 0) {
+      quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+      quantity.quantityItemDetails.push(quantityDetail);
+    } else {
+
+      let isDefaultExistsSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="default"';
+      let isDefaultExistsQuantityDetail = alasql(isDefaultExistsSQL, [quantity.quantityItemDetails]);
+
+      if (isDefaultExistsQuantityDetail.length > 0) {
+        quantity.quantityItemDetails = [];
+        quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+        quantity.quantityItemDetails.push(quantityDetail);
+      } else {
+        if (quantityDetail.name !== 'default') {
+          let isItemAlreadyExistSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="' + quantityDetail.name + '"';
+          let isItemAlreadyExists = alasql(isItemAlreadyExistSQL, [quantity.quantityItemDetails]);
+
+          if (isItemAlreadyExists.length > 0) {
+            for (let quantityindex = 0; quantityindex < quantity.quantityItemDetails.length; quantityindex++) {
+              quantity.quantityItemDetails[quantityindex].quantityItems = quantityDetail.quantityItems;
+              quantity.quantityItemDetails[quantityindex].total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+            }
+          } else {
+            quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+            quantity.quantityItemDetails.push(quantityDetail);
+          }
+        } else {
+          quantity.quantityItemDetails = [];
+          quantity.quantityItemDetails.push(quantityDetail);
+        }
+      }
+    }
+    quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?', [quantity.quantityItemDetails]);
+  }
+
+//Update Quantity Of Project Cost Heads
   updateQuantityOfProjectCostHeads(projectId:string, costHeadId:number, categoryId:number, workItemId:number,
                                    quantityDetail:QuantityDetails, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
