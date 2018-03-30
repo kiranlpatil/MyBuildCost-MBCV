@@ -887,11 +887,16 @@ class ProjectService {
                       quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
                       quantity.quantityItemDetails.push(quantityDetail);
                     } else {
+                      let quantityDetailIndex = 0;
                       for(let quantityDetailObj of quantity.quantityItemDetails) {
+                        if(quantity.quantityItemDetails.length > 1 && quantityDetailObj.name === 'default') {
+                          quantity.quantityItemDetails.splice(quantityDetailIndex, 1);
+                        }
                         if(quantityDetailObj.name === quantityDetail.name) {
                           quantityDetailObj.quantityItems = quantityDetail.quantityItems;
                           quantityDetailObj.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?',[quantityDetail.quantityItems]);
                         }
+                        quantityDetailIndex++;
                       }
                     }
                     quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantity.quantityItemDetails]);
