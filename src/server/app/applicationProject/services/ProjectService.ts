@@ -30,6 +30,7 @@ import CategoriesListWithRatesDTO = require('../dataaccess/dto/project/Categorie
 import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
 import messages  = require('../../applicationProject/shared/messages');
 import { CommonService } from '../../applicationProject/shared/CommonService';
+import WorkItemListWithRatesDTO = require('../dataaccess/dto/project/WorkItemListWithRatesDTO');
 
 let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
@@ -322,7 +323,7 @@ class ProjectService {
           }
         }
         let inActiveWorkItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, building.rates, false);
-        callback(null,{data:inActiveWorkItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null,{data:inActiveWorkItemsListWithBuildingRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
         }
     });
   }
@@ -352,7 +353,7 @@ class ProjectService {
           }
         }
         let inActiveWorkItemsListWithProjectRates = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, project.rates, false);
-        callback(null,{data:inActiveWorkItemsListWithProjectRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null,{data:inActiveWorkItemsListWithProjectRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -1048,7 +1049,7 @@ class ProjectService {
         if(result.length > 0) {
           let workItemsOfBuildingCategory = result[0].costHeads.categories.workItems;
           let workItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(workItemsOfBuildingCategory, result[0].rates, true);
-          callback(null, {data: workItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          callback(null, {data: workItemsListWithBuildingRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
         } else {
           let error = new Error();
           error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
@@ -1079,7 +1080,7 @@ class ProjectService {
         if(result.length > 0) {
           let workItemsOfCategory = result[0].projectCostHeads.categories.workItems;
           let workItemsListWithRates = this.getWorkItemListWithCentralizedRates(workItemsOfCategory, result[0].rates, true);
-          callback(null, {data: workItemsListWithRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          callback(null, {data: workItemsListWithRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
         } else {
           let error = new Error();
           error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
@@ -1090,11 +1091,12 @@ class ProjectService {
   }
 
   getWorkItemListWithCentralizedRates(workItemsOfCategory: Array<WorkItem>, centralizedRates: Array<any>, isWorkItemActive:boolean) {
-    let workItemsListWithRates = new Array<WorkItem>();
-    for (let workItemObj of workItemsOfCategory) {
-      if (workItemObj.active === isWorkItemActive) {
-        let workItem: WorkItem = workItemObj;
-        let rateItemsOfWorkItem = workItemObj.rate.rateItems;
+
+    let workItemsListWithRates: WorkItemListWithRatesDTO = new WorkItemListWithRatesDTO();
+    for (let workItemData of workItemsOfCategory) {
+      if (workItemData.active === isWorkItemActive) {
+        let workItem: WorkItem = workItemData;
+        let rateItemsOfWorkItem = workItemData.rate.rateItems;
         workItem.rate.rateItems = this.getRatesFromCentralizedrates(rateItemsOfWorkItem, centralizedRates);
 
         let arrayOfRateItems = workItem.rate.rateItems;
@@ -1106,8 +1108,9 @@ class ProjectService {
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
            workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+           workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount+ workItem.amount;
          }
-      workItemsListWithRates.push(workItem);
+      workItemsListWithRates.workItems.push(workItem);
       }
     }
     return workItemsListWithRates;
@@ -1264,9 +1267,8 @@ class ProjectService {
 
     for (let categoryData of categoriesOfCostHead) {
       let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates, true);
-      let calculateWorkItemTotalAmount =  alasql('VALUE OF SELECT ROUND(SUM(amount),2) FROM ?',[workItems]);
-      categoryData.amount = calculateWorkItemTotalAmount;
-      categoriesTotalAmount = categoriesTotalAmount + calculateWorkItemTotalAmount;
+      categoryData.amount = workItems.workItemsAmount;
+      categoriesTotalAmount = categoriesTotalAmount + workItems.workItemsAmount;
       delete categoryData.workItems;
       categoriesListWithRates.categories.push(categoryData);
     }
