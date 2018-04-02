@@ -188,22 +188,25 @@ export class GetQuantityComponent implements OnInit {
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
     this.messageService.message(message);
 
-    for(let workItemData of this.workItemsList) {
-      if(workItemData.rateAnalysisId === this.workItemId) {
-        this.calculateTotalOfQuantityItemDetails(workItemData);
-        if(workItemData.quantity.total !== 0) {
-          workItemData.quantity.isEstimated = true;
-          if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
-            workItemData.amount = this.commonService.calculateAmountOfWorkItem(workItemData.quantity.total,
-              workItemData.rate.total);
+    let workItemId = this.workItemId;
+    let workItemData = this.workItemsList.filter(
+      function( workItemData: any){
+        return workItemData.rateAnalysisId === workItemId;
+      });
+
+    this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
+        if(workItemData[0].quantity.total !== 0) {
+          workItemData[0].quantity.isEstimated = true;
+          if(workItemData[0].quantity.isEstimated && workItemData[0].rate.isEstimated) {
+            workItemData[0].amount = this.commonService.calculateAmountOfWorkItem(workItemData[0].quantity.total,
+              workItemData[0].rate.total);
           }
         } else {
-          workItemData.quantity.isEstimated = false;
-          workItemData.amount = 0;
+          workItemData[0].quantity.isEstimated = false;
+          workItemData[0].amount = 0;
         }
-        break;
-      }
-    }
+
+
 
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
       this.categoryRateAnalysisId, this.workItemsList);
@@ -219,24 +222,6 @@ export class GetQuantityComponent implements OnInit {
     this.messageService.message(message);
     this.loaderService.stop();
   }
-
-  calculateTotalOfQuantityItemDetails(workItemData : WorkItem) {
-    let quantityItemDetailsTotal = 0;
-    for(let quantityItemDetail of workItemData.quantity.quantityItemDetails) {
-      this.calculateTotalOfQuantityItems(quantityItemDetail);
-      quantityItemDetailsTotal = quantityItemDetailsTotal + quantityItemDetail.total;
-    }
-    workItemData.quantity.total = quantityItemDetailsTotal;
-  }
-
-  calculateTotalOfQuantityItems(quantityItemDetail : QuantityDetails) {
-    let quantityItemTotal = 0;
-    for(let quantityItemData of quantityItemDetail.quantityItems) {
-      quantityItemTotal = quantityItemTotal + quantityItemData.quantity;
-    }
-    quantityItemDetail.total = quantityItemTotal;
-  }
-
 
   setQuantityItemNameForDelete(quantityIndex: number) {
      this.quantityIndex= quantityIndex;
