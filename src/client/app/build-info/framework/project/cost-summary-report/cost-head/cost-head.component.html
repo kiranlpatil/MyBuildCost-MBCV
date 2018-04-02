@@ -93,12 +93,11 @@
                               (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}</button>
                     </td>
                     <td>
-                      <a (click)="addNewDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"><span class="glyphicon glyphicon-plus-sign"></span></a>
-                    </td>
-                    <td>
-                      <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head"
+                      <a class="add-more-details" (click)="addNewDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"
+                         title="Add More Details"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                      <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head" title="Delete Work Item"
                            (click)="setIdsForDeleteWorkItem(category.rateAnalysisId,workItem.rateAnalysisId,workItemIndex )">
-                        <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete-blue.png" />
+                        <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />
                       </div>
                     </td>
                     <td class="show-embedded-table">

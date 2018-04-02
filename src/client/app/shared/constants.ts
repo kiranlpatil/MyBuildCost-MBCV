@@ -477,7 +477,7 @@ export class Button {
   public static WORKITEM: string = 'WorkItem';
   public static ITEM: string = 'Item';
   public static ROW: string = 'Row';
-  public static COSTHEAD: string = 'CostHead';
+  public static COSTHEAD: string = 'Cost Head';
 }
 
 export class Units {
