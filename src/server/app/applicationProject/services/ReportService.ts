@@ -139,9 +139,9 @@ class ReportService {
         let thumbRuleReport = new ThumbRuleReport();
         thumbRuleReport.name = costHead.name;
         thumbRuleReport.rateAnalysisId = costHead.rateAnalysisId;
-        thumbRuleReport.amount = costHead.budgetedCostAmount;
+        thumbRuleReport.amount = parseFloat((costHead.budgetedCostAmount).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
         thumbRuleReport.costHeadActive = costHead.active;
-        thumbRuleReport.rate = parseFloat((costHead.budgetedCostAmount / buildingReport.area).toFixed(2));
+        thumbRuleReport.rate = parseFloat((thumbRuleReport.amount / buildingReport.area).toFixed(2));
         if(rateUnit === Constants.SQUREMETER_UNIT) {
           thumbRuleReport.rate = parseFloat((thumbRuleReport.rate * config.get(Constants.SQUARE_METER)).toFixed(2));
         }
