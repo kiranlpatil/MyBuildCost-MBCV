@@ -1649,7 +1649,7 @@ class ProjectService {
       logger.info('createPromiseForRateUpdateOfProjectRates has been hit for projectId : '+projectId+', rateItem : '+rateItem);
       //update rate
       let projectRepository = new ProjectRepository();
-      let queryUpdateRateForProject = {'_id' : projectId, 'rates.item':rateItem};
+      let queryUpdateRateForProject = {'_id' : projectId, 'rates.itemName':rateItem};
       let updateRateForProject = { $set : {'rates.$.rate' : rateItemRate} };
       projectRepository.findOneAndUpdate(queryUpdateRateForProject, updateRateForProject,{new: true}, (error:Error, result:Project) => {
         if (error) {
