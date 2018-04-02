@@ -301,9 +301,9 @@ select,
 .btn {
   border-radius: 25px;
   color: $heading;
-  height: 35px;
   font-weight: bold;
   font-size: 13px;
+  height: 40px;
   line-height: 13px;
   text-transform: inherit;
   text-align: center;
@@ -320,6 +320,7 @@ select,
 .btn-primary {
   background: $theme-color;
   border: $theme-color 1px solid;
+  color: $heading important;
   padding: 0 10px;
   width: 200px;
 
@@ -333,6 +334,7 @@ select,
 }
 
 .btn-default {
+  background: transparent;
   padding: 10px 35px;
 
   &:focus,
@@ -450,6 +452,7 @@ h5 {
 
   .modal-header {
     background: $theme-color;
+    border-radius: 8px 8px 0 0;
     height: 60px;
     h5 {
       margin-bottom: 0;
@@ -530,6 +533,7 @@ control-messages {
   border-color: transparent;
   padding: 0;
   margin: 0 0 10px;
+  text-align: left;
 }
 
 .navbar-brand {
@@ -811,7 +815,7 @@ img[alt] {
     bottom: inherit;
     left: 0;
     position: absolute;
-    top: 60px;
+    top: 65px;
     width: 100%;
     z-index: 999;
     div {

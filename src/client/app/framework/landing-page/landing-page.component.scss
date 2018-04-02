@@ -1,5 +1,9 @@
 @import '../../../css/common';
 
+.container {
+  width: 1170px;
+}
+
 .page-background {
   background: no-repeat fixed 50% 100%;
   display: table;
@@ -17,8 +21,9 @@
     }
 
     h4 {
-      font-size: 30px;
       color: $heading;
+      font-size: 30px;
+      margin-bottom: 5px;
     }
 
     ul {
@@ -59,15 +64,19 @@
       width: 390px;
       margin: 0 auto;
     }
+
+    form {
+      margin-top: 15px;
+    }
   }
 }
 
 .create-new-header {
-  background-color: $white;
+  background-color: transparent;
   height: 50px;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   z-index: 1;
 
@@ -93,6 +102,11 @@
   }
 }
 
+@media screen and (max-width: 1170px) {
+  .container {
+    width: 100%;
+  }
+}
 
 @media only screen and (max-width: 480px) {
   .page-background {

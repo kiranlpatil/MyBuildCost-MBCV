@@ -185,6 +185,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
   public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Some where Quantity field is blank. Please fill it';
+  public static LOGIN_INFO: string = 'Enter your details Below.';
 }
 
 export class NavigationRoutes {

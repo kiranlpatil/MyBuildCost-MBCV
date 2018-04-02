@@ -42,7 +42,7 @@ export class ForgotPasswordComponent {
     this.MY_TAG_LINE = ProjectAsset.TAG_LINE;
     this.EMAIL_ICON = ImagePath.EMAIL_ICON;
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
-    this.forgotPasswordButtonLabel = 'Send Email';
+    this.forgotPasswordButtonLabel = 'Request Reset Link';
   }
 
   onSubmit() {
