@@ -471,6 +471,7 @@ export class Button {
   public static SAVE: string = 'Save';
   public static GET_AMOUNT: string = 'Estimate Cost';
   public static GET_RATE: string = 'Get Rate';
+  public static GET_QUANTITY: string = 'Get Qty.';
   public static SYSTEM_RA: string = 'System RA';
   public static ADD: string = 'Add ';
   public static ADD_MORE_DETAILS: string = 'Add More Details';

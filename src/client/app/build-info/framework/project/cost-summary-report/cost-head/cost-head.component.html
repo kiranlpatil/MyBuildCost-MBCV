@@ -67,7 +67,7 @@
                                               id="getQuantity{{categoryIndex}}"
                                               class="btn-get-amount" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                                               (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
-                                        Get Qty.
+                                        {{getButton().GET_QUANTITY}}
                                       </button>
                                     </td>
                                     <td>{{ workItem.unit }}</td>
@@ -131,6 +131,7 @@
 
                                       <div *ngIf="showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
                                         <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+                                          <span class="glyphicon glyphicon-remove" (click)="closeQuantityTab()"></span>
                                           <bi-get-quantity [quantityItems]="quantityItemsArray"
                                                            [categoryDetails] ="categoryDetails"
                                                            [workItemsList] ="workItemsList"
@@ -159,6 +160,7 @@
                       <div id="collapse" class="panel-collapse collapse">
                         <div class="panel-body">
                           <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+                            <span class="glyphicon glyphicon-remove" (click)="closeDetailedQuantityTab()"></span>
                             <bi-quantity-details
                               [quantityDetails]="workItem.quantity.quantityItemDetails"
                               [workItem] ="workItem"

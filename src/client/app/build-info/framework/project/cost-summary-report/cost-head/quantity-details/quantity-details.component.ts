@@ -84,7 +84,7 @@ export class QuantityDetailsComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_QUANTITY_DETAILS;
     this.messageService.message(message);
-    this.refreshWorkItemList.emit(this.categoryRateAnalysisId);
+    this.refreshWorkItemList.emit();
     this.loaderService.stop();
   }
 
@@ -107,5 +107,6 @@ export class QuantityDetailsComponent implements OnInit {
 
   setShowWorkItemTab( tabName : string) {
     this.showWorkItemTabName = tabName;
+    this.refreshWorkItemList.emit();
   }
 }
