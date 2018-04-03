@@ -16,6 +16,7 @@ export class MaterialTakeoffComponent implements OnInit {
   secondaryFilterHeading : string = null;
   secondaryFilterList : any[];
   building : string = 'Build1';
+  selectedBuilding : string = null;
 
   flatReport : any[];
   materialReport : any[];
@@ -29,7 +30,7 @@ export class MaterialTakeoffComponent implements OnInit {
   ];
 
   public buildingList: any[] = [
-    'Building All','Build1', 'Build2'
+    'All Buildings', 'Build1', 'Build2'
   ];
 
   public groupByList: any[] = [
@@ -51,7 +52,7 @@ export class MaterialTakeoffComponent implements OnInit {
       flatReport => this.onGetListSuccess(flatReport),
       error => this.onGetListFailure(error)
     );*/
-    /*this.flatReport = [
+   /* this.flatReport = [
       {
         'building' : '',
         'costHead' : '',
@@ -61,11 +62,13 @@ export class MaterialTakeoffComponent implements OnInit {
         'label' : '',
         'unit' : ''
       }
-    ];
+    ];*/
 
-    this.materialReport = this.materialTakeoffService.buildMaterialReport(this.building, this.secondaryFilter,
+    /*this.materialReport = this.materialTakeoffService.buildMaterialReport(this.building, this.secondaryFilter,
       this.groupBy, this.flatReport);*/
 
+    this.selectedBuilding = 'Build1';
+    this.building = 'Build1';
     this.secondaryFilterHeading = 'Cost Head';
     this.secondaryFilterList = this.costHeadList;
   }
