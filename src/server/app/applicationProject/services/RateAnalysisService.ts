@@ -193,6 +193,7 @@ class RateAnalysisService {
       callback(null, {'buildingCostHeads' : buildingCostHeads, 'rates' : rateItemsRateAnalysis, 'units' : unitsRateAnalysis});
     }).catch(function(e:any) {
       logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
+      CCPromise.reject(e);
     });
   }
 

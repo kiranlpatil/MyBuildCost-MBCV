@@ -1361,6 +1361,7 @@ class ProjectService {
             callback(null, {status:200});
           }).catch(function(e:any) {
             logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e));
+            CCPromise.reject(e);
           });
         }
         }
@@ -1434,8 +1435,13 @@ class ProjectService {
         } else {
           logger.info('Inside updateBudgetRatesForBuildingCostHeads success');
           let projectService = new ProjectService();
-          let buildingCostHeads = projectService.calculateBudgetCostForBuilding(result.buildingCostHeads, projectDetails, buildingDetails);
+          let buidingCostHeads = result.buildingCostHeads;
+          let configCostHeads = config.get('configCostHeads');
+          projectService.convertConfigCostHeads(configCostHeads , buidingCostHeads);
+
+          let buildingCostHeads = projectService.calculateBudgetCostForBuilding(buidingCostHeads, projectDetails, buildingDetails);
           let rates  = projectService.getRates(result, buildingCostHeads);
+
           let query = {'_id': buildingId};
           let newData = {$set: {'costHeads': buildingCostHeads, 'rates': rates}};
           buildingRepository.findOneAndUpdate(query, newData, {new: true}, (error:any, response:any) => {
@@ -1452,6 +1458,7 @@ class ProjectService {
       });
     }).catch(function(e:any){
       logger.error('Error in updateBudgetRatesForBuildingCostHeads :'+e);
+      CCPromise.reject(e);
     });
   }
 
@@ -1476,7 +1483,6 @@ class ProjectService {
 
   convertConfigCostHeads(configCostHeads : Array<any>, costHeadsData:Array<CostHead>) {
 
-    let costHeadsFromConfig = new Array<CostHead>();
     for(let configCostHead of configCostHeads) {
 
       let costHead : CostHead = new CostHead();
@@ -1523,12 +1529,19 @@ class ProjectService {
           logger.err('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
           reject(error);
         } else {
+
             let projectService = new ProjectService();
+            let costHeadsFromRateAnalysis = result.buildingCostHeads;
+            let configProjectCostHeads = config.get('configProjectCostHeads');
+            projectService.convertConfigCostHeads(configProjectCostHeads , costHeadsFromRateAnalysis);
+
             let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(
-              result.buildingCostHeads, projectDetails, buildingDetails);
+              costHeadsFromRateAnalysis, projectDetails, buildingDetails);
             let rates  = projectService.getRates(result, projectCostHeads);
+
             let query = {'_id': projectId};
             let newData = {$set: {'projectCostHeads': projectCostHeads, 'rates': rates}};
+
             projectRepository.findOneAndUpdate(query, newData, {new: true}, (error: any, response: any) => {
               logger.info('Project service, getAllDataFromRateAnalysis has been hit');
               if (error) {
@@ -1543,6 +1556,7 @@ class ProjectService {
       });
     }).catch(function(e:any){
       logger.error('Error in updateBudgetRatesForProjectCostHeads :'+e);
+      CCPromise.reject(e);
     });
   }
 
@@ -1688,6 +1702,20 @@ class ProjectService {
           case Constants.SAFETY_MEASURES : {
             budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
             calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, totalCarpetAreaOfProject);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+            break;
+          }
+          case Constants.CLUB_HOUSE : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.TOTAL_SLAB_AREA_OF_CLUB_HOUSE, projectDetails.slabArea);
+            budgetedCostAmount = eval(calculateBudgtedCost);
+            this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+            break;
+          }
+          case Constants.SWIMMING_POOL : {
+            budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
             budgetedCostAmount = eval(calculateBudgtedCost);
             this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
             break;

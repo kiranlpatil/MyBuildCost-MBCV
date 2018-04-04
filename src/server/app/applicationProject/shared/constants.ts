@@ -34,9 +34,13 @@ class Constants {
   public static NUM_OF_FLOORS : string = 'numOfFloors';
   public static NUM_OF_LIFTS : string = 'numOfLifts';
   public static NUM_OF_PARKING_FLOORS : string = 'numOfParkingFloors';
+  public static TOTAL_SLAB_AREA_OF_CLUB_HOUSE : string = 'totalSlabAreaOfClubHouse';
+  public static SWIMMING_POOL_CAPACITY : string = 'swimmingPoolCapacity';
 
   //Common Ammenities Cost Heads
   public static SAFETY_MEASURES : string = 'Safety measures';
+  public static CLUB_HOUSE : string = 'Club House';
+  public static SWIMMING_POOL : string = 'Swimming Pool';
 
   //Building Cost Heads
   public static RCC_BAND_OR_PATLI : string = 'RCC band / patli';

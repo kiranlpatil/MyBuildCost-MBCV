@@ -720,7 +720,12 @@
     "falseCeiling" : "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
     "specialElevationalFeatures" : "carpetArea * 1.35 * 25",
     "boardsAndSignagsInsideBuilding" : "700 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 60000 + 100 * numOfFloors",
-    "Safety measures" : "carpetArea * 1.35 * 5"
+    "Safety measures" : "carpetArea * 1.35 * 5",
+
+    //COMMON ammenities
+
+    "Club House" : "totalSlabAreaOfClubHouse * 1200",
+    "Swimming Pool" : "swimmingPoolCapacity * 45"
   },
   "rateAnalysisAPI" : {
     "buildingCostHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
@@ -4652,6 +4657,80 @@
               "measurementUnit" : "No.",
               "directRate" : null,
               "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "configProjectCostHeads" : [
+    {
+      "name" : "Club House",
+      "rateAnalysisId" : 100000,
+      "categories" : [
+        {
+          "name" : "In RCC",
+          "rateAnalysisId" : 100001,
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in RCC framed structure",
+              "rateAnalysisId" : 100002,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1200,
+              "directRateUnit" : "Sqft b/up"
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in RCC framed structure",
+              "rateAnalysisId" : 100003,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1500,
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        },
+        {
+          "name" : "In load bearing",
+          "rateAnalysisId" : 100004,
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in load bearing masonry",
+              "rateAnalysisId" : 100005,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1000,
+              "directRateUnit" : "Sqft b/up"
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in load bearing masonry",
+              "rateAnalysisId" : 100006,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1200,
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Swimming Pool",
+      "rateAnalysisId" : 100007,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100008,
+          "workItems" : [
+            {
+              "name" : "Providing a swimming pool with filtration plant, deck etc",
+              "rateAnalysisId" : 100009,
+              "measurementUnit" : "Number",
+              "directRate" : 400000,
+              "directRateUnit" : "Number"
+            },
+            {
+              "name" : "Providing and constructing changing room's block ",
+              "rateAnalysisId" : 100010,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1200,
+              "directRateUnit" : "Sqft b/up"
             }
           ]
         }
