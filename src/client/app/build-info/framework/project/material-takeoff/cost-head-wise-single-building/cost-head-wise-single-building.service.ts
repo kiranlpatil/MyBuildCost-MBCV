@@ -4,7 +4,7 @@ import { Http, } from '@angular/http';
 
 
 @Injectable()
-export class MaterialTotalService  {
+export class CostHeadWiseSingleBuildingService  {
 
 
 }

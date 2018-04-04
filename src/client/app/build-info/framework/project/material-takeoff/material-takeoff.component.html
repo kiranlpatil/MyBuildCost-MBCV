@@ -20,8 +20,10 @@
         </select>
       </div>
     </div>
-    <bi-material-total-report
-      [materialTakeOffDetails] ="materialTakeOffDetails">
-    </bi-material-total-report>
+    <div *ngIf="groupBy === 'Cost Head Wise' && building !== 'All Buildings'">
+      <bi-material-total-report
+        [materialTakeOffDetails] ="materialTakeOffDetails">
+      </bi-material-total-report>
+    </div>
   </div>
 </section>
