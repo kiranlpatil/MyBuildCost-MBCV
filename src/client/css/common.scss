@@ -617,6 +617,15 @@ control-messages {
   padding-top: 2px;
 }
 
+.container {
+  width: 1000px;
+}
+@media only screen and (max-width: 1024px) {
+  .container {
+    width: 100%;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .container-fluid > .navbar-collapse,
   .container-fluid > .navbar-header,
@@ -836,6 +845,3 @@ img[alt] {
   }
 }
 
-.container {
-  width: 1000px;
-}
