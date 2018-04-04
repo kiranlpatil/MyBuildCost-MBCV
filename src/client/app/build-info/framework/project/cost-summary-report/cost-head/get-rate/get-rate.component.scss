@@ -13,6 +13,14 @@
   max-width: 100%;
   border-radius: 6px;
 
+  .close {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+
   table {
     thead {
       th {
@@ -202,7 +210,7 @@
   border: solid transparent;
   content: " ";
   height: 0;
-  left: 54%;
+  left: 42%;
   position: absolute;
   pointer-events: none;
   width: 0;
@@ -230,11 +238,11 @@
 }
 
 .get-cost-section:after, .get-cost-section:before {
-  left: 70% !important;
+  left: 61% !important;
 }
 
 .get-systemRA-section:after, .get-systemRA-section:before {
-  left: 85% !important;
+  left: 80% !important;
 }
 
 input[disabled],
@@ -243,3 +251,4 @@ textarea[disabled] {
   background: $white;
   color: $text-disabled;
 }
+

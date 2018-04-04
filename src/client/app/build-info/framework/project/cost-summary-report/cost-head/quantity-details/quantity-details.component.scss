@@ -17,7 +17,7 @@
     float: left;
 
     &:nth-child(1) {
-      width: 350px;
+      width: 349px;
     }
 
     &:nth-child(2),
@@ -28,7 +28,7 @@
     }
 
     &:nth-child(3) {
-      width: 75px;
+      width: 80px;
     }
 
     &:last-child {
@@ -64,6 +64,22 @@
     display: block;
     float: right !important;
     padding: 0;
-    width: calc(100% - 350px) !important;
+    width: calc(100% - 349px) !important;
+  }
+
+  .delete-Quantity-details {
+    cursor: pointer;
+    width: 20px;
+  }
+
+  .edit-cost-null {
+    display: inline-block;
+    padding: 5px;
+  }
+
+  .edit-cost {
+    border-bottom: 1px solid $body-text;
+    display: inline-block;
+    padding: 5px;
   }
 }

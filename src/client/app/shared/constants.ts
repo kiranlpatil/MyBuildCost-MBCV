@@ -362,7 +362,7 @@ export class TableHeadings {
   public static BREADTH : string = 'Breadth';
   public static HEIGHT : string = 'Height';
   public static UNIT: string = 'Unit';
-  public static RATEANALYSIS : string = 'Rate Analysis';
+  public static RATEANALYSIS : string = 'Rate Analysis/Unit';
   public static AMOUNT : string = 'Amount';
   public static COST : string = 'Cost';
   public static TOTAL: string = 'Total';

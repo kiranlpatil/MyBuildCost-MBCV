@@ -49,7 +49,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   deleteConfirmationCategory = ProjectElements.CATEGORY;
   deleteConfirmationWorkItem = ProjectElements.WORK_ITEM;
   deleteConfirmationForQuantityDetails = ProjectElements.QUANTITY_DETAILS;
-
+  public showQuantityDetails:boolean=false;
   private showWorkItemList:boolean=false;
   private showWorkItemTab : string = null;
   private showQuantityTab : string = null;
@@ -182,6 +182,15 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.getDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
       let quantityDetail :QuantityDetails = new QuantityDetails();
       this.workItem.quantity.quantityItemDetails.push(quantityDetail);
+      this.showHideQuantityDetails(categoryId,workItemIndex);
+  }
+
+  showHideQuantityDetails(categoryId:number,workItemIndex:number) {
+    if(this.compareWorkItemId === this.workItem.rateAnalysisId && this.compareCategoryId === categoryId) {
+      this.showQuantityDetails = true;
+    } else {
+      this.showQuantityDetails = false;
+    }
   }
 
   //Get Default Quantity (If floor wise or building wise quantity is not added)

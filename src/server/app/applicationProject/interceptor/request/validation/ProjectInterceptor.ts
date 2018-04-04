@@ -778,6 +778,38 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
+  updateDirectQuantityOfBuildingCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var buildingId = req.params.buildingId;
+    var costHeadId = req.params.costHeadId;
+    var directQuantity = req.body.directQuantity;
+    ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (directQuantity === undefined) ||
+            (req.params.categoryId === '') || (req.params.workItemId === '') || (directQuantity === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
   updateQuantityOfProjectCostHeads(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var costHeadId = parseInt(req.params.costHeadId);

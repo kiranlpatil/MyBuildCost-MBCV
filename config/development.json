@@ -688,7 +688,7 @@
   "SqureMeter":0.0929,
   "budgetedCostFormulae" : {
     "excavation" : "plinthArea * 7 * 1.15 / 35.28 * 150",
-    "dewatering" : "saleableArea * 1",
+    "Dewatering" : "saleableArea * 1",
     "backfiliing" : "plinthArea * 7 * 1 * 1.15 / 35.28 * 90",
     "Soling" : "plinthArea * 40",  //a
     "RCC band / patli" : "slabArea * 500", //a
@@ -696,19 +696,19 @@
     "Internal Plaster" : "carpetArea * 3.5 * 20",  //a
     "Gypsum / POP plaster (punning)" : "carpetArea * 2.5 * 18",  //a
     "External plaster" : "carpetArea * 2.5 * 45",
-    "Waterproofing" : "carpetArea * 1.35 * 30",
+    "Water proofing" : "carpetArea * 1.35 * 30",
     "Dado / wall tiling" : "carpetArea * 1.35 * 110",   //a
     "windowSills/Jambs" : "carpetArea * 0.07 * 85", //both
     "windowsAndGlassDoors" : "250 * (carpetArea * 0.2)",
     "electrification" : "carpetArea * 1.35 * 110",
     "Fabrication" : "carpetArea * 1.35 * 40",   //a
-    "Pointing" : "carpetArea * 1.35 * 55",    // a
+    "Painting" : "carpetArea * 1.35 * 55",    // a
     "Kitchen otta" : "(numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) * 15 * 1500",    //a
     "Door Frames" : "10000 * (3 * numOfOneBHK + 4 * numOfTwoBHK + 6 * numOfThreeBHK + 8 * numOfFourBHK + 10 * numOfFiveBHK) + 1500 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)", //a door frames
     "External plumbing / drainage line" : "5000 * (numOfOneBHK * 1 + numOfTwoBHK * 2 + numOfThreeBHK * 3 + numOfFourBHK * 4 + numOfFiveBHK * 5) + 6000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",   //plumbing
-    "lift" : "(150000 * numOfFloors * numOfLifts)",
+    "Lift" : "(150000 * numOfFloors * numOfLifts)",
     "electricalLightFittings" : "((carpetArea / 400) * 500 + ((projectPeriphery / 40) * 5000 + ( numOfFloors * 3) * 700)",
-    "garbageChute" : "(60000 * (numOfFloors - numOfParkingFloors))",
+    "Garbage chute" : "(60000 * (numOfFloors - numOfParkingFloors))",
     "modularKitchenOrFurniture" : "(numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) * 125000",
     "pestControl" : "carpetArea * 1.35 * 2",
     "solarWater" : "carpetArea * 1.35 * 20",
@@ -720,7 +720,12 @@
     "falseCeiling" : "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
     "specialElevationalFeatures" : "carpetArea * 1.35 * 25",
     "boardsAndSignagsInsideBuilding" : "700 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 60000 + 100 * numOfFloors",
-    "Safety measures" : "carpetArea * 1.35 * 5"
+    "Safety measures" : "carpetArea * 1.35 * 5",
+
+    //COMMON ammenities
+
+    "Club House" : "totalSlabAreaOfClubHouse * 1200",
+    "Swimming Pool" : "swimmingPoolCapacity * 45"
   },
   "rateAnalysisAPI" : {
     "buildingCostHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
@@ -4438,22 +4443,6 @@
   ],
   "configCostHeads" : [
     {
-      "name" : "Soling (plinth)",
-      "categories" : [
-        {
-          "name" : "default",
-          "workItems" : [
-            {
-              "name" : "230 mm thk dry rubble soling with murum filling in gaps and compacting",
-              "measurementUnit" : "cum",
-              "directRate" : 100,
-              "directRateUnit" : "cft"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name" : "Water proofing",
       "rateAnalysisId" : 100217,
       "categories" : [
@@ -4462,7 +4451,7 @@
           "rateAnalysisId" : 100218,
           "workItems" : [
             {
-              "name" : "Brick bat waterproofing up to 150 mm thk for bathroom / toilets with 200 mm sunk",
+              "name" : "Brick bat waterproofing up to 150 mm thk for bathroom or toilets with 200 mm sunk",
               "rateAnalysisId" : 100219,
               "measurementUnit" : "Sqm",
               "directRate" : null,
@@ -4479,46 +4468,7 @@
               "name" : "Brick Bat waterproofing upto 150 mm thk for attached terraces with 200 mm sunk",
               "rateAnalysisId" : 100221,
               "measurementUnit" : "Sqm",
-              "directRate" : null,
-              "directRateUnit" : null
-            }
-          ]
-        },
-        {
-          "name" : "Shahbad stone waterproofing",
-          "rateAnalysisId" : 100222,
-          "workItems" : [
-            {
-              "name" : "Shahbad stone water proofing (Box waterproofing) for vertical surfaces without screeding",
-              "rateAnalysisId" : 100223,
-              "measurementUnit" : "Sqm",
-              "directRate" : null,
-              "directRateUnit" : null
-            }
-          ]
-        },
-        {
-          "name" : "IPS ghotai/ Khadi mal waterproofing",
-          "rateAnalysisId" : 100224,
-          "workItems" : [
-            {
-              "name" : "IPS Ghotai (Khadi maal) waterproofing 50mm thick for UGWT / Smimming pools",
-              "rateAnalysisId" : 100225,
-              "measurementUnit" : "Sqm",
-              "directRate" : null,
-              "directRateUnit" : null
-            }
-          ]
-        },
-        {
-          "name" : "Ghotai plaster waterproofing",
-          "rateAnalysisId" : 100226,
-          "workItems" : [
-            {
-              "name" : "Ghotai plaster for UGWT / Swimming pools",
-              "rateAnalysisId" : 100227,
-              "measurementUnit" : "Sqm",
-              "directRate" : null,
+              "directRate" : 400,
               "directRateUnit" : null
             }
           ]
@@ -4528,7 +4478,7 @@
           "rateAnalysisId" : 100228,
           "workItems" : [
             {
-              "name" : "Chemical water proofing with screeding for bathrooms / toilets of typical size 8' X 5' with 50mm sunk (For toilets with suspended plumbing)",
+              "name" : "Chemical water proofing with screeding for bathrooms or toilets of typical size 8' X 5' with 50mm sunk (For toilets with suspended plumbing)",
               "rateAnalysisId" : 100229,
               "measurementUnit" : "Sqm",
               "directRate" : null,
@@ -4570,22 +4520,21 @@
               "directRateUnit" : null
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "name" : "Dewatering",
+      "rateAnalysisId" : 100473,
+      "categories" : [
         {
-          "name" : "Membrane waterproofing",
-          "rateAnalysisId" : 100235,
+          "name" : "default",
+          "rateAnalysisId" : 100474,
           "workItems" : [
             {
-              "name" : "Providing and applying EPDM membrane  waterproofing with Crystaline method",
-              "rateAnalysisId" : 100236,
-              "measurementUnit" : "Sqm",
-              "directRate" : null,
-              "directRateUnit" : null
-            },
-            {
-              "name" : "Providing and applying Bituminious. membrane  waterproofing with Crystaline method",
-              "rateAnalysisId" : 100237,
-              "measurementUnit" : "Sqm",
+              "name" : "Carrying out dewatering of the excavated pit ",
+              "rateAnalysisId" : 100475,
+              "measurementUnit" : null,
               "directRate" : null,
               "directRateUnit" : null
             }
@@ -4594,63 +4543,194 @@
       ]
     },
     {
-      "name" : "Fabrication",
+      "name" : "Garbage chute",
+      "rateAnalysisId" : 100476,
       "categories" : [
         {
-          "name" : "Window grills ( On plastered jambs )",
+          "name" : "Non segregated type",
+          "rateAnalysisId" : 100477,
           "workItems" : [
             {
-              "name" : "MS window grill for window of size 2.4 X 1.8 m as per attached design",
-              "measurementUnit" : null,
-              "directRate" : null,
-              "directRateUnit" : null
+              "name" : "Providing and installing non segregated type garbage chute system",
+              "rateAnalysisId" : 100478,
+              "measurementUnit" : "No.",
+              "directRate" : 300000,
+              "directRateUnit" : "No."
+            }
+          ]
+        },
+        {
+          "name" : "Segregated type",
+          "rateAnalysisId" : 100479,
+          "workItems" : [
+            {
+              "name" : "Providing and installing garbage chute system with dry and wet garbage segregation",
+              "rateAnalysisId" : 100480,
+              "measurementUnit" : "No.",
+              "directRate" : 400000,
+              "directRateUnit" : "No."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Lift",
+      "rateAnalysisId" : 100496,
+      "categories" : [
+        {
+          "name" : "GI powder coated lift",
+          "rateAnalysisId" : 100497,
+          "workItems" : [
+            {
+              "name" : "Providing and installing 5 passenger GI powder coated lift",
+              "rateAnalysisId" : 100498,
+              "measurementUnit" : "No.",
+              "directRate" : 500000,
+              "directRateUnit" : "No."
             },
             {
-              "name" : "MS window grill for window of size 1.8 X 1.8 m as per attached design",
-              "measurementUnit" : null,
-              "directRate" : null,
-              "directRateUnit" : null
+              "name" : "Providing and installing 8 passenger GI powder coated lift",
+              "rateAnalysisId" : 100499,
+              "measurementUnit" : "No.",
+              "directRate" : 650000,
+              "directRateUnit" : "No."
             },
             {
-              "name" : "MS window grill for window of size 1.2 X 1.8 m as per attached design",
-              "measurementUnit" : null,
-              "directRate" : null,
-              "directRateUnit" : null
+              "name" : "Providing and installing 10 passenger GI powder coated lift",
+              "rateAnalysisId" : 100500,
+              "measurementUnit" : "No.",
+              "directRate" : 750000,
+              "directRateUnit" : "No."
             },
             {
-              "name" : "MS window grill for window of size 0.9 X 1.8 m as per attached design",
-              "measurementUnit" : null,
+              "name" : "Providing and installing 13 passengerGI powder coated lift",
+              "rateAnalysisId" : 100501,
+              "measurementUnit" : "No.",
+              "directRate" : 800000,
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing GI powder coated lift as per required capacity and specifications",
+              "rateAnalysisId" : 100502,
+              "measurementUnit" : "No.",
               "directRate" : null,
               "directRateUnit" : null
             }
           ]
         },
         {
-          "name" : "Window grills ( On masonry jambs )",
+          "name" : "SS lift",
+          "rateAnalysisId" : 100503,
           "workItems" : [
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 2.4 X 1.8 M to be nailed on masonry.",
-              "measurementUnit" : null,
-              "directRate" : null,
-              "directRateUnit" : null
+              "name" : "Providing and installing 5 passenger SS lift",
+              "rateAnalysisId" : 100504,
+              "measurementUnit" : "No.",
+              "directRate" : 700000,
+              "directRateUnit" : "No."
             },
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.8 X 1.8 M to be nailed on masonry.",
-              "measurementUnit" : null,
-              "directRate" : null,
-              "directRateUnit" : null
+              "name" : "Providing and installing 8 passenger SS lift",
+              "rateAnalysisId" : 100505,
+              "measurementUnit" : "No.",
+              "directRate" : 800000,
+              "directRateUnit" : "No."
             },
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.2 X 1.8 M to be nailed on masonry.",
-              "measurementUnit" : null,
-              "directRate" : null,
-              "directRateUnit" : null
+              "name" : "Providing and installing 10 passenger SS lift",
+              "rateAnalysisId" : 100506,
+              "measurementUnit" : "No.",
+              "directRate" : 900000,
+              "directRateUnit" : "No."
             },
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 0.9 X 1.8 M to be nailed on masonry.",
-              "measurementUnit" : null,
+              "name" : "Providing and installing 13 passenger SS lift",
+              "rateAnalysisId" : 100507,
+              "measurementUnit" : "No.",
+              "directRate" : 1100000,
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing SS lift as per required capacity and specifications",
+              "rateAnalysisId" : 100508,
+              "measurementUnit" : "No.",
               "directRate" : null,
               "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "configProjectCostHeads" : [
+    {
+      "name" : "Club House",
+      "rateAnalysisId" : 100000,
+      "categories" : [
+        {
+          "name" : "In RCC",
+          "rateAnalysisId" : 100001,
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in RCC framed structure",
+              "rateAnalysisId" : 100002,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1200,
+              "directRateUnit" : "Sqft b/up"
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in RCC framed structure",
+              "rateAnalysisId" : 100003,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1500,
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        },
+        {
+          "name" : "In load bearing",
+          "rateAnalysisId" : 100004,
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in load bearing masonry",
+              "rateAnalysisId" : 100005,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1000,
+              "directRateUnit" : "Sqft b/up"
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in load bearing masonry",
+              "rateAnalysisId" : 100006,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1200,
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Swimming Pool",
+      "rateAnalysisId" : 100007,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100008,
+          "workItems" : [
+            {
+              "name" : "Providing a swimming pool with filtration plant, deck etc",
+              "rateAnalysisId" : 100009,
+              "measurementUnit" : "Number",
+              "directRate" : 400000,
+              "directRateUnit" : "Number"
+            },
+            {
+              "name" : "Providing and constructing changing room's block ",
+              "rateAnalysisId" : 100010,
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : 1200,
+              "directRateUnit" : "Sqft b/up"
             }
           ]
         }

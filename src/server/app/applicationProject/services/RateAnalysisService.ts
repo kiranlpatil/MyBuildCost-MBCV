@@ -193,6 +193,7 @@ class RateAnalysisService {
       callback(null, {'buildingCostHeads' : buildingCostHeads, 'rates' : rateItemsRateAnalysis, 'units' : unitsRateAnalysis});
     }).catch(function(e:any) {
       logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
+      CCPromise.reject(e);
     });
   }
 
@@ -211,6 +212,7 @@ class RateAnalysisService {
         });
       }).catch(function(e:any) {
         logger.error('Promise failed for individual ! url:'+url+ ':\n error :' +JSON.stringify(e));
+        CCPromise.reject(e);
       });
    }
 

@@ -31,20 +31,31 @@ class Constants {
   public static NUM_OF_THREE_BHK : string = 'numOfThreeBHK';
   public static NUM_OF_FOUR_BHK : string = 'numOfFourBHK';
   public static NUM_OF_FIVE_BHK : string = 'numOfFiveBHK';
+  public static NUM_OF_FLOORS : string = 'numOfFloors';
+  public static NUM_OF_LIFTS : string = 'numOfLifts';
+  public static NUM_OF_PARKING_FLOORS : string = 'numOfParkingFloors';
+  public static TOTAL_SLAB_AREA_OF_CLUB_HOUSE : string = 'totalSlabAreaOfClubHouse';
+  public static SWIMMING_POOL_CAPACITY : string = 'swimmingPoolCapacity';
 
   //Common Ammenities Cost Heads
   public static SAFETY_MEASURES : string = 'Safety measures';
+  public static CLUB_HOUSE : string = 'Club House';
+  public static SWIMMING_POOL : string = 'Swimming Pool';
 
   //Building Cost Heads
   public static RCC_BAND_OR_PATLI : string = 'RCC band / patli';
   public static EXTERNAL_PLASTER : string = 'External plaster';
   public static FABRICATION : string = 'Fabrication';
-  public static POINTING : string = 'Pointing';
+  public static PAINTING : string = 'Painting';
   public static KITCHEN_OTTA : string = 'Kitchen otta';
   public static SOLING : string = 'Soling';
   public static MASONRY : string = 'Masonry';
   public static INTERNAL_PLASTER : string = 'Internal Plaster';
   public static GYPSUM_OR_POP_PLASTER : string = 'Gypsum / POP plaster (punning)';
+  public static WATER_PROOFING : string = 'Water proofing';
+  public static DEWATERING : string = 'Dewatering';
+  public static GARBAGE_CHUTE : string = 'Garbage chute';
+  public static LIFT : string = 'Lift';
 
   // Value Constant
   public static NUMBER_OF_FRACTION_DIGIT = 2;

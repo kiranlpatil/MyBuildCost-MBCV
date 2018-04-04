@@ -39,6 +39,10 @@
   .panel-body {
     padding: 0;
   }
+
+  .total-cost {
+    margin-right: 215px;
+  }
 }
 
 .building-name{
@@ -46,10 +50,10 @@
   border-radius: 8px;
   box-shadow: 6px 6px 7px rgba(0, 0, 0, 0.05);
   color: $heading;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 20px;
   margin-bottom: 5px;
-  padding: 10px 15px;
+  padding: 15px;
   text-align: left;
   width: 100%;
   .building-label {
@@ -83,14 +87,22 @@
     width: 100%;
 
     .add-more-details {
+      background: none;
+      border: 0;
       color: $dashboard-link;
       display: inline-block;
       font-size: 16px;
       opacity: 0;
-      padding: 5px;
+      padding: 10px 5px 5px;
       position: relative;
       transition: opacity 0.5s ease-in-out;
       width: auto;
+
+      &:hover {
+        background: none;
+        border: 0;
+        box-shadow: none;
+      }
     }
 
     .delete-cost-head {
@@ -121,7 +133,7 @@
     float: left;
 
     &:nth-child(1) {
-      width: 350px;
+      width: 349px;
     }
 
     &:nth-child(2),
@@ -132,7 +144,7 @@
     }
 
     &:nth-child(3) {
-      width: 75px;
+      width: 80px;
     }
 
     &:last-child {
@@ -161,14 +173,28 @@
     height: 23px;
   }
 
+  .edit-cost-null {
+    display: inline-block;
+    padding: 5px;
+  }
+
   .edit-cost {
+    border-bottom: 1px solid $body-text;
+    display: inline-block;
     padding: 5px;
   }
 
   .active {
     background: $azure;
-    border: 1px solid transparent;
+    border: 1px solid $dashboard-link;
     border-radius: 4px;
+    color: $dashboard-link;
+  }
+
+  .active-cost {
+    background: $azure;
+    border-bottom: 1px solid $dashboard-link;
+    border-radius: 0;
     color: $dashboard-link;
   }
 
@@ -255,11 +281,14 @@
   }
 
   .work-item-panel-row {
-    padding: 0 !important;
+    display: block;
+    font-weight: 400 !important;
+    padding: 0 0 0 30px !important;
     position: relative;
   }
 
   .panel-heading {
+    background: none;
     box-shadow: none;
   }
 
@@ -278,7 +307,7 @@
       display: block;
       float: right;
       padding: 0;
-      width: calc(100% - 350px);
+      width: calc(100% - 349px);
     }
   }
 }
