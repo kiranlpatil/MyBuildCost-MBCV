@@ -120,7 +120,7 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  deleteQuantityByName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number, quantityName:string) {
+  deleteQuantityDetailsByName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number, quantityName:string) {
     var body= { item: { name : quantityName } };
     var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
       '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY + '/' + API.ITEM;

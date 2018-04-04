@@ -170,6 +170,7 @@ export class Messages {
   public static MSG_SUCCESS_ADD_CATEGORY: string = 'Category added successfully.';
   public static MSG_SUCCESS_DELETE_CATEGORY: string = 'Category deleted successfully.';
   public static MSG_SUCCESS_DELETE_QUANTITY_ITEM: string = 'Quantity item deleted successfully.';
+  public static MSG_SUCCESS_DELETE_QUANTITY_DETAILS: string = 'Quantity Details deleted successfully.';
   public static MSG_ALREADY_ADDED_ALL_CATEGORIES: string = 'Already added all Categories.';
   public static MSG_SUCCESS_ADD_WORKITEM: string = 'Workitem added successfully.';
   public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
@@ -185,6 +186,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
   public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Some where Quantity field is blank. Please fill it';
+  public static LOGIN_INFO: string = 'Enter your details Below.';
 }
 
 export class NavigationRoutes {
@@ -442,6 +444,8 @@ export class Label {
   public static GET_SYSTEM_RATE : string = 'getSystemRate';
   public static GET_RATE_BY_QUANTITY : string = 'getRateByQuantity';
   public static WORKITEM_RATE_TAB : string = 'rate';
+  public static WORKITEM_RATE_BY_QUANTITY_TAB : string = 'cost';
+  public static WORKITEM_SYSTEM_RATE_TAB : string = 'systemRA';
   public static WORKITEM_QUANTITY_TAB : string = 'quantity';
   public static QUANTITY_VIEW : string = 'default';
   public static WORKITEM_DETAILED_QUANTITY_TAB : string = 'detailedQuantity';
@@ -467,6 +471,7 @@ export class Button {
   public static SAVE: string = 'Save';
   public static GET_AMOUNT: string = 'Estimate Cost';
   public static GET_RATE: string = 'Get Rate';
+  public static GET_QUANTITY: string = 'Get Qty.';
   public static SYSTEM_RA: string = 'System RA';
   public static ADD: string = 'Add ';
   public static ADD_MORE_DETAILS: string = 'Add More Details';
@@ -474,7 +479,7 @@ export class Button {
   public static WORKITEM: string = 'WorkItem';
   public static ITEM: string = 'Item';
   public static ROW: string = 'Row';
-  public static COSTHEAD: string = 'CostHead';
+  public static COSTHEAD: string = 'Cost Head';
 }
 
 export class Units {
@@ -487,6 +492,7 @@ export class ProjectElements {
   public static WORK_ITEM = 'WorkItem';
   public static BUILDING = 'Building';
   public static QUANTITY_ITEM = 'Quantity Item';
+  public static QUANTITY_DETAILS = 'Quantity Details';
   public static CATEGORY = 'Category';
   public static SLAB_AREA = 'Slab Area';
   public static SALEABLE_AREA = 'Saleable Area';

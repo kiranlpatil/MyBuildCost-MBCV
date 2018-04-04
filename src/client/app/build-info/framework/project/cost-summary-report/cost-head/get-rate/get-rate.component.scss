@@ -7,10 +7,10 @@
   border: 1px solid $table-border;
   display: block;
   float: right;
-  margin: 0 15px 15px;
+  margin: 10px 0 15px;
   padding: 10px 30px;
   position: relative;
-  max-width: calc(100% - 250px);
+  max-width: 100%;
   border-radius: 6px;
 
   table {
@@ -202,7 +202,7 @@
   border: solid transparent;
   content: " ";
   height: 0;
-  left: 57%;
+  left: 54%;
   position: absolute;
   pointer-events: none;
   width: 0;
@@ -230,11 +230,11 @@
 }
 
 .get-cost-section:after, .get-cost-section:before {
-  left: 73% !important;
+  left: 70% !important;
 }
 
 .get-systemRA-section:after, .get-systemRA-section:before {
-  left: 88% !important;
+  left: 85% !important;
 }
 
 input[disabled],

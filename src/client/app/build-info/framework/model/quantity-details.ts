@@ -3,7 +3,7 @@ import { QuantityItem } from './quantity-item';
 export class QuantityDetails {
   name: string;
   total: number;
-  quantityItems =Array<QuantityItem>();
+  quantityItems : Array<QuantityItem>;
 
   constructor() {
     this.total = 0;

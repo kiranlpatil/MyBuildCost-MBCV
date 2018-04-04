@@ -30,6 +30,7 @@ import CategoriesListWithRatesDTO = require('../dataaccess/dto/project/Categorie
 import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
 import messages  = require('../../applicationProject/shared/messages');
 import { CommonService } from '../../applicationProject/shared/CommonService';
+import WorkItemListWithRatesDTO = require('../dataaccess/dto/project/WorkItemListWithRatesDTO');
 
 let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
@@ -322,7 +323,7 @@ class ProjectService {
           }
         }
         let inActiveWorkItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, building.rates, false);
-        callback(null,{data:inActiveWorkItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null,{data:inActiveWorkItemsListWithBuildingRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
         }
     });
   }
@@ -352,7 +353,7 @@ class ProjectService {
           }
         }
         let inActiveWorkItemsListWithProjectRates = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, project.rates, false);
-        callback(null,{data:inActiveWorkItemsListWithProjectRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null,{data:inActiveWorkItemsListWithProjectRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -639,7 +640,7 @@ class ProjectService {
                         quantityItems.splice(quantityIndex,1);
                       }
                     }
-                    workItem.quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantityItems]);
+                    workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?',[quantityItems]);
                   }
                 }
               }
@@ -681,7 +682,7 @@ class ProjectService {
                         quantityItems.splice(quantityIndex,1);
                       }
                     }
-                    workItem.quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantityItems]);
+                    workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?',[quantityItems]);
                   }
                 }
               }
@@ -922,7 +923,7 @@ class ProjectService {
     quantity.isEstimated = true;
 
     if (quantity.quantityItemDetails.length === 0) {
-      quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+      quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
       quantity.quantityItemDetails.push(quantityDetail);
     } else {
 
@@ -931,7 +932,7 @@ class ProjectService {
 
       if (isDefaultExistsQuantityDetail.length > 0) {
         quantity.quantityItemDetails = [];
-        quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+        quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
         quantity.quantityItemDetails.push(quantityDetail);
       } else {
         if (quantityDetail.name !== 'default') {
@@ -942,21 +943,21 @@ class ProjectService {
             for (let quantityindex = 0; quantityindex < quantity.quantityItemDetails.length; quantityindex++) {
               if(quantity.quantityItemDetails[quantityindex].name === quantityDetail.name) {
                 quantity.quantityItemDetails[quantityindex].quantityItems = quantityDetail.quantityItems;
-                quantity.quantityItemDetails[quantityindex].total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+                quantity.quantityItemDetails[quantityindex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
               }
             }
           } else {
-            quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+            quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
             quantity.quantityItemDetails.push(quantityDetail);
           }
         } else {
           quantity.quantityItemDetails = [];
-          quantityDetail.total = alasql('VALUE OF SELECT SUM(quantity) FROM ?', [quantityDetail.quantityItems]);
+          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
           quantity.quantityItemDetails.push(quantityDetail);
         }
       }
     }
-    quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?', [quantity.quantityItemDetails]);
+    quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?', [quantity.quantityItemDetails]);
   }
 
 //Update Quantity Of Project Cost Heads
@@ -1048,7 +1049,7 @@ class ProjectService {
         if(result.length > 0) {
           let workItemsOfBuildingCategory = result[0].costHeads.categories.workItems;
           let workItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(workItemsOfBuildingCategory, result[0].rates, true);
-          callback(null, {data: workItemsListWithBuildingRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          callback(null, {data: workItemsListWithBuildingRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
         } else {
           let error = new Error();
           error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
@@ -1079,7 +1080,7 @@ class ProjectService {
         if(result.length > 0) {
           let workItemsOfCategory = result[0].projectCostHeads.categories.workItems;
           let workItemsListWithRates = this.getWorkItemListWithCentralizedRates(workItemsOfCategory, result[0].rates, true);
-          callback(null, {data: workItemsListWithRates, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          callback(null, {data: workItemsListWithRates.workItems, access_token: this.authInterceptor.issueTokenWithUid(user)});
         } else {
           let error = new Error();
           error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
@@ -1090,24 +1091,26 @@ class ProjectService {
   }
 
   getWorkItemListWithCentralizedRates(workItemsOfCategory: Array<WorkItem>, centralizedRates: Array<any>, isWorkItemActive:boolean) {
-    let workItemsListWithRates = new Array<WorkItem>();
-    for (let workItemObj of workItemsOfCategory) {
-      if (workItemObj.active === isWorkItemActive) {
-        let workItem: WorkItem = workItemObj;
-        let rateItemsOfWorkItem = workItemObj.rate.rateItems;
+
+    let workItemsListWithRates: WorkItemListWithRatesDTO = new WorkItemListWithRatesDTO();
+    for (let workItemData of workItemsOfCategory) {
+      if (workItemData.active === isWorkItemActive) {
+        let workItem: WorkItem = workItemData;
+        let rateItemsOfWorkItem = workItemData.rate.rateItems;
         workItem.rate.rateItems = this.getRatesFromCentralizedrates(rateItemsOfWorkItem, centralizedRates);
 
         let arrayOfRateItems = workItem.rate.rateItems;
-        let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?',[arrayOfRateItems]);
+        let totalOfAllRateItems = alasql('VALUE OF SELECT ROUND(SUM(totalAmount),2) FROM ?',[arrayOfRateItems]);
         workItem.rate.total = parseFloat((totalOfAllRateItems/workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
 
         let quantityItems = workItem.quantity.quantityItemDetails;
-        workItem.quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?',[quantityItems]);
+        workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?',[quantityItems]);
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
            workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+           workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount+ workItem.amount;
          }
-      workItemsListWithRates.push(workItem);
+      workItemsListWithRates.workItems.push(workItem);
       }
     }
     return workItemsListWithRates;
@@ -1264,9 +1267,8 @@ class ProjectService {
 
     for (let categoryData of categoriesOfCostHead) {
       let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates, true);
-      let calculateWorkItemTotalAmount =  alasql('VALUE OF SELECT SUM(amount) FROM ?',[workItems]);
-      categoryData.amount = calculateWorkItemTotalAmount;
-      categoriesTotalAmount = categoriesTotalAmount + calculateWorkItemTotalAmount;
+      categoryData.amount = workItems.workItemsAmount;
+      categoriesTotalAmount = categoriesTotalAmount + workItems.workItemsAmount;
       delete categoryData.workItems;
       categoriesListWithRates.categories.push(categoryData);
     }
@@ -1554,9 +1556,9 @@ class ProjectService {
     let budgetCostFormulae:string;
     let calculateBudgtedCost :string;
 
-    let calculateProjectData = 'SELECT SUM(building.totalCarpetAreaOfUnit) AS totalCarpetArea, ' +
-      'SUM(building.totalSlabArea) AS totalSlabAreaProject,' +
-      'SUM(building.totalSaleableAreaOfUnit) AS totalSaleableArea  FROM ? AS building';
+    let calculateProjectData = 'SELECT ROUND(SUM(building.totalCarpetAreaOfUnit),2) AS totalCarpetArea, ' +
+      'ROUND(SUM(building.totalSlabArea),2) AS totalSlabAreaProject,' +
+      'ROUND(SUM(building.totalSaleableAreaOfUnit),2) AS totalSaleableArea  FROM ? AS building';
     let projectData = alasql(calculateProjectData, [projectDetails.buildings]);
     let totalSlabAreaOfProject : number = projectData[0].totalSlabAreaProject;
     let totalSaleableAreaOfProject : number = projectData[0].totalSaleableArea;
@@ -1649,7 +1651,7 @@ class ProjectService {
       logger.info('createPromiseForRateUpdateOfProjectRates has been hit for projectId : '+projectId+', rateItem : '+rateItem);
       //update rate
       let projectRepository = new ProjectRepository();
-      let queryUpdateRateForProject = {'_id' : projectId, 'rates.item':rateItem};
+      let queryUpdateRateForProject = {'_id' : projectId, 'rates.itemName':rateItem};
       let updateRateForProject = { $set : {'rates.$.rate' : rateItemRate} };
       projectRepository.findOneAndUpdate(queryUpdateRateForProject, updateRateForProject,{new: true}, (error:Error, result:Project) => {
         if (error) {
@@ -1688,9 +1690,9 @@ class ProjectService {
     if (budgetedCostAmount) {
       logger.info('Project service, calculateThumbRuleReportForProjectCostHead has been hit');
 
-      let calculateProjectData = 'SELECT SUM(building.totalCarpetAreaOfUnit) AS totalCarpetArea, ' +
-        'SUM(building.totalSlabArea) AS totalSlabAreaProject,' +
-        'SUM(building.totalSaleableAreaOfUnit) AS totalSaleableArea  FROM ? AS building';
+      let calculateProjectData = 'SELECT ROUND(SUM(building.totalCarpetAreaOfUnit),2) AS totalCarpetArea, ' +
+        'ROUND(SUM(building.totalSlabArea),2) AS totalSlabAreaProject,' +
+        'ROUND(SUM(building.totalSaleableAreaOfUnit),2) AS totalSaleableArea  FROM ? AS building';
       let projectData = alasql(calculateProjectData, [projectDetails.buildings]);
       let totalSlabAreaOfProject : number = projectData[0].totalSlabAreaProject;
       let totalSaleableAreaOfProject : number = projectData[0].totalSaleableArea;

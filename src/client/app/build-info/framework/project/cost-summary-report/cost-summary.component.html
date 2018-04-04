@@ -94,7 +94,7 @@
                                 (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">Estimate Cost</button>
                       </td>
                       <td class="delete-cost-head" >
-                        <div data-toggle="modal"
+                        <div title="Delete Cost Head" data-toggle="modal"
                              data-target="#deleteCosthead"
                              (click)="setIdsToInActiveCostHead(building._id, building.estimate.estimatedCosts[i].rateAnalysisId)">
                           <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />

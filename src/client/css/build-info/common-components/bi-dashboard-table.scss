@@ -54,7 +54,7 @@
     td, th {
       border: 0;
       line-height: 14px;
-      padding: 6px 15px;
+      padding: 6px 10px;
       vertical-align: middle;
     }
 
@@ -121,7 +121,7 @@
       td > .edit-field {
         input {
           background: url('../assets/build-info/dashboard/edit.png') no-repeat 95% 46%;
-          border: 1px solid $border-color;
+          border: 1px solid $persian-green;
         }
 
       }

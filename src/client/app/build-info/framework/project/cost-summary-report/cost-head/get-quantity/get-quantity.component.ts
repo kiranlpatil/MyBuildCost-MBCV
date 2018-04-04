@@ -182,32 +182,34 @@ export class GetQuantityComponent implements OnInit {
   }
 
   onUpdateQuantityItemsSuccess(success : string) {
-    this.refreshWorkItemList.emit(this.categoryRateAnalysisId);
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
     this.messageService.message(message);
 
-/*    for(let workItemData of this.workItemsList) {
-      if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
-        workItemData.quantity.total = this.quantityTotal;
-        if(workItemData.quantity.total !== 0) {
-          workItemData.quantity.isEstimated = true;
-          if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
-            workItemData.amount = this.commonService.calculateAmountOfWorkItem(workItemData.quantity.total,
-              workItemData.rate.total);
+    let workItemId = this.workItemId;
+    let workItemData = this.workItemsList.filter(
+      function( workItemData: any){
+        return workItemData.rateAnalysisId === workItemId;
+      });
+
+    this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
+        if(workItemData[0].quantity.total !== 0) {
+          workItemData[0].quantity.isEstimated = true;
+          if(workItemData[0].quantity.isEstimated && workItemData[0].rate.isEstimated) {
+            workItemData[0].amount = this.commonService.calculateAmountOfWorkItem(workItemData[0].quantity.total,
+              workItemData[0].rate.total);
           }
         } else {
-          workItemData.quantity.isEstimated = false;
-          workItemData.amount = 0;
+          workItemData[0].quantity.isEstimated = false;
+          workItemData[0].amount = 0;
         }
-        break;
-      }
-    }
+
+
 
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
       this.categoryRateAnalysisId, this.workItemsList);
-    this.categoriesTotalAmount.emit(categoriesTotal);*/
+    this.categoriesTotalAmount.emit(categoriesTotal);
     this.showWorkItemTabName.emit('');
       this.loaderService.stop();
   }

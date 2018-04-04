@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Category } from '../../../app/build-info/framework/model/category';
 import { WorkItem } from '../../../app/build-info/framework/model/work-item';
 import { ValueConstant } from '../constants';
+import { QuantityDetails } from '../../build-info/framework/model/quantity-details';
 
 @Injectable()
 export class CommonService {
@@ -38,6 +39,23 @@ export class CommonService {
       ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
     }
     return categoryDetailsTotalAmount;
+  }
+
+  calculateTotalOfQuantityItemDetails(workItemData : WorkItem) {
+    let quantityItemDetailsTotal = 0;
+    for(let quantityItemDetail of workItemData.quantity.quantityItemDetails) {
+      this.calculateTotalOfQuantityItems(quantityItemDetail);
+      quantityItemDetailsTotal = quantityItemDetailsTotal + quantityItemDetail.total;
+    }
+    workItemData.quantity.total = quantityItemDetailsTotal;
+  }
+
+  calculateTotalOfQuantityItems(quantityItemDetail : QuantityDetails) {
+    let quantityItemTotal = 0;
+    for(let quantityItemData of quantityItemDetail.quantityItems) {
+      quantityItemTotal = quantityItemTotal + quantityItemData.quantity;
+    }
+    quantityItemDetail.total = quantityItemTotal;
   }
 
   calculateAmountOfWorkItem(totalQuantity : number, totalRate : number) {

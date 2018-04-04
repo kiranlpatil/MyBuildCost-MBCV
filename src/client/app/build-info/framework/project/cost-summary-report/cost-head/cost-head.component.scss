@@ -42,7 +42,7 @@
 }
 
 .building-name{
-  background-color: $white;
+  background-color: $header-bg;
   border-radius: 8px;
   box-shadow: 6px 6px 7px rgba(0, 0, 0, 0.05);
   color: $heading;
@@ -75,21 +75,37 @@
 
 .table-categories {
   border-bottom: 1px solid $border-color;
-
+  margin: 0 auto;
+  width: calc(100% - 30px);
   tr {
+    border: 0;
     display: inline-block;
     width: 100%;
 
+    .add-more-details {
+      color: $dashboard-link;
+      display: inline-block;
+      font-size: 16px;
+      opacity: 0;
+      padding: 5px;
+      position: relative;
+      transition: opacity 0.5s ease-in-out;
+      width: auto;
+    }
+
     .delete-cost-head {
       background: transparent;
-      margin-top: 4px;
+      display: inline-block;
       opacity: 0;
+      padding: 0;
       position: relative;
-      right: 0;
+      right: inherit;
+      top: -5px;
     }
 
     &:hover {
-      .delete-cost-head {
+      .delete-cost-head,
+      .add-more-details {
         opacity: 1;
       }
     }
@@ -105,27 +121,18 @@
     float: left;
 
     &:nth-child(1) {
-      width: 260px;
+      width: 350px;
     }
 
-    &:nth-child(2){
-      width: 120px;
-    }
-
-    &:nth-child(3){
-      width: 120px;
-    }
-
-    &:nth-child(4) {
-      width: 60px;
-    }
-
-    &:nth-child(5) {
+    &:nth-child(2),
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
       width: 110px;
     }
 
-    &:nth-child(6){
-      width: 107px;
+    &:nth-child(3) {
+      width: 75px;
     }
 
     &:last-child {
@@ -136,11 +143,7 @@
     }
   }
   tr > td {
-    &:nth-child(4) {
-      padding-top: 13px;
-    }
-
-    &:nth-child(6){
+    &:nth-child(5) {
       padding-top: 10px;
     }
 
@@ -148,6 +151,12 @@
       margin: 2px;
     }
   }
+
+  tr > .add-work-item {
+    padding: 0;
+    width: 100% !important;
+  }
+
   .btn-get-amount {
     height: 23px;
   }
@@ -156,11 +165,6 @@
     padding: 5px;
   }
 
-  .show-embedded-table {
-    display: block;
-    padding: 0;
-    width: 100%;
-  }
   .active {
     background: $azure;
     border: 1px solid transparent;
@@ -217,13 +221,15 @@
 
 .bg-white {
   margin-top: -5px;
-  padding: 0 15px;
+  padding: 0;
   position: relative;
   z-index: 10;
 }
 
 .add-item-table{
-  margin-top: -5px;
+  margin: -5px auto 0;
+  width: calc(100% - 30px);
+
   tr {
     td {
       border-top: 1px solid $border-color;
@@ -236,6 +242,43 @@
     }
     &:hover {
       background: $white;
+    }
+  }
+}
+
+.work-item-panel {
+  padding: 0;
+  width: 100% !important;
+
+  .panel-group {
+    padding: 0;
+  }
+
+  .work-item-panel-row {
+    padding: 0 !important;
+    position: relative;
+  }
+
+  .panel-heading {
+    box-shadow: none;
+  }
+
+  table  {
+    #show-embedded-table-row {
+      background-color: $azure;
+      border: 0;
+
+      &:hover {
+        background: $azure;
+        border: 0;
+      }
+    }
+
+    #show-embedded-table {
+      display: block;
+      float: right;
+      padding: 0;
+      width: calc(100% - 350px);
     }
   }
 }

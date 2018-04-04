@@ -1,8 +1,5 @@
 @import '../../framework/landing-page/landing-page.component';
 
-.container {
-  width: 1170px;
-}
 .page-background {
   .content-background {
     background-repeat: no-repeat;
@@ -14,13 +11,40 @@
     }
 
     .btn-primary {
-      margin: 10px 0;
+      margin: 10px 0 30px;
     }
+  }
+
+  .forgot-password-link {
+    float: right;
+    font-size: 11px;
+    margin-top: 3px;
   }
 }
 
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 980px) {
   .container {
-    width: 100%;
+    background: no-repeat fixed 50% 100%;
+    background-image: url('../assets/build-info/page_background/page-bg.png');
+    min-height: 100vh;
+
+    .col-sm-6 {
+      width: 100%;
+    }
+  }
+  .page-background {
+    height: auto;
+    .inner-content {
+      background-image: none  !important;
+      height: auto;
+      padding-top: 50px;
+      vertical-align: top;
+      width: 100%;
+
+      .content {
+        margin: 0 auto;
+        width: 90%;
+      }
+    }
   }
 }
