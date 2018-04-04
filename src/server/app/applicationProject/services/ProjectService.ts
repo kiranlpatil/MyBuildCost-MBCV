@@ -521,15 +521,15 @@ class ProjectService {
                 }
               }
 
-              if(promiseArrayForUpdateBuildingCentralizedRates.length !== 0){
+              if(promiseArrayForUpdateBuildingCentralizedRates.length !== 0) {
                 CCPromise.all(promiseArrayForUpdateBuildingCentralizedRates).then(function(data: Array<any>) {
 
                   console.log('Rates Array updated : '+JSON.stringify(centralizedRates));
                   callback(null, { 'data' : 'success' });
 
                 }).catch(function(e:any) {
-                  logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
-                  CCPromise.reject(e);
+                  logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e.message));
+                  CCPromise.reject(e.message);
                 });
               } else {
                 callback(null, { 'data' : 'success' });
@@ -605,7 +605,7 @@ class ProjectService {
                 callback(null, { 'data' : 'success' });
 
               }).catch(function(e:any) {
-                logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
+                logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e.message));
                 let errorObj = new Error();
                 errorObj.message = e;
                 callback(errorObj, null);
@@ -1360,8 +1360,8 @@ class ProjectService {
             let projectCostHeadsData = data[1];
             callback(null, {status:200});
           }).catch(function(e:any) {
-            logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e));
-            CCPromise.reject(e);
+            logger.error(' Promise failed for syncProjectWithRateAnalysisData ! :' +JSON.stringify(e.message));
+            CCPromise.reject(e.message);
           });
         }
         }
@@ -1457,8 +1457,8 @@ class ProjectService {
         }
       });
     }).catch(function(e:any){
-      logger.error('Error in updateBudgetRatesForBuildingCostHeads :'+e);
-      CCPromise.reject(e);
+      logger.error('Error in updateBudgetRatesForBuildingCostHeads :'+JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -1555,8 +1555,8 @@ class ProjectService {
           }
       });
     }).catch(function(e:any){
-      logger.error('Error in updateBudgetRatesForProjectCostHeads :'+e);
-      CCPromise.reject(e);
+      logger.error('Error in updateBudgetRatesForProjectCostHeads :'+JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -1744,8 +1744,8 @@ class ProjectService {
         }
       });
     }).catch(function(e:any) {
-      logger.error('Promise failed for individual createPromiseForAddingNewRateItem! error :' +JSON.stringify(e));
-      CCPromise.reject(e);
+      logger.error('Promise failed for individual createPromiseForAddingNewRateItem! error :' +JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -1765,8 +1765,8 @@ class ProjectService {
         }
       });
     }).catch(function(e:any) {
-      logger.error('Promise failed for individual createPromiseForRateUpdate ! Error: ' +JSON.stringify(e));
-      CCPromise.reject(e);
+      logger.error('Promise failed for individual createPromiseForRateUpdate ! Error: ' +JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -1786,8 +1786,8 @@ class ProjectService {
         }
       });
     }).catch(function(e:any) {
-      logger.error('Promise failed for individual createPromiseForAddingNewRateItemInProjectRates ! error :' +JSON.stringify(e));
-      CCPromise.reject(e);
+      logger.error('Promise failed for individual createPromiseForAddingNewRateItemInProjectRates ! error :' +JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -1807,8 +1807,8 @@ class ProjectService {
         }
       });
     }).catch(function(e:any) {
-      logger.error('Promise failed for individual createPromiseForRateUpdateOfProjectRates ! Error: ' +JSON.stringify(e));
-      CCPromise.reject(e);
+      logger.error('Promise failed for individual createPromiseForRateUpdateOfProjectRates ! Error: ' +JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
