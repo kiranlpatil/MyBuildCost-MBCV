@@ -148,6 +148,16 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
+  updateDirectRate( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                    directRate : number) {
+    var body= { directRate : directRate };
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
+      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT + '/'+ API.RATE;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
+
   getRateItems( projectId : String, buildingId : string, costheadId : number, categoryId : number, workItemId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/'+ API.COSTHEAD +'/' +
       costheadId + '/' + API.CATEGORY + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId ;

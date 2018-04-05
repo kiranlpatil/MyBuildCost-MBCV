@@ -475,6 +475,29 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.loaderService.stop();
   }
 
+  changeDirectRate(categoryId : number, workItemId: number, directRate : number) {
+    if(directRate !== null || directRate !== 0) {
+      this.loaderService.start();
+      this.costSummaryService.updateDirectRate(this.baseUrl, this.costHeadId, categoryId, workItemId, directRate).subscribe(
+        success => this.onUpdateDirectRateSuccess(success),
+        error => this.onUpdateDirectRateFailure(error)
+      );
+    }
+  }
+
+  onUpdateDirectRateSuccess(success : any) {
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_UPDATE_RATE;
+    this.messageService.message(message);
+    this.refreshWorkItemList();
+    this.loaderService.stop();
+  }
+
+  onUpdateDirectRateFailure(error : any) {
+    this.loaderService.stop();
+  }
+
   /*  deactivateCategory() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
