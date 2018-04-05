@@ -341,6 +341,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
      }
 
+    this.totalAmount = Math.round(this.totalAmount);
     this.rateItemsArray.total= parseFloat((this.totalAmount/this.rateItemsArray.quantity).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
   }
 
