@@ -926,25 +926,7 @@ class ProjectService {
         callback(error, null);
       } else {
         let costHeadList = building.costHeads;
-        let quantity  : Quantity;
-        for (let costHead of costHeadList) {
-          if (costHeadId === costHead.rateAnalysisId) {
-            let categoriesOfCostHead = costHead.categories;
-            for (let categoryData of categoriesOfCostHead) {
-              if (categoryId === categoryData.rateAnalysisId) {
-                for (let workItemData of categoryData.workItems) {
-                  if (workItemId === workItemData.rateAnalysisId) {
-                    quantity  = workItemData.quantity;
-                    quantity.isEstimated = true;
-                    quantity.isDirectQuantity = true;
-                    quantity.total = directQuantity;
-                    quantity.quantityItemDetails = [];
-                  }
-                }
-              }
-            }
-          }
-        }
+        this.setDirectQuantityOfWorkItem(costHeadList, costHeadId, categoryId, workItemId, directQuantity);
 
         let query = {_id: buildingId};
         let data = {$set : {'costHeads' : costHeadList}};
@@ -958,6 +940,53 @@ class ProjectService {
         });
       }
     });
+  }
+
+  updateDirectQuantityOfProjectWorkItems(projectId:string, costHeadId:number, categoryId:number, workItemId:number,
+                                          directQuantity:number, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, updateDirectQuantityOfProjectWorkItems has been hit');
+    this.projectRepository.findById(projectId, (error, project) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let costHeadList = project.projectCostHeads;
+        this.setDirectQuantityOfWorkItem(costHeadList, costHeadId, categoryId, workItemId, directQuantity);
+
+        let query = {_id: projectId};
+        let data = {$set : {'projectCostHeads' : costHeadList}};
+        this.projectRepository.findOneAndUpdate(query, data, {new: true}, (error, building) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
+
+  setDirectQuantityOfWorkItem(costHeadList: Array<CostHead>, costHeadId: number,
+                              categoryId: number, workItemId: number, directQuantity: number) {
+    let quantity: Quantity;
+    for (let costHead of costHeadList) {
+      if (costHeadId === costHead.rateAnalysisId) {
+        let categoriesOfCostHead = costHead.categories;
+        for (let categoryData of categoriesOfCostHead) {
+          if (categoryId === categoryData.rateAnalysisId) {
+            for (let workItemData of categoryData.workItems) {
+              if (workItemId === workItemData.rateAnalysisId) {
+                quantity = workItemData.quantity;
+                quantity.isEstimated = true;
+                quantity.isDirectQuantity = true;
+                quantity.total = directQuantity;
+                quantity.quantityItemDetails = [];
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   updateQuantityItemsOfWorkItem(quantity: Quantity, quantityDetail: QuantityDetails) {

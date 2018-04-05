@@ -626,6 +626,31 @@ class ProjectController {
     }
   }
 
+  updateDirectQuantityOfProjectWorkItems(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, updateDirectQuantityOfBuildingCostHeads has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let directQuantity = req.body.directQuantity;
+
+      let projectService = new ProjectService();
+      projectService.updateDirectQuantityOfProjectWorkItems( projectId, costHeadId,
+        categoryId, workItemId, directQuantity, user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('updateDirectQuantityOfProjectWorkItems success');
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   //Update Quantity Of Project Cost Heads
   updateQuantityOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
     try {

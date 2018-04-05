@@ -199,10 +199,15 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfBuildingCostHeads,
       controller.updateQuantityOfBuildingCostHeads, this._responseInterceptor.exit);
 
-    //update direct quantity
+    //update direct quantity Building
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfBuildingCostHeads,
       controller.updateDirectQuantityOfBuildingCostHeads, this._responseInterceptor.exit);
+
+    //update direct quantity Project
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfProjectWorkItems,
+      controller.updateDirectQuantityOfProjectWorkItems, this._responseInterceptor.exit);
 
     //Delete quantityitem from  quantity
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',
