@@ -629,4 +629,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showWorkItemTab = tabName;
     this.refreshCategoryList();
   }
+
+  closeRateView() {
+    this.showWorkItemTab = null;
+    this.displayRateView = null;
+  }
 }

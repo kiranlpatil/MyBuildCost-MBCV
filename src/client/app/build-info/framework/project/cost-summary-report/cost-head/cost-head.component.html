@@ -62,7 +62,7 @@
                                 </td>-->
                                 <td>
                                   <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                    <input type="number" [(ngModel)]="workItem.quantity.total" (blur)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)" id="directQuantity" size="10" class="form-control clear">
+                                    <input type="number" [(ngModel)]="workItem.quantity.total" (change)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)" id="directQuantity" size="10" class="form-control clear">
                                     <span class="glyphicon glyphicon-calendar" id="getQuantity{{categoryIndex}}"
                                           [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                                           (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
@@ -122,6 +122,7 @@
                                                    [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                                    [totalAmount]="totalAmount"
                                                    (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                                   (closeRateView)="closeRateView($event)"
                                                    (showWorkItemTabName)="setShowWorkItemTab($event)"
                                                    [baseUrl] = "baseUrl"
                                                    [disableRateField]="disableRateField">

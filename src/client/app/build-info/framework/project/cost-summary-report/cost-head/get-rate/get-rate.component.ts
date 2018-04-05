@@ -35,6 +35,7 @@ export class GetRateComponent {
   @Output() categoriesTotalAmount = new EventEmitter<number>();
   @Output() showWorkItemTabName = new EventEmitter<string>();
   @Output() refreshCategoryList = new EventEmitter();
+  @Output() closeRateView = new EventEmitter();
 
   quantityIncrement: number = 1;
   previousTotalQuantity: number = 1;
@@ -174,6 +175,10 @@ this.rate.total = this.commonService.decimalConversion(this.totalAmount / this.r
         workItemData.rate = this.rate;
       }
     }
+  }
+
+  closeRateTab() {
+    this.closeRateView.emit();
   }
 
   onGetRateItemsByOriginalNameFailure(error: any) {

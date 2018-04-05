@@ -1,6 +1,6 @@
 <!--Edit enabled-->
 <div *ngIf="rate!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost') ? 'get-cost-section' : 'get-systemRA-section')">
-  <button class="close"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button class="close" (click)="closeRateTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
   <div class="pull-left">
     <div class="pull-left" *ngIf="rate!==undefined">
       <div class="pull-left quantity-label">
