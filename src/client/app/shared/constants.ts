@@ -176,6 +176,7 @@ export class Messages {
   public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
   public static MSG_SUCCESS_DELETE_WORKITEM: string = 'Your workitem deleted successfully.';
   public static MSG_SUCCESS_UPDATE_THUMBRULE_RATE_COSTHEAD: string = 'Thumbrule rate for CostHead updated successfully.';
+  public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM : string = 'Direct rate for workitem updated successfully.';
 
   //Quantity view required fields
   public static MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED = 'Enter item';
@@ -285,6 +286,7 @@ export class API {
   public static WORKITEM_ALL = 'workitem/all';
   public static QUANTITY = 'quantity';
   public static ITEM = 'item';
+  public static DIRECT = 'direct';
   public static SYNC_RATE_ANALYSIS = 'syncWithRateAnalysis';
 
   public static THUMBRULE_RULE_RATE='report/thumbRuleRate';

@@ -936,6 +936,7 @@ class ProjectService {
                   if (workItemId === workItemData.rateAnalysisId) {
                     quantity  = workItemData.quantity;
                     quantity.isEstimated = true;
+                    quantity.isDirectQuantity = true;
                     quantity.total = directQuantity;
                     quantity.quantityItemDetails = [];
                   }
@@ -1142,10 +1143,15 @@ class ProjectService {
 
         let arrayOfRateItems = workItem.rate.rateItems;
         let totalOfAllRateItems = alasql('VALUE OF SELECT ROUND(SUM(totalAmount),2) FROM ?',[arrayOfRateItems]);
-        workItem.rate.total = parseFloat((totalOfAllRateItems/workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
+        if(!workItem.isDirectRate) {
+          workItem.rate.total = parseFloat((totalOfAllRateItems / workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
+        }
 
         let quantityItems = workItem.quantity.quantityItemDetails;
-        workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?',[quantityItems]);
+
+        if(!workItem.quantity.isDirectQuantity) {
+            workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?',[quantityItems]);
+        }
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
            workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);

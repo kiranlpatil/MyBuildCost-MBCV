@@ -61,22 +61,13 @@
                                   <button class="add-more-details-btn">{{getButton().ADD_MORE_DETAILS}} </button>
                                 </td>-->
                                 <td>
-                                  <!--<div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                    <input [(ngModel)]="workItem.quantity.total" id="directQuantity" size="10" class="form-control clear">
-                                  </div>-->
-                                  <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
-                                       *ngIf="workItem.quantity.total != 0"
-                                       (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
-                                    <i class="icon-calculator icon-large icon-white"></i>
-                                    <input [(ngModel)]="workItem.quantity.total" id="quantity" size="10" class="form-control clear">
-                                  </div>
-                                  <button *ngIf="workItem.quantity.total == 0"
-                                          type="button"
-                                          id="getQuantity{{categoryIndex}}"
-                                          class="btn-get-amount" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
+                                  <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
+                                    <input type="number" [(ngModel)]="workItem.quantity.total" (blur)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)" id="directQuantity" size="10" class="form-control clear">
+                                    <span class="glyphicon glyphicon-calendar" id="getQuantity{{categoryIndex}}"
+                                          [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                                           (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
-                                    {{getButton().GET_QUANTITY}}
-                                  </button>
+                                  </span>
+                                  </div>
                                 </td>
                                 <td>{{ workItem.unit }}</td>
                                 <td>

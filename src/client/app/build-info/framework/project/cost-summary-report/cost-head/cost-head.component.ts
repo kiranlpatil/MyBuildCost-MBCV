@@ -450,7 +450,32 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryIdForInActive = categoryId;
   }
 
-/*  deactivateCategory() {
+  changeDirectQuantity(categoryId : number, workItemId: number, directQuantity : number) {
+    if(directQuantity !== null || directQuantity !== 0) {
+      this.loaderService.start();
+      this.costSummaryService.updateDirectQuantityAmount(this.baseUrl, this.costHeadId, categoryId, workItemId, directQuantity).subscribe(
+        workItemList => this.onChangeDirectQuantitySuccess(workItemList),
+        error => this.onChangeDirectQuantityFailure(error)
+      );
+    }
+  }
+
+  onChangeDirectQuantitySuccess(success : any) {
+    console.log('success : '+JSON.stringify(success));
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM;
+    this.messageService.message(message);
+    this.refreshWorkItemList();
+    this.loaderService.stop();
+  }
+
+  onChangeDirectQuantityFailure(error : any) {
+    console.log('error : '+JSON.stringify(error));
+    this.loaderService.stop();
+  }
+
+  /*  deactivateCategory() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
 

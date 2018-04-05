@@ -3,6 +3,7 @@ import { QuantityDetails } from './quantity-details';
 export class Quantity {
   total: number;
   isEstimated : boolean;
+  isDirectQuantity : boolean;
   quantityItemDetails = Array<QuantityDetails>();
 
   constructor() {

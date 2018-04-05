@@ -120,6 +120,15 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
+  updateDirectQuantityAmount( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                       directQuantity : number) {
+    var body= { directQuantity : directQuantity };
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
+      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT + '/'+ API.QUANTITY;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
   deleteQuantityDetailsByName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number, quantityName:string) {
     var body= { item: { name : quantityName } };
     var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
