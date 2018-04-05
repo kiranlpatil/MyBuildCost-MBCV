@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { CostHeadWiseSingleBuildingService } from './cost-head-wise-single-building.service';
+import { CostHeadWiseSingleBuildingService } from './material-take-off-details.service';
 
 
 @Component({
   moduleId: module.id,
   selector: 'bi-material-total-report',
-  templateUrl: 'cost-head-wise-single-building.component.html'
+  templateUrl: 'material-take-off-details.component.html'
 })
 
 export class CostHeadWiseSingleBuildingComponent implements OnInit {

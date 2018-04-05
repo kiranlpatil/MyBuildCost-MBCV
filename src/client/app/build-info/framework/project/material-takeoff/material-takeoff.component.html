@@ -15,12 +15,13 @@
       </div>
       <div class="col-md-4">
         Building
-        <select [(ngModel)]="selectedBuilding" (change)="onChangeBuilding($event.target.value)">
+        <select [(ngModel)]="building" (change)="onChangeBuilding($event.target.value)">
+          <option [value]=getMaterialTakeOffElements().ALL_BUILDINGS>All Buildings</option>
           <option *ngFor="let building of buildingList" [value]="building">{{ building }}</option>
         </select>
       </div>
     </div>
-    <div *ngIf="groupBy === 'Cost Head Wise' && building !== 'All Buildings'">
+    <div>
       <bi-material-total-report
         [materialTakeOffDetails] ="materialTakeOffDetails">
       </bi-material-total-report>

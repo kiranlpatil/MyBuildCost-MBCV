@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaterialTakeoffService } from './material-takeoff.service';
+import { MaterialTakeOffReport } from '../../model/material-take-off-report';
+import { MaterialTakeOffElements } from '../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -11,36 +13,31 @@ import { MaterialTakeoffService } from './material-takeoff.service';
 export class MaterialTakeoffComponent implements OnInit {
 
   projectId : string = null;
-  groupBy : string = 'Cost Head Wise';
-  secondaryFilter : string = 'RCC';
+  groupBy : string = MaterialTakeOffElements.COST_HEAD_WISE;
+  secondaryFilter : string;
   secondaryFilterHeading : string = null;
   secondaryFilterList : any[];
-  building : string = 'Build1';
-  selectedBuilding : string = null;
+  building : string;
+  list : any;
 
   flatReport : any[];
-  materialReport : any[];
 
-  public costHeadList: any[] = [
-    'RCC', 'Plaster'
-  ];
+  public costHeadList: any[];
 
-  public materialList: any[] = [
-    'Cement', 'Sand'
-  ];
+  public materialList: any[];
 
-  public buildingList: any[] = [
-    'All Buildings', 'Build1', 'Build2'
-  ];
+  public buildingList: any[];
 
-  public groupByList: any[] = [
-    'Cost Head Wise', 'Material Wise'
-  ];
+  public groupByList: any[];
+
 
   //Material details send to material total component
-  materialTakeOffDetails :any[];
+  materialTakeOffDetails :Array<MaterialTakeOffReport> = new Array<MaterialTakeOffReport>();
 
   constructor( private activatedRoute:ActivatedRoute,  private _router : Router, private materialTakeoffService : MaterialTakeoffService) {
+  this.groupByList = [
+      MaterialTakeOffElements.COST_HEAD_WISE, MaterialTakeOffElements.MATERIAL_WISE
+    ];
   }
 
   ngOnInit() {
@@ -51,11 +48,11 @@ export class MaterialTakeoffComponent implements OnInit {
   }
 
   getList(projectId : string) {
-/*    this.materialTakeoffService.getList(projectId).subscribe(
+    /*this.materialTakeoffService.getList(projectId).subscribe(
       flatReport => this.onGetListSuccess(flatReport),
       error => this.onGetListFailure(error)
     );*/
-    this.flatReport = [
+    /*this.flatReport = [
       {
         "building" : "Build1",
         "costHead" : "RCC",
@@ -66,85 +63,52 @@ export class MaterialTakeoffComponent implements OnInit {
         "unit" : "sqm"
       },
       {
-        "building" : "Build2",
-        "costHead" : "RCC",
+        "building" : "Build1",
+        "costHead" : "External Plaster",
         "workItem" : "Abc",
         'material' : "Cement",
         "label" : "Floor1",
-        "quantity" : 12,
+        "quantity" : 15,
         "unit" : "sqm"
       },
       {
-        "building" : "Build3",
+        "building" : "Build1",
+        "costHead" : "External Plaster",
+        "workItem" : "Abc",
+        'material' : "Sand",
+        "label" : "Floor1",
+        "quantity" : 76,
+        "unit" : "sqm"
+      },
+      {
+        "building" : "Build1",
         "costHead" : "RCC",
         "workItem" : "Abc",
         'material' : "Cement",
         "label" : "Floor1",
-        "quantity" : 12,
+        "quantity" : 65,
+        "unit" : "sqm"
+      },
+      {
+        "building" : "Build1",
+        "costHead" : "RCC",
+        "workItem" : "Abc",
+        'material' : "Cement",
+        "label" : "Floor1",
+        "quantity" : 34,
         "unit" : "sqm"
       }
-    ];
+    ];*/
 
-    /*this.buildingList = this.materialTakeoffService.getDistinctBuildingList(this.flatReport);*/
-
-    /*this.materialReport = this.materialTakeoffService.buildMaterialReport(this.building, this.secondaryFilter,
-      this.groupBy, this.flatReport);*/
-
-    this.selectedBuilding = 'Build1';
-    this.building = 'Build1';
-    this.secondaryFilterHeading = 'Cost Head';
-    this.secondaryFilterList = this.costHeadList;
-    this.materialTakeOffDetails = {
-      "building": "Build1",
-      "name": "RCC",
-      "materialDetails": [
-        {
-          "name": "Cement",
-          "itemDetails": [
-            {
-              "item": "Abc",
-              "quantity": 12,
-              "unit": "Bags"
-            },
-            {
-              "item": "Efg",
-              "quantity": 16,
-              "unit": "Bags"
-            },
-            {
-              "item": "Hij",
-              "quantity": 18,
-              "unit": "Bags"
-            }
-          ],
-          "unit": "Bags",
-          "total": 46
-        },
-        {
-          "name": "Sand",
-          "itemDetails": [
-            {
-              "item": "Xyz",
-              "quantity": 34,
-              "unit": "Bags"
-            },
-            {
-              "item": "Pqr",
-              "quantity": 19,
-              "unit": "Bags"
-            },
-            {
-              "item": "Stq",
-              "quantity": 99,
-              "unit": "Bags"
-            }
-          ],
-          "unit": "Bags",
-          "total": 152
-        }
-      ]
+    this.list = {
+      "buildinglist": ["Build1", "Build2", "Build3", "Build4", "Build5"],
+      "costheadlist": ["costhead1", "costhead2", "costhead3", "costhead4", "costhead5", "costhead6"],
+      "materiallist": ["material1", "material2", "material3", "material4", "material5", "material6", "material7"]
     };
+
+    this.extractList(this.list);
   }
+
 
 /*  onGetListSuccess(flatReport : any) {
 
@@ -154,34 +118,42 @@ export class MaterialTakeoffComponent implements OnInit {
     console.log(error);
   }*/
 
+  extractList(list : any) {
+    this.buildingList = list.buildinglist;
+    this.building = this.buildingList[0];
+
+    this.costHeadList = list.costheadlist;
+    this.secondaryFilterHeading = MaterialTakeOffElements.COST_HEAD;
+    this.secondaryFilterList = this.costHeadList;
+    this.secondaryFilter = this.costHeadList[0];
+
+    this.materialList = list.materiallist;
+  }
+
   onChangeGroupBy(groupBy : any) {
     this.groupBy = groupBy;
     console.log('Group By :'+this.groupBy);
-    if(this.groupBy === 'Cost Head Wise') {
+    if(this.groupBy === MaterialTakeOffElements.COST_HEAD_WISE) {
       this.secondaryFilterList = this.costHeadList;
-      this.secondaryFilterHeading = 'Cost Head';
+      this.secondaryFilterHeading = MaterialTakeOffElements.COST_HEAD;
     } else {
       this.secondaryFilterList = this.materialList;
-      this.secondaryFilterHeading = 'Material';
+      this.secondaryFilterHeading = MaterialTakeOffElements.MATERIAL;
     }
 
-    /*this.materialReport = this.materialTakeoffService.buildMaterialReport(this.building, this.secondaryFilter,
-      this.groupBy, this.flatReport);*/
   }
 
   onChangeSecondFilter(secondFilter : any) {
     this.secondaryFilter = secondFilter;
     console.log('Second Filter :'+this.secondaryFilter);
-
-    /*this.materialReport = this.materialTakeoffService.buildMaterialReport(this.building, this.secondaryFilter,
-      this.groupBy, this.flatReport);*/
   }
 
   onChangeBuilding(building : any) {
     this.building = building;
     console.log('Building :'+this.building);
+  }
 
-    /*this.materialReport = this.materialTakeoffService.buildMaterialReport(this.building, this.secondaryFilter,
-      this.groupBy, this.flatReport);*/
+  getMaterialTakeOffElements() {
+    return MaterialTakeOffElements;
   }
 }

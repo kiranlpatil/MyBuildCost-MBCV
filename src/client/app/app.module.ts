@@ -54,8 +54,8 @@ import { CostSummaryComponent } from './build-info/framework/project/cost-summar
 import { CostSummaryService } from './build-info/framework/project/cost-summary-report/cost-summary.service';
 import { MaterialTakeoffComponent } from './build-info/framework/project/material-takeoff/material-takeoff.component';
 import { MaterialTakeoffService } from './build-info/framework/project/material-takeoff/material-takeoff.service';
-import { CostHeadWiseSingleBuildingComponent } from './build-info/framework/project/material-takeoff/cost-head-wise-single-building/cost-head-wise-single-building.component';
-import { CostHeadWiseSingleBuildingService } from './build-info/framework/project/material-takeoff/cost-head-wise-single-building/cost-head-wise-single-building.service';
+import { CostHeadWiseSingleBuildingComponent } from './build-info/framework/project/material-takeoff/material-take-off-details/material-take-off-details.component';
+import { CostHeadWiseSingleBuildingService } from './build-info/framework/project/material-takeoff/material-take-off-details/material-take-off-details.service';
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
 import { GetQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.component';

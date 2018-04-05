@@ -500,6 +500,15 @@ export class ProjectElements {
   public static SQUAREMETER = 'sqmt';
 }
 
+export class MaterialTakeOffElements {
+
+  public static COST_HEAD_WISE = 'Cost Head Wise';
+  public static ALL_BUILDINGS = 'All Buildings';
+  public static COST_HEAD = 'Cost Head';
+  public static MATERIAL_WISE = 'Material Wise';
+  public static MATERIAL = 'Material';
+}
+
 export class Menus {
   public static COST_SUMMARY = 'Cost Summary';
   public static MATERIAL_TAKEOFF = 'Material Takeoff';
