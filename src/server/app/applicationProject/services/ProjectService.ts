@@ -1785,6 +1785,33 @@ class ProjectService {
             this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
             break;
           }
+          case Constants.DOORS : {
+            /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors)
+              .replace(Constants.NUM_OF_LIFTS, buildingDetails.numOfLifts);
+            budgetedCostAmount = eval(calculateBudgtedCost);*/
+            budgetedCostAmount = 1;
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.DADO_OR_WALL_TILING : {
+            /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors)
+              .replace(Constants.NUM_OF_LIFTS, buildingDetails.numOfLifts);
+            budgetedCostAmount = eval(calculateBudgtedCost);*/
+            budgetedCostAmount = 1;
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
+          case Constants.FLOORING : {
+            /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+            calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors)
+              .replace(Constants.NUM_OF_LIFTS, buildingDetails.numOfLifts);
+            budgetedCostAmount = eval(calculateBudgtedCost);*/
+            budgetedCostAmount = 1;
+            this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+            break;
+          }
           default : {
             break;
           }

@@ -56,6 +56,9 @@ class Constants {
   public static DEWATERING : string = 'Dewatering';
   public static GARBAGE_CHUTE : string = 'Garbage chute';
   public static LIFT : string = 'Lift';
+  public static DOORS : string = 'Doors';
+  public static DADO_OR_WALL_TILING : string = 'Dado / wall tiling';
+  public static FLOORING : string = 'Flooring';
 
   // Value Constant
   public static NUMBER_OF_FRACTION_DIGIT = 2;
