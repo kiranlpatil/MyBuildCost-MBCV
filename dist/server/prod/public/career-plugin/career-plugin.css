@@ -1,0 +1,83 @@
+#jobmosis-career-plugin {
+  margin-top: 70px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  background: white;
+  overflow: hidden;
+  color: black;
+  box-shadow: 2px 2px 8px 1px grey;
+  height: 265px;
+  width: 290px;
+}
+
+h3.career-plugin-header {
+  margin: 0 0 10px 0;
+  padding: 15px;
+  color: white;
+  background: #165fac;
+  cursor: move;
+  font-weight: normal;
+  font-size: 24px;
+  text-align: center;
+}
+
+#career-plugin-mobile-no {
+  font-size: 18px;
+  width: 100%;
+}
+
+.plugin-form-wrap {
+  padding: 15px;
+  position: relative;
+}
+
+.plugin-form-wrap label {
+  margin-bottom: 8px;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.plugin-btn-grp {
+  margin-top: 8px;
+}
+
+.plugin-btn-grp button {
+  background: #165fac;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 8px;
+  margin-right: 4px;
+  margin-left: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  box-shadow: 1px 1px 2px 1px grey;
+}
+
+span#career-plugin-notification {
+  font-size: 12px;
+  color: red;
+  font-weight: bold;
+}
+
+.plugin-foot-note {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  margin: auto;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+  #jobmosis-career-plugin {
+    margin: 0 auto 20px;
+    position: relative !important;
+    right: inherit;
+    top: 0;
+  }
+}
