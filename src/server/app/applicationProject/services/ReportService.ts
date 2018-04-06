@@ -18,6 +18,11 @@ import alasql = require('alasql');
 import Constants = require('../shared/constants');
 import ProjectService = require('./ProjectService');
 import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
+import MaterialDetailDTO = require("../dataaccess/dto/project/MaterialDetailDTO");
+import WorkItem = require("../dataaccess/model/project/building/WorkItem");
+import {QuantityDetails} from "../../../../client/app/build-info/framework/model/quantity-details";
+import MaterialTakeOffFlatDetailsDTO = require("../dataaccess/dto/Report/MaterialTakeOffFlatDetailsDTO");
+import MaterialTakeOffFiltersListDTO = require("../dataaccess/dto/Report/MaterialTakeOffFiltersListDTO");
 let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Report Service');
@@ -262,6 +267,120 @@ class ReportService {
         callback(null,{ data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
+  }
+
+  getMaterialDetails( projectId : any, user: User,
+                      callback: (error: any, result: any) => void) {
+
+    logger.info('Report Service, getMaterialDetails has been hit');
+    let query = { _id: projectId};
+    let populate = {path : 'buildings'};
+    this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+      logger.info('Report Service, findAndPopulate has been hit');
+      if(error) {
+        callback(error, null);
+      } else {
+        callback(null, this.getBuildingMaterialDetails(result[0].buildings));
+      }
+    });
+  }
+
+  getBuildingMaterialDetails(buildings : Array<Building>): Array<MaterialTakeOffFlatDetailsDTO> {
+    let materialTakeOffFlatDetailsArray : Array<MaterialTakeOffFlatDetailsDTO>= new Array<MaterialTakeOffFlatDetailsDTO>();
+    let buildingName: string;
+    for(let building: Building of buildings) {
+      buildingName = building.name;
+      this.addMaterialDTOForActiveCostHeadInDTOArray(building, buildingName, materialTakeOffFlatDetailsArray);
+
+    }
+    return materialTakeOffFlatDetailsArray;
+  }
+
+  getMaterialFilters( projectId : any, user: User,
+                      callback: (error: any, result: any) => void) {
+
+    logger.info('Report Service, getMaterialFilters has been hit');
+    let query = { _id: projectId};
+    let populate = {path : 'buildings'};
+    this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+      logger.info('Report Service, findAndPopulate has been hit');
+      if(error) {
+        callback(error, null);
+      } else {
+        callback(null, this.getMaterialTakeOffFilterObject(result[0].buildings));
+      }
+    });
+  }
+
+  private getMaterialTakeOffFilterObject(buildings: Array<Building>) {
+    let materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO> = this.getBuildingMaterialDetails(buildings);
+    let column: string = 'buildingName';
+    let buildingList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray);
+    column = 'costHeadName';
+    let costHeadList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray);
+    column = 'materialName';
+    let materialList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray);
+    let materialTakeOffFiltersObject: MaterialTakeOffFiltersListDTO = new MaterialTakeOffFiltersListDTO(buildingList, costHeadList, materialList);
+    return materialTakeOffFiltersObject;
+  }
+
+  private getDistinctArrayOfStringFromAlasql(column: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+    let sqlQuery: string = 'SELECT DISTINCT flatData.' + column + ' FROM ? AS flatData';
+    let distinctObjectArray = alasql(sqlQuery, [materialTakeOffFlatDetailsArray]);
+    let distinctNameStringArray: Array<string> = new Array<string>();
+    for(let distinctObject of distinctObjectArray) {
+      distinctNameStringArray.push(distinctObject[column]);
+    }
+    return distinctNameStringArray;
+  }
+
+  private addMaterialDTOForActiveCostHeadInDTOArray(building: Building, buildingName: string,
+                                                    materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+    let costHeadName;
+    for (let costHead: CostHead of building.costHeads) {
+      if (costHead.active) {
+        costHeadName = costHead.name;
+        this.addMaterialDTOForActiveCategoryInDTOArray(costHead, buildingName, costHeadName, materialTakeOffFlatDetailsArray);
+      }
+    }
+  }
+
+  private addMaterialDTOForActiveCategoryInDTOArray(costHead: CostHead, buildingName: string, costHeadName: string,
+                                                    materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+    let categoryName: string;
+    for (let category: Category of costHead.categories) {
+      if (category.active) {
+        categoryName = category.name;
+        this.addMaterialDTOForActiveWorkitemInDTOArray(category, buildingName, costHeadName, categoryName, materialTakeOffFlatDetailsArray);
+      }
+    }
+  }
+
+  private addMaterialDTOForActiveWorkitemInDTOArray(category: Category, buildingName: string, costHeadName: string,
+                      categoryName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+    let workItemName: string;
+    for (let workItem: WorkItem of category.workItems) {
+      if (workItem.active) {
+        workItemName = workItem.name;
+        this.createMaterialDTOObjectForEstimatedQuantityAndRate(workItem, buildingName, costHeadName, categoryName,
+          workItemName, materialTakeOffFlatDetailsArray);
+      }
+    }
+  }
+
+  private createMaterialDTOObjectForEstimatedQuantityAndRate(workItem: WorkItem, buildingName: string, costHeadName: string,
+                  categoryName : string, workItemName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+    let quantityName: string;
+    if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
+      for (let quantity: QuantityDetails of workItem.quantity.quantityItemDetails) {
+        quantityName = quantity.name;
+        for (let rateItem of workItem.rate.rateItems) {
+          let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
+            workItemName, rateItem.itemName, quantityName, rateItem.quantity, rateItem.unit);
+          materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
+        }
+      }
+    }
   }
 
 }
