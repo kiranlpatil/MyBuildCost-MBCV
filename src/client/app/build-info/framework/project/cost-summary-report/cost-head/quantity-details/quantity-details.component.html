@@ -11,7 +11,7 @@
             <input [ngModel]="quantity.total" id="quantity" size="10" class="form-control clear">
           </div>
           <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity)">
-            Get Qty.
+            {{getLabel().GET_QUANTITY}}
           </button>
         </td>
 
@@ -32,7 +32,7 @@
 
 
         <td>
-          <div data-toggle="modal" title="Delete Quantity Details"
+          <div *ngIf="keyQuantity" data-toggle="modal" title="Delete Quantity Details"
                data-target="#deleteQuantityDetails"
                (click)="setQuantityNameForDelete(quantity.name)" class="delete-Quantity-details">
             <img alt="Delete Quantity Details" src="assets/build-info/dashboard/delete-blue.png" />

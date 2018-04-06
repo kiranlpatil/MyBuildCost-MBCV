@@ -23,10 +23,12 @@ export class Messages {
   //Registraion Success messages
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New OTP (One Time Password) has been sent to your registered mobile number';
-  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP: string = 'New OTP (One Time Password) has been sent to your new mobile number';
+  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP: string = 'New OTP (One Time Password) has' +
+    ' been sent to your new mobile number';
   public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account.';
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.Kindly login';
-  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'A verification email is sent to your new email id. Current email id will be active till you verify new email id.';
+  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'A verification email is sent to your new email id. ' +
+    'Current email id will be active till you verify new email id.';
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email for password reset has been sent successfully on your registered email id.';
   public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully.';
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
@@ -137,7 +139,8 @@ export class Messages {
   public static MSG_EMAIL_VERIFICATION_HEADING = 'Your email is updated successfully.';
   public static MSG_EMAIL_VERIFICATION_MESSAGE = 'Kindly click on SIGN IN to use BuildInfo.';
   public static MSG_ACTIVATE_USER_HEADING = 'Congratulations! Welcome To BuildInfo.';
-  public static MSG_ACTIVATE_USER_SUB_HEADING = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
+  public static MSG_ACTIVATE_USER_SUB_HEADING = 'You can now find candidates using the highly accurate,' +
+    ' simpler, faster and powerful solution.';
   public static MSG_ACTIVATE_USER_MESSAGE = 'Your account has been created successfully. Kindly click Sign In.';
   public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
     'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s' +
@@ -186,7 +189,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_HEIGHT_REQUIRED = 'Enter height';
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
-  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Quantity details item name is required';
+  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields can not be empty';
   public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Quantity details name is required';
   public static LOGIN_INFO: string = 'Enter your details below';
 }
@@ -451,6 +454,7 @@ export class Label {
   public static WORKITEM_RATE_BY_QUANTITY_TAB : string = 'cost';
   public static WORKITEM_SYSTEM_RATE_TAB : string = 'systemRA';
   public static WORKITEM_QUANTITY_TAB : string = 'quantity';
+  public static GET_QUANTITY : string = 'Get Qty.';
   public static QUANTITY_VIEW : string = 'default';
   public static WORKITEM_DETAILED_QUANTITY_TAB : string = 'detailedQuantity';
 

@@ -117,6 +117,7 @@ export class GetQuantityComponent implements OnInit {
     this.updateQuantity('updateBreadth');
     this.updateQuantity('updateHeight');
   }
+
   addQuantityItem() {
     let quantity = new QuantityItem();
     quantity.item = '';
@@ -131,7 +132,7 @@ export class GetQuantityComponent implements OnInit {
   }
 
   updateQuantityItem(quantityItems : Array<QuantityItem>) {
-    if(this.validateQuantityItem(quantityItems)) {
+    if(this.validateQuantityItem(quantityItems) && (this.keyQuantity !== null && this.keyQuantity !== undefined)) {
       let quantityObj : QuantityDetails = new QuantityDetails();
       quantityObj.name = this.keyQuantity;
       quantityObj.quantityItems = quantityItems;
