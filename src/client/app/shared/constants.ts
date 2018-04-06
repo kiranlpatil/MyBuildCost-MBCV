@@ -300,6 +300,10 @@ export class API {
   public static CARPET_AREA='carpetArea';
   public static BUDGETED_COST ='budgetedCost';
 
+  //Material Take Off
+
+  public static REPORT_MATERIAL_TAKE_OFF ='report/materialtakeoff';
+  public static MATERIAL_FILTERS_LIST ='material/filters/list';
 }
 
 export class ImagePath {

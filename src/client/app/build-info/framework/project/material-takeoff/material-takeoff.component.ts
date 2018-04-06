@@ -44,14 +44,14 @@ export class MaterialTakeoffComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
     });
-    this.getList(this.projectId);
+    this.getMaterialFiltersList(this.projectId);
   }
 
-  getList(projectId : string) {
-    /*this.materialTakeoffService.getList(projectId).subscribe(
-      flatReport => this.onGetListSuccess(flatReport),
-      error => this.onGetListFailure(error)
-    );*/
+  getMaterialFiltersList(projectId : string) {
+    this.materialTakeoffService.getMaterialFiltersList(projectId).subscribe(
+      materialFiltersList => this.onGetMaterialFiltersListSuccess(materialFiltersList),
+      error => this.onGetMaterialFiltersListFailure(error)
+    );
     /*this.flatReport = [
       {
         "building" : "Build1",
@@ -100,23 +100,17 @@ export class MaterialTakeoffComponent implements OnInit {
       }
     ];*/
 
-    this.list = {
-      "buildingList": ["Build1", "Build2", "Build3", "Build4", "Build5"],
-      "costHeadList": ["costhead1", "costhead2", "costhead3", "costhead4", "costhead5", "costhead6"],
-      "materialList": ["material1", "material2", "material3", "material4", "material5", "material6", "material7"]
-    };
+  }
 
+
+  onGetMaterialFiltersListSuccess(materialFiltersList : any) {
+    this.list = materialFiltersList;
     this.extractList(this.list);
   }
 
-
-/*  onGetListSuccess(flatReport : any) {
-
-  }
-
-  onGetListFailure(error : any) {
+  onGetMaterialFiltersListFailure(error : any) {
     console.log(error);
-  }*/
+  }
 
   extractList(list : any) {
     this.buildingList = list.buildingList;
