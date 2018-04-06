@@ -65,8 +65,7 @@
                                 <td>
                                   <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                     <input type="number" [(ngModel)]="workItem.quantity.total" (change)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)" id="directQuantity" size="10" class="form-control clear">
-                                    <span id="getQuantity{{categoryIndex}}"
-                                          [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
+                                    <span class="calculator" id="getQuantity{{categoryIndex}}"
                                           (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                   </span>
@@ -74,11 +73,10 @@
                                 </td>
                                 <td>{{ workItem.unit }}</td>
                                 <td>
-                                  <div class="edit-field" [class.active]="(rateView==='rate' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
+                                  <div class="edit-field">
                                     <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
-                                    <input *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate" size="10" class="form-control clear">
-                                     <span id ="getRate{{categoryIndex}}"
-                                          [class.active]="(rateView==='rate' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
+                                    <input *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate" size="10" class="form-control clear" readonly>
+                                     <span class="calculator"  id ="getRate{{categoryIndex}}"
                                        *ngIf="workItem.isDirectRate === false" (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
                                      <img src="assets/build-info/dashboard/calculator2.png" />
                                      </span>
