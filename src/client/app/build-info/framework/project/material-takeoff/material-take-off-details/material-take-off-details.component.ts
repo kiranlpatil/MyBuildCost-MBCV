@@ -13,7 +13,7 @@ export class CostHeadWiseSingleBuildingComponent implements OnInit {
  /* itemDetails : any[];
   materialDetails : any[];
   materialTakeOffDetails : any[];*/
-  @Input() materialTakeOffDetails : any[];
+  @Input() materialTakeOffDetails : any;
 
   ngOnInit() {
 
@@ -132,6 +132,7 @@ export class CostHeadWiseSingleBuildingComponent implements OnInit {
         "unit" : "Bags"
       }
     ];*/
+    console.log('materialTakeOffDetails -> '+this.materialTakeOffDetails);
   }
 
 }

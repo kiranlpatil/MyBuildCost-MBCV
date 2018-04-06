@@ -1,45 +1,32 @@
 <bi-project-header></bi-project-header>
 <section class="wrapper">
 
-    <div *ngIf="materialTakeOffDetails !== undefined"  class="col-md-12">
-      {{materialTakeOffDetails.name}} {{materialTakeOffDetails.building}}
-      <div *ngFor="let materialData of materialTakeOffDetails.materialDetails">
-        {{ materialData.name }} : {{ materialData.total }} {{ materialData.unit }}
-        <div class="container text-center">
-          <div class="col-md-12">
-            <div class="col-md-4">
-              Item
-            </div>
-            <div class="col-md-4">
-              Quantity
-            </div>
-            <div class="col-md-4">
-              Unit
-            </div>
+<div *ngIf="materialTakeOffDetails !== undefined" class="col-md-12">
+  <div *ngFor="let materialData of materialTakeOffDetails | keys">
+    <div class="col-md-12">
+    {{materialData}} {{ materialTakeOffDetails[materialData].header }}
+    </div>
+
+    <div *ngFor="let secondaryViewData of materialTakeOffDetails[materialData].secondaryView | keys">
+      <div class="col-md-12">
+      {{secondaryViewData}} {{ materialTakeOffDetails[materialData].secondaryView[secondaryViewData].header }}
+
+        <div *ngFor="let tableView of materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table | keys" class="col-md-12">
+
+
+          <div *ngFor="let tableHeader of materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table[tableView] | keys" class="col-md-12">
+
+            {{tableHeader}}
+
           </div>
-        <div *ngFor="let itemData of materialData.itemDetails">
-          <div class="col-md-4">
-            {{ itemData.item }}
-          </div>
-          <div class="col-md-4">
-            {{ itemData.quantity }}
-          </div>
-          <div class="col-md-4">
-            {{ itemData.unit }}
-          </div>
-        </div>
-          <div class="col-md-12">
-            <div class="col-md-4">
-              Total
-            </div>
-            <div class="col-md-4">
-              -
-            </div>
-            <div class="col-md-4">
-              -
-            </div>
+
           </div>
       </div>
+
     </div>
+
   </div>
+</div>
+
+
 </section>

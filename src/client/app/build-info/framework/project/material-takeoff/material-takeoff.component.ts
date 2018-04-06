@@ -32,7 +32,7 @@ export class MaterialTakeoffComponent implements OnInit {
 
 
   //Material details send to material total component
-  materialTakeOffDetails :Array<MaterialTakeOffReport> = new Array<MaterialTakeOffReport>();
+  materialTakeOffDetails :any;
 
   constructor( private activatedRoute:ActivatedRoute,  private _router : Router, private materialTakeoffService : MaterialTakeoffService) {
   this.groupByList = [
@@ -101,9 +101,9 @@ export class MaterialTakeoffComponent implements OnInit {
     ];*/
 
     this.list = {
-      "buildinglist": ["Build1", "Build2", "Build3", "Build4", "Build5"],
-      "costheadlist": ["costhead1", "costhead2", "costhead3", "costhead4", "costhead5", "costhead6"],
-      "materiallist": ["material1", "material2", "material3", "material4", "material5", "material6", "material7"]
+      "buildingList": ["Build1", "Build2", "Build3", "Build4", "Build5"],
+      "costHeadList": ["costhead1", "costhead2", "costhead3", "costhead4", "costhead5", "costhead6"],
+      "materialList": ["material1", "material2", "material3", "material4", "material5", "material6", "material7"]
     };
 
     this.extractList(this.list);
@@ -119,15 +119,194 @@ export class MaterialTakeoffComponent implements OnInit {
   }*/
 
   extractList(list : any) {
-    this.buildingList = list.buildinglist;
+    this.buildingList = list.buildingList;
     this.building = this.buildingList[0];
 
-    this.costHeadList = list.costheadlist;
+    this.costHeadList = list.costHeadList;
     this.secondaryFilterHeading = MaterialTakeOffElements.COST_HEAD;
     this.secondaryFilterList = this.costHeadList;
     this.secondaryFilter = this.costHeadList[0];
 
-    this.materialList = list.materiallist;
+    this.materialList = list.materialList;
+
+    this.materialTakeOffDetails = {
+      "RCC": {
+        "header": "All Building",
+        "secondaryView": {
+          "cement": {
+            "header": "1970 Bags",
+            "table": {
+              "headers": {
+                "column-one": "Building Name",
+                "column-two": "Quantity",
+                "column-three": "Unit"
+              },
+              "content": {
+                "Building A": {
+                  "column-one": "Building A",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                },
+                "Building B": {
+                  "column-one": "Building B",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                },
+                "Building C": {
+                  "column-one": "Building C",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                }
+
+
+              },
+              "footer": {
+                "column-one": "Total",
+                "column-two": 878,
+                "column-three": "BAG"
+              }
+            }
+          },
+          "Sand": {
+            "header": "1970 Bags",
+            "table": {
+              "headers": {
+                "column-one": "Building Name",
+                "column-two": "Quantity",
+                "column-three": "Unit"
+              },
+              "content": {
+                "Building A": {
+                  "column-one": "Building A",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                },
+                "Building B": {
+                  "column-one": "Building B",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                },
+                "Building C": {
+                  "column-one": "Building C",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                }
+
+              },
+              "footer": {
+                "column-one": "Total",
+                "column-two": 878,
+                "column-three": "BAG"
+              }
+
+            }
+          }
+        }
+
+      }
+    };
   }
 
   onChangeGroupBy(groupBy : any) {
