@@ -120,36 +120,36 @@ export class MaterialTakeoffComponent implements OnInit {
             "header": "1970 Bags",
             "table": {
               "headers": {
-                "column-one": "Building Name",
-                "column-two": "Quantity",
-                "column-three": "Unit"
+                "columnOne": "Building Name",
+                "columnTwo": "Quantity",
+                "columnThree": "Unit"
               },
               "content": {
                 "Building A": {
-                  "column-one": "Building A",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Building A",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Building B": {
-                  "column-one": "Building B",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Building B",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Building C": {
-                  "column-one": "Building C",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Building C",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 }
 
 
               },
               "footer": {
-                "column-one": "Total",
-                "column-two": 878,
-                "column-three": "BAG"
+                "columnOne": "Total",
+                "columnTwo": 878,
+                "columnThree": "BAG"
               }
             }
           },
@@ -157,35 +157,35 @@ export class MaterialTakeoffComponent implements OnInit {
             "header": "1970 Bags",
             "table": {
               "headers": {
-                "column-one": "Building Name",
-                "column-two": "Quantity",
-                "column-three": "Unit"
+                "columnOne": "Building Name",
+                "columnTwo": "Quantity",
+                "columnThree": "Unit"
               },
               "content": {
                 "Building A": {
-                  "column-one": "Building A",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Building A",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Building B": {
-                  "column-one": "Building B",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Building B",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Building C": {
-                  "column-one": "Building C",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Building C",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 }
 
               },
               "footer": {
-                "column-one": "Total",
-                "column-two": 878,
-                "column-three": "BAG"
+                "columnOne": "Total",
+                "columnTwo": 878,
+                "columnThree": "BAG"
               }
 
             }
@@ -205,96 +205,96 @@ export class MaterialTakeoffComponent implements OnInit {
             "header": "3456 Bags",
             "table": {
               "headers": {
-                "column-one": "Item",
-                "column-two": "Quantity",
-                "column-three": "Unit"
+                "columnOne": "Item",
+                "columnTwo": "Quantity",
+                "columnThree": "Unit"
               },
               "content": {
                 "WorkItem 1": {
-                  "column-one": "WorkItem 1",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "WorkItem 1",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent":  {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 },
                 "WorkItem 2": {
-                  "column-one": "WorkItem 2",
-                  "column-two": 865,
-                  "column-three": "BAG",
+                  "columnOne": "WorkItem 2",
+                  "columnTwo": 865,
+                  "columnThree": "BAG",
                   "subContent":  {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 },
                 "WorkItem 3": {
-                  "column-one": "WorkItem 4",
-                  "column-two": 363,
-                  "column-three": "BAG",
+                  "columnOne": "WorkItem 4",
+                  "columnTwo": 363,
+                  "columnThree": "BAG",
                   "subContent":  {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 },
                 "WorkItem 4": {
-                  "column-one": "WorkItem 4",
-                  "column-two": 87,
-                  "column-three": "BAG",
+                  "columnOne": "WorkItem 4",
+                  "columnTwo": 87,
+                  "columnThree": "BAG",
                   "subContent":  {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 }
@@ -302,9 +302,9 @@ export class MaterialTakeoffComponent implements OnInit {
 
               },
               "footer": {
-                "column-one": "Total",
-                "column-two": 878,
-                "column-three": "BAG"
+                "columnOne": "Total",
+                "columnTwo": 878,
+                "columnThree": "BAG"
               }
             }
           },
@@ -312,83 +312,83 @@ export class MaterialTakeoffComponent implements OnInit {
             "header": "8964 Bags",
             "table": {
               "headers": {
-                "column-one": "Item",
-                "column-two": "Quantity",
-                "column-three": "Unit"
+                "columnOne": "Item",
+                "columnTwo": "Quantity",
+                "columnThree": "Unit"
               },
               "content": {
                 "WorkItem A": {
-                  "column-one": "WorkItem A",
-                  "column-two": 63,
-                  "column-three": "BAG",
+                  "columnOne": "WorkItem A",
+                  "columnTwo": 63,
+                  "columnThree": "BAG",
                   "subContent":  {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 },
                 "WorkItem B": {
-                  "column-one": "WorkItem B",
-                  "column-two": 78,
-                  "column-three": "BAG",
+                  "columnOne": "WorkItem B",
+                  "columnTwo": 78,
+                  "columnThree": "BAG",
                   "subContent":  {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 },
                 "WorkItem C": {
-                  "column-one": "WorkItem C",
-                  "column-two": 54,
-                  "column-three": "BAG",
+                  "columnOne": "WorkItem C",
+                  "columnTwo": 54,
+                  "columnThree": "BAG",
                   "subContent":  {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 }
 
               },
               "footer": {
-                "column-one": "Total",
-                "column-two": 878,
-                "column-three": "BAG"
+                "columnOne": "Total",
+                "columnTwo": 878,
+                "columnThree": "BAG"
               }
 
             }
@@ -408,36 +408,36 @@ export class MaterialTakeoffComponent implements OnInit {
             "header": "1970 Bags",
             "table": {
               "headers": {
-                "column-one": "Item",
-                "column-two": "Quantity",
-                "column-three": "Unit"
+                "columnOne": "Item",
+                "columnTwo": "Quantity",
+                "columnThree": "Unit"
               },
               "content": {
                 "Workitem A": {
-                  "column-one": "Workitem A",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem A",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Workitem B": {
-                  "column-one": "Workitem B",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem B",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Workitem C": {
-                  "column-one": "Workitem C",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem C",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 }
 
 
               },
               "footer": {
-                "column-one": "Total",
-                "column-two": 878,
-                "column-three": "BAG"
+                "columnOne": "Total",
+                "columnTwo": 878,
+                "columnThree": "BAG"
               }
             }
           },
@@ -445,35 +445,35 @@ export class MaterialTakeoffComponent implements OnInit {
             "header": "Build 2 : 1970 Bags",
             "table": {
               "headers": {
-                "column-one": "Item",
-                "column-two": "Quantity",
-                "column-three": "Unit"
+                "columnOne": "Item",
+                "columnTwo": "Quantity",
+                "columnThree": "Unit"
               },
               "content": {
                 "Workitem A": {
-                  "column-one": "Workitem A",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem A",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Workitem B": {
-                  "column-one": "Workitem B",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem B",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 },
                 "Workitem C": {
-                  "column-one": "Workitem C",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem C",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 }
 
               },
               "footer": {
-                "column-one": "Total",
-                "column-two": 878,
-                "column-three": "BAG"
+                "columnOne": "Total",
+                "columnTwo": 878,
+                "columnThree": "BAG"
               }
 
             }
@@ -493,68 +493,68 @@ export class MaterialTakeoffComponent implements OnInit {
             "header": "1970 Bags",
             "table": {
               "headers": {
-                "column-one": "Item",
-                "column-two": "Quantity",
-                "column-three": "Unit"
+                "columnOne": "Item",
+                "columnTwo": "Quantity",
+                "columnThree": "Unit"
               },
               "content": {
                 "Workitem A": {
-                  "column-one": "Workitem A",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem A",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 },
                 "Workitem B": {
-                  "column-one": "Workitem B",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem B",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {
                     "1st Floor": {
-                      "column-one": "1st Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "1st Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "2nd Floor": {
-                      "column-one": "2nd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "2nd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     },
                     "3rd Floor": {
-                      "column-one": "3rd Floor",
-                      "column-two": 32,
-                      "column-three": "BAG"
+                      "columnOne": "3rd Floor",
+                      "columnTwo": 32,
+                      "columnThree": "BAG"
                     }
                   }
                 },
                 "Workitem C": {
-                  "column-one": "Workitem C",
-                  "column-two": 435,
-                  "column-three": "BAG",
+                  "columnOne": "Workitem C",
+                  "columnTwo": 435,
+                  "columnThree": "BAG",
                   "subContent": {}
                 }
 
 
               },
               "footer": {
-                "column-one": "Total",
-                "column-two": 878,
-                "column-three": "BAG"
+                "columnOne": "Total",
+                "columnTwo": 878,
+                "columnThree": "BAG"
               }
             }
           }

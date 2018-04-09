@@ -511,6 +511,8 @@ export class MaterialTakeOffElements {
   public static COST_HEAD = 'Cost Head';
   public static MATERIAL_WISE = 'Material Wise';
   public static MATERIAL = 'Material';
+  public static CONTENT = 'content';
+  public static SUB_CONTENT = 'subContent';
 }
 
 export class Menus {

@@ -35,21 +35,21 @@
 
                             <div *ngFor="let tableHeader of materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table[tableView] | keys; let tableHeaderIndex = index">
 
-                              <div *ngIf="tableView != 'content'" class="col-md-4">
+                              <div *ngIf="tableView != getMaterialTakeOffElements().CONTENT" class="col-md-4">
                                  {{materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
                               </div>
 
-                              <div *ngIf="tableView == 'content'" class="col-md-12">
+                              <div *ngIf="tableView == getMaterialTakeOffElements().CONTENT" class="col-md-12">
 
-                                <div *ngFor="let tableData of materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader] | keys ;let tableDataIndex = index">
+                                <div *ngFor="let tableData of materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader] | keys">
 
                                   <a data-toggle="collapse" href="#item{{tableHeaderIndex}}{{secondaryViewDataIndex}}">
-                                    <div *ngIf="tableData != 'subContent' " class="col-md-4">
+                                    <div *ngIf="tableData != getMaterialTakeOffElements().SUB_CONTENT " class="col-md-4">
                                         {{materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader][tableData]}}
                                     </div>
                                   </a>
 
-                                    <div id="item{{tableHeaderIndex}}{{secondaryViewDataIndex}}" class="panel-collapse collapse  col-md-12" *ngIf="tableData == 'subContent' ">
+                                    <div id="item{{tableHeaderIndex}}{{secondaryViewDataIndex}}" class="panel-collapse collapse  col-md-12" *ngIf="tableData == getMaterialTakeOffElements().SUB_CONTENT ">
 
                                       <div *ngFor="let tableSubContentData of materialTakeOffDetails[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader][tableData] | keys ">
 
