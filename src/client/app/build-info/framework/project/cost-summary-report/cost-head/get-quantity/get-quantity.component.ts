@@ -160,7 +160,7 @@ export class GetQuantityComponent implements OnInit {
 
   validateQuantityItem(quantityItems : Array<QuantityItem>) {
     for(let quantityItemData of quantityItems) {
-      if((quantityItemData.item === '' || quantityItemData.item === undefined) ||
+      if((quantityItemData.item === '' || quantityItemData.item === undefined ||  quantityItemData.item.trim() === '') ||
         (quantityItemData.nos === undefined || quantityItemData.nos === null) ||
         (quantityItemData.length === undefined || quantityItemData.length === null) ||
         (quantityItemData.height === undefined || quantityItemData.height === null)) {

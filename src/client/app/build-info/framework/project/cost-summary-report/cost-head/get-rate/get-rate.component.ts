@@ -96,23 +96,41 @@ export class GetRateComponent {
 
   }
   updateRate(rateItemsArray: Rate) {
-    this.loaderService.start();
-     let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-    let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
+    if (this.validateRateItem(rateItemsArray.rateItems)) {
+      this.loaderService.start();
+      let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+      let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
-    let rate = new Rate();
-    rate.rateFromRateAnalysis = rateItemsArray.rateFromRateAnalysis;
-    rate.total = this.commonService.decimalConversion(rateItemsArray.total);
-    rate.quantity = rateItemsArray.quantity;
-    rate.unit = rateItemsArray.unit;
-    rate.rateItems = rateItemsArray.rateItems;
-    rate.imageURL=rateItemsArray.imageURL;
-    rate.notes=rateItemsArray.notes;
+      let rate = new Rate();
+      rate.rateFromRateAnalysis = rateItemsArray.rateFromRateAnalysis;
+      rate.total = this.commonService.decimalConversion(rateItemsArray.total);
+      rate.quantity = rateItemsArray.quantity;
+      rate.unit = rateItemsArray.unit;
+      rate.rateItems = rateItemsArray.rateItems;
+      rate.imageURL = rateItemsArray.imageURL;
+      rate.notes = rateItemsArray.notes;
 
-    this.costSummaryService.updateRate( this.baseUrl, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
-      success => this.onUpdateRateSuccess(success),
-      error => this.onUpdateRateFailure(error)
-    );
+      this.costSummaryService.updateRate(this.baseUrl, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
+        success => this.onUpdateRateSuccess(success),
+        error => this.onUpdateRateFailure(error)
+      );
+    } else {
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
+      this.messageService.message(message);
+    }
+  }
+
+  validateRateItem(rateItems : Array<RateItem>) {
+    for(let rateItemData of rateItems) {
+      if((rateItemData.itemName === null || rateItemData.itemName === undefined || rateItemData.itemName.trim() === '') ||
+        (rateItemData.rate === undefined || rateItemData.rate === null) ||
+        (rateItemData.quantity === undefined || rateItemData.quantity === null)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   onUpdateRateSuccess(success : string) {
