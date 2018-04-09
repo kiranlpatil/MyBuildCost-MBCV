@@ -106,6 +106,8 @@ export class MaterialTakeoffComponent implements OnInit {
       this.costHeadWiseSingleBuilding();
     } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building === MaterialTakeOffElements.ALL_BUILDINGS) {
       this.materialWiseAllBuildings();
+    } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building !== MaterialTakeOffElements.ALL_BUILDINGS) {
+      this.materialWiseSingleBuilding();
     }
   }
 
@@ -482,4 +484,82 @@ export class MaterialTakeoffComponent implements OnInit {
     };
   }
 
+  materialWiseSingleBuilding() {
+    this.materialTakeOffDetails = {
+      "Cement": {
+        "header": "Build1",
+        "secondaryView": {
+          "Cement": {
+            "header": "1970 Bags",
+            "table": {
+              "headers": {
+                "column-one": "Item",
+                "column-two": "Quantity",
+                "column-three": "Unit"
+              },
+              "content": {
+                "Workitem A": {
+                  "column-one": "Workitem A",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                },
+                "Workitem B": {
+                  "column-one": "Workitem B",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {
+                    "1st Floor": {
+                      "column-one": "1st Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "2nd Floor": {
+                      "column-one": "2nd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    },
+                    "3rd Floor": {
+                      "column-one": "3rd Floor",
+                      "column-two": 32,
+                      "column-three": "BAG"
+                    }
+                  }
+                },
+                "Workitem C": {
+                  "column-one": "Workitem C",
+                  "column-two": 435,
+                  "column-three": "BAG",
+                  "subContent": {}
+                }
+
+
+              },
+              "footer": {
+                "column-one": "Total",
+                "column-two": 878,
+                "column-three": "BAG"
+              }
+            }
+          }
+        }
+      }
+    };
+  }
 }
