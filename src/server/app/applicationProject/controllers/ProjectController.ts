@@ -85,6 +85,49 @@ class ProjectController {
     }
   }
 
+  getInActiveProjectCostHeads(req:express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, getInActiveCostHead has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let projectService = new ProjectService();
+      projectService.getInActiveProjectCostHeads( projectId, user, (error, result) => {
+        if (error) {
+          next(error);
+        } else {
+          logger.info('Get InActive CostHead success');
+          next(new Response(200, result));
+        }
+      });
+    } catch (e) {
+      next(new CostControllException(e.message, e.stack));
+    }
+  }
+
+  setProjectCostHeadStatus(req: express.Request, res: express.Response, next: any): void {
+    logger.info('Project controller, setProjectCostHeadStatus has been hit');
+    try {
+      let projectService = new ProjectService();
+      let user = req.user;
+      let projectId =  req.params.projectId;
+      let costHeadId =  parseInt(req.params.costHeadId);
+      let costHeadActiveStatus = req.params.activeStatus;
+
+      projectService.setProjectCostHeadStatus( projectId, costHeadId, costHeadActiveStatus, user,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Update setProjectCostHeadStatus success ');
+          logger.debug('setProjectCostHeadStatus for Project ID : '+projectId+
+            ', CostHead : '+costHeadId+', costHeadActiveStatus : '+costHeadActiveStatus);
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   createBuilding(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, addBuilding has been hit');

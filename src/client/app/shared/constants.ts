@@ -166,9 +166,9 @@ export class Messages {
   public static MSG_SUCCESS_CLONED_BUILDING_DETAILS: string = 'Your building cloned successfully.';
   public static MSG_SUCCESS_UPDATE_PROJECT_DETAILS: string = 'Your project updated successfully.';
   public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details updated successfully.';
-  public static MSG_SUCCESS_DELETE_BUILDING: string = 'Your building deleted successfully.';
+  public static MSG_SUCCESS_DELETE_BUILDING: string = 'Building deleted successfully.';
   public static MSG_SUCCESS_ADD_COSTHEAD: string = 'Costhead added successfully.';
-  public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Your costhead deleted successfully.';
+  public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Costhead deleted successfully.';
   public static MSG_SUCCESS_DELETE_ITEM: string = 'Your item deleted successfully.';
   public static MSG_SUCCESS_UPDATE_RATE: string = 'Rate updated.';
   public static MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL: string = 'Quantity should not zero or null.';

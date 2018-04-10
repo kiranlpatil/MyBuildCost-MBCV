@@ -58,9 +58,29 @@
               </td>
               <td class="delete-cost-head">
                 <div data-toggle="modal"
-                     data-target="#deleteCosthead">
+                     data-target="#deleteCosthead"
+                     (click)="setIdsToInActiveCostHead(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateAnalysisId)">
                   <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                 </div>
+              </td>
+            </tr>
+            <tr *ngIf="showProjectCostHeadList" class="add-cost-head">
+              <td class="border-left">
+                <select class="select-item" (change)="onChangeActiveSelectedCostHead($event.target.value)">
+                  <option>Select Item</option>
+                  <option *ngFor="let projectCostHead of inActiveProjectCostHeads" [value]="projectCostHead.rateAnalysisId">
+                    {{ projectCostHead.name }}
+                  </option>
+                </select>
+              </td>
+              <td colspan="5">&nbsp;</td>
+            </tr>
+            <tr class="add-item-row">
+              <td colspan="5" class="add-items">
+                <button type="button" class="btn btn-add-item"
+                        (click)="getAllInActiveProjectCostHeads()">
+                  <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
+                </button>
               </td>
             </tr>
           </tbody>
@@ -81,4 +101,8 @@
     </table>
 
   </div>
+</div>
+
+<div class="modal fade default-modal" id="deleteCosthead" role="dialog">
+  <bi-delete-confirmation-modal [elementType]="deleteConfirmationCostHead" (deleteElementEvent)="deleteProjectCostHead($event)"></bi-delete-confirmation-modal>
 </div>

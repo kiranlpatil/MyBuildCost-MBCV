@@ -45,6 +45,12 @@ class ProjectRoutes {
     router.get('/:projectId/rates/rateItem/:originalRateItemName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.getProjectRateItemsByOriginalName, controller.getProjectRateItemsByOriginalName, this._responseInterceptor.exit);
 
+    router.get('/:projectId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getInActiveProjectCostHeads, this._responseInterceptor.exit);
+
+    router.put('/:projectId/costhead/:costHeadId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.setProjectCostHeadStatus, this._responseInterceptor.exit);
+
     /*Project- Routes: Category*/
 
     //Retrive categories for particular costhead

@@ -164,6 +164,41 @@ class ProjectService {
     });
   }
 
+  getInActiveProjectCostHeads(projectId: string, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getInActiveCostHead has been hit');
+    this.projectRepository.findById(projectId, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        logger.info('Project service, findById has been hit');
+        logger.debug('getting InActive CostHead for Project Name : '+result.name);
+        let response = result.projectCostHeads;
+        let inActiveCostHead=[];
+        for(let costHeadItem of response) {
+          if(!costHeadItem.active) {
+            inActiveCostHead.push(costHeadItem);
+          }
+        }
+        callback(null,{data:inActiveCostHead, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  setProjectCostHeadStatus( projectId : string, costHeadId : number, costHeadActiveStatus : string, user: User,
+                     callback: (error: any, result: any) => void) {
+    let query = {'_id' : projectId, 'projectCostHeads.rateAnalysisId' : costHeadId};
+    let activeStatus = JSON.parse(costHeadActiveStatus);
+    let newData = { $set : {'projectCostHeads.$.active' : activeStatus}};
+    this.projectRepository.findOneAndUpdate(query, newData, {new: true},(err, response) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if(err) {
+        callback(err, null);
+      } else {
+        callback(null, {data: response, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
   cloneBuildingDetails( buildingId:string, buildingDetails:any, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, cloneBuildingDetails has been hit');
     let query = { _id : buildingId };
