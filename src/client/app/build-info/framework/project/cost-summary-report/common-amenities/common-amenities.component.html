@@ -26,8 +26,8 @@
                 <div class="white-bg"></div>
               </th>
             </tr>
-            <tr>
-              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
+            <tr class="cost-summary-row-list">
+              <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
               <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
               <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
               <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
@@ -91,11 +91,11 @@
     <table class="table table-row-spacing table-dashboard total-table">
       <tbody>
       <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
-        <td>{{getLabel().TOTAL}}</td>
-        <td>{{amenitiesReport.thumbRule.totalRate|number}}</td>
-        <td><span class="estimated-cost">{{amenitiesReport.thumbRule.totalBudgetedCost|number}}</span></td>
-        <td>{{amenitiesReport.estimate.totalRate|number}}</td>
-        <td><span class="estimated-cost">{{amenitiesReport.estimate.totalEstimatedCost|number}}</span></td>
+        <td class="border-left">{{getLabel().TOTAL}}</td>
+        <td class="border-left">{{amenitiesReport.thumbRule.totalRate|number}}</td>
+        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.thumbRule.totalBudgetedCost|number}}</span></td>
+        <td class="border-left">{{amenitiesReport.estimate.totalRate|number}}</td>
+        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.totalEstimatedCost|number}}</span></td>
       </tr>
       </tbody>
     </table>

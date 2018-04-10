@@ -35,7 +35,11 @@
   padding: 0 0 10px;
   text-align: left;
 }
-
+.cost-summary-row-list {
+  .text-center {
+    text-align: center;
+  }
+}
 .collapse-items {
   border-bottom: 1px solid $clone-border;
   float: left;

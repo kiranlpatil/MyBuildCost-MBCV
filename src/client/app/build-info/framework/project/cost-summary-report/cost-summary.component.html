@@ -57,8 +57,8 @@
                         <div class="white-bg"></div>
                       </th>
                     </tr>
-                    <tr>
-                      <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
+                    <tr class="cost-summary-row-list">
+                      <th class="text-center"><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
                       <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
                       <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}}</span></th>
                       <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
@@ -127,11 +127,11 @@
             <table class="table table-row-spacing table-dashboard total-table">
               <tbody>
                 <tr *ngIf="(building.thumbRule && building.estimate)">
-                  <td>{{ getLabel().TOTAL }}</td>
-                  <td>{{ building.thumbRule.totalRate|number }}</td>
-                  <td><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number }}</span></td>
-                  <td>{{ building.estimate.totalRate|number }}</td>
-                  <td><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number }}</span></td>
+                  <td class="border-left">{{ getLabel().TOTAL }}</td>
+                  <td class="border-left">{{ building.thumbRule.totalRate|number }}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number }}</span></td>
+                  <td class="border-left">{{ building.estimate.totalRate|number }}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number }}</span></td>
                 </tr>
               </tbody>
             </table>

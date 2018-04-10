@@ -18,7 +18,7 @@ export class ProjectFormComponent {
   @Output() onSubmitEvent = new EventEmitter<Project>();
 
   projectForm:  FormGroup;
-  public isShowErrorMessage: boolean = true;
+  public isShowErrorMessage: boolean = false;
   public errorMessage: boolean = false;
 
   constructor( private formBuilder: FormBuilder) {
@@ -42,6 +42,8 @@ export class ProjectFormComponent {
     if(this.projectForm.valid) {
     this.projectModel = this.projectForm.value;
       this.onSubmitEvent.emit(this.projectModel);
+    } else {
+      this.isShowErrorMessage = true;
     }
   }
 

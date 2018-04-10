@@ -66,8 +66,11 @@ export class CreateBuildingComponent  implements  OnInit {
   }
 
   checkApartmentConfiguration(buildingModel : Building) {
-    if((buildingModel.numOfOneBHK !== 0) || (buildingModel.numOfTwoBHK  !== 0 ) ||
-      (buildingModel.numOfThreeBHK !== 0) || (buildingModel.numOfFourBHK !== 0) || (buildingModel.numOfFiveBHK !== 0)) {
+    if((buildingModel.numOfOneBHK !== 0 && buildingModel.numOfOneBHK !== null) ||
+      (buildingModel.numOfTwoBHK  !== 0 && buildingModel.numOfTwoBHK !== null) ||
+      (buildingModel.numOfThreeBHK !== 0 && buildingModel.numOfThreeBHK !== null) ||
+      (buildingModel.numOfFourBHK !== 0 && buildingModel.numOfFourBHK !== null) ||
+      (buildingModel.numOfFiveBHK !== 0 && buildingModel.numOfFiveBHK !== null)) {
       return true;
     } else {
       return false;
