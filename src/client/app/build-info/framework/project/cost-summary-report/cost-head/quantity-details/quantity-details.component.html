@@ -49,6 +49,7 @@
                              [categoryDetails] ="categoryDetails"
                              [keyQuantity]="keyQuantity"
                              [workItemsList] ="workItemsList"
+                             (closeQuantityView) = "closeQuantityView($event)"
                              (showWorkItemTabName)="setShowWorkItemTab($event)"
                              [baseUrl] = "baseUrl">
             </bi-get-quantity>

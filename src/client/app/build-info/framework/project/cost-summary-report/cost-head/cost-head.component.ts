@@ -691,4 +691,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.showWorkItemTab = null;
     this.displayRateView = null;
   }
+
+  closeQuantityView() {
+    this.showQuantityTab = null;
+    this.showWorkItemTab = null;
+  }
 }
