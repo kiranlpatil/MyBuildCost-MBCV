@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.mainHeaderMenuHideShow = 'signin';
-    window.history.forward();
+    //window.history.forward();
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params['email'] !== undefined) {
         this.userForm.controls['email'].setValue(params['email']);
