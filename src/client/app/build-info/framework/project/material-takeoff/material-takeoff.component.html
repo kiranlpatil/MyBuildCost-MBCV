@@ -1,30 +1,31 @@
 <bi-project-header></bi-project-header>
 <section class="wrapper">
-  <div class="container text-center">
-    <div class="col-md-12">
-      <div class="col-md-4">
-        <select (change)="onChangeGroupBy($event.target.value)">
+  <div class="container">
+    <div class="col-sm-9 col-xs-12 padding-right30 left-content">
+      <div class="pull-left no-padding">
+        <select class="select-costing no-margin" (change)="onChangeGroupBy($event.target.value)">
           <option *ngFor="let groupBy of groupByList" [value]="groupBy">{{ groupBy }}</option>
         </select>
       </div>
-      <div class="col-md-4">
+      <div class="pull-left no-padding">
         {{ secondaryFilterHeading }}
-        <select (change)="onChangeSecondFilter($event.target.value)">
+        <select class="select-costing no-margin" (change)="onChangeSecondFilter($event.target.value)">
           <option *ngFor="let secondaryFilter of secondaryFilterList" [value]="secondaryFilter">{{ secondaryFilter }}</option>
         </select>
       </div>
-      <div class="col-md-4">
+      <div class="pull-left no-padding">
         Building
-        <select [(ngModel)]="building" (change)="onChangeBuilding($event.target.value)">
+        <select  class="select-costing no-margin" [(ngModel)]="building" (change)="onChangeBuilding($event.target.value)">
           <option [value]=getMaterialTakeOffElements().ALL_BUILDINGS>All Buildings</option>
           <option *ngFor="let building of buildingList" [value]="building">{{ building }}</option>
         </select>
       </div>
-    </div>
-    <div>
       <bi-material-take-off-report
         [MaterialTakeOffReport]="materialTakeOffReport">
       </bi-material-take-off-report>
+    </div>
+    <div class="col-xs-3 no-padding right-content">
+      <img src="./assets/build-info/dashboard/ads.png" style="width: 100%; margin-top: 20px;" />
     </div>
   </div>
 </section>
