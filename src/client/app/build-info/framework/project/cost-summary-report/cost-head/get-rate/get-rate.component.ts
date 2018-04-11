@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { Messages, Button, TableHeadings, Label, Headings, ValueConstant } from '../../../../../../shared/constants';
 import {
   SessionStorage, SessionStorageService,
@@ -48,10 +48,26 @@ export class GetRateComponent {
   selectedRateItem:RateItem;
   selectedRateItemIndex:number;
   type : string;
+  selectedItemName: string;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private commonService: CommonService) {
   }
+
+  getItemName(event : any) {
+
+    if (event.target.value !== '') {
+      this.selectedItemName = event.target.value;
+      event.target.value = '';
+    }
+  }
+
+  setItemName(event : any) {
+    if (event.target.value === '') {
+      event.target.value = this.selectedItemName;
+    }
+  }
+
 
   calculateTotal(choice?:string) {
     this.ratePerUnitAmount = 0;

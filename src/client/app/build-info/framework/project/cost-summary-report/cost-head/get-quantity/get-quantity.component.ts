@@ -31,7 +31,7 @@ export class GetQuantityComponent implements OnInit {
   @Input() keyQuantity : string;
 
   @Output() showWorkItemTabName = new EventEmitter<string>();
-  @Output() refreshWorkItemList = new EventEmitter();
+  @Output() closeQuantityView = new EventEmitter();
   @Output() categoriesTotalAmount = new EventEmitter<number>();
 
   projectId : string;
@@ -225,6 +225,23 @@ export class GetQuantityComponent implements OnInit {
      this.messageService.message(message);
      this.updateAllQuantity();
       }
+
+  closeQuantityTab() {
+    let quantityItemsArray = this.quantityItems;
+    for(let quantityIndex in quantityItemsArray) {
+      if((quantityItemsArray[quantityIndex].item === null || quantityItemsArray[quantityIndex].item === '' )&&
+        (quantityItemsArray[quantityIndex].nos === 0 || quantityItemsArray[quantityIndex].nos === null) ||
+        (quantityItemsArray[quantityIndex].length === 0 || quantityItemsArray[quantityIndex].length === null) ||
+        (quantityItemsArray[quantityIndex].height === 0 || quantityItemsArray[quantityIndex].height === null)) {
+
+      quantityItemsArray.splice(parseInt(quantityIndex),quantityItemsArray.length);
+      } else {
+        this.quantityItems = quantityItemsArray;
+        this.closeQuantityView.emit('');
+      }
+    }
+    this.closeQuantityView.emit('');
+  }
 
  /* deleteElement(elementType : string) {
     if(elementType === ProjectElements.QUANTITY_ITEM) {

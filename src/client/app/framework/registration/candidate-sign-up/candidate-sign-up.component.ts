@@ -5,7 +5,7 @@ import { CandidateDetail } from './../../../user/models/candidate-details';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../../shared/customvalidations/validation.service';
 import { AppSettings, CommonService, Message, MessageService, NavigationRoutes } from '../../../shared/index';
-import { API, ImagePath, Label, SessionStorage, Messages } from '../../../shared/constants';
+import { API, ImagePath, Label, SessionStorage,Messages} from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
 import { SharedService } from '../../../shared/services/shared-service';
 import { ErrorService } from '../../../shared/services/error.service';
@@ -108,6 +108,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   onRegistrationSuccess(candidate: any) {
     /*fbq('track', 'CompleteRegistration');
     this.gtag_report_conversion('AW-831903917/fTZvCPC1q3YQrbHXjAM');*/
+
     SessionStorageService.setSessionValue(SessionStorage.USER_ID, candidate.data._id);
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, this.userForm.value.email);
     SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);

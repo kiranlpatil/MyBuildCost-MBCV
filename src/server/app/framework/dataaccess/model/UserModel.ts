@@ -1,6 +1,6 @@
 import Project = require('../../../applicationProject/dataaccess/model/project/Project');
 
-interface UserModel {
+interface   UserModel {
   user_id:string;
   first_name: string;
   last_name: string;

@@ -33,6 +33,7 @@ export class QuantityDetailsComponent implements OnInit {
   workItemData: Array<WorkItem>;
   keyQuantity: string;
   quantityName: string;
+  showQuantityTab : string = null;
   showWorkItemTabName: string = null;
 
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
@@ -117,5 +118,9 @@ export class QuantityDetailsComponent implements OnInit {
   setShowWorkItemTab( tabName : string) {
     this.showWorkItemTabName = tabName;
     this.refreshWorkItemList.emit();
+  }
+  closeQuantityView() {
+    this.showQuantityTab = null;
+    this.showWorkItemTabName = null;
   }
 }

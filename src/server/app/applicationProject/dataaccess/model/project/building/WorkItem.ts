@@ -23,7 +23,6 @@ class WorkItem {
     this.amount = 0;
     this.isDirectRate = false;
     this.active = false;
-    this.unit = null;
     this.remarks = '';
   }
 }
