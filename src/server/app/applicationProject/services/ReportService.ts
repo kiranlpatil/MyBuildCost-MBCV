@@ -404,7 +404,9 @@ class ReportService {
 
         }
         logger.info("material report "+ JSON.stringify(materialTakeOffReport.secondaryView));
-        callback(null, materialTakeOffReport);
+        let responseData = {};
+        responseData[element]= materialTakeOffReport;
+        callback(null, responseData);
       }
     });
   }
