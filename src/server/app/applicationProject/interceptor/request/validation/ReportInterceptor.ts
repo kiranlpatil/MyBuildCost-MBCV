@@ -48,4 +48,23 @@ class ReportInterceptor {
       }
     });
   }
+
+  getMaterialTakeOffReport(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    ReportInterceptor.validateProjectId(projectId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        }
+        next();
+      }
+    });
+  }
 }export = ReportInterceptor;

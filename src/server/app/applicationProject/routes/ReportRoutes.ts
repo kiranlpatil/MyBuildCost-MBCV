@@ -49,6 +49,11 @@ class ReportRoutes {
     router.get('/:reportType/project/:projectId/material/filters/list', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, this.reportRequestValidator.getMaterialFilters, controller.getMaterialFilters,
       this._responseInterceptor.exit);
+
+    //Provide MaterialTakeOff Report
+    router.post('/:reportType/project/:projectId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      this.reportRequestValidator.getMaterialTakeOffReport, controller.getMaterialTakeOffReport, this._responseInterceptor.exit);
+
     return router;
   }
 }

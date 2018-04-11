@@ -122,5 +122,28 @@ class ReportController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+
+  getMaterialTakeOffReport(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Report Controller, getMaterialTakeOffReport has been hit');
+      let reportService = new ReportService();
+      let user = req.user;
+      let projectId =  req.params.projectId;
+      let elementWiseReport: string = req.body.elementWiseReport;
+      let element: string = req.body.element;
+      let building: string = req.body.building;
+
+      reportService.getMaterialTakeOffReport( projectId, building, elementWiseReport, element, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get getMaterialTakeOffReport success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 export  = ReportController;
