@@ -55,17 +55,16 @@ export class MaterialTakeoffComponent implements OnInit {
   }
 
   extractList(list : any) {
-    this.buildingList = list.buildingList;
-    this.building = this.buildingList[0];
+    this.groupBy = MaterialTakeOffElements.COST_HEAD_WISE;
 
     this.costHeadList = list.costHeadList;
+    this.materialList = list.materialList;
     this.secondaryFilterHeading = MaterialTakeOffElements.COST_HEAD;
     this.secondaryFilterList = this.costHeadList;
     this.secondaryFilter = this.costHeadList[0];
 
-    this.groupBy = MaterialTakeOffElements.COST_HEAD_WISE;
-
-    this.materialList = list.materialList;
+    this.buildingList = list.buildingList;
+    this.building = this.buildingList[0];
 
     this.buildMaterialTakeOffReport(this.groupBy, this.secondaryFilter, this.building);
 
@@ -76,9 +75,11 @@ export class MaterialTakeoffComponent implements OnInit {
     if(this.groupBy === MaterialTakeOffElements.COST_HEAD_WISE) {
       this.secondaryFilterList = this.costHeadList;
       this.secondaryFilterHeading = MaterialTakeOffElements.COST_HEAD;
+      this.secondaryFilter = this.costHeadList[0];
     } else {
       this.secondaryFilterList = this.materialList;
       this.secondaryFilterHeading = MaterialTakeOffElements.MATERIAL;
+      this.secondaryFilter = this.materialList[0];
     }
 
     this.buildMaterialTakeOffReport(this.groupBy, this.secondaryFilter, this.building);
@@ -103,7 +104,8 @@ export class MaterialTakeoffComponent implements OnInit {
     if(groupBy === MaterialTakeOffElements.COST_HEAD_WISE && building === MaterialTakeOffElements.ALL_BUILDINGS) {
       this.costHeadWiseAllBuildings();
     } else if(groupBy === MaterialTakeOffElements.COST_HEAD_WISE && building !== MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.costHeadWiseSingleBuilding();
+      this.getMaterialTakeOffOfCostHeadWiseSingleBuilding( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
+        this.secondaryFilter, this.building);
     } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building === MaterialTakeOffElements.ALL_BUILDINGS) {
       this.materialWiseAllBuildings();
     } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building !== MaterialTakeOffElements.ALL_BUILDINGS) {
@@ -179,209 +181,6 @@ export class MaterialTakeoffComponent implements OnInit {
                   "columnTwo": 435,
                   "columnThree": "BAG",
                   "subContent": {}
-                }
-
-              },
-              "footer": {
-                "columnOne": "Total",
-                "columnTwo": 878,
-                "columnThree": "BAG"
-              }
-
-            }
-          }
-        }
-
-      }
-    };
-  }
-
-  costHeadWiseSingleBuilding() {
-    this.materialTakeOffReport = {
-      "RCC": {
-        "header": "Build1",
-        "secondaryView": {
-          "cement": {
-            "header": "3456 Bags",
-            "table": {
-              "headers": {
-                "columnOne": "Item",
-                "columnTwo": "Quantity",
-                "columnThree": "Unit"
-              },
-              "content": {
-                "WorkItem 1": {
-                  "columnOne": "WorkItem 1",
-                  "columnTwo": 435,
-                  "columnThree": "BAG",
-                  "subContent":  {
-                    "1st Floor": {
-                      "columnOne": "1st Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "2nd Floor": {
-                      "columnOne": "2nd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "3rd Floor": {
-                      "columnOne": "3rd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    }
-                  }
-                },
-                "WorkItem 2": {
-                  "columnOne": "WorkItem 2",
-                  "columnTwo": 865,
-                  "columnThree": "BAG",
-                  "subContent":  {
-                    "1st Floor": {
-                      "columnOne": "1st Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "2nd Floor": {
-                      "columnOne": "2nd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "3rd Floor": {
-                      "columnOne": "3rd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    }
-                  }
-                },
-                "WorkItem 3": {
-                  "columnOne": "WorkItem 4",
-                  "columnTwo": 363,
-                  "columnThree": "BAG",
-                  "subContent":  {
-                    "1st Floor": {
-                      "columnOne": "1st Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "2nd Floor": {
-                      "columnOne": "2nd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "3rd Floor": {
-                      "columnOne": "3rd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    }
-                  }
-                },
-                "WorkItem 4": {
-                  "columnOne": "WorkItem 4",
-                  "columnTwo": 87,
-                  "columnThree": "BAG",
-                  "subContent":  {
-                    "1st Floor": {
-                      "columnOne": "1st Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "2nd Floor": {
-                      "columnOne": "2nd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "3rd Floor": {
-                      "columnOne": "3rd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    }
-                  }
-                }
-
-
-              },
-              "footer": {
-                "columnOne": "Total",
-                "columnTwo": 878,
-                "columnThree": "BAG"
-              }
-            }
-          },
-          "Sand": {
-            "header": "8964 Bags",
-            "table": {
-              "headers": {
-                "columnOne": "Item",
-                "columnTwo": "Quantity",
-                "columnThree": "Unit"
-              },
-              "content": {
-                "WorkItem A": {
-                  "columnOne": "WorkItem A",
-                  "columnTwo": 63,
-                  "columnThree": "BAG",
-                  "subContent":  {
-                    "1st Floor": {
-                      "columnOne": "1st Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "2nd Floor": {
-                      "columnOne": "2nd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "3rd Floor": {
-                      "columnOne": "3rd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    }
-                  }
-                },
-                "WorkItem B": {
-                  "columnOne": "WorkItem B",
-                  "columnTwo": 78,
-                  "columnThree": "BAG",
-                  "subContent":  {
-                    "1st Floor": {
-                      "columnOne": "1st Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "2nd Floor": {
-                      "columnOne": "2nd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "3rd Floor": {
-                      "columnOne": "3rd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    }
-                  }
-                },
-                "WorkItem C": {
-                  "columnOne": "WorkItem C",
-                  "columnTwo": 54,
-                  "columnThree": "BAG",
-                  "subContent":  {
-                    "1st Floor": {
-                      "columnOne": "1st Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "2nd Floor": {
-                      "columnOne": "2nd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    },
-                    "3rd Floor": {
-                      "columnOne": "3rd Floor",
-                      "columnTwo": 32,
-                      "columnThree": "BAG"
-                    }
-                  }
                 }
 
               },
@@ -561,5 +360,20 @@ export class MaterialTakeoffComponent implements OnInit {
         }
       }
     };
+  }
+
+  getMaterialTakeOffOfCostHeadWiseSingleBuilding(elementWiseReport : string, element : string, building : string) {
+    this.materialTakeoffService.getMaterialTakeOffReport(this.projectId, elementWiseReport, element, building).subscribe(
+      materialTakeOffReport => this.onGetMaterialTakeOffReportSuccess(materialTakeOffReport),
+      error => this.onGetMaterialTakeOffReportFailure(error)
+    );
+  }
+
+  onGetMaterialTakeOffReportSuccess(materialTakeOffReport : any) {
+    this.materialTakeOffReport = materialTakeOffReport;
+  }
+
+  onGetMaterialTakeOffReportFailure(error : any) {
+    console.log(error);
   }
 }
