@@ -47,6 +47,7 @@ export class GetRateComponent {
   arrayOfRateItems: Array<RateItem>;
   selectedRateItem:RateItem;
   selectedRateItemIndex:number;
+  selectedRateItemKey : string;
   type : string;
   selectedItemName: string;
 
@@ -213,9 +214,10 @@ export class GetRateComponent {
     this.previousTotalQuantity = previousTotalQuantity;
   }
 
-  getRateItemsByOriginalName(rateItem: any, index:number) {
+  getRateItemsByOriginalName(rateItem: any, rateItemKey : string, index:number) {
     this.selectedRateItem = rateItem;
     this.selectedRateItemIndex = index;
+    this.selectedRateItemKey = rateItemKey;
 
     this.costSummaryService.getRateItemsByOriginalName( this.baseUrl,rateItem.originalItemName).subscribe(
       rateItemsData => this.onGetRateItemsByOriginalNameSuccess(rateItemsData.data),
@@ -228,8 +230,12 @@ export class GetRateComponent {
 
     for(let rateItemData of rateItemsData) {
       if(rateItemData.itemName === this.selectedRateItem.itemName) {
-         this.rate.rateItems[this.selectedRateItemIndex].rate = rateItemData.rate;
-        this.calculateTotal();
+         for(let rateItem of this.rate.rateItems) {
+           if(rateItem.type === this.selectedRateItemKey && rateItem.itemName === this.selectedRateItem.itemName) {
+             rateItem.rate = rateItemData.rate;
+             this.calculateTotal();
+           }
+         }
       }
     }
     for(let workItemData of this.workItemsList) {
