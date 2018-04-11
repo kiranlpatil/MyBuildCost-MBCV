@@ -35,7 +35,11 @@
   padding: 0 0 10px;
   text-align: left;
 }
-
+.cost-summary-row-list {
+  .text-center {
+    text-align: center;
+  }
+}
 .collapse-items {
   border-bottom: 1px solid $clone-border;
   float: left;
@@ -168,6 +172,17 @@
     background: $white;
     border: 0;
     color: $heading;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .left-content {
+    padding-right: 10px;
+    width: 100%;
+  }
+
+  .right-content {
+    display: none;
   }
 }
 

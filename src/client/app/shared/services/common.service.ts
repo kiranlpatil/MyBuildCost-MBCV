@@ -35,8 +35,7 @@ export class CommonService {
         }
         categoryData.amount = categoryTotalAmount;
       }
-      categoryDetailsTotalAmount = parseFloat((categoryDetailsTotalAmount + categoryData.amount
-      ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      categoryDetailsTotalAmount = Math.round(categoryDetailsTotalAmount + categoryData.amount);
     }
     return categoryDetailsTotalAmount;
   }
@@ -59,7 +58,7 @@ export class CommonService {
   }
 
   calculateAmountOfWorkItem(totalQuantity : number, totalRate : number) {
-    return this.decimalConversion(totalQuantity * totalRate);
+    return Math.round(totalQuantity * totalRate);
   }
 
   decimalConversion(value : number) {

@@ -9,6 +9,7 @@ class WorkItem {
   unit: string;
   rate: Rate;
   systemRate: Rate;
+  isDirectRate : boolean;
   amount: number;
   remarks: string;
   active: boolean;
@@ -20,8 +21,8 @@ class WorkItem {
     this.rate = new Rate();
     this.systemRate = new Rate();
     this.amount = 0;
+    this.isDirectRate = false;
     this.active = false;
-    this.unit = null;
     this.remarks = '';
   }
 }

@@ -4,7 +4,7 @@ import { RateItem } from './rate-item';
 export class Rate {
   rateFromRateAnalysis: number;
   total: number;
-  isEstimated : boolean
+  isEstimated : boolean;
   quantity: number;
   unit :string;
   imageURL: string;

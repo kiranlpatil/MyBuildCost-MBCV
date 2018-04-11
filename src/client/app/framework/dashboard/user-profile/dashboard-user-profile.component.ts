@@ -9,7 +9,8 @@ import { SessionStorage, SessionStorageService, Message, Messages, MessageServic
 @Component({
   moduleId: module.id,
   selector: 'dashboard-user-profile',
-  templateUrl: 'dashboard-user-profile.component.html'
+  templateUrl: 'dashboard-user-profile.component.html',
+  styleUrls: ['dashboard-user-profile.component.css'],
 })
 
 export class DashboardProfileComponent implements OnInit {

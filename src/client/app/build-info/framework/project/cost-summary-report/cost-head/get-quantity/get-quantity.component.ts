@@ -31,7 +31,7 @@ export class GetQuantityComponent implements OnInit {
   @Input() keyQuantity : string;
 
   @Output() showWorkItemTabName = new EventEmitter<string>();
-  @Output() refreshWorkItemList = new EventEmitter();
+  @Output() closeQuantityView = new EventEmitter();
   @Output() categoriesTotalAmount = new EventEmitter<number>();
 
   projectId : string;
@@ -100,33 +100,11 @@ export class GetQuantityComponent implements OnInit {
     this.quantityItems = quantityItems;
 
     for(let quantityIndex in this.quantityItems) {
+      var number = this.quantityItems[quantityIndex].nos;
+      var length = this.quantityItems[quantityIndex].length;
+      var height = this.quantityItems[quantityIndex].height;
 
-      if (this.quantityItems[quantityIndex].length === undefined || this.quantityItems[quantityIndex].length === 0 ||
-        this.quantityItems[quantityIndex].length === null) {
-
-        var multiplier = this.quantityItems[quantityIndex].height;
-        var multiplicand = this.quantityItems[quantityIndex].breadth;
-
-      } else if (this.quantityItems[quantityIndex].height === undefined || this.quantityItems[quantityIndex].height === 0 ||
-        this.quantityItems[quantityIndex].height === null) {
-
-        multiplier = this.quantityItems[quantityIndex].length;
-        multiplicand = this.quantityItems[quantityIndex].breadth;
-
-      } else if (this.quantityItems[quantityIndex].breadth === undefined || this.quantityItems[quantityIndex].breadth === 0 ||
-        this.quantityItems[quantityIndex].breadth === null) {
-
-        multiplier = this.quantityItems[quantityIndex].length;
-        multiplicand = this.quantityItems[quantityIndex].height;
-
-      } else {
-
-        multiplier = this.quantityItems[quantityIndex].length;
-        multiplicand = this.quantityItems[quantityIndex].breadth;
-
-      }
-
-      this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion(multiplier * multiplicand);
+      this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion( number * length * height );
       this.quantityTotal = this.commonService.decimalConversion(this.quantityTotal +
         this.quantityItems[quantityIndex].quantity);
       }
@@ -139,6 +117,7 @@ export class GetQuantityComponent implements OnInit {
     this.updateQuantity('updateBreadth');
     this.updateQuantity('updateHeight');
   }
+
   addQuantityItem() {
     let quantity = new QuantityItem();
     quantity.item = '';
@@ -153,7 +132,10 @@ export class GetQuantityComponent implements OnInit {
   }
 
   updateQuantityItem(quantityItems : Array<QuantityItem>) {
-    if(this.validateQuantityIteamName(quantityItems)) {
+
+    if(this.validateQuantityItem(quantityItems) && (this.keyQuantity !== ''
+        && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
+
       let quantityObj : QuantityDetails = new QuantityDetails();
       quantityObj.name = this.keyQuantity;
       quantityObj.quantityItems = quantityItems;
@@ -167,14 +149,21 @@ export class GetQuantityComponent implements OnInit {
     } else {
       var message = new Message();
       message.isError = false;
-      message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
+      if(this.keyQuantity !== null && this.keyQuantity !== undefined) {
+        message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
+      } else {
+        message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
+      }
       this.messageService.message(message);
     }
   }
 
-  validateQuantityIteamName(quantityItems : Array<QuantityItem>) {
+  validateQuantityItem(quantityItems : Array<QuantityItem>) {
     for(let quantityItemData of quantityItems) {
-      if(quantityItemData.item === '' || quantityItemData.item === undefined) {
+      if((quantityItemData.item === '' || quantityItemData.item === undefined ||  quantityItemData.item.trim() === '') ||
+        (quantityItemData.nos === undefined || quantityItemData.nos === null) ||
+        (quantityItemData.length === undefined || quantityItemData.length === null) ||
+        (quantityItemData.height === undefined || quantityItemData.height === null)) {
         return false;
       }
     }
@@ -236,6 +225,23 @@ export class GetQuantityComponent implements OnInit {
      this.messageService.message(message);
      this.updateAllQuantity();
       }
+
+  closeQuantityTab() {
+    let quantityItemsArray = this.quantityItems;
+    for(let quantityIndex in quantityItemsArray) {
+      if((quantityItemsArray[quantityIndex].item === null || quantityItemsArray[quantityIndex].item === '' )&&
+        (quantityItemsArray[quantityIndex].nos === 0 || quantityItemsArray[quantityIndex].nos === null) ||
+        (quantityItemsArray[quantityIndex].length === 0 || quantityItemsArray[quantityIndex].length === null) ||
+        (quantityItemsArray[quantityIndex].height === 0 || quantityItemsArray[quantityIndex].height === null)) {
+
+      quantityItemsArray.splice(parseInt(quantityIndex),quantityItemsArray.length);
+      } else {
+        this.quantityItems = quantityItemsArray;
+        this.closeQuantityView.emit('');
+      }
+    }
+    this.closeQuantityView.emit('');
+  }
 
  /* deleteElement(elementType : string) {
     if(elementType === ProjectElements.QUANTITY_ITEM) {

@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {Messages, Button, TableHeadings, Label, Headings, ValueConstant} from '../../../../../../shared/constants';
+import {Component, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
+import { Messages, Button, TableHeadings, Label, Headings, ValueConstant } from '../../../../../../shared/constants';
 import {
   SessionStorage, SessionStorageService,
   Message, MessageService
@@ -28,6 +28,10 @@ export class GetRateComponent {
   @Input() workItemRateAnalysisId : number;
   @Input() workItemsList : Array<WorkItem>;
   @Input() totalAmount: number;
+  @Input() ratePerUnitAmount : number;
+  @Input() totalAmountOfMaterial: number;
+  @Input() totalAmountOfLabour: number;
+  @Input() totalAmountOfMaterialAndLabour: number;
   @Input() baseUrl : string;
   @Input() rateView: string;
   @Input() disableRateField: boolean;
@@ -35,6 +39,7 @@ export class GetRateComponent {
   @Output() categoriesTotalAmount = new EventEmitter<number>();
   @Output() showWorkItemTabName = new EventEmitter<string>();
   @Output() refreshCategoryList = new EventEmitter();
+  @Output() closeRateView = new EventEmitter();
 
   quantityIncrement: number = 1;
   previousTotalQuantity: number = 1;
@@ -42,50 +47,109 @@ export class GetRateComponent {
   arrayOfRateItems: Array<RateItem>;
   selectedRateItem:RateItem;
   selectedRateItemIndex:number;
+  type : string;
+  selectedItemName: string;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private commonService: CommonService) {
   }
 
-  calculateTotal(choice?:string) {
-    this.totalAmount = 0;
+  getItemName(event : any) {
 
-    for (let i = 0; i < this.rate.rateItems.length; i++) {
-
-      if(choice === 'changeTotalQuantity') {
-        this.rate.rateItems[i].quantity = this.commonService.decimalConversion(this.rate.rateItems[i].quantity *
-          this.quantityIncrement);
-      }
-
-      this.rate.rateItems[i].totalAmount = this.commonService.decimalConversion(this.rate.rateItems[i].quantity*
-        this.rate.rateItems[i].rate);
-
-      this.totalAmount = this.commonService.decimalConversion(this.totalAmount +
-        this.rate.rateItems[i].totalAmount);
-
+    if (event.target.value !== '') {
+      this.selectedItemName = event.target.value;
+      event.target.value = '';
     }
-
-this.rate.total = this.commonService.decimalConversion(this.totalAmount / this.rate.quantity);
   }
 
+  setItemName(event : any) {
+    if (event.target.value === '') {
+      event.target.value = this.selectedItemName;
+    }
+  }
+
+
+  calculateTotal(choice?:string) {
+    this.ratePerUnitAmount = 0;
+    this.totalAmount = 0;
+    this.totalAmountOfLabour = 0;
+    this.totalAmountOfMaterial=0;
+    this.totalAmountOfMaterialAndLabour = 0;
+
+    for (let rateItemsIndex in this.rate.rateItems) {
+      if(choice === 'changeTotalQuantity') {
+        this.rate.rateItems[rateItemsIndex].quantity = this.commonService.decimalConversion(this.rate.rateItems[rateItemsIndex].quantity *
+          this.quantityIncrement);
+      }
+      this.type = this.rate.rateItems[rateItemsIndex].type;
+        switch (this.type) {
+          case 'M' :
+              this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(
+                this.rate.rateItems[rateItemsIndex].quantity * this.rate.rateItems[rateItemsIndex].rate);
+
+              this.totalAmountOfMaterial = Math.round(this.totalAmountOfMaterial + this.rate.rateItems[rateItemsIndex].totalAmount);
+
+               break;
+
+          case 'L' :
+              this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(
+                this.rate.rateItems[rateItemsIndex].quantity * this.rate.rateItems[rateItemsIndex].rate);
+
+              this.totalAmountOfLabour = Math.round(this.totalAmountOfLabour + this.rate.rateItems[rateItemsIndex].totalAmount);
+
+              break;
+
+          case 'M + L' :
+              this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(
+                this.rate.rateItems[rateItemsIndex].quantity * this.rate.rateItems[rateItemsIndex].rate);
+
+              this.totalAmountOfMaterialAndLabour = Math.round(this.totalAmountOfMaterialAndLabour +
+                 this.rate.rateItems[rateItemsIndex].totalAmount);
+
+              break;
+              }
+      this.totalAmount = this.totalAmountOfMaterial + this.totalAmountOfLabour +this.totalAmountOfMaterialAndLabour;
+        this.totalAmount = Math.round(this.totalAmount);
+    }
+    this.ratePerUnitAmount = this.commonService.decimalConversion(this.totalAmount / this.rate.quantity);
+
+  }
   updateRate(rateItemsArray: Rate) {
-    this.loaderService.start();
-     let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-    let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
+    if (this.validateRateItem(rateItemsArray.rateItems)) {
+      this.loaderService.start();
+      let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+      let workItemId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
 
-    let rate = new Rate();
-    rate.rateFromRateAnalysis = rateItemsArray.rateFromRateAnalysis;
-    rate.total = this.commonService.decimalConversion(rateItemsArray.total);
-    rate.quantity = rateItemsArray.quantity;
-    rate.unit = rateItemsArray.unit;
-    rate.rateItems = rateItemsArray.rateItems;
-    rate.imageURL=rateItemsArray.imageURL;
-    rate.notes=rateItemsArray.notes;
+      let rate = new Rate();
+      rate.rateFromRateAnalysis = rateItemsArray.rateFromRateAnalysis;
+      rate.total = this.commonService.decimalConversion(rateItemsArray.total);
+      rate.quantity = rateItemsArray.quantity;
+      rate.unit = rateItemsArray.unit;
+      rate.rateItems = rateItemsArray.rateItems;
+      rate.imageURL = rateItemsArray.imageURL;
+      rate.notes = rateItemsArray.notes;
 
-    this.costSummaryService.updateRate( this.baseUrl, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
-      success => this.onUpdateRateSuccess(success),
-      error => this.onUpdateRateFailure(error)
-    );
+      this.costSummaryService.updateRate(this.baseUrl, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
+        success => this.onUpdateRateSuccess(success),
+        error => this.onUpdateRateFailure(error)
+      );
+    } else {
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
+      this.messageService.message(message);
+    }
+  }
+
+  validateRateItem(rateItems : Array<RateItem>) {
+    for(let rateItemData of rateItems) {
+      if((rateItemData.itemName === null || rateItemData.itemName === undefined || rateItemData.itemName.trim() === '') ||
+        (rateItemData.rate === undefined || rateItemData.rate === null) ||
+        (rateItemData.quantity === undefined || rateItemData.quantity === null)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   onUpdateRateSuccess(success : string) {
@@ -96,8 +160,7 @@ this.rate.total = this.commonService.decimalConversion(this.totalAmount / this.r
 
     for(let workItemData of this.workItemsList) {
       if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
-        workItemData.rate.total = this.commonService.decimalConversion(this.totalAmount /
-          workItemData.rate.quantity);
+        workItemData.rate.total = this.ratePerUnitAmount;
         if(workItemData.rate.total !== 0) {
           workItemData.rate.isEstimated = true;
           if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
@@ -174,6 +237,10 @@ this.rate.total = this.commonService.decimalConversion(this.totalAmount / this.r
         workItemData.rate = this.rate;
       }
     }
+  }
+
+  closeRateTab() {
+    this.closeRateView.emit();
   }
 
   onGetRateItemsByOriginalNameFailure(error: any) {

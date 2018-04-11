@@ -106,10 +106,11 @@
         transition: opacity 0.5s ease-in-out;
       }
 
-      img {
+      .calculator {
         position: absolute;
-        right: 7px;
-        top: 9px;
+        right: -14px;
+        top: 6px;
+        width: 12px;
       }
     }
 
@@ -121,7 +122,12 @@
       td > .edit-field {
         input {
           background: url('../assets/build-info/dashboard/edit.png') no-repeat 95% 46%;
-          border: 1px solid $border-color;
+          border: 1px solid $gray;
+        }
+
+        input[readonly] {
+          background: url('../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
+          border: 1px solid transparent;
         }
 
       }

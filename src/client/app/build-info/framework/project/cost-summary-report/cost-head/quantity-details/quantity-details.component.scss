@@ -1,0 +1,86 @@
+@import '../../../../../../../css/common';
+
+.table-categories {
+  border-bottom: 1px solid $border-color;
+
+  tr {
+    display: inline-block;
+    width: 100%;
+  }
+  thead > tr {
+    border-top: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
+  }
+
+  tr > td,
+  tr > th {
+    float: left;
+
+    &:nth-child(1) {
+      width: 349px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+      width: 110px;
+    }
+
+    &:nth-child(3) {
+      width: 80px;
+    }
+
+    &:last-child {
+      vertical-align: top;
+    }
+    .edit-field {
+      width: auto;
+    }
+  }
+  tr > td {
+    &:nth-child(5) {
+      padding-top: 10px;
+    }
+
+    .edit-field {
+      margin: 2px;
+    }
+  }
+  .quantity-name {
+    box-shadow: none;
+    font-size: 12px;
+    height: 26px;
+    margin: 2px 0;
+    padding: 3px;
+  }
+  .hide-hover {
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .show-embedded-table {
+    display: block;
+    float: right !important;
+    margin-right: 5px;
+    padding: 0;
+    width: calc(100% - 356px) !important;
+  }
+
+  .delete-Quantity-details {
+    cursor: pointer;
+    width: 20px;
+  }
+
+  .edit-cost-null {
+    display: inline-block;
+    padding: 5px;
+  }
+
+  .edit-cost {
+    border-bottom: 1px solid $body-text;
+    display: inline-block;
+    padding: 5px;
+  }
+}

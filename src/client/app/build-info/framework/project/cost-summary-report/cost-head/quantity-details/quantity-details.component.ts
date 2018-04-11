@@ -7,6 +7,7 @@ import * as lodsh from 'lodash';
 import { QuantityDetails } from '../../../../model/quantity-details';
 import { Message, MessageService, SessionStorage, SessionStorageService } from '../../../../../../shared/index';
 import { CostSummaryService } from '../../cost-summary.service';
+import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 
 @Component({
   moduleId: module.id,
@@ -28,15 +29,16 @@ export class QuantityDetailsComponent implements OnInit {
   @Output() categoriesTotalAmount = new EventEmitter<number>();
   @Output() refreshWorkItemList = new EventEmitter();
 
-    quantityItemsArray:any = {};
-    workItemData :Array<WorkItem>;
-    keyQuantity:string;
-    quantityName:string;
-    quantityIndex:number;
-    showWorkItemTabName: string=null;
+  quantityItemsArray: any = {};
+  workItemData: Array<WorkItem>;
+  keyQuantity: string;
+  quantityName: string;
+  showQuantityTab : string = null;
+  showWorkItemTabName: string = null;
 
-      constructor(private costSummaryService : CostSummaryService, private messageService:MessageService) {
-      }
+  constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
+              private loaderService: LoaderService) {
+  }
 
    ngOnInit() {
     this.workItemData = this.workItem;
@@ -58,50 +60,67 @@ export class QuantityDetailsComponent implements OnInit {
     }
   }
 
-  deleteQuantityByName(quantityName: string,quantityIndex:number) {
-
+  setQuantityNameForDelete(quantityName: string, quantityIndex: number) {
     this.quantityName = quantityName;
-    this.quantityIndex = quantityIndex;
-    let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-
-    this.costSummaryService.deleteQuantityByName(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
-      this.workItemRateAnalysisId, quantityName).subscribe(
-      success => this.onDeleteQuantityByNameSuccess(success),
-      error => this.onDeleteQuantityByNameFailure(error)
-    );
   }
 
-  onDeleteQuantityByNameSuccess(success: any) {
-        for(let quantityData of this.quantityDetails) {
-          if(quantityData.name === this.quantityName) {
-            this.quantityDetails.splice(this.quantityIndex);
-            break;
-          }
-          break;
-        }
-       var message = new Message();
-       message.isError = false;
-       message.custom_message = Messages.MSG_SUCCESS_DELETE_QUANTITY_ITEM;
-       this.messageService.message(message);
-       this.refreshWorkItemList.emit(this.categoryRateAnalysisId);
-  }
-
-  onDeleteQuantityByNameFailure(error: any) {
-    console.log('Delete Quantity error');
+  deleteQuantityDetailsByName() {
+    if(this.quantityName !== null && this.quantityName !== undefined && this.quantityName !== '') {
+      this.loaderService.start();
+      let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+      this.costSummaryService.deleteQuantityDetailsByName(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
+        this.workItemRateAnalysisId, this.quantityName).subscribe(
+        success => this.onDeleteQuantityDetailsByNameSuccess(success),
+        error => this.onDeleteQuantityDetailsByNameFailure(error)
+      );
+    } else {
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
+      this.messageService.message(message);
     }
+  }
+
+  onDeleteQuantityDetailsByNameSuccess(success: any) {
+    for (let quantityIndex in this.quantityDetails) {
+      if (this.quantityDetails[quantityIndex].name === this.quantityName) {
+        this.quantityDetails.splice(parseInt(quantityIndex),1);
+        break;
+      }
+    }
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_DELETE_QUANTITY_DETAILS;
+    this.messageService.message(message);
+    this.refreshWorkItemList.emit();
+    this.loaderService.stop();
+  }
+
+  onDeleteQuantityDetailsByNameFailure(error: any) {
+    console.log('Delete Quantity error');
+  }
 
 
-  onInputKeyQuantity(keyQuantity:string) {
-    this.keyQuantity=keyQuantity;
+  changeQuantityName(keyQuantity: string) {
+    if(keyQuantity !== null && keyQuantity !== undefined && keyQuantity !== '') {
+      this.keyQuantity = keyQuantity;
+    }
   }
 
   getLabel() {
     return Label;
   }
+
   getButton() {
     return Button;
   }
+
   setShowWorkItemTab( tabName : string) {
     this.showWorkItemTabName = tabName;
+    this.refreshWorkItemList.emit();
+  }
+  closeQuantityView() {
+    this.showQuantityTab = null;
+    this.showWorkItemTabName = null;
   }
 }

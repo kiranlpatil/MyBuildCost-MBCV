@@ -96,6 +96,7 @@
       background: $jagged-ice;
       font-size: 11px;
       font-weight: bold;
+      text-align: center;
       width: 98px;
       label {
         font-size: 11px;
@@ -124,6 +125,20 @@
     float: right;
     padding: 3px 24px;
   }
+
+  .cancel {
+    float: right;
+    margin-top: 9px;
+    background: none;
+    border: none;
+    color: $persian-green;
+
+    &:hover,
+    &:active,
+    &:focus {
+      @extend .cancel;
+    }
+  }
 }
 
 .arrow-up {
@@ -139,7 +154,7 @@
 
 .get-quantity-section:after, .get-quantity-section:before {
   bottom: 100%;
-  left: 28%;
+  left: 10%;
   border: solid transparent;
   content: " ";
   height: 0;

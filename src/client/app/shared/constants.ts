@@ -23,10 +23,12 @@ export class Messages {
   //Registraion Success messages
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New OTP (One Time Password) has been sent to your registered mobile number';
-  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP: string = 'New OTP (One Time Password) has been sent to your new mobile number';
+  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP: string = 'New OTP (One Time Password) has' +
+    ' been sent to your new mobile number';
   public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account.';
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.Kindly login';
-  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'A verification email is sent to your new email id. Current email id will be active till you verify new email id.';
+  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'A verification email is sent to your new email id. ' +
+    'Current email id will be active till you verify new email id.';
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email for password reset has been sent successfully on your registered email id.';
   public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully.';
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
@@ -102,6 +104,10 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED = 'Enter no. of lifts';
   public static MSG_ERROR_VALIDATION_ALPHABATES = 'Enter alphabates only';
 
+  public static MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION = 'Add at least one Apartment Configuration';
+  public static MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS = 'The value of total number of floors should be more than number of parking floors';
+
+
   public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and we will send you a verification code on mobile' +
     ' number you have entered.';
   public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new account email address and we will send you a link to reset your email' +
@@ -137,7 +143,8 @@ export class Messages {
   public static MSG_EMAIL_VERIFICATION_HEADING = 'Your email is updated successfully.';
   public static MSG_EMAIL_VERIFICATION_MESSAGE = 'Kindly click on SIGN IN to use BuildInfo.';
   public static MSG_ACTIVATE_USER_HEADING = 'Congratulations! Welcome To BuildInfo.';
-  public static MSG_ACTIVATE_USER_SUB_HEADING = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
+  public static MSG_ACTIVATE_USER_SUB_HEADING = 'You can now find candidates using the highly accurate,' +
+    ' simpler, faster and powerful solution.';
   public static MSG_ACTIVATE_USER_MESSAGE = 'Your account has been created successfully. Kindly click Sign In.';
   public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
     'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s' +
@@ -159,9 +166,9 @@ export class Messages {
   public static MSG_SUCCESS_CLONED_BUILDING_DETAILS: string = 'Your building cloned successfully.';
   public static MSG_SUCCESS_UPDATE_PROJECT_DETAILS: string = 'Your project updated successfully.';
   public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details updated successfully.';
-  public static MSG_SUCCESS_DELETE_BUILDING: string = 'Your building deleted successfully.';
+  public static MSG_SUCCESS_DELETE_BUILDING: string = 'Building deleted successfully.';
   public static MSG_SUCCESS_ADD_COSTHEAD: string = 'Costhead added successfully.';
-  public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Your costhead deleted successfully.';
+  public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Costhead deleted successfully.';
   public static MSG_SUCCESS_DELETE_ITEM: string = 'Your item deleted successfully.';
   public static MSG_SUCCESS_UPDATE_RATE: string = 'Rate updated.';
   public static MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL: string = 'Quantity should not zero or null.';
@@ -170,11 +177,13 @@ export class Messages {
   public static MSG_SUCCESS_ADD_CATEGORY: string = 'Category added successfully.';
   public static MSG_SUCCESS_DELETE_CATEGORY: string = 'Category deleted successfully.';
   public static MSG_SUCCESS_DELETE_QUANTITY_ITEM: string = 'Quantity item deleted successfully.';
+  public static MSG_SUCCESS_DELETE_QUANTITY_DETAILS: string = 'Quantity Details deleted successfully.';
   public static MSG_ALREADY_ADDED_ALL_CATEGORIES: string = 'Already added all Categories.';
   public static MSG_SUCCESS_ADD_WORKITEM: string = 'Workitem added successfully.';
   public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
   public static MSG_SUCCESS_DELETE_WORKITEM: string = 'Your workitem deleted successfully.';
   public static MSG_SUCCESS_UPDATE_THUMBRULE_RATE_COSTHEAD: string = 'Thumbrule rate for CostHead updated successfully.';
+  public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM : string = 'Direct rate for workitem updated successfully.';
 
   //Quantity view required fields
   public static MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED = 'Enter item';
@@ -184,8 +193,9 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_HEIGHT_REQUIRED = 'Enter height';
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
-  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Some where Quantity field is blank. Please fill it';
-  public static LOGIN_INFO: string = 'Enter your details Below.';
+  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields can not be empty';
+  public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Quantity details name is required';
+  public static LOGIN_INFO: string = 'Enter your details below';
 }
 
 export class NavigationRoutes {
@@ -284,6 +294,7 @@ export class API {
   public static WORKITEM_ALL = 'workitem/all';
   public static QUANTITY = 'quantity';
   public static ITEM = 'item';
+  public static DIRECT = 'direct';
   public static SYNC_RATE_ANALYSIS = 'syncWithRateAnalysis';
 
   public static THUMBRULE_RULE_RATE='report/thumbRuleRate';
@@ -365,7 +376,7 @@ export class TableHeadings {
   public static BREADTH : string = 'Breadth';
   public static HEIGHT : string = 'Height';
   public static UNIT: string = 'Unit';
-  public static RATEANALYSIS : string = 'Rate Analysis';
+  public static RATEANALYSIS : string = 'Rate Analysis/Unit';
   public static AMOUNT : string = 'Amount';
   public static COST : string = 'Cost';
   public static TOTAL: string = 'Total';
@@ -433,6 +444,8 @@ export class Label {
   public static COSTING_BY_UNIT : string = 'Costing in ';
   public static COSTING_PER_AREA : string = 'Costing per ';
   public static TOTAL : string = 'Total ';
+  public static SUBTOTAL : string = 'Sub Total';
+  public static NOTES : string = 'Notes ';
   public static BUDGETED_COST : string = 'Budgeted Cost ';
   public static ESTIMATED_COST : string = 'Estimated Cost ';
   public static COST_HEAD : string = 'Cost Head';
@@ -450,6 +463,7 @@ export class Label {
   public static WORKITEM_RATE_BY_QUANTITY_TAB : string = 'cost';
   public static WORKITEM_SYSTEM_RATE_TAB : string = 'systemRA';
   public static WORKITEM_QUANTITY_TAB : string = 'quantity';
+  public static GET_QUANTITY : string = 'Get Qty.';
   public static QUANTITY_VIEW : string = 'default';
   public static WORKITEM_DETAILED_QUANTITY_TAB : string = 'detailedQuantity';
 
@@ -474,6 +488,7 @@ export class Button {
   public static SAVE: string = 'Save';
   public static GET_AMOUNT: string = 'Estimate Cost';
   public static GET_RATE: string = 'Get Rate';
+  public static GET_QUANTITY: string = 'Get Qty.';
   public static SYSTEM_RA: string = 'System RA';
   public static ADD: string = 'Add ';
   public static ADD_MORE_DETAILS: string = 'Add More Details';
@@ -494,6 +509,7 @@ export class ProjectElements {
   public static WORK_ITEM = 'WorkItem';
   public static BUILDING = 'Building';
   public static QUANTITY_ITEM = 'Quantity Item';
+  public static QUANTITY_DETAILS = 'Quantity Details';
   public static CATEGORY = 'Category';
   public static SLAB_AREA = 'Slab Area';
   public static SALEABLE_AREA = 'Saleable Area';

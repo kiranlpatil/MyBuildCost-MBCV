@@ -8,7 +8,7 @@
     padding-bottom: 30px;
 
     .content {
-      margin-top: 55px;
+      margin-top: 25px;
     }
 
     .content > h4 {
@@ -16,4 +16,10 @@
       text-align: left;
     }
   }
+}
+
+.wrapper {
+  margin-top: 80px;
+  min-height: calc(100vh - 80px);
+  padding: 0;
 }

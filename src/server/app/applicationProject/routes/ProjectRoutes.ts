@@ -45,6 +45,12 @@ class ProjectRoutes {
     router.get('/:projectId/rates/rateItem/:originalRateItemName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.getProjectRateItemsByOriginalName, controller.getProjectRateItemsByOriginalName, this._responseInterceptor.exit);
 
+    router.get('/:projectId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getInActiveProjectCostHeads, this._responseInterceptor.exit);
+
+    router.put('/:projectId/costhead/:costHeadId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.setProjectCostHeadStatus, this._responseInterceptor.exit);
+
     /*Project- Routes: Category*/
 
     //Retrive categories for particular costhead
@@ -91,6 +97,11 @@ class ProjectRoutes {
     router.put('/:projectId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateRateOfProjectCostHeads,
       controller.updateRateOfProjectCostHeads, this._responseInterceptor.exit);
+
+    //Update DirectRate  of workItem
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/rate',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectRateOfProjectWorkItems,
+      controller.updateDirectRateOfProjectWorkItems, this._responseInterceptor.exit);
 
 
 
@@ -199,6 +210,16 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfBuildingCostHeads,
       controller.updateQuantityOfBuildingCostHeads, this._responseInterceptor.exit);
 
+    //update direct quantity Building
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfBuildingCostHeads,
+      controller.updateDirectQuantityOfBuildingWorkItems, this._responseInterceptor.exit);
+
+    //update direct quantity Project
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfProjectWorkItems,
+      controller.updateDirectQuantityOfProjectWorkItems, this._responseInterceptor.exit);
+
     //Delete quantityitem from  quantity
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.deleteQuantityOfBuildingCostHeadsByName,
@@ -213,6 +234,12 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     router.put('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateRateOfBuildingCostHeads,
       controller.updateRateOfBuildingCostHeads, this._responseInterceptor.exit);
+
+    //Update DirectRate  of workItem
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/rate',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectRateOfBuildingWorkItems,
+      controller.updateDirectRateOfBuildingWorkItems, this._responseInterceptor.exit);
+
 
     /*Building- Routes: Rate Analysis Communication*/
 

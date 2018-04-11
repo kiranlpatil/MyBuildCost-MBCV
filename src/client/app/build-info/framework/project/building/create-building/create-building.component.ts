@@ -33,21 +33,48 @@ export class CreateBuildingComponent  implements  OnInit {
   }
 
   onSubmit(buildingModel : Building) {
+    if(this.checkNumberOfFloors(buildingModel.totalNumOfFloors, buildingModel.numOfParkingFloors)) {
 
-      if((buildingModel.numOfOneBHK !== 0) || (buildingModel.numOfTwoBHK  !== 0 ) ||
-        (buildingModel.numOfThreeBHK !== 0) || (buildingModel.numOfFourBHK !== 0) || (buildingModel.numOfFiveBHK !== 0)) {
-      this.loaderService.start();
-      let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      this.buildingService.createBuilding(projectId, buildingModel)
-        .subscribe(
-          building => this.onCreateBuildingSuccess(building),
-          error => this.onCreateBuildingFailure(error));
+      if(this.checkApartmentConfiguration(buildingModel)) {
+        this.loaderService.start();
+        let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+        this.buildingService.createBuilding(projectId, buildingModel)
+          .subscribe(
+            building => this.onCreateBuildingSuccess(building),
+            error => this.onCreateBuildingFailure(error));
       } else {
-        var message = new Message();
-        message.isError = false;
-        message.custom_message = 'Add at least one Apartment Configuration';
-        this.messageService.message(message);
+          var message = new Message();
+          message.isError = false;
+          message.custom_message = Messages.MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION;
+          this.messageService.message(message);
       }
+
+    } else {
+      message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS;
+      this.messageService.message(message);
+    }
+  }
+
+  checkNumberOfFloors(totalNumOfFloors : number, numOfParkingFloors : number) {
+    if(totalNumOfFloors > numOfParkingFloors) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkApartmentConfiguration(buildingModel : Building) {
+    if((buildingModel.numOfOneBHK !== 0 && buildingModel.numOfOneBHK !== null) ||
+      (buildingModel.numOfTwoBHK  !== 0 && buildingModel.numOfTwoBHK !== null) ||
+      (buildingModel.numOfThreeBHK !== 0 && buildingModel.numOfThreeBHK !== null) ||
+      (buildingModel.numOfFourBHK !== 0 && buildingModel.numOfFourBHK !== null) ||
+      (buildingModel.numOfFiveBHK !== 0 && buildingModel.numOfFiveBHK !== null)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   onCreateBuildingSuccess(building : any) {

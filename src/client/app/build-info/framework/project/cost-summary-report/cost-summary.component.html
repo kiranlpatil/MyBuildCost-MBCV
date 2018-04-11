@@ -2,7 +2,7 @@
 <section class="wrapper">
 
   <div class="container">
-    <div class="col-sm-9 col-xs-12 padding-right30">
+    <div class="col-sm-9 col-xs-12 padding-right30 left-content">
       <div class="col-sm-5 padding-left0">
         <h5>{{ getHeadings().CONSTRUCTION_COST }}</h5>
       </div>
@@ -17,7 +17,7 @@
         </select>
       </div>
     </div>
-    <div class="col-sm-9 col-xs-12 padding-right30">
+    <div class="col-sm-9 col-xs-12 padding-right30 left-content">
       <div class="panel panel-default">
       <div class="panel-group" *ngFor="let building of buildingsReport; let i = index">
             <div class="panel-heading">
@@ -57,8 +57,8 @@
                         <div class="white-bg"></div>
                       </th>
                     </tr>
-                    <tr>
-                      <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
+                    <tr class="cost-summary-row-list">
+                      <th class="text-center"><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
                       <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
                       <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}}</span></th>
                       <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
@@ -127,11 +127,11 @@
             <table class="table table-row-spacing table-dashboard total-table">
               <tbody>
                 <tr *ngIf="(building.thumbRule && building.estimate)">
-                  <td>{{ getLabel().TOTAL }}</td>
-                  <td>{{ building.thumbRule.totalRate|number }}</td>
-                  <td><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number }}</span></td>
-                  <td>{{ building.estimate.totalRate|number }}</td>
-                  <td><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number }}</span></td>
+                  <td class="border-left">{{ getLabel().TOTAL }}</td>
+                  <td class="border-left">{{ building.thumbRule.totalRate|number }}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number }}</span></td>
+                  <td class="border-left">{{ building.estimate.totalRate|number }}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number }}</span></td>
                 </tr>
               </tbody>
             </table>
@@ -167,7 +167,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-3 no-padding">
+    <div class="col-xs-3 no-padding right-content">
       <img src="./assets/build-info/dashboard/ads.png" style="width: 100%; margin-top: 20px;" />
     </div>
   </div>

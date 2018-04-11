@@ -8,6 +8,7 @@ export class WorkItem {
   unit: string;
   rate: Rate;
   systemRate: Rate;
+  isDirectRate : boolean;
   amount: number;
   active: boolean;
   remarks: string;
@@ -18,6 +19,7 @@ export class WorkItem {
     this.quantity = new Quantity();
     this.rate = new Rate();
     this.systemRate = new Rate();
+    this.isDirectRate = false;
     this.amount = 0;
     this.unit = Units.UNIT;
     this.active=false;

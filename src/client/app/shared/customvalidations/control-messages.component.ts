@@ -10,6 +10,7 @@ import { ValidationService } from './validation.service';
 export class ControlMessagesComponent {
   @Input() control: FormControl;
   @Input() submitStatus: boolean;
+  @Input() isShowErrorMessage ?: boolean;
 
   get errorMessage() {
     for (let propertyName in this.control.errors) {
@@ -17,6 +18,9 @@ export class ControlMessagesComponent {
         return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
       }
       if (this.control.errors.hasOwnProperty(propertyName) && this.submitStatus) {
+        return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
+      }
+      if (this.control.errors.hasOwnProperty(propertyName) && this.isShowErrorMessage) {
         return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
       }
     }

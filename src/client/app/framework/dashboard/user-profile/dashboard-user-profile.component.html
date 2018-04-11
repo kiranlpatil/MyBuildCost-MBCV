@@ -1,22 +1,25 @@
 <section class="wrapper">
-  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+  <div class="inner-wrapper">
 
-    <h5>Account Details</h5>
+    <!--<h5>Account Details</h5>-->
 
-    <div class="col-sm-4 my-info">
-      <div class="description-container">
+    <div class="col-sm-12 my-info">
+      <div class="description-container clearfix">
         <div class="image-container">
-          <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
+          <!--<cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>-->
+          <p>SK</p>
         </div>
         <div class="user-name">
-          <span class="profile-name-first">{{model.first_name}}&nbsp;</span>
+          <p class="profile-name-first">{{model.first_name}}</p>
+          <p class="profile-name-first">{{model.email}}&nbsp;</p>
+          <a href="">Change Password</a>
         </div>
 
       </div>
     </div>
 
 
-    <div class="col-sm-8">
+    <div class="col-sm-12 text-left">
 
       <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form clearfix">
 
@@ -55,27 +58,29 @@
                  class="form-control clear"/>
         </div>
 
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <div class="form-group"[class.hide-list]>
+              <control-messages [control]="userForm.controls.state"></control-messages>
+              <label>{{getLabels().STATE_LABEL}}</label>
+              <input type="text" [(ngModel)]="model.state" formControlName="state" id="state"
+                     class="form-control clear"/>
+            </div>
+          </div>
 
-        <div class="form-group"[class.hide-list]>
-          <control-messages [control]="userForm.controls.state"></control-messages>
-          <label>{{getLabels().STATE_LABEL}}</label>
-          <input type="text" [(ngModel)]="model.state" formControlName="state" id="state"
-                 class="form-control clear"/>
+          <div class="col-sm-6 col-xs-12">
+            <div class="form-group"[class.hide-list]>
+              <control-messages [control]="userForm.controls.city"></control-messages>
+              <label>{{getLabels().CITY_LABEL}}</label>
+              <input type="text" [(ngModel)]="model.city" formControlName="city" id="city"
+                     class="form-control clear"/>
+            </div>
+          </div>
         </div>
-
-        <div class="form-group"[class.hide-list]>
-          <control-messages [control]="userForm.controls.city"></control-messages>
-          <label>{{getLabels().CITY_LABEL}}</label>
-          <input type="text" [(ngModel)]="model.city" formControlName="city" id="city"
-                 class="form-control clear"/>
-        </div>
-
-
-
 
         <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
           error_msg }}</b></div>
-        <button type="submit" class="btn btn-primary pull-right">
+        <button type="submit" class="btn btn-primary">
           Save Profile
         </button>
       </form>
@@ -96,8 +101,10 @@
         </div>
         <div class="modal-body">
           <p>{{getMessages().MSG_RESET_EMAIL_ADDRESS}}</p>
-          <div class="col-sm-12">
-            <cn-change-email (onEmailChangeSuccess)="showHideEmailModal()"></cn-change-email>
+          <div class="row">
+            <div class="col-sm-12">
+              <cn-change-email (onEmailChangeSuccess)="showHideEmailModal()"></cn-change-email>
+            </div>
           </div>
         </div>
       </div>
@@ -117,8 +124,10 @@
         </div>
         <div class="modal-body">
           <p>{{getMessages().MSG_RESET_MOBILE_NUMBER}}</p>
-          <div class="col-sm-12">
-            <cn-change-mobile (onMobileNumberChangeComplete)="onMobileNumberChangeComplete()"></cn-change-mobile>
+          <div class="row">
+            <div class="col-sm-12">
+              <cn-change-mobile (onMobileNumberChangeComplete)="onMobileNumberChangeComplete()"></cn-change-mobile>
+            </div>
           </div>
         </div>
       </div>

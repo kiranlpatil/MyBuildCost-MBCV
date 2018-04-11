@@ -54,6 +54,12 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
+  getAllInActiveProjectCostHeads(projectId : string) {
+    var url = API.PROJECT + '/'+ projectId + '/' + API.COSTHEAD;
+
+    return this.httpDelegateService.getAPI(url);
+  }
+
   getAllInActiveCostHeads(projectId : string, buildingId : string) {
     var url = API.PROJECT + '/'+ projectId + '/'+ API.BUILDING + '/' + buildingId + '/' + API.COSTHEAD;
 
@@ -64,6 +70,22 @@ export class CostSummaryService extends BaseService {
   activeCostHead( projectId : string, buildingId : string, selectedInActiveCostHeadId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
       selectedInActiveCostHeadId +'/'+ API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_TRUE;
+    let body = {};
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
+  activateProjectCostHead( projectId : string, selectedInActiveCostHeadId : number) {
+    var url = API.PROJECT + '/' + projectId + '/' + API.COSTHEAD +'/' +
+      selectedInActiveCostHeadId +'/'+ API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_TRUE;
+    let body = {};
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
+  inactivateProjectCostHead( projectId : string, selectedInActiveCostHeadId : number) {
+    var url = API.PROJECT + '/' + projectId + '/' + API.COSTHEAD +'/' +
+      selectedInActiveCostHeadId +'/'+ API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_FALSE;
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
@@ -120,7 +142,16 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  deleteQuantityByName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number, quantityName:string) {
+  updateDirectQuantityAmount( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                       directQuantity : number) {
+    var body= { directQuantity : directQuantity };
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
+      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT + '/'+ API.QUANTITY;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
+  deleteQuantityDetailsByName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number, quantityName:string) {
     var body= { item: { name : quantityName } };
     var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
       '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY + '/' + API.ITEM;
@@ -138,6 +169,16 @@ export class CostSummaryService extends BaseService {
 
     return this.httpDelegateService.putAPI(url, body);
   }
+
+  updateDirectRate( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                    directRate : number) {
+    var body= { directRate : directRate };
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
+      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT + '/'+ API.RATE;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+
 
   getRateItems( projectId : String, buildingId : string, costheadId : number, categoryId : number, workItemId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/'+ API.COSTHEAD +'/' +
