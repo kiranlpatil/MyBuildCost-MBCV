@@ -41,7 +41,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of rateItem.value; let i=index">
-                  <td *ngIf="rateView !== getLabel().WORKITEM_SYSTEM_RATE_TAB">
+                  <td class="datalist-input" *ngIf="rateView !== getLabel().WORKITEM_SYSTEM_RATE_TAB">
                     <input id="itemDescription" class="form-control remark-input" (mouseover)="getRateItemsByOriginalName(item, i)"
                            list="RateItems" [(ngModel)]="item.itemName"  (mousedown)="getItemName($event)" (blur)="setItemName($event); getRateItemsByOriginalName(item, i)"/>
                       <datalist id="RateItems" >
