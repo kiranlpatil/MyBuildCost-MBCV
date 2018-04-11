@@ -15,7 +15,7 @@ import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
 import { LoaderService } from '../../../../shared/loader/loaders.service';
-//import * as jsPDF from 'jspdf';
+import * as jsPDF from 'jspdf';
 
 @Component({
   moduleId: module.id,
@@ -26,7 +26,7 @@ import { LoaderService } from '../../../../shared/loader/loaders.service';
 
 export class CostSummaryComponent implements OnInit {
 
-  //@ViewChild('content') content: ElementRef;
+  @ViewChild('content') content: ElementRef;
   buildingsReport: Array <BuildingReport>;
   amenitiesReport: BuildingReport;
   projectReport: ProjectReport;
@@ -414,7 +414,7 @@ export class CostSummaryComponent implements OnInit {
     return ProjectElements;
   }
 
-/*  downloadToPdf() {
+  downloadToPdf() {
     let doc = new jsPDF();
     let specialElementHandlers = {
       '#editor': function (element : any, renderer : any) {
@@ -429,6 +429,6 @@ export class CostSummaryComponent implements OnInit {
     });
 
     doc.save('test.pdf');
-  }*/
+  }
 
 }
