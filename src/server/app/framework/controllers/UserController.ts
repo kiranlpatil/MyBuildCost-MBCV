@@ -34,7 +34,13 @@ class UserController {
       let auth: AuthInterceptor = new AuthInterceptor();
       userService.createUser(data, (error, result) => {
         if(error) {
-          res.send({'error': error.message});
+          next({
+            reason: Messages.MSG_ERROR_REGISTRATION,
+            message: Messages.MSG_ERROR_REGISTRATION,
+            stackTrace: new Error(),
+            code: 400
+          });
+          /*res.status(400).send({'error':error.message,'message':error.message });*/
         } else {
           let token = auth.issueTokenWithUid(result);
           res.send({
@@ -384,8 +390,8 @@ class UserController {
       let params = req.params.id;
       delete params.access_token;
       let user = req.user;
-      var userServices = new UserService();
-      userServices.getUserById(user, (err, result)=> {
+      //var userServices = new UserService();
+      userService.getUserById(user, (err, result)=> {
         if(err) {
           res.send(err);
         } else {
