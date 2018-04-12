@@ -4,6 +4,8 @@ import { Candidate } from '../../../user/models/candidate';
 import { AppSettings, ImagePath, SessionStorage, LocalStorage } from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
+import {UserProfile} from "../../../user/models/user";
+import {ProfileService} from "../../shared/profileservice/profile.service";
 
 @Component({
   moduleId: module.id,
@@ -29,10 +31,17 @@ export class DashboardHeaderComponent {
     }
   }
 
-  constructor(private _router: Router, private _eref: ElementRef) {
+  constructor(private _router: Router, private _eref: ElementRef,
+  private profileService: ProfileService) {
     this.HEADER_LOGO = ImagePath.HEADER_LOGO;
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
     this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
+    profileService.profileUpdateObservable$.subscribe(
+      (user: UserProfile) => {
+        if (user.first_name) {
+          this.user_first_name = user.first_name;
+        }
+      });
   }
 
   getImagePath(imagePath: string) {

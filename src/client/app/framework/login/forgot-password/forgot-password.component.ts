@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import { ForgotPassword } from '../../../user/models/forgot-password';
 import { ForgotPasswordService } from './forgot-password.service';
 import { Message, Messages, MessageService, NavigationRoutes } from '../../../shared/index';
@@ -15,13 +15,14 @@ import { ImagePath, ProjectAsset } from '../../../shared/constants';
   styleUrls: ['forgot-password.component.css'],
 })
 
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit{
   model = new ForgotPassword();
   userForm: FormGroup;
   error_msg: string;
   MY_LOGO_PATH: string;
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
+  emailForForgetPassword: string;
   EMAIL_ICON: string;
   BODY_BACKGROUND: string;
   forgotPasswordButtonLabel: string;
@@ -31,8 +32,10 @@ export class ForgotPasswordComponent {
 
 
   constructor(private _router: Router,
-              private forgotPasswordService: ForgotPasswordService, private messageService: MessageService,
-              private formBuilder: FormBuilder) {
+              private forgotPasswordService: ForgotPasswordService,
+              private messageService: MessageService,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute ) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]]
     });
@@ -43,6 +46,12 @@ export class ForgotPasswordComponent {
     this.EMAIL_ICON = ImagePath.EMAIL_ICON;
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.forgotPasswordButtonLabel = 'Request Reset Link';
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.emailForForgetPassword = params['email'];
+    });
   }
 
   onSubmit() {

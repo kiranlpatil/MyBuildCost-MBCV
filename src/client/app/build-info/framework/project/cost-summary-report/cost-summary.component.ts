@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
@@ -15,7 +15,7 @@ import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
 import { LoaderService } from '../../../../shared/loader/loaders.service';
-
+//import * as jsPDF from 'jspdf';
 
 @Component({
   moduleId: module.id,
@@ -26,6 +26,7 @@ import { LoaderService } from '../../../../shared/loader/loaders.service';
 
 export class CostSummaryComponent implements OnInit {
 
+  //@ViewChild('content') content: ElementRef;
   buildingsReport: Array <BuildingReport>;
   amenitiesReport: BuildingReport;
   projectReport: ProjectReport;
@@ -412,4 +413,22 @@ export class CostSummaryComponent implements OnInit {
   getProjectElements() {
     return ProjectElements;
   }
+
+/*  downloadToPdf() {
+    let doc = new jsPDF();
+    let specialElementHandlers = {
+      '#editor': function (element : any, renderer : any) {
+        return true;
+      }
+    };
+
+    let content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+    });
+
+    doc.save('test.pdf');
+  }*/
+
 }

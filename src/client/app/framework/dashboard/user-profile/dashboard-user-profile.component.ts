@@ -22,6 +22,7 @@ export class DashboardProfileComponent implements OnInit {
   showModalStyle: boolean = false;
   showStyleMobile: boolean = false;
   model: UserProfile = new UserProfile();
+  first_letter:string;
 
   constructor(private  dashboardUserProfileService : DashboardUserProfileService, private formBuilder: FormBuilder,
               private messageService: MessageService, private profileService: ProfileService,
@@ -51,6 +52,7 @@ export class DashboardProfileComponent implements OnInit {
     this.model.company_name = user.company_name;
     this.model.state = user.state;
     this.model.city = user.city;
+    this.first_letter =(user.first_name).toString().charAt(0);
   }
 
   failUserDetails(error : any) {
@@ -65,6 +67,8 @@ export class DashboardProfileComponent implements OnInit {
         .subscribe(
           user => this.onProfileUpdateSuccess(user),
           error => this.onProfileUpdateError(error));
+      SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, this.model.first_name);
+      this.profileService.onProfileUpdate(this.model);
     }
   }
 

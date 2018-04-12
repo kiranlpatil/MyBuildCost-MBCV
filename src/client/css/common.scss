@@ -839,6 +839,10 @@ img[alt] {
   position: absolute;
 }
 
+input[disabled][_ngcontent-c4], input[readonly][_ngcontent-c4], textarea[disabled][_ngcontent-c4] {
+  color: $disable-input;
+}
+
 @media only screen and (max-width: 767px) {
   .password-required-message {
     position: relative;

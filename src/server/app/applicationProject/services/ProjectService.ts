@@ -540,8 +540,8 @@ class ProjectService {
 
               for(let rate of rateItems) {
 
-                let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.itemName= '"+rate.itemName+"'";
-                let rateExistArray = alasql(rateObjectExistSQL,[centralizedRates]);
+                let rateObjectExistSQL = 'SELECT * FROM ? AS rates WHERE rates.itemName= ?';
+                let rateExistArray = alasql(rateObjectExistSQL,[centralizedRates,rate.itemName]);
                 if(rateExistArray.length > 0) {
                   if(rateExistArray[0].rate !== rate.rate) {
                     //update rate of rateItem
@@ -666,8 +666,8 @@ class ProjectService {
 
             for(let rate of rateItems) {
 
-              let rateObjectExistSQL = "SELECT * FROM ? AS rates WHERE rates.itemName= '"+rate.itemName+"'";
-              let rateExistArray = alasql(rateObjectExistSQL,[centralizedRatesOfProjects]);
+              let rateObjectExistSQL = 'SELECT * FROM ? AS rates WHERE rates.itemName= ?';
+              let rateExistArray = alasql(rateObjectExistSQL,[centralizedRatesOfProjects,rate.itemName]);
               if(rateExistArray.length > 0) {
                 if(rateExistArray[0].rate !== rate.rate) {
                   //update rate of rateItem

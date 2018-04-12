@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.mainHeaderMenuHideShow = 'signin';
-    window.history.forward();
+    //window.history.forward();
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params['email'] !== undefined) {
         this.userForm.controls['email'].setValue(params['email']);
@@ -186,7 +186,7 @@ export class LoginComponent implements OnInit {
   }
 
   onForgotPassword() {
-    this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD]);
+    this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD, {email: this.userForm.value.email}]);
   }
 
   OnRememberPassword(event: any) {

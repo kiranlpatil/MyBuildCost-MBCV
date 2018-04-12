@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rateItem of rate.rateItems | groupBy:'type'; let k = index">
+        <tr *ngFor="let rateItem of rate.rateItems | groupBy:'type';">
           <td class="rate-item" colspan="5">
             <table>
               <thead>
@@ -41,14 +41,14 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of rateItem.value; let i=index">
-                  <td *ngIf="rateView !== getLabel().WORKITEM_SYSTEM_RATE_TAB">
-                    <input id="itemDescription" class="form-control remark-input" (mouseover)="getRateItemsByOriginalName(item, i)"
-                           list="RateItems" [(ngModel)]="item.itemName"  (mousedown)="getItemName($event)" (blur)="setItemName($event); getRateItemsByOriginalName(item, i)"/>
+                  <td class="datalist-input" *ngIf="rateView === getLabel().WORKITEM_RATE_TAB">
+                    <input id="itemDescription" class="form-control remark-input" (mouseover)="getRateItemsByOriginalName(item, rateItem.key, i)"
+                           list="RateItems" [(ngModel)]="item.itemName"  (mousedown)="getItemName($event)" (blur)="setItemName($event); getRateItemsByOriginalName(item, rateItem.key, i)"/>
                       <datalist id="RateItems" >
                         <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}"></option>    
                      </datalist>
                   </td>
-                  <td *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB">
+                  <td *ngIf="rateView !== getLabel().WORKITEM_RATE_TAB">
                     <input id="itemDescription" class="form-control remark-input" [(ngModel)]="item.itemName" [disabled]="disableRateField"/>
                   </td>
                   <!--<td>
