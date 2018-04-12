@@ -407,10 +407,10 @@ class ReportService {
   private getMaterialDataFromFlatDetailsArray(elementWiseReport: string, element: string, building: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     let sqlQuery: string;
     switch(elementWiseReport) {
-      case 'costHead':
+      case Constants.STR_COSTHEAD:
         sqlQuery = this.alasqlQueryForMaterialTakeOffDataCostHeadWise(building, element);
         break;
-      case 'material':
+      case Constants.STR_MATERIAL:
         sqlQuery = this.alasqlQueryForMaterialTakeOffDataMaterialWise(building, element);
         break;
     }
@@ -523,7 +523,7 @@ class ReportService {
                   categoryName : string, workItemName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     let quantityName: string;
     if(workItem.quantity.isDirectQuantity && workItem.rate.isEstimated) {
-      quantityName = 'Direct';
+      quantityName = Constants.STR_DIRECT;
       for (let rateItem of workItem.rate.rateItems) {
         let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
           workItemName, rateItem.itemName, quantityName, rateItem.quantity, rateItem.unit);

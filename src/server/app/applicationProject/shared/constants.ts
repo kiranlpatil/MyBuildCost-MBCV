@@ -76,6 +76,7 @@ class Constants {
   public static STR_COSTHEAD_NAME = Constants.STR_COSTHEAD + Constants.STR_NAME;
   public static STR_MATERIAL = 'material';
   public static STR_Material_NAME = Constants.STR_MATERIAL + Constants.STR_NAME;
+  public static STR_DIRECT = 'Direct';
 
   //ALSQL uses constants
   public static ALASQL_FROM = ' FROM ? ';
