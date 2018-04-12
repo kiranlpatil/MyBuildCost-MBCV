@@ -30,72 +30,56 @@
                         <span class="caret"></span>
                         <span class="">{{secondaryViewData}}</span>
                         <span class="slab-area">
-                         {{
-                          MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].header }}
+                         {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].header }}
                         </span>
                       </a>
                     </h4>
 
                   </div>
 
-                  <div style="margin-top: 10px;width: 100%;float: left;" id="secondaryViewData{{secondaryViewDataIndex}}" class="panel-collapse collapse">
+                  <div id="secondaryViewData{{secondaryViewDataIndex}}" class="panel-collapse collapse">
 
                     <div *ngFor="let tableView of MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table | keys; let tableViewIndex = index" class="col-md-12 no-padding">
-
                       <div class="">
-                        <div class="no-border" style="display: inline-block;width: 100%;margin: 5px 0;">
+                        <div class="no-border">
                           <div class="">
 
                             <div *ngFor="let tableHeader of MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView] | keys; let tableHeaderIndex = index">
 
+                              <!--header-->
+                              <div *ngIf="tableView == getMaterialTakeOffElements().HEADERS">
 
-                              <div *ngIf="tableView != getMaterialTakeOffElements().CONTENT" class="col-md-4" >
-                                <div class="panel-group no-border" style="padding: 15px 0 16px;">
-                                  <div class="panel panel-default" >
-                                {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
-                              </div>
-                                </div>
-                              </div>
-
-                              <div *ngIf="tableView == getMaterialTakeOffElements().CONTENT" class="col-md-12 no-padding">
-
-                                <div class="panel-group no-border" style="padding: 0;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);">
-                                  <div class="panel panel-default" style="display: inline-block;width: 100%;background: #fff;">
-
-                                    <div *ngFor="let tableData of MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader] | keys">
-
-                                      <a class="col-md-4" data-toggle="collapse" href="#item{{tableHeaderIndex}}{{secondaryViewDataIndex}}" style="padding: 9px;">
-                                        <div *ngIf="tableData != getMaterialTakeOffElements().SUB_CONTENT ">
-                                          {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader][tableData]}}
-                                        </div>
-                                      </a>
-
-
-                                    <div id="item{{tableHeaderIndex}}{{secondaryViewDataIndex}}"
-                                         class="panel-collapse collapse  col-md-12 no-padding"
-                                         *ngIf="tableData == getMaterialTakeOffElements().SUB_CONTENT ">
-
-                                      <div *ngFor="let tableSubContentData of MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader][tableData] | keys ">
-
-                                        <div class="col-md-12 no-padding">
-
-                                          <div class="">
-                                            <div class="">
-                                              <div class="">
-                                                  <div *ngFor="let tableSubContentSubData of MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader][tableData][tableSubContentData] | keys">
-                                                    <div class="col-md-4">
-                                                      {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader][tableData][tableSubContentData][tableSubContentSubData]}}
-                                                    </div>
-                                                  </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
+                                    <div *ngIf="tableHeader == getMaterialTakeOffElements().COLUMN_ONE" class="col-md-6">
+                                      {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
                                     </div>
 
-                                </div>
+                                    <div *ngIf="tableHeader == getMaterialTakeOffElements().COLUMN_TWO" class="col-md-3">
+                                      {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
+                                    </div>
+
+                                    <div *ngIf="tableHeader == getMaterialTakeOffElements().COLUMN_THREE" class="col-md-3">
+                                      {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
+                                    </div>
+
+                              </div>
+
+                              <!--content-->
+                              <div *ngIf="tableView == getMaterialTakeOffElements().CONTENT" class="col-md-12 no-padding">
+
+                                <div class="panel-group no-border">
+                                  <div class="panel panel-default">
+
+                                    <div class="col-md-12 no-padding">
+                                      <bi-actual-content
+                                        [content]="MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]">
+                                      </bi-actual-content>
+                                    </div>
+
+                                    <div class="col-md-12 no-padding">
+                                      <bi-sub-content
+                                        [content]="MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]">
+                                      </bi-sub-content>
+                                    </div>
 
                                   </div>
                                 </div>
@@ -103,6 +87,23 @@
 
 
 
+
+                              </div>
+
+                              <!--footer-->
+                              <div *ngIf="tableView === getMaterialTakeOffElements().FOOTER">
+
+                                    <div *ngIf="tableHeader == getMaterialTakeOffElements().COLUMN_ONE" class="col-md-6" >
+                                      {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
+                                    </div>
+
+                                    <div *ngIf="tableHeader == getMaterialTakeOffElements().COLUMN_TWO" class="col-md-3" >
+                                      {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
+                                    </div>
+
+                                    <div *ngIf="tableHeader == getMaterialTakeOffElements().COLUMN_THREE" class="col-md-3" >
+                                      {{MaterialTakeOffReport[materialData].secondaryView[secondaryViewData].table[tableView][tableHeader]}}
+                                    </div>
 
                               </div>
 

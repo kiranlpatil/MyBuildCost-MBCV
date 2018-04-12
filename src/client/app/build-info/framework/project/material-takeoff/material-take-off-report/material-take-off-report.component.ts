@@ -17,6 +17,4 @@ export class MaterialTakeOffReportComponent  {
   getMaterialTakeOffElements() {
     return MaterialTakeOffElements;
   }
-
-
 }

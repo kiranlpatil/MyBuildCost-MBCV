@@ -1,0 +1,30 @@
+
+<div *ngFor="let tableData of content | keys">
+
+  <!--sub content-->
+  <div *ngIf="tableData == getMaterialTakeOffElements().SUB_CONTENT ">
+
+    <div *ngFor="let tableSubContentData of content[tableData] | keys ">
+
+      <div class="col-md-12 no-padding">
+
+        <div *ngFor="let tableSubContentSubData of content[tableData][tableSubContentData] | keys">
+          <div *ngIf="tableSubContentSubData == getMaterialTakeOffElements().COLUMN_ONE" class="col-md-6">
+            {{content[tableData][tableSubContentData][tableSubContentSubData]}}
+          </div>
+
+          <div *ngIf="tableSubContentSubData == getMaterialTakeOffElements().COLUMN_TWO" class="col-md-3">
+            {{content[tableData][tableSubContentData][tableSubContentSubData]}}
+          </div>
+
+          <div *ngIf="tableSubContentSubData == getMaterialTakeOffElements().COLUMN_THREE" class="col-md-3">
+            {{content[tableData][tableSubContentData][tableSubContentSubData]}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
