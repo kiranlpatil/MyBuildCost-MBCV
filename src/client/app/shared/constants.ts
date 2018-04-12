@@ -528,8 +528,14 @@ export class MaterialTakeOffElements {
   public static MATERIAL_WISE = 'Material Wise';
   public static MATERIAL = 'Material';
   public static CONTENT = 'content';
+  public static HEADERS = 'headers';
+  public static FOOTER = 'footer';
   public static SUB_CONTENT = 'subContent';
+  public static COLUMN_ONE = 'columnOne';
+  public static COLUMN_TWO = 'columnTwo';
+  public static COLUMN_THREE = 'columnThree';
   public static ELEMENT_WISE_REPORT_COST_HEAD = 'costHead';
+  public static ELEMENT_WISE_REPORT_MATERIAL = 'material';
 }
 
 export class Menus {
