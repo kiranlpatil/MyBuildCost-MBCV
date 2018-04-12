@@ -85,11 +85,11 @@ class Constants {
   public static ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE =
     'SELECT buildingName AS header, workItemName AS rowValue, SUM(quantity) AS Total, unit ';
   public static ALASQL_SELECT_QUANTITY_NAME_AS = ' quantityName AS subValue ';
-  public static ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO = 'WHERE materialName = "';
+  public static ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO = 'WHERE materialName = ?';
   public static ALASQL_SELECT_BUILDING_NAME = ' buildingName = "';
   public static ALASQL_SELECT_MATERIAL_TAKEOFF_COSTHEAD_WISE =
     'SELECT materialName AS header, workItemName AS rowValue, SUM(quantity) AS Total, unit';
-  public static ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO = 'WHERE costHeadName = "';
+  public static ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO = 'WHERE costHeadName = ?';
   public static ALASQL_GROUP_MATERIAL_WORKITEM_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE =
     'GROUP BY materialName,workItemName, quantityName, unit ';
   public static ALASQL_ORDER_BY_MATERIAL_WORKITEM_COSTHEAD_WISE = 'ORDER BY materialName,workItemName ';

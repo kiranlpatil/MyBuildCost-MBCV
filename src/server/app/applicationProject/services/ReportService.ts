@@ -408,17 +408,17 @@ class ReportService {
     let sqlQuery: string;
     switch(elementWiseReport) {
       case Constants.STR_COSTHEAD:
-        sqlQuery = this.alasqlQueryForMaterialTakeOffDataCostHeadWise(building, element);
+        sqlQuery = this.alasqlQueryForMaterialTakeOffDataCostHeadWise(building);
         break;
       case Constants.STR_MATERIAL:
-        sqlQuery = this.alasqlQueryForMaterialTakeOffDataMaterialWise(building, element);
+        sqlQuery = this.alasqlQueryForMaterialTakeOffDataMaterialWise(building);
         break;
     }
-    let materialReportRowData = alasql(sqlQuery, [materialTakeOffFlatDetailsArray]);
+    let materialReportRowData = alasql(sqlQuery, [materialTakeOffFlatDetailsArray,element]);
     return materialReportRowData;
   }
 
-  private alasqlQueryForMaterialTakeOffDataMaterialWise(building: string, element: string) {
+  private alasqlQueryForMaterialTakeOffDataMaterialWise(building: string) {
     let select: string = Constants.STR_EMPTY;
     let from: string = Constants.ALASQL_FROM;
     let where: string = Constants.STR_EMPTY;
@@ -428,17 +428,17 @@ class ReportService {
     if (building !== Constants.STR_ALL_BUILDING) {
       select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE + Constants.STR_COMMA_SPACE +
         Constants.ALASQL_SELECT_QUANTITY_NAME_AS;
-      where = Constants.ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO + element + Constants.STR_DOUBLE_INVERTED_COMMA +
+      where = Constants.ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO  +
         Constants.STR_AND + Constants.ALASQL_SELECT_BUILDING_NAME + building + Constants.STR_DOUBLE_INVERTED_COMMA;
     } else {
       select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE ;
-      where = Constants.ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO + element + Constants.STR_DOUBLE_INVERTED_COMMA;
+      where = Constants.ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO ;
     }
     sqlQuery = select + from + where + groupBy + orderBy;
     return sqlQuery;
   }
 
-  private alasqlQueryForMaterialTakeOffDataCostHeadWise(building: string, element: string) {
+  private alasqlQueryForMaterialTakeOffDataCostHeadWise(building: string) {
     let select: string = Constants.STR_EMPTY;
     let from: string = Constants.ALASQL_FROM;
     let where: string = Constants.STR_EMPTY;
@@ -448,13 +448,13 @@ class ReportService {
     if (building !== Constants.STR_ALL_BUILDING) {
       select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_COSTHEAD_WISE + Constants.STR_COMMA_SPACE +
         Constants.ALASQL_SELECT_QUANTITY_NAME_AS;
-      where = Constants.ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO + element + Constants.STR_DOUBLE_INVERTED_COMMA
+      where = Constants.ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO
         + Constants.STR_AND + Constants.ALASQL_SELECT_BUILDING_NAME + building + Constants.STR_DOUBLE_INVERTED_COMMA;
       groupBy = Constants.ALASQL_GROUP_MATERIAL_WORKITEM_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE;
       orderBy = Constants.ALASQL_ORDER_BY_MATERIAL_WORKITEM_COSTHEAD_WISE;
     } else {
       select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS;
-      where = Constants.ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO + element + Constants.STR_DOUBLE_INVERTED_COMMA;
+      where = Constants.ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO;
       groupBy = Constants.ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS;
       orderBy = Constants.ALASQL_ORDER_BY_MATERIAL_BUILDING_MATERIAL_TAKEOFF_COSTHEAD_WISE;
     }
