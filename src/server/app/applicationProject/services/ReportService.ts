@@ -340,54 +340,46 @@ class ReportService {
         callback(error, null);
       } else {
         let materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO> = this.getBuildingMaterialDetails(result[0].buildings);
-        let selectFrom = 'SELECT materialName,buildingName, workItemName,quantityName,  SUM(quantity) AS Total, unit FROM ? ';
-        let where = 'WHERE costHeadName = "'+ element + '" AND buildingName = "'+building+'" ';
-        let groupByAndOrderBy = 'GROUP BY materialName,workItemName, quantityName, unit ORDER BY materialName,workItemName ';
+        let materialReportRowData =
+          this.getMaterialDataFromFlatDetailsArray(elementWiseReport, element, building, materialTakeOffFlatDetailsArray);
         let materialTakeOffReport: MaterialTakeOffReport = new MaterialTakeOffReport(null, null);
-          /*materialTakeOffReport.secondaryView = new Map<string, MaterialTakeOffSecondaryView>();*/
         materialTakeOffReport.secondaryView = {};
-        if(elementWiseReport === 'costHead' && building !== 'All Building') {
-          let materialReportRowData = alasql(selectFrom + where + groupByAndOrderBy, [materialTakeOffFlatDetailsArray]);
           for(let record of materialReportRowData ) {
-            if(materialTakeOffReport.secondaryView[record.materialName] !== undefined &&
-              materialTakeOffReport.secondaryView[record.materialName] !== null) {         // check if material is in map
+            if(materialTakeOffReport.secondaryView[record.header] !== undefined &&
+              materialTakeOffReport.secondaryView[record.header] !== null) {         // check if material is in map
                let materialTakeOffSecondaryView : MaterialTakeOffSecondaryView =
-                 materialTakeOffReport.secondaryView[record.materialName];
+                 materialTakeOffReport.secondaryView[record.header];
                let table : MaterialTakeOffTableView = materialTakeOffSecondaryView.table;
-               if(table.content[record.workItemName] !== undefined && table.content[record.workItemName] !== null) {
-                 let  tableViewContent: MaterialTakeOffTableViewContent = table.content[record.workItemName];
+               if(table.content[record.rowValue] !== undefined && table.content[record.rowValue] !== null) {
+                 let  tableViewContent: MaterialTakeOffTableViewContent = table.content[record.rowValue];
                  tableViewContent.columnTwo = tableViewContent.columnTwo + record.Total;   // update total
-                 tableViewContent.subContent[record.quantityName] =
-                   new MaterialTakeOffTableViewSubContent(record.quantityName, record.Total, record.unit);
+                 if(record.subValue){
+                   tableViewContent.subContent[record.subValue] =
+                     new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, record.unit);
+                 }
                }else {
                  let subContentMap = {};
-                 if(record.quantityName) {
+                 if(record.subValue) {
                    let materialTakeOffTableViewSubContent =
-                     new MaterialTakeOffTableViewSubContent(record.quantityName, record.Total, record.unit);
-                   /*subContentMap = new Map<string, MaterialTakeOffTableViewSubContent>();
-                   subContentMap.set(record.quantityName, materialTakeOffTableViewSubContent);*/
-                   subContentMap[record.quantityName]= materialTakeOffTableViewSubContent;
+                     new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, record.unit);
+                   subContentMap[record.subValue]= materialTakeOffTableViewSubContent;
                  }
                  let  tableViewContent: MaterialTakeOffTableViewContent =
-                   new MaterialTakeOffTableViewContent(record.workItemName, record.Total, record.unit, subContentMap);
-                  table.content[record.workItemName] = tableViewContent;
+                   new MaterialTakeOffTableViewContent(record.rowValue, record.Total, record.unit, subContentMap);
+                  table.content[record.rowValue] = tableViewContent;
                }
                table.footer.columnTwo = table.footer.columnTwo + record.Total;
               materialTakeOffSecondaryView.header = table.footer.columnTwo + ' ' + record.unit;
             }else {
               let subContentMap = {};
-              if(record.quantityName) {
-                let materialTakeOffTableViewSubContent =  new MaterialTakeOffTableViewSubContent(record.quantityName, record.Total, 'BAG');
-                //subContentMap = new Map<string, MaterialTakeOffTableViewSubContent>();
-                //subContentMap.set(record.quantityName, materialTakeOffTableViewSubContent);
-                subContentMap[record.quantityName] = materialTakeOffTableViewSubContent;
+              if(record.subValue) {
+                let materialTakeOffTableViewSubContent =  new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, 'BAG');
+                subContentMap[record.subValue] = materialTakeOffTableViewSubContent;
               }
               let  tableViewContent: MaterialTakeOffTableViewContent =
-                new MaterialTakeOffTableViewContent(record.workItemName, record.Total, record.unit, subContentMap);
-              /*let tableViewContentMap :Map<string, MaterialTakeOffTableViewContent> = new Map<string, MaterialTakeOffTableViewContent>();
-              tableViewContentMap.set(record.workItemName, tableViewContent);*/
+                new MaterialTakeOffTableViewContent(record.rowValue, record.Total, record.unit, subContentMap);
               let tableViewContentMap = {};
-              tableViewContentMap[record.workItemName] = tableViewContent;
+              tableViewContentMap[record.rowValue] = tableViewContent;
               let materialTakeOffTableViewHeader: MaterialTakeOffTableViewHeaders =
                 new MaterialTakeOffTableViewHeaders('Item', 'Quantity', 'Unit');
               let materialTakeOffTableViewFooter : MaterialTakeOffTableViewFooter =
@@ -398,17 +390,70 @@ class ReportService {
                 new MaterialTakeOffSecondaryView(materialTakeOffTableViewFooter.columnTwo +' '+ materialTakeOffTableViewFooter.columnThree,
                   table);
               materialTakeOffReport.header = building;
-              materialTakeOffReport.secondaryView[record.materialName] =  materialTakeOffSecondaryView;
+              materialTakeOffReport.secondaryView[record.header] =  materialTakeOffSecondaryView;
             }
           }
-
-        }
-        logger.info("material report "+ JSON.stringify(materialTakeOffReport.secondaryView));
         let responseData = {};
         responseData[element]= materialTakeOffReport;
         callback(null, responseData);
       }
     });
+  }
+
+  private getMaterialDataFromFlatDetailsArray(elementWiseReport: string, element: string, building: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+    let sqlQuery: string;
+    switch(elementWiseReport) {
+      case 'costHead':
+        sqlQuery = this.alasqlQueryForMaterialTakeOffDataCostHeadWise(building, element);
+        break;
+      case 'material':
+        sqlQuery = this.alasqlQueryForMaterialTakeOffDataMaterialWise(building, element);
+        break;
+    }
+    let materialReportRowData = alasql(sqlQuery, [materialTakeOffFlatDetailsArray]);
+    return materialReportRowData;
+  }
+
+  private alasqlQueryForMaterialTakeOffDataMaterialWise(building: string, element: string) {
+    let select: string = Constants.STR_EMPTY;
+    let from: string = Constants.ALASQL_FROM;
+    let where: string = Constants.STR_EMPTY;
+    let groupBy: string = Constants.ALASQL_GROUP_BY_MATERIAL_TAKEOFF_MATERIAL_WISE;
+    let orderBy: string = Constants.ALASQL_ORDER_BY_MATERIAL_TAKEOFF_MATERIAL_WISE;
+    let sqlQuery: string;
+    if (building !== Constants.STR_ALL_BUILDING) {
+      select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE + Constants.STR_COMMA_SPACE +
+        Constants.ALASQL_SELECT_QUANTITY_NAME_AS;
+      where = Constants.ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO + element + Constants.STR_DOUBLE_INVERTED_COMMA +
+        Constants.STR_AND + Constants.ALASQL_SELECT_BUILDING_NAME + building + Constants.STR_DOUBLE_INVERTED_COMMA;
+    } else {
+      select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE ;
+      where = Constants.ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO + element + Constants.STR_DOUBLE_INVERTED_COMMA;
+    }
+    sqlQuery = select + from + where + groupBy + orderBy;
+    return sqlQuery;
+  }
+
+  private alasqlQueryForMaterialTakeOffDataCostHeadWise(building: string, element: string) {
+    let select: string = '';
+    let from: string = ' FROM ? ';
+    let where: string = '';
+    let groupBy: string = '';
+    let orderBy: string = '';
+    let sqlQuery: string;
+    if (building !== 'All Buildings') {
+      select = 'SELECT materialName AS header, workItemName AS rowValue, quantityName AS subValue, SUM(quantity) AS Total, unit ';
+      where = 'WHERE costHeadName = "' + element + '" AND buildingName = "' + building + '" ';
+      groupBy = 'GROUP BY materialName,workItemName, quantityName, unit ';
+      orderBy = 'ORDER BY materialName,workItemName ';
+    } else {
+      select = 'SELECT materialName AS header, buildingName AS rowValue, SUM(quantity) AS Total, unit ';
+      where = 'WHERE costHeadName = "' + element + '" ';
+      groupBy = 'GROUP BY materialName, buildingName, quantityName, unit ';
+      orderBy = 'ORDER BY materialName, buildingName ';
+    }
+    sqlQuery = select + from + where + groupBy + orderBy;
+    return sqlQuery;
   }
 
   private getMaterialTakeOffFilterObject(buildings: Array<Building>) {
