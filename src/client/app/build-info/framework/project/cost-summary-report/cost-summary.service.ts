@@ -193,6 +193,11 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
+  getCostHeadDetails(baseUrl: string, costHeadId : number) {
+    var url = baseUrl +'/'+ API.COSTHEAD+ '/' + costHeadId;
+    return this.httpDelegateService.getAPI(url);
+  }
+
   /*//In Active Category
   deactivateCategory(projectId : String, buildingId : string, costHeadId : number, categoryId : any) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
