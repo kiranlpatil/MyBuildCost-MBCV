@@ -522,7 +522,15 @@ class ReportService {
   private createMaterialDTOObjectForEstimatedQuantityAndRate(workItem: WorkItem, buildingName: string, costHeadName: string,
                   categoryName : string, workItemName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     let quantityName: string;
-    if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
+    if(workItem.quantity.isDirectQuantity && workItem.rate.isEstimated) {
+      quantityName = 'Direct';
+      for (let rateItem of workItem.rate.rateItems) {
+        let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
+          workItemName, rateItem.itemName, quantityName, rateItem.quantity, rateItem.unit);
+        materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
+      }
+    }
+    else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
       for (let quantity: QuantityDetails of workItem.quantity.quantityItemDetails) {
         quantityName = quantity.name;
         for (let rateItem of workItem.rate.rateItems) {
