@@ -1,0 +1,11 @@
+"use strict";
+var ProjectReport = (function () {
+    function ProjectReport() {
+        this.buildings = new Array();
+        this.commonAmenities = new Array();
+    }
+    return ProjectReport;
+}());
+module.exports = ProjectReport;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9hcHBsaWNhdGlvblByb2plY3QvZGF0YWFjY2Vzcy9tb2RlbC9wcm9qZWN0L3JlcG9ydHMvUHJvamVjdFJlcG9ydC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBRUE7SUFBQTtRQUNFLGNBQVMsR0FBeUIsSUFBSSxLQUFLLEVBQWtCLENBQUM7UUFDOUQsb0JBQWUsR0FBeUIsSUFBSSxLQUFLLEVBQWtCLENBQUM7SUFFdEUsQ0FBQztJQUFELG9CQUFDO0FBQUQsQ0FKQSxBQUlDLElBQUE7QUFDRCxpQkFBUyxhQUFhLENBQUMiLCJmaWxlIjoiYXBwL2FwcGxpY2F0aW9uUHJvamVjdC9kYXRhYWNjZXNzL21vZGVsL3Byb2plY3QvcmVwb3J0cy9Qcm9qZWN0UmVwb3J0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEJ1aWxkaW5nUmVwb3J0ID0gcmVxdWlyZSgnLi9CdWlsZGluZ1JlcG9ydCcpO1xyXG5cclxuY2xhc3MgUHJvamVjdFJlcG9ydCB7XHJcbiAgYnVpbGRpbmdzIDogQXJyYXk8QnVpbGRpbmdSZXBvcnQ+PW5ldyBBcnJheTxCdWlsZGluZ1JlcG9ydD4oKTtcclxuICBjb21tb25BbWVuaXRpZXMgOiBBcnJheTxCdWlsZGluZ1JlcG9ydD49bmV3IEFycmF5PEJ1aWxkaW5nUmVwb3J0PigpO1xyXG5cclxufVxyXG5leHBvcnQgPSBQcm9qZWN0UmVwb3J0O1xyXG4iXX0=
