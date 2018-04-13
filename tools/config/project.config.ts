@@ -56,15 +56,7 @@ export class ProjectConfig extends SeedConfig {
        {
        name: 'lodash',
        path: `node_modules/lodash/lodash.js`
-    },
-       {
-         name: 'jspdf',
-         packageMeta: {
-           format: "global"
-         },
-         path: `node_modules/jspdf/dist/jspdf.min.js`
-       }
-       ];
+    }];
 
     this.addPackagesBundles(additionalPackages);
     // Add packages (e.g. ng2-translate)
