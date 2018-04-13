@@ -75,7 +75,12 @@
                                 <td>
                                   <div class="edit-field">
                                     <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
-                                    <input *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate" size="10" class="form-control clear" readonly>
+                                    <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
+                                      {{workItem.rate.total}}
+                                    </div>
+                                    <div class="edit-rate-null" *ngIf="!workItem.rate.total">
+                                      -
+                                    </div>
                                      <span class="calculator"  id ="getRate{{categoryIndex}}"
                                        *ngIf="workItem.isDirectRate === false" (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
                                      <img src="assets/build-info/dashboard/calculator2.png" />

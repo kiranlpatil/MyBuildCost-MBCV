@@ -184,6 +184,17 @@
     padding: 5px;
   }
 
+  .edit-rate-null {
+    display: inline-block;
+    padding: 7px 5px 5px;
+  }
+
+  .edit-rate {
+    border-bottom: 1px solid $body-text;
+    display: inline-block;
+    padding: 7px 5px 5px;
+  }
+
   .active {
     background: $azure;
     border: 1px solid $dashboard-link;
