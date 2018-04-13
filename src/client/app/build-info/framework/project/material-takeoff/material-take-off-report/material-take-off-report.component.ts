@@ -11,7 +11,7 @@ import { MaterialTakeOffElements } from '../../../../../shared/constants';
 
 export class MaterialTakeOffReportComponent  {
 
-  @Input() MaterialTakeOffReport : any;
+  @Input() materialTakeOffReport : any;
   viewSubContent : boolean = false;
   headerIndex : number;
   dataIndex : number;

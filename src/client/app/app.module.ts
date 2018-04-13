@@ -57,6 +57,7 @@ import { MaterialTakeoffService } from './build-info/framework/project/material-
 import { MaterialTakeOffReportComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/material-take-off-report.component';
 import { SubContentComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/content/sub-content/sub-content.component';
 import { ActualContentComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/content/actual-content/actual-content.component';
+import { TableRowComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/row/row.component';
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
 import { GetQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.component';
@@ -118,6 +119,7 @@ import { QuantityDetailsComponent } from './build-info/framework/project/cost-su
     SubContentComponent,
     ActualContentComponent,
     MaterialTakeOffReportComponent,
+    TableRowComponent,
     GetRateComponent,
     ProjectItemComponent,
     QuantityDetailsComponent,
