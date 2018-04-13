@@ -513,35 +513,38 @@ class ReportService {
     for (let workItem: WorkItem of category.workItems) {
       if (workItem.active) {
         workItemName = workItem.name;
-        this.createMaterialDTOObjectForEstimatedQuantityAndRate(workItem, buildingName, costHeadName, categoryName,
+        this.addEstimatedQuantityAndRateMaterialItemInDTOArray(workItem, buildingName, costHeadName, categoryName,
           workItemName, materialTakeOffFlatDetailsArray);
       }
     }
   }
 
-  private createMaterialDTOObjectForEstimatedQuantityAndRate(workItem: WorkItem, buildingName: string, costHeadName: string,
+  private addEstimatedQuantityAndRateMaterialItemInDTOArray(workItem: WorkItem, buildingName: string, costHeadName: string,
                   categoryName : string, workItemName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     let quantityName: string;
     if(workItem.quantity.isDirectQuantity && workItem.rate.isEstimated) {
       quantityName = Constants.STR_DIRECT;
-      for (let rateItem of workItem.rate.rateItems) {
-        let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-          workItemName, rateItem.itemName, quantityName, rateItem.quantity, rateItem.unit);
-        materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
-      }
+      this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
+        materialTakeOffFlatDetailsArray);
     }
     else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
       for (let quantity: QuantityDetails of workItem.quantity.quantityItemDetails) {
         quantityName = quantity.name;
-        for (let rateItem of workItem.rate.rateItems) {
-          let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-            workItemName, rateItem.itemName, quantityName, rateItem.quantity, rateItem.unit);
-          materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
-        }
+        this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
+          materialTakeOffFlatDetailsArray);
       }
     }
   }
 
+  private createAndAddMaterialDTOObjectInDTOArray(workItem: WorkItem, buildingName: string, costHeadName: string, categoryName: string,
+                  workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+    for (let rateItem of workItem.rate.rateItems) {
+      let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
+        workItemName, rateItem.itemName, quantityName, ((workItem.quantity.total / workItem.rate.quantity) * rateItem.quantity),
+        rateItem.unit);
+      materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
+    }
+  }
 }
 
 Object.seal(ReportService);
