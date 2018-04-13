@@ -5,27 +5,23 @@ import { HttpDelegateService } from '../../../../shared/services/http-delegate.s
 import { API } from '../../../../shared/index';
 import { Observable } from 'rxjs/Observable';
 import { Project } from '../../model/project';
+import { MaterialTakeOffFilters } from '../../model/material-take-off-filters';
 
 
 @Injectable()
-export class MaterialTakeoffService extends BaseService {
+export class MaterialTakeOffService extends BaseService {
 
-  constructor(protected http: Http, protected messageService: MessageService, protected httpDelegateService : HttpDelegateService) {
+  constructor(protected httpDelegateService : HttpDelegateService) {
     super();
   }
 
-  materialFiltersList(projectId: string) {
-    var url = API.REPORT_MATERIAL_TAKE_OFF + '/' + API.PROJECT + '/' +projectId+ '/' + API.MATERIAL_FILTERS_LIST;
+  getMaterialFiltersList(projectId: string) {
+    let url = API.REPORT_MATERIAL_TAKE_OFF + '/' + API.PROJECT + '/' +projectId+ '/' + API.MATERIAL_FILTERS_LIST;
     return this.httpDelegateService.getAPI(url);
   }
 
-  getMaterialTakeOffReport(projectId : string, elementWiseReport : string, element : string, building : string): Observable<Project> {
-    var url = API.REPORT_MATERIAL_TAKE_OFF + '/' + API.PROJECT + '/' +projectId;
-    let body = {
-      "elementWiseReport" : elementWiseReport,
-      "element" : element,
-      "building" : building
-    };
-    return this.httpDelegateService.postAPI(url, body);
+  getMaterialTakeOffReport(projectId : string, materialTakeOffFilters : MaterialTakeOffFilters): Observable<Project> {
+    let url = API.REPORT_MATERIAL_TAKE_OFF + '/' + API.PROJECT + '/' +projectId;
+    return this.httpDelegateService.postAPI(url, materialTakeOffFilters);
   }
 }

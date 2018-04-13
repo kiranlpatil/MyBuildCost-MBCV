@@ -524,6 +524,7 @@ export class MaterialTakeOffElements {
 
   public static COST_HEAD_WISE = 'Cost Head Wise';
   public static ALL_BUILDINGS = 'All Buildings';
+  public static BUILDING = 'Building';
   public static COST_HEAD = 'Cost Head';
   public static MATERIAL_WISE = 'Material Wise';
   public static MATERIAL = 'Material';
