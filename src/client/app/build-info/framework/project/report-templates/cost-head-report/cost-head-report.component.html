@@ -1,25 +1,43 @@
-<div>
-  <div [hidden]="true" id="content" #content>
-    <h2>HTML Table</h2>
+<div [hidden]="true" id="content" #content>
+  <div *ngIf="costHead">
+    <h3>{{costHead.name}}</h3>
     <table>
-      <tr>
-        <th>Company</th>
-        <th>Contact</th>
-        <th>Country</th>
-      </tr>
-      <tr *ngFor="let item of items">
-        <td>{{item}}</td>
-        <td>{{item}}</td>
-        <td>{{item}}</td>
-      </tr>
+      <thead>
+        <th>Category Name</th>
+        <th>Amount</th>
+      </thead>
+      <tbody>
+        <div *ngFor="let category of costHead.categories">
+          <tr>
+            <td style="font-size: 12px">{{category.name}}</td>
+            <td style="font-size: 12px">{{category.amount}}</td>
+          </tr>
+          <tr>
+            <td>
+              <table>
+                <thead>
+                  <th>WorkItem Name</th>
+                  <th>Quantity</th>
+                  <th>Rate</th>
+                  <th>Amount</th>
+                </thead>
+              <tbody>
+              <tr *ngFor="let workitem of category.workItems">
+                <div *ngIf="workitem">
+                  <td style="font-size: 12px">{{workitem.name}}</td>
+                  <td style="font-size: 12px">{{workitem.quantity.total}}</td>
+                  <td style="font-size: 12px">{{workitem.rate.total}}</td>
+                  <td style="font-size: 12px">{{workitem.amount}}</td>
+                </div>
+              </tr>
+              </tbody>
+            </table>
+            </td>
+          </tr>
+        </div>
+      </tbody>
     </table>
   </div>
-
-  <button (click)="downloadToPdf()">Export PDF</button>
-<!--
-  <table>
-    <thead>Header</thead>
-    <tbody>Body</tbody>
-    <tfoot>Footer</tfoot>
-  </table>-->
 </div>
+
+  <button (click)="downloadToPdf()">Save as PDF</button>
