@@ -25,12 +25,13 @@ import MaterialTakeOffFlatDetailsDTO = require('../dataaccess/dto/Report/Materia
 import MaterialTakeOffFiltersListDTO = require('../dataaccess/dto/Report/MaterialTakeOffFiltersListDTO');
 import {element} from 'protractor';
 import MaterialTakeOffReport = require('../dataaccess/model/project/reports/MaterialTakeOffReport');
-import MaterialTakeOffTableView = require("../dataaccess/model/project/reports/MaterialTakeOffTableView");
-import MaterialTakeOffSecondaryView = require("../dataaccess/model/project/reports/MaterialTakeOffSecondaryView");
-import MaterialTakeOffTableViewContent = require("../dataaccess/model/project/reports/MaterialTakeOffTableViewContent");
-import MaterialTakeOffTableViewSubContent = require("../dataaccess/model/project/reports/MaterialTakeOffTableViewSubContent");
-import MaterialTakeOffTableViewHeaders = require("../dataaccess/model/project/reports/MaterialTakeOffTableViewHeaders");
-import MaterialTakeOffTableViewFooter = require("../dataaccess/model/project/reports/MaterialTakeOffTableViewFooter");
+import MaterialTakeOffTableView = require('../dataaccess/model/project/reports/MaterialTakeOffTableView');
+import MaterialTakeOffSecondaryView = require('../dataaccess/model/project/reports/MaterialTakeOffSecondaryView');
+import MaterialTakeOffTableViewContent = require('../dataaccess/model/project/reports/MaterialTakeOffTableViewContent');
+import MaterialTakeOffTableViewSubContent = require('../dataaccess/model/project/reports/MaterialTakeOffTableViewSubContent');
+import MaterialTakeOffTableViewHeaders = require('../dataaccess/model/project/reports/MaterialTakeOffTableViewHeaders');
+import MaterialTakeOffTableViewFooter = require('../dataaccess/model/project/reports/MaterialTakeOffTableViewFooter');
+import CostControllException = require("../exception/CostControllException");
 let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Report Service');
@@ -139,7 +140,8 @@ class ReportService {
       thumbRule.totalBudgetedCost = Math.round(totalRates[0].totalAmount);
       thumbRule.thumbRuleReports = thumbRuleReports;
 
-      let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',[estimatedReports]);
+      let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',
+        [estimatedReports]);
       estimate.totalRate = totalEstimatedRates[0].totalRate;
     /*  if(rateUnit === Constants.SQUREMETER_UNIT) {
         estimate.totalRate =  parseFloat((estimate.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
@@ -222,7 +224,8 @@ class ReportService {
       thumbRule.totalBudgetedCost = Math.round(totalRates[0].totalAmount);
       thumbRule.thumbRuleReports = thumbRuleReports;
 
-    let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',[estimatedReports]);
+    let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',
+      [estimatedReports]);
       estimate.totalRate = totalEstimatedRates[0].totalRate;
      /* if(rateUnit === Constants.SQUREMETER_UNIT) {
         estimate.totalRate =  parseFloat((estimate.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
@@ -236,7 +239,8 @@ class ReportService {
     return(commonAmenitiesReport);
   }
 
-  getThumbRuleAndEstimatedReportForProjectCostHead(projectCostHead: Array<CostHead>, projectRates: Array<CentralizedRate>, projectReport: BuildingReport, thumbRuleReports: ThumbRuleReport[],
+  getThumbRuleAndEstimatedReportForProjectCostHead(projectCostHead: Array<CostHead>, projectRates: Array<CentralizedRate>,
+                                                   projectReport: BuildingReport, thumbRuleReports: ThumbRuleReport[],
                                                    estimatedReports: EstimateReport[], totalArea:number, rateUnit:string) {
   for (let costHead  of projectCostHead) {
     if (costHead.active) {
@@ -334,26 +338,68 @@ class ReportService {
     logger.info('Report Service, getMaterialTakeOffReport has been hit');
     let query = { _id: projectId};
     let populate = {path : 'buildings'};
+    if(building !== Constants.STR_ALL_BUILDING) {
+      populate = {path : 'buildings', match:{name: building}};
+    }
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
       logger.info('Report Service, findAndPopulate has been hit');
       if(error) {
         callback(error, null);
       } else {
+        if(result[0].buildings.length === 0) {
+          callback(new CostControllException('Unable to find Building',null), null);
+        }
         let materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO> = this.getBuildingMaterialDetails(result[0].buildings);
         let materialReportRowData =
           this.getMaterialDataFromFlatDetailsArray(elementWiseReport, element, building, materialTakeOffFlatDetailsArray);
-        let materialTakeOffReport: MaterialTakeOffReport = new MaterialTakeOffReport(null, null);
-        materialTakeOffReport.secondaryView = {};
-          this.populateMaterialTakeOffReportFromRowData(materialReportRowData, materialTakeOffReport, building);
-        let responseData = {};
-        responseData[element]= materialTakeOffReport;
-        callback(null, responseData);
+        if(materialReportRowData.length>0 && materialReportRowData[0].header !== undefined) {
+          let materialTakeOffReport: MaterialTakeOffReport = new MaterialTakeOffReport(null, null);
+          materialTakeOffReport.secondaryView = {};
+          this.populateMaterialTakeOffReportFromRowData(materialReportRowData, materialTakeOffReport, elementWiseReport, building);
+          let responseData = {};
+          responseData[element]= materialTakeOffReport;
+          callback(null, responseData);
+        }else {
+          callback(new CostControllException('Material TakeOff Report Not Found', null), null);
+        }
       }
     });
   }
 
-  private populateMaterialTakeOffReportFromRowData(materialReportRowData: any, materialTakeOffReport: MaterialTakeOffReport, building: string) {
+  private populateMaterialTakeOffReportFromRowData(materialReportRowData: any, materialTakeOffReport: MaterialTakeOffReport,
+                                                   elementWiseReport: string, building: string) {
     for (let record of materialReportRowData) {
+      /*if (materialTakeOffReport.secondaryView[record.header] === undefined &&
+        materialTakeOffReport.secondaryView[record.header] === null) {
+        materialTakeOffReport.title = building;
+        materialTakeOffReport.secondaryView[record.header] = {};
+      }
+      let materialTakeOffSecondaryView: MaterialTakeOffSecondaryView = materialTakeOffReport.secondaryView[record.header];
+      if(materialTakeOffSecondaryView.table === undefined) {
+        materialTakeOffSecondaryView.table = new MaterialTakeOffTableView(null, null, null);
+      }
+      let table: MaterialTakeOffTableView = materialTakeOffSecondaryView.table;
+      if(table.header === null) {
+        let columnOne: 'Item';
+        let columnTwo: 'Quantity';
+        let columnThree: 'Unit';
+        if(elementWiseReport === )
+        new MaterialTakeOffTableViewHeaders('Item', 'Quantity', 'Unit');
+      }
+
+
+      if(materialTakeOffSecondaryView.title === undefined) {
+        materialTakeOffSecondaryView.title = 'send'; //TODO
+      }
+      if(materialTakeOffSecondaryView.title === undefined) {
+        materialTakeOffSecondaryView.title = 'head'; //TODO
+      }
+
+
+*/
+
+
+
       if (materialTakeOffReport.secondaryView[record.header] !== undefined &&
         materialTakeOffReport.secondaryView[record.header] !== null) {         // check if material is in map
         let materialTakeOffSecondaryView: MaterialTakeOffSecondaryView =
@@ -378,7 +424,7 @@ class ReportService {
           table.content[record.rowValue] = tableViewContent;
         }
         table.footer.columnTwo = table.footer.columnTwo + record.Total;
-        materialTakeOffSecondaryView.header = table.footer.columnTwo + ' ' + record.unit;
+        materialTakeOffSecondaryView.title = table.footer.columnTwo + ' ' + record.unit;
       } else {
         let subContentMap = {};
         if (record.subValue) {
@@ -398,13 +444,14 @@ class ReportService {
         let materialTakeOffSecondaryView: MaterialTakeOffSecondaryView =
           new MaterialTakeOffSecondaryView(materialTakeOffTableViewFooter.columnTwo + ' ' + materialTakeOffTableViewFooter.columnThree,
             table);
-        materialTakeOffReport.header = building;
+        materialTakeOffReport.title = building;
         materialTakeOffReport.secondaryView[record.header] = materialTakeOffSecondaryView;
       }
     }
   }
 
-  private getMaterialDataFromFlatDetailsArray(elementWiseReport: string, element: string, building: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+  private getMaterialDataFromFlatDetailsArray(elementWiseReport: string, element: string, building: string,
+                                              materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     let sqlQuery: string;
     switch(elementWiseReport) {
       case Constants.STR_COSTHEAD:
@@ -499,7 +546,7 @@ class ReportService {
   private addMaterialDTOForActiveCategoryInDTOArray(costHead: CostHead, buildingName: string, costHeadName: string,
                                                     materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     let categoryName: string;
-    for (let category: Category of costHead.categories) {
+    for (let category of costHead.categories) {
       if (category.active) {
         categoryName = category.name;
         this.addMaterialDTOForActiveWorkitemInDTOArray(category, buildingName, costHeadName, categoryName, materialTakeOffFlatDetailsArray);
@@ -510,7 +557,7 @@ class ReportService {
   private addMaterialDTOForActiveWorkitemInDTOArray(category: Category, buildingName: string, costHeadName: string,
                       categoryName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     let workItemName: string;
-    for (let workItem: WorkItem of category.workItems) {
+    for (let workItem of category.workItems) {
       if (workItem.active) {
         workItemName = workItem.name;
         this.addEstimatedQuantityAndRateMaterialItemInDTOArray(workItem, buildingName, costHeadName, categoryName,
@@ -526,9 +573,8 @@ class ReportService {
       quantityName = Constants.STR_DIRECT;
       this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
         materialTakeOffFlatDetailsArray);
-    }
-    else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
-      for (let quantity: QuantityDetails of workItem.quantity.quantityItemDetails) {
+    } else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
+      for (let quantity of workItem.quantity.quantityItemDetails) {
         quantityName = quantity.name;
         this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
           materialTakeOffFlatDetailsArray);
@@ -540,7 +586,7 @@ class ReportService {
                   workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
     for (let rateItem of workItem.rate.rateItems) {
       let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-        workItemName, rateItem.itemName, quantityName, ((workItem.quantity.total / workItem.rate.quantity) * rateItem.quantity),
+        workItemName, rateItem.itemName, quantityName, Math.ceil(((workItem.quantity.total / workItem.rate.quantity) * rateItem.quantity)),
         rateItem.unit);
       materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
     }

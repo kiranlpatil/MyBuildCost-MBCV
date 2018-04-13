@@ -1,13 +1,7 @@
-class MaterialTakeOffTableViewFooter {
-  columnOne: string;
-  columnTwo: number;
-  columnThree: string;
+import MaterialTakeOffView = require('./MaterialTakeOffView');
 
-  constructor(columnOne: string, columnTwo: number, columnThree: string) {
-    this.columnOne = columnOne;
-    this.columnTwo = columnTwo;
-    this.columnThree = columnThree;
-  }
+class MaterialTakeOffTableViewFooter extends MaterialTakeOffView {
+
 }
 
-export = MaterialTakeOffTableViewFooter
+export = MaterialTakeOffTableViewFooter;
