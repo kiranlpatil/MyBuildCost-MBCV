@@ -1,0 +1,22 @@
+<div *ngFor="let tableData of content | keys">
+
+  <!--content-->
+  <div *ngIf="tableData == getMaterialTakeOffElements().COLUMN_ONE" class="col-md-6">
+    <div>
+      {{content[tableData]}}
+    </div>
+  </div>
+
+  <div *ngIf="tableData == getMaterialTakeOffElements().COLUMN_TWO" class="col-md-3">
+    <div>
+      {{content[tableData]}}
+    </div>
+  </div>
+
+  <div *ngIf="tableData == getMaterialTakeOffElements().COLUMN_THREE" class="col-md-3">
+    <div>
+      {{content[tableData]}}
+    </div>
+  </div>
+
+</div>

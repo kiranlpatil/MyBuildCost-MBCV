@@ -5,6 +5,7 @@ import LoggerInterceptor = require('./../../framework/interceptor/LoggerIntercep
 import { Inject } from 'typescript-ioc';
 import RequestInterceptor = require('../interceptor/request/RequestInterceptor');
 import ResponseInterceptor = require('../interceptor/response/ResponseInterceptor');
+import ReportRequestValidator = require('../interceptor/request/validation/ReportInterceptor');
 
 var router = express.Router();
 
@@ -16,18 +17,21 @@ class ReportRoutes {
   private _requestInterceptor: RequestInterceptor;
   @Inject
   private _responseInterceptor: ResponseInterceptor;
+  @Inject
+  private reportRequestValidator: ReportRequestValidator;
 
   constructor () {
     this._reportController = new ReportController();
     this.authInterceptor = new AuthInterceptor();
+    this.reportRequestValidator = new ReportRequestValidator();
   }
   get routes () : express.Router {
 
     var controller = this._reportController;
 
     //Provide all buildings in a Project with thumbrule and estimate report with particular area and unit.
-    router.get('/:reportType/project/:projectId/rate/:costingUnit/area/:costingArea', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      controller.getProject, this._responseInterceptor.exit);
+    router.get('/:reportType/project/:projectId/rate/:costingUnit/area/:costingArea', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.getProject, this._responseInterceptor.exit);
 
     //Provide all costheads from rate analysis
     router.get('/costHeads', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
@@ -36,6 +40,20 @@ class ReportRoutes {
     //Provide all workitems from rate analysis
     router.get('/workItems', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRateAnalysisWorkItems, this._responseInterceptor.exit);
+
+    //Provide material details for material takeoff report
+    router.get('/:reportType/project/:projectId/material/details', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      this.reportRequestValidator.getMaterialDetails, controller.getMaterialDetails, this._responseInterceptor.exit);
+
+    //Provide building list , material list and costhead list for material takeoff report
+    router.get('/:reportType/project/:projectId/material/filters/list', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, this.reportRequestValidator.getMaterialFilters, controller.getMaterialFilters,
+      this._responseInterceptor.exit);
+
+    //Provide MaterialTakeOff Report
+    router.post('/:reportType/project/:projectId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      this.reportRequestValidator.getMaterialTakeOffReport, controller.getMaterialTakeOffReport, this._responseInterceptor.exit);
+
     return router;
   }
 }

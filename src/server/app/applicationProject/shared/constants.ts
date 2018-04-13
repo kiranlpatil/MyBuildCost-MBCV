@@ -62,5 +62,43 @@ class Constants {
 
   // Value Constant
   public static NUMBER_OF_FRACTION_DIGIT = 2;
+
+  //STR Constants
+  public static STR_ALL_BUILDING = 'All Buildings';
+  public static STR_EMPTY = '';
+  public static STR_COMMA_SPACE = ', ';
+  public static STR_DOUBLE_INVERTED_COMMA = '" ';
+  public static STR_AND = ' AND ';
+  public static STR_BUILDING = 'building';
+  public static STR_NAME = 'Name';
+  public static STR_BUILDING_NAME = Constants.STR_BUILDING + Constants.STR_NAME;
+  public static STR_COSTHEAD = 'costHead';
+  public static STR_COSTHEAD_NAME = Constants.STR_COSTHEAD + Constants.STR_NAME;
+  public static STR_MATERIAL = 'material';
+  public static STR_Material_NAME = Constants.STR_MATERIAL + Constants.STR_NAME;
+  public static STR_DIRECT = 'Direct';
+
+  //ALSQL uses constants
+  public static ALASQL_FROM = ' FROM ? ';
+  public static ALASQL_GROUP_BY_MATERIAL_TAKEOFF_MATERIAL_WISE = 'GROUP BY buildingName, workItemName, quantityName, unit ';
+  public static ALASQL_ORDER_BY_MATERIAL_TAKEOFF_MATERIAL_WISE = 'ORDER BY buildingName, workItemName,quantityName ';
+  public static ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE =
+    'SELECT buildingName AS header, workItemName AS rowValue, SUM(quantity) AS Total, unit ';
+  public static ALASQL_SELECT_QUANTITY_NAME_AS = ' quantityName AS subValue ';
+  public static ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO = 'WHERE materialName = ?';
+  public static ALASQL_SELECT_BUILDING_NAME = ' buildingName = "';
+  public static ALASQL_SELECT_MATERIAL_TAKEOFF_COSTHEAD_WISE =
+    'SELECT materialName AS header, workItemName AS rowValue, SUM(quantity) AS Total, unit';
+  public static ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO = 'WHERE costHeadName = ?';
+  public static ALASQL_GROUP_MATERIAL_WORKITEM_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE =
+    'GROUP BY materialName,workItemName, quantityName, unit ';
+  public static ALASQL_ORDER_BY_MATERIAL_WORKITEM_COSTHEAD_WISE = 'ORDER BY materialName,workItemName ';
+  public static ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE =
+    'GROUP BY materialName, buildingName, quantityName, unit ';
+  public static ALASQL_ORDER_BY_MATERIAL_BUILDING_MATERIAL_TAKEOFF_COSTHEAD_WISE = 'ORDER BY materialName, buildingName ';
+  public static ALASQL_SELECT_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS =
+    'SELECT materialName AS header, buildingName AS rowValue, SUM(quantity) AS Total, unit';
+  public static ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS =
+    'GROUP BY materialName, buildingName, quantityName, unit ';
 }
 export=Constants;

@@ -311,6 +311,10 @@ export class API {
   public static CARPET_AREA='carpetArea';
   public static BUDGETED_COST ='budgetedCost';
 
+  //Material Take Off
+
+  public static REPORT_MATERIAL_TAKE_OFF ='report/materialtakeoff';
+  public static MATERIAL_FILTERS_LIST ='material/filters/list';
 }
 
 export class ImagePath {
@@ -514,6 +518,24 @@ export class ProjectElements {
   public static RS_PER_SQMT = 'Rs/Sqmt';
   public static SQUAREFEET = 'sqft';
   public static SQUAREMETER = 'sqmt';
+}
+
+export class MaterialTakeOffElements {
+
+  public static COST_HEAD_WISE = 'Cost Head Wise';
+  public static ALL_BUILDINGS = 'All Buildings';
+  public static COST_HEAD = 'Cost Head';
+  public static MATERIAL_WISE = 'Material Wise';
+  public static MATERIAL = 'Material';
+  public static CONTENT = 'content';
+  public static HEADERS = 'headers';
+  public static FOOTER = 'footer';
+  public static SUB_CONTENT = 'subContent';
+  public static COLUMN_ONE = 'columnOne';
+  public static COLUMN_TWO = 'columnTwo';
+  public static COLUMN_THREE = 'columnThree';
+  public static ELEMENT_WISE_REPORT_COST_HEAD = 'costHead';
+  public static ELEMENT_WISE_REPORT_MATERIAL = 'material';
 }
 
 export class Menus {
