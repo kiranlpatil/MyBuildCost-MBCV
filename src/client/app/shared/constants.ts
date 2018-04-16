@@ -522,11 +522,11 @@ export class ProjectElements {
 
 export class MaterialTakeOffElements {
 
-  public static COST_HEAD_WISE = 'Cost Head Wise';
+  public static COST_HEAD_WISE = 'Cost Head wise';
   public static ALL_BUILDINGS = 'All Buildings';
   public static BUILDING = 'Building';
   public static COST_HEAD = 'Cost Head';
-  public static MATERIAL_WISE = 'Material Wise';
+  public static MATERIAL_WISE = 'Material wise';
   public static MATERIAL = 'Material';
   public static CONTENT = 'content';
   public static HEADERS = 'headers';

@@ -4,8 +4,8 @@
     <div class="col-sm-9 col-xs-12 padding-right30 left-content">
       <div class="pull-left no-padding">
         <select class="select-costing no-margin" (change)="onChangeGroupBy($event.target.value)">
-          <option *ngFor="let elementWiseReport of elementWiseReports" [value]="elementWiseReport">{{
-            elementWiseReport }}</option>
+          <option *ngFor="let elementWiseReport of elementWiseReports" [value]="elementWiseReport.elementKey">{{
+            elementWiseReport.elementValue }}</option>
         </select>
       </div>
       <div class="pull-left no-padding">

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MaterialTakeOffService } from './material-takeoff.service';
 import { MaterialTakeOffElements } from '../../../../shared/constants';
 import { MaterialTakeOffFilters } from '../../model/material-take-off-filters';
+import { MaterialTakeOffElement } from '../../model/material-take-off-element';
 
 @Component({
   moduleId: module.id,
@@ -21,15 +22,25 @@ export class MaterialTakeoffComponent implements OnInit {
   costHeads: Array<string>;
   materials: Array<string>;
   buildings: Array<string>;
-  elementWiseReports: Array<string>;
+  elementWiseReports: Array<MaterialTakeOffElement> = new Array<MaterialTakeOffElement>();
   elements : Array<string>;
 
   materialTakeOffReport :any;
 
   constructor( private activatedRoute:ActivatedRoute,  private _router : Router, private materialTakeoffService : MaterialTakeOffService) {
-  this.elementWiseReports = [
-      MaterialTakeOffElements.COST_HEAD_WISE, MaterialTakeOffElements.MATERIAL_WISE
-    ];
+
+    let costHeadElement = {
+      elementKey : MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
+      elementValue : MaterialTakeOffElements.COST_HEAD_WISE
+    };
+
+    let materialElement = {
+      elementKey : MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL,
+      elementValue : MaterialTakeOffElements.MATERIAL_WISE
+    };
+
+    this.elementWiseReports.push(costHeadElement);
+    this.elementWiseReports.push(materialElement);
   }
 
   ngOnInit() {
@@ -49,7 +60,8 @@ export class MaterialTakeoffComponent implements OnInit {
 
   onGetMaterialFiltersListSuccess(materialFiltersList : Array<string>) {
     this.extractList(materialFiltersList);
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.selectedElement, this.building);
+    this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
+      this.selectedElement, this.building);
   }
 
   onGetMaterialFiltersListFailure(error : any) {
@@ -57,7 +69,7 @@ export class MaterialTakeoffComponent implements OnInit {
   }
 
   extractList(list : any) {
-    this.elementWiseReport = MaterialTakeOffElements.COST_HEAD_WISE;
+    this.elementWiseReport = MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD;
 
     this.costHeads = list.costHeadList;
     this.materials = list.materialList;
@@ -71,8 +83,9 @@ export class MaterialTakeoffComponent implements OnInit {
   }
 
   onChangeGroupBy(groupBy : string) {
+
     this.elementWiseReport = groupBy;
-    if(this.elementWiseReport === MaterialTakeOffElements.COST_HEAD_WISE) {
+    if(this.elementWiseReport === MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD) {
       this.elements = this.costHeads;
       this.elementHeading = MaterialTakeOffElements.COST_HEAD;
     } else {
@@ -81,38 +94,22 @@ export class MaterialTakeoffComponent implements OnInit {
     }
     this.selectedElement = this.elements[0];
 
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.selectedElement, this.building);
+    this.getMaterialTakeOffReport( this.elementWiseReport, this.selectedElement, this.building);
 
   }
 
   onChangeSecondFilter(selectedElement : string) {
     this.selectedElement = selectedElement;
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.selectedElement, this.building);
+    this.getMaterialTakeOffReport( this.elementWiseReport, this.selectedElement, this.building);
   }
 
   onChangeBuilding(building : string) {
     this.building = building;
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.selectedElement, this.building);
+    this.getMaterialTakeOffReport( this.elementWiseReport, this.selectedElement, this.building);
   }
 
   getMaterialTakeOffElements() {
     return MaterialTakeOffElements;
-  }
-
-  buildMaterialTakeOffReport(groupBy : string, selectedElement : string, building : string) {
-    if(groupBy === MaterialTakeOffElements.COST_HEAD_WISE && building === MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
-        this.selectedElement, this.building);
-    } else if(groupBy === MaterialTakeOffElements.COST_HEAD_WISE && building !== MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
-        this.selectedElement, this.building);
-    } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building === MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL,
-        this.selectedElement, this.building);
-    } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building !== MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL,
-        this.selectedElement, this.building);
-    }
   }
 
   getMaterialTakeOffReport(elementWiseReport : string, selectedElement : string, building : string) {
