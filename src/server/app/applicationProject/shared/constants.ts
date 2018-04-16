@@ -100,5 +100,7 @@ class Constants {
     'SELECT materialName AS header, buildingName AS rowValue, SUM(quantity) AS Total, unit';
   public static ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS =
     'GROUP BY materialName, buildingName, quantityName, unit ';
+  public static ALASQL_MATERIAL_NOT_LABOUR = ' materialName NOT LIKE "%Labour%" ';
+  public static ALASQL_AND_MATERIAL_NOT_LABOUR = ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOUR;
 }
 export=Constants;

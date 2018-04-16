@@ -394,7 +394,7 @@ class ReportService {
       }
 
       let materialTakeOffTableViewSubContent = null;
-      if (record.subValue && record.subValue !== 'default') {
+      if (record.subValue && record.subValue !== 'default' && record.subValue !== 'Direct') {
         materialTakeOffTableViewSubContent =
           new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, record.unit);
       }
@@ -453,6 +453,7 @@ class ReportService {
       select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE ;
       where = Constants.ALASQL_WHERE_MATERIAL_NAME_EQUALS_TO ;
     }
+    where = where + Constants.ALASQL_AND_MATERIAL_NOT_LABOUR;
     sqlQuery = select + from + where + groupBy + orderBy;
     return sqlQuery;
   }
@@ -477,6 +478,7 @@ class ReportService {
       groupBy = Constants.ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS;
       orderBy = Constants.ALASQL_ORDER_BY_MATERIAL_BUILDING_MATERIAL_TAKEOFF_COSTHEAD_WISE;
     }
+    where = where + Constants.ALASQL_AND_MATERIAL_NOT_LABOUR;
     sqlQuery = select + from + where + groupBy + orderBy;
     return sqlQuery;
   }
@@ -488,14 +490,20 @@ class ReportService {
     column = Constants.STR_COSTHEAD_NAME;
     let costHeadList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray);
     column = Constants.STR_Material_NAME;
-    let materialList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray);
+    let materialList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray,
+      Constants.ALASQL_MATERIAL_NOT_LABOUR);
     let materialTakeOffFiltersObject: MaterialTakeOffFiltersListDTO = new MaterialTakeOffFiltersListDTO(buildingList, costHeadList,
       materialList);
     return materialTakeOffFiltersObject;
   }
 
-  private getDistinctArrayOfStringFromAlasql(column: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+  private getDistinctArrayOfStringFromAlasql(column: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,
+                                             notLikeOptional?: string) {
     let sqlQuery: string = 'SELECT DISTINCT flatData.' + column + ' FROM ? AS flatData';
+    let where = ' where '+ notLikeOptional;
+    if(notLikeOptional) {
+      sqlQuery = sqlQuery + where;
+    }
     let distinctObjectArray = alasql(sqlQuery, [materialTakeOffFlatDetailsArray]);
     let distinctNameStringArray: Array<string> = new Array<string>();
     for(let distinctObject of distinctObjectArray) {
