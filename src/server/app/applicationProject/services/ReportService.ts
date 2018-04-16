@@ -91,7 +91,7 @@ class ReportService {
         }
          let totalOfArea = alasql('VALUE OF SELECT ROUND(SUM('+typeOfArea+'),2) FROM ?',[buildings]);
         if(rateUnit === Constants.SQUREMETER_UNIT) {
-         totalArea = Math.round(totalOfArea * config.get(Constants.SQUARE_METER));
+         totalArea =totalOfArea * config.get(Constants.SQUARE_METER);
         } else {
           totalArea = totalOfArea;
         }
@@ -119,7 +119,7 @@ class ReportService {
       buildingReport.name = building.name;
       buildingReport._id = building._id;
       if(rateUnit === Constants.SQUREMETER_UNIT) {
-        buildingReport.area =  Math.round( building[typeOfArea] * config.get(Constants.SQUARE_METER));
+        buildingReport.area =  building[typeOfArea] * config.get(Constants.SQUARE_METER);
       } else {
         buildingReport.area = building[typeOfArea];
       }
@@ -133,18 +133,12 @@ class ReportService {
 
       let totalRates = alasql('SELECT ROUND(SUM(amount),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',[thumbRuleReports]);
       thumbRule.totalRate = totalRates[0].totalRate;
-    /*  if(rateUnit === Constants.SQUREMETER_UNIT) {
-        thumbRule.totalRate =  parseFloat((thumbRule.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
-      }*/
       thumbRule.totalBudgetedCost = Math.round(totalRates[0].totalAmount);
       thumbRule.thumbRuleReports = thumbRuleReports;
 
       let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',[estimatedReports]);
       estimate.totalRate = totalEstimatedRates[0].totalRate;
-    /*  if(rateUnit === Constants.SQUREMETER_UNIT) {
-        estimate.totalRate =  parseFloat((estimate.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
-      }*/
-      estimate.totalEstimatedCost = Math.round(totalEstimatedRates[0].totalAmount);
+      estimate.totalEstimatedCost = totalEstimatedRates[0].totalAmount;
       estimate.estimatedCosts = estimatedReports;
 
       buildingReport.thumbRule = thumbRule;
@@ -167,10 +161,7 @@ class ReportService {
         thumbRuleReport.rateAnalysisId = costHead.rateAnalysisId;
         thumbRuleReport.amount = Math.round(costHead.budgetedCostAmount);
         thumbRuleReport.costHeadActive = costHead.active;
-        thumbRuleReport.rate = parseFloat((thumbRuleReport.amount / buildingReport.area).toFixed(2));
-   /*     if(rateUnit === Constants.SQUREMETER_UNIT) {
-          thumbRuleReport.rate = parseFloat((thumbRuleReport.rate * config.get(Constants.SQUARE_METER)).toFixed(2));
-        }*/
+        thumbRuleReport.rate = thumbRuleReport.amount / buildingReport.area;
         thumbRuleReports.push(thumbRuleReport);
 
         //Estimated cost Report
@@ -191,10 +182,7 @@ class ReportService {
     let projectService : ProjectService = new ProjectService();
     let categoriesObj = projectService.getCategoriesListWithCentralizedRates(costHeadCategories, centralizedRates);
     estimateReport.total = categoriesObj.categoriesAmount;
-    estimateReport.rate = parseFloat((estimateReport.total / area).toFixed(2));
-   /* if(rateUnit === Constants.SQUREMETER_UNIT) {
-      estimateReport.rate = parseFloat((estimateReport.rate * config.get(Constants.SQUARE_METER)).toFixed(2));
-    }*/
+    estimateReport.rate = estimateReport.total / area;
     return estimateReport;
   }
 
@@ -216,18 +204,12 @@ class ReportService {
 
     let totalRates = alasql('SELECT ROUND(SUM(amount),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',[thumbRuleReports]);
       thumbRule.totalRate = totalRates[0].totalRate;
-     /* if(rateUnit === Constants.SQUREMETER_UNIT) {
-        thumbRule.totalRate =  parseFloat((thumbRule.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
-      }*/
       thumbRule.totalBudgetedCost = Math.round(totalRates[0].totalAmount);
       thumbRule.thumbRuleReports = thumbRuleReports;
 
     let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',[estimatedReports]);
       estimate.totalRate = totalEstimatedRates[0].totalRate;
-     /* if(rateUnit === Constants.SQUREMETER_UNIT) {
-        estimate.totalRate =  parseFloat((estimate.totalRate * config.get(Constants.SQUARE_METER)).toFixed(2));
-      }*/
-      estimate.totalEstimatedCost =  Math.round(totalEstimatedRates[0].totalAmount);
+      estimate.totalEstimatedCost = totalEstimatedRates[0].totalAmount;
       estimate.estimatedCosts = estimatedReports;
 
       projectReport.thumbRule = thumbRule;
@@ -246,10 +228,7 @@ class ReportService {
       thumbRuleReport.rateAnalysisId = costHead.rateAnalysisId;
       thumbRuleReport.amount = Math.round(costHead.budgetedCostAmount);
       thumbRuleReport.costHeadActive = costHead.active;
-      thumbRuleReport.rate = parseFloat((thumbRuleReport.amount / totalArea).toFixed(2));
-     /* if (rateUnit === Constants.SQUREMETER_UNIT) {
-        thumbRuleReport.rate = parseFloat((thumbRuleReport.rate * config.get(Constants.SQUARE_METER)).toFixed(2));
-      }*/
+      thumbRuleReport.rate = thumbRuleReport.amount / totalArea;
       thumbRuleReports.push(thumbRuleReport);
 
       //Estimated cost Report

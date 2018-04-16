@@ -60,7 +60,7 @@ export class QuantityDetailsComponent implements OnInit {
     }
   }
 
-  setQuantityNameForDelete(quantityName: string, quantityIndex: number) {
+  setQuantityNameForDelete(quantityName: string) {
     this.quantityName = quantityName;
   }
 

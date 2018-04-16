@@ -347,34 +347,27 @@ export class CostSummaryComponent implements OnInit {
     //Calculate total of all building
     for (let buildindIndex = 0; buildindIndex < this.buildingsReport.length; buildindIndex++) {
 
-      this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost +
-        parseFloat((this.buildingsReport[buildindIndex].thumbRule.totalBudgetedCost).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.buildingsReport[buildindIndex].thumbRule.totalBudgetedCost;
 
-      this.grandTotalOfTotalRate = this.grandTotalOfTotalRate +
-        parseFloat((this.buildingsReport[buildindIndex].thumbRule.totalRate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+      this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.buildingsReport[buildindIndex].thumbRule.totalRate;
 
-      this.grandTotalOfArea =( this.grandTotalOfArea + parseFloat((
-        this.buildingsReport[buildindIndex].area).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT)));
+      this.grandTotalOfArea = this.grandTotalOfArea + this.buildingsReport[buildindIndex].area;
 
       this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost +
-        parseFloat((this.buildingsReport[buildindIndex].estimate.totalEstimatedCost).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+       this.buildingsReport[buildindIndex].estimate.totalEstimatedCost;
 
       this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate +
-        parseFloat((this.buildingsReport[buildindIndex].estimate.totalRate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+       this.buildingsReport[buildindIndex].estimate.totalRate;
     }
 
     //Calculate total with amenities data
-    this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost +
-      parseFloat((this.amenitiesReport.thumbRule.totalBudgetedCost).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+    this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.amenitiesReport.thumbRule.totalBudgetedCost;
 
-    this.grandTotalOfTotalRate = this.grandTotalOfTotalRate +
-      parseFloat((this.amenitiesReport.thumbRule.totalRate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+    this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.amenitiesReport.thumbRule.totalRate;
 
-    this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost +
-      parseFloat((this.amenitiesReport.estimate.totalEstimatedCost).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+    this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost + this.amenitiesReport.estimate.totalEstimatedCost;
 
-    this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate +
-      parseFloat((this.amenitiesReport.estimate.totalRate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+    this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate + this.amenitiesReport.estimate.totalRate;
   }
 
   toggleShowGrandTotalPanelBody() {

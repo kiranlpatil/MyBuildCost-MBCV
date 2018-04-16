@@ -25,7 +25,7 @@
                 <a (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}" [class.collapsed]="i!=0">
                   {{ building.name }}
                   <span class="slab-area">
-                    {{ getLabel().TOTAL }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area }} {{ (defaultCostingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
+                    {{ getLabel().TOTAL }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area| number: '1.0-0' }} {{ (defaultCostingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
                   </span>
                   <!--<span class="slab-area" *ngIf="compareIndex !== i">
                     {{ getLabel().BUDGETED_COST }} : {{ building.thumbRule.totalBudgetedCost|number }}
@@ -68,7 +68,7 @@
                   <tbody *ngIf="(building.thumbRule && building.estimate)" >
                     <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index" class="delete-cost-head-cell">
                       <td class="border-left">{{ thumbRuleItem.name }}</td>
-                      <td class="border-left">{{ thumbRuleItem.rate | number }}</td>
+                      <td class="border-left">{{ thumbRuleItem.rate | number: '1.2-2' }}</td>
                       <td class="border-left">
                         <div class="edit-field">
                           <input type="number"
@@ -79,7 +79,7 @@
                         </div>
                       </td>
                       <td class="border-left">
-                        {{ building.estimate.estimatedCosts[i].rate | number }}
+                        {{ building.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
                       </td>
                       <td>
                         <div *ngIf="building.estimate.estimatedCosts[i].total != 0"
@@ -87,7 +87,7 @@
                           <span class="estimated-cost"
                             [class.above-cost]="building.estimate.estimatedCosts[i].total > thumbRuleItem.amount"
                             [class.below-cost]="building.estimate.estimatedCosts[i].total < thumbRuleItem.amount">
-                            {{ building.estimate.estimatedCosts[i].total | number }}
+                            {{ building.estimate.estimatedCosts[i].total | number: '1.0-0' }}
                           </span>
                         </div>
                         <button *ngIf="building.estimate.estimatedCosts[i].total == 0"
@@ -129,10 +129,10 @@
               <tbody>
                 <tr *ngIf="(building.thumbRule && building.estimate)">
                   <td class="border-left">{{ getLabel().TOTAL }}</td>
-                  <td class="border-left">{{ building.thumbRule.totalRate|number }}</td>
-                  <td class="border-left"><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number }}</span></td>
-                  <td class="border-left">{{ building.estimate.totalRate|number }}</td>
-                  <td class="border-left"><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number }}</span></td>
+                  <td class="border-left">{{ building.thumbRule.totalRate|number: '1.2-2' }}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number : '1.0-0'}}</span></td>
+                  <td class="border-left">{{ building.estimate.totalRate|number: '1.2-2'}}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number : '1.0-0'}}</span></td>
                 </tr>
               </tbody>
             </table>
@@ -156,10 +156,10 @@
                 <tbody>
                 <tr>
                   <td>{{ getLabel().GRAND_TOTAL }}</td>
-                  <td>{{ grandTotalOfTotalRate|number }}</td>
-                  <td><span class="estimated-cost">{{ grandTotalOfBudgetedCost|number }}</span></td>
-                  <td>{{ grandTotalOfEstimatedRate|number }}</td>
-                  <td><span class="estimated-cost">{{ grandTotalOfEstimatedCost|number }}</span></td>
+                  <td>{{ grandTotalOfTotalRate|number: '1.2-2' }}</td>
+                  <td><span class="estimated-cost">{{ grandTotalOfBudgetedCost|number: '1.0-0' }}</span></td>
+                  <td>{{ grandTotalOfEstimatedRate|number: '1.2-2' }}</td>
+                  <td><span class="estimated-cost">{{ grandTotalOfEstimatedCost|number: '1.0-0' }}</span></td>
                 </tr>
                 </tbody>
               </table>

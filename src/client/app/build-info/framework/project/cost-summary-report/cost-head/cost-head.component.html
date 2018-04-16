@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-4 text-right padding-right5">
           <bi-cost-head-report-pdf [costHeadId]="costHeadId"></bi-cost-head-report-pdf>
-          <span class="text-left total-amount-work total-cost"> {{categoryDetailsTotalAmount|number}} </span>
+          <span class="text-left total-amount-work total-cost"> {{categoryDetailsTotalAmount|number : '1.0-0'}} </span>
         </div>
       </h4>
       <div class="panel-group" *ngFor=" let category of categoryDetails; let categoryIndex = index ">
@@ -23,7 +23,7 @@
                    href="#collapse{{category.rateAnalysisId}}" class="collapsed">
                   <span class="caret"></span>
                   <span class="">{{ category.name }}</span>
-                  <span class="text-right pull-right total-cost">{{ category.amount|number }}</span>
+                  <span class="text-right pull-right total-cost">{{ category.amount|number :'1.0-0'}}</span>
                 </a>
               </div>
             </div>
@@ -97,10 +97,10 @@
                                   <div class="edit-cost" [class.active-cost]="(rateView==='cost' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                                        *ngIf="workItem.amount != 0 && workItem.isDirectRate === false"
                                        (click)="getRateByQuantity( getLabel().GET_RATE_BY_QUANTITY, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">
-                                    {{ (workItem.amount)|number}}
+                                    {{ (workItem.amount)|number : '1.0-0'}}
                                   </div>
                                   <div  *ngIf="workItem.isDirectRate">
-                                    {{ (workItem.amount)|number}}
+                                    {{ (workItem.amount)|number : '1.0-0'}}
                                   </div>
                                 </td>
 
@@ -135,11 +135,7 @@
                                                    [workItemsList] ="workItemsList"
                                                    [categoryRateAnalysisId]="category.rateAnalysisId"
                                                    [workItemRateAnalysisId]="workItem.rateAnalysisId"
-                                                   [totalAmount]="totalAmount"
                                                    [ratePerUnitAmount]="ratePerUnitAmount"
-                                                   [totalAmountOfMaterial] = "totalAmountOfMaterial"
-                                                   [totalAmountOfLabour] = "totalAmountOfLabour"
-                                                   [totalAmountOfMaterialAndLabour] = "totalAmountOfMaterialAndLabour"
                                                    (categoriesTotalAmount)="setCategoriesTotal($event)"
                                                    (closeRateView)="closeRateView($event)"
                                                    (showWorkItemTabName)="setShowWorkItemTab($event)"
@@ -235,4 +231,12 @@
 <div class="modal fade default-modal" id="deleteQuantityDetails" role="dialog">
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationForQuantityDetails" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
 </div>
+
+
+
+<!--
+<div class="modal fade" id="updateDirectQuantity" role="dialog">
+  <bi-update-confirmation-modal [quantityType]="updateConfirmationForDirectQuantity" (updateElementEvent)="updateElement($event)"></bi-update-confirmation-modal>
+</div>
+-->
 
