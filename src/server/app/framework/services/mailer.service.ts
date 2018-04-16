@@ -1,6 +1,7 @@
 import * as nodemailer from 'nodemailer';
 import MailAttachments = require('../shared/sharedarray');
 import LoggerService = require('../shared/logger/LoggerService');
+import Imp = require('../public/templates/');
 import * as fs from 'fs';
 import * as path from 'path';
 import { SentMessageInfo } from 'nodemailer';
@@ -21,16 +22,23 @@ class SendMailService {
        data: Map<string, string>,
        callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string,attachment?:any) {
 
-    let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
-    if(content) {
+    //let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
+    try {
+      let content = fs.readFileSync('../public/templates/' + templateName).toString();
+      console.log('content : '+content);
+    } catch (err) {
+      console.log('err : '+JSON.stringify(err));
+      callback(null, null);
+    }
+
+    /*if(content) {
       console.log('content resolve : '+JSON.stringify(content));
       let result = content;
       callback(null, null);
     } else {
-      let content2 = fs.readFileSync(config.get('application.publicPath') + 'templates/' + templateName).toString();
       console.log('content  publicPath: '+JSON.stringify(content2));
       callback(null, null);
-    }
+    }*/
     /*data.forEach((value: string, key: string) => {
       content = content.replace(key, value);
     });
