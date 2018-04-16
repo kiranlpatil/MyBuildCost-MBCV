@@ -63,7 +63,7 @@ export class DashboardProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if(this.userForm.valid) {
+    //if(this.userForm.valid) {
       this.model = this.userForm.value;
       this.dashboardUserProfileService.updateProfile(this.model)
         .subscribe(
@@ -71,7 +71,7 @@ export class DashboardProfileComponent implements OnInit {
           error => this.onProfileUpdateError(error));
       SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, this.model.first_name);
       this.profileService.onProfileUpdate(this.model);
-    }
+    //}
   }
 
   onProfileUpdateSuccess(result: any) {
