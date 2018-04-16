@@ -213,7 +213,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
                 return defaultQuantityDetail.name === Label.DEFAULT_VIEW;
               });
             this.workItem.quantity.quantityItemDetails = defaultQuantityDetail;
-            this.quantityItemsArray = defaultQuantityDetail[0].quantityItems;
+            this.quantityItemsArray = lodsh.cloneDeep(defaultQuantityDetail[0].quantityItems);
             this.keyQuantity = defaultQuantityDetail[0].name;
         } else {
             let quantityDetail: QuantityDetails = new QuantityDetails();
