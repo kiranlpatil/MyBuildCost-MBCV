@@ -39,7 +39,7 @@
 
                     <!--header-->
                     <div class="item-header">
-                      <bi-table-row
+                      <bi-table-row [customClass]="'item-header-row'"
                         [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.header">
                       </bi-table-row>
                     </div>
@@ -50,23 +50,35 @@
                       <div class="inner-item-list" (click)="showSubContent(secondaryViewDataIndex, contentIndex)">
 
                       <!--content-->
-                      <span class="caret"></span>
-                      <bi-table-row
-                        [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content]">
-                      </bi-table-row>
-
-                      <!--sub content-->
-                        <div  *ngIf="dataIndex === secondaryViewDataIndex &&
-                                    headerIndex === contentIndex &&
-                                    viewSubContent">
-                          <div class="collapse-list-item" *ngFor="let subContent of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys;">
-                            <bi-table-row
-                              [customClass]="'row-list'"
-                              [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent]">
-                            </bi-table-row>
+                        <div class="panel panel-default">
+                          <div class="panel-group">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseRow{{secondaryViewDataIndex}}">
+                                  <bi-table-row [customClass]="'item-inner-row'"
+                                    [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content]">
+                                  </bi-table-row>
+                                  <span class="caret"></span>
+                                </a>
+                              </h4>
+                            </div>
                           </div>
                         </div>
-
+                        <div id="collapseRow{{secondaryViewDataIndex}}" class="panel-collapse collapse">
+                          <div class="panel-body">
+                          <!--sub content-->
+                            <div  *ngIf="dataIndex === secondaryViewDataIndex &&
+                                        headerIndex === contentIndex &&
+                                        viewSubContent">
+                              <div class="collapse-list-item" *ngFor="let subContent of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys;">
+                                <bi-table-row
+                                  [customClass]="'row-list'"
+                                  [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent]">
+                                </bi-table-row>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -74,7 +86,7 @@
                     <!--footer-->
                     <div class="item-footer">
                       <bi-table-row
-                        [customClass]="'footer-row'"
+                        [customClass]="'item-footer-row'"
                         [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.footer">
                       </bi-table-row>
                     </div>

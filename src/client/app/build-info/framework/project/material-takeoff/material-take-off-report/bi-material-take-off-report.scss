@@ -17,9 +17,8 @@
     border-radius: 8px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
     font-weight: bold;
-    min-height: 50px;
     margin: 6px 0 0;
-    padding: 25px 15px;
+    padding: 0 15px;
     position: relative;
     width: 100%;
   }
@@ -29,10 +28,30 @@
     border: 0;
     border-radius: 8px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
-    min-height: 37px;
+    min-height: 31px;
     margin: 6px 0 0;
-    padding: 8px 15px;
+    padding: 0 15px;
     width: 100%;
+    .panel-body {
+      padding: 0;
+    }
+    .panel-heading {
+      background: transparent;
+      box-shadow: none;
+      min-height: 32px;
+      a {
+        font-weight: bold;
+        padding: 0;
+        .caret {
+          top: 44%;
+        }
+      }
+    }
+    .panel-group {
+      border: 0;
+      padding: 0;
+    }
+
   }
   .item-footer {
     display: inline-block;
@@ -41,9 +60,8 @@
     border-radius: 8px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
     font-weight: bold;
-    min-height: 50px;
     margin: 6px 0 0;
-    padding: 15px 15px;
+    padding: 0 15px;
     position: relative;
     width: 100%;
   }
