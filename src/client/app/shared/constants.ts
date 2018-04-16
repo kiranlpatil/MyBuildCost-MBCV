@@ -183,7 +183,8 @@ export class Messages {
   public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
   public static MSG_SUCCESS_DELETE_WORKITEM: string = 'Your workitem deleted successfully.';
   public static MSG_SUCCESS_UPDATE_THUMBRULE_RATE_COSTHEAD: string = 'Thumbrule rate for CostHead updated successfully.';
-  public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM : string = 'Direct rate for workitem updated successfully.';
+  public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM : string = 'Direct quantity for workitem updated successfully.';
+  public static MSG_SUCCESS_UPDATE_DIRECT_RATE_OF_WORKITEM : string = 'Direct rate for workitem updated successfully.';
 
   //Quantity view required fields
   public static MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED = 'Enter item';
@@ -447,7 +448,9 @@ export class Label {
   public static COSTING_BY_UNIT : string = 'Costing in ';
   public static COSTING_PER_AREA : string = 'Costing per ';
   public static TOTAL : string = 'Total ';
-  public static SUBTOTAL : string = 'Sub Total';
+  public static TOTAL_A : string = 'Total(A)';
+  public static TOTAL_A_B : string = 'Total(A+B)';
+  public static TOTAL_A_B_C : string = 'Total(A+B+C)';
   public static NOTES : string = 'Notes ';
   public static BUDGETED_COST : string = 'Budgeted Cost ';
   public static ESTIMATED_COST : string = 'Estimated Cost ';
@@ -512,7 +515,9 @@ export class ProjectElements {
   public static WORK_ITEM = 'WorkItem';
   public static BUILDING = 'Building';
   public static QUANTITY_ITEM = 'Quantity Item';
+  public static DIRECT_QUANTITY = 'Direct Quantity';
   public static QUANTITY_DETAILS = 'Quantity Details';
+  public static QUANTITY = 'Quantity';
   public static CATEGORY = 'Category';
   public static SLAB_AREA = 'Slab Area';
   public static SALEABLE_AREA = 'Saleable Area';
@@ -525,10 +530,11 @@ export class ProjectElements {
 
 export class MaterialTakeOffElements {
 
-  public static COST_HEAD_WISE = 'Cost Head Wise';
+  public static COST_HEAD_WISE = 'Cost Head wise';
   public static ALL_BUILDINGS = 'All Buildings';
+  public static BUILDING = 'Building';
   public static COST_HEAD = 'Cost Head';
-  public static MATERIAL_WISE = 'Material Wise';
+  public static MATERIAL_WISE = 'Material wise';
   public static MATERIAL = 'Material';
   public static CONTENT = 'content';
   public static HEADERS = 'headers';
@@ -539,6 +545,9 @@ export class MaterialTakeOffElements {
   public static COLUMN_THREE = 'columnThree';
   public static ELEMENT_WISE_REPORT_COST_HEAD = 'costHead';
   public static ELEMENT_WISE_REPORT_MATERIAL = 'material';
+  public static ERROR_MESSAGE_MATERIAL_TAKE_OFF_REPORT_OF = 'Material take off report of ';
+  public static ERROR_MESSAGE_IS_NOT_FOUND_FOR = ' is not found for ';
+  public static ERROR_MESSAGE_BUILDING = ' building.';
 }
 
 export class Menus {

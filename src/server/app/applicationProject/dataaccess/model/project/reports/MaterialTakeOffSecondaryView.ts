@@ -1,11 +1,11 @@
 import MaterialTakeOffTableView = require('./MaterialTakeOffTableView');
 
 class MaterialTakeOffSecondaryView {
-  header: string;
+  title: string;
   table: MaterialTakeOffTableView;
 
   constructor(header: string, table: MaterialTakeOffTableView) {
-    this.header = header;
+    this.title = header;
     this.table = table;
   }
 }

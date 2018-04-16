@@ -100,7 +100,7 @@
         font-size: 12px;
         height: 26px;
         margin: 0;
-        padding: 3px 28px 3px 3px;
+        padding: 3px 24px 3px 3px;
         width: 100%;
         text-align: center;
         transition: opacity 0.5s ease-in-out;
@@ -154,7 +154,7 @@
   }
 
   .estimated-cost {
-    min-width: 100px;
+    width: 120px;
     display: block;
   }
 
@@ -194,31 +194,19 @@
     margin: 0;
 
     tbody > tr {
+      box-shadow: none !important;
+      background: transparent;
+      border: 0;
+
       td {
         font-size: 12px;
         font-weight: 800;
         border-top: 0;
-        padding: 0 8px;
         vertical-align: middle;
 
         &:first-child {
           font-size: 24px;
           font-weight: 300;
-        }
-
-        &:nth-child(2),
-        &:nth-child(3),
-        &:nth-child(4) {
-          text-align: right;
-        }
-
-        &:last-child {
-          text-align: center;
-        }
-
-        .estimated-cost {
-          min-width: 100px;
-          display: block;
         }
       }
     }

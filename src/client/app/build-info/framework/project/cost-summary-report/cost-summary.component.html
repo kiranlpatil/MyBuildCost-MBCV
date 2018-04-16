@@ -25,7 +25,7 @@
                 <a (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}" [class.collapsed]="i!=0">
                   {{ building.name }}
                   <span class="slab-area">
-                    {{ getLabel().TOTAL }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area }} {{ (defaultCostingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
+                    {{ getLabel().TOTAL }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area| number: '1.0-0' }} {{ (defaultCostingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
                   </span>
                   <!--<span class="slab-area" *ngIf="compareIndex !== i">
                     {{ getLabel().BUDGETED_COST }} : {{ building.thumbRule.totalBudgetedCost|number }}
@@ -39,7 +39,8 @@
                   <li><p  data-toggle="modal" data-target="#myModal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
                   <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
                   <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
-                  <li><p (click)="downloadToPdf()">Print PDF</p></li>
+                  <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
+                  <li><cost-summary-report-pdf [buildingReport]="building"></cost-summary-report-pdf></li>
                 </ul>
               </div>
             </div>
@@ -68,7 +69,7 @@
                   <tbody *ngIf="(building.thumbRule && building.estimate)" >
                     <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index" class="delete-cost-head-cell">
                       <td class="border-left">{{ thumbRuleItem.name }}</td>
-                      <td class="border-left">{{ thumbRuleItem.rate | number }}</td>
+                      <td class="border-left">{{ thumbRuleItem.rate | number: '1.2-2' }}</td>
                       <td class="border-left">
                         <div class="edit-field">
                           <input type="number"
@@ -79,7 +80,7 @@
                         </div>
                       </td>
                       <td class="border-left">
-                        {{ building.estimate.estimatedCosts[i].rate | number }}
+                        {{ building.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
                       </td>
                       <td>
                         <div *ngIf="building.estimate.estimatedCosts[i].total != 0"
@@ -87,7 +88,7 @@
                           <span class="estimated-cost"
                             [class.above-cost]="building.estimate.estimatedCosts[i].total > thumbRuleItem.amount"
                             [class.below-cost]="building.estimate.estimatedCosts[i].total < thumbRuleItem.amount">
-                            {{ building.estimate.estimatedCosts[i].total | number }}
+                            {{ building.estimate.estimatedCosts[i].total | number: '1.0-0' }}
                           </span>
                         </div>
                         <button *ngIf="building.estimate.estimatedCosts[i].total == 0"
@@ -129,10 +130,10 @@
               <tbody>
                 <tr *ngIf="(building.thumbRule && building.estimate)">
                   <td class="border-left">{{ getLabel().TOTAL }}</td>
-                  <td class="border-left">{{ building.thumbRule.totalRate|number }}</td>
-                  <td class="border-left"><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number }}</span></td>
-                  <td class="border-left">{{ building.estimate.totalRate|number }}</td>
-                  <td class="border-left"><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number }}</span></td>
+                  <td class="border-left">{{ building.thumbRule.totalRate|number: '1.2-2' }}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number : '1.0-0'}}</span></td>
+                  <td class="border-left">{{ building.estimate.totalRate|number: '1.2-2'}}</td>
+                  <td class="border-left"><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number : '1.0-0'}}</span></td>
                 </tr>
               </tbody>
             </table>
@@ -152,14 +153,14 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <table class="table">
+              <table class="table table-dashboard">
                 <tbody>
                 <tr>
                   <td>{{ getLabel().GRAND_TOTAL }}</td>
-                  <td>{{ grandTotalOfTotalRate|number }}</td>
-                  <td><span class="estimated-cost">{{ grandTotalOfBudgetedCost|number }}</span></td>
-                  <td>{{ grandTotalOfEstimatedRate|number }}</td>
-                  <td><span class="estimated-cost">{{ grandTotalOfEstimatedCost|number }}</span></td>
+                  <td>{{ grandTotalOfTotalRate|number: '1.2-2' }}</td>
+                  <td><span class="estimated-cost">{{ grandTotalOfBudgetedCost|number: '1.0-0' }}</span></td>
+                  <td>{{ grandTotalOfEstimatedRate|number: '1.2-2' }}</td>
+                  <td><span class="estimated-cost">{{ grandTotalOfEstimatedCost|number: '1.0-0' }}</span></td>
                 </tr>
                 </tbody>
               </table>
@@ -333,122 +334,5 @@
 
 </section>
 
-<div id="content" #content style="display: none">
-  <h2 style="font-family:'Arial, Helvetica, sans-serif';font-size:16px; border-bottom: 1px solid #000;">
-    Budgeted & Estimated Cost Report for Mont Vert Belbrook </h2>
-  <div style="font-family:'Arial, Helvetica, sans-serif';font-size:12px;">
-    <div style="padding-bottom: 5px;">
-      <strong>Company Name:</strong>
-      <span>Royal Properties LTD</span>
-    </div>
-    <div style="padding-bottom: 5px;">
-      <strong>Project Name:</strong>
-      <span>Mont Vert Belbrook</span>
-    </div>
-    <div style="padding-bottom: 5px;">
-      <strong>Building Name:</strong>
-      <span>Dwarka</span>
-    </div>
-    <div style="padding-bottom: 5px;">
-      <strong>Generated on:</strong>
-      <span>4th April 2018</span>
-    </div>
-  </div>
 
-<!--  <table bgcolor="#fff" width="2500" style="font-size:8px;font-family:'Arial, Helvetica, sans-serif';">
-    <tr>
-      <td bgcolor="#fff" width="">Cost Head</td>
-      <td width="">By Thumbrule</td>
-      <td width="">Estimated (as per project quantities and rates)</td>
-    </tr>
-  </table>-->
-  <table width="2500" style="font-size:8px;font-family:'Arial, Helvetica, sans-serif';">
-    <tr>
-      <th width="400">Cost Head</th>
-      <th width="400" style="word-wrap: break-word"> By Thumbrule - Rate/sqft Slab Area</th>
-      <th width="400"> By Thumbrule - <hr>Budgeted Cost</th>
-      <th width="400"> Estimated - <hr>Rate/sqft Slab Area </th>
-      <th width="400">Estimated - Budgeted Cost </th>
-    </tr>
-    <tr>
-      <td>External plaster</td>
-      <td align="right">12.4</td>
-      <td align="right">9787.5</td>
-      <td align="right">44.55</td>
-      <td align="right">35,147.2</td>
-    </tr>
-    <tr>
-      <td>Fabrication</td>
-      <td>5.95</td>
-      <td>4698</td>
-      <td>2,185.58</td>
-      <td>1,724,418.72</td>
-    </tr>
-    <tr>
-      <td>Gypsum / POP plaster (punning)</td>
-      <td>4.96</td>
-      <td>3915</td>
-      <td>2.86</td>
-      <td>2,254</td>
-    </tr>
-    <tr>
-      <td>Internal plaster</td>
-      <td>7.72</td>
-      <td>6090</td>
-      <td>1.11</td>
-      <td>872.5</td>
-    </tr>
-    <tr>
-      <td>Kitchen otta</td>
-      <td>3,165.4</td>
-      <td>24,97,500</td>
-      <td>11,263.7</td>
-      <td>8,887,060</td>
-    </tr>
-    <tr>
-      <td>Masonry</td>
-      <td>12.35</td>
-      <td>9744</td>
-      <td>1.77</td>
-      <td>1,395</td>
-    </tr>
-    <tr>
-      <td>Pointing</td>
-      <td>8.19</td>
-      <td>6459.75</td>
-      <td>5.53</td>
-      <td>4,362.75</td>
-    </tr>
-    <tr>
-      <td>RCC band / patli</td>
-      <td>1.9</td>
-      <td>1500</td>
-      <td>27.49</td>
-      <td>21,687.36</td>
-    </tr>
-    <tr>
-      <td>Safety measures</td>
-      <td>3,165.4</td>
-      <td>24,97,500</td>
-      <td>11,263.7</td>
-      <td>8,887,060</td>
-    <tr>
-      <td>Boards & Signages in common areas</td>
-      <td>3,165.4</td>
-      <td>24,97,500</td>
-      <td>11,263.7</td>
-      <td>8,887,060</td>
-    </tr>
-    <tr>
-      <td>Total</td>
-      <td>2,539,694.25</td>
-      <td>13,532.59</td>
-      <td>13,532.59</td>
-      <td>10,677,197.53</td>
-    </tr>
-  </table>
-</div>
-
-<!--<cost-summary-report-pdf [buildingsReport]="buildingsReport"></cost-summary-report-pdf>
-
-<button (click)="downloadToPdf()">Export PDF</button>-->
+<!--<cost-summary-report-pdf [buildingsReport]="buildingsReport"></cost-summary-report-pdf>-->

@@ -221,17 +221,17 @@ class UserController {
       let userService = new UserService();
       let params = req.body;   //email
 
-      userService.forgotPassword(params, (error, result) => {
+      userService.forgotPassword(params, (error: any, result: any) => {
 
         if (error) {
-          if (error === Messages.MSG_ERROR_CHECK_INACTIVE_ACCOUNT) {
+          if (error.message === Messages.MSG_ERROR_CHECK_INACTIVE_ACCOUNT) {
             next({
               reason: Messages.MSG_ERROR_USER_NOT_ACTIVATED,
               message: Messages.MSG_ERROR_ACCOUNT_STATUS,
               stackTrace: new Error(),
               code: 400
             });
-          } else if (error === Messages.MSG_ERROR_USER_NOT_FOUND) {
+          } else if (error.message === Messages.MSG_ERROR_USER_NOT_FOUND) {
             next({
               reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
               message: Messages.MSG_ERROR_USER_NOT_FOUND,

@@ -36,25 +36,21 @@ export class CostHeadComponent implements OnInit, OnChanges {
   costHeadId:number;
   workItemId: number;
   categoryId: number;
+  directQuantity: number;
   categoryDetails: Array<Category>;
   categoryDetailsTotalAmount: number=0;
   workItem: WorkItem;
-  ratePerUnitAmount : number = 0;
-  totalAmount : number = 0;
-  totalAmountOfMaterial : number = 0;
-  totalAmountOfLabour : number = 0;
-  totalAmountOfMaterialAndLabour : number = 0;
   categoryRateAnalysisId:number;
   compareWorkItemRateAnalysisId:number;
   quantity:number=0;
   rateFromRateAnalysis:number=0;
   unit:string='';
-  choice:string;
   showCategoryList: boolean = false;
   workItemsList: Array<WorkItem>;
   deleteConfirmationCategory = ProjectElements.CATEGORY;
   deleteConfirmationWorkItem = ProjectElements.WORK_ITEM;
   deleteConfirmationForQuantityDetails = ProjectElements.QUANTITY_DETAILS;
+  updateConfirmationForDirectQuantity = ProjectElements.DIRECT_QUANTITY;
   public showQuantityDetails:boolean=false;
   private showWorkItemList:boolean=false;
   private showWorkItemTab : string = null;
@@ -128,8 +124,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryDetailsTotalAmount = 0.0;
 
     for (let categoryData of this.categoryDetails) {
-      this.categoryDetailsTotalAmount = this.commonService.decimalConversion(this.categoryDetailsTotalAmount
-        + categoryData.amount);
+      this.categoryDetailsTotalAmount =this.categoryDetailsTotalAmount + categoryData.amount;
     }
     this.loaderService.stop();
   }
@@ -218,7 +213,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
                 return defaultQuantityDetail.name === Label.DEFAULT_VIEW;
               });
             this.workItem.quantity.quantityItemDetails = defaultQuantityDetail;
-            this.quantityItemsArray = defaultQuantityDetail[0].quantityItems;
+            this.quantityItemsArray = lodsh.cloneDeep(defaultQuantityDetail[0].quantityItems);
             this.keyQuantity = defaultQuantityDetail[0].name;
         } else {
             let quantityDetail: QuantityDetails = new QuantityDetails();
@@ -246,7 +241,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.rate);
-      this.calculateTotalForRateView();
       this.currentCategoryIndex = categoryIndex;
       this.currentWorkItemIndex = workItemIndex;
       this.rateView = Label.WORKITEM_RATE_TAB;
@@ -266,7 +260,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.rate);
       this.calculateQuantity(workItem);
-      this.calculateTotalForRateView();
       this.setRateFlags(displayRateView, disableRateField);
       this.rateView = Label.WORKITEM_RATE_BY_QUANTITY_TAB;
       this.currentCategoryIndex = categoryIndex;
@@ -286,7 +279,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.systemRate);
-      this.calculateTotalForRateView();
       this.rateView = Label.WORKITEM_SYSTEM_RATE_TAB;
       this.currentCategoryIndex = categoryIndex;
       this.currentWorkItemIndex = workItemIndex;
@@ -332,50 +324,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
         this.rateItemsArray.rateItems[rateItemsIndex].quantity *
         this.quantityIncrement).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
     }
-  }
-
-  calculateTotalForRateView() {
-    this.rateItemsArray.total=0;
-    this.ratePerUnitAmount = 0;
-     this.totalAmount =  this.calculateTotalForRateItems(this.rateItemsArray.rateItems);
-    this.ratePerUnitAmount = this.commonService.decimalConversion(this.totalAmount / this.rateItemsArray.quantity);
-    this.rateItemsArray.total= this.ratePerUnitAmount;
-  }
-
-  calculateTotalForRateItems(rateItems : Array<RateItem>) {
-    this.totalAmount = 0;
-    this.totalAmountOfMaterial = 0;
-    this.totalAmountOfLabour = 0;
-    this.totalAmountOfMaterialAndLabour = 0;
-    for (let rateItemsIndex in  rateItems) {
-      this.choice = rateItems[rateItemsIndex].type;
-      switch (this.choice) {
-        case 'M':
-          this.rateItemsArray.rateItems[rateItemsIndex].totalAmount = parseFloat((this.rateItemsArray.rateItems[rateItemsIndex].quantity *
-            this.rateItemsArray.rateItems[rateItemsIndex].rate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
-
-          this.totalAmountOfMaterial = Math.round(this.totalAmountOfMaterial + this.rateItemsArray.rateItems[rateItemsIndex].totalAmount);
-          break;
-
-        case 'L':
-          this.rateItemsArray.rateItems[rateItemsIndex].totalAmount = parseFloat((this.rateItemsArray.rateItems[rateItemsIndex].quantity *
-            this.rateItemsArray.rateItems[rateItemsIndex].rate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
-
-          this.totalAmountOfLabour = Math.round(this.totalAmountOfLabour + this.rateItemsArray.rateItems[rateItemsIndex].totalAmount);
-          break;
-
-        case 'M + L':
-          this.rateItemsArray.rateItems[rateItemsIndex].totalAmount = parseFloat((this.rateItemsArray.rateItems[rateItemsIndex].quantity *
-            this.rateItemsArray.rateItems[rateItemsIndex].rate).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
-
-          this.totalAmountOfMaterialAndLabour = Math.round(this.totalAmountOfMaterialAndLabour +
-            this.rateItemsArray.rateItems[rateItemsIndex].totalAmount);
-          break;
-      }
-      this.totalAmount = this.totalAmountOfMaterial + this.totalAmountOfLabour + this.totalAmountOfMaterialAndLabour;
-      this.totalAmount = Math.round(this.totalAmount);
-    }
-    return (this.totalAmount);
   }
 
   setIdsForDeleteWorkItem(categoryId: string, workItemId: string,workItemIndex:number) {
@@ -521,7 +469,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   onUpdateDirectRateSuccess(success : any) {
     var message = new Message();
     message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_UPDATE_RATE;
+    message.custom_message = Messages.MSG_SUCCESS_UPDATE_DIRECT_RATE_OF_WORKITEM;
     this.messageService.message(message);
     this.refreshWorkItemList();
     this.loaderService.stop();
@@ -659,6 +607,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.deactivateWorkItem();
     }
   }
+
+ /* updateElement(quantityType : string) {
+      if(quantityType === ProjectElements.DIRECT_QUANTITY) {
+        this.changeDirectQuantity();
+      }
+  }*/
 
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);

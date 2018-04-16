@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MaterialTakeoffService } from './material-takeoff.service';
+import { MaterialTakeOffService } from './material-takeoff.service';
 import { MaterialTakeOffElements } from '../../../../shared/constants';
+import { MaterialTakeOffFilters } from '../../model/material-take-off-filters';
+import { MaterialTakeOffElement } from '../../model/material-take-off-element';
+import { Message, MessageService } from '../../../../shared/index';
 
 @Component({
   moduleId: module.id,
@@ -13,111 +16,106 @@ export class MaterialTakeoffComponent implements OnInit {
 
   projectId : string;
   elementWiseReport : string;
-  element : string;
+  selectedElement : string;
   elementHeading : string;
   building : string;
 
-  costHeadList: Array<string>;
-  materialList: Array<string>;
-  buildingList: Array<string>;
-  elementWiseReportList: Array<string>;
-  elementList : Array<string>;
+  costHeads: Array<string>;
+  materials: Array<string>;
+  buildings: Array<string>;
+  elementWiseReports: Array<MaterialTakeOffElement> = new Array<MaterialTakeOffElement>();
+  elements : Array<string>;
+  elementFound : boolean;
 
   materialTakeOffReport :any;
 
-  constructor( private activatedRoute:ActivatedRoute,  private _router : Router, private materialTakeoffService : MaterialTakeoffService) {
-  this.elementWiseReportList = [
-      MaterialTakeOffElements.COST_HEAD_WISE, MaterialTakeOffElements.MATERIAL_WISE
-    ];
+  constructor( private activatedRoute:ActivatedRoute,  private _router : Router, private materialTakeoffService : MaterialTakeOffService,
+               private messageService : MessageService) {
+
+    let costHeadElement = new MaterialTakeOffElement();
+    costHeadElement.elementKey = MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD;
+    costHeadElement.elementValue = MaterialTakeOffElements.COST_HEAD_WISE;
+
+    let materialElement = new MaterialTakeOffElement();
+    materialElement.elementKey = MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL;
+      materialElement.elementValue = MaterialTakeOffElements.MATERIAL_WISE;
+
+    this.elementWiseReports.push(costHeadElement);
+    this.elementWiseReports.push(materialElement);
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
     });
-    this.materialFiltersList(this.projectId);
+    this.getMaterialFiltersList(this.projectId);
   }
 
-  materialFiltersList(projectId : string) {
-    this.materialTakeoffService.materialFiltersList(projectId).subscribe(
-      materialFiltersList => this.onMaterialFiltersListSuccess(materialFiltersList),
-      error => this.onMaterialFiltersListFailure(error)
+  getMaterialFiltersList(projectId : string) {
+    this.materialTakeoffService.getMaterialFiltersList(projectId).subscribe(
+      materialFiltersList => this.onGetMaterialFiltersListSuccess(materialFiltersList),
+      error => this.onGetMaterialFiltersListFailure(error)
     );
   }
 
 
-  onMaterialFiltersListSuccess(materialFiltersList : Array<string>) {
+  onGetMaterialFiltersListSuccess(materialFiltersList : Array<string>) {
     this.extractList(materialFiltersList);
+    this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
+      this.selectedElement, this.building);
   }
 
-  onMaterialFiltersListFailure(error : any) {
+  onGetMaterialFiltersListFailure(error : any) {
     console.log(error);
   }
 
   extractList(list : any) {
-    this.elementWiseReport = MaterialTakeOffElements.COST_HEAD_WISE;
+    this.elementWiseReport = MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD;
 
-    this.costHeadList = list.costHeadList;
-    this.materialList = list.materialList;
+    this.costHeads = list.costHeadList;
+    this.materials = list.materialList;
     this.elementHeading = MaterialTakeOffElements.COST_HEAD;
-    this.elementList = this.costHeadList;
-    this.element = this.costHeadList[0];
+    this.elements = this.costHeads;
+    this.selectedElement = this.costHeads[0];
 
-    this.buildingList = list.buildingList;
-    this.building = this.buildingList[0];
-
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.element, this.building);
+    this.buildings = list.buildingList;
+    this.building = this.buildings[0];
 
   }
 
   onChangeGroupBy(groupBy : string) {
-    this.elementWiseReport = groupBy;
-    if(this.elementWiseReport === MaterialTakeOffElements.COST_HEAD_WISE) {
-      this.elementList = this.costHeadList;
-      this.elementHeading = MaterialTakeOffElements.COST_HEAD;
-      this.element = this.costHeadList[0];
-    } else {
-      this.elementList = this.materialList;
-      this.elementHeading = MaterialTakeOffElements.MATERIAL;
-      this.element = this.materialList[0];
-    }
 
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.element, this.building);
+    this.elementWiseReport = groupBy;
+    if(this.elementWiseReport === MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD) {
+      this.elements = this.costHeads;
+      this.elementHeading = MaterialTakeOffElements.COST_HEAD;
+    } else {
+      this.elements = this.materials;
+      this.elementHeading = MaterialTakeOffElements.MATERIAL;
+    }
+    this.selectedElement = this.elements[0];
+
+    this.getMaterialTakeOffReport( this.elementWiseReport, this.selectedElement, this.building);
 
   }
 
-  onChangeSecondFilter(secondFilter : string) {
-    this.element = secondFilter;
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.element, this.building);
+  onChangeSecondFilter(selectedElement : string) {
+    this.selectedElement = selectedElement;
+    this.getMaterialTakeOffReport( this.elementWiseReport, this.selectedElement, this.building);
   }
 
   onChangeBuilding(building : string) {
     this.building = building;
-    this.buildMaterialTakeOffReport(this.elementWiseReport, this.element, this.building);
+    this.getMaterialTakeOffReport( this.elementWiseReport, this.selectedElement, this.building);
   }
 
   getMaterialTakeOffElements() {
     return MaterialTakeOffElements;
   }
 
-  buildMaterialTakeOffReport(groupBy : string, secondaryFilter : string, building : string) {
-    if(groupBy === MaterialTakeOffElements.COST_HEAD_WISE && building === MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
-        this.element, this.building);
-    } else if(groupBy === MaterialTakeOffElements.COST_HEAD_WISE && building !== MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
-        this.element, this.building);
-    } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building === MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL,
-        this.element, this.building);
-    } else if(groupBy === MaterialTakeOffElements.MATERIAL_WISE && building !== MaterialTakeOffElements.ALL_BUILDINGS) {
-      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL,
-        this.element, this.building);
-    }
-  }
-
-  getMaterialTakeOffReport(elementWiseReport : string, element : string, building : string) {
-    this.materialTakeoffService.getMaterialTakeOffReport(this.projectId, elementWiseReport, element, building).subscribe(
+  getMaterialTakeOffReport(elementWiseReport : string, selectedElement : string, building : string) {
+    let materialTakeOffFilters = new MaterialTakeOffFilters(elementWiseReport, selectedElement, building);
+    this.materialTakeoffService.getMaterialTakeOffReport(this.projectId, materialTakeOffFilters).subscribe(
       materialTakeOffReport => this.onGetMaterialTakeOffReportSuccess(materialTakeOffReport),
       error => this.onGetMaterialTakeOffReportFailure(error)
     );
@@ -125,9 +123,17 @@ export class MaterialTakeoffComponent implements OnInit {
 
   onGetMaterialTakeOffReportSuccess(materialTakeOffReport : any) {
     this.materialTakeOffReport = materialTakeOffReport;
+    this.elementFound = true;
+
   }
 
   onGetMaterialTakeOffReportFailure(error : any) {
-    console.log(error);
+    this.elementFound = false;
+
+    var message = new Message();
+    message.isError = true;
+    message.custom_message = error.err_msg;
+    message.error_msg = error.err_msg;
+    this.messageService.message(message);
   }
 }

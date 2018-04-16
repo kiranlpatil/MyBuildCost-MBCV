@@ -62,28 +62,29 @@
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-right" [disabled]="disableRateField"/>
+                    <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-left" [disabled]="disableRateField"/>
                   </td>
                   <td>
                     <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                   </td>
-                  <td>
-                    <input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>
+                  <td class="text-right">
+                    <!--<input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>-->
+                    {{item.totalAmount|number : '1.2-2'}}
                   </td>
                 </tr>
                </tbody>
               <tfoot>
               <tr>
-                <td class="total-amount text-left">
-                  <label>{{ getLabel().SUBTOTAL }}</label>
-                </td>
                 <td colspan="3">
                 </td>
-                <td>
-                  <div *ngIf="(rateItem.key === 'M')"> {{ totalAmountOfMaterial|number}} </div>
-                  <div *ngIf="(rateItem.key === 'L')"> {{ totalAmountOfLabour|number}} </div>
-                  <div *ngIf="(rateItem.key === 'M + L')"> {{ totalAmountOfMaterialAndLabour|number}} </div>
+                <td class="total-amount text-left">
+                  <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
+                </td>
+                <td class="text-right">
+                  <div *ngIf="(rateItem.key === 'M')">{{ totalAmountOfMaterial|number : '1.2-2'}} </div>
+                  <div *ngIf="(rateItem.key === 'L')">{{ totalAmountOfLabour|number : '1.2-2'}} </div>
+                  <div *ngIf="(rateItem.key === 'M + L')">{{ totalAmountOfMaterialAndLabour|number : '1.2-2'}} </div>
                 </td>
               </tr>
               </tfoot>
@@ -93,13 +94,15 @@
       </tbody>
       <tfoot>
       <tr>
-        <td class="total-amount text-left">
-          <label>{{ getLabel().TOTAL }}</label>
+        <td class="total-amount text-left" >
+          <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}</label>
+          <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A_B_C}}</label>
+          <label *ngIf="totalAmountOfMaterial && !totalAmountOfLabour && !totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A}}</label>
         </td>
         <td class="total-amount" colspan="3">
         </td>
         <td class="total-amount">
-          {{ totalAmount|number}}
+          {{ totalAmount|number: '1.2-2'}}
         </td>
       </tr>
       <tr>
@@ -109,7 +112,7 @@
         <td class="total-amount" colspan="3">
         </td>
         <td class="total-amount">
-          {{ ratePerUnitAmount|number}}
+          {{ ratePerUnitAmount|number: '1.2-2'}}
         </td>
       </tr>
       </tfoot>

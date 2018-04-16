@@ -48,7 +48,7 @@ export class QuantityDetailsComponent implements OnInit {
   getQuantity(quantityDetail : QuantityDetails) {
     if(this.showWorkItemTabName !==  Label.WORKITEM_QUANTITY_TAB) {
       if(quantityDetail.quantityItems.length !== 0) {
-        this.quantityItemsArray = quantityDetail.quantityItems;
+        this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
         this.keyQuantity = quantityDetail.name;
       } else {
         this.quantityItemsArray = [];
@@ -60,7 +60,7 @@ export class QuantityDetailsComponent implements OnInit {
     }
   }
 
-  setQuantityNameForDelete(quantityName: string, quantityIndex: number) {
+  setQuantityNameForDelete(quantityName: string) {
     this.quantityName = quantityName;
   }
 

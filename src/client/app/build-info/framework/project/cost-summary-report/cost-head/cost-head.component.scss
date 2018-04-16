@@ -147,6 +147,10 @@
       width: 80px;
     }
 
+    &:nth-child(4) {
+      text-align: right;
+    }
+
     &:last-child {
       vertical-align: top;
     }
@@ -190,7 +194,7 @@
   }
 
   .edit-rate {
-    border-bottom: 1px solid $body-text;
+    //border-bottom: 1px solid $body-text;
     display: inline-block;
     padding: 7px 5px 5px;
   }

@@ -36,7 +36,7 @@
           <tbody *ngIf="amenitiesReport.thumbRule  && amenitiesReport.estimate" >
             <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index" class="delete-cost-head-cell">
               <td class="border-left">{{thumbRuleItem.name}}</td>
-              <td class="border-left"><span class="estimated-cost">{{thumbRuleItem.rate}}</span></td>
+              <td class="border-left"><span class="estimated-cost">{{thumbRuleItem.rate| number: '1.2-2'}}</span></td>
               <td class="border-left">
                 <div class="edit-field">
                   <input type="number"
@@ -46,8 +46,8 @@
                          class="form-control clear"/>
                 </div>
               </td>
-              <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate}}</span></td>
-              <td>
+              <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate | number: '1.2-2'}}</span></td>
+            <!--  <td>
                 <div class="edit-field" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
                      (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
                   <input [(ngModel)]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total"
@@ -55,6 +55,19 @@
                 </div>
                 <button type="button" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
                         class="btn-get-amount" (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
+              </td>-->
+              <td>
+                <div *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
+                     (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
+                          <span  class="estimated-cost"
+                                 [class.above-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total > thumbRuleItem.amount"
+                                 [class.below-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total < thumbRuleItem.amount">
+                            {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number: '1.0-0' }}
+                          </span>
+                </div>
+                <button *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
+                        type="button" class="btn-get-amount"
+                        (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
               </td>
               <td class="delete-cost-head">
                 <div data-toggle="modal"
@@ -92,10 +105,10 @@
       <tbody>
       <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
         <td class="border-left">{{getLabel().TOTAL}}</td>
-        <td class="border-left">{{amenitiesReport.thumbRule.totalRate|number}}</td>
-        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.thumbRule.totalBudgetedCost|number}}</span></td>
-        <td class="border-left">{{amenitiesReport.estimate.totalRate|number}}</td>
-        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.totalEstimatedCost|number}}</span></td>
+        <td class="border-left">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</td>
+        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}</span></td>
+        <td class="border-left">{{amenitiesReport.estimate.totalRate|number: '1.2-2'}}</td>
+        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}</span></td>
       </tr>
       </tbody>
     </table>
