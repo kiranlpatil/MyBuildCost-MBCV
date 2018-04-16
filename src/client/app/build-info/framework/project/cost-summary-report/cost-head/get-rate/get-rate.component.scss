@@ -213,7 +213,7 @@
   border: solid transparent;
   content: " ";
   height: 0;
-  left: 42%;
+  left: 52.5%;
   position: absolute;
   pointer-events: none;
   width: 0;
@@ -241,17 +241,17 @@
 }
 
 .get-cost-section:after, .get-cost-section:before {
-  left: 61% !important;
+  left: 62% !important;
 }
 
 .get-systemRA-section:after, .get-systemRA-section:before {
-  left: 80% !important;
+  left: 81% !important;
 }
 
 input[disabled],
 input[readonly],
 textarea[disabled] {
-  background: $white;
-  color: $text-disabled;
+  background: $disabled-input-bg;
+  color: $disable-input;
 }
 

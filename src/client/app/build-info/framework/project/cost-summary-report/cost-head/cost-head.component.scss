@@ -147,6 +147,10 @@
       width: 80px;
     }
 
+    &:nth-child(4) {
+      text-align: right;
+    }
+
     &:last-child {
       vertical-align: top;
     }
@@ -182,6 +186,17 @@
     border-bottom: 1px solid $body-text;
     display: inline-block;
     padding: 5px;
+  }
+
+  .edit-rate-null {
+    display: inline-block;
+    padding: 7px 5px 5px;
+  }
+
+  .edit-rate {
+    //border-bottom: 1px solid $body-text;
+    display: inline-block;
+    padding: 7px 5px 5px;
   }
 
   .active {

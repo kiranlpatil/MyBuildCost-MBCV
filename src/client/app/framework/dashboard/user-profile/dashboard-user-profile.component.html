@@ -12,7 +12,7 @@
         <div class="user-name">
           <p class="profile-name-first">{{model.first_name}}</p>
           <p class="profile-name-first">{{model.email}}&nbsp;</p>
-          <a href="">Change Password</a>
+          <a [routerLink]="['/dashboard/change-password']" (click)="navigateTo('/dashboard/change-password');">Change Password</a>
         </div>
 
       </div>

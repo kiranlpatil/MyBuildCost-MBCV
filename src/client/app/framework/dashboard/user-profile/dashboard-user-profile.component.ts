@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../../shared/customvalidations/validation.service';
 import { Label, Headings } from '../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, Messages, MessageService, ProfileService } from '../../../shared/index';
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -24,7 +25,8 @@ export class DashboardProfileComponent implements OnInit {
   model: UserProfile = new UserProfile();
   first_letter:string;
 
-  constructor(private  dashboardUserProfileService : DashboardUserProfileService, private formBuilder: FormBuilder,
+  constructor(private  dashboardUserProfileService : DashboardUserProfileService, private _router: Router,
+              private formBuilder: FormBuilder,
               private messageService: MessageService, private profileService: ProfileService,
               ) {
     this.userForm = this.formBuilder.group({
@@ -121,7 +123,9 @@ export class DashboardProfileComponent implements OnInit {
   }
   onPictureUpload(imagePath: string) {
     }
-
+  navigateTo(nav:string) {
+    this._router.navigate([nav]);
+  }
   showHideMobileModal() {
     this.showStyleMobile = !this.showStyleMobile;
   }

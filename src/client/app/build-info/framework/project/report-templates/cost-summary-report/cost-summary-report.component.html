@@ -1,0 +1,20 @@
+<div [hidden]="true" id="costSummary" #costSummary>
+  <div *ngIf="buildingsReport">
+    <table>
+      <tr>
+        <th>Cost Head</th>
+        <th>By Thumb Rule</th>
+        <th>Estimated</th>
+      </tr>
+      <div *ngFor="let building of buildingsReport; let i = index">
+        <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index">
+          <td>{{ thumbRuleItem.name }}</td>
+          <td>{{ building.estimate.estimatedCosts[i].rate }}</td>
+          <td>{{ building.estimate.estimatedCosts[i].total}}</td>
+        </tr>
+      </div>
+    </table>
+  </div>
+</div>
+
+<button (click)="downloadToPdf()">Download Cost Summary PDF</button>
