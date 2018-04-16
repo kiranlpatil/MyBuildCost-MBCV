@@ -1,0 +1,21 @@
+select {
+  width: auto;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 0 solid #ccc;
+  min-height: inherit;
+  padding: 6px 15px 6px 0;
+  position: absolute;
+  top: 30px;
+  font-size: 21px;
+  font-weight: 300;
+  z-index: 101; }
+  select:focus {
+    border-bottom: 0 !important; }
+
+h3 {
+  font-size: 22px;
+  font-weight: 300;
+  margin-top: -12px; }
+
+/*# sourceMappingURL=/app\build-info\framework\project-header\project-list-header\project-list-header.component.css.map */
