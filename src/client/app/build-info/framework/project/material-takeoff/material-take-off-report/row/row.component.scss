@@ -1,0 +1,61 @@
+@import '../../../../../../../css/common';
+
+.row-list {
+  color: #8290A8;
+  padding: 0;
+  font-size: 12px;
+  margin: 0 1px;
+  .border-right {
+    border-right: 1px solid $row-border;
+    padding-bottom: 10px !important;
+  }
+  .col-md-6 {
+    padding: 0 0 0 58px;
+  }
+}
+
+.item-inner-row {
+  display: table;
+  margin: 0;
+  width: 100%;
+  .border-right {
+    border-right: 1px solid $row-border;
+  }
+  .row-lists {
+    border-right: 1px solid $row-border;
+    display: table-cell;
+    float: none;
+    font-size: 12px;
+    margin: 0;
+    padding: 10px 15px;
+  }
+  .col-md-6 {
+    padding-left: 44px;
+  }
+  .border-0 {
+    border: 0 !important;
+  }
+}
+
+.item-header-row{
+  .border-right {
+    border-right: 1px solid $row-border;
+  }
+  .row-lists {
+    font-size: 12px;
+    min-height: 50px;
+    margin: 0;
+    padding: 25px 15px;
+  }
+}
+
+.item-footer-row{
+  .border-right {
+    border-right: 1px solid $row-border;
+  }
+  .row-lists {
+    font-size: 12px;
+    margin: 0;
+    padding: 15px;
+  }
+}

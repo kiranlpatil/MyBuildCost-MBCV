@@ -1286,11 +1286,10 @@ class ProjectService {
         workItem.rate.rateItems = this.getRatesFromCentralizedrates(rateItemsOfWorkItem, centralizedRates);
 
         let arrayOfRateItems = workItem.rate.rateItems;
-        let totalOfAllRateItems = alasql('VALUE OF SELECT ROUND(SUM(totalAmount),2) FROM ?',[arrayOfRateItems]);
+        let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?',[arrayOfRateItems]);
         if(!workItem.isDirectRate) {
-          workItem.rate.total = parseFloat((totalOfAllRateItems / workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
+          workItem.rate.total = totalOfAllRateItems / workItem.rate.quantity;
         }
-
         let quantityItems = workItem.quantity.quantityItemDetails;
 
         if(!workItem.quantity.isDirectQuantity) {
@@ -1298,7 +1297,7 @@ class ProjectService {
         }
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
-           workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+           workItem.amount = workItem.rate.total * workItem.quantity.total;
            workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount+ workItem.amount;
          }
       workItemsListWithRates.workItems.push(workItem);
@@ -1494,7 +1493,7 @@ class ProjectService {
     }
 
     if(categoriesTotalAmount !== 0) {
-      categoriesListWithRates.categoriesAmount = this.commonService.decimalConversion(categoriesTotalAmount);
+      categoriesListWithRates.categoriesAmount = categoriesTotalAmount;
     }
 
     return categoriesListWithRates;

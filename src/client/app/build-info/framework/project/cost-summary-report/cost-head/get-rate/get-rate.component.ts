@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Messages, Button, TableHeadings, Label, Headings, ValueConstant } from '../../../../../../shared/constants';
 import {
   SessionStorage, SessionStorageService,
@@ -20,18 +20,14 @@ import { RateItem } from '../../../../model/rate-item';
   styleUrls: ['get-rate.component.css'],
 })
 
-export class GetRateComponent {
+export class GetRateComponent implements OnInit {
 
   @Input() rate: Rate;
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
   @Input() workItemRateAnalysisId : number;
   @Input() workItemsList : Array<WorkItem>;
-  @Input() totalAmount: number;
   @Input() ratePerUnitAmount : number;
-  @Input() totalAmountOfMaterial: number;
-  @Input() totalAmountOfLabour: number;
-  @Input() totalAmountOfMaterialAndLabour: number;
   @Input() baseUrl : string;
   @Input() rateView: string;
   @Input() disableRateField: boolean;
@@ -41,6 +37,10 @@ export class GetRateComponent {
   @Output() refreshCategoryList = new EventEmitter();
   @Output() closeRateView = new EventEmitter();
 
+  totalAmount : number = 0;
+  totalAmountOfMaterial : number = 0;
+  totalAmountOfLabour : number = 0;
+  totalAmountOfMaterialAndLabour : number = 0;
   quantityIncrement: number = 1;
   previousTotalQuantity: number = 1;
   totalItemRateQuantity: number = 0;
@@ -53,6 +53,9 @@ export class GetRateComponent {
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private commonService: CommonService) {
+  }
+  ngOnInit() {
+    this.calculateTotal();
   }
 
   getItemName(event : any) {
@@ -79,42 +82,41 @@ export class GetRateComponent {
 
     for (let rateItemsIndex in this.rate.rateItems) {
       if(choice === 'changeTotalQuantity') {
-        this.rate.rateItems[rateItemsIndex].quantity = this.commonService.decimalConversion(this.rate.rateItems[rateItemsIndex].quantity *
-          this.quantityIncrement);
+        this.rate.rateItems[rateItemsIndex].quantity =this.rate.rateItems[rateItemsIndex].quantity *
+          this.quantityIncrement;
       }
       this.type = this.rate.rateItems[rateItemsIndex].type;
         switch (this.type) {
           case 'M' :
-              this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(
-                this.rate.rateItems[rateItemsIndex].quantity * this.rate.rateItems[rateItemsIndex].rate);
+              this.rate.rateItems[rateItemsIndex].totalAmount = this.rate.rateItems[rateItemsIndex].quantity *
+                this.rate.rateItems[rateItemsIndex].rate;
 
-              this.totalAmountOfMaterial = Math.round(this.totalAmountOfMaterial + this.rate.rateItems[rateItemsIndex].totalAmount);
+              this.totalAmountOfMaterial = this.totalAmountOfMaterial + this.rate.rateItems[rateItemsIndex].totalAmount;
 
                break;
 
           case 'L' :
-              this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(
-                this.rate.rateItems[rateItemsIndex].quantity * this.rate.rateItems[rateItemsIndex].rate);
+              this.rate.rateItems[rateItemsIndex].totalAmount = this.rate.rateItems[rateItemsIndex].quantity *
+                this.rate.rateItems[rateItemsIndex].rate;
 
-              this.totalAmountOfLabour = Math.round(this.totalAmountOfLabour + this.rate.rateItems[rateItemsIndex].totalAmount);
+              this.totalAmountOfLabour = this.totalAmountOfLabour + this.rate.rateItems[rateItemsIndex].totalAmount;
 
               break;
 
           case 'M + L' :
-              this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(
-                this.rate.rateItems[rateItemsIndex].quantity * this.rate.rateItems[rateItemsIndex].rate);
+              this.rate.rateItems[rateItemsIndex].totalAmount = this.rate.rateItems[rateItemsIndex].quantity *
+                this.rate.rateItems[rateItemsIndex].rate;
 
-              this.totalAmountOfMaterialAndLabour = Math.round(this.totalAmountOfMaterialAndLabour +
-                 this.rate.rateItems[rateItemsIndex].totalAmount);
+              this.totalAmountOfMaterialAndLabour = this.totalAmountOfMaterialAndLabour +
+                 this.rate.rateItems[rateItemsIndex].totalAmount;
 
               break;
               }
       this.totalAmount = this.totalAmountOfMaterial + this.totalAmountOfLabour +this.totalAmountOfMaterialAndLabour;
-        this.totalAmount = Math.round(this.totalAmount);
     }
-    this.ratePerUnitAmount = this.commonService.decimalConversion(this.totalAmount / this.rate.quantity);
-
-  }
+    this.ratePerUnitAmount = this.totalAmount / this.rate.quantity;
+    this.rate.total= this.ratePerUnitAmount;
+    }
   updateRate(rateItemsArray: Rate) {
     if (this.validateRateItem(rateItemsArray.rateItems)) {
       this.loaderService.start();
@@ -179,7 +181,6 @@ export class GetRateComponent {
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
       this.categoryRateAnalysisId, this.workItemsList);
     this.categoriesTotalAmount.emit(categoriesTotal);
-
     this.showWorkItemTabName.emit('');
       this.loaderService.stop();
   }
@@ -231,11 +232,13 @@ export class GetRateComponent {
     for(let rateItemData of rateItemsData) {
       if(rateItemData.itemName === this.selectedRateItem.itemName) {
          for(let rateItem of this.rate.rateItems) {
-           if(rateItem.type === this.selectedRateItemKey && rateItem.itemName === this.selectedRateItem.itemName) {
+           if(rateItem.itemName === this.selectedRateItem.itemName) {
              rateItem.rate = rateItemData.rate;
              this.calculateTotal();
+             break;
            }
          }
+         break;
       }
     }
     for(let workItemData of this.workItemsList) {

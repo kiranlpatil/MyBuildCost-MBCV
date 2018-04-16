@@ -278,10 +278,12 @@ class UserService {
 
   SendChangeMailVerification(field: any, callback: (error: any, result: SentMessageInfo) => void) {
     let query = {'email': field.current_email, 'isActivated': true};
-    let updateData = {'temp_email': field.new_email};
-    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+    let updateData = {$set:{'temp_email': field.new_email}};
+    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error: any, result: any) => {
       if (error) {
         callback(new Error(Messages.MSG_ERROR_EMAIL_ACTIVE_NOW), null);
+      } else if(result == null) {
+        callback(new Error(Messages.MSG_ERROR_VERIFY_ACCOUNT), null);
       } else {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(result);
@@ -410,7 +412,7 @@ class UserService {
     });
   }
 
-  update(_id: string, item: any, callback: (error: any, result: any) => void) {
+  update(_id: any, item: any, callback: (error: any, result: any) => void) {
 
     this.userRepository.findById(_id, (err: any, res: any) => {
 
@@ -560,10 +562,17 @@ class UserService {
 
         this.SendChangeMailVerification(data, (error, result) => {
           if (error) {
-            if (error === Messages.MSG_ERROR_CHECK_EMAIL_ACCOUNT) {
+            if (error.message === Messages.MSG_ERROR_CHECK_EMAIL_ACCOUNT) {
               callback({
                 reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
                 message: Messages.MSG_ERROR_EMAIL_ACTIVE_NOW,
+                stackTrace: new Error(),
+                code: 400
+              }, null);
+            }if (error.message === Messages.MSG_ERROR_VERIFY_ACCOUNT) {
+              callback({
+                reason: Messages.MSG_ERROR_VERIFY_ACCOUNT,
+                message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
                 stackTrace: new Error(),
                 code: 400
               }, null);

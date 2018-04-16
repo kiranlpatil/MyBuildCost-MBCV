@@ -3,7 +3,7 @@ import MaterialTakeOffTableViewFooter = require('./MaterialTakeOffTableViewFoote
 import MaterialTakeOffTableViewContent = require('./MaterialTakeOffTableViewContent');
 
 class MaterialTakeOffTableView {
-  headers: MaterialTakeOffTableViewHeaders;
+  header: MaterialTakeOffTableViewHeaders;
   //content: Map<string, MaterialTakeOffTableViewContent>;
   content: any;
   footer: MaterialTakeOffTableViewFooter;
@@ -17,7 +17,7 @@ class MaterialTakeOffTableView {
 
   constructor(headers: MaterialTakeOffTableViewHeaders, content: any,
               footer: MaterialTakeOffTableViewFooter) {
-    this.headers = headers;
+    this.header = headers;
     this.content = content;
     this.footer = footer;
   }

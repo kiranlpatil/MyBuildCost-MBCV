@@ -1,9 +1,6 @@
-import MaterialTakeOffTableViewSubContent = require('./MaterialTakeOffTableViewSubContent');
+import MaterialTakeOffView = require('./MaterialTakeOffView');
 
-class MaterialTakeOffTableViewContent {
-  columnOne: string;
-  columnTwo: string;
-  columnThree: string;
+class MaterialTakeOffTableViewContent extends MaterialTakeOffView {
   /*subContent: Map<string, MaterialTakeOffTableViewSubContent>;*/
   subContent: any;
 
@@ -15,9 +12,7 @@ class MaterialTakeOffTableViewContent {
   }*/
 
   constructor(columnOne: string, columnTwo: string, columnThree: string, subContent: any) {
-    this.columnOne = columnOne;
-    this.columnTwo = columnTwo;
-    this.columnThree = columnThree;
+    super(columnOne, columnTwo, columnThree);
     this.subContent = subContent;
   }
 }

@@ -1,7 +1,7 @@
 import MaterialTakeOffSecondaryView = require('./MaterialTakeOffSecondaryView');
 
 class MaterialTakeOffReport {
-   header: string;
+   title: string;
    /*secondaryView: Map<string, MaterialTakeOffSecondaryView>;*/
   secondaryView: any;
 
@@ -11,7 +11,7 @@ class MaterialTakeOffReport {
    }*/
 
   constructor(header: string, secondaryView: any) {
-    this.header = header;
+    this.title = header;
     this.secondaryView = secondaryView;
   }
 }
