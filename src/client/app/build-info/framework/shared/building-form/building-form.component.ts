@@ -22,7 +22,9 @@ export class BuildingFormComponent {
   buildingForm:  FormGroup;
   public isShowErrorMessage: boolean = false;
   public errorMessage: boolean = false;
-  private actionItems:string[]=new Array(0);
+  actionItems:string[]=new Array(0);
+  actionItemsArray:string[]=ValueConstant.ACTION_ITEMS;
+
   private view: string | '';
 
   constructor( private formBuilder: FormBuilder, private _router: Router) {

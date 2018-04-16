@@ -36,7 +36,7 @@
               <div class="dropdown menu-items">
                 <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
                 <ul class = "dropdown-menu">
-                  <li><p  data-toggle="modal" data-target="#myModal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
+                  <li><p  data-toggle="modal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
                   <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
                   <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
                   <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
@@ -278,13 +278,13 @@
             </div>
             </div>
 
-          <div class="modal-footer">
+          <!--<div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <button class="btn btn-primary next-btn" type="submit"  (click)="cloneBuildingBasicDetails()" data-toggle="modal" data-target="#new" data-dismiss="modal">Next</button>
-<!--
+&lt;!&ndash;
 <button class="btn btn-primary next-btn" type="submit"  (click)="cloneBuildingBasicDetails()"data-dismiss="modal">{{ getButton().CLONE_BUTTON }}</button>
--->
-          </div>
+&ndash;&gt;
+          </div>-->
         </form>
       </div>
     </div>

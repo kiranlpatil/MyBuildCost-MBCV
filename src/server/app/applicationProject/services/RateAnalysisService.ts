@@ -318,6 +318,35 @@ class RateAnalysisService {
       buildingCategories.push(category);
   }
 
+  syncRateitemFromRateAnalysis(entity:string,buildingDetails:any, callback:(error: any, data:any)=> void) {
+
+    let rateItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_RATE);
+    let rateItemRateAnalysisPromise = this.createPromise(rateItemURL);
+    logger.info('rateItemRateAnalysisPromise for has been hit');
+
+    let rateAnalysisNotesURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_NOTES);
+    let notesRateAnalysisPromise = this.createPromise(rateAnalysisNotesURL);
+    logger.info('notesRateAnalysisPromise for has been hit');
+
+    let allUnitsFromRateAnalysisURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_UNIT);
+    let unitsRateAnalysisPromise = this.createPromise(allUnitsFromRateAnalysisURL);
+    logger.info('unitsRateAnalysisPromise for has been hit');
+
+    CCPromise.all([
+      rateItemRateAnalysisPromise,
+      notesRateAnalysisPromise,
+      unitsRateAnalysisPromise
+    ]).then(function(data: Array<any>) {
+      logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
+      logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
+      callback(null, data);
+    }).catch(function(e:any) {
+      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e.message));
+      CCPromise.reject(e);
+    });
+
+  }
+
   getWorkItemsFromRateAnalysis(workItemsByCategory: any, rateItemsRateAnalysis: any,
                                         unitsRateAnalysis: any, notesRateAnalysis: any,
                                buildingWorkItems: Array<WorkItem>, configWorkItems :  Array<any>) {
@@ -351,7 +380,13 @@ class RateAnalysisService {
       let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
 
       workItem.rate.rateItems = rateItemsByWorkItem;
-      workItem.rate.quantity = rateItemsByWorkItem[0].totalQuantity;
+      if(rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
+        workItem.rate.quantity = rateItemsByWorkItem[0].totalQuantity;
+        workItem.systemRate.quantity = rateItemsByWorkItem[0].totalQuantity;
+      } else {
+        workItem.rate.quantity = 1;
+        workItem.systemRate.quantity = 1;
+      }
       workItem.rate.isEstimated = false;
       workItem.rate.notes = notesList[0].notes;
       workItem.rate.imageURL = notesList[0].imageURL;
@@ -359,7 +394,6 @@ class RateAnalysisService {
       //System rate
 
       workItem.systemRate.rateItems = rateItemsByWorkItem;
-      workItem.systemRate.quantity = rateItemsByWorkItem[0].totalQuantity;
       workItem.systemRate.notes = notesList[0].notes;
       workItem.systemRate.imageURL = notesList[0].imageURL;
 
