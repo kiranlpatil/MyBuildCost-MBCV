@@ -1288,7 +1288,7 @@ class ProjectService {
         let arrayOfRateItems = workItem.rate.rateItems;
         let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?',[arrayOfRateItems]);
         if(!workItem.isDirectRate) {
-          workItem.rate.total = parseFloat((totalOfAllRateItems / workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
+          workItem.rate.total = totalOfAllRateItems / workItem.rate.quantity;
         }
         let quantityItems = workItem.quantity.quantityItemDetails;
 

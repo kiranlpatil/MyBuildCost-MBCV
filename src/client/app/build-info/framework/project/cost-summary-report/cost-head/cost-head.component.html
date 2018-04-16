@@ -77,7 +77,7 @@
                                   <div class="edit-field">
                                     <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
                                     <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
-                                      {{workItem.rate.total}}
+                                      {{workItem.rate.total|number : '1.2-2'}}
                                     </div>
                                     <div class="edit-rate-null" *ngIf="!workItem.rate.total">
                                       -
