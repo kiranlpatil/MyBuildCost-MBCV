@@ -6,7 +6,7 @@ import { MaterialTakeOffElements } from '../../../../../shared/constants';
   moduleId: module.id,
   selector: 'bi-material-take-off-report',
   templateUrl: 'material-take-off-report.component.html',
-  styleUrls: ['bi-material-take-off-report.css'],
+  styleUrls: ['material-take-off-report.css'],
 })
 
 export class MaterialTakeOffReportComponent  {

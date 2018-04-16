@@ -32,15 +32,13 @@ export class MaterialTakeoffComponent implements OnInit {
   constructor( private activatedRoute:ActivatedRoute,  private _router : Router, private materialTakeoffService : MaterialTakeOffService,
                private messageService : MessageService) {
 
-    let costHeadElement = {
-      elementKey : MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
-      elementValue : MaterialTakeOffElements.COST_HEAD_WISE
-    };
+    let costHeadElement = new MaterialTakeOffElement();
+    costHeadElement.elementKey = MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD;
+    costHeadElement.elementValue = MaterialTakeOffElements.COST_HEAD_WISE;
 
-    let materialElement = {
-      elementKey : MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL,
-      elementValue : MaterialTakeOffElements.MATERIAL_WISE
-    };
+    let materialElement = new MaterialTakeOffElement();
+    materialElement.elementKey = MaterialTakeOffElements.ELEMENT_WISE_REPORT_MATERIAL;
+      materialElement.elementValue = MaterialTakeOffElements.MATERIAL_WISE;
 
     this.elementWiseReports.push(costHeadElement);
     this.elementWiseReports.push(materialElement);
