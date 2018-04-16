@@ -1,0 +1,108 @@
+<section class="material-takeoff-report">
+  <div class="panel-group no-border"  *ngFor="let materialKey of materialTakeOffReport | keys; let materialDataIndex = index">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <div class="col-sm-12">
+            <a class="building-name">
+              <span class="">{{materialKey}}</span>
+              <span class="slab-area">
+                {{ materialTakeOffReport[materialKey].title }}
+              </span>
+            </a>
+          </div>
+        </h4>
+      </div>
+
+
+      <div class="panel-collapse">
+        <div class="panel-body">
+          <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys; let secondaryViewDataIndex = index">
+            <div class="col-md-12 no-padding">
+
+              <div class="panel panel-default">
+                <div class="panel-group no-border">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" [class.collapsed]="secondaryViewDataIndex != 0">
+                        <span class="caret"></span>
+                        <span class="">{{secondaryViewKey}}</span>
+                        <span class="slab-area">
+                         {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}
+                        </span>
+                      </a>
+                    </h4>
+
+                  </div>
+
+                  <div id="secondaryViewData{{secondaryViewDataIndex}}" class="panel-collapse collapse" [class.in]="secondaryViewDataIndex === 0">
+
+                    <!--header-->
+                    <div class="item-header">
+                      <bi-table-row [customClass]="'item-header-row'"
+                        [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.header">
+                      </bi-table-row>
+                    </div>
+
+                    <!--content-->
+                    <div *ngFor="let content of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content | keys; let contentIndex = index">
+
+                      <div class="inner-item-list" (click)="showSubContent(secondaryViewDataIndex, contentIndex)">
+
+                      <!--content-->
+                        <div class="panel panel-default">
+                          <div class="panel-group">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseRow{{secondaryViewDataIndex}}">
+                                  <bi-table-row [customClass]="'item-inner-row'"
+                                    [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content]">
+                                  </bi-table-row>
+                                  <span class="caret"></span>
+                                </a>
+                              </h4>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="collapseRow{{secondaryViewDataIndex}}" class="panel-collapse collapse">
+                          <div class="panel-body">
+                          <!--sub content-->
+                            <div  *ngIf="dataIndex === secondaryViewDataIndex &&
+                                        headerIndex === contentIndex &&
+                                        viewSubContent">
+                              <div class="collapse-list-item" *ngFor="let subContent of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys;">
+                                <bi-table-row
+                                  [customClass]="'row-list'"
+                                  [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent]">
+                                </bi-table-row>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <!--footer-->
+                    <div class="item-footer">
+                      <bi-table-row
+                        [customClass]="'item-footer-row'"
+                        [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.footer">
+                      </bi-table-row>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</section>

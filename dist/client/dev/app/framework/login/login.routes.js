@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var login_component_1 = require("./login.component");
+var login_auth_guard_service_1 = require("./login-auth-guard.service");
+exports.LoginRoutes = [
+    {
+        path: 'signin',
+        component: login_component_1.LoginComponent,
+        canActivate: [login_auth_guard_service_1.LoginauthGuard]
+    }
+];
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvbG9naW4vbG9naW4ucm91dGVzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EscURBQW1EO0FBQ25ELHVFQUE0RDtBQUcvQyxRQUFBLFdBQVcsR0FBWTtJQUNsQztRQUNFLElBQUksRUFBRSxRQUFRO1FBQ2QsU0FBUyxFQUFFLGdDQUFjO1FBQ3pCLFdBQVcsRUFBQyxDQUFDLHlDQUFjLENBQUM7S0FDN0I7Q0FDRixDQUFDIiwiZmlsZSI6ImFwcC9mcmFtZXdvcmsvbG9naW4vbG9naW4ucm91dGVzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUm91dGUgfSBmcm9tICdAYW5ndWxhci9yb3V0ZXInO1xyXG5pbXBvcnQgeyBMb2dpbkNvbXBvbmVudCB9IGZyb20gJy4vbG9naW4uY29tcG9uZW50JztcclxuaW1wb3J0IHsgTG9naW5hdXRoR3VhcmQgfSBmcm9tICcuL2xvZ2luLWF1dGgtZ3VhcmQuc2VydmljZSc7XHJcblxyXG5cclxuZXhwb3J0IGNvbnN0IExvZ2luUm91dGVzOiBSb3V0ZVtdID0gW1xyXG4gIHtcclxuICAgIHBhdGg6ICdzaWduaW4nLFxyXG4gICAgY29tcG9uZW50OiBMb2dpbkNvbXBvbmVudCxcclxuICAgIGNhbkFjdGl2YXRlOltMb2dpbmF1dGhHdWFyZF1cclxuICB9XHJcbl07XHJcbiJdfQ==

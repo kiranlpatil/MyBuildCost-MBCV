@@ -1,0 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Config = JSON.parse('{"API":"http://localhost:9001","ENV":"DEV","VERSION":"4.2.3"}');
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9zaGFyZWQvY29uZmlnL2Vudi5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFPYSxRQUFBLE1BQU0sR0FBYyxJQUFJLENBQUMsS0FBSyxDQUFDLG1CQUFtQixDQUFDLENBQUMiLCJmaWxlIjoiYXBwL3NoYXJlZC9jb25maWcvZW52LmNvbmZpZy5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIEZlZWwgZnJlZSB0byBleHRlbmQgdGhpcyBpbnRlcmZhY2VcclxuLy8gZGVwZW5kaW5nIG9uIHlvdXIgYXBwIHNwZWNpZmljIGNvbmZpZy5cclxuZXhwb3J0IGludGVyZmFjZSBFbnZDb25maWcge1xyXG4gIEFQST86IHN0cmluZztcclxuICBFTlY/OiBzdHJpbmc7XHJcbn1cclxuXHJcbmV4cG9ydCBjb25zdCBDb25maWc6IEVudkNvbmZpZyA9IEpTT04ucGFyc2UoJzwlPSBFTlZfQ09ORklHICU+Jyk7XHJcbiJdfQ==

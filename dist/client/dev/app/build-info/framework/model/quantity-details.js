@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var QuantityDetails = (function () {
+    function QuantityDetails() {
+        this.total = 0;
+        this.quantityItems = new Array();
+    }
+    return QuantityDetails;
+}());
+exports.QuantityDetails = QuantityDetails;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9idWlsZC1pbmZvL2ZyYW1ld29yay9tb2RlbC9xdWFudGl0eS1kZXRhaWxzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUE7SUFLRTtRQUNFLElBQUksQ0FBQyxLQUFLLEdBQUcsQ0FBQyxDQUFDO1FBQ2YsSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLEtBQUssRUFBZ0IsQ0FBQztJQUNqRCxDQUFDO0lBQ0gsc0JBQUM7QUFBRCxDQVRBLEFBU0MsSUFBQTtBQVRZLDBDQUFlIiwiZmlsZSI6ImFwcC9idWlsZC1pbmZvL2ZyYW1ld29yay9tb2RlbC9xdWFudGl0eS1kZXRhaWxzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUXVhbnRpdHlJdGVtIH0gZnJvbSAnLi9xdWFudGl0eS1pdGVtJztcclxuXHJcbmV4cG9ydCBjbGFzcyBRdWFudGl0eURldGFpbHMge1xyXG4gIG5hbWU6IHN0cmluZztcclxuICB0b3RhbDogbnVtYmVyO1xyXG4gIHF1YW50aXR5SXRlbXMgOiBBcnJheTxRdWFudGl0eUl0ZW0+O1xyXG5cclxuICBjb25zdHJ1Y3RvcigpIHtcclxuICAgIHRoaXMudG90YWwgPSAwO1xyXG4gICAgdGhpcy5xdWFudGl0eUl0ZW1zID0gbmV3IEFycmF5PFF1YW50aXR5SXRlbT4oKTtcclxuICB9XHJcbn1cclxuIl19
