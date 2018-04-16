@@ -232,11 +232,13 @@ export class GetRateComponent implements OnInit {
     for(let rateItemData of rateItemsData) {
       if(rateItemData.itemName === this.selectedRateItem.itemName) {
          for(let rateItem of this.rate.rateItems) {
-           if(rateItem.type === this.selectedRateItemKey && rateItem.itemName === this.selectedRateItem.itemName) {
+           if(rateItem.itemName === this.selectedRateItem.itemName) {
              rateItem.rate = rateItemData.rate;
              this.calculateTotal();
+             break;
            }
          }
+         break;
       }
     }
     for(let workItemData of this.workItemsList) {
