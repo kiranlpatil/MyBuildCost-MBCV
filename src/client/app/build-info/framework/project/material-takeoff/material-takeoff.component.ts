@@ -130,15 +130,12 @@ export class MaterialTakeoffComponent implements OnInit {
   }
 
   onGetMaterialTakeOffReportFailure(error : any) {
-    console.log(error);
-
     this.elementFound = false;
 
     var message = new Message();
-    message.isError = false;
-    message.custom_message = this.getMaterialTakeOffElements().ERROR_MESSAGE_MATERIAL_TAKE_OFF_REPORT_OF +
-      this.selectedElement + this.getMaterialTakeOffElements().ERROR_MESSAGE_IS_NOT_FOUND_FOR + this.building
-    + this.getMaterialTakeOffElements().ERROR_MESSAGE_BUILDING;
+    message.isError = true;
+    message.custom_message = error.err_msg;
+    message.error_msg = error.err_msg;
     this.messageService.message(message);
   }
 }
