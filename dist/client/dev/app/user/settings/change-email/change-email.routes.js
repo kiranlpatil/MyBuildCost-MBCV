@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var change_email_component_1 = require("./change-email.component");
+exports.ChangeEmailRoutes = [
+    {
+        path: 'change-email',
+        component: change_email_component_1.ChangeEmailComponent
+    }
+];
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC91c2VyL3NldHRpbmdzL2NoYW5nZS1lbWFpbC9jaGFuZ2UtZW1haWwucm91dGVzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsbUVBQThEO0FBRWpELFFBQUEsaUJBQWlCLEdBQVk7SUFDeEM7UUFDRSxJQUFJLEVBQUUsY0FBYztRQUNwQixTQUFTLEVBQUUsNkNBQW9CO0tBQ2hDO0NBQ0YsQ0FBQyIsImZpbGUiOiJhcHAvdXNlci9zZXR0aW5ncy9jaGFuZ2UtZW1haWwvY2hhbmdlLWVtYWlsLnJvdXRlcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7Um91dGV9IGZyb20gXCJAYW5ndWxhci9yb3V0ZXJcIjtcclxuaW1wb3J0IHtDaGFuZ2VFbWFpbENvbXBvbmVudH0gZnJvbSBcIi4vY2hhbmdlLWVtYWlsLmNvbXBvbmVudFwiO1xyXG5cclxuZXhwb3J0IGNvbnN0IENoYW5nZUVtYWlsUm91dGVzOiBSb3V0ZVtdID0gW1xyXG4gIHtcclxuICAgIHBhdGg6ICdjaGFuZ2UtZW1haWwnLFxyXG4gICAgY29tcG9uZW50OiBDaGFuZ2VFbWFpbENvbXBvbmVudFxyXG4gIH1cclxuXTtcclxuIl19

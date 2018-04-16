@@ -1,0 +1,32 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var TooltipComponent = (function () {
+    function TooltipComponent() {
+    }
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], TooltipComponent.prototype, "message", void 0);
+    TooltipComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'cn-tool-tip',
+            templateUrl: 'tool-tip-component.html',
+            styleUrls: ['tool-tip-component.css']
+        })
+    ], TooltipComponent);
+    return TooltipComponent;
+}());
+exports.TooltipComponent = TooltipComponent;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9zaGFyZWQvdG9vbC10aXAtY29tcG9uZW50L3Rvb2wtdGlwLWNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQUFBLHNDQUFpRDtBQVNqRDtJQUFBO0lBRUEsQ0FBQztJQURVO1FBQVIsWUFBSyxFQUFFOztxREFBaUI7SUFEZCxnQkFBZ0I7UUFQNUIsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxNQUFNLENBQUMsRUFBRTtZQUNuQixRQUFRLEVBQUUsYUFBYTtZQUN2QixXQUFXLEVBQUUseUJBQXlCO1lBQ3RDLFNBQVMsRUFBRSxDQUFDLHdCQUF3QixDQUFDO1NBQ3RDLENBQUM7T0FFVyxnQkFBZ0IsQ0FFNUI7SUFBRCx1QkFBQztDQUZELEFBRUMsSUFBQTtBQUZZLDRDQUFnQiIsImZpbGUiOiJhcHAvc2hhcmVkL3Rvb2wtdGlwLWNvbXBvbmVudC90b29sLXRpcC1jb21wb25lbnQuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIElucHV0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XHJcblxyXG5AQ29tcG9uZW50KHtcclxuICBtb2R1bGVJZDogbW9kdWxlLmlkLFxyXG4gIHNlbGVjdG9yOiAnY24tdG9vbC10aXAnLFxyXG4gIHRlbXBsYXRlVXJsOiAndG9vbC10aXAtY29tcG9uZW50Lmh0bWwnLFxyXG4gIHN0eWxlVXJsczogWyd0b29sLXRpcC1jb21wb25lbnQuY3NzJ11cclxufSlcclxuXHJcbmV4cG9ydCBjbGFzcyBUb29sdGlwQ29tcG9uZW50IHtcclxuICBASW5wdXQoKSBtZXNzYWdlOiBzdHJpbmc7XHJcbn1cclxuIl19

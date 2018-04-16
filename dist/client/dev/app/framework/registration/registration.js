@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Registration = (function () {
+    function Registration() {
+    }
+    return Registration;
+}());
+exports.Registration = Registration;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvcmVnaXN0cmF0aW9uL3JlZ2lzdHJhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBO0lBQUE7SUFTQSxDQUFDO0lBQUQsbUJBQUM7QUFBRCxDQVRBLEFBU0MsSUFBQTtBQVRZLG9DQUFZIiwiZmlsZSI6ImFwcC9mcmFtZXdvcmsvcmVnaXN0cmF0aW9uL3JlZ2lzdHJhdGlvbi5qcyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjbGFzcyBSZWdpc3RyYXRpb24ge1xyXG4gIGlkOiBhbnk7XHJcbiAgZmlyc3RfbmFtZTogc3RyaW5nO1xyXG4gIGxhc3RfbmFtZTogc3RyaW5nO1xyXG4gIGVtYWlsOiBzdHJpbmc7XHJcbiAgbW9iaWxlX251bWJlcjogc3RyaW5nO1xyXG4gIHBhc3N3b3JkOiBzdHJpbmc7XHJcbiAgY29uZmlybV9wYXNzd29yZDogc3RyaW5nO1xyXG4gIGN1cnJlbnRfdGhlbWU6IHN0cmluZztcclxufVxyXG4iXX0=

@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var candidate_sign_up_component_1 = require("./candidate-sign-up.component");
+exports.CandidateSignUpRoutes = [
+    {
+        path: 'registration',
+        component: candidate_sign_up_component_1.CandidateSignUpComponent
+    },
+    {
+        path: 'applicant-signup/:id',
+        component: candidate_sign_up_component_1.CandidateSignUpComponent
+    }
+];
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvcmVnaXN0cmF0aW9uL2NhbmRpZGF0ZS1zaWduLXVwL2NhbmRpZGF0ZS1zaWduLXVwLnJvdXRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUlBLDZFQUF5RTtBQUU1RCxRQUFBLHFCQUFxQixHQUFZO0lBQzVDO1FBQ0UsSUFBSSxFQUFFLGNBQWM7UUFDcEIsU0FBUyxFQUFFLHNEQUF3QjtLQUNwQztJQUNEO1FBQ0UsSUFBSSxFQUFFLHNCQUFzQjtRQUM1QixTQUFTLEVBQUUsc0RBQXdCO0tBQ3BDO0NBQ0YsQ0FBQyIsImZpbGUiOiJhcHAvZnJhbWV3b3JrL3JlZ2lzdHJhdGlvbi9jYW5kaWRhdGUtc2lnbi11cC9jYW5kaWRhdGUtc2lnbi11cC5yb3V0ZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcclxuICogQ3JlYXRlZCBieSB0ZWNocHJpbWVsYWIgb24gMy85LzIwMTcuXHJcbiAqL1xyXG5pbXBvcnQgeyBSb3V0ZSB9IGZyb20gJ0Bhbmd1bGFyL3JvdXRlcic7XHJcbmltcG9ydCB7IENhbmRpZGF0ZVNpZ25VcENvbXBvbmVudCB9IGZyb20gJy4vY2FuZGlkYXRlLXNpZ24tdXAuY29tcG9uZW50JztcclxuXHJcbmV4cG9ydCBjb25zdCBDYW5kaWRhdGVTaWduVXBSb3V0ZXM6IFJvdXRlW10gPSBbXHJcbiAge1xyXG4gICAgcGF0aDogJ3JlZ2lzdHJhdGlvbicsXHJcbiAgICBjb21wb25lbnQ6IENhbmRpZGF0ZVNpZ25VcENvbXBvbmVudFxyXG4gIH0sXHJcbiAge1xyXG4gICAgcGF0aDogJ2FwcGxpY2FudC1zaWdudXAvOmlkJyxcclxuICAgIGNvbXBvbmVudDogQ2FuZGlkYXRlU2lnblVwQ29tcG9uZW50XHJcbiAgfVxyXG5dO1xyXG4iXX0=

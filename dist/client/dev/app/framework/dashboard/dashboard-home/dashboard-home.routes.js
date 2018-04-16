@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var index_1 = require("./index");
+exports.DashboardHomeRoutes = [
+    {
+        path: 'dashboardhome',
+        component: index_1.DashboardHomeComponent
+    }
+];
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvZGFzaGJvYXJkL2Rhc2hib2FyZC1ob21lL2Rhc2hib2FyZC1ob21lLnJvdXRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLGlDQUFpRDtBQUVwQyxRQUFBLG1CQUFtQixHQUFZO0lBQzFDO1FBQ0UsSUFBSSxFQUFFLGVBQWU7UUFDckIsU0FBUyxFQUFFLDhCQUFzQjtLQUNsQztDQUNGLENBQUMiLCJmaWxlIjoiYXBwL2ZyYW1ld29yay9kYXNoYm9hcmQvZGFzaGJvYXJkLWhvbWUvZGFzaGJvYXJkLWhvbWUucm91dGVzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUm91dGUgfSBmcm9tICdAYW5ndWxhci9yb3V0ZXInO1xyXG5pbXBvcnQgeyBEYXNoYm9hcmRIb21lQ29tcG9uZW50IH0gZnJvbSAnLi9pbmRleCc7XHJcblxyXG5leHBvcnQgY29uc3QgRGFzaGJvYXJkSG9tZVJvdXRlczogUm91dGVbXSA9IFtcclxuICB7XHJcbiAgICBwYXRoOiAnZGFzaGJvYXJkaG9tZScsXHJcbiAgICBjb21wb25lbnQ6IERhc2hib2FyZEhvbWVDb21wb25lbnRcclxuICB9XHJcbl07XHJcbiJdfQ==

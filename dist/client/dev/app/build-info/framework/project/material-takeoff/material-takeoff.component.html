@@ -1,0 +1,32 @@
+<bi-project-header></bi-project-header>
+<section class="wrapper">
+  <div class="container">
+    <div class="col-sm-9 col-xs-12 padding-right30 left-content">
+      <div class="pull-left no-padding">
+        <select class="select-costing no-margin" (change)="onChangeGroupBy($event.target.value)">
+          <option *ngFor="let elementWiseReport of elementWiseReportList" [value]="elementWiseReport">{{
+            elementWiseReport }}</option>
+        </select>
+      </div>
+      <div class="pull-left no-padding">
+        {{ elementHeading }}
+        <select class="select-costing no-margin" (change)="onChangeSecondFilter($event.target.value)">
+          <option *ngFor="let element of elementList" [value]="element">{{ element }}</option>
+        </select>
+      </div>
+      <div class="pull-left no-padding">
+        Building
+        <select  class="select-costing no-margin" [(ngModel)]="building" (change)="onChangeBuilding($event.target.value)">
+          <option [value]=getMaterialTakeOffElements().ALL_BUILDINGS>All Buildings</option>
+          <option *ngFor="let building of buildingList" [value]="building">{{ building }}</option>
+        </select>
+      </div>
+      <bi-material-take-off-report
+        [MaterialTakeOffReport]="materialTakeOffReport">
+      </bi-material-take-off-report>
+    </div>
+    <div class="col-xs-3 no-padding right-content">
+      <img src="./assets/build-info/dashboard/ads.png" style="width: 100%; margin-top: 20px;" />
+    </div>
+  </div>
+</section>

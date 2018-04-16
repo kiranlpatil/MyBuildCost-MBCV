@@ -1,0 +1,108 @@
+<!--TODO: make separate component for Common Amminities-->
+<div *ngIf="amenitiesReport !== undefined" class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapseCommonDevelopment" class="collapsed">
+          {{getHeadings().COMMON_DEVELOPMENT}}
+          <span class="caret"></span>
+        </a>
+      </h4>
+    </div>
+
+    <div id="collapseCommonDevelopment" class="panel-collapse collapse">
+      <div class="panel-body">
+
+        <table class="table table-row-spacing table-dashboard">
+          <thead>
+            <tr>
+              <th rowspan="2" class="border-left">{{getLabel().AMENITY_COST_HEAD}}</th>
+              <th colspan="2" class="border-left table-heading">
+                {{getLabel().REPORT_BY_THUMBRULE}}
+                <div class="white-bg"></div>
+              </th>
+              <th colspan="2" class="border-left table-heading">
+                {{getLabel().ESTIMATED}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+                <div class="white-bg"></div>
+              </th>
+            </tr>
+            <tr class="cost-summary-row-list">
+              <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
+              <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
+              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
+              <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
+            </tr>
+          </thead>
+          <tbody *ngIf="amenitiesReport.thumbRule  && amenitiesReport.estimate" >
+            <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index" class="delete-cost-head-cell">
+              <td class="border-left">{{thumbRuleItem.name}}</td>
+              <td class="border-left"><span class="estimated-cost">{{thumbRuleItem.rate}}</span></td>
+              <td class="border-left">
+                <div class="edit-field">
+                  <input type="number"
+                         [(ngModel)]="thumbRuleItem.amount"
+                         id="thumbRuleItem.amount"
+                         (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
+                         class="form-control clear"/>
+                </div>
+              </td>
+              <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate}}</span></td>
+              <td>
+                <div class="edit-field" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
+                     (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
+                  <input [(ngModel)]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total"
+                         id="estimatedItem.total">
+                </div>
+                <button type="button" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
+                        class="btn-get-amount" (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
+              </td>
+              <td class="delete-cost-head">
+                <div data-toggle="modal"
+                     data-target="#deleteCosthead"
+                     (click)="setIdsToInActiveCostHead(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateAnalysisId)">
+                  <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="showProjectCostHeadList" class="add-cost-head">
+              <td class="border-left">
+                <select class="select-item" (change)="onChangeActiveSelectedCostHead($event.target.value)">
+                  <option>Select Item</option>
+                  <option *ngFor="let projectCostHead of inActiveProjectCostHeads" [value]="projectCostHead.rateAnalysisId">
+                    {{ projectCostHead.name }}
+                  </option>
+                </select>
+              </td>
+              <td colspan="5">&nbsp;</td>
+            </tr>
+            <tr class="add-item-row">
+              <td colspan="5" class="add-items">
+                <button type="button" class="btn btn-add-item"
+                        (click)="getAllInActiveProjectCostHeads()">
+                  <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <table class="table table-row-spacing table-dashboard total-table">
+      <tbody>
+      <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
+        <td class="border-left">{{getLabel().TOTAL}}</td>
+        <td class="border-left">{{amenitiesReport.thumbRule.totalRate|number}}</td>
+        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.thumbRule.totalBudgetedCost|number}}</span></td>
+        <td class="border-left">{{amenitiesReport.estimate.totalRate|number}}</td>
+        <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.totalEstimatedCost|number}}</span></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div class="modal fade default-modal" id="deleteCosthead" role="dialog">
+  <bi-delete-confirmation-modal [elementType]="deleteConfirmationCostHead" (deleteElementEvent)="deleteProjectCostHead($event)"></bi-delete-confirmation-modal>
+</div>
