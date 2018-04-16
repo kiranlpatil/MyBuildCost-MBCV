@@ -30,12 +30,11 @@ export class CommonService {
       if(categoryData.rateAnalysisId === categoryRateAnalysisId) {
         let categoryTotalAmount = 0;
         for(let workItemData of workItemsList) {
-          categoryTotalAmount = parseFloat((categoryTotalAmount + workItemData.amount
-          ).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+          categoryTotalAmount =categoryTotalAmount + workItemData.amount;
         }
         categoryData.amount = categoryTotalAmount;
       }
-      categoryDetailsTotalAmount = Math.round(categoryDetailsTotalAmount + categoryData.amount);
+      categoryDetailsTotalAmount = categoryDetailsTotalAmount + categoryData.amount;
     }
     return categoryDetailsTotalAmount;
   }
@@ -58,7 +57,7 @@ export class CommonService {
   }
 
   calculateAmountOfWorkItem(totalQuantity : number, totalRate : number) {
-    return Math.round(totalQuantity * totalRate);
+    return (totalQuantity * totalRate);
   }
 
   decimalConversion(value : number) {

@@ -53,10 +53,9 @@ import { ProjectHeaderComponent } from './build-info/framework/project-header/pr
 import { CostSummaryComponent } from './build-info/framework/project/cost-summary-report/cost-summary.component';
 import { CostSummaryService } from './build-info/framework/project/cost-summary-report/cost-summary.service';
 import { MaterialTakeoffComponent } from './build-info/framework/project/material-takeoff/material-takeoff.component';
-import { MaterialTakeoffService } from './build-info/framework/project/material-takeoff/material-takeoff.service';
+import { MaterialTakeOffService } from './build-info/framework/project/material-takeoff/material-takeoff.service';
 import { MaterialTakeOffReportComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/material-take-off-report.component';
-import { SubContentComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/content/sub-content/sub-content.component';
-import { ActualContentComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/content/actual-content/actual-content.component';
+import { TableRowComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/row/row.component';
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
 import { GetQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.component';
@@ -70,8 +69,10 @@ import { DeleteConfirmationModalComponent } from './shared/delete-confirmation-m
 import { ProjectFormComponent } from './build-info/framework/shared/project-form/project-form.component';
 import { BuildingFormComponent } from './build-info/framework/shared/building-form/building-form.component';
 import { SharePrintPageComponent } from './build-info/framework/project-header/share-print-page/share-print-page.component';
-import { QuantityDetailsComponent } from './build-info/framework/project/cost-summary-report/cost-head/quantity-details/quantity-details.component';
-
+import { QuantityDetailsComponent }
+from './build-info/framework/project/cost-summary-report/cost-head/quantity-details/quantity-details.component';
+import { CostHeadReportComponent } from './build-info/framework/project/report-templates/cost-head-report/cost-head-report.component';
+import { CostSummaryReportComponent } from './build-info/framework/project/report-templates/cost-summary-report/cost-summary-report.component'
 
 @NgModule({
   imports: [
@@ -115,9 +116,8 @@ import { QuantityDetailsComponent } from './build-info/framework/project/cost-su
     CostSummaryPipe,
     GetQuantityComponent,
     MaterialTakeoffComponent,
-    SubContentComponent,
-    ActualContentComponent,
     MaterialTakeOffReportComponent,
+    TableRowComponent,
     GetRateComponent,
     ProjectItemComponent,
     QuantityDetailsComponent,
@@ -129,8 +129,12 @@ import { QuantityDetailsComponent } from './build-info/framework/project/cost-su
     ProjectFormComponent,
     BuildingFormComponent,
 
+    //report pdf
+    CostHeadReportComponent,
+
     PageNotFoundComponent,
-    CommonAmenitiesComponent
+    CommonAmenitiesComponent,
+    CostSummaryReportComponent
   ],
 
   providers: [
@@ -164,7 +168,7 @@ import { QuantityDetailsComponent } from './build-info/framework/project/cost-su
     ProjectService,
     BuildingService,
     CostSummaryService,
-    MaterialTakeoffService
+    MaterialTakeOffService
   ],
   bootstrap: [AppComponent]
 })

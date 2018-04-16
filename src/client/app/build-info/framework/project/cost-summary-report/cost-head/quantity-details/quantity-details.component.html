@@ -20,8 +20,8 @@
         <td>-</td>
 
         <td>
-          <div class="edit-cost" *ngIf="workItemData.rate.isEstimated">
-            {{ (quantity.total * workItemData.rate.total)|number }}
+          <div *ngIf="workItemData.rate.isEstimated">
+            {{ (quantity.total * workItemData.rate.total)|number: '1.0-0' }}
           </div>
           <div class="edit-cost-null" *ngIf="!workItemData.rate.isEstimated">
             -

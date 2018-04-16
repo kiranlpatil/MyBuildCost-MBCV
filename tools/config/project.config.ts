@@ -52,15 +52,11 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     // Add packages (e.g. lodash)
-     let additionalPackages: ExtendPackages[] = [{
-       name: 'lodash',
-       path: `${this.APP_BASE}node_modules/lodash/lodash.js`
-    }/*,
+     let additionalPackages: ExtendPackages[] = [
        {
-         name: 'alasql',
-         path: `${this.APP_BASE}node_modules/alasql/dist/alasql.js`
-       }*/
-       ];
+       name: 'lodash',
+       path: `node_modules/lodash/lodash.js`
+    }];
 
     this.addPackagesBundles(additionalPackages);
     // Add packages (e.g. ng2-translate)

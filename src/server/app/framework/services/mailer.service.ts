@@ -20,6 +20,9 @@ class SendMailService {
   send(sendmailTo: string, subject: string, templateName: string,
        data: Map<string, string>,
        callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string,attachment?:any) {
+    if(config.has('application.publicPath')) {
+      console.log('PUBLICpATH: '+JSON.stringify(config.get('application.publicPath')));
+    }
     let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
     data.forEach((value: string, key: string) => {
       content = content.replace(key, value);

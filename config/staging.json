@@ -20,7 +20,7 @@
     },
     "exportFilePathServer": "/server/prod/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",
-    "publicPath":"/server/prod/app/framework/public/",
+    "publicPath":"/server/dev/app/framework/public/",
     "profilePath":"/server/prod/public/profileImage",
     "profilePathForClient":"/public/profileImage/",
     "limitForQuery" : 10,

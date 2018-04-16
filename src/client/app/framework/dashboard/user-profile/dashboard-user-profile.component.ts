@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../../shared/customvalidations/validation.service';
 import { Label, Headings } from '../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, Messages, MessageService, ProfileService } from '../../../shared/index';
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -24,7 +25,8 @@ export class DashboardProfileComponent implements OnInit {
   model: UserProfile = new UserProfile();
   first_letter:string;
 
-  constructor(private  dashboardUserProfileService : DashboardUserProfileService, private formBuilder: FormBuilder,
+  constructor(private  dashboardUserProfileService : DashboardUserProfileService, private _router: Router,
+              private formBuilder: FormBuilder,
               private messageService: MessageService, private profileService: ProfileService,
               ) {
     this.userForm = this.formBuilder.group({
@@ -61,7 +63,7 @@ export class DashboardProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if(this.userForm.valid) {
+    //if(this.userForm.valid) {
       this.model = this.userForm.value;
       this.dashboardUserProfileService.updateProfile(this.model)
         .subscribe(
@@ -69,7 +71,7 @@ export class DashboardProfileComponent implements OnInit {
           error => this.onProfileUpdateError(error));
       SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, this.model.first_name);
       this.profileService.onProfileUpdate(this.model);
-    }
+    //}
   }
 
   onProfileUpdateSuccess(result: any) {
@@ -121,7 +123,9 @@ export class DashboardProfileComponent implements OnInit {
   }
   onPictureUpload(imagePath: string) {
     }
-
+  navigateTo(nav:string) {
+    this._router.navigate([nav]);
+  }
   showHideMobileModal() {
     this.showStyleMobile = !this.showStyleMobile;
   }

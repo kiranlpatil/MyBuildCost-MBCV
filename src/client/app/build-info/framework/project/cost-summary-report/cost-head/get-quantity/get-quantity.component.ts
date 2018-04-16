@@ -43,7 +43,6 @@ export class GetQuantityComponent implements OnInit {
   lengthTotal: number = 0;
   breadthTotal: number = 0;
   heightTotal: number = 0;
-  deleteConfirmationQuantityItem = ProjectElements.QUANTITY_ITEM;
 
   constructor(private costSummaryService : CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private _router : Router, private commonService: CommonService) {
@@ -227,27 +226,8 @@ export class GetQuantityComponent implements OnInit {
       }
 
   closeQuantityTab() {
-    let quantityItemsArray = this.quantityItems;
-    for(let quantityIndex in quantityItemsArray) {
-      if((quantityItemsArray[quantityIndex].item === null || quantityItemsArray[quantityIndex].item === '' )&&
-        (quantityItemsArray[quantityIndex].nos === 0 || quantityItemsArray[quantityIndex].nos === null) ||
-        (quantityItemsArray[quantityIndex].length === 0 || quantityItemsArray[quantityIndex].length === null) ||
-        (quantityItemsArray[quantityIndex].height === 0 || quantityItemsArray[quantityIndex].height === null)) {
-
-      quantityItemsArray.splice(parseInt(quantityIndex),quantityItemsArray.length);
-      } else {
-        this.quantityItems = quantityItemsArray;
-        this.closeQuantityView.emit('');
-      }
-    }
     this.closeQuantityView.emit('');
   }
-
- /* deleteElement(elementType : string) {
-    if(elementType === ProjectElements.QUANTITY_ITEM) {
-      this.deleteQuantityItem();
-    }
-  }*/
 
   getButton() {
     return Button;

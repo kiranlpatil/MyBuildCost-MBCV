@@ -53,6 +53,11 @@ class ProjectRoutes {
 
     /*Project- Routes: Category*/
 
+    //Retrive details of particular costhead from Project
+    router.get('/:projectId/costhead/:costHeadId', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, validator.getCategoriesOfProjectCostHead, controller.getCategoriesOfProjectCostHead,
+      this._responseInterceptor.exit);
+
     //Retrive categories for particular costhead
     router.get('/:projectId/costhead/:costHeadId/category', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, validator.getCategoriesOfProjectCostHead, controller.getCategoriesOfProjectCostHead,
@@ -146,6 +151,11 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
     //Retrive list of inactive costheads
     router.get('/:projectId/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.getInActiveCostHead, controller.getInActiveCostHead, this._responseInterceptor.exit);
+
+    //Retrive details of particular costhead from Project
+    router.get('/:projectId/building/:buildingId/costhead/:costHeadId', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, validator.getCategoriesOfBuildingCostHead, controller.getCostHeadDetailsOfBuilding,
+      this._responseInterceptor.exit);
 
     //Add new costhead in building
     router.put('/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,

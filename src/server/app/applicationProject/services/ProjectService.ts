@@ -1286,11 +1286,10 @@ class ProjectService {
         workItem.rate.rateItems = this.getRatesFromCentralizedrates(rateItemsOfWorkItem, centralizedRates);
 
         let arrayOfRateItems = workItem.rate.rateItems;
-        let totalOfAllRateItems = alasql('VALUE OF SELECT ROUND(SUM(totalAmount),2) FROM ?',[arrayOfRateItems]);
+        let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?',[arrayOfRateItems]);
         if(!workItem.isDirectRate) {
-          workItem.rate.total = parseFloat((totalOfAllRateItems / workItem.rate.quantity).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT));
+          workItem.rate.total = totalOfAllRateItems / workItem.rate.quantity;
         }
-
         let quantityItems = workItem.quantity.quantityItemDetails;
 
         if(!workItem.quantity.isDirectQuantity) {
@@ -1298,7 +1297,7 @@ class ProjectService {
         }
 
          if(workItem.rate.isEstimated && workItem.quantity.isEstimated) {
-           workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+           workItem.amount = workItem.rate.total * workItem.quantity.total;
            workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount+ workItem.amount;
          }
       workItemsListWithRates.workItems.push(workItem);
@@ -1450,6 +1449,35 @@ class ProjectService {
     });
   }
 
+  getCostHeadDetailsOfBuilding(projectId:string, buildingId:string, costHeadId:number,
+                               user:User, callback:(error: any, result: any)=> void) {
+
+    logger.info('Project service, Get Project CostHead Categories has been hit');
+    let query = [
+      { $match: {'_id': ObjectId(buildingId)}},
+      { $project : {'costHeads':1,'rates':1}},
+      { $unwind: '$costHeads'},
+      { $match: {'costHeads.rateAnalysisId': costHeadId }},
+      { $project : {'costHeads':1,'_id':0,'rates':1}}
+    ];
+    this.buildingRepository.aggregate(query, (error, result) => {
+      logger.info('Project service, Get workitems for specific category has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        if(result.length > 0) {
+          let data = result[0].costHeads;
+          let categoriesListWithCentralizedRates = this.getCategoriesListWithCentralizedRates(data.categories, result[0].rates);
+          callback(null, {data: data, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        } else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
+          callback(error, null);
+        }
+      }
+    });
+  }
+
   //Get category list with centralized rate
   getCategoriesListWithCentralizedRates(categoriesOfCostHead: Array<Category>, centralizedRates: Array<CentralizedRate>) {
     let categoriesTotalAmount = 0 ;
@@ -1460,12 +1488,12 @@ class ProjectService {
       let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates, true);
       categoryData.amount = workItems.workItemsAmount;
       categoriesTotalAmount = categoriesTotalAmount + workItems.workItemsAmount;
-      delete categoryData.workItems;
+      //delete categoryData.workItems;
       categoriesListWithRates.categories.push(categoryData);
     }
 
     if(categoriesTotalAmount !== 0) {
-      categoriesListWithRates.categoriesAmount = this.commonService.decimalConversion(categoriesTotalAmount);
+      categoriesListWithRates.categoriesAmount = categoriesTotalAmount;
     }
 
     return categoriesListWithRates;

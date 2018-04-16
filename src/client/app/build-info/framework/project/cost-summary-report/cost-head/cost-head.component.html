@@ -10,7 +10,8 @@
           <span class="text-left"> ( {{ costHeadName }} ) </span>
         </div>
         <div class="col-md-4 text-right padding-right5">
-          <span class="text-left total-amount-work total-cost"> {{categoryDetailsTotalAmount|number}} </span>
+          <bi-cost-head-report-pdf [costHeadId]="costHeadId"></bi-cost-head-report-pdf>
+          <span class="text-left total-amount-work total-cost"> {{categoryDetailsTotalAmount|number : '1.0-0'}} </span>
         </div>
       </h4>
       <div class="panel-group" *ngFor=" let category of categoryDetails; let categoryIndex = index ">
@@ -22,7 +23,7 @@
                    href="#collapse{{category.rateAnalysisId}}" class="collapsed">
                   <span class="caret"></span>
                   <span class="">{{ category.name }}</span>
-                  <span class="text-right pull-right total-cost">{{ category.amount|number }}</span>
+                  <span class="text-right pull-right total-cost">{{ category.amount|number :'1.0-0'}}</span>
                 </a>
               </div>
             </div>
@@ -75,7 +76,12 @@
                                 <td>
                                   <div class="edit-field">
                                     <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
-                                    <input *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate" size="10" class="form-control clear" readonly>
+                                    <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
+                                      {{workItem.rate.total|number : '1.2-2'}}
+                                    </div>
+                                    <div class="edit-rate-null" *ngIf="!workItem.rate.total">
+                                      -
+                                    </div>
                                      <span class="calculator"  id ="getRate{{categoryIndex}}"
                                        *ngIf="workItem.isDirectRate === false" (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
                                      <img src="assets/build-info/dashboard/calculator2.png" />
@@ -91,10 +97,10 @@
                                   <div class="edit-cost" [class.active-cost]="(rateView==='cost' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                                        *ngIf="workItem.amount != 0 && workItem.isDirectRate === false"
                                        (click)="getRateByQuantity( getLabel().GET_RATE_BY_QUANTITY, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">
-                                    {{ (workItem.amount)|number}}
+                                    {{ (workItem.amount)|number : '1.0-0'}}
                                   </div>
                                   <div  *ngIf="workItem.isDirectRate">
-                                    {{ (workItem.amount)|number}}
+                                    {{ (workItem.amount)|number : '1.0-0'}}
                                   </div>
                                 </td>
 
@@ -129,11 +135,7 @@
                                                    [workItemsList] ="workItemsList"
                                                    [categoryRateAnalysisId]="category.rateAnalysisId"
                                                    [workItemRateAnalysisId]="workItem.rateAnalysisId"
-                                                   [totalAmount]="totalAmount"
                                                    [ratePerUnitAmount]="ratePerUnitAmount"
-                                                   [totalAmountOfMaterial] = "totalAmountOfMaterial"
-                                                   [totalAmountOfLabour] = "totalAmountOfLabour"
-                                                   [totalAmountOfMaterialAndLabour] = "totalAmountOfMaterialAndLabour"
                                                    (categoriesTotalAmount)="setCategoriesTotal($event)"
                                                    (closeRateView)="closeRateView($event)"
                                                    (showWorkItemTabName)="setShowWorkItemTab($event)"
@@ -229,4 +231,12 @@
 <div class="modal fade default-modal" id="deleteQuantityDetails" role="dialog">
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationForQuantityDetails" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
 </div>
+
+
+
+<!--
+<div class="modal fade" id="updateDirectQuantity" role="dialog">
+  <bi-update-confirmation-modal [quantityType]="updateConfirmationForDirectQuantity" (updateElementEvent)="updateElement($event)"></bi-update-confirmation-modal>
+</div>
+-->
 

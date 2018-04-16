@@ -934,6 +934,26 @@ class ProjectController {
     }
   }
 
+  getCostHeadDetailsOfBuilding(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, Get Project CostHead Categories has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let projectService = new ProjectService();
+      projectService.getCostHeadDetailsOfBuilding(projectId, buildingId, costHeadId, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   //Update status ( true/false ) of category
   updateCategoryStatus(req: express.Request, res: express.Response, next: any): void {
     try {

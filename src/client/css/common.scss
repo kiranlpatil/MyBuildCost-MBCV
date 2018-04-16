@@ -839,7 +839,10 @@ img[alt] {
   position: absolute;
 }
 
-input[disabled][_ngcontent-c4], input[readonly][_ngcontent-c4], textarea[disabled][_ngcontent-c4] {
+input[disabled],
+input[readonly],
+textarea[disabled] {
+  background: $disabled-input-bg;
   color: $disable-input;
 }
 
