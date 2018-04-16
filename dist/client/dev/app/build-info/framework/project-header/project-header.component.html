@@ -1,0 +1,21 @@
+<header  class="header-container">
+  <div class="container">
+    <div class="col-sm-9 padding-right30">
+      <ul>
+        <li>
+          <a type="button" [routerLinkActive]="['active']" [routerLink]="['/project', getCurrentProjectId(),'cost-summary']" cost-summary>{{getMenus().COST_SUMMARY}}</a>
+        </li>
+        <li>
+          <a type="button"  [routerLinkActive]="['active']" [routerLink]="['/project',getCurrentProjectId(),'material-takeoff']">{{getMenus().MATERIAL_TAKEOFF}}</a>
+        </li>
+        <li>
+          <a type="button"  [routerLinkActive]="['active']"  [routerLink]="['/project', getCurrentProjectId(),'details']" >{{getMenus().PROJECT_DETAILS}}</a>
+        </li>
+        <li>
+          <a (click)="goToCreateBuilding()"><span class="glyphicon glyphicon-plus"></span>{{getMenus().ADD_BUILDING}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+

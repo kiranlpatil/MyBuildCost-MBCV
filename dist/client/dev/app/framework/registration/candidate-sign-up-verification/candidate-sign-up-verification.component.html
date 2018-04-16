@@ -1,0 +1,15 @@
+<section class="main-form-wrapper verify-user">
+
+  <cn-user-header></cn-user-header>
+
+  <cn-app-loader></cn-app-loader>
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 content">
+    <cn-otp-verification [verificationMessage]="signUpVerificationMessage"
+                         [verificationHeading]="signUpVerificationHeading"
+                          [actionName]="actionName"
+                         [userID]="userID" [mobileNumber]="mobileNumber"
+                         (onMobileVerificationSuccess)="toggleModal()">
+    </cn-otp-verification>
+  </div>
+
+</section>
