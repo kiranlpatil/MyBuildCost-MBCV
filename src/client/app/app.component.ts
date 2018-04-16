@@ -42,7 +42,7 @@ export class AppComponent {
       (message: Message) => {
         if (message.isError === true) {
           let err = message.error_msg.error;
-          if (err === 'Could not attach click handler to the element. Reason: element not found.') {
+          if (err === 'Could not attach click handler to the selectedElement. Reason: selectedElement not found.') {
             message.isError = false;
           } else {
             this.showError(message);

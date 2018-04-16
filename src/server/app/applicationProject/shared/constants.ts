@@ -92,13 +92,15 @@ class Constants {
   public static ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO = 'WHERE costHeadName = ?';
   public static ALASQL_GROUP_MATERIAL_WORKITEM_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE =
     'GROUP BY materialName,workItemName, quantityName, unit ';
-  public static ALASQL_ORDER_BY_MATERIAL_WORKITEM_COSTHEAD_WISE = 'ORDER BY materialName,workItemName ';
+  public static ALASQL_ORDER_BY_MATERIAL_WORKITEM_COSTHEAD_WISE = 'ORDER BY materialName,workItemName, quantityName ';
   public static ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE =
     'GROUP BY materialName, buildingName, quantityName, unit ';
-  public static ALASQL_ORDER_BY_MATERIAL_BUILDING_MATERIAL_TAKEOFF_COSTHEAD_WISE = 'ORDER BY materialName, buildingName ';
+  public static ALASQL_ORDER_BY_MATERIAL_BUILDING_MATERIAL_TAKEOFF_COSTHEAD_WISE = 'ORDER BY materialName, buildingName, quantityName ';
   public static ALASQL_SELECT_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS =
     'SELECT materialName AS header, buildingName AS rowValue, SUM(quantity) AS Total, unit';
   public static ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS =
     'GROUP BY materialName, buildingName, quantityName, unit ';
+  public static ALASQL_MATERIAL_NOT_LABOUR = ' materialName NOT LIKE "%Labour%" ';
+  public static ALASQL_AND_MATERIAL_NOT_LABOUR = ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOUR;
 }
 export=Constants;

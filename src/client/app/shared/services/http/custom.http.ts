@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Rx";
-import {ConnectionBackend, Http, Request, RequestOptions, RequestOptionsArgs, Response} from "@angular/http";
-import {ErrorInstance, Message, Messages, MessageService} from "./../../index";
-import {LoaderService} from "../../loader/loaders.service";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { ConnectionBackend, Http, Request, RequestOptions, RequestOptionsArgs, Response } from '@angular/http';
+import { ErrorInstance, Message, Messages, MessageService } from './../../index';
+import { LoaderService } from '../../loader/loaders.service';
 
 @Injectable()
 export class CustomHttp extends Http {
@@ -58,7 +58,8 @@ export class CustomHttp extends Http {
             errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
             errorInstance.err_code = err.status;
           } else {
-            errorInstance.err_msg = JSON.parse(err._body).error.message;
+            errorInstance.err_msg = JSON.parse(err._body).message;
+            errorInstance.err_code = err.status;
           }
           return Observable.throw(errorInstance);
         } else {
