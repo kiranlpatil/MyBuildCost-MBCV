@@ -33,7 +33,14 @@
     padding: 0;
     width: 100%;
     .panel-body {
+      max-height: 0;
+      overflow: hidden;
       padding: 0;
+      transition: all 0.5s ease;
+    }
+    .in {
+      max-height: 230px;
+      overflow: auto;
     }
     .panel-heading {
       background: transparent;
@@ -52,7 +59,6 @@
       border: 0;
       padding: 0;
     }
-
   }
   .item-footer {
     display: inline-block;
@@ -83,9 +89,13 @@
   font-weight: 400;
   font-size: 20px;
   margin-bottom: 5px;
+  overflow: hidden;
   padding: 15px;
   text-align: left;
+  text-overflow: ellipsis;
   width: 100%;
+  white-space: nowrap;
+
   .building-label {
     color: #434C5E;
     font-size: 21px;
