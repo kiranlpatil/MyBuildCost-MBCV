@@ -1,2 +1,7 @@
 @import '../../../../../framework/landing-page/landing-page.component';
 @import '../../../../framework/create-project/create-project.component';
+
+.create-new-header {
+  height: 0;
+  top: 80px;
+}

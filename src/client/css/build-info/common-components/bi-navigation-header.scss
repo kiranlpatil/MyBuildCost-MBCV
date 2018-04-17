@@ -1,0 +1,32 @@
+@import '../../../css/common';
+
+.create-new-header {
+  background-color: transparent;
+  height: 50px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+  .btn-back {
+    float: left;
+    margin-left: 15px;
+  }
+
+  .btn-close {
+    float: right;
+    margin-right: 15px;
+  }
+
+  .btn-close,
+  .btn-back {
+    margin-top: 9px;
+    span {
+      color: $gray-dark;
+      display: block;
+      font-size: 10px;
+      margin-top: 5px;
+    }
+  }
+}

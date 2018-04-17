@@ -242,30 +242,7 @@
 }
 
 .create-new-header {
-  .btn-back {
-    left: 0;
-    margin-left: 15px;
-    position: fixed;
-    top: 80px;
-  }
-
-  .btn-close {
-    margin-right: 15px;
-    position: fixed;
-    right: 0;
-    top: 80px;
-  }
-
-  .btn-close,
-  .btn-back {
-    margin-top: 9px;
-    span {
-      color: $gray-dark;
-      display: block;
-      font-size: 10px;
-      margin-top: 5px;
-    }
-  }
+  top: 80px;
 }
 
 .bg-white {
