@@ -45,7 +45,7 @@
                     </div>
 
                     <!--content-->
-                    <div *ngFor="let content of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content | keys; let contentIndex = index">
+                    <div *ngFor="let content of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content | keys:getMaterialTakeOffElements().SORT; let contentIndex = index">
 
                       <div class="inner-item-list">
 
