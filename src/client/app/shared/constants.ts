@@ -545,6 +545,7 @@ export class MaterialTakeOffElements {
   public static ERROR_MESSAGE_MATERIAL_TAKE_OFF_REPORT_OF = 'Material take off report of ';
   public static ERROR_MESSAGE_IS_NOT_FOUND_FOR = ' is not found for ';
   public static ERROR_MESSAGE_BUILDING = ' building.';
+  public static SORT = 'sort';
 }
 
 export class Menus {

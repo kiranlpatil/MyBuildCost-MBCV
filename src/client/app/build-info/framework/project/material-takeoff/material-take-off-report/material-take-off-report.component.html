@@ -67,8 +67,7 @@
                             <div class="panel-body" [class.in]="dataIndex === secondaryViewDataIndex &&
                                         headerIndex === contentIndex &&
                                         viewSubContent">
-                              <!--sub content-->
-                              <div class="collapse-list-item" *ngFor="let subContent of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys;">
+                              <div class="collapse-list-item" *ngFor="let subContent of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys:getMaterialTakeOffElements().SORT;">
                                 <bi-table-row
                                   [customClass]="'row-list'"
                                   [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent]">
