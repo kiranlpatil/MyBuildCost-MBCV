@@ -21,15 +21,6 @@
   </div>
   <div class="col-sm-12 no-padding">
     <table class="get-rate-table">
-      <thead>
-        <tr>
-          <th>{{ getTableHeadings().DESCRIPTION }}</th>
-          <th>{{ getTableHeadings().QUANTITY }}</th>
-          <th>{{ getTableHeadings().UNIT }}</th>
-          <th>{{ getTableHeadings().RATE_PER_UNIT }}</th>
-          <th>{{ getTableHeadings().COST }}</th>
-        </tr>
-      </thead>
       <tbody>
         <tr *ngFor="let rateItem of rate.rateItems | groupBy:'type';">
           <td class="rate-item" colspan="5">
@@ -37,6 +28,13 @@
               <thead>
                 <tr>
                   <th colspan="5">{{ (rateItem.key === 'M') ? 'A. Material' : ((rateItem.key === "L") ? "B. Labour" : "C. Material + Labour") }}</th>
+                </tr>
+                <tr class="table-headings">
+                  <th>{{ getTableHeadings().DESCRIPTION }}</th>
+                  <th>{{ getTableHeadings().QUANTITY }}</th>
+                  <th>{{ getTableHeadings().UNIT }}</th>
+                  <th>{{ getTableHeadings().RATE_PER_UNIT }}</th>
+                  <th>{{ getTableHeadings().COST }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -62,7 +60,7 @@
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-left" [disabled]="disableRateField"/>
+                    <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-right" [disabled]="disableRateField"/>
                   </td>
                   <td>
                     <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
@@ -76,9 +74,7 @@
                </tbody>
               <tfoot>
               <tr>
-                <td colspan="3">
-                </td>
-                <td class="total-amount text-left">
+                <td colspan="4" class="total-amount">
                   <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
                 <td class="text-right">
@@ -93,28 +89,20 @@
         </tr>
       </tbody>
       <tfoot>
-      <tr>
-        <td class="total-amount text-left" >
-          <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}</label>
-          <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A_B_C}}</label>
-          <label *ngIf="totalAmountOfMaterial && !totalAmountOfLabour && !totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A}}</label>
-        </td>
-        <td class="total-amount" colspan="3">
-        </td>
-        <td class="total-amount">
-          {{ totalAmount|number: '1.2-2'}}
-        </td>
-      </tr>
-      <tr>
-        <td class="total-amount text-left">
-          <label>Rate per unit</label>
-        </td>
-        <td class="total-amount" colspan="3">
-        </td>
-        <td class="total-amount">
-          {{ ratePerUnitAmount|number: '1.2-2'}}
-        </td>
-      </tr>
+        <tr>
+          <td class="grand-total-amount" colspan="5">
+            <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}:</label>
+            <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A_B_C}}:</label>
+            <label *ngIf="totalAmountOfMaterial && !totalAmountOfLabour && !totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A}}:</label>
+            <span>{{ totalAmount|number: '1.2-2'}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="grand-total-amount" colspan="5">
+            <label>Rate per unit:</label>
+            <span>{{ ratePerUnitAmount|number: '1.2-2'}}</span>
+          </td>
+        </tr>
       </tfoot>
     </table>
   </div>

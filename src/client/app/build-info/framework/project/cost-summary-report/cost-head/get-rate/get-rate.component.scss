@@ -5,13 +5,13 @@
 .get-systemRA-section {
   background: $azure;
   border: 1px solid $table-border;
+  border-radius: 6px;
   display: block;
   float: right;
   margin: 10px 0 15px;
-  padding: 10px 30px;
-  position: relative;
   max-width: 100%;
-  border-radius: 6px;
+  padding: 5px;
+  position: relative;
 
   .close {
     width: 10px;
@@ -25,13 +25,13 @@
     thead {
       th {
         font-size: 11px;
-        text-align: center;
         padding: 10px 10px 2px;
-        width: 17.5%;
+        text-align: center;
+        width: 15%;
 
         &:first-child {
-          width: 30%;
           padding: 10px 10px 2px 0;
+          width: 40%;
         }
 
         &:last-child {
@@ -43,16 +43,23 @@
       background: transparent;
       border: 1px solid transparent;
       td {
-        padding: 5px 10px;
+        padding: 0;
         width: 17.5%;
 
         .form-control {
+          border: 1px solid $white;
+          border-radius: 0;
+          box-shadow: none;
           display: block;
           font-size: 11px;
-          height: 27px;
+          height: 24px;
           margin: 0;
-          padding: 4px 7px;
+          padding: 0 7px;
           width: 100%;
+
+          &:focus {
+            border: 1px solid $persian-green;
+          }
         }
         input[type='number'] {
           text-align: right;
@@ -60,7 +67,7 @@
         .remark-input {
           float: left;
           margin: 0;
-          width: calc(100% - 40px);
+          width: 100%;
         }
         .get-total-amount {
           margin: 0;
@@ -68,30 +75,41 @@
 
         &:first-child {
           width: 30%;
-          padding: 2px 10px 2px 0;
+          padding: 0;
         }
 
         &:last-child {
-          padding: 2px 0 2px 10px;
+          padding: 3px 3px 3px 10px;
         }
       }
-      td.total-amount {
+      .total-amount,
+      .grand-total-amount {
         font-size: 11px;
         font-weight: bold;
-        padding: 7px 0 2px 0;
+        padding: 3px;
         text-align: right;
 
         label {
           font-size: 11px;
           font-weight: bold;
+          margin: 0;
         }
         span {
           padding-right: 8px;
         }
       }
-      td.total-amount.text-left {
-        text-align: left;
+
+      .grand-total-amount {
+        label {
+          margin: 0 15px 0 0;
+        }
+        span {
+          display: inline-block;
+          padding-right: 3px;
+          width: 70px;
+        }
       }
+
       .remark-icon {
         padding: 5px 10px 5px;
         text-align: left;
@@ -123,8 +141,47 @@
       width: 100% !important;
 
       th {
-        padding: 7px 0 2px;
+        padding: 10px 0 3px;
         text-align: left;
+      }
+
+      .table-headings {
+        th {
+          background: $jagged-ice;
+          border-right: 1px solid $azure;
+          padding: 3px;
+          text-align: center;
+
+          &:first-child {
+           border-radius: 5px 0 0 0;
+          }
+          &:last-child {
+            border-radius: 0 5px 0 0;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid $azure;
+        }
+        tr > td {
+          background: $white;
+          border-right: 1px solid $azure;
+        }
+      }
+
+      tfoot {
+        tr > td {
+          background: $jagged-ice;
+
+          &:first-child {
+            border-radius: 0 0 0 5px;
+          }
+          &:last-child {
+            border-radius: 0 0 5px 0;
+          }
+        }
       }
     }
   }
@@ -132,8 +189,8 @@
   .notes-table {
     thead {
       th {
+        padding: 5px 0 2px !important;
         text-align: left !important;
-        padding: 7px 0 2px !important;
       }
     }
 
@@ -166,14 +223,14 @@
   .quantity-label {
     float: left;
     font-size: 11px;
-    padding: 10px 5px 10px 0;
+    padding: 7px 5px 7px 0;
     text-align: left;
   }
   .quantity-count {
     float: left;
     font-size: 11px;
     height: 24px;
-    margin: 5px 4px 10px;
+    margin: 3px 4px 8px;
     padding: 3px;
     text-align: center;
     width: 60px;
@@ -181,7 +238,7 @@
   .quantity-sqft {
     float: left;
     font-size: 11px;
-    padding: 10px 5px;
+    padding: 7px 5px;
     text-align: left;
   }
   .add-new-btn {
@@ -251,7 +308,7 @@
 input[disabled],
 input[readonly],
 textarea[disabled] {
-  background: $disabled-input-bg;
+  background: $white;
   color: $disable-input;
 }
 
