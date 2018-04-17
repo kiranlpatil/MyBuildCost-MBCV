@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="col-sm-6">
+    <div class="page-background">
+      <div class="inner-content content-background clearfix" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+        <img class="logo-image" src={{MY_LOGO_PATH}} alt="Facebook Link">
+        <ul>
+          <li>Estimate Project Cost</li>
+          <li>Budget it</li>
+          <li>Control it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <section class="col-sm-6">
+    <div class="page-background">
+      <div class="inner-content clearfix">
+        <div *ngIf="isFromCareerPlugin">
+          <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
+        </div>
+
+        <div class="content">
+          <div *ngIf="isGuideMessageVisible" class="welcome-message">
+            <h3>Welcome !</h3>
+            <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
+          </div>
+          <h4>Sign In</h4>
+          <p>{{getMessages().LOGIN_INFO}}</p>
+          <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
+            <div class="form-group">
+              <control-messages [control]="userForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
+              <label>Enter Work Email</label>
+              <input type="email" formControlName="email" id="email" maxlength="40" autocomplete="off" class="form-control"
+                     placeholder="johndoe@example.com" />
+            </div>
+
+            <div class="form-group">
+              <control-messages [control]="userForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
+              <label>Enter Password</label>
+              <a class="forgot-password-link" (click)="onForgotPassword()">Forgot Password?</a>
+              <input type="password" formControlName="password" id="password" autocomplete="off" class="form-control"
+                     placeholder="Minimum 6 characters"/>
+            </div>
+            <div class="col-sm-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{ error_msg }}</b></div>
+            <div class="button-group">
+              <!--<div class="checkbox">
+                <label>
+                  <input type="checkbox" (click)="OnRememberPassword($event)" [checked]="isRememberPassword">{{getLabel().REMENBER_ME}}
+                </label>
+              </div>-->
+              <button type="submit" class="btn btn-primary">Sign In</button>
+              <!--<div class="other-links">
+                <a (click)="onForgotPassword()">Forgot Password</a> |
+                <a (click)="onSignUp()">Register New User</a>
+              </div>-->
+              <p>Don't have an account?</p>
+              <button  class="btn btn-default" (click)="onSignUp()">Signup Here</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
