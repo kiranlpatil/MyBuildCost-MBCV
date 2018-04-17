@@ -1,1 +1,0 @@
-{"version":3,"sources":["app/shared/tool-tip-component/tool-tip-component.scss"],"names":[],"mappings":"AAAA;EAEI,oBAAmB,EACpB","file":"tool-tip-component.css","sourcesContent":[".tooltip-message {\r\n  .message {\r\n    padding: 0 10px 0 0;\r\n  }\r\n}\r\n"]}
