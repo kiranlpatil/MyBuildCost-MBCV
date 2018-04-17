@@ -58,21 +58,6 @@ export class GetRateComponent implements OnInit {
     this.calculateTotal();
   }
 
-  getItemName(event : any) {
-
-    if (event.target.value !== '') {
-      this.selectedItemName = event.target.value;
-      event.target.value = '';
-    }
-  }
-
-  setItemName(event : any) {
-    if (event.target.value === '') {
-      event.target.value = this.selectedItemName;
-    }
-  }
-
-
   calculateTotal(choice?:string) {
     this.ratePerUnitAmount = 0;
     this.totalAmount = 0;
@@ -216,35 +201,51 @@ export class GetRateComponent implements OnInit {
     this.previousTotalQuantity = previousTotalQuantity;
   }
 
-  getRateItemsByOriginalName(rateItem: any, rateItemKey : string, index:number) {
-    this.selectedRateItem = rateItem;
-    this.selectedRateItemIndex = index;
-    this.selectedRateItemKey = rateItemKey;
+  getItemName(event : any) {
 
-    this.costSummaryService.getRateItemsByOriginalName( this.baseUrl,rateItem.originalItemName).subscribe(
-      rateItemsData => this.onGetRateItemsByOriginalNameSuccess(rateItemsData.data),
-      error => this.onGetRateItemsByOriginalNameFailure(error)
-    );
+    if (event.target.value !== '') {
+      this.selectedItemName = event.target.value;
+      event.target.value = '';
+    }
+  }
+
+  setItemName(event : any) {
+    if (event.target.value === '') {
+      event.target.value = this.selectedItemName;
+    }
+  }
+
+  getRateItemsByOriginalName(rateItem: any, index:number) {
+      this.selectedRateItem = rateItem;
+      this.selectedRateItemIndex = index;
+
+      this.costSummaryService.getRateItemsByOriginalName(this.baseUrl, rateItem.originalItemName).subscribe(
+        rateItemsData => this.onGetRateItemsByOriginalNameSuccess(rateItemsData.data),
+        error => this.onGetRateItemsByOriginalNameFailure(error)
+      );
   }
 
   onGetRateItemsByOriginalNameSuccess(rateItemsData: any) {
-    this.arrayOfRateItems = rateItemsData;
+      this.arrayOfRateItems = rateItemsData;
+  }
 
+  setRate(rateItemsData : any) {
     for(let rateItemData of rateItemsData) {
       if(rateItemData.itemName === this.selectedRateItem.itemName) {
-         for(let rateItem of this.rate.rateItems) {
-           if(rateItem.itemName === this.selectedRateItem.itemName) {
-             rateItem.rate = rateItemData.rate;
-             this.calculateTotal();
-             break;
-           }
-         }
-         break;
+        for(let rateItem of this.rate.rateItems) {
+          if(rateItem.itemName === this.selectedRateItem.itemName) {
+            rateItem.rate = rateItemData.rate;
+            this.calculateTotal();
+            break;
+          }
+        }
+        break;
       }
     }
     for(let workItemData of this.workItemsList) {
       if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
         workItemData.rate = this.rate;
+        break;
       }
     }
   }
