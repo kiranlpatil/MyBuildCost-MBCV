@@ -24,10 +24,10 @@
   <table width="2500" style="font-size:8px;font-family:'Arial, Helvetica, sans-serif';">
     <tr>
       <th width="400">Cost Head</th>
-      <th width="400" style="word-wrap: break-word"> By Thumbrule - Rate/sqft Slab Area</th>
+      <th width="400" style="word-wrap: break-word"> By Thumbrule - {{ costingByUnit }}<br/>{{ costingByArea }}</th>
       <th width="400"> By Thumbrule - <hr>Budgeted Cost</th>
-      <th width="400"> Estimated - <hr>Rate/sqft Slab Area </th>
-      <th width="400">Estimated - Budgeted Cost </th>
+      <th width="400"> Estimated - <hr>{{ costingByUnit }}<br/>{{ costingByArea }} </th>
+      <th width="400">Estimated - Estimated Cost </th>
     </tr>
     <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
       <td>{{thumbRuleItem.name}}</td>
@@ -35,6 +35,13 @@
       <td align="right">{{thumbRuleItem.amount}}</td>
       <td align="right">{{ buildingReport.estimate.estimatedCosts[i].rate | number }}</td>
       <td align="right">{{ buildingReport.estimate.estimatedCosts[i].total | number }}</td>
+    </tr>
+    <tr>
+      <td>TOTAL</td>
+      <td>{{ buildingReport.thumbRule.totalRate|number: '1.2-2' }}</td>
+      <td>{{ buildingReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+      <td>{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</td>
+      <td>{{ buildingReport.estimate.totalEstimatedCost|number: '1.2-2'}}</td>
     </tr>
   </table>
 </div>

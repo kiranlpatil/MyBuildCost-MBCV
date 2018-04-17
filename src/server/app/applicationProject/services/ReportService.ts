@@ -531,21 +531,22 @@ class ReportService {
     if(workItem.quantity.isDirectQuantity && workItem.rate.isEstimated) {
       quantityName = Constants.STR_DIRECT;
       this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
-        materialTakeOffFlatDetailsArray);
+        materialTakeOffFlatDetailsArray, workItem.quantity.total);
     } else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
       for (let quantity of workItem.quantity.quantityItemDetails) {
         quantityName = quantity.name;
         this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
-          materialTakeOffFlatDetailsArray);
+          materialTakeOffFlatDetailsArray, quantity.total);
       }
     }
   }
 
   private createAndAddMaterialDTOObjectInDTOArray(workItem: WorkItem, buildingName: string, costHeadName: string, categoryName: string,
-                  workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+                  workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,
+                                                  quantity: number) {
     for (let rateItem of workItem.rate.rateItems) {
       let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-        workItemName, rateItem.itemName, quantityName, Math.ceil(((workItem.quantity.total / workItem.rate.quantity) * rateItem.quantity)),
+        workItemName, rateItem.itemName, quantityName, Math.ceil(((quantity / workItem.rate.quantity) * rateItem.quantity)),
         rateItem.unit);
       materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
     }

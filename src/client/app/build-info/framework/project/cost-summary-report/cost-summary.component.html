@@ -40,7 +40,11 @@
                   <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
                   <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
                   <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
-                  <li><cost-summary-report-pdf [buildingReport]="building"></cost-summary-report-pdf></li>
+                  <li><cost-summary-report-pdf [buildingReport]="building"
+                                               [costingByUnit]="defaultCostingByUnit"
+                                               [costingByArea]="defaultCostingByArea">
+
+                  </cost-summary-report-pdf></li>
                 </ul>
               </div>
             </div>
