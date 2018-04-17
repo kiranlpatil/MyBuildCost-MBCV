@@ -58,13 +58,12 @@ export class AppComponent {
     this.isShowErrorMessage = false;
     this.errorMessage = message.error_msg;
     this.customMessage = message.custom_message;
-    if(message.error_code===401) {
-      this.isShowErrorMessage = false;
-      setTimeout(function () {
-        this.closeErrorMessage();
+    setTimeout(function () {
+      this.closeErrorMessage();
+      if(message.error_code===401) {
         this.logOut();
-      }.bind(this), 5555);
-    }
+      }
+    }.bind(this), 8888);
   }
 
   showSuccess(message: Message) {
