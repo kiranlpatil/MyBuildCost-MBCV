@@ -35,6 +35,14 @@
         opacity: 1;
       }
     }
+
+    .category-name {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: calc(100% - 300px);
+    }
   }
   .panel-body {
     padding: 0;
@@ -298,8 +306,11 @@
   .work-item-panel-row {
     display: block;
     font-weight: 400 !important;
+    overflow: hidden;
     padding: 0 0 0 30px !important;
     position: relative;
+    text-overflow: clip;
+    white-space: inherit;
   }
 
   .panel-heading {

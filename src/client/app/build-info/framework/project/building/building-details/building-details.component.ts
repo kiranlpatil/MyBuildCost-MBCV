@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Messages, Headings } from '../../../../../shared/constants';
+import { ActivatedRoute, Router } from '@angular/router';
+import {Messages, Headings, NavigationRoutes, Button} from '../../../../../shared/constants';
 import { Building } from './../../../model/building';
 import { MessageService } from '../../../../../shared/index';
 import { Message } from '../../../../../shared/index';
@@ -21,7 +21,7 @@ export class BuildingDetailsComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
 
-  constructor(private buildingService: BuildingService,
+  constructor(private buildingService: BuildingService, private _router: Router,
               private activatedRoute:ActivatedRoute, private messageService: MessageService) {
   }
 
@@ -101,5 +101,14 @@ export class BuildingDetailsComponent implements OnInit {
 
   getHeadings() {
     return Headings;
+  }
+
+  goBack() {
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this._router.navigate([NavigationRoutes.APP_PROJECT,projectId,NavigationRoutes.APP_COST_SUMMARY]);
+  }
+
+  getButton() {
+    return Button;
   }
 }

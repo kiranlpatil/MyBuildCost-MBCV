@@ -198,26 +198,6 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  /*//In Active Category
-  deactivateCategory(projectId : String, buildingId : string, costHeadId : number, categoryId : any) {
-    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
-      costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_FALSE;
-    let body = {};
-
-    return this.httpDelegateService.putAPI(url, body);
-  }
-
-  //Active Category
-  activateCategory(projectId : string, buildingId : string, costHeadId : number, categoryId : number) {
-    var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/'+ API.COSTHEAD +'/' +
-      costHeadId +'/' + API.CATEGORY + '/' + categoryId + '/' + API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_TRUE;
-    let body = {};
-
-    return this.httpDelegateService.putAPI(url, body);
-  }
-
-*/
-
   //Get All WorkItems Of Category
   getActiveWorkItemsOfCategory(baseUrl: string, costHeadId : number, categoryId : number) {
     var url = baseUrl +'/'+ API.COSTHEAD+ '/' + costHeadId + '/' + API.CATEGORY + '/' + categoryId + '/' + API.WORKITEMLIST;

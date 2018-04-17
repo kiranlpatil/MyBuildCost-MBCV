@@ -117,6 +117,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
   onGetCategoriesSuccess(categoryDetails: any) {
     this.categoryDetails = categoryDetails.data.categories;
     this.categoryDetailsTotalAmount = categoryDetails.data.categoriesAmount;
+    if(this.categoryRateAnalysisId) {
+      this.getActiveWorkItemsOfCategory(this.categoryRateAnalysisId);
+    }
   }
 
   calculateCategoriesTotal() {
@@ -479,84 +482,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.loaderService.stop();
   }
 
-  /*  deactivateCategory() {
-    let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-
-    this.costSummaryService.deactivateCategory( projectId, buildingId, this.costHeadId, this.categoryIdForInActive).subscribe(
-      deactivatedCategory => this.onDeactivateCategorySuccess(deactivatedCategory),
-      error => this.onDeactivateCategoryFailure(error)
-    );
-  }
-
-  onDeactivateCategorySuccess(deactivatedCategory : any) {
-    let categoryList = lodsh.clone(this.categoryDetails);
-    this.categoryDetails = this.commonService.removeDuplicateItmes(categoryList, deactivatedCategory.data);
-    this.calculateCategoriesTotal();
-    var message = new Message();
-    message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_DELETE_CATEGORY;
-    this.messageService.message(message);
-/!*    this.getCategories( this.projectId, this.costHeadId);*!/
-  }
-
-  onDeactivateCategoryFailure(error : any) {
-    console.log('In Active Category error : '+JSON.stringify(error));
-  }*/
-
- /* getInActiveCategories() {
-    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-
-    this.costSummaryService.getInActiveCategories( projectId, buildingId, this.costHeadId).subscribe(
-      categoryList => this.onGetInActiveCategoriesSuccess(categoryList),
-      error => this.onGetInActiveCategoriesFailure(error)
-    );
-  }
-
-  onGetInActiveCategoriesSuccess(categoryList : any) {
-    if(categoryList.data.length!==0) {
-    this.categoryArray = categoryList.data;
-    this.showCategoryList = true;
-    } else {
-      var message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_ALREADY_ADDED_ALL_CATEGORIES;
-      this.messageService.message(message);
-    }
-  }
-
-  onGetInActiveCategoriesFailure(error : any) {
-    console.log('categoryList error : '+JSON.stringify(error));
-  }*/
-
-  /*onChangeActivateSelectedCategory(selectedCategoryId : number ) {
-    let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-
-    this.costSummaryService.activateCategory( projectId, buildingId, this.costHeadId, selectedCategoryId).subscribe(
-      building => this.onActivateCategorySuccess(building),
-      error => this.onActivateCategoryFailure(error)
-    );
-  }
-
-  onActivateCategorySuccess(activatedCategory : any) {
-    this.categoryDetails = this.categoryDetails.concat(activatedCategory.data);
-    this.calculateCategoriesTotal();
-
-    let categoryList = lodsh.clone(this.categoryArray);
-    this.categoryArray = this.commonService.removeDuplicateItmes(categoryList, this.categoryDetails);
-
-    var message = new Message();
-    message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_ADD_CATEGORY;
-    this.messageService.message(message);
-  }
-
-  onActivateCategoryFailure(error : any) {
-    console.log('building error : '+ JSON.stringify(error));
-  }
-*/
   refreshCategoryList() {
     this.getCategories( this.projectId, this.costHeadId);
     this.showWorkItemTab = null;
@@ -633,12 +558,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   setCategoriesTotal( categoriesTotal : number) {
     this.categoryDetailsTotalAmount = categoriesTotal;
-    this.refreshWorkItemList();
+    this.refreshCategoryList();
   }
 
   setShowWorkItemTab( tabName : string) {
     this.showWorkItemTab = tabName;
-    this.refreshCategoryList();
   }
 
   closeRateView() {
