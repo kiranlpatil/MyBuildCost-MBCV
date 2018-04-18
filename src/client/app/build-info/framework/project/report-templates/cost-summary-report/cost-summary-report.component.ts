@@ -6,6 +6,7 @@ import { SessionStorage } from '../../../../../shared/constants';
   moduleId: module.id,
   selector: 'cost-summary-report-pdf',
   templateUrl: 'cost-summary-report.component.html',
+  styleUrls: ['cost-summary-report.component.css'],
 })
 
 export class CostSummaryReportComponent {

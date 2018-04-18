@@ -1,50 +1,62 @@
 <div *ngIf="buildingReport" id="budgetedAndEstimated" #budgetedAndEstimated style="display: none">
-  <h2 style="font-family:'Arial, Helvetica, sans-serif';font-size:16px; border-bottom: 1px solid #000;">
+  <h2 style="font-size:14px; padding-bottom: 15px; border-bottom: 1px solid #ccc; text-align: center">
     Budgeted & Estimated Cost Report for {{currentProjectName}} </h2>
-  <div style="font-family:'Arial, Helvetica, sans-serif';font-size:12px;">
+  <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
     <div style="padding-bottom: 5px;">
       <strong>Company Name:</strong>
       <span>Royal Properties LTD</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Project Name:</strong>
+      <strong style="font-weight: bold">Project Name:</strong>
       <span>{{currentProjectName}}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Building Name:</strong>
+      <strong style="font-weight: bold">Building Name:</strong>
       <span>{{ buildingReport.name }}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Generated on:</strong>
+      <strong style="font-weight: bold">Generated on:</strong>
       <span>4th April 2018</span>
     </div>
   </div>
 
+  <table width="100%" border="1" bordercolor="#ccc" style="font-size:10px;text-align: left">
+    <thead>
+      <tr>
+        <th style="padding: 10px 5px;" rowspan="2" >Cost Head</th>
+        <th colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
+        <th colspan="2" style="text-align: center;padding: 10px 5px;">Seminar</th>
+      </tr>
 
-  <table width="1000" style="font-size:8px;font-family:'Arial, Helvetica, sans-serif';text-align: left">
-    <tr>
-      <th width="400">Cost Head</th>
-      <th width="400" style="word-wrap: break-word"> By Thumbrule - {{ costingByUnit }}<br/> {{ costingByArea }}</th>
-      <th width="400"> By Thumbrule - <hr>Budgeted Cost</th>
-      <th width="400"> Estimated - <hr>{{ costingByUnit }}<br/>{{ costingByArea }} </th>
-      <th width="400">Estimated - Estimated Cost </th>
-    </tr>
-    <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
-      <td>{{thumbRuleItem.name}}</td>
-      <td>{{ thumbRuleItem.rate | number }}</td>
-      <td>{{thumbRuleItem.amount}}</td>
-      <td>{{ buildingReport.estimate.estimatedCosts[i].rate | number }}</td>
-      <td>{{ buildingReport.estimate.estimatedCosts[i].total | number }}</td>
-    </tr>
-    <tr>
-      <th width="400">TOTAL</th>
-      <th width="400">{{ buildingReport.thumbRule.totalRate|number: '1.2-2' }}</th>
-      <th width="400">{{ buildingReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</th>
-      <th width="400">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
-      <th width="400">{{ buildingReport.estimate.totalEstimatedCost|number: '1.2-2'}}</th>
-    </tr>
+      <tr>
+        <th style="text-align: center;padding: 10px 5px;font-weight: bold;">{{ costingByUnit }}</th>
+        <th style="text-align: center;padding: 10px 5px;font-weight: bold;">{{ costingByArea }}</th>
+        <th style="text-align: center;padding: 10px 5px;font-weight: bold;">{{ costingByUnit }}</th>
+        <th style="text-align: center;padding: 10px 5px;font-weight: bold;">{{ costingByArea }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
+        <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
+        <td style="padding: 5px;" align="right">{{ thumbRuleItem.rate | number }}</td>
+        <td style="padding: 5px;" align="right">{{thumbRuleItem.amount}}</td>
+        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].rate | number }}</td>
+        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].total | number }}</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
+        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalRate|number: '1.2-2' }}</td>
+        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</td>
+        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.estimate.totalEstimatedCost|number: '1.2-2'}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
+
+
+
+
 
 <div *ngIf="buildingReport" id="budgeted" #budgeted style="display: none">
   <h2 style="font-family:'Arial, Helvetica, sans-serif';font-size:16px; border-bottom: 1px solid #000;">
@@ -88,6 +100,9 @@
   </table>
 </div>
 
+
+
+
 <div *ngIf="buildingReport" id="estimated" #estimated style="display: none">
   <h2 style="font-family:'Arial, Helvetica, sans-serif';font-size:16px; border-bottom: 1px solid #000;">
     Estimated Cost Report for {{currentProjectName}} </h2>
@@ -130,6 +145,8 @@
   </table>
 </div>
 
-<p (click)="downloadToPdf('Budgeted and Estimated cost report')">Budgeted and Estimated cost report</p>
-<p (click)="downloadToPdf('Budgeted cost report')">Budgeted cost report</p>
-<p (click)="downloadToPdf('Estimated cost report')">Estimated cost report</p>
+<div class="pdf-list">
+  <p class="download-pdf" (click)="downloadToPdf('Budgeted cost report')">- Budgeted cost report</p>
+  <p class="download-pdf" (click)="downloadToPdf('Estimated cost report')">- Estimated cost report</p>
+  <p class="download-pdf" (click)="downloadToPdf('Budgeted and Estimated cost report')">- Both</p>
+</div>

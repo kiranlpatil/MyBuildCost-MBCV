@@ -62,8 +62,10 @@
   font-size: 20px;
   margin-bottom: 5px;
   padding: 15px;
+  position: relative;
   text-align: left;
   width: 100%;
+
   .building-label {
     color: #434C5E;
     font-size: 21px;
@@ -242,6 +244,7 @@
 }
 
 .create-new-header {
+  height: 0;
   top: 80px;
 }
 

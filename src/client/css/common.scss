@@ -358,6 +358,21 @@ select,
   }
 }
 
+.btn-print {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  height: 20px;
+  width: 20px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    @extend .btn-print;
+    outline: 0;
+  }
+}
+
 // Headings
 /*h1,
 h2,

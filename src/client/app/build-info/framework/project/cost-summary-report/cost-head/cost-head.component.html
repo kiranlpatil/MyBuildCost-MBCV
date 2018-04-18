@@ -5,14 +5,14 @@
   <div class="container">
     <div class="col-xs-12 no-padding">
       <h4 class="building-name clearfix">
-        <div class="col-md-8">
+        <div class="col-md-8 padding-left0">
           <span class="building-label"> {{ viewTypeValue }} </span>
           <span class="text-left"> ( {{ costHeadName }} ) </span>
         </div>
         <div class="col-md-4 text-right padding-right5">
-          <bi-cost-head-report-pdf [costHeadId]="costHeadId"></bi-cost-head-report-pdf>
           <span class="text-left total-amount-work total-cost"> {{categoryDetailsTotalAmount|number : '1.0-0'}} </span>
         </div>
+        <bi-cost-head-report-pdf [costHeadId]="costHeadId"></bi-cost-head-report-pdf>
       </h4>
       <div class="panel-group" *ngFor=" let category of categoryDetails; let categoryIndex = index ">
         <div class="panel panel-default">
