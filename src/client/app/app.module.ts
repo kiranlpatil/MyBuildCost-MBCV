@@ -66,6 +66,7 @@ import { GetRateComponent } from './build-info/framework/project/cost-summary-re
 import { CreateNewProjectComponent } from './build-info/framework/create-new-project/create-new-project.component';
 import { ProjectItemComponent } from './build-info/framework/project-list/project-item/project-item.component';
 import { DeleteConfirmationModalComponent } from './shared/delete-confirmation-modal/delete-confirmation-modal.component';
+import { UpdateConfirmationModalComponent } from './shared/update-confirmation-modal/update-confirmation-modal.component';
 import { ProjectFormComponent } from './build-info/framework/shared/project-form/project-form.component';
 import { BuildingFormComponent } from './build-info/framework/shared/building-form/building-form.component';
 import { SharePrintPageComponent } from './build-info/framework/project-header/share-print-page/share-print-page.component';
@@ -126,6 +127,7 @@ import { CostSummaryReportComponent } from './build-info/framework/project/repor
     //Shared Components
     GroupByPipe,
     DeleteConfirmationModalComponent,
+    UpdateConfirmationModalComponent,
     ProjectFormComponent,
     BuildingFormComponent,
 
