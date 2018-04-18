@@ -18,9 +18,6 @@ export class CostSummaryReportComponent {
   @Input() costingByArea: any;
   currentProjectName: string;
   company_name: string;
-  isBudgetedAndEstimated: boolean = false;
-  isBudgeted: boolean = false;
-  isEstimated: boolean = false;
   generatedDate: Date = new Date();
 
   constructor() {
@@ -33,20 +30,13 @@ export class CostSummaryReportComponent {
     switch (reportType) {
       case 'Budgeted and Estimated cost report':
         content = this.budgetedAndEstimated.nativeElement.innerHTML;
-        this.isBudgetedAndEstimated = true;
         break;
       case 'Budgeted cost report':
         content = this.budgeted.nativeElement.innerHTML;
-        this.isBudgeted = true;
         break;
       case 'Estimated cost report':
         content = this.estimated.nativeElement.innerHTML;
-        this.isEstimated = true;
         break;
-      default:
-        this.isBudgetedAndEstimated = false;
-        this.isBudgeted = false;
-        this.isEstimated = false;
     }
     let contentDiv = document.createElement('div');
     //let content = this.BudgetedAndEstimated.nativeElement.innerHTML;
