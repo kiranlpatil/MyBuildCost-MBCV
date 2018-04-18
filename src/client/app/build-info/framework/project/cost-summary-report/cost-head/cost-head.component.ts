@@ -497,7 +497,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.getCategories( this.projectId, this.costHeadId);
     //this.showWorkItemTab = null;
     //this.showQuantityTab = null;
-    this.displayRateView = null;
+    //this.displayRateView = null;
   }
 
   refreshWorkItemList() {

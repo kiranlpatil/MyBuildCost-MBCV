@@ -17,7 +17,7 @@
 
       <div class="panel-collapse">
         <div class="panel-body">
-          <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys; let secondaryViewDataIndex = index">
+          <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT; let secondaryViewDataIndex = index">
             <div class="col-md-12 no-padding">
 
               <div class="panel panel-default">
