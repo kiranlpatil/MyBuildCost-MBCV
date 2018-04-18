@@ -99,13 +99,12 @@ class ProjectService {
     });
   }
 
-  getProjectAndBuildingDetails( projectId : string, buildingId: string, callback: (error: any, result: any) => void) {
+  getProjectAndBuildingDetails( projectId : string, buildingId : string, callback: (error: any, result: any) => void) {
     logger.info('Project service, getProjectAndBuildingDetails for sync with rateAnalysis has been hit');
     let query = { _id: projectId};
     let populate = {path : 'buildings'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
       logger.info('Project service, findAndPopulate has been hit');
-      logger.debug('Project Name : '+result[0].name);
       if(error) {
         logger.error('Project service, getProjectAndBuildingDetails findAndPopulate failed '+JSON.stringify(error));
         callback(error, null);
@@ -119,14 +118,30 @@ class ProjectService {
   updateProjectById( projectDetails: Project, user: User, callback:(error: any, result:any) => void) {
     logger.info('Project service, updateProjectDetails has been hit');
     let query = { _id : projectDetails._id };
-    delete projectDetails._id;
+    let buildingId = '';
 
-    this.projectRepository.findOneAndUpdate(query, projectDetails, {new: true}, (error, result) => {
-      logger.info('Project service, findOneAndUpdate has been hit');
-      if (error) {
+    this.getProjectAndBuildingDetails(projectDetails._id, buildingId, (error, projectAndBuildingDetails) => {
+      if(error) {
+        logger.error('Project service, getProjectAndBuildingDetails failed');
         callback(error, null);
       } else {
-        callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+
+        logger.info('Project service, syncProjectWithRateAnalysisData.');
+        let projectData = projectAndBuildingDetails.data[0];
+        let buildings = projectAndBuildingDetails.data[0].buildings;
+        let buildingData: Building;
+        delete projectDetails._id;
+        projectDetails.projectCostHeads = this.calculateBudgetCostForCommonAmmenities(
+          projectData.projectCostHeads,projectData, buildingData);
+
+        this.projectRepository.findOneAndUpdate(query, projectDetails, {new: true}, (error, result) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
       }
     });
   }
@@ -154,12 +169,23 @@ class ProjectService {
   updateBuildingById( buildingId:string, buildingDetails:any, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateBuilding has been hit');
     let query = { _id : buildingId };
-    this.buildingRepository.findOneAndUpdate(query, buildingDetails,{new: true}, (error, result) => {
+    let projection = {'costHeads' : 1};
+    this.buildingRepository.findByIdWithProjection(buildingId, projection,(error, result) => {
       logger.info('Project service, findOneAndUpdate has been hit');
       if (error) {
         callback(error, null);
       } else {
-        callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let projectDetails : Project;
+        buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, projectDetails, buildingDetails);
+
+        this.buildingRepository.findOneAndUpdate(query, buildingDetails,{new: true}, (error, result) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
       }
     });
   }
