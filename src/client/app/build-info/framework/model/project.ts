@@ -13,4 +13,5 @@ export class Project {
   totalNumOfBuildings:number;
   projectDuration: number;
   buildings: Building[] = new Array(0);
+  createdAt: Date;
 }

@@ -243,6 +243,8 @@ export class SessionStorage {
   public static CURRENT_BUILDING = 'current_building_id';
   public static CURRENT_COST_HEAD_ID = 'current_cost_head_id';
   public static CURRENT_WORKITEM_ID = 'current_workitem_id';
+  public static COMPANY_NAME = 'company_name';
+  public static CREATED_AT = 'createdAt';
 }
 
 export class LocalStorage {

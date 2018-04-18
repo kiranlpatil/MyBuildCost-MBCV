@@ -30,7 +30,10 @@ export class CreateProjectComponent implements  OnInit {
   onSubmit(projectModel : Project) {
       this.projectService.createProject(projectModel)
         .subscribe(
-          project => this.onCreateProjectSuccess(project),
+          project => {
+            this.onCreateProjectSuccess(project);
+            SessionStorageService.setSessionValue(SessionStorage.CREATED_AT, project.createdAt);
+          },
           error => this.onCreateProjectFailure(error));
   }
 
