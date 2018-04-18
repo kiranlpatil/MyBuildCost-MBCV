@@ -30,6 +30,12 @@
                         <span class="slab-area">
                          {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}
                         </span>
+                        <!--pdf report-->
+                        <bi-cost-head-wise-material-take-off-report
+                          [reportData]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table"
+                          [projectName]="projectName"
+                          [buildingName]="buildingName">
+                        </bi-cost-head-wise-material-take-off-report>
                       </a>
                     </h4>
 

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { MaterialTakeOffElements } from '../../../../../shared/constants';
+import {MaterialTakeOffElements, SessionStorage} from '../../../../../shared/constants';
+import {SessionStorageService} from "../../../../../shared/services/session.service";
 
 
 @Component({
@@ -12,10 +13,16 @@ import { MaterialTakeOffElements } from '../../../../../shared/constants';
 export class MaterialTakeOffReportComponent  {
 
   @Input() materialTakeOffReport : any;
+  @Input() buildingName : string;
   viewSubContent : boolean = false;
   headerIndex : number;
   dataIndex : number;
+  projectName : string;
 
+  constructor() {
+    this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+    console.log('Project name  : ->'+this.projectName);
+  }
 
   getMaterialTakeOffElements() {
     return MaterialTakeOffElements;
