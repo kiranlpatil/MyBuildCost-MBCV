@@ -9,7 +9,7 @@ import { SessionStorage } from '../../../../../shared/constants';
 })
 
 export class CostSummaryReportComponent {
-  @ViewChild('content') content: ElementRef;
+  @ViewChild('content', {read: ElementRef}) content: ElementRef;
   @Input() buildingReport: any;
   @Input() costingByUnit: any;
   @Input() costingByArea: any;
@@ -20,7 +20,17 @@ export class CostSummaryReportComponent {
   }
 
   downloadToPdf() {
-    console.log('download to pdf');
+    let contentDiv = document.createElement('div');
+    let content = this.content.nativeElement.innerHTML;
+    contentDiv.innerHTML = content;
+    contentDiv.setAttribute('id','print-div');
+    document.getElementById('tpl-app').style.display = 'none';
+    window.document.body.appendChild(contentDiv);
+    window.document.close();
+    window.print();
+    var elem = document.querySelector('#print-div');
+    elem.parentNode.removeChild(elem);
+    document.getElementById('tpl-app').style.display = 'initial';
   }
 }
 
