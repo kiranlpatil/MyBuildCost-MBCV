@@ -9,7 +9,6 @@
               <span class="slab-area">
                 {{ materialTakeOffReport[materialKey].title }}
               </span>
-              <button>Download</button>
             </a>
           </div>
         </h4>
@@ -18,7 +17,7 @@
 
       <div class="panel-collapse">
         <div class="panel-body">
-          <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys; let secondaryViewDataIndex = index">
+          <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT; let secondaryViewDataIndex = index">
             <div class="col-md-12 no-padding">
 
               <div class="panel panel-default">
@@ -31,7 +30,6 @@
                         <span class="slab-area">
                          {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}
                         </span>
-                        <button>Download</button>
                       </a>
                     </h4>
 
