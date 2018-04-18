@@ -119,6 +119,11 @@ export class QuantityDetailsComponent implements OnInit {
     this.showWorkItemTabName = tabName;
     this.refreshWorkItemList.emit();
   }
+
+  setCategoriesTotal( categoriesTotal : number) {
+    this.categoriesTotalAmount.emit(categoriesTotal);
+  }
+
   closeQuantityView() {
     this.showQuantityTab = null;
     this.showWorkItemTabName = null;
