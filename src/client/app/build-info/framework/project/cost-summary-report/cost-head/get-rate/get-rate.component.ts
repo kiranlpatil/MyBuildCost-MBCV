@@ -230,23 +230,30 @@ export class GetRateComponent implements OnInit {
   }
 
   setRate(rateItemsData : any) {
-    for(let rateItemData of rateItemsData) {
-      if(rateItemData.itemName === this.selectedRateItem.itemName) {
-        for(let rateItem of this.rate.rateItems) {
-          if(rateItem.itemName === this.selectedRateItem.itemName) {
-            rateItem.rate = rateItemData.rate;
-            this.calculateTotal();
-            break;
-          }
-        }
-        break;
-      }
-    }
-    for(let workItemData of this.workItemsList) {
-      if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
-        workItemData.rate = this.rate;
-        break;
-      }
+
+    let selectedItemName = this.selectedRateItem.itemName;
+    let rateItemData : Array<RateItem> = rateItemsData.filter(
+      function( rateItemData1: any){
+        return rateItemData1.itemName === selectedItemName;
+      });
+
+    if(rateItemData.length !== 0) {
+      let rateItems: Array<RateItem> = this.rate.rateItems.filter(
+        function (rateItems: any) {
+          return rateItems.itemName === selectedItemName;
+        });
+
+      rateItems[0].rate = rateItemData[0].rate;
+
+      this.calculateTotal();
+
+      let workItemRateAnalysisId = this.workItemRateAnalysisId;
+      let workItemData: Array<WorkItem> = this.workItemsList.filter(
+        function (workItemData: any) {
+          return workItemData.rateAnalysisId === workItemRateAnalysisId;
+        });
+
+      workItemData[0].rate = this.rate;
     }
   }
 
