@@ -1,0 +1,16 @@
+<p (click)="downloadToPdf()">Print Pdf</p>
+
+
+<div id="content" #content style="display: none">
+
+  <h2>{{getMaterialTakeOffElements().COST_HEAD_PDF_REPORT_HEADING}} {{projectName}}</h2>
+  <bi-pdf-header
+    [projectName]="projectName"
+    [buildingName]="buildingName">
+  </bi-pdf-header>
+
+  <bi-table-view
+    [reportData]="reportData">
+  </bi-table-view>
+
+</div>

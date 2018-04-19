@@ -9,6 +9,12 @@
               <span class="slab-area">
                 {{ materialTakeOffReport[materialKey].title }}
               </span>
+              <!--pdf report-->
+              <bi-all-element-report
+                [materialTakeOffReport]="materialTakeOffReport"
+                [projectName]="projectName"
+                [buildingName]="buildingName">
+              </bi-all-element-report>
             </a>
           </div>
         </h4>
@@ -31,11 +37,11 @@
                          {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}
                         </span>
                         <!--pdf report-->
-                        <bi-cost-head-wise-single-element-report
+                        <bi-single-element-report
                           [reportData]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table"
                           [projectName]="projectName"
                           [buildingName]="buildingName">
-                        </bi-cost-head-wise-single-element-report>
+                        </bi-single-element-report>
                       </a>
                     </h4>
 

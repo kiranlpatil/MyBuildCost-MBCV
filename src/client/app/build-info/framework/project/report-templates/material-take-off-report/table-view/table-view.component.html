@@ -1,0 +1,43 @@
+<div>
+
+  <table width="100%">
+    <!--header-->
+    <tr width="100%">
+      <bi-table-row-pdf
+        [tableData]="reportData.header">
+      </bi-table-row-pdf>
+    </tr>
+  </table>
+
+  <table *ngFor="let contentData of reportData.content | keys:getMaterialTakeOffElements().SORT"  width="100%">
+    <!--content-->
+
+    <!--actual content-->
+    <tr width="100%">
+      <bi-table-row-pdf
+        [tableData]="reportData.content[contentData]">
+      </bi-table-row-pdf>
+    </tr>
+
+    <!--subContent content-->
+    <tr *ngFor="let subContentData of reportData.content[contentData].subContent | keys:getMaterialTakeOffElements().SORT" width="100%">
+      <bi-table-row-pdf
+        [tableData]="reportData.content[contentData].subContent[subContentData]">
+      </bi-table-row-pdf>
+    </tr>
+
+  </table>
+
+
+  <table width="100%">
+    <!--footer-->
+    <tr width="100%">
+      <bi-table-row-pdf
+        [tableData]="reportData.footer">
+      </bi-table-row-pdf>
+    </tr>
+
+
+
+  </table>
+</div>

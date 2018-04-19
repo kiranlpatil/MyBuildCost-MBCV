@@ -1,0 +1,18 @@
+<div>
+  <div>
+    <strong>{{getPDFReportHeaders().COMPANY_NAME}}</strong>
+    <span>Royal Properties LTD</span>
+  </div>
+  <div>
+    <strong>{{getPDFReportHeaders().PROJECT_NAME}}</strong>
+    <span>{{projectName}}</span>
+  </div>
+  <div *ngIf="buildingName !== getMaterialTakeOffElements().ALL_BUILDINGS">
+    <strong>{{getPDFReportHeaders().BUILDING_NAME}}</strong>
+    <span>{{ buildingName }}</span>
+  </div>
+  <div>
+    <strong>{{getPDFReportHeaders().GENERATED_ON}}</strong>
+    <span>{{generatedDate | date:getPDFReportHeaders().DATE_FORMAT}}</span>
+  </div>
+</div>
