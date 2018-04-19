@@ -14,6 +14,10 @@ export class CostHeadReportComponent implements OnInit, AfterViewInit  {
   @Input() costHeadId: number;
 
   costHead : any;
+  projectName : string;
+  buildingName : string;
+  comapnyName : string;
+  generatedDate: Date = new Date();
 
   constructor(private costSummaryService : CostSummaryService) {
     console.log('constructor');
@@ -36,6 +40,9 @@ export class CostHeadReportComponent implements OnInit, AfterViewInit  {
 
   onGetCategoriesSuccess(costHeadDetails : any) {
     this.costHead = costHeadDetails.data;
+    this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+    this.buildingName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING_NAME);
+    this.comapnyName = SessionStorageService.getSessionValue(SessionStorage.COMPANY_NAME);
   }
 
   onGetCategoriesFailure(error : Error) {

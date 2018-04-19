@@ -231,6 +231,7 @@ class RateAnalysisService {
       if(configCostHeads.length > 0) {
         for(let configCostHead of configCostHeads) {
           if(configCostHead.name === costHead.name) {
+            costHead.priorityId = configCostHead.priorityId;
             categories = configCostHead.categories;
           }
         }

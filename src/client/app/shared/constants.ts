@@ -240,6 +240,7 @@ export class SessionStorage {
   public static CHANGE_MAIL_VALUE = 'change_mail_value';
   public static CURRENT_PROJECT_ID = 'current_project_id';
   public static CURRENT_PROJECT_NAME = 'current_project_name';
+  public static CURRENT_BUILDING_NAME = 'current_building_name';
   public static CURRENT_BUILDING = 'current_building_id';
   public static CURRENT_COST_HEAD_ID = 'current_cost_head_id';
   public static CURRENT_WORKITEM_ID = 'current_workitem_id';

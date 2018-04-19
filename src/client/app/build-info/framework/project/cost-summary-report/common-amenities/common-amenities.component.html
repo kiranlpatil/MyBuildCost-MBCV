@@ -8,6 +8,20 @@
           <span class="caret"></span>
         </a>
       </h4>
+      <div class="dropdown menu-items">
+        <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
+        <ul class = "dropdown-menu">
+          <li class="first-child-list">
+            <div class="download-pdf-list">
+              <span>Download</span>
+              <common-amenities-report-pdf [amenitiesReport]="amenitiesReport"
+                                           [costingByUnit]="costingByUnit"
+                                           [costingByArea]="costingByArea">
+              </common-amenities-report-pdf>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div id="collapseCommonDevelopment" class="panel-collapse collapse">
