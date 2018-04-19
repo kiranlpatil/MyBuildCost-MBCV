@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { MaterialTakeOffElements, PDFReportHeaders } from '../../../../../../shared/constants';
+import { Component, Input, OnInit } from '@angular/core';
+import {MaterialTakeOffElements, PDFReportHeaders, SessionStorage} from '../../../../../../shared/constants';
+import {SessionStorageService} from "../../../../../../shared/services/session.service";
 
 @Component({
   moduleId: module.id,
@@ -7,11 +8,18 @@ import { MaterialTakeOffElements, PDFReportHeaders } from '../../../../../../sha
   templateUrl: 'pdf-header.component.html',
 })
 
-export class PdfHeaderComponent {
-  @Input() companyName : string;
-  @Input() projectName : string;
+export class PdfHeaderComponent implements OnInit{
+
   @Input() buildingName : string;
+
+  companyName : string;
+  projectName : string;
   public generatedDate: Date = new Date();
+
+  ngOnInit() {
+    this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+    this.companyName = SessionStorageService.getSessionValue(SessionStorage.COMPANY_NAME);
+  }
 
   getMaterialTakeOffElements() {
     return MaterialTakeOffElements;

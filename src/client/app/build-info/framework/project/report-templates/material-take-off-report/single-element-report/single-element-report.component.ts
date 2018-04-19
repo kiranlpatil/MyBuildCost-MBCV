@@ -10,11 +10,9 @@ import { CommonService } from '../../../../../../shared/services/common.service'
 
 export class SingleElementReportComponent {
   @ViewChild('content', {read: ElementRef}) content: ElementRef;
-  @Input() projectName : string;
-  @Input() companyName : string;
   @Input() buildingName : string;
   @Input() reportData : any;
-  public generatedDate: Date = new Date();
+  generatedDate: Date = new Date();
 
   downloadToPdf() {
        console.log('reportData single -> '+JSON.stringify(this.reportData));

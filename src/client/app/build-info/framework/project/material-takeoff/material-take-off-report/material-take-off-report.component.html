@@ -12,8 +12,6 @@
               <!--pdf report-->
               <bi-all-element-report
                 [materialTakeOffReport]="materialTakeOffReport"
-                [companyName]="companyName"
-                [projectName]="projectName"
                 [buildingName]="buildingName">
               </bi-all-element-report>
             </a>
@@ -40,8 +38,6 @@
                         <!--pdf report-->
                         <bi-single-element-report
                           [reportData]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table"
-                          [companyName]="companyName"
-                          [projectName]="projectName"
                           [buildingName]="buildingName">
                         </bi-single-element-report>
                       </a>

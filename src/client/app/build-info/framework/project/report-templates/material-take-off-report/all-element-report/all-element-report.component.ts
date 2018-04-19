@@ -10,8 +10,6 @@ import { CommonService } from '../../../../../../shared/services/common.service'
 
 export class AllElementReportComponent {
   @ViewChild('content', {read: ElementRef}) content: ElementRef;
-  @Input() companyName : string;
-  @Input() projectName : string;
   @Input() buildingName : string;
   @Input() materialTakeOffReport : any;
   public generatedDate: Date = new Date();

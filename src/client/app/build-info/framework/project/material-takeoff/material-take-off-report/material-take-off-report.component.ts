@@ -21,8 +21,8 @@ export class MaterialTakeOffReportComponent  {
   companyName : string;
 
   constructor() {
-    this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
-    this.companyName = SessionStorageService.getSessionValue(SessionStorage.COMPANY_NAME);
+    /*this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+    this.companyName = SessionStorageService.getSessionValue(SessionStorage.COMPANY_NAME);*/
   }
 
   getMaterialTakeOffElements() {
