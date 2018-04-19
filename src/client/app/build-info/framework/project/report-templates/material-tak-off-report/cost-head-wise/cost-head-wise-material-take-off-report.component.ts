@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { SessionStorageService } from '../../../../../../shared/services/session.service';
-import { SessionStorage } from '../../../../../../shared/constants';
+import { MaterialTakeOffElements, PDFReportHeaders } from '../../../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -13,9 +12,10 @@ export class CostHeadWiseMaterialTakeOffDataReportComponent {
   @Input() projectName : string;
   @Input() buildingName : string;
   @Input() reportData : any;
+  public generatedDate: Date = new Date();
 
   downloadToPdf() {
-   console.log('reportData -> '+JSON.stringify(this.reportData));
+       console.log('reportData -> '+JSON.stringify(this.reportData));
          let contentDiv = document.createElement('div');
         let content = this.content.nativeElement.innerHTML;
         contentDiv.innerHTML = content;
@@ -27,6 +27,14 @@ export class CostHeadWiseMaterialTakeOffDataReportComponent {
         var elem = document.querySelector('#print-div');
         elem.parentNode.removeChild(elem);
         document.getElementById('tpl-app').style.display = 'initial';
+  }
+
+  getMaterialTakeOffElements() {
+    return MaterialTakeOffElements;
+  }
+
+  getPDFReportHeaders() {
+    return PDFReportHeaders;
   }
 }
 

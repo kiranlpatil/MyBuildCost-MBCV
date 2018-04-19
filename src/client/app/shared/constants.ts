@@ -548,6 +548,15 @@ export class MaterialTakeOffElements {
   public static ERROR_MESSAGE_IS_NOT_FOUND_FOR = ' is not found for ';
   public static ERROR_MESSAGE_BUILDING = ' building.';
   public static SORT = 'sort';
+  public static COST_HEAD_PDF_REPORT_HEADING = 'Cost Head Report for';
+}
+
+export class PDFReportHeaders {
+  public static COMPANY_NAME = 'Company Name:';
+  public static PROJECT_NAME = 'Project Name:';
+  public static BUILDING_NAME = 'Building Name:';
+  public static GENERATED_ON = 'Generated on:';
+  public static DATE_FORMAT = 'dd MMM yyyy';
 }
 
 export class Menus {
