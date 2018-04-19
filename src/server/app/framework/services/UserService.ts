@@ -90,6 +90,7 @@ class UserService {
                 'data': {
                   'first_name': result[0].first_name,
                   'last_name': result[0].last_name,
+                  'company_name': result[0].company_name,
                   'email': result[0].email,
                   '_id': result[0]._id,
                   'current_theme': result[0].current_theme,

@@ -1,24 +1,24 @@
 <div [hidden]="true" id="content" #content>
   <div *ngIf="costHead">
     <h3 style="width:100%; border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px; font-size: 14px; font-weight: 600;">
-      {{costHead.name}} for Project Name
+      {{costHead.name}} for {{projectName}}
     </h3>
     <div style="font-size:12px; text-align: left; margin-bottom: 20px;">
       <div style="padding-bottom: 5px;">
         <strong style="font-weight: bold">Company Name:</strong>
-        <span>Royal Properties LTD</span>
+        <span>{{comapnyName}}</span>
       </div>
       <div style="padding-bottom: 5px;">
         <strong style="font-weight: bold">Project Name:</strong>
-        <span>Project Name</span>
+        <span>{{projectName}}</span>
       </div>
       <div style="padding-bottom: 5px;">
         <strong style="font-weight: bold">Building Name:</strong>
-        <span>Bulding Name</span>
+        <span>{{buildingName}}</span>
       </div>
       <div style="padding-bottom: 5px;">
         <strong style="font-weight: bold">Generated on:</strong>
-        <span>4th April 2018</span>
+        <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
       </div>
     </div>
     <div style="font-size:10px; text-align: left" *ngFor="let category of costHead.categories">
