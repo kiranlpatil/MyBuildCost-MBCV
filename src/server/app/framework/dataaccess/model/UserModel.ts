@@ -1,4 +1,5 @@
 import Project = require('../../../applicationProject/dataaccess/model/project/Project');
+import UserSubscription = require("../../../applicationProject/dataaccess/model/project/Subscription/UserSubscription");
 
 interface   UserModel {
   user_id:string;
@@ -15,5 +16,6 @@ interface   UserModel {
   current_theme: string;
   activation_date: Date;
   projects: Array<Project>;
+  subscription: Array<UserSubscription>;
 }
 export = UserModel;

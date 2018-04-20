@@ -362,8 +362,17 @@ select,
   background: transparent;
   border: 0;
   box-shadow: none;
+  font-size: 12px;
+  font-weight: 600;
   height: 20px;
-  width: 20px;
+  padding: 0;
+  width: auto;
+
+  span {
+    font-size: 12px;
+    margin: 0 5px 0 0;
+    top: 2px;
+  }
 
   &:hover,
   &:focus,

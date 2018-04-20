@@ -85,17 +85,9 @@
   background-color: $header-bg;
   border-radius: 8px;
   box-shadow: 6px 6px 7px rgba(0, 0, 0, 0.05);
-  color: $heading;
-  font-weight: 400;
-  font-size: 20px;
   margin-bottom: 5px;
-  overflow: hidden;
-  padding: 15px;
-  position: relative;
+  padding: 20px 130px 20px 15px !important;
   text-align: left;
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
 
   .building-label {
     color: #434C5E;

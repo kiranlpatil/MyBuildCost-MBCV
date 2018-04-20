@@ -100,14 +100,6 @@
       cursor: pointer;
     }
 
-    .menu-items > .dropdown-menu > li {
-      &:last-child {
-        p {
-          border: 0;
-        }
-      }
-    }
-
     .menu-items.open > a {
       background-color: $page-background;
     }

@@ -1,5 +1,6 @@
 import DataAccess = require('../../../framework/dataaccess/dataaccess');
 import Subscription = require('../mongoose/Subscription');
+import BaseSubscriptionPackage = require('../model/project/Subscription/BaseSubscriptionPackage');
 
 let mongoose = DataAccess.mongooseInstance;
 let mongooseConnection = DataAccess.mongooseConnection;
@@ -9,14 +10,14 @@ class SubscriptionSchema {
 
     let schema = mongoose.Schema({
 
-      price: {
-        type: Number
+        basePackage: {
+        type: Object
       },
-      days: {
-        type: Number
+        addBuilding: {
+        type: Object
       },
-      numOfProjects: {
-        type: Number
+        renewal: {
+        type: Object
       }
     },
       {

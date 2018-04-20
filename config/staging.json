@@ -75,6 +75,21 @@
     ],
     "replaceConsole": true
   },
+  "subscription":{
+    "package":{
+      "Free" : {
+        "basePackage": {
+          "name": "Free",
+          "description": " 1 project and 5 buildings",
+          "validity": 1080,
+          "cost": 300,
+          "numOfProjects": 1,
+          "numOfBuildings": 5,
+          "iterativeDiscount": 1000
+        }
+      }
+    }
+  },
   "category" :
   {
     "default": [

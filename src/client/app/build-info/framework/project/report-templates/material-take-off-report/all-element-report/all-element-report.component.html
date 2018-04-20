@@ -1,0 +1,30 @@
+<button class="btn-print" (click)="downloadToPdf()"><span class="glyphicon glyphicon-print"></span>Print/Download</button>
+
+<div id="content" #content style="display: none">
+  <bi-pdf-header
+    [elementType]="elementType"
+    [elementName]="elementName"
+    [buildingName]="buildingName">
+  </bi-pdf-header>
+
+  <div  *ngFor="let materialKey of materialTakeOffReport | keys;">
+    <h4 style="text-align:left;">
+      <span>{{materialKey}}</span>
+      <span>{{ materialTakeOffReport[materialKey].title }}</span>
+    </h4>
+
+    <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT;" style="clear: both;width: 400px;">
+      <table width="100%" align="left" style="margin-bottom: 5px;float:left">
+        <thead style="font-size:12px;">
+        <th width="60%">{{secondaryViewKey}}</th>
+        <th width="40%" style="text-align: right">{{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}</th>
+        </thead>
+      </table>
+      <!--pdf report-->
+      <bi-table-view
+        [reportData]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table">
+      </bi-table-view>
+    </div>
+  </div>
+
+</div>

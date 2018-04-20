@@ -77,14 +77,9 @@
 
 .building-name {
   .btn-print {
-    padding: 0;
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translate(0 , -50%);
-
-    span {
-      font-size: 16px;
-    }
   }
 }

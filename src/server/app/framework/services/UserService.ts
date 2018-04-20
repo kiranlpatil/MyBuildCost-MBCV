@@ -15,6 +15,10 @@ import bcrypt = require('bcrypt');
 import { MailChimpMailerService } from './mailchimp-mailer.service';
 import UserModel = require('../dataaccess/model/UserModel');
 import User = require('../dataaccess/mongoose/user');
+import SubscriptionService = require("../../applicationProject/services/SubscriptionService");
+import SubscriptionPackage = require("../../applicationProject/dataaccess/model/project/Subscription/SubscriptionPackage");
+import BaseSubscriptionPackage = require("../../applicationProject/dataaccess/model/project/Subscription/BaseSubscriptionPackage");
+import UserSubscription = require("../../applicationProject/dataaccess/model/project/Subscription/UserSubscription");
 
 class UserService {
   APP_NAME: string;
@@ -52,18 +56,50 @@ class UserService {
             }, null);
           } else {
             item.password = hash;
-            this.userRepository.create(item, (err, res) => {
-              if (err) {
-                callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-              } else {
-                callback(null, res);
+            let subScriptionService = new SubscriptionService();
+            subScriptionService.getSubscriptionPackageByName('Free', (err: any,
+                                                                      freeSubscription: Array<SubscriptionPackage>) => {
+              if (freeSubscription.length > 0) {
+                this.assignFreeSubscriptionAndCreateUser(item, freeSubscription[0], callback);
+              }else {
+                subScriptionService.addSubscriptionPackage(config.get('subscription.package.Free'),
+                  (err: any, freeSubscription)=> {
+                    this.assignFreeSubscriptionAndCreateUser(item, freeSubscription, callback);
+                });
               }
+
             });
+
           }
         });
       }
 
     });
+  }
+
+  private assignFreeSubscriptionAndCreateUser(item: any, freeSubscription: SubscriptionPackage, callback: (error: any, result: any) => void) {
+    let user: UserModel = item;
+    this.assignFreeSubscriptionPackage(user, freeSubscription);
+    this.userRepository.create(user, (err, res) => {
+      if (err) {
+        callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+      } else {
+        callback(null, res);
+      }
+    });
+  }
+
+  private assignFreeSubscriptionPackage(user: UserModel, freeSubscription: SubscriptionPackage) {
+    let subscription = new UserSubscription();
+    subscription.activationDate = new Date();
+    subscription.numOfBuildings = freeSubscription.basePackage.numOfBuildings;
+    subscription.numOfProjects = freeSubscription.basePackage.numOfProjects;
+    subscription.validity = freeSubscription.basePackage.validity;
+    subscription.projectId = new Array<string>();
+    subscription.purchased = new Array<BaseSubscriptionPackage>();
+    subscription.purchased.push(freeSubscription.basePackage);
+    user.subscription = new Array<UserSubscription>();
+    user.subscription.push(subscription);
   }
 
   login(data: any, callback:(error: any, result: any) => void) {

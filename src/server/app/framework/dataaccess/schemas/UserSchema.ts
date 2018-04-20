@@ -93,7 +93,10 @@ class UserSchema {
         type: Date,
         default: new Date()
       },
-      project : [{type: Schema.Types.ObjectId, ref: 'Project'}]
+      project : [{type: Schema.Types.ObjectId, ref: 'Project'}],
+      subscription: {
+        type: Object
+      }
     }, {versionKey: false});
     return schema;
   }
