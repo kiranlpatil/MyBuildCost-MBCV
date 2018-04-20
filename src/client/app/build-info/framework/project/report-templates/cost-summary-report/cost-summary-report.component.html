@@ -15,6 +15,9 @@
       <span>{{ buildingReport.name }}</span>
     </div>
     <div style="padding-bottom: 5px;">
+      <strong>TOTAL {{ costingByArea }}: {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
+    </div>
+    <div style="padding-bottom: 5px;">
       <strong style="font-weight: bold">Generated on:</strong>
       <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
     </div>
@@ -72,6 +75,9 @@
       <span>{{ buildingReport.name }}</span>
     </div>
     <div style="padding-bottom: 5px;">
+      <strong>TOTAL {{ costingByArea }}: {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
+    </div>
+    <div style="padding-bottom: 5px;">
       <strong>Generated on:</strong>
       <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
     </div>
@@ -121,6 +127,9 @@
     <div style="padding-bottom: 5px;">
       <strong>Building Name:</strong>
       <span>{{ buildingReport.name }}</span>
+    </div>
+    <div style="padding-bottom: 5px;">
+      <strong>TOTAL {{ costingByArea }}: {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
     </div>
     <div style="padding-bottom: 5px;">
       <strong>Generated on:</strong>
