@@ -37,6 +37,7 @@ import { UserChangePasswordService } from './framework/dashboard/user-change-pas
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { HttpDelegateService } from './shared/services/http-delegate.service';
 
+
 //Application IMPORTS
 
 import { ProjectService } from './build-info/framework/project/project.service';
@@ -73,7 +74,12 @@ import { SharePrintPageComponent } from './build-info/framework/project-header/s
 import { QuantityDetailsComponent }
 from './build-info/framework/project/cost-summary-report/cost-head/quantity-details/quantity-details.component';
 import { CostHeadReportComponent } from './build-info/framework/project/report-templates/cost-head-report/cost-head-report.component';
-import { CostSummaryReportComponent } from './build-info/framework/project/report-templates/cost-summary-report/cost-summary-report.component'
+import { CostSummaryReportComponent } from './build-info/framework/project/report-templates/cost-summary-report/cost-summary-report.component';
+import { AllElementReportComponent } from './build-info/framework/project/report-templates/material-take-off-report/all-element-report/all-element-report.component';
+import { CostHeadWiseSingleElementComponent } from './build-info/framework/project/report-templates/material-take-off-report/table-view/table-view.component';
+import { PdfHeaderComponent } from './build-info/framework/project/report-templates/material-take-off-report/pdf-header/pdf-header.component';
+import { TableRowDataComponent } from './build-info/framework/project/report-templates/material-take-off-report/table-row/table-row.component';
+import { CommonAmenitiesReportComponent } from './build-info/framework/project/report-templates/common-amenities-report/common-amenities-report.component';
 
 @NgModule({
   imports: [
@@ -118,6 +124,10 @@ import { CostSummaryReportComponent } from './build-info/framework/project/repor
     GetQuantityComponent,
     MaterialTakeoffComponent,
     MaterialTakeOffReportComponent,
+    AllElementReportComponent,
+    CostHeadWiseSingleElementComponent,
+    PdfHeaderComponent,
+    TableRowDataComponent,
     TableRowComponent,
     GetRateComponent,
     ProjectItemComponent,
@@ -136,7 +146,8 @@ import { CostSummaryReportComponent } from './build-info/framework/project/repor
 
     PageNotFoundComponent,
     CommonAmenitiesComponent,
-    CostSummaryReportComponent
+    CostSummaryReportComponent,
+    CommonAmenitiesReportComponent
   ],
 
   providers: [

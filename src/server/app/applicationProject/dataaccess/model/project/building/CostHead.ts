@@ -3,6 +3,7 @@ import ThumbRuleRate = require('./../reports/ThumbRuleRate');
 
 class CostHead {
   name: string;
+  priorityId: number;
   rateAnalysisId:number;
   budgetedCostAmount:number;
   active: boolean;

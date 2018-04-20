@@ -170,6 +170,7 @@ export class GetQuantityComponent implements OnInit {
   }
 
   onUpdateQuantityItemsSuccess(success : string) {
+
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
@@ -182,24 +183,23 @@ export class GetQuantityComponent implements OnInit {
       });
 
     this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
-        if(workItemData[0].quantity.total !== 0) {
-          workItemData[0].quantity.isEstimated = true;
-          if(workItemData[0].quantity.isEstimated && workItemData[0].rate.isEstimated) {
-            workItemData[0].amount = this.commonService.calculateAmountOfWorkItem(workItemData[0].quantity.total,
-              workItemData[0].rate.total);
-          }
-        } else {
-          workItemData[0].quantity.isEstimated = false;
-          workItemData[0].amount = 0;
+
+      if(workItemData[0].quantity.total !== 0) {
+        workItemData[0].quantity.isEstimated = true;
+        if(workItemData[0].quantity.isEstimated && workItemData[0].rate.isEstimated) {
+          workItemData[0].amount = this.commonService.calculateAmountOfWorkItem(workItemData[0].quantity.total,
+            workItemData[0].rate.total);
         }
-
-
+      } else {
+        workItemData[0].quantity.isEstimated = false;
+        workItemData[0].amount = 0;
+      }
 
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
-      this.categoryRateAnalysisId, this.workItemsList);
+    this.categoryRateAnalysisId, this.workItemsList);
     this.categoriesTotalAmount.emit(categoriesTotal);
     this.showWorkItemTabName.emit('');
-      this.loaderService.stop();
+    this.loaderService.stop();
   }
 
   onUpdateQuantityItemsFailure(error: any) {

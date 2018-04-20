@@ -126,6 +126,7 @@ export class CostSummaryComponent implements OnInit {
   goToCostHeadView( buildingId : string, buildingName:string, estimatedItem :any) {
 
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING_NAME, buildingName);
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
 

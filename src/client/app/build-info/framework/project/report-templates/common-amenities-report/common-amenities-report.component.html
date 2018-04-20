@@ -1,0 +1,54 @@
+      <div *ngIf="amenitiesReport" id="content" #content style="display: none">
+        <h2 style="font-size:14px; padding-bottom: 15px; border-bottom: 1px solid #ccc; text-align: center">
+          {{costReportFor}} Cost Report for {{currentProjectName}} </h2>
+        <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
+          <div style="padding-bottom: 5px;">
+            <strong>Company Name:</strong>
+            <span>{{company_name}}</span>
+          </div>
+          <div style="padding-bottom: 5px;">
+            <strong>Project Name:</strong>
+            <span>{{currentProjectName}}</span>
+          </div>
+          <div style="padding-bottom: 5px;">
+            <strong style="font-weight: bold">Generated on:</strong>
+            <span>{{generatedDate | date:'d-MMMM-y'}}</span>
+          </div>
+        </div>
+
+        <table width="100%" border="1" bordercolor="#ccc" style="font-size:10px;text-align: left">
+          <thead>
+          <tr>
+            <th style="padding: 10px 5px;" rowspan="2" >Amenity Cost Head</th>
+            <th *ngIf="isBudgeted" colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
+            <th *ngIf="isEstimated" colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
+          </tr>
+          <tr>
+            <th *ngIf="isBudgeted" style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
+            <th *ngIf="isBudgeted" style="text-align: center;padding: 10px 5px;">Budgeted Cost</th>
+            <th *ngIf="isEstimated" style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
+            <th *ngIf="isEstimated" style="text-align: center;padding: 10px 5px;">Estimated Cost</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index">
+            <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
+            <td *ngIf="isBudgeted" style="padding: 5px;" align="right">{{ thumbRuleItem.rate | number }}</td>
+            <td *ngIf="isBudgeted" style="padding: 5px;" align="right">{{thumbRuleItem.amount}}</td>
+            <td *ngIf="isEstimated" style="padding: 5px;" align="right">{{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate | number }}</td>
+            <td *ngIf="isEstimated" style="padding: 5px;" align="right">{{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
+            <td *ngIf="isBudgeted" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
+            <td *ngIf="isBudgeted" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+            <td *ngIf="isEstimated" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}</td>
+            <td *ngIf="isEstimated" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.estimate.totalEstimatedCost|number: '1.2-2'}}</td>
+          </tr>
+          </tbody>
+    </table>
+  </div>
+      <p (click)="downloadToPdf('Budgeted cost report')">Budgeted Cost Report</p>
+      <p (click)="downloadToPdf('Estimated cost report')">Estimated Cost Report</p>
+      <p (click)="downloadToPdf('Budgeted and Estimated cost report')">Both</p>
+

@@ -41,6 +41,9 @@ export class DashboardHeaderComponent {
         if (user.first_name) {
           this.user_first_name = user.first_name;
         }
+        if (user.company_name) {
+          SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, user.company_name);
+        }
       });
   }
 

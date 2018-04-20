@@ -1,3 +1,13 @@
+<a>
+  <!--pdf report-->
+  <bi-all-element-report
+    [materialTakeOffReport]="materialTakeOffReport"
+    [elementType]="elementType"
+    [elementName]="elementName"
+    [buildingName]="buildingName">
+  </bi-all-element-report>
+</a>
+
 <section class="material-takeoff-report">
   <div class="panel-group no-border"  *ngFor="let materialKey of materialTakeOffReport | keys; let materialDataIndex = index">
     <div class="panel panel-default">
@@ -17,7 +27,7 @@
 
       <div class="panel-collapse">
         <div class="panel-body">
-          <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys; let secondaryViewDataIndex = index">
+          <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT; let secondaryViewDataIndex = index">
             <div class="col-md-12 no-padding">
 
               <div class="panel panel-default">
@@ -60,7 +70,7 @@
                                   <bi-table-row [customClass]="'item-inner-row'"
                                     [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content]">
                                   </bi-table-row>
-                                  <span class="caret"></span>
+                                  <span *ngIf="buildingName != getMaterialTakeOffElements().ALL_BUILDINGS" class="caret"></span>
                                 </a>
                               </h4>
                             </div>

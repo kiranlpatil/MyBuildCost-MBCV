@@ -1,0 +1,40 @@
+<div>
+
+  <h2>{{getMaterialTakeOffElements().MATERIAL_TAKE_OFF_REPORT_HEADING}}</h2>
+
+  <div>
+    <strong>{{getPDFReportHeaders().COMPANY_NAME}}</strong>
+    <span>{{companyName}}</span>
+  </div>
+
+  <div>
+    <strong>{{getPDFReportHeaders().PROJECT_NAME}}</strong>
+    <span>{{projectName}}</span>
+  </div>
+
+  <div *ngIf="buildingName !== getMaterialTakeOffElements().ALL_BUILDINGS">
+    <strong>{{getPDFReportHeaders().BUILDING_NAME}}</strong>
+    <span>{{ buildingName }}</span>
+  </div>
+
+  <div *ngIf="buildingName === getMaterialTakeOffElements().ALL_BUILDINGS">
+    <strong>{{getProjectElements().BUILDING}}</strong>
+    <span>{{ buildingName }}</span>
+  </div>
+
+  <div *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD">
+    <strong>{{getPDFReportHeaders().COST_HEAD_NAME}}</strong>
+    <span>{{ elementName }}</span>
+  </div>
+
+  <div *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL">
+    <strong>{{getPDFReportHeaders().MATERIAL_NAME}}</strong>
+    <span>{{ elementName }}</span>
+  </div>
+
+  <div>
+    <strong>{{getPDFReportHeaders().GENERATED_ON}}</strong>
+    <span>{{generatedDate | date:getPDFReportHeaders().DATE_FORMAT}}</span>
+  </div>
+
+</div>

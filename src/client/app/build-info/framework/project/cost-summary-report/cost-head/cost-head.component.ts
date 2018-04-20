@@ -100,7 +100,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
         console.log('Error');
       }
 
-   SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_ID, this.costHeadId);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_ID, this.costHeadId);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_NAME, this.costHeadName);
       this.getCategories( this.projectId, this.costHeadId);
 
     });
@@ -461,7 +462,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM;
     this.messageService.message(message);
-    this.refreshWorkItemList();
+    this.refreshCategoryList();
     this.loaderService.stop();
   }
 
@@ -497,7 +498,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.getCategories( this.projectId, this.costHeadId);
     //this.showWorkItemTab = null;
     //this.showQuantityTab = null;
-    this.displayRateView = null;
+    //this.displayRateView = null;
   }
 
   refreshWorkItemList() {

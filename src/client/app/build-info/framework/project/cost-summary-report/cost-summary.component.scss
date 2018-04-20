@@ -37,7 +37,7 @@
 }
 .cost-summary-row-list {
   .text-center {
-    text-align: center;
+    text-align: centerc;
   }
 }
 .collapse-items {
@@ -179,6 +179,20 @@
     background: $white;
     border: 0;
     color: $heading;
+  }
+}
+
+.download-pdf-list {
+  span {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 10px 0 0;
+  }
+}
+
+.first-child-list {
+  &:hover {
+    background: transparent !important;
   }
 }
 

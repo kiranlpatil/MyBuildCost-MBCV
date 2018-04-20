@@ -240,9 +240,13 @@ export class SessionStorage {
   public static CHANGE_MAIL_VALUE = 'change_mail_value';
   public static CURRENT_PROJECT_ID = 'current_project_id';
   public static CURRENT_PROJECT_NAME = 'current_project_name';
+  public static CURRENT_BUILDING_NAME = 'current_building_name';
   public static CURRENT_BUILDING = 'current_building_id';
   public static CURRENT_COST_HEAD_ID = 'current_cost_head_id';
+  public static CURRENT_COST_HEAD_NAME = 'current_cost_head';
   public static CURRENT_WORKITEM_ID = 'current_workitem_id';
+  public static COMPANY_NAME = 'company_name';
+  public static CREATED_AT = 'createdAt';
 }
 
 export class LocalStorage {
@@ -546,6 +550,17 @@ export class MaterialTakeOffElements {
   public static ERROR_MESSAGE_IS_NOT_FOUND_FOR = ' is not found for ';
   public static ERROR_MESSAGE_BUILDING = ' building.';
   public static SORT = 'sort';
+  public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
+}
+
+export class PDFReportHeaders {
+  public static COMPANY_NAME = 'Company Name : ';
+  public static PROJECT_NAME = 'Project Name : ';
+  public static BUILDING_NAME = 'Building Name : ';
+  public static GENERATED_ON = 'Generated on : ';
+  public static DATE_FORMAT = 'dd MMM yyyy';
+  public static COST_HEAD_NAME = 'Cost Head Name : ';
+  public static MATERIAL_NAME = 'Material Name : ';
 }
 
 export class Menus {
