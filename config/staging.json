@@ -742,6 +742,7 @@
   "projectCostHeads" : [
     {
       "name" : "Club House",
+      "priorityId": 100,
       "rateAnalysisId" : 100000,
       "categories" : [
         {
@@ -788,6 +789,7 @@
     },
     {
       "name" : "Swimming Pool",
+      "priorityId": 101,
       "rateAnalysisId" : 100007,
       "categories" : [
         {
@@ -1001,7 +1003,9 @@
       "categories" : []
     },
     {
-      "name" : "Safety Measures",
+      "name" : "Safety measures",
+      "priorityId": 102,
+      "rateAnalysisId" : 251,
       "categories" : []
     },
     {
@@ -1218,7 +1222,8 @@
   ],
   "costHeads" : [
     {
-      "name" : "Soling (plinth)",
+      "name" : "Soling",
+      "priorityId": 1,
       "categories" : [
         {
           "name" : "default",
@@ -1234,7 +1239,8 @@
       ]
     },
     {
-      "name" : "RCC",
+      "name" : "RCC band / patli",
+      "priorityId": 2,
       "rateAnalysisId" : 100082,
       "categories" : [
         {
@@ -1348,6 +1354,7 @@
     },
     {
       "name" : "Masonry",
+      "priorityId": 3,
       "categories" : [
         {
           "name" : "Fly ash brick masonry",
@@ -1700,6 +1707,7 @@
     },
     {
       "name" : "Internal Plaster",
+      "priorityId": 4,
       "categories" : [
         {
           "name" : "On brick masonry",
@@ -1906,7 +1914,8 @@
       ]
     },
     {
-      "name" : "Gypsum punning",
+      "name" : "Gypsum / POP plaster (punning)",
+      "priorityId": 5,
       "categories" : [
         {
           "name" : "Gypsum plaster (punning)",
@@ -1940,7 +1949,8 @@
       ]
     },
     {
-      "name" : "External Plaster",
+      "name" : "External plaster",
+      "priorityId": 6,
       "categories" : [
         {
           "name" : "Single coat external plaster",
@@ -2045,7 +2055,8 @@
       ]
     },
     {
-      "name" : "Water proofing",
+      "name" : "Waterproofing",
+      "priorityId": 7,
       "rateAnalysisId" : 100217,
       "categories" : [
         {
@@ -2185,7 +2196,8 @@
       ]
     },
     {
-      "name" : "Flooring+Skirting",
+      "name" : "Flooring",
+      "priorityId": 8,
       "rateAnalysisId" : 100238,
       "categories" : [
         {
@@ -2554,6 +2566,7 @@
     },
     {
       "name" : "Dado / wall tiling",
+      "priorityId": 9,
       "rateAnalysisId" : 100292,
       "categories" : [
         {
@@ -2751,7 +2764,8 @@
       ]
     },
     {
-      "name" : "Kitchen platforms",
+      "name" : "Kitchen otta",
+      "priorityId": 10,
       "rateAnalysisId" : 100321,
       "categories" : [
         {
@@ -2852,6 +2866,7 @@
     },
     {
       "name" : "Window sills / jambs",
+      "priorityId": 11,
       "rateAnalysisId" : 100336,
       "categories" : [
         {
@@ -2926,6 +2941,7 @@
     },
     {
       "name" : "Staircase treads and risers",
+      "priorityId": 12,
       "rateAnalysisId" : 100347,
       "categories" : [
         {
@@ -3275,7 +3291,8 @@
       ]
     },
     {
-      "name" : "Doors with frames",
+      "name" : "Doors",
+      "priorityId": 13,
       "rateAnalysisId" : 100398,
       "categories" : [
         {
@@ -3491,6 +3508,7 @@
     },
     {
       "name" : "Fabrication",
+      "priorityId": 14,
       "categories" : [
         {
           "name" : "Window grills ( On plastered jambs )",
@@ -3554,6 +3572,7 @@
     },
     {
       "name" : "Painting",
+      "priorityId": 15,
       "rateAnalysisId" : 100442,
       "categories" : [
         {
@@ -3642,6 +3661,7 @@
     },
     {
       "name" : "Roofing",
+      "priorityId": 16,
       "rateAnalysisId" : 100455,
       "categories" : [
         {
@@ -3696,6 +3716,7 @@
     },
     {
       "name" : "Excavation",
+      "priorityId": 17,
       "rateAnalysisId" : 100463,
       "categories" : [
         {
@@ -3762,6 +3783,7 @@
     },
     {
       "name" : "Dewatering",
+      "priorityId": 18,
       "rateAnalysisId" : 100473,
       "categories" : [
         {
@@ -3781,6 +3803,7 @@
     },
     {
       "name" : "Garbage chute",
+      "priorityId": 19,
       "rateAnalysisId" : 100476,
       "categories" : [
         {
@@ -3813,6 +3836,7 @@
     },
     {
       "name" : "Backfilling (plinth)",
+      "priorityId": 20,
       "rateAnalysisId" : 100481,
       "categories" : [
         {
@@ -3839,6 +3863,7 @@
     },
     {
       "name" : "Windows/Sliding doors",
+      "priorityId": 21,
       "rateAnalysisId" : 100485,
       "categories" : [
         {
@@ -3912,6 +3937,7 @@
     },
     {
       "name" : "Lift",
+      "priorityId": 22,
       "rateAnalysisId" : 100496,
       "categories" : [
         {
@@ -4001,6 +4027,7 @@
     {
       "name" : "Electrical light fittings in common areas of building",
       "rateAnalysisId" : 100509,
+      "priorityId": 23,
       "categories" : [
         {
           "name" : "default",
@@ -4020,6 +4047,7 @@
     {
       "name" : "Pest Control",
       "rateAnalysisId" : 100512,
+      "priorityId": 24,
       "categories" : [
         {
           "name" : "default",
@@ -4039,6 +4067,7 @@
     {
       "name" : "Solar water heating system",
       "rateAnalysisId" : 100515,
+      "priorityId": 25,
       "categories" : [
         {
           "name" : "default",
@@ -4064,6 +4093,7 @@
     },
     {
       "name" : "Piped gas system",
+      "priorityId": 26,
       "rateAnalysisId" : 100519,
       "categories" : [
         {
@@ -4103,6 +4133,7 @@
     },
     {
       "name" : "Sky lounge on top terrace",
+      "priorityId": 27,
       "rateAnalysisId" : 100525,
       "categories" : [
         {
@@ -4122,6 +4153,7 @@
     },
     {
       "name" : "Fire fighting system",
+      "priorityId": 28,
       "rateAnalysisId" : 100528,
       "categories" : [
         {
@@ -4141,6 +4173,7 @@
     },
     {
       "name" : "Safety and Security automation",
+      "priorityId": 29,
       "rateAnalysisId" : 100531,
       "categories" : [
         {
@@ -4187,6 +4220,7 @@
     },
     {
       "name" : "Shower Enclosures",
+      "priorityId": 30,
       "rateAnalysisId" : 100540,
       "categories" : [
         {
@@ -4220,6 +4254,7 @@
     },
     {
       "name" : "False ceiling",
+      "priorityId": 31,
       "rateAnalysisId" : 100545,
       "categories" : [
         {
@@ -4278,11 +4313,13 @@
     },
     {
       "name" : "Special elevational features",
+      "priorityId": 32,
       "rateAnalysisId" : 100554,
       "categories" : []
     },
     {
       "name" : "Boards & Signages inside building",
+      "priorityId": 33,
       "rateAnalysisId" : 100555,
       "categories" : [
         {
@@ -4302,6 +4339,7 @@
     },
     {
       "name" : "Electrification",
+      "priorityId": 34,
       "rateAnalysisId" : 100558,
       "categories" : [
         {
@@ -4393,6 +4431,7 @@
     },
     {
       "name" : "Internal plumbing with vertical lines",
+      "priorityId": 35,
       "rateAnalysisId" : 100572,
       "categories" : [
         {
@@ -4436,11 +4475,17 @@
           ]
         }
       ]
+    },
+    {
+      "name" : "Safety measures",
+      "priorityId": 102,
+      "categories" : []
     }
   ],
   "configCostHeads" : [
     {
       "name" : "Water proofing",
+      "priorityId": 7,
       "rateAnalysisId" : 100217,
       "categories" : [
         {
@@ -4522,6 +4567,7 @@
     },
     {
       "name" : "Dewatering",
+      "priorityId": 18,
       "rateAnalysisId" : 100473,
       "categories" : [
         {
@@ -4541,6 +4587,7 @@
     },
     {
       "name" : "Garbage chute",
+      "priorityId": 19,
       "rateAnalysisId" : 100476,
       "categories" : [
         {
@@ -4573,6 +4620,7 @@
     },
     {
       "name" : "Lift",
+      "priorityId": 22,
       "rateAnalysisId" : 100496,
       "categories" : [
         {
@@ -4663,6 +4711,7 @@
   "configProjectCostHeads" : [
     {
       "name" : "Club House",
+      "priorityId": 100,
       "rateAnalysisId" : 100000,
       "categories" : [
         {
@@ -4709,6 +4758,7 @@
     },
     {
       "name" : "Swimming Pool",
+      "priorityId": 101,
       "rateAnalysisId" : 100007,
       "categories" : [
         {
