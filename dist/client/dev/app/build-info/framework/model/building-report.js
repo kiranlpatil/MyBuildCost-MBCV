@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var BuildingReport = (function () {
+    function BuildingReport() {
+    }
+    return BuildingReport;
+}());
+exports.BuildingReport = BuildingReport;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9idWlsZC1pbmZvL2ZyYW1ld29yay9tb2RlbC9idWlsZGluZy1yZXBvcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFJQTtJQUFBO0lBT0EsQ0FBQztJQUFELHFCQUFDO0FBQUQsQ0FQQSxBQU9DLElBQUE7QUFQWSx3Q0FBYyIsImZpbGUiOiJhcHAvYnVpbGQtaW5mby9mcmFtZXdvcmsvbW9kZWwvYnVpbGRpbmctcmVwb3J0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgVGh1bWJSdWxlIH0gZnJvbSAnLi90aHVtYnJ1bGUnO1xyXG5pbXBvcnQgeyBFc3RpbWF0ZSB9ICBmcm9tICcuL2VzdGltYXRlJztcclxuXHJcblxyXG5leHBvcnQgY2xhc3MgQnVpbGRpbmdSZXBvcnQge1xyXG4gIF9pZD86c3RyaW5nO1xyXG4gIG5hbWU6c3RyaW5nO1xyXG4gIGFyZWE6bnVtYmVyO1xyXG4gIHRodW1iUnVsZSA6IFRodW1iUnVsZTtcclxuICBlc3RpbWF0ZTogRXN0aW1hdGU7XHJcblxyXG59XHJcbiJdfQ==

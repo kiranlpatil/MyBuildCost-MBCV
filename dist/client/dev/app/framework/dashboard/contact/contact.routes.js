@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var index_1 = require("./index");
+exports.ContactRoutes = [
+    {
+        path: 'contact',
+        component: index_1.ContactComponent
+    }
+];
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvZGFzaGJvYXJkL2NvbnRhY3QvY29udGFjdC5yb3V0ZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpQ0FBMkM7QUFFOUIsUUFBQSxhQUFhLEdBQVk7SUFDcEM7UUFDRSxJQUFJLEVBQUUsU0FBUztRQUNmLFNBQVMsRUFBRSx3QkFBZ0I7S0FDNUI7Q0FDRixDQUFDIiwiZmlsZSI6ImFwcC9mcmFtZXdvcmsvZGFzaGJvYXJkL2NvbnRhY3QvY29udGFjdC5yb3V0ZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBSb3V0ZSB9IGZyb20gJ0Bhbmd1bGFyL3JvdXRlcic7XHJcbmltcG9ydCB7IENvbnRhY3RDb21wb25lbnQgfSBmcm9tICcuL2luZGV4JztcclxuXHJcbmV4cG9ydCBjb25zdCBDb250YWN0Um91dGVzOiBSb3V0ZVtdID0gW1xyXG4gIHtcclxuICAgIHBhdGg6ICdjb250YWN0JyxcclxuICAgIGNvbXBvbmVudDogQ29udGFjdENvbXBvbmVudFxyXG4gIH1cclxuXTtcclxuIl19

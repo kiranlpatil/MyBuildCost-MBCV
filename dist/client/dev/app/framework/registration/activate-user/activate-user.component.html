@@ -1,0 +1,37 @@
+<section class="main-form-wrapper activate-user">
+
+  <cn-user-header></cn-user-header>
+
+  <cn-app-loader></cn-app-loader>
+
+  <div class="col-md-8 col-xs-10 content" *ngIf="!isEmailVerification;else other_content">
+
+    <h5>{{activationMessageHeading}}</h5>
+
+    <div class="inner-content">
+      <p>{{activationMessageSubHeading}}<br /></p>
+      <p>{{activationMessage}}</p>
+
+      <div class="btn-group">
+        <a class="btn btn-success" (click)="navigateTo();">Sign In</a>
+      </div>
+
+    </div>
+
+  </div>
+  <ng-template #other_content>
+  <div class="col-md-8 col-xs-10 content" >
+      <h5>{{emailVerificationMessageHeading}}</h5>
+
+      <div class="inner-content">
+        <p>{{emailVerificationMessage}}<br /></p>
+      <div class="btn-group">
+        <a class="btn btn-success" (click)="navigateTo();">Sign In</a>
+      </div>
+    </div>
+  </div>
+  </ng-template>
+</section>
+
+
+

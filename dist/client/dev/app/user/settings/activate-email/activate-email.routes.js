@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var activate_email_component_1 = require("./activate-email.component");
+exports.ActivateEmailRoutes = [
+    {
+        path: 'activate-email',
+        component: activate_email_component_1.ActivateEmailComponent
+    }
+];
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC91c2VyL3NldHRpbmdzL2FjdGl2YXRlLWVtYWlsL2FjdGl2YXRlLWVtYWlsLnJvdXRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLHVFQUFvRTtBQUV2RCxRQUFBLG1CQUFtQixHQUFZO0lBQzFDO1FBQ0UsSUFBSSxFQUFFLGdCQUFnQjtRQUN0QixTQUFTLEVBQUUsaURBQXNCO0tBQ2xDO0NBQ0YsQ0FBQyIsImZpbGUiOiJhcHAvdXNlci9zZXR0aW5ncy9hY3RpdmF0ZS1lbWFpbC9hY3RpdmF0ZS1lbWFpbC5yb3V0ZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBSb3V0ZSB9IGZyb20gJ0Bhbmd1bGFyL3JvdXRlcic7XHJcbmltcG9ydCB7IEFjdGl2YXRlRW1haWxDb21wb25lbnQgfSBmcm9tICcuL2FjdGl2YXRlLWVtYWlsLmNvbXBvbmVudCc7XHJcblxyXG5leHBvcnQgY29uc3QgQWN0aXZhdGVFbWFpbFJvdXRlczogUm91dGVbXSA9IFtcclxuICB7XHJcbiAgICBwYXRoOiAnYWN0aXZhdGUtZW1haWwnLFxyXG4gICAgY29tcG9uZW50OiBBY3RpdmF0ZUVtYWlsQ29tcG9uZW50XHJcbiAgfVxyXG5dO1xyXG4iXX0=

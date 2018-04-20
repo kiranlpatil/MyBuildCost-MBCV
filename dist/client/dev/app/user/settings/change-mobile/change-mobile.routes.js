@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var change_mobile_component_1 = require("./change-mobile.component");
+exports.ChangeMobileRoutes = [
+    {
+        path: 'change-mobile-number',
+        component: change_mobile_component_1.ChangeMobileComponent
+    }
+];
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC91c2VyL3NldHRpbmdzL2NoYW5nZS1tb2JpbGUvY2hhbmdlLW1vYmlsZS5yb3V0ZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxxRUFBZ0U7QUFFbkQsUUFBQSxrQkFBa0IsR0FBWTtJQUN6QztRQUNFLElBQUksRUFBRSxzQkFBc0I7UUFDNUIsU0FBUyxFQUFFLCtDQUFxQjtLQUNqQztDQUNGLENBQUMiLCJmaWxlIjoiYXBwL3VzZXIvc2V0dGluZ3MvY2hhbmdlLW1vYmlsZS9jaGFuZ2UtbW9iaWxlLnJvdXRlcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7Um91dGV9IGZyb20gXCJAYW5ndWxhci9yb3V0ZXJcIjtcclxuaW1wb3J0IHtDaGFuZ2VNb2JpbGVDb21wb25lbnR9IGZyb20gXCIuL2NoYW5nZS1tb2JpbGUuY29tcG9uZW50XCI7XHJcblxyXG5leHBvcnQgY29uc3QgQ2hhbmdlTW9iaWxlUm91dGVzOiBSb3V0ZVtdID0gW1xyXG4gIHtcclxuICAgIHBhdGg6ICdjaGFuZ2UtbW9iaWxlLW51bWJlcicsXHJcbiAgICBjb21wb25lbnQ6IENoYW5nZU1vYmlsZUNvbXBvbmVudFxyXG4gIH1cclxuXTtcclxuIl19
