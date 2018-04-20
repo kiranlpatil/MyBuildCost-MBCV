@@ -11,6 +11,7 @@ export class CostHeadReportComponent implements OnInit  {
 
   @ViewChild('content', {read: ElementRef}) content: ElementRef;
   @Input() categoryDetails: any;
+  @Input() categoryDetailsTotalAmount: any;
 
   costHead : any;
   projectName : string;
