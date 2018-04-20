@@ -12,7 +12,7 @@
         <div class="col-md-4 text-right padding-right5">
           <span class="text-left total-amount-work total-cost"> {{categoryDetailsTotalAmount|number : '1.0-0'}} </span>
         </div>
-        <bi-cost-head-report-pdf [costHeadId]="costHeadId"></bi-cost-head-report-pdf>
+        <bi-cost-head-report-pdf [categoryDetails]="categoryDetails"></bi-cost-head-report-pdf>
       </h4>
       <div class="panel-group" *ngFor=" let category of categoryDetails; let categoryIndex = index ">
         <div class="panel panel-default">

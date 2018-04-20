@@ -1,6 +1,6 @@
-import {join} from "path";
-import {SeedConfig} from "./seed.config";
-import {ImagePath} from "../../src/client/app/shared/constants";
+import { join } from 'path';
+import { SeedConfig } from './seed.config';
+import { ImagePath } from '../../src/client/app/shared/constants';
  import { ExtendPackages } from './seed.config.interfaces';
 
 /**
@@ -17,7 +17,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-     this.APP_TITLE = 'TPL-Project';
+     this.APP_TITLE = 'BuildInfo - Cost Control App';
      this.FAV_ICON = ImagePath.FAV_ICON;
      this.SPLASH_SCREEN = ImagePath.BODY_BACKGROUND;
      this.APP_LOGO = ImagePath.MY_WHITE_LOGO;

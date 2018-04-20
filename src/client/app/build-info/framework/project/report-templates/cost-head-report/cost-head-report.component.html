@@ -1,7 +1,7 @@
 <div [hidden]="true" id="content" #content>
-  <div *ngIf="costHead">
+  <div>
     <h3 style="width:100%; border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px; font-size: 14px; font-weight: 600;">
-      {{costHead.name}} for {{projectName}}
+      {{costHeadName}} of {{projectName}}
     </h3>
     <div style="font-size:12px; text-align: left; margin-bottom: 20px;">
       <div style="padding-bottom: 5px;">
@@ -21,7 +21,7 @@
         <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
       </div>
     </div>
-    <div style="font-size:10px; text-align: left" *ngFor="let category of costHead.categories">
+    <div style="font-size:10px; text-align: left" *ngFor="let category of categoryDetails">
       <table *ngIf="category.workItems.length !==0" width="100%" align="left" cellspacing="10">
         <thead style="font-size:12px;">
           <th width="60%">{{category.name}}</th>
