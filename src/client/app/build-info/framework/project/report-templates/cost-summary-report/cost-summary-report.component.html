@@ -38,17 +38,17 @@
     <tbody>
       <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
-        <td style="padding: 5px;" align="right">{{ thumbRuleItem.rate | number }}</td>
-        <td style="padding: 5px;" align="right">{{thumbRuleItem.amount}}</td>
-        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].rate | number }}</td>
-        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].total | number }}</td>
+        <td style="padding: 5px;" align="right">{{ thumbRuleItem.rate | number: '1.2-2' }}</td>
+        <td style="padding: 5px;" align="right">{{thumbRuleItem.amount | number: '1.0-0'}}</td>
+        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].rate | number: '1.2-2' }}</td>
+        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}</td>
       </tr>
       <tr>
         <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalRate|number: '1.2-2' }}</td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</td>
-        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.estimate.totalEstimatedCost|number: '1.2-2'}}</td>
+        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.estimate.totalEstimatedCost|number: '1.0-0'}}</td>
       </tr>
     </tbody>
   </table>
@@ -91,13 +91,13 @@
     <tbody>
       <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
-        <td style="padding: 5px;" align="right">{{ thumbRuleItem.rate | number }}</td>
-        <td style="padding: 5px;" align="right">{{thumbRuleItem.amount}}</td>
+        <td style="padding: 5px;" align="right">{{ thumbRuleItem.rate | number: '1.2-2' }}</td>
+        <td style="padding: 5px;" align="right">{{thumbRuleItem.amount |number : '1.0-0'}}</td>
       </tr>
       <tr>
         <th style="padding: 5px;">TOTAL</th>
         <th style="padding: 5px;text-align: right;">{{ buildingReport.thumbRule.totalRate|number: '1.2-2' }}</th>
-        <th style="padding: 5px;text-align: right;">{{ buildingReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</th>
+        <th style="padding: 5px;text-align: right;">{{ buildingReport.thumbRule.totalBudgetedCost |number : '1.0-0'}}</th>
       </tr>
     </tbody>
   </table>
@@ -143,13 +143,13 @@
     <tbody>
       <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
-        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].rate | number }}</td>
-        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].total | number }}</td>
+        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].rate | number: '1.2-2' }}</td>
+        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].total | number : '1.0-0' }}</td>
       </tr>
       <tr>
         <th style="padding: 5px;">TOTAL</th>
-        <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
-        <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalEstimatedCost|number: '1.2-2'}}</th>
+        <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalRate | number: '1.2-2'}}</th>
+        <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalEstimatedCost | number : '1.0-0'}}</th>
       </tr>
     </tbody>
   </table>
