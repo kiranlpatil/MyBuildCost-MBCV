@@ -91,7 +91,10 @@
                       </div>
                     </td>
                     <td class="border-left">
-                      {{ building.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
+                      <span *ngIf="building.estimate.estimatedCosts[i].rate === 0">-</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].rate !== 0">
+                        {{ building.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
+                      </span>
                     </td>
                     <td>
                       <div *ngIf="building.estimate.estimatedCosts[i].total != 0"
@@ -150,9 +153,24 @@
               <tr *ngIf="(building.thumbRule && building.estimate)">
                 <td class="border-left">{{ getLabel().TOTAL }}</td>
                 <td class="border-left">{{ building.thumbRule.totalRate|number: '1.2-2' }}</td>
-                <td class="border-left"><span class="estimated-cost">{{ building.thumbRule.totalBudgetedCost|number : '1.0-0'}}</span></td>
-                <td class="border-left">{{ building.estimate.totalRate|number: '1.2-2'}}</td>
-                <td class="border-left"><span class="estimated-cost">{{ building.estimate.totalEstimatedCost|number : '1.0-0'}}</span></td>
+                <td class="border-left">
+                  <span class="estimated-cost" *ngIf="building.thumbRule.totalBudgetedCost === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.thumbRule.totalBudgetedCost !== 0">
+                    {{ building.thumbRule.totalBudgetedCost|number : '1.0-0'}}
+                  </span>
+                </td>
+                <td class="border-left">
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRate === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRate !== 0">
+                    {{ building.estimate.totalRate|number: '1.2-2'}}
+                  </span>
+                </td>
+                <td class="border-left">
+                  <span class="estimated-cost" *ngIf="building.estimate.totalEstimatedCost === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalEstimatedCost !== 0">
+                    {{ building.estimate.totalEstimatedCost|number : '1.0-0'}}
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -176,9 +194,24 @@
                 <tr>
                   <td>{{ getLabel().GRAND_TOTAL }}</td>
                   <td>{{ grandTotalOfTotalRate|number: '1.2-2' }}</td>
-                  <td><span class="estimated-cost">{{ grandTotalOfBudgetedCost|number: '1.0-0' }}</span></td>
-                  <td>{{ grandTotalOfEstimatedRate|number: '1.2-2' }}</td>
-                  <td><span class="estimated-cost">{{ grandTotalOfEstimatedCost|number: '1.0-0' }}</span></td>
+                  <td>
+                    <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost !== 0">-</span>
+                    <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost === 0">
+                      {{ grandTotalOfBudgetedCost|number: '1.0-0' }}
+                    </span>
+                  </td>
+                  <td>
+                    <span *ngIf="grandTotalOfEstimatedRate === 0">-</span>
+                    <span *ngIf="grandTotalOfEstimatedRate !== 0">
+                          {{ grandTotalOfEstimatedRate|number: '1.2-2' }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="estimated-cost" *ngIf="grandTotalOfEstimatedCost === 0">-</span>
+                    <span class="estimated-cost" *ngIf="grandTotalOfEstimatedCost !== 0">
+                      {{ grandTotalOfEstimatedCost|number: '1.0-0' }}
+                    </span>
+                  </td>
                 </tr>
                 </tbody>
               </table>
