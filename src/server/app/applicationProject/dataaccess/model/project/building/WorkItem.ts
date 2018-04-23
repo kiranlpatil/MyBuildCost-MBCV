@@ -14,7 +14,7 @@ class WorkItem {
   amount: number;
   remarks: string;
   active: boolean;
-  attachmentDetails:Array<AttachmentDetailsModel>;
+  attachmentDetails:AttachmentDetailsModel[];
 
 
   constructor(name:string, rateAnalysisId:number) {

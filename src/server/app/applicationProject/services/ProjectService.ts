@@ -2016,7 +2016,7 @@ class ProjectService {
   }
 
   addAttachmentToWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                          workItemId: number,fileData: any, callback: (error: Error, attachmentDetails: AttachmentDetailsModel) => void) {
+                          workItemId: number,fileData: any, callback: (error: any, result: any) => void) {
     __dirname = path.resolve() + config.get('application.attachmentPath');
     let form = new multiparty.Form({uploadDir: __dirname});
     form.parse(fileData, (err: Error, fields: any, files: any) => {
@@ -2057,7 +2057,7 @@ class ProjectService {
               if (error) {
                 callback(error, null);
               } else {
-                callback(null, response.attachmentObject);
+                callback(null, {data: 'success'});
               }
             });
           }

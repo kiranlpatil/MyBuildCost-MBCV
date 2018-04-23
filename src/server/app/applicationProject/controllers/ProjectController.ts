@@ -1075,7 +1075,7 @@ class ProjectController {
         message: e.message,
         stackTrace: e,
         code: 403
-      })
+      });
     }
   }
 
