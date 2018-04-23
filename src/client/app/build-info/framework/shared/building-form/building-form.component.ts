@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Label, NavigationRoutes, ValueConstant } from '../../../../shared/constants';
-import { ValidationService } from '../../../../shared/customvalidations/validation.service';
-import { Building } from '../../model/building';
-import { SessionStorage, SessionStorageService } from '../../../../shared/index';
-import { Router } from "@angular/router";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Label, NavigationRoutes, ValueConstant} from '../../../../shared/constants';
+import {ValidationService} from '../../../../shared/customvalidations/validation.service';
+import {Building} from '../../model/building';
+import {SessionStorage, SessionStorageService} from '../../../../shared/index';
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -16,19 +16,19 @@ import { Router } from "@angular/router";
 export class BuildingFormComponent {
 
   @Input() submitActionLabel: string;
-  @Input() buildingModel?:Building= new Building();
+  @Input() buildingModel?: Building = new Building();
   @Output() onSubmitEvent = new EventEmitter<Building>();
 
   buildingForm:  FormGroup;
   public isShowErrorMessage: boolean = false;
   public errorMessage: boolean = false;
   actionItems:string[]=new Array(0);
-  actionItemsArray:string[]=ValueConstant.ACTION_ITEMS;
+  actionItemsArray:string[]=ValueConstant.ACTION_ITEMS.slice();
 
   private view: string | '';
 
   constructor( private formBuilder: FormBuilder, private _router: Router) {
-    this.actionItems=ValueConstant.ACTION_ITEMS.slice();
+    //this.actionItems=ValueConstant.ACTION_ITEMS.slice();
     this.view=SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
     this.buildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -65,7 +65,7 @@ export class BuildingFormComponent {
     if(event.target.checked) {
       this.actionItems.push(event.target.value);
     }else {
-      this.actionItems.splice(this.actionItems.indexOf(event.target.value),1);
+      this.actionItems.splice(this.actionItems.indexOf(event.target.value));
     }
   }
   navigateTo(navigate:string) {

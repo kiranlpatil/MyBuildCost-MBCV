@@ -45,7 +45,7 @@ export class CloneBuildingComponent  implements  OnInit {
   onSubmit(buildingModel : Building) {
     if(this.checkNumberOfFloors(buildingModel.totalNumOfFloors, buildingModel.numOfParkingFloors)) {
       if(this.checkApartmentConfiguration(buildingModel)) {
-        //this.loaderService.start();
+        this.loaderService.start();
         let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
         let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
         this.buildingService.cloneBuildingCostHeads(projectId,buildingId, buildingModel)
@@ -91,24 +91,8 @@ export class CloneBuildingComponent  implements  OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
     this.messageService.message(message);
-    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-
-    /*this.buildingService.syncBuildingWithRateAnalysis(projectId, building.data._id).subscribe(
-      building => this.onSyncBuildingWithRateAnalysisSuccess(building),
-      error => this.onSyncBuildingWithRateAnalysisFailure(error));*/
-  }
-
-  onSyncBuildingWithRateAnalysisSuccess(building : Building) {
-    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.loaderService.stop();
-    this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
-  }
-
-  onSyncBuildingWithRateAnalysisFailure(error:any) {
-    console.log(error);
     this.loaderService.stop();
   }
-
   onCreateBuildingFailure(error : any) {
     console.log(error);
     this.loaderService.stop();
@@ -125,7 +109,6 @@ export class CloneBuildingComponent  implements  OnInit {
   onGetBuildingDetailsForCloneSuccess(building: any) {
     this.cloneBuildingModel = building.data;
     this.cloneBuildingModel.name = '';
-    //this.clonedBuildingDetails = building.data.costHeads;
   }
 
   onGetBuildingDetailsForCloneFailure(error: any) {

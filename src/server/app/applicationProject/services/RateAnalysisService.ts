@@ -4,15 +4,17 @@ import User = require('../../framework/dataaccess/mongoose/user');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import CostControllException = require('../exception/CostControllException');
 import WorkItem = require('../dataaccess/model/project/building/WorkItem');
-let request = require('request');
-let config = require('config');
-var log4js = require('log4js');
-var logger=log4js.getLogger('Rate Analysis Service');
 import alasql = require('alasql');
 import Rate = require('../dataaccess/model/project/building/Rate');
 import CostHead = require('../dataaccess/model/project/building/CostHead');
 import Category = require('../dataaccess/model/project/building/Category');
 import Constants = require('../shared/constants');
+
+let request = require('request');
+let config = require('config');
+var log4js = require('log4js');
+var logger = log4js.getLogger('Rate Analysis Service');
+
 let CCPromise = require('promise/lib/es6-extensions');
 
 class RateAnalysisService {
@@ -27,7 +29,7 @@ class RateAnalysisService {
     this.userService = new UserService();
   }
 
-  getCostHeads( url: string, user: User, callback: (error: any, result: any) => void) {
+  getCostHeads(url: string, user: User, callback: (error: any, result: any) => void) {
     logger.info('Rate Analysis Service, getCostHeads has been hit');
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
@@ -40,7 +42,7 @@ class RateAnalysisService {
     });
   }
 
-  getWorkItems( url: string, user: User, callback: (error: any, result: any) => void) {
+  getWorkItems(url: string, user: User, callback: (error: any, result: any) => void) {
     logger.info('Rate Analysis Service, getWorkItems has been hit');
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
@@ -52,18 +54,18 @@ class RateAnalysisService {
     });
   }
 
-  getWorkItemsByCostHeadId( url: string,costHeadId: string, user: User, callback: (error: any, result: any) => void) {
+  getWorkItemsByCostHeadId(url: string, costHeadId: string, user: User, callback: (error: any, result: any) => void) {
     logger.info('Rate Analysis Service, getWorkItemsByCostHeadId has been hit');
-    let workItems : Array<WorkItem> = [];
+    let workItems: Array<WorkItem> = [];
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(error, null);
       } else if (!error && response) {
         let res = JSON.parse(body);
-        if(res) {
+        if (res) {
 
-          for(let workitem of res.SubItemType) {
-            if(parseInt(costHeadId) === workitem.C3) {
+          for (let workitem of res.SubItemType) {
+            if (parseInt(costHeadId) === workitem.C3) {
               let workitemDetails = new WorkItem(workitem.C2, workitem.C1);
               workItems.push(workitemDetails);
             }
@@ -74,8 +76,8 @@ class RateAnalysisService {
     });
   }
 
-  getApiCall(url : string, callback:(error : any, response: any) => void) {
-    logger.info('getApiCall for rateAnalysis has bee hit for url : '+url);
+  getApiCall(url: string, callback: (error: any, response: any) => void) {
+    logger.info('getApiCall for rateAnalysis has bee hit for url : ' + url);
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(new CostControllException(error.message, error.stack), null);
@@ -86,28 +88,28 @@ class RateAnalysisService {
     });
   }
 
-  getRate(workItemId: number, callback:(error: any, data:any) => void) {
+  getRate(workItemId: number, callback: (error: any, data: any) => void) {
     let url = config.get('rateAnalysisAPI.unit');
     this.getApiCall(url, (error, unitData) => {
-      if(error) {
+      if (error) {
         callback(error, null);
-      }else {
+      } else {
         unitData = unitData['UOM'];
         url = config.get('rateAnalysisAPI.rate');
         this.getApiCall(url, (error, data) => {
-          if(error) {
+          if (error) {
             callback(error, null);
           } else {
             let rate = data['RateAnalysisData'];
             let sql = 'SELECT rate.C5 AS quantity, unit.C2 As unit FROM ? AS rate JOIN ? AS unit on unit.C1 =  rate.C8 and' +
-              ' rate.C1 = '+ workItemId;
+              ' rate.C1 = ' + workItemId;
             let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS itemName,ROUND(rate.C7,2) AS quantity,ROUND(rate.C3,2) AS rate,' +
               ' ROUND(rate.C3*rate.C7,2) AS totalAmount, rate.C6 type, unit.C2 As unit FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
-              '  WHERE rate.C1 = '+ workItemId;
+              '  WHERE rate.C1 = ' + workItemId;
             let sql3 = 'SELECT ROUND(SUM(rate.C3*rate.C7) / SUM(rate.C7),2) AS total  FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
-              '  WHERE rate.C1 = '+ workItemId;
+              '  WHERE rate.C1 = ' + workItemId;
             let quantityAndUnit = alasql(sql, [rate, unitData]);
-            let rateResult : Rate = new Rate();
+            let rateResult: Rate = new Rate();
             let totalrateFromRateAnalysis = alasql(sql3, [rate, unitData]);
             rateResult.quantity = quantityAndUnit[0].quantity;
             rateResult.unit = quantityAndUnit[0].unit;
@@ -123,15 +125,15 @@ class RateAnalysisService {
   }
 
   //TODO : Delete API's related to workitems add, deleet, get list.
-  getWorkitemList(costHeadId: number,categoryId: number, callback:(error: any, data:any) => void) {
+  getWorkitemList(costHeadId: number, categoryId: number, callback: (error: any, data: any) => void) {
     let url = config.get('rateAnalysisAPI.workitem');
     this.getApiCall(url, (error, workitem) => {
-      if(error) {
+      if (error) {
         callback(error, null);
-      }else {
-        let sql: string = 'SELECT C2 AS rateAnalysisId, C3 AS name FROM ? WHERE C1 = '+ costHeadId+' and C4 = '+ categoryId;
-        if(categoryId === 0) {
-          sql = 'SELECT C2 AS rateAnalysisId, C3 AS name FROM ? WHERE C1 = '+ costHeadId;
+      } else {
+        let sql: string = 'SELECT C2 AS rateAnalysisId, C3 AS name FROM ? WHERE C1 = ' + costHeadId + ' and C4 = ' + categoryId;
+        if (categoryId === 0) {
+          sql = 'SELECT C2 AS rateAnalysisId, C3 AS name FROM ? WHERE C1 = ' + costHeadId;
         }
         workitem = workitem['Items'];
         let workitemList = alasql(sql, [workitem]);
@@ -140,7 +142,7 @@ class RateAnalysisService {
     });
   }
 
-  convertCostHeadsFromRateAnalysisToCostControl(entity:string, callback:(error: any, data:any)=> void) {
+  convertCostHeadsFromRateAnalysisToCostControl(entity: string, callback: (error: any, data: any) => void) {
     logger.info('convertCostHeadsFromRateAnalysisToCostControl has been hit');
 
     let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS);
@@ -175,7 +177,7 @@ class RateAnalysisService {
       rateItemRateAnalysisPromise,
       notesRateAnalysisPromise,
       unitsRateAnalysisPromise
-    ]).then(function(data: Array<any>) {
+    ]).then(function (data: Array<any>) {
       logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
       let costHeadsRateAnalysis = data[0][Constants.RATE_ANALYSIS_ITEM_TYPE];
       let categoriesRateAnalysis = data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE];
@@ -190,31 +192,35 @@ class RateAnalysisService {
       rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
         rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
       logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
-      callback(null, {'buildingCostHeads' : buildingCostHeads, 'rates' : rateItemsRateAnalysis, 'units' : unitsRateAnalysis});
-    }).catch(function(e:any) {
-      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e));
+      callback(null, {
+        'buildingCostHeads': buildingCostHeads,
+        'rates': rateItemsRateAnalysis,
+        'units': unitsRateAnalysis
+      });
+    }).catch(function (e: any) {
+      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e));
       CCPromise.reject(e);
     });
   }
 
   createPromise(url: string) {
-      return new CCPromise(function(resolve : any, reject : any){
-        logger.info('createPromise has been hit for : '+url);
-        let rateAnalysisService = new RateAnalysisService();
-        rateAnalysisService.getApiCall(url, (error : any, data: any) => {
-          if(error) {
-            console.log('Error in createPromise get data from rate analysis: '+JSON.stringify(error));
-            reject(error);
-          } else {
-            console.log('createPromise data from rate analysis success.');
-            resolve(data);
-          }
-        });
-      }).catch(function(e:any) {
-        logger.error('Promise failed for individual ! url:'+url+ ':\n error :' +JSON.stringify(e));
-        CCPromise.reject(e);
+    return new CCPromise(function (resolve: any, reject: any) {
+      logger.info('createPromise has been hit for : ' + url);
+      let rateAnalysisService = new RateAnalysisService();
+      rateAnalysisService.getApiCall(url, (error: any, data: any) => {
+        if (error) {
+          console.log('Error in createPromise get data from rate analysis: ' + JSON.stringify(error));
+          reject(error);
+        } else {
+          console.log('createPromise data from rate analysis success.');
+          resolve(data);
+        }
       });
-   }
+    }).catch(function (e: any) {
+      logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(e));
+      CCPromise.reject(e);
+    });
+  }
 
   getCostHeadsFromRateAnalysis(costHeadsRateAnalysis: any, categoriesRateAnalysis: any,
                                workItemsRateAnalysis: any, rateItemsRateAnalysis: any,
@@ -226,11 +232,11 @@ class RateAnalysisService {
       let costHead = new CostHead();
       costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
       let configCostHeads = config.get('costHeads');
-      let categories= new Array<Category>();
+      let categories = new Array<Category>();
 
-      if(configCostHeads.length > 0) {
-        for(let configCostHead of configCostHeads) {
-          if(configCostHead.name === costHead.name) {
+      if (configCostHeads.length > 0) {
+        for (let configCostHead of configCostHeads) {
+          if (configCostHead.name === costHead.name) {
             costHead.priorityId = configCostHead.priorityId;
             categories = configCostHead.categories;
           }
@@ -244,7 +250,7 @@ class RateAnalysisService {
       let categoriesByCostHead = alasql(categoriesRateAnalysisSQL, [categoriesRateAnalysis]);
       let buildingCategories: Array<Category> = new Array<Category>();
 
-      if(categoriesByCostHead.length === 0 ) {
+      if (categoriesByCostHead.length === 0) {
         this.getWorkItemsWithoutCategoryFromRateAnalysis(costHead.rateAnalysisId, workItemsRateAnalysis,
           rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories, categories);
       } else {
@@ -269,9 +275,9 @@ class RateAnalysisService {
       let category = new Category(categoriesByCostHead[categoryIndex].name, categoriesByCostHead[categoryIndex].rateAnalysisId);
       let configWorkItems = new Array<WorkItem>();
 
-      if(configCategories.length > 0) {
+      if (configCategories.length > 0) {
         for (let configCategory of configCategories) {
-          if(configCategory.name === categoriesByCostHead[categoryIndex].name) {
+          if (configCategory.name === categoriesByCostHead[categoryIndex].name) {
             configWorkItems = configCategory.workItems;
           }
         }
@@ -291,35 +297,35 @@ class RateAnalysisService {
     }
   }
 
-  getWorkItemsWithoutCategoryFromRateAnalysis( costHeadRateAnalysisId: number, workItemsRateAnalysis: any,
-                                 rateItemsRateAnalysis: any, unitsRateAnalysis: any,
-                                 notesRateAnalysis: any, buildingCategories: Array<Category>, configCategories: Array<Category>) {
+  getWorkItemsWithoutCategoryFromRateAnalysis(costHeadRateAnalysisId: number, workItemsRateAnalysis: any,
+                                              rateItemsRateAnalysis: any, unitsRateAnalysis: any,
+                                              notesRateAnalysis: any, buildingCategories: Array<Category>, configCategories: Array<Category>) {
 
-      logger.info('getWorkItemsWithoutCategoryFromRateAnalysis has been hit.');
+    logger.info('getWorkItemsWithoutCategoryFromRateAnalysis has been hit.');
 
-      let workItemsWithoutCategoriesRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, workItem.C3 AS name' +
-        ' FROM ? AS workItem where NOT workItem.C4 AND workItem.C1 = '+costHeadRateAnalysisId;
-      let workItemsWithoutCategories = alasql(workItemsWithoutCategoriesRateAnalysisSQL, [workItemsRateAnalysis]);
+    let workItemsWithoutCategoriesRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, workItem.C3 AS name' +
+      ' FROM ? AS workItem where NOT workItem.C4 AND workItem.C1 = ' + costHeadRateAnalysisId;
+    let workItemsWithoutCategories = alasql(workItemsWithoutCategoriesRateAnalysisSQL, [workItemsRateAnalysis]);
 
-      let buildingWorkItems: Array<WorkItem> = new Array<WorkItem>();
-      let category = new Category('default', 0);
-      let configWorkItems = new Array<WorkItem>();
+    let buildingWorkItems: Array<WorkItem> = new Array<WorkItem>();
+    let category = new Category('default', 0);
+    let configWorkItems = new Array<WorkItem>();
 
-      if(configCategories.length > 0) {
-        for (let configCategory of configCategories) {
-          if(configCategory.name === 'default') {
-            configWorkItems = configCategory.workItems;
-          }
+    if (configCategories.length > 0) {
+      for (let configCategory of configCategories) {
+        if (configCategory.name === 'default') {
+          configWorkItems = configCategory.workItems;
         }
       }
-      this.getWorkItemsFromRateAnalysis(workItemsWithoutCategories, rateItemsRateAnalysis,
-        unitsRateAnalysis, notesRateAnalysis, buildingWorkItems, configWorkItems);
+    }
+    this.getWorkItemsFromRateAnalysis(workItemsWithoutCategories, rateItemsRateAnalysis,
+      unitsRateAnalysis, notesRateAnalysis, buildingWorkItems, configWorkItems);
 
-      category.workItems = buildingWorkItems;
-      buildingCategories.push(category);
+    category.workItems = buildingWorkItems;
+    buildingCategories.push(category);
   }
 
-  syncRateitemFromRateAnalysis(entity:string,buildingDetails:any, callback:(error: any, data:any)=> void) {
+  syncRateitemFromRateAnalysis(entity: string, buildingDetails: any, callback: (error: any, data: any) => void) {
 
     let rateItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_RATE);
     let rateItemRateAnalysisPromise = this.createPromise(rateItemURL);
@@ -333,77 +339,137 @@ class RateAnalysisService {
     let unitsRateAnalysisPromise = this.createPromise(allUnitsFromRateAnalysisURL);
     logger.info('unitsRateAnalysisPromise for has been hit');
 
+    let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS);
+    let costHeadRateAnalysisPromise = this.createPromise(costHeadURL);
+    logger.info('costHeadRateAnalysisPromise for has been hit');
+
     CCPromise.all([
       rateItemRateAnalysisPromise,
       notesRateAnalysisPromise,
-      unitsRateAnalysisPromise
-    ]).then(function(data: Array<any>) {
+      unitsRateAnalysisPromise,
+      costHeadRateAnalysisPromise
+    ]).then(function (data: Array<any>) {
       logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
       logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
       callback(null, data);
-    }).catch(function(e:any) {
-      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' +JSON.stringify(e.message));
-      CCPromise.reject(e);
+    }).catch(function (e: any) {
+      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + e.message);
+      CCPromise.reject(e.message);
     });
 
   }
 
   getWorkItemsFromRateAnalysis(workItemsByCategory: any, rateItemsRateAnalysis: any,
-                                        unitsRateAnalysis: any, notesRateAnalysis: any,
-                               buildingWorkItems: Array<WorkItem>, configWorkItems :  Array<any>) {
+                               unitsRateAnalysis: any, notesRateAnalysis: any,
+                               buildingWorkItems: Array<WorkItem>, configWorkItems: Array<any>) {
 
     logger.info('getWorkItemsFromRateAnalysis has been hit.');
 
-    for (let workItemIndex = 0; workItemIndex < workItemsByCategory.length; workItemIndex++) {
+    /* for (let workItemIndex = 0; workItemIndex < workItemsByCategory.length; workItemIndex++) {
+   //  for (let workItemIndex of workItemsByCategory ) {
 
-      let workItem = new WorkItem(workItemsByCategory[workItemIndex].name,
-        workItemsByCategory[workItemIndex].rateAnalysisId);
+       let workItem = new WorkItem(workItemsByCategory[workItemIndex].name,
+         workItemsByCategory[workItemIndex].rateAnalysisId);
 
-      if(configWorkItems.length > 0) {
-        for(let configWorkItem of configWorkItems) {
-          if(configWorkItem.name === workItemsByCategory[workItemIndex].name) {
-            workItem.unit = configWorkItem.measurementUnit;
-          }
-        }
-      }
+       if(configWorkItems.length > 0) {
+         for(let configWorkItem of configWorkItems) {
+           if(configWorkItem.name === workItemsByCategory[workItemIndex].name) {
+             workItem.unit = configWorkItem.measurementUnit;
+           }
+         }
+       }
 
-      let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
-        'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
-        'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
-        'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
-        'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9 where rateItem.C1 = '
-        + workItemsByCategory[workItemIndex].rateAnalysisId;
-      let rateItemsByWorkItem = alasql(rateItemsRateAnalysisSQL, [rateItemsRateAnalysis, unitsRateAnalysis]);
+       let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
+         'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
+         'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
+         'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
+         'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9 where rateItem.C1 = '
+         + workItemsByCategory[workItemIndex].rateAnalysisId;
+       let rateItemsByWorkItem = alasql(rateItemsRateAnalysisSQL, [rateItemsRateAnalysis, unitsRateAnalysis]);
 
-      //TODO : Remove HardCoding for notes API
-      let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = 49';
-      //+ rateItemsByWorkItem[notesIndex].notesId;
-      let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
+       //TODO : Remove HardCoding for notes API
+       let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = 49';
+       //+ rateItemsByWorkItem[notesIndex].notesId;
+       let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
 
-      workItem.rate.rateItems = rateItemsByWorkItem;
-      if(rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
-        workItem.rate.quantity = rateItemsByWorkItem[0].totalQuantity;
-        workItem.systemRate.quantity = rateItemsByWorkItem[0].totalQuantity;
-      } else {
-        workItem.rate.quantity = 1;
-        workItem.systemRate.quantity = 1;
-      }
-      workItem.rate.isEstimated = false;
-      workItem.rate.notes = notesList[0].notes;
-      workItem.rate.imageURL = notesList[0].imageURL;
+       workItem.rate.rateItems = rateItemsByWorkItem;
+       if(rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
+         workItem.rate.quantity = rateItemsByWorkItem[0].totalQuantity;
+         workItem.systemRate.quantity = rateItemsByWorkItem[0].totalQuantity;
+       } else {
+         workItem.rate.quantity = 1;
+         workItem.systemRate.quantity = 1;
+       }
+       workItem.rate.isEstimated = false;
+       workItem.rate.notes = notesList[0].notes;
+       workItem.rate.imageURL = notesList[0].imageURL;
 
-      //System rate
+       //System rate
 
-      workItem.systemRate.rateItems = rateItemsByWorkItem;
-      workItem.systemRate.notes = notesList[0].notes;
-      workItem.systemRate.imageURL = notesList[0].imageURL;
+       workItem.systemRate.rateItems = rateItemsByWorkItem;
+       workItem.systemRate.notes = notesList[0].notes;
+       workItem.systemRate.imageURL = notesList[0].imageURL;
+
+
+       buildingWorkItems.push(workItem);
+     }*/
+
+    for (let categoryWorkitem of workItemsByCategory) {
+      //  for (let workItemIndex of workItemsByCategory ) {
+
+      let workItem = this.addRateAnylysisToWorkitem(categoryWorkitem, configWorkItems, rateItemsRateAnalysis,
+        unitsRateAnalysis, notesRateAnalysis);
 
 
       buildingWorkItems.push(workItem);
     }
   }
-}
 
+  addRateAnylysisToWorkitem(categoryWorkitem: any, configWorkItems: Array<any>, rateItemsRateAnalysis: any,
+                            unitsRateAnalysis: any, notesRateAnalysis: any) {
+    let workItem = new WorkItem(categoryWorkitem.name, categoryWorkitem.rateAnalysisId);
+
+    if (configWorkItems.length > 0) {
+      for (let configWorkItem of configWorkItems) {
+        if (configWorkItem.name === categoryWorkitem.name) {
+          workItem.unit = configWorkItem.measurementUnit;
+        }
+      }
+    }
+
+    let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
+      'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
+      'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
+      'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
+      'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9 where rateItem.C1 = '
+      + categoryWorkitem.rateAnalysisId;
+    let rateItemsByWorkItem = alasql(rateItemsRateAnalysisSQL, [rateItemsRateAnalysis, unitsRateAnalysis]);
+
+    //TODO : Remove HardCoding for notes API
+    let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = 49';
+    //+ rateItemsByWorkItem[notesIndex].notesId;
+    let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
+
+    workItem.rate.rateItems = rateItemsByWorkItem;
+    if (rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
+      workItem.rate.quantity = rateItemsByWorkItem[0].totalQuantity;
+      workItem.systemRate.quantity = rateItemsByWorkItem[0].totalQuantity;
+    } else {
+      workItem.rate.quantity = 1;
+      workItem.systemRate.quantity = 1;
+    }
+    workItem.rate.isEstimated = false;
+    workItem.rate.notes = notesList[0].notes;
+    workItem.rate.imageURL = notesList[0].imageURL;
+
+    //System rate
+
+    workItem.systemRate.rateItems = rateItemsByWorkItem;
+    workItem.systemRate.notes = notesList[0].notes;
+    workItem.systemRate.imageURL = notesList[0].imageURL;
+    return workItem;
+  }
+}
 
 
 Object.seal(RateAnalysisService);

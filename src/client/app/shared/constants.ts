@@ -572,7 +572,7 @@ export class Menus {
   public static MATERIAL_TAKEOFF = 'Material Takeoff';
   public static PROJECT_DETAILS = 'Project Details';
   public static MY_PROJECTS = 'My Projects';
-  public static CLONE = 'Clone';
+  public static CLONE = 'Copy As New Building';
   public static EDIT = 'Edit';
   public static DELETE = 'Delete';
   public static ADD_BUILDING = 'Add Building';
