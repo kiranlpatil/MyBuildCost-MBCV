@@ -1,16 +1,16 @@
 <div *ngIf="workItemData">
   <table class="table table-dashboard table-categories">
     <tbody>
-      <tr *ngFor="let quantity of quantityDetails">
+      <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
         <td>
           <input  class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (change)="changeQuantityName(quantity.name)">
         </td>
 
         <td>
-          <div class="edit-field" *ngIf="quantity.total != 0" (click)="getQuantity(quantity)">
+          <div class="edit-field" *ngIf="quantity.total != 0" (click)="getQuantity(quantity, quantityIndex)">
             <input [ngModel]="quantity.total" id="quantity" size="10" class="form-control clear">
           </div>
-          <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity)">
+          <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity, quantityIndex)">
             {{getLabel().GET_QUANTITY}}
           </button>
         </td>
@@ -34,28 +34,29 @@
         <td>
           <div data-toggle="modal" title="Delete Quantity Details"
                data-target="#deleteQuantityDetails"
-               (click)="setQuantityNameForDelete(quantity.name, workItemData)" class="delete-Quantity-details">
+               (click)="setQuantityNameForDelete(quantity.name)" class="delete-Quantity-details">
             <img alt="Delete Quantity Details" src="assets/build-info/dashboard/delete-blue.png" />
           </div>
         </td>
+        <div *ngIf="showWorkItemTabName == getLabel().WORKITEM_QUANTITY_TAB && quantityIndex === currentQuantityIndex">
+          <td class="show-embedded-table">
+            <div>
+              <bi-get-quantity [quantityItems]="quantityItemsArray"
+                               [quantityDetails]="quantityDetails"
+                               [categoryRateAnalysisId]="categoryRateAnalysisId"
+                               [categoryDetails] ="categoryDetails"
+                               [keyQuantity]="keyQuantity"
+                               [workItemsList] ="workItemsList"
+                               (categoriesTotalAmount)="setCategoriesTotal($event)"
+                               (showWorkItemTabName)="setShowWorkItemTab($event)"
+                               [baseUrl] = "baseUrl">
+              </bi-get-quantity>
+            </div>
+          </td>
+        </div>
+
       </tr>
 
-      <tr *ngIf="showWorkItemTabName == getLabel().WORKITEM_QUANTITY_TAB">
-        <td class="show-embedded-table">
-          <div>
-            <bi-get-quantity [quantityItems]="quantityItemsArray"
-                             [quantityDetails]="quantityDetails"
-                             [categoryRateAnalysisId]="categoryRateAnalysisId"
-                             [categoryDetails] ="categoryDetails"
-                             [keyQuantity]="keyQuantity"
-                             [workItemsList] ="workItemsList"
-                             (categoriesTotalAmount)="setCategoriesTotal($event)"
-                             (showWorkItemTabName)="setShowWorkItemTab($event)"
-                             [baseUrl] = "baseUrl">
-            </bi-get-quantity>
-          </div>
-        </td>
-      </tr>
     </tbody>
   </table>
 </div>

@@ -35,6 +35,7 @@ export class QuantityDetailsComponent implements OnInit {
   quantityName: string;
   showQuantityTab : string = null;
   showWorkItemTabName: string = null;
+  currentQuantityIndex : number;
 
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
               private loaderService: LoaderService) {
@@ -45,7 +46,8 @@ export class QuantityDetailsComponent implements OnInit {
 
   }
 
-  getQuantity(quantityDetail : QuantityDetails) {
+  getQuantity(quantityDetail : QuantityDetails, quantityIndex : number) {
+    this.currentQuantityIndex = quantityIndex;
     if(this.showWorkItemTabName !==  Label.WORKITEM_QUANTITY_TAB) {
       if(quantityDetail.quantityItems.length !== 0) {
         this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
