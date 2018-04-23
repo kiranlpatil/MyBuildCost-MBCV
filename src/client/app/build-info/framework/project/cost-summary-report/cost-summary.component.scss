@@ -107,6 +107,9 @@
 
     td:nth-child(3) > .budgeted-amount {
       display: block;
+      height: 26px;
+      padding: 7px 24px 7px 0;
+      width: 120px;
     }
 
     td:nth-child(3) > .edit-field {
