@@ -142,7 +142,7 @@
             </div>
           </div>
           <table class="table table-row-spacing table-dashboard total-table">
-            <!-- *ngIf="showGrandTotalPanelTable && i == compareIndex" -->
+            <!-- *ngIf="showGrandTotalPanelTable[i]" -->
             <tbody>
               <tr *ngIf="(building.thumbRule && building.estimate)">
                 <td class="border-left">{{ getLabel().TOTAL }}</td>
