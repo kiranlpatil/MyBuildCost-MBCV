@@ -9,12 +9,13 @@
           <!--<cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>-->
           <p>{{first_letter}}</p>
         </div>
-        <div class="user-name">
-          <p class="profile-name-first">{{model.first_name}}</p>
-          <p class="profile-name-first">{{model.email}}&nbsp;</p>
-          <a [routerLink]="['/dashboard/change-password']" (click)="navigateTo('/dashboard/change-password');">Change Password</a>
+        <div class="description">
+          <div class="user-name">
+            <p class="profile-name">{{model.first_name}}</p>
+            <p class="profile-name">{{model.email}}&nbsp;</p>
+            <a [routerLink]="['/dashboard/change-password']" (click)="navigateTo('/dashboard/change-password');">Change Password</a>
+          </div>
         </div>
-
       </div>
     </div>
 

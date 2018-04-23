@@ -17,7 +17,7 @@
     margin-left: 0 !important;
 
     img {
-      margin-top: 18px;
+      margin-top: 13px;
       height: 40px;
     }
   }
@@ -79,11 +79,19 @@
         border-top: 3px dashed $link-color;
         margin: 0;
       }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background: transparent;
+        color: $active-link;
+      }
     }
 
     .active {
       a {
-        background: $bg-wrapper;
+        background: transparent;
+        color: $active-link !important;
       }
     }
 
@@ -107,9 +115,9 @@
     .dropdown-menu {
       border-radius: 0;
       margin-top: 9px;
-      min-width: 180px;
-      padding: 0;
-      right: 17px;
+      min-width: 365px;
+      padding: 20px;
+      right: 19px;
 
       li {
         margin: 0;
@@ -117,26 +125,35 @@
       }
 
       .dropdown-item {
-        padding: 15px 10px;
-        font-size: 13px;
-        font-weight: 600;
         color: #666;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 20px 0 0;
 
         span {
           margin-right: 15px;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+          background: transparent;
+          color: $active-link;
         }
       }
 
       .divider {
         margin: 5px 0 0;
       }
-
-      p {
-        margin: 0 0 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 200px;
+      .description-container {
+        margin-bottom: 25px;
+        .user-name {
+          .profile-name {
+            color: $body-text;
+            font-size: 24px;
+            line-height: 24px;
+          }
+        }
       }
     }
   }
