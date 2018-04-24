@@ -26,6 +26,7 @@ export class MaterialTakeoffComponent implements OnInit {
   elementWiseReports: Array<MaterialTakeOffElement> = new Array<MaterialTakeOffElement>();
   elements : Array<string>;
   elementFound : boolean;
+  isMaterialTakeOffReportPresent : boolean;
 
   materialTakeOffReport :any;
 
@@ -62,8 +63,10 @@ export class MaterialTakeoffComponent implements OnInit {
 
   onGetMaterialFiltersListSuccess(materialFiltersList : Array<string>) {
     this.extractList(materialFiltersList);
-    this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
-      this.selectedElement, this.building);
+    if (this.selectedElement !== undefined && this.building !== undefined) {
+      this.getMaterialTakeOffReport( MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD,
+        this.selectedElement, this.building);
+    }
   }
 
   onGetMaterialFiltersListFailure(error : any) {
@@ -72,17 +75,26 @@ export class MaterialTakeoffComponent implements OnInit {
 
   extractList(list : any) {
     this.elementWiseReport = MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD;
-
-    this.costHeads = list.costHeadList;
-    this.materials = list.materialList;
     this.elementHeading = MaterialTakeOffElements.COST_HEAD;
-    this.elements = this.costHeads;
-    this.selectedElement = this.costHeads[0];
 
-    this.buildings = list.buildingList;
-    this.building = this.buildings[0];
+    if (list.costHeadList.length > 0) {
+      this.costHeads = list.costHeadList;
+      this.elements = this.costHeads;
+      this.selectedElement = this.costHeads[0];
+    }
+      if(list.materialList.length > 0) {
+        this.materials = list.materialList;
+      }
 
+      if(list.buildingList.length > 0) {
+        this.buildings = list.buildingList;
+        this.building = this.buildings[0];
+        this.isMaterialTakeOffReportPresent = true;
+      } else {
+        this.isMaterialTakeOffReportPresent = false;
+      }
   }
+
 
   onChangeGroupBy(groupBy : string) {
 

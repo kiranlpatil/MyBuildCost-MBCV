@@ -200,6 +200,7 @@ export class GetQuantityComponent implements OnInit {
     this.categoriesTotalAmount.emit(categoriesTotal);
     this.showWorkItemTabName.emit('');
     this.loaderService.stop();
+    this.closeQuantityTab();
   }
 
   onUpdateQuantityItemsFailure(error: any) {

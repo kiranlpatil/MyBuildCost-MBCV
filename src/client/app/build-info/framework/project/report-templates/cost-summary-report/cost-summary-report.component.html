@@ -3,22 +3,22 @@
     Budgeted & Estimated Cost Report for {{currentProjectName}} </h2>
   <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
     <div style="padding-bottom: 5px;">
-      <strong>Company Name:</strong>
+      <strong>Company Name : </strong>
       <span>{{company_name}}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Project Name:</strong>
+      <strong>Project Name : </strong>
       <span>{{currentProjectName}}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Building Name:</strong>
+      <strong>Building Name : </strong>
       <span>{{ buildingReport.name }}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Total {{ costingByArea }}: {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
+      <strong>Total {{ costingByArea }} : {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong style="font-weight: bold">Generated on:</strong>
+      <strong style="font-weight: bold">Generated on : </strong>
       <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
     </div>
   </div>
@@ -49,9 +49,9 @@
       <tr>
         <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</td>
-        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</td>
+        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{getProjectElements().RS}} {{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.estimate.totalRate | number: '1.2-2'}}</td>
-        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.estimate.totalEstimatedCost | number: '1.0-0'}}</td>
+        <td style="padding: 5px;font-weight: bold;" align="right" width="">{{getProjectElements().RS}} {{ buildingReport.estimate.totalEstimatedCost | number: '1.0-0'}}</td>
       </tr>
     </tbody>
   </table>
@@ -63,22 +63,22 @@
     Budgeted Cost Report for {{currentProjectName}} </h2>
   <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
     <div style="padding-bottom: 5px;">
-      <strong>Company Name:</strong>
+      <strong>Company Name : </strong>
       <span>Royal Properties LTD</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Project Name:</strong>
+      <strong>Project Name : </strong>
       <span>{{currentProjectName}}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Building Name:</strong>
+      <strong>Building Name : </strong>
       <span>{{ buildingReport.name }}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Total {{ costingByArea }}: {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
+      <strong>Total {{ costingByArea }} : {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Generated on:</strong>
+      <strong>Generated on : </strong>
       <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
     </div>
   </div>
@@ -103,13 +103,11 @@
       <tr>
         <th style="padding: 5px;">TOTAL</th>
         <th style="padding: 5px;text-align: right;">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</th>
-        <th style="padding: 5px;text-align: right;">{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</th>
+        <th style="padding: 5px;text-align: right;">{{getProjectElements().RS}} {{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</th>
       </tr>
     </tbody>
   </table>
 </div>
-
-
 
 
 <div *ngIf="buildingReport" id="estimated" #estimated style="display: none">
@@ -117,28 +115,28 @@
     Estimated Cost Report for {{currentProjectName}} </h2>
   <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
     <div style="padding-bottom: 5px;">
-      <strong>Company Name:</strong>
+      <strong>Company Name : </strong>
       <span>{{company_name}}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Project Name:</strong>
+      <strong>Project Name : </strong>
       <span>{{currentProjectName}}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Building Name:</strong>
+      <strong>Building Name : </strong>
       <span>{{ buildingReport.name }}</span>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Total {{ costingByArea }}: {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
+      <strong>Total {{ costingByArea }} : {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
     </div>
     <div style="padding-bottom: 5px;">
-      <strong>Generated on:</strong>
+      <strong>Generated on : </strong>
       <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
     </div>
   </div>
 
 
-  <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left">
+  <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left" *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
     <thead>
       <tr>
         <th rowspan="2" style="padding: 10px 5px;">Cost Head</th>
@@ -151,14 +149,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
-        <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
-        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].rate | number: '1.2-2' }}</td>
-        <td style="padding: 5px;" align="right">{{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}</td>
+        <td style="padding: 5px;" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+          {{thumbRuleItem.name}}
+        </td>
+        <td style="padding: 5px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].rate !== 0">
+          {{ buildingReport.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
+        </td>
+        <td style="padding: 5px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+          {{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}
+        </td>
       </tr>
       <tr>
         <th style="padding: 5px;">TOTAL</th>
         <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
-        <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalEstimatedCost|number: '1.0-0'}}</th>
+        <th style="padding: 5px;text-align: right;">{{getProjectElements().RS}} {{ buildingReport.estimate.totalEstimatedCost|number: '1.0-0'}}</th>
       </tr>
     </tbody>
   </table>

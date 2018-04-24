@@ -341,13 +341,14 @@ class RateAnalysisService {
       let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
         'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
         'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
-        'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
+        'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity,  rateItem.C13 AS notesRateAnalysisId ' +
         'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9 where rateItem.C1 = '
         + workItemsByCategory[workItemIndex].rateAnalysisId;
       let rateItemsByWorkItem = alasql(rateItemsRateAnalysisSQL, [rateItemsRateAnalysis, unitsRateAnalysis]);
 
       //TODO : Remove HardCoding for notes API
-      let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = 49';
+      let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = '+
+        rateItemsByWorkItem[0].notesRateAnalysisId;
       //+ rateItemsByWorkItem[notesIndex].notesId;
       let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
 

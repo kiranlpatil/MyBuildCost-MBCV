@@ -118,7 +118,7 @@
             </textarea>
         </td>
         <td>
-          <img id="rateImageURL" src="{{rate.imageURL}}">
+          <img *ngIf="rate.imageURL != ''" id="rateImageURL" src="{{rate.imageURL}}">
         </td>
       </tr>
     </tbody>

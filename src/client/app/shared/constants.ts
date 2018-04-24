@@ -527,6 +527,7 @@ export class ProjectElements {
   public static RS_PER_SQMT = 'Rs/Sqmt';
   public static SQUAREFEET = 'sqft';
   public static SQUAREMETER = 'sqmt';
+  public static RS = 'Rs';
 }
 
 export class MaterialTakeOffElements {
@@ -550,7 +551,9 @@ export class MaterialTakeOffElements {
   public static ERROR_MESSAGE_IS_NOT_FOUND_FOR = ' is not found for ';
   public static ERROR_MESSAGE_BUILDING = ' building.';
   public static SORT = 'sort';
+  public static CHECK_SUB_CONTENT = 'checkSubContent';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
+  public static REPORT_EMPTY_MESSAGE = 'Please provide estimation of cost head to get material take off report.';
 }
 
 export class PDFReportHeaders {

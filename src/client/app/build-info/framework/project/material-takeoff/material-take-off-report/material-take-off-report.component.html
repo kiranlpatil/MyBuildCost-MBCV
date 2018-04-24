@@ -67,7 +67,7 @@
                                   <bi-table-row [customClass]="'item-inner-row'"
                                     [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content]">
                                   </bi-table-row>
-                                  <span *ngIf="buildingName != getMaterialTakeOffElements().ALL_BUILDINGS" class="caret"></span>
+                                  <span *ngIf="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT" class="caret"></span>
                                 </a>
                               </h4>
                             </div>
