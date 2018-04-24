@@ -63,7 +63,12 @@
                          class="form-control clear"/>
                 </div>
               </td>
-              <td class="border-left">{{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate | number: '1.2-2'}}</td>
+              <td class="border-left">
+                <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate === 0">-</span>
+                <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate !== 0">
+                        {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate | number: '1.2-2'}}
+                </span>
+              </td>
             <!--  <td>
                 <div class="edit-field" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
                      (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
@@ -115,10 +120,28 @@
             </tr>
             <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
               <td class="border-left">{{getLabel().TOTAL}}</td>
-              <td class="border-left">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</td>
-              <td class="border-left">{{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}</td>
-              <td class="border-left">{{amenitiesReport.estimate.totalRate|number: '1.2-2'}}</td>
-              <td class="border-left">{{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}</td>
+              <td class="border-left">
+                <span *ngIf="amenitiesReport.thumbRule.totalRate === 0">-</span>
+                <span *ngIf="amenitiesReport.thumbRule.totalRate !== 0">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</span>
+              </td>
+              <td class="border-left">
+                <span class="estimated-cost" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost === 0">-</span>
+                <span class="estimated-cost" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost !== 0">
+                  {{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}
+                </span>
+              </td>
+              <td class="border-left">
+                <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
+                <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
+                  {{amenitiesReport.estimate.totalRate|number: '1.2-2'}}
+                </span>
+              </td>
+              <td class="border-left">
+                <span class="estimated-cost" *ngIf="amenitiesReport.estimate.totalEstimatedCost === 0">-</span>
+                <span class="estimated-cost" *ngIf="amenitiesReport.estimate.totalEstimatedCost !== 0">
+                    {{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -129,10 +152,28 @@
       <tbody>
         <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
           <td class="border-left">{{getLabel().TOTAL}}</td>
-          <td class="border-left">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</td>
-          <td class="border-left"><span class="estimated-cost">{{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}</span></td>
-          <td class="border-left">{{amenitiesReport.estimate.totalRate|number: '1.2-2'}}</td>
-          <td class="border-left"><span class="estimated-cost">{{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}</span></td>
+          <td class="border-left">
+            <span *ngIf="amenitiesReport.thumbRule.totalRate === 0">-</span>
+            <span *ngIf="amenitiesReport.thumbRule.totalRate !== 0">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</span>
+          </td>
+          <td class="border-left">
+            <span class="estimated-cost" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost === 0">-</span>
+            <span class="estimated-cost" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost !== 0">
+              {{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}
+            </span>
+          </td>
+          <td class="border-left">
+            <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
+            <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
+              {{amenitiesReport.estimate.totalRate|number: '1.2-2'}}
+            </span>
+          </td>
+          <td class="border-left">
+            <span class="estimated-cost" *ngIf="amenitiesReport.estimate.totalEstimatedCost === 0">-</span>
+            <span class="estimated-cost" *ngIf="amenitiesReport.estimate.totalEstimatedCost !== 0">
+              {{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>

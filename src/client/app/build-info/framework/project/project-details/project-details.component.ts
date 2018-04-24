@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CurrentView, Messages} from '../../../../shared/constants';
+import { CurrentView, Messages } from '../../../../shared/constants';
 import { ProjectService } from '../project.service';
 import { Project } from './../../model/project';
 import { Message, MessageService,SessionStorage, SessionStorageService } from '../../../../shared/index';
+import { ProjectNameChangeService } from '../../../../shared/services/project-name-change.service';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +20,7 @@ export class ProjectDetailsComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
 
-  constructor(private projectService: ProjectService,
+  constructor(private projectService: ProjectService, private projectNameChangeService : ProjectNameChangeService,
               private messageService: MessageService, private activatedRoute:ActivatedRoute) {
   }
 
@@ -59,6 +60,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   onUpdateProjectSuccess(result: any) {
     if (result !== null) {
+      this.projectNameChangeService.change(result.data.name);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, result.data.name);
       var message = new Message();
       message.isError = false;

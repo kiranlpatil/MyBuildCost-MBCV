@@ -1,5 +1,5 @@
 <header class="page-header">
-  <nav class="navbar navbar-fixed-top">
+  <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
 
@@ -43,14 +43,27 @@
               </a>
               <ul class="dropdown-menu mobile-dropdown">
                 <li class="user-info">
-                  <img class="visible-xs" src="assets/framework/images/dashboard/profile.png" alt="User Profile"/>
-                  <h4>{{user_first_name}}</h4>
+                  <!--<img class="visible-xs" src="assets/framework/images/dashboard/profile.png" alt="User Profile"/>
+                  <h4>{{user_first_name}}</h4>-->
+                  <div class="my-info">
+                    <div class="description-container clearfix">
+                      <div class="image-container">
+                        <!--<cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>-->
+                        <p>{{first_letter}}</p>
+                      </div>
+                      <div class="description">
+                        <div class="user-name">
+                          <p class="profile-name">{{user_first_name}}</p>
+                          <p class="profile-email">{{user_email}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </li>
                 <li class="divider"></li>
                 <li role="menuitem" [routerLinkActive]="['active']">
                   <a class="dropdown-item" [routerLink]="['/dashboard/details']"
-                     (click)="navigateTo('/dashboard/details');">
-                    <span class="glyphicon glyphicon-list-alt"></span>Account Details
+                     (click)="navigateTo('/dashboard/details');">Account Details
                   </a>
                 </li>
                 <!--<li role="menuitem" [routerLinkActive]="['active']">
@@ -60,7 +73,7 @@
                 </li>-->
                 <li role="menuitem">
                   <a class="dropdown-item" (click)="logOut()">
-                    <span class="glyphicon glyphicon-log-out"></span>Sign Out
+                    Sign Out
                   </a>
                 </li>
               </ul>

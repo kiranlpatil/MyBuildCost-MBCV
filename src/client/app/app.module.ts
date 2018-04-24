@@ -55,7 +55,8 @@ import { CostSummaryComponent } from './build-info/framework/project/cost-summar
 import { CostSummaryService } from './build-info/framework/project/cost-summary-report/cost-summary.service';
 import { MaterialTakeoffComponent } from './build-info/framework/project/material-takeoff/material-takeoff.component';
 import { MaterialTakeOffService } from './build-info/framework/project/material-takeoff/material-takeoff.service';
-import { MaterialTakeOffReportComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/material-take-off-report.component';
+import { MaterialTakeOffReportComponent }
+from './build-info/framework/project/material-takeoff/material-take-off-report/material-take-off-report.component';
 import { TableRowComponent } from './build-info/framework/project/material-takeoff/material-take-off-report/row/row.component';
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
@@ -84,6 +85,7 @@ import { PdfHeaderComponent }
 from './build-info/framework/project/report-templates/material-take-off-report/pdf-header/pdf-header.component';
 import { CommonAmenitiesReportComponent }
 from './build-info/framework/project/report-templates/common-amenities-report/common-amenities-report.component';
+import { ProjectNameChangeService } from './shared/services/project-name-change.service';
 
 @NgModule({
   imports: [
@@ -184,7 +186,8 @@ from './build-info/framework/project/report-templates/common-amenities-report/co
     ProjectService,
     BuildingService,
     CostSummaryService,
-    MaterialTakeOffService
+    MaterialTakeOffService,
+    ProjectNameChangeService
   ],
   bootstrap: [AppComponent]
 })

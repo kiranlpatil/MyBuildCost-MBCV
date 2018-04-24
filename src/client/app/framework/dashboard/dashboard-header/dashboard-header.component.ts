@@ -20,9 +20,10 @@ export class DashboardHeaderComponent {
   public isOpenProfile: boolean = false;
   PROFILE_IMG_PATH: string;
   user_first_name: string;
-  user_last_name: string;
+  user_email: string;
   HEADER_LOGO: string;
   MOBILE_LOGO: string;
+  first_letter:string;
 
   @HostListener('document:click', ['$event']) onClick(event: any) {
     if (!this._eref.nativeElement.contains(event.target)) {
@@ -36,6 +37,8 @@ export class DashboardHeaderComponent {
     this.HEADER_LOGO = ImagePath.HEADER_LOGO;
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
     this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
+    this.user_email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
+    this.first_letter =(this.user_first_name).toString().charAt(0);
     profileService.profileUpdateObservable$.subscribe(
       (user: UserProfile) => {
         if (user.first_name) {

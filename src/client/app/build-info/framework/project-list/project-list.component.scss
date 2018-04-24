@@ -3,7 +3,7 @@
 .wrapper {
   background-color: $page-background;
   min-height: calc(100vh - 80px);
-  margin-top: 80px;
+  /*margin-top: 80px;*/
   padding-top:30px;
   width: 100%;
   text-align: left;
@@ -60,7 +60,7 @@
 
 @media only screen and (max-width: 767px) {
   .wrapper {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     min-height: calc(100vh - 50px);
   }
 }

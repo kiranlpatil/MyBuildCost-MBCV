@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 import { NavigationRoutes, Menus } from '../../../../shared/constants';
 import { ProjectService } from '../../project/project.service';
 import { SessionStorage,SessionStorageService } from '../../../../shared/index';
 import { Project } from './../../model/project';
+import { ProjectNameChangeService } from '../../../../shared/services/project-name-change.service';
 
 @Component({
   moduleId: module.id,
@@ -17,8 +19,16 @@ export class ProjectListHeaderComponent implements OnInit {
   projects : Array<Project>;
   selectedProjectName : string;
   currentView : string;
+  projectNameSubscription : Subscription;
 
-  constructor(private projectService: ProjectService, private _router: Router) {
+  constructor(private projectService: ProjectService, private _router: Router,
+              private projectNameChangeService : ProjectNameChangeService) {
+
+    this.projectNameSubscription = projectNameChangeService.changeProjectName$.subscribe(
+      projectName => {
+        this.selectedProjectName = projectName;
+        this.getAllProjects();
+      });
   }
 
   ngOnInit() {

@@ -10,8 +10,8 @@
 }
 .wrapper {
   background-color: $white;
-  margin-top: 80px;
   min-height: calc(100vh - 80px);
+  padding: 80px 0 20px;
   text-align: center;
 
   .inner-wrapper {
@@ -122,45 +122,6 @@
 
     p {
       text-align: left;
-    }
-  }
-}
-
-.description-container {
-  .image-container {
-    background: $gray;
-    border-radius: 50%;
-    float: left;
-    height: 80px !important;
-    margin-right: 15px;
-    position: relative;
-    text-align: center;
-    width: 80px !important;
-
-    p {
-      color: $white;
-      font-size: 34px;
-      line-height: 80px;
-      text-transform: uppercase;
-    }
-  }
-
-  .user-name {
-    float: right;
-    margin-top: 8px;
-    text-align: left;
-    width: calc(100% - 100px);
-
-    .profile-name-first,
-    .profile-name-last {
-      background: none;
-      color: $black-theme-color;
-      font-size: 14px;
-      margin-bottom: 2px;
-      padding: 0;
-      text-transform: capitalize;
-      word-break: break-all;
-      word-wrap: break-word;
     }
   }
 }
