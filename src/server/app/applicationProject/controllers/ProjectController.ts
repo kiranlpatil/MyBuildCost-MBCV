@@ -1128,5 +1128,77 @@ class ProjectController {
       });
     }
   }
+
+  addAttachmentToProjectWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let projectService = new ProjectService();
+      var projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      var fileName = req;
+      projectService.addAttachmentToProjectWorkItem( projectId, costHeadId, categoryId, workItemId,fileName ,(error, response) => {
+        if (error) {
+          next(error);
+        } else {
+          res.status(200).send({response});
+        }
+      });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
+  getPresentFilesForProjectWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let projectService = new ProjectService();
+      var projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      projectService.getPresentFilesForProjectWorkItem(projectId, costHeadId, categoryId, workItemId, (error, response) => {
+        if (error) {
+          next(error);
+        } else {
+          res.status(200).send({response});
+        }
+      });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
+  deleteAttachmentOfProjectWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let projectService = new ProjectService();
+      var projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let assignedFileName = req.body.assignedFileName;
+      projectService.deleteAttachmentOfProjectWorkItem(projectId,costHeadId, categoryId, workItemId,assignedFileName,(error, response) => {
+        if (error) {
+          next(error);
+        } else {
+          res.status(200).send({response});
+        }
+      });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
 }
 export  = ProjectController;

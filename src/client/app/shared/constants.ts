@@ -13,6 +13,8 @@ export class AppSettings {
   public static IS_SOCIAL_LOGIN_YES = 'YES';
   public static IS_SOCIAL_LOGIN_NO = 'NO';
   public static HTTP_CLIENT = 'http://';
+  public static PUBLIC = '/public';
+  public static ATTACHMENT_FILES = '/attachment-files/';
 }
 
 
@@ -197,6 +199,15 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields can not be empty';
   public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Quantity details name is required';
   public static LOGIN_INFO: string = 'Enter your details below';
+
+  //File Attachment messages
+
+  public static  MSG_ERROR_VALIDATION_OF_FILE_EXTENSION = 'The file you are trying to attach is not supported by this application';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_SIZE = 'Please check the file size';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_SELECTION = 'please select file';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'selected file already exits';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'file uploaded successfully';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'file deleted successfully';
 }
 
 export class NavigationRoutes {
@@ -570,11 +581,11 @@ export class Menus {
 export class ValueConstant {
 
   public static NUMBER_OF_FRACTION_DIGIT = 2;
-  public static  FILE_SIZE = 500000000000;
+  public static  FILE_SIZE = 5000000;
 }
 
 export class FileAttachment {
-  public static EXTENSIONS_FOR_FILE = new Array('txt', 'pdf', 'doc','docx','text/plain');
+  public static EXTENSIONS_FOR_FILE = new Array('txt');
 }
 
 export class CurrentView {

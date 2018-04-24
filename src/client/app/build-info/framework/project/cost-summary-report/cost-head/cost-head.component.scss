@@ -252,7 +252,7 @@
   margin-top: -5px;
   padding: 0;
   position: relative;
-  z-index: 10;
+  //z-index: 10;
 }
 
 .add-item-table{
@@ -319,3 +319,9 @@
   }
 }
 
+.file-attachment {
+  .dropdown-menu {
+    left: inherit !important;
+    right: 100%;
+  }
+}

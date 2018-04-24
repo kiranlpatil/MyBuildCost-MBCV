@@ -108,6 +108,21 @@ class ProjectRoutes {
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectRateOfProjectWorkItems,
       controller.updateDirectRateOfProjectWorkItems, this._responseInterceptor.exit);
 
+    /* Attachment Routes */
+
+    //update file in workItem
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/uploadFile',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToProjectWorkItem,
+      controller.addAttachmentToProjectWorkItem, this._responseInterceptor.exit);
+
+    router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/fileNameList',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForProjectWorkItem,
+      controller.getPresentFilesForProjectWorkItem, this._responseInterceptor.exit);
+
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
+      validator.checkPresentFilesForProjectWorkItem, controller.deleteAttachmentOfProjectWorkItem, this._responseInterceptor.exit);
+
+
 
 
     /*.....Building-Routes.....*/
@@ -261,13 +276,16 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
 
     //update file in workItem
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/uploadFile',
-     validator.addAttachmentToWorkItem, controller.addAttachmentToWorkItem);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToWorkItem,
+      controller.addAttachmentToWorkItem, this._responseInterceptor.exit);
 
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/fileNameList',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.getRate, controller.getPresentFilesForWorkItem, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForWorkItem,
+      controller.getPresentFilesForWorkItem, this._responseInterceptor.exit);
 
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
-     controller.deleteAttachmentOfWorkItem);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForWorkItem,
+      controller.deleteAttachmentOfWorkItem,this._responseInterceptor.exit);
 
 
     return router;
