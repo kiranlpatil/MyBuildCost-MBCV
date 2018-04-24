@@ -320,3 +320,8 @@
   }
 }
 
+@-moz-document url-prefix() {
+  .panel-default .panel-heading a.cost-head-lists {
+    white-space: inherit;
+  }
+}

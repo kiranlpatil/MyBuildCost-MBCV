@@ -419,6 +419,12 @@ h5 {
     color: $black;
     margin: 0;
   }
+  .btn-close {
+    img {
+      right: 10px;
+      position: absolute;
+    }
+  }
 }
 
 .toaster-error {
@@ -883,3 +889,11 @@ textarea[disabled] {
   }
 }
 
+@-moz-document url-prefix() {
+  .navbar-collapse {
+    select {
+      height: 47px;
+      top: 25px;
+    }
+  }
+}
