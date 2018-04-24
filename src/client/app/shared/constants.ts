@@ -552,7 +552,7 @@ export class MaterialTakeOffElements {
   public static ERROR_MESSAGE_BUILDING = ' building.';
   public static SORT = 'sort';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
-  public static REPORT_EMPTY_MESSAGE = 'Report is empty, because you have not estimated any work item.';
+  public static REPORT_EMPTY_MESSAGE = 'Please provide estimation of cost head to get material take off report.';
 }
 
 export class PDFReportHeaders {

@@ -26,7 +26,7 @@ export class MaterialTakeoffComponent implements OnInit {
   elementWiseReports: Array<MaterialTakeOffElement> = new Array<MaterialTakeOffElement>();
   elements : Array<string>;
   elementFound : boolean;
-  ExistanceOfBuilding : boolean;
+  isMaterialTakeOffReportPresent : boolean;
 
   materialTakeOffReport :any;
 
@@ -89,9 +89,9 @@ export class MaterialTakeoffComponent implements OnInit {
       if(list.buildingList.length > 0) {
         this.buildings = list.buildingList;
         this.building = this.buildings[0];
-        this.ExistanceOfBuilding = true;
+        this.isMaterialTakeOffReportPresent = true;
       } else {
-        this.ExistanceOfBuilding = false;
+        this.isMaterialTakeOffReportPresent = false;
       }
   }
 
