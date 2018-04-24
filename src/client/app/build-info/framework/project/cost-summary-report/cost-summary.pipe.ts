@@ -3,13 +3,15 @@ import { MaterialTakeOffElements } from '../../../../shared/constants';
 @Pipe({name: 'keys', pure: false})
 
 export class CostSummaryPipe implements PipeTransform {
-  transform(value: any, sort : string,args: any[] = null): any {
+  transform(value: any, operation : string, args: any[] = null): any {
     if(value !== undefined) {
-      if(sort === MaterialTakeOffElements.SORT) {
+      if(operation === MaterialTakeOffElements.SORT) {
         return Object.keys(value).sort(function (a, b) {
           return a.toLowerCase().localeCompare(b.toLowerCase());
         });
-      } else {
+      } else if(operation === 'checkSubContent') {
+         return (Object.keys(value).length !== 0 ? true : false);
+      }else {
         return Object.keys(value);
       }
     }
