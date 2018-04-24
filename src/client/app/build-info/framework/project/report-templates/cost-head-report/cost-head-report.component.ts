@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { SessionStorage, SessionStorageService } from '../../../../../shared/index';
+import { ProjectElements } from '../../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -39,5 +40,9 @@ export class CostHeadReportComponent implements OnInit  {
     var elem = document.querySelector('#print-div');
     elem.parentNode.removeChild(elem);
     document.getElementById('tpl-app').style.display = 'initial';
+  }
+
+  getProjectElements() {
+    return ProjectElements;
   }
 }

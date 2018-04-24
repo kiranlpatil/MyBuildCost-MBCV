@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MaterialTakeOffElements, PDFReportHeaders, ProjectElements, SessionStorage} from '../../../../../../shared/constants';
+import { MaterialTakeOffElements, PDFReportHeaders, ProjectElements, SessionStorage } from '../../../../../../shared/constants';
 import { SessionStorageService } from '../../../../../../shared/services/session.service';
 
 @Component({

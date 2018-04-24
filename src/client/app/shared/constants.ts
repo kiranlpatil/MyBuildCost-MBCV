@@ -530,6 +530,7 @@ export class ProjectElements {
   public static RS_PER_SQMT = 'Rs/Sqmt';
   public static SQUAREFEET = 'sqft';
   public static SQUAREMETER = 'sqmt';
+  public static RS = 'Rs';
 }
 
 export class MaterialTakeOffElements {

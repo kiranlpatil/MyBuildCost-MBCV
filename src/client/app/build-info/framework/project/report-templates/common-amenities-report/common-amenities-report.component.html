@@ -41,9 +41,9 @@
     <tr>
       <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
       <td *ngIf="isBudgeted" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
-      <td *ngIf="isBudgeted" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+      <td *ngIf="isBudgeted" style="padding: 5px;font-weight: bold;" align="right" width="">{{getProjectElements().RS}} {{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
       <td *ngIf="isEstimated" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}</td>
-      <td *ngIf="isEstimated" style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.estimate.totalEstimatedCost|number: '1.2-2'}}</td>
+      <td *ngIf="isEstimated" style="padding: 5px;font-weight: bold;" align="right" width="">{{getProjectElements().RS}} {{ amenitiesReport.estimate.totalEstimatedCost|number: '1.2-2'}}</td>
     </tr>
     </tbody>
   </table>

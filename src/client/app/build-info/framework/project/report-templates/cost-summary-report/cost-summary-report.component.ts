@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { SessionStorageService } from '../../../../../shared/services/session.service';
 import { SessionStorage } from '../../../../../shared/constants';
+import { ProjectElements } from '../../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -49,6 +50,10 @@ export class CostSummaryReportComponent {
     var elem = document.querySelector('#print-div');
     elem.parentNode.removeChild(elem);
     document.getElementById('tpl-app').style.display = 'initial';
+  }
+
+  getProjectElements() {
+    return ProjectElements;
   }
 }
 
