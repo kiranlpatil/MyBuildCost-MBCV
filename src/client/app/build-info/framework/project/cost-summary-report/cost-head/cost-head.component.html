@@ -124,6 +124,17 @@
                                             title="Add More Details">
                                       <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
+                                    <div class="dropdown file-attachment">
+                                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-paperclip" (click)="setVariable()"></span>
+                                      </a>
+                                      <ul class="dropdown-menu">
+                                        <bi-attachment [costHeadId]="costHeadId"
+                                                       [categoryId]="categoryId"
+                                                       [baseUrl] = "baseUrl" (showAttachmentView)="closeAttachmentView($event)"
+                                                       [workItem]="workItem"></bi-attachment>
+                                      </ul>
+                                    </div>
                                     <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head" title="Delete Work Item"
                                          (click)="setIdsForDeleteWorkItem(category.rateAnalysisId,workItem.rateAnalysisId,workItemIndex )">
                                       <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />

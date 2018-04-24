@@ -1,6 +1,7 @@
 import { Units } from '../../../shared/constants';
 import { Quantity } from './quantity';
 import { Rate } from './rate';
+import { AttachmentDetailsModel } from './attachment-details';
 export class WorkItem {
   name: string;
   rateAnalysisId: number;
@@ -12,6 +13,7 @@ export class WorkItem {
   amount: number;
   active: boolean;
   remarks: string;
+  attachmentDetails: AttachmentDetailsModel[];
 
   constructor(name: string, rateAnalysisId: number) {
     this.name = name;

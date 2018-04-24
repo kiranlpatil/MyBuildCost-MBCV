@@ -1128,4 +1128,133 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
+  addAttachmentToWorkItem(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var buildingId = req.params.buildingId;
+    var costHeadId = req.params.costHeadId;
+    var categoryId = req.params.categoryId;
+    var workItemId = req.params.workItemId;
+    var fileName = req;
+
+    ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId,  (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if( (categoryId === undefined) || (categoryId === '') ||
+            (workItemId === undefined) || (workItemId === '') || (fileName === undefined) || (fileName === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+   }
+  checkPresentFilesForWorkItem(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var buildingId = req.params.buildingId;
+    var costHeadId = req.params.costHeadId;
+    ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) ||
+            (req.params.categoryId === '') || (req.params.workItemId === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+  addAttachmentToProjectWorkItem(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = req.params.costHeadId;
+    var categoryId = req.params.categoryId;
+    var workItemId = req.params.workItemId;
+    var fileName = req;
+
+    ProjectInterceptor.validateProjectCostHeadIds(projectId,costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if( (categoryId === undefined) || (categoryId === '') ||
+            (workItemId === undefined) || (workItemId === '') || (fileName === undefined) || (fileName === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+  checkPresentFilesForProjectWorkItem(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = parseInt(req.params.costHeadId);
+    var categoryId = parseInt(req.params.categoryId);
+    var workItemId = parseInt(req.params.workItemId);
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((categoryId === undefined) || (workItemId === undefined) ||
+            (categoryId === null) || (workItemId === null)) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
 }export = ProjectInterceptor;

@@ -75,6 +75,8 @@ import { SharePrintPageComponent } from './build-info/framework/project-header/s
 import { QuantityDetailsComponent }
 from './build-info/framework/project/cost-summary-report/cost-head/quantity-details/quantity-details.component';
 import { CostHeadReportComponent } from './build-info/framework/project/report-templates/cost-head-report/cost-head-report.component';
+import { CostSummaryReportComponent } from './build-info/framework/project/report-templates/cost-summary-report/cost-summary-report.component'
+import { AttachmentComponent } from './build-info/framework/project/cost-summary-report/cost-head/attachment/attachment.component';
 import { CostSummaryReportComponent }
 from './build-info/framework/project/report-templates/cost-summary-report/cost-summary-report.component';
 import { MaterialTakeOffPdfReportComponent }
@@ -152,6 +154,7 @@ import { ProjectNameChangeService } from './shared/services/project-name-change.
     PageNotFoundComponent,
     CommonAmenitiesComponent,
     CostSummaryReportComponent,
+    AttachmentComponent,
     CommonAmenitiesReportComponent
   ],
 

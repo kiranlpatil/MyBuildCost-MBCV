@@ -22,6 +22,7 @@
     "downloadFilePathClient": "/public/exported-files/",
     "publicPath":"/src/server/app/framework/public/",
     "profilePath":"/src/server/public/profileImage",
+    "attachmentPath":"\\src\\server\\public\\attachment-files",
     "profilePathForClient":"/public/profileImage/",
     "limitForQuery" : 10,
     "mail": {
@@ -55,7 +56,8 @@
       "routerNumber": "4"
     },
     "filePathForMasterDataExcel" : "/src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
-    "filePathForProfileImage" : "/src/server/app/framework/public/profileimage"
+    "filePathForProfileImage" : "/src/server/app/framework/public/profileimage",
+    "filePathForAttachment": "/src/server/app/framework/public/attachment-files"
 
   },
   /*"logger" : {

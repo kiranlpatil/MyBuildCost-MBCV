@@ -34,6 +34,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   keyQuantity:string;
   costHeadName: string;
   costHeadId:number;
+  buildingId:any;
   workItemId: number;
   categoryId: number;
   directQuantity: number;
@@ -56,6 +57,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   private showWorkItemList:boolean=false;
   private showWorkItemTab : string = null;
   private showQuantityTab : string = null;
+  private showAttachmentView : string = null;
   private compareWorkItemId:number=0;
   private compareCategoryId:number=0;
   private quantityItemsArray: Array<QuantityItem> = [];
@@ -93,8 +95,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
 
       if(this.viewType ===  API.BUILDING ) {
-        let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-        this.baseUrl = '' +API.PROJECT + '/' + this.projectId + '/' + '' +  API.BUILDING+ '/' + buildingId;
+         this.buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+        this.baseUrl = '' +API.PROJECT + '/' + this.projectId + '/' + '' +  API.BUILDING+ '/' + this.buildingId;
       } else if(this.viewType === API.COMMON_AMENITIES) {
         this.baseUrl = '' +API.PROJECT + '/' + this.projectId;
       } else {
@@ -603,5 +605,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
   closeQuantityView() {
     this.showQuantityTab = null;
     this.showWorkItemTab = null;
+  }
+  closeAttachmentView() {
+      this.showAttachmentView = null;
+  }
+  setVariable() {
+      this.showAttachmentView = Button.ATTACH_FILE;
   }
 }
