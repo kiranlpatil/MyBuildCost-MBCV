@@ -25,9 +25,9 @@
     </tr>
     <tr>
       <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-      <th style="text-align: center;padding: 10px 5px;">Budgeted Cost</th>
+      <th style="text-align: center;padding: 10px 5px;">Budgeted Cost ( {{getProjectElements().RS}}  )</th>
       <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-      <th style="text-align: center;padding: 10px 5px;">Estimated Cost</th>
+      <th style="text-align: center;padding: 10px 5px;">Estimated Cost ( {{getProjectElements().RS}}  )</th>
     </tr>
     </thead>
     <tbody>
@@ -57,7 +57,7 @@
     <tr>
       <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
       <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{getProjectElements().RS}} {{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
       <td style="padding: 5px;font-weight: bold;" align="right" width="">
         <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
           {{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}
@@ -102,7 +102,7 @@
     </tr>
     <tr>
       <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-      <th style="text-align: center;padding: 10px 5px;">Budgeted Cost</th>
+      <th style="text-align: center;padding: 10px 5px;">Budgeted Cost ( {{getProjectElements().RS}}  )</th>
     </tr>
     </thead>
     <tbody>
@@ -120,7 +120,7 @@
     <tr>
       <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
       <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{getProjectElements().RS}} {{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
     </tr>
     </tbody>
   </table>
@@ -153,7 +153,7 @@
       </tr>
       <tr>
         <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-        <th style="text-align: center;padding: 10px 5px;">Estimated Cost</th>
+        <th style="text-align: center;padding: 10px 5px;">Estimated Cost ( {{getProjectElements().RS}}  )</th>
       </tr>
     </thead>
     <tbody>
