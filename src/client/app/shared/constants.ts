@@ -552,6 +552,7 @@ export class MaterialTakeOffElements {
   public static ERROR_MESSAGE_BUILDING = ' building.';
   public static SORT = 'sort';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
+  public static REPORT_EMPTY_MESSAGE = 'Report is empty, because you have not initialised any work item.';
 }
 
 export class PDFReportHeaders {

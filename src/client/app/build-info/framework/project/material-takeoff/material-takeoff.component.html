@@ -17,7 +17,7 @@
       <div class="pull-left padding-left15">
         {{getMaterialTakeOffElements().BUILDING}}
         <select  class="select-costing no-margin" [(ngModel)]="building" (change)="onChangeBuilding($event.target.value)">
-          <option [value]=getMaterialTakeOffElements().ALL_BUILDINGS>{{getMaterialTakeOffElements().ALL_BUILDINGS}}</option>
+          <option *ngIf="ExistanceOfBuilding" [value]=getMaterialTakeOffElements().ALL_BUILDINGS>{{getMaterialTakeOffElements().ALL_BUILDINGS}}</option>
           <option *ngFor="let building of buildings" [value]="building">{{ building }}</option>
         </select>
       </div>
@@ -29,6 +29,9 @@
           [buildingName]="building"
           [materialTakeOffReport]="materialTakeOffReport">
         </bi-material-take-off-report>
+      </div>
+      <div *ngIf="selectedElement === undefined || building === undefined">
+        <h4>{{getMaterialTakeOffElements().REPORT_EMPTY_MESSAGE}}</h4>
       </div>
     </div>
     <div class="col-xs-3 no-padding right-content">
