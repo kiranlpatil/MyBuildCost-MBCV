@@ -161,8 +161,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   //Get detailed quantity
   getDetailedQuantity(categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
-    if( this.showQuantityTab !== Label.WORKITEM_DETAILED_QUANTITY_TAB ||
-      this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItem.rateAnalysisId) {
+    /*if( this.showQuantityTab !== Label.WORKITEM_DETAILED_QUANTITY_TAB ||
+      this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItem.rateAnalysisId) {*/
 
       this.setItemId(categoryId, workItem.rateAnalysisId);
 
@@ -182,9 +182,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.currentWorkItemIndex = workItemIndex;
       this.showQuantityTab = Label.WORKITEM_DETAILED_QUANTITY_TAB;
 
-    } else {
+    /*} else {
       this.showWorkItemTab = null;
-    }
+    }*/
   }
 
   //Add blank detailed quantity at last
