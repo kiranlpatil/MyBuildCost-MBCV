@@ -78,7 +78,7 @@
         </td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">
           <span *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
-            {{getProjectElements().RS}} {{ buildingReport.estimate.totalEstimatedCost | number: '1.0-0'}}
+            {{ buildingReport.estimate.totalEstimatedCost | number: '1.0-0'}}
           </span>
           <span *ngIf="buildingReport.estimate.totalEstimatedCost === 0">-</span>
         </td>

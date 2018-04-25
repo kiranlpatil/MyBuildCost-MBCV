@@ -33,7 +33,7 @@
           <th width="64%" style="padding: 10px 5px;">WorkItem Name</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Quantity</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit ( {{getProjectElements().RS}}  )</th>
-          <th width="12%" style="padding: 10px 5px;text-align:right">Amount</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">Amount ( {{getProjectElements().RS}}  )</th>
         </thead>
         <tbody>
         <tr *ngFor="let workitem of category.workItems">
@@ -51,7 +51,7 @@
       <table width="100%" align="left" cellspacing="10">
         <thead style="font-size:12px; font-weight: bold">
           <th width="60%">Total</th>
-          <th width="40%" style="text-align: right">{{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
+          <th width="40%" style="text-align: right">{{getProjectElements().RS}} {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
         </thead>
       </table>
     </div>
