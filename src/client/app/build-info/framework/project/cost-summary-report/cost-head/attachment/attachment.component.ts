@@ -21,17 +21,19 @@ export class AttachmentComponent implements OnInit {
   @Input() workItem: any;
 
   @Output() showAttachmentView = new EventEmitter();
-  @ViewChild('myInput')
-  myInputVar : any;
+  @ViewChild('fileInput')
+
+  fileInputVar : any;
   workItemId :number;
   private filesToUpload: Array<File>;
   private fileExtension: string;
   private message = new Message();
   private fileName: string;
+  private assignedFileName: any;
   private path: any;
   private fileNamesList: Array<AttachmentDetailsModel>;
   private enableUploadOption: boolean = false;
-  private validFileExtension = FileAttachment.EXTENSIONS_FOR_FILE;
+  private excludedFileExtension = FileAttachment.EXTENSIONS_FOR_FILE;
 
   constructor( private costSummaryService: CostSummaryService, private messageService : MessageService,
                private loaderService : LoaderService) { }
@@ -40,7 +42,7 @@ export class AttachmentComponent implements OnInit {
     this.filesToUpload = fileInput.target.files;
     this.fileExtension = this.filesToUpload[0].name.substring(this.filesToUpload[0].name.lastIndexOf('.') + 1).toLowerCase();
 
-       if (this.validFileExtension.indexOf(this.fileExtension) >= 0) {
+       if (this.excludedFileExtension.indexOf(this.fileExtension) >= 0) {
           this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_EXTENSION;
           this.messageService.message(this.message);
           } else {
@@ -82,24 +84,17 @@ export class AttachmentComponent implements OnInit {
      return true;
    }
   addAttachment() {
-    if (this.enableUploadOption) {
-      if(this.validFile()) {
+    if (this.validFile()) {
         this.loaderService.start();
         this.costSummaryService.addAttachment(this.baseUrl, this.costHeadId, this.categoryId, this.workItemId, this.filesToUpload).then(
           success => this.onAddAttachmentSuccess(success),
           error => this.onAddAttachmentFailure(error)
         );
-      } else {
-        this.myInputVar.nativeElement.value = '';
-        this.message.isError = false;
+    } else {
+        this.fileInputVar.nativeElement.value = '';
+        this.enableUploadOption = false;
         this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS;
         this.messageService.message(this.message);
-      }
-    } else {
-      this.myInputVar.nativeElement.value = '';
-      this.message.isError = false;
-      this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_SELECTION;
-      this.messageService.message(this.message);
     }
   }
 
@@ -108,21 +103,28 @@ export class AttachmentComponent implements OnInit {
     this.message.isError = false;
     this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL;
     this.messageService.message(this.message);
-    this.myInputVar.nativeElement.value = '';
+    this.fileInputVar.nativeElement.value = '';
+    this.enableUploadOption = false;
     this.getPresentFilesForWorkItem();
   }
+
   onAddAttachmentFailure(error: any) {
     console.log(error);
   }
 
-  deleteAttachment(assignedFileName: any) {
+  setNameOfAttachment(assignedFileName: any) {
+    this.assignedFileName = assignedFileName;
+  }
+  removeAttachment() {
     this.loaderService.start();
-    this.costSummaryService.deleteAttachment(this.baseUrl, this.costHeadId,this.categoryId,this.workItemId, assignedFileName).subscribe(
-      success => this.onDeleteAttachmentSuccess(success,assignedFileName),
-      error => this.onDeleteAttachmentFailure(error)
+    this.costSummaryService.removeAttachment(this.baseUrl, this.costHeadId,this.categoryId,this.workItemId,
+      this.assignedFileName).subscribe(
+      success => this.onRemoveAttachmentSuccess(success,this.assignedFileName),
+      error => this.onRemoveAttachmentFailure(error)
     );
   }
-  onDeleteAttachmentSuccess(success: any, assignedFileName:any) {
+
+  onRemoveAttachmentSuccess(success: any, assignedFileName:any) {
     for(let fileIndex in this.fileNamesList) {
       if(this.fileNamesList[fileIndex].assignedFileName === assignedFileName) {
         this.fileNamesList.splice(parseInt(fileIndex),1);
@@ -134,11 +136,12 @@ export class AttachmentComponent implements OnInit {
     this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL;
     this.messageService.message(this.message);
   }
-  onDeleteAttachmentFailure(error: any) {
+  onRemoveAttachmentFailure(error: any) {
     console.log(error);
   }
+
   closeAttachmentView() {
-    this.myInputVar.nativeElement.value = '';
+    this.fileInputVar.nativeElement.value = '';
    this.showAttachmentView.emit();
   }
   getButton() {

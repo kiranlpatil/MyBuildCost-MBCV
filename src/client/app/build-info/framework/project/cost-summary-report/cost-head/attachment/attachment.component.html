@@ -2,16 +2,34 @@
   <li id="Attachments" *ngFor="let file of fileNamesList">
         {{file.fileName}}
     <a class="glyphicon glyphicon-arrow-down" href="{{path}}{{file.assignedFileName}}" download="{{file.fileName}}"></a> 
-   <span *ngIf="file.fileName" (click)="deleteAttachment(file.assignedFileName)"><img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" /></span> 
+   <span data-toggle="modal" data-target="#removeAttachment" (click)="setNameOfAttachment(file.assignedFileName)"><img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" /></span> 
  </li>
 
  <li class="dropdown last-child">
    <div class="dropdown">
-      <input #myInput type="file" (change)="onFileSelect($event)">
-      <button (click)="addAttachment()">  {{getButton().ATTACH_FILE}} </button>
+      <input #fileInput type="file" (change)="onFileSelect($event)">
+      <button [disabled]="!enableUploadOption" (click)="addAttachment()">  {{getButton().ATTACH_FILE}} </button>
      <button (click)="closeAttachmentView()">{{getButton().CANCEL_BUTTON}} </button>
    </div>
   </li>
 
 
+  <div id="removeAttachment" data-backdrop="false" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Do You Want to Delete Attachment file </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="removeAttachment()" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>

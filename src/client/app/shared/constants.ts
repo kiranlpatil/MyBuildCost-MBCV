@@ -602,7 +602,7 @@ export class ValueConstant {
 }
 
 export class FileAttachment {
-  public static EXTENSIONS_FOR_FILE = new Array('txt');
+  public static EXTENSIONS_FOR_FILE = new Array();
 }
 
 export class CurrentView {

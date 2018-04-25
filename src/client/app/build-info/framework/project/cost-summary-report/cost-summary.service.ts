@@ -224,7 +224,7 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  deleteAttachment(baseUrl: string, costHeadId:number, categoryId:number, workItemId:number, assignedFileName:any) {
+  removeAttachment(baseUrl: string, costHeadId:number, categoryId:number, workItemId:number, assignedFileName:any) {
     var url = baseUrl +'/' + API.COSTHEAD +'/' +
       costHeadId + '/' + API.CATEGORY + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + API.DELETE_FILE;
     let body = {assignedFileName : assignedFileName };
