@@ -874,35 +874,20 @@ class ProjectService {
   updateWorkItemStatusOfBuildingCostHeads(buildingId:string, costHeadId:number, categoryId:number, workItemId:number,
                                           workItemActiveStatus : boolean, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, update Workitem has been hit');
-    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+    let query = {_id: buildingId};
+    let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].active':workItemActiveStatus}};
+    let arrayFilter = [
+      {'costHead.rateAnalysisId':costHeadId},
+      {'category.rateAnalysisId': categoryId},
+      {'workItem.rateAnalysisId':workItemId}
+    ];
+
+    this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
       if (error) {
         callback(error, null);
       } else {
-        let costHeadList = building.costHeads;
-
-        for (let costHeadData of costHeadList) {
-          if (costHeadId === costHeadData.rateAnalysisId) {
-            for (let categoryData of costHeadData.categories) {
-              if (categoryId === categoryData.rateAnalysisId) {
-                for (let workItemData of categoryData.workItems) {
-                  if (workItemId === workItemData.rateAnalysisId) {
-                    workItemData.active = workItemActiveStatus;
-                  }
-                }
-              }
-            }
-          }
-        }
-
-          let query = {_id: buildingId};
-          this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, response) => {
-            logger.info('Project service, findOneAndUpdate has been hit');
-            if (error) {
-              callback(error, null);
-            } else {
-              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-            }
-          });
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -911,35 +896,19 @@ class ProjectService {
   updateWorkItemStatusOfProjectCostHeads(projectId:string, costHeadId:number, categoryId:number, workItemId:number,
                                          workItemActiveStatus : boolean, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, Update WorkItem Status Of Project Cost Heads has been hit');
-    this.projectRepository.findById(projectId, (error, project:Project) => {
+    let query = {_id: projectId};
+    let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].active':workItemActiveStatus}};
+    let arrayFilter = [
+      {'costHead.rateAnalysisId':costHeadId},
+      {'category.rateAnalysisId': categoryId},
+      {'workItem.rateAnalysisId':workItemId}
+    ];
+    this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
+      logger.info('Project service, Update WorkItem Status Of Project Cost Heads ,findOneAndUpdate has been hit');
       if (error) {
         callback(error, null);
       } else {
-        let costHeadList = project.projectCostHeads;
-
-        for (let costHeadData of costHeadList) {
-          if (costHeadId === costHeadData.rateAnalysisId) {
-            for (let categoryData of costHeadData.categories) {
-              if (categoryId === categoryData.rateAnalysisId) {
-                for (let workItemData of categoryData.workItems) {
-                  if (workItemId === workItemData.rateAnalysisId) {
-                    workItemData.active = workItemActiveStatus;
-                  }
-                }
-              }
-            }
-          }
-        }
-
-          let query = {_id: projectId};
-          this.projectRepository.findOneAndUpdate(query, project, {new: true}, (error, response) => {
-            logger.info('Project service, Update WorkItem Status Of Project Cost Heads ,findOneAndUpdate has been hit');
-            if (error) {
-              callback(error, null);
-            } else {
-              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-            }
-          });
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

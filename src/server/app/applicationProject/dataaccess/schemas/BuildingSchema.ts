@@ -1,6 +1,7 @@
 import DataAccess = require('../../../framework/dataaccess/dataaccess');
 import Building = require('../mongoose/Building');
 import Category = require('../mongoose/CostHead');
+import {Schema} from 'mongoose';
 
 let mongoose = DataAccess.mongooseInstance;
 let mongooseConnection = DataAccess.mongooseConnection;
@@ -8,7 +9,7 @@ let mongooseConnection = DataAccess.mongooseConnection;
 class BuildingSchema {
   static get schema() {
 
-    let schema = mongoose.Schema({
+    let schema = new Schema({
 
       name: {
         type: String

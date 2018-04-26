@@ -10,7 +10,7 @@ let mongooseConnection = DataAccess.mongooseConnection;
 class ProjectSchema {
   static get schema() {
 
-    let schema = mongoose.Schema({
+    let schema = new Schema({
 
       name: {
         type: String,
