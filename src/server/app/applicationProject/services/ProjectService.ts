@@ -2018,20 +2018,11 @@ class ProjectService {
 
   addAttachmentToWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
                           workItemId: number,fileData: any, callback: (error: any, result: any) => void) {
-    __dirname = path.resolve() + config.get('application.attachmentPath');
-    let form = new multiparty.Form({uploadDir: __dirname});
-    form.parse(fileData, (err: Error, fields: any, files: any) => {
-      if (err) {
-        callback(err, null);
+
+      this.addAttachment(fileData, (error: any, attachmentObject: AttachmentDetailsModel) => {
+      if (error) {
+        callback(error, null);
       } else {
-
-        let file_path = files.file[0].path;
-        let assignedFileName = file_path.substr(files.file[0].path.lastIndexOf('\\') + 1);
-
-        let attachmentObject: AttachmentDetailsModel = new AttachmentDetailsModel();
-        attachmentObject.fileName = files.file[0].originalFilename;
-        attachmentObject.assignedFileName = assignedFileName;
-
         let projection = {costHeads: 1};
         this.buildingRepository.findByIdWithProjection(buildingId, projection, (error, building) => {
           if (error) {
@@ -2040,7 +2031,7 @@ class ProjectService {
             let costHeadList = building.costHeads;
             let costHeads = this.uploadFile(costHeadList, costHeadId, categoryId, workItemId, attachmentObject);
             let query = {_id: buildingId};
-            let updateData = {$set : {'costHeads' : costHeads}};
+            let updateData = {$set: {'costHeads': costHeads}};
             this.buildingRepository.findOneAndUpdate(query, updateData, {new: true}, (error, response) => {
               if (error) {
                 callback(error, null);
@@ -2054,63 +2045,70 @@ class ProjectService {
     });
   }
 
+  addAttachment(fileData: any, callback :(error: any, result :any) => void) {
+    __dirname = path.resolve() + config.get('application.attachmentPath');
+    let form = new multiparty.Form({uploadDir: __dirname});
+    form.parse(fileData, (err: Error, fields: any, files: any) => {
+      if (err) {
+        callback(err, null);
+      } else {
+
+        let file_path = files.file[0].path;
+        let assignedFileName = file_path.substr(files.file[0].path.lastIndexOf('\\') + 1);
+
+        let attachmentObject: AttachmentDetailsModel = new AttachmentDetailsModel();
+        attachmentObject.fileName = files.file[0].originalFilename;
+        attachmentObject.assignedFileName = assignedFileName;
+        callback(null, attachmentObject);
+      }
+    });
+  }
+
   uploadFile(costHeadList: Array<CostHead>, costHeadId: number, categoryId: number, workItemId: number,
              attachmentObject: AttachmentDetailsModel) {
-    for (let costHead of costHeadList) {
-      if (costHeadId === costHead.rateAnalysisId) {
-        let categoriesOfCostHead = costHead.categories;
-        for (let categoryData of categoriesOfCostHead) {
-          if (categoryId === categoryData.rateAnalysisId) {
-            for (let workItemData of categoryData.workItems) {
-              if (workItemId === workItemData.rateAnalysisId) {
-                workItemData.attachmentDetails.push(attachmentObject);
-              }
-            }
-          }
-        }
-      }
-    }
+    let costHead = costHeadList.filter(function(currentCostHead: CostHead){ return currentCostHead.rateAnalysisId === costHeadId; });
+    let categories = costHead[0].categories;
+    let category = categories.filter(function (currentCategory: Category) { return currentCategory.rateAnalysisId === categoryId; });
+    let workItems = category[0].workItems;
+    let workItem = workItems.filter(function (currentWorkItem: WorkItem) {
+       if(currentWorkItem.rateAnalysisId === workItemId) {
+        currentWorkItem.attachmentDetails.push(attachmentObject);
+       }
+       return;
+    });
     return costHeadList;
   }
 
-  getPresentFilesForWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                             workItemId: number,callback: (error: any, result: any) => void) {
-    logger.info('Project service, getPresentFilesForWorkItem has been hit');
+  getPresentFilesForBuildingWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
+                                     workItemId: number, callback: (error: any, result: any) => void) {
+    logger.info('Project service, getPresentFilesForBuildingWorkItem has been hit');
     let projection = { costHeads : 1 };
     this.buildingRepository.findByIdWithProjection(buildingId, projection, (error, building) => {
       if (error) {
         callback(error, null);
       } else {
         let costHeadList = building.costHeads;
-        let ArrayOfAttachmentModels = new Array<AttachmentDetailsModel>();
-        ArrayOfAttachmentModels = this.getPresentFiles(costHeadList, costHeadId, categoryId, workItemId, ArrayOfAttachmentModels);
-        callback(null,{data:ArrayOfAttachmentModels});
+       let attachmentList = this.getPresentFiles(costHeadList, costHeadId, categoryId, workItemId);
+        callback(null,{data:attachmentList});
         }
     });
   }
 
-  getPresentFiles(costHeadList: Array<CostHead>, costHeadId: number, categoryId: number, workItemId: number,
-                  ArrayOfAttachmentModels: AttachmentDetailsModel[]) {
-    for (let costHead of costHeadList) {
-      if (costHeadId === costHead.rateAnalysisId) {
-        let categoriesOfCostHead = costHead.categories;
-        for (let categoryData of categoriesOfCostHead) {
-          if (categoryId === categoryData.rateAnalysisId) {
-            for (let workItemData of categoryData.workItems) {
-              if (workItemId === workItemData.rateAnalysisId) {
-                ArrayOfAttachmentModels = workItemData.attachmentDetails;
-              }
-            }
-          }
-        }
-      }
-    }
-    return ArrayOfAttachmentModels;
+  getPresentFiles(costHeadList: Array<CostHead>, costHeadId: number, categoryId: number, workItemId: number) {
+
+    let attachmentList = new Array<AttachmentDetailsModel>();
+    let costHead = costHeadList.filter(function(currentCostHead: CostHead){ return currentCostHead.rateAnalysisId === costHeadId; });
+    let categories = costHead[0].categories;
+    let category = categories.filter(function (currentCategory: Category) { return currentCategory.rateAnalysisId === categoryId; });
+    let workItems = category[0].workItems;
+    let workItem = workItems.filter(function (currentWorkItem: WorkItem) { return currentWorkItem.rateAnalysisId === workItemId; });
+    attachmentList = workItem[0].attachmentDetails;
+    return attachmentList;
   }
 
-  deleteAttachmentOfWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                             workItemId: number, assignedFileName: any,callback: (error: any, result: any) => void) {
-    logger.info('Project service, deleteAttachmentOfWorkItem has been hit');
+  removeAttachmentOfBuildingWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
+                                     workItemId: number, assignedFileName: any, callback: (error: any, result: any) => void) {
+    logger.info('Project service, removeAttachmentOfBuildingWorkItem has been hit');
     let projection = { costHeads : 1 };
     this.buildingRepository.findByIdWithProjection(buildingId, projection, (error, building) => {
       if (error) {
@@ -2140,45 +2138,31 @@ class ProjectService {
 
 
   deleteFile(costHeadList: any, costHeadId: number, categoryId: number, workItemId: number, assignedFileName: any) {
-    let ArrayOfAttachmentModels = new Array<AttachmentDetailsModel>();
-    for (let costHead of costHeadList) {
-      if (costHeadId === costHead.rateAnalysisId) {
-        let categoriesOfCostHead = costHead.categories;
-        for (let categoryData of categoriesOfCostHead) {
-          if (categoryId === categoryData.rateAnalysisId) {
-            for (let workItemData of categoryData.workItems) {
-              if (workItemId === workItemData.rateAnalysisId) {
-                ArrayOfAttachmentModels = workItemData.attachmentDetails;
-                for (let fileIndex in ArrayOfAttachmentModels) {
-                  if (ArrayOfAttachmentModels[fileIndex].assignedFileName === assignedFileName) {
-                    ArrayOfAttachmentModels.splice(parseInt(fileIndex), 1);
-                    break;
-                  }
-                }
-              }
-            }
+
+    let costHead = costHeadList.filter(function(currentCostHead: CostHead){ return currentCostHead.rateAnalysisId === costHeadId; });
+    let categories = costHead[0].categories;
+    let category = categories.filter(function (currentCategory: Category) { return currentCategory.rateAnalysisId === categoryId; });
+    let workItems = category[0].workItems;
+    let workItem = workItems.filter(function (currentWorkItem: WorkItem) {
+      if(currentWorkItem.rateAnalysisId === workItemId) {
+        let attachmentList = currentWorkItem.attachmentDetails;
+        for (let fileIndex in attachmentList) {
+          if (attachmentList[fileIndex].assignedFileName === assignedFileName) {
+            attachmentList.splice(parseInt(fileIndex), 1);
+            break;
           }
         }
       }
-    }
+      return;
+    });
   }
 
   addAttachmentToProjectWorkItem(projectId: string, costHeadId: number, categoryId: number,
                                  workItemId: number,fileData: any, callback: (error: any, result: any) => void) {
-    __dirname = path.resolve() + config.get('application.attachmentPath');
-    let form = new multiparty.Form({uploadDir: __dirname});
-    form.parse(fileData, (err: Error, fields: any, files: any) => {
-      if (err) {
-        callback(err, null);
+    this.addAttachment(fileData, (error: any, attachmentObject: AttachmentDetailsModel) => {
+      if (error) {
+        callback(error, null);
       } else {
-
-        let file_path = files.file[0].path;
-        let assignedFileName = file_path.substr(files.file[0].path.lastIndexOf('\\') + 1);
-
-        let attachmentObject: AttachmentDetailsModel = new AttachmentDetailsModel();
-        attachmentObject.fileName = files.file[0].originalFilename;
-        attachmentObject.assignedFileName = assignedFileName;
-
         let projection = {projectCostHeads: 1};
         this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
           if (error) {
@@ -2195,11 +2179,12 @@ class ProjectService {
                 callback(null, {data: 'success'});
               }
             });
-          }
-        });
-      }
-    });
+           }
+          });
+        }
+     });
   }
+
   getPresentFilesForProjectWorkItem(projectId: string,costHeadId: number, categoryId: number,
                                     workItemId: number,callback: (error: any, result: any) => void) {
     logger.info('Project service, getPresentFilesForProjectWorkItem has been hit');
@@ -2209,15 +2194,15 @@ class ProjectService {
         callback(error, null);
       } else {
         let costHeadList = project.projectCostHeads;
-        let ArrayOfAttachmentModels = new Array<AttachmentDetailsModel>();
-        ArrayOfAttachmentModels = this.getPresentFiles(costHeadList, costHeadId, categoryId, workItemId, ArrayOfAttachmentModels);
-        callback(null,{data:ArrayOfAttachmentModels});
+        let attachmentList = this.getPresentFiles(costHeadList, costHeadId, categoryId, workItemId);
+        callback(null,{data:attachmentList});
       }
     });
   }
-  deleteAttachmentOfProjectWorkItem(projectId: string, costHeadId: number, categoryId: number,
-                                    workItemId: number, assignedFileName: any,callback: (error: any, result: any) => void) {
-    logger.info('Project service, deleteAttachmentOfProjectWorkItem has been hit');
+
+  removeAttachmentOfProjectWorkItem(projectId: string, costHeadId: number, categoryId: number,
+                                    workItemId: number, assignedFileName: any, callback: (error: any, result: any) => void) {
+    logger.info('Project service, removeAttachmentOfProjectWorkItem has been hit');
     let projection = { projectCostHeads : 1 };
     this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
       if (error) {

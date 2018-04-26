@@ -120,7 +120,7 @@ class ProjectRoutes {
       controller.getPresentFilesForProjectWorkItem, this._responseInterceptor.exit);
 
     router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
-      validator.checkPresentFilesForProjectWorkItem, controller.deleteAttachmentOfProjectWorkItem, this._responseInterceptor.exit);
+      validator.checkPresentFilesForProjectWorkItem, controller.removeAttachmentOfProjectWorkItem, this._responseInterceptor.exit);
 
 
 
@@ -276,16 +276,16 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
 
     //update file in workItem
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/uploadFile',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToWorkItem,
-      controller.addAttachmentToWorkItem, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToBuildingWorkItem,
+      controller.addAttachmentToBuildingWorkItem, this._responseInterceptor.exit);
 
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/fileNameList',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForWorkItem,
-      controller.getPresentFilesForWorkItem, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForBuildingWorkItem,
+      controller.getPresentFilesForBuildingWorkItem, this._responseInterceptor.exit);
 
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForWorkItem,
-      controller.deleteAttachmentOfWorkItem,this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForBuildingWorkItem,
+      controller.removeAttachmentOfBuildingWorkItem,this._responseInterceptor.exit);
 
 
     return router;

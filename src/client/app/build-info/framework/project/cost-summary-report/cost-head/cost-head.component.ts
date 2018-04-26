@@ -617,8 +617,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
   setVariable(categoryId: number, workItemId:number, categoryIndex: number, workItemIndex:number) {
     if(this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
-
-      this.setItemId(categoryId, workItemId);
       this.showAttachmentView = Button.ATTACH_FILE;
       this.currentCategoryIndex = categoryIndex;
       this.currentWorkItemIndex = workItemIndex;

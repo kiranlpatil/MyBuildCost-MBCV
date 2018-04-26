@@ -175,6 +175,10 @@
       opacity: 0;
     }
 
+    .file-attachment > .file-attached {
+      opacity: 1 !important;
+    }
+
     .attachment-menu-open > span {
       opacity: 1;
     }

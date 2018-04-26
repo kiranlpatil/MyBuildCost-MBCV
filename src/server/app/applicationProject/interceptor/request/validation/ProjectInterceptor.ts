@@ -1128,7 +1128,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
     });
   }
 
-  addAttachmentToWorkItem(req: any, res: any, next: any) {
+  addAttachmentToBuildingWorkItem(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;
@@ -1162,7 +1162,7 @@ if ((req.body.name === undefined) || (req.body.region === undefined) || (req.bod
       }
     });
    }
-  checkPresentFilesForWorkItem(req: any, res: any, next: any) {
+  checkPresentFilesForBuildingWorkItem(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;

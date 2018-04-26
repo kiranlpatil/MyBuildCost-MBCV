@@ -128,7 +128,7 @@
                                       <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Files" />
                                       </span>
-                                      <span *ngIf="workItem.attachmentDetails.length != 0" (click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
+                                      <span class="file-attached" *ngIf="workItem.attachmentDetails.length != 0" (click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/file-attached.png" alt="Attach Files" />
                                       </span>
                                       <div class="attachment-menu" *ngIf="showAttachmentView == getButton().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex">

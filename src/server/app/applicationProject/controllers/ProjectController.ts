@@ -1053,7 +1053,7 @@ class ProjectController {
     }
   }
 
-  addAttachmentToWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
+  addAttachmentToBuildingWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       let projectService = new ProjectService();
       var projectId = req.params.projectId;
@@ -1061,8 +1061,8 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      var fileName = req;
-      projectService.addAttachmentToWorkItem( projectId, buildingId ,costHeadId, categoryId, workItemId,fileName ,(error, response) => {
+      let fileData = req;
+      projectService.addAttachmentToWorkItem( projectId, buildingId ,costHeadId, categoryId, workItemId,fileData ,(error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1079,7 +1079,7 @@ class ProjectController {
     }
   }
 
-  getPresentFilesForWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
+  getPresentFilesForBuildingWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       let projectService = new ProjectService();
       var projectId = req.params.projectId;
@@ -1087,7 +1087,7 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      projectService.getPresentFilesForWorkItem(projectId, buildingId, costHeadId, categoryId, workItemId, (error, response) => {
+      projectService.getPresentFilesForBuildingWorkItem(projectId, buildingId, costHeadId, categoryId, workItemId, (error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1103,7 +1103,7 @@ class ProjectController {
       });
     }
   }
-  deleteAttachmentOfWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
+  removeAttachmentOfBuildingWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       let projectService = new ProjectService();
       var projectId = req.params.projectId;
@@ -1112,7 +1112,8 @@ class ProjectController {
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
       let assignedFileName = req.body.assignedFileName;
-      projectService.deleteAttachmentOfWorkItem(projectId, buildingId, costHeadId, categoryId, workItemId,assignedFileName,(error, response) => {
+      projectService.removeAttachmentOfBuildingWorkItem(projectId, buildingId, costHeadId, categoryId, workItemId,
+        assignedFileName,(error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1136,8 +1137,8 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      var fileName = req;
-      projectService.addAttachmentToProjectWorkItem( projectId, costHeadId, categoryId, workItemId,fileName ,(error, response) => {
+      let fileData = req;
+      projectService.addAttachmentToProjectWorkItem( projectId, costHeadId, categoryId, workItemId,fileData ,(error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1176,7 +1177,7 @@ class ProjectController {
       });
     }
   }
-  deleteAttachmentOfProjectWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
+  removeAttachmentOfProjectWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       let projectService = new ProjectService();
       var projectId = req.params.projectId;
@@ -1184,7 +1185,7 @@ class ProjectController {
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
       let assignedFileName = req.body.assignedFileName;
-      projectService.deleteAttachmentOfProjectWorkItem(projectId,costHeadId, categoryId, workItemId,assignedFileName,(error, response) => {
+      projectService.removeAttachmentOfProjectWorkItem(projectId,costHeadId, categoryId, workItemId,assignedFileName,(error, response) => {
         if (error) {
           next(error);
         } else {

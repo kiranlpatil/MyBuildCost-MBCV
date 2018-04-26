@@ -32,6 +32,7 @@ export class AttachmentComponent implements OnInit {
   private assignedFileName: any;
   private path: any;
   private fileNamesList: Array<AttachmentDetailsModel>;
+  private attachmentFiles: Array<AttachmentDetailsModel>;
   private enableUploadOption: boolean = false;
   private excludedFileExtension = FileAttachment.EXTENSIONS_FOR_FILE;
 
@@ -76,9 +77,9 @@ export class AttachmentComponent implements OnInit {
     console.log(error);
   }
    validFile() {
-     let attchmentFiles = this.workItem.attachmentDetails;
-     for(let index in attchmentFiles) {
-           if(attchmentFiles[index].fileName === this.fileName) {
+     this.attachmentFiles = this.workItem.attachmentDetails;
+     for(let index in  this.attachmentFiles) {
+           if( this.attachmentFiles[index].fileName === this.fileName) {
              return false;
            }
       }
