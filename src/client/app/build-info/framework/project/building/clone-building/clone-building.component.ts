@@ -11,7 +11,7 @@ import { LoaderService } from '../../../../../shared/loader/loaders.service';
   moduleId: module.id,
   selector: 'bi-clone-building',
   templateUrl: 'clone-building.component.html',
-  styleUrls: ['create-building.component.css'],
+  styleUrls: ['clone-building.component.css'],
 })
 
 export class CloneBuildingComponent  implements  OnInit {

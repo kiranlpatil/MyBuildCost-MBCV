@@ -95,15 +95,16 @@
   </div>
   <p class="form-sub-heading" *ngIf="view=='cloneBuilding'">{{ getLabels().CLONE_BUILDING_MESSAGE }}</p>
   <div  class="form-group"  *ngIf="view=='cloneBuilding'">
-    <div *ngFor="let actionItem of actionItemsArray;let i=index">
-    <input type="checkbox" name="choices"
-           value="{{actionItem}}" (click)="selectItem($event)" [disabled]="i > actionItems.length" [checked]="actionItems.indexOf(actionItem)!= -1"/>
-    <span>{{ actionItem }}</span>
+    <div class="default-checkbox" *ngFor="let actionItem of actionItemsArray;let i=index">
+      <input id="checkbox{{i}}" type="checkbox" name="choices"
+               value="{{actionItem}}" (click)="selectItem($event)" [disabled]="i > actionItems.length" [checked]="actionItems.indexOf(actionItem)!= -1"/>
+      <label for="checkbox{{i}}">{{ actionItem }}</label>
     </div>
   </div>
   <!--  <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">
       <b>{{ errorMessage }}</b></div>-->
-
-  <button type="submit" class="btn btn-primary">{{ submitActionLabel }}</button>
-  <button type="button" class="btn btn-primary" (click)="navigateTo('/dashboard')"  *ngIf="view=='cloneBuilding'">Cancel</button>
+  <div class="button-group">
+    <button type="button" class="btn btn-default" (click)="navigateTo('/dashboard')"  *ngIf="view=='cloneBuilding'">Cancel</button>
+    <button type="submit" class="btn btn-primary">{{ submitActionLabel }}</button>
+  </div>
 </form>

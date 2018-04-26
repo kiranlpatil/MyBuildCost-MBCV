@@ -1,1 +1,19 @@
+@import '../../../../../css/common';
+.form-group {
+  .form-control, textarea {
+    background: transparent;
+  }
+}
+.button-group {
+  float: left;
+  text-align: center;
+  width: 100%;
+
+  .btn-default {
+    margin-right: 15px;
+  }
+  .btn-primary {
+    width: 120px;
+  }
+}
 
