@@ -21,9 +21,7 @@ export class AttachmentComponent implements OnInit {
   @Input() workItem: any;
 
   @Output() showAttachmentView = new EventEmitter();
-  @ViewChild('fileInput')
 
-  fileInputVar : any;
   workItemId :number;
   private filesToUpload: Array<File>;
   private fileExtension: string;
@@ -77,7 +75,7 @@ export class AttachmentComponent implements OnInit {
     console.log(error);
   }
    validFile() {
-     this.attachmentFiles = this.workItem.attachmentDetails;
+     this.attachmentFiles =  this.fileNamesList;
      for(let index in  this.attachmentFiles) {
            if( this.attachmentFiles[index].fileName === this.fileName) {
              return false;
@@ -93,7 +91,6 @@ export class AttachmentComponent implements OnInit {
           error => this.onAddAttachmentFailure(error)
         );
     } else {
-        this.fileInputVar.nativeElement.value = '';
         this.enableUploadOption = false;
         this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS;
         this.messageService.message(this.message);
@@ -105,7 +102,6 @@ export class AttachmentComponent implements OnInit {
     this.message.isError = false;
     this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL;
     this.messageService.message(this.message);
-    this.fileInputVar.nativeElement.value = '';
     this.enableUploadOption = false;
     this.getPresentFilesForWorkItem();
   }
@@ -143,7 +139,6 @@ export class AttachmentComponent implements OnInit {
   }
 
   closeAttachmentView() {
-    this.fileInputVar.nativeElement.value = '';
    this.showAttachmentView.emit();
   }
   getButton() {

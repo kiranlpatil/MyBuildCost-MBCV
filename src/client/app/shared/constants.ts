@@ -203,11 +203,10 @@ export class Messages {
   //File Attachment messages
 
   public static  MSG_ERROR_VALIDATION_OF_FILE_EXTENSION = 'The file you are trying to attach is not supported by this application';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_SIZE = 'Please check the file size';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_SELECTION = 'please select file';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'selected file already exits';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'file uploaded successfully';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'file deleted successfully';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_SIZE = 'File size should be not be more than 5MB';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'Selected file already exits';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
 }
 
 export class NavigationRoutes {
@@ -487,6 +486,7 @@ export class Label {
   public static GET_QUANTITY : string = 'Get Qty.';
   public static QUANTITY_VIEW : string = 'default';
   public static WORKITEM_DETAILED_QUANTITY_TAB : string = 'detailedQuantity';
+  public static ATTACH_FILE : string = 'Attach File';
 
   //Quantity View
   public static DEFAULT_VIEW = 'default';

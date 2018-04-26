@@ -115,12 +115,15 @@ class ProjectRoutes {
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToProjectWorkItem,
       controller.addAttachmentToProjectWorkItem, this._responseInterceptor.exit);
 
+    //Retrive all present files from workItem
     router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/fileNameList',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForProjectWorkItem,
       controller.getPresentFilesForProjectWorkItem, this._responseInterceptor.exit);
 
+    //remove attached file from workItem
     router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
-      validator.checkPresentFilesForProjectWorkItem, controller.removeAttachmentOfProjectWorkItem, this._responseInterceptor.exit);
+      this.authInterceptor.requiresAuth, validator.checkPresentFilesForProjectWorkItem,
+      controller.removeAttachmentOfProjectWorkItem, this._responseInterceptor.exit);
 
 
 
@@ -279,10 +282,12 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToBuildingWorkItem,
       controller.addAttachmentToBuildingWorkItem, this._responseInterceptor.exit);
 
+    //Retrive all present files from workItem
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/fileNameList',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForBuildingWorkItem,
       controller.getPresentFilesForBuildingWorkItem, this._responseInterceptor.exit);
 
+    //remove attached file from workItem
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForBuildingWorkItem,
       controller.removeAttachmentOfBuildingWorkItem,this._responseInterceptor.exit);

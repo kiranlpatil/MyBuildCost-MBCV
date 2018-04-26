@@ -124,14 +124,14 @@
                                             title="Add More Details">
                                       <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
-                                    <div class="file-attachment" [class.attachment-menu-open]="showAttachmentView == getButton().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex">
+                                    <div class="file-attachment" [class.attachment-menu-open]="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                       <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Files" />
                                       </span>
                                       <span class="file-attached" *ngIf="workItem.attachmentDetails.length != 0" (click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/file-attached.png" alt="Attach Files" />
                                       </span>
-                                      <div class="attachment-menu" *ngIf="showAttachmentView == getButton().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex">
+                                      <div class="attachment-menu" *ngIf="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                         <bi-attachment [costHeadId]="costHeadId"
                                                        [categoryId]="categoryId"
                                                        [baseUrl] = "baseUrl" (showAttachmentView)="closeAttachmentView($event)"
