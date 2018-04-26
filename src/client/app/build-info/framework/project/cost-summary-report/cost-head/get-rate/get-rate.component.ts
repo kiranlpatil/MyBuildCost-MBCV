@@ -33,7 +33,6 @@ export class GetRateComponent implements OnInit {
   @Input() disableRateField: boolean;
 
   @Output() categoriesTotalAmount = new EventEmitter<number>();
-  @Output() showWorkItemTabName = new EventEmitter<string>();
   @Output() refreshCategoryList = new EventEmitter();
   @Output() closeRateView = new EventEmitter();
 
@@ -167,7 +166,7 @@ export class GetRateComponent implements OnInit {
     let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
     this.categoryRateAnalysisId, this.workItemsList);
     this.categoriesTotalAmount.emit(categoriesTotal);
-    //this.showWorkItemTabName.emit('');
+    //this.showQuantityTab.emit('');
     this.loaderService.stop();
     this.closeRateTab();
   }

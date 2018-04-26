@@ -24,21 +24,21 @@
     </div>
     <div style="font-size:10px; text-align: left; width: 750px;" *ngFor="let category of categoryDetails">
       <table *ngIf="category.workItems.length !==0 && category.amount !== 0" width="100%" align="left" cellspacing="10" style="float:left;margin:30px 0 0;">
-        <thead style="font-size:12px;">
+        <thead style="font-size:12px;page-break-inside: avoid;">
           <th width="60%">{{category.name}}</th>
           <th width="40%" style="text-align: right">{{getProjectElements().RS}} {{category.amount |number :'1.0-0'}}</th>
         </thead>
       </table>
       <table *ngIf="category.workItems.length !==0 && category.amount !== 0" border="1" bordercolor="#bbb" width="100%" align="left" style="margin: 5px 0 5px;float:left;">
-        <thead>
-          <th width="52%" style="padding: 10px 5px;">WorkItem Name</th>
+        <thead style="page-break-inside: avoid;">
+          <th width="64%" style="padding: 10px 5px;">WorkItem Name</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Quantity</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Unit</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit ( {{getProjectElements().RS}}  )</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Amount ( {{getProjectElements().RS}}  )</th>
         </thead>
         <tbody>
-        <tr *ngFor="let workitem of category.workItems">
+        <tr style="page-break-inside: avoid;" *ngFor="let workitem of category.workItems">
           <div *ngIf="workitem && workitem.amount !== 0">
             <td width="52%" align="left" style="padding: 5px;">{{workitem.name}}</td>
             <td width="12%" align="right" style="padding: 5px;">{{workitem.quantity.total|number :'1.0-0'}}</td>
@@ -53,7 +53,7 @@
     </div>
     <div  style="font-size:10px; text-align: left;width: 750px;" *ngIf="categoryDetailsTotalAmount !== 0" >
       <table width="100%" align="left" cellspacing="10">
-        <thead style="font-size:12px; font-weight: bold">
+        <thead style="font-size:12px; font-weight: bold;page-break-inside: avoid;">
           <th width="60%">Total</th>
           <th width="40%" style="text-align: right">{{getProjectElements().RS}} {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
         </thead>

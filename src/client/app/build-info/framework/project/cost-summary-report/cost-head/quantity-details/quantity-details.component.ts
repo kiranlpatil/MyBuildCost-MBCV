@@ -34,7 +34,6 @@ export class QuantityDetailsComponent implements OnInit {
   keyQuantity: string;
   quantityName: string;
   showQuantityTab : string = null;
-  showWorkItemTabName: string = null;
   currentQuantityIndex : number;
 
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
@@ -48,7 +47,7 @@ export class QuantityDetailsComponent implements OnInit {
 
   getQuantity(quantityDetail : QuantityDetails, quantityIndex : number) {
     this.currentQuantityIndex = quantityIndex;
-    if(this.showWorkItemTabName !==  Label.WORKITEM_QUANTITY_TAB) {
+    if(this.showQuantityTab !==  Label.WORKITEM_QUANTITY_TAB) {
       if(quantityDetail.quantityItems.length !== 0) {
         this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
         this.keyQuantity = quantityDetail.name;
@@ -56,9 +55,9 @@ export class QuantityDetailsComponent implements OnInit {
         this.quantityItemsArray = [];
         quantityDetail.name = this.keyQuantity;
       }
-      this.showWorkItemTabName = Label.WORKITEM_QUANTITY_TAB;
+      this.showQuantityTab = Label.WORKITEM_QUANTITY_TAB;
     }else {
-      this.showWorkItemTabName=null;
+      this.showQuantityTab=null;
     }
   }
 
@@ -117,17 +116,11 @@ export class QuantityDetailsComponent implements OnInit {
     return Button;
   }
 
-  setShowWorkItemTab( tabName : string) {
-    this.showWorkItemTabName = tabName;
-    this.refreshWorkItemList.emit();
-  }
-
   setCategoriesTotal( categoriesTotal : number) {
     this.categoriesTotalAmount.emit(categoriesTotal);
   }
 
   closeQuantityView() {
     this.showQuantityTab = null;
-    this.showWorkItemTabName = null;
   }
 }

@@ -155,7 +155,6 @@
                                                      [ratePerUnitAmount]="ratePerUnitAmount"
                                                      (categoriesTotalAmount)="setCategoriesTotal($event)"
                                                      (closeRateView)="closeRateView($event)"
-                                                     (showWorkItemTabName)="setShowWorkItemTab($event)"
                                                      [baseUrl] = "baseUrl"
                                                      [disableRateField]="disableRateField">
                                         </bi-get-rate>
@@ -169,7 +168,6 @@
                                                        [categoryDetails] ="categoryDetails"
                                                        [workItemsList] ="workItemsList"
                                                        (categoriesTotalAmount)="setCategoriesTotal($event)"
-                                                       (showWorkItemTabName)="setShowWorkItemTab($event)"
                                                        (refreshWorkItemList)="refreshWorkItemList($event)"
                                                        (closeQuantityView) = "closeQuantityView($event)"
                                                        [categoryRateAnalysisId]="category.rateAnalysisId"

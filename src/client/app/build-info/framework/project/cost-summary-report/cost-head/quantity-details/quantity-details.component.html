@@ -38,7 +38,7 @@
             <img alt="Delete Quantity Details" src="assets/build-info/dashboard/delete-blue.png" />
           </div>
         </td>
-        <div *ngIf="showWorkItemTabName == getLabel().WORKITEM_QUANTITY_TAB && quantityIndex === currentQuantityIndex">
+        <div *ngIf="showQuantityTab == getLabel().WORKITEM_QUANTITY_TAB && quantityIndex === currentQuantityIndex">
           <td class="show-embedded-table">
             <div>
               <bi-get-quantity [quantityItems]="quantityItemsArray"
@@ -48,7 +48,7 @@
                                [keyQuantity]="keyQuantity"
                                [workItemsList] ="workItemsList"
                                (categoriesTotalAmount)="setCategoriesTotal($event)"
-                               (showWorkItemTabName)="setShowWorkItemTab($event)"
+                               (closeQuantityView) = "closeQuantityView($event)"
                                [baseUrl] = "baseUrl">
               </bi-get-quantity>
             </div>

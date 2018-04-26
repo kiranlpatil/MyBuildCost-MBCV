@@ -24,14 +24,14 @@
   </div>
 
   <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left;">
-    <thead>
-      <tr>
+    <thead style="display: table-header-group;">
+      <tr style="page-break-inside: avoid;">
         <th style="padding: 10px 5px;" rowspan="2" >Cost Head</th>
         <th colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
         <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
       </tr>
 
-      <tr>
+      <tr style="page-break-inside: avoid;">
         <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
         <th style="text-align: center;padding: 10px 5px;">Budgeted Cost ( {{getProjectElements().RS}}  )</th>
         <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
@@ -39,7 +39,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
+      <tr style="page-break-inside: avoid;" *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
         <td style="padding: 5px;" align="right">
           <span *ngIf="thumbRuleItem.rate !== 0">
@@ -66,7 +66,7 @@
           <span *ngIf="buildingReport.estimate.estimatedCosts[i].total === 0">-</span>
         </td>
       </tr>
-      <tr>
+      <tr style="page-break-inside: avoid;">
         <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</td>
         <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</td>
@@ -114,18 +114,18 @@
   </div>
 
   <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left">
-    <thead>
-      <tr>
+    <thead style="display: table-header-group;">
+      <tr style="page-break-inside: avoid;">
         <th rowspan="2" style="padding: 10px 5px;">Cost Head</th>
         <th colspan="2" style="text-align: center;padding: 10px 5px;"> By Thumbrule</th>
       </tr>
-      <tr>
+      <tr style="page-break-inside: avoid;">
         <th style="text-align: center;padding: 10px 5px;"> {{ costingByUnit }} {{ costingByArea }}</th>
         <th style="text-align: center;padding: 10px 5px;"> Budgeted Cost ( {{getProjectElements().RS}}  )</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
+      <tr style="page-break-inside: avoid;" *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
         <td style="padding: 5px;" align="right">
           <span *ngIf="thumbRuleItem.rate !== 0">
@@ -138,7 +138,7 @@
           <span *ngIf="thumbRuleItem.amount === 0">-</span>
         </td>
       </tr>
-      <tr>
+      <tr style="page-break-inside: avoid;">
         <th style="padding: 5px;">TOTAL</th>
         <th style="padding: 5px;text-align: right;">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</th>
         <th style="padding: 5px;text-align: right;">{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</th>
@@ -175,18 +175,18 @@
 
 
   <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left" *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
-    <thead>
-      <tr>
+    <thead style="display: table-header-group;">
+      <tr style="page-break-inside: avoid;">
         <th rowspan="2" style="padding: 10px 5px;">Cost Head</th>
         <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
       </tr>
-      <tr>
+      <tr style="page-break-inside: avoid;">
         <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }} </th>
         <th style="text-align: center;padding: 10px 5px;">Estimated Cost ( {{getProjectElements().RS}}  )</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
+      <tr style="page-break-inside: avoid;" *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px;" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
           {{thumbRuleItem.name}}
         </td>
@@ -197,7 +197,7 @@
           {{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}
         </td>
       </tr>
-      <tr>
+      <tr style="page-break-inside: avoid;">
         <th style="padding: 5px;">TOTAL</th>
         <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
         <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalEstimatedCost|number: '1.0-0'}}</th>
