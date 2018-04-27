@@ -13,7 +13,7 @@ export class AppSettings {
   public static IS_SOCIAL_LOGIN_YES = 'YES';
   public static IS_SOCIAL_LOGIN_NO = 'NO';
   public static HTTP_CLIENT = 'http://';
-  public static PUBLIC = '/public';
+  public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
 }
 
