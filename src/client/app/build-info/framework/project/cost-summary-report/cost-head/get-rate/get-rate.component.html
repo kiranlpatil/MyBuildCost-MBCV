@@ -1,6 +1,7 @@
 <!--Edit enabled-->
-<div *ngIf="rate!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost') ? 'get-cost-section' : 'get-systemRA-section')">
-  <button class="close" (click)="closeRateTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+<div *ngIf="rate!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost' || innerView == getLabel().GET_RATE_BY_QUANTITY) ? 'get-cost-section' : 'get-systemRA-section')">
+  <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="close" (click)="closeRateTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
   <div class="pull-left">
     <div class="pull-left" *ngIf="rate!==undefined">
       <div class="pull-left quantity-label">

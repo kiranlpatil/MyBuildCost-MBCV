@@ -7,10 +7,10 @@
         </td>
 
         <td>
-          <div class="edit-field" *ngIf="quantity.total != 0" (click)="getQuantity(quantity, quantityIndex)">
+          <div class="edit-field" *ngIf="quantity.total != 0" (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
             <input [ngModel]="quantity.total" id="quantity" size="10" class="form-control clear">
           </div>
-          <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity, quantityIndex)">
+          <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
             {{getLabel().GET_QUANTITY}}
           </button>
         </td>
@@ -20,17 +20,16 @@
         <td><span class="value">-</span></td>
 
         <td>
-          <span class="value" *ngIf="workItemData.rate.isEstimated">
+          <div *ngIf="workItemData.rate.isEstimated" (click)="getRateByQuantity(quantityIndex, quantity.total, getLabel().GET_RATE_BY_QUANTITY)">
+            <span class="value">
             {{ (quantity.total * workItemData.rate.total)|number: '1.0-0' }}
           </span>
+          </div>
           <div class="edit-cost-null" *ngIf="!workItemData.rate.isEstimated">
             <span class="value">-</span>
           </div>
         </td>
-
         <td><span class="value">-</span></td>
-
-
         <td>
           <div data-toggle="modal" title="Delete Quantity Details"
                data-target="#deleteQuantityDetails"
@@ -38,25 +37,34 @@
             <img alt="Delete Quantity Details" src="assets/build-info/dashboard/delete-blue.png" />
           </div>
         </td>
-        <div *ngIf="showQuantityTab == getLabel().WORKITEM_QUANTITY_TAB && quantityIndex === currentQuantityIndex">
-          <td class="show-embedded-table">
-            <div>
-              <bi-get-quantity [quantityItems]="quantityItemsArray"
-                               [quantityDetails]="quantityDetails"
-                               [categoryRateAnalysisId]="categoryRateAnalysisId"
-                               [categoryDetails] ="categoryDetails"
-                               [keyQuantity]="keyQuantity"
-                               [workItemsList] ="workItemsList"
-                               (categoriesTotalAmount)="setCategoriesTotal($event)"
-                               (closeQuantityView) = "closeQuantityView($event)"
-                               [baseUrl] = "baseUrl">
-              </bi-get-quantity>
-            </div>
-          </td>
-        </div>
+        <td class="show-embedded-table">
+          <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
 
+              <div>
+                <bi-get-quantity [quantityItems]="quantityItemsArray"
+                                 [quantityDetails]="quantityDetails"
+                                 [categoryRateAnalysisId]="categoryRateAnalysisId"
+                                 [categoryDetails] ="categoryDetails"
+                                 [keyQuantity]="keyQuantity"
+                                 [workItemsList] ="workItemsList"
+                                 (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                 [baseUrl] = "baseUrl">
+                </bi-get-quantity>
+              </div>
+          </div>
+          <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().GET_RATE_BY_QUANTITY">
+            <bi-get-rate [rate]="rateItemsArray"
+                         [categoryDetails] ="categoryDetails"
+                         [workItemsList] ="workItemsList"
+                         [ratePerUnitAmount]="ratePerUnitAmount"
+                         [baseUrl] = "baseUrl"
+                         [innerView]="getLabel().GET_RATE_BY_QUANTITY"
+                         (closeInnerView)="closeInnerView($event)"
+                         [disableRateField]="true">
+            </bi-get-rate>
+          </div>
+        </td>
       </tr>
-
     </tbody>
   </table>
 </div>
