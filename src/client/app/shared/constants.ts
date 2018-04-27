@@ -206,7 +206,7 @@ export class Messages {
   //File Attachment messages
 
   public static  MSG_ERROR_VALIDATION_OF_FILE_EXTENSION = 'The file you are trying to attach is not supported by this application';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_SIZE = 'File size should be not be more than 5MB';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_SIZE = 'File size should not be more than 5MB';
   public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'Selected file already exits';
   public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
@@ -525,6 +525,7 @@ export class Button {
   public static ROW: string = 'Row';
   public static COSTHEAD: string = 'Cost Head';
   public static ATTACH_FILE: string = 'Attach File';
+  public static STANDARD_NOTE: string = 'Standard Note / Disclaimer:';
 }
 
 export class Units {
@@ -534,13 +535,13 @@ export class Units {
 
 export class ProjectElements {
   public static COST_HEAD = 'CostHead';
-  public static WORK_ITEM = 'WorkItem';
+  public static WORK_ITEM = ' a WorkItem';
   public static BUILDING = 'Building';
   public static QUANTITY_ITEM = 'Quantity Item';
   public static DIRECT_QUANTITY = 'Direct Quantity';
-  public static QUANTITY_DETAILS = 'Quantity Details';
+  public static QUANTITY_DETAILS = ' a Quantity Details';
   public static QUANTITY = 'Quantity';
-  public static ATTACHMENT = 'Attachment';
+  public static ATTACHMENT = ' an Attachment';
   public static CATEGORY = 'Category';
   public static SLAB_AREA = 'Slab Area';
   public static SALEABLE_AREA = 'Saleable Area';
@@ -619,4 +620,14 @@ export class CurrentView {
   public static COST_SUMMARY = 'costSummary';
   public static MATERIAL_TAKE_OFF = 'materialTakeOff';
   public static PROJECT_DETAILS = 'projectDetails';
+}
+
+export class StandardNotes {
+  public static Notes = '<ul><li>The material consumption constants and rate are based on various sources' +
+    ' from the construction industry. This information may vary from project-to-project or' +
+    ' place-to-place depending on construction methods and practices.\n</li></ul>' +
+    'The material consumption constants are including wastages as per standard practices.\n' +
+    'The contents/services under this rate analysis shall be used only for reference. The user shall verify the' +
+    ' content before using it. Big Slice Technologies Pvt. Ltd. (OPC) shall not be held responsible for any' +
+    ' consequences resulted due to use of the contents/services of this rate analysis.\n';
 }

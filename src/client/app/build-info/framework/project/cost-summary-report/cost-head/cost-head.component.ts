@@ -611,6 +611,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
   closeAttachmentView() {
       this.showAttachmentView = null;
   }
+
+  workItemRefresh() {
+    this.getActiveWorkItemsOfCategory(this.categoryId);
+  }
   setVariable(categoryId: number, workItemId:number, categoryIndex: number, workItemIndex:number) {
     if(this.showAttachmentView !== Label.ATTACH_FILE || this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
       this.showAttachmentView = Button.ATTACH_FILE;

@@ -18,7 +18,7 @@
     <label for="file-input" class="btn btn-primary">
     {{getButton().ATTACH_FILE}}
     </label>
-    <input id="file-input" type="file" (change)="onFileSelect($event)" class="btn btn-primary">
+    <input  #fileInput id="file-input" type="file" (change)="onFileSelect($event)" class="btn btn-primary">
   </div>
 </div>
 

@@ -21,7 +21,10 @@ export class AttachmentComponent implements OnInit {
   @Input() workItem: any;
 
   @Output() showAttachmentView = new EventEmitter();
+  @Output() workItemRefresh = new EventEmitter();
+  @ViewChild('fileInput')
 
+  fileInputVar : any;
   workItemId :number;
   private filesToUpload: Array<File>;
   private fileExtension: string;
@@ -91,6 +94,7 @@ export class AttachmentComponent implements OnInit {
           error => this.onAddAttachmentFailure(error)
         );
     } else {
+        this.fileInputVar.nativeElement.value = '';
         this.enableUploadOption = false;
         this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS;
         this.messageService.message(this.message);
@@ -102,8 +106,10 @@ export class AttachmentComponent implements OnInit {
     this.message.isError = false;
     this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL;
     this.messageService.message(this.message);
+    this.fileInputVar.nativeElement.value = '';
     this.enableUploadOption = false;
     this.getPresentFilesForWorkItem();
+    this.workItemRefresh.emit();
   }
 
   onAddAttachmentFailure(error: any) {
@@ -133,12 +139,14 @@ export class AttachmentComponent implements OnInit {
     this.message.isError = false;
     this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL;
     this.messageService.message(this.message);
+    this.workItemRefresh.emit();
   }
   onRemoveAttachmentFailure(error: any) {
     console.log(error);
   }
 
   closeAttachmentView() {
+    this.fileInputVar.nativeElement.value = '';
    this.showAttachmentView.emit();
   }
   getButton() {

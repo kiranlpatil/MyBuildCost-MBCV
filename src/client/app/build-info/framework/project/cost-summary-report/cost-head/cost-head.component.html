@@ -135,6 +135,7 @@
                                         <bi-attachment [costHeadId]="costHeadId"
                                                        [categoryId]="categoryId"
                                                        [baseUrl] = "baseUrl" (showAttachmentView)="closeAttachmentView($event)"
+                                                       (workItemRefresh) = "workItemRefresh($event)"
                                                        [workItem]="workItem"></bi-attachment>
                                       </div>
                                     </div>
