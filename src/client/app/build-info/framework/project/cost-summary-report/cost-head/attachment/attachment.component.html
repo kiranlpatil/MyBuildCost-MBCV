@@ -2,8 +2,6 @@
 <ul>
  <li id="Attachments" *ngFor="let file of fileNamesList">
     <p>{{file.fileName}}</p>
-    <p>path :: {{path}}</p>
-    <p>file.assignedFileName :: {{file.assignedFileName}}</p>
     <div class="file-actions">
       <a href="{{path}}{{file.assignedFileName}}" download="{{file.fileName}}">
         <img alt="Delete Work Item" src="assets/build-info/dashboard/download-attachment.jpg" />

@@ -2145,9 +2145,7 @@ class ProjectService {
 
         let file_path = files.file[0].path;
         let assignedFileName = file_path.substr(files.file[0].path.lastIndexOf('\/') + 1);
-        logger.info('files.file[0].path full : '+files.file[0].path);
-        logger.info('files.file[0].path Last Index : '+files.file[0].path.lastIndexOf('\/'));
-        logger.info('Substr : '+assignedFileName);
+        logger.info('Attached assigned fileName : '+assignedFileName);
 
         let attachmentObject: AttachmentDetailsModel = new AttachmentDetailsModel();
         attachmentObject.fileName = files.file[0].originalFilename;
