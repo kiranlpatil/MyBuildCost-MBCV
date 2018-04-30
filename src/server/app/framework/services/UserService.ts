@@ -77,19 +77,31 @@ class UserService {
     });
   }
 
-  private assignFreeSubscriptionAndCreateUser(item: any, freeSubscription: SubscriptionPackage, callback: (error: any, result: any) => void) {
+   assignFreeSubscriptionAndCreateUser(item: any, freeSubscription: SubscriptionPackage, callback: (error: any, result: any) => void) {
     let user: UserModel = item;
+    let sendMailService = new SendMailService();
     this.assignFreeSubscriptionPackage(user, freeSubscription);
-    this.userRepository.create(user, (err, res) => {
+    this.userRepository.create(user, (err:Error, res:any) => {
       if (err) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else {
-        callback(null, res);
-      }
+        let auth = new AuthInterceptor();
+        let token = auth.issueTokenWithUid(res);
+        let host = config.get('application.mail.host');
+        let link = host + 'signin?access_token=' + token + '&_id=' + res._id;
+        let htmlTemplate = 'welcome-aboard.html';
+        let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
+          ['$first_name$',res.first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+        let attachment=MailAttachments.WelcomeAboardAttachmentArray;
+        sendMailService.send( user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data,attachment,
+          (err: any, result: any) => {
+            callback(err, result);
+          });
+        }
     });
   }
 
-  private assignFreeSubscriptionPackage(user: UserModel, freeSubscription: SubscriptionPackage) {
+  assignFreeSubscriptionPackage(user: UserModel, freeSubscription: SubscriptionPackage) {
     let subscription = new UserSubscription();
     subscription.activationDate = new Date();
     subscription.numOfBuildings = freeSubscription.basePackage.numOfBuildings;
@@ -298,8 +310,8 @@ class UserService {
         let htmlTemplate = 'forgotpassword.html';
         let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
           ['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
-
-      sendMailService.send( field.email, Messages.EMAIL_SUBJECT_FORGOT_PASSWORD, htmlTemplate, data,
+        let attachment=MailAttachments.ForgetPasswordAttachmentArray;
+        sendMailService.send( field.email, Messages.EMAIL_SUBJECT_FORGOT_PASSWORD, htmlTemplate, data,attachment,
 (err: any, result: any) => {
             callback(err, result);
           });
@@ -329,9 +341,10 @@ class UserService {
         let sendMailService = new SendMailService();
         let data: Map<string, string> = new Map([['$applicationLink$',config.get('application.mail.host')],
           ['$link$', link]]);
+        let attachment=MailAttachments.AttachmentArray;
         sendMailService.send(field.new_email,
           Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
-          'change.mail.html', data, callback);
+          'change.mail.html', data,attachment, callback);
       }
     });
   }
@@ -371,7 +384,7 @@ class UserService {
     });
   }*/
 
-  sendRecruiterVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
+/*  sendRecruiterVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
 
     this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0) {
@@ -389,16 +402,17 @@ class UserService {
         callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
       }
     });
-  }
+  }*/
 
 
   sendMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
     let sendMailService = new SendMailService();
     let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
       ['$first_name$',field.first_name],['$email$',field.email],['$message$',field.message]]);
+    let attachment=MailAttachments.AttachmentArray;
     sendMailService.send(config.get('application.mail.ADMIN_MAIL'),
       Messages.EMAIL_SUBJECT_USER_CONTACTED_YOU,
-      'contactus.mail.html',data,callback);
+      'contactus.mail.html',data,attachment,callback);
   }
 
   sendMailOnError(errorInfo: any, callback: (error: any, result: SentMessageInfo) => void) {

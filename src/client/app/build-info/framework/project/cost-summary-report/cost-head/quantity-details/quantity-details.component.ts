@@ -2,12 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '../../../../model/category';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { WorkItem } from '../../../../model/work-item';
-import { Button, Label, Messages } from '../../../../../../shared/constants';
+import {Button, Label, Messages, ValueConstant} from '../../../../../../shared/constants';
 import * as lodsh from 'lodash';
 import { QuantityDetails } from '../../../../model/quantity-details';
 import { Message, MessageService, SessionStorage, SessionStorageService } from '../../../../../../shared/index';
 import { CostSummaryService } from '../../cost-summary.service';
 import { LoaderService } from '../../../../../../shared/loader/loaders.service';
+import { Rate } from '../../../../model/rate';
 
 @Component({
   moduleId: module.id,
@@ -29,13 +30,21 @@ export class QuantityDetailsComponent implements OnInit {
   @Output() categoriesTotalAmount = new EventEmitter<number>();
   @Output() refreshWorkItemList = new EventEmitter();
 
+  workItemId : number;
+  rateItemsArray : Rate;
+  unit:string='';
+  previousRateQuantity : number = 0;
+  quantityIncrement : number = 1;
+
+  currentFloorIndex : number;
+  showInnerView : string;
+
   quantityItemsArray: any = {};
   workItemData: Array<WorkItem>;
   keyQuantity: string;
   quantityName: string;
   showQuantityTab : string = null;
   currentQuantityIndex : number;
-
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
               private loaderService: LoaderService) {
   }
@@ -43,22 +52,6 @@ export class QuantityDetailsComponent implements OnInit {
    ngOnInit() {
     this.workItemData = this.workItem;
 
-  }
-
-  getQuantity(quantityDetail : QuantityDetails, quantityIndex : number) {
-    this.currentQuantityIndex = quantityIndex;
-    if(this.showQuantityTab !==  Label.WORKITEM_QUANTITY_TAB) {
-      if(quantityDetail.quantityItems.length !== 0) {
-        this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
-        this.keyQuantity = quantityDetail.name;
-      } else {
-        this.quantityItemsArray = [];
-        quantityDetail.name = this.keyQuantity;
-      }
-      this.showQuantityTab = Label.WORKITEM_QUANTITY_TAB;
-    }else {
-      this.showQuantityTab=null;
-    }
   }
 
   setQuantityNameForDelete(quantityName: string) {
@@ -120,7 +113,59 @@ export class QuantityDetailsComponent implements OnInit {
     this.categoriesTotalAmount.emit(categoriesTotal);
   }
 
-  closeQuantityView() {
-    this.showQuantityTab = null;
+  getQuantity(quantityDetail : QuantityDetails, floorIndex : number, showInnerView : string) {
+    if(floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
+      this.setFloorIndex(floorIndex);
+      if(quantityDetail.quantityItems.length !== 0) {
+        this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
+        this.keyQuantity = quantityDetail.name;
+      } else {
+        this.quantityItemsArray = [];
+        quantityDetail.name = this.keyQuantity;
+      }
+      this.showInnerView = this.getLabel().WORKITEM_QUANTITY_TAB;
+    }else {
+      this.showInnerView = null;
+    }
+  }
+
+  /////
+  setFloorIndex(floorIndex : number) {
+    this.currentFloorIndex = floorIndex;
+    console.log('Floor Index : '+floorIndex);
+  }
+
+  // Get Rate by quantity
+  getRateByQuantity(floorIndex : number, costQuantity : number, showInnerView : string) {
+    if(floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
+      this.setFloorIndex(floorIndex);
+      this.setWorkItemDataForRateView(this.workItemRateAnalysisId, this.workItem.rate);
+      this.calculateQuantity(this.workItem,costQuantity);
+      this.showInnerView =  this.getLabel().GET_RATE_BY_QUANTITY;
+    } else {
+      this.closeInnerView();
+    }
+  }
+
+  closeInnerView() {
+    this.showInnerView = null;
+    this.setFloorIndex(-1);
+  }
+
+  setWorkItemDataForRateView(workItemId : number, rate : Rate) {
+    this.workItemId = workItemId;
+    this.rateItemsArray = lodsh.cloneDeep(rate);
+    this.unit = lodsh.cloneDeep(rate.unit);
+  }
+
+  calculateQuantity(workItem : WorkItem, costQuantity : number) {
+    this.previousRateQuantity = lodsh.cloneDeep(workItem.rate.quantity);
+    this.rateItemsArray.quantity = costQuantity;
+    this.quantityIncrement = this.rateItemsArray.quantity / this.previousRateQuantity;
+    for (let rateItemsIndex = 0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
+      this.rateItemsArray.rateItems[rateItemsIndex].quantity = parseFloat((
+        this.rateItemsArray.rateItems[rateItemsIndex].quantity *
+        this.quantityIncrement).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
+    }
   }
 }

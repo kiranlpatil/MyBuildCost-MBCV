@@ -16,6 +16,12 @@ class MailAttachments {
       path:  path.resolve() + config.get('application.publicPath')+'images/banner/password-reset.png',
       cid: 'unique@password-reset'
     },
+  ];
+  public static WelcomeAboardAttachmentArray:Array<any>=[
+    {
+      path: path.resolve() + config.get('application.publicPath')+'images/logo/application-logo.png',
+      cid: 'unique@application-logo'
+    },
     {
       path:  path.resolve() + config.get('application.publicPath')+'images/banner/welcome-aboard.png',
       cid: 'unique@welcome-aboard'

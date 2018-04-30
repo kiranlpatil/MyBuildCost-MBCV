@@ -34,11 +34,14 @@ export class GetRateComponent implements OnInit {
   @Input() baseUrl : string;
   @Input() rateView: string;
   @Input() disableRateField: boolean;
+  @Input() innerView: string;
+
   @Input() displayDisclaimar: boolean;
 
   @Output() categoriesTotalAmount = new EventEmitter<number>();
   @Output() refreshCategoryList = new EventEmitter();
   @Output() closeRateView = new EventEmitter();
+  @Output() closeInnerView = new EventEmitter();
 
   totalAmount : number = 0;
   totalAmountOfMaterial : number = 0;
@@ -264,6 +267,11 @@ export class GetRateComponent implements OnInit {
   closeRateTab() {
     this.closeRateView.emit();
   }
+
+  closeInnerViewTab() {
+    this.closeInnerView.emit();
+  }
+
 
   onGetRateItemsByOriginalNameFailure(error: any) {
     console.log(error);

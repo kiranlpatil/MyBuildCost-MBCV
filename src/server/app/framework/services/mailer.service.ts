@@ -18,8 +18,8 @@ class SendMailService {
   });
 
   send(sendmailTo: string, subject: string, templateName: string,
-       data: Map<string, string>,
-       callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string,attachment?:any) {
+       data: Map<string, string>,attachment?:any[],
+       callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string) {
 
     let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
     data.forEach((value: string, key: string) => {
@@ -32,7 +32,8 @@ class SendMailService {
       cc: carbonCopy,
       subject: subject,
       html: content,
-      attachments:attachment?attachment: MailAttachments.AttachmentArray
+      attachments:attachment
+      /*attachment?attachment: MailAttachments.WelcomeAboardAttachmentArray*/
     };
     SendMailService.smtpTransport.sendMail(mailOptions, function (error: Error, response: SentMessageInfo) {
       if (error) {
