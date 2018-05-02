@@ -136,14 +136,16 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   // Get Rate by quantity
-  getRateByQuantity(floorIndex : number, costQuantity : number, showInnerView : string) {
-    if(floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
-      this.setFloorIndex(floorIndex);
-      this.setWorkItemDataForRateView(this.workItemRateAnalysisId, this.workItem.rate);
-      this.calculateQuantity(this.workItem,costQuantity);
-      this.showInnerView =  this.getLabel().GET_RATE_BY_QUANTITY;
-    } else {
-      this.closeInnerView();
+  getRateByQuantity(cost : number,floorIndex : number, costQuantity : number, showInnerView : string) {
+    if (cost !== 0) {
+      if (floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
+        this.setFloorIndex(floorIndex);
+        this.setWorkItemDataForRateView(this.workItemRateAnalysisId, this.workItem.rate);
+        this.calculateQuantity(this.workItem, costQuantity);
+        this.showInnerView = this.getLabel().GET_RATE_BY_QUANTITY;
+      } else {
+        this.closeInnerView();
+      }
     }
   }
 

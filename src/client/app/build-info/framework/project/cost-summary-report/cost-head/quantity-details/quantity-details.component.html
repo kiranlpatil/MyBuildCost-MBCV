@@ -20,7 +20,7 @@
         <td><span class="value">-</span></td>
 
         <td>
-          <div *ngIf="workItemData.rate.isEstimated" (click)="getRateByQuantity(quantityIndex, quantity.total, getLabel().GET_RATE_BY_QUANTITY)">
+          <div *ngIf="workItemData.rate.isEstimated" (click)="getRateByQuantity(quantity.total * workItemData.rate.total, quantityIndex, quantity.total, getLabel().GET_RATE_BY_QUANTITY)">
             <span class="value">
             {{ (quantity.total * workItemData.rate.total)|number: '1.0-0' }}
           </span>
