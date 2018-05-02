@@ -209,17 +209,17 @@ export class GetRateComponent implements OnInit {
   }
 
   getItemName(event : any) {
-
     if (event.target.value !== '') {
       this.selectedItemName = event.target.value;
       event.target.value = '';
     }
   }
 
-  setItemName(event : any) {
-    if (event.target.value === '') {
+  setItemName(event : any, changeEvent? : string) {
+    if (event.target.value === '' && !changeEvent) {
       event.target.value = this.selectedItemName;
     }
+      this.setRate(this.arrayOfRateItems);
   }
 
   getRateItemsByOriginalName(rateItem: any, index:number) {

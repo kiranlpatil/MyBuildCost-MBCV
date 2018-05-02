@@ -42,7 +42,7 @@
                 <tr *ngFor="let item of rateItem.value; let i=index">
                   <td class="datalist-input" *ngIf="rateView === getLabel().WORKITEM_RATE_TAB">
                     <input id="itemDescription" class="form-control remark-input" (mouseover)="getRateItemsByOriginalName(item, i)"
-                           list="RateItems" [(ngModel)]="item.itemName"  (click)="getItemName($event)" (change)="setItemName($event);setRate(arrayOfRateItems)" (blur)="setItemName($event)"/>
+                           list="RateItems" [(ngModel)]="item.itemName"  (focus)="getItemName($event)" (input)="setItemName($event, 'changeEvent')" (blur)="setItemName($event)"/>
                       <datalist id="RateItems" >
                         <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}"></option>    
                      </datalist>
