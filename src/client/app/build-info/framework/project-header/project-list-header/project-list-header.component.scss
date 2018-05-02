@@ -1,18 +1,34 @@
-select {
-  width: auto;
-  background-color: transparent;
-  border: 0;
-  border-bottom: 0 solid #ccc;
-  min-height: inherit;
-  padding: 6px 15px 6px 0;
+.select-project {
   position: absolute;
   top: 30px;
-  font-size: 21px;
-  font-weight: 300;
+  width: 100%;
   z-index: 101;
 
-  &:focus {
-    border-bottom: 0 !important;
+  span {
+    background: transparent url('../assets/framework/images/form/drop-down.png') no-repeat right center;
+    cursor: pointer;
+    font-size: 21px;
+    font-weight: 300;
+    left: 0;
+    padding-right: 20px;
+    position: absolute;
+    top: 6px;
+    z-index: -1;
+  }
+
+  select {
+    background: none;
+    border: 0;
+    border-bottom: 0 solid #ccc;
+    font-size: 21px;
+    font-weight: 300;
+    min-height: inherit;
+    padding: 6px 15px 6px 0;
+    width: auto;
+
+    &:focus {
+      border-bottom: 0 !important;
+    }
   }
 }
 

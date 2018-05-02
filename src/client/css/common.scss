@@ -897,4 +897,23 @@ textarea[disabled] {
       top: 25px;
     }
   }
+
+  .select-project {
+    span {
+      font-weight: 100 !important;
+      left: 4px !important;
+      top: 9px !important;
+    }
+  }
+}
+
+
+@supports (-ms-ime-align: auto) {
+  .select-project {
+    span {
+      font-weight: 100 !important;
+      left: 3px !important;
+      top: 7px !important;
+    }
+  }
 }

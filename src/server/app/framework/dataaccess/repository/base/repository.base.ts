@@ -31,6 +31,15 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       }
     });
   }
+  retrieveWithProjection (field:any,projection:any, callback: (error: any, result: any) => void) {
+    this._model.find(field, projection,(error :Error, result: T) => {
+      if(error) {
+        callback(new CostControllException('retrieve Failed. '+error.message, error, 500), null);
+      } else {
+        callback(null, result);
+      }
+    });
+  }
 
   update (_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
     this._model.update({_id: _id}, item, (error :Error, result: T) => {

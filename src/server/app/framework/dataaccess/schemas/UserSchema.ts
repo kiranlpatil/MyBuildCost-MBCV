@@ -8,7 +8,7 @@ let mongooseConnection = DataAccess.mongooseConnection;
 
 class UserSchema {
   static get schema() {
-    let schema = mongoose.Schema({
+    let schema = new Schema({
 
      /* location: {
         city: String,

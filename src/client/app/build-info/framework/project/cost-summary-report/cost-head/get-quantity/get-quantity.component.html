@@ -81,7 +81,8 @@
 
   <button type="button" class="add-new-btn" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
   <button type="submit" class="save-btn" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
-  <button class="cancel" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
 </div>
 
 <div class="modal fade" id="deleteQuantity" role="dialog">

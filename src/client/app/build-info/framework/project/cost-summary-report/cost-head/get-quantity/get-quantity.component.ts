@@ -29,8 +29,10 @@ export class GetQuantityComponent implements OnInit {
   @Input() workItemsList : Array<WorkItem>;
   @Input() baseUrl : string;
   @Input() keyQuantity : string;
+  @Input() innerView: string;
 
   @Output() closeQuantityView = new EventEmitter();
+  @Output() closeInnerView = new EventEmitter();
   @Output() categoriesTotalAmount = new EventEmitter<number>();
 
   projectId : string;
@@ -226,6 +228,10 @@ export class GetQuantityComponent implements OnInit {
 
   closeQuantityTab() {
     this.closeQuantityView.emit('');
+  }
+
+  closeInnerViewTab() {
+    this.closeInnerView.emit();
   }
 
   getButton() {
