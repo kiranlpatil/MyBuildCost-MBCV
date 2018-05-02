@@ -129,13 +129,10 @@ export class QuantityDetailsComponent implements OnInit {
     }
   }
 
-  /////
   setFloorIndex(floorIndex : number) {
     this.currentFloorIndex = floorIndex;
-    console.log('Floor Index : '+floorIndex);
   }
 
-  // Get Rate by quantity
   getRateByQuantity(cost : number,floorIndex : number, costQuantity : number, showInnerView : string) {
     if (cost !== 0) {
       if (floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
