@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '../../../../model/category';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { WorkItem } from '../../../../model/work-item';
-import {Button, Label, Messages, ValueConstant} from '../../../../../../shared/constants';
+import { Button, Label, Messages, ValueConstant } from '../../../../../../shared/constants';
 import * as lodsh from 'lodash';
 import { QuantityDetails } from '../../../../model/quantity-details';
 import { Message, MessageService, SessionStorage, SessionStorageService } from '../../../../../../shared/index';
@@ -20,7 +20,7 @@ import { Rate } from '../../../../model/rate';
 export class QuantityDetailsComponent implements OnInit {
 
   @Input() quantityDetails : Array<QuantityDetails>;
-  @Input() workItem : Array<WorkItem>;
+  @Input() workItem : WorkItem;
   @Input() workItemsList : Array<WorkItem>;
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
@@ -40,7 +40,7 @@ export class QuantityDetailsComponent implements OnInit {
   showInnerView : string;
 
   quantityItemsArray: any = {};
-  workItemData: Array<WorkItem>;
+  workItemData: WorkItem;
   keyQuantity: string;
   quantityName: string;
   showQuantityTab : string = null;
