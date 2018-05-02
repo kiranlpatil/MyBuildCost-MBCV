@@ -119,7 +119,17 @@
       background: $jagged-ice;
       font-size: 11px;
       font-weight: bold;
-      text-align: center;
+      text-align: right !important;
+
+      &:first-child {
+        text-align: center !important;
+      }
+
+      &:nth-child(7) {
+        padding-left: 15px;
+        text-align: left !important;
+      }
+
       width: 98px;
       label {
         font-size: 11px;
@@ -177,13 +187,13 @@
 
 .get-quantity-section:after, .get-quantity-section:before {
   bottom: 100%;
-  left: 16%;
   border: solid transparent;
   content: " ";
   height: 0;
-  width: 0;
+  left: 10.5%;
   position: absolute;
   pointer-events: none;
+  width: 0;
 }
 
 .get-quantity-section:after {

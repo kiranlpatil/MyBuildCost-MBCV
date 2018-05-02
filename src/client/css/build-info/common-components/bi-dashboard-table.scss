@@ -84,10 +84,11 @@
     }
 
     td > .edit-field {
-      cursor: pointer;
+      float: right;
       margin: 0 auto;
+      padding-right: 20px;
       position: relative;
-      width: 120px;
+      width: 100px;
 
       input {
         background: url('../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
@@ -100,16 +101,17 @@
         height: 26px;
         margin: 0;
         padding: 3px 24px 3px 3px;
-        width: 100%;
-        text-align: center;
+        text-align: right;
         transition: opacity 0.5s ease-in-out;
+        width: 82px;
       }
 
       .calculator {
+        cursor: pointer;
         opacity: 1;
         position: absolute;
-        right: -14px;
-        top: 6px;
+        top: 5px;
+        right: 0;
         transition: opacity 0.5s ease-in-out;
         width: 12px;
       }

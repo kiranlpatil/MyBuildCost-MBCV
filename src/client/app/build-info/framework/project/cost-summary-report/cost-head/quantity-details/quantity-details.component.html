@@ -15,7 +15,10 @@
           </button>
         </td>
 
-        <td><span class="value">{{workItemData.unit}}</span></td>
+        <td>
+          <span class="value" *ngIf="!workItemData.unit">-</span>
+          <span class="value" *ngIf="workItemData.unit">{{workItemData.unit}}</span>
+        </td>
 
         <td><span class="value">-</span></td>
 

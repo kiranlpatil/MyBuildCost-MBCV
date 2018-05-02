@@ -73,22 +73,25 @@
                                     </span>
                                   </div>
                                 </td>
-                                <td><span class="value">{{ workItem.unit }}</span></td>
-                                  <td>
-                                    <div class="edit-field">
-                                      <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
-                                      <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
-                                        {{workItem.rate.total|number : '1.2-2'}}
-                                      </div>
-                                      <div class="edit-rate-null" *ngIf="!workItem.rate.total">
-                                        -
-                                      </div>
-                                       <span class="calculator"  id ="getRate{{categoryIndex}}"
-                                         *ngIf="workItem.isDirectRate === false" (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
-                                       <img src="assets/build-info/dashboard/calculator2.png" />
-                                       </span>
+                                <td>
+                                  <span class="value" *ngIf="workItem.unit">{{ workItem.unit }}</span>
+                                  <span class="value" *ngIf="!workItem.unit">-</span>
+                                </td>
+                                <td>
+                                  <div class="edit-field">
+                                    <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
+                                    <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
+                                      {{workItem.rate.total|number : '1.2-2'}}
                                     </div>
-                                  </td>
+                                    <div class="edit-rate-null" *ngIf="!workItem.rate.total">
+                                      -
+                                    </div>
+                                     <span class="calculator"  id ="getRate{{categoryIndex}}"
+                                       *ngIf="workItem.isDirectRate === false" (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
+                                     <img src="assets/build-info/dashboard/calculator2.png" />
+                                     </span>
+                                  </div>
+                                </td>
 
                                   <!--Cost-->
                                   <td>
@@ -117,11 +120,6 @@
                                     </div>
                                   </td>
                                   <td>
-                                    <button class="add-more-details"
-                                            (click)="addNewDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"
-                                            title="Add More Details">
-                                      <span class="glyphicon glyphicon-plus-sign"></span>
-                                    </button>
                                     <div class="file-attachment" [class.attachment-menu-open]="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                       <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Files" />
@@ -137,6 +135,11 @@
                                                        [workItem]="workItem"></bi-attachment>
                                       </div>
                                     </div>
+                                    <button class="add-more-details"
+                                            (click)="addNewDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"
+                                            title="Add More Details">
+                                      <span class="glyphicon glyphicon-plus-sign"></span>
+                                    </button>
                                     <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head" title="Delete Work Item"
                                          (click)="setIdsForDeleteWorkItem(category.rateAnalysisId,workItem.rateAnalysisId,workItemIndex )">
                                       <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />

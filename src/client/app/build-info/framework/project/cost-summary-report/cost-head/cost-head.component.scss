@@ -201,8 +201,7 @@
     &:hover {
       .delete-cost-head,
       .add-more-details,
-      .file-attachment > span,
-      .btn-get-amount {
+      .file-attachment > span {
         opacity: 1;
       }
     }
@@ -215,41 +214,38 @@
 
   tr > td,
   tr > th {
-    float: left;
-
     &:nth-child(1) {
-      width: 329px;
+      width: 295px;
     }
 
     &:nth-child(2),
-    &:nth-child(4),
-    &:nth-child(5),
-    &:nth-child(6) {
-      width: 110px;
+    &:nth-child(4) {
+      text-align: right;
+      width: 130px;
     }
 
     &:nth-child(3) {
-      width: 80px;
+      text-align: left;
+      width: 75px;
     }
 
-    &:nth-child(4) {
+    &:nth-child(5) {
       text-align: right;
+      width: 110px;
+    }
+
+    &:nth-child(6) {
+      width: 110px;
+      text-align: center;
     }
 
     &:last-child {
       vertical-align: top;
     }
     .edit-field {
-      width: auto;
-    }
-  }
-  tr > td {
-    &:nth-child(5) {
-      padding-top: 10px;
-    }
-
-    .edit-field {
       margin: 2px;
+      min-height: 25px;
+      padding-right: 20px;
     }
   }
 
@@ -269,27 +265,27 @@
 
   .edit-cost-null {
     display: inline-block;
-    padding: 4px 5px 5px;
+    padding: 5px;
   }
 
   .edit-cost {
     border-bottom: 1px solid $body-text;
-    display: inline-block;
-    padding: 4px 2px 2px;
     cursor: pointer;
+    display: inline-block;
+    padding: 2px;
   }
 
   .edit-rate-null {
-    display: inline-block;
-    padding: 6px 5px 5px;
     cursor: default;
+    display: inline-block;
+    padding: 7px 5px 5px;
   }
 
   .edit-rate {
     //border-bottom: 1px solid $body-text;
-    display: inline-block;
-    padding: 6px 2px 2px;
     cursor: default;
+    display: inline-block;
+    padding: 7px 5px 5px;
   }
 
   .value {
@@ -371,6 +367,12 @@
     padding: 0;
   }
 
+  .panel-default {
+    .panel-heading {
+      min-height: inherit;
+    }
+  }
+
   .work-item-panel-row {
     display: block;
     font-weight: 400 !important;
@@ -390,6 +392,10 @@
     #show-embedded-table-row {
       background-color: $azure;
       border: 0;
+
+      td {
+        padding: 6px 9px;
+      }
 
       &:hover {
         background: $azure;
