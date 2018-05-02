@@ -50,6 +50,8 @@
                                  [categoryDetails] ="categoryDetails"
                                  [keyQuantity]="keyQuantity"
                                  [workItemsList] ="workItemsList"
+                                 [innerView]="getLabel().WORKITEM_QUANTITY_TAB"
+                                 (closeInnerView)="closeInnerView($event)"
                                  (categoriesTotalAmount)="setCategoriesTotal($event)"
                                  [baseUrl] = "baseUrl">
                 </bi-get-quantity>

@@ -124,7 +124,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   onGetCategoriesSuccess(categoryDetails: any) {
     this.categoryDetails = categoryDetails.data.categories;
     this.categoryDetailsTotalAmount = categoryDetails.data.categoriesAmount;
-    if(this.categoryRateAnalysisId) {
+    if(this.categoryRateAnalysisId !== undefined && this.categoryRateAnalysisId !== null) {
       this.getActiveWorkItemsOfCategory(this.categoryRateAnalysisId);
     }
   }
