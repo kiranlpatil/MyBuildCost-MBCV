@@ -7,6 +7,8 @@ import { Building } from '../../../model/building';
 import { BuildingService } from './../building.service';
 import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
+declare let $: any;
+
 @Component({
   moduleId: module.id,
   selector: 'bi-create-building',
@@ -89,10 +91,19 @@ export class CreateBuildingComponent  implements  OnInit {
       error => this.onSyncBuildingWithRateAnalysisFailure(error));
   }
 
-  onSyncBuildingWithRateAnalysisSuccess(building : Building) {
+  onSyncBuildingWithRateAnalysisSuccess(project : Project) {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this.loaderService.stop();
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
+    var myVar;
+    myVar = setTimeout(ScrollToID, 3000);
+    function ScrollToID() {
+      $('.collapse').removeClass('in');
+      $('#collapse'+numOfbuildings).addClass('in');
+      $('html, body').animate({
+        scrollTop: $('#collapse-cost-summary-panel'+numOfbuildings).offset().top - 8
+      }, 1000);
+    }
   }
 
   onSyncBuildingWithRateAnalysisFailure(error:any) {

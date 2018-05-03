@@ -21,7 +21,7 @@
         <div class="panel panel-default" *ngFor="let building of buildingsReport; let i = index">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}" [class.collapsed]="i!=0" data-parent="#cost-summary-panel">
+              <a id="collapse-cost-summary-panel{{i}}" (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}" [class.collapsed]="i!=0" data-parent="#cost-summary-panel">
                 {{ building.name }}
                 <span class="slab-area">
                   {{ getLabel().TOTAL }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area| number: '1.0-0' }} {{ (defaultCostingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
