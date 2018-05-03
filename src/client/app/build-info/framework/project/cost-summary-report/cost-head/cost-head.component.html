@@ -19,8 +19,7 @@
           <div class="panel-heading">
             <div class="panel-title clearfix" (click)="getActiveWorkItemsOfCategory(category.rateAnalysisId)">
               <div class="col-sm-12">
-                <a data-toggle="collapse"
-                   href="#collapse{{category.rateAnalysisId}}" data-parent="#cost-head-panels" class="collapsed cost-head-lists">
+                <a data-parent="#cost-head-panels" class="collapsed cost-head-lists">
                   <span class="caret"></span>
                   <span class="category-name">{{ category.name }}</span>
                   <span class="text-right pull-right total-cost">{{ category.amount|number :'1.0-0'}}</span>
@@ -28,7 +27,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="category.rateAnalysisId == categoryId" id="collapse{{category.rateAnalysisId}}" class="panel-collapse collapse" [class.in]="category.rateAnalysisId == categoryRateAnalysisId">
+          <div *ngIf="category.rateAnalysisId == categoryId" id="collapse{{category.rateAnalysisId}}" class="panel-collapse collapse">
             <div class="panel-body">
               <div class="bg-white"  *ngFor="let workItem of workItemsList; let workItemIndex = index">
                 <table class="table table-dashboard table-categories">

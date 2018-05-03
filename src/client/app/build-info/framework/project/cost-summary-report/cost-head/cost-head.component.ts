@@ -534,6 +534,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
     getActiveWorkItemsOfCategory(categoryId : number) {
+      this.closeAllTabs();
       let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.categoryId = categoryId;
       this.categoryRateAnalysisId = categoryId;
@@ -545,6 +546,17 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   onGetActiveWorkItemsOfCategorySuccess(workItemsList : any) {
     this.workItemsList = workItemsList.data;
+    this.toggleWorkItemView();
+  }
+
+  toggleWorkItemView() {
+    if($('#collapse'+this.categoryRateAnalysisId).hasClass('display-body')) {
+      $('#collapse'+this.categoryRateAnalysisId).removeClass('display-body');
+      $('#collapse'+this.categoryRateAnalysisId).addClass('hide-body');
+    } else {
+      $('#collapse' + this.categoryRateAnalysisId).removeClass('hide-body');
+      $('#collapse'+this.categoryRateAnalysisId).addClass('display-body');
+    }
   }
 
   // calculation of Quantity * Rate
@@ -617,6 +629,12 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
   closeAttachmentView() {
       this.showAttachmentView = null;
+  }
+
+  closeAllTabs() {
+    this.closeRateView();
+    this.closeQuantityView();
+    this.closeAttachmentView();
   }
 
   workItemRefresh() {
