@@ -1,11 +1,11 @@
 @import '../../../css/common';
 
 .modal-body {
-  padding: 40px 60px 60px;
+  padding: 30px 40px 40px;
   text-align: center;
   p {
-    color: $body-text;
-    font-size: 36px;
+    color: $warning-text;
+    font-size: 20px;
     font-weight: 300;
     margin-bottom: 40px;
   }
@@ -14,5 +14,16 @@
   }
   .btn {
     padding: 0 25px;
+  }
+  .modal-icon {
+    margin: 0 0 10px 0;
+    i {
+      display: inline-block;
+      font-weight: normal;
+      height: 70px;
+      position: relative;
+      top: 1px;
+      width: 80px;
+    }
   }
 }
