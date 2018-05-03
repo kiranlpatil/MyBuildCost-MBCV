@@ -297,6 +297,21 @@
     margin: 5px 0;
     padding: 3px 24px;
   }
+  .cancel {
+    background: none;
+    border: 1px solid #6598CA;
+    border-radius: 2px;
+    color: $persian-green;
+    float: left;
+    margin: 5px 3px;
+    padding: 3px 18px;
+
+    &:hover,
+    &:active,
+    &:focus {
+      @extend .cancel;
+    }
+  }
 }
 
 .get-rate-section:after, .get-rate-section:before,

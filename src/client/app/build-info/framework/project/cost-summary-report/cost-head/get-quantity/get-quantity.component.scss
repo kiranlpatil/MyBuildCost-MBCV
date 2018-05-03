@@ -13,6 +13,11 @@
   transform: translateX(-50%);
   width: 100%;
 
+  .close {
+    width: 10px;
+    height: 20px;
+    margin: 0 4px 15px 5px;
+  }
   table {
     border-radius: 5px;
     margin: 0;
@@ -160,11 +165,13 @@
   }
 
   .cancel {
-    float: right;
-    margin-top: 9px;
     background: none;
-    border: none;
+    border: 1px solid #6598CA;
+    border-radius: 2px;
     color: $persian-green;
+    float: right;
+    margin: 5px 3px;
+    padding: 3px 18px;
 
     &:hover,
     &:active,

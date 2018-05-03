@@ -92,6 +92,9 @@
       <tfoot>
         <tr>
           <td rowspan="2">
+            <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="cancel" (click)="closeRateTab()">{{getButton().CANCEL_BUTTON}}</button>
+            <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="cancel" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+
             <button type="button" *ngIf="!disableRateField" class="save-btn" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
           </td>
           <td class="grand-total-amount" colspan="4">

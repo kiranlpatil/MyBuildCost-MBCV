@@ -1,4 +1,6 @@
 <div *ngIf="quantityItems!==undefined" class="get-quantity-section">
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeQuantityTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
   <table class="table">
     <thead>
       <th>{{getTableHeadings().ITEM}}</th>
