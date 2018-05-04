@@ -78,6 +78,25 @@
       padding: 7px 0;
       display: inline-block;
     }
+
+    .edit-cost-null {
+      display: inline-block;
+      padding: 0;
+    }
+
+    .edit-cost {
+      border-bottom: 1px solid $body-text;
+      cursor: pointer;
+      display: inline-block;
+      padding: 2px;
+    }
+
+    .active-cost {
+      //background: $azure;
+      border-bottom: 1px solid $dashboard-link;
+      border-radius: 0;
+      color: $dashboard-link;
+    }
   }
 
   .quantity-name {

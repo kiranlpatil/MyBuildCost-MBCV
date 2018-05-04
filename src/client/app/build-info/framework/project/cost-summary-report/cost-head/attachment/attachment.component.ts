@@ -47,15 +47,17 @@ export class AttachmentComponent implements OnInit {
     this.fileExtension = this.filesToUpload[0].name.substring(this.filesToUpload[0].name.lastIndexOf('.') + 1).toLowerCase();
 
        if (this.excludedFileExtension.indexOf(this.fileExtension) >= 0) {
-          this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_EXTENSION;
-          this.messageService.message(this.message);
+           this.message.isError = true;
+           this.message.error_msg  = Messages.MSG_ERROR_VALIDATION_OF_FILE_EXTENSION;
+           this.messageService.message(this.message);
           } else {
               if (this.filesToUpload[0].size <= ValueConstant.FILE_SIZE) {
                   this.fileName = this.filesToUpload[0].name;
                   this.enableUploadOption = true;
                   this.addAttachment();
                  } else {
-                  this.message.custom_message = Messages.MSG_ERROR_VALIDATION_OF_FILE_SIZE;
+                  this.message.isError = true;
+                  this.message.error_msg = Messages.MSG_ERROR_VALIDATION_OF_FILE_SIZE;
                   this.messageService.message(this.message);
               }
           }
@@ -78,8 +80,20 @@ export class AttachmentComponent implements OnInit {
   this.fileNamesList = fileNamesList.response.data;
   }
   onGetPresentFilesForWorkItemFailure(error: any) {
+    let message = new Message();
+    if (error.err_code === 404 || error.err_code === 0) {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    } else {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    }
+    this.loaderService.stop();
     console.log(error);
   }
+
    validFile() {
      this.attachmentFiles =  this.fileNamesList;
      for(let index in  this.attachmentFiles) {
@@ -89,6 +103,7 @@ export class AttachmentComponent implements OnInit {
       }
      return true;
    }
+
   addAttachment() {
     if (this.validFile()) {
         this.loaderService.start();
@@ -116,6 +131,17 @@ export class AttachmentComponent implements OnInit {
   }
 
   onAddAttachmentFailure(error: any) {
+    let message = new Message();
+    if (error.err_code === 404 || error.err_code === 0) {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    } else {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    }
+    this.loaderService.stop();
     console.log(error);
   }
 
@@ -145,6 +171,17 @@ export class AttachmentComponent implements OnInit {
     this.workItemRefresh.emit();
   }
   onRemoveAttachmentFailure(error: any) {
+    let message = new Message();
+    if (error.err_code === 404 || error.err_code === 0) {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    } else {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    }
+    this.loaderService.stop();
     console.log(error);
   }
 

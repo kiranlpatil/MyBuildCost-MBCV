@@ -82,7 +82,7 @@
                                     <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
                                       {{workItem.rate.total|number : '1.2-2'}}
                                     </div>
-                                    <div class="edit-rate-null" *ngIf="!workItem.rate.total || !workItem.rate.isEstimated">
+                                    <div class="edit-rate-null" *ngIf="!workItem.isDirectRate && !workItem.rate.isEstimated">
                                       -
                                     </div>
                                      <span class="calculator"  id ="getRate{{categoryIndex}}"
@@ -184,8 +184,8 @@
                                 <td colspan="8" class="add-work-item">
                                   <div id="collapseDetails{{workItemIndex}}" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                      <div>
-                                        <!--<span class="glyphicon glyphicon-remove" (click)="closeDetailedQuantityTab()"></span>showQuantityTab == getLabel().WORKITEM_DETAILED_QUANTITY_TAB &&-->
+                                      <div *ngIf="showWorkItemTab !== getLabel().WORKITEM_RATE_TAB && showWorkItemTab !== getLabel().WORKITEM_SYSTEM_RATE_TAB && showWorkItemTab!==getLabel().WORKITEM_RATE_BY_QUANTITY_TAB">
+                                      <!--<span class="glyphicon glyphicon-remove" (click)="closeDetailedQuantityTab()"></span>showQuantityTab == getLabel().WORKITEM_DETAILED_QUANTITY_TAB &&-->
                                         <bi-quantity-details
                                           [quantityDetails]="workItem.quantity.quantityItemDetails"
                                           [workItem] ="workItem"

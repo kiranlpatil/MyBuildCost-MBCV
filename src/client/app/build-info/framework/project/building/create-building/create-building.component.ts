@@ -47,15 +47,15 @@ export class CreateBuildingComponent  implements  OnInit {
             error => this.onCreateBuildingFailure(error));
       } else {
           var message = new Message();
-          message.isError = false;
-          message.custom_message = Messages.MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION;
+          message.isError = true;
+          message.error_msg = Messages.MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION;
           this.messageService.message(message);
       }
 
     } else {
       message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS;
+      message.isError = true;
+      message.error_msg = Messages.MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS;
       this.messageService.message(message);
     }
   }
