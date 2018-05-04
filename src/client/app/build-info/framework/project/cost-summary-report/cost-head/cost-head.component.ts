@@ -395,6 +395,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.workItemListArray = workItemList.data;
       this.showWorkItemList = true;
     } else {
+      this.showWorkItemList = false;
       var message = new Message();
       message.isError = false;
       message.custom_message = Messages.MSG_ALREADY_ADDED_ALL_WORKITEMS;
