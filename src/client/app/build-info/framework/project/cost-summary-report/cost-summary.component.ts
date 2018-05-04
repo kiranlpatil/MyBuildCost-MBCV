@@ -123,8 +123,8 @@ export class CostSummaryComponent implements OnInit {
     } else if(inActiveCostHeads.data.length === 0) {
       this.showCostHeadList = false;
       let message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS;
+      message.isError = true;
+      message.error_msg = Messages.MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS;
       this.messageService.message(message);
     }
   }

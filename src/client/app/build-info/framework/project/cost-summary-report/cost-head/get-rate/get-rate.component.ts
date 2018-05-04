@@ -130,8 +130,8 @@ export class GetRateComponent implements OnInit {
       );
     } else {
       var message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
+      message.isError = true;
+      message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
       this.messageService.message(message);
     }
   }
@@ -191,8 +191,8 @@ export class GetRateComponent implements OnInit {
         this.totalItemRateQuantity = newTotalQuantity;
         this.rate.quantity = newTotalQuantity;
         var message = new Message();
-        message.isError = false;
-        message.custom_message = Messages.MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL;
+        message.isError = true;
+        message.error_msg = Messages.MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL;
         this.messageService.message(message);
 
     } else {
