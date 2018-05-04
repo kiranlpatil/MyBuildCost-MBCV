@@ -30,7 +30,7 @@
           [materialTakeOffReport]="materialTakeOffReport">
         </bi-material-take-off-report>
       </div>
-      <div *ngIf="selectedElement === undefined || building === undefined">
+      <div *ngIf="isMaterialTakeOffReportPresent === false">
         <h4>{{getMaterialTakeOffElements().REPORT_EMPTY_MESSAGE}}</h4>
       </div>
     </div>
