@@ -184,8 +184,8 @@
                                 <td colspan="8" class="add-work-item">
                                   <div id="collapseDetails{{workItemIndex}}" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                      <div>
-                                        <!--<span class="glyphicon glyphicon-remove" (click)="closeDetailedQuantityTab()"></span>showQuantityTab == getLabel().WORKITEM_DETAILED_QUANTITY_TAB &&-->
+                                      <div *ngIf="showWorkItemTab !== getLabel().WORKITEM_RATE_TAB && showWorkItemTab !== getLabel().WORKITEM_SYSTEM_RATE_TAB && showWorkItemTab!==getLabel().WORKITEM_RATE_BY_QUANTITY_TAB">
+                                      <!--<span class="glyphicon glyphicon-remove" (click)="closeDetailedQuantityTab()"></span>showQuantityTab == getLabel().WORKITEM_DETAILED_QUANTITY_TAB &&-->
                                         <bi-quantity-details
                                           [quantityDetails]="workItem.quantity.quantityItemDetails"
                                           [workItem] ="workItem"
