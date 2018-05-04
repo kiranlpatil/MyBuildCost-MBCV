@@ -224,7 +224,7 @@
     }
 
     &:nth-child(4) {
-      text-align: right;
+      text-align: center;
       width: 130px;
     }
 
@@ -250,6 +250,7 @@
       margin: 2px;
       min-height: 25px;
       padding-right: 20px;
+      text-align: right;
     }
   }
 
