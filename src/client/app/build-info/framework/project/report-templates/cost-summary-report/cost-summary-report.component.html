@@ -70,23 +70,23 @@
   </table>
   <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
     <tbody>
-    <tr style="page-break-inside: avoid;">
-      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;">TOTAL</td>
-      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</td>
-      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">&#8377;{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</td>
-      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">
-          <span *ngIf="buildingReport.estimate.totalRate !== 0">
-            {{ buildingReport.estimate.totalRate | number: '1.2-2'}}
-          </span>
-        <span *ngIf="buildingReport.estimate.totalRate === 0">-</span>
-      </td>
-      <td style="border: none;padding: 5px;font-weight: bold;width: 17.5%;" align="right">
-          <span *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
-            &#8377;{{ buildingReport.estimate.totalEstimatedCost | number: '1.0-0'}}
-          </span>
-        <span *ngIf="buildingReport.estimate.totalEstimatedCost === 0">-</span>
-      </td>
-    </tr>
+      <tr style="page-break-inside: avoid;">
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;">TOTAL</td>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</td>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">&#8377;{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</td>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">
+            <span *ngIf="buildingReport.estimate.totalRate !== 0">
+              {{ buildingReport.estimate.totalRate | number: '1.2-2'}}
+            </span>
+          <span *ngIf="buildingReport.estimate.totalRate === 0">-</span>
+        </td>
+        <td style="border: none;padding: 5px;font-weight: bold;width: 17.5%;" align="right">
+            <span *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
+              &#8377;{{ buildingReport.estimate.totalEstimatedCost | number: '1.0-0'}}
+            </span>
+          <span *ngIf="buildingReport.estimate.totalEstimatedCost === 0">-</span>
+        </td>
+      </tr>
     </tbody>
   </table>
 
@@ -124,8 +124,8 @@
   <table border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto;">
     <thead style="display: table-header-group;">
       <tr style="page-break-inside: avoid;">
-        <th rowspan="2" style="padding: 10px 15px;text-align: center;width: 40%;">Cost Head</th>
-        <th colspan="2" style="text-align: center;padding: 10px 5px;"> By Thumbrule</th>
+        <th rowspan="2" style="text-align: center;padding: 10px 15px;width: 40%;">Cost Head</th>
+        <th colspan="2" style="text-align: center;padding: 10px 15px;"> By Thumbrule</th>
       </tr>
       <tr style="page-break-inside: avoid;">
         <th style="text-align: center;padding: 10px 15px;width: 30%;"> {{ costingByUnit }} {{ costingByArea }}</th>
@@ -150,11 +150,11 @@
   </table>
   <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
     <tbody>
-    <tr style="page-break-inside: avoid;">
-      <th style="border: none;padding: 5px 15px;width: 40%;">TOTAL</th>
-      <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</th>
-      <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">&#8377;{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</th>
-    </tr>
+      <tr style="page-break-inside: avoid;">
+        <th style="border: none;padding: 5px 15px;width: 40%;">TOTAL</th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">{{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">&#8377;{{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</th>
+      </tr>
     </tbody>
   </table>
   <div style="border-top: 1px solid #ccc;font-size: 12px;margin: 30px auto 0 auto;padding: 10px 0;text-align: right;width: 100%;max-width: 750px;">
@@ -164,9 +164,13 @@
 
 
 <div *ngIf="buildingReport" id="estimated" #estimated style="display: none">
-  <h2 style="font-size:14px; padding-bottom: 15px; border-bottom: 1px solid #ccc; text-align: center;">
-    Estimated Cost Report for {{currentProjectName}} </h2>
-  <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
+  <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
+    Estimated Cost Report</h2>
+  <h3 style="font-size:16px; padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">for {{currentProjectName}}</h3>
+  <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
+    {{generatedDate | date:'dd MMMM yyyy'}}
+  </div>
+  <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
     <div style="padding-bottom: 5px;">
       <strong>Company Name : </strong>
       <span>{{company_name}}</span>
@@ -182,43 +186,46 @@
     <div style="padding-bottom: 5px;">
       <strong>Total {{ costingByArea }} : {{ buildingReport.area| number: '1.0-0' }} {{ costingByUnit }}</strong>
     </div>
-    <div style="padding-bottom: 5px;">
-      <strong>Generated on : </strong>
-      <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
-    </div>
   </div>
 
 
-  <table border="1" bordercolor="#888" style="font-size:10px;text-align: left" *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
+  <table border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto;" *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
     <thead style="display: table-header-group;">
       <tr style="page-break-inside: avoid;">
-        <th rowspan="2" style="padding: 10px 5px;">Cost Head</th>
-        <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
+        <th rowspan="2" style="text-align:center;padding: 10px 15px;width: 40%;">Cost Head</th>
+        <th colspan="2" style="text-align: center;padding: 10px 15px;">Estimated</th>
       </tr>
       <tr style="page-break-inside: avoid;">
-        <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }} </th>
-        <th style="text-align: center;padding: 10px 5px;">Estimated Cost ( {{getProjectElements().RS}}  )</th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByUnit }} {{ costingByArea }} </th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">Estimated Cost ( {{getProjectElements().RS}}  )</th>
       </tr>
     </thead>
     <tbody>
       <tr style="page-break-inside: avoid;" *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
-        <td style="padding: 5px;" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+        <td style="padding: 5px 15px;" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
           {{thumbRuleItem.name}}
         </td>
-        <td style="padding: 5px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].rate !== 0">
+        <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].rate !== 0">
           {{ buildingReport.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
         </td>
-        <td style="padding: 5px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
-          {{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}
+        <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+          &#8377;{{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}
         </td>
-      </tr>
-      <tr style="page-break-inside: avoid;">
-        <th style="padding: 5px;">TOTAL</th>
-        <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
-        <th style="padding: 5px;text-align: right;">{{ buildingReport.estimate.totalEstimatedCost|number: '1.0-0'}}</th>
       </tr>
     </tbody>
   </table>
+  <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
+    <tbody>
+      <tr style="page-break-inside: avoid;">
+        <th style="border: none;padding: 5px 15px;width: 40%;">TOTAL</th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">{{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">&#8377;{{ buildingReport.estimate.totalEstimatedCost|number: '1.0-0'}}</th>
+      </tr>
+    </tbody>
+  </table>
+  <div style="border-top: 1px solid #ccc;font-size: 12px;margin: 30px auto 0 auto;padding: 10px 0;text-align: right;width: 100%;max-width: 750px;">
+    Powered by <span style="color:#716edc!important;font-size:11px;text-transform: uppercase;">Build Info</span>
+  </div>
 </div>
 
 <div class="pdf-list">
