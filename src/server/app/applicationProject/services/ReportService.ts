@@ -425,6 +425,36 @@ class ReportService {
           new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, record.unit);
       }
 
+      if(table.content[record.costHeadName] === undefined || table.content[record.costHeadName] === null) {
+        table.content[record.costHeadName] = new MaterialTakeOffTableViewContent(record.costHeadName, 0, record.unit, {});
+      }
+
+
+      if(table.content[record.costHeadName].subContent[record.rowValue] === undefined ||
+        table.content[record.costHeadName].subContent[record.rowValue] === null) {
+        table.content[record.costHeadName].subContent[record.rowValue] = new MaterialTakeOffTableViewContent(record.rowValue, 0, record.unit, {});
+      }
+
+      let tableViewSubContent: MaterialTakeOffTableViewContent = table.content[record.costHeadName].subContent[record.rowValue];
+      tableViewSubContent.columnTwo = tableViewSubContent.columnTwo + record.Total;   // update total
+
+      let tableViewContent: MaterialTakeOffTableViewContent = table.content[record.costHeadName];
+      tableViewContent.columnTwo = tableViewContent.columnTwo + record.Total;   // update total
+
+      if(materialTakeOffTableViewSubContent) {
+        materialTakeOffTableViewSubContent.columnTwo = parseFloat(
+          materialTakeOffTableViewSubContent.columnTwo).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+        tableViewContent.subContent[record.subValue] = materialTakeOffTableViewSubContent;
+      }
+
+      ///
+
+      /*let materialTakeOffTableViewSubContent = null;
+      if (record.subValue && record.subValue !== 'default' && record.subValue !== 'Direct') {
+        materialTakeOffTableViewSubContent =
+          new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, record.unit);
+      }
+
       if(table.content[record.rowValue] === undefined || table.content[record.rowValue] === null) {
         table.content[record.rowValue] = new MaterialTakeOffTableViewContent(record.rowValue, 0, record.unit, {});
       }
@@ -436,7 +466,8 @@ class ReportService {
         materialTakeOffTableViewSubContent.columnTwo = parseFloat(
           materialTakeOffTableViewSubContent.columnTwo).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
         tableViewContent.subContent[record.subValue] = materialTakeOffTableViewSubContent;
-      }
+      }*/
+      ///
 
       let materialTakeOffTableViewFooter: MaterialTakeOffTableViewFooter = null;
       if(table.footer === undefined || table.footer === null) {
