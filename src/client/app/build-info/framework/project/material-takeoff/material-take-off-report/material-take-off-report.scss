@@ -14,7 +14,7 @@
 }
 
 .material-takeoff-report {
-  margin-top: 25px;
+  margin-top: 0;
   .panel-group {
     padding: 10px 0 0;
     tr {
@@ -112,5 +112,99 @@
   }
   .total-amount-work {
     font-weight: bold;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .panel-default {
+    .panel-heading {
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
+      border-radius: 0;
+      float: left;
+      height: auto;
+      min-height: inherit;
+      width: 100%;
+
+      a {
+        background: $white;
+        float: left;
+        font-size: 20px;
+        overflow: auto;
+        padding: 15px 10px;
+        position: relative;
+        text-overflow: clip;
+        white-space: normal;
+      }
+
+      a > .slab-area {
+        display: block;
+        font-size: 12px;
+        margin: 5px 0 0 0;
+        width: 100%;
+      }
+    }
+  }
+  .material-takeoff-report {
+    margin-top: -5px;
+    .item-header {
+      display: none;
+    }
+
+    .item-footer {
+      border-radius: 0;
+      margin: 0;
+    }
+
+    .panel-group {
+      padding: 0;
+
+      .panel-default {
+        float: left;
+        margin-bottom: 15px;
+        width: 100%;
+
+        &:first-child {
+          margin-top: 5px;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .inner-item-list {
+      border-radius: 0;
+      min-height: inherit;
+      margin: 0;
+
+      .panel-default {
+        margin: 0;
+      }
+      .panel-body {
+        float: left;
+        width: 100%;
+      }
+
+      .panel-heading {
+        float: left;
+        min-height: inherit;
+        a {
+          .caret {
+            left : 7px;
+          }
+        }
+      }
+    }
+  }
+
+  .building-name {
+    background: $header-bg !important;
+    border-radius: 0;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
+    font-size: 12px;
+    margin: 0;
+    padding: 10px !important;
   }
 }
