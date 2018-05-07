@@ -28,6 +28,7 @@ export class GetQuantityComponent implements OnInit {
   @Input() workItemRateAnalysisId : number;
   @Input() workItemsList : Array<WorkItem>;
   @Input() baseUrl : string;
+  @Input() workItemUnit : string;
   @Input() keyQuantity : string;
   @Input() innerView: string;
 
