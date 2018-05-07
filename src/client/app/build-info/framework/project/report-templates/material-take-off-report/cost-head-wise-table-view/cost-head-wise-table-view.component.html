@@ -1,0 +1,53 @@
+<table width="100%" border="1" bordercolor="#ccc" style="font-size:10px;text-align: left;margin: 0 0 40px;float:left;-fs-table-paginate: auto;">
+  <thead style="display: table-header-group">
+    <tr style="page-break-inside: avoid">
+      <th width="60%" style="padding: 10px 5px; text-align: left">{{reportData.header.columnOne}}</th>
+      <th width="40%" style="padding: 10px 5px; text-align: right">{{reportData.header.columnTwo}}</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let contentData of reportData.content | keys:getMaterialTakeOffElements().SORT"  width="100%" >
+    <td colspan="3">
+      <table width="100%" style="text-align: left">
+
+
+        <tr *ngFor="let subContentData of reportData.content[contentData].subContent | keys:getMaterialTakeOffElements().SORT"  width="100%" >
+          <td colspan="3">
+            <table width="100%" style="text-align: left">
+              <!--actual content-->
+              <tr style="page-break-inside: avoid">
+                <td width="60%" style="padding: 5px; border-right: 1px solid #ccc;font-weight: bold;">
+                  {{reportData.content[contentData].subContent[subContentData].columnOne }}
+                </td>
+                <td width="40%" align="right" style="padding: 5px; font-weight: bold;">
+                  {{reportData.content[contentData].subContent[subContentData].columnTwo | number}} {{reportData.content[contentData].subContent[subContentData].columnThree}}
+                </td>
+              </tr>
+              <!--subContent content-->
+              <tr style="page-break-inside: avoid" *ngFor="let innerSubContentData of reportData.content[contentData].subContent[subContentData].subContent | keys:getMaterialTakeOffElements().SORT">
+                <td width="60%" style="padding: 5px; border-right: 1px solid #ccc;">
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnOne}}
+                </td>
+                <td width="40%" align="right" style="padding: 5px;">
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnTwo | number}} {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnThree}}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+
+      </table>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot style="display: table-row-group">
+    <tr>
+      <td width="60%" style="padding: 5px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
+      <td width="40%" align="right" style="padding: 5px;font-weight: bold;">{{reportData.footer.columnTwo | number}} {{reportData.footer.columnThree}}</td>
+    </tr>
+  </tfoot>
+</table>
+
+
+

@@ -79,8 +79,10 @@ import { CostHeadReportComponent } from './build-info/framework/project/report-t
 import { AttachmentComponent } from './build-info/framework/project/cost-summary-report/cost-head/attachment/attachment.component';
 import { MaterialTakeOffPdfReportComponent }
 from './build-info/framework/project/report-templates/material-take-off-report/material-take-off-pdf-report.component';
-import { CostHeadWiseSingleElementComponent }
-from './build-info/framework/project/report-templates/material-take-off-report/table-view/table-view.component';
+import { CostHeadWiseTableViewComponent }
+from './build-info/framework/project/report-templates/material-take-off-report/cost-head-wise-table-view/cost-head-wise-table-view.component';
+import { MaterialWiseTableViewComponent }
+from './build-info/framework/project/report-templates/material-take-off-report/material-wise-table-view/material-wise-table-view.component';
 import { PdfHeaderComponent }
 from './build-info/framework/project/report-templates/material-take-off-report/pdf-header/pdf-header.component';
 import { CommonAmenitiesReportComponent }
@@ -136,7 +138,8 @@ import { DisclaimerComponent } from './shared/disclaimer-component/disclaimer-co
     MaterialWiseReportComponent,
     MaterialTakeOffReportComponent,
     MaterialTakeOffPdfReportComponent,
-    CostHeadWiseSingleElementComponent,
+    CostHeadWiseTableViewComponent,
+    MaterialWiseTableViewComponent,
     PdfHeaderComponent,
     TableRowComponent,
     GetRateComponent,

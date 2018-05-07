@@ -17,9 +17,13 @@
         </thead>
       </table>
       <!--pdf report-->
-      <bi-table-view
+      <bi-head-wise-table-view *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD"
         [reportData]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table">
-      </bi-table-view>
+      </bi-head-wise-table-view>
+
+      <bi-material-wise-table-view *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL"
+                               [reportData]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table">
+      </bi-material-wise-table-view>
     </div>
   </div>
 </div>
