@@ -110,7 +110,7 @@ export class CostSummaryComponent implements OnInit {
     setTimeout(() => {
       ScrollToID(this.compareIndex);
     }, 500);
-    function ScrollToID(compareIndex) {
+    function ScrollToID(compareIndex : number) {
       if(!$('#collapse-cost-summary-panel'+compareIndex).hasClass('collapsed')) {
         var divPos = $('#collapse-cost-summary-panel'+compareIndex).offset().top;
         $('html, body').animate({
