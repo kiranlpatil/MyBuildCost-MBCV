@@ -25,3 +25,18 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .page-background {
+    .inner-content {
+      .get-started {
+        position: relative;
+        bottom: auto;
+        right: auto;
+      }
+      .content {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-<form class="form-details" [formGroup]="projectForm" (submit)="submitForm()">
+<form class="col-xs-12 form-details" [formGroup]="projectForm" (submit)="submitForm()">
 
   <div  class="form-group">
     <control-messages [control]="projectForm.controls.name" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>

@@ -80,11 +80,12 @@
       background: initial;
       padding: 0;
       .page-background {
-        background-size: contain;
+        background: url("../../../assets/build-info/page_background/page-bg.png") bottom/contain no-repeat !important;
         .inner-content {
           display: block;
+          height: auto;
           position: absolute;
-          transform: translateY(-40%);
+          transform: translateY(-70%);
           top: 50%;
           width: 100%;
           ul {
@@ -98,6 +99,13 @@
             font-size: 14px;
           }
         }
+      }
+    }
+  }
+  .page-background {
+    .inner-content {
+      .content {
+        width: 100%;
       }
     }
   }

@@ -735,6 +735,9 @@ control-messages {
   .hover-list {
     display: none;
   }
+  .page-background {
+    background: none!important;
+  }
 }
 
 @media only screen and (max-width: 480px) {
