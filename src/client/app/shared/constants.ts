@@ -553,6 +553,7 @@ export class ProjectElements {
   public static SQUAREFEET = 'sqft';
   public static SQUAREMETER = 'sqmt';
   public static RS = 'Rs';
+  public static RS_SYMBOL = '&#8377;';
 }
 
 export class MaterialTakeOffElements {

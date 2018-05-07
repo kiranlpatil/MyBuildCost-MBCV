@@ -4,6 +4,7 @@ import { Messages, NavigationRoutes, ImagePath, Headings, Button } from '../../.
 import { SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../../shared/index';
 import { Building } from '../../../model/building';
+import { Project } from '../../../model/project';
 import { BuildingService } from './../building.service';
 import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
@@ -46,15 +47,15 @@ export class CreateBuildingComponent  implements  OnInit {
             error => this.onCreateBuildingFailure(error));
       } else {
           var message = new Message();
-          message.isError = false;
-          message.custom_message = Messages.MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION;
+          message.isError = true;
+          message.error_msg = Messages.MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION;
           this.messageService.message(message);
       }
 
     } else {
       message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS;
+      message.isError = true;
+      message.error_msg = Messages.MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS;
       this.messageService.message(message);
     }
   }
@@ -93,10 +94,10 @@ export class CreateBuildingComponent  implements  OnInit {
 
   onSyncBuildingWithRateAnalysisSuccess(project : Project) {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    let numOfbuildings = (project.buildings.length - 1);
     this.loaderService.stop();
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
-    var myVar;
-    myVar = setTimeout(ScrollToID, 3000);
+    let myVar = setTimeout(ScrollToID, 3000);
     function ScrollToID() {
       $('.collapse').removeClass('in');
       $('#collapse'+numOfbuildings).addClass('in');

@@ -1,7 +1,11 @@
 <div *ngIf="amenitiesReport" id="amenitiesBothReport" #amenitiesBothReport style="display: none">
-  <h2 style="font-size:14px; padding-bottom: 15px; border-bottom: 1px solid #ccc; text-align: center">
-    Budgeted Cost and Estimated Cost Report for {{currentProjectName}} </h2>
-  <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
+  <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
+    Budgeted Cost and Estimated Cost Report</h2>
+  <h3 style="font-size:16px; padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">for {{currentProjectName}}</h3>
+  <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
+    {{generatedDate | date:'dd MMMM yyyy'}}
+  </div>
+  <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
     <div style="padding-bottom: 5px;">
       <strong>Company Name:</strong>
       <span>{{company_name}}</span>
@@ -10,76 +14,83 @@
       <strong>Project Name:</strong>
       <span>{{currentProjectName}}</span>
     </div>
-    <div style="padding-bottom: 5px;">
-      <strong style="font-weight: bold">Generated on:</strong>
-      <span>{{generatedDate | date:'d-MMMM-y'}}</span>
-    </div>
   </div>
 
-  <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left">
+  <table border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto;">
     <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
-      <th style="padding: 10px 5px;" rowspan="2" >Amenity Cost Head</th>
+      <th style="text-align:center;padding: 10px 5px;width: 30%;" rowspan="2" >Amenity Cost Head</th>
       <th colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
       <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
     </tr>
     <tr style="page-break-inside: avoid">
-      <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-      <th style="text-align: center;padding: 10px 5px;">Budgeted Cost ( {{getProjectElements().RS}}  )</th>
-      <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-      <th style="text-align: center;padding: 10px 5px;">Estimated Cost ( {{getProjectElements().RS}}  )</th>
+      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByUnit }} {{ costingByArea }}</th>
+      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Budgeted Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
+      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByUnit }} {{ costingByArea }}</th>
+      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Estimated Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
     </tr>
     </thead>
     <tbody>
     <tr style="page-break-inside: avoid" *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index">
-      <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
-      <td style="padding: 5px;" align="right">
+      <td style="padding: 5px 15px;width: 17.5%;">{{thumbRuleItem.name}}</td>
+      <td style="padding: 5px 15px;width: 17.5%;" align="right">
         <span *ngIf="thumbRuleItem.rate !== 0">{{ thumbRuleItem.rate | number }}</span>
         <span *ngIf="thumbRuleItem.rate === 0">-</span>
       </td>
-      <td style="padding: 5px;" align="right">
-        <span *ngIf="thumbRuleItem.amount !== 0">{{thumbRuleItem.amount | number }}</span>
+      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+        <span *ngIf="thumbRuleItem.amount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{thumbRuleItem.amount | number }}</span>
         <span *ngIf="thumbRuleItem.amount === 0">-</span>
       </td>
-      <td style="padding: 5px;" align="right">
+      <td style="padding: 5px 15px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate !== 0">
           {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate | number }}
         </span>
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate === 0">-</span>
       </td>
-      <td style="padding: 5px;" align="right">
+      <td style="padding: 5px 15px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total !== 0">
-          {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
+          <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
         </span>
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total === 0">-</span>
       </td>
     </tr>
+    </tbody>
+  </table>
+  <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
+    <tbody>
     <tr style="page-break-inside: avoid">
-      <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;">TOTAL</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
           {{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}
         </span>
         <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
       </td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.totalEstimatedCost !== 0">
-          {{getProjectElements().RS}} {{ amenitiesReport.estimate.totalEstimatedCost|number: '1.2-2'}}
+          <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.totalEstimatedCost|number: '1.2-2'}}
         </span>
         <span *ngIf="amenitiesReport.estimate.totalEstimatedCost === 0">-</span>
       </td>
     </tr>
     </tbody>
   </table>
+  <div style="border-top: 1px solid #ccc;font-size: 12px;margin: 30px auto 0 auto;padding: 10px 0;text-align: right;width: 100%;max-width: 750px;">
+    Powered by <span style="color:#716edc!important;font-size:11px;text-transform: uppercase;">Build Info</span>
+  </div>
 </div>
 
 
 <div *ngIf="amenitiesReport" id="amenitiesBudgetedReport" #amenitiesBudgetedReport style="display: none">
-  <h2 style="font-size:14px; padding-bottom: 15px; border-bottom: 1px solid #ccc; text-align: center">
-    Budgeted Cost Report for {{currentProjectName}} </h2>
-  <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
+  <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
+    Budgeted Cost Report</h2>
+  <h3 style="font-size:16px; padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">for {{currentProjectName}}</h3>
+  <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
+    {{generatedDate | date:'dd MMMM yyyy'}}
+  </div>
+  <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
     <div style="padding-bottom: 5px;">
       <strong>Company Name:</strong>
       <span>{{company_name}}</span>
@@ -88,49 +99,56 @@
       <strong>Project Name:</strong>
       <span>{{currentProjectName}}</span>
     </div>
-    <div style="padding-bottom: 5px;">
-      <strong style="font-weight: bold">Generated on:</strong>
-      <span>{{generatedDate | date:'d-MMMM-y'}}</span>
-    </div>
   </div>
 
-  <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left">
+  <table border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto;">
     <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
-      <th style="padding: 10px 5px;" rowspan="2" >Amenity Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
+      <th style="text-align:center;padding: 10px 15px;width: 40%;" rowspan="2" >Amenity Cost Head</th>
+      <th colspan="2" style="text-align: center;padding: 10px 15px;">By Thumbrule</th>
     </tr>
     <tr style="page-break-inside: avoid">
-      <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-      <th style="text-align: center;padding: 10px 5px;">Budgeted Cost ( {{getProjectElements().RS}}  )</th>
+      <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByUnit }} {{ costingByArea }}</th>
+      <th style="text-align: center;padding: 10px 15px;width: 30%;">Budgeted Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
     </tr>
     </thead>
     <tbody>
     <tr style="page-break-inside: avoid" *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index">
-      <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
-      <td style="padding: 5px;" align="right">
+      <td style="padding: 5px 15px;">{{thumbRuleItem.name}}</td>
+      <td style="padding: 5px 15px;" align="right">
         <span *ngIf="thumbRuleItem.rate !== 0">{{ thumbRuleItem.rate | number }}</span>
         <span *ngIf="thumbRuleItem.rate === 0">-</span>
       </td>
-      <td style="padding: 5px;" align="right">
-        <span *ngIf="thumbRuleItem.amount !== 0">{{thumbRuleItem.amount}}</span>
+      <td style="padding: 5px 15px;" align="right">
+        <span *ngIf="thumbRuleItem.amount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{thumbRuleItem.amount}}</span>
         <span *ngIf="thumbRuleItem.amount === 0">-</span>
       </td>
     </tr>
+    </tbody>
+  </table>
+  <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
+    <tbody>
     <tr style="page-break-inside: avoid">
-      <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
-      <td style="padding: 5px;font-weight: bold;" align="right" width="">{{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 40%;" width="">TOTAL</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width=""><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
     </tr>
     </tbody>
   </table>
+  <div style="border-top: 1px solid #ccc;font-size: 12px;margin: 30px auto 0 auto;padding: 10px 0;text-align: right;width: 100%;max-width: 750px;">
+    Powered by <span style="color:#716edc!important;font-size:11px;text-transform: uppercase;">Build Info</span>
+  </div>
 </div>
 
 
 <div *ngIf="amenitiesReport" id="amenitiesEstimatedReport" #amenitiesEstimatedReport style="display: none">
   <h2 style="font-size:14px; padding-bottom: 15px; border-bottom: 1px solid #ccc; text-align: center">
-    Estimated Cost Report for {{currentProjectName}} </h2>
-  <div style="font-size:12px; text-align: left; margin-bottom: 10px;">
+    Estimated Cost Report</h2>
+  <h3 style="font-size:16px; padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">for {{currentProjectName}}</h3>
+  <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
+    {{generatedDate | date:'dd MMMM yyyy'}}
+  </div>
+  <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
     <div style="padding-bottom: 5px;">
       <strong>Company Name:</strong>
       <span>{{company_name}}</span>
@@ -139,54 +157,57 @@
       <strong>Project Name:</strong>
       <span>{{currentProjectName}}</span>
     </div>
-    <div style="padding-bottom: 5px;">
-      <strong style="font-weight: bold">Generated on:</strong>
-      <span>{{generatedDate | date:'d-MMMM-y'}}</span>
-    </div>
   </div>
 
-  <table border="1" bordercolor="#ccc" style="font-size:10px;text-align: left">
+  <table border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto;">
     <thead style="display: table-header-group">
       <tr style="page-break-inside: avoid">
-        <th style="padding: 10px 5px;" rowspan="2" >Amenity Cost Head</th>
-        <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
+        <th style="text-align:center;padding: 10px 15px;width: 40%;" rowspan="2" >Amenity Cost Head</th>
+        <th colspan="2" style="text-align: center;padding: 10px 15px;">Estimated</th>
       </tr>
       <tr style="page-break-inside: avoid">
-        <th style="text-align: center;padding: 10px 5px;">{{ costingByUnit }} {{ costingByArea }}</th>
-        <th style="text-align: center;padding: 10px 5px;">Estimated Cost ( {{getProjectElements().RS}}  )</th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByUnit }} {{ costingByArea }}</th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">Estimated Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
       </tr>
     </thead>
     <tbody>
       <tr style="page-break-inside: avoid" *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index">
-        <td style="padding: 5px;">{{thumbRuleItem.name}}</td>
-        <td style="padding: 5px;" align="right">
+        <td style="padding: 5px 15px;">{{thumbRuleItem.name}}</td>
+        <td style="padding: 5px 15px;" align="right">
           <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate !== 0">
             {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate | number }}
           </span>
           <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate === 0">-</span>
         </td>
-        <td style="padding: 5px;" align="right">
+        <td style="padding: 5px 15px;" align="right">
           <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total !== 0">
-            {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
+            <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
           </span>
           <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total === 0">-</span>
         </td>
       </tr>
+    </tbody>
+  </table>
+  <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
+    <tbody>
       <tr style="page-break-inside: avoid">
-        <td style="padding: 5px;font-weight: bold;" width="">TOTAL</td>
-        <td style="padding: 5px;font-weight: bold;" align="right" width="">
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 40%;" width="">TOTAL</td>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width="">
           <span *ngIf="amenitiesReport.estimate.totalRate !== 0">{{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}</span>
           <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
         </td>
-        <td style="padding: 5px;font-weight: bold;" align="right" width="">
-          <span *ngIf="amenitiesReport.estimate.totalEstimatedCost !== 0">
-            {{getProjectElements().RS}} {{ amenitiesReport.estimate.totalEstimatedCost|number: '1.2-2'}}
-          </span>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width="">
+            <span *ngIf="amenitiesReport.estimate.totalEstimatedCost !== 0">
+              <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.totalEstimatedCost|number: '1.2-2'}}
+            </span>
           <span *ngIf="amenitiesReport.estimate.totalEstimatedCost === 0">-</span>
         </td>
       </tr>
     </tbody>
   </table>
+  <div style="border-top: 1px solid #ccc;font-size: 12px;margin: 30px auto 0 auto;padding: 10px 0;text-align: right;width: 100%;max-width: 750px;">
+    Powered by <span style="color:#716edc!important;font-size:11px;text-transform: uppercase;">Build Info</span>
+  </div>
 </div>
 
 

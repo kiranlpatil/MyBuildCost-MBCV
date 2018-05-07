@@ -148,11 +148,11 @@ export class GetQuantityComponent implements OnInit {
       );
     } else {
       var message = new Message();
-      message.isError = false;
+      message.isError = true;
       if(this.keyQuantity !== null && this.keyQuantity !== undefined) {
-        message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
+        message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
       } else {
-        message.custom_message = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
+        message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
       }
       this.messageService.message(message);
     }
@@ -206,7 +206,7 @@ export class GetQuantityComponent implements OnInit {
   onUpdateQuantityItemsFailure(error: any) {
     var message = new Message();
     message.isError = true;
-    message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
+    message.error_msg = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
     this.messageService.message(message);
     this.loaderService.stop();
   }

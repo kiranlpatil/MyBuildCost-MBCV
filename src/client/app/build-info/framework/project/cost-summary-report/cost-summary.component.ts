@@ -16,6 +16,8 @@ import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
 import { LoaderService } from '../../../../shared/loader/loaders.service';
 
+declare let $: any;
+
 @Component({
   moduleId: module.id,
   selector: 'bi-cost-summary-report',
@@ -105,7 +107,17 @@ export class CostSummaryComponent implements OnInit {
   setBuildingId( i:number, buildingId: string) {
     this.compareIndex = i;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
-    //this.showGrandTotalPanelTable[this.compareIndex] = !this.showGrandTotalPanelTable[this.compareIndex];
+    setTimeout(() => {
+      ScrollToID(this.compareIndex);
+    }, 500);
+    function ScrollToID(compareIndex) {
+      if(!$('#collapse-cost-summary-panel'+compareIndex).hasClass('collapsed')) {
+        var divPos = $('#collapse-cost-summary-panel'+compareIndex).offset().top;
+        $('html, body').animate({
+          scrollTop: divPos - 8
+        }, 500);
+      }
+    }
   }
 
   getAllInActiveCostHeads(buildingId: string) {
@@ -123,8 +135,8 @@ export class CostSummaryComponent implements OnInit {
     } else if(inActiveCostHeads.data.length === 0) {
       this.showCostHeadList = false;
       let message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS;
+      message.isError = true;
+      message.error_msg = Messages.MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS;
       this.messageService.message(message);
     }
   }
