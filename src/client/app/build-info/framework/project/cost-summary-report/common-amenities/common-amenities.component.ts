@@ -8,6 +8,8 @@ import { CostSummaryService } from '../../cost-summary-report/cost-summary.servi
 import { CostHead } from '../../../model/costhead';
 import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
+declare let $: any;
+
 @Component({
   moduleId: module.id,
   selector: 'bi-common-amenities',
@@ -166,7 +168,21 @@ export class CommonAmenitiesComponent implements OnInit {
 
   showGrandTotalTable() {
     this.showGrandTotalPanelTable = !this.showGrandTotalPanelTable;
+
+    setTimeout(() => {
+      this.ScrollToID();
+    }, 500);
   }
+
+  ScrollToID() {
+  if(!$('#collapseCommonDevelopmentHeading').hasClass('collapsed')) {
+    var divPos = $('#collapseCommonDevelopmentHeading').offset().top;
+    $('html, body').animate({
+      scrollTop: divPos - 8
+    }, 500);
+  }
+}
+
 }
 
 
