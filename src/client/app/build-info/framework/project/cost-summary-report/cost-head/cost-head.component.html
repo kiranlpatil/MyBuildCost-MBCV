@@ -168,12 +168,14 @@
                                       <bi-get-quantity [quantityItems]="quantityItemsArray"
                                                        [categoryDetails] ="categoryDetails"
                                                        [workItemsList] ="workItemsList"
+                                                       [workItemUnit] = "workItem.unit"
                                                        (categoriesTotalAmount)="setCategoriesTotal($event)"
                                                        (refreshWorkItemList)="refreshWorkItemList($event)"
                                                        (closeQuantityView) = "closeQuantityView($event)"
                                                        [categoryRateAnalysisId]="category.rateAnalysisId"
                                                        [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                                        [keyQuantity]="keyQuantity"
+                                                       [quantityId]="quantityId"
                                                        [baseUrl] = "baseUrl">
                                       </bi-get-quantity>
                                     </div>

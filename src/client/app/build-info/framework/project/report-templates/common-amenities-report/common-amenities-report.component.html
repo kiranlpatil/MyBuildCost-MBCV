@@ -24,9 +24,9 @@
       <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
     </tr>
     <tr style="page-break-inside: avoid">
-      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByUnit }} {{ costingByArea }}</th>
+      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByArea }} ( <span [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span> )</th>
       <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Budgeted Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
-      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByUnit }} {{ costingByArea }}</th>
+      <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByArea }} ( <span [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span> )</th>
       <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Estimated Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
     </tr>
     </thead>
@@ -38,7 +38,7 @@
         <span *ngIf="thumbRuleItem.rate === 0">-</span>
       </td>
       <td style="padding: 5px 15px;width: 17.5%;" align="right">
-        <span *ngIf="thumbRuleItem.amount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{thumbRuleItem.amount | number }}</span>
+        <span *ngIf="thumbRuleItem.amount !== 0">{{thumbRuleItem.amount | number }}</span>
         <span *ngIf="thumbRuleItem.amount === 0">-</span>
       </td>
       <td style="padding: 5px 15px;width: 17.5%;" align="right">
@@ -49,7 +49,7 @@
       </td>
       <td style="padding: 5px 15px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total !== 0">
-          <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
+          {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
         </span>
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total === 0">-</span>
       </td>
@@ -60,11 +60,11 @@
     <tbody>
     <tr style="page-break-inside: avoid">
       <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;">TOTAL</td>
-      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
       <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
       <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
-          {{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}
+          <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}
         </span>
         <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
       </td>
@@ -108,7 +108,7 @@
       <th colspan="2" style="text-align: center;padding: 10px 15px;">By Thumbrule</th>
     </tr>
     <tr style="page-break-inside: avoid">
-      <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByUnit }} {{ costingByArea }}</th>
+      <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }} ( <span [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span> )</th>
       <th style="text-align: center;padding: 10px 15px;width: 30%;">Budgeted Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
     </tr>
     </thead>
@@ -120,7 +120,7 @@
         <span *ngIf="thumbRuleItem.rate === 0">-</span>
       </td>
       <td style="padding: 5px 15px;" align="right">
-        <span *ngIf="thumbRuleItem.amount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{thumbRuleItem.amount}}</span>
+        <span *ngIf="thumbRuleItem.amount !== 0">{{thumbRuleItem.amount}}</span>
         <span *ngIf="thumbRuleItem.amount === 0">-</span>
       </td>
     </tr>
@@ -130,7 +130,7 @@
     <tbody>
     <tr style="page-break-inside: avoid">
       <td style="border: none;padding: 5px 15px;font-weight: bold;width: 40%;" width="">TOTAL</td>
-      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width="">{{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
+      <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width=""><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.thumbRule.totalRate|number: '1.2-2' }}</td>
       <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width=""><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
     </tr>
     </tbody>
@@ -166,7 +166,7 @@
         <th colspan="2" style="text-align: center;padding: 10px 15px;">Estimated</th>
       </tr>
       <tr style="page-break-inside: avoid">
-        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByUnit }} {{ costingByArea }}</th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }} ( <span [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span> )</th>
         <th style="text-align: center;padding: 10px 15px;width: 30%;">Estimated Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
       </tr>
     </thead>
@@ -181,7 +181,7 @@
         </td>
         <td style="padding: 5px 15px;" align="right">
           <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total !== 0">
-            <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
+            {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number }}
           </span>
           <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total === 0">-</span>
         </td>
@@ -193,7 +193,7 @@
       <tr style="page-break-inside: avoid">
         <td style="border: none;padding: 5px 15px;font-weight: bold;width: 40%;" width="">TOTAL</td>
         <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width="">
-          <span *ngIf="amenitiesReport.estimate.totalRate !== 0">{{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}</span>
+          <span *ngIf="amenitiesReport.estimate.totalRate !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ amenitiesReport.estimate.totalRate|number: '1.2-2'}}</span>
           <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
         </td>
         <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;" align="right" width="">

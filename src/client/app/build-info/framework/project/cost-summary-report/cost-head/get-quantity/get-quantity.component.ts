@@ -28,7 +28,9 @@ export class GetQuantityComponent implements OnInit {
   @Input() workItemRateAnalysisId : number;
   @Input() workItemsList : Array<WorkItem>;
   @Input() baseUrl : string;
+  @Input() workItemUnit : string;
   @Input() keyQuantity : string;
+  @Input() quantityId : number;
   @Input() innerView: string;
 
   @Output() closeQuantityView = new EventEmitter();
@@ -137,6 +139,7 @@ export class GetQuantityComponent implements OnInit {
         && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
 
       let quantityObj : QuantityDetails = new QuantityDetails();
+      quantityObj.id = this.quantityId;
       quantityObj.name = this.keyQuantity;
       quantityObj.quantityItems = quantityItems;
       this.loaderService.start();

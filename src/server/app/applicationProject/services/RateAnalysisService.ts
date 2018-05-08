@@ -198,8 +198,8 @@ class RateAnalysisService {
         'units': unitsRateAnalysis
       });
     }).catch(function (e: any) {
-      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e));
-      CCPromise.reject(e);
+      logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -299,7 +299,8 @@ class RateAnalysisService {
 
   getWorkItemsWithoutCategoryFromRateAnalysis(costHeadRateAnalysisId: number, workItemsRateAnalysis: any,
                                               rateItemsRateAnalysis: any, unitsRateAnalysis: any,
-                                              notesRateAnalysis: any, buildingCategories: Array<Category>, configCategories: Array<Category>) {
+                                              notesRateAnalysis: any, buildingCategories: Array<Category>,
+                                              configCategories: Array<Category>) {
 
     logger.info('getWorkItemsWithoutCategoryFromRateAnalysis has been hit.');
 

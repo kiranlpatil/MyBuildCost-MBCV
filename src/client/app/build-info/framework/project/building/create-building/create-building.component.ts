@@ -88,7 +88,7 @@ export class CreateBuildingComponent  implements  OnInit {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
 
     this.buildingService.syncBuildingWithRateAnalysis(projectId, building.data._id).subscribe(
-      building => this.onSyncBuildingWithRateAnalysisSuccess(building),
+      project => this.onSyncBuildingWithRateAnalysisSuccess(project),
       error => this.onSyncBuildingWithRateAnalysisFailure(error));
   }
 

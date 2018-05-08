@@ -6,6 +6,7 @@ import { MessageService } from '../../../../../shared/index';
 import { Message } from '../../../../../shared/index';
 import { BuildingService } from '../building.service';
 import { SessionStorage, SessionStorageService } from '../../../../../shared/index';
+import { LoaderService } from '../../../../../shared/loader/loaders.service';
 
 @Component({
   moduleId: module.id,
@@ -22,7 +23,8 @@ export class BuildingDetailsComponent implements OnInit {
   public errorMessage: boolean = false;
 
   constructor(private buildingService: BuildingService, private _router: Router,
-              private activatedRoute:ActivatedRoute, private messageService: MessageService) {
+              private activatedRoute:ActivatedRoute, private messageService: MessageService,
+              private loaderService : LoaderService) {
   }
 
   ngOnInit() {
@@ -64,16 +66,32 @@ export class BuildingDetailsComponent implements OnInit {
 
 
   updateBuilding(buildingModel : Building) {
-      let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      let buildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
-      this.buildingService.updateBuilding( projectId, buildingId, buildingModel)
-        .subscribe(
-          building => this.updateBuildingSuccess(building),
-          error => this.updateBuildingFailure(error));
+    if(this.checkNumberOfFloors(buildingModel.totalNumOfFloors, buildingModel.numOfParkingFloors)) {
+
+      if(this.checkApartmentConfiguration(buildingModel)) {
+        this.loaderService.start();
+        let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+        let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+        this.buildingService.updateBuilding(projectId, buildingId, buildingModel)
+          .subscribe(
+            building => this.updateBuildingSuccess(building),
+            error => this.updateBuildingFailure(error));
+      } else {
+        var message = new Message();
+        message.isError = true;
+        message.error_msg = Messages.MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION;
+        this.messageService.message(message);
+      }
+    } else {
+      message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS;
+      this.messageService.message(message);
+    }
   }
 
   updateBuildingSuccess(result: any) {
-
+    this.loaderService.stop();
     if (result !== null) {
       var message = new Message();
       message.isError = false;
@@ -85,7 +103,7 @@ export class BuildingDetailsComponent implements OnInit {
   updateBuildingFailure(error: any) {
 
     var message = new Message();
-
+    this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       message.error_msg = error.err_msg;
       message.isError = true;
@@ -96,6 +114,26 @@ export class BuildingDetailsComponent implements OnInit {
       message.error_msg = error.err_msg;
       message.isError = true;
       this.messageService.message(message);
+    }
+  }
+
+  checkNumberOfFloors(totalNumOfFloors : number, numOfParkingFloors : number) {
+    if(totalNumOfFloors > numOfParkingFloors) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkApartmentConfiguration(buildingModel : Building) {
+    if((buildingModel.numOfOneBHK !== 0 && buildingModel.numOfOneBHK !== null) ||
+      (buildingModel.numOfTwoBHK  !== 0 && buildingModel.numOfTwoBHK !== null) ||
+      (buildingModel.numOfThreeBHK !== 0 && buildingModel.numOfThreeBHK !== null) ||
+      (buildingModel.numOfFourBHK !== 0 && buildingModel.numOfFourBHK !== null) ||
+      (buildingModel.numOfFiveBHK !== 0 && buildingModel.numOfFiveBHK !== null)) {
+      return true;
+    } else {
+      return false;
     }
   }
 

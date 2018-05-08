@@ -37,7 +37,7 @@
       <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" disabled/>
     </td>
     <td class="get-amount-value text-left get-unit">
-      <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control unit-input text-left" disabled/>
+      {{workItemUnit}}
     </td>
     <td colspan="2" class="get-amount-value get-delete text-center">
       <div class="col-xs-2">
@@ -65,7 +65,7 @@
       <span> {{quantityTotal|number}} </span>
     </td>
     <td class="total-amount text-left">
-      sqft
+      {{workItemUnit}}
     </td>
     <td colspan="2" class="total-amount">
       &nbsp;

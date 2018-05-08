@@ -33,6 +33,7 @@ export class QuantityDetailsComponent implements OnInit {
   @Output() workItemRateId = new EventEmitter<number>();
 
   workItemId : number;
+  quantityId : number;
   rateItemsArray : Rate;
   unit:string='';
   previousRateQuantity : number = 0;
@@ -79,9 +80,11 @@ export class QuantityDetailsComponent implements OnInit {
       if(quantityDetail.quantityItems.length !== 0) {
         this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
         this.keyQuantity = quantityDetail.name;
+        this.quantityId = quantityDetail.id;
       } else {
         this.quantityItemsArray = [];
         quantityDetail.name = this.keyQuantity;
+        quantityDetail.id =undefined;
       }
       this.showInnerView = this.getLabel().WORKITEM_QUANTITY_TAB;
     }else {
