@@ -148,7 +148,7 @@ class Messages {
   public static MSG_ERROR_EMPTY_RESPONSE = 'Empty response';
 
   //Building with same name
-  public static MSG_ERROR_BUILDING_NAME_ALREADY_EXIST = 'Building Name Already Exist';
+  public static MSG_ERROR_BUILDING_NAME_ALREADY_EXIST = 'Building with same name is already exist.';
 }
 export=Messages;
 
