@@ -1,5 +1,5 @@
 import { BuildingReport } from './building-report';
-import  { AddCostHeadButton} from '../../../../../server/app/applicationProject/dataaccess/model/project/reports/showHideCostHeadButton';
+import { AddCostHeadButton } from './showHideCostHeadButton';
 
 class ProjectReport {
   buildings : Array<BuildingReport>;

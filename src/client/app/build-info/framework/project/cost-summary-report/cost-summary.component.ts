@@ -15,7 +15,7 @@ import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
 import { LoaderService } from '../../../../shared/loader/loaders.service';
-import {AddCostHeadButton} from "../../../../../../server/app/applicationProject/dataaccess/model/project/reports/showHideCostHeadButton";
+import { AddCostHeadButton } from '../../model/showHideCostHeadButton';
 
 declare let $: any;
 
