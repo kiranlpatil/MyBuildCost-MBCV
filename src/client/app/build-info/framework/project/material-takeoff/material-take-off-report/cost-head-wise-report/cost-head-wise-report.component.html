@@ -16,6 +16,8 @@
                  <span class="caret"></span>
                 </a>
 
+
+                <!--sub content-->
                 <div id="collapsepanel{{subContentIndex}}" class="panel-collapse collapse">
                   <div class="panel-body">
                     <div class="collapse-list-item" *ngFor="let innerSubContent of costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().SORT;">
@@ -26,29 +28,9 @@
                     </div>
                   </div>
                 </div>
-                <!--<a class="collapse-list-item" *ngFor="let subContent of costHeadWiseContent[content].subContent | keys:getMaterialTakeOffElements().SORT; let subContentIndex = index">
-                  <div (click)="showInnerSubContent(costHeadWiseContent[content].subContent[subContent].subContent, secondaryViewDataIndex, contentIndex, subContentIndex)">
-                    <bi-table-row
-                      [customClass]="'row-list'"
-                      [rows]="costHeadWiseContent[content].subContent[subContent]">
-                    </bi-table-row>
-                    <span *ngIf="costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT" class="caret"></span>
 
 
-                  </div>
-                </a>
 
-
-                &lt;!&ndash;Inner sub content&ndash;&gt;
-                <div class="panel-body" *ngIf="dataIndex === secondaryViewDataIndex &&
-                                        headerIndex === contentIndex  && nestedSubContentIndex === subContentIndex && viewSubContent && viewNestedSubContent">
-                  <div class="collapse-list-item" *ngFor="let innerSubContent of costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().SORT;">
-                    <bi-table-row
-                      [customClass]="'row-list'"
-                      [rows]="costHeadWiseContent[content].subContent[subContent].subContent[innerSubContent]">
-                    </bi-table-row>
-                  </div>
-                </div>-->
               </h4>
             </div>
           </div>
