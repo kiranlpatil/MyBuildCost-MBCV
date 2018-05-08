@@ -44,6 +44,7 @@ class ProjectService {
   costHeadId: number;
   categoryId: number;
   workItemId: number;
+  showHideAddItemButton:boolean=true;
   private projectRepository: ProjectRepository;
   private buildingRepository: BuildingRepository;
   private authInterceptor: AuthInterceptor;
@@ -1591,8 +1592,12 @@ class ProjectService {
         if (result.length > 0) {
           let workItemsOfBuildingCategory = result[0].costHeads.categories.workItems;
           let workItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(workItemsOfBuildingCategory, result[0].rates, true);
+          let workItemsListAndShowHideAddItemButton= {
+            workItems:workItemsListWithBuildingRates.workItems,
+            showHideAddButton:workItemsListWithBuildingRates.showHideAddItemButton
+          };
           callback(null, {
-            data: workItemsListWithBuildingRates.workItems,
+            data: workItemsListAndShowHideAddItemButton,
             access_token: this.authInterceptor.issueTokenWithUid(user)
           });
         } else {
@@ -1625,8 +1630,12 @@ class ProjectService {
         if (result.length > 0) {
           let workItemsOfCategory = result[0].projectCostHeads.categories.workItems;
           let workItemsListWithRates = this.getWorkItemListWithCentralizedRates(workItemsOfCategory, result[0].rates, true);
+          let workItemsListAndShowHideAddItemButton= {
+            workItems:workItemsListWithRates.workItems,
+            showHideAddButton:workItemsListWithRates.showHideAddItemButton
+          };
           callback(null, {
-            data: workItemsListWithRates.workItems,
+            data: workItemsListAndShowHideAddItemButton,
             access_token: this.authInterceptor.issueTokenWithUid(user)
           });
         } else {
@@ -1663,6 +1672,8 @@ class ProjectService {
           workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount + workItem.amount;
         }
         workItemsListWithRates.workItems.push(workItem);
+      }else {
+        workItemsListWithRates.showHideAddItemButton=false;
       }
     }
     return workItemsListWithRates;

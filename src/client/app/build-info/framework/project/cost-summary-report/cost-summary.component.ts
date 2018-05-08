@@ -15,6 +15,7 @@ import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
 import { LoaderService } from '../../../../shared/loader/loaders.service';
+import {AddCostHeadButton} from "../../../../../../server/app/applicationProject/dataaccess/model/project/reports/showHideCostHeadButton";
 
 declare let $: any;
 
@@ -55,6 +56,7 @@ export class CostSummaryComponent implements OnInit {
   cloneBuildingForm: FormGroup;
   cloneBuildingModel: Building = new Building();
   clonedBuildingDetails: Array<CostHead>;
+  showHideCostHeadButtonsList: Array<AddCostHeadButton>;
 
   public costIn: any[] = [
     { 'costInId': ProjectElements.RS_PER_SQFT},
@@ -173,6 +175,7 @@ export class CostSummaryComponent implements OnInit {
     this.projectReport = new ProjectReport( projects.data.buildings, projects.data.commonAmenities[0]) ;
     this.buildingsReport = this.projectReport.buildings;
     this.amenitiesReport = this.projectReport.commonAmenities;
+    this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
   }
 
@@ -207,11 +210,7 @@ export class CostSummaryComponent implements OnInit {
     this.loaderService.stop();
      if ( costHeadDetails !== null) {
       this.showCostHeadList = false;
-      var message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD;
-      this.messageService.message(message);
-    }
+      }
     this.onChangeCostingByUnit(this.defaultCostingByUnit);
   }
 

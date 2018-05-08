@@ -134,8 +134,8 @@
                   </tr>
                   <tr class="add-item-row">
                     <td colspan="5" class="add-items">
-                      <button type="button" class="btn btn-add-item"
-                              (click)="getAllInActiveCostHeads(building._id)">
+                      <button  type="button" class="btn btn-add-item"
+                               [disabled]="showHideCostHeadButtonsList[i].showHideAddCostHeadButton" (click)="getAllInActiveCostHeads(building._id)" >
                         <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
                       </button>
                     </td>
@@ -183,6 +183,7 @@
 
       <!--Common Amenity-->
       <bi-common-amenities
+        [showHideCostHeadButtonList]="showHideCostHeadButtonsList"
         [amenitiesReport]="amenitiesReport"
         [costingByUnit]="defaultCostingByUnit"
         [costingByArea]="defaultCostingByArea"

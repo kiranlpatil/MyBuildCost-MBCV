@@ -74,7 +74,9 @@
     }
   }
 }
-
+button[disabled]{
+  cursor:not-allowed;
+}
 .building-name {
   .btn-print {
     position: absolute;

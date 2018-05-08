@@ -117,7 +117,7 @@
             <tr class="add-item-row">
               <td colspan="5" class="add-items">
                 <button type="button" class="btn btn-add-item"
-                        (click)="getAllInActiveProjectCostHeads()">
+                        (click)="getAllInActiveProjectCostHeads()" [disabled]="showHideCostHeadButtonList[showHideCostHeadButtonList.length-1].showHideAddCostHeadButton">
                   <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
                 </button>
               </td>

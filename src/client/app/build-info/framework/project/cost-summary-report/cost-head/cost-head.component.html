@@ -229,7 +229,7 @@
                   <tr>
                     <td  class="add-items" colspan="7">
                       <button type="button" class="btn-add-item"
-                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)">
+                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)" [disabled]="showHideAddItemButton">
                         <span class="glyphicon glyphicon-plus"></span> {{getButton().ADD}} {{getButton().ITEM}}</button>
                     </td>
                   </tr>
