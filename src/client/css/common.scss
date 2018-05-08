@@ -652,6 +652,12 @@ control-messages {
 .container {
   width: 1000px;
 }
+.collapse-list-item {
+  .row-lists {
+    font-weight: normal!important;
+    color: #8290A8;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .container {
     width: 100%;

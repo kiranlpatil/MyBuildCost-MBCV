@@ -20,6 +20,26 @@
   }
 }
 
+
+.inner-item-list {
+  .panel-default {
+    .panel-heading {
+      min-height: 35px;
+      a {
+        display: block;
+        padding: 12px 0 7px 15px;
+        position: relative;
+        .caret {
+          top: 15px;
+        }
+      }
+      .panel-body {
+        padding: 0 0 5px 15px;
+      }
+    }
+  }
+}
+
 .material-takeoff-report {
   margin-top: 25px;
   .panel-group {

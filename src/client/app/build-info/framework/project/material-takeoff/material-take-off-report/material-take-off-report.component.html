@@ -27,10 +27,10 @@
           <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT; let secondaryViewDataIndex = index">
             <div class="col-md-12 no-padding">
 
-              <div class="panel panel-default">
-                <div class="panel-group no-border">
+              <div class="panel-group">
+                <div class="panel panel-default no-border">
                   <div class="panel-heading">
-                    <h4 class="panel-title">
+                    <div class="panel-title">
                       <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" [class.collapsed]="secondaryViewDataIndex != 0">
                         <span class="caret"></span>
                         <span class="">{{secondaryViewKey}}</span>
@@ -38,7 +38,7 @@
                          {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}
                         </span>
                       </a>
-                    </h4>
+                    </div>
 
                   </div>
 
