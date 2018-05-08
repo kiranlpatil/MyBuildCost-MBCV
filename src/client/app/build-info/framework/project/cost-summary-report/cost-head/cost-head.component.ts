@@ -158,7 +158,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
           workItem.quantity.quantityItemDetails[0].name !== Label.DEFAULT_VIEW)) {
         this.getDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
       } else {
-        this.getDefaultQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+          this.getDefaultQuantity(categoryId, workItem, categoryIndex, workItemIndex);
       }
   }
 
@@ -522,9 +522,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
 /*  setSelectedWorkItems(workItemList:any) {
     this.selectedWorkItems = workItemList;
   }*/
-  toggleWorkItemPanel(workItemIndex : number) {
+  toggleWorkItemPanel(workItemIndex : number, workItem : WorkItem) {
     var element = document.getElementById('collapseDetails'+workItemIndex);
-    if(element.classList.contains('display-body')) {
+    if(element.classList.contains('display-body') || (workItem.quantity.quantityItemDetails.length > 0 &&
+        workItem.quantity.quantityItemDetails[0].name === 'default')) {
       element.classList.remove('display-body');
       element.classList.add('hide-body');
     } else if(element.classList.contains('hide-body')) {
