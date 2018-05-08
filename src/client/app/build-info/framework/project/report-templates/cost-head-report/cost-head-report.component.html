@@ -1,10 +1,15 @@
 <div [hidden]="true" id="content" #content>
   <div>
-    <h3 style="width:100%; border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px; font-size: 14px; font-weight: 600;">
-      <span *ngIf="viewType === 'building'">{{costHeadName}}</span> Cost estimation for {{projectName}}
-      <br><span *ngIf="viewType === 'common-amenities'">Common Development and Amenities : {{costHeadName}} </span>
-    </h3>
-    <div style="font-size:12px; text-align: left; margin-bottom: 20px;">
+    <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
+      <span *ngIf="viewType === 'building'">{{costHeadName}}</span> Cost estimation
+    </h2>
+    <h3 style="font-size:16px; padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;"> for {{projectName}}</h3>
+    <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;"
+        *ngIf="viewType === 'common-amenities'">Common Development and Amenities : {{costHeadName}}</h2>
+    <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
+      {{generatedDate | date:'dd MMMM yyyy'}}
+    </div>
+    <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
       <div style="padding-bottom: 5px;">
         <strong style="font-weight: bold">Company Name : </strong>
         <span>{{comapnyName}}</span>
@@ -17,25 +22,21 @@
         <strong style="font-weight: bold">Building Name : </strong>
         <span>{{buildingName}}</span>
       </div>
-      <div style="padding-bottom: 5px;">
-        <strong style="font-weight: bold">Generated on : </strong>
-        <span>{{generatedDate | date:'dd-MM-yyyy'}}</span>
-      </div>
     </div>
-    <div style="font-size:10px; text-align: left; width: 750px;" *ngFor="let category of categoryDetails">
-      <table *ngIf="category.workItems.length !==0 && category.amount !== 0" width="100%" align="left" cellspacing="10" style="float:left;margin:30px 0 0;">
+    <div style="font-size:10px; text-align: left;" *ngFor="let category of categoryDetails">
+      <table *ngIf="category.workItems.length !==0 && category.amount !== 0" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 30px auto 0 auto;">
         <thead style="font-size:12px;page-break-inside: avoid;">
           <th width="60%">{{category.name}}</th>
-          <th width="40%" style="text-align: right">{{getProjectElements().RS}} {{category.amount |number :'1.0-0'}}</th>
+          <th width="40%" style="text-align: right"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{category.amount |number :'1.0-0'}}</th>
         </thead>
       </table>
-      <table *ngIf="category.workItems.length !==0 && category.amount !== 0" border="1" bordercolor="#bbb" width="100%" align="left" style="margin: 5px 0 5px;float:left;">
+      <table *ngIf="category.workItems.length !==0 && category.amount !== 0" border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 5px auto;">
         <thead style="page-break-inside: avoid;">
-          <th width="64%" style="padding: 10px 5px;">WorkItem Name</th>
+          <th width="52%" style="padding: 10px 5px;">WorkItem Name</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Quantity</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Unit</th>
-          <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit ( {{getProjectElements().RS}}  )</th>
-          <th width="12%" style="padding: 10px 5px;text-align:right">Amount ( {{getProjectElements().RS}}  )</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>  )</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">Amount ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>  )</th>
         </thead>
         <tbody>
         <tr style="page-break-inside: avoid;" *ngFor="let workitem of category.workItems">
@@ -51,14 +52,20 @@
         </tbody>
       </table>
     </div>
-    <div  style="font-size:10px; text-align: left;width: 750px;" *ngIf="categoryDetailsTotalAmount !== 0" >
-      <table width="100%" align="left" cellspacing="10">
+
+    <div *ngIf="categoryDetailsTotalAmount !== 0">
+      <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
         <thead style="font-size:12px; font-weight: bold;page-break-inside: avoid;">
-          <th width="60%">Total</th>
-          <th width="40%" style="text-align: right">{{getProjectElements().RS}} {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
+          <th style="border: none;padding: 5px;width:60%">Total</th>
+          <th style="border: none;padding: 5px;width:40%;text-align: right"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
         </thead>
       </table>
     </div>
+
+    <div style="border-top: 1px solid #ccc;font-size: 12px;margin: 30px auto 0 auto;padding: 10px 0;text-align: right;width: 100%;max-width: 750px;">
+      Powered by <span style="color:#716edc!important;font-size:11px;text-transform: uppercase;">Build Info</span>
+    </div>
+
   </div>
 </div>
 <button class="btn-print" (click)="downloadToPDF()"><span class="glyphicon glyphicon-print"></span>Download/Print</button>

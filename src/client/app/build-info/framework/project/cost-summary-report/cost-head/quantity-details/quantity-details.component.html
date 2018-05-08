@@ -23,15 +23,19 @@
         <td><span class="value">-</span></td>
 
         <td>
-          <div *ngIf="quantity.total * workItemData.rate.total !== 0" (click)="getRateByQuantity(quantity.total * workItemData.rate.total, quantityIndex, quantity.total, getLabel().GET_RATE_BY_QUANTITY)">
+          <div *ngIf="workItemData.isDirectRate === false && workItemData.rate.isEstimated === false">
+            <span class="value">-</span>
+          </div>
+          <div *ngIf="quantity.total * workItemData.rate.total !== 0 && workItemData.rate.isEstimated && workItemData.isDirectRate === false" (click)="getRateByQuantity(quantity.total * workItemData.rate.total, quantityIndex, quantity.total, getLabel().GET_RATE_BY_QUANTITY)">
             <span class="value edit-cost" [class.active-cost]="(quantityIndex === currentFloorIndex && showInnerView === getLabel().GET_RATE_BY_QUANTITY)">
               {{ (quantity.total * workItemData.rate.total)|number: '1.0-0' }}
             </span>
           </div>
-          <div class="edit-cost-null" *ngIf="quantity.total * workItemData.rate.total === 0">
-            <span class="value">-</span>
+          <div  *ngIf="workItemData.isDirectRate">
+            {{(quantity.total * workItemData.rate.total)|number: '1.0-0'}}
           </div>
         </td>
+
         <td><span class="value">-</span></td>
         <td>
           <div data-toggle="modal" title="Delete Quantity Details"
@@ -49,6 +53,7 @@
                                  [categoryRateAnalysisId]="categoryRateAnalysisId"
                                  [categoryDetails] ="categoryDetails"
                                  [keyQuantity]="keyQuantity"
+                                 [quantityId]="quantityId"
                                  [workItemsList] ="workItemsList"
                                  [innerView]="getLabel().WORKITEM_QUANTITY_TAB"
                                  (closeInnerView)="closeInnerView($event)"

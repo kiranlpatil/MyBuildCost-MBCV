@@ -1,4 +1,4 @@
-<table width="100%" border="1" bordercolor="#ccc" style="font-size:10px;text-align: left;margin: 0 0 40px;float:left;-fs-table-paginate: auto;">
+<table border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto 10px auto;-fs-table-paginate: auto;">
   <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
       <th width="60%" style="padding: 10px 5px; text-align: left">{{reportData.header.columnOne}}</th>
@@ -31,12 +31,14 @@
        </td>
      </tr>
   </tbody>
-  <tfoot style="display: table-row-group">
+</table>
+<table border="1" bordercolor="#888" style="font-size:10px;margin: 0 auto 40px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
+  <tbody>
     <tr>
-      <td width="60%" style="padding: 5px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
-      <td width="40%" align="right" style="padding: 5px;font-weight: bold;">{{reportData.footer.columnTwo | number}} {{reportData.footer.columnThree}}</td>
+      <td width="60%" style="border: none;padding: 5px 15px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
+      <td width="40%" align="right" style="border: none;padding: 5px 15px;font-weight: bold;">{{reportData.footer.columnTwo | number}} {{reportData.footer.columnThree}}</td>
     </tr>
-  </tfoot>
+  </tbody>
 </table>
 
 

@@ -39,6 +39,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   costHeadId:number;
   buildingId:any;
   workItemId: number;
+  quantityId: number;
   categoryId: number;
   directQuantity: number;
   categoryDetails: Array<Category>;
@@ -233,6 +234,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
             this.workItem.quantity.quantityItemDetails = defaultQuantityDetail;
             this.quantityItemsArray = lodsh.cloneDeep(defaultQuantityDetail[0].quantityItems);
             this.keyQuantity = defaultQuantityDetail[0].name;
+            this.quantityId = defaultQuantityDetail[0].id;
         } else {
             let quantityDetail: QuantityDetails = new QuantityDetails();
             quantityDetail.quantityItems = [];

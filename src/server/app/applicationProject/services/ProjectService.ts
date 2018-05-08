@@ -1372,39 +1372,60 @@ class ProjectService {
   updateQuantityItemsOfWorkItem(quantity: Quantity, quantityDetail: QuantityDetails) {
 
     quantity.isEstimated = true;
+    let current_date = new Date();
+    let quantityId = current_date.getUTCMilliseconds();
 
     if (quantity.quantityItemDetails.length === 0) {
-      quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
-      quantity.quantityItemDetails.push(quantityDetail);
+        if(quantityDetail.id === undefined) {
+          quantityDetail.id = quantityId;
+          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+          quantity.quantityItemDetails.push(quantityDetail);
+        } else {
+          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+          quantity.quantityItemDetails.push(quantityDetail);
+        }
     } else {
 
       let isDefaultExistsSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="default"';
       let isDefaultExistsQuantityDetail = alasql(isDefaultExistsSQL, [quantity.quantityItemDetails]);
 
       if (isDefaultExistsQuantityDetail.length > 0) {
+        quantityDetail.id = quantityId;
         quantity.quantityItemDetails = [];
         quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
         quantity.quantityItemDetails.push(quantityDetail);
+
       } else {
         if (quantityDetail.name !== 'default') {
           let isItemAlreadyExistSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="' + quantityDetail.name + '"';
           let isItemAlreadyExists = alasql(isItemAlreadyExistSQL, [quantity.quantityItemDetails]);
 
           if (isItemAlreadyExists.length > 0) {
-            for (let quantityindex = 0; quantityindex < quantity.quantityItemDetails.length; quantityindex++) {
-              if (quantity.quantityItemDetails[quantityindex].name === quantityDetail.name) {
-                quantity.quantityItemDetails[quantityindex].quantityItems = quantityDetail.quantityItems;
-                quantity.quantityItemDetails[quantityindex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+            for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
+              if (quantity.quantityItemDetails[quantityIndex].name === quantityDetail.name) {
+                quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
+                quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
+                  [quantityDetail.quantityItems]);
               }
             }
+
           } else {
-            quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
-            quantity.quantityItemDetails.push(quantityDetail);
+            if(quantityDetail.id === undefined) {
+                quantityDetail.id = quantityId;
+                quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+                quantity.quantityItemDetails.push(quantityDetail);
+
+            }else {
+              for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
+                  if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
+                    quantity.quantityItemDetails[quantityIndex].name = quantityDetail.name;
+                    quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
+                    quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
+                      [quantityDetail.quantityItems]);
+                   }
+               }
+            }
           }
-        } else {
-          quantity.quantityItemDetails = [];
-          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
-          quantity.quantityItemDetails.push(quantityDetail);
         }
       }
     }

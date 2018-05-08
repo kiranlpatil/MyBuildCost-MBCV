@@ -1,8 +1,11 @@
-<h2 style="width:100%; border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px; font-size: 14px; font-weight: 600;">
+<h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
   {{getMaterialTakeOffElements().MATERIAL_TAKE_OFF_REPORT_HEADING}}
 </h2>
+<div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
+  {{generatedDate | date:'dd MMMM yyyy'}}
+</div>
 
-<div style="font-size:12px; text-align: left; margin-bottom: 20px;">
+<div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
   <div  style="padding-bottom: 5px;">
     <strong>{{getPDFReportHeaders().COMPANY_NAME}}</strong>
     <span>{{companyName}}</span>
@@ -31,11 +34,6 @@
   <div  style="padding-bottom: 5px;" *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL">
     <strong>{{getPDFReportHeaders().MATERIAL_NAME}}</strong>
     <span>{{ elementName }}</span>
-  </div>
-
-  <div  style="padding-bottom: 5px;">
-    <strong>{{getPDFReportHeaders().GENERATED_ON}}</strong>
-    <span>{{generatedDate | date:getPDFReportHeaders().DATE_FORMAT}}</span>
   </div>
 </div>
 
