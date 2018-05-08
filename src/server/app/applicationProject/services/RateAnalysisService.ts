@@ -382,7 +382,7 @@ class RateAnalysisService {
 
     if (configWorkItems.length > 0) {
       for (let configWorkItem of configWorkItems) {
-        if (configWorkItem.name === categoryWorkitem.name) {
+        if (configWorkItem.name === categoryWorkitem.name.trim()) {
           workItem.unit = configWorkItem.measurementUnit;
           workItem.isMeasurementSheet = configWorkItem.isMeasurementSheet;
           workItem.isRateAnalysis = configWorkItem.isRateAnalysis;
