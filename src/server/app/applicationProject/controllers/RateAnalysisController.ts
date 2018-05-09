@@ -93,6 +93,17 @@ class RateAnalysisController {
     }
   }
 
+  SyncRateAnalysis(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let rateAnalysisService = new RateAnalysisService();
+
+      rateAnalysisService.SyncRateAnalysis();
+          /*next(new Response(200,'done'));*/
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
 }
 
 export  = RateAnalysisController;

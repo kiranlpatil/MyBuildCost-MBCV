@@ -38,6 +38,8 @@ class RateAnalysisRoutes {
     //Retrive rate from RateAnalysis for workitem
     router.get('/costHead/:costHeadId/workItem/:workItemId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRate, this._responseInterceptor.exit);
+
+    router.get('/sync', controller.SyncRateAnalysis);
     return router;
   }
 }

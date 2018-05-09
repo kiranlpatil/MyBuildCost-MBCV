@@ -31,6 +31,7 @@ import { AttachmentDetailsModel } from '../dataaccess/model/project/building/Att
 let config = require('config');
 let log4js = require('log4js');
 import * as mongoose from 'mongoose';
+import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
 
 //import RateItemsAnalysisData = require("../dataaccess/model/project/building/RateItemsAnalysisData");
 
@@ -314,23 +315,36 @@ class ProjectService {
               let rateAnalysisData;
               if (oldBuildingDetails.cloneItems && oldBuildingDetails.cloneItems.indexOf(Constants.RATE_ANALYSIS_CLONE) === -1) {
                 let rateAnalysisService: RateAnalysisService = new RateAnalysisService();
-                rateAnalysisService.syncRateitemFromRateAnalysis(Constants.STR_BUILDING ,oldBuildingDetails,
-                  (error, data) => {
-                    if (error) {
-                      callback(error, null);
-                    } else {
-                      rateAnalysisData = {
-                        rates: data[0][Constants.RATE_ANALYSIS_DATA],
-                        notes: data[1][Constants.RATE_ANALYSIS_DATA],
-                        units: data[2][Constants.RATE_ANALYSIS_UOM],
-                        costHeads: data[3][Constants.RATE_ANALYSIS_ITEM_TYPE]
-                      };
-
-                      this.getRatesAndCostHeads(projectId,oldBuildingDetails, building, costHeads,rateAnalysisData,user, callback);
+                let query = [
+                  {
+                    $project:{
+                      'buildingCostHeads.categories.workItems':1
                     }
-                  });
+                  },
+                  {$unwind: '$buildingCostHeads'},
+                  {$unwind: '$buildingCostHeads.categories'},
+                  {$unwind: '$buildingCostHeads.categories.workItems'},
+                  {
+                    $project:{_id:0,workItem:'$buildingCostHeads.categories.workItems'}
+                  }
+                ];
+                rateAnalysisService.getAggregateData(query,(error, workItemAggregateData) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    rateAnalysisService.getCostControlRateAnalysis({},{'buildingRates':1}, (err: any, data:any)=>{
+                      if(err) {
+                        callback(error, null);
+                      }else {
+                        this.getRatesAndCostHeads(projectId,oldBuildingDetails, building, costHeads,workItemAggregateData,user,
+                          data.buildingRates, callback);
+                      }
+                    });
+                  }
+                });
               } else {
-                this.getRatesAndCostHeads(projectId,oldBuildingDetails, building, costHeads,rateAnalysisData,user, callback);
+                this.getRatesAndCostHeads(projectId,oldBuildingDetails, building, costHeads,null, user,
+                  null, callback);
               }
 
             }
@@ -350,18 +364,16 @@ class ProjectService {
 
   }
 
-  getRatesAndCostHeads(projectId: string,oldBuildingDetails: Building, building:Building, costHeads: CostHead[],rateAnalysisData:any,
-              user: User, callback: (error: Error, result: Building) => void) {
+  getRatesAndCostHeads(projectId: string,oldBuildingDetails: Building, building:Building, costHeads: CostHead[],workItemAggregateData:any,
+              user: User, centralizedRates: any, callback: (error: Error, result: Building) => void) {
     oldBuildingDetails.costHeads = this.calculateBudgetCostForBuilding(building.costHeads, oldBuildingDetails);
-
-    this.cloneCostHeads(costHeads, oldBuildingDetails,rateAnalysisData);
-
+    this.cloneCostHeads(costHeads, oldBuildingDetails,workItemAggregateData);
     if(oldBuildingDetails.cloneItems.indexOf(Constants.RATE_ANALYSIS_CLONE) === -1) {
-      oldBuildingDetails.rates=this.getCentralizedRates(rateAnalysisData, oldBuildingDetails.costHeads);
+      //oldBuildingDetails.rates=this.getCentralizedRates(rateAnalysisData, oldBuildingDetails.costHeads);
+      oldBuildingDetails.rates = centralizedRates;
     } else {
       oldBuildingDetails.rates = building.rates;
     }
-
     this.createBuilding(projectId, oldBuildingDetails, user, (error, res) => {
       if (error) {
         callback(error, null);
@@ -415,8 +427,9 @@ class ProjectService {
     let rateAnalysisService: RateAnalysisService = new RateAnalysisService();
     let configWorkItems = new Array<WorkItem>();
     if (!isClone) {
-      workItem = rateAnalysisService.getRateAnalysis(workItem, configWorkItems, rateAnalysisData.rates,
-        rateAnalysisData.units, rateAnalysisData.notes);
+      /*workItem = rateAnalysisService.getRateAnalysis(workItem, configWorkItems, rateAnalysisData.rates,
+        rateAnalysisData.units, rateAnalysisData.notes);*/
+      workItem = this.clonedWorkitemWithRateAnalysis(workItem, rateAnalysisData);
       }
       }
 
@@ -1959,23 +1972,18 @@ class ProjectService {
     let buildingRepository = new BuildingRepository();
     let projectRepository = new ProjectRepository();
 
-    rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING,
-      (error: any, result: any) => {
+    rateAnalysisService.getCostControlRateAnalysis({}, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateCostHeadsForBuildingAndProject : convertCostHeadsFromRateAnalysisToCostControl : '
             + JSON.stringify(error));
           callback(error, null);
         } else {
           logger.info('GetAllDataFromRateAnalysis success');
-          let buildingCostHeads = result.buildingCostHeads;
+          let buildingCostHeads = rateAnalysis.buildingCostHeads;
           let projectService = new ProjectService();
-          let configCostHeads = config.get('configCostHeads');
-          this.convertConfigCostHeads(configCostHeads, buildingCostHeads);
-          let data = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingData);
-          let sortedCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [data]);
-          let rates = this.getRates(result, data);
+          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingData);
           let queryForBuilding = {'_id': buildingId};
-          let updateCostHead = {$set: {'costHeads': sortedCostHeads, 'rates': rates}};
+          let updateCostHead = {$set: {'costHeads': buildingCostHeads, 'rates': rateAnalysis.buildingRates}};
 
           buildingRepository.findOneAndUpdate(queryForBuilding, updateCostHead, {new: true}, (error: any, response: any) => {
             if (error) {
@@ -2011,23 +2019,19 @@ class ProjectService {
       let projectService = new ProjectService();
       let buildingRepository = new BuildingRepository();
       logger.info('Inside updateBudgetRatesForBuildingCostHeads promise.');
-      rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(entity, (error: any, result: any) => {
+      rateAnalysisService.getCostControlRateAnalysis( {}, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.err('Error in promise updateBudgetRatesForBuildingCostHeads : ' + JSON.stringify(error));
           reject(error);
         } else {
           logger.info('Inside updateBudgetRatesForBuildingCostHeads success');
           let projectService = new ProjectService();
-          let buidingCostHeads = result.buildingCostHeads;
-          let configCostHeads = config.get('configCostHeads');
-          projectService.convertConfigCostHeads(configCostHeads, buidingCostHeads);
+          let buildingCostHeads = rateAnalysis.buildingCostHeads;
 
-          let buildingCostHeads = projectService.calculateBudgetCostForBuilding(buidingCostHeads, buildingDetails);
-          let sortedCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [buildingCostHeads]);
-          let rates = projectService.getRates(result, buildingCostHeads);
+          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingDetails);
 
           let query = {'_id': buildingId};
-          let newData = {$set: {'costHeads': sortedCostHeads, 'rates': rates}};
+          let newData = {$set: {'costHeads': buildingCostHeads, 'rates': rateAnalysis.buildingRates}};
           buildingRepository.findOneAndUpdate(query, newData, {new: true}, (error: any, response: any) => {
             logger.info('Project service, getAllDataFromRateAnalysis has been hit');
             if (error) {
@@ -2131,26 +2135,19 @@ class ProjectService {
       let rateAnalysisService = new RateAnalysisService();
       let projectRepository = new ProjectRepository();
       logger.info('Inside updateBudgetRatesForProjectCostHeads promise.');
-      rateAnalysisService.convertCostHeadsFromRateAnalysisToCostControl(entity, (error: any, result: any) => {
+      rateAnalysisService.getCostControlRateAnalysis({},{},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.err('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
           reject(error);
         } else {
 
           let projectService = new ProjectService();
-          let costHeadsFromRateAnalysis = result.buildingCostHeads;
-          let configProjectCostHeads = config.get('configProjectCostHeads');
-          projectService.convertConfigCostHeads(configProjectCostHeads, costHeadsFromRateAnalysis);
-
-          let projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(
-            costHeadsFromRateAnalysis, projectDetails);
-
-          let sortedProjectCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [projectCostHeads]);
-
-          let rates = projectService.getRates(result, projectCostHeads);
+          let projectCostHeads = rateAnalysis.projectCostHeads;
+          projectCostHeads = projectService.calculateBudgetCostForCommonAmmenities(
+            projectCostHeads, projectDetails);
 
           let query = {'_id': projectId};
-          let newData = {$set: {'projectCostHeads': sortedProjectCostHeads, 'rates': rates}};
+          let newData = {$set: {'projectCostHeads': projectCostHeads, 'rates': rateAnalysis.projectRates}};
 
           projectRepository.findOneAndUpdate(query, newData, {new: true}, (error: any, response: any) => {
             logger.info('Project service, getAllDataFromRateAnalysis has been hit');
@@ -2715,6 +2712,16 @@ class ProjectService {
     budgetCostRates.sqft = (budgetedCostAmount / area);
     budgetCostRates.sqmt = (budgetCostRates.sqft * config.get(Constants.SQUARE_METER));
     return budgetCostRates;
+  }
+
+  private clonedWorkitemWithRateAnalysis(workItem:WorkItem, workItemAggregateData: any) {
+
+    for(let aggregateData of workItemAggregateData) {
+      if(workItem.rateAnalysisId === aggregateData.workItem.rateAnalysisId){
+        workItem.rate = aggregateData.workItem.rate;
+        break;
+      }
+    }
   }
 }
 

@@ -3,11 +3,11 @@ import { MaterialTakeOffElements, PDFReportHeaders } from '../../../../../../sha
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-table-view',
-  templateUrl: 'table-view.component.html',
+  selector: 'bi-head-wise-table-view',
+  templateUrl: 'cost-head-wise-table-view.component.html',
 })
 
-export class CostHeadWiseSingleElementComponent {
+export class CostHeadWiseTableViewComponent {
   @Input() reportData : any;
 
   getMaterialTakeOffElements() {
