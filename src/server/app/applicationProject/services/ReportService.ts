@@ -390,9 +390,10 @@ class ReportService {
         //footer
         table.footer.columnTwo = contentTotal;
         secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree;
-        reportTotal = reportTotal + contentTotal;
-        recordUnit = table.footer.columnThree;
       }
+
+      reportTotal = reportTotal + contentTotal;
+      recordUnit = table.footer.columnThree;
 
       if (elementWiseReport === Constants.STR_MATERIAL) {
         materialTakeOffReport.subTitle.columnTwo = reportTotal;
