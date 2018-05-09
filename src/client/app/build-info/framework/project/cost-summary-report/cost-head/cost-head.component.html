@@ -130,6 +130,7 @@
                                       <div class="attachment-menu" *ngIf="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                         <bi-attachment [costHeadId]="costHeadId"
                                                        [categoryId]="categoryId"
+                                                       [fileNamesList]="fileNamesList"
                                                        [baseUrl] = "baseUrl" (showAttachmentView)="closeAttachmentView($event)"
                                                        (workItemRefresh) = "workItemRefresh($event)"
                                                        [workItem]="workItem"></bi-attachment>

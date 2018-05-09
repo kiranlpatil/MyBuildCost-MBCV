@@ -20,6 +20,7 @@ export class AttachmentComponent implements OnInit {
   @Input() categoryId: number;
   @Input() baseUrl: string;
   @Input() workItem: WorkItem;
+  @Input() fileNamesList: Array<AttachmentDetailsModel>;
 
   @Output() showAttachmentView = new EventEmitter();
   @Output() workItemRefresh = new EventEmitter();
@@ -33,7 +34,6 @@ export class AttachmentComponent implements OnInit {
   private fileName: string;
   private assignedFileName: any;
   private path: any;
-  private fileNamesList: Array<AttachmentDetailsModel>;
   private attachmentFiles: Array<AttachmentDetailsModel>;
   private attachmentFilesCheck: Array<AttachmentDetailsModel>;
   private enableUploadOption: boolean = false;
@@ -41,6 +41,12 @@ export class AttachmentComponent implements OnInit {
 
   constructor( private costSummaryService: CostSummaryService, private messageService : MessageService,
                private loaderService : LoaderService) { }
+
+  ngOnInit() {
+    this.workItemId = this.workItem.rateAnalysisId;
+    this.attachmentFilesCheck = this.workItem.attachmentDetails;
+    this.path = AppSettings.IP + AppSettings.PUBLIC + AppSettings.ATTACHMENT_FILES;
+  }
 
   onFileSelect(fileInput: any) {
     this.filesToUpload = fileInput.target.files;
@@ -62,37 +68,6 @@ export class AttachmentComponent implements OnInit {
               }
           }
     }
-
-  ngOnInit() {
-     this.workItemId = this.workItem.rateAnalysisId;
-    this.attachmentFilesCheck = this.workItem.attachmentDetails;
-     this.path = AppSettings.IP + AppSettings.PUBLIC + AppSettings.ATTACHMENT_FILES;
-     this.getPresentFilesForWorkItem();
-  }
-
-  getPresentFilesForWorkItem() {
-    this.costSummaryService.getPresentFilesForWorkItem(this.baseUrl,this.costHeadId,this.categoryId,this.workItemId).subscribe(
-      fileNamesList => this.onGetPresentFilesForWorkItemSuccess(fileNamesList),
-      error => this.onGetPresentFilesForWorkItemFailure(error)
-    );
-}
-  onGetPresentFilesForWorkItemSuccess(fileNamesList : any) {
-  this.fileNamesList = fileNamesList.response.data;
-  }
-  onGetPresentFilesForWorkItemFailure(error: any) {
-    let message = new Message();
-    if (error.err_code === 404 || error.err_code === 0) {
-      message.error_msg = error.err_msg;
-      message.isError = true;
-      this.messageService.message(message);
-    } else {
-      message.error_msg = error.err_msg;
-      message.isError = true;
-      this.messageService.message(message);
-    }
-    this.loaderService.stop();
-    console.log(error);
-  }
 
    validFile() {
      this.attachmentFiles =  this.fileNamesList;
@@ -126,7 +101,6 @@ export class AttachmentComponent implements OnInit {
     this.messageService.message(this.message);
     this.fileInputVar.nativeElement.value = '';
     this.enableUploadOption = false;
-    this.getPresentFilesForWorkItem();
     this.workItemRefresh.emit();
   }
 

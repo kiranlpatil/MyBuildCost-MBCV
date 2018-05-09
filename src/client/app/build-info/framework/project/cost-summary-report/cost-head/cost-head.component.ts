@@ -14,6 +14,7 @@ import { LoaderService } from '../../../../../shared/loader/loaders.service';
 import { QuantityDetailsComponent } from './quantity-details/quantity-details.component';
 import { RateItem } from '../../../model/rate-item';
 import { AttachmentComponent } from './attachment/attachment.component';
+import { AttachmentDetailsModel } from '../../../model/attachment-details';
 
 declare var $: any;
 
@@ -52,6 +53,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   unit:string='';
   showCategoryList: boolean = false;
   displayCategory: boolean = false;
+  fileNamesList:Array<AttachmentDetailsModel>;
   workItemsList: Array<WorkItem>;
   deleteConfirmationCategory = ProjectElements.CATEGORY;
   deleteConfirmationWorkItem = ProjectElements.WORK_ITEM;
@@ -640,15 +642,41 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   workItemRefresh() {
-    this.getActiveWorkItemsOfCategory(this.categoryId);
+    this.getCategories( this.projectId, this.costHeadId);
   }
   setVariable(categoryId: number, workItemId:number, categoryIndex: number, workItemIndex:number) {
     if(this.showAttachmentView !== Label.ATTACH_FILE || this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
       this.showAttachmentView = Button.ATTACH_FILE;
       this.currentCategoryIndex = categoryIndex;
       this.currentWorkItemIndex = workItemIndex;
+      this.fileNamesList = [];
+      this.getPresentFilesForWorkItem(workItemId);
     } else {
       this.showAttachmentView = null;
     }
+  }
+
+  getPresentFilesForWorkItem(workItemId:number) {
+    this.costSummaryService.getPresentFilesForWorkItem(this.baseUrl,this.costHeadId,this.categoryId,workItemId).subscribe(
+      fileNamesList => this.onGetPresentFilesForWorkItemSuccess(fileNamesList),
+      error => this.onGetPresentFilesForWorkItemFailure(error)
+    );
+  }
+  onGetPresentFilesForWorkItemSuccess(fileNamesList : any) {
+     this.fileNamesList = fileNamesList.response.data;
+  }
+  onGetPresentFilesForWorkItemFailure(error: any) {
+    let message = new Message();
+    if (error.err_code === 404 || error.err_code === 0) {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    } else {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    }
+    this.loaderService.stop();
+    console.log(error);
   }
 }
