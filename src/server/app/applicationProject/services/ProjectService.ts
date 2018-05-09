@@ -2079,6 +2079,13 @@ class ProjectService {
           let workItem: WorkItem = new WorkItem(configWorkItem.name, configWorkItem.rateAnalysisId);
           workItem.isDirectRate = true;
           workItem.unit = configWorkItem.measurementUnit;
+          workItem.isMeasurementSheet = configWorkItem.isMeasurementSheet;
+          workItem.isRateAnalysis = configWorkItem.isRateAnalysis;
+          workItem.rateAnalysisPerUnit = configWorkItem.rateAnalysisPerUnit;
+          workItem.isItemBreakdownRequired = configWorkItem.isItemBreakdownRequired;
+          workItem.length = configWorkItem.length;
+          workItem.breadthOrWidth = configWorkItem.breadthOrWidth;
+          workItem.height = configWorkItem.height;
 
           if (configWorkItem.directRate !== null) {
             workItem.rate.total = configWorkItem.directRate;

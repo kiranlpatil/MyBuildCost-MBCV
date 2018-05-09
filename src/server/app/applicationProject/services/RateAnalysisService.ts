@@ -231,6 +231,9 @@ class RateAnalysisService {
 
       let costHead = new CostHead();
       costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
+      if(costHead.name === 'Soling') {
+        console.log('Done : ');
+      }
       let configCostHeads = config.get('costHeads');
       let categories = new Array<Category>();
 
