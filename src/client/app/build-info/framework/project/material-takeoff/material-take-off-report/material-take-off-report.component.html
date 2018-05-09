@@ -52,62 +52,6 @@
                     </div>
 
                     <!--content-->
-                  <!--  <div *ngFor="let content of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content | keys:getMaterialTakeOffElements().SORT; let contentIndex = index">
-
-                      <div class="inner-item-list">
-
-                      &lt;!&ndash;content&ndash;&gt;
-                        <div class="panel panel-default">
-                          <div class="panel-group">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a [class.collapsed]="dataIndex !== secondaryViewDataIndex ||
-                                        headerIndex !== contentIndex ||
-                                        !viewSubContent" (click)="showSubContent(secondaryViewDataIndex, contentIndex)">
-                                  <bi-table-row [customClass]="'item-inner-row'"
-                                    [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content]">
-                                  </bi-table-row>
-                                  <span *ngIf="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT" class="caret"></span>
-                                </a>
-                              </h4>
-                            </div>
-
-                            <div class="panel-body" [class.in]="dataIndex === secondaryViewDataIndex &&
-                                        headerIndex === contentIndex &&
-                                        viewSubContent">
-                              <div class="collapse-list-item" *ngFor="let subContent of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent | keys:getMaterialTakeOffElements().SORT; let subContentIndex = index">
-                                <div (click)="showInnerSubContent(subContentIndex)">
-                                <bi-table-row
-                                  [customClass]="'row-list'"
-                                  [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent]">
-                                </bi-table-row>
-                                <span *ngIf="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT" class="caret"></span>
-
-
-                                &lt;!&ndash;Inner sub content&ndash;&gt;
-                                <div class="panel-body" [class.in]="dataIndex === secondaryViewDataIndex &&
-                                        headerIndex === contentIndex  && nestedSubContentIndex === subContentIndex && viewSubContent && viewNestedSubContent">
-                                  <div class="collapse-list-item" *ngFor="let innerSubContent of materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().SORT;">
-                                    <bi-table-row
-                                      [customClass]="'row-list'"
-                                      [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content[content].subContent[subContent].subContent[innerSubContent]">
-                                    </bi-table-row>
-                                  </div>
-                                </div>
-
-
-                              </div>
-                              </div>
-                            </div>
-
-
-                          </div>
-                        </div>
-
-                      </div>
-
-                    </div>
--->
                     <bi-cost-head-wise-report *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD"
                                          [secondaryViewDataIndex]="secondaryViewDataIndex"
                                          [costHeadWiseContent]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content">
