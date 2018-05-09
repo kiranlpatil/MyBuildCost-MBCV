@@ -65,7 +65,7 @@
                                 </td>-->
                                 <td>
                                   <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                    <input type="number" [(ngModel)]="workItem.quantity.total" (blur)="displayModal()" (change)="setDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)"
+                                    <input type="number" [(ngModel)]="workItem.quantity.total" (change)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)"
                                             id="directQuantity" size="10" class="form-control clear">
                                     <span class="calculator" id="getQuantity{{categoryIndex}}"
                                           (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">

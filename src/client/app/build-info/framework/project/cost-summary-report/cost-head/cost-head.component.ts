@@ -451,7 +451,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryIdForInActive = categoryId;
   }
 
-  setDirectQuantity(categoryId : number, workItemId: number, directQuantity : number) {
+/*  setDirectQuantity(categoryId : number, workItemId: number, directQuantity : number) {
     this.categoryId = categoryId;
     this.workItemId = workItemId;
     this.directQuantity = directQuantity;
@@ -459,13 +459,13 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   displayModal() {
     $('#updateDirectQuantity').modal('show');
-  }
+  }*/
 
-  changeDirectQuantity() {
-    if( this.directQuantity !== null ||  this.directQuantity !== 0) {
+  changeDirectQuantity(categoryId : number, workItemId: number, directQuantity : number) {
+    if( directQuantity !== null ||  directQuantity !== 0) {
       this.loaderService.start();
-      this.costSummaryService.updateDirectQuantityAmount(this.baseUrl, this.costHeadId, this.categoryId,
-        this.workItemId, this.directQuantity).subscribe(
+      this.costSummaryService.updateDirectQuantityAmount(this.baseUrl, this.costHeadId, categoryId,
+        workItemId, directQuantity).subscribe(
         workItemList => this.onChangeDirectQuantitySuccess(workItemList),
         error => this.onChangeDirectQuantityFailure(error)
       );
@@ -592,11 +592,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  updateElement(elementType : string) {
+/*  updateElement(elementType : string) {
       if(elementType === ProjectElements.DIRECT_QUANTITY) {
         this.changeDirectQuantity();
       }
-    }
+    }*/
 
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
