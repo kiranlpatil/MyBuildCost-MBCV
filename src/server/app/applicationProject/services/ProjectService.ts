@@ -199,7 +199,8 @@ class ProjectService {
     });
   }
 
-  updateBuildingById(buildingId: string, buildingDetails: any, user: User, callback: (error: any, result: any) => void) {
+  updateBuildingById(projectId : string, buildingId: string, buildingDetails: any, user: User,
+                     callback: (error: any, result: any) => void) {
     logger.info('Project service, updateBuilding has been hit');
     let query = {_id: buildingId};
     let projection = {'costHeads': 1};
@@ -215,7 +216,33 @@ class ProjectService {
           if (error) {
             callback(error, null);
           } else {
-            callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+
+            this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
+              if (error) {
+                logger.error('Project service, getProjectAndBuildingDetails failed');
+                callback(error, null);
+              } else {
+
+
+                logger.info('Project service, syncProjectWithRateAnalysisData.');
+                let projectData = projectAndBuildingDetails.data[0];
+                let projectCostHeads = this.calculateBudgetCostForCommonAmmenities(projectData.projectCostHeads, projectData);
+                let queryForProject = {'_id': projectId};
+                let updateProjectCostHead = {$set: {'projectCostHeads': projectCostHeads}};
+
+                logger.info('Calling update project Costheads has been hit');
+                this.projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
+                  (error: any, response: any) => {
+                    if (error) {
+                      logger.err('Error update project Costheads : ' + JSON.stringify(error));
+                      callback(error, null);
+                    } else {
+                      logger.debug('Update project Costheads success');
+                      callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+                    }
+                  });
+              }
+            });
           }
         });
       }

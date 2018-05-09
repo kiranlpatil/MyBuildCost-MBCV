@@ -217,8 +217,8 @@ class RateAnalysisService {
         }
       });
     }).catch(function (e: any) {
-      logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(e));
-      CCPromise.reject(e);
+      logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
