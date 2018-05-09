@@ -1,7 +1,7 @@
 @import '../../../../../../../css/common';
 
 .row-list {
-  color: #8290A8;
+  //color: #8290A8;
   padding: 0;
   font-size: 12px;
   margin: 0 1px;
@@ -11,6 +11,10 @@
   }
   .col-md-6 {
     padding: 0 0 0 40px;
+  }
+  .row-lists {
+    line-height: 1.4;
+    white-space: initial;
   }
 }
 
@@ -29,6 +33,7 @@
     font-size: 12px;
     margin: 0;
     padding: 15px;
+    white-space: initial;
   }
   .col-md-6 {
     overflow: hidden;
@@ -41,24 +46,54 @@
 }
 
 .item-header-row{
+  padding: 13px 0 13px 15px;
   .border-right {
     border-right: 1px solid $row-border;
   }
   .row-lists {
     font-size: 12px;
-    min-height: 43px;
     margin: 0;
-    padding: 13px 15px;
   }
 }
 
 .item-footer-row{
+  padding: 13px 0 13px 15px;
   .border-right {
     border-right: 1px solid $row-border;
   }
   .row-lists {
     font-size: 12px;
     margin: 0;
-    padding: 15px;
+  }
+}
+
+.row-list {
+  .col-md-6 {
+    padding: initial;
+  }
+  .row-lists {
+    font-weight: bold;
+    padding-left: 15px;
+  }
+}
+
+.sub-items {
+  .item-description {
+    padding-left: 30px;
+  }
+}
+
+.sub-items-list {
+  .row-lists {
+    font-weight: normal;
+    color: #8290A8;
+  }
+  .item-description {
+    padding-left: 25px;
+  }
+}
+.material-take-off-sub-items {
+  .item-description {
+    padding-left: 35px;
   }
 }

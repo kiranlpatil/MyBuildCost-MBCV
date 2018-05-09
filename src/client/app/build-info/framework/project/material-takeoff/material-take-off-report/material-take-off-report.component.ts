@@ -17,8 +17,10 @@ export class MaterialTakeOffReportComponent  {
   @Input() elementType : string;
   @Input() elementName : string;
   viewSubContent : boolean = false;
+  viewNestedSubContent : boolean = false;
   headerIndex : number;
   dataIndex : number;
+  nestedSubContentIndex : number;
   projectName : string;
   companyName : string;
 
@@ -32,12 +34,22 @@ export class MaterialTakeOffReportComponent  {
   }
 
   showSubContent(secondaryViewDataIndex : number, tableHeaderIndex : number) {
+    console.log('elementType->'+this.elementType);
     if(this.viewSubContent !== true || this.dataIndex !== secondaryViewDataIndex || this.headerIndex !== tableHeaderIndex) {
       this.dataIndex = secondaryViewDataIndex;
       this.headerIndex = tableHeaderIndex;
       this.viewSubContent = true;
     } else {
       this.viewSubContent = false;
+    }
+  }
+
+  showInnerSubContent(innerSubContent : number) {
+    if(this.viewNestedSubContent !== true || this.nestedSubContentIndex !== innerSubContent) {
+      this.nestedSubContentIndex = innerSubContent;
+      this.viewNestedSubContent = true;
+    } else {
+      this.viewNestedSubContent = false;
     }
   }
 }

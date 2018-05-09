@@ -1,5 +1,12 @@
 @import '../../../../../../css/common';
 
+.panel-group {
+  border-bottom: 0;
+  float: initial;
+  margin: 0;
+  padding: 0;
+}
+
 .panel-default {
   .panel-heading {
     min-height: 56px;
@@ -10,6 +17,26 @@
 
   .main-panel {
     margin-top: 8px;
+  }
+}
+
+
+.inner-item-list {
+  .panel-default {
+    .panel-heading {
+      min-height: 35px;
+      a {
+        display: block;
+        padding: 12px 0 7px 15px;
+        position: relative;
+        .caret {
+          top: 18px;
+        }
+      }
+      .panel-body {
+        padding: 0 0 5px 15px;
+      }
+    }
   }
 }
 
@@ -50,6 +77,13 @@
       overflow: hidden;
       padding: 0;
       transition: all 0.5s ease;
+      .collapse-list-item {
+        position: relative;
+        .caret {
+          position: absolute;
+          top: 4px;
+        }
+      }
     }
     .in {
       max-height: 230px;
@@ -75,7 +109,7 @@
   }
   .item-footer {
     display: inline-block;
-    background: #ffffff;
+    background: $white;
     border: 0;
     border-radius: 8px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
@@ -87,8 +121,8 @@
   }
   .collapse-list-item {
     .row-list {
-      padding: 4px 10px 0 28px;
       display: inline-block;
+      padding: 4px 10px 0 28px;
       width: 100%;
     }
   }
@@ -113,4 +147,11 @@
   .total-amount-work {
     font-weight: bold;
   }
+}
+
+.material-takeoff-report .inner-item-list .collapse-list-item {
+  display: block;
+  margin: 4px 0;
+  border-radius: 8px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
 }
