@@ -94,17 +94,17 @@ export class CreateBuildingComponent  implements  OnInit {
 
   onSyncBuildingWithRateAnalysisSuccess(project : any) {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    let numOfbuildings = (project.buildings.length - 1);
+    //let numOfbuildings = (project.buildings.length - 1);
     this.loaderService.stop();
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
-    let myVar = setTimeout(ScrollToID, 3000);
+    /*let myVar = setTimeout(ScrollToID, 3000);
     function ScrollToID() {
       $('.collapse').removeClass('in');
       $('#collapse'+numOfbuildings).addClass('in');
       $('html, body').animate({
         scrollTop: $('#collapse-cost-summary-panel'+numOfbuildings).offset().top - 8
       }, 1000);
-    }
+    }*/
   }
 
   onSyncBuildingWithRateAnalysisFailure(error:any) {
