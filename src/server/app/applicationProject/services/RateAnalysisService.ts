@@ -9,6 +9,8 @@ import Rate = require('../dataaccess/model/project/building/Rate');
 import CostHead = require('../dataaccess/model/project/building/CostHead');
 import Category = require('../dataaccess/model/project/building/Category');
 import Constants = require('../shared/constants');
+import RateAnalysisRepository = require('../dataaccess/repository/RateAnalysisRepository');
+import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
 
 let request = require('request');
 let config = require('config');
@@ -22,11 +24,13 @@ class RateAnalysisService {
   company_name: string;
   private authInterceptor: AuthInterceptor;
   private userService: UserService;
+  private rateAnalysisRepository: RateAnalysisRepository;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.authInterceptor = new AuthInterceptor();
     this.userService = new UserService();
+    this.rateAnalysisRepository = new RateAnalysisRepository();
   }
 
   getCostHeads(url: string, user: User, callback: (error: any, result: any) => void) {
@@ -217,8 +221,8 @@ class RateAnalysisService {
         }
       });
     }).catch(function (e: any) {
-      logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(e));
-      CCPromise.reject(e);
+      logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -227,40 +231,42 @@ class RateAnalysisService {
                                unitsRateAnalysis: any, notesRateAnalysis: any,
                                buildingCostHeads: Array<CostHead>) {
     logger.info('getCostHeadsFromRateAnalysis has been hit.');
+    //let budgetCostHeads = config.get('budgetedCostFormulae');
     for (let costHeadIndex = 0; costHeadIndex < costHeadsRateAnalysis.length; costHeadIndex++) {
+      if(config.has('budgetedCostFormulae.'+ costHeadsRateAnalysis[costHeadIndex].C2)) {
+        let costHead = new CostHead();
+        costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
+        let configCostHeads = config.get('costHeads');
+        let categories = new Array<Category>();
 
-      let costHead = new CostHead();
-      costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
-      let configCostHeads = config.get('costHeads');
-      let categories = new Array<Category>();
-
-      if (configCostHeads.length > 0) {
-        for (let configCostHead of configCostHeads) {
-          if (configCostHead.name === costHead.name) {
-            costHead.priorityId = configCostHead.priorityId;
-            categories = configCostHead.categories;
+        if (configCostHeads.length > 0) {
+          for (let configCostHead of configCostHeads) {
+            if (configCostHead.name === costHead.name) {
+              costHead.priorityId = configCostHead.priorityId;
+              categories = configCostHead.categories;
+            }
           }
         }
+        costHead.rateAnalysisId = costHeadsRateAnalysis[costHeadIndex].C1;
+
+        let categoriesRateAnalysisSQL = 'SELECT Category.C1 AS rateAnalysisId, Category.C2 AS name' +
+          ' FROM ? AS Category where Category.C3 = ' + costHead.rateAnalysisId;
+
+        let categoriesByCostHead = alasql(categoriesRateAnalysisSQL, [categoriesRateAnalysis]);
+        let buildingCategories: Array<Category> = new Array<Category>();
+
+        if (categoriesByCostHead.length === 0) {
+          this.getWorkItemsWithoutCategoryFromRateAnalysis(costHead.rateAnalysisId, workItemsRateAnalysis,
+            rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories, categories);
+        } else {
+          this.getCategoriesFromRateAnalysis(categoriesByCostHead, workItemsRateAnalysis,
+            rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories, categories);
+        }
+
+        costHead.categories = buildingCategories;
+        costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
+        buildingCostHeads.push(costHead);
       }
-      costHead.rateAnalysisId = costHeadsRateAnalysis[costHeadIndex].C1;
-
-      let categoriesRateAnalysisSQL = 'SELECT Category.C1 AS rateAnalysisId, Category.C2 AS name' +
-        ' FROM ? AS Category where Category.C3 = ' + costHead.rateAnalysisId;
-
-      let categoriesByCostHead = alasql(categoriesRateAnalysisSQL, [categoriesRateAnalysis]);
-      let buildingCategories: Array<Category> = new Array<Category>();
-
-      if (categoriesByCostHead.length === 0) {
-        this.getWorkItemsWithoutCategoryFromRateAnalysis(costHead.rateAnalysisId, workItemsRateAnalysis,
-          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories, categories);
-      } else {
-        this.getCategoriesFromRateAnalysis(categoriesByCostHead, workItemsRateAnalysis,
-          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCategories, categories);
-      }
-
-      costHead.categories = buildingCategories;
-      costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
-      buildingCostHeads.push(costHead);
     }
   }
 
@@ -421,6 +427,142 @@ class RateAnalysisService {
     workItem.systemRate.notes = notes;
     workItem.systemRate.imageURL = imageURL;
     return workItem;
+  }
+
+  SyncRateAnalysis() {
+    let rateAnalysisService = new RateAnalysisService();
+    this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, (error: any, buildingData: any)=> {
+      if(error) {
+        logger.error('RateAnalysis Sync Failed.');
+      } else {
+        this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, (error: any, projectData: any)=> {
+          if (error) {
+            logger.error('RateAnalysis Sync Failed.');
+          } else {
+            let buildingCostHeads = JSON.parse(JSON.stringify(buildingData.buildingCostHeads));
+            let projectCostHeads = JSON.parse(JSON.stringify(projectData.buildingCostHeads));
+            let configCostHeads = config.get('configCostHeads');
+            let configProjectCostHeads = config.get('configProjectCostHeads');
+            this.convertConfigCostHeads(configCostHeads, buildingCostHeads);
+            this.convertConfigCostHeads(configProjectCostHeads, projectCostHeads);
+            buildingCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [buildingCostHeads]);
+            projectCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [projectCostHeads]);
+            let buildingRates = this.getRates(buildingData, buildingCostHeads);
+            let projectRates = this.getRates(projectData, projectCostHeads);
+            let rateAnalysis = new RateAnalysis(buildingCostHeads, buildingRates, projectCostHeads, projectRates);
+            this.saveRateAnalysis(rateAnalysis);
+          }
+        });
+      }
+    });
+  }
+
+  convertConfigCostHeads(configCostHeads: Array<any>, costHeadsData: Array<CostHead>) {
+
+    for (let configCostHead of configCostHeads) {
+
+      let costHead: CostHead = new CostHead();
+      costHead.name = configCostHead.name;
+      costHead.priorityId = configCostHead.priorityId;
+      costHead.rateAnalysisId = configCostHead.rateAnalysisId;
+      let categoriesList = new Array<Category>();
+
+      for (let configCategory of configCostHead.categories) {
+
+        let category: Category = new Category(configCategory.name, configCategory.rateAnalysisId);
+        let workItemsList: Array<WorkItem> = new Array<WorkItem>();
+
+        for (let configWorkItem of configCategory.workItems) {
+
+          let workItem: WorkItem = new WorkItem(configWorkItem.name, configWorkItem.rateAnalysisId);
+          workItem.isDirectRate = true;
+          workItem.unit = configWorkItem.measurementUnit;
+
+          if (configWorkItem.directRate !== null) {
+            workItem.rate.total = configWorkItem.directRate;
+          } else {
+            workItem.rate.total = 0;
+          }
+          workItem.rate.isEstimated = true;
+          workItemsList.push(workItem);
+        }
+        category.workItems = workItemsList;
+        categoriesList.push(category);
+      }
+
+      costHead.categories = categoriesList;
+      costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
+      costHeadsData.push(costHead);
+    }
+    return costHeadsData;
+  }
+
+  getRates(result: any, costHeads: Array<CostHead>) {
+    let getRatesListSQL = 'SELECT * FROM ? AS q WHERE q.C4 IN (SELECT t.rateAnalysisId ' +
+      'FROM ? AS t)';
+    let rateItems = alasql(getRatesListSQL, [result.rates, costHeads]);
+
+    let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
+      'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
+      'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
+      'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity ' +
+      'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9';
+
+    let rateItemsList = alasql(rateItemsRateAnalysisSQL, [rateItems, result.units]);
+
+    let distinctItemsSQL = 'select DISTINCT itemName,originalItemName,rate FROM ?';
+    var distinctRates = alasql(distinctItemsSQL, [rateItemsList]);
+
+    return distinctRates;
+  }
+
+  saveRateAnalysis(rateAnalysis: RateAnalysis) {
+    logger.info('saveRateAnalysis is been hit');
+    let query = {};
+    this.rateAnalysisRepository.retrieve({}, (error:any, rateAnalysisArray: Array<RateAnalysis>) => {
+      if(error) {
+        logger.error('Unable to retrive synced RateAnalysis');
+      } else {
+        if(rateAnalysisArray.length >0) {
+          query = { _id : rateAnalysisArray[0]._id};
+          let update = {$set: {'costHeads': rateAnalysis.costHeads, 'rates': rateAnalysis.rates}};
+          this.rateAnalysisRepository.findOneAndUpdate(query, update,{new: true},(error: any, rateAnalysisArray: RateAnalysis) => {
+            if(error) {
+              logger.error('saveRateAnalysis failed => ' + error.message);
+            }else {
+              logger.info('Updated RateAnalysis.');
+            }
+          });
+        }else {
+          this.rateAnalysisRepository.create(rateAnalysis, (error: any, result: RateAnalysis) => {
+            if(error) {
+              logger.error('saveRateAnalysis failed => ' + error.message);
+            }else {
+              logger.info('Saved RateAnalysis.');
+            }
+          });
+        }
+      }
+    });
+  }
+
+  getCostControlRateAnalysis(query: any, projection: any, callback: (error: any, rateAnalysis: RateAnalysis) => void) {
+    this.rateAnalysisRepository.retrieveWithProjection(query, projection,(error: any, rateAnalysisArray: Array<RateAnalysis>) => {
+      if(error) {
+        callback(error, null);
+      } else {
+        if(rateAnalysisArray.length === 0) {
+          logger.error('ContControl RateAnalysis not found.');
+          callback('ContControl RateAnalysis not found.', null);
+        }else {
+          callback(null, rateAnalysisArray[0]);
+        }
+      }
+    });
+  }
+
+  getAggregateData(query: any, callback:(error:any, aggregateData: any) =>void) {
+    this.rateAnalysisRepository.aggregate(query,callback);
   }
 }
 

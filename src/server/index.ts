@@ -7,6 +7,8 @@ import * as fs from 'fs';
 import LoggerService = require('./app/framework/shared/logger/LoggerService');
 import * as sharedService from './app/framework/shared/logger/shared.service';
 import Middlewares = require('./app/framework/middlewares/base/MiddlewaresBase');
+import RateAnalysis = require("./app/applicationProject/dataaccess/model/RateAnalysis/RateAnalysis");
+import RateAnalysisService = require("./app/applicationProject/services/RateAnalysisService");
 var log4js = require('log4js');
 var config = require('config');
 /*var logDir = 'Logs';*/
@@ -16,6 +18,7 @@ __dirname = './';
 var _clientDir = '/dist/client/dev';
 var _serverDir = '/dist/server/dev';
 var app = express();
+var CronJob = require('cron').CronJob;
 
 export function init(port: number, mode: string, protocol: string, dist_runner: string) {
 
@@ -49,7 +52,15 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     sharedService.mailToAdmin(error);
   });
 
-
+  let syncAtEveryFifteenMinute = new CronJob('00 */5 * * * *', function() {
+      let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
+      rateAnalysisServices.SyncRateAnalysis();
+    }, function () {
+      console.log('restart server');
+    },
+    true
+  );
+  syncAtEveryFifteenMinute.start();
   //logger log4js initialization
   /*
     console.log('Logger Initialization');

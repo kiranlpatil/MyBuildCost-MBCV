@@ -18,12 +18,9 @@ import alasql = require('alasql');
 import Constants = require('../shared/constants');
 import ProjectService = require('./ProjectService');
 import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
-import MaterialDetailDTO = require('../dataaccess/dto/project/MaterialDetailDTO');
 import WorkItem = require('../dataaccess/model/project/building/WorkItem');
-import {QuantityDetails} from '../../../../client/app/build-info/framework/model/quantity-details';
 import MaterialTakeOffFlatDetailsDTO = require('../dataaccess/dto/Report/MaterialTakeOffFlatDetailsDTO');
 import MaterialTakeOffFiltersListDTO = require('../dataaccess/dto/Report/MaterialTakeOffFiltersListDTO');
-import {element} from 'protractor';
 import MaterialTakeOffReport = require('../dataaccess/model/project/reports/MaterialTakeOffReport');
 import MaterialTakeOffTableView = require('../dataaccess/model/project/reports/MaterialTakeOffTableView');
 import MaterialTakeOffSecondaryView = require('../dataaccess/model/project/reports/MaterialTakeOffSecondaryView');
@@ -31,8 +28,10 @@ import MaterialTakeOffTableViewContent = require('../dataaccess/model/project/re
 import MaterialTakeOffTableViewSubContent = require('../dataaccess/model/project/reports/MaterialTakeOffTableViewSubContent');
 import MaterialTakeOffTableViewHeaders = require('../dataaccess/model/project/reports/MaterialTakeOffTableViewHeaders');
 import MaterialTakeOffTableViewFooter = require('../dataaccess/model/project/reports/MaterialTakeOffTableViewFooter');
-import CostControllException = require("../exception/CostControllException");
-import MaterialTakeOffView = require("../dataaccess/model/project/reports/MaterialTakeOffView");
+import CostControllException = require('../exception/CostControllException');
+import MaterialTakeOffView = require('../dataaccess/model/project/reports/MaterialTakeOffView');
+import { AddCostHeadButton } from '../dataaccess/model/project/reports/showHideCostHeadButton';
+
 let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Report Service');
@@ -40,12 +39,14 @@ var logger=log4js.getLogger('Report Service');
 class ReportService {
   APP_NAME: string;
   company_name: string;
+  costHeadsList: Array<AddCostHeadButton> =  new Array<AddCostHeadButton>();
   private projectRepository: ProjectRepository;
   private buildingRepository: BuildingRepository;
   private authInterceptor: AuthInterceptor;
   private userService : UserService;
   private rateAnalysisService : RateAnalysisService;
   private projectService : ProjectService;
+
 
   constructor() {
     this.projectRepository = new ProjectRepository();
@@ -108,6 +109,7 @@ class ReportService {
         } else {
           callback(null,error);
         }
+        projectReport.showHideCostHeadButtons = this.costHeadsList;
         callback(null,{ data: projectReport, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
@@ -131,7 +133,8 @@ class ReportService {
       let estimatedReports = new Array<EstimateReport>();
 
 
-      this.getThumbRuleAndEstimatedReport(building, buildingReport, thumbRuleReports, estimatedReports, rateUnit);
+      this.getThumbRuleAndEstimatedReport(building, buildingReport, thumbRuleReports,
+        estimatedReports, rateUnit);
 
       let totalRates = alasql('SELECT ROUND(SUM(amount),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',[thumbRuleReports]);
       thumbRule.totalRate = totalRates[0].totalRate;
@@ -148,13 +151,17 @@ class ReportService {
       buildingReport.estimate = estimate;
       buildingsReport.push(buildingReport);
     }
+    console.log('SHow Hide List : '+JSON.stringify(this.costHeadsList));
     return(buildingsReport);
   }
 
 
   getThumbRuleAndEstimatedReport(building :Building, buildingReport: BuildingReport,
-                                 thumbRuleReports: ThumbRuleReport[], estimatedReports: EstimateReport[], rateUnit:string) {
+                                 thumbRuleReports: ThumbRuleReport[], estimatedReports: EstimateReport[],
+                                 rateUnit:string) {
 
+    let costHeadButtonForBuilding = new AddCostHeadButton();
+    costHeadButtonForBuilding.buildingName = building.name;
     for (let costHead of building.costHeads) {
 
       if(costHead.active) {
@@ -171,8 +178,11 @@ class ReportService {
         let estimateReport = new EstimateReport();
         estimateReport = this.getEstimatedReport(building.rates, costHead, buildingReport.area, rateUnit);
         estimatedReports.push(estimateReport);
+      } else {
+        costHeadButtonForBuilding.showHideAddCostHeadButton = false;
       }
     }
+    this.costHeadsList.push(costHeadButtonForBuilding);
   }
 
   getEstimatedReport(centralizedRates:Array<CentralizedRate>, costHead: any, area:number, rateUnit:string) {
@@ -219,13 +229,18 @@ class ReportService {
       projectReport.thumbRule = thumbRule;
       projectReport.estimate = estimate;
     commonAmenitiesReport.push(projectReport);
+    console.log('SHow Hide List : '+JSON.stringify(this.costHeadsList));
     return(commonAmenitiesReport);
   }
 
   getThumbRuleAndEstimatedReportForProjectCostHead(projectCostHead: Array<CostHead>, projectRates: Array<CentralizedRate>,
                                                    projectReport: BuildingReport, thumbRuleReports: ThumbRuleReport[],
                                                    estimatedReports: EstimateReport[], totalArea:number, rateUnit:string) {
-  for (let costHead  of projectCostHead) {
+
+    let costHeadButtonForBuilding = new AddCostHeadButton();
+    costHeadButtonForBuilding.buildingName = projectReport.name;
+
+    for (let costHead  of projectCostHead) {
     if (costHead.active) {
       //ThumbRule Report
       let thumbRuleReport = new ThumbRuleReport();
@@ -240,8 +255,10 @@ class ReportService {
       let estimateReport = new EstimateReport();
       estimateReport = this.getEstimatedReport(projectRates, costHead, totalArea, rateUnit);
       estimatedReports.push(estimateReport);
+    }else {
+      costHeadButtonForBuilding.showHideAddCostHeadButton=false;
     }
-   }
+   }this.costHeadsList.push(costHeadButtonForBuilding);
   }
 
 

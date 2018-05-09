@@ -21,6 +21,8 @@ export class CommonAmenitiesComponent implements OnInit {
   @Input() amenitiesReport: BuildingReport;
   @Input() costingByUnit : string;
   @Input() costingByArea : string;
+  @Input() showHideCostHeadButtonList ?: Array<any>;
+
   @Output() getReportDetails =  new EventEmitter<any>();
   projectId: string;
   projectName: string;

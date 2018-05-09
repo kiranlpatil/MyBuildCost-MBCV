@@ -54,8 +54,9 @@
                                   <div class="panel-heading">
                                     <div class="panel-title clearfix" >
                                       <a data-toggle="collapse" href="#collapseDetails{{workItemIndex}}"
-                                         class="work-item-panel-row collapsed" data-parent="#category-panel" (click)="toggleWorkItemPanel(workItemIndex)">
-                                      <span class="caret"></span>{{ workItem.name }}</a>
+                                         class="work-item-panel-row collapsed" data-parent="#category-panel" (click)="toggleWorkItemPanel(workItemIndex, workItem)">
+                                      <span class="caret"
+                                            *ngIf="workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default'"></span>{{ workItem.name }}</a>
                                     </div>
                                   </div>
                                 </td>
@@ -64,7 +65,7 @@
                                 </td>-->
                                 <td>
                                   <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                    <input type="number" [(ngModel)]="workItem.quantity.total" (blur)="displayModal()" (change)="setDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)"
+                                    <input type="number" [(ngModel)]="workItem.quantity.total" (change)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)"
                                             id="directQuantity" size="10" class="form-control clear">
                                     <span class="calculator" id="getQuantity{{categoryIndex}}"
                                           (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
@@ -184,7 +185,7 @@
                               </tr>
                               <tr class="add-work-item-row">
                                 <td colspan="8" class="add-work-item">
-                                  <div id="collapseDetails{{workItemIndex}}" class="panel-collapse collapse">
+                                  <div id="collapseDetails{{workItemIndex}}"  class="panel-collapse collapse">
                                     <div class="panel-body">
                                       <div *ngIf="showWorkItemTab !== getLabel().WORKITEM_RATE_TAB && showWorkItemTab !== getLabel().WORKITEM_SYSTEM_RATE_TAB && showWorkItemTab!==getLabel().WORKITEM_RATE_BY_QUANTITY_TAB">
                                       <!--<span class="glyphicon glyphicon-remove" (click)="closeDetailedQuantityTab()"></span>showQuantityTab == getLabel().WORKITEM_DETAILED_QUANTITY_TAB &&-->
@@ -229,7 +230,7 @@
                   <tr>
                     <td  class="add-items" colspan="7">
                       <button type="button" class="btn-add-item"
-                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)">
+                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)" [disabled]="showHideAddItemButton">
                         <span class="glyphicon glyphicon-plus"></span> {{getButton().ADD}} {{getButton().ITEM}}</button>
                     </td>
                   </tr>

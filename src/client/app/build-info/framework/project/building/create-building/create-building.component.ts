@@ -113,7 +113,11 @@ export class CreateBuildingComponent  implements  OnInit {
   }
 
   onCreateBuildingFailure(error : any) {
-    console.log(error);
+    var message = new Message();
+    message.isError = true;
+    message.custom_message = error.err_msg;
+    message.error_msg = error.err_msg;
+    this.messageService.message(message);
     this.loaderService.stop();
   }
 

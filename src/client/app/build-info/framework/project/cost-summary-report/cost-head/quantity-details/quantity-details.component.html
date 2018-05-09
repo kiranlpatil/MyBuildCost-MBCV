@@ -20,7 +20,10 @@
           <span class="value" *ngIf="workItemData.unit">{{workItemData.unit}}</span>
         </td>
 
-        <td><span class="value">-</span></td>
+        <td>
+          <span class="value" *ngIf="workItemData.rate.isEstimated">{{workItemData.rate.total|number : '1.2-2' }}</span>
+          <span class="value"  *ngIf="!workItemData.rate.isEstimated">-</span>
+        </td>
 
         <td>
           <div *ngIf="workItemData.isDirectRate === false && workItemData.rate.isEstimated === false">
@@ -31,8 +34,9 @@
               {{ (quantity.total * workItemData.rate.total)|number: '1.0-0' }}
             </span>
           </div>
-          <div  *ngIf="workItemData.isDirectRate">
-            {{(quantity.total * workItemData.rate.total)|number: '1.0-0'}}
+          <div>
+            <span class="value" *ngIf="workItemData.isDirectRate && quantity.total * workItemData.rate.total === 0">-</span>
+            <span class="value" *ngIf="workItemData.isDirectRate &&  quantity.total * workItemData.rate.total !== 0">{{(quantity.total * workItemData.rate.total)|number: '1.0-0'}}</span>
           </div>
         </td>
 

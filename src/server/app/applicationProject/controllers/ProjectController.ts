@@ -155,9 +155,10 @@ class ProjectController {
       logger.info('Project controller, updateBuilding has been hit');
       let user = req.user;
       let buildingId = req.params.buildingId;
+      let projectId = req.params.projectId;
       let buildingDetails = <Building> req.body;
       let projectService = new ProjectService();
-      projectService.updateBuildingById( buildingId, buildingDetails, user, (error, result) => {
+      projectService.updateBuildingById( projectId, buildingId, buildingDetails, user, (error, result) => {
         if(error) {
           next(error);
         } else {
