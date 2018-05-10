@@ -235,7 +235,7 @@ class ProjectService {
                 this.projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
                   (error: any, response: any) => {
                     if (error) {
-                      logger.err('Error update project Costheads : ' + JSON.stringify(error));
+                      logger.error('Error update project Costheads : ' + JSON.stringify(error));
                       callback(error, null);
                     } else {
                       logger.debug('Update project Costheads success');
@@ -2000,7 +2000,7 @@ class ProjectService {
               projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
                 (error: any, response: any) => {
                   if (error) {
-                    logger.err('Error update project Costheads : ' + JSON.stringify(error));
+                    logger.error('Error update project Costheads : ' + JSON.stringify(error));
                     callback(error, null);
                   } else {
                     logger.debug('Update project Costheads success');
@@ -2021,7 +2021,7 @@ class ProjectService {
       logger.info('Inside updateBudgetRatesForBuildingCostHeads promise.');
       rateAnalysisService.getCostControlRateAnalysis( {}, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
-          logger.err('Error in promise updateBudgetRatesForBuildingCostHeads : ' + JSON.stringify(error));
+          logger.error('Error in promise updateBudgetRatesForBuildingCostHeads : ' + JSON.stringify(error));
           reject(error);
         } else {
           logger.info('Inside updateBudgetRatesForBuildingCostHeads success');
@@ -2137,7 +2137,7 @@ class ProjectService {
       logger.info('Inside updateBudgetRatesForProjectCostHeads promise.');
       rateAnalysisService.getCostControlRateAnalysis({},{},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
-          logger.err('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
+          logger.error('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
           reject(error);
         } else {
 
@@ -2301,6 +2301,177 @@ class ProjectService {
             .replace(Constants.NUM_OF_LIFTS, buildingDetails.numOfLifts);
           budgetedCostAmount = eval(calculateBudgtedCost);*/
           budgetedCostAmount = 1;
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.EXCAVATION : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.PLINTH_AREA, buildingDetails.plinthArea);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.BACKFILLING_PLINTH : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.PLINTH_AREA, buildingDetails.plinthArea);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.FLOORING_SKIRTING_WALL_TILING_DADO : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.WINDOWS_SILLS_OR_JAMBS : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.DOORS_WITH_FRAMES_AND_HARDWARE : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.WINDOWS_AND_GLASS_DOORS : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.ELECTRIFICATION : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.PLUMBING : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK)
+            .replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.PEST_CONTROL : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.SOLAR_WATER_HEATING_SYSTEM : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.PIPED_GAS_SYSTEM : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.SKY_LOUNGE_ON_TOP_TERRACE : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SLAB_AREA, buildingDetails.totalSlabArea)
+            .replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors)
+            .replace(Constants.NUM_OF_PARKING_FLOORS, buildingDetails.numOfParkingFloors);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.FIRE_FIGHTING_SYSTEM : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.SECURITY_AUTOMATION : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          /*calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK)
+            .replace(Constants.TOTAL_NUM_OF_BUILDINGS, buildingDetails.numOfFiveBHK); //total number of buildings
+          budgetedCostAmount = eval(calculateBudgtedCost);*/
+          budgetedCostAmount = 1;
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.SHOWER_ENCLOSURES : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.FALSE_CEILING : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.SPECIAL_ELEVATIONAL_FEATURES_IN_FRP_FERRO_GRC : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
+          budgetedCostAmount = eval(calculateBudgtedCost);
+          this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
+          break;
+        }
+        case Constants.BOARDS_AND_SIGNAGES_INSIDE_BUILDING : {
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
+            .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
+            .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
+            .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
+            .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK)
+            .replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors);
+          budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }

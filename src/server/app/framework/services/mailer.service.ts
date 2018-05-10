@@ -18,8 +18,8 @@ class SendMailService {
   });
 
   send(sendmailTo: string, subject: string, templateName: string,
-       data: Map<string, string>,attachment?:any[],
-       callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string) {
+       data: Map<string, string>,
+       callback: (error: Error, result: SentMessageInfo) => void,attachment?:any[], carbonCopy?: string) {
 
     let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
     data.forEach((value: string, key: string) => {

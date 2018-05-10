@@ -417,7 +417,7 @@ class RateAnalysisService {
       workItem.rate.quantity = 1;
       workItem.systemRate.quantity = 1;
     }
-    workItem.rate.isEstimated = false;
+    workItem.rate.isEstimated = true;
     workItem.rate.notes = notes;
     workItem.rate.imageURL =imageURL;
 
@@ -525,7 +525,12 @@ class RateAnalysisService {
       } else {
         if(rateAnalysisArray.length >0) {
           query = { _id : rateAnalysisArray[0]._id};
-          let update = {$set: {'costHeads': rateAnalysis.costHeads, 'rates': rateAnalysis.rates}};
+          let update = {$set: {
+            'projectCostHeads': rateAnalysis.projectCostHeads,
+            'projectRates': rateAnalysis.projectRates,
+            'buildingCostHeads': rateAnalysis.buildingCostHeads,
+            'buildingRates': rateAnalysis.buildingRates
+          }};
           this.rateAnalysisRepository.findOneAndUpdate(query, update,{new: true},(error: any, rateAnalysisArray: RateAnalysis) => {
             if(error) {
               logger.error('saveRateAnalysis failed => ' + error.message);

@@ -396,7 +396,7 @@ class ReportService {
 
 
             tableSubContent[subContent].columnTwo =
-              parseFloat(tableSubContent[subContent].columnTwo).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+              Math.ceil(tableSubContent[subContent].columnTwo);
             table.content[content].columnTwo = (parseFloat(table.content[content].columnTwo) +
               parseFloat(tableSubContent[subContent].columnTwo)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
           }

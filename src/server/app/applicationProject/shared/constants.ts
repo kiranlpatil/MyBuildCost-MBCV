@@ -43,6 +43,8 @@ class Constants {
   public static TOTAL_SLAB_AREA_OF_CLUB_HOUSE : string = 'totalSlabAreaOfClubHouse';
   public static SWIMMING_POOL_CAPACITY : string = 'swimmingPoolCapacity';
 
+  public static TOTAL_NUM_OF_BUILDINGS : string = 'numOfBuildings';
+
   //Common Ammenities Cost Heads
   public static SAFETY_MEASURES : string = 'Safety measures';
   public static CLUB_HOUSE : string = 'Club House';
@@ -65,6 +67,25 @@ class Constants {
   public static DOORS : string = 'Doors';
   public static DADO_OR_WALL_TILING : string = 'Dado / wall tiling';
   public static FLOORING : string = 'Flooring';
+  public static EXCAVATION : string = 'Excavation';
+  public static BACKFILLING_PLINTH : string = 'Backfilling (plinth)';
+  public static FLOORING_SKIRTING_WALL_TILING_DADO : string = 'Flooring + skirting + wall tiling (Dado)';
+  public static WINDOWS_SILLS_OR_JAMBS : string = 'Window sills / jambs';
+  public static DOORS_WITH_FRAMES_AND_HARDWARE : string = 'Doors with frames and hardware';
+  public static WINDOWS_AND_GLASS_DOORS : string = 'Windows and Glass doors';
+  public static ELECTRIFICATION : string = 'Electrification';
+  public static PLUMBING : string = 'External plumbing / drainage line';
+  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS : string = 'Electrical light fittings in common areas of building';
+  public static PEST_CONTROL : string = 'Pest Control';
+  public static SOLAR_WATER_HEATING_SYSTEM : string = 'Solar water heating system';
+  public static PIPED_GAS_SYSTEM : string = 'Piped gas system';
+  public static SKY_LOUNGE_ON_TOP_TERRACE : string = 'Sky lounge on top terrace';
+  public static FIRE_FIGHTING_SYSTEM : string = 'Fire fighting system';
+  public static SECURITY_AUTOMATION : string = 'Security automation';
+  public static SHOWER_ENCLOSURES : string = 'Shower Enclosures';
+  public static FALSE_CEILING : string = 'False ceiling';
+  public static SPECIAL_ELEVATIONAL_FEATURES_IN_FRP_FERRO_GRC : string = 'Special elevational features in FRP/Ferro/GRC ';
+  public static BOARDS_AND_SIGNAGES_INSIDE_BUILDING : string = 'Boards & Signages inside building';
 
   // Value Constant
   public static NUMBER_OF_FRACTION_DIGIT = 2;
