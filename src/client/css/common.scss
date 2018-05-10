@@ -58,10 +58,6 @@
   padding-right: 0;
 }
 
-.padding-top0 {
-  padding-top: 0 !important;
-}
-
 .input-group-addon {
   padding: 6px 12px;
   background-color: transparent;
@@ -226,6 +222,7 @@ select,
     float: left;
     font-size: 13px;
     font-weight: 600;
+    text-align: left;
 
     small {
       color: $unit;
@@ -656,7 +653,6 @@ control-messages {
 .container {
   width: 1000px;
 }
-
 @media only screen and (max-width: 1024px) {
   .container {
     width: 100%;
@@ -665,7 +661,7 @@ control-messages {
 
 @media only screen and (max-width: 768px) {
   .container {
-    padding: 0 10px;
+    padding: 0 25px;
   }
 
   .container-fluid > .navbar-collapse,
@@ -743,6 +739,9 @@ control-messages {
   .page-background {
     background: none!important;
   }
+  .btn-primary {
+    height: 40px;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -753,7 +752,7 @@ control-messages {
   }
 }
 
-@media screen and (min-width: 300px) and (max-width: 768px) {
+@media screen and (min-width: 300px) and (max-width: 767px) {
   .btn {
     padding: 5px 15px;
   }
