@@ -534,8 +534,14 @@ class RateAnalysisService {
       } else {
         if(rateAnalysisArray.length >0) {
           query = { _id : rateAnalysisArray[0]._id};
-          let update = {$set: {'costHeads': rateAnalysis.costHeads, 'rates': rateAnalysis.rates}};
-          this.rateAnalysisRepository.findOneAndUpdate(query, update,{new: true},(error: any, rateAnalysisArray: RateAnalysis) => {
+          let update = {$set: {
+            'buildingCostHeads': rateAnalysis.buildingCostHeads,
+            'buildingRates': rateAnalysis.buildingRates,
+            'projectCostHeads' : rateAnalysis.projectCostHeads,
+            'projectRates' : rateAnalysis.projectRates
+          }};
+          this.rateAnalysisRepository.findOneAndUpdate(query, update,{new: true},
+            (error: any, rateAnalysisArray: RateAnalysis) => {
             if(error) {
               logger.error('saveRateAnalysis failed => ' + error.message);
             }else {

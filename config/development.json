@@ -5902,7 +5902,7 @@
       ]
     },
     {
-      "name" : "Doors",
+      "name" : "Doors with frames",
       "priorityId": 13,
       "rateAnalysisId" : 100398,
       "categories" : [
@@ -8497,6 +8497,943 @@
               "length" : true,
               "breadthOrWidth" : true,
               "height" : true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Electrification",
+      "priorityId": 34,
+      "rateAnalysisId" : 100558,
+      "categories" : [
+        {
+          "name" : "Inside unit/apartment- Point wise",
+          "rateAnalysisId" : 100559,
+          "workItems" : [
+            {
+              "name" : "Providing electrical points inside apartment with wiring considered from switch board to points- Point wise",
+              "rateAnalysisId" : 100560,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "Per Job",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Inside unit/apartment- Material wise",
+          "rateAnalysisId" : 100561,
+          "workItems" : [
+            {
+              "name" : "Providing electrical points inside apartment with wiring considered from switch board to points- Material wise",
+              "rateAnalysisId" : 100562,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "Per Job",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Wiring",
+          "rateAnalysisId" : 100563,
+          "workItems" : [
+            {
+              "name" : "Providing wiring from DB to switch boards",
+              "rateAnalysisId" : 100564,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "Per Job",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing wiring from DB to meter for each unit",
+              "rateAnalysisId" : 100565,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "Per Job",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Inside unit/apartment- Point wise",
+          "rateAnalysisId" : 100566,
+          "workItems" : [
+            {
+              "name" : "Providing electrical points in common areas with wiring considered from switch board to points- Point wise",
+              "rateAnalysisId" : 100567,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "Per Job",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Inside unit/apartment- Material wise",
+          "rateAnalysisId" : 100568,
+          "workItems" : [
+            {
+              "name" : "Providing electrical points in common areas with wiring considered from switch board to points- Material wise",
+              "rateAnalysisId" : 100569,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "Per Job",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Meter board/room",
+          "rateAnalysisId" : 100570,
+          "workItems" : [
+            {
+              "name" : "Providing meters for each unit with main switch, MCB's, Fuse, Common bus bar etc.",
+              "rateAnalysisId" : 100571,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "Per Job",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Electrical light fittings in common areas of building",
+      "rateAnalysisId" : 100509,
+      "priorityId": 23,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100510,
+          "workItems" : [
+            {
+              "name" : "Providing electrical lighting in common areas",
+              "rateAnalysisId" : 100511,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Pest Control",
+      "rateAnalysisId" : 100512,
+      "priorityId": 24,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100513,
+          "workItems" : [
+            {
+              "name" : "Providing Pre pest control treatment for the building as directed",
+              "rateAnalysisId" : 100514,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 50,
+              "directRatePerUnit" : "Per Sqm",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Solar water heating system",
+      "rateAnalysisId" : 100515,
+      "priorityId": 25,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100516,
+          "workItems" : [
+            {
+              "name" : "Providing and installing Flat plate collector solar water heating system as per required specifications",
+              "rateAnalysisId" : 100517,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "litres",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 110,
+              "directRatePerUnit" : "Per litres",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and installing Evacuated tube collector- ETC ( Glass tube type) solar water heating system as per required specifications",
+              "rateAnalysisId" : 100518,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "litres",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 130,
+              "directRatePerUnit" : "Per litres",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Piped gas system",
+      "priorityId": 26,
+      "rateAnalysisId" : 100519,
+      "categories" : [
+        {
+          "name" : "Piping system",
+          "rateAnalysisId" : 100520,
+          "workItems" : [
+            {
+              "name" : "Designing, providing and installing LPG reticulated system as per approved specifications",
+              "rateAnalysisId" : 100521,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Apartments",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 9500,
+              "directRatePerUnit" : "Per Apartment",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Gas bank room",
+          "rateAnalysisId" : 100522,
+          "workItems" : [
+            {
+              "name" : "Providing and constructing of Ground floor structure of gas bank in RCC framed structure",
+              "rateAnalysisId" : 100523,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 1200,
+              "directRatePerUnit" : "Per Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and constructing of Ground floor structure of gas bank in load bearing masonry",
+              "rateAnalysisId" : 100524,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 1000,
+              "directRatePerUnit" : "Per Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Sky lounge on top terrace",
+      "priorityId": 27,
+      "rateAnalysisId" : 100525,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100526,
+          "workItems" : [
+            {
+              "name" : "Estimated cost will be same as budgeted cost. Estimated cost will be non clickable/non editable.",
+              "rateAnalysisId" : 100527,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "cum",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 1,
+              "rateAnalysisUnit" : "cum",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Fire fighting system",
+      "priorityId": 28,
+      "rateAnalysisId" : 100528,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100529,
+          "workItems" : [
+            {
+              "name" : "Provising and installing fire fighting system as per rules, regulations and design",
+              "rateAnalysisId" : 100530,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Safety and Security automation",
+      "priorityId": 29,
+      "rateAnalysisId" : 100531,
+      "categories" : [
+        {
+          "name" : "CCTV",
+          "rateAnalysisId" : 100532,
+          "workItems" : [
+            {
+              "name" : "Providing and installing CCTV system as required",
+              "rateAnalysisId" : 102200,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Video door phones",
+          "rateAnalysisId" : 100533,
+          "workItems" : [
+            {
+              "name" : "Providing and installing Video door phone system as required",
+              "rateAnalysisId" : 102201,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Gas leak detectors",
+          "rateAnalysisId" : 100534,
+          "workItems" : [
+            {
+              "name" : "Providing and installing Gas leak detection system as required",
+              "rateAnalysisId" : 102202,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Panic alarm",
+          "rateAnalysisId" : 100535,
+          "workItems" : [
+            {
+              "name" : "Providing and installing Panic alarm system as required",
+              "rateAnalysisId" : 102203,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Boom barrier",
+          "rateAnalysisId" : 100536,
+          "workItems" : [
+            {
+              "name" : "Providing Boom barriers at the gates as required",
+              "rateAnalysisId" : 102204,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Automated gates",
+          "rateAnalysisId" : 100537,
+          "workItems" : [
+            {
+              "name" : "Providing automated gate for the project as per design",
+              "rateAnalysisId" : 102205,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Controlled access lobies",
+          "rateAnalysisId" : 100538,
+          "workItems" : [
+            {
+              "name" : "Providing controlled access system in the lobbies as required",
+              "rateAnalysisId" : 102206,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Intecom system",
+          "rateAnalysisId" : 100539,
+          "workItems" : [
+            {
+              "name" : "Providing EPABX intercom system in the project",
+              "rateAnalysisId" : 102207,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Shower Enclosures",
+      "priorityId": 30,
+      "rateAnalysisId" : 100540,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100541,
+          "workItems" : [
+            {
+              "name" : "Providing and installing sliding type shower partition as per required specifications",
+              "rateAnalysisId" : 100542,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No.",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 12000,
+              "directRatePerUnit" : "No.",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and installing partly fixed glass plus partly openable glass door type shower partition as per required specifications",
+              "rateAnalysisId" : 100543,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No.",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 14000,
+              "directRatePerUnit" : "No.",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and installing partly fixed glass type shower partition as per required specifications",
+              "rateAnalysisId" : 100544,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No.",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 8000,
+              "directRatePerUnit" : "No.",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "False ceiling",
+      "priorityId": 31,
+      "rateAnalysisId" : 100545,
+      "categories" : [
+        {
+          "name" : "Gypsum sheet",
+          "rateAnalysisId" : 100546,
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with gypsum sheets on GI patti framing",
+              "rateAnalysisId" : 100547,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 75,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "GI powder coated sheet",
+          "rateAnalysisId" : 100548,
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with GI powder coated sheets on GI patti framing",
+              "rateAnalysisId" : 100549,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 90,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Polyacrylic sheet",
+          "rateAnalysisId" : 100550,
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with polyacrylic sheets on GI patti framing",
+              "rateAnalysisId" : 100551,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 125,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Polycarbonate sheet",
+          "rateAnalysisId" : 100552,
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with polycarbonate sheets on GI patti framing",
+              "rateAnalysisId" : 100553,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 65,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Special elevational features",
+      "priorityId": 32,
+      "rateAnalysisId" : 100554,
+      "categories" : [
+        {
+          "name" : "Ferrocrete features",
+          "rateAnalysisId" : 102000,
+          "workItems" : [
+            {
+              "name" : "Providing and fixing ferrocrete elevational features as per design",
+              "rateAnalysisId" : 102001,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            }
+          ]
+        },
+        {
+          "name" : "FRP/GRC features",
+          "rateAnalysisId" : 102002,
+          "workItems" : [
+            {
+              "name" : "Providing and fixing FRP/GRC elevational features as per design",
+              "rateAnalysisId" : 102003,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            }
+          ]
+        },
+        {
+          "name" : "Glass glazing/Aluminium composite panels",
+          "rateAnalysisId" : 102004,
+          "workItems" : [
+            {
+              "name" : "Providing and fixing Glass glazing for building facades as per design",
+              "rateAnalysisId" : 102005,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            },
+            {
+              "name" : "Providing and fixing Aluminium composite panels for building facades as per design",
+              "rateAnalysisId" : 102006,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            }
+          ]
+        },
+        {
+          "name" : "Wooden planks/Composite cement sheets",
+          "rateAnalysisId" : 102007,
+          "workItems" : [
+            {
+              "name" : "Providing and fixing wooden plank elevational features as per design",
+              "rateAnalysisId" : 102008,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            },
+            {
+              "name" : "Providing and fixing composite cement sheet panelling facade as per design",
+              "rateAnalysisId" : 102009,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Boards & Signages inside building",
+      "priorityId": 33,
+      "rateAnalysisId" : 100555,
+      "categories" : [
+        {
+          "name" : "default",
+          "rateAnalysisId" : 100556,
+          "workItems" : [
+            {
+              "name" : "Boards & Signages inside building",
+              "rateAnalysisId" : 100557,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "cum",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 1,
+              "rateAnalysisUnit" : "cum",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            },
+            {
+              "name" : "Providing and fixing name board on the main doors",
+              "rateAnalysisId" : 102010,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 350,
+              "directRatePerUnit" : "Per No",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and fixing floor number indicator boards",
+              "rateAnalysisId" : 102011,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 70,
+              "directRatePerUnit" : "Per No",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and fixing name directory board in the entrance lobby",
+              "rateAnalysisId" : 102012,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 15000,
+              "directRatePerUnit" : "Per No",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and fixing parking alootment boards in the parking",
+              "rateAnalysisId" : 102013,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 150,
+              "directRatePerUnit" : "Per No",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and fixing safety/directional boards inside the bulding ",
+              "rateAnalysisId" : 102014,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 200,
+              "directRatePerUnit" : "Per No",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and fixing building name indicator board outside building",
+              "rateAnalysisId" : 102015,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 1200,
+              "directRatePerUnit" : "Per No",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
             }
           ]
         }
