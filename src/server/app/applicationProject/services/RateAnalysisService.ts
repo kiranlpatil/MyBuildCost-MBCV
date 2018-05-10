@@ -417,7 +417,7 @@ class RateAnalysisService {
       workItem.rate.quantity = 1;
       workItem.systemRate.quantity = 1;
     }
-    workItem.rate.isEstimated = false;
+    workItem.rate.isEstimated = true;
     workItem.rate.notes = notes;
     workItem.rate.imageURL =imageURL;
 
