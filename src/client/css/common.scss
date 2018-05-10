@@ -424,8 +424,9 @@ h5 {
   }
   .btn-close {
     img {
-      right: 10px;
       position: absolute;
+      right: 10px;
+      top: 5px;
     }
   }
 }
@@ -749,6 +750,17 @@ control-messages {
     }
   }
 }
+
+@media screen and (max-width: 425px) {
+  .carpet-area {
+    control-messages {
+      div {
+        margin: 82px 0 6px;
+      }
+    }
+  }
+}
+
 
 @media screen and (min-width: 300px) and (max-width: 767px) {
   .btn {

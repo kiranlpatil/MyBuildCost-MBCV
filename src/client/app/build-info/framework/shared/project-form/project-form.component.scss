@@ -19,11 +19,11 @@
 
 @media screen and (max-width: 767px) {
   .button-group {
-    .btn-primary {
-      width: 200px;
+    .btn {
+      padding: 5px 25px;
     }
   }
   .form-details {
-    padding: 0 25px;
+    padding: 15px;
   }
 }
