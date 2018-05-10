@@ -649,7 +649,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.showAttachmentView = Button.ATTACH_FILE;
       this.currentCategoryIndex = categoryIndex;
       this.currentWorkItemIndex = workItemIndex;
-      this.fileNamesList = [];
       this.getPresentFilesForWorkItem(workItemId);
     } else {
       this.showAttachmentView = null;
