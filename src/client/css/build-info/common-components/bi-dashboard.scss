@@ -156,3 +156,72 @@ button[disabled]{
     }
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .filter-dropdrown {
+    .dropdown-menu {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      display: block;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      top: 0;
+      z-index: unset;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .wrapper {
+    min-height: calc(100vh - 50px);
+  }
+
+  .filter-dropdrown {
+    margin: 0 -10px;
+
+    .dropdown-menu {
+      border: 0;
+      border-radius: 0;
+      box-shadow: 0 30px 62px rgba(0,0,0,.150);
+      margin: 0;
+      min-width: 100%;
+      outline: 0;
+      padding: 0 10px 15px;
+    }
+
+    .page-heading {
+      padding: 10px;
+      position: relative;
+      width: 100%;
+    }
+
+    a {
+      color: $body-text;
+      margin-right: 5px;
+      padding: 5px;
+      position: absolute;
+      right: 0;
+      top: 4px;
+      z-index: 1;
+    }
+  }
+
+  .open > .page-heading {
+    background: $white;
+  }
+
+  .building-name {
+    .btn-print {
+      right: 5px;
+    }
+  }
+
+  .costhead-building-name {
+    .btn-print {
+      top: 20px;
+    }
+  }
+}

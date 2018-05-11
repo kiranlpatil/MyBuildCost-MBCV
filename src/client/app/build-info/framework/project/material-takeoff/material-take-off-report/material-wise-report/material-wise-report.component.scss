@@ -18,3 +18,17 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .panel {
+    margin-bottom: 0 !important;
+    .panel-heading {
+      margin: 5px 0 0 !important;
+    }
+  }
+  .inner-sub-items-list {
+    .caret {
+      left: 7px !important;
+    }
+  }
+}

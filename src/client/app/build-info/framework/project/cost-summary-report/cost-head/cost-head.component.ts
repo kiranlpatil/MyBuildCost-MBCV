@@ -527,7 +527,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
   toggleWorkItemPanel(workItemIndex : number, workItem : WorkItem) {
     var element = document.getElementById('collapseDetails'+workItemIndex);
     if(element.classList.contains('display-body') || (workItem.quantity.quantityItemDetails.length > 0 &&
-        workItem.quantity.quantityItemDetails[0].name === 'default')) {
+        workItem.quantity.quantityItemDetails[0].name === 'default') || workItem.quantity.isDirectQuantity === true ||
+      workItem.quantity.isEstimated === false) {
       element.classList.remove('display-body');
       element.classList.add('hide-body');
     } else if(element.classList.contains('hide-body')) {

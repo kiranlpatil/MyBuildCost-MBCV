@@ -106,6 +106,10 @@ export class CostSummaryComponent implements OnInit {
     });
   }
 
+  showDropdown(e: any) {
+      e.stopPropagation();
+  }
+
   setBuildingId( i:number, buildingId: string) {
     this.compareIndex = i;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);

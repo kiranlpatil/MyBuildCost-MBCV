@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorage, SessionStorageService } from '../../../shared/index';
 import { Menus, NavigationRoutes, CurrentView } from '../../../shared/constants';
@@ -11,6 +11,9 @@ import { Menus, NavigationRoutes, CurrentView } from '../../../shared/constants'
 })
 
 export class ProjectHeaderComponent implements OnInit {
+
+  @Input() isClassVisible: boolean;
+  @Output() toggleClassView = new EventEmitter<boolean>();
 
   constructor(private _router: Router) {
   }
@@ -37,6 +40,10 @@ export class ProjectHeaderComponent implements OnInit {
 
   currentView() {
     return CurrentView;
+  }
+
+  closeMenu() {
+    this.toggleClassView.emit(false);
   }
 
 }

@@ -1,74 +1,78 @@
-<div class="container">
-  <div class="col-sm-6">
-    <div class="page-background">
-      <div class="inner-content content-background clearfix" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
-        <img class="logo-image" src={{MY_LOGO}} alt="Facebook Link">
-        <ul>
-          <li>Estimate Project Cost</li>
-          <li>Budget it</li>
-          <li>Control it</li>
-        </ul>
+<div class="signup-page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="hidden-xs col-sm-6">
+        <div class="page-background">
+          <div class="inner-content content-background clearfix" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+            <img class="logo-image" src={{MY_LOGO}} alt="Facebook Link">
+            <ul>
+              <li>Estimate Project Cost</li>
+              <li>Budget it</li>
+              <li>Control it</li>
+            </ul>
+          </div>
+        </div>
       </div>
+
+      <section class="col-xs-12 col-sm-6">
+        <div class="page-background">
+          <div class="inner-content clearfix">
+            <div *ngIf="isFromCareerPlugin">
+              <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
+            </div>
+
+            <div class="content">
+              <div *ngIf="isGuideMessageVisible" class="welcome-message">
+                <h3>Welcome !</h3>
+                <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
+              </div>
+              <h4>{{getLabel().START_FREE}}</h4>
+              <p>{{getLabel().REGISTRATION_INFO}}</p>
+              <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
+
+                <div class="form-group">
+                  <control-messages [control]="userForm.controls.email" [submitStatus]="submitStatus"></control-messages>
+                  <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
+                  <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off"
+                         required placeholder="johndoe@example.com"/>
+                </div>
+
+                <div class="form-group">
+                  <control-messages [control]="userForm.controls.first_name"
+                                    [submitStatus]="submitStatus"></control-messages>
+                  <label>{{getLabel().NAME}}</label>
+                  <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20"
+                         autocomplete="off" required placeholder="John Doe"/>
+                </div>
+
+                <div class="form-group form-password">
+                  <control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus"></control-messages>
+                  <label>{{getLabel().PASSWORD}}</label>
+                  <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
+                         class="form-control" required placeholder="Minimum 6 characters"/>
+                </div>
+
+                <div class="col-sm-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">
+                  <b>{{error_msg }}</b>
+                </div>
+                <div class="button-group">
+                  <button type="submit" class="btn btn-primary">Continue</button>
+                </div>
+              </form>
+              <p class="privacy-policy">
+                <span>{{getLabel().ACCEPT_NAME}}</span>
+                <span><a (click)="goToAcceptTerms()">{{getLabel().TERMS_AND_CONDITIONS_NAME}}</a> and
+                <a>{{getLabel().PRIVACY_POLICY}}</a>
+              </span>
+              </p>
+              <p>Already have an account?</p>
+              <button  class="btn btn-default" (click)="goToSignIn()">Sign In</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-
-  <section class="col-sm-6">
-    <div class="page-background">
-      <div class="inner-content clearfix">
-        <div *ngIf="isFromCareerPlugin">
-          <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
-        </div>
-
-        <div class="content">
-          <div *ngIf="isGuideMessageVisible" class="welcome-message">
-            <h3>Welcome !</h3>
-            <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
-          </div>
-          <h4>{{getLabel().START_FREE}}</h4>
-          <p>{{getLabel().REGISTRATION_INFO}}</p>
-          <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
-
-            <div class="form-group">
-              <control-messages [control]="userForm.controls.email" [submitStatus]="submitStatus"></control-messages>
-              <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
-              <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off"
-                     required placeholder="johndoe@example.com"/>
-            </div>
-
-            <div class="form-group">
-              <control-messages [control]="userForm.controls.first_name"
-                                [submitStatus]="submitStatus"></control-messages>
-              <label>{{getLabel().NAME}}</label>
-              <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20"
-                     autocomplete="off" required placeholder="John Doe"/>
-            </div>
-
-            <div class="form-group form-password">
-              <control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus"></control-messages>
-              <label>{{getLabel().PASSWORD}}</label>
-              <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
-                     class="form-control" required placeholder="Minimum 6 characters"/>
-            </div>
-
-            <div class="col-sm-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">
-              <b>{{error_msg }}</b>
-            </div>
-            <div class="button-group">
-              <button type="submit" class="btn btn-primary">Continue</button>
-            </div>
-          </form>
-          <p class="privacy-policy">
-            <span>{{getLabel().ACCEPT_NAME}}</span>
-            <span><a (click)="goToAcceptTerms()">{{getLabel().TERMS_AND_CONDITIONS_NAME}}</a> and
-            <a>{{getLabel().PRIVACY_POLICY}}</a>
-          </span>
-          </p>
-          <p>Already have an account?</p>
-          <button  class="btn btn-default" (click)="goToSignIn()">Sign In</button>
-        </div>
-      </div>
-    </div>
-  </section>
 </div>
 
 

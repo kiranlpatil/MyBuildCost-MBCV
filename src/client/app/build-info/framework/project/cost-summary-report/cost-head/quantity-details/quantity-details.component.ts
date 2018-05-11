@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '../../../../model/category';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { WorkItem } from '../../../../model/work-item';
-import { Button, Label, Messages, ValueConstant } from '../../../../../../shared/constants';
+import { Button, Label, Messages, TableHeadings, ValueConstant } from '../../../../../../shared/constants';
 import * as lodsh from 'lodash';
 import { QuantityDetails } from '../../../../model/quantity-details';
 import { Message, MessageService, SessionStorage, SessionStorageService } from '../../../../../../shared/index';
@@ -68,6 +68,10 @@ export class QuantityDetailsComponent implements OnInit {
 
   getButton() {
     return Button;
+  }
+
+  getTableHeadings() {
+    return TableHeadings;
   }
 
   setCategoriesTotal( categoriesTotal : number) {

@@ -6,10 +6,13 @@ import { MaterialTakeOffFilters } from '../../model/material-take-off-filters';
 import { MaterialTakeOffElement } from '../../model/material-take-off-element';
 import { Message, MessageService,SessionStorage, SessionStorageService } from '../../../../shared/index';
 
+declare let $: any;
+
 @Component({
   moduleId: module.id,
   selector: 'bi-material-takeoff-report',
-  templateUrl: 'material-takeoff.component.html'
+  templateUrl: 'material-takeoff.component.html',
+  styleUrls: ['material-takeoff.component.css']
 })
 
 export class MaterialTakeoffComponent implements OnInit {
@@ -51,6 +54,10 @@ export class MaterialTakeoffComponent implements OnInit {
       this.projectId = params['projectId'];
     });
     this.getMaterialFiltersList(this.projectId);
+  }
+
+  showDropdown(e: any) {
+    e.stopPropagation();
   }
 
   getMaterialFiltersList(projectId : string) {

@@ -145,10 +145,10 @@ export class Messages {
   public static CONTACT_US_EMAIL_2 = 'careers@techprimelab.com';
   public static MSG_EMAIL_VERIFICATION_HEADING = 'Your email is updated successfully.';
   public static MSG_EMAIL_VERIFICATION_MESSAGE = 'Kindly click on SIGN IN to use BuildInfo.';
-  public static MSG_ACTIVATE_USER_HEADING = 'Congratulations! Welcome To BuildInfo.';
+  public static MSG_ACTIVATE_USER_HEADING = 'Congratulations!';
   public static MSG_ACTIVATE_USER_SUB_HEADING = 'You can now find candidates using the highly accurate,' +
     ' simpler, faster and powerful solution.';
-  public static MSG_ACTIVATE_USER_MESSAGE = 'Your account has been created successfully. Kindly click Sign In.';
+  public static MSG_ACTIVATE_USER_MESSAGE = 'Your email has been confirmed, you can now login with your new email ID.';
   public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
     'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s' +
     'when an unknown printer took a galley of type and scrambled it to make a type specimen book.' +
@@ -379,7 +379,7 @@ export class Headings {
   public static CHANGE_PASSWORD: string = 'Change Password';
   public static CHANGE_EMAIL_HEADING: string = 'Change your Email';
   public static CHANGE_MOBILE_NUMBER_HEADING: string = 'Change Your Mobile Number';
-  public static RESET_PASSWORD_HEADING: string = 'RESET PASSWORD';
+  public static RESET_PASSWORD_HEADING: string = 'Reset Password';
   public static CREATE_YOUR_FIRST_PROJECT: string = 'Create Your First Project';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
   public static EDIT_BUILDING: string = 'Edit Building';

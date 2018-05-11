@@ -1,4 +1,4 @@
-<form class="form-details" [formGroup]="buildingForm" (submit)="submitForm()">
+<form class="col-xs-12 form-details" [formGroup]="buildingForm" (submit)="submitForm()">
 
   <div  class="form-group">
     <control-messages [control]="buildingForm.controls.name" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
@@ -12,7 +12,7 @@
     <input type="number" [(ngModel)]="buildingModel.totalSlabArea" formControlName="totalSlabArea" id="totalSlabArea" class="form-control" placeholder="Enter slab area" required/>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group carpet-area">
     <control-messages [control]="buildingForm.controls.totalCarpetAreaOfUnit" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{ getLabels().CARPET_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
     <input type="number" class="form-control" [(ngModel)]="buildingModel.totalCarpetAreaOfUnit" formControlName="totalCarpetAreaOfUnit" id="totalCarpetAreaOfUnit" placeholder="Enter carpet area" required/>

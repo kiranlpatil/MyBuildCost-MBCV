@@ -30,3 +30,9 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .create-new-header {
+    display: none;
+  }
+}

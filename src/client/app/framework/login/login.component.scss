@@ -22,7 +22,21 @@
   }
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 767px) {
+  .container {
+    background: none;
+    .btn {
+      width: 200px;
+    }
+    .page-background {
+      .forgot-password-link {
+        color: #a4a4a4;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .container {
     background: no-repeat fixed 50% 100%;
     background-image: url('../assets/build-info/page_background/page-bg.png');
