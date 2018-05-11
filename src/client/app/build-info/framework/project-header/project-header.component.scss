@@ -66,4 +66,33 @@
   }
 }
 
+@media screen and (max-width: 767px) {
 
+  .header-container {
+    background: transparent;
+    display: none;
+    ul {
+      min-width: 230px;
+      width: 100%;
+      li {
+        display: block;
+        padding: 15px 15px 15px 0;
+        a {
+          border-left: 5px solid $mobile-menu-background-color;
+          color: $link-color;
+          font-size: 16px;
+          font-weight: normal;
+          padding: 2px 30px;
+        }
+        .active {
+          border-bottom: none!important;
+          border-left: 5px solid $theme-color;
+          font-weight: bold;
+        }
+      }
+    }
+    .add-building-link {
+      display: none;
+    }
+  }
+}

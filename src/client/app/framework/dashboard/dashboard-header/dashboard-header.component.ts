@@ -4,8 +4,8 @@ import { Candidate } from '../../../user/models/candidate';
 import { AppSettings, ImagePath, SessionStorage, LocalStorage } from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
-import {UserProfile} from "../../../user/models/user";
-import {ProfileService} from "../../shared/profileservice/profile.service";
+import {UserProfile} from '../../../user/models/user';
+import {ProfileService} from '../../shared/profileservice/profile.service';
 
 @Component({
   moduleId: module.id,
@@ -94,5 +94,12 @@ export class DashboardHeaderComponent {
 
   closeMenu() {
     this.isClassVisible = false;
+  }
+
+  toggleDashboardMenu(value:boolean) {
+    this.isClassVisible = value;
+  }
+  getCurrentProjectId() {
+    return SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
   }
 }
