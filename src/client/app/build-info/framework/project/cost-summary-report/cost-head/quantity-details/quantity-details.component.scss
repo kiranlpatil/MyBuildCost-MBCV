@@ -131,3 +131,65 @@
     padding: 7px 2px 2px;
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .table-categories {
+    tbody > tr {
+      border-bottom: 2px solid $border-color;
+      td {
+        &:first-child {
+          float:left;
+          text-align: left;
+          width: 100%;
+        }
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6) {
+          float:left;
+          text-align: left;
+          width: 50%;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5) {
+          border-bottom: 1px solid $border-color;
+        }
+
+        &:nth-child(7) {
+          text-align: right;
+          width: 50%;
+          float: left;
+        }
+
+        .edit-cost-null,
+        .edit-cost,
+        .value {
+          border: 0;
+          display: inline-block;
+          font-weight: 600;
+          padding: 8px 0;
+        }
+
+        .edit-rate-null,
+        .edit-rate {
+          font-weight: 600;
+          padding: 7px 0 5px;
+        }
+      }
+
+      .delete-Quantity-details {
+        float: right;
+        padding: 9px 5px;
+        width: 25px;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}

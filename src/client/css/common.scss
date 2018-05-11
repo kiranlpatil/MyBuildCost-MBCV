@@ -222,6 +222,7 @@ select,
     float: left;
     font-size: 13px;
     font-weight: 600;
+    text-align: left;
 
     small {
       color: $unit;
@@ -423,8 +424,9 @@ h5 {
   }
   .btn-close {
     img {
-      right: 10px;
       position: absolute;
+      right: 10px;
+      top: 5px;
     }
   }
 }
@@ -652,7 +654,6 @@ control-messages {
 .container {
   width: 1000px;
 }
-
 @media only screen and (max-width: 1024px) {
   .container {
     width: 100%;
@@ -676,7 +677,9 @@ control-messages {
 }
 
 @media only screen and (max-width: 767px) {
-
+  .container {
+    padding: 0 10px;
+  }
   .padding-left15,
   .padding-right15 {
     padding: 0;
@@ -732,6 +735,12 @@ control-messages {
   .hover-list {
     display: none;
   }
+  .page-background {
+    background: none!important;
+  }
+  .btn-primary {
+    height: 40px;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -742,7 +751,18 @@ control-messages {
   }
 }
 
-@media screen and (min-width: 300px) and (max-width: 768px) {
+@media screen and (max-width: 425px) {
+  .carpet-area {
+    control-messages {
+      div {
+        margin: 82px 0 6px;
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
   .btn {
     padding: 5px 15px;
   }

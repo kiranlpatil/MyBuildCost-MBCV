@@ -65,6 +65,10 @@
         text-align: left;
         width: 190px;
       }
+
+      .mobile-headings {
+        display: none;
+      }
     }
 
     .border-left {
@@ -229,3 +233,47 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .table-dashboard {
+    tbody > tr {
+      td {
+        .mobile-headings {
+          color: $body-text;
+          display: block;
+          font-weight: 400;
+          padding: 0;
+          width: 100%;
+        }
+      }
+
+      td > .edit-field {
+        float: left;
+        margin: 0;
+        text-align: left;
+        width: 100%;
+
+        input {
+          border: 1px solid transparent;
+          border-radius: 0;
+          font-weight: 600;
+          padding-left: 0;
+          text-align: left;
+          width: 100%;
+        }
+
+        .calculator {
+          right: 2px;
+        }
+      }
+
+      &:hover {
+        td > .edit-field {
+          input {
+            border: 1px solid transparent;
+            border-bottom: 1px solid $gray;
+          }
+        }
+      }
+    }
+  }
+}

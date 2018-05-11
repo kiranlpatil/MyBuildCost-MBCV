@@ -1,11 +1,11 @@
-import {Route} from "@angular/router";
-import {DashboardComponent} from "./dashboard.component";
-import {DashboardHomeComponent} from "./dashboard-home/index";
-import {AboutComponent} from "./about/index";
-import {ContactComponent} from "./contact/contact.component";
-import {DashboardProfileComponent} from "../../framework/dashboard/user-profile/dashboard-user-profile.component";
-import {UserChangePasswordComponent} from "../../framework/dashboard/user-change-password/user-change-password.component";
-import {AuthGuardService} from "../../shared/services/auth-guard.service";
+import {Route} from '@angular/router';
+import {DashboardComponent} from './dashboard.component';
+import {DashboardHomeComponent} from './dashboard-home/index';
+import {AboutComponent} from './about/index';
+import {ContactComponent} from './contact/contact.component';
+import {DashboardProfileComponent} from '../../framework/dashboard/user-profile/dashboard-user-profile.component';
+import {UserChangePasswordComponent} from '../../framework/dashboard/user-change-password/user-change-password.component';
+import {AuthGuardService} from '../../shared/services/auth-guard.service';
 
 export const DashboardRoutes: Route[] = [
   {

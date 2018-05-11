@@ -1326,6 +1326,9 @@ class ProjectService {
                   if (workItemId === workItemData.rateAnalysisId) {
                     quantity = workItemData.quantity;
                     quantity.isEstimated = true;
+                    if(quantity.isDirectQuantity === true) {
+                      quantity.isDirectQuantity = false;
+                    }
                     this.updateQuantityItemsOfWorkItem( quantity, quantityDetail);
                     break;
                   }

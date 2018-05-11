@@ -1,7 +1,6 @@
 @import '../../../../../../css/common';
 
 .wrapper {
-  /*margin-top: 80px;*/
   min-height: calc(100vh - 80px);
   padding-top: 0;
 
@@ -280,14 +279,8 @@
     padding: 2px;
   }
 
-  .edit-rate-null {
-    cursor: default;
-    display: inline-block;
-    padding: 7px 5px 5px;
-  }
-
+  .edit-rate-null,
   .edit-rate {
-    //border-bottom: 1px solid $body-text;
     cursor: default;
     display: inline-block;
     padding: 7px 5px 5px;
@@ -442,5 +435,169 @@
 
 .disable-link {
   pointer-events: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    padding: 0;
+  }
+  .wrapper {
+    min-height: calc(100vh - 50px);
+
+    .panel-group {
+      padding: 0;
+    }
+
+    .panel-default {
+      .panel-heading {
+        border-radius: 0;
+        min-height: 30px;
+        a {
+          float: left;
+          padding: 0 10px 10px;
+          position: relative;
+        }
+
+        .category-name {
+          text-transform: capitalize;
+          width: calc(100% - 80px);
+        }
+
+        .total-cost {
+          margin: 0;
+        }
+
+        .cost-head-lists > .caret {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .building-name {
+    background: $white;
+    border-radius: 0;
+    margin: 0;
+    padding: 10px;
+
+    .building-label {
+      font-size: 18px;
+    }
+    .text-left {
+      font-size: 12px;
+    }
+    .total-amount-work {
+      margin-right: 0;
+      padding: 0;
+    }
+
+    .col-sm-8 {
+      float: left;
+      padding: 0;
+      width: calc(100% - 80px);
+    }
+
+    .col-sm-4 {
+      float: right;
+      padding: 0;
+      width: 80px;
+    }
+  }
+
+  .table-categories {
+    border-bottom: 2px solid $border-color;
+    float: left;
+    width: 100%;
+    thead {
+      display: none;
+    }
+
+    tbody > tr {
+      td {
+        &:first-child {
+          float:left;
+          text-align: left;
+          width: 100%;
+        }
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6) {
+          float:left;
+          text-align: left;
+          width: 50%;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5) {
+          border-bottom: 1px solid $border-color;
+        }
+
+        &:nth-child(7) {
+          text-align: right;
+          width: 50%;
+          float: left;
+        }
+
+        .edit-cost-null,
+        .edit-cost,
+        .value {
+          border: 0;
+          display: inline-block;
+          font-weight: 600;
+          padding: 8px 0;
+        }
+
+        .edit-rate-null,
+        .edit-rate {
+          font-weight: 600;
+          padding: 7px 0 5px;
+        }
+      }
+
+    td > .edit-field {
+      margin: 2px 0;
+      text-align: left;
+        input {
+          text-align: left;
+        }
+      }
+
+      .delete-cost-head,
+      .add-more-details,
+      .file-attachment > span {
+        margin: 0;
+        opacity: 1;
+        padding: 16px 5px 10px;
+        width: 25px;
+      }
+
+      .file-attachment {
+        .attachment-menu {
+          padding: 15px;
+          right: -54px;
+          width: 300px;
+        }
+      }
+
+      .attachment-menu:after, .attachment-menu:before {
+        left: 81%;
+      }
+    }
+  }
+
+  .work-item-panel {
+    .work-item-panel-row {
+      padding: 0 0 0 15px !important;
+      font-weight: 600 !important;
+      .caret {
+        left: 0;
+        top: 5px;
+      }
+    }
+  }
 }
 

@@ -3,10 +3,12 @@
     <tbody>
       <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
         <td>
+          <span class="mobile-headings">{{getTableHeadings().ITEM}}</span>
           <input  class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (change)="changeQuantityName(quantity.name)">
         </td>
 
         <td>
+          <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
           <div class="edit-field" *ngIf="quantity.total != 0" (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
             <input [ngModel]="quantity.total" id="quantity" size="10" class="form-control clear">
           </div>
@@ -16,16 +18,19 @@
         </td>
 
         <td>
+          <span class="mobile-headings">{{getTableHeadings().UNIT}}</span>
           <span class="value" *ngIf="!workItemData.unit">-</span>
           <span class="value" *ngIf="workItemData.unit">{{workItemData.unit}}</span>
         </td>
 
         <td>
+          <span class="mobile-headings">{{getTableHeadings().RATE_PER_UNIT}}</span>
           <span class="value" *ngIf="workItemData.rate.isEstimated">{{workItemData.rate.total|number : '1.2-2' }}</span>
           <span class="value"  *ngIf="!workItemData.rate.isEstimated">-</span>
         </td>
 
         <td>
+          <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
           <div *ngIf="workItemData.isDirectRate === false && workItemData.rate.isEstimated === false">
             <span class="value">-</span>
           </div>
@@ -40,7 +45,10 @@
           </div>
         </td>
 
-        <td><span class="value">-</span></td>
+        <td>
+          <span class="mobile-headings">{{getTableHeadings().COST}}</span>
+          <span class="value">-</span>
+        </td>
         <td>
           <div data-toggle="modal" title="Delete Quantity Details"
                data-target="#deleteQuantityDetails"
