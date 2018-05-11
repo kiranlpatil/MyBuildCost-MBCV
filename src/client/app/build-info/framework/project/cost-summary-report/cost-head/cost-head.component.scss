@@ -514,6 +514,7 @@
 
     tbody > tr {
       td {
+        min-height: 42px;
         &:first-child {
           float:left;
           text-align: left;
@@ -596,6 +597,15 @@
       .caret {
         left: 0;
         top: 5px;
+      }
+    }
+  }
+
+  .add-item-table {
+    margin: 0 auto;
+    tr {
+      td {
+        border: 0;
       }
     }
   }

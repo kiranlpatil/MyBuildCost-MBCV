@@ -38,7 +38,7 @@
     border-radius: 4px;
     padding: 1px 4px;
     height: auto;
-    margin: 5px 0;
+    margin: 6px 0;
     font-weight: 600;
     font-size: 12px;
     min-width: 75px;
@@ -74,9 +74,15 @@
     }
   }
 }
-button[disabled]{
+
+.btn.disabled,
+.btn[disabled],
+button[disabled],
+fieldset[disabled] .btn {
+  opacity: 0.4;
   cursor:not-allowed;
 }
+
 .building-name {
   .btn-print {
     position: absolute;

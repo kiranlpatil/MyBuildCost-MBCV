@@ -96,7 +96,7 @@
 
                                 <!--Cost-->
                                 <td>
-                                  <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
+                                  <span class="mobile-headings">{{getTableHeadings().COST}}</span>
                                   <div class="edit-cost-null" *ngIf="workItem.amount == 0  && workItem.isDirectRate === false">
                                     -
                                   </div>
@@ -112,7 +112,7 @@
 
                                 <!--RateAnalysis-->
                                 <td>
-                                  <span class="mobile-headings">{{getTableHeadings().COST}}</span>
+                                  <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
                                   <div  *ngIf=" workItem.isDirectRate === false">
                                    <button class="btn-get-amount" [class.active]="(rateView==='systemRA' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                                           type="button" (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}

@@ -137,6 +137,7 @@
     tbody > tr {
       border-bottom: 2px solid $border-color;
       td {
+        min-height: 42px;
         &:first-child {
           float:left;
           text-align: left;
