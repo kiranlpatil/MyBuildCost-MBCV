@@ -10,8 +10,8 @@
       <th>{{getTableHeadings().HEIGHT}}</th>
       <th>{{getTableHeadings().QUANTITY}}</th>
       <th class="text-left">{{getTableHeadings().UNIT}}</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
+      <th class="hidden-xs">&nbsp;</th>
+      <th class="hidden-xs">&nbsp;</th>
     </thead>
   <tbody>
   <tr *ngFor="let quantityItem of quantityItems;  let quantityIndex= index ">
@@ -39,7 +39,7 @@
     <td class="get-amount-value text-left get-unit">
       {{workItemUnit}}
     </td>
-    <td colspan="2" class="get-amount-value get-delete text-center">
+    <td colspan="2" class="get-amount-value get-delete text-center hidden-xs">
       <div class="col-xs-2">
       <span title="Delete Quantity Item" (click)="deleteQuantityItem(quantityIndex)" class="glyphicon glyphicon-trash"></span>
       </div>
@@ -67,17 +67,17 @@
     <td class="total-amount text-left">
       {{workItemUnit}}
     </td>
-    <td colspan="2" class="total-amount">
+    <td colspan="2" class="total-amount hidden-xs">
       &nbsp;
     </td>
   </tr>
   </tbody>
   </table>
 
-  <button type="button" class="add-new-btn" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
-  <button type="submit" class="save-btn" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
-  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
-  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button type="button" class="add-new-btn hidden-xs" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
+  <button type="submit" class="save-btn hidden-xs" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
 </div>
 
 <div class="modal fade" id="deleteQuantity" role="dialog">

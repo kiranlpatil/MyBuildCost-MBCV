@@ -1,2 +1,29 @@
 @import '../../../../../../css/common';
 @import '../cost-summary.component';
+
+.panel-default {
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+  .panel-default {
+    .panel-heading {
+      float: left;
+      width: 100%;
+      a {
+        border-radius: 3px;
+        float: left;
+        font-size: 18px;
+        padding: 10px 20px 10px 25px;
+        position: relative;
+        width: 100%;
+      }
+      .menu-items > a {
+        border-radius: 2px;
+        height: 24px;
+        padding: 0;
+        width: 14px;
+      }
+    }
+  }
+}

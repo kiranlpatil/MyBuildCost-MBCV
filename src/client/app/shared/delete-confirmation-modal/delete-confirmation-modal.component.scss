@@ -32,5 +32,14 @@
 @media only screen and (max-width: 767px) {
   .modal-body {
     padding: 30px 15px 40px;
+
+    .btn {
+      padding: 0 5px;
+      width: 100px;
+    }
+
+    .bi-btn {
+      margin-right: 5px;
+    }
   }
 }

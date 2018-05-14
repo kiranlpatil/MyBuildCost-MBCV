@@ -141,6 +141,10 @@
           float:left;
           text-align: left;
           width: 100%;
+
+          input {
+            pointer-events: none;
+          }
         }
         &:nth-child(2),
         &:nth-child(3),
@@ -148,6 +152,7 @@
         &:nth-child(5),
         &:nth-child(6) {
           float:left;
+          min-height: 42px;
           text-align: left;
           width: 50%;
         }
@@ -160,9 +165,10 @@
         }
 
         &:nth-child(7) {
+          float: left;
+          min-height: 42px;
           text-align: right;
           width: 50%;
-          float: left;
         }
 
         .edit-cost-null,
@@ -190,6 +196,12 @@
       &:last-child {
         border-bottom: 0;
       }
+    }
+
+    .show-embedded-table {
+      margin-right: 0;
+      padding: 0 9px;
+      width: 100% !important;
     }
   }
 }

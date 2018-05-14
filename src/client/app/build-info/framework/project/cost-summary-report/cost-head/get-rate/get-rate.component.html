@@ -33,7 +33,7 @@
                 <tr class="table-headings">
                   <th>{{ getTableHeadings().DESCRIPTION }}</th>
                   <th>{{ getTableHeadings().QUANTITY }}</th>
-                  <th>{{ getTableHeadings().UNIT }}</th>
+                  <th class="hidden-xs">{{ getTableHeadings().UNIT }}</th>
                   <th>{{ getTableHeadings().RATE_PER_UNIT }}</th>
                   <th>{{ getTableHeadings().COST }}</th>
                 </tr>
@@ -57,10 +57,11 @@
                     </select>
                   </td>-->
                   <td>
-                    <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right"
+                    <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right hidden-xs"
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
+                    <span class="visible-xs mobile-quantity-value" [class.disable-mobile-quantity-value]="disableRateField">{{item.quantity}} {{item.unit}}</span>
                   </td>
-                  <td>
+                  <td class="hidden-xs">
                     <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-left" [disabled]="disableRateField" readonly/>
                   </td>
                   <td>
@@ -75,7 +76,10 @@
                </tbody>
               <tfoot>
               <tr>
-                <td colspan="4" class="total-amount">
+                <td colspan="3" class="total-amount">
+                  <label class="visible-xs">{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
+                </td>
+                <td class="hidden-xs total-amount">
                   <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
                 <td>
@@ -92,10 +96,10 @@
       <tfoot>
         <tr>
           <td rowspan="2">
-            <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="cancel" (click)="closeRateTab()">{{getButton().CANCEL_BUTTON}}</button>
-            <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="cancel" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+            <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeRateTab()">{{getButton().CANCEL_BUTTON}}</button>
+            <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
 
-            <button type="button" *ngIf="!disableRateField" class="save-btn" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
+            <button type="button" *ngIf="!disableRateField" class="save-btn hidden-xs" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
           </td>
           <td class="grand-total-amount" colspan="4">
             <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}:</label>

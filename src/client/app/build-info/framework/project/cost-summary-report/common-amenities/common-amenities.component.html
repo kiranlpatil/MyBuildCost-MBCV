@@ -1,10 +1,10 @@
 <!--TODO: make separate component for Common Amminities-->
-<div *ngIf="amenitiesReport !== undefined" class="panel-group">
-  <div class="panel panel-default">
+
+  <div class="panel panel-default"  *ngIf="amenitiesReport !== undefined" >
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a id="collapseCommonDevelopmentHeading" data-toggle="collapse" href="#collapseCommonDevelopment" class="collapsed panel-name" (click)="showGrandTotalTable()">
-          <span>{{getHeadings().COMMON_DEVELOPMENT}}</span>
+        <a id="collapse-cost-summary-panel{{totalNumberOfBuildings}}" data-parent="#cost-summary-panel" data-toggle="collapse" href="#collapse{{totalNumberOfBuildings}}" (click)="showGrandTotalTable()">
+          {{getHeadings().COMMON_DEVELOPMENT}}
           <span class="caret"></span>
         </a>
       </h4>
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div id="collapseCommonDevelopment" class="panel-collapse collapse">
+    <div id="collapse{{totalNumberOfBuildings}}" class="panel-collapse collapse">
       <div class="panel-body">
 
         <table class="table table-row-spacing table-dashboard cost-summary-table">
@@ -120,7 +120,7 @@
               </td>
               <td colspan="5">&nbsp;</td>
             </tr>
-            <tr class="add-item-row">
+            <tr class="add-item-row hidden-xs">
               <td colspan="5" class="add-items">
                 <button type="button" class="btn btn-add-item"
                         (click)="getAllInActiveProjectCostHeads()" [disabled]="showHideCostHeadButtonList[showHideCostHeadButtonList.length-1].showHideAddCostHeadButton">
@@ -128,7 +128,7 @@
                 </button>
               </td>
             </tr>
-            <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
+            <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate && !showGrandTotalPanelTable">
               <td class="border-left">{{getLabel().TOTAL}}</td>
               <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
               <td class="border-left">
@@ -201,7 +201,7 @@
     </table>
 
   </div>
-</div>
+
 
 <div class="modal fade default-modal" id="deleteCosthead" role="dialog">
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationCostHead" (deleteElementEvent)="deleteProjectCostHead($event)"></bi-delete-confirmation-modal>

@@ -220,3 +220,41 @@
   border: 1px solid $error !important;
 }
 
+@media only screen and (max-width: 767px) {
+  .get-quantity-section {
+    margin: 0 0 10px;
+    table {
+      pointer-events: none;
+    }
+    .close {
+      margin: 0 4px 5px 5px;
+    }
+
+    thead {
+      th {
+        &:nth-child(7) {
+          border-radius: 5px 0 0 0;
+        }
+        &:nth-child(7) {
+          border-radius: 0 5px 0 0;
+        }
+      }
+    }
+
+    .total-amt-row {
+      td {
+        &:nth-child(7) {
+          border-radius: 0 0 0 5px;
+        }
+        &:nth-child(7) {
+          border: 0;
+          border-radius: 0 0 5px 0;
+        }
+      }
+    }
+  }
+  .get-quantity-section:after, .get-quantity-section:before {
+    display: none;
+  }
+}
+

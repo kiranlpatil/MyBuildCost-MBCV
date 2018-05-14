@@ -443,6 +443,7 @@
   }
   .wrapper {
     min-height: calc(100vh - 50px);
+    padding: 0;
 
     .panel-group {
       padding: 0;
@@ -451,10 +452,10 @@
     .panel-default {
       .panel-heading {
         border-radius: 0;
-        min-height: 30px;
+        min-height: inherit;
         a {
           float: left;
-          padding: 0 10px 10px;
+          padding: 10px 10px 6px 25px;
           position: relative;
         }
 
@@ -466,18 +467,21 @@
         .total-cost {
           margin: 0;
         }
+      }
 
-        .cost-head-lists > .caret {
-          display: none;
+      .panel-body {
+        .bg-white {
+          &:first-child {
+            margin: 0;
+          }
         }
       }
     }
   }
 
   .building-name {
-    background: $white;
     border-radius: 0;
-    margin: 0;
+    margin: 5px 0;
     padding: 10px;
 
     .building-label {
@@ -524,7 +528,8 @@
         &:nth-child(4),
         &:nth-child(5),
         &:nth-child(6) {
-          float:left;
+          float: left;
+          min-height: 42px;
           text-align: left;
           width: 50%;
         }
@@ -537,9 +542,10 @@
         }
 
         &:nth-child(7) {
+          float: left;
+          min-height: 42px;
           text-align: right;
           width: 50%;
-          float: left;
         }
 
         .edit-cost-null,
@@ -566,25 +572,30 @@
         }
       }
 
-      .delete-cost-head,
-      .add-more-details,
       .file-attachment > span {
+        float: right;
         margin: 0;
         opacity: 1;
-        padding: 16px 5px 10px;
-        width: 25px;
+        padding: 16px 9px 10px;
+        width: 34px;
       }
 
       .file-attachment {
         .attachment-menu {
           padding: 15px;
-          right: -54px;
+          right: 0;
+          top: 40px;
           width: 300px;
         }
       }
 
       .attachment-menu:after, .attachment-menu:before {
-        left: 81%;
+        left: 98%;
+      }
+
+      .delete-cost-head,
+      .add-more-details {
+        display: none;
       }
     }
   }
@@ -596,6 +607,29 @@
       .caret {
         left: 0;
         top: 5px;
+      }
+    }
+
+    table {
+      #show-embedded-table-row {
+        td {
+          padding: 6px 9px;
+        }
+      }
+
+      #show-embedded-table {
+        margin-right: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .add-item-table {
+    margin: 0 auto;
+    width: 100%;
+    tr {
+      td {
+        border: 0;
       }
     }
   }

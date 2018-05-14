@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
-  ValueConstant, CurrentView
+  ValueConstant, CurrentView, ScrollView
 } from '../../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
@@ -51,6 +51,8 @@ export class CostSummaryComponent implements OnInit {
   showGrandTotalPanelBody:boolean=true;
   //showGrandTotalPanelTable= new Array<boolean>(10);
   compareIndex:number=0;
+
+  totalNumberOfBuildings : number;
 
  public inActiveCostHeadArray: Array<CostHead>;
   cloneBuildingForm: FormGroup;
@@ -113,17 +115,7 @@ export class CostSummaryComponent implements OnInit {
   setBuildingId( i:number, buildingId: string) {
     this.compareIndex = i;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
-    setTimeout(() => {
-      ScrollToID(this.compareIndex);
-    }, 500);
-    function ScrollToID(compareIndex : number) {
-      if(!$('#collapse-cost-summary-panel'+compareIndex).hasClass('collapsed')) {
-        var divPos = $('#collapse-cost-summary-panel'+compareIndex).offset().top;
-        $('html, body').animate({
-          scrollTop: divPos - 8
-        }, 500);
-      }
-    }
+   this.costSummaryService.moveSelectedBuildingAtTop(this.compareIndex);
   }
 
   getAllInActiveCostHeads(buildingId: string) {
@@ -178,9 +170,17 @@ export class CostSummaryComponent implements OnInit {
   onGetCostSummaryReportSuccess(projects : any) {
     this.projectReport = new ProjectReport( projects.data.buildings, projects.data.commonAmenities[0]) ;
     this.buildingsReport = this.projectReport.buildings;
+    if(this.projectReport.buildings !== undefined) {
+      this.totalNumberOfBuildings = this.projectReport.buildings.length;
+    }
     this.amenitiesReport = this.projectReport.commonAmenities;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
+
+    if(SessionStorageService.getSessionValue(SessionStorage.FROM_VIEW) === this.getScrollView().GO_TO_RECENT_BUILDING) {
+      SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, null);
+      this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
+    }
   }
 
   onGetCostSummaryReportFailure(error : any) {
@@ -427,6 +427,10 @@ export class CostSummaryComponent implements OnInit {
 
   getProjectElements() {
     return ProjectElements;
+  }
+
+  getScrollView() {
+    return ScrollView;
   }
 
 }

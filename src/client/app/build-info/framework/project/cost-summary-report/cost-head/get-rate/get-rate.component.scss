@@ -136,6 +136,7 @@
     border-bottom: 1px solid $gray-light;
     border-top: 1px solid $gray-light;
     display: block;
+    float: left;
 
     .rate-item {
       padding: 0 !important;
@@ -223,7 +224,7 @@
           width: 30%;
         }
 
-        p{
+        p {
           font-size: 11px;
         }
       }
@@ -363,3 +364,75 @@ textarea[disabled] {
   color: $disable-input;
 }
 
+@media only screen and (max-width: 767px) {
+  .get-rate-section,
+  .get-cost-section,
+  .get-systemRA-section {
+    margin: 0 0 10px;
+    .quantity-count,
+    .get-rate-table {
+      pointer-events: none;
+    }
+    table {
+      tr {
+        td {
+          &:first-child {
+            width: 30%;
+          }
+
+          &:nth-child(2) {
+            width: 35%;
+          }
+
+          &:nth-child(3),
+          &:nth-child(4) {
+            width: 17.5%;
+          }
+
+        }
+      }
+    }
+
+    .notes-table {
+      thead {
+        th {
+          float: left;
+          width: 100% !important;
+
+
+          &:last-child {
+            padding: 0 !important;
+          }
+        }
+      }
+
+      tbody > tr {
+        td {
+          width: 100%;
+          float: left;
+
+          &:last-child {
+            padding: 0 !important;
+          }
+        }
+      }
+    }
+
+    .mobile-quantity-value {
+      color: $black-theme-color;
+      font-size: 11px;
+      padding: 0 7px;
+      text-align: right;
+    }
+
+    .disable-mobile-quantity-value {
+      color: $disable-input !important;
+    }
+  }
+
+  .get-rate-section:after, .get-rate-section:before,
+  .get-cost-section:after, .get-cost-section:before,
+  .get-systemRA-section:after, .get-systemRA-section:before {
+    display: none;
+  }
+}

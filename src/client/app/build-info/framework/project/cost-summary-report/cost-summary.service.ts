@@ -8,8 +8,11 @@ import { QuantityItem } from '../../model/quantity-item';
 import { Rate } from '../../model/rate';
 import { ProjectElements } from '../../../../shared/constants';
 
+declare let $: any;
+
 @Injectable()
 export class CostSummaryService extends BaseService {
+
 
   constructor(protected messageService: MessageService, protected httpDelegateService : HttpDelegateService) {
     super();
@@ -230,5 +233,45 @@ export class CostSummaryService extends BaseService {
       costHeadId + '/' + API.CATEGORY + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + API.DELETE_FILE;
     let body = {assignedFileName : assignedFileName };
     return this.httpDelegateService.putAPI(url, body);
+  }
+
+  /*moveAtTop(compareIndex : number, collapseCostSummaryPanelTag :any) {
+    let collapseTag = '#collapse' + compareIndex;
+    $(collapseTag).ready(function () {
+      var divPos = $(collapseCostSummaryPanelTag).offset().top;
+      $('html, body').animate({
+        scrollTop: divPos - 8
+      }, 500);
+    });
+  }*/
+
+  moveSelectedBuildingAtTop(compareIndex : number) {
+    let collapseCostSummaryPanelTag = '#collapse-cost-summary-panel' + compareIndex;
+    if($(collapseCostSummaryPanelTag).hasClass('collapsed')) {
+      $('.collapse').removeClass('in');
+      let collapseTag = '#collapse' + compareIndex;
+      $(collapseTag).ready(function () {
+        var divPos = $(collapseCostSummaryPanelTag).offset().top;
+        $('html, body').animate({
+          scrollTop: divPos - 8
+        }, 500);
+      });
+    }
+  }
+
+  moveRecentBuildingAtTop(compareIndex : number) {
+    let collapseCostSummaryPanelTag = '#collapse-cost-summary-panel' + compareIndex;
+    $(collapseCostSummaryPanelTag).ready(function () {
+        $(collapseCostSummaryPanelTag).removeClass('collapsed');
+        $('.collapse').removeClass('in');
+        $('#collapse'+compareIndex).addClass('in');
+        let collapseTag = '#collapse' + compareIndex;
+        $(collapseTag).ready(function () {
+          var divPos = $(collapseCostSummaryPanelTag).offset().top;
+          $('html, body').animate({
+            scrollTop: divPos - 8
+          }, 500);
+        });
+    });
   }
 }

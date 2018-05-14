@@ -321,12 +321,12 @@ class RateAnalysisService {
     let workItemsWithoutCategories = alasql(workItemsWithoutCategoriesRateAnalysisSQL, [workItemsRateAnalysis]);
 
     let buildingWorkItems: Array<WorkItem> = new Array<WorkItem>();
-    let category = new Category('default', 0);
+    let category = new Category('Work Items', 0);
     let configWorkItems = new Array<WorkItem>();
 
     if (configCategories.length > 0) {
       for (let configCategory of configCategories) {
-        if (configCategory.name === 'default') {
+        if (configCategory.name === 'Work Items') {
           configWorkItems = configCategory.workItems;
         }
       }
