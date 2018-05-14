@@ -19,6 +19,7 @@ declare let $: any;
 
 export class CommonAmenitiesComponent implements OnInit {
   @Input() amenitiesReport: BuildingReport;
+  @Input() totalNumberOfBuildings: number;
   @Input() costingByUnit : string;
   @Input() costingByArea : string;
   @Input() showHideCostHeadButtonList ?: Array<any>;
@@ -170,21 +171,8 @@ export class CommonAmenitiesComponent implements OnInit {
 
   showGrandTotalTable() {
     this.showGrandTotalPanelTable = !this.showGrandTotalPanelTable;
-
-    setTimeout(() => {
-      this.ScrollToID();
-    }, 500);
+    this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
   }
-
-  ScrollToID() {
-  if(!$('#collapseCommonDevelopmentHeading').hasClass('collapsed')) {
-    var divPos = $('#collapseCommonDevelopmentHeading').offset().top;
-    $('html, body').animate({
-      scrollTop: divPos - 8
-    }, 500);
-  }
-}
-
 }
 
 

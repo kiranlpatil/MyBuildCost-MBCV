@@ -244,6 +244,7 @@ export class SessionStorage {
   public static IS_LOGGED_IN = 'is_user_logged_in';
   public static IS_USER_SIGN_IN = 'is_user_register';
   public static CURRENT_VIEW = 'current_view';
+  public static FROM_VIEW = 'from_view';
   public static USER_ID = 'user_id';
   public static MOBILE_NUMBER = 'mobile_number';
   public static VERIFIED_MOBILE_NUMBER = 'verified_mobile_number';
@@ -625,6 +626,11 @@ export class CurrentView {
   public static COST_SUMMARY = 'costSummary';
   public static MATERIAL_TAKE_OFF = 'materialTakeOff';
   public static PROJECT_DETAILS = 'projectDetails';
+}
+
+export class ScrollView {
+
+  public static GO_TO_RECENT_BUILDING = 'goToRecentBuilding';
 }
 
 export class StandardNotes {
