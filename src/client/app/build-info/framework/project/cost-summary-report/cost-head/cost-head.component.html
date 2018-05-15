@@ -6,8 +6,8 @@
     <div class="col-xs-12 no-padding">
       <h4 class="building-name clearfix costhead-building-name">
         <div class="col-sm-8 padding-left0">
-          <span class="building-label"> {{ viewTypeValue }} </span>
-          <span class="text-left"> ( {{ costHeadName }} ) </span>
+          <span class="building-label"> {{ costHeadName }} </span>
+          <span class="text-left"> ( {{ viewTypeValue }} ) </span>
         </div>
         <div class="col-sm-4 text-right padding-right5">
           <span class="text-left total-amount-work total-cost"> {{categoryDetailsTotalAmount|number : '1.0-0'}} </span>
@@ -96,7 +96,7 @@
 
                                 <!--Cost-->
                                 <td>
-                                  <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
+                                  <span class="mobile-headings">{{getTableHeadings().COST}}</span>
                                   <div class="edit-cost-null" *ngIf="workItem.amount == 0  && workItem.isDirectRate === false">
                                     -
                                   </div>
@@ -112,7 +112,7 @@
 
                                 <!--RateAnalysis-->
                                 <td>
-                                  <span class="mobile-headings">{{getTableHeadings().COST}}</span>
+                                  <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
                                   <div  *ngIf=" workItem.isDirectRate === false">
                                    <button class="btn-get-amount" [class.active]="(rateView==='systemRA' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
                                           type="button" (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}
@@ -232,7 +232,7 @@
                     <td colspan="6">&nbsp;</td>
                   </tr>
                   <tr>
-                    <td  class="add-items" colspan="7">
+                    <td  class="add-items hidden-xs" colspan="7">
                       <button type="button" class="btn-add-item"
                               (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)" [disabled]="showHideAddItemButton">
                         <span class="glyphicon glyphicon-plus"></span> {{getButton().ADD}} {{getButton().ITEM}}</button>

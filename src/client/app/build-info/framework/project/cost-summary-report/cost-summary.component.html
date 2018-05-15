@@ -147,7 +147,7 @@
                     </td>
                     <td colspan="5">&nbsp;</td>
                   </tr>
-                  <tr class="add-item-row">
+                  <tr class="add-item-row hidden-xs">
                     <td colspan="5" class="add-items">
                       <button  type="button" class="btn btn-add-item"
                                [disabled]="showHideCostHeadButtonsList[i].showHideAddCostHeadButton" (click)="getAllInActiveCostHeads(building._id)" >
@@ -202,16 +202,18 @@
             </tbody>
           </table>
         </div>
+        <!--Common Amenity-->
+        <bi-common-amenities
+          [showHideCostHeadButtonList]="showHideCostHeadButtonsList"
+          [totalNumberOfBuildings]="totalNumberOfBuildings"
+          [amenitiesReport]="amenitiesReport"
+          [costingByUnit]="defaultCostingByUnit"
+          [costingByArea]="defaultCostingByArea"
+          (getReportDetails)="getCostSummaryReport($event)">
+        </bi-common-amenities>
       </div>
 
-      <!--Common Amenity-->
-      <bi-common-amenities
-        [showHideCostHeadButtonList]="showHideCostHeadButtonsList"
-        [amenitiesReport]="amenitiesReport"
-        [costingByUnit]="defaultCostingByUnit"
-        [costingByArea]="defaultCostingByArea"
-        (getReportDetails)="getCostSummaryReport($event)">
-      </bi-common-amenities>
+
 
       <div class="panel-group no-border grand-total-table">
         <div class="panel panel-default">

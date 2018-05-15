@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Messages, NavigationRoutes, ImagePath, Headings, Button } from '../../../../../shared/constants';
+import { Messages, NavigationRoutes, ImagePath, Headings, Button, ScrollView } from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../../shared/index';
 import { Building } from '../../../model/building';
@@ -94,17 +94,9 @@ export class CreateBuildingComponent  implements  OnInit {
 
   onSyncBuildingWithRateAnalysisSuccess(project : any) {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    //let numOfbuildings = (project.buildings.length - 1);
+    SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, this.getScrollView().GO_TO_RECENT_BUILDING);
     this.loaderService.stop();
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
-    /*let myVar = setTimeout(ScrollToID, 3000);
-    function ScrollToID() {
-      $('.collapse').removeClass('in');
-      $('#collapse'+numOfbuildings).addClass('in');
-      $('html, body').animate({
-        scrollTop: $('#collapse-cost-summary-panel'+numOfbuildings).offset().top - 8
-      }, 1000);
-    }*/
   }
 
   onSyncBuildingWithRateAnalysisFailure(error:any) {
@@ -127,5 +119,9 @@ export class CreateBuildingComponent  implements  OnInit {
 
   getButton() {
     return Button;
+  }
+
+  getScrollView() {
+    return ScrollView;
   }
 }

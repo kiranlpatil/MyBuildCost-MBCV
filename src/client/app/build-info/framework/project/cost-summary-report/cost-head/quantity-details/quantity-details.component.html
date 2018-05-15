@@ -4,7 +4,7 @@
       <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
         <td>
           <span class="mobile-headings">{{getTableHeadings().ITEM}}</span>
-          <input  class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (change)="changeQuantityName(quantity.name)">
+          <input placeholder="Flat/Floor/Parking details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (change)="changeQuantityName(quantity.name)">
         </td>
 
         <td>
@@ -30,7 +30,7 @@
         </td>
 
         <td>
-          <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
+          <span class="mobile-headings">{{getTableHeadings().COST}}</span>
           <div *ngIf="workItemData.isDirectRate === false && workItemData.rate.isEstimated === false">
             <span class="value">-</span>
           </div>
@@ -40,13 +40,16 @@
             </span>
           </div>
           <div>
+            <span class="value" *ngIf="quantity.total * workItemData.rate.total === 0" >-</span>
+          </div>
+          <div>
             <span class="value" *ngIf="workItemData.isDirectRate && quantity.total * workItemData.rate.total === 0">-</span>
             <span class="value" *ngIf="workItemData.isDirectRate &&  quantity.total * workItemData.rate.total !== 0">{{(quantity.total * workItemData.rate.total)|number: '1.0-0'}}</span>
           </div>
         </td>
 
         <td>
-          <span class="mobile-headings">{{getTableHeadings().COST}}</span>
+          <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
           <span class="value">-</span>
         </td>
         <td>
