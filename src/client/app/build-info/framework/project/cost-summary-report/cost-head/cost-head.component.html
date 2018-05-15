@@ -122,7 +122,8 @@
                                     -
                                   </div>
                                 </td>
-                                  <td>
+
+                                <td>
                                     <div class="file-attachment" [class.attachment-menu-open]="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                       <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Files" />
@@ -149,7 +150,8 @@
                                       <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />
                                     </div>
                                   </td>
-                                  <td id="show-embedded-table" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
+
+                                <td id="show-embedded-table" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
                                     <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB">
                                       <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                                         <bi-get-rate [rate]="rateItemsArray"
@@ -186,7 +188,17 @@
                                     </div>
                                   </div>
                                 </td>
+
+                                <div class="modal fade default-modal" id="updateDirectQuantity{{workItemIndex}}" role="dialog">
+                                  <bi-update-confirmation-modal
+                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [categoryId]="categoryId"
+                                    [workitem]="workItem"
+                                    (updateElementEvent)="updateElement($event)">
+                                  </bi-update-confirmation-modal>
+                                </div>
                               </tr>
+
                               <tr class="add-work-item-row">
                                 <td colspan="8" class="add-work-item">
                                   <div id="collapseDetails{{workItemIndex}}"  class="panel-collapse collapse">
@@ -261,6 +273,3 @@
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationForAttachment" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
 </div>
 
-<div class="modal fade default-modal" id="updateDirectQuantity" role="dialog">
-  <bi-update-confirmation-modal [elementType]="updateConfirmationForDirectQuantity" (updateElementEvent)="updateElement($event)"></bi-update-confirmation-modal>
-</div>
