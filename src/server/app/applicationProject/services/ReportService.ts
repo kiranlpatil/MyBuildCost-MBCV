@@ -353,7 +353,7 @@ class ReportService {
           let materialTakeOffReport: MaterialTakeOffReport = new MaterialTakeOffReport( null, null, null);
           materialTakeOffReport.secondaryView = {};
           this.populateMaterialTakeOffReportFromRowData(materialReportRowData, materialTakeOffReport, elementWiseReport, building);
-          this.calculateTotalOfMaterialTakeReport(materialTakeOffReport, elementWiseReport);
+          this.calculateTotalOfMaterialTakeReport(materialTakeOffReport, elementWiseReport, building);
           let responseData = {};
           responseData[element]= materialTakeOffReport;
           callback(null, responseData);
@@ -364,7 +364,7 @@ class ReportService {
     });
   }
 
-  calculateTotalOfMaterialTakeReport(materialTakeOffReport : any, elementWiseReport : string) {
+  calculateTotalOfMaterialTakeReport(materialTakeOffReport : any, elementWiseReport : string, building : string) {
 
     let reportTotal = 0;
     let recordUnit;
@@ -412,11 +412,11 @@ class ReportService {
       reportTotal = reportTotal + contentTotal;
       recordUnit = table.footer.columnThree;
 
-
+      if (elementWiseReport === Constants.STR_MATERIAL && building === Constants.STR_ALL_BUILDING) {
         materialTakeOffReport.subTitle.columnTwo = reportTotal;
         materialTakeOffReport.subTitle.columnThree = recordUnit;
         materialTakeOffReport.subTitle.columnOne = ': ' + reportTotal + ' ' + materialTakeOffReport.subTitle.columnThree;
-
+      }
     }
   }
 

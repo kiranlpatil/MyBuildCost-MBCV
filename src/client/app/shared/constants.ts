@@ -561,6 +561,7 @@ export class ProjectElements {
 
 export class MaterialTakeOffElements {
 
+  public static TOTAL_QUANTITY = 'Total Quantity';
   public static COST_HEAD_WISE = 'Cost Head wise';
   public static ALL_BUILDINGS = 'All Buildings';
   public static BUILDING = 'Building';
