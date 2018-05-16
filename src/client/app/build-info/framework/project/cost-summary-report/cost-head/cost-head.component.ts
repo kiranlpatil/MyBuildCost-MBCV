@@ -622,6 +622,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.refreshCategoryList();
   }
 
+  setCategoriesTotalOfQty( categoriesTotal : number) {
+    this.categoryDetailsTotalAmount = categoriesTotal;
+  }
+
   closeRateView() {
     this.showWorkItemTab = null;
     this.displayRateView = null;

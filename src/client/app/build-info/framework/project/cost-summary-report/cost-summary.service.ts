@@ -7,6 +7,7 @@ import { HttpDelegateService } from '../../../../shared/services/http-delegate.s
 import { QuantityItem } from '../../model/quantity-item';
 import { Rate } from '../../model/rate';
 import { ProjectElements } from '../../../../shared/constants';
+import { QuantityDetails } from '../../model/quantity-details';
 
 declare let $: any;
 
@@ -153,6 +154,17 @@ export class CostSummaryService extends BaseService {
     var body= { directQuantity : directQuantity };
     var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
       '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT + '/'+ API.QUANTITY;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
+  updateQuantityDetails(baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                        quantityDetailsObj : QuantityDetails) {
+
+    var body= {  item : quantityDetailsObj };
+
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
+      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT_QUANTITY +
+      '/'+ API.QUANTITY_ITEM_DETAILS;
 
     return this.httpDelegateService.putAPI(url, body);
   }
