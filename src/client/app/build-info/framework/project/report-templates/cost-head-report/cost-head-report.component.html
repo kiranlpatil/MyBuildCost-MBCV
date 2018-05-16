@@ -10,7 +10,7 @@
       {{generatedDate | date:'dd MMMM yyyy'}}
     </div>
     <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
-      <div style="padding-bottom: 5px;">
+      <div *ngIf="comapnyName !== 'undefined' && comapnyName !== '' && comapnyName.trim() !== ''" style="padding-bottom: 5px;">
         <strong style="font-weight: bold">Company Name : </strong>
         <span>{{comapnyName}}</span>
       </div>

@@ -156,6 +156,17 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
+  updateMeasurementSheet(categoryId: number, workItem : WorkItem, categoryIndex : number, workItemIndex : number) {
+    if(workItem.quantity.isDirectQuantity ||
+      (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
+      $('#updateMeasurementQuantity'+workItemIndex).modal();
+    } else if(!workItem.quantity.isDirectQuantity && workItem.quantity.quantityItemDetails.length === 0) {
+      this.getDefaultQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+    } else if(!workItem.quantity.isDirectQuantity && workItem.quantity.quantityItemDetails[0].name === 'default') {
+      this.getDefaultQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+    }
+  }
+
   getQuantity(categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
       if ((workItem.quantity.quantityItemDetails.length > 1) || (workItem.quantity.quantityItemDetails.length === 1 &&
           workItem.quantity.quantityItemDetails[0].name !== Label.DEFAULT_VIEW)) {
@@ -191,6 +202,21 @@ export class CostHeadComponent implements OnInit, OnChanges {
     /*} else {
       this.showWorkItemTab = null;
     }*/
+  }
+
+  showAddFloorwiseQuantityModal(workItem : WorkItem, workItemIndex : number, categoryId: number, categoryIndex : number) {
+    if(workItem.quantity.isDirectQuantity ||
+      (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default')) {
+      $('#addFloorwiseQuantity'+workItemIndex).modal();
+    } else if(workItem.quantity.quantityItemDetails ||
+      (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
+      this.addNewDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+    }
+  }
+
+  addFloorwiseQuantity(categoryObject : any) {
+    this.addNewDetailedQuantity(categoryObject.categoryId,
+      categoryObject.workitem, categoryObject.categoryIndex, categoryObject.workItemIndex);
   }
 
   //Add blank detailed quantity at last
@@ -229,7 +255,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
         this.workItem = workItem;
         let quantityDetails: Array<QuantityDetails> = workItem.quantity.quantityItemDetails;
 
-        if( quantityDetails.length !==0 ) {
+        if( quantityDetails.length !==0 && quantityDetails[0].name === Label.DEFAULT_VIEW) {
             this.workItem.quantity.quantityItemDetails = [];
             let defaultQuantityDetail = quantityDetails.filter(
               function( defaultQuantityDetail: any){
@@ -598,6 +624,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
   updateElement(updatedWorkitem : any) {
      this.changeDirectQuantity(updatedWorkitem.categoryId , updatedWorkitem.workitem.rateAnalysisId,
        updatedWorkitem.workitem.quantity.total);
+  }
+
+  updateQuantityMeasurementSheet(categoryObj : any) {
+    console.log('Call to update measurement sheet');
+    this.getDefaultQuantity(categoryObj.categoryId, categoryObj.workitem, categoryObj.categoryIndex, categoryObj.workItemIndex);
   }
 
   goBack() {

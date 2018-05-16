@@ -654,28 +654,6 @@ class ProjectController {
     }
   }
 
-  addCostHeadBuilding(req: express.Request, res: express.Response, next: any): void {
-    try {
-      logger.info('Project controller, addCostHeadBuilding has been hit');
-      let user = req.user;
-      let buildingId = req.params.buildingId;
-      let costHeadDetails = <CostHead> req.body;
-      let projectService = new ProjectService();
-      let query = {$push: { costHead : costHeadDetails}};
-      projectService.updateBuildingById( buildingId, query, user, (error, result) => {
-        if(error) {
-          next(error);
-        } else {
-          logger.info('Add CostHead Building success');
-          logger.debug('Added CostHead for Building ID : '+buildingId);
-          next(new Response(200,result));
-        }
-      });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
   updateQuantityOfBuildingCostHeads(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, updateQuantity has been hit');

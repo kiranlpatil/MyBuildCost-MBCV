@@ -175,10 +175,6 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
       this._requestInterceptor.intercept, validator.getCategoriesOfBuildingCostHead, controller.getCostHeadDetailsOfBuilding,
       this._responseInterceptor.exit);
 
-    //Add new costhead in building
-    router.put('/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      controller.addCostHeadBuilding, this._responseInterceptor.exit);
-
     //Update budgeted cost for costhead
     router.put('/:projectId/building/:buildingId/costhead',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.updateBudgetedCostForBuildingCostHead, controller.updateBudgetedCostForCostHead, this._responseInterceptor.exit);
