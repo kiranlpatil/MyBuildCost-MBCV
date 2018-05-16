@@ -1528,6 +1528,13 @@ class ProjectService {
                }
             }
           }
+        } else {
+          quantity.quantityItemDetails = [];
+          console.log('quantity : '+JSON.stringify(quantity));
+          quantityDetail.id = quantityId;
+          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+          console.log(quantity.quantityItemDetails);
+          quantity.quantityItemDetails.push(quantityDetail);
         }
       }
     }
