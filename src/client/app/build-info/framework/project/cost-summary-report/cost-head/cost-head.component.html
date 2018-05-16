@@ -64,10 +64,12 @@
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
                                   <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                    <input type="number" [(ngModel)]="workItem.quantity.total" (change)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)"
+                                    <input type="number" [(ngModel)]="workItem.quantity.total"
+                                           (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
                                             id="directQuantity" size="10" class="form-control clear">
                                     <span class="calculator" id="getQuantity{{categoryIndex}}"
-                                          (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                          (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                          <!--(click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">-->
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>
                                   </div>
@@ -141,7 +143,7 @@
                                       </div>
                                     </div>
                                     <button class="add-more-details"
-                                            (click)="addNewDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"
+                                            (click)="showAddFloorwiseQuantityModal(workItem, workItemIndex, category.rateAnalysisId, categoryIndex)"
                                             title="Add More Details">
                                       <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
@@ -195,6 +197,28 @@
                                     [categoryId]="categoryId"
                                     [workitem]="workItem"
                                     (updateElementEvent)="updateElement($event)">
+                                  </bi-update-confirmation-modal>
+                                </div>
+
+                                <div class="modal fade default-modal" id="updateMeasurementQuantity{{workItemIndex}}" role="dialog">
+                                  <bi-update-confirmation-modal
+                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [categoryId]="categoryId"
+                                    [workitem]="workItem"
+                                    [workItemIndex] = "workItemIndex"
+                                    [categoryIndex] = "categoryIndex"
+                                    (updateElementEvent)="updateQuantityMeasurementSheet($event)">
+                                  </bi-update-confirmation-modal>
+                                </div>
+
+                                <div class="modal fade default-modal" id="addFloorwiseQuantity{{workItemIndex}}" role="dialog">
+                                  <bi-update-confirmation-modal
+                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [categoryId]="categoryId"
+                                    [workitem]="workItem"
+                                    [workItemIndex] = "workItemIndex"
+                                    [categoryIndex] = "categoryIndex"
+                                    (updateElementEvent)="addFloorwiseQuantity($event)">
                                   </bi-update-confirmation-modal>
                                 </div>
                               </tr>
