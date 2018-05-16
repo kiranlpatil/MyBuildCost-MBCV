@@ -61,6 +61,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   deleteConfirmationForAttachment = ProjectElements.ATTACHMENT;
   updateConfirmationForDirectQuantity = ProjectElements.DIRECT_QUANTITY;
   public showQuantityDetails:boolean=false;
+
   private showWorkItemList:boolean=false;
   private showWorkItemTab : string = null;
   private showQuantityTab : string = null;
@@ -453,15 +454,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryIdForInActive = categoryId;
   }
 
-/*  setDirectQuantity(categoryId : number, workItemId: number, directQuantity : number) {
-    this.categoryId = categoryId;
-    this.workItemId = workItemId;
-    this.directQuantity = directQuantity;
+  showUpdateDirectQuantityModal(workItem : WorkItem, categoryId : number, workItemIndex : number) {
+    this.currentWorkItemIndex = workItemIndex;
+    if(workItem.quantity.quantityItemDetails.length !== 0) {
+      $('#updateDirectQuantity'+workItemIndex).modal();
+    } else {
+      this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.quantity.total);
+    }
   }
-
-  displayModal() {
-    $('#updateDirectQuantity').modal('show');
-  }*/
 
   changeDirectQuantity(categoryId : number, workItemId: number, directQuantity : number) {
     if( directQuantity !== null ||  directQuantity !== 0) {
@@ -595,11 +595,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-/*  updateElement(elementType : string) {
-      if(elementType === ProjectElements.DIRECT_QUANTITY) {
-        this.changeDirectQuantity();
-      }
-    }*/
+  updateElement(updatedWorkitem : any) {
+     this.changeDirectQuantity(updatedWorkitem.categoryId , updatedWorkitem.workitem.rateAnalysisId,
+       updatedWorkitem.workitem.quantity.total);
+  }
 
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);

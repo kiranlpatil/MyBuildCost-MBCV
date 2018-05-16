@@ -10,13 +10,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class UpdateConfirmationModalComponent {
 
   @Input() elementType: string;
-  @Output() updateElementEvent = new EventEmitter<string>();
-
-  constructor() {
-
-  }
+  @Input() categoryId: string;
+  @Input() workitem: string;
+  @Output() updateElementEvent = new EventEmitter<any>();
 
   updateElement() {
-    this.updateElementEvent.emit(this.elementType);
+    let workitemObj = {
+      workitem : this.workitem,
+      categoryId : this.categoryId
+    };
+    this.updateElementEvent.emit(workitemObj);
   }
 }
