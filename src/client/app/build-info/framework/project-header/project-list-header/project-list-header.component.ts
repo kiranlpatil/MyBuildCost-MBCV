@@ -33,8 +33,8 @@ export class ProjectListHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentView = SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
-    if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== undefined ||
-      SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== null) {
+    if( SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== 'undefined' &&
+      SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== 'null') {
       this.selectedProjectName=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
     }
     this.getAllProjects();
@@ -49,6 +49,14 @@ export class ProjectListHeaderComponent implements OnInit {
 
   onGetAllProjectsSuccess(projects : any) {
     this.projects = projects.data;
+    if((this.currentView === 'costSummary'|| this.currentView === 'materialTakeOff' || this.currentView === 'projectDetails') && SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) === null ){
+      let projectList : Array<Project>;
+      projectList = this.projects.filter(
+        function( project: Project){
+          return project._id.toString() == SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID).toString();
+        });
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME,  projectList[0].name);
+    }
   }
 
   onGetAllProjectsFailure(error : any) {
