@@ -15,10 +15,10 @@ import bcrypt = require('bcrypt');
 import { MailChimpMailerService } from './mailchimp-mailer.service';
 import UserModel = require('../dataaccess/model/UserModel');
 import User = require('../dataaccess/mongoose/user');
-import SubscriptionService = require("../../applicationProject/services/SubscriptionService");
-import SubscriptionPackage = require("../../applicationProject/dataaccess/model/project/Subscription/SubscriptionPackage");
-import BaseSubscriptionPackage = require("../../applicationProject/dataaccess/model/project/Subscription/BaseSubscriptionPackage");
-import UserSubscription = require("../../applicationProject/dataaccess/model/project/Subscription/UserSubscription");
+import SubscriptionService = require('../../applicationProject/services/SubscriptionService');
+import SubscriptionPackage = require('../../applicationProject/dataaccess/model/project/Subscription/SubscriptionPackage');
+import BaseSubscriptionPackage = require('../../applicationProject/dataaccess/model/project/Subscription/BaseSubscriptionPackage');
+import UserSubscription = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscription');
 
 class UserService {
   APP_NAME: string;
@@ -431,9 +431,10 @@ class UserService {
         ['$message$',errorInfo.message],['$error$',errorInfo.stack]]);
     }
     let sendMailService = new SendMailService();
+    let attachment = MailAttachments.AttachmentArray;
     sendMailService.send(config.get('application.mail.ADMIN_MAIL'),
       Messages.EMAIL_SUBJECT_SERVER_ERROR + ' on ' + config.get('application.mail.host'),
-      'error.mail.html',data,callback,config.get('application.mail.TPLGROUP_MAIL'));
+      'error.mail.html',data,attachment, callback,config.get('application.mail.TPLGROUP_MAIL'));
   }
 
   findById(id: any, callback: (error: any, result: any) => void) {
