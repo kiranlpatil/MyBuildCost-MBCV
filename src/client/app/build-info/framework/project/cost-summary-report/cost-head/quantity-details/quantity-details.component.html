@@ -4,17 +4,21 @@
       <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
         <td>
           <span class="mobile-headings">{{getTableHeadings().ITEM}}</span>
-          <input placeholder="Flat/Floor/Parking details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (change)="changeQuantityName(quantity.name)">
+          <input placeholder="Flat/Floor/Parking details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (focus)="changeQuantityName(quantity.name)"
+                 (change)="updateQuantityDetails(quantity, getLabel().NAME)">
         </td>
 
         <td>
           <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
-          <div class="edit-field" *ngIf="quantity.total != 0" (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
-            <input [ngModel]="quantity.total" id="quantity" size="10" class="form-control clear">
+          <div class="edit-field">
+            <input type="number"  [(ngModel)]="quantity.total"
+                   id="quantity" size="10" class="form-control clear"
+                   (change)="updateQuantityDetails(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
+            <span class="calculator"  id="getQuantity{{quantityIndex}}"
+                  (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
+                 <img src="assets/build-info/dashboard/calculator2.png" />
+          </span>
           </div>
-          <button  *ngIf="quantity.total == 0" class="btn-get-amount" (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
-            {{getLabel().GET_QUANTITY}}
-          </button>
         </td>
 
         <td>
