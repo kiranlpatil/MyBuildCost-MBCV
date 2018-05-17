@@ -113,7 +113,7 @@ export class QuantityDetailsComponent implements OnInit {
     }
   }
 
-  updateQuantityDetails(quantity :QuantityDetails, flag : string) {
+  updateQuantityDetails(quantity :QuantityDetails, flag : string, quantityIndex ?: number) {
 
     let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
     if(this.validateQuantityName(quantity.name)) {
@@ -123,8 +123,10 @@ export class QuantityDetailsComponent implements OnInit {
       quantityDetailsObj.total = quantity.total;
       if(flag === Label.NAME) {
         quantityDetailsObj.quantityItems = quantity.quantityItems;
-      }else if(flag === Label.DIRECT_QUANTITY) {
+      } else if(flag === Label.DIRECT_QUANTITY) {
         quantityDetailsObj.quantityItems = [];
+        this.quantityDetails[quantityIndex].quantityItems = [];
+        this.showInnerView = null;
       } else {
         console.log('error');
       }

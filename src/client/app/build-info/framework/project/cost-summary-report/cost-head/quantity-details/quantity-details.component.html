@@ -11,7 +11,9 @@
         <td>
           <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
           <div class="edit-field">
-            <input type="number"  [(ngModel)]="quantity.total"  (change)="updateQuantityDetails(quantity, getLabel().DIRECT_QUANTITY) "id="quantity" size="10" class="form-control clear">
+            <input type="number"  [(ngModel)]="quantity.total"
+                   id="quantity" size="10" class="form-control clear"
+                   (change)="updateQuantityDetails(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
             <span class="calculator"  id="getQuantity{{quantityIndex}}"
                   (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
                  <img src="assets/build-info/dashboard/calculator2.png" />
