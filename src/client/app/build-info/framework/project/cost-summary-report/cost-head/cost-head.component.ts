@@ -269,10 +269,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
             let quantityDetail: QuantityDetails = new QuantityDetails();
             quantityDetail.quantityItems = [];
             quantityDetail.name = this.getLabel().DEFAULT_VIEW;
-            this.workItem.quantity.quantityItemDetails.push(quantityDetail);
+           // this.workItem.quantity.quantityItemDetails.push(quantityDetail);
             this.quantityItemsArray = [];
             this.keyQuantity = this.getLabel().DEFAULT_VIEW;
-        }
+          }
 
         this.currentCategoryIndex = categoryIndex;
         this.currentWorkItemIndex = workItemIndex;
