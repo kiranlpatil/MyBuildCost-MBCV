@@ -94,7 +94,7 @@ export class QuantityDetailsComponent implements OnInit {
           if (!quantityDetail.isDirectQuantity) {
             this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
             this.keyQuantity = quantityDetail.name;
-            this.quantityId = quantityDetail.id;
+            quantityDetail.id = this.quantityId;
           } else {
             this.quantityItemsArray = [];
             this.keyQuantity = quantityDetail.name;
@@ -146,6 +146,11 @@ export class QuantityDetailsComponent implements OnInit {
   onUpdateQuantityDetailSuccess(success :any, flag : string) {
     var message = new Message();
     message.isError = false;
+
+    if(success.data.id) {
+      this.quantityId = success.data.id;
+    }
+
     if(flag ===  Label.NAME) {
       this.loaderService.stop();
       let categoryDetailsTotalAmount = this.calculate();

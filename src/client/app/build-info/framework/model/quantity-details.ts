@@ -8,7 +8,6 @@ export class QuantityDetails {
   quantityItems : Array<QuantityItem>;
 
   constructor() {
-    this.id = 0;
     this.total = 0;
     this.quantityItems = new Array<QuantityItem>();
   }
