@@ -358,7 +358,7 @@ class ReportService {
           responseData[element]= materialTakeOffReport;
           callback(null, responseData);
         }else {
-          callback(new CostControllException('Material TakeOff Report Not Found For '+ building , null), null);
+          callback(new CostControllException(Constants.MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION + element , null), null);
         }
       }
     });
