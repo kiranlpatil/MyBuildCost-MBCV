@@ -1483,7 +1483,7 @@ class ProjectService {
             if (error) {
               callback(error, null);
             } else {
-              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+              callback(null, {data: quantityDetailsObj, status :'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
             }
           });
         }else {
