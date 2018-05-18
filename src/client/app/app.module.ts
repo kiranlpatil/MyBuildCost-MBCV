@@ -89,8 +89,10 @@ import { CommonAmenitiesReportComponent }
 from './build-info/framework/project/report-templates/common-amenities-report/common-amenities-report.component';
 import { CloneBuildingComponent} from './build-info/framework/project/building/clone-building/clone-building.component';
 import { ProjectNameChangeService } from './shared/services/project-name-change.service';
-import {CostSummaryReportComponent} from "./build-info/framework/project/report-templates/cost-summary-report/cost-summary-report.component";
+import {CostSummaryReportComponent} from './build-info/framework/project/report-templates/cost-summary-report/cost-summary-report.component';
 import { DisclaimerComponent } from './shared/disclaimer-component/disclaimer-component';
+import {
+  SortByCategoryAmountPipe} from './build-info/framework/project/cost-summary-report/cost-head/sort-by-category-amount.pipe';
 
 @NgModule({
   imports: [
@@ -132,6 +134,7 @@ import { DisclaimerComponent } from './shared/disclaimer-component/disclaimer-co
     CostSummaryComponent,
     CostHeadComponent,
     CostSummaryPipe,
+    SortByCategoryAmountPipe,
     GetQuantityComponent,
     MaterialTakeoffComponent,
     CostHeadWiseReportComponent,

@@ -15,7 +15,7 @@
         <bi-cost-head-report-pdf [categoryDetails]="categoryDetails" [categoryDetailsTotalAmount]="categoryDetailsTotalAmount" [viewType]="viewType"></bi-cost-head-report-pdf>
       </h4>
       <div class="panel-group" id="cost-head-panels">
-        <div class="panel panel-default" *ngFor=" let category of categoryDetails; let categoryIndex = index ">
+        <div class="panel panel-default" *ngFor=" let category of categoryDetails| sortByCategoryAmount; let categoryIndex = index ">
           <div class="panel-heading">
             <div class="panel-title clearfix" (click)="getActiveWorkItemsOfCategory(category.rateAnalysisId)">
               <a data-parent="#cost-head-panels" class="collapsed cost-head-lists">
@@ -175,8 +175,10 @@
                                     <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                                       <!-- <span class="glyphicon glyphicon-remove" (click)="closeQuantityTab()"></span>-->
                                       <bi-get-quantity [quantityItems]="quantityItemsArray"
+                                                       [showWorkItemTab]="showWorkItemTab"
                                                        [categoryDetails] ="categoryDetails"
                                                        [workItemsList] ="workItemsList"
+                                                       [quantityDetails]="quantityDetails"
                                                        [workItemUnit] = "workItem.unit"
                                                        (categoriesTotalAmount)="setCategoriesTotal($event)"
                                                        (refreshWorkItemList)="refreshWorkItemList($event)"
