@@ -38,6 +38,8 @@ export class QuantityDetailsComponent implements OnInit {
 
   workItemId : number;
   quantityId : number;
+  currentId : number;
+  currentQtyName : string;
   rateItemsArray : Rate;
   unit:string='';
   previousRateQuantity : number = 0;
@@ -94,7 +96,11 @@ export class QuantityDetailsComponent implements OnInit {
           if (!quantityDetail.isDirectQuantity) {
             this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
             this.keyQuantity = quantityDetail.name;
-            quantityDetail.id = this.quantityId;
+            if(quantityDetail.id === undefined && this.currentQtyName === quantityDetail.name) {
+              this.quantityId = this.currentId ;
+            }else {
+              this.quantityId = quantityDetail.id;
+            }
           } else {
             this.quantityItemsArray = [];
             this.keyQuantity = quantityDetail.name;
@@ -118,7 +124,11 @@ export class QuantityDetailsComponent implements OnInit {
     let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
     if(this.validateQuantityName(quantity.name)) {
       let quantityDetailsObj : QuantityDetails = new QuantityDetails();
-      quantityDetailsObj.id =  quantity.id;
+      if(quantity.id === undefined && this.currentQtyName === quantity.name) {
+        quantityDetailsObj.id =  this.currentId;
+      }else {
+        quantityDetailsObj.id =  quantity.id;
+      }
       quantityDetailsObj.name = quantity.name;
       quantityDetailsObj.total = quantity.total;
       if(flag === Label.NAME) {
@@ -150,7 +160,8 @@ export class QuantityDetailsComponent implements OnInit {
     message.isError = false;
 
     if(success.data.id) {
-      this.quantityId = success.data.id;
+      this.currentQtyName = success.data.name;
+      this.currentId = success.data.id;
     }
 
     if(flag ===  Label.NAME) {
