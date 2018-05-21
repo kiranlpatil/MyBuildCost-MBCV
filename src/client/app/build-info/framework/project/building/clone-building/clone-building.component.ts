@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {Messages, NavigationRoutes, ImagePath, Headings, Button, Menus} from '../../../../../shared/constants';
+import {
+  Messages, NavigationRoutes, ImagePath, Headings, Button, Menus,
+  ScrollView
+} from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, MessageService,} from '../../../../../shared/index';
 import { Building } from '../../../model/building';
 import { BuildingService } from './../building.service';
@@ -125,6 +128,8 @@ export class CloneBuildingComponent  implements  OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_COPY_BUILDING_PROJECT;
     this.messageService.message(message);
+    SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, this.getScrollView().GO_TO_RECENT_BUILDING);
+
     this.loaderService.stop();
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
@@ -155,5 +160,7 @@ export class CloneBuildingComponent  implements  OnInit {
   getMenus() {
     return Menus;
   }
-
+  getScrollView() {
+    return ScrollView;
+  }
 }
