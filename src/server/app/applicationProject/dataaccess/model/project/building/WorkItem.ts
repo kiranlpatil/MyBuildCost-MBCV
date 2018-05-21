@@ -16,6 +16,7 @@ class WorkItem {
   length: boolean;
   breadthOrWidth : boolean;
   height : boolean;
+  isSteelWorkItem : boolean;
 
   unit: string;
   rate: Rate;
@@ -36,6 +37,7 @@ class WorkItem {
     this.attachmentDetails = new Array<AttachmentDetailsModel>();
     this.amount = 0;
     this.isDirectRate = false;
+    this.isSteelWorkItem = false;
     this.active=false;
     this.remarks = '';
   }

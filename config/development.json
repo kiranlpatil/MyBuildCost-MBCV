@@ -1731,6 +1731,7 @@
               "isMeasurementSheet" : true,
               "measurementUnit" : "Kg",
               "isRateAnalysis" : false,
+              "isSteelWorkItem" : true,
               "rateAnalysisPerUnit" : null,
               "rateAnalysisUnit" : null,
               "directRate" : 45,

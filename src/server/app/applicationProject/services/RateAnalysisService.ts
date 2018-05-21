@@ -287,6 +287,9 @@ class RateAnalysisService {
       let category = new Category(categoriesByCostHead[categoryIndex].name, categoriesByCostHead[categoryIndex].rateAnalysisId);
       let configWorkItems = new Array<WorkItem>();
 
+      /*if(categoriesByCostHead[categoryIndex].name === 'RCC band / patli') {
+        console.log('debug');
+      }*/
       if (configCategories.length > 0) {
         for (let configCategory of configCategories) {
           if (configCategory.name === categoriesByCostHead[categoryIndex].name) {
@@ -422,6 +425,7 @@ class RateAnalysisService {
     workItem.isDirectRate = !configWorkItem.isRateAnalysis;
     workItem.isRateAnalysis = configWorkItem.isRateAnalysis;
     workItem.isMeasurementSheet = configWorkItem.isMeasurementSheet;
+    workItem.isSteelWorkItem = configWorkItem.isSteelWorkItem;
     workItem.rateAnalysisPerUnit = configWorkItem.rateAnalysisPerUnit;
     workItem.rateAnalysisUnit = configWorkItem.rateAnalysisUnit;
     workItem.isItemBreakdownRequired = configWorkItem.isItemBreakdownRequired;
