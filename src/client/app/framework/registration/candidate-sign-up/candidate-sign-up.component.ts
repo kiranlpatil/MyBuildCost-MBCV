@@ -110,6 +110,9 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.gtag_report_conversion('AW-831903917/fTZvCPC1q3YQrbHXjAM');*/
 
     SessionStorageService.setSessionValue(SessionStorage.USER_ID, candidate.data._id);
+    if(candidate.data.company_name) {
+      SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, candidate.data.company_name);
+    }
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, this.userForm.value.email);
     SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);
     SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');

@@ -230,8 +230,8 @@
                     </td>
                     <td>
                       <span class="mobile-headings">{{ getLabel().BUDGETED_COST }}</span>
-                      <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost !== 0">-</span>
-                      <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost === 0">
+                      <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost === 0">-</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost !== 0">
                         {{ grandTotalOfBudgetedCost|number: '1.0-0' }}
                       </span>
                     </td>

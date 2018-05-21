@@ -10,7 +10,12 @@
   .panel-heading {
     min-height: 56px;
     a {
-      padding: 13px 20px 13px 30px;
+      padding: 13px 0 13px 30px;
+    }
+
+    .total {
+      font-size: 14px;
+      font-weight: normal;
     }
   }
 
@@ -171,10 +176,23 @@
         float: left;
         font-size: 18px;
         overflow: auto;
-        padding: 15px 10px;
+        padding: 10px;
         position: relative;
         text-overflow: clip;
         white-space: normal;
+      }
+
+      a > .caret {
+        top: 17px;
+      }
+
+      .slab-area {
+        display: inline-block !important;
+        width: auto !important;
+      }
+      .row-lists-right {
+        padding: 0;
+        text-align: right;
       }
     }
   }

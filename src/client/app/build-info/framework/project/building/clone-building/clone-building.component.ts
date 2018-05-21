@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Messages, NavigationRoutes, ImagePath, Headings, Button } from '../../../../../shared/constants';
+import {Messages, NavigationRoutes, ImagePath, Headings, Button, Menus} from '../../../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, MessageService,} from '../../../../../shared/index';
 import { Building } from '../../../model/building';
 import { BuildingService } from './../building.service';
@@ -150,6 +150,10 @@ export class CloneBuildingComponent  implements  OnInit {
 
   getButton() {
     return Button;
+  }
+
+  getMenus() {
+    return Menus;
   }
 
 }

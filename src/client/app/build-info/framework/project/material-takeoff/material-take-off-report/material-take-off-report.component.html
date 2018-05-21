@@ -5,8 +5,13 @@
         <h4 class="panel-title">
           <a class="building-name">
             <span class="" [title]="materialKey">{{materialKey}}</span>
-            <span class="slab-area" [title]="materialTakeOffReport[materialKey].title + materialTakeOffReport[materialKey].subTitle.columnOne">
+            <span *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL && buildingName === getMaterialTakeOffElements().ALL_BUILDINGS"
+              class="slab-area" [title]="materialTakeOffReport[materialKey].title + materialTakeOffReport[materialKey].subTitle.columnOne">
               {{ materialTakeOffReport[materialKey].title + materialTakeOffReport[materialKey].subTitle.columnOne}}
+            </span>
+            <span *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD && buildingName !== getMaterialTakeOffElements().ALL_BUILDINGS"
+                  class="slab-area" [title]="buildingName">
+              {{ buildingName }}
             </span>
             <!--pdf report-->
             <div>
@@ -30,11 +35,20 @@
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" [class.collapsed]="secondaryViewDataIndex != 0">
-                      <span class="caret hidden-xs"></span>
-                      <span class="">{{secondaryViewKey}}</span>
-                      <span class="slab-area">
-                       {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}
-                      </span>
+                      <span class="caret"></span>
+
+                      <div class="col-sm-8 col-xs-7 row-lists border-right item-description">
+                        {{secondaryViewKey}}
+                      </div>
+
+                      <div class="col-sm-2 col-xs-3 text-right row-lists row-lists-right border-right">
+                        <span class="total">{{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.footer.columnTwo}}</span>
+                      </div>
+
+                      <div class="col-sm-2 col-xs-2 text-center row-lists row-lists-right border-0">
+                        <span class="total">{{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.footer.columnThree}}</span>
+                      </div>
+
                     </a>
                   </h4>
                 </div>

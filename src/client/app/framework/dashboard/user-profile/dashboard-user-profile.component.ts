@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../../shared/customvalidations/validation.service';
 import { Label, Headings } from '../../../shared/constants';
 import { SessionStorage, SessionStorageService, Message, Messages, MessageService, ProfileService } from '../../../shared/index';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -32,10 +32,10 @@ export class DashboardProfileComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       'first_name': ['', Validators.required],
       'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
-      'company_name': ['', [Validators.required, ValidationService.alphabatesValidator]],
-      'state': ['',[Validators.required, ValidationService.alphabatesValidator]],
-      'city': ['', [Validators.required, ValidationService.alphabatesValidator]]
+      'mobile_number': ['', ValidationService.mobileNumberValidator],
+      'company_name': [''],
+      'state': [''],
+      'city': ['']
     });
   }
 
@@ -65,13 +65,24 @@ export class DashboardProfileComponent implements OnInit {
     this.submitted = true;
     //if(this.userForm.valid) {
       this.model = this.userForm.value;
-      this.dashboardUserProfileService.updateProfile(this.model)
-        .subscribe(
-          user => this.onProfileUpdateSuccess(user),
-          error => this.onProfileUpdateError(error));
-      SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, this.model.first_name);
-      this.profileService.onProfileUpdate(this.model);
-    //}
+     if( this.model.first_name !== '' ||  this.model.first_name.trim() !== '') {
+       if(this.model.company_name.trim() !== '') {
+         SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, this.model.company_name);
+       } else {
+         this.model.company_name = this.model.company_name.trim();
+         SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, undefined);
+       }
+        this.dashboardUserProfileService.updateProfile(this.model)
+          .subscribe(
+            user => this.onProfileUpdateSuccess(user),
+            error => this.onProfileUpdateError(error));
+        SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, this.model.first_name);
+        this.profileService.onProfileUpdate(this.model);
+      }
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_ERROR_VALIDATION_FIRSTNAME_REQUIRED;
+    this.messageService.message(message);
   }
 
   onProfileUpdateSuccess(result: any) {

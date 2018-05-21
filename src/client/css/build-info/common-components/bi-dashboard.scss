@@ -140,6 +140,16 @@ fieldset[disabled] .btn {
 
     .profile-email {
       background: none;
+      color: $black-theme-color;
+      font-size: 14px;
+      margin-bottom: 2px;
+      padding: 0 !important;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+
+    .profile-email {
+      background: none;
       color: $placeholder-color;
       font-size: 13px;
       margin-bottom: 2px;

@@ -134,5 +134,8 @@ class Constants {
   public static ALASQL_MATERIAL_NOT_LABOR = ' materialName NOT LIKE "%Labor%" ';
   public static ALASQL_AND_MATERIAL_NOT_LABOUR = ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOUR +
     ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR;
+
+  // Error Messages
+  public static MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION = 'Oop\'s! looks like you haven\'t provided Cost Estimation for ';
 }
 export=Constants;

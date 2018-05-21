@@ -1,4 +1,4 @@
-<div [hidden]="true" id="content" #content>
+<div *ngIf="categoryDetails !== undefined" [hidden]="true" id="content" #content>
   <div>
     <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
       <span *ngIf="viewType === 'building'">{{costHeadName}}</span> Cost estimation
@@ -10,7 +10,7 @@
       {{generatedDate | date:'dd MMMM yyyy'}}
     </div>
     <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
-      <div style="padding-bottom: 5px;">
+      <div *ngIf="comapnyName !== 'undefined' && comapnyName !== '' && company_name !== null" style="padding-bottom: 5px;">
         <strong style="font-weight: bold">Company Name : </strong>
         <span>{{comapnyName}}</span>
       </div>
@@ -24,15 +24,16 @@
       </div>
     </div>
     <div style="font-size:10px; text-align: left;" *ngFor="let category of categoryDetails">
-      <table *ngIf="category.workItems.length !==0 && category.amount !== 0" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 30px auto 0 auto;">
+      <table *ngIf="category.workItems.length !== 0 && isWorkItemsActive(category.workItems)" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 30px auto 0 auto;">
         <thead style="font-size:12px;page-break-inside: avoid;">
           <th width="60%">{{category.name}}</th>
-          <th width="40%" style="text-align: right"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{category.amount |number :'1.0-0'}}</th>
+          <th width="40%" style="text-align: right" *ngIf="category.amount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{category.amount |number :'1.0-0'}}</th>
+          <th width="40%" style="text-align: right" *ngIf="category.amount == 0">-</th>
         </thead>
       </table>
-      <table *ngIf="category.workItems.length !==0 && category.amount !== 0" border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 5px auto;">
+      <table *ngIf="category.workItems.length !== 0 && isWorkItemsActive(category.workItems)" border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 5px auto;">
         <thead style="page-break-inside: avoid;">
-          <th width="52%" style="padding: 10px 5px;">WorkItem Name</th>
+          <th width="52%" style="padding: 10px 5px;">WorkItem Name {{category.workItems.length}} </th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Quantity</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Unit</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>  )</th>
@@ -40,24 +41,27 @@
         </thead>
         <tbody>
         <tr style="page-break-inside: avoid;" *ngFor="let workitem of category.workItems">
-          <div *ngIf="workitem && workitem.amount !== 0">
+          <div *ngIf="workitem.active">
             <td width="52%" align="left" style="padding: 5px;">{{workitem.name}}</td>
-            <td width="12%" align="right" style="padding: 5px;">{{workitem.quantity.total|number :'1.0-0'}}</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.quantity.total !== 0 ">{{workitem.quantity.total|number :'1.0-0'}}</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.quantity.total === 0 ">-</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.unit">{{workitem.unit}}</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.unit">-</td>
             <td width="12%" align="right" style="padding: 5px;">{{workitem.rate.total |number :'1.0-0'}}</td>
-            <td width="12%" align="right" style="padding: 5px;">{{workitem.amount|number :'1.0-0'}}</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.amount !== 0 ">{{workitem.amount|number :'1.0-0'}}</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.amount === 0 ">-</td>
           </div>
         </tr>
         </tbody>
       </table>
     </div>
 
-    <div *ngIf="categoryDetailsTotalAmount !== 0">
-      <table border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
+    <div>
+      <table *ngIf="isCategoryHavingWorkItem(categoryDetails)" border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
         <thead style="font-size:12px; font-weight: bold;page-break-inside: avoid;">
           <th style="border: none;padding: 5px;width:60%">Total</th>
-          <th style="border: none;padding: 5px;width:40%;text-align: right"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
+          <th style="border: none;padding: 5px;width:40%;text-align: right" *ngIf="categoryDetailsTotalAmount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
+          <th style="border: none;padding: 5px;width:40%;text-align: right" *ngIf="categoryDetailsTotalAmount === 0">-</th>
         </thead>
       </table>
     </div>

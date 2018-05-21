@@ -654,28 +654,6 @@ class ProjectController {
     }
   }
 
-  addCostHeadBuilding(req: express.Request, res: express.Response, next: any): void {
-    try {
-      logger.info('Project controller, addCostHeadBuilding has been hit');
-      let user = req.user;
-      let buildingId = req.params.buildingId;
-      let costHeadDetails = <CostHead> req.body;
-      let projectService = new ProjectService();
-      let query = {$push: { costHead : costHeadDetails}};
-      projectService.updateBuildingById( buildingId, query, user, (error, result) => {
-        if(error) {
-          next(error);
-        } else {
-          logger.info('Add CostHead Building success');
-          logger.debug('Added CostHead for Building ID : '+buildingId);
-          next(new Response(200,result));
-        }
-      });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
   updateQuantityOfBuildingCostHeads(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, updateQuantity has been hit');
@@ -745,6 +723,57 @@ class ProjectController {
             next(error);
           } else {
             logger.info('updateDirectQuantityOfProjectWorkItems success');
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateQuantityDetailsOfBuilding(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, update DirectQuantity Of BuildingQuantityItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let quantityDetailsObj = req.body.item;
+
+      let projectService = new ProjectService();
+      projectService.updateQuantityDetailsOfBuilding( projectId, buildingId, costHeadId,
+        categoryId, workItemId, quantityDetailsObj, user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('update DirectQuantity Of BuildingQuantityItems success');
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateQuantityDetailsOfProject(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, update DirectQuantity Of BuildingQuantityItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let quantityDetailsObj = req.body.item;
+
+      let projectService = new ProjectService();
+      projectService.updateQuantityDetailsOfProject( projectId, costHeadId,
+        categoryId, workItemId, quantityDetailsObj, user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('update DirectQuantity Of BuildingQuantityItems success');
             next(new Response(200,result));
           }
         });

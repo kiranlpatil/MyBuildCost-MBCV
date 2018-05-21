@@ -15,7 +15,7 @@
         <bi-cost-head-report-pdf [categoryDetails]="categoryDetails" [categoryDetailsTotalAmount]="categoryDetailsTotalAmount" [viewType]="viewType"></bi-cost-head-report-pdf>
       </h4>
       <div class="panel-group" id="cost-head-panels">
-        <div class="panel panel-default" *ngFor=" let category of categoryDetails; let categoryIndex = index ">
+        <div class="panel panel-default" *ngFor=" let category of categoryDetails| sortByCategoryAmount; let categoryIndex = index ">
           <div class="panel-heading">
             <div class="panel-title clearfix" (click)="getActiveWorkItemsOfCategory(category.rateAnalysisId)">
               <a data-parent="#cost-head-panels" class="collapsed cost-head-lists">
@@ -64,10 +64,12 @@
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
                                   <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                    <input type="number" [(ngModel)]="workItem.quantity.total" (change)="changeDirectQuantity(category.rateAnalysisId, workItem.rateAnalysisId, workItem.quantity.total)"
+                                    <input type="number" [(ngModel)]="workItem.quantity.total"
+                                           (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
                                             id="directQuantity" size="10" class="form-control clear">
                                     <span class="calculator" id="getQuantity{{categoryIndex}}"
-                                          (click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                          (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                          <!--(click)="getQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">-->
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>
                                   </div>
@@ -122,7 +124,8 @@
                                     -
                                   </div>
                                 </td>
-                                  <td>
+
+                                <td>
                                     <div class="file-attachment" [class.attachment-menu-open]="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                       <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Files" />
@@ -140,7 +143,7 @@
                                       </div>
                                     </div>
                                     <button class="add-more-details"
-                                            (click)="addNewDetailedQuantity(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)"
+                                            (click)="showAddFloorwiseQuantityModal(workItem, workItemIndex, category.rateAnalysisId, categoryIndex)"
                                             title="Add More Details">
                                       <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
@@ -149,7 +152,8 @@
                                       <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />
                                     </div>
                                   </td>
-                                  <td id="show-embedded-table" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
+
+                                <td id="show-embedded-table" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
                                     <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB">
                                       <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                                         <bi-get-rate [rate]="rateItemsArray"
@@ -186,12 +190,44 @@
                                     </div>
                                   </div>
                                 </td>
+
+                                <div class="modal fade default-modal" id="updateDirectQuantity{{workItemIndex}}" role="dialog">
+                                  <bi-update-confirmation-modal
+                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [categoryId]="categoryId"
+                                    [workitem]="workItem"
+                                    (updateElementEvent)="updateElement($event)">
+                                  </bi-update-confirmation-modal>
+                                </div>
+
+                                <div class="modal fade default-modal" id="updateMeasurementQuantity{{workItemIndex}}" role="dialog">
+                                  <bi-update-confirmation-modal
+                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [categoryId]="categoryId"
+                                    [workitem]="workItem"
+                                    [workItemIndex] = "workItemIndex"
+                                    [categoryIndex] = "categoryIndex"
+                                    (updateElementEvent)="updateQuantityMeasurementSheet($event)">
+                                  </bi-update-confirmation-modal>
+                                </div>
+
+                                <div class="modal fade default-modal" id="addFloorwiseQuantity{{workItemIndex}}" role="dialog">
+                                  <bi-update-confirmation-modal
+                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [categoryId]="categoryId"
+                                    [workitem]="workItem"
+                                    [workItemIndex] = "workItemIndex"
+                                    [categoryIndex] = "categoryIndex"
+                                    (updateElementEvent)="addFloorwiseQuantity($event)">
+                                  </bi-update-confirmation-modal>
+                                </div>
                               </tr>
+
                               <tr class="add-work-item-row">
                                 <td colspan="8" class="add-work-item">
                                   <div id="collapseDetails{{workItemIndex}}"  class="panel-collapse collapse">
                                     <div class="panel-body">
-                                      <div *ngIf="showWorkItemTab !== getLabel().WORKITEM_RATE_TAB && showWorkItemTab !== getLabel().WORKITEM_SYSTEM_RATE_TAB && showWorkItemTab!==getLabel().WORKITEM_RATE_BY_QUANTITY_TAB">
+                                      <div *ngIf="showWorkItemTab !== getLabel().WORKITEM_RATE_TAB && showWorkItemTab !== getLabel().WORKITEM_SYSTEM_RATE_TAB && showWorkItemTab!==getLabel().WORKITEM_RATE_BY_QUANTITY_TAB && showWorkItemTab!==getLabel().WORKITEM_QUANTITY_TAB">
                                       <!--<span class="glyphicon glyphicon-remove" (click)="closeDetailedQuantityTab()"></span>showQuantityTab == getLabel().WORKITEM_DETAILED_QUANTITY_TAB &&-->
                                         <bi-quantity-details
                                           [quantityDetails]="workItem.quantity.quantityItemDetails"
@@ -199,6 +235,7 @@
                                           [workItemsList] ="workItemsList"
                                           [categoryDetails] ="categoryDetails"
                                           (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                          (categoriesTotalAmountOfQty)="setCategoriesTotalOfQty($event)"
                                           (quantityName)="setQuantityName($event)"
                                           (workItemRateId)="setWorkItemId($event)"
                                           (refreshWorkItemList)="refreshCategoryList($event)"
@@ -261,6 +298,3 @@
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationForAttachment" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
 </div>
 
-<div class="modal fade default-modal" id="updateDirectQuantity" role="dialog">
-  <bi-update-confirmation-modal [elementType]="updateConfirmationForDirectQuantity" (updateElementEvent)="updateElement($event)"></bi-update-confirmation-modal>
-</div>

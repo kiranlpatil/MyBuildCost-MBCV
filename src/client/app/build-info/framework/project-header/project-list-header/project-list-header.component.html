@@ -1,10 +1,9 @@
-<h3 *ngIf="currentView === 'createProject'">{{getMenus().CREATE_NEW_PROJECT}}</h3>
-<h3 *ngIf="currentView === 'createBuilding'">{{getMenus().ADD_BUILDING_TO_PROJECT}}</h3>
-<h3 *ngIf="currentView === 'cloneBuilding'">{{getMenus().COPY_BUILDING}}</h3>
-<div class="select-project" *ngIf="(currentView !== 'createProject') &&(currentView !== 'cloneBuilding') && (currentView !== 'createBuilding') || (currentView === 'costSummary')">
+<h3 class="hidden-xs" *ngIf="currentView === 'createProject'">{{getMenus().CREATE_NEW_PROJECT}}</h3>
+<h3 class="hidden-xs" *ngIf="currentView === 'createBuilding'">{{getMenus().ADD_BUILDING_TO_PROJECT}}</h3>
+<h3 class="hidden-xs" *ngIf="currentView === 'cloneBuilding'">{{getMenus().COPY_BUILDING}}</h3>
+<div class="select-project" *ngIf="(currentView !== 'createProject') &&(currentView !== 'cloneBuilding') && (currentView !== 'createBuilding') && (currentView !== null) || (currentView === 'costSummary')">
   <span>{{selectedProjectName}}</span>
   <select  [(ngModel)]="selectedProjectName" (change)="selectedProject($event.target.value)">
-    <option value="My Projects">{{getMenus().MY_PROJECTS}}</option>
     <option *ngFor="let project of projects" [value]="project.name">{{project.name}}</option>
   </select>
 </div>

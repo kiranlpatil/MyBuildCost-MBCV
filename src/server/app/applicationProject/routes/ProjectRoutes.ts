@@ -96,6 +96,11 @@ class ProjectRoutes {
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.deleteQuantityOfProjectCostHeadsByName,
       controller.deleteQuantityOfProjectCostHeadsByName, this._responseInterceptor.exit);
 
+    //update direct quantity and floor name of Project
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/directQuantity/quantityItemDetails',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfProjectCostHeads,
+      controller.updateQuantityDetailsOfProject, this._responseInterceptor.exit);
+
     /*Project- Routes: Rate*/
 
     //Update rate of workitem
@@ -175,10 +180,6 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
       this._requestInterceptor.intercept, validator.getCategoriesOfBuildingCostHead, controller.getCostHeadDetailsOfBuilding,
       this._responseInterceptor.exit);
 
-    //Add new costhead in building
-    router.put('/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      controller.addCostHeadBuilding, this._responseInterceptor.exit);
-
     //Update budgeted cost for costhead
     router.put('/:projectId/building/:buildingId/costhead',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.updateBudgetedCostForBuildingCostHead, controller.updateBudgetedCostForCostHead, this._responseInterceptor.exit);
@@ -247,6 +248,12 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfProjectWorkItems,
       controller.updateDirectQuantityOfProjectWorkItems, this._responseInterceptor.exit);
+
+    //update direct quantity and floor name of quantity Details
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/directQuantity/quantityItemDetails',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfBuildingCostHeads,
+      controller.updateQuantityDetailsOfBuilding, this._responseInterceptor.exit);
+
 
     //Delete quantityitem from  quantity
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',

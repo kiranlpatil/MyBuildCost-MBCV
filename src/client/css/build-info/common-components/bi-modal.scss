@@ -37,5 +37,11 @@
       margin: 50px auto;
       width: 90%;
     }
+    .modal-body {
+      padding: 20px !important;
+      p {
+        line-height: 28px;
+      }
+    }
   }
 }

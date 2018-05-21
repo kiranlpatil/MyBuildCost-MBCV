@@ -11,10 +11,15 @@
 
     <div *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT;" style="clear: both;width: 100%;">
       <table style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto 5px auto;">
-        <thead>
-          <th width="60%">{{secondaryViewKey}} : {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}</th>
+        <thead *ngIf="buildingName !== getMaterialTakeOffElements().ALL_BUILDINGS && elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL; else buildingNameAsHeader">
+          <th width="60%">{{getMaterialTakeOffElements().TOTAL_QUANTITY}} : {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}</th>
           <th width="40%" style="text-align: right"></th>
         </thead>
+
+        <ng-template #buildingNameAsHeader>
+          <th width="60%">{{secondaryViewKey}} : {{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].title }}</th>
+          <th width="40%" style="text-align: right"></th>
+        </ng-template>
       </table>
       <!--pdf report-->
       <bi-head-wise-table-view *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD"

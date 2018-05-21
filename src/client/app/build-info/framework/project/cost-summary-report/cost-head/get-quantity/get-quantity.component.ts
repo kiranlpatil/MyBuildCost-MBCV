@@ -52,6 +52,9 @@ export class GetQuantityComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.quantityItems.length === 0) {
+      this.addQuantityItem();
+    }
     this.updateAllQuantity();
    this.workItemId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
     }

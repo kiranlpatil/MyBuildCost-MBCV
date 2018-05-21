@@ -353,18 +353,18 @@ class ReportService {
           let materialTakeOffReport: MaterialTakeOffReport = new MaterialTakeOffReport( null, null, null);
           materialTakeOffReport.secondaryView = {};
           this.populateMaterialTakeOffReportFromRowData(materialReportRowData, materialTakeOffReport, elementWiseReport, building);
-          this.calculateTotalOfMaterialTakeReport(materialTakeOffReport, elementWiseReport);
+          this.calculateTotalOfMaterialTakeReport(materialTakeOffReport, elementWiseReport, building);
           let responseData = {};
           responseData[element]= materialTakeOffReport;
           callback(null, responseData);
         }else {
-          callback(new CostControllException('Material TakeOff Report Not Found For '+ building , null), null);
+          callback(new CostControllException(Constants.MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION + element , null), null);
         }
       }
     });
   }
 
-  calculateTotalOfMaterialTakeReport(materialTakeOffReport : any, elementWiseReport : string) {
+  calculateTotalOfMaterialTakeReport(materialTakeOffReport : any, elementWiseReport : string, building : string) {
 
     let reportTotal = 0;
     let recordUnit;
@@ -412,7 +412,7 @@ class ReportService {
       reportTotal = reportTotal + contentTotal;
       recordUnit = table.footer.columnThree;
 
-      if (elementWiseReport === Constants.STR_MATERIAL) {
+      if (elementWiseReport === Constants.STR_MATERIAL && building === Constants.STR_ALL_BUILDING) {
         materialTakeOffReport.subTitle.columnTwo = reportTotal;
         materialTakeOffReport.subTitle.columnThree = recordUnit;
         materialTakeOffReport.subTitle.columnOne = ': ' + reportTotal + ' ' + materialTakeOffReport.subTitle.columnThree;

@@ -6,7 +6,7 @@
 </div>
 
 <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
-  <div  style="padding-bottom: 5px;">
+  <div *ngIf="companyName !== 'undefined' && companyName !== '' && company_name !== null" style="padding-bottom: 5px;">
     <strong>{{getPDFReportHeaders().COMPANY_NAME}}</strong>
     <span>{{companyName}}</span>
   </div>

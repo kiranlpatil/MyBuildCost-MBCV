@@ -780,7 +780,7 @@ class ProjectInterceptor {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;
-    var projectDetails = req.body.item;
+    var quantityDetails = req.body.item;
     ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId, (error, result) => {
       if (error) {
         next(error);
@@ -793,9 +793,9 @@ class ProjectInterceptor {
             code: 400
           });
         } else {
-          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (projectDetails === undefined) ||
-            (projectDetails.name === undefined) || (projectDetails.name === '') ||
-            (req.params.categoryId === '') || (req.params.workItemId === '') || (projectDetails === '')) {
+          if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (quantityDetails === undefined) ||
+            (quantityDetails.name === undefined) || (quantityDetails.name === '') ||
+            (req.params.categoryId === '') || (req.params.workItemId === '') || (quantityDetails === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,

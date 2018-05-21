@@ -78,9 +78,9 @@ export class DashboardHeaderComponent {
   }
 
   deleteProjectDetailsFromSessionStorege() {
-    sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_ID);
-    sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_NAME);
-    sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
+    // sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_ID);
+     sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_NAME);
+    // sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
   }
 
   toggleMenu() {
