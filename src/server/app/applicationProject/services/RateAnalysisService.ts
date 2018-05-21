@@ -307,6 +307,28 @@ class RateAnalysisService {
       category.workItems = buildingWorkItems;
       buildingCategories.push(category);
     }
+
+    if(configCategories.length > 0) {
+
+      for(let configCategoryIndex=0; configCategoryIndex < configCategories.length; configCategoryIndex++) {
+        let isCategoryExistsSQL = 'SELECT * FROM ? AS workitems WHERE TRIM(workitems.name)= ?';
+        let categoryExistsArray = alasql(isCategoryExistsSQL,[categoriesByCostHead, configCategories[configCategoryIndex].name]);
+        if(categoryExistsArray.length === 0) {
+          let configCat = new Category(configCategories[configCategoryIndex].name, configCategories[configCategoryIndex].rateAnalysisId);
+          configCat.workItems = this.getWorkitemsForConfigCategory(configCategories[configCategoryIndex].workItems);
+          buildingCategories.push(configCat);
+        }
+      }
+    }
+  }
+
+  getWorkitemsForConfigCategory(configWorkitems:any) {
+    let workItemsList = new Array<WorkItem>();
+    for(let workitemIndex=0; workitemIndex < configWorkitems.length; workitemIndex++) {
+      let configWorkitem = new WorkItem(configWorkitems[workitemIndex].name, configWorkitems[workitemIndex].rateAnalysisId);
+      workItemsList.push(configWorkitem);
+    }
+    return workItemsList;
   }
 
   getWorkItemsWithoutCategoryFromRateAnalysis(costHeadRateAnalysisId: number, workItemsRateAnalysis: any,

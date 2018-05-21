@@ -1522,6 +1522,7 @@
       "categories" : [
         {
           "name" : "Work Items",
+          "rateAnalysisId" : 0,
           "workItems" : [
             {
               "name" : "230 mm thk dry rubble soling with murum filling in gaps and compacting",
