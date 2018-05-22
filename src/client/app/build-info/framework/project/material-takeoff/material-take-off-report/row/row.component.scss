@@ -110,10 +110,6 @@
   .row-list {
     .row-lists {
       padding: 0 5px 5px;
-
-      &:last-child {
-        text-align: right !important;
-      }
     }
 
     .col-xs-7 {
@@ -129,10 +125,6 @@
     .row-lists {
       float: left;
       padding: 15px 5px;
-
-      &:last-child {
-        text-align: right !important;
-      }
     }
 
     .col-xs-7 {
@@ -150,10 +142,6 @@
     }
     .row-lists {
       padding: 5px;
-
-      &:last-child {
-        text-align: right !important;
-      }
     }
   }
 }

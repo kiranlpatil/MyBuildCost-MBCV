@@ -128,8 +128,8 @@
         padding: 15px 20px;
         position: absolute;
         text-align: left;
-        top: 24px;
-        right: -34px;
+        top: 32px;
+        right: -32px;
         width: 400px;
         z-index: 1;
       }
@@ -163,15 +163,20 @@
     .attachment-menu-open > span {
       color: $dashboard-link;
       cursor: pointer;
-      padding: 5px 3px 5px 2px;
+      padding: 5px 2px;
       position: relative;
       top: -4px;
       transition: opacity 0.5s ease-in-out;
-      width: auto;
+      width: 23px;
+      display: inline-block;
     }
 
     .file-attachment > span {
       opacity: 0;
+    }
+
+    .file-attachment > span > img {
+      width: 100%;
     }
 
     .file-attachment > .file-attached {
@@ -576,7 +581,7 @@
         float: right;
         margin: 0;
         opacity: 1;
-        padding: 16px 9px 10px;
+        padding: 22px 6px 0;
         width: 34px;
       }
 
@@ -584,7 +589,7 @@
         .attachment-menu {
           padding: 15px;
           right: 0;
-          top: 40px;
+          top: 53px;
           width: 300px;
         }
       }
