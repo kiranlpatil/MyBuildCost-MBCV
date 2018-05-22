@@ -14,6 +14,8 @@ export class UpdateConfirmationModalComponent {
   @Input() workitem: string;
   @Input() workItemIndex ?: string;
   @Input() categoryIndex ?: string;
+  @Input() total ?: number;
+  @Output() updateTotalEvent = new EventEmitter<any>();
   @Output() updateElementEvent = new EventEmitter<any>();
 
   updateElement() {
@@ -24,5 +26,12 @@ export class UpdateConfirmationModalComponent {
       categoryIndex : this.categoryIndex
     };
     this.updateElementEvent.emit(workitemObj);
+  }
+  cancle() {
+    let totalObj = {
+      workitem: this.workitem,
+      total: this.total
+    };
+    this.updateTotalEvent.emit(totalObj);
   }
 }

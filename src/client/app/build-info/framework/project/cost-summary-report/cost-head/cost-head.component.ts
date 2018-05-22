@@ -41,6 +41,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   buildingId:any;
   workItemId: number;
   quantityId: number;
+  total: number;
   categoryId: number;
   directQuantity: number;
   categoryDetails: Array<Category>;
@@ -480,6 +481,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.categoryIdForInActive = categoryId;
   }
 
+  setQuantityTotal(total: number) {
+    this.total = total;
+  }
   showUpdateDirectQuantityModal(workItem : WorkItem, categoryId : number, workItemIndex : number) {
     this.currentWorkItemIndex = workItemIndex;
     if(workItem.quantity.quantityItemDetails.length !== 0) {
@@ -624,6 +628,11 @@ export class CostHeadComponent implements OnInit, OnChanges {
   updateElement(updatedWorkitem : any) {
      this.changeDirectQuantity(updatedWorkitem.categoryId , updatedWorkitem.workitem.rateAnalysisId,
        updatedWorkitem.workitem.quantity.total);
+  }
+
+  updateTotal(totalObj:any) {
+    let workItem = totalObj.workitem;
+    workItem.quantity.total = totalObj.total;
   }
 
   updateQuantityMeasurementSheet(categoryObj : any) {

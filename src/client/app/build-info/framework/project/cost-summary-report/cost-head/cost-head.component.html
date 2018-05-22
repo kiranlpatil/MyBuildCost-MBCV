@@ -64,7 +64,7 @@
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
                                   <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                    <input type="number" [(ngModel)]="workItem.quantity.total"
+                                    <input type="number" [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
                                            (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
                                             id="directQuantity" size="10" class="form-control clear">
                                     <span class="calculator" id="getQuantity{{categoryIndex}}"
@@ -196,6 +196,8 @@
                                     [elementType]="updateConfirmationForDirectQuantity"
                                     [categoryId]="categoryId"
                                     [workitem]="workItem"
+                                    [total]="total"
+                                    (updateTotalEvent) = "updateTotal($event)"
                                     (updateElementEvent)="updateElement($event)">
                                   </bi-update-confirmation-modal>
                                 </div>
