@@ -24,11 +24,11 @@ export class Messages {
 
   //Registraion Success messages
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
-  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New OTP (One Time Password) has been sent to your registered mobile number';
+  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New OTP (One Time Password) has been sent to your registered mobile number.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP: string = 'New OTP (One Time Password) has' +
-    ' been sent to your new mobile number';
-  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account.';
-  public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.Kindly login';
+    ' been sent to your new mobile number.';
+  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully to your email id.';
+  public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully. Please login.';
   public static MSG_SUCCESS_CHANGE_EMAIL: string = 'A verification email is sent to your new email id. ' +
     'Current email id will be active till you verify new email id.';
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email for password reset has been sent successfully on your registered email id.';
@@ -36,12 +36,12 @@ export class Messages {
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string = 'Congratulations!';
-  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password Changed Successfully';
+  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password changed successfully';
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
-    'You may start using it immediately by clicking on Sign In!';
+    'You may start using it immediately by clicking on Sign In.';
 
   //Registration Failure messages
-  public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token!';
+  public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token.';
   public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string = 'Sorry.';
   public static MSG_ERROR_DASHBOARD_PROFILE_PIC: string = 'Failed to change profile picture.';
   public static MSG_ERROR_CHANGE_THEME: string = 'Failed to change theme.';
@@ -52,7 +52,7 @@ export class Messages {
 
   //Registration validation messages
   public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your e-mail address';
-  public static MSG_ERROR_VALIDATION_WEBSITE_REQUIRED = 'Enter company website.';
+  public static MSG_ERROR_VALIDATION_WEBSITE_REQUIRED = 'Enter company website';
   public static MSG_ERROR_VALIDATION_PASSWORD_REQUIRED = 'Enter your password';
   public static MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED = 'Enter a new password';
   public static MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED = 'Confirm your password';
@@ -106,15 +106,13 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED = 'Enter no. of lifts';
   public static MSG_ERROR_VALIDATION_ALPHABATES = 'Enter alphabates only';
 
-  public static MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION = 'Add at least one Apartment Configuration';
+  public static MSG_ERROR_VALIDATION_ADD_AT_LEAST_ONE_APARTMENT_CONFIGURATION = 'Add at least one apartment details';
   public static MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS = 'Total number of floors should be more than number of parking floors';
-  public static MSG_ERROR_VALIDATION_SAME_BUILDING_NAME = 'Building with same name is already exist.';
+  public static MSG_ERROR_VALIDATION_SAME_BUILDING_NAME = 'Building with same name already exists.';
 
 
-  public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and we will send you a verification code on mobile' +
-    ' number you have entered.';
-  public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new account email address and we will send you a link to reset your email' +
-    ' address.';
+  public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and you will receive a verification code on it.';
+  public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new email id and we will send you a reset password link.';
   public static MSG_EMAIL_ACTIVATION = 'Your email has been activated. You may start using your account with new email address' +
     ' immediately.';
   public static MSG_CONTACT_US = 'Please provide the following details and we will get back to you soon.';
@@ -165,33 +163,33 @@ export class Messages {
   //Application Success Messages
   public static MSG_SUCCESS_PROJECT_CREATION: string = 'Project has been created successfully.';
   public static MSG_SUCCESS_ADD_BUILDING_PROJECT: string = 'Building has been successfully added to project.\n' +
-    'Please wait while we are synching data from rate analysis.';
+    'Please wait...';
   public static MSG_SUCCESS_COPY_BUILDING_PROJECT: string = 'Building has been successfully copied to project.\n' +
-    'Please wait while we are synching data from rate analysis.';
+    'Please wait...';
 
-  public static MSG_SUCCESS_CLONED_BUILDING_DETAILS: string = 'Your building cloned successfully.';
-  public static MSG_SUCCESS_UPDATE_PROJECT_DETAILS: string = 'Your project updated successfully.';
-  public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details updated successfully.';
+  public static MSG_SUCCESS_CLONED_BUILDING_DETAILS: string = 'Your building is cloned successfully.';
+  public static MSG_SUCCESS_UPDATE_PROJECT_DETAILS: string = 'Your project is updated successfully.';
+  public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details are updated successfully.';
   public static MSG_SUCCESS_DELETE_BUILDING: string = 'Building deleted successfully.';
-  public static MSG_SUCCESS_ADD_COSTHEAD: string = 'Costhead added successfully.';
-  public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Costhead deleted successfully.';
+  public static MSG_SUCCESS_ADD_COSTHEAD: string = 'Cost head added successfully.';
+  public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Cost head deleted successfully.';
   public static MSG_SUCCESS_DELETE_ITEM: string = 'Your item deleted successfully.';
   public static MSG_SUCCESS_UPDATE_RATE: string = 'Rate updated.';
-  public static MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL: string = 'Quantity should not zero or null.';
-  public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM: string = 'Your cost head items updated successfully.';
-  public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR: string = 'There is error in operation';
+  public static MSG_QUANTITY_SHOULD_NOT_ZERO_OR_NULL: string = 'Quantity should not be zero or blank.';
+  public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM: string = 'Your Cost Head items updated successfully.';
+  public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR: string = 'There is an error in operation.';
   public static MSG_SUCCESS_ADD_CATEGORY: string = 'Category added successfully.';
   public static MSG_SUCCESS_DELETE_CATEGORY: string = 'Category deleted successfully.';
   public static MSG_SUCCESS_DELETE_QUANTITY_ITEM: string = 'Quantity item deleted successfully.';
-  public static MSG_SUCCESS_DELETE_QUANTITY_DETAILS: string = 'Quantity Details deleted successfully.';
+  public static MSG_SUCCESS_DELETE_QUANTITY_DETAILS: string = 'Quantity details deleted successfully.';
   public static MSG_ALREADY_ADDED_ALL_CATEGORIES: string = 'Already added all Categories.';
-  public static MSG_SUCCESS_ADD_WORKITEM: string = 'Workitem added successfully.';
-  public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
-  public static MSG_SUCCESS_DELETE_WORKITEM: string = 'Your workitem deleted successfully.';
-  public static MSG_SUCCESS_UPDATE_THUMBRULE_RATE_COSTHEAD: string = 'Thumbrule rate for CostHead updated successfully.';
-  public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM : string = 'Quantity for workitem updated successfully.';
-  public static MSG_SUCCESS_UPDATE_DIRECT_RATE_OF_WORKITEM : string = 'Rate for workitem updated successfully.';
-  public static MSG_SUCCESS_UPDATE_QUANTITY_NAME_WORKITEM : string = 'Quantity name updated successfully.';
+  public static MSG_SUCCESS_ADD_WORKITEM: string = 'Work Item added successfully.';
+  public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all Work Items.';
+  public static MSG_SUCCESS_DELETE_WORKITEM: string = 'Your Work Item deleted successfully.';
+  public static MSG_SUCCESS_UPDATE_THUMBRULE_RATE_COSTHEAD: string = 'Thumbrule rate for Cost Head updated successfully.';
+  public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM : string = 'Quantity for Work Item updated successfully.';
+  public static MSG_SUCCESS_UPDATE_DIRECT_RATE_OF_WORKITEM : string = 'Rate for Work Item updated successfully.';
+  public static MSG_SUCCESS_UPDATE_QUANTITY_NAME_WORKITEM : string = 'Title for Work Item updated successfully.';
 
   //Quantity view required fields
   public static MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED = 'Enter item';
@@ -201,16 +199,16 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_HEIGHT_REQUIRED = 'Enter height';
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
-  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields can not be empty';
+  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields cannot be empty';
   public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Flat/Floor/Parking details can not be empty';
   public static LOGIN_INFO: string = 'Enter your details below';
-  public static MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS: string = 'Already added all CostHeads.';
+  public static MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS: string = 'Already added all Cost Heads.';
 
   //File Attachment messages
 
-  public static  MSG_ERROR_VALIDATION_OF_FILE_EXTENSION = 'The file you are trying to attach is not supported by this application';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_SIZE = 'File size should not be more than 5MB';
-  public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'Selected file already exits';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_EXTENSION = 'The file you are trying to attach is not supported.';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_SIZE = 'File size should not be greater than 5MB';
+  public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'Selected file already exists';
   public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
 }
@@ -387,8 +385,8 @@ export class Headings {
   public static CREATE_YOUR_FIRST_PROJECT: string = 'Create Your First Project';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
   public static EDIT_BUILDING: string = 'Edit Building';
-  public static LIST_BUILDING: string = 'Buildings List';
-  public static ADD_NEW_BUILDING: string = 'Add Building in Project';
+  public static LIST_BUILDING: string = 'Building List';
+  public static ADD_NEW_BUILDING: string = 'Add Building to a Project';
   public static COMMON_DEVELOPMENT : string = 'Common Development and Amenities';
   public static ELECTRIC_INFRASTRUCTURE : string = 'Electric Infrastructure ';
   public static CONSTRUCTION_COST : string = 'Construction Cost (Material + Labour)';
@@ -522,7 +520,7 @@ export class Button {
   public static SAVE: string = 'Save';
   public static GET_AMOUNT: string = 'Estimate Cost';
   public static GET_RATE: string = 'Get Rate';
-  public static GET_QUANTITY: string = 'Get Qty.';
+  public static GET_QUANTITY: string = 'Get Qty';
   public static SYSTEM_RA: string = 'System RA';
   public static ADD: string = 'Add ';
   public static ADD_MORE_DETAILS: string = 'Add More Details';
@@ -587,18 +585,18 @@ export class MaterialTakeOffElements {
   public static SORT = 'sort';
   public static CHECK_SUB_CONTENT_PRESENT = 'checkSubContentPresent';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
-  public static REPORT_EMPTY_MESSAGE = 'Please provide estimation of cost head to get material take off report.';
+  public static REPORT_EMPTY_MESSAGE = 'Looks like you have not estimated any Cost Head. Please estimate to generate material take off report.';
 }
 
 export class PDFReportHeaders {
-  public static COMPANY_NAME = 'Company Name : ';
-  public static PROJECT_NAME = 'Project Name : ';
-  public static BUILDING_NAME = 'Building Name : ';
-  public static BUILDING = 'Building : ';
-  public static GENERATED_ON = 'Generated on : ';
+  public static COMPANY_NAME = 'Company Name: ';
+  public static PROJECT_NAME = 'Project Name: ';
+  public static BUILDING_NAME = 'Building Name: ';
+  public static BUILDING = 'Building: ';
+  public static GENERATED_ON = 'Generated on: ';
   public static DATE_FORMAT = 'dd MMM yyyy';
-  public static COST_HEAD_NAME = 'Cost Head Name : ';
-  public static MATERIAL_NAME = 'Material Name : ';
+  public static COST_HEAD_NAME = 'Cost Head Name: ';
+  public static MATERIAL_NAME = 'Material Name: ';
 }
 
 export class Menus {

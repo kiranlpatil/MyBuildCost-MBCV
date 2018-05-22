@@ -47,7 +47,7 @@ export class QuantityDetailsComponent implements OnInit {
 
   currentFloorIndex : number;
   showInnerView : string;
-
+  quantity : QuantityDetails;
   quantityItemsArray: any = {};
   workItemData: WorkItem;
   keyQuantity: string;
@@ -120,15 +120,11 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   updateQuantityDetails(quantity :QuantityDetails, flag : string, quantityIndex ?: number) {
-
+    this.quantity = quantity;
     let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
     if(this.validateQuantityName(quantity.name)) {
       let quantityDetailsObj : QuantityDetails = new QuantityDetails();
-      if(quantity.id === undefined && this.currentQtyName === quantity.name) {
-        quantityDetailsObj.id =  this.currentId;
-      }else {
-        quantityDetailsObj.id =  quantity.id;
-      }
+      quantityDetailsObj.id =  quantity.id;
       quantityDetailsObj.name = quantity.name;
       quantityDetailsObj.total = quantity.total;
       if(flag === Label.NAME) {
@@ -162,6 +158,7 @@ export class QuantityDetailsComponent implements OnInit {
     if(success.data.id) {
       this.currentQtyName = success.data.name;
       this.currentId = success.data.id;
+      this.quantity.id = success.data.id;
     }
 
     if(flag ===  Label.NAME) {
