@@ -44,6 +44,14 @@
     .btn-primary {
       margin: 15px 0;
     }
+
+    .logo-image {
+      margin: -250px 0 20px;
+    }
+
+    ul {
+      margin-top: -80px;
+    }
   }
 }
 @media screen and (max-width: 767px) {
@@ -64,6 +72,20 @@
         .content {
           width: 100%;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-background {
+    .inner-content {
+      .logo-image {
+        margin: 0 0 20px;
+      }
+
+      ul {
+        margin-top: 0;
       }
     }
   }

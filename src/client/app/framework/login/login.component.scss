@@ -13,6 +13,10 @@
     .btn-primary {
       margin: 10px 0 30px;
     }
+
+    .logo-image {
+      margin: -60px 0 20px;
+    }
   }
 
   .forgot-password-link {
@@ -31,6 +35,16 @@
     .page-background {
       .forgot-password-link {
         color: #a4a4a4;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-background {
+    .inner-content {
+      .logo-image {
+        margin: 0 0 20px;
       }
     }
   }

@@ -1,7 +1,7 @@
 @import '../../../css/common';
 
 .container {
-  //width: 1170px;
+  width: 1170px;
 }
 
 .page-background {
@@ -71,6 +71,10 @@
   }
 }
 
+.mobile-background-image {
+  display: none;
+}
+
 @media screen and (min-width: 320px) and (max-width: 359px) {
   .inner-content {
     .logo-image {
@@ -128,10 +132,11 @@
     }
   }
 
-  .background-image {
-    position: fixed;
+  .mobile-background-image {
     bottom: 0;
+    display: block;
     left: 0;
+    position: fixed;
     width: 100%;
     z-index: -1;
   }
@@ -153,12 +158,12 @@
     }
   }
 }
-//@media screen and (max-width: 1170px) {
-//  .container {
-//    width: 100%;
-//  }
-//}
-//
+@media screen and (max-width: 1170px) {
+  .container {
+    width: 100%;
+  }
+}
+
 //@media only screen and (max-width: 480px) {
 //  .page-background {
 //    .inner-content {
