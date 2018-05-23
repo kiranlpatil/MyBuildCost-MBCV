@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate } from '../../../user/models/candidate';
-import { AppSettings, ImagePath, SessionStorage, LocalStorage } from '../../../shared/constants';
+import {AppSettings, ImagePath, SessionStorage, LocalStorage, NavigationRoutes} from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
 import {UserProfile} from '../../../user/models/user';
@@ -58,13 +58,13 @@ export class DashboardHeaderComponent {
   }
 
   logOut() {
-    if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))!=1) {
+    if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))!==1) {
       window.sessionStorage.clear();
       window.localStorage.clear();
-    }
+      }
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
-    window.location.href = host;
-  }
+    window.location.replace(host + '/signin');
+    }
 
   navigateToWithId(nav:string) {
     var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
