@@ -2644,11 +2644,21 @@ class ProjectService {
 
     let calculateProjectData = 'SELECT ROUND(SUM(building.totalCarpetAreaOfUnit),2) AS totalCarpetArea, ' +
       'ROUND(SUM(building.totalSlabArea),2) AS totalSlabAreaProject,' +
+      'ROUND(SUM(building.numOfOneBHK),2) AS totalNumberOfOneBHK,' +
+      'ROUND(SUM(building.numOfTwoBHK),2) AS totalNumberOfTwoBHK,' +
+      'ROUND(SUM(building.numOfThreeBHK),2) AS totalNumberOfThreeBHK,' +
+      'ROUND(SUM(building.numOfFourBHK),2) AS totalNumberOfFourBHK,' +
+      'ROUND(SUM(building.numOfFiveBHK),2) AS totalNumberOfFiveBHK,' +
       'ROUND(SUM(building.totalSaleableAreaOfUnit),2) AS totalSaleableArea  FROM ? AS building';
     let projectData = alasql(calculateProjectData, [projectDetails.buildings]);
     let totalSlabAreaOfProject: number = projectData[0].totalSlabAreaProject;
     let totalSaleableAreaOfProject: number = projectData[0].totalSaleableArea;
     let totalCarpetAreaOfProject: number = projectData[0].totalCarpetArea;
+    let totalNumberOfOneBHKInProject: number = projectData[0].totalNumberOfOneBHK;
+    let totalNumberOfTwoBHKInProject: number = projectData[0].totalNumberOfTwoBHK;
+    let totalNumberOfThreeBHKInProject: number = projectData[0].totalNumberOfThreeBHK;
+    let totalNumberOfFourBHKInProject: number = projectData[0].totalNumberOfFourBHK;
+    let totalNumberOfFiveBHKInProject: number = projectData[0].totalNumberOfFiveBHK;
 
     for (let costHead of costHeadsRateAnalysis) {
 

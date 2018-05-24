@@ -287,9 +287,6 @@ class RateAnalysisService {
       let category = new Category(categoriesByCostHead[categoryIndex].name, categoriesByCostHead[categoryIndex].rateAnalysisId);
       let configWorkItems = new Array<WorkItem>();
 
-      /*if(categoriesByCostHead[categoryIndex].name === 'RCC band / patli') {
-        console.log('debug');
-      }*/
       if (configCategories.length > 0) {
         for (let configCategory of configCategories) {
           if (configCategory.name === categoriesByCostHead[categoryIndex].name) {
@@ -412,7 +409,7 @@ class RateAnalysisService {
     for(let configWorkItem of configWorkItems) {
       let isWorkItemExistSQL = 'SELECT * FROM ? AS workitems WHERE TRIM(workitems.name)= ?';
       let workItemExistArray = alasql(isWorkItemExistSQL,[workItemsByCategory, configWorkItem.name]);
-      if(workItemExistArray.length === 0 ) {
+      if(workItemExistArray.length === 0 && configWorkItem.rateAnalysisId) {
         let workitem = this.convertConfigorkitem(configWorkItem);
         buildingWorkItems.push(workitem);
       }
