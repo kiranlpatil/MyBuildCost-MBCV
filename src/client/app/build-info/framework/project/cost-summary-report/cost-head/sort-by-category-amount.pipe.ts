@@ -3,18 +3,30 @@ import {Category} from '../../../model/category';
 @Pipe({name: 'sortByCategoryAmount', pure: false})
 
 export class SortByCategoryAmountPipe implements PipeTransform {
-  transform(categories: Array<Category>, operation?: string, args: any[] = null): any {
+  transform(categories: Array<any>, operation?: string, args: any[] = null): any {
+    if (categories === null) {
+      return null;
+    }
     if(categories !== undefined) {
-      categories.sort((a: Category, b: Category) => {
-        if (Number(a.amount) > Number(b.amount)) {
+      var sortArray = categories.map(
+        function(data, idx){
+        return {idx:idx, data:data};
+      });
+
+      sortArray.sort((a: any, b: any) => {
+        if (Number(a.data.amount) > Number(b.data.amount)) {
           return -1;
-        } else if (Number(a.amount) < Number(b.amount)) {
+        } else if (Number(a.data.amount) < Number(b.data.amount)) {
           return 1;
         } else {
-          return 0;
+          return a.idx - b.idx;
         }
       });
+      var categories = sortArray.map(function(val){
+        return val.data;
+      });
     }
+
     return categories;
   }
 }
