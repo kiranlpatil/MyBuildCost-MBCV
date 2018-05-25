@@ -32,6 +32,7 @@ let config = require('config');
 let log4js = require('log4js');
 import * as mongoose from 'mongoose';
 import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
+import SteelQuantityDetails = require('../dataaccess/model/project/building/SteelQuantityDetails');
 
 //import RateItemsAnalysisData = require("../dataaccess/model/project/building/RateItemsAnalysisData");
 
@@ -1304,6 +1305,98 @@ class ProjectService {
     });
   }
 
+  updateSteelQuantityOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
+                                         workItemId: number, steelQuantityDetails: SteelQuantityDetails, user: User,
+                                         callback: (error: any, result: any) => void) {
+    let query = [
+      {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
+      {$unwind: '$costHeads'},
+      {$project: {'costHeads': 1}},
+      {$unwind: '$costHeads.categories'},
+      {$match: {'costHeads.categories.rateAnalysisId': categoryId}},
+      {$project: {'costHeads.categories.workItems': 1}},
+      {$unwind: '$costHeads.categories.workItems'},
+      {$match: {'costHeads.categories.workItems.rateAnalysisId': workItemId}},
+      {$project: {'costHeads.categories.workItems.quantity': 1}},
+    ];
+
+    this.buildingRepository.aggregate(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        if (result.length > 0) {
+          let quantity= result[0].costHeads.categories.workItems.quantity;
+          this.updateSteelQuantityDetails(quantity, steelQuantityDetails);
+
+          let query = {_id: buildingId};
+          let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity':quantity}};
+          let arrayFilter = [
+            {'costHead.rateAnalysisId':costHeadId},
+            {'category.rateAnalysisId': categoryId},
+            {'workItem.rateAnalysisId':workItemId}
+          ];
+          this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null, {data: steelQuantityDetails.steelQuantityItems, status :'success',
+                      access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        }else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
+          callback(error, null);
+        }
+      }
+    });
+  }
+
+  updateSteelQuantityDetails(quantity: Quantity, steelQuantityDetails:SteelQuantityDetails) {
+
+    quantity.isEstimated = true;
+    let current_date = new Date();
+    let quantityId = current_date.getUTCMilliseconds();
+
+    if (quantity.steelQuantityDetails.length === 0) {
+      if (steelQuantityDetails.id === undefined) {
+        steelQuantityDetails.id = quantityId;
+        quantity.steelQuantityDetails.push(steelQuantityDetails);
+      } else {
+        quantity.steelQuantityDetails.push(steelQuantityDetails);
+      }
+    }else {
+      let isDefaultExistsSQL = 'SELECT name from ? AS steelQuantityDetails where steelQuantityDetails.name="default"';
+      let isDefaultExistsQuantityDetail = alasql(isDefaultExistsSQL, [quantity.steelQuantityDetails]);
+
+      if (isDefaultExistsQuantityDetail.length > 0) {
+        quantity.steelQuantityDetails = [];
+        quantity.steelQuantityDetails.push(steelQuantityDetails);
+
+      } else {
+        if (steelQuantityDetails.name !== 'default') {
+          let isItemAlreadyExistSQL = 'SELECT id from ? AS steelQuantityDetails where steelQuantityDetails.id=' + steelQuantityDetails.id + '';
+          let isItemAlreadyExists = alasql(isItemAlreadyExistSQL, [quantity.steelQuantityDetails]);
+
+          if (isItemAlreadyExists.length > 0) {
+            for (let quantityIndex = 0; quantityIndex < quantity.steelQuantityDetails.length; quantityIndex++) {
+              if (quantity.steelQuantityDetails[quantityIndex].id === steelQuantityDetails.id) {
+                quantity.steelQuantityDetails[quantityIndex].isDirectQuantity = false;
+                quantity.steelQuantityDetails[quantityIndex].steelQuantityItems =steelQuantityDetails.steelQuantityItems;
+                quantity.steelQuantityDetails[quantityIndex].total = steelQuantityDetails.total;
+              }
+            }
+          } else {
+            steelQuantityDetails.id = quantityId;
+            steelQuantityDetails.isDirectQuantity= false;
+            quantity.steelQuantityDetails.push(steelQuantityDetails);
+          }
+        }
+      }
+    }
+  }
+
   updateQuantityOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
                                     quantityDetail: QuantityDetails, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, updateQuantityOfBuildingCostHeads has been hit');
@@ -1365,7 +1458,8 @@ class ProjectService {
     let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.isEstimated':true,
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.isDirectQuantity':true,
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.total':directQuantity,
-        'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.quantityItemDetails':[]
+        'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.quantityItemDetails':[],
+        'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.steelQuantityDetails':[]
       }};
 
     let arrayFilter = [

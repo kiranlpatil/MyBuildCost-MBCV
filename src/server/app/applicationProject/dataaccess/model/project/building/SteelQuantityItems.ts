@@ -1,7 +1,6 @@
 import SteelQuantityItem = require('./SteelQuantityItem');
 
 class SteelQuantityItems {
-  totalWeight: number =0;
   totalWeightOf6mm : number = 0;
   totalWeightOf8mm : number = 0;
   totalWeightOf10mm : number = 0;
