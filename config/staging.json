@@ -59,6 +59,7 @@
     "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
 
   },
+
   "logger" : {
     "levels": {
       "[all]":"DEBUG"
@@ -76,6 +77,7 @@
     ],
     "replaceConsole": true
   },
+
   "subscription":{
     "package":{
       "Free" : {
@@ -91,6 +93,7 @@
       }
     }
   },
+
   "category" :
   {
     "default": [
@@ -645,6 +648,7 @@
       }
     ]
   },
+
   "thumbRuleRate": {
     "slabArea": {
       "sqft": 20,
@@ -655,6 +659,7 @@
       "sqmt": 60
     }
   },
+
   "rate": {
     "default": [
       {
@@ -683,11 +688,13 @@
       }
     ]
   },
+
   "SqureMeter":0.0929,
+
   "budgetedCostFormulae" : {
-    "excavation" : "plinthArea * 7 * 1.15 / 35.28 * 150",
+    "Excavation" : "plinthArea * 7 * 1.15 / 35.28 * 150",
     "Dewatering" : "saleableArea * 1",
-    "backfiliing" : "plinthArea * 7 * 1 * 1.15 / 35.28 * 90",
+    "Backfilling (plinth)" : "plinthArea * 7 * 1 * 1.15 / 35.28 * 90",
     "Soling" : "plinthArea * 40",  //a
     "RCC band / patli" : "slabArea * 500", //a
     "Masonry" : "carpetArea * 1.6 * 70",
@@ -696,28 +703,30 @@
     "External plaster" : "carpetArea * 2.5 * 45",
     "Water proofing" : "carpetArea * 1.35 * 30",
     "Dado / wall tiling" : "carpetArea * 1.35 * 110",   //a
-    "windowSills/Jambs" : "carpetArea * 0.07 * 85", //both
-    "windowsAndGlassDoors" : "250 * (carpetArea * 0.2)",
-    "electrification" : "carpetArea * 1.35 * 110",
+    "Flooring + skirting + wall tiling (Dado)" : "carpetArea * 1.35 * 110",   //a
+    "Window sills / jambs" : "carpetArea * 0.07 * 85", //both
+    "Windows and Glass doors" : "250 * (carpetArea * 0.2)",
+    "Electrification" : "carpetArea * 1.35 * 110",
     "Fabrication" : "carpetArea * 1.35 * 40",   //a
     "Painting" : "carpetArea * 1.35 * 55",    // a
     "Kitchen otta" : "(numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) * 15 * 1500",    //a
     "Door Frames" : "10000 * (3 * numOfOneBHK + 4 * numOfTwoBHK + 6 * numOfThreeBHK + 8 * numOfFourBHK + 10 * numOfFiveBHK) + 1500 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)", //a door frames
+    "Doors with frames and hardware" : "10000 * (3 * numOfOneBHK + 4 * numOfTwoBHK + 6 * numOfThreeBHK + 8 * numOfFourBHK + 10 * numOfFiveBHK) + 1500 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)", //a door frames
     "External plumbing / drainage line" : "5000 * (numOfOneBHK * 1 + numOfTwoBHK * 2 + numOfThreeBHK * 3 + numOfFourBHK * 4 + numOfFiveBHK * 5) + 6000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",   //plumbing
     "Lift" : "(150000 * numOfFloors * numOfLifts)",
-    "electricalLightFittings" : "((carpetArea / 400) * 500 + ((projectPeriphery / 40) * 5000 + ( numOfFloors * 3) * 700)",
+    "Electrical light fittings in common areas of building" : "((carpetArea / 400) * 500 + ((projectPeriphery / 40) * 5000 + ( numOfFloors * 3) * 700)",
     "Garbage chute" : "(60000 * (numOfFloors - numOfParkingFloors))",
     "modularKitchenOrFurniture" : "(numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) * 125000",
-    "pestControl" : "carpetArea * 1.35 * 2",
-    "solarWater" : "carpetArea * 1.35 * 20",
-    "pipedGasSystem" : "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
-    "skyLounge" : "(slabArea / (numOfFloors + numfOfParkingFloors)) * 150",
-    "fireFightingSystem" : "( 50000 * numOfFloors)",
-    "securityAutomation" : "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 3500 * numOfBuildings + 3500 * 2 + 15000",
-    "showerInclosure" : "15000 * (1 * numOfOneBHK + 1 * numOfTwoBHK + 2 * numOfThreeBHK + 3 * numOfFourBHK + 4 * numOfFiveBHK)",
-    "falseCeiling" : "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
-    "specialElevationalFeatures" : "carpetArea * 1.35 * 25",
-    "boardsAndSignagsInsideBuilding" : "700 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 60000 + 100 * numOfFloors",
+    "Pest Control" : "carpetArea * 1.35 * 2",
+    "Solar water heating system" : "carpetArea * 1.35 * 20",
+    "Piped gas system" : "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
+    "Sky lounge on top terrace" : "(slabArea / (numOfFloors + numOfParkingFloors)) * 150",
+    "Fire fighting system" : "( 50000 * numOfFloors)",
+    "Safety and Security automation" : "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 3500 * numOfBuildings + 3500 * 2 + 15000",
+    "Shower Enclosures" : "15000 * (1 * numOfOneBHK + 1 * numOfTwoBHK + 2 * numOfThreeBHK + 3 * numOfFourBHK + 4 * numOfFiveBHK)",
+    "False ceiling" : "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
+    "Special elevational features" : "carpetArea * 1.35 * 25",
+    "Boards & Signages inside building" : "700 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 60000 + 100 * numOfFloors",
     "Safety measures" : "carpetArea * 1.35 * 5",
 
     //COMMON ammenities
@@ -757,6 +766,7 @@
     "Local body-  Project sanctioning charges" : "totalCarpetAreaOfUnit * 1.35 * 150",
     "Security charges during project period" : "plotArea / 10000 * 10500 * totalCarpetAreaOfUnit"
   },
+
   "rateAnalysisAPI" : {
     "buildingCostHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "buildingCategories" : "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
@@ -772,6 +782,7 @@
     "amenitiesUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "amenitiesRateAnalysisNotes" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA"
   },
+
   "projectCostHeads" : [
     {
       "name" : "Club House",
@@ -1253,6 +1264,7 @@
       ]
     }
   ],
+
   "costHeads" : [
     {
       "name" : "Soling",
@@ -4515,6 +4527,7 @@
       "categories" : []
     }
   ],
+
   "configCostHeads" : [
     {
       "name" : "Water proofing",

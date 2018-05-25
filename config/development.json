@@ -806,88 +806,88 @@
 
   "projectCostHeads" : [
     {
-    "name" : "Club House",
+      "name" : "Club House",
       "priorityId": 100,
-     "rateAnalysisId" : 100000,
+      "rateAnalysisId" : 100000,
       "categories" : [
-       {
-        "name" : "In RCC",
-         "rateAnalysisId" : 100001,
-        "workItems" : [
-          {
-          "name" : "Construction of Ground floor structure of club house in RCC framed structure",
-          "rateAnalysisId" : 100002,
-            "isMeasurementSheet" : true,
-            "measurementUnit" : "cum",
-            "isRateAnalysis" : true,
-            "rateAnalysisPerUnit" : 1,
-            "rateAnalysisUnit" : "cum",
-            "isDirectRate" : false,
-            "directRate" : null,
-            "directRatePerUnit" : null,
-            "isItemBreakdownRequired" : false,
-            "length" : true,
-            "breadthOrWidth" : true,
-            "height" : true
+        {
+          "name" : "In RCC",
+          "rateAnalysisId" : 100001,
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in RCC framed structure",
+              "rateAnalysisId" : 100002,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "cum",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 1,
+              "rateAnalysisUnit" : "cum",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in RCC framed structure",
+              "rateAnalysisId" : 100003,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "cum",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 1,
+              "rateAnalysisUnit" : "cum",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            }
+          ]
         },
-          {
-            "name" : "Construction of G+1 structure of club house in RCC framed structure",
-            "rateAnalysisId" : 100003,
-            "isMeasurementSheet" : true,
-            "measurementUnit" : "cum",
-            "isRateAnalysis" : true,
-            "rateAnalysisPerUnit" : 1,
-            "rateAnalysisUnit" : "cum",
-            "isDirectRate" : false,
-            "directRate" : null,
-            "directRatePerUnit" : null,
-            "isItemBreakdownRequired" : false,
-            "length" : true,
-            "breadthOrWidth" : true,
-            "height" : true
-          }
-        ]
-      },
-      {
-        "name" : "In load bearing",
-        "rateAnalysisId" : 100004,
-        "workItems" : [
-          {
-            "name" : "Construction of Ground floor structure of club house in load bearing masonry",
-            "rateAnalysisId" : 100005,
-            "isMeasurementSheet" : true,
-            "measurementUnit" : "cum",
-            "isRateAnalysis" : true,
-            "rateAnalysisPerUnit" : 1,
-            "rateAnalysisUnit" : "cum",
-            "isDirectRate" : false,
-            "directRate" : null,
-            "directRatePerUnit" : null,
-            "isItemBreakdownRequired" : false,
-            "length" : true,
-            "breadthOrWidth" : true,
-            "height" : true
-          },
-          {
-            "name" : "Construction of G+1 structure of club house in load bearing masonry",
-            "rateAnalysisId" : 100006,
-            "isMeasurementSheet" : true,
-            "measurementUnit" : "cum",
-            "isRateAnalysis" : true,
-            "rateAnalysisPerUnit" : 1,
-            "rateAnalysisUnit" : "cum",
-            "isDirectRate" : false,
-            "directRate" : null,
-            "directRatePerUnit" : null,
-            "isItemBreakdownRequired" : false,
-            "length" : true,
-            "breadthOrWidth" : true,
-            "height" : true
-          }
-        ]
-      }
-    ]
-  },
+        {
+          "name" : "In load bearing",
+          "rateAnalysisId" : 100004,
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in load bearing masonry",
+              "rateAnalysisId" : 100005,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "cum",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 1,
+              "rateAnalysisUnit" : "cum",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in load bearing masonry",
+              "rateAnalysisId" : 100006,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "cum",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 1,
+              "rateAnalysisUnit" : "cum",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            }
+          ]
+        }
+      ]
+    },
     {
       "name" : "Swimming Pool",
       "priorityId": 101,
@@ -3001,8 +3001,7 @@
               "isRateAnalysis" : false,
               "rateAnalysisPerUnit" : null,
               "rateAnalysisUnit" : "cum",
-              "isDirectRate" : 10,
-              "directRate" : null,
+              "directRate" : 10,
               "directRatePerUnit" : "Per Sft b/up area",
               "isItemBreakdownRequired" : false,
               "length" : false,
@@ -7496,20 +7495,20 @@
           "name" : "Video door phones",
           "rateAnalysisId" : 100533,
           "workItems" : [
-              {
-                "name" : "Providing and installing Video door phone system as required",
-                "rateAnalysisId" : 102201,
-                "isMeasurementSheet" : false,
-                "measurementUnit" : "Job",
-                "isRateAnalysis" : false,
-                "rateAnalysisPerUnit" : null,
-                "rateAnalysisUnit" : null,
-                "directRate" : 0,
-                "directRatePerUnit" : "Per Job",
-                "isItemBreakdownRequired" : false,
-                "length" : false,
-                "breadthOrWidth" : false,
-                "height" : false
+            {
+              "name" : "Providing and installing Video door phone system as required",
+              "rateAnalysisId" : 102201,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "Per Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
             }
           ]
         },
@@ -10808,7 +10807,7 @@
               "breadthOrWidth" : true,
               "height" : false
             }
-           ]
+          ]
         }
       ]
     },
@@ -12056,7 +12055,7 @@
               "breadthOrWidth" : null,
               "height" : null
             }
-           ]
+          ]
         }
       ]
     },
