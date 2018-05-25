@@ -27,84 +27,43 @@
         <input [(ngModel)]="quantityItemSteel.item" id="costitem" style="width:150%" class="form-control" [class.required-field]="quantityItemSteel.item == ''"/>
       </td>
       <td>
-        <select  (change)="onDiameterSelect($event.target.value)">
-          <option [value]="6">6</option>
-          <option *ngFor="let diameter of diameterValuesArray" [value]="diameter">{{ diameter }}</option>
+        <select [(ngModel)]="quantityItemSteel.diameter">
+          <option [value]="0"> </option>
+          <option *ngFor="let diameter of diameterValuesArray" [value]="diameter" [selected]="quantityItemSteel.diameter == diameter">{{ diameter }}</option>
         </select>
       </td>
       <td>
-        <input  type="number" class="get-amount-value" [(ngModel)]="quantityItemSteel.length" id="length" style="width:150%" class="form-control" required/>
+        <input  type="number" class="get-amount-value" [(ngModel)]="quantityItemSteel.length" id="length"  style="width:150%" class="form-control" required/>
       </td>
       <td>
-        <input  type="number"   class="get-amount-value" [(ngModel)]="quantityItemSteel.nos" id="nos" style="width:150%" class="form-control"/>
+        <input  type="number"   class="get-amount-value" [(ngModel)]="quantityItemSteel.nos" id="nos"  style="width:150%" class="form-control"/>
       </td>
-      <td>
-        <input type="number"  class="get-amount-value" [(ngModel)]="quantityItemSteel.six" id="sixmm" style="width:150%" class="form-control" disabled/>
-      </td>
-      <td>
-        <input  type="number"  class="get-amount-value" [(ngModel)]= "quantityItemSteel.eight"  id="eightmm" style="width:150%" class="form-control" disabled/>
-      </td>
-      <td>
-        <input  type="number"  class="get-amount-value" [(ngModel)]= "quantityItemSteel.ten"  id="tenmm" style="width:150%" class="form-control" disabled/>
-      </td>
-      <td>
-        <input  type="number"  class="get-amount-value" [(ngModel)]= "quantityItemSteel.twelve"  id="twelvemm" style="width:150%" class="form-control" disabled/>
-      </td>
-      <td>
-        <input  type="number"  class="get-amount-value" [(ngModel)]= "quantityItemSteel.sixteen"  id="sixteenmm" style="width:150%" class="form-control" disabled/>
-      </td>
-      <td>
-        <input  type="number"  class="get-amount-value" [(ngModel)]= "quantityItemSteel.twenty"  id="twentymm" style="width:150%" class="form-control" disabled/>
-      </td>
-      <td>
-        <input  type="number"  class="get-amount-value" [(ngModel)]= "quantityItemSteel.twentyFive"  id="twentyFivemm" style="width:150%" class="form-control" disabled/>
-      </td>
-      <td>
-        <input  type="number"  class="get-amount-value" [(ngModel)]= "quantityItemSteel.thirty"  id="thirtymm" style="width:150%" class="form-control" disabled/>
+      <td *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let j=index">
+        <span disabled >{{getDiameterQuantityFun(quantityIndex,diameter,getValueConstant().STEEL_DIAMETER_STRING_VALUES[j],getValueConstant().TOTAL_STEEL_DIAMETER_STRING_VALUES[j])|number:'1.2-2'}}kg</span>
       </td>
 
       <td colspan="2">
         <div class="col-xs-2">
-          <span title="Delete Quantity Item"  class="glyphicon glyphicon-trash"></span>
+          <span title="Delete Quantity Item"  class="glyphicon glyphicon-trash" (click)="deleteQuantityItem(quantityIndex)"></span>
         </div>
       </td>
     </tr>
-    <tr>
+    <tr disabled>
       <td>
-        <label>{{ getTableHeadings().WEIGHT_IN_KG }}</label>
+        <label disabled>{{ getTableHeadings().WEIGHT_IN_KG }}</label>
       </td>
       <td>
-        <span> </span>
+        <span disabled>{{totalDiamterQuantity.totalWeight}} </span>
       </td>
       <td>
-        <span> </span>
+        <span disabled> </span>
       </td>
       <td>
-        <span> </span>
+        <span disabled> </span>
       </td>
-      <td>
-        <span> 0 </span>
-      </td>
-      <td>
-        <span> 0 </span>
-      </td>
-      <td>
-        <span> 0 </span>
-      </td>
-      <td>
-        <span> 0 </span>
-      </td>
-      <td>
-        <span> 0 </span>
-      </td>
-      <td>
-        <span> 0 </span>
-      </td>
-      <td>
-        <span> 0 </span>
-      </td>
-      <td>
-        <span> 0 </span>
+
+      <td *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let k=index">
+        <span> {{getTotalDiameterQuantityFun(diameter,getValueConstant().STEEL_DIAMETER_STRING_VALUES[k],getValueConstant().TOTAL_STEEL_DIAMETER_STRING_VALUES[k])|number:'1.2-2'}}</span>
       </td>
     </tr>
     </tbody>
