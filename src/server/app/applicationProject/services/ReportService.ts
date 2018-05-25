@@ -199,6 +199,16 @@ class ReportService {
     return estimateReport;
   }
 
+  getEstimatedReportForNonCategories(thumbRuleReport: ThumbRuleReport) {
+    let estimateReport = new EstimateReport();
+    estimateReport.name = thumbRuleReport.name;
+    estimateReport.rateAnalysisId = thumbRuleReport.rateAnalysisId;
+    estimateReport.total = thumbRuleReport.amount;
+    estimateReport.disableCostHeadView = true;
+    estimateReport.rate = thumbRuleReport.rate;
+    return estimateReport;
+  }
+
   generateReportForProjectCostHeads(projectCostHeads:  Array<CostHead>, projectRates: Array<CentralizedRate>, totalArea: number,
                                      rateUnit: string) {
     let commonAmenitiesReport : Array<BuildingReport> = new Array<BuildingReport>();
@@ -253,7 +263,12 @@ class ReportService {
 
       //Estimated cost Report
       let estimateReport = new EstimateReport();
-      estimateReport = this.getEstimatedReport(projectRates, costHead, totalArea, rateUnit);
+      if(costHead.categories.length > 0) {
+        estimateReport = this.getEstimatedReport(projectRates, costHead, totalArea, rateUnit);
+      } else {
+        estimateReport = this.getEstimatedReportForNonCategories(thumbRuleReport);
+      }
+
       estimatedReports.push(estimateReport);
     }else {
       costHeadButtonForBuilding.showHideAddCostHeadButton=false;

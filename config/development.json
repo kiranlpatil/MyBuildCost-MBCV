@@ -753,7 +753,39 @@
     //COMMON ammenities
 
     "Club House" : "totalSlabAreaOfClubHouse * 1200",
-    "Swimming Pool" : "swimmingPoolCapacity * 45"
+    "Swimming Pool" : "swimmingPoolCapacity * 45",
+    "D G set backup" : "totalCarpetAreaOfUnit * 1.35 * 15",
+    "Podium" : "podiumArea * 700",
+    "Landscaping of open spaces (hard+soft)" : "150 * openSpace + plotPeripheryLength / 10 * 600",
+    "Rain water harvesting" : "plotArea / 30000 * 400000",
+    "Boards & Signages in common areas" : "100000 + 1000 * totalNumberOfBuildings",
+    "Electrical light fittings in common areas of project" : "plotPeripheryLength / 20 * 2500 + openSpace / 500 * 1000",
+    "Site dev - electrical infrastructure" : "30000 * numOfOneBHK + 40000 * numOfTwoBHK + 50000 * numOfThreeBHK + 55000 * numOfFourBHK + 60000 * numOfFiveBHK",
+    "Site dev - plumbing & drainage system" : "totalCarpetAreaOfUnit * 1.35 * 20",
+    "Site dev - Backfilling (plot)" : "plotArea * 0.25 * 2 * 10",
+    "Site dev - Road work / pavement in side margins" : "80 * plotArea * 0.65",
+    "Compound wall" : "1000 * plotPeripheryLength",
+    "Tensile/fabricated car parks in side margins" : "plotArea / 5000 * 60000",
+    "Car park marking / parking accessories" : "carpetAreaOfParking * 15",
+    "Cleaning & Shifting of debris" : "totalCarpetAreaOfUnit * 1.35 * 5",
+    "Electricity and diesel charges" : "(totalCarpetAreaOfUnit * 1.35 / 2) * targetedProjectCompletionPeriod",
+    "Material Testing" : "totalCarpetAreaOfUnit * 1.35 * 2",
+    "Departmental Labour" : "plotArea / 10000 * 300 * 30 * targetedProjectCompletionPeriod",
+    "Safety Measures" : "totalCarpetAreaOfUnit * 1.35 * 5",
+    "Cleaning of units before possession" : "totalCarpetAreaOfUnit * 1.35 * 2.5",
+    "Labour camp" : "totalCarpetAreaOfUnit * 1.35 * 10",
+    "Site Preparation - temporary fencing" : "plotPeripheryLength * 100 * 10",
+    "Site preparation- temporary structures/stores" : "saleableArea * 2",
+    "Temporary electrification" : "totalCarpetAreaOfUnit * 1.35 * 3",
+    "Temporary plumbing & drainage" : "saleableArea * 2",
+    "Water charges" : "(totalCarpetAreaOfUnit * 1.35) / 60000 * 850 * 30 * targetedProjectCompletionPeriod",
+    "Repairs / maintenance charges in defect liability period of 5 years" : "totalCarpetAreaOfUnit * 1.35 * 3",
+    "Proffessional fees" : "totalCarpetAreaOfUnit * 1.35 * 40",
+    "Sales and marketing" : "totalCarpetAreaOfUnit * 1.35 * 175",
+    "Finance cost" : "totalCarpetAreaOfUnit * 1.35 * 100",
+    "Administrative charges" : "totalCarpetAreaOfUnit * 1.35 * 40",
+    "Local body-  Project sanctioning charges" : "totalCarpetAreaOfUnit * 1.35 * 150",
+    "Security charges during project period" : "plotArea / 10000 * 10500 * totalCarpetAreaOfUnit"
   },
 
   "rateAnalysisAPI" : {
@@ -9603,39 +9635,205 @@
     {
       "name" : "Club House",
       "priorityId": 100,
-      "rateAnalysisId" : 100000,
+      "rateAnalysisId" : 200000,
       "categories" : [
         {
           "name" : "In RCC",
-          "rateAnalysisId" : 100001,
+          "rateAnalysisId" : 200001,
           "workItems" : [
             {
               "name" : "Construction of Ground floor structure of club house in RCC framed structure",
-              "rateAnalysisId" : 100002,
+              "rateAnalysisId" : 200002,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1200,
+              "directRatePerUnit" : "Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in RCC framed structure",
+              "rateAnalysisId" : 200003,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1500,
+              "directRatePerUnit" : "Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "In load bearing",
+          "rateAnalysisId" : 200004,
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in load bearing masonry",
+              "rateAnalysisId" : 200005,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1000,
+              "directRatePerUnit" : "Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in load bearing masonry",
+              "rateAnalysisId" : 200006,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1200,
+              "directRatePerUnit" : "Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Swimming Pool",
+      "priorityId": 101,
+      "rateAnalysisId" : 200007,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200008,
+          "workItems" : [
+            {
+              "name" : "Providing a swimming pool with filtration plant, deck etc",
+              "rateAnalysisId" : 200009,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 400000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and constructing changing room's block ",
+              "rateAnalysisId" : 200010,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1200,
+              "directRatePerUnit" : "Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Children play area",
+      "priorityId": 102,
+      "rateAnalysisId" : 200011,
+      "categories" : [
+        {
+          "name" : "Play equipments",
+          "rateAnalysisId" : 200012,
+          "workItems" : [
+            {
+              "name" : "Providing and installing children play equipments as per selection",
+              "rateAnalysisId" : 200013,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 500000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Play area flooring",
+          "rateAnalysisId" : 200014,
+          "workItems" : [
+            {
+              "name" : "Providing and executing EPDM flooring in children play area",
+              "rateAnalysisId" : 200015,
               "isMeasurementSheet" : true,
-              "measurementUnit" : "cum",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 1,
-              "rateAnalysisUnit" : "cum",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 300,
+              "directRatePerUnit" : "Sqft",
               "isItemBreakdownRequired" : false,
               "length" : true,
               "breadthOrWidth" : true,
               "height" : true
             },
             {
-              "name" : "Construction of G+1 structure of club house in RCC framed structure",
-              "rateAnalysisId" : 100003,
+              "name" : "Providing gravel sand pit in children play area",
+              "rateAnalysisId" : 200016,
               "isMeasurementSheet" : true,
-              "measurementUnit" : "cum",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 1,
-              "rateAnalysisUnit" : "cum",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 25,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : true
+            },
+            {
+              "name" : "Providing and executing suitable flooring in children play area",
+              "rateAnalysisId" : 200017,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 25,
+              "directRatePerUnit" : "Sqft",
               "isItemBreakdownRequired" : false,
               "length" : true,
               "breadthOrWidth" : true,
@@ -9644,28 +9842,12 @@
           ]
         },
         {
-          "name" : "In load bearing",
-          "rateAnalysisId" : 100004,
+          "name" : "P.C.C. on volume basis",
+          "rateAnalysisId" : 200018,
           "workItems" : [
             {
-              "name" : "Construction of Ground floor structure of club house in load bearing masonry",
-              "rateAnalysisId" : 100005,
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "cum",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 1,
-              "rateAnalysisUnit" : "cum",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : true,
-              "breadthOrWidth" : true,
-              "height" : true
-            },
-            {
-              "name" : "Construction of G+1 structure of club house in load bearing masonry",
-              "rateAnalysisId" : 100006,
+              "name" : "P.C.C. ( M - 7.5 grade)",
+              "rateAnalysisId" : 200019,
               "isMeasurementSheet" : true,
               "measurementUnit" : "cum",
               "isRateAnalysis" : true,
@@ -9684,41 +9866,710 @@
       ]
     },
     {
-      "name" : "Swimming Pool",
-      "priorityId": 101,
-      "rateAnalysisId" : 100007,
+      "name" : "Gym",
+      "priorityId": 103,
+      "rateAnalysisId" : 200020,
       "categories" : [
         {
-          "name" : "Work Items",
-          "rateAnalysisId" : 100008,
+          "name" : "Gym equipments",
+          "rateAnalysisId" : 200021,
           "workItems" : [
             {
-              "name" : "Providing a swimming pool with filtration plant, deck etc",
-              "rateAnalysisId" : 100009,
+              "name" : "Providing and installing indoor Gym equipments",
+              "rateAnalysisId" : 100022,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing outdoor Gym equipments",
+              "rateAnalysisId" : 200023,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Gym area flooring",
+          "rateAnalysisId" : 200024,
+          "workItems" : [
+            {
+              "name" : "Providing and executing Rubber tile flooring in gym area",
+              "rateAnalysisId" : 200025,
               "isMeasurementSheet" : true,
-              "measurementUnit" : "cum",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 1,
-              "rateAnalysisUnit" : "cum",
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 200,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and executing suitable flooring in gym area",
+              "rateAnalysisId" : 200026,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
               "isDirectRate" : false,
               "directRate" : null,
               "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "D G set backup",
+      "priorityId": 104,
+      "rateAnalysisId" : 200027,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200028,
+          "workItems" : [
+            {
+              "name" : "Providing and installing DG back up of required capacity",
+              "rateAnalysisId" : 200029,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Podium",
+      "priorityId": 105,
+      "rateAnalysisId" : 200030,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200031,
+          "workItems" : [
+            {
+              "name" : "Providing and constructing podium with RCC, plaster,waterproofing, railing etc complete",
+              "rateAnalysisId" : 200032,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "sqft of Slab area",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 850,
+              "directRatePerUnit" : "sqft of slab area",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Landscaping of open spaces (hard+soft)",
+      "priorityId": 106,
+      "rateAnalysisId" : 200033,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200034,
+          "workItems" : [
+            {
+              "name" : "Providing and executing soft landscaping using variety of plants/lawn",
+              "rateAnalysisId" : 200035,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and executing hard landscaping using masonry, stones, sculptures etc",
+              "rateAnalysisId" : 200036,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Rain water harvesting",
+      "priorityId": 107,
+      "rateAnalysisId" : 200037,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200038,
+          "workItems" : [
+            {
+              "name" : "Providing and executing rain water harvesting",
+              "rateAnalysisId" : 200039,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Boards & Signages in common areas",
+      "priorityId": 108,
+      "rateAnalysisId" : 200040,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200041,
+          "workItems" : [
+            {
+              "name" : "Providing and fixing project name board at the main gate",
+              "rateAnalysisId" : 200042,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and fixing safety/directional signages inside the project",
+              "rateAnalysisId" : 200043,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and fixing project signage above the building",
+              "rateAnalysisId" : 200044,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Electrical light fittings in common areas of project",
+      "priorityId": 109,
+      "rateAnalysisId" : 200045,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200046,
+          "workItems" : [
+            {
+              "name" : "Providing electrical lighting in common areas",
+              "rateAnalysisId" : 200047,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Site dev - electrical infrastructure",
+      "priorityId": 110,
+      "rateAnalysisId" : 200048,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200049,
+          "workItems" : [
+            {
+              "name" : "Providing and constructing transformer room of the required size",
+              "rateAnalysisId" : 200050,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "sqft of slab area",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 800,
+              "directRatePerUnit" : "sqft of slab area",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing transformer of the required capacity",
+              "rateAnalysisId" : 200051,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and laying underground pipeline of required diameter and inspection chmabers as required for incoming cable from transformer to meter room",
+              "rateAnalysisId" : 200052,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and laying incoming cable of required specification from the transfromer to the meter room",
+              "rateAnalysisId" : 200053,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Rm",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Site dev - plumbing & drainage system",
+      "priorityId": 111,
+      "rateAnalysisId" : 200054,
+      "categories" : [
+        {
+          "name" : "Inspection chambers",
+          "rateAnalysisId" : 200055,
+          "workItems" : [
+            {
+              "name" : "Inspection chamber of size 3'0\" x 1'6\" x 3'0\" deep with chamber cover",
+              "rateAnalysisId" : 200056,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "No",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Inspection chamber of size 2'0\" x 1'6\" x 3'0\" deep with chamber cover",
+              "rateAnalysisId" : 200057,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "No",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Gully trap chamber of size 9\" x 1'0\" x 2'0\" deep with chamber cover",
+              "rateAnalysisId" : 200058,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "No",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Manhole of size top ID 1'9\"X bottom ID 4'0\" X 6'0\" deep with chamber cover",
+              "rateAnalysisId" : 200059,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "No",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Inspection chamber of size 2'0\" x 1'6\" x 2'0\" deep with chamber cover",
+              "rateAnalysisId" : 200060,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "No",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Inspection chamber of size 3'0\" x 1'6\" x 2'0\" deep with chamber cover",
+              "rateAnalysisId" : 200061,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "No",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Manhole of size top ID 1'9\"X bottom ID 4'0\" X 5'0\" deep with chamber cover",
+              "rateAnalysisId" : 200062,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "No",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Underground RCC pipe line",
+          "rateAnalysisId" : 200063,
+          "workItems" : [
+            {
+              "name" : "6\" Under ground RCC pipe line",
+              "rateAnalysisId" : 200064,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rm",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "8\" Under ground RCC pipe line",
+              "rateAnalysisId" : 200065,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rm",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "10\" Under ground RCC pipe line",
+              "rateAnalysisId" : 200066,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rm",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "12\" Under ground RCC pipe line",
+              "rateAnalysisId" : 200067,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rm",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "18\" Under ground RCC pipe line",
+              "rateAnalysisId" : 200068,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rm",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Road side open gutter for rain water",
+          "rateAnalysisId" : 200069,
+          "workItems" : [
+            {
+              "name" : "Road side open RCC gutter with 4\" thk RCC pardi and raft with clear internal dimensions- 2'4\" Wide X 2'0\" Avg depth i/c excavation & PCC.",
+              "rateAnalysisId" : 200070,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rft",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Road side open RCC gutter with 6\" thk RCC pardi and raft with clear internal dimensions- 2'0\" Wide X 2'0\" Avg depth i/c excavation & PCC.",
+              "rateAnalysisId" : 200071,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Rft",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Water pumps",
+          "rateAnalysisId" : 200072,
+          "workItems" : [
+            {
+              "name" : "Providing water pumping system from UGWT to OHWT",
+              "rateAnalysisId" : 200073,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing hydropneumatic system for water pumping from UGWT to individual units",
+              "rateAnalysisId" : 200074,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Site dev - Backfilling (plot)",
+      "priorityId": 112,
+      "rateAnalysisId" : 200075,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200076,
+          "workItems" : [
+            {
+              "name" : "Carrying out backfilling of plot by machiney using murum available on site and levelling and compacting it using compactor/road roller",
+              "rateAnalysisId" : 200077,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "cum",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 90,
+              "directRatePerUnit" : "Cum",
               "isItemBreakdownRequired" : false,
               "length" : true,
               "breadthOrWidth" : true,
               "height" : true
             },
             {
-              "name" : "Providing and constructing changing room's block ",
-              "rateAnalysisId" : 100010,
+              "name" : "Carrying out backfilling of plot by machiney using purchased murum and levelling and compacting it using compactor/road roller",
+              "rateAnalysisId" : 200078,
               "isMeasurementSheet" : true,
               "measurementUnit" : "cum",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 1,
-              "rateAnalysisUnit" : "cum",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 400,
+              "directRatePerUnit" : "Cum",
               "isItemBreakdownRequired" : false,
               "length" : true,
               "breadthOrWidth" : true,
@@ -9727,6 +10578,1930 @@
           ]
         }
       ]
+    },
+    {
+      "name" : "Site dev - Road work / pavement in side margins",
+      "priorityId": 113,
+      "rateAnalysisId" : 200079,
+      "categories" : [
+        {
+          "name" : "Tar road",
+          "rateAnalysisId" : 200080,
+          "workItems" : [
+            {
+              "name" : "Providing and executing 3\" WBM road with murum rolling",
+              "rateAnalysisId" : 200081,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing 6\" WBM road with murum rolling",
+              "rateAnalysisId" : 200082,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing semigrouting on WBM road",
+              "rateAnalysisId" : 200083,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing liquid seal coat on semigrouted layer of road",
+              "rateAnalysisId" : 200084,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing carpet sealcoat on semigrouted layer of road",
+              "rateAnalysisId" : 200085,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Concrete road ( Trimix)",
+          "rateAnalysisId" : 200086,
+          "workItems" : [
+            {
+              "name" : "Providing and executing 3\" WBM road with murum rolling",
+              "rateAnalysisId" : 200087,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing 6\" WBM road with murum rolling",
+              "rateAnalysisId" : 200088,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing concrete ( Trimix) road as per required thickness and grade of concrete",
+              "rateAnalysisId" : 200089,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing concrete ( Trimix) road with stamping as per required thickness, grade of concrete and stamp design",
+              "rateAnalysisId" : 200090,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
+        },
+        {
+          "name" : "Paved road",
+          "rateAnalysisId" : 200091,
+          "workItems" : [
+            {
+              "name" : "Providing and executing 3\" WBM road with murum rolling",
+              "rateAnalysisId" : 200092,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing 6\" WBM road with murum rolling",
+              "rateAnalysisId" : 200093,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Concrete paver block flooring as per selected shape(Non glazed blocks)",
+              "rateAnalysisId" : 200094,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "sft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            },
+            {
+              "name" : "Concrete paver block flooring as per selected shape (Glazed blocks)",
+              "rateAnalysisId" : 200095,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "sft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+           ]
+        }
+      ]
+    },
+    {
+      "name" : "Kerbing",
+      "priorityId": 114,
+      "rateAnalysisId" : 200096,
+      "categories" : [
+        {
+          "name" : "Kerbing work",
+          "rateAnalysisId" : 200097,
+          "workItems" : [
+            {
+              "name" : "4\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
+              "rateAnalysisId" : 200098,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "6\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
+              "rateAnalysisId" : 200099,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground",
+              "rateAnalysisId" : 200100,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground with painting",
+              "rateAnalysisId" : 200101,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Project entrance gate",
+      "priorityId": 115,
+      "rateAnalysisId" : 200102,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200103,
+          "workItems" : [
+            {
+              "name" : "Providing and constructing project entrance gate as per design",
+              "rateAnalysisId" : 200104,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Compound wall",
+      "priorityId": 116,
+      "rateAnalysisId" : 200105,
+      "categories" : [
+        {
+          "name" : "UCR/Masonry Compound wall",
+          "rateAnalysisId" : 200106,
+          "workItems" : [
+            {
+              "name" : "Providing and constructing 1'6\" wide UCR compound wall with 5' high chain link above UCR (Check image)",
+              "rateAnalysisId" : 200107,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and constructing Masonry compound wall as per the design",
+              "rateAnalysisId" : 200108,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 800,
+              "directRatePerUnit" : "Rft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and constructing RCC columns and beams for supporting the masonry of compound wall",
+              "rateAnalysisId" : 200109,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Rft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and constructing Pile columns with cap and beams for supporting the masonry of compound wall",
+              "rateAnalysisId" : 200110,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Rft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Car park systems",
+      "priorityId": 117,
+      "rateAnalysisId" : 200111,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200112,
+          "workItems" : [
+            {
+              "name" : "Providing and installing mechanical one above other car park system",
+              "rateAnalysisId" : 200113,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing mechanical puzzle car park system",
+              "rateAnalysisId" : 200114,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing mechanical puzzle car park system",
+              "rateAnalysisId" : 200115,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 45000,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Car park marking / parking accessories",
+      "priorityId": 118,
+      "rateAnalysisId" : 200116,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200117,
+          "workItems" : [
+            {
+              "name" : "Providing and marking of parkings with thermopastic paint",
+              "rateAnalysisId" : 200118,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sqft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing safety accessaries like Corner guards, reflectors, speed breakers etc.",
+              "rateAnalysisId" : 200119,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Cleaning & Shifting of debris",
+      "priorityId": 119,
+      "rateAnalysisId" : 200120,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200121,
+          "workItems" : [
+            {
+              "name" : "Shifting of site debris inside the site using JCB and dumper",
+              "rateAnalysisId" : 200122,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Trip",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 800,
+              "directRatePerUnit" : "Trip",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Shifting of site debris outside the  site using JCB and dumper",
+              "rateAnalysisId" : 200123,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Trip",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1200,
+              "directRatePerUnit" : "Trip",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Shifting of site debris inside the  site using JCB/manual filling and Tractor",
+              "rateAnalysisId" : 200124,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Trip",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 850,
+              "directRatePerUnit" : "Trip",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Shifting of site debris inside the  site using JCB/manual filling and Tractor",
+              "rateAnalysisId" : 200125,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Trip",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1000,
+              "directRatePerUnit" : "Trip",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing, installing and removing of debris chute on site for debris collection",
+              "rateAnalysisId" : 200126,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing debris disposal system on site",
+              "rateAnalysisId" : 200127,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Electricity and diesel charges",
+      "priorityId": 120,
+      "rateAnalysisId" : 200128,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200129,
+          "workItems" : [
+            {
+              "name" : "Monthly electricity bill of site during construction period",
+              "rateAnalysisId" : 200130,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Months",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Month",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Monthly diesel charges for generator at site during construction period",
+              "rateAnalysisId" : 200131,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Months",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Month",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Material Testing",
+      "priorityId": 121,
+      "rateAnalysisId" : 200132,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200133,
+          "workItems" : [
+            {
+              "name" : "Testing of Concrete cubes in the laboratory",
+              "rateAnalysisId" : 200134,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Testing of steel samples in the laboratory",
+              "rateAnalysisId" : 200135,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Testing of agreegate sample in the laboratory",
+              "rateAnalysisId" : 200136,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Testing of Crushed sand sample in the laboratory",
+              "rateAnalysisId" : 200137,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Testing of river sand sample in the laboratory",
+              "rateAnalysisId" : 200138,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Testing of soil sample in the laboratory",
+              "rateAnalysisId" : 200139,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Testing of cement sample in the laboratory",
+              "rateAnalysisId" : 200140,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Testing of brick sample in the laboratory",
+              "rateAnalysisId" : 200141,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and testing mix design of concrete for given material samples",
+              "rateAnalysisId" : 200142,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Samples",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Sample",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Departmental Labour",
+      "priorityId": 122,
+      "rateAnalysisId" : 200143,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200144,
+          "workItems" : [
+            {
+              "name" : "Providing and engaging male coolies as departmental labour",
+              "rateAnalysisId" : 200145,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Nos",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 400,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and engaging female coolies as departmental labour",
+              "rateAnalysisId" : 200146,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Nos",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 300,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Safety Measures",
+      "priorityId": 123,
+      "rateAnalysisId" : 200147,
+      "categories" : [
+        {
+          "name" : "Safety net/railings",
+          "rateAnalysisId" : 200148,
+          "workItems" : [
+            {
+              "name" : "Installation & removal of safety net, 3 m wide, along with building periphery, using 6 m long,1-1/2\" dia GI pipe.",
+              "rateAnalysisId" : 200149,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Installation & removal of safety net, 3 m wide, along with building periphery, using 6 m long,1-1/2\" dia MS pipe",
+              "rateAnalysisId" : 200150,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing safety railings on periphery",
+              "rateAnalysisId" : 200151,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Rft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and installing safety platforms on periphery",
+              "rateAnalysisId" : 200152,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Rft",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Safety gear",
+          "rateAnalysisId" : 200153,
+          "workItems" : [
+            {
+              "name" : "Providing and using Safety helmets for staff and workers",
+              "rateAnalysisId" : 200154,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 350,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and using safety belts for workers",
+              "rateAnalysisId" : 200155,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 650,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and using reflective jackets for workers",
+              "rateAnalysisId" : 200156,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 150,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing and using safety rubber shoes for workers",
+              "rateAnalysisId" : 200157,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 250,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Cleaning of units before possession",
+      "priorityId": 124,
+      "rateAnalysisId" : 200158,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200159,
+          "workItems" : [
+            {
+              "name" : "Cleaning of units before possession including cleaning materials",
+              "rateAnalysisId" : 200160,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Units",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 3000,
+              "directRatePerUnit" : "Units",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Sample Flat",
+      "priorityId": 125,
+      "rateAnalysisId" : 200161,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200162,
+          "workItems" : [
+            {
+              "name" : "Construction of temporary structure with civil finishes on ground for sample flat",
+              "rateAnalysisId" : 200163,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1800,
+              "directRatePerUnit" : "Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing furniture and fixtures in sample flat",
+              "rateAnalysisId" : 200164,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Labour camp",
+      "priorityId": 126,
+      "rateAnalysisId" : 200165,
+      "categories" : [
+        {
+          "name" : "Safety and Security",
+          "rateAnalysisId" : 200166,
+          "workItems" : [
+            {
+              "name" : "Temporary fabricated 8' high GI sheet fencing for labour camp with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS angle for horizontal support (Check image, notes)",
+              "rateAnalysisId" : 200167,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing security persons for the site security for the labour camp",
+              "rateAnalysisId" : 200168,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Persons",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 10000,
+              "directRatePerUnit" : "Person",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing CCTV security system for the labour camp",
+              "rateAnalysisId" : 200169,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 20000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Electricity",
+          "rateAnalysisId" : 200170,
+          "workItems" : [
+            {
+              "name" : "Monthly electricity bill of labour camp during construction period",
+              "rateAnalysisId" : 200171,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Months",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Month",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Monthly diesel charges for generator at labour camp during construction period",
+              "rateAnalysisId" : 200172,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Months",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Month",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Hutments",
+          "rateAnalysisId" : 200173,
+          "workItems" : [
+            {
+              "name" : "Providing and erecting temporary structures for the labour hutment",
+              "rateAnalysisId" : 200174,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 15000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Water and sanitation",
+          "rateAnalysisId" : 200175,
+          "workItems" : [
+            {
+              "name" : "Providing temporary toilet facility along with septic tank for the labour camp",
+              "rateAnalysisId" : 200176,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 100000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing Water purifying system of required capacity for the labour camp",
+              "rateAnalysisId" : 200177,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 100000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing Water purifying system of required capacity for the labour camp",
+              "rateAnalysisId" : 200178,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 100000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Rent",
+          "rateAnalysisId" : 200179,
+          "workItems" : [
+            {
+              "name" : "Paying of rent for open land of labour camp",
+              "rateAnalysisId" : 200180,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Months",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Months",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Site Preparation - temporary fencing",
+      "priorityId": 127,
+      "rateAnalysisId" : 200181,
+      "categories" : [
+        {
+          "name" : "Barbed wire fencing",
+          "rateAnalysisId" : 200182,
+          "workItems" : [
+            {
+              "name" : "4 ft high Barbed wire 12 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
+              "rateAnalysisId" : 200183,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "4 ft high Barbed wire 12 x 12 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
+              "rateAnalysisId" : 200184,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "4 ft high Barbed wire 14 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
+              "rateAnalysisId" : 200185,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Fabricated GI sheet fencing",
+          "rateAnalysisId" : 200186,
+          "workItems" : [
+            {
+              "name" : "Temporary fabricated GI sheet fencing 10' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS angle horizontal support (Check image, notes)",
+              "rateAnalysisId" : 200187,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 8' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS  angle horizontal support (Check image, notes)",
+              "rateAnalysisId" : 200188,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 8 ft high with 50 x 50 x 12 g hollow pipe for vertical and cross supports at 8' c/c and 25 x 25 x 18 g hollow pipe for horizontal support (Check image, notes)",
+              "rateAnalysisId" : 200189,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 10 ft high with 50 x 50 x 12 g hollow pipe for vertical and cross supports at 8' c/c and 25 x 25 x 18 g hollow pipe for horizontal support (Check image, notes)",
+              "rateAnalysisId" : 200190,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 12' high with 75 x 40 C channel vertical supports at 8' c/c and 50 x 50 x 5 angle for cross supports (Check image, notes)",
+              "rateAnalysisId" : 200191,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Chainlink fencing",
+          "rateAnalysisId" : 200192,
+          "workItems" : [
+            {
+              "name" : "4 ft high Chainlink fencing with cement poles of 4\" x 4\" x 6' ht. at 8' c/c (Check image)",
+              "rateAnalysisId" : 200193,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "5 ft high Chainlink fencing with MS angle pole 40 X 40 X 5mm 6' ht. at 5' c/c (Check image )",
+              "rateAnalysisId" : 200194,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+           ]
+        }
+      ]
+    },
+    {
+      "name" : "Site preparation- temporary structures/stores",
+      "priorityId": 128,
+      "rateAnalysisId" : 200195,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200196,
+          "workItems" : [
+            {
+              "name" : "Providing and erecting temporary structures on site for stores etc.",
+              "rateAnalysisId" : 200197,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Site/sales office",
+      "priorityId": 131,
+      "rateAnalysisId" : 200204,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200205,
+          "workItems" : [
+            {
+              "name" : "Construction of temporary structure with civil finishes on ground for sample flat",
+              "rateAnalysisId" : 200206,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Sqft b/up",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1800,
+              "directRatePerUnit" : "Sqft b/up",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing furniture and fixtures in sample flat",
+              "rateAnalysisId" : 200207,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Society Office with furniture",
+      "priorityId": 132,
+      "rateAnalysisId" : 200208,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200209,
+          "workItems" : [
+            {
+              "name" : "Providing furniture and fixtures in society office",
+              "rateAnalysisId" : 200210,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Water charges",
+      "priorityId": 133,
+      "rateAnalysisId" : 200211,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200212,
+          "workItems" : [
+            {
+              "name" : "Supplying water tankers for construction activities and curing purpose",
+              "rateAnalysisId" : 200213,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Number",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 750,
+              "directRatePerUnit" : "Number",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Supplying water tankers for Drinking purpose",
+              "rateAnalysisId" : 200214,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Number",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 1000,
+              "directRatePerUnit" : "Number",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Supplying water Jars for drinking purpose",
+              "rateAnalysisId" : 200215,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Number",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 40,
+              "directRatePerUnit" : "Number",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Proffessional fees",
+      "priorityId": 135,
+      "rateAnalysisId" : 200219,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200220,
+          "workItems" : [
+            {
+              "name" : "Appointing Structural consultant for the project",
+              "rateAnalysisId" : 200221,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Designing cum liaisoning architect for the project",
+              "rateAnalysisId" : 200222,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Designing architect for the project",
+              "rateAnalysisId" : 200223,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Liaisoning architect for the project",
+              "rateAnalysisId" : 200224,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing MEP consultant for the project",
+              "rateAnalysisId" : 200225,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Electrical consultant for the project",
+              "rateAnalysisId" : 200226,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Plumbing consultant for the project",
+              "rateAnalysisId" : 200227,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Environmental consultant for the project",
+              "rateAnalysisId" : 200228,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Landscape consultant for the project",
+              "rateAnalysisId" : 200229,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing Interior designing consultant for the project",
+              "rateAnalysisId" : 200230,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Appointing lighting consultant for the project",
+              "rateAnalysisId" : 200231,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 0,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Security charges during project period",
+      "priorityId": 140,
+      "rateAnalysisId" : 200244,
+      "categories" : [
+        {
+          "name" : "Work Items",
+          "rateAnalysisId" : 200245,
+          "workItems" : [
+            {
+              "name" : "Providing security persons for the site security for the project duration",
+              "rateAnalysisId" : 200246,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Persons",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 10000,
+              "directRatePerUnit" : "Person",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Providing CCTV security system for site during construction",
+              "rateAnalysisId" : 200247,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "Job",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "isDirectRate" : true,
+              "directRate" : 20000,
+              "directRatePerUnit" : "Job",
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "fixedCostConfigProjectCostHeads" : [
+    {
+      "name" : "Temporary electrification",
+      "priorityId": 129,
+      "rateAnalysisId" : 200198,
+      "categories" : []
+    },
+    {
+      "name" : "Temporary plumbing & drainage",
+      "priorityId": 130,
+      "rateAnalysisId" : 200201,
+      "categories" : []
+    },
+    {
+      "name" : "Repairs / maintenance charges in defect liability period of 5 years",
+      "priorityId": 134,
+      "rateAnalysisId" : 200216,
+      "categories" : []
+    },
+    {
+      "name" : "Sales and marketing",
+      "priorityId": 136,
+      "rateAnalysisId" : 200232,
+      "categories" : []
+    },
+    {
+      "name" : "Finance cost",
+      "priorityId": 137,
+      "rateAnalysisId" : 200235,
+      "categories" : []
+    },
+    {
+      "name" : "Administrative charges",
+      "priorityId": 138,
+      "rateAnalysisId" : 200238,
+      "categories" : []
+    },
+    {
+      "name" : "Local body-  Project sanctioning charges",
+      "priorityId": 139,
+      "rateAnalysisId" : 200241,
+      "categories" : []
     }
   ]
 }
