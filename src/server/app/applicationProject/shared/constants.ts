@@ -26,6 +26,7 @@ class Constants {
 
   public static BUDGETED_COST_FORMULAE : string = 'budgetedCostFormulae.';
   public static CARPET_AREA : string = 'carpetArea';
+  public static PODIUM_AREA : string = 'podiumArea';
   public static TOTAL_CARPET_AREA : string = 'totalCarpetAreaOfUnit';
   public static SLAB_AREA : string = 'slabArea';
   public static TOTAL_SLAB_AREA : string = 'totalSlabArea';
@@ -46,10 +47,55 @@ class Constants {
 
   public static TOTAL_NUM_OF_BUILDINGS : string = 'numOfBuildings';
 
+  public static OPEN_SPACE : string = 'openSpace';
+  public static PLOT_PERIPHERY_LENGTH : string = 'plotPeripheryLength';
+  public static PLOT_AREA : string = 'plotArea ';
+  public static TOTAL_NUMBER_OF_BUILDINGS : string = 'totalNumberOfBuildings';
+  public static CARPET_AREA_OF_PARKING : string = 'carpetAreaOfParking';
+  public static TARGETED_PROJECT_COMPLETION_PERIOD : string = 'targetedProjectCompletionPeriod';
+
   //Common Ammenities Cost Heads
   public static SAFETY_MEASURES : string = 'Safety measures';
   public static CLUB_HOUSE : string = 'Club House';
   public static SWIMMING_POOL : string = 'Swimming Pool';
+  public static CHILDREN_PLAY_AREA : string = 'Children play area';
+  public static GYM : string = 'Gym';
+  public static D_G_SET_BACKUP : string = 'D G set backup';
+  public static PODIUM : string = 'Podium';
+  public static LANDSCAPING_OF_OPEN_SPACES : string = 'Landscaping of open spaces (hard+soft)';
+  public static RAIN_WATER_HARVESTING : string = 'Rain water harvesting';
+  public static BOARDS_AND_SIGNAGES_IN_COMMON_AREAS : string = 'Boards & Signages in common areas';
+  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_PROJECT : string = 'Electrical light fittings in common areas of project';
+  public static SITE_DEV_ELECTRICAL_INFRASTRUCTURE : string = 'Site dev - electrical infrastructure';
+  public static SITE_DEV_PLUMBING_AND_DRAINAGE_SYSTEM : string = 'Site dev - plumbing & drainage system';
+  public static SITE_DEV_BACKFILLING : string = 'Site dev - Backfilling (plot)';
+  public static SITE_DEV_ROAD_WORK : string = 'Site dev - Road work / pavement in side margins';
+  public static KERBING : string = 'Kerbing';
+  public static PROJECT_ENTRANCE_GATE : string = 'Project entrance gate';
+  public static COMPOUND_WALL : string = 'Compound wall';
+  public static CAR_PARK_SYSTEMS : string = 'Car park systems';
+  public static CAR_PARK_MARKING_PARKING_ACCESSORIES : string = 'Car park marking / parking accessories';
+  public static CLEANING_AND_SHIFTING_OF_DEBRIS : string = 'Cleaning & Shifting of debris';
+  public static ELECTRICITY_AND_DIESEL_CHARGES : string = 'Electricity and diesel charges';
+  public static MATERIAL_TESTING : string = 'Material Testing';
+  public static DEPARTMENTAL_LABOUR : string = 'Departmental Labour';
+  public static CLEANING_OF_UNITS_BEFORE_POSSESSION : string = 'Cleaning of units before possession';
+  public static SAMPLE_FLAT : string = 'Sample Flat';
+  public static LABOUR_CAMP : string = 'Labour camp';
+  public static SITE_PREPARATION_TEMPORARY_FENCING : string = 'Site Preparation - temporary fencing';
+  public static SITE_PREPARATION_TEMPORARY_STRUCTURES_STORES : string = 'Site preparation- temporary structures/stores';
+  public static TEMPORARY_ELECTRIFICATION : string = 'Temporary electrification';
+  public static TEMPORARY_PLUMBING_AND_DRAINAGE : string = 'Temporary plumbing & drainage';
+  public static SITE_SALES_OFFICE : string = 'Site/sales office';
+  public static SOCIETY_OFFICE_WITH_FURNITURE : string = 'Society Office with furniture';
+  public static WATER_CHARGES : string = 'Water charges';
+  public static REPAIRS_MAINTENANCE_CHARGES_IN_DEFECT_LIABILITY_PERIOD_OF_5_YEARS : string = 'Repairs / maintenance charges in defect liability period of 5 years';
+  public static PROFFESSIONAL_FEES : string = 'Proffessional fees';
+  public static SALES_AND_MARKETING : string = 'Sales and marketing';
+  public static FINANCE_COST : string = 'Finance cost';
+  public static ADMINISTRATIVE_CHARGES : string = 'Administrative charges';
+  public static LOCAL_BODY_PROJECT_SANCTIONING_CHARGES : string = 'Local body-  Project sanctioning charges';
+  public static SECURITY_CHARGES_DURING_PROJECT_PERIOD : string = 'Security charges during project period';
 
   //Building Cost Heads
   public static RCC_BAND_OR_PATLI : string = 'RCC band / patli';

@@ -515,8 +515,10 @@ class RateAnalysisService {
             let projectCostHeads = JSON.parse(JSON.stringify(projectData.buildingCostHeads));
             let configCostHeads = config.get('configCostHeads');
             let configProjectCostHeads = config.get('configProjectCostHeads');
+            let fixedCostConfigProjectCostHeads = config.get('fixedCostConfigProjectCostHeads');
             this.convertConfigCostHeads(configCostHeads, buildingCostHeads);
             this.convertConfigCostHeads(configProjectCostHeads, projectCostHeads);
+            this.convertConfigCostHeads(fixedCostConfigProjectCostHeads, projectCostHeads);
             buildingCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [buildingCostHeads]);
             projectCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [projectCostHeads]);
             let buildingRates = this.getRates(buildingData, buildingCostHeads);

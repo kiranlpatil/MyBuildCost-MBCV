@@ -43,10 +43,12 @@ export class CommonAmenitiesComponent implements OnInit {
     });
   }
   goToCostHeadView(estimatedItem :EstimateReport) {
-    this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
-    this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_COMMON_AMENITIES,
-      this.projectName, NavigationRoutes.APP_COST_HEAD, estimatedItem.name, estimatedItem.rateAnalysisId, NavigationRoutes.APP_CATEGORY]);
+    if(!estimatedItem.disableCostHeadView) {
+      this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+      this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+      this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_COMMON_AMENITIES,
+        this.projectName, NavigationRoutes.APP_COST_HEAD, estimatedItem.name, estimatedItem.rateAnalysisId, NavigationRoutes.APP_CATEGORY]);
+    }
   }
 
 
