@@ -13,11 +13,11 @@
           <div class="edit-field">
             <input type="number"  [(ngModel)]="quantity.total"
                    id="quantity" size="10" class="form-control clear"
-                   (change)="updateQuantityDetails(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
-            <span class="calculator"  id="getQuantity{{quantityIndex}}"
-                  (click)="getQuantity(quantity, quantityIndex, getLabel().WORKITEM_QUANTITY_TAB)">
+                   (change)="updateFloorwiseQunatityConfirmation(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
+            <span class="calculator" id="getQuantity{{quantityIndex}}"
+                  (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_QUANTITY_TAB, quantityIndex)">
                  <img src="assets/build-info/dashboard/calculator2.png" />
-          </span>
+            </span>
           </div>
         </td>
 
@@ -53,6 +53,7 @@
           <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
           <span class="value">-</span>
         </td>
+
         <td>
           <div data-toggle="modal" title="Delete Quantity Details"
                data-target="#deleteQuantityDetails"
@@ -60,6 +61,7 @@
             <img alt="Delete Quantity Details" src="assets/build-info/dashboard/delete-blue.png" />
           </div>
         </td>
+
         <td class="show-embedded-table">
           <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
 
@@ -67,6 +69,7 @@
                 <bi-get-quantity [quantityItems]="quantityItemsArray"
                                  [quantityDetails]="quantityDetails"
                                  [workItem]="workItem"
+                                 [workItemUnit] = "workItem.unit"
                                  [categoryRateAnalysisId]="categoryRateAnalysisId"
                                  [workItemRateAnalysisId]="workItemRateAnalysisId"
                                  [categoryDetails] ="categoryDetails"
@@ -80,6 +83,7 @@
                 </bi-get-quantity>
               </div>
           </div>
+
           <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().GET_RATE_BY_QUANTITY">
             <bi-get-rate [rate]="rateItemsArray"
                          [categoryDetails] ="categoryDetails"
@@ -90,6 +94,17 @@
                          (closeInnerView)="closeInnerView($event)"
                          [disableRateField]="true">
             </bi-get-rate>
+          </div>
+
+          <div class="modal fade default-modal" id="updateFloorwiseQuantityModal{{quantityIndex}}" role="dialog">
+            <bi-update-confirmation-modal
+              [elementType]="updateConfirmationForDirectQuantity"
+              [quantity]="quantity"
+              [workItemUnit]="workItemData.unit"
+              [detailedQuantityFlag]="flagForFloorwiseQuantity"
+              [quantityIndex]="quantityIndex"
+              (updateElementEvent)="updateDetailedQuanityAfterConfirmation($event)">
+            </bi-update-confirmation-modal>
           </div>
         </td>
       </tr>
