@@ -1306,7 +1306,7 @@ class ProjectService {
   }
 
   updateSteelQuantityOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                                         workItemId: number, steelQuantityDetails: SteelQuantityDetails, user: User,
+                                         workItemId: number, steelQuantityDetails: QuantityDetails, user: User,
                                          callback: (error: any, result: any) => void) {
     let query = [
       {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
@@ -1353,7 +1353,7 @@ class ProjectService {
     });
   }
 
-  updateSteelQuantityDetails(quantity: Quantity, steelQuantityDetails:SteelQuantityDetails) {
+  updateSteelQuantityDetails(quantity: Quantity, steelQuantityDetails:QuantityDetails) {
 
     quantity.isEstimated = true;
     let current_date = new Date();
@@ -1459,7 +1459,6 @@ class ProjectService {
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.isDirectQuantity':true,
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.total':directQuantity,
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.quantityItemDetails':[],
-        'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.steelQuantityDetails':[]
       }};
 
     let arrayFilter = [
@@ -1695,10 +1694,10 @@ class ProjectService {
     if (quantity.quantityItemDetails.length === 0) {
         if(quantityDetail.id === undefined) {
           quantityDetail.id = quantityId;
-          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+          //quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
           quantity.quantityItemDetails.push(quantityDetail);
         } else {
-          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+          //quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
           quantity.quantityItemDetails.push(quantityDetail);
         }
     } else {
@@ -1709,44 +1708,54 @@ class ProjectService {
       if (isDefaultExistsQuantityDetail.length > 0) {
         quantityDetail.id = quantityId;
         quantity.quantityItemDetails = [];
-        quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+      //  quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
         quantity.quantityItemDetails.push(quantityDetail);
 
       } else {
         if (quantityDetail.name !== 'default') {
-          let isItemAlreadyExistSQL = 'SELECT id from ? AS quantityDetails where quantityDetails.id="' + quantityDetail.id + '"';
+          let isItemAlreadyExistSQL = 'SELECT id from ? AS quantityDetails where quantityDetails.id=' + quantityDetail.id + '';
           let isItemAlreadyExists = alasql(isItemAlreadyExistSQL, [quantity.quantityItemDetails]);
 
           if (isItemAlreadyExists.length > 0) {
             for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
               if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
                 quantity.quantityItemDetails[quantityIndex].isDirectQuantity = false;
-                quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
-                quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
-                  [quantityDetail.quantityItems]);
+                if (quantityDetail.steelQuantityItems) {
+                  quantity.quantityItemDetails[quantityIndex].steelQuantityItems = quantityDetail.steelQuantityItems;
+                  quantity.quantityItemDetails[quantityIndex].total = quantityDetail.total;
+                } else {
+                  quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
+                  quantity.quantityItemDetails[quantityIndex].total = quantityDetail.total;
+                }
               }
             }
-
           } else {
-            if(quantityDetail.id === undefined) {
-                quantityDetail.id = quantityId;
-                quantityDetail.isDirectQuantity = false;
-                quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
-                quantity.quantityItemDetails.push(quantityDetail);
-
-            }else {
-              for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
-                  if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
-                    quantity.quantityItemDetails[quantityIndex].name = quantityDetail.name;
-                    quantity.quantityItemDetails[quantityIndex].isDirectQuantity = false;
-                    quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
-                    quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
-                      [quantityDetail.quantityItems]);
-                   }
-               }
-            }
+            quantityDetail.id = quantityId;
+            quantityDetail.isDirectQuantity = false;
+            quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+            quantity.quantityItemDetails.push(quantityDetail);
           }
-        } else {
+          /*else {
+                     if(quantityDetail.id === undefined) {
+                         quantityDetail.id = quantityId;
+                         quantityDetail.isDirectQuantity = false;
+                        // quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+                         quantity.quantityItemDetails.push(quantityDetail);
+
+                     }else {
+                       for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
+                           if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
+                             quantity.quantityItemDetails[quantityIndex].name = quantityDetail.name;
+                             quantity.quantityItemDetails[quantityIndex].isDirectQuantity = false;
+                             quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
+                             quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
+                               [quantityDetail.quantityItems]);
+                            }
+                        }
+                     }
+                   }
+                 }*/
+        }else {
           quantity.quantityItemDetails = [];
           console.log('quantity : '+JSON.stringify(quantity));
           quantityDetail.id = quantityId;

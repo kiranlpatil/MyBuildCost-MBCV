@@ -7,7 +7,7 @@ class QuantityDetails {
   total: number;
   isDirectQuantity : boolean;
   quantityItems ?: Array<QuantityItem>;
-  steelQuantityItems?: Array<SteelQuantityItems>;
+  steelQuantityItems?: SteelQuantityItems;
   constructor() {
     this.id = 0;
     this.total = 0;
