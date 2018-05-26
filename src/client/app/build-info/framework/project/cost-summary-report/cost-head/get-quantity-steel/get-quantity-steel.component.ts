@@ -27,58 +27,63 @@ export class GetSteelQuantityComponent implements OnInit {
   diameterValuesArray:any[] =ValueConstant.STEEL_DIAMETER_VALUES.slice();
   steelQuantityItems: Array<SteelQuantityItem>=new Array<SteelQuantityItem>();
   totalDiamterQuantity:SteelQuantityItems;
+  quantityDetails=new QuantityDetails();
   ngOnInit() {
     if(this.steelQuantityItems.length === 0) {
       this.addQuantityItem();
     }
-    this.totalDiamterQuantity=new SteelQuantityItems(0,0,0,0,0,0,0,0,0);
+    this.totalDiamterQuantity=new SteelQuantityItems();
     }
 
     getDiameterQuantityFun(steelQuantityItemIndex:number,diameter:any,value:string,totalString:string) {
     let steelQuantityItem: any = this.steelQuantityItems[steelQuantityItemIndex];
     if (diameter === parseInt(this.steelQuantityItems[steelQuantityItemIndex].diameter)) {
-      steelQuantityItem[value] =
+      steelQuantityItem.weight =
         (0.000628 * diameter * diameter * this.steelQuantityItems[steelQuantityItemIndex].length *
           this.steelQuantityItems[steelQuantityItemIndex].nos) * 10;
-      return steelQuantityItem[ValueConstant.STEEL_DIAMETER_STRING_VALUES[ValueConstant.STEEL_DIAMETER_VALUES.indexOf(diameter)]];
+      return steelQuantityItem.weight;
   }
     return 0;
   }
 
-  getTotalDiameterQuantityFun(diameter :number,value:string,totalString:string) {
-  let tempArray:any;
-  for(let steelQuantityItemIndex in this.steelQuantityItems) {
+  getTotalDiameterQuantity(diameter :number) {
+    let tempArray:any;
+   for(let steelQuantityItemIndex in this.steelQuantityItems) {
     let steelQuantityItem: any =  this.steelQuantityItems[steelQuantityItemIndex];
-    if (diameter === parseInt(this.steelQuantityItems[steelQuantityItemIndex].diameter) && steelQuantityItem[value] != 0) {
+    if (diameter === parseInt(this.steelQuantityItems[steelQuantityItemIndex].diameter) && this.steelQuantityItems[steelQuantityItemIndex].weight != 0) {
       if(tempArray == undefined) {
         tempArray= {};
       }
-      if(tempArray[totalString]==undefined) {
-        tempArray[totalString]=[];
+      if(tempArray[diameter]==undefined) {
+        tempArray[diameter]=[];
       }
-      tempArray[totalString].push(steelQuantityItem[value]);
+      tempArray[diameter].push(steelQuantityItem.weight);
     }
   }
-  if(tempArray && tempArray[totalString] ) {
-    console.log(tempArray[totalString].reduce((acc:any, val:any) => { return acc + val; }));
-    (<any>this.totalDiamterQuantity)[totalString]=tempArray[totalString].reduce((acc:any, val:any) => { return acc + val; });
-    console.log(this.totalDiamterQuantity);
-    this.totalDiamterQuantity.totalWeight=this.totalDiamterQuantity.totalWeightOf6mm+this.totalDiamterQuantity.totalWeightOf8mm+
-      this.totalDiamterQuantity.totalWeightOf10mm+this.totalDiamterQuantity.totalWeightOf12mm+
-      this.totalDiamterQuantity.totalWeightOf16mm+this.totalDiamterQuantity.totalWeightOf20mm+
-      this.totalDiamterQuantity.totalWeightOf25mm+this.totalDiamterQuantity.totalWeightOf30mm;
-    this.totalDiamterQuantity.steelQuantityItem=this.steelQuantityItems;
-    return tempArray[totalString].reduce((acc:any, val:any) => { return acc + val; });
+  if(tempArray && tempArray[diameter] ) {
+     if((<any>this.totalDiamterQuantity.totalWeightOfDiameter===undefined)) {
+       (<any>this.totalDiamterQuantity.totalWeightOfDiameter)={};
+     }
+    (<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]=tempArray[diameter].reduce((acc:any, val:any) => { return acc + val; });
+    return tempArray[diameter].reduce((acc:any, val:any) => { return acc + val; });
   }
     return 0;
   }
-
-  addQuantityItem() {
-    this.steelQuantityItems.push(new SteelQuantityItem('',0,0,0,0,
-      0,0,0,0,0,0,0));
+  getQuantityTotal():number {
+    let total:number=0;
+    for(let diameter in this.totalDiamterQuantity.totalWeightOfDiameter) {
+      total+=parseInt((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
+    }
+    this.quantityDetails.total=total;
+    return total;
   }
-  deleteQuantityItem(index:number){
-    this.steelQuantityItems.splice(index,1)
+  addQuantityItem() {
+    this.steelQuantityItems.push(new SteelQuantityItem('',0,0,0,0));
+  }
+  deleteQuantityItem(index:number) {
+    this.totalDiamterQuantity.totalWeightOfDiameter[this.steelQuantityItems[index].diameter]=
+      this.totalDiamterQuantity.totalWeightOfDiameter[this.steelQuantityItems[index].diameter]- this.steelQuantityItems[index].weight;
+    this.steelQuantityItems.splice(index,1);
   }
   getButton() {
     return Button;
@@ -95,5 +100,15 @@ export class GetSteelQuantityComponent implements OnInit {
 
   getHeadings() {
     return Headings;
+  }
+
+   setTotalDiameterQuantity(diameter: any, weight: number) {
+    if(this.totalDiamterQuantity.totalWeightOfDiameter == undefined) {
+      this.totalDiamterQuantity.totalWeightOfDiameter= {};
+    }
+    if(this.totalDiamterQuantity.totalWeightOfDiameter[diameter] == undefined) {
+      this.totalDiamterQuantity.totalWeightOfDiameter[diameter]=0;
+    }
+    this.totalDiamterQuantity.totalWeightOfDiameter[diameter]+=weight;
   }
 }

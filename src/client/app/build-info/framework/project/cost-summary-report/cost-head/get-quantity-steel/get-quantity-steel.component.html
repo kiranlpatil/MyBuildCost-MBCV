@@ -53,7 +53,7 @@
         <label disabled>{{ getTableHeadings().WEIGHT_IN_KG }}</label>
       </td>
       <td>
-        <span disabled>{{totalDiamterQuantity.totalWeight}} </span>
+        <span disabled>{{getQuantityTotal()|number:'1.2-2'}}kg </span>
       </td>
       <td>
         <span disabled> </span>
@@ -63,7 +63,10 @@
       </td>
 
       <td *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let k=index">
+<!--
         <span> {{getTotalDiameterQuantityFun(diameter,getValueConstant().STEEL_DIAMETER_STRING_VALUES[k],getValueConstant().TOTAL_STEEL_DIAMETER_STRING_VALUES[k])|number:'1.2-2'}}</span>
+-->
+        <span>{{getTotalDiameterQuantity(diameter)|number:'1.2-2'}}kg</span>
       </td>
     </tr>
     </tbody>
