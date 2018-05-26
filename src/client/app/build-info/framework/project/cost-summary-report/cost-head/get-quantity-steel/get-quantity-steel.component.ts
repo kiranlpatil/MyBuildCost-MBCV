@@ -24,16 +24,39 @@ import {SteelQuantityItems} from "../../../../model/SteelQuantityItems";
 })
 
 export class GetSteelQuantityComponent implements OnInit {
+  @Input() steelQuantityItems: Array<SteelQuantityItem>;
+  @Input() totalDiamterQuantity: SteelQuantityItems;
+  @Input() quantityDetails :  Array<QuantityDetails>;
+  @Input() categoryDetails :  Array<Category>;
+  @Input() categoryRateAnalysisId : number;
+  @Input() workItemRateAnalysisId : number;
+  @Input() workItemsList : Array<WorkItem>;
+  @Input() baseUrl : string;
+  @Input() workItemUnit : string;
+  @Input() keyQuantity : string;
+  @Input() quantityId : number;
+  @Input() innerView: string;
+  @Input() workItem ?: WorkItem;
+
+
+  @Output() closeQuantityView = new EventEmitter();
+  @Output() closeInnerView = new EventEmitter();
+  @Output() categoriesTotalAmount = new EventEmitter<number>();
+
   diameterValuesArray:any[] =ValueConstant.STEEL_DIAMETER_VALUES.slice();
-  steelQuantityItems: Array<SteelQuantityItem>=new Array<SteelQuantityItem>();
-  totalDiamterQuantity:SteelQuantityItems;
-  quantityDetails=new QuantityDetails();
+  workItemId:any;
+
+  total:number;
+  constructor(private costSummaryService : CostSummaryService,  private loaderService: LoaderService,
+              private messageService: MessageService, private _router : Router, private commonService: CommonService){
+
+  }
   ngOnInit() {
     if(this.steelQuantityItems.length === 0) {
       this.addQuantityItem();
     }
-    this.totalDiamterQuantity=new SteelQuantityItems();
-    }
+    this.workItemId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
+  }
 
     getDiameterQuantityFun(steelQuantityItemIndex:number,diameter:any,value:string,totalString:string) {
     let steelQuantityItem: any = this.steelQuantityItems[steelQuantityItemIndex];
@@ -74,7 +97,7 @@ export class GetSteelQuantityComponent implements OnInit {
     for(let diameter in this.totalDiamterQuantity.totalWeightOfDiameter) {
       total+=parseInt((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
     }
-    this.quantityDetails.total=total;
+    this.total=total;
     return total;
   }
   addQuantityItem() {
@@ -84,6 +107,68 @@ export class GetSteelQuantityComponent implements OnInit {
     this.totalDiamterQuantity.totalWeightOfDiameter[this.steelQuantityItems[index].diameter]=
       this.totalDiamterQuantity.totalWeightOfDiameter[this.steelQuantityItems[index].diameter]- this.steelQuantityItems[index].weight;
     this.steelQuantityItems.splice(index,1);
+    this.steelQuantityItems.length===0?this.addQuantityItem():console.log();
+  }
+  updateQuantityItem(totalDiameterQuantity : SteelQuantityItems) {
+    totalDiameterQuantity.steelQuantityItem=this.steelQuantityItems;
+      let quantityObj : QuantityDetails = new QuantityDetails();
+      quantityObj.id = this.quantityId;
+      quantityObj.name = this.keyQuantity;
+      quantityObj.steelQuantityItems = totalDiameterQuantity;
+      quantityObj.total=this.total;
+      this.loaderService.start();
+      let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+      this.costSummaryService.updateQuantityItems(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
+        this.workItemId, quantityObj).subscribe(
+        success => this.onUpdateQuantityItemsSuccess(success),
+        error => this.onUpdateQuantityItemsFailure(error)
+      );
+      }
+  onUpdateQuantityItemsSuccess(success : string) {
+
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;
+    this.messageService.message(message);
+
+    let workItemId = this.workItemId;
+    let workItemData = this.workItemsList.filter(
+      function( workItemData: any){
+        return workItemData.rateAnalysisId === workItemId;
+      });
+
+    this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
+
+    if(workItemData[0].quantity.total !== 0) {
+      workItemData[0].quantity.isEstimated = true;
+      if(workItemData[0].quantity.isEstimated && workItemData[0].rate.isEstimated) {
+        workItemData[0].amount = this.commonService.calculateAmountOfWorkItem(workItemData[0].quantity.total,
+          workItemData[0].rate.total);
+      }
+    } else {
+      workItemData[0].quantity.isEstimated = false;
+      workItemData[0].amount = 0;
+    }
+
+    let categoriesTotal= this.commonService.totalCalculationOfCategories(this.categoryDetails,
+      this.categoryRateAnalysisId, this.workItemsList);
+    this.categoriesTotalAmount.emit(categoriesTotal);
+    this.loaderService.stop();
+    this.closeQuantityTab();
+  }
+  closeQuantityTab() {
+    this.closeQuantityView.emit('');
+  }
+
+  closeInnerViewTab() {
+    this.closeInnerView.emit();
+  }
+  onUpdateQuantityItemsFailure(error: any) {
+    var message = new Message();
+    message.isError = true;
+    message.error_msg = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
+    this.messageService.message(message);
+    this.loaderService.stop();
   }
   getButton() {
     return Button;
@@ -100,15 +185,5 @@ export class GetSteelQuantityComponent implements OnInit {
 
   getHeadings() {
     return Headings;
-  }
-
-   setTotalDiameterQuantity(diameter: any, weight: number) {
-    if(this.totalDiamterQuantity.totalWeightOfDiameter == undefined) {
-      this.totalDiamterQuantity.totalWeightOfDiameter= {};
-    }
-    if(this.totalDiamterQuantity.totalWeightOfDiameter[diameter] == undefined) {
-      this.totalDiamterQuantity.totalWeightOfDiameter[diameter]=0;
-    }
-    this.totalDiamterQuantity.totalWeightOfDiameter[diameter]+=weight;
   }
 }

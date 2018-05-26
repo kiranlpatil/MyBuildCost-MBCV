@@ -63,9 +63,7 @@
       </td>
 
       <td *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let k=index">
-<!--
-        <span> {{getTotalDiameterQuantityFun(diameter,getValueConstant().STEEL_DIAMETER_STRING_VALUES[k],getValueConstant().TOTAL_STEEL_DIAMETER_STRING_VALUES[k])|number:'1.2-2'}}</span>
--->
+
         <span>{{getTotalDiameterQuantity(diameter)|number:'1.2-2'}}kg</span>
       </td>
     </tr>
@@ -73,10 +71,8 @@
   </table>
 
   <button type="button" class="hidden-xs" (click)="addQuantityItem()">+ {{ getButton().ADD }} {{ getButton().ROW }}</button>
-  <button type="submit" class="hidden-xs">{{ getButton().SAVE }}</button>
-  <!--<button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{ getButton().CANCEL_BUTTON }}</button>
-  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{ getButton().CANCEL_BUTTON }}</button>
---></div>
+  <button type="submit" class="hidden-xs" (click)="updateQuantityItem(totalDiamterQuantity)">{{ getButton().SAVE }}</button>
+ </div>
 
 <!--<div class="modal fade" id="deleteQuantity" role="dialog">
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationQuantityItem" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>

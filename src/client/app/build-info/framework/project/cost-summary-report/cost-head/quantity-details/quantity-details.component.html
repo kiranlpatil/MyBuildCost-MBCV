@@ -83,6 +83,22 @@
                 </bi-get-quantity>
               </div>
           </div>
+          <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_STEEL_QUANTITY_TAB">
+            <bi-get-quantity-steel [steelQuantityItems]="quantityItemsArray"
+                                 [quantityDetails]="quantityDetails"
+                                 [workItem]="workItem"
+                                   [categoryDetails] ="categoryDetails"
+                                 [categoryRateAnalysisId]="categoryRateAnalysisId"
+                                 [workItemRateAnalysisId]="workItemRateAnalysisId"
+                                 [keyQuantity]="keyQuantity"
+                                 [quantityId]="quantityId"
+                                 [workItemsList] ="workItemsList"
+                                 [innerView]="getLabel().WORKITEM_STEEL_QUANTITY_TAB"
+                                 (closeInnerView)="closeInnerView($event)"
+                                 (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                 [baseUrl] = "baseUrl">
+                </bi-get-quantity-steel>
+          </div>
 
           <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().GET_RATE_BY_QUANTITY">
             <bi-get-rate [rate]="rateItemsArray"

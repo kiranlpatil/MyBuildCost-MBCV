@@ -112,7 +112,7 @@ export class QuantityDetailsComponent implements OnInit {
             this.quantityId = quantityDetail.id;
           }
         }
-        this.showInnerView = this.getLabel().WORKITEM_QUANTITY_TAB;
+        this.showInnerView = showInnerView;
       } else {
         this.showInnerView = null;
       }

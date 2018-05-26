@@ -67,12 +67,12 @@
                                     <input type="number" [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
                                            (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
                                             id="directQuantity" size="10" class="form-control clear">
-                                    <span class="calculator" *ngIf="!workItem.isSteelWorkItem" id="getQuantity{{categoryIndex}}" [class.disabled]="!workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                    <span class="calculator"  id="getQuantity{{categoryIndex}}" [class.disabled]="!workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>
-                                    <span class="calculator" *ngIf="workItem.isSteelWorkItem" id="getQuantity1{{categoryIndex}}" (click)="updateSteelMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                    <!--<span class="calculator" *ngIf="workItem.isSteelWorkItem" id="getQuantity1{{categoryIndex}}" (click)="updateSteelMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
-                                    </span>
+                                    </span>-->
                                   </div>
                                 </td>
                                 <td>
@@ -195,7 +195,21 @@
 
 
                                   <div *ngIf="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB">
-                                    <bi-get-quantity-steel></bi-get-quantity-steel>
+                                    <bi-get-quantity-steel
+                                      [steelQuantityItems]="steelQuantityItemsArray.steelQuantityItem"
+                                      [totalDiamterQuantity]="steelQuantityItemsArray"
+                                      [workItemsList] ="workItemsList"
+                                      [categoryDetails] ="categoryDetails"
+                                      [workItem]="workItem"
+                                      [workItemUnit] = "workItem.unit"
+                                      (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                      (refreshWorkItemList)="refreshWorkItemList($event)"
+                                      (closeQuantityView) = "closeQuantityView($event)"
+                                      [categoryRateAnalysisId]="category.rateAnalysisId"
+                                      [workItemRateAnalysisId]="workItem.rateAnalysisId"
+                                      [keyQuantity]="keyQuantity"
+                                      [quantityId]="quantityId"
+                                      [baseUrl] = "baseUrl"></bi-get-quantity-steel>
                                   </div>
 
                                 </td>
