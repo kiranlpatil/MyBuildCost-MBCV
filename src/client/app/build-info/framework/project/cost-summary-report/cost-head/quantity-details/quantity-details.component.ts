@@ -45,6 +45,7 @@ export class QuantityDetailsComponent implements OnInit {
   unit:string='';
   previousRateQuantity : number = 0;
   quantityIncrement : number = 1;
+  total : number;
 
   currentFloorIndex : number;
   showInnerView : string;
@@ -144,6 +145,15 @@ export class QuantityDetailsComponent implements OnInit {
     } else if(quantityData.detailedQuantityFlag === Label.WORKITEM_QUANTITY_TAB) {
       this.getQuantity(quantityData.quantity, quantityData.quantityIndex, quantityData.detailedQuantityFlag);
     }
+  }
+
+  setQuantityTotal(quantity : QuantityDetails, total: number) {
+    this.quantity = quantity;
+    this.total = total;
+  }
+
+  updateTotal(obj : any) {
+    this.quantity.total = obj.total;
   }
 
   updateQuantityDetails(quantity :any, flag : string, quantityIndex ?: number) {

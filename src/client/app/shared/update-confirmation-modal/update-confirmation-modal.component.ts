@@ -37,7 +37,7 @@ export class UpdateConfirmationModalComponent {
     };
     this.updateElementEvent.emit(workitemObj);
   }
-  cancle() {
+  cancel() {
     let totalObj = {
       workitem: this.workitem,
       total: this.total
