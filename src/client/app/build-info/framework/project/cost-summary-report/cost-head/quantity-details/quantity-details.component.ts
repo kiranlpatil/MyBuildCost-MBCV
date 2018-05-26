@@ -12,6 +12,7 @@ import {
 import { CostSummaryService } from '../../cost-summary.service';
 import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 import { Rate } from '../../../../model/rate';
+declare var $: any;
 
 @Component({
   moduleId: module.id,
@@ -44,6 +45,7 @@ export class QuantityDetailsComponent implements OnInit {
   unit:string='';
   previousRateQuantity : number = 0;
   quantityIncrement : number = 1;
+  total : number;
 
   currentFloorIndex : number;
   showInnerView : string;
@@ -53,6 +55,8 @@ export class QuantityDetailsComponent implements OnInit {
   keyQuantity: string;
   currentQuantityName: string;
   showQuantityTab : string = null;
+  flagForFloorwiseQuantity : string = null;
+
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
               private loaderService: LoaderService) {
   }
@@ -120,7 +124,39 @@ export class QuantityDetailsComponent implements OnInit {
     }
   }
 
-  updateQuantityDetails(quantity :QuantityDetails, flag : string, quantityIndex ?: number) {
+  updateFloorwiseQunatityConfirmation(quantity :any, flag : string, quantityIndex ?: number) {
+    this.flagForFloorwiseQuantity = flag;
+    if((flag === Label.DIRECT_QUANTITY && quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
+      (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
+      console.log('Update Modal');
+      $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
+    } else {
+      if(flag === Label.DIRECT_QUANTITY) {
+        this.updateQuantityDetails(quantity, flag, quantityIndex);
+      } else if(flag === Label.WORKITEM_QUANTITY_TAB) {
+        this.getQuantity(quantity, quantityIndex, flag);
+      }
+    }
+  }
+
+  updateDetailedQuanityAfterConfirmation(quantityData : any) {
+    if(quantityData.detailedQuantityFlag === Label.DIRECT_QUANTITY) {
+      this.updateQuantityDetails(quantityData.quantity, quantityData.detailedQuantityFlag, quantityData.quantityIndex);
+    } else if(quantityData.detailedQuantityFlag === Label.WORKITEM_QUANTITY_TAB) {
+      this.getQuantity(quantityData.quantity, quantityData.quantityIndex, quantityData.detailedQuantityFlag);
+    }
+  }
+
+  setQuantityTotal(quantity : QuantityDetails, total: number) {
+    this.quantity = quantity;
+    this.total = total;
+  }
+
+  updateTotal(obj : any) {
+    this.quantity.total = obj.total;
+  }
+
+  updateQuantityDetails(quantity :any, flag : string, quantityIndex ?: number) {
     this.quantity = quantity;
     let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
     if(this.validateQuantityName(quantity.name)) {

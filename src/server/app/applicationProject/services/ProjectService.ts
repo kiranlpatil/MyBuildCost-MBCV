@@ -1306,7 +1306,7 @@ class ProjectService {
   }
 
   updateSteelQuantityOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                                         workItemId: number, steelQuantityDetails: SteelQuantityDetails, user: User,
+                                         workItemId: number, steelQuantityDetails: QuantityDetails, user: User,
                                          callback: (error: any, result: any) => void) {
     let query = [
       {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
@@ -1353,7 +1353,7 @@ class ProjectService {
     });
   }
 
-  updateSteelQuantityDetails(quantity: Quantity, steelQuantityDetails:SteelQuantityDetails) {
+  updateSteelQuantityDetails(quantity: Quantity, steelQuantityDetails:QuantityDetails) {
 
     quantity.isEstimated = true;
     let current_date = new Date();
@@ -1459,7 +1459,6 @@ class ProjectService {
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.isDirectQuantity':true,
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.total':directQuantity,
         'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.quantityItemDetails':[],
-        'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.steelQuantityDetails':[]
       }};
 
     let arrayFilter = [
@@ -1695,10 +1694,10 @@ class ProjectService {
     if (quantity.quantityItemDetails.length === 0) {
         if(quantityDetail.id === undefined) {
           quantityDetail.id = quantityId;
-          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+          //quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
           quantity.quantityItemDetails.push(quantityDetail);
         } else {
-          quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+          //quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
           quantity.quantityItemDetails.push(quantityDetail);
         }
     } else {
@@ -1709,44 +1708,54 @@ class ProjectService {
       if (isDefaultExistsQuantityDetail.length > 0) {
         quantityDetail.id = quantityId;
         quantity.quantityItemDetails = [];
-        quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+      //  quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
         quantity.quantityItemDetails.push(quantityDetail);
 
       } else {
         if (quantityDetail.name !== 'default') {
-          let isItemAlreadyExistSQL = 'SELECT id from ? AS quantityDetails where quantityDetails.id="' + quantityDetail.id + '"';
+          let isItemAlreadyExistSQL = 'SELECT id from ? AS quantityDetails where quantityDetails.id=' + quantityDetail.id + '';
           let isItemAlreadyExists = alasql(isItemAlreadyExistSQL, [quantity.quantityItemDetails]);
 
           if (isItemAlreadyExists.length > 0) {
             for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
               if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
                 quantity.quantityItemDetails[quantityIndex].isDirectQuantity = false;
-                quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
-                quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
-                  [quantityDetail.quantityItems]);
+                if (quantityDetail.steelQuantityItems) {
+                  quantity.quantityItemDetails[quantityIndex].steelQuantityItems = quantityDetail.steelQuantityItems;
+                  quantity.quantityItemDetails[quantityIndex].total = quantityDetail.total;
+                } else {
+                  quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
+                  quantity.quantityItemDetails[quantityIndex].total = quantityDetail.total;
+                }
               }
             }
-
           } else {
-            if(quantityDetail.id === undefined) {
-                quantityDetail.id = quantityId;
-                quantityDetail.isDirectQuantity = false;
-                quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
-                quantity.quantityItemDetails.push(quantityDetail);
-
-            }else {
-              for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
-                  if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
-                    quantity.quantityItemDetails[quantityIndex].name = quantityDetail.name;
-                    quantity.quantityItemDetails[quantityIndex].isDirectQuantity = false;
-                    quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
-                    quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
-                      [quantityDetail.quantityItems]);
-                   }
-               }
-            }
+            quantityDetail.id = quantityId;
+            quantityDetail.isDirectQuantity = false;
+            quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+            quantity.quantityItemDetails.push(quantityDetail);
           }
-        } else {
+          /*else {
+                     if(quantityDetail.id === undefined) {
+                         quantityDetail.id = quantityId;
+                         quantityDetail.isDirectQuantity = false;
+                        // quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
+                         quantity.quantityItemDetails.push(quantityDetail);
+
+                     }else {
+                       for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
+                           if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
+                             quantity.quantityItemDetails[quantityIndex].name = quantityDetail.name;
+                             quantity.quantityItemDetails[quantityIndex].isDirectQuantity = false;
+                             quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
+                             quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
+                               [quantityDetail.quantityItems]);
+                            }
+                        }
+                     }
+                   }
+                 }*/
+        }else {
           quantity.quantityItemDetails = [];
           console.log('quantity : '+JSON.stringify(quantity));
           quantityDetail.id = quantityId;
@@ -2414,7 +2423,7 @@ class ProjectService {
 
       switch (costHead.name) {
 
-        case Constants.RCC_BAND_OR_PATLI : {
+        case Constants.RCC : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.SLAB_AREA, buildingDetails.totalSlabArea);
           budgetedCostAmount = eval(calculateBudgtedCost);
@@ -2475,7 +2484,7 @@ class ProjectService {
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
-        case Constants.GYPSUM_OR_POP_PLASTER : {
+        case Constants.GYPSUM_PUNNING : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit);
           budgetedCostAmount = eval(calculateBudgtedCost);
@@ -2512,7 +2521,7 @@ class ProjectService {
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
-        case Constants.DOORS : {
+        case Constants.DOORS_WITH_FRAMES : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
             .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
@@ -2528,7 +2537,7 @@ class ProjectService {
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
-        case Constants.DADO_OR_WALL_TILING : {
+        case Constants.DADO_OR_WALL_TILING : {     // ToDo : waiting for indrajeet's ans
           /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors)
             .replace(Constants.NUM_OF_LIFTS, buildingDetails.numOfLifts);
@@ -2537,7 +2546,7 @@ class ProjectService {
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
-        case Constants.FLOORING : {
+        case Constants.FLOORING : {                 // ToDo : waiting for indrajeet's ans
           /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors)
             .replace(Constants.NUM_OF_LIFTS, buildingDetails.numOfLifts);
@@ -2616,11 +2625,11 @@ class ProjectService {
           break;
         }
         case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, buildingDetails.totalCarpetAreaOfUnit)
-            .replace(Constants.PROJECT_PERIPHERRY, buildingDetails.totalCarpetAreaOfUnit);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
+          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA_OF_PARKING, buildingDetails.carpetAreaOfParking)
+            .replace(Constants.PLOT_PERIPHERY_LENGTH, buildingDetails.totalCarpetAreaOfUnit)
+            .replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors);
+          budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
@@ -2665,7 +2674,7 @@ class ProjectService {
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
-        case Constants.SECURITY_AUTOMATION : {
+        case Constants.SAFETY_AND_SECURITY_AUTOMATION : {    // ToDo : waiting for indrajeet's ans
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + 'Safety and Security automation').toString();
           /*calculateBudgtedCost = budgetCostFormulae.replace(Constants.NUM_OF_ONE_BHK, buildingDetails.numOfOneBHK)
             .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
@@ -2762,7 +2771,7 @@ class ProjectService {
 
         case Constants.SAFETY_MEASURES : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA, totalCarpetAreaOfProject);
+          calculateBudgtedCost = budgetCostFormulae.replace(Constants.TOTAL_CARPET_AREA, totalCarpetAreaOfProject);
           budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
@@ -2782,19 +2791,11 @@ class ProjectService {
           break;
         }
         case Constants.CHILDREN_PLAY_AREA : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.GYM : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.D_G_SET_BACKUP : {
@@ -2869,7 +2870,7 @@ class ProjectService {
           this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
-        case Constants.KERBING : {
+        case Constants.KERBING : {    // ToDo : waiting for indrajeet's ans
           /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
           budgetedCostAmount = eval(calculateBudgtedCost);*/
@@ -2878,11 +2879,7 @@ class ProjectService {
           break;
         }
         case Constants.PROJECT_ENTRANCE_GATE : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.COMPOUND_WALL : {
@@ -2892,7 +2889,7 @@ class ProjectService {
           this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
-        case Constants.CAR_PARK_SYSTEMS : {
+        case Constants.CAR_PARK_SYSTEMS : {   // ToDo : waiting for indrajeet's ans
           /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
           budgetedCostAmount = eval(calculateBudgtedCost);*/
@@ -2900,11 +2897,10 @@ class ProjectService {
           this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
-        case Constants.CAR_PARK_MARKING_PARKING_ACCESSORIES : {
+        case Constants.CAR_PARK_MARKING_PARKING_ACCESSORIES : {      // ToDo : waiting for indrajeet's ans
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA_OF_PARKING, totalCarpetAreaOfParking);
           budgetedCostAmount = eval(calculateBudgtedCost);
-          budgetedCostAmount = 1;
           this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
@@ -2946,11 +2942,7 @@ class ProjectService {
           break;
         }
         case Constants.SAMPLE_FLAT : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.LABOUR_CAMP : {
@@ -2989,19 +2981,11 @@ class ProjectService {
           break;
         }
         case Constants.SITE_SALES_OFFICE : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.SOCIETY_OFFICE_WITH_FURNITURE : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.WATER_CHARGES : {
@@ -3034,14 +3018,6 @@ class ProjectService {
           break;
         }
         case Constants.FINANCE_COST : {
-          /*budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.SWIMMING_POOL_CAPACITY, projectDetails.poolCapacity);
-          budgetedCostAmount = eval(calculateBudgtedCost);*/
-          budgetedCostAmount = 1;
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
-          break;
-        }
-        case Constants.FINANCE_COST : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.TOTAL_CARPET_AREA, totalCarpetAreaOfProject);
           budgetedCostAmount = eval(calculateBudgtedCost);
@@ -3062,7 +3038,7 @@ class ProjectService {
           this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
-        case Constants.SECURITY_CHARGES_DURING_PROJECT_PERIOD : {
+        case Constants.SITE_SECURITY : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.PLOT_AREA, projectDetails.plotArea)
             .replace(Constants.TOTAL_CARPET_AREA, totalCarpetAreaOfProject);
@@ -3078,6 +3054,11 @@ class ProjectService {
 
     }
     return costHeads;
+  }
+
+  setFixedBudgetedCost(budgetedCostAmount : number, costHead : any, projectDetails : Project, costHeads : Array<CostHead>) {
+    budgetedCostAmount = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name);
+    this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
   }
 
   addNewCentralizedRateForBuilding(buildingId: string, rateItem: any) {

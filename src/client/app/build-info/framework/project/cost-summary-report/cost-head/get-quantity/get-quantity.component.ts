@@ -149,6 +149,7 @@ export class GetQuantityComponent implements OnInit {
       quantityObj.id = this.quantityId;
       quantityObj.name = this.keyQuantity;
       quantityObj.quantityItems = quantityItems;
+      quantityObj.total = this.quantityTotal;
       this.loaderService.start();
       let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.costSummaryService.updateQuantityItems(this.baseUrl, costHeadId, this.categoryRateAnalysisId,

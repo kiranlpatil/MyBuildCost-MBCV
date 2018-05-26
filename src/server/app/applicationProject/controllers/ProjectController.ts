@@ -26,9 +26,6 @@ class ProjectController {
       let data =  <Project>req.body;
       let user = req.user;
 
-      let defaultRates = config.get('rate.default');
-      data.rates = defaultRates;
-
       let projectService = new ProjectService();
       projectService.createProject( data, user,(error, result) => {
         if(error) {
@@ -689,7 +686,7 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      let steelQuantityDetails = req.body.item.steelQuantityDetails[0];
+      let steelQuantityDetails = req.body.item;
      // let steelQuantityDetails = quantityDetails.steelQuantityDetails;
 
       let projectService = new ProjectService();
