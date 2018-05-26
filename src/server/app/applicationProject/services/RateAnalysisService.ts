@@ -240,7 +240,7 @@ class RateAnalysisService {
     if(config.has('budgetedCostFormulae.'+ costHeadsRateAnalysis[costHeadIndex].C2)) {
       let costHead = new CostHead();
       costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
-      let configCostHeads = config.get('costHeads');
+      let configCostHeads = config.get('configCostHeads');
       let categories = new Array<Category>();
 
         if (configCostHeads.length > 0) {

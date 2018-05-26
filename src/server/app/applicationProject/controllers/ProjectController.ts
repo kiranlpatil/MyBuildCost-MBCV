@@ -26,9 +26,6 @@ class ProjectController {
       let data =  <Project>req.body;
       let user = req.user;
 
-      let defaultRates = config.get('rate.default');
-      data.rates = defaultRates;
-
       let projectService = new ProjectService();
       projectService.createProject( data, user,(error, result) => {
         if(error) {

@@ -55,7 +55,7 @@ class Constants {
   public static TARGETED_PROJECT_COMPLETION_PERIOD : string = 'targetedProjectCompletionPeriod';
 
   //Common Ammenities Cost Heads
-  public static SAFETY_MEASURES : string = 'Safety measures';
+  public static SAFETY_MEASURES : string = 'Safety Measures';
   public static CLUB_HOUSE : string = 'Club House';
   public static SWIMMING_POOL : string = 'Swimming Pool';
   public static CHILDREN_PLAY_AREA : string = 'Children play area';
@@ -95,23 +95,23 @@ class Constants {
   public static FINANCE_COST : string = 'Finance cost';
   public static ADMINISTRATIVE_CHARGES : string = 'Administrative charges';
   public static LOCAL_BODY_PROJECT_SANCTIONING_CHARGES : string = 'Local body-  Project sanctioning charges';
-  public static SECURITY_CHARGES_DURING_PROJECT_PERIOD : string = 'Security charges during project period';
+  public static SITE_SECURITY : string = 'Site security';
 
   //Building Cost Heads
-  public static RCC_BAND_OR_PATLI : string = 'RCC band / patli';
+  public static RCC : string = 'RCC';
   public static EXTERNAL_PLASTER : string = 'External plaster';
   public static FABRICATION : string = 'Fabrication';
   public static PAINTING : string = 'Painting';
   public static KITCHEN_OTTA : string = 'Kitchen otta';
-  public static SOLING : string = 'Soling';
+  public static SOLING : string = 'Soling (plinth)';
   public static MASONRY : string = 'Masonry';
   public static INTERNAL_PLASTER : string = 'Internal Plaster';
-  public static GYPSUM_OR_POP_PLASTER : string = 'Gypsum / POP plaster (punning)';
+  public static GYPSUM_PUNNING : string = 'Gypsum punning';
   public static WATER_PROOFING : string = 'Water proofing';
   public static DEWATERING : string = 'Dewatering';
   public static GARBAGE_CHUTE : string = 'Garbage chute';
   public static LIFT : string = 'Lift';
-  public static DOORS : string = 'Door Frames';
+  public static DOORS_WITH_FRAMES : string = 'Doors with frames';
   public static DADO_OR_WALL_TILING : string = 'Dado / wall tiling';
   public static FLOORING : string = 'Flooring';
   public static EXCAVATION : string = 'Excavation';
@@ -128,7 +128,7 @@ class Constants {
   public static PIPED_GAS_SYSTEM : string = 'Piped gas system';
   public static SKY_LOUNGE_ON_TOP_TERRACE : string = 'Sky lounge on top terrace';
   public static FIRE_FIGHTING_SYSTEM : string = 'Fire fighting system';
-  public static SECURITY_AUTOMATION : string = 'Safety and Security automation';
+  public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation';
   public static SHOWER_ENCLOSURES : string = 'Shower Enclosures';
   public static FALSE_CEILING : string = 'False ceiling';
   public static SPECIAL_ELEVATIONAL_FEATURES_IN_FRP_FERRO_GRC : string = 'Special elevational features in FRP/Ferro/GRC';
