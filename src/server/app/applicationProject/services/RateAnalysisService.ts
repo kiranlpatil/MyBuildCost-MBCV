@@ -535,45 +535,50 @@ class RateAnalysisService {
 
     for (let configCostHead of configCostHeads) {
 
-      let costHead: CostHead = new CostHead();
-      costHead.name = configCostHead.name;
-      costHead.priorityId = configCostHead.priorityId;
-      costHead.rateAnalysisId = configCostHead.rateAnalysisId;
-      let categoriesList = new Array<Category>();
+      let costHeadExistSQL = 'SELECT * FROM ? AS costHeads WHERE costHeads.name= ?';
+      let costHeadExistArray = alasql(costHeadExistSQL,[costHeadsData,configCostHead.name]);
 
-      for (let configCategory of configCostHead.categories) {
+      if(costHeadExistArray.length === 0 && configCostHead.rateAnalysisId) {
+        let costHead: CostHead = new CostHead();
+        costHead.name = configCostHead.name;
+        costHead.priorityId = configCostHead.priorityId;
+        costHead.rateAnalysisId = configCostHead.rateAnalysisId;
+        let categoriesList = new Array<Category>();
 
-        let category: Category = new Category(configCategory.name, configCategory.rateAnalysisId);
-        let workItemsList: Array<WorkItem> = new Array<WorkItem>();
+        for (let configCategory of configCostHead.categories) {
 
-        for (let configWorkItem of configCategory.workItems) {
+          let category: Category = new Category(configCategory.name, configCategory.rateAnalysisId);
+          let workItemsList: Array<WorkItem> = new Array<WorkItem>();
 
-          let workItem: WorkItem = new WorkItem(configWorkItem.name, configWorkItem.rateAnalysisId);
-          workItem.isDirectRate = true;
-          workItem.unit = configWorkItem.measurementUnit;
-          workItem.isMeasurementSheet = configWorkItem.isMeasurementSheet;
-          workItem.isRateAnalysis = configWorkItem.isRateAnalysis;
-          workItem.rateAnalysisPerUnit = configWorkItem.rateAnalysisPerUnit;
-          workItem.isItemBreakdownRequired = configWorkItem.isItemBreakdownRequired;
-          workItem.length = configWorkItem.length;
-          workItem.breadthOrWidth = configWorkItem.breadthOrWidth;
-          workItem.height = configWorkItem.height;
+          for (let configWorkItem of configCategory.workItems) {
 
-          if (configWorkItem.directRate !== null) {
-            workItem.rate.total = configWorkItem.directRate;
-          } else {
-            workItem.rate.total = 0;
+            let workItem: WorkItem = new WorkItem(configWorkItem.name, configWorkItem.rateAnalysisId);
+            workItem.isDirectRate = true;
+            workItem.unit = configWorkItem.measurementUnit;
+            workItem.isMeasurementSheet = configWorkItem.isMeasurementSheet;
+            workItem.isRateAnalysis = configWorkItem.isRateAnalysis;
+            workItem.rateAnalysisPerUnit = configWorkItem.rateAnalysisPerUnit;
+            workItem.isItemBreakdownRequired = configWorkItem.isItemBreakdownRequired;
+            workItem.length = configWorkItem.length;
+            workItem.breadthOrWidth = configWorkItem.breadthOrWidth;
+            workItem.height = configWorkItem.height;
+
+            if (configWorkItem.directRate !== null) {
+              workItem.rate.total = configWorkItem.directRate;
+            } else {
+              workItem.rate.total = 0;
+            }
+            workItem.rate.isEstimated = true;
+            workItemsList.push(workItem);
           }
-          workItem.rate.isEstimated = true;
-          workItemsList.push(workItem);
-        }
-        category.workItems = workItemsList;
-        categoriesList.push(category);
+          category.workItems = workItemsList;
+          categoriesList.push(category);
       }
 
-      costHead.categories = categoriesList;
-      costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
-      costHeadsData.push(costHead);
+        costHead.categories = categoriesList;
+        costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
+        costHeadsData.push(costHead);
+      }
     }
     return costHeadsData;
   }
