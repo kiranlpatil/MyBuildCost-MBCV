@@ -134,6 +134,10 @@ class Constants {
   public static SPECIAL_ELEVATIONAL_FEATURES_IN_FRP_FERRO_GRC : string = 'Special elevational features in FRP/Ferro/GRC';
   public static BOARDS_AND_SIGNAGES_INSIDE_BUILDING : string = 'Boards & Signages inside building';
 
+
+  //Building Category
+  public static STEEL : string = 'Steel';
+
   // Value Constant
   public static NUMBER_OF_FRACTION_DIGIT = 2;
   public static CLONE_ITEMS:string[]=['Cost Head','Category','Work Item','Quantity','Rate Analysis'];
