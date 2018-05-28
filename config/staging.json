@@ -156,7 +156,7 @@
     "Fabrication" : "carpetArea * 1.35 * 40",   //a
     "Painting" : "carpetArea * 1.35 * 55",    // a
     "Kitchen otta" : "(numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) * 15 * 1500",    //a
-    "Doors with frames" : "10000 * (3 * numOfOneBHK + 4 * numOfTwoBHK + 6 * numOfThreeBHK + 8 * numOfFourBHK + 10 * numOfFiveBHK) + 1500 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)", //a door frames
+    "Doors with frames" : "10000 * (3 * numOfOneBHK + 4 * numOfTwoBHK + 6 * numOfThreeBHK + 8 * numOfFourBHK + 10 * numOfFiveBHK) + 15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)", //a door frames
     "External plumbing / drainage line" : "5000 * (numOfOneBHK * 1 + numOfTwoBHK * 2 + numOfThreeBHK * 3 + numOfFourBHK * 4 + numOfFiveBHK * 5) + 6000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",   //plumbing
     "Lift" : "(150000 * numOfFloors * numOfLifts)",
     "Electrical light fittings in common areas of building" : "((carpetAreaOfParking / 400) * 500 + (plotPeripheryLength / 40) * 5000 + ( numOfFloors * 3) * 700)",
