@@ -2938,7 +2938,7 @@ class ProjectService {
         case Constants.SITE_SECURITY : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.PLOT_AREA, projectDetails.plotArea)
-            .replace(Constants.TOTAL_CARPET_AREA, totalCarpetAreaOfProject);
+            .replace(Constants.TARGETED_PROJECT_COMPLETION_PERIOD, targetedProjectCompletionPeriod);
           budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
