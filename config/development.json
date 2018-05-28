@@ -232,7 +232,7 @@
     "Finance cost" : "totalCarpetAreaOfUnit * 1.35 * 100",
     "Administrative charges" : "totalCarpetAreaOfUnit * 1.35 * 40",
     "Local body-  Project sanctioning charges" : "totalCarpetAreaOfUnit * 1.35 * 150",
-    "Site security" : "plotArea / 10000 * 10500 * totalCarpetAreaOfUnit"
+    "Site security" : "plotArea / 10000 * 10500 * targetedProjectCompletionPeriod"
   },
 
   "rateAnalysisAPI" : {
