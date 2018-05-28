@@ -69,7 +69,7 @@ export class GetSteelQuantityComponent implements OnInit {
     return 0;
   }
 
-  getTotalDiameterQuantity(diameter :number) {
+  getTotalDiameterQuantity(diameter :number,k:number) {
     let tempArray:any;
    for(let steelQuantityItemIndex in this.steelQuantityItems) {
     let steelQuantityItem: any =  this.steelQuantityItems[steelQuantityItemIndex];
@@ -87,7 +87,8 @@ export class GetSteelQuantityComponent implements OnInit {
      if((<any>this.totalDiamterQuantity.totalWeightOfDiameter===undefined)) {
        (<any>this.totalDiamterQuantity.totalWeightOfDiameter)={};
      }
-    (<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]=tempArray[diameter].reduce((acc:any, val:any) => { return acc + val; });
+    (<any>this.totalDiamterQuantity.totalWeightOfDiameter)[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[k]]=
+      tempArray[diameter].reduce((acc:any, val:any) => { return acc + val; });
     return tempArray[diameter].reduce((acc:any, val:any) => { return acc + val; });
   }
     return 0;
@@ -95,7 +96,7 @@ export class GetSteelQuantityComponent implements OnInit {
   getQuantityTotal():number {
     let total:number=0;
     for(let diameter in this.totalDiamterQuantity.totalWeightOfDiameter) {
-      total+=parseInt((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
+      total+=parseFloat((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
     }
     this.total=total;
     return total;
@@ -111,7 +112,8 @@ export class GetSteelQuantityComponent implements OnInit {
   }
   updateQuantityItem(totalDiameterQuantity : SteelQuantityItems) {
     totalDiameterQuantity.steelQuantityItem=this.steelQuantityItems;
-      let quantityObj : QuantityDetails = new QuantityDetails();
+    totalDiameterQuantity.unit=this.workItem.unit;
+    let quantityObj : QuantityDetails = new QuantityDetails();
       quantityObj.id = this.quantityId;
       quantityObj.name = this.keyQuantity;
       quantityObj.steelQuantityItems = totalDiameterQuantity;

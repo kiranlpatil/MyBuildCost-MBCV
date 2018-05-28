@@ -632,7 +632,7 @@ export class ValueConstant {
 //array of actions for copy building
   public static CLONE_ITEMS: string[] = ['Cost Head', 'Category', 'Work Item', 'Quantity', 'Rate Analysis'];
   public static STEEL_DIAMETER_VALUES: Number[] = [6,8,10,12,16,20,25,30];
-  public static STEEL_DIAMETER_STRING_VALUES: string[] = ['six','eight','ten','twelve','sixteen','twenty','twentyFive','thirty'];
+  public static STEEL_DIAMETER_STRING_VALUES: string[] = ['6mm Steel','8mm Steel','10mm Steel','12mm Steel','16mm Steel','20mm Steel','25mm Steel','30mm Steel'];
   public static TOTAL_STEEL_DIAMETER_STRING_VALUES: string[] = ['totalWeightOf6mm','totalWeightOf8mm','totalWeightOf10mm','totalWeightOf12mm','totalWeightOf16mm','totalWeightOf20mm','totalWeightOf25mm','totalWeightOf30mm'];
   public static NUMBER_OF_FRACTION_DIGIT = 2;
   public static FILE_SIZE = 5000000;

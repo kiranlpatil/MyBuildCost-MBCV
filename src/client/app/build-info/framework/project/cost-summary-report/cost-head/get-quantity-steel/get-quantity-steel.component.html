@@ -1,4 +1,6 @@
 <div class="get-quantity-section">
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeQuantityTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
   <table class="table">
     <thead>
     <th>{{ getTableHeadings().ITEM }}</th>
@@ -64,7 +66,7 @@
 
       <td *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let k=index">
 
-        <span>{{getTotalDiameterQuantity(diameter)|number:'1.2-2'}}kg</span>
+        <span>{{getTotalDiameterQuantity(diameter,k)|number:'1.2-2'}}kg</span>
       </td>
     </tr>
     </tbody>
