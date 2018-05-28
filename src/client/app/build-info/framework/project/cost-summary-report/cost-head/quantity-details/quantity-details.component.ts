@@ -48,7 +48,7 @@ export class QuantityDetailsComponent implements OnInit {
   previousRateQuantity : number = 0;
   quantityIncrement : number = 1;
   total : number;
-steelquantityItem:any;
+  steelquantityItem:any;
   currentFloorIndex : number;
   showInnerView : string;
   quantity : QuantityDetails;
@@ -95,14 +95,14 @@ steelquantityItem:any;
     if(quantityDetail.name !== undefined) {
       if (floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
         this.setFloorIndex(floorIndex);
-        if (showInnerView !=this.getLabel().WORKITEM_STEEL_QUANTITY_TAB && quantityDetail.quantityItems.length !== 0 ) {
+        if (showInnerView !== this.getLabel().WORKITEM_STEEL_QUANTITY_TAB && quantityDetail.quantityItems && quantityDetail.quantityItems.length !== 0 ) {
           this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
           this.keyQuantity = quantityDetail.name;
           this.quantityId = quantityDetail.id;
-        }else if(showInnerView==this.getLabel().WORKITEM_STEEL_QUANTITY_TAB){
-          if( quantityDetail.steelQuantityItems ){
+        }else if(showInnerView == this.getLabel().WORKITEM_STEEL_QUANTITY_TAB) {
+          if( quantityDetail.steelQuantityItems ) {
             this.steelquantityItem=quantityDetail.steelQuantityItems;
-          }else{
+          }else {
             this.steelquantityItem=new SteelQuantityItems();
           }
           this.keyQuantity = quantityDetail.name;
@@ -136,7 +136,10 @@ steelquantityItem:any;
 
   updateFloorwiseQunatityConfirmation(quantity :any, flag : string, quantityIndex ?: number) {
     this.flagForFloorwiseQuantity = flag;
-    if((flag === Label.DIRECT_QUANTITY && quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
+    if(quantity.quantityItems===undefined) {
+      quantity.quantityItems=[];
+    }
+    if((flag === Label.DIRECT_QUANTITY &&  quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
       (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
       console.log('Update Modal');
       $('#updateFloorwiseQuantityModal'+quantityIndex).modal();

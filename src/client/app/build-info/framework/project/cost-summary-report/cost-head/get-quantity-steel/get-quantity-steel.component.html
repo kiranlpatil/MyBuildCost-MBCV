@@ -72,7 +72,11 @@
 
   <button type="button" class="hidden-xs" (click)="addQuantityItem()">+ {{ getButton().ADD }} {{ getButton().ROW }}</button>
   <button type="submit" class="hidden-xs" (click)="updateQuantityItem(totalDiamterQuantity)">{{ getButton().SAVE }}</button>
- </div>
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+
+
+</div>
 
 <!--<div class="modal fade" id="deleteQuantity" role="dialog">
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationQuantityItem" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>

@@ -160,7 +160,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
   }
 
-  updateMeasurementSheet(categoryId: number, workItem : WorkItem, categoryIndex : number, workItemIndex : number) {
+  updateMeasurementSheet(categoryId: number, workItem : WorkItem, categoryIndex : number, workItemIndex : number,flag:string) {
     if(workItem.quantity.isDirectQuantity ||
       (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
       $('#updateMeasurementQuantity'+workItemIndex).modal();
@@ -176,7 +176,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
           workItem.quantity.quantityItemDetails[0].name !== Label.DEFAULT_VIEW)) {
         this.getDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
       } else {
-          this.getDefaultQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+          this.getDefaultQuantity(categoryId, workItem, categoryIndex, workItemIndex,);
       }
   }
 
@@ -239,13 +239,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
       this.showQuantityDetails = false;
     }
   }
-  updateSteelMeasurementSheet(categoryId: number, workItem : WorkItem, categoryIndex : number, workItemIndex : number) {
-    if( this.showWorkItemTab !== Label.WORKITEM_QUANTITY_TAB ) {
-      this.showWorkItemTab=Label.WORKITEM_STEEL_QUANTITY_TAB;
-      }else {
-      this.showWorkItemTab=null;
-    }
-    }
+
 
   //Get Default Quantity (If floor wise or building wise quantity is not added)
   getDefaultQuantity(categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
@@ -287,7 +281,7 @@ debugger
             quantityDetail.name = this.getLabel().DEFAULT_VIEW;
             if(this.workItem.isSteelWorkItem){
               this.steelQuantityItemsArray=new SteelQuantityItems();
-            }else{
+            }else {
               this.quantityItemsArray = [];
             }
            // this.workItem.quantity.quantityItemDetails.push(quantityDetail);

@@ -18,7 +18,7 @@ export class WorkItem {
   rateAnalysisUnit : string;
   isItemBreakdownRequired : boolean=false;
   length : boolean;
-  isSteelWorkItem:boolean=false;
+  isSteelWorkItem:boolean;
   breadthOrWidth : boolean;
   height : boolean;
   attachmentDetails: AttachmentDetailsModel[];
