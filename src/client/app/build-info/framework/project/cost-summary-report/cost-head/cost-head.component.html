@@ -70,9 +70,11 @@
                                     <span class="calculator"  id="getQuantity{{categoryIndex}}" [class.disabled]="!workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>
-                                    <!--<span class="calculator" *ngIf="workItem.isSteelWorkItem" id="getQuantity1{{categoryIndex}}" (click)="updateSteelMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                    <!--<span class="calculator" *ngIf="workItem.isSteelWorkItem" id="getQuantity1{{categoryIndex}}" [class.disabled]="!workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex,getLabel().WORKITEM_STEEL_QUANTITY_TAB)">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>-->
+
+
                                   </div>
                                 </td>
                                 <td>
@@ -124,7 +126,6 @@
                                   <div *ngIf=" workItem.isDirectRate">
                                     -
                                   </div>
-                                  {{showWorkItemTab}}
                                 </td>
 
                                 <td>
