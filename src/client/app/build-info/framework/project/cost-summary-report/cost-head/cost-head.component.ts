@@ -302,7 +302,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
             this.keyQuantity = defaultQuantityDetail[0].name;
             this.quantityId = defaultQuantityDetail[0].id;
         } else if(quantityDetails.length !==0 && quantityDetails[0].name === Label.DEFAULT_VIEW && this.workItem.isSteelWorkItem){
-debugger
+
           this.workItem.quantity.quantityItemDetails = [];
           let defaultQuantityDetail = quantityDetails.filter(
             function( defaultQuantityDetail: any){
@@ -312,7 +312,6 @@ debugger
           this.steelQuantityItemsArray = lodsh.cloneDeep(defaultQuantityDetail[0].steelQuantityItems);
           this.keyQuantity = defaultQuantityDetail[0].name;
           this.quantityId = defaultQuantityDetail[0].id;
-          console.log('jhdjh');
         } else {
             let quantityDetail: QuantityDetails = new QuantityDetails();
             quantityDetail.quantityItems = [];
