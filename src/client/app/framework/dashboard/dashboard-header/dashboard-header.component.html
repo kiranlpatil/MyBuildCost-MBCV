@@ -32,6 +32,15 @@
 
       <div class="collapse navbar-collapse" [class.open-nav]="isClassVisible">
         <bi-project-header [isClassVisible]="isClassVisible" (toggleClassView)="toggleDashboardMenu($event)"></bi-project-header>
+        <div class="divider"></div>
+        <ul class="visible-xs navbar-links">
+          <li role="menuitem" [routerLinkActive]="['active']">
+            <a class="dropdown-item"  [routerLink]="['/dashboard']" (click)="navigateTo('/dashboard');">My Projects</a>
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item">Learn</a>
+          </li>
+        </ul>
       </div>
 
       <ul class="nav navbar-nav navbar-right">

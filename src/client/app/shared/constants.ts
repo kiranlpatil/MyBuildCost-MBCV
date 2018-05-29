@@ -211,6 +211,7 @@ export class Messages {
   public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'Selected file already exists';
   public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
+  public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor/Parking Details';
 }
 
 export class NavigationRoutes {

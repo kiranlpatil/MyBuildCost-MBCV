@@ -76,13 +76,13 @@
       width: 100%;
       li {
         display: block;
-        padding: 15px 15px 15px 0;
+        padding: 10px 15px 10px 0;
         a {
           border-left: 5px solid $mobile-menu-background-color;
           color: $link-color;
           font-size: 16px;
           font-weight: normal;
-          padding: 2px 30px;
+          padding: 2px 15px;
         }
         .active {
           border-bottom: none!important;
@@ -90,6 +90,10 @@
           font-weight: bold;
         }
       }
+    }
+
+    .col-sm-9 {
+      padding-right: 0 !important;
     }
     .add-building-link {
       display: none;

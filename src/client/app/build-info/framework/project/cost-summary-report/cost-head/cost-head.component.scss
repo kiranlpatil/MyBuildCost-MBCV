@@ -105,8 +105,9 @@
       display: inline-block;
       font-size: 16px;
       opacity: 0;
-      padding: 10px 3px 5px;
+      padding: 0 3px 5px 6px;
       position: relative;
+      top: 4px;
       transition: opacity 0.5s ease-in-out;
       width: auto;
 
@@ -165,7 +166,7 @@
       cursor: pointer;
       padding: 5px 2px;
       position: relative;
-      top: -4px;
+      top: 0;
       transition: opacity 0.5s ease-in-out;
       width: 23px;
       display: inline-block;
@@ -194,7 +195,7 @@
       padding: 0;
       position: relative;
       right: inherit;
-      top: -5px;
+      top: -1px;
     }
 
     .btn-get-amount {
@@ -245,6 +246,11 @@
     &:nth-child(6) {
       width: 110px;
       text-align: center;
+    }
+
+    &:nth-child(7) {
+      min-width: 100px;
+      text-align: right;
     }
 
     &:last-child {
@@ -581,7 +587,7 @@
         float: right;
         margin: 0;
         opacity: 1;
-        padding: 22px 6px 0;
+        padding: 17px 6px 0;
         width: 34px;
       }
 

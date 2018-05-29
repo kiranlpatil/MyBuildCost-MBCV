@@ -657,6 +657,10 @@ export class CostHeadComponent implements OnInit, OnChanges {
     return Label;
   }
 
+  getMessages() {
+    return Messages;
+  }
+
   setCategoriesTotal( categoriesTotal : number) {
     this.categoryDetailsTotalAmount = categoriesTotal;
     this.refreshCategoryList();

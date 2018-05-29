@@ -30,14 +30,14 @@
             <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
               <div class="form-group">
                 <control-messages [control]="userForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
-                <label>Enter Work Email</label>
+                <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
                 <input type="email" formControlName="email" id="email" maxlength="40" autocomplete="off" class="form-control"
                        placeholder="johndoe@example.com" />
               </div>
 
               <div class="form-group">
                 <control-messages [control]="userForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
-                <label>Enter Password</label>
+                <label>{{getLabel().PASSWORD}}</label>
                 <a class="forgot-password-link" (click)="onForgotPassword()">Forgot Password?</a>
                 <input type="password" formControlName="password" id="password" autocomplete="off" class="form-control"
                        placeholder="Minimum 6 characters"/>

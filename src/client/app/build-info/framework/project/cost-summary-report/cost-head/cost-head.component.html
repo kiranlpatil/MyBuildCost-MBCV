@@ -63,11 +63,11 @@
                                 </td>-->
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
-                                  <div class="edit-field" [class.active]="(rateView==='quantity' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
+                                  <div class="edit-field" [class.active-quantity]="(showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
                                     <input type="number" [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
                                            (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
                                             id="directQuantity" size="10" class="form-control clear">
-                                    <span class="calculator" id="getQuantity{{categoryIndex}}" [class.disabled]="!workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                    <span class="calculator" id="getQuantity{{categoryIndex}}" *ngIf="workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>
 
@@ -80,7 +80,7 @@
                                 </td>
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().RATE_PER_UNIT}}</span>
-                                  <div class="edit-field">
+                                  <div class="edit-field" [class.active-rate]="(showWorkItemTab == getLabel().WORKITEM_RATE_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
                                     <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
                                     <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
                                       {{workItem.rate.total|number : '1.2-2'}}
@@ -106,7 +106,7 @@
                                        (click)="getRateByQuantity( getLabel().GET_RATE_BY_QUANTITY, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">
                                     {{ (workItem.amount)|number : '1.0-0'}}
                                   </div>
-                                  <div  *ngIf="workItem.isDirectRate">
+                                  <div class="value" *ngIf="workItem.isDirectRate">
                                     {{ (workItem.amount)|number : '1.0-0'}}
                                   </div>
                                 </td>
@@ -119,7 +119,7 @@
                                           type="button" (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}
                                    </button>
                                   </div>
-                                  <div *ngIf=" workItem.isDirectRate">
+                                  <div class="value" *ngIf=" workItem.isDirectRate">
                                     -
                                   </div>
                                 </td>
@@ -141,9 +141,9 @@
                                                        [workItem]="workItem"></bi-attachment>
                                       </div>
                                     </div>
-                                    <button class="add-more-details" [disabled]="!workItem.isItemBreakdownRequired"
+                                    <button class="add-more-details" *ngIf="workItem.isItemBreakdownRequired"
                                             (click)="showAddFloorwiseQuantityModal(workItem, workItemIndex, category.rateAnalysisId, categoryIndex)"
-                                            title="Add More Details">
+                                            title="{{getMessages().ADD_MORE_DETAILS_TITLE}}">
                                       <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
                                     <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head" title="Delete Work Item"

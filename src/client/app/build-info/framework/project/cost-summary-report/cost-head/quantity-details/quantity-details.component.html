@@ -4,13 +4,13 @@
       <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
         <td>
           <span class="mobile-headings">{{getTableHeadings().ITEM}}</span>
-          <input placeholder="Flat/Floor/Parking details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (focus)="changeQuantityName(quantity.name)"
+          <input placeholder="Flat/Floor/Parking Details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (focus)="changeQuantityName(quantity.name)"
                  (change)="updateQuantityDetails(quantity, getLabel().NAME)">
         </td>
 
         <td>
           <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
-          <div class="edit-field">
+          <div class="edit-field" [class.active-quantity]="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
             <input type="number"  [(ngModel)]="quantity.total"
                    id="quantity" size="10" class="form-control clear" (focus)="setQuantityTotal(quantity, quantity.total)"
                    (change)="updateFloorwiseQunatityConfirmation(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
