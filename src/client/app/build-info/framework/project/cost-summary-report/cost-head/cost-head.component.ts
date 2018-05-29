@@ -316,7 +316,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
             let quantityDetail: QuantityDetails = new QuantityDetails();
             quantityDetail.quantityItems = [];
             quantityDetail.name = this.getLabel().DEFAULT_VIEW;
-            if(this.workItem.isSteelWorkItem){
+            if(this.workItem.isSteelWorkItem) {
               this.steelQuantityItemsArray=new SteelQuantityItems();
             }else {
               this.quantityItemsArray = [];

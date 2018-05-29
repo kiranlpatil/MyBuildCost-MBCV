@@ -206,6 +206,8 @@
 
 
                                   <div *ngIf="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB">
+                                    <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+
                                     <bi-get-quantity-steel
                                       [steelQuantityItems]="steelQuantityItemsArray.steelQuantityItem"
                                       [totalDiamterQuantity]="steelQuantityItemsArray"
@@ -221,6 +223,7 @@
                                       [keyQuantity]="keyQuantity"
                                       [quantityId]="quantityId"
                                       [baseUrl] = "baseUrl"></bi-get-quantity-steel>
+                                  </div>
                                   </div>
 
                                 </td>

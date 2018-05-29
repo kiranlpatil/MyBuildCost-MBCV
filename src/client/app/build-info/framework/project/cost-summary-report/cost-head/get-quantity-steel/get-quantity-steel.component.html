@@ -1,7 +1,7 @@
 <div class="get-quantity-section">
   <button *ngIf="innerView !== getLabel().WORKITEM_STEEL_QUANTITY_TAB" class="close" (click)="closeQuantityTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
   <button *ngIf="innerView === getLabel().WORKITEM_STEEL_QUANTITY_TAB" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
-  <span>Calculated weight for each displayed in below columns</span>
+  <span>Calculated weight for each bar displayed in below columns</span>
   <table class="table">
     <thead>
     <th>{{ getTableHeadings().ITEM }}</th>

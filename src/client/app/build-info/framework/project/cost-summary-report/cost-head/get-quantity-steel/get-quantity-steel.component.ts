@@ -45,6 +45,7 @@ export class GetSteelQuantityComponent implements OnInit {
 
   diameterValuesArray:any[] =ValueConstant.STEEL_DIAMETER_VALUES.slice();
   workItemId:any;
+  quantityItemSteel: Array<SteelQuantityItem>;
 
   total:number;
   constructor(private costSummaryService : CostSummaryService,  private loaderService: LoaderService,
@@ -95,7 +96,9 @@ export class GetSteelQuantityComponent implements OnInit {
   }
   getQuantityTotal():number {
     let total:number=0;
+
     for(let diameter in this.totalDiamterQuantity.totalWeightOfDiameter) {
+
       total+=parseFloat((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
     }
     this.total=total;
@@ -105,10 +108,10 @@ export class GetSteelQuantityComponent implements OnInit {
     this.steelQuantityItems.push(new SteelQuantityItem('',0,0,0,0));
   }
   deleteQuantityItem(index:number) {
-    this.totalDiamterQuantity.totalWeightOfDiameter[this.steelQuantityItems[index].diameter]=
-      this.totalDiamterQuantity.totalWeightOfDiameter[this.steelQuantityItems[index].diameter]- this.steelQuantityItems[index].weight;
+    this.totalDiamterQuantity.totalWeightOfDiameter[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]]=
+      this.totalDiamterQuantity.totalWeightOfDiameter[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]]- this.steelQuantityItems[index].weight;
     this.steelQuantityItems.splice(index,1);
-    this.steelQuantityItems.length===0?this.addQuantityItem():console.log();
+    //this.steelQuantityItems.length===0?this.addQuantityItem():console.log();
   }
   updateQuantityItem(totalDiameterQuantity : SteelQuantityItems) {
     totalDiameterQuantity.steelQuantityItem=this.steelQuantityItems;
@@ -138,9 +141,7 @@ export class GetSteelQuantityComponent implements OnInit {
       function( workItemData: any){
         return workItemData.rateAnalysisId === workItemId;
       });
-
-   // this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
-
+    // this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
     if(workItemData[0].quantity.total !== 0) {
       workItemData[0].quantity.isEstimated = true;
       if(workItemData[0].quantity.isEstimated && workItemData[0].rate.isEstimated) {
