@@ -800,8 +800,11 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      console.log('animated');
       this.animateView = true;
     },150);
+
+    setTimeout(() => {
+      $('.animate-item').css('transform','initial');
+    },2000);
   }
 }
