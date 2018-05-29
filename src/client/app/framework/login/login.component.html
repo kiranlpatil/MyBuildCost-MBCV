@@ -2,12 +2,12 @@
   <div class="row">
     <div class="hidden-xs col-sm-6">
       <div class="page-background">
-        <div class="inner-content content-background clearfix" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+        <div class="inner-content content-background clearfix fadein-element" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
           <img class="logo-image" src={{MY_LOGO_PATH}} alt="Facebook Link">
           <ul>
-            <li>Estimate Project Cost</li>
-            <li>Budget it</li>
-            <li>Control it</li>
+            <li class="fadein-sub-element">Estimate Project Cost</li>
+            <li class="fadein-sub-element">Budget it</li>
+            <li class="fadein-sub-element">Control it</li>
           </ul>
         </div>
       </div>
@@ -20,7 +20,7 @@
             <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
           </div>
 
-          <div class="content">
+          <div class="content fadein-element">
             <div *ngIf="isGuideMessageVisible" class="welcome-message">
               <h3>Welcome !</h3>
               <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
@@ -28,14 +28,14 @@
             <h4>Sign In</h4>
             <p>{{getMessages().LOGIN_INFO}}</p>
             <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
-              <div class="form-group">
+              <div class="form-group fadein-sub-element">
                 <control-messages [control]="userForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
                 <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
                 <input type="email" formControlName="email" id="email" maxlength="40" autocomplete="off" class="form-control"
                        placeholder="johndoe@example.com" />
               </div>
 
-              <div class="form-group">
+              <div class="form-group fadein-sub-element">
                 <control-messages [control]="userForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
                 <label>{{getLabel().PASSWORD}}</label>
                 <a class="forgot-password-link" (click)="onForgotPassword()">Forgot Password?</a>
@@ -43,7 +43,7 @@
                        placeholder="Minimum 6 characters"/>
               </div>
               <div class="col-sm-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{ error_msg }}</b></div>
-              <div class="button-group">
+              <div class="button-group fadein-sub-element">
                 <!--<div class="checkbox">
                   <label>
                     <input type="checkbox" (click)="OnRememberPassword($event)" [checked]="isRememberPassword">{{getLabel().REMENBER_ME}}

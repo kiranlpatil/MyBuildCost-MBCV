@@ -83,8 +83,9 @@
                     <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
                   </tr>
                 </thead>
-                <tbody *ngIf="(building.thumbRule && building.estimate)" >
-                  <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index" class="delete-cost-head-cell">
+                <tbody class="animated-list" *ngIf="(building.thumbRule && building.estimate)">
+                  <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index" class="delete-cost-head-cell animate-item"
+                      [ngStyle]="animateView ? getListItemAnimation(i) : null">
                     <td class="border-left">{{ thumbRuleItem.name }}</td>
                     <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
                     <td class="border-left">

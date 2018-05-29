@@ -14,8 +14,10 @@
         </div>
         <bi-cost-head-report-pdf [categoryDetails]="categoryDetails" [categoryDetailsTotalAmount]="categoryDetailsTotalAmount" [viewType]="viewType"></bi-cost-head-report-pdf>
       </h4>
-      <div class="panel-group" id="cost-head-panels">
-        <div class="panel panel-default" *ngFor=" let category of categoryDetails| sortByCategoryAmount; let categoryIndex = index ">
+      <div class="panel-group animated-list" id="cost-head-panels">
+        <div class="panel panel-default animate-item"
+             *ngFor=" let category of categoryDetails| sortByCategoryAmount; let categoryIndex = index "
+             [ngStyle]="animateView ? getListItemAnimation(categoryIndex) : null">
           <div class="panel-heading">
             <div class="panel-title clearfix" (click)="getActiveWorkItemsOfCategory(category.rateAnalysisId)">
               <a data-parent="#cost-head-panels" class="collapsed cost-head-lists">
@@ -25,9 +27,10 @@
               </a>
             </div>
           </div>
-          <div *ngIf="category.rateAnalysisId == categoryId" id="collapse{{category.rateAnalysisId}}" class="panel-collapse collapse">
+          <div class="cost-head-panel-wrapper hide-body" id="collapse{{category.rateAnalysisId}}">
+            <div *ngIf="category.rateAnalysisId == categoryId" class="panel-collapse">
             <div class="panel-body">
-              <div class="bg-white"  *ngFor="let workItem of workItemsList; let workItemIndex = index">
+              <div class="bg-white" *ngFor="let workItem of workItemsList; let workItemIndex = index">
                 <table class="table table-dashboard table-categories">
                   <thead *ngIf="workItemIndex === 0">
                   <tr>
@@ -67,7 +70,10 @@
                                     <input type="number" [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
                                            (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
                                             id="directQuantity" size="10" class="form-control clear">
-                                    <span class="calculator" id="getQuantity{{categoryIndex}}" *ngIf="workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex)">
+                                    <span class="calculator"
+                                          id="getQuantity{{categoryIndex}}"
+                                          [class.disabled]="!workItem.isMeasurementSheet"
+                                          (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex);">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>
 
@@ -88,8 +94,10 @@
                                     <div class="edit-rate-null" *ngIf="!workItem.isDirectRate && !workItem.rate.isEstimated">
                                       -
                                     </div>
-                                     <span class="calculator"  id ="getRate{{categoryIndex}}"
-                                       *ngIf="workItem.isDirectRate === false" (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
+                                     <span class="calculator"
+                                           id ="getRate{{categoryIndex}}"
+                                           *ngIf="workItem.isDirectRate === false"
+                                           (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
                                      <img src="assets/build-info/dashboard/calculator2.png" />
                                      </span>
                                   </div>
@@ -115,8 +123,10 @@
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
                                   <div  *ngIf=" workItem.isDirectRate === false">
-                                   <button class="btn-get-amount" [class.active]="(rateView==='systemRA' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
-                                          type="button" (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}
+                                   <button class="btn-get-amount"
+                                           [class.active]="(rateView==='systemRA' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
+                                           type="button"
+                                           (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}
                                    </button>
                                   </div>
                                   <div class="value" *ngIf=" workItem.isDirectRate">
@@ -152,8 +162,9 @@
                                     </div>
                                   </td>
 
-                                <td id="show-embedded-table" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
-                                    <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB">
+                                <td id="show-embedded-table"
+                                    *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
+                                    <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB" [@fadeIn]="state">
                                       <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                                         <bi-get-rate [rate]="rateItemsArray"
                                                      [categoryDetails] ="categoryDetails"
@@ -285,6 +296,7 @@
                 </table>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>

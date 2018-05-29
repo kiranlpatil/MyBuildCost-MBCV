@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import {MaterialTakeOffElements, SessionStorage} from '../../../../../shared/constants';
+import { Component, Input, AfterViewInit } from '@angular/core';
+import {MaterialTakeOffElements, Animations, SessionStorage} from '../../../../../shared/constants';
 import {SessionStorageService} from '../../../../../shared/services/session.service';
 
 
@@ -7,11 +7,12 @@ import {SessionStorageService} from '../../../../../shared/services/session.serv
   moduleId: module.id,
   selector: 'bi-material-take-off-report',
   templateUrl: 'material-take-off-report.component.html',
-  styleUrls: ['material-take-off-report.css'],
+  styleUrls: ['material-take-off-report.css']
 })
 
-export class MaterialTakeOffReportComponent  {
+export class MaterialTakeOffReportComponent implements AfterViewInit {
 
+  animateView: boolean = false;
   @Input() materialTakeOffReport : any;
   @Input() buildingName : string;
   @Input() elementType : string;
@@ -51,5 +52,16 @@ export class MaterialTakeOffReportComponent  {
     } else {
       this.viewNestedSubContent = false;
     }
+  }
+
+  getListItemAnimation(index : number) {
+    return Animations.getListItemAnimationStyle(index, Animations.defaultDelayFactor);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      console.log('animated');
+      this.animateView = true;
+    },150);
   }
 }

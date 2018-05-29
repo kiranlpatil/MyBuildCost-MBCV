@@ -28,13 +28,15 @@
 
 
       <div class="panel-collapse main-panel">
-        <div class="panel-body">
-          <div class="col-md-12 no-padding" *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT; let secondaryViewDataIndex = index">
-            <div class="panel-group">
+        <div class="panel-body animated-list">
+          <div class="col-md-12 no-padding"
+               *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT; let secondaryViewDataIndex = index">
+            <div class="panel-group animate-item"
+                 [ngStyle]="animateView ? getListItemAnimation(secondaryViewDataIndex) : null">
               <div class="panel panel-default no-border">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" [class.collapsed]="secondaryViewDataIndex != 0">
+                    <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" class="collapsed">
                       <span class="caret"></span>
 
                       <div class="col-sm-8 col-xs-7 row-lists border-right item-description">
@@ -52,7 +54,7 @@
                     </a>
                   </h4>
                 </div>
-                <div id="secondaryViewData{{secondaryViewDataIndex}}" class="panel-collapse collapse" [class.in]="secondaryViewDataIndex === 0">
+                <div id="secondaryViewData{{secondaryViewDataIndex}}" class="panel-collapse collapse">
 
                   <!--header-->
                   <div class="item-header">

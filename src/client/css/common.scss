@@ -114,6 +114,7 @@
 body {
   color: $body-text;
   font-family: 'Open Sans', sans-serif;
+  overflow-y: scroll;
   text-align: center;
 
   //Container
@@ -654,6 +655,40 @@ control-messages {
 .container {
   width: 1000px;
 }
+
+.animated-list {
+  .animate-item {
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.1, 1.11, 0.93, 1.49);
+    transform: scale(0.95);
+  }
+}
+
+.fadein-element {
+  animation: element-fade-in 0.5s ease;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+@keyframes element-fade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+.fadein-sub-element {
+  animation: sub-element-fade-in 0.3s ease;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+@keyframes sub-element-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   .container {
     width: 100%;
