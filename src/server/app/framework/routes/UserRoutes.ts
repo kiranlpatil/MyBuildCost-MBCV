@@ -57,6 +57,16 @@ class UserRoutes {
       router.put('/verify/changedEmailId/:id', logger.logDetail, authInterceptor.requiresAuth,
         authInterceptor.secureApiCheck, controller.verifyChangedEmailId);
 
+
+
+      /* Check for limitation of buildings*/
+      router.get('/:userId/project/:projectId/checkForLimitationOfBuilding',logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck,controller.checkForLimitationOfBuilding);
+
+
+
+
+
       //User settings
       router.put('/change/emailId/:id', logger.logDetail, authInterceptor.requiresAuth,
         authInterceptor.secureApiCheck, controller.changeEmailId);

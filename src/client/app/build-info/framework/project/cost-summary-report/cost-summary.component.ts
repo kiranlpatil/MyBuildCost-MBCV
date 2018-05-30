@@ -4,7 +4,7 @@ import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
   ValueConstant, CurrentView, ScrollView, Animations
 } from '../../../../shared/constants';
-import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../shared/index';
+import {SessionStorage, SessionStorageService, Message, Messages, MessageService, API} from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
 import { Building } from '../../model/building';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -52,6 +52,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   showGrandTotalPanelBody:boolean=true;
   //showGrandTotalPanelTable= new Array<boolean>(10);
   compareIndex:number=0;
+  userId:any;
+  baseUrl:string;
 
   totalNumberOfBuildings : number;
 
@@ -60,7 +62,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   cloneBuildingModel: Building = new Building();
   clonedBuildingDetails: Array<CostHead>;
   showHideCostHeadButtonsList: Array<AddCostHeadButton>;
-
+  isActiveAddBuildingButton:boolean=false;
   public costIn: any[] = [
     { 'costInId': ProjectElements.RS_PER_SQFT},
     { 'costInId': ProjectElements.RS_PER_SQMT}
@@ -169,6 +171,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetCostSummaryReportSuccess(projects : any) {
+    this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     this.projectReport = new ProjectReport( projects.data.buildings, projects.data.commonAmenities[0]) ;
     this.buildingsReport = this.projectReport.buildings;
     if(this.projectReport.buildings !== undefined) {
@@ -177,13 +180,21 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     this.amenitiesReport = this.projectReport.commonAmenities;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
-
     if(SessionStorageService.getSessionValue(SessionStorage.FROM_VIEW) === this.getScrollView().GO_TO_RECENT_BUILDING) {
       SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, null);
       this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
     }
+    /*this.costSummaryService.checkLimitationOfBuilding(this.userId,this.projectId).subscribe(
+      status=>this.checkLimitationOfBuildingSuccess(status),
+      error=>this.checkLimitationOfBuildingFailure(error)
+    );*/
   }
-
+  checkLimitationOfBuildingSuccess(status:any){
+    this.isActiveAddBuildingButton=status.data.isActiveAddBuildingButton;
+  }
+  checkLimitationOfBuildingFailure(error:any){
+ console.log(error);
+  }
   onGetCostSummaryReportFailure(error : any) {
     console.log('onGetCostInFail()'+error);
   }

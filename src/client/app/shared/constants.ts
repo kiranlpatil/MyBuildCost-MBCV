@@ -301,10 +301,14 @@ export class API {
   public static CHANGE_THEME = 'changetheme';
   public static RESET_PASSWORD = 'user/resetpassword';
   public static GOOGLE_LOGIN = 'googlelogin';
+  public static USER = 'User';
+
 
   //Project
   public static USER_ALL_PROJECTS = 'user/all/project';
   public static PROJECT = 'project';
+  public static CHECK_FOR_LIMITATION_OF_BUILDING = 'checkForLimitationOfBuilding';
+
   public static BUILDING = 'building';
   public static COSTHEAD = 'costhead';
   public static COMMON_AMENITIES = 'common-amenities';

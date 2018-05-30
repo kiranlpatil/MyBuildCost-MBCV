@@ -19,13 +19,17 @@ import SubscriptionService = require('../../applicationProject/services/Subscrip
 import SubscriptionPackage = require('../../applicationProject/dataaccess/model/project/Subscription/SubscriptionPackage');
 import BaseSubscriptionPackage = require('../../applicationProject/dataaccess/model/project/Subscription/BaseSubscriptionPackage');
 import UserSubscription = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscription');
+import {Types} from 'mongoose';
+import Project = require('../../applicationProject/dataaccess/model/project/Project');
+import ProjectRepository = require('../../applicationProject/dataaccess/repository/ProjectRepository');
 
 class UserService {
   APP_NAME: string;
   company_name: string;
   mid_content: any;
+  isActiveAddBuildingButton:boolean=false;
   private userRepository: UserRepository;
-
+  private projectRepository:ProjectRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
@@ -125,6 +129,45 @@ class UserService {
         }
     });
   }
+//check for building validation
+  getUserForCheckingBuilding(userId:string,projectId:string,user:User,callback: (error: any, result: any) => void) {
+    let query= [
+      { $match: {'_id':userId}},
+      { $project : {'subscription':1}},
+      { $unwind: '$subscription'},
+      { $match: {'subscription.projectId':projectId}}
+    ];
+    this.userRepository.aggregate(query,(error,result)=> {
+      if(error) {
+        callback(error,null);
+      }else {
+        if(result.length > 0) {
+          for(let subscriptionPackage of result) {
+              if(subscriptionPackage && subscriptionPackage.subscription.projectId!==null) {
+                let query = {_id: projectId};
+                let populate = {path: 'building', select: ['name', 'buildings',]};
+                this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    let noOfBuildings=result.buildings.length;
+                    if(subscriptionPackage && noOfBuildings <= subscriptionPackage.subscription.numOfBuildings) {
+                      this.isActiveAddBuildingButton=false;
+                    }else {
+                      this.isActiveAddBuildingButton=true;
+                    }
+                    }
+                  callback(null,result);
+
+                });
+              }
+            }
+        }
+      }
+      callback(null,{data:this.isActiveAddBuildingButton});
+    });
+  }
+
 
   assignFreeSubscriptionPackage(user: UserModel, freeSubscription: SubscriptionPackage) {
     let subscription = new UserSubscription();

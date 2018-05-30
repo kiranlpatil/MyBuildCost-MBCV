@@ -14,6 +14,7 @@ export class ProjectHeaderComponent implements OnInit {
 
   @Input() isClassVisible: boolean;
   @Output() toggleClassView = new EventEmitter<boolean>();
+  @Input () isActiveAddBuildingButton?:boolean;
 
   constructor(private _router: Router) {
   }

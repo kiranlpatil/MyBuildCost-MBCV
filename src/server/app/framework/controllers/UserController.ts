@@ -409,6 +409,32 @@ class UserController {
     }
   }
 
+  checkForLimitationOfBuilding(req:express.Request,res:express.Response,next:any) {
+    try {
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let userId =req.params.userId;
+      let projectService = new UserService();
+      projectService.getUserForCheckingBuilding(userId,projectId,user,(error:any,result:any) => {
+        if(error) {
+          next(error);
+        }else {
+          res.send(result);
+          }
+      });
+    } catch (e) {
+      next({
+        reason:e.message,
+        message:e.message,
+        stackTrace: new Error()
+      });
+    }
+  }
+
+
+
+
+
   changeMobileNumber(req: express.Request, res: express.Response, next: any) {
 
     try {
