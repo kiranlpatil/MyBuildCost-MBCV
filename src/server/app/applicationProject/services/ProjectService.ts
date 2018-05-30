@@ -437,9 +437,6 @@ class ProjectService {
     let isClone: boolean =(cloneItems && cloneItems.indexOf(Constants.CATEGORY_CLONE) !== -1);
     for (let categoryIndex in categories) {
       let category = categories[categoryIndex];
-      if (!isClone) {
-        category.active = false;
-      }
       categories[categoryIndex].workItems = this.cloneWorkItems(category.workItems, cloneItems,rateAnalysisData);
     }
     return categories;
