@@ -1,0 +1,438 @@
+@import '../../../../../../../css/common';
+
+.get-rate-section,
+.get-cost-section,
+.get-systemRA-section {
+  background: $azure;
+  border: 1px solid $table-border;
+  border-radius: 6px;
+  display: block;
+  float: right;
+  margin: 0 0 15px;
+  max-width: 100%;
+  padding: 5px;
+  position: relative;
+
+  .close {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+
+  table {
+    thead {
+      th {
+        font-size: 11px;
+        padding: 10px 10px 2px;
+        text-align: center;
+        width: 15%;
+
+        &:first-child {
+          padding: 10px 10px 2px 0;
+          width: 40%;
+        }
+
+        &:last-child {
+          padding: 10px 0 2px 10px;
+        }
+      }
+    }
+    tr {
+      background: transparent;
+      border: 1px solid transparent;
+      td {
+        padding: 0;
+        width: 17.5%;
+
+        .form-control {
+          border: 1px solid $white;
+          border-radius: 0;
+          box-shadow: none;
+          color: $black-theme-color;
+          display: block;
+          font-size: 11px;
+          height: 24px;
+          margin: 0;
+          padding: 0 7px;
+          width: 100%;
+
+          &:focus {
+            border: 1px solid $persian-green;
+          }
+        }
+        input[type='number'] {
+          text-align: right;
+        }
+        .remark-input {
+          float: left;
+          margin: 0;
+          width: 100%;
+        }
+        .get-total-amount {
+          margin: 0;
+        }
+
+        &:first-child {
+          width: 30%;
+          padding: 0;
+        }
+
+        &:last-child {
+          padding: 3px 3px 3px 10px;
+        }
+      }
+      .total-amount,
+      .grand-total-amount {
+        font-size: 11px;
+        font-weight: bold;
+        padding: 3px;
+        text-align: right;
+
+        label {
+          font-size: 11px;
+          font-weight: bold;
+          margin: 0;
+        }
+        span {
+          padding-right: 8px;
+        }
+      }
+
+      .grand-total-amount {
+        label {
+          margin: 0 15px 0 0;
+        }
+        span {
+          display: inline-block;
+          padding-right: 3px;
+          //min-width: 100px;
+        }
+      }
+
+      .remark-icon {
+        padding: 5px 10px 5px;
+        text-align: left;
+        float: left;
+        img {
+          float: left;
+        }
+      }
+      .glyphicon.glyphicon-trash {
+        cursor: pointer;
+        top: 6px;
+      }
+      &:hover {
+        border: 1px solid transparent;
+      }
+    }
+  }
+  .datalist-input {
+    line-height: 0;
+  }
+
+  .get-rate-table {
+    border-bottom: 1px solid $gray-light;
+    border-top: 1px solid $gray-light;
+    display: block;
+    float: left;
+
+    .rate-item {
+      padding: 0 !important;
+      width: 100% !important;
+
+      th {
+        padding: 10px 0 3px;
+        text-align: left;
+      }
+
+      .table-headings {
+        th {
+          background: $jagged-ice;
+          border-right: 1px solid $azure;
+          padding: 3px;
+          text-align: center;
+
+          &:first-child {
+           border-radius: 5px 0 0 0;
+          }
+          &:last-child {
+            border-radius: 0 5px 0 0;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid $azure;
+        }
+        tr > td {
+          background: $white;
+          border-right: 1px solid $azure;
+
+          &:last-child {
+            text-align: right;
+          }
+        }
+      }
+
+      tfoot {
+        tr > td {
+          background: $jagged-ice;
+
+          &:first-child {
+            border-radius: 0 0 0 5px;
+          }
+          &:last-child {
+            border-radius: 0 0 5px 0;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  .notes-table {
+    thead {
+      th {
+        padding: 5px 0 2px !important;
+        text-align: left !important;
+      }
+    }
+
+    tbody > tr {
+      td {
+        width: 70%;
+        textarea {
+          font-size: 11px;
+          height: 120px;
+          padding: 8px 10px;
+          width: 100%;
+        }
+
+        img {
+          background: $white;
+          border: 4px solid $white;
+          border-radius: 3px;
+          display: table;
+          margin: 0 auto;
+          max-width: 100%;
+        }
+
+        &:last-child {
+          width: 30%;
+        }
+
+        p {
+          font-size: 11px;
+        }
+      }
+    }
+
+    .nav-tabs {
+      border: 0;
+      margin-bottom: 7px;
+
+      li {
+        margin-right: 10px;
+      }
+      li > a {
+        color: $heading;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        padding: 1px 3px;
+
+        &:hover,
+        &:active,
+        &:focus {
+          background: transparent;
+        }
+      }
+
+      li.active > a {
+        background: transparent;
+        border-bottom: 2px solid $jagged-ice;
+      }
+    }
+  }
+
+  .quantity-label {
+    float: left;
+    font-size: 11px;
+    padding: 7px 5px 7px 0;
+    text-align: left;
+  }
+  .quantity-count {
+    float: left;
+    font-size: 11px;
+    height: 24px;
+    margin: 3px 4px 8px;
+    padding: 3px;
+    text-align: center;
+    width: 60px;
+  }
+  .quantity-sqft {
+    float: left;
+    font-size: 11px;
+    padding: 7px 5px;
+    text-align: left;
+  }
+  .add-new-btn {
+    background: transparent;
+    border: 1px solid $persian-green;
+    border-radius: 2px;
+    color: $persian-green;
+    font-size: 12px;
+    padding: 2px 4px;
+    height: auto;
+    margin: 5px;
+    float: left;
+  }
+  .save-btn {
+    @extend .add-new-btn;
+    background: $persian-green;
+    border-radius: 3px;
+    color: $white;
+    float: left;
+    margin: 5px 0;
+    padding: 3px 24px;
+  }
+  .cancel {
+    background: none;
+    border: 1px solid #6598CA;
+    border-radius: 2px;
+    color: $persian-green;
+    float: left;
+    margin: 5px 3px;
+    padding: 3px 18px;
+
+    &:hover,
+    &:active,
+    &:focus {
+      @extend .cancel;
+    }
+  }
+}
+
+.get-rate-section:after, .get-rate-section:before,
+.get-cost-section:after, .get-cost-section:before,
+.get-systemRA-section:after, .get-systemRA-section:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  left: 47%;
+  position: absolute;
+  pointer-events: none;
+  width: 0;
+}
+
+.get-rate-section:after,
+.get-cost-section:after,
+.get-systemRA-section:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: $azure;
+  border-width: 8px;
+  margin-left: -18px;
+}
+.get-rate-section:before,
+.get-cost-section:before,
+.get-systemRA-section:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: $table-border;
+  border-width: 10px;
+  margin-left: -20px;
+}
+
+.alignment-top {
+  vertical-align: top;
+}
+
+.get-cost-section:after, .get-cost-section:before {
+  left: 63% !important;
+}
+
+.get-systemRA-section:after, .get-systemRA-section:before {
+  left: 79% !important;
+}
+
+input[disabled],
+input[readonly],
+textarea[disabled] {
+  background: $white;
+  color: $disable-input;
+}
+
+@media only screen and (max-width: 767px) {
+  .get-rate-section,
+  .get-cost-section,
+  .get-systemRA-section {
+    margin: 0 0 10px;
+    .quantity-count,
+    .get-rate-table {
+      pointer-events: none;
+    }
+    table {
+      tr {
+        td {
+          &:first-child {
+            width: 30%;
+          }
+
+          &:nth-child(2) {
+            width: 35%;
+          }
+
+          &:nth-child(3),
+          &:nth-child(4) {
+            width: 17.5%;
+          }
+
+        }
+      }
+    }
+
+    .notes-table {
+      thead {
+        th {
+          float: left;
+          width: 100% !important;
+
+
+          &:last-child {
+            padding: 0 !important;
+          }
+        }
+      }
+
+      tbody > tr {
+        td {
+          width: 100%;
+          float: left;
+
+          &:last-child {
+            padding: 0 !important;
+          }
+        }
+      }
+    }
+
+    .mobile-quantity-value {
+      color: $black-theme-color;
+      font-size: 11px;
+      padding: 0 7px;
+      text-align: right;
+    }
+
+    .disable-mobile-quantity-value {
+      color: $disable-input !important;
+    }
+  }
+
+  .get-rate-section:after, .get-rate-section:before,
+  .get-cost-section:after, .get-cost-section:before,
+  .get-systemRA-section:after, .get-systemRA-section:before {
+    display: none;
+  }
+}

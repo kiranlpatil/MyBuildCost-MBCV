@@ -4,7 +4,7 @@ import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
-import { templateLocals } from '../../utils';
+import { TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -13,11 +13,17 @@ const plugins = <any>gulpLoadPlugins();
  * environment.
  */
 export = () => {
-  return gulp.src(join(Config.APP_CLIENT_SRC, 'index.html'))
+  return gulp
+    .src(join(Config.APP_SRC, 'index.html'))
     .pipe(injectJs())
     .pipe(injectCss())
-    .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
+    .pipe(
+      plugins.template(
+        new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build(),
+        Config.TEMPLATE_CONFIG
+      )
+    )
+    .pipe(gulp.dest(Config.APP_DEST));
 };
 
 /**
@@ -25,24 +31,27 @@ export = () => {
  * @param {Array<string>} files - The files to be injected.
  */
 function inject(...files: Array<string>) {
-    return plugins.inject(gulp.src(files, { read: false }), {
-        files,
-        transform: transformPath()
-    });
+  return plugins.inject(gulp.src(files, { read: false }), {
+    files,
+    transform: transformPath()
+  });
 }
 
 /**
  * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
 function injectJs() {
-  return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE), join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE));
+  return inject(
+    join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE),
+    join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE)
+  );
 }
 
 /**
  * Injects the bundled CSS files for the production environment.
  */
 function injectCss() {
-  return inject(join(Config.CSS_DEST, Config.CSS_PROD_BUNDLE));
+  return inject(join(Config.CSS_DEST, `${Config.CSS_BUNDLE_NAME}.css`));
 }
 
 /**
@@ -52,7 +61,24 @@ function injectCss() {
 function transformPath() {
   return function(filepath: string) {
     let path: Array<string> = normalize(filepath).split(sep);
-    arguments[0] = Config.APP_BASE + path.slice(4, path.length).join(sep) + `?${Date.now()}`;
-    return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
+    let slice_after = path.indexOf(Config.APP_DEST);
+    if (slice_after > -1) {
+      slice_after++;
+    } else {
+      /**
+       * For Express `4`
+       * @type {number}
+       */
+      slice_after = 4;
+    }
+    arguments[0] =
+      Config.APP_BASE + path.slice(slice_after, path.length).join(sep);
+    const queryString = Config.QUERY_STRING_GENERATOR();
+    if (queryString) {
+      arguments[0] += `?${queryString}`;
+    }
+    return slash(
+      plugins.inject.transform.apply(plugins.inject.transform, arguments)
+    );
   };
 }

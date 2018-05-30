@@ -3,5 +3,5 @@ export class Notification {
   title: string;
   description: string;
   is_read: boolean;
-  notification_time:'';
+  notification_time: '';
 }

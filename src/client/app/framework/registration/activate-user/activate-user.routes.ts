@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
 import { ActivateUserComponent } from './index';
 
-export const ActivateUserRoutes:Route[] = [
+export const ActivateUserRoutes: Route[] = [
   {
-    path: 'activate_user',
+    path: 'activate-user',
     component: ActivateUserComponent
   }
 ];

@@ -1,39 +1,66 @@
-<section class="wrapper" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
-
-  <div class="col-lg-4 col-sm-8 col-xs-10 content">
-
-    <h5>Login</h5>
-
-    <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
-      <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
-      <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
-      <div class="col-sm-1 col-xs-1 close-msg">
-        <button (click)="closeErrorMessage()" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
-        </button>
+<div class="container">
+  <div class="row">
+    <div class="hidden-xs col-sm-6">
+      <div class="page-background">
+        <div class="inner-content content-background clearfix fadein-element" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+          <img class="logo-image" src={{MY_LOGO_PATH}} alt="Facebook Link">
+          <ul>
+            <li class="fadein-sub-element">Estimate Project Cost</li>
+            <li class="fadein-sub-element">Budget it</li>
+            <li class="fadein-sub-element">Control it</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <form [formGroup]="userForm" (submit)="onSubmit()">
+    <section class="col-xs-12 col-sm-6">
+      <div class="page-background">
+        <div class="inner-content clearfix">
+          <div *ngIf="isFromCareerPlugin">
+            <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
+          </div>
 
-      <div class="form-group input-group">
-        <control-messages [control]="userForm.controls.email"></control-messages>
-        <span class="input-group-addon"><img src="{{EMAIL_ICON}}"></span>
-        <input type="text" formControlName="email" id="email" placeholder="Email" class="form-control"/>
+          <div class="content fadein-element">
+            <div *ngIf="isGuideMessageVisible" class="welcome-message">
+              <h3>Welcome !</h3>
+              <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
+            </div>
+            <h4>Sign In</h4>
+            <p>{{getMessages().LOGIN_INFO}}</p>
+            <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
+              <div class="form-group fadein-sub-element">
+                <control-messages [control]="userForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
+                <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
+                <input type="email" formControlName="email" id="email" maxlength="40" autocomplete="off" class="form-control"
+                       placeholder="johndoe@example.com" />
+              </div>
+
+              <div class="form-group fadein-sub-element">
+                <control-messages [control]="userForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
+                <label>{{getLabel().PASSWORD}}</label>
+                <a class="forgot-password-link" (click)="onForgotPassword()">Forgot Password?</a>
+                <input type="password" formControlName="password" id="password" autocomplete="off" class="form-control"
+                       placeholder="Minimum 6 characters"/>
+              </div>
+              <div class="col-sm-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{ error_msg }}</b></div>
+              <div class="button-group fadein-sub-element">
+                <!--<div class="checkbox">
+                  <label>
+                    <input type="checkbox" (click)="OnRememberPassword($event)" [checked]="isRememberPassword">{{getLabel().REMENBER_ME}}
+                  </label>
+                </div>-->
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <!--<div class="other-links">
+                  <a (click)="onForgotPassword()">Forgot Password</a> |
+                  <a (click)="onSignUp()">Register New User</a>
+                </div>-->
+                <p>Don't have an account?</p>
+                <button  class="btn btn-default" (click)="onSignUp()">Signup Here</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group input-group">
-        <control-messages [control]="userForm.controls.password"></control-messages>
-        <span class="input-group-addon"><img src="{{PASSWORD_ICON}}"></span>
-        <input type="password" formControlName="password" id="password" placeholder="Password" class="form-control"/>
-      </div>
-
-      <div class="other-links">
-        <a (click)="onForgotPassword()">Forgot Password</a>
-      </div>
-
-      <button type="submit" class="btn btn-default btn-block" [disabled]="!userForm.valid">Sign in</button>
-
-    </form>
+    </section>
   </div>
-</section>
-
+</div>

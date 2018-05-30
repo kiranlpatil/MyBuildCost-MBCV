@@ -9,31 +9,15 @@
   url('../assets/framework/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
-@font-face {
-  font-family: 'helveticaneueregular';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../assets/framework/fonts/helveticaneue-webfont.eot'),
-  url('../assets/framework/fonts/helveticaneue-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../assets/framework/fonts/helveticaneue-webfont.woff2') format('woff2'),
-  url('../assets/framework/fonts/helveticaneue-webfont.woff') format('woff'),
-  url('../assets/framework/fonts/helveticaneue-webfont.ttf') format('truetype'),
-  url('../assets/framework/fonts/helveticaneue-webfont.svg#helveticaneueregular') format('svg');
-}
-
-
-@font-face {
-  font-family: 'helvlightregular';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../assets/framework/fonts/helveticalightregular-webfont.eot'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.woff2') format('woff2'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.woff') format('woff'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.ttf') format('truetype'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.svg#helvlightregular') format('svg');
-}
-
 @import './common';
-@import './framework/light-theme';
-@import './framework/dark-theme';
+
+//build-info
+@import 'build-info/common-components/bi-header';
+@import 'build-info/common-components/bi-navigation-header';
+@import 'build-info/common-components/bi-dashboard';
+@import 'build-info/common-components/bi-dashboard-panel';
+@import 'build-info/common-components/bi-dashboard-table';
+@import 'build-info/common-components/bi-modal';
+@import 'build-info/common-components/bi-edit-details';
+@import 'build-info/common-components/bi-checkbox';
+

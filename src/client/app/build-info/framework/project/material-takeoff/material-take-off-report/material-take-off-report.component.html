@@ -1,0 +1,93 @@
+<section class="material-takeoff-report">
+  <div class="panel-group no-border"  *ngFor="let materialKey of materialTakeOffReport | keys; let materialDataIndex = index">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="building-name">
+            <span class="" [title]="materialKey">{{materialKey}}</span>
+            <span *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL && buildingName === getMaterialTakeOffElements().ALL_BUILDINGS"
+              class="slab-area" [title]="materialTakeOffReport[materialKey].title + materialTakeOffReport[materialKey].subTitle.columnOne">
+              {{ materialTakeOffReport[materialKey].title + materialTakeOffReport[materialKey].subTitle.columnOne}}
+            </span>
+            <span *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD && buildingName !== getMaterialTakeOffElements().ALL_BUILDINGS"
+                  class="slab-area" [title]="buildingName">
+              {{ buildingName }}
+            </span>
+            <!--pdf report-->
+            <div>
+              <bi-material-take-off-pdf-report
+                [materialTakeOffReport]="materialTakeOffReport"
+                [elementType]="elementType"
+                [elementName]="elementName"
+                [buildingName]="buildingName">
+              </bi-material-take-off-pdf-report>
+            </div>
+          </a>
+        </h4>
+      </div>
+
+
+      <div class="panel-collapse main-panel">
+        <div class="panel-body animated-list">
+          <div class="col-md-12 no-padding"
+               *ngFor="let secondaryViewKey of materialTakeOffReport[materialKey].secondaryView | keys:getMaterialTakeOffElements().SORT; let secondaryViewDataIndex = index">
+            <div class="panel-group animate-item"
+                 [ngStyle]="animateView ? getListItemAnimation(secondaryViewDataIndex) : null">
+              <div class="panel panel-default no-border">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" class="collapsed">
+                      <span class="caret"></span>
+
+                      <div class="col-sm-8 col-xs-7 row-lists border-right item-description">
+                        {{secondaryViewKey}}
+                      </div>
+
+                      <div class="col-sm-2 col-xs-3 text-right row-lists border-right">
+                        <span class="total">{{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.footer.columnTwo}}</span>
+                      </div>
+
+                      <div class="col-sm-2 col-xs-2 text-left row-lists border-0">
+                        <span class="total">{{materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.footer.columnThree}}</span>
+                      </div>
+
+                    </a>
+                  </h4>
+                </div>
+                <div id="secondaryViewData{{secondaryViewDataIndex}}" class="panel-collapse collapse">
+
+                  <!--header-->
+                  <div class="item-header">
+                    <bi-table-row [customClass]="'item-header-row'"
+                      [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.header">
+                    </bi-table-row>
+                  </div>
+
+
+                    <!--content-->
+                    <bi-cost-head-wise-report *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD"
+                                         [secondaryViewDataIndex]="secondaryViewDataIndex"
+                                         [costHeadWiseContent]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content">
+                    </bi-cost-head-wise-report>
+                    <bi-material-wise-report *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL"
+                                         [secondaryViewDataIndex]="secondaryViewDataIndex"
+                                         [materialWiseContent]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content">
+                    </bi-material-wise-report>
+
+                  <!--footer-->
+                  <div class="item-footer">
+                    <bi-table-row
+                      [customClass]="'item-footer-row'"
+                      [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.footer">
+                    </bi-table-row>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

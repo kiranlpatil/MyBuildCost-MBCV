@@ -1,30 +1,23 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LoginService } from './login.service';
-import { Login } from './login';
+import { Login } from '../../user/models/login';
 import {
+  AppSettings,
+  ImagePath,
+  SessionStorage,
+  SessionStorageService,
   Message,
-  Messages,
   MessageService,
   NavigationRoutes,
-  LocalStorage,
-  LocalStorageService,
-  AppSettings,
-  CommonService,
-  ThemeChangeService,
-  ImagePath,
-  LoaderService
-} from '../shared/index';
-import { FacebookService } from './facebook.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidationService } from '../shared/customvalidations/validation.service';
-import { FBToken } from './fbtoken';
-import { GoogleToken } from './googletoken';
-import { ProjectAsset } from '../shared/constants';
-import {isBoolean} from "util";
-
-/// <reference path='../../../../../typings/globals/fbsdk/index.d.ts'/>
-/// <reference path='../../../../../tools/manual_typings/project/googleplus.d.ts'/>
+  ThemeChangeService
+} from '../../shared/index';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ValidationService } from '../../shared/customvalidations/validation.service';
+import { Label, LocalStorage, Messages, ProjectAsset } from '../../shared/constants';
+import { SharedService } from '../../shared/services/shared-service';
+import { RegistrationService } from '../../user/services/registration.service';
+import { LocalStorageService } from './../../shared/services/local-storage.service';
 
 @Component({
   moduleId: module.id,
@@ -33,30 +26,34 @@ import {isBoolean} from "util";
   styleUrls: ['login.component.css'],
 })
 
-
 export class LoginComponent implements OnInit {
-  model = new Login();
-  googleModel = new GoogleToken();
-  userForm:FormGroup;
-  error_msg:string;
-  isShowErrorMessage:boolean = true;
-  status:boolean;
-  MY_LOGO_PATH:string;
-  EMAIL_ICON:string;
-  PASSWORD_ICON:string;
-  APP_NAME:string;
-  MY_TAG_LINE:string;
-  UNDER_LICENCE:string;
-  BODY_BACKGROUND:string;
+  @ViewChild('toaster') toaster: ElementRef;
+  private model = new Login();
+  userForm: FormGroup;
+  error_msg: string;
+  isShowErrorMessage: boolean = true;
+  private MY_LOGO_PATH: string;
+  private EMAIL_ICON: string;
+  private PASSWORD_ICON: string;
+  private APP_NAME: string;
+  private MY_TAG_LINE: string;
+  private UNDER_LICENCE: string;
+  private BODY_BACKGROUND: string;
+  submitStatus: boolean;
+  mainHeaderMenuHideShow: string;
+  isChrome: boolean;
+  isToasterVisible: boolean = true;
+  isFromCareerPlugin: boolean = false;
+  recruiterReferenceId: string;
+  isRememberPassword: boolean = false;
 
-
-  constructor(private _router:Router, private loginService:LoginService, private themeChangeService:ThemeChangeService,
-              private messageService:MessageService, private _ngZone:NgZone,
-              private formBuilder:FormBuilder, private commonService:CommonService, private loaderService:LoaderService,
-              private _facebookService:FacebookService) {
+  constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
+              private messageService: MessageService, private formBuilder: FormBuilder,
+              private sharedService: SharedService, private activatedRoute: ActivatedRoute,
+              private registrationService:RegistrationService) {
     this.userForm = this.formBuilder.group({
-      'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'password': ['', [Validators.required]]
+      'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
+      'password': ['', [ValidationService.requirePasswordValidator]]
     });
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
     this.APP_NAME = ProjectAsset.APP_NAME;
@@ -65,77 +62,105 @@ export class LoginComponent implements OnInit {
     this.EMAIL_ICON = ImagePath.EMAIL_ICON;
     this.PASSWORD_ICON = ImagePath.PASSWORD_ICON;
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+    this.isChrome = this.sharedService.getUserBrowser();
+    this.isToasterVisible = this.sharedService.getToasterVisiblity();
   }
 
   ngOnInit() {
-    window.history.forward();
-    gapi.load('auth2',() => {
-      var auth2 = gapi.auth2.init({
-        client_id: '244363436693-l4fglqbjitj39t9dsg7lkep5esfoe1bq.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        scope: 'profile email'
-      });
-      auth2.attachClickHandler(document.getElementById('googleSignInButton'), {},
-        (googleUser:any)=> {
-         // var profile = googleUser.getBasicProfile();
-          var googleToken = googleUser.Zi.id_token;
-          this.setGoogleToken(googleToken);
-         },
-        (error:any)=> {
-          this.googleError(error);
-        }
-      );
+    this.mainHeaderMenuHideShow = 'signin';
+    //window.history.forward();
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      if (params['email'] !== undefined) {
+        this.userForm.controls['email'].setValue(params['email']);
+      }
+      if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))===1) {
+
+        this.userForm.controls['email'].setValue(SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID));
+        this.userForm.controls['password'].setValue(SessionStorageService.getSessionValue(SessionStorage.PASSWORD));
+        this.isRememberPassword=true;
+      }else {
+        this.isRememberPassword=false;
+      }
+
+      this.recruiterReferenceId = params['integrationKey'];
+      this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
     });
-    //this.onSignIn;
-    this._facebookService.loadAndInitFBSDK();
-    if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN)) === 1) {
-      this._router.navigate(['/dashboard']);
+
+
+
+    if(LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN)) {
+      this.getUserData();
     }
+  }
+
+  getUserData() {
+    this.loginService.getUserData()
+      .subscribe(
+        data => {
+          this.registrationService.onGetUserDataSuccess(data);
+        }, error => { this.registrationService.onLoginFailure(error);}
+      );
   }
 
   onSubmit() {
-  //  this.loaderService.start();
-
     this.model = this.userForm.value;
+    if (this.model.email === '' || this.model.password === '') {
+      this.submitStatus = true;
+      return;
+    }
+
+    if (!this.userForm.valid) {
+      return;
+    }
+
     this.model.email = this.model.email.toLowerCase();
-    this.loginService.userLogin(this.model)
-      .subscribe(
-        res => (this.loginSuccess(res)),
-        error => (this.loginFail(error)));
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.currentPosition.bind(this), this.locationError.bind(this));
+    }
+    window.scrollTo(0,0);
   }
 
-  loginSuccess(res:any) {
-  // this.loaderService.stop();
+  currentPosition(position: any) {
+    this.loginService.userLogin(this.model)
+      .subscribe(
+        res => (this.onUserLoginSuccess(res)),
+        error => (this.onUserLoginFailure(error)));
+  }
+
+  onUserLoginSuccess(res: any) {
+    if(this.isRememberPassword) {
+      LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
+      LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
+      LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
+      SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);
+    } else {
+      LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 0);
+    }
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
+    SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, res.data.company_name);
+    SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, res.data.first_name);
 
     this.userForm.reset();
     if (res.data.current_theme) {
-      LocalStorageService.setLocalValue(LocalStorage.MY_THEME, res.data.current_theme);
+      SessionStorageService.setSessionValue(SessionStorage.MY_THEME, res.data.current_theme);
       this.themeChangeService.change(res.data.current_theme);
     }
     if (res.isSocialLogin) {
-      LocalStorageService.setLocalValue(LocalStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_YES);
+      SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_YES);
     } else {
-      LocalStorageService.setLocalValue(LocalStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
+      SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
     }
-    this.successRedirect();
+    this.successRedirect(res);
   }
 
-  successRedirect() {
-    LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 1);
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-    var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+  onUserLoginFailure(error: any) {
 
-    if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
-      window.location.reload(); //this will enable access to dropdown option oof profile.
-    }
-  }
-
-  loginFail(error:any) {
-    //this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
-      message.error_msg = error.err_msg;
+      message.error_msg = error.message;
       message.isError = true;
+
       this.messageService.message(message);
     } else {
       this.isShowErrorMessage = false;
@@ -143,135 +168,43 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  connectFacebook() {
-    var self = this;
-    FB.login((response:any) => {
-     if (response.authResponse) {
-     self._ngZone.run(() => {
-     var fb = new FBToken();
-     fb.token = response.authResponse.accessToken;
-     this.setFBToken(fb.token);
-
-     });
-     } else {
-     var message = new Message();
-     message.isError = true;
-     message.error_msg = Messages.MSG_ERROR_FB_AUTH;
-     this.messageService.message(message);
-     }
-     }, {scope: 'public_profile, email', auth_type: 'rerequest'});
-  }
-
-  onFacebookLoginClick():void {
-    var fb = new FBToken();
-     FB.getLoginStatus(function (response:any) {
-     if (response.status === 'connected') {
-     fb.token = response.authResponse.accessToken;
-     this.setFBToken(fb.token);
-     } else {
-     this.connectFacebook();
-     }
-     }.bind(this));
-  }
-
- /* onGoogleLoginClick() {
-
-     window.history.forward();
-     gapi.load('auth2',() => {
-     var auth2 = gapi.auth2.init({
-     client_id: '244363436693-l4fglqbjitj39t9dsg7lkep5esfoe1bq.apps.googleusercontent.com',
-     cookiepolicy: 'single_host_origin',
-     scope: 'profile email'
-     });
-     auth2.attachClickHandler(document.getElementById('googleSignInButton'), {},
-     (googleUser:any)=> {
-     // var profile = googleUser.getBasicProfile();
-     var googleToken = googleUser.Zi.id_token;
-     console.log('googleToken: ' + googleToken);
-     this.setGoogleToken(googleToken);
-     },
-     (error:any)=> {
-     this.googleError(error);
-     }
-     );
-     });
-  }*/
-
-  setFBToken(token:any) {
-    this.loginService.setFBToken(token)
+  locationError(error: any) {
+    this.loginService.userLogin(this.model)
       .subscribe(
-        res => (this.loginSuccess(res)),
-        error => (this.loginFail(error)));
+        res => (this.onUserLoginSuccess(res)),
+        error => (this.onUserLoginFailure(error)));
   }
- /* connectGoogleplus() {
 
-  }*/
-
-  /*loginWithGoogle(): void{
-    var gptoken = new GoogleToken();
-    FB.getLoginStatus(function (response:any) {
-      this.connectGoogleplus();
-    }.bind(this));
-    alert('Please log in with google');
-  }*/
+  successRedirect(res: any) {
+    SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
+    SessionStorageService.setSessionValue(SessionStorage.IS_USER_SIGN_IN, 1);
+    SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+  }
 
   onSignUp() {
     this._router.navigate([NavigationRoutes.APP_REGISTRATION]);
   }
 
   onForgotPassword() {
-    this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD]);
+    this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD, {email: this.userForm.value.email}]);
   }
 
-  closeErrorMessage() {
-    this.isShowErrorMessage = true;
-  }
-  setGoogleToken(googleToken:any) {
-    this.googleModel.googleToken = googleToken;
-    this.loginService.setGoogleToken(this.googleModel)
-      .subscribe(
-        res => (this.loginSuccess(res)),
-        error => (this.loginFail(error)));
+  OnRememberPassword(event: any) {
+    if(event.target.checked) {
+      this.isRememberPassword = true;
+    } else {
+      this.isRememberPassword = false;
+    }
   }
 
-  googleError(error:any) {
-    var message = new Message();
-    message.error_msg = error;
-    message.isError = true;
-    this.messageService.message(message);
+  getMessages() {
+    return Messages;
   }
 
-  onFailure(error:any) {
-  console.log(error);
-}
-  /*renderButton() {
-  gapi.signin2.render('my-signin2', {
-    'scope': 'profile email',
-    'width': 240,
-    'height': 50,
-    'longtitle': true,
-    'theme': 'dark',
-    'onsuccess': (googleUser:any)=>
-    {
-      var profile = googleUser.getBasicProfile();
-      console.log('Email: ' + profile.getEmail());
-      var googleToken = googleUser.getAuthResponse().id_token;
-      //this.gtoken = googleToken;
-      console.log('googleToken: ' + googleToken);
-      var googleToken = googleUser.Zi.access_token;
-      this.setGToken(googleToken);
-    },
-    'onfailure': this.onFailure
-  });
-}*/
-  /*onSignIn(googleUser){
-    var profile = googleUser.getBasicProfile();
-    console.log('Email: ' + profile.getEmail());
-    var googleToken = googleUser.getAuthResponse().id_token;
-    //this.gtoken = googleToken;
-    console.log('googleToken: ' + googleToken);
-    var googleToken = googleUser.Zi.access_token;
-    this.setGToken(googleToken);
-  }*/
+  getLabel() {
+    return Label;
+  }
+
 }
 

@@ -1,0 +1,67 @@
+//@import '../loader1/variable';
+//variables
+//descriptive variables
+$global-white: #fff;
+$darkgray: #5c5e5d;
+$light-white: #efefef;
+$darkred: #eb0000;
+$black: #000;
+$gray: #ccc;
+$redbg: #e61b1f;
+$amber-bg: #ffbe00;
+$transparent-bg: rgba(0, 0, 0, .5);
+
+//functional variables
+$dropdown-menu-bg: $darkgray;
+$dropdown-menu-link-color: $light-white;
+$slider-indicators-color: $light-white;
+$loader-bg: $light-white;
+$loader-border: $darkred;
+$needle-bg: $redbg;
+$tolerance-color: $amber-bg;
+
+.loader-container {
+  background: $transparent-bg;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+
+  .inner-loader {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 5px solid $loader-bg;
+    border-radius: 50%;
+    border-top: 5px solid $loader-border;
+    height: 50px;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: fixed;
+    top: 50%;
+    vertical-align: middle;
+    width: 50px;
+  }
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+
+

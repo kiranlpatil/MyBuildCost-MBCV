@@ -1,0 +1,21 @@
+@import '../../../../css/common';
+
+.activate-user {
+  .content {
+
+    h1 {
+      color: $wrapper-text;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .activate-user {
+    .content {
+      h1 {
+        font-size: 22px;
+      }
+    }
+  }
+}

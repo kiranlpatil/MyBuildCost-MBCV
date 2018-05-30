@@ -1,24 +1,32 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {LoaderService} from "../../shared/loader/loader.service";
-
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { LoaderService } from '../../../shared/loader/loaders.service';
+import { NavigationRoutes } from '../../../shared/index';
 @Component({
-    moduleId: module.id,
-    selector: 'tpl-dashboard-home',
-    templateUrl: 'dashboard-home.component.html',
-    styleUrls: ['dashboard-home.component.css'],
+  moduleId: module.id,
+  selector: 'my-dashboard-home',
+  templateUrl: 'dashboard-home.component.html',
+  styleUrls: ['dashboard-home.component.css']
 })
-export class DashboardHomeComponent implements OnInit,OnDestroy {
+export class DashboardHomeComponent implements OnInit {
 
-      constructor(private loaderService:LoaderService) {
+  constructor(private _router: Router, private loaderService: LoaderService) {
 
-    }
+  }
 
-    ngOnInit() {
-        document.body.scrollTop = 0;
-      //this.loaderService.stop();
-    }
+  ngOnInit() {
+    document.body.scrollTop = 0;
+  }
 
-    ngOnDestroy() {
-     // this.loaderService.stop();
-    }
+  goToCreateProject() {
+    this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+  }
+
+  goToAddBuilding() {
+    this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
+  }
+
+  goToViewProject() {
+    this._router.navigate([NavigationRoutes.APP_LIST_PROJECT]);
+  }
 }

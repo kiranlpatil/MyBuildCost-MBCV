@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ContactComponent }  from './index';
+import { ContactComponent } from './index';
 
 export const ContactRoutes: Route[] = [
   {

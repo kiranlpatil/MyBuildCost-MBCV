@@ -1,0 +1,97 @@
+@import '../../../../css/common';
+
+.wrapper {
+  background-color: $page-background;
+  min-height: calc(100vh - 80px);
+  padding-top:30px;
+  width: 100%;
+  text-align: left;
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      margin-bottom: 30px;
+      position: relative;
+      text-align: center;
+      vertical-align: top;
+      width: 19.85%;
+    }
+
+    h4 {
+      color: $heading;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  }
+}
+
+.building-image-container {
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 15px;
+
+  .building-image {
+    margin: 0 auto;
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    position: relative;
+    background: $page-background;
+  }
+
+  .building-image > img {
+    border-radius: 0;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .wrapper {
+    min-height: calc(100vh - 50px);
+    ul {
+      li{
+        margin-bottom: 15px;
+        width: 24.85%;
+      }
+
+      h4 {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .wrapper {
+    ul {
+      li{
+        width: 32.85%;
+      }
+    }
+  }
+  .building-image-container {
+    margin: 0 auto 5px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .wrapper {
+    ul {
+      li{
+        width: 49%;
+      }
+    }
+  }
+}

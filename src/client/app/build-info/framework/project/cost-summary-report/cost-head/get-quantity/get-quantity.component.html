@@ -1,0 +1,85 @@
+<div *ngIf="quantityItems!==undefined" class="get-quantity-section">
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeQuantityTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <table class="table">
+    <thead>
+      <th>{{getTableHeadings().ITEM}}</th>
+      <th>{{getTableHeadings().NUMBERS}}</th>
+      <th>{{getTableHeadings().LENGTH}}</th>
+      <th>{{getTableHeadings().BREADTH}}</th>
+      <th>{{getTableHeadings().HEIGHT}}</th>
+      <th>{{getTableHeadings().QUANTITY}}</th>
+      <th class="text-left">{{getTableHeadings().UNIT}}</th>
+      <th class="hidden-xs">&nbsp;</th>
+      <th class="hidden-xs">&nbsp;</th>
+    </thead>
+  <tbody>
+  <tr *ngFor="let quantityItem of quantityItems;  let quantityIndex= index ">
+    <td class="get-amount-value">
+      <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control" [class.required-field]="quantityItem.item == ''"/>
+    </td>
+    <!--<td class="remark-icon">
+      <img title="{{quantityItem.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
+    </td>-->
+    <td  class="get-amount-value">
+      <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="updateQuantity('updateNos')" class="form-control" required/>
+    </td>
+    <td class="get-amount-value">
+      <input type="number" [disabled]="!workItem.length" *ngIf="workItem" [(ngModel)]="quantityItem.length" id="length" (change)="updateQuantity('updateLength')" class="form-control" required/>
+    </td>
+    <td class="get-amount-value">
+      <input  type="number" [disabled]="!workItem.breadthOrWidth" *ngIf="workItem" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="updateQuantity('updateBreadth')" class="form-control"/>
+    </td>
+    <td class="get-amount-value">
+      <input type="number" [disabled]="!workItem.height" *ngIf="workItem" [(ngModel)]="quantityItem.height" id="height" (change)="updateQuantity('updateHeight')" class="form-control" required/>
+    </td>
+    <td class="get-amount-value">
+      <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" disabled/>
+    </td>
+    <td class="get-amount-value text-left get-unit">
+      {{workItemUnit}}
+    </td>
+    <td colspan="2" class="get-amount-value get-delete text-center hidden-xs">
+      <div class="col-xs-2">
+      <span title="Delete Quantity Item" (click)="deleteQuantityItem(quantityIndex)" class="glyphicon glyphicon-trash"></span>
+      </div>
+    </td>
+  </tr>
+  <tr class="total-amt-row">
+    <td class="total-amount text-center">
+      <label>{{getTableHeadings().TOTAL}}</label>
+    </td>
+    <td class="total-amount text-right">
+      <span>{{quantityNumbersTotal|number}}</span>
+    </td>
+    <td class="total-amount text-right">
+      <span>{{lengthTotal|number}}</span>
+    </td>
+    <td class="total-amount text-right">
+      <span> {{breadthTotal|number}} </span>
+    </td>
+    <td class="total-amount text-right">
+      <span> {{heightTotal|number}} </span>
+    </td>
+    <td class="total-amount text-right">
+      <span> {{quantityTotal|number}} </span>
+    </td>
+    <td class="total-amount text-left">
+      {{workItemUnit}}
+    </td>
+    <td colspan="2" class="total-amount hidden-xs">
+      &nbsp;
+    </td>
+  </tr>
+  </tbody>
+  </table>
+
+  <button type="button" class="add-new-btn hidden-xs" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
+  <button type="submit" class="save-btn hidden-xs" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+</div>
+
+<div class="modal fade" id="deleteQuantity" role="dialog">
+  <bi-delete-confirmation-modal [elementType]="deleteConfirmationQuantityItem" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
+</div>

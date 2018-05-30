@@ -1,0 +1,43 @@
+@import '../../../framework/landing-page/landing-page.component';
+
+.page-background {
+  background: no-repeat fixed 0 100%;
+  clear: both;
+
+  .inner-content {
+    padding: 30px 0;
+
+    /*.content {
+      margin-top: 25px;
+    }*/
+
+    .content > h4 {
+      margin-bottom: 30px;
+      text-align: left;
+    }
+  }
+}
+
+.wrapper {
+  /*margin-top: 80px;*/
+  min-height: calc(100vh - 80px);
+  padding: 0;
+}
+
+.create-new-header {
+  height: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .page-background {
+    .inner-content {
+      padding: 10px 0 5px;
+      .content > h4 {
+        font-size: 24px;
+        font-weight: 100;
+        margin-bottom: 0;
+        text-align: center;
+      }
+    }
+  }
+}

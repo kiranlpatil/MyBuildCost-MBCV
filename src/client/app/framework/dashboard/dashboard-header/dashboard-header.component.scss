@@ -1,0 +1,29 @@
+@import '../../../../css/common';
+
+.page-header {
+  height: 80px;
+  border-bottom: 1px solid $gray;
+  z-index: 99;
+}
+
+.container {
+  position: relative;
+}
+
+@media only screen and (max-width: 1280px) {
+  .container {
+    width: 700px;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .container {
+    width: 440px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .page-header {
+    height: 50px;
+  }
+}

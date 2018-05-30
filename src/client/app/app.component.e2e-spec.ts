@@ -1,6 +1,6 @@
 describe('App', () => {
 
-  beforeEach( () => {
+  beforeEach(() => {
     browser.get('/');
   });
 

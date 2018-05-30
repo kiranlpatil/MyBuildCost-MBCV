@@ -1,39 +1,33 @@
 import { Routes } from '@angular/router';
-import { LoginRoutes } from './framework/login/index';
-import { RegistrationRoutes } from './framework/registration/index';
 import { DashboardRoutes } from './framework/dashboard/index';
-import { ForgotPasswordRoutes } from './framework/password/forgot-password/index';
 import { StartRoutes } from './framework/start/start.routes';
-import { DashboardProfileRoutes } from './framework/dashboard/dashboard-profile/index';
-import { ChangePasswordRoutes } from './framework/password/change-password/index';
 import { AboutRoutes } from './framework/dashboard/about/index';
-import { SettingsRoutes } from './framework/dashboard/settings/index';
 import { ActivateUserRoutes } from './framework/registration/activate-user/activate-user.routes';
-import { ResetPasswordRoutes } from './framework/password/forgot-password/reset-password/reset-password.routes';
-import { VerifyUserRoutes } from './framework/registration/verify_user/verify-user.routes';
-import { VerifyPhoneRoutes } from './framework/registration/verify_phone/verify-phone.routes';
-import { ChangeEmailRoutes } from './framework/dashboard/settings/change-email/change-email.routes';
-import { ActivateEmailRoutes } from './framework/dashboard/settings/activate-email/activate-email.routes';
-import { ChangeMobileRoutes } from './framework/dashboard/settings/change-mobile/change-mobile.routes';
-import {LandingPageRoutes} from './framework/landing-page/landing-page.routes';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
+import { ProjectRoutes } from './build-info/framework/project/project.routes';
+import { BuildingRoutes } from './build-info/framework/project/building/building.routes';
+import { LandingPageRoutes } from './framework/landing-page/landing-page.routes';
+import { CreateNewProjectRoutes } from './build-info/framework/create-new-project/create-new-project.routes';
+import { CreateProjectRoutes } from './build-info/framework/create-project/create-project.routes';
+import { CreateBuildingRoutes } from './build-info/framework/project/building/create-building/create-building.routes';
+import {CloneBuildingRoutes} from './build-info/framework/project/building/clone-building/clone-building.routes';
 
 
 export const routes: Routes = [
-  ...LandingPageRoutes,
-  ...LoginRoutes,
-  ...RegistrationRoutes,
+
   ...ActivateUserRoutes,
-  ...ActivateEmailRoutes,
-  ...VerifyUserRoutes,
-  ...VerifyPhoneRoutes,
   ...DashboardRoutes,
-  ...ForgotPasswordRoutes,
-  ...ResetPasswordRoutes,
-  ...DashboardProfileRoutes,
-  ...ChangePasswordRoutes,
-  ...ChangeEmailRoutes,
-  ...ChangeMobileRoutes,
   ...AboutRoutes,
-  ...SettingsRoutes,
-   ...StartRoutes,
+  ...ProjectRoutes,
+  ...LandingPageRoutes,
+  ...BuildingRoutes,
+  ...CreateProjectRoutes,
+  ...CreateBuildingRoutes,
+  ...CloneBuildingRoutes,
+  ...CreateNewProjectRoutes,
+  ...StartRoutes,
+  {
+    path:'**',
+    component: PageNotFoundComponent
+  }
 ];

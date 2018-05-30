@@ -1,16 +1,15 @@
-import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DashboardService } from './dashboard.service';
-import { UserProfile } from './user';
+import { DashboardService } from '../../user/services/dashboard.service';
+import { UserProfile } from '../../user/models/user';
 import {
+  SessionStorage,
+  SessionStorageService,
   Message,
   MessageService,
   NavigationRoutes,
-  LocalStorageService,
-  LocalStorage,
   ProfileService
-} from '../shared/index';
-import {LoaderService} from "../shared/loader/loader.service";
+} from '../../shared/index';
 
 
 @Component({
@@ -20,30 +19,24 @@ import {LoaderService} from "../shared/loader/loader.service";
   styleUrls: ['dashboard.component.css'],
 })
 
-export class DashboardComponent implements OnInit,OnDestroy {
+export class DashboardComponent implements OnInit {
   mode = 'Observable';
   model = new UserProfile();
   overlayStyle = false;
-  newUser:number;
+  newUser: number;
 
-  constructor(private _router:Router, private dashboardService:DashboardService, private messageService:MessageService,
-              private profileService:ProfileService, private zone:NgZone, private loaderService:LoaderService) {
+  constructor(private _router: Router, private dashboardService: DashboardService, private messageService: MessageService,
+              private profileService: ProfileService, private zone: NgZone ) {
   }
 
   ngOnInit() {
-    this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN));
+    this.newUser = parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN));
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {
       this.getUserProfile();
     }
   }
-
-  ngOnDestroy() {
-   // this.loaderService.stop();
-    // this.loaderService.showLoading(false);
-  }
-
   getUserProfile() {
     this.dashboardService.getUserProfile()
       .subscribe(
@@ -51,9 +44,9 @@ export class DashboardComponent implements OnInit,OnDestroy {
         error => this.onUserProfileError(error));
   }
 
-  onUserProfileSuccess(result:any) {
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, result.data.email);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, result.data.mobile_number);
+  onUserProfileSuccess(result: any) {
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, result.data.email);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, result.data.mobile_number);
     this.zone.run(() => {
       if (result !== null) {
         this.model = result;
@@ -62,14 +55,14 @@ export class DashboardComponent implements OnInit,OnDestroy {
     });
   }
 
-  onUserProfileError(error:any) {
+  onUserProfileError(error: any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
     this.messageService.message(message);
   }
 
-  navigateTo(nav:string) {
+  navigateTo(nav: string) {
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }
@@ -77,12 +70,8 @@ export class DashboardComponent implements OnInit,OnDestroy {
   }
 
   onLogout() {
-    LocalStorageService.removeLocalValue(LocalStorage.ACCESS_TOKEN);
-    LocalStorageService.removeLocalValue(LocalStorage.IS_THEME_SELECTED);
-    LocalStorageService.removeLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
-    LocalStorageService.removeLocalValue(LocalStorage.EMAIL_ID);
-    LocalStorageService.removeLocalValue(LocalStorage.USER_ID);
-    LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 0);
+    window.sessionStorage.clear();
+    window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 

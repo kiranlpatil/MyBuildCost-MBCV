@@ -1,0 +1,44 @@
+<div *ngFor="let content of costHeadWiseContent | keys:getMaterialTakeOffElements().SORT; let contentIndex = index">
+
+  <div class="inner-item-list">
+
+    <!--content-->
+
+        <div class="panel-group">
+          <div class="panel panel-default" *ngFor="let subContent of costHeadWiseContent[content].subContent | keys:getMaterialTakeOffElements().SORT; let subContentIndex = index">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" class="collapsed" href="#collapsepanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}">
+                  <bi-table-row
+                    [customClass]="'row-list'"
+                    [rows]="costHeadWiseContent[content].subContent[subContent]">
+                  </bi-table-row>
+                  <span *ngIf="costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT" class="caret"></span>
+                </a>
+
+
+                <!--sub content-->
+                <div
+                  *ngIf="costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT"
+                  id="collapsepanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="collapse-list-item" *ngFor="let innerSubContent of costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().SORT;">
+                      <bi-table-row
+                        [customClass]="'row-list sub-items-list'"
+                        [rows]="costHeadWiseContent[content].subContent[subContent].subContent[innerSubContent]">
+                      </bi-table-row>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </h4>
+            </div>
+          </div>
+        </div>
+
+
+  </div>
+
+</div>

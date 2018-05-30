@@ -1,0 +1,147 @@
+@import '../../../../../../../css/common';
+
+.row-list {
+  //color: #8290A8;
+  display: table;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  .row-lists {
+    display: table-cell;
+    float: none;
+  }
+
+  .border-right {
+    border-right: 1px solid $row-border;
+    padding-bottom: 6px !important;
+  }
+  .col-sm-8 {
+    padding: 0 10px 0 40px;
+  }
+  .row-lists {
+    line-height: 1.4;
+    white-space: initial;
+  }
+}
+
+.item-inner-row {
+  display: table;
+  margin: 0;
+  width: 100%;
+
+  .border-right {
+    border-right: 1px solid $row-border;
+  }
+  .row-lists {
+    border-right: 1px solid $row-border;
+    display: table-cell;
+    float: none;
+    font-size: 12px;
+    margin: 0;
+    padding: 15px;
+    white-space: initial;
+  }
+  .col-sm-8 {
+    overflow: hidden;
+    padding-left: 30px;
+    white-space: normal;
+  }
+  .border-0 {
+    border: 0 !important;
+  }
+}
+
+.item-header-row{
+  padding: 13px 0 13px 15px;
+  .border-right {
+    border-right: 1px solid $row-border;
+  }
+  .row-lists {
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+.item-footer-row {
+  padding: 13px 0 13px 15px;
+  .border-right {
+    border-right: 1px solid $row-border;
+  }
+  .row-lists {
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+.row-list {
+  .col-md-6 {
+    padding: initial;
+  }
+  .row-lists {
+    font-weight: bold;
+    padding-left: 15px;
+  }
+}
+
+.sub-items {
+  .item-description {
+    padding-left: 30px;
+  }
+}
+
+.sub-items-list {
+  .row-lists {
+    font-weight: normal;
+    color: #8290A8;
+  }
+  .item-description {
+    padding-left: 25px;
+  }
+}
+.material-take-off-sub-items {
+  .item-description {
+    padding-left: 35px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .row-list {
+    .row-lists {
+      padding: 0 5px 5px;
+    }
+
+    .col-xs-7 {
+      padding: 0 0 0 5px;
+    }
+
+    .border-right {
+      border-right: 0;
+    }
+  }
+
+  .item-inner-row {
+    .row-lists {
+      float: left;
+      padding: 15px 5px;
+    }
+
+    .col-xs-7 {
+      padding-left: 25px;
+    }
+
+    .border-right {
+      border-right: 0;
+    }
+  }
+
+  .item-footer-row {
+    .border-right {
+      border-right: 0;
+    }
+    .row-lists {
+      padding: 5px;
+    }
+  }
+}

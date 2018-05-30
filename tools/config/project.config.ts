@@ -1,8 +1,7 @@
 import { join } from 'path';
-
 import { SeedConfig } from './seed.config';
-// import { ExtendPackages } from './seed.config.interfaces';
-import { ImagePath } from '../../src/client/app/framework/shared/constants';
+import { ImagePath } from '../../src/client/app/shared/constants';
+ import { ExtendPackages } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -18,7 +17,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-     this.APP_TITLE = 'TPL Mobile Seed';
+     this.APP_TITLE = 'BuildInfo - Cost Control App';
      this.FAV_ICON = ImagePath.FAV_ICON;
      this.SPLASH_SCREEN = ImagePath.BODY_BACKGROUND;
      this.APP_LOGO = ImagePath.MY_WHITE_LOGO;
@@ -29,9 +28,9 @@ export class ProjectConfig extends SeedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
-      // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
+       {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
-       //{src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
+       {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
         {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true}
 	 ];
 
@@ -42,6 +41,37 @@ export class ProjectConfig extends SeedConfig {
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
     ];
 
+    this.ROLLUP_INCLUDE_DIR = [
+      ...this.ROLLUP_INCLUDE_DIR,
+      //'node_modules/moment/**'
+    ];
+
+    this.ROLLUP_NAMED_EXPORTS = [
+      ...this.ROLLUP_NAMED_EXPORTS,
+      //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
+    ];
+
+    // Add packages (e.g. lodash)
+     let additionalPackages: ExtendPackages[] = [
+       {
+       name: 'lodash',
+       path: `node_modules/lodash/lodash.js`
+    }];
+
+    this.addPackagesBundles(additionalPackages);
+    // Add packages (e.g. ng2-translate)
+    /* let additionalPackages: ExtendPackages[] = [{
+      name: 'ng2-social-share',
+      // Path to the package's bundle
+      path: 'node_modules/ng2-social-share',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+
+    }];
+
+    this.addPackagesBundles(additionalPackages);
+     */
     // Add packages (e.g. lodash)
     // let additionalPackages: ExtendPackages[] = [{
     //   name: 'lodash',
@@ -67,8 +97,13 @@ export class ProjectConfig extends SeedConfig {
     //
     // this.addPackagesBundles(additionalPackages);
 
+    /* Add proxy middleware */
+    // this.PROXY_MIDDLEWARE = [
+    //   require('http-proxy-middleware')('/api', { ws: false, target: 'http://localhost:3003' })
+    // ];
+
     /* Add to or override NPM module configurations: */
-    // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
+    // this.PLUGIN_CONFIGS['browser-sync'] = { ghostMode: false };
   }
 
 }

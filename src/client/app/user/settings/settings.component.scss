@@ -1,0 +1,41 @@
+@import '../../../css/common';
+
+@media (max-width: 1280px) and (min-width: 981px) {
+  .settings {
+    .settings-content {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 980px) {
+  .settings {
+    label {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .settings {
+    height: calc(100vh - 45px);
+    overflow: auto;
+    padding-bottom: 54px;
+    vertical-align: top;
+
+    .settings-content {
+      top: 50px;
+      margin-bottom: 15px;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .settings {
+    label {
+      width: 100%;
+    }
+  }
+}

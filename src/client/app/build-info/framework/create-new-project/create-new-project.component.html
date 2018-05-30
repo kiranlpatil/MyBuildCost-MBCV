@@ -1,0 +1,13 @@
+<div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND_TRANSPARENT + ')'}">
+  <div class="inner-content clearfix">
+    <div class="create-new-project">
+      <img src="assets/build-info/create-new-project/create-new-project.png" alt="Create New Project"/>
+      <p>{{getHeadings().CREATE_YOUR_FIRST_PROJECT}}</p>
+      <button type="button" class="btn btn-primary" (click)="goToCreateProject()">{{getButton().CREATE_NEW_PROJECT}}</button>
+    </div>
+    <div class="get-started">
+      <img src="assets/build-info/create-new-project/get-started.png" alt="Get Started"/>
+      <h5>{{getLabels().GET_STARTED}}</h5>
+    </div>
+  </div>
+</div>

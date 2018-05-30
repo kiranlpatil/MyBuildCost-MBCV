@@ -1,29 +1,37 @@
-#TPl Mobile Seed QICK START:
+#JobMosis job portal QUICK START:
 
-Steps for seed Inshort:-
+Steps for JobMosis In Short:-
 
-TPL seed has both http and https configuration.In below context we discuss about how we can use that configuration.
+JobMosis has both http and https configuration.In below context we discuss about how we can use that configuration.
 
-pre for seed Requirements:-     1. latest node version
+pre for JobMosis Requirements:- 1. latest node version
                                 2. latest npm version
                                 3. mongodb
 
 steps: 1.npm install    //npm install --unsafe -perm
-       2.typings install
+       2.typings install (1) for install specific package defination -----> typings install dt~mongoose --save --global
+                                   (2)for the installation of specific type file---> sudo npm install --save @types/crypto-js 
        3.start mongodb:  1. ~mongod
        4.For Development Environment:
                             1. ~npm start
-                            2. ~node app.server.dev.js --NODE_ENV=development  //Default. for backend configuration which is use http protocol. 
+                            2. ~node app.server.dev.js --NODE_ENV=development  //Default. for backend configuration (ubuntu) which is using http protocol. 
                                                          OR 
                                                        for http2
-                                ~node app.server.dev.http2.js --NODE_ENV=development //Default. for backend configuration which is use http2 protocol.
-                                 .
-       5.For Production Environment:
+                                ~node app.server.dev.http2.js --NODE_ENV=development //Default. for backend configuration (ubuntu) which is using http2 protocol.
+                                 
+       5.For Staging Environment:
+                            1. ~npm start
+                            2. ~node app.server.dev.js --NODE_ENV=staging  //Default. for backend configuration (ubuntu) which is using http protocol. 
+                                                         OR 
+                                                       for http2
+                                ~node app.server.dev.http2.js --NODE_ENV=development //Default. for backend configuration (ubuntu) which is using http2 protocol.
+                                                                  
+       6.For Production Environment:
                             1. ~gulp build.prod or ~npm run build.prod
-                            2. ~node app.server.prod.js --NODE_ENV=production //for backend configurations(ubuntuntu)which is use http protocol. 
+                            2. ~node app.server.prod.js --NODE_ENV=production //for backend configurations(ubuntu)which is using http protocol. 
                                                          OR
                                                        for http2
-                               ~node app.server.prod.js --NODE_ENV=production //for backend configurations(ubuntuntu)which is use http2 protocol
+                               ~node app.server.prod.js --NODE_ENV=production //for backend configurations(ubuntu)which is using http2 protocol
          
         
 
@@ -36,9 +44,10 @@ knowing they will never conflict for users.
 
 [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/vyakymenko/angular2-seed-express.svg?branch=master)](https://travis-ci.org/vyakymenko/angular2-seed-express)
-[![Dependency Status](https://david-dm.org/vyakymenko/angular2-seed-express.svg)](https://david-dm.org/vyakymenko/angular2-seed-express)
-[![devDependency Status](https://david-dm.org/vyakymenko/angular2-seed-express/dev-status.svg)](https://david-dm.org/vyakymenko/angular2-seed-express#info=devDependencies)
+[![Build status](https://ci.appveyor.com/api/projects/status/lh1m985431jm79o3?svg=true)](https://ci.appveyor.com/project/vyakymenko/angular-seed-express)
+[![Build Status](https://travis-ci.org/vyakymenko/angular-seed-express.svg?branch=master)](https://travis-ci.org/vyakymenko/angular-seed-express)
+[![Dependency Status](https://david-dm.org/vyakymenko/angular-seed-express.svg)](https://david-dm.org/vyakymenko/angular-seed-express)
+[![devDependency Status](https://david-dm.org/vyakymenko/angular-seed-express/dev-status.svg)](https://david-dm.org/vyakymenko/angular-seed-express#info=devDependencies)
 
 **Want to feel like a full-stack Angular 2 developer but know only Express?**
 
@@ -55,7 +64,7 @@ Include:
 For Angular 2 development information and wiki, look here:
  - [Angular2-Seed](https://github.com/mgechev/angular2-seed) Wow wow it's our parent :)
  - [Angular2-Seed-WIKI](https://github.com/mgechev/angular2-seed/wiki) Wiki Information about Seed!
- - [Angular2-Seed-Advanced](https://github.com/mgechev/angular2-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
+ - [Angular2-Seed-Advanced](https://github.com/NathanWalker/angular-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
 
 ```bash
 git clone --depth 1 https://github.com/vyakymenko/angular2-seed-express.git
@@ -112,7 +121,7 @@ cordova run device
 
     Step 5. openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-3) To run the site on https,Follow the steps mentioned in #TPl Mobile Seed QICK START:
+3) To run the site on https,Follow the steps mentioned in #TPl Mobile Seed QUICK START:
  
 
 #Backend Debugging
@@ -153,7 +162,6 @@ $ pm2 restart all
 
 # in cluster mode ( example 4 workers )
 $ pm2 start app.server.prod.js -i 4
-
 ```
 
 More details about [PM2](http://pm2.keymetrics.io/)
@@ -282,7 +290,7 @@ require('./server')(9001, 'dev');
  */
 require('./server')(9000);
 ```
- 
+
 # Reverse Proxy NginX Config Example
 ```
 server {
@@ -303,9 +311,260 @@ server {
 }
 ```
 
+# Redis Download/Install
+
+ - About [Redis](http://redis.io/).
+ - [Download](http://redis.io/download#download) and [install](http://redis.io/download#installation) latest stable version of Redis.
+ - [Documentation](http://redis.io/documentation) about Redis.
+
+# Redis Start
+
+After installation we need to start our server:
+```sh
+# start server
+$ src/redis-server
+```
+
+# Redis More Settings + Daemonize
+
+ - Redis [Persistence](http://redis.io/topics/quickstart#redis-persistence)
+ - Redis [More Properties](http://redis.io/topics/quickstart#installing-redis-more-properly)
+
 # MongoDB
 
  - In progress
+ 
+# MongoDB update scripts
+
+ - Version : 1.1.1
+ - Date : 7 Sept 2017
+ - Scenario : Industry code for 'IT' updated in master data so that need to update for candidates and recruiters who are consuming it.
+ - Update Script :
+ db.candidates.update({"industry.code" : "4"},
+   {$set:{"industry.code" : "1000"}},
+   { multi: true }
+ );
+ 
+ db.recruiters.find({}).forEach(function(recruiter) {
+       recruiter.postedJobs.forEach(function(job){
+           if(job.industry.code=="4"){
+               job.industry.code = "1000"
+           }
+       })
+ 	db.recruiters.save(recruiter);
+ })
+ 
+ 
+ - Version : 1.1.2
+ - Date : 25 Oct 2017
+ - Scenario : Added new field 'isJobPostClosed' into recruiter job post (Run command using mongo shell instead of 
+ robomongo)
+ - Update Script : 
+ db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+ for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+     if(recruiter.postedJobs[i].isJobPostClosed == true || 
+     recruiter.postedJobs[i].isJobPostClosed == false){
+ print("skip");
+         
+ }else{
+ 	recruiter.postedJobs[i].isJobPostClosed = false;
+     db.getCollection('recruiters').update(
+     {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+     print("success:" + recruiter.postedJobs[i]._id);
+ }
+ }
+ 
+ })
+ 
+ 
+ - Version : 1.1.3
+ - Date : 3 Nov 2017
+ - Extend job expiry date for all current jobs in production to 30th April 2018 [CN-1806]
+ - Update Script
+ db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+  for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+      if(recruiter.postedJobs[i].isJobPostClosed == true){
+  		print("skip");
+  	}else {
+ 	 	recruiter.postedJobs[i].expiringDate = ISODate("2018-04-30T18:29:59.414Z");
+ 		 db.getCollection('recruiters').update(
+ 		 {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+ 		 print("success:" + recruiter.postedJobs[i]._id);
+ 	}
+  }
+ })
+ 
+ //script for demo and staging
+ db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+   for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+       if(recruiter.postedJobs[i].isJobPostClosed == true){
+   		print("skip");
+   	}else {
+  	 	recruiter.postedJobs[i].isJobPostExpired = false;
+  		 db.getCollection('recruiters').update(
+  		 {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+  		 print("success:" + recruiter.postedJobs[i]._id);
+  	}
+   }
+  })
+  
+  //Updated script for production
+  db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+    for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+        if(recruiter.postedJobs[i].isJobPostClosed == true){
+    		print("skip");
+    	}else {
+   	 	recruiter.postedJobs[i].expiringDate = ISODate("2018-04-30T18:29:59.414Z");
+   	 	recruiter.postedJobs[i].isJobPostExpired = false;
+   		 db.getCollection('recruiters').update(
+   		 {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+   		 print("success:" + recruiter.postedJobs[i]._id);
+   	}
+    }
+   })
+   
+ - Version : 1.1.4
+ - Date : 25 nov 2017
+ - image path change
+ - Update Script
+       
+    //Script for image path on Demo for user and recruiter table 
+     
+     db.getCollection('users').find({'picture':{'$exists':true}}).forEach(function(user) {
+     if(user.picture){
+     var pic = user.picture;
+     print(pic.substr(pic.lastIndexOf('/') + 1));
+     pic = '/public/profileImage/'+pic.substr(pic.lastIndexOf('/') + 1);
+     print(user._id,pic);
+     user.picture=pic.replace(/"/g, "");
+     db.getCollection('users').update(
+          {"_id":user._id},user);
+          print("success:" + user._id);
+     }
+     })
+     
+     db.getCollection('recruiters').find({'company_logo':{'$exists':true}}).forEach(function(user) {
+     if(user.company_logo){
+     var pic = user.company_logo;
+     print(pic.substr(pic.lastIndexOf('/') + 1));
+     pic = '/public/profileImage/'+pic.substr(pic.lastIndexOf('/') + 1);
+     print(user._id,pic);
+     user.company_logo=pic.replace(/"/g, "");
+     db.getCollection('recruiters').update(
+          {"_id":user._id},user);
+          print("success:" + user._id);
+     }
+     })
+   
+    - Version : 1.1.4
+    - Date : 5 dec 2017
+    - performance branch changes done 
+    - Update Script
+   
+   //script to create the indexes on table 
+   db.getCollection('candidates').createIndex({'professionalDetails.experience':-1}) //for experience sort
+   db.getCollection('candidates').createIndex({'professionalDetails.currentSalary':1}) //for salary sort
+   db.getCollection('candidates').createIndex({'location.city':1}) //for search of candidate
+   db.getCollection('candidates').createIndex({'proficiencies':1}) //for search of candidate
+   db.getCollection('candidates').createIndex({'industry.name':1}) //for search of candidate
+   db.getCollection('users').createIndex({'email':1})  // for login 
+   db.getCollection('jobprofiles').createIndex({'recruiterId':1}) //for recruiter dashboard
+   db.getCollection('jobprofiles').createIndex({'salaryMaxValue': -1}) //for salary filter
+   db.getCollection('jobprofiles').createIndex({'experienceMinValue': 1}) //for min experience
+   db.getCollection('jobprofiles').createIndex({'location.city':1}) // for search job
+   db.getCollection('jobprofiles').createIndex({'proficiencies':1}) //for search job
+   db.getCollection('jobprofiles').createIndex({'industry.name':1}) //for search job
+   db.getCollection('industries').createIndex({'name':1})   // for industry 
+   
+ 
+ //Script for performance branch to seperate the postedjobs from recruiter
+  db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+   for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+       var jobprofile = recruiter.postedJobs[i];
+   jobprofile.recruiterId = recruiter._id;
+   db.getCollection('jobprofiles').insert(jobprofile);
+   }
+  })
+  
+  // script to update experience 
+  var experiences = [ "0 Year","1 Year","2 Year","3 Year","4 Year","5 Year","6 Year","7 Year","8 Year","9 Year","10 Year","11 Year","12 Year","13 Year","14 Year","15 Year","16 Year","17 Year","18 Year","19 Year","20 Year","21 Year","22 Year","23 Year","24 Year","25 Year","26 Year","27 Year","29 Year","30 Year" ];
+  for(var i=0;i<experiences.length;i++ ){
+  db.getCollection('candidates').update({'professionalDetails.experience':experiences[i]},{$set:{'professionalDetails.experience':i}},{multi:true})
+  }
+  
+  //script to update the salary
+  var   salary=[ "1 Lac","2 Lacs","3 Lacs","4 Lacs","5 Lacs","6 Lacs","7 Lacs","8 Lacs","9 Lacs","10 Lacs","11 Lacs","12 Lacs","13 Lacs","14 Lacs","15 Lacs","16 Lacs","17 Lacs","18 Lacs","19 Lacs","20 Lacs","21 Lacs","22 Lacs","23 Lacs","24 Lacs","25 Lacs","26 Lacs","27 Lacs","29 Lacs","30 Lacs" ];
+  for(var i=0;i<salary.length;i++ ){
+  db.getCollection('candidates').update({'professionalDetails.currentSalary':salary[i]},{$set:{'professionalDetails.currentSalary':i}},{multi:true})
+  }
+  
+  
+  //removed optional keyskill from jobprofiles
+  db.getCollection('jobProfiles').find().forEach(function(profile) {
+    if(profile.additionalProficiencies && profile.additionalProficiencies.length > 0){
+      if(profile.proficiencies==undefined){
+      profile.proficiencies=[];
+      }else{
+        for(let i of profile.additionalProficiencies){
+          profile.proficiencies.push(i);
+        }
+      }  
+      profile.additionalProficiencies=[];
+      db.getCollection('jobProfiles').update(
+           {"_id":profile._id},profile);
+           print("success:" + profile._id);
+    }
+  })
+  
+  - Version : 1.1.5
+  - Date : 6 dec 2017
+  - Recruiter's myCandidateList moved to new collection name RecruiterCandidates
+  - Update Script
+  
+  //indexes for new collection
+    db.getCollection('recruiter-candidates').createIndex({'recruiterId':1})
+    db.getCollection('recruiter-candidates').createIndex({'recruiterId':1,'source':1})
+    
+    
+   - Version : 1.1.6
+    - Date : 15 dec 2017
+    - Update Script for status change 'Logged In' 
+    - Update Script
+    
+  //Update Script for status change 'Logged In' 
+  db.getCollection('recruiter-candidates').update({'status' : 'Logged In'},
+  {$set:{"status" : "Existing"}},{ multi: true });
+   
+  
+#Jobmosis Career_plugin 
+
+Step 1:Inject these two script/link in index.html
+
+<script src="http://34.214.128.209/public/career-plugin/career-plugin.js"></script>
+<link rel="stylesheet" href="http://34.214.128.209/public/career-plugin/career-plugin.css">
+
+Step 2: Add this tag in html page.
+
+<div id="jobmosis-career-plugin" name="myIntegrationKey" draggable="true" style="position: absolute;top: 75px;" ></div>
+
+Step 3: Add below code to initilise/load plugin script.
+
+//Default colors is being used for header and button with this code.
+
+var docLoad = new CareerPlugin();
+docLoad.load();
+
+or
+
+// If You want diffrent colors(other than existing) for header and button. You can set, see below code.
+// First parameter represent for header and second for buttton.
+
+var docLoad = new CareerPlugin();
+docLoad.load('#808080','#FF0000');
+
+Note: To avoid typescript compilation error use below declartion(If typescript).
+ declare var CareerPlugin:any;
+
 
 # MySQL
 
@@ -315,9 +574,121 @@ server {
 
  - we have used msg91 to send sms for otp verification.[https://msg91.com/].Purchase sms on this site and enter the Auth key in the file(/home/nilesh/Projects/tpl-web-fullstack-seed/src/server/app/services/user.service.ts) as follows,
  var msg91 = require("msg91")("AUTHKEY", "TPLSID", "4");//(4 -Transactional route,1-Promotional route)[https://www.npmjs.com/package/msg91]
-  
 
-# Contributors
+# Deployment Process for Master Data :
+I) Use Following steps to connect AWS server for uploading new Industry Json file :
+
+Download FileZilla FTP Client.
+1). Open the FileZilla client.
+2). From the top of the home screen, click on Edit and select Settings.
+3). On the left side of the menu, expand the Connection section and highlight SFTP.
+4). Click on the [Add keyfile...] button and browse your local machine's directories and select your Private
+Key file.                                                
+5). Then, again from the top of FileZilla's home screen, click on File and select Site Manager.
+6). Finally, on the left side of the Site Manager, click on the New Site button and type a unique name
+under My Sites that will allow you to easily identify this particular remote server in the future.
+7). Now, under the General tab, fill in the Host (an IP address) and Port fields (default is 22).
+8). In the Protocol drop-down menu, select SFTP - SSH File Transfer Protocol.
+9). In the Logon Type drop-down menu, select Normal.
+10). Click on Connect button.
+
+
+II) Use Following steps and call API for upload new Industry :
+File upload steps:-
+1). The interface is split in half -- the left side shows the files on your PC, the right side will show the files
+on your hosted web space.
+To transfer files from your computer to our hosted web space, you'll want to locate your website files on
+your computer on the left side of the FTP client, then right-click on a file, then select the option to
+'upload.'
+( Excel name must be- NewIndustryDataExcel.xlsx )
+
+Path for excel file upload:-(for right hand side i.e.server side)
+bitnami/apps/CNext/c-next/src/server/app/framework/public/config
+now select file from left side(your local PC files) and right click on the file to be upload and select
+"upload". The file will be get uploaded to server(right hand side).
+2). Hit the api http://ServerAddress/api/readxlsx from postman.
+replace the ServerAddress with address you wish to work on(stagging IP address)
+
+
+# Data recovery plan :
+ We are defining the backup plan in AWS server, By using AWS Images we can create backup of all the things
+ like database, application settings and other code .
+ In AWS there is another facility of auto backup but now we are not using it because of it require script 
+ In Future will give a automation for backup of AWS Server
+  
+ Follow below step's to create backup and recovery for Jobmosis Application 
+ 1. Goto  all Services and select EC2 menu
+  ![Alt text](readme-images/1.jpg? "Optional Title")
+  ![Alt text](readme-images/2.jpg? "Optional Title")
+   2. Click on "Running Instances" option from "Resources".
+  ![Alt text](readme-images/3.jpg? "Optional Title")
+   3. It will give you list of instances running
+  4. right click on the instance which you want to backup 
+  ![Alt text](readme-images/4.jpg? "Optional Title")
+  5. select option Image then select "Create Image"
+ ![Alt text](readme-images/5.jpg? "Optional Title")
+  6. It will prompt for enter details like Image name, Image Description 
+  ![Alt text](readme-images/6.jpg? "Optional Title")
+   7. Select No reboot option check
+![Alt text](readme-images/8.jpg? "Optional Title")
+   8. Click on "Create Image"
+  ![Alt text](readme-images/7.jpg? "Optional Title")
+ 
+ II) Restore Steps :
+  Go To left side option Snapshots 
+  1. check whether the Image is created or not.
+  ![Alt text](readme-images/11.jpg? "Optional Title")
+  2. click on the EC2 again
+  ![Alt text](readme-images/12.jpg? "Optional Title")
+  3. Click on the create Instance
+  ![Alt text](readme-images/12.jpg? "Optional Title")
+  4. Click on the My AMI's
+  ![Alt text](readme-images/13.jpg? "Optional Title")
+  5. select which backup image is restore
+  ![Alt text](readme-images/14.jpg? "Optional Title")
+  6. then select free tier and continue
+  ![Alt text](readme-images/15.jpg? "Optional Title")
+  
+ # Deployment process of Code on Various Server :
+  Go To left side option Snapshots 
+  1. See Image for branches and commit directions :
+    ![Alt text](readme-images/16.jpg? "Optional Title")
+    
+
+  
+# Definition of DONE for developers:
+ 
+ 1. Every story should have acceptance criteria.
+ 2. When all the conditions mentioned in "Acceptance Criteria" is satisfied.
+ 3. Must follow best practices for coding.
+ 4. Must follow UI/UX best practices.
+ 5. Had done code review.
+ 6. Unit tests are written.
+ 7. Static code analysis.
+ 8. There should be zero code duplication.
+ 9. Time complexity should be minimum.
+ 10. Performance testing must be completed.
+ 11. Solution approach must be discussed before development.
+ 12. Before check in on development branch build prod aot. (gulp build.prod.aot)
+ 13. Handle exception in backend with proper error handling.
+ 14. If have any schema change, do changes in admin export functionality.
+ 
+ # Definition of DONE for QA:
+ 
+ 1. Functional testing is completed.
+ 2. All tests are written in Test Suite.
+ 3. Change is verified on staging.
+ 4. Sanity test on demo is completed.
+ 
+ # Service Level Agreement (SLA):
+ 1. SLA for ShowStopper: Item should be fixed and solution should be deployed on production server within 24 hours.
+ 2. SLA for HighPriority: Item should be fixed and solution should be deployed on production server within 48 hours. 
+ Deployment on production server could be differed on case by case but fix need to be made available within 48 hours so that it is ready to deploy on production server/branch.
+ 
+ # Schedule of deployment on production:
+ Every last day of week we will deploy new certified & verified version on production server and send a release note to all stake holders.
+  
+ # Contributors
 
 [<img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&s=117" width="117">](https://github.com/mgechev) |[<img alt="ludohenin" src="https://avatars.githubusercontent.com/u/1011516?v=3&s=117" width="117">](https://github.com/ludohenin) |[<img alt="d3viant0ne" src="https://avatars.githubusercontent.com/u/8420490?v=3&s=117" width="117">](https://github.com/d3viant0ne) |[<img alt="Shyam-Chen" src="https://avatars.githubusercontent.com/u/13535256?v=3&s=117" width="117">](https://github.com/Shyam-Chen) |[<img alt="tarlepp" src="https://avatars.githubusercontent.com/u/595561?v=3&s=117" width="117">](https://github.com/tarlepp) |[<img alt="NathanWalker" src="https://avatars.githubusercontent.com/u/457187?v=3&s=117" width="117">](https://github.com/NathanWalker) |
 :---: |:---: |:---: |:---: |:---: |:---: |
@@ -386,51 +757,6 @@ server {
 [<img alt="ultrasonicsoft" src="https://avatars.githubusercontent.com/u/4145169?v=3&s=117" width="117">](https://github.com/ultrasonicsoft) |[<img alt="inkidotcom" src="https://avatars.githubusercontent.com/u/100466?v=3&s=117" width="117">](https://github.com/inkidotcom) |
 :---: |:---: |
 [ultrasonicsoft](https://github.com/ultrasonicsoft) |[inkidotcom](https://github.com/inkidotcom) |
-
-## Wiki Contributors
-
-Here are all the awesome guys who are helping to make the project's wiki even better!
-
-```
-37  Minko Gechev
-22  Clayton K. N. Passos
-15  Shyam-Chen
-14  Vincent van Proosdij
- 8  Christian Dobert
- 8  Robert van Kints
- 8  matthew harwood
- 6  Ludovic HENIN
- 5  Attila Egyed
- 3  Stefan Schüller
- 3  Patrick Hillert
- 3  Ezequiel Cicala
- 2  Nathan Walker
- 2  Yannick Koehler
- 2  Giovanni Candido da Silva
- 2  Simon Hampton
- 2  Cy Klassen
- 2  Joshua Wiens
- 2  Drake Wilson
- 2  Dinsitro
- 1  zcsongor
- 1  BouncingBit
- 1  Brian Kotek
- 1  Chris Kapilla
- 1  Dang Tung
- 1  Eddie Sun
- 1  Enrico Secondulfo
- 1  Eugene Serkin
- 1  Ishara Samantha
- 1  Myrmex
- 1  Pol Stafford
- 1  Raphael Schmitt
- 1  Sebastian Fuss
- 1  Sebastien de Salvador
- 1  The Ult
- 1  graham
- 1  kiuka
- 1  Ankit Kamboj
-```
 
 
 # Change Log

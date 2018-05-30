@@ -1,0 +1,88 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CurrentView, Messages } from '../../../../shared/constants';
+import { ProjectService } from '../project.service';
+import { Project } from './../../model/project';
+import { Message, MessageService,SessionStorage, SessionStorageService } from '../../../../shared/index';
+import { ProjectNameChangeService } from '../../../../shared/services/project-name-change.service';
+
+@Component({
+  moduleId: module.id,
+  selector: 'bi-project-details',
+  templateUrl: 'project-details.component.html',
+  styleUrls: ['project-details.component.css']
+})
+
+export class ProjectDetailsComponent implements OnInit {
+
+  projectId : string;
+  projectModel: Project = new Project();
+  public isShowErrorMessage: boolean = true;
+  public errorMessage: boolean = false;
+
+  constructor(private projectService: ProjectService, private projectNameChangeService : ProjectNameChangeService,
+              private messageService: MessageService, private activatedRoute:ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,CurrentView.PROJECT_DETAILS);
+    this.activatedRoute.params.subscribe(params => {
+     this.projectId = params['projectId'];
+      if(this.projectId) {
+        this.getProject();
+      }
+    });
+  }
+
+  getProject() {
+    this.projectService.getProject(this.projectId).subscribe(
+      project => this.onGetProjectSuccess(project),
+      error => this.onGetProjectFailure(error)
+    );
+  }
+
+  onGetProjectSuccess(project : any) {
+    this.projectModel = project.data[0];
+  }
+
+  onGetProjectFailure(error : any) {
+    console.log(error);
+  }
+
+
+  updateProject(projectModel : Project) {
+      let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+      this.projectService.updateProject(projectId, projectModel)
+        .subscribe(
+          user => this.onUpdateProjectSuccess(user),
+          error => this.onUpdateProjectFailure(error));
+  }
+
+  onUpdateProjectSuccess(result: any) {
+    if (result !== null) {
+      this.projectNameChangeService.change(result.data.name);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, result.data.name);
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_SUCCESS_UPDATE_PROJECT_DETAILS;
+      this.messageService.message(message);
+    }
+  }
+
+  onUpdateProjectFailure(error: any) {
+
+    var message = new Message();
+
+    if (error.err_code === 404 || error.err_code === 0) {
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    } else {
+      this.isShowErrorMessage = false;
+      this.errorMessage = error.err_msg;
+      message.error_msg = error.err_msg;
+      message.isError = true;
+      this.messageService.message(message);
+    }
+  }
+}

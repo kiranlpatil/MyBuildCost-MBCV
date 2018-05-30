@@ -1,12 +1,10 @@
-
 import * as winston from 'winston';
 
-
-var logger = new winston.Logger({
+let logger = new winston.Logger({
   transports: [
     new winston.transports.File({
       level: 'info',
-      filename: "clientErrorLogs",
+      filename: 'clientErrorLogs',
       handleExceptions: true,
       json: true,
       maxsize: 5242880, //5MB
@@ -25,7 +23,7 @@ var logger = new winston.Logger({
 
 module.exports = logger;
 module.exports.stream = {
-  write: function (message:any, encoding:any) {
+  write: function (message: any, encoding: any) {
     logger.info(message);
   }
 };

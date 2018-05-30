@@ -3,7 +3,7 @@
 .contact {
 
   iframe {
-    border: 1px solid $border-grey;
+    border: 1px solid $border-color;
     margin-top: 30px;
     width: 100%;
   }
@@ -44,10 +44,10 @@
 
       .form-control {
         background: transparent;
-        border-left: $border-grey 1px solid;
+        border-left: $gray 1px solid;
         border-radius: 0;
-        border-right: $border-grey 1px solid;
-        border-top: $border-grey 1px solid;
+        border-right: $gray 1px solid;
+        border-top: $gray 1px solid;
         box-shadow: none;
         color: $text-color;
         display: block;

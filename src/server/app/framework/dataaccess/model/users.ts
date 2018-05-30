@@ -1,0 +1,3 @@
+class UsersClassModel {
+}
+export = UsersClassModel;

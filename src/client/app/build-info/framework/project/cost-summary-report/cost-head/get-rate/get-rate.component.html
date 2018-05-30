@@ -1,0 +1,150 @@
+<!--Edit enabled-->
+<div *ngIf="rate!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost' || innerView == getLabel().GET_RATE_BY_QUANTITY) ? 'get-cost-section' : 'get-systemRA-section')">
+  <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="close" (click)="closeRateTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <div class="pull-left">
+    <div class="pull-left" *ngIf="rate!==undefined">
+      <div class="pull-left quantity-label">
+        {{ getHeadings().ITEM }} {{ getHeadings().QUANTITY }}{{ getHeadings().COLON }}
+      </div>
+      <div class="pull-left">
+        <input [(ngModel)]="rate.quantity" id="rateQuantity" type="number" class="form-control quantity-count"
+               (change)="onTotalQuantityChange(rate.quantity)"
+               (focus)="getPreviousQuantity(rate.quantity)"
+               [disabled]="disableRateField"/>
+      </div>
+      <div class="pull-left">
+        <span class="quantity-sqft">
+          {{ rate.unit }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 no-padding">
+    <table class="get-rate-table">
+      <tbody>
+        <tr *ngFor="let rateItem of rate.rateItems | groupBy:'type';">
+          <td class="rate-item" colspan="5">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="5">{{ (rateItem.key === 'M') ? 'A. Material' : ((rateItem.key === "L") ? "B. Labour" : "C. Material + Labour") }}</th>
+                </tr>
+                <tr class="table-headings">
+                  <th>{{ getTableHeadings().DESCRIPTION }}</th>
+                  <th>{{ getTableHeadings().QUANTITY }}</th>
+                  <th class="hidden-xs">{{ getTableHeadings().UNIT }}</th>
+                  <th>{{ getTableHeadings().RATE_PER_UNIT }}</th>
+                  <th>{{ getTableHeadings().COST }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of rateItem.value; let i=index">
+                  <td class="datalist-input" *ngIf="rateView === getLabel().WORKITEM_RATE_TAB">
+                    <input id="itemDescription" class="form-control remark-input" (mouseover)="getRateItemsByOriginalName(item, i)"
+                           list="RateItems" [(ngModel)]="item.itemName"  (focus)="getItemName($event)" (input)="setItemName($event, 'changeEvent')" (blur)="setItemName($event)"/>
+                      <datalist id="RateItems" >
+                        <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}"></option>    
+                     </datalist>
+                  </td>
+                  <td *ngIf="rateView !== getLabel().WORKITEM_RATE_TAB">
+                    <input id="itemDescription" class="form-control remark-input" [(ngModel)]="item.itemName" [disabled]="disableRateField"/>
+                  </td>
+                  <!--<td>
+                    <span class="glyphicon glyphicon-chevron-down" (click)="getRateItemsByOriginalName(item, i)"></span>
+                     <select id="RateItemsDropDown" *ngIf="i === selectedRateItemIndex">
+                       <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}">{{rateItem.itemName}}</option>
+                    </select>
+                  </td>-->
+                  <td>
+                    <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right hidden-xs"
+                           (change)="calculateTotal()" [disabled]="disableRateField"/>
+                    <span class="visible-xs mobile-quantity-value" [class.disable-mobile-quantity-value]="disableRateField">{{item.quantity}} {{item.unit}}</span>
+                  </td>
+                  <td class="hidden-xs">
+                    <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-left" [disabled]="disableRateField" readonly/>
+                  </td>
+                  <td>
+                    <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
+                           (change)="calculateTotal()" [disabled]="disableRateField"/>
+                  </td>
+                  <td>
+                    <!--<input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>-->
+                    {{item.totalAmount|number : '1.2-2'}}
+                  </td>
+                </tr>
+               </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="3" class="total-amount">
+                  <label class="visible-xs">{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
+                </td>
+                <td class="hidden-xs total-amount">
+                  <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
+                </td>
+                <td>
+                  <div *ngIf="(rateItem.key === 'M')">{{ totalAmountOfMaterial|number : '1.2-2'}} </div>
+                  <div *ngIf="(rateItem.key === 'L')">{{ totalAmountOfLabour|number : '1.2-2'}} </div>
+                  <div *ngIf="(rateItem.key === 'M + L')">{{ totalAmountOfMaterialAndLabour|number : '1.2-2'}} </div>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td rowspan="2">
+            <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeRateTab()">{{getButton().CANCEL_BUTTON}}</button>
+            <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+
+            <button type="button" *ngIf="!disableRateField" class="save-btn hidden-xs" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
+          </td>
+          <td class="grand-total-amount" colspan="4">
+            <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}:</label>
+            <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A_B_C}}:</label>
+            <label *ngIf="totalAmountOfMaterial && !totalAmountOfLabour && !totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A}}:</label>
+            <span>{{ totalAmount|number: '1.2-2'}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="grand-total-amount" colspan="4">
+            <label>Rate per unit:</label>
+            <span>{{ ratePerUnitAmount|number: '1.2-2'}}</span>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <table class="notes-table">
+    <thead>
+      <th>
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#notes">{{ getLabel().NOTES }}</a></li>
+          <li *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB"><a data-toggle="tab" href="#disclaimer">{{getButton().STANDARD_NOTE}}</a></li>
+        </ul>
+      </th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="alignment-top">
+          <div class="tab-content">
+            <div id="notes" class="tab-pane fade in active">
+              <p>{{rate.notes}}</p>
+            </div>
+            <div id="disclaimer" class="tab-pane fade"  *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB" >
+              <bi-disclaimer-component [note]="getStandardNotes().Notes"></bi-disclaimer-component>
+            </div>
+          </div>
+        </td>
+        <td class="alignment-top">
+          <img *ngIf="rate.imageURL != ''" id="rateImageURL" src="{{rate.imageURL}}">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

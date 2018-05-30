@@ -1,17 +1,79 @@
 @import '../../../../css/common';
-$footer-bg: #f8f8f8;
 
 .home-page-footer {
-  background: $footer-bg;
-  border-top: $border-color 1px solid;
+  background: #9ba3ab;
   bottom: 0;
-  height: 140px;
-  padding: 15px 0;
-  position: absolute;
+  height: 21px;
+  line-height: 0;
+  padding: 0 15px;
+  position: fixed;
   width: 100%;
+  z-index: 1050;
 
   p,
   a {
+    color: $footer-color;
     font-size: 12px;
   }
+
+  .copyright-statement {
+    float: left;
+    text-align: left;
+    width: 30%;
+  }
+
+  .faq {
+    color: $footer-color;
+    float: right;
+    margin-top: 4px;
+    text-align: right;
+    width: 70%;
+  }
+
+  .faq-statement {
+    color: $theme-orange;
+
+    .faq-link {
+      color: $theme-orange;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .glyphicon {
+      color: $footer-color;
+      margin: 0 5px 0 15px;
+    }
+  }
 }
+
+@media only screen and (max-width: 767px) {
+  .home-page-footer {
+    padding: 0 5px;
+    height: 45px;
+    position: relative;
+
+    p,
+    a {
+      font-size: 9px;
+    }
+
+    .copyright-statement {
+      text-align: center;
+      width: 100%;
+    }
+
+    .faq {
+      text-align: center;
+      margin: 7px 0 0;
+      width: 100%;
+    }
+
+    .faq-statement {
+      .glyphicon {
+        font-size: 16px;
+        margin: 0 10px;
+      }
+    }
+  }
+}
+

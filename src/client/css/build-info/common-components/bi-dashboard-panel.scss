@@ -1,0 +1,193 @@
+@import '../../../css/common';
+
+.wrapper {
+  .panel-group {
+    border-bottom: 1px solid $gray-light;
+    float: left;
+    margin: 0;
+    padding: 20px 0;
+    width: 100%;
+  }
+}
+
+
+.panel-default {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+
+  /*.panel-heading .panel-title a:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";
+    float: left;
+    color: $gray;
+  }
+  .panel-heading .panel-title a.collapsed:after {
+    content: "\e080";
+  }
+*/
+  .panel-heading {
+    background: $white;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px $panel-shadow;
+    min-height: 65px;
+    padding: 0;
+    position: relative;
+
+    a {
+      color: $heading;
+      font-size: 24px;
+      font-weight: 300;
+      left: 0;
+      padding: 20px 20px 20px 30px;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      .caret {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: rotate(0deg);
+        z-index: 1;
+      }
+    }
+
+    a.collapsed {
+      .caret {
+        transform: rotate(270deg);
+      }
+    }
+
+    a > .slab-area {
+      color: $heading;
+      font-size: 14px;
+      font-weight: 400;
+      margin-left: 10px;
+    }
+
+    .menu-items {
+      height: 24px;
+      position: absolute;
+      right: 10px;
+      top: 23px;
+      width: 24px;
+    }
+
+    .menu-items > .dropdown-menu {
+      border: 0;
+      border-radius: 0;
+      box-shadow: 10px 10px 10px $panel-shadow;
+      min-width: 170px;
+      padding: 5px 0 0;
+    }
+
+    .menu-items > .dropdown-menu li {
+      padding: 0 10px;
+      &:hover {
+        background: $page-background;
+      }
+    }
+
+    .menu-items > .dropdown-menu > li > p {
+      border-bottom: 1px solid $menu-item-links;
+      border-radius: 0;
+      font-size: 12px;
+      margin: 0;
+      padding: 5px 0;
+      cursor: pointer;
+    }
+
+    .menu-items.open > a {
+      background-color: $menu-item-hover-color;
+    }
+
+    .menu-items > a {
+      border-radius: 2px;
+      height: 24px;
+      padding: 0;
+      width: 24px;
+
+      &:focus,
+      &:hover,
+      &:active {
+        background-color: $menu-item-hover-color;
+      }
+    }
+
+    .menu-items > a > img {
+      display: block;
+      padding: 3px 10px;
+      position: relative;
+      top: 2px;
+    }
+
+    .menu-items > ul {
+      left: inherit;
+      right: 0;
+      top: 30px;
+    }
+  }
+
+  .panel-heading + .panel-collapse > .panel-body {
+    border: 0;
+    padding: 0;
+  }
+
+  .total {
+    td {
+      font-weight: bold;
+    }
+  }
+}
+
+.grand-total-table {
+  .panel-title {
+    padding: 20px 0;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+  .panel-default {
+    .panel-heading {
+      .menu-items {
+        right: 5px;
+        top: 10px;
+        width: 14px;
+      }
+
+      .menu-items > a {
+        width: 14px;
+      }
+
+      .menu-items > a > img {
+        padding: 3px 5px;
+      }
+
+      a {
+        .caret {
+          left: 7px;
+        }
+      }
+
+      a > .slab-area {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 5px 0 0 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .grand-total-table {
+    .panel-title {
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,207 @@
+@import '../../../../../../../css/common';
+
+.table-categories {
+  //border-bottom: 1px solid $border-color;
+
+  tr {
+    display: inline-block;
+    width: 100%;
+
+    .delete-Quantity-details {
+      cursor: pointer;
+      margin-top: 5px;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+      width: 20px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  thead > tr {
+    border-top: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
+  }
+
+  tr > td,
+  tr > th {
+    float: left;
+
+    &:nth-child(1) {
+      width: 295px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(4) {
+      text-align: right;
+      width: 130px;
+    }
+
+    &:nth-child(2) {
+      .btn-get-amount {
+        margin-right: 20px;
+      }
+    }
+
+    &:nth-child(3) {
+      text-align: left;
+      width: 75px;
+    }
+
+    &:nth-child(4) {
+      .value {
+        padding-right: 28px;
+      }
+    }
+
+    &:nth-child(5) {
+      text-align: right;
+      width: 110px;
+    }
+
+    &:nth-child(6) {
+      width: 110px;
+      text-align: center;
+    }
+
+
+    &:last-child {
+      vertical-align: top;
+    }
+    .edit-field {
+      margin: 2px;
+      min-height: 25px;
+    }
+
+    .value {
+      padding: 7px 0;
+      display: inline-block;
+    }
+
+    .edit-cost-null {
+      display: inline-block;
+      padding: 0;
+    }
+
+    .edit-cost {
+      border-bottom: 1px solid $body-text;
+      cursor: pointer;
+      display: inline-block;
+      padding: 2px;
+    }
+
+    .active-cost {
+      //background: $azure;
+      border-bottom: 1px solid $dashboard-link;
+      border-radius: 0;
+      color: $dashboard-link;
+    }
+  }
+
+  .quantity-name {
+    box-shadow: none;
+    font-size: 12px;
+    height: 26px;
+    margin: 1px 0 5px;
+    padding: 3px;
+  }
+  .hide-hover {
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .show-embedded-table {
+    display: block;
+    float: right !important;
+    margin-right: 5px;
+    padding: 6px 9px;
+    width: calc(100% - 356px) !important;
+  }
+
+  .edit-cost-null {
+    display: inline-block;
+    padding: 5px;
+  }
+
+  .edit-cost {
+    border-bottom: 1px solid $body-text;
+    display: inline-block;
+    padding: 7px 2px 2px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .table-categories {
+    tbody > tr {
+      border-bottom: 2px solid $border-color;
+      td {
+        &:first-child {
+          float:left;
+          text-align: left;
+          width: 100%;
+
+          input {
+            pointer-events: none;
+          }
+        }
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6) {
+          float:left;
+          min-height: 42px;
+          text-align: left;
+          width: 50%;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5) {
+          border-bottom: 1px solid $border-color;
+        }
+
+        &:nth-child(7) {
+          float: left;
+          min-height: 42px;
+          text-align: right;
+          width: 50%;
+        }
+
+        .edit-cost-null,
+        .edit-cost,
+        .value {
+          border: 0;
+          display: inline-block;
+          font-weight: 600;
+          padding: 8px 0;
+        }
+
+        .edit-rate-null,
+        .edit-rate {
+          font-weight: 600;
+          padding: 7px 0 5px;
+        }
+      }
+
+      .delete-Quantity-details {
+        float: right;
+        padding: 9px 5px;
+        width: 25px;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    .show-embedded-table {
+      margin-right: 0;
+      padding: 0 9px;
+      width: 100% !important;
+    }
+  }
+}

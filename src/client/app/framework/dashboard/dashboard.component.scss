@@ -2,7 +2,6 @@
 
 .dashboard {
   min-height: 100%;
-  padding-bottom: 140px;
   position: relative;
   width: 100%;
 
@@ -37,6 +36,7 @@
     }
   }
 }
+
 // Media Queries
 @media only screen and (max-width: 768px) {
   .dashboard {

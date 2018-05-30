@@ -1,0 +1,276 @@
+<bi-project-header></bi-project-header>
+<section class="wrapper">
+  <div class="container">
+    <div class="col-sm-9 col-xs-12 padding-right30 left-content">
+      <div class="dropdown filter-dropdrown">
+        <a class="dropdown-toggle visible-xs" type="button" id="dropdownMenuFilter" data-toggle="dropdown">
+          <img src="assets/build-info/filter/sort.png" alt="Filter"/>
+        </a>
+        <div class="page-heading col-sm-5 padding-left0">
+          <h5>{{ getHeadings().CONSTRUCTION_COST }}</h5>
+        </div>
+        <ul class="col-sm-7 dropdown-menu padding-top-7" role="menu" aria-labelledby="dropdownMenuFilter">
+          <li (click)="showDropdown($event)">
+            <label>{{ getLabel().COSTING_BY_UNIT }}</label>
+            <select class="select-costing" (change)="onChangeCostingByUnit($event.target.value)">
+              <option *ngFor="let cIn of costIn" [value]="cIn.costInId">{{ cIn.costInId }}</option>
+            </select>
+          </li>
+          <li (click)="showDropdown($event)">
+            <label>{{ getLabel().COSTING_PER_AREA }}</label>
+            <select class="select-costing no-margin" (change)="onChangeCostingByArea($event.target.value)">
+              <option *ngFor="let cPer of costPer" [value]="cPer.costPerId">{{(cPer.costPerId === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((cPer.costPerId === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-9 col-xs-12 padding-right30 left-content">
+      <div class="panel-group" id="cost-summary-panel">
+        <div class="panel panel-default" *ngFor="let building of buildingsReport; let i = index">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="panel-name" id="collapse-cost-summary-panel{{i}}" (click)="setBuildingId(i,building._id)" data-toggle="collapse" href="#collapse{{i}}" [class.collapsed]="i!=0" data-parent="#cost-summary-panel">
+                <span>{{ building.name }}</span>
+                <span class="slab-area">
+                  {{ getLabel().TOTAL }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ building.area| number: '1.0-0' }} {{ (defaultCostingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
+                </span>
+                <!--<span class="slab-area" *ngIf="compareIndex !== i">
+                  {{ getLabel().BUDGETED_COST }} : {{ building.thumbRule.totalBudgetedCost|number }}
+                </span>-->
+                <span class="caret"></span>
+              </a>
+            </h4>
+            <div class="dropdown menu-items">
+              <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
+              <ul class="dropdown-menu">
+                <li class="first-child-list">
+                  <div class="download-pdf-list">
+                    <span><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Download/Print</span>
+                    <cost-summary-report-pdf [buildingReport]="building"
+                                             [costingByUnit]="defaultCostingByUnit"
+                                             [costingByArea]="defaultCostingByArea">
+
+                    </cost-summary-report-pdf>
+                  </div>
+                </li>
+                <li><p  data-toggle="modal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
+                <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
+                <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
+                <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
+              </ul>
+            </div>
+          </div>
+          <div id="collapse{{i}}" class="panel-collapse collapse" [class.in]="i===0">
+            <div class="panel-body">
+              <table class="table table-row-spacing table-dashboard cost-summary-table">
+                <thead>
+                  <tr>
+                    <th rowspan="2" class="border-left">{{ getLabel().COST_HEAD }}</th>
+                    <th colspan="2" class="border-left table-heading">
+                      {{ getLabel().REPORT_BY_THUMBRULE }}
+                      <div class="white-bg"></div>
+                    </th>
+                    <th colspan="2" class="border-left table-heading">
+                      {{ getLabel().ESTIMATED }} <span class="sub-heading">{{ getLabel().AS_PER_PROJECT }}</span>
+                      <div class="white-bg"></div>
+                    </th>
+                  </tr>
+                  <tr class="cost-summary-row-list">
+                    <th class="text-center"><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
+                    <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
+                    <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}}</span></th>
+                    <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
+                  </tr>
+                </thead>
+                <tbody class="animated-list" *ngIf="(building.thumbRule && building.estimate)">
+                  <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index" class="delete-cost-head-cell animate-item"
+                      [ngStyle]="animateView ? getListItemAnimation(i) : null">
+                    <td class="border-left">{{ thumbRuleItem.name }}</td>
+                    <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
+                    <td class="border-left">
+                      <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
+                      <span *ngIf="thumbRuleItem.rate !== 0">{{ thumbRuleItem.rate | number: '1.2-2' }}</span>
+                      <span *ngIf="thumbRuleItem.rate === 0">-</span>
+                    </td>
+                    <td class="border-left">
+                      <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
+                      <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0">
+                        {{thumbRuleItem.amount | number: '1.0-0'  }}
+                      </span>
+                      <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
+                      <div class="edit-field">
+                        <input type="number"
+                               [(ngModel)]="thumbRuleItem.amount"
+                               id="thumbRuleItem.amount"
+                               (blur)="changeBudgetedCostAmountOfBuildingCostHead(building._id, thumbRuleItem.name, thumbRuleItem.amount)"
+                               class="form-control clear"/>
+                      </div>
+                    </td>
+                    <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
+                    <td class="border-left">
+                      <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].rate === 0">-</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].rate !== 0">
+                        {{ building.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }} </span>
+                      <div *ngIf="building.estimate.estimatedCosts[i].total != 0"
+                           (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">
+                        <span class="estimated-cost"
+                          [class.above-cost]="building.estimate.estimatedCosts[i].total > thumbRuleItem.amount"
+                          [class.below-cost]="building.estimate.estimatedCosts[i].total < thumbRuleItem.amount">
+                          {{ building.estimate.estimatedCosts[i].total | number: '1.0-0' }}
+                        </span>
+                      </div>
+                      <button *ngIf="building.estimate.estimatedCosts[i].total == 0"
+                              type="button" class="btn-get-amount"
+                              (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">Estimate Cost</button>
+                    </td>
+                    <td class="delete-cost-head" >
+                      <div title="Delete Cost Head" data-toggle="modal"
+                           data-target="#deleteCostheadModal"
+                           (click)="setIdsToInActiveCostHead(building._id, building.estimate.estimatedCosts[i].rateAnalysisId)">
+                        <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngIf="showCostHeadList===true && buildingId===building._id" class="add-cost-head">
+                    <td class="border-left">
+                      <select class="select-item" (change)="onChangeActiveSelectedCostHead($event.target.value)">
+                        <option>Select Item</option>
+                        <option *ngFor="let costHeadItem of inActiveCostHeadArray" [value]="costHeadItem.rateAnalysisId">
+                          {{ costHeadItem.name }}
+                        </option>
+                      </select>
+                    </td>
+                    <td colspan="5">&nbsp;</td>
+                  </tr>
+                  <tr class="add-item-row hidden-xs">
+                    <td colspan="5" class="add-items">
+                      <button  type="button" class="btn btn-add-item"
+                               [disabled]="showHideCostHeadButtonsList[i].showHideAddCostHeadButton" (click)="getAllInActiveCostHeads(building._id)" >
+                        <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
+                      </button>
+                    </td>
+                  </tr>
+                  <!--<tr class="total" *ngIf="(building.thumbRule && building.estimate)">
+                    <td class="border-left">{{ getLabel().TOTAL }}</td>
+                    <td class="border-left">{{ building.thumbRule.totalRate|number: '1.2-2' }}</td>
+                    <td class="border-left">{{ building.thumbRule.totalBudgetedCost|number : '1.0-0'}}</td>
+                    <td class="border-left">{{ building.estimate.totalRate|number: '1.2-2'}}</td>
+                    <td class="border-left">{{ building.estimate.totalEstimatedCost|number : '1.0-0'}}</td>
+                  </tr>-->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <table class="table table-row-spacing table-dashboard total-table">
+            <!-- *ngIf="showGrandTotalPanelTable[i]" -->
+            <tbody>
+              <tr *ngIf="(building.thumbRule && building.estimate)">
+                <td class="border-left">{{ getLabel().TOTAL }}</td>
+                <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
+                <td class="border-left">
+                  <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
+                  <span class="estimated-cost">{{ building.thumbRule.totalRate|number: '1.2-2' }}</span>
+                </td>
+                <td class="border-left">
+                  <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
+                  <span class="estimated-cost" *ngIf="building.thumbRule.totalBudgetedCost === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.thumbRule.totalBudgetedCost !== 0">
+                    {{ building.thumbRule.totalBudgetedCost|number : '1.0-0'}}
+                  </span>
+                </td>
+                <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
+                <td class="border-left">
+                  <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRate === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRate !== 0">
+                    {{ building.estimate.totalRate|number: '1.2-2'}}
+                  </span>
+                </td>
+                <td class="border-left">
+                  <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }} </span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalEstimatedCost === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalEstimatedCost !== 0">
+                    {{ building.estimate.totalEstimatedCost|number : '1.0-0'}}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--Common Amenity-->
+        <bi-common-amenities
+          [showHideCostHeadButtonList]="showHideCostHeadButtonsList"
+          [totalNumberOfBuildings]="totalNumberOfBuildings"
+          [amenitiesReport]="amenitiesReport"
+          [costingByUnit]="defaultCostingByUnit"
+          [costingByArea]="defaultCostingByArea"
+          (getReportDetails)="getCostSummaryReport($event)">
+        </bi-common-amenities>
+      </div>
+
+
+
+      <div class="panel-group no-border grand-total-table">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <table class="table table-dashboard">
+                <tbody>
+                  <tr>
+                    <td>{{ getLabel().GRAND_TOTAL }}</td>
+                    <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
+                    <td>
+                      <span class="mobile-headings">{{ defaultCostingByUnit }}</span>
+                      <span>{{ grandTotalOfTotalRate|number: '1.2-2' }}</span>
+                    </td>
+                    <td>
+                      <span class="mobile-headings">{{ getLabel().BUDGETED_COST }}</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost === 0">-</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfBudgetedCost !== 0">
+                        {{ grandTotalOfBudgetedCost|number: '1.0-0' }}
+                      </span>
+                    </td>
+                    <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
+                    <td>
+                      <span class="mobile-headings">{{ defaultCostingByUnit }}</span>
+                      <span *ngIf="grandTotalOfEstimatedRate === 0">-</span>
+                      <span *ngIf="grandTotalOfEstimatedRate !== 0">
+                            {{ grandTotalOfEstimatedRate|number: '1.2-2' }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }}</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfEstimatedCost === 0">-</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfEstimatedCost !== 0">
+                        {{ grandTotalOfEstimatedCost|number: '1.0-0' }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 no-padding right-content">
+      <img src="./assets/build-info/dashboard/ads.png" style="width: 100%; margin-top: 20px;" />
+    </div>
+  </div>
+
+  <!--Delete modals-->
+  <div class="modal fade default-modal" id="deleteCostheadModal" role="dialog">
+    <bi-delete-confirmation-modal [elementType]="deleteConfirmationCostHead" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
+  </div>
+
+  <div class="modal fade default-modal" id="deleteBuilding" role="dialog">
+    <bi-delete-confirmation-modal [elementType]="deleteConfirmationBuilding" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
+  </div>
+
+</section>

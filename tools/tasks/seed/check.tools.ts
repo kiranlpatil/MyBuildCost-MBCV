@@ -13,6 +13,7 @@ export = (done: any) => {
   // need to require the build.toolchain task as it won't be able to run after we run clear.files
   let buildTools = require('./build.tools');
   let cleanTools = require('./clean.tools');
+
   let rebuild = false;
 
   try {

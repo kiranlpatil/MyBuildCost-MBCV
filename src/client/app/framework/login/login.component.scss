@@ -1,33 +1,82 @@
-@import '../../../css/common';
+@import '../../framework/landing-page/landing-page.component';
 
-.wrapper {
-
-  .content {
-
-    .btn-facebook > span,
-    .btn-google-plus > span {
-      font-family: 'gothamrnd-book';
-      font-size: 18px;
-      font-weight: bold;
-      padding-right: 15px;
+.page-background {
+  .content-background {
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+  .inner-content {
+    .checkbox {
+      text-align: left;
     }
 
-    .other-links {
-      float: right;
-      margin: 0 0 15px;
+    .btn-primary {
+      margin: 10px 0 30px;
+    }
+
+    .logo-image {
+      margin: -60px 0 20px;
     }
   }
 
+  .forgot-password-link {
+    float: right;
+    font-size: 11px;
+    margin-top: 3px;
+  }
 }
 
-@media (max-width: 768px) {
-  .wrapper {
+.fadein-element .fadein-sub-element:nth-child(1) { animation-delay: 0.50s; }
+.fadein-element .fadein-sub-element:nth-child(2) { animation-delay: 0.56s; }
+.fadein-element .fadein-sub-element:nth-child(3) { animation-delay: 0.62s; }
+.fadein-element .button-group.fadein-sub-element { animation-delay: 0.68s; }
 
-    .content {
+@media screen and (max-width: 767px) {
+  .container {
+    background: none;
+    .btn {
+      width: 200px;
+    }
+    .page-background {
+      .forgot-password-link {
+        color: #a4a4a4;
+      }
+    }
+  }
+}
 
-      .sign-in-with > p {
-        margin: 10px 0;
-        text-align: center;
+@media screen and (max-width: 768px) {
+  .page-background {
+    .inner-content {
+      .logo-image {
+        margin: 0 0 20px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    background: no-repeat fixed 50% 100%;
+    background-image: url('../assets/build-info/page_background/page-bg.png');
+    min-height: 100vh;
+
+    .col-sm-6 {
+      width: 100%;
+    }
+  }
+  .page-background {
+    height: auto;
+    .inner-content {
+      background-image: none  !important;
+      height: auto;
+      padding-top: 50px;
+      vertical-align: top;
+      width: 100%;
+
+      .content {
+        margin: 0 auto;
+        width: 90%;
       }
     }
   }

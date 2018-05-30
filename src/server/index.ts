@@ -1,122 +1,263 @@
 import * as http from 'http';
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
 import * as path from 'path';
-import * as compression from 'compression';
-import * as routes from './routes';
-import * as methodOverride  from 'method-override';
-import * as cors from 'cors';
+/*import * as routes from "./routes";*/
+/*import * as cnextRoutes from "./cnext-routes";*/
 import * as fs from 'fs';
+import LoggerService = require('./app/framework/shared/logger/LoggerService');
+import * as sharedService from './app/framework/shared/logger/shared.service';
+import Middlewares = require('./app/framework/middlewares/base/MiddlewaresBase');
+import RateAnalysis = require("./app/applicationProject/dataaccess/model/RateAnalysis/RateAnalysis");
+import RateAnalysisService = require("./app/applicationProject/services/RateAnalysisService");
+var log4js = require('log4js');
+var config = require('config');
+/*var logDir = 'Logs';*/
+
 var spdy = require('spdy');
-
-var _clientDir = '../client';
+__dirname = './';
+var _clientDir = '/dist/client/dev';
+var _serverDir = '/dist/server/dev';
 var app = express();
+var CronJob = require('cron').CronJob;
 
-export function init(port: number, mode: string,protocol: string) {
-
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
-  app.use(bodyParser.text());
-  app.use(compression());
-  app.use(cors());
-  app.use(bodyParser.json());
-  app.use(methodOverride("X-HTTP-Method"));
-  app.use(methodOverride("X-HTTP-Method-Override"));
-  app.use(methodOverride("X-Method-Override"));
-  app.use(methodOverride("_method"))
-  app.use(express.static('src/'));
+export function init(port: number, mode: string, protocol: string, dist_runner: string) {
 
 
+
+
+
+  var loggerConfig=config.get('logger');
+
+  log4js.configure(loggerConfig);
+  var loggerCategory =config.get('logger.levels.[all]')
+  var logger=log4js.getLogger('User Controller');
+  logger.info('Initialization info');
+  logger.error('Initialization error');
+  logger.debug('Initialization debug');
+
+
+
+  process.on('uncaughtException', function (err:any) {
+    let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
+    let error= {
+      reason: 'uncaught exception',
+      message: err,
+      stack: err.stack,
+      code: 500
+    };
+    console.error(error);
+    _loggerService.logError('Catching uncaught Exceptions. : ' +err);
+    _loggerService.logError('Catching uncaught Exceptions stack : ' +err.stack);
+    //sharedService.errorHandler(error);
+    sharedService.mailToAdmin(error);
+  });
+
+  let syncAtEveryFifteenMinute = new CronJob('00 */5 * * * *', function() {
+      let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
+      rateAnalysisServices.SyncRateAnalysis();
+    }, function () {
+      console.log('restart server');
+    },
+    true
+  );
+  syncAtEveryFifteenMinute.start();
+  //logger log4js initialization
+  /*
+    console.log('Logger Initialization');
+
+   var logConfig=config.get('logger');
+
+    console.log('Logger Initialization 1');
+
+   var loggerLevel=config.get('logger.levels.[all]');
+
+    console.log('Logger Initialization 2');
+
+    var logger = log4js.getLogger(loggerLevel); // initialize the var to use.
+
+    console.log('Logger Initialization completed');
+
+    logger.info('This is Information Logger');
+    logger.error('This is Error Logger');
+    logger.debug('This is Debugger');
+
+    console.log('Logger appended in file');*/
   /**
    * Dev Mode.
    * @note Dev server will only give for you middleware.
    */
-  if (mode == 'dev') {
-    app.all('/*', function(req, res, next) {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-      next();
-    });
+  if (mode === 'dev') {
+    if (dist_runner === 'dist') {
+      app.all('/*', function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+        next();
+      });
 
-    routes.init(app);
+      app.use(Middlewares.configuration);
 
-    let root = path.resolve(process.cwd());
-    let clientRoot = path.resolve(process.cwd(), './dist/dev/client');
-    app.use(express.static(root));
-    app.use(express.static(clientRoot));
-    var renderIndex = (req: express.Request, res: express.Response) => {
-      res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
-    };
-   app.get('/*', renderIndex);
-    /**
-     * Api Routes for `Development`.
-     */
-  }
-  else {
-    /**
-     * Prod Mode.
-     * @note Prod mod will give you static + middleware.
-     */
+      let root = path.resolve(process.cwd());
+      let clientRoot = path.resolve(process.cwd(), './client/dev');
+      app.use(express.static(root));
+      app.use(express.static(clientRoot));
+      _serverDir = '/dist/server/dev';
+      app.use('/public', express.static(path.resolve(__dirname + _serverDir +'/public')));
+      var renderIndex = (req: express.Request, res: express.Response) => {
+        _clientDir = '/client/dev';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
+      app.get('/*', renderIndex);
+      /**
+       * Api Routes for `Development`.
+       */
+    } else {
+      app.all('/*', function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+        next();
+      });
 
-    /**
-     * Api Routes for `Production`.
-     */
-    routes.init(app);
-    /**
-     * Static.
-     */
-    app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
-    app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
-    app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+      /*routes.init(app);*/
+      app.use(Middlewares.configuration);
+      //cnextRoutes.cnextInit(app);
 
-    /**
-     * Spa Res Sender.
-     * @param req {any}
-     * @param res {any}
-     */
-    var renderIndex = function (req: express.Request, res: express.Response) {
-      res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
-    };
-    //app.get('*', function(req,res) {
-    //  res.sendFile(process.cwd() + '/dist/prod/client/index.html');
-    //});
+      let root = path.resolve(process.cwd());
+      let clientRoot = path.resolve(process.cwd(), './dist/client/dev');
+      app.use(express.static(root));
+      app.use(express.static(clientRoot));
+      _serverDir = '/dist/server/dev';
+      app.use('/public', express.static(path.resolve(__dirname+ _serverDir +'/public')));
+      let renderIndex = (req: express.Request, res: express.Response) => {
+        _clientDir = '/dist/client/dev';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
+      app.get('/*', renderIndex);
+      /**
+       * Api Routes for `Development`.
+       */
+    }
+  } else {
+    if(dist_runner === 'dist') {
+      /**
+       * Prod Mode.
+       * @note Prod mod will give you static + middleware.
+       */
 
-    /**
-     * Prevent server routing and use @ng2-router.
-     */
-    app.get('/*', renderIndex);
+      /**
+       * Api Routes for `Production`.
+       */
+      /*routes.init(app);*/
+      /*cnextRoutes.cnextInit(app);*/
+      /**
+       * Client Dir
+       */
+      _clientDir = './client/prod';
+      _serverDir = '/server/prod';
+
+      /**
+       * Static.
+       */
+      app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
+      app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
+      app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+      app.use('/public', express.static(path.resolve(__dirname+ _serverDir + '/public')));
+
+      /**
+       * Spa Res Sender.
+       * @param req {any}
+       * @param res {any}
+       */
+      var renderIndex = function (req: express.Request, res: express.Response) {
+        _clientDir = '/client/prod';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
+
+      //app.get('*', function(req,res) {
+      //  res.sendFile(process.cwd() + '/dist/prod/client/index.html');
+      //});
+
+      /**
+       * Prevent server routing and use @ng2-router.
+       */
+      app.get('/*', renderIndex);
+    } else {
+      /**
+       * Prod Mode.
+       * @note Prod mod will give you static + middleware.
+       */
+
+      /**
+       * Api Routes for `Production`.
+       */
+      app.use(Middlewares.configuration);
+      /**
+       * Client Dir
+       */
+      _clientDir = './dist/client/prod';
+      _serverDir = '/dist/server/prod';
+
+      /**
+       * Static.
+       */
+      app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
+      app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
+      app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+      app.use('/public', express.static(path.resolve(__dirname+ _serverDir+'/public')));
+
+      /**
+       * Spa Res Sender.
+       * @param req {any}
+       * @param res {any}
+       */
+      var renderIndex = function (req: express.Request, res: express.Response) {
+        _clientDir = '/dist/client/prod';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
+
+      //app.get('*', function(req,res) {
+      //  res.sendFile(process.cwd() + '/dist/prod/client/index.html');
+      //});
+
+      /**
+       * Prevent server routing and use @ng2-router.
+       */
+      app.get('/*', renderIndex);
+    }
   }
 
   /**
    * Server with gzip compression.
    */
   //HTTP START:
-  if(protocol == 'http') {
+  if (protocol === 'http') {
     return new Promise<http.Server>((resolve, reject) => {
       let server = app.listen(port, () => {
         var port = server.address().port;
         console.log('App is listening on port:' + port);
         resolve(server);
       });
+      server.timeout = 600000; //by default timeout set to 10 min for export functionality
     });
   } else {
     const options = {
-      key: fs.readFileSync("./server.key"),
-      cert: fs.readFileSync("./server.crt"),
-
+      // key: fs.readFileSync('./staging.jobmosis.com.key'),
+      // cert: fs.readFileSync('./staging.jobmosis.com.crt'),
+      handshakeTimeout: 600000, //by default timeout set to 10 min for export functionality, Need to test this
+      passphrase: 'tpl123',
       spdy: {
         protocols: ['h2']
       }
     };
 
     return spdy.createServer(options, app)
-      .listen(port, (error:any) => {
+      .listen(port, (error: any) => {
         if (error) {
           console.error(error)
-          return process.exit(1);
+          // return process.exit(1);
+          process.exit(1);
         } else {
           console.log('http2 Listening on port: ' + port + '.');
         }
-      })
+      });
   }
-};
+}

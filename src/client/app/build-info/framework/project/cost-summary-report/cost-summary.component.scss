@@ -1,0 +1,460 @@
+@import '../../../../../css/common';
+
+.clone-modal {
+  .modal-dialog {
+    width: 450px;
+  }
+  .modal-body {
+    height: 500px;
+    overflow-y: scroll;
+  }
+  .next-btn,
+  .clone-btn {
+    padding: 0 40px;
+    width: auto;
+  }
+  .modal-header {
+    .modal-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 95%;
+    }
+  }
+}
+.apartment-configuration-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.following-items-title {
+  border-bottom: 1px solid $clone-border;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  padding: 0 0 10px;
+  text-align: left;
+}
+.cost-summary-row-list {
+  th {
+    &:first-child {
+      border-radius: 0 !important;
+    }
+  }
+  .text-center {
+    text-align: center;
+  }
+}
+.collapse-items {
+  border-bottom: 1px solid $clone-border;
+  float: left;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+  input[type=checkbox] {
+    margin: 4px 3px 0 3px;
+    padding: 0;
+  }
+  a {
+    color: $name;
+    font-weight: 600;
+  }
+  .collapse.in {
+    padding: 10px 0 0 10px;
+    input[type=checkbox] {
+      width: 30px;
+    }
+  }
+  .inner-items {
+    float: left;
+    padding: 0 0 10px;
+  }
+  .sub-inner-items {
+    padding: 10px 0 0 25px;
+  }
+}
+.up-arrow {
+  display: none;
+}
+
+.total-body {
+  padding: 15px 0 !important;
+}
+
+.table-dashboard {
+  thead > tr,
+  tbody > tr {
+    box-shadow: 10px 10px 10px $panel-shadow;
+
+    th:nth-child(3),
+    td:nth-child(3),
+    th:nth-child(6),
+    td:nth-child(6) {
+      width: 120px;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 140px;
+    }
+
+    td:nth-child(3),
+    td:nth-child(4),
+    td:nth-child(6) {
+      text-align: right;
+    }
+
+    td:nth-child(4) > .budgeted-amount {
+      display: block;
+      height: 26px;
+      padding: 7px 24px 7px 0;
+      width: 120px;
+    }
+
+    td:nth-child(4) > .edit-field {
+      display: none;
+      width: 120px;
+      input {
+        text-align: right;
+        width: 100%;
+      }
+    }
+
+    td {
+      &:first-child {
+        border-radius: 6px 0 0 6px;
+      }
+
+      &:nth-child(7) {
+        border-radius: 0 6px 6px 0;
+        text-align: right;
+        width: 120px;
+      }
+    }
+
+    th {
+      &:first-child {
+        border-radius: 6px 0 0 6px;
+      }
+
+      &:last-child {
+        border-radius: 0 6px 6px 0;
+      }
+    }
+
+    &:hover {
+      td:nth-child(4) > .budgeted-amount {
+        display: none;
+      }
+
+      td:nth-child(4) > .edit-field {
+        display: block;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.add-cost-head {
+  td {
+    &:last-child {
+      border-radius: 0 6px 6px 0;
+    }
+  }
+}
+
+.total-table {
+  tbody > tr {
+    &:hover {
+      background: $white !important;
+    }
+
+    td {
+      &:last-child {
+        border-radius: 0 6px 6px 0;
+        text-align: right;
+        width: 120px;
+      }
+    }
+  }
+}
+
+.wrapper {
+  .btn-get-amount {
+    min-width: 100px;
+  }
+}
+
+.panel-default {
+  .panel-heading {
+    background: $header-bg;
+  }
+}
+
+.btn-add-item {
+  background: $white;
+  border: 0;
+  border-radius: 20px;
+  color: $heading;
+  font-size: 12px;
+  font-weight: 800;
+  height: 36px;
+  margin: 0;
+  padding: 6px 60px;
+
+  .glyphicon-plus {
+    padding-right: 6px;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $white;
+    border: 0;
+    color: $heading;
+  }
+}
+
+.download-pdf-list {
+  span {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 0 0;
+  }
+}
+
+.first-child-list {
+  &:hover {
+    background: transparent !important;
+  }
+}
+
+.filter-dropdrown {
+  ul {
+    float: right;
+    width: auto;
+
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .wrapper {
+    padding: 0;
+  }
+  .left-content {
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .right-content {
+    display: none;
+  }
+
+  .table-dashboard {
+    thead {
+      display: none;
+    }
+
+    tbody {
+      float: left;
+      width: 100%;
+    }
+
+    tbody > tr {
+      border-radius: 3px;
+      float: left;
+      margin-top: 10px;
+      width: 100%;
+
+      td {
+        padding: 5px 10px;
+        text-align: left !important;
+
+        &:first-child,
+        &:nth-child(2),
+        &:nth-child(5) {
+          float: left;
+          font-size: 14px;
+          font-weight: bold;
+          width: 100%;
+
+          p {
+            color: $body-text;
+            font-size: 12px;
+            margin-bottom: 0;
+          }
+        }
+
+        &:first-child {
+          padding: 10px 10px 5px;
+        }
+
+        &:nth-child(3),
+        &:nth-child(6) {
+          float: left;
+          width: 40%;
+        }
+
+        &:nth-child(4),
+        &:nth-child(7) {
+          float: left;
+          width: 60%;
+        }
+
+        .border-top {
+          border-top: 1px solid $border-color;
+          padding-top: 10px;
+        }
+
+        span {
+          display: block;
+          font-weight: 600;
+          padding: 7px 0;
+        }
+      }
+
+      .border-left {
+        border: 0;
+      }
+
+      &:hover {
+        td:nth-child(4) > .budgeted-amount {
+          display: block;
+        }
+
+        td:nth-child(4) > .edit-field {
+          display: none;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+  .cost-summary-table {
+    tbody > tr {
+      td {
+        &:last-child {
+          display: none;
+        }
+      }
+    }
+
+    tbody > .total {
+      td {
+        &:last-child {
+          display: block;
+        }
+      }
+    }
+
+    tbody > .add-item-row {
+      border: 0;
+      td {
+        &:last-child {
+          display: block;
+          text-align: center !important;
+        }
+
+        span {
+          display: inline-block;
+          padding: 0 6px 0 0;
+        }
+      }
+    }
+  }
+
+  .grand-total-table {
+    tbody > tr {
+      margin-top: 0;
+    }
+  }
+
+  .filter-dropdrown {
+    .page-heading {
+      padding-left: 10px;
+    }
+
+    .page-heading > h5 {
+      margin: 2px 0;
+    }
+
+    .dropdown-menu {
+      .col-sm-12 {
+        text-align: left !important;
+      }
+    }
+
+    ul {
+      float: none;
+      padding: 0 10px 10px;
+      width: auto;
+      li {
+        display: inline-block;
+        text-align: left;
+        width: calc(50% - 8px);
+
+        label {
+          font-size: 14px;
+          width: 100%;
+        }
+
+        select {
+          max-width: 100%;
+          width: 100%;
+        }
+
+        &:first-child {
+          margin-right: 5px;
+        }
+
+        &:last-child {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  .wrapper {
+    .select-costing {
+      margin: 0;
+    }
+  }
+
+  #cost-summary-panel {
+    padding-top: 0;
+  }
+
+  .panel-default {
+    .panel-heading {
+      border-radius: 3px;
+      display: block;
+      min-height: inherit;
+      height: auto;
+
+      .panel-name {
+        background: $header-bg;
+        border-radius: 3px;
+        float: left;
+        font-size: 18px;
+        padding: 10px 20px 10px 25px;
+        position: relative;
+        width: 100%;
+      }
+    }
+
+    a {
+      .caret {
+        top: 20px;
+      }
+    }
+  }
+}
+
+
+
+
+

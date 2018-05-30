@@ -1,10 +1,12 @@
 import { Route } from '@angular/router';
+import { LoginComponent } from './login.component';
+import { LoginauthGuard } from './login-auth-guard.service';
 
-import { LoginComponent } from './index';
 
 export const LoginRoutes: Route[] = [
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'signin',
+    component: LoginComponent,
+    canActivate:[LoginauthGuard]
   }
 ];

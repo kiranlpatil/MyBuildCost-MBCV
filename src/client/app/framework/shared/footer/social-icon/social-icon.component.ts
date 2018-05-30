@@ -1,5 +1,5 @@
-import {  Component } from '@angular/core';
-import { ImagePath } from '../../constants';
+import { Component } from '@angular/core';
+import { ImagePath } from '../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -9,9 +9,9 @@ import { ImagePath } from '../../constants';
 })
 export class SocialIconComponent {
 
-  FACEBOOK_ICON:string;
-  GOOGLE_PLUS_ICON:string;
-  LINKEDIN_ICON:string;
+  FACEBOOK_ICON: string;
+  GOOGLE_PLUS_ICON: string;
+  LINKEDIN_ICON: string;
 
   constructor() {
     this.FACEBOOK_ICON = ImagePath.FACEBOOK_ICON;

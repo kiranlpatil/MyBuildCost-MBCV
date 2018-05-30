@@ -1,21 +1,15 @@
-@import '../../../../css/common';
+@import '../../../framework/landing-page/landing-page.component';
 
 .activate-user {
   .content {
-
-    h1 {
-      color: $wrapper-text;
-      margin: 0;
+    h5 {
+      font-size: 20px;
+      background: transparent !important;
+      border: 0 !important;
     }
-  }
-}
 
-@media (max-width: 768px) {
-  .activate-user {
-    .content {
-      h1 {
-        font-size: 22px;
-      }
+    p {
+      margin-bottom: 20px;
     }
   }
 }

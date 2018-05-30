@@ -1,0 +1,17 @@
+@import '../../../../../../css/common';
+
+.download-pdf {
+  border-bottom: 1px solid #f1f2f2;
+  border-radius: 0;
+  font-size: 12px;
+  margin: 0;
+  padding: 5px 0 5px 10px;
+  cursor: pointer;
+}
+.pdf-list {
+  p {
+    &:hover {
+      background: $page-background;
+    }
+  }
+}

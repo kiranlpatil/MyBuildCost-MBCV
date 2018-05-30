@@ -1,17 +1,19 @@
-<div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}" >
-  <div class="page-header">
-    <ul>
-      <li><a (click)="onLogin()">Login</a></li>
-      <li><a (click)="onSignUp()">Register</a></li>
-    </ul>
-  </div>
-  <div class="inner-content clearfix">
-    <h4>Get Aligned</h4>
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Nullam sem turpis, sodales eu urna sed, posuere finibus leo finibus.
-        Sed et lorem eu mi tincidunt fringilla at non odio.
-        Vivamus auctor quam a lobortis tincidunt. Aliquam faucibus nulla lorem, sed imperdiet justo bibendum ac. In semper rutrum metus fringilla mollis.</p>
+<div class="landing-page-wrapper">
+  <div class="container">
+    <div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+      <div class="inner-content clearfix fadein-element">
+        <img class="logo-image" src={{MY_LOGO}} alt="Facebook Link">
+        <ul>
+          <li class="fadein-sub-element">Estimate Project Cost</li>
+          <li class="fadein-sub-element">Budget it</li>
+          <li class="fadein-sub-element">Control it</li>
+        </ul>
+        <p class="fadein-sub-element tagline1"> Execute project within the approved budget</p>
+        <button  class="btn btn-primary fadein-sub-element" (click)="goToSignUp()">Start Free Trial</button>
+        <p class="fadein-sub-element tagline2">Already have an account?</p>
+        <button  class="btn btn-default fadein-sub-element" (click)="goToSignIn()">Sign In</button>
+      </div>
     </div>
   </div>
 </div>
+<img src="assets/build-info/page_background/page-bg.png" class="mobile-background-image fadein-element"/>

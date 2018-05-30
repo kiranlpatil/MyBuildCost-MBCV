@@ -1,0 +1,47 @@
+@import '../../../framework/landing-page/landing-page.component';
+
+.page-background {
+  background: no-repeat fixed 0 100%;
+  .inner-content {
+    position: relative;
+    .create-new-project {
+      img {
+        margin: 20px auto 15px;
+        padding: 37px 45px;
+        border: 2px solid $border-color;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .get-started {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .get-started > img {
+      margin: 0 auto;
+    }
+
+    .get-started > h5 {
+      font-weight: 600;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .page-background {
+    .inner-content {
+      .get-started {
+        position: relative;
+        bottom: auto;
+        right: auto;
+      }
+      .content {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+<div *ngIf="workItemData">
+  <table class="table table-dashboard table-categories">
+    <tbody>
+      <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
+        <td>
+          <span class="mobile-headings">{{getTableHeadings().ITEM}}</span>
+          <input placeholder="Flat/Floor/Parking Details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (focus)="changeQuantityName(quantity.name)"
+                 (change)="updateQuantityDetails(quantity, getLabel().NAME)">
+        </td>
+
+        <td>
+          <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
+          <div class="edit-field" [class.active-quantity]="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
+            <input type="number"  [(ngModel)]="quantity.total"
+                   id="quantity" size="10" class="form-control clear" (focus)="setQuantityTotal(quantity, quantity.total)"
+                   (change)="updateFloorwiseQunatityConfirmation(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
+            <span class="calculator" id="getQuantity{{quantityIndex}}"
+                  (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_QUANTITY_TAB, quantityIndex)">
+                 <img src="assets/build-info/dashboard/calculator2.png" />
+            </span>
+          </div>
+        </td>
+
+        <td>
+          <span class="mobile-headings">{{getTableHeadings().UNIT}}</span>
+          <span class="value" *ngIf="!workItemData.unit">-</span>
+          <span class="value" *ngIf="workItemData.unit">{{workItemData.unit}}</span>
+        </td>
+
+        <td>
+          <span class="mobile-headings">{{getTableHeadings().RATE_PER_UNIT}}</span>
+          <span class="value" *ngIf="workItemData.rate.isEstimated">{{workItemData.rate.total|number : '1.2-2' }}</span>
+          <span class="value"  *ngIf="!workItemData.rate.isEstimated">-</span>
+        </td>
+
+        <td>
+          <span class="mobile-headings">{{getTableHeadings().COST}}</span>
+          <div *ngIf="workItemData.isDirectRate === false && workItemData.rate.isEstimated === false">
+            <span class="value">-</span>
+          </div>
+          <div *ngIf="quantity.total * workItemData.rate.total !== 0 && workItemData.rate.isEstimated && workItemData.isDirectRate === false" (click)="getRateByQuantity(quantity.total * workItemData.rate.total, quantityIndex, quantity.total, getLabel().GET_RATE_BY_QUANTITY)">
+            <span class="value edit-cost" [class.active-cost]="(quantityIndex === currentFloorIndex && showInnerView === getLabel().GET_RATE_BY_QUANTITY)">
+              {{ (quantity.total * workItemData.rate.total)|number: '1.0-0' }}
+            </span>
+          </div>
+          <div>
+            <span class="value" *ngIf="workItemData.isDirectRate && quantity.total * workItemData.rate.total === 0">-</span>
+            <span class="value" *ngIf="workItemData.isDirectRate &&  quantity.total * workItemData.rate.total !== 0">{{(quantity.total * workItemData.rate.total)|number: '1.0-0'}}</span>
+          </div>
+        </td>
+
+        <td>
+          <span class="mobile-headings">{{getTableHeadings().RATEANALYSIS}}</span>
+          <span class="value">-</span>
+        </td>
+
+        <td>
+          <div data-toggle="modal" title="Delete Quantity Details"
+               data-target="#deleteQuantityDetails"
+               (click)="setQuantityNameForDelete(quantity.name)" class="delete-Quantity-details">
+            <img alt="Delete Quantity Details" src="assets/build-info/dashboard/delete-blue.png" />
+          </div>
+        </td>
+
+        <td class="show-embedded-table">
+          <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
+
+              <div>
+                <bi-get-quantity [quantityItems]="quantityItemsArray"
+                                 [quantityDetails]="quantityDetails"
+                                 [workItem]="workItem"
+                                 [workItemUnit] = "workItem.unit"
+                                 [categoryRateAnalysisId]="categoryRateAnalysisId"
+                                 [workItemRateAnalysisId]="workItemRateAnalysisId"
+                                 [categoryDetails] ="categoryDetails"
+                                 [keyQuantity]="keyQuantity"
+                                 [quantityId]="quantityId"
+                                 [workItemsList] ="workItemsList"
+                                 [innerView]="getLabel().WORKITEM_QUANTITY_TAB"
+                                 (closeInnerView)="closeInnerView($event)"
+                                 (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                 [baseUrl] = "baseUrl">
+                </bi-get-quantity>
+              </div>
+          </div>
+
+          <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().GET_RATE_BY_QUANTITY">
+            <bi-get-rate [rate]="rateItemsArray"
+                         [categoryDetails] ="categoryDetails"
+                         [workItemsList] ="workItemsList"
+                         [ratePerUnitAmount]="ratePerUnitAmount"
+                         [baseUrl] = "baseUrl"
+                         [innerView]="getLabel().GET_RATE_BY_QUANTITY"
+                         (closeInnerView)="closeInnerView($event)"
+                         [disableRateField]="true">
+            </bi-get-rate>
+          </div>
+
+          <div class="modal fade default-modal" id="updateFloorwiseQuantityModal{{quantityIndex}}" role="dialog">
+            <bi-update-confirmation-modal
+              [elementType]="updateConfirmationForDirectQuantity"
+              [quantity]="quantity"
+              [total]="total"
+              [workItemUnit]="workItemData.unit"
+              [detailedQuantityFlag]="flagForFloorwiseQuantity"
+              [quantityIndex]="quantityIndex"
+              (updateTotalEvent) = "updateTotal($event)"
+              (updateElementEvent)="updateDetailedQuanityAfterConfirmation($event)">
+            </bi-update-confirmation-modal>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

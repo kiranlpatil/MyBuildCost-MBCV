@@ -1,25 +1,31 @@
-/**
- * Created by admin on 10/5/16.
- */
-
+let config = require('config');
+let path = require('path');
 class MailAttachments {
-    public static AttachmentArray : Array<any> = [
-        {
-            path: './src/server/app/framework/public/images/logo/logo-white.png',
-            cid: 'unique@company-logo'
-        },{
-            path: './src/server/app/framework/public/images/banner/banner.png',
-            cid: 'unique@banner'
-        },{
-            path: './src/server/app/framework/public/images/footer/fb.png',
-            cid: 'unique@fbfooter'
-        },{
-            path: './src/server/app/framework/public/images/footer/google-plus.png',
-            cid: 'unique@googleplus'
-        },{
-            path: './src/server/app/framework/public/images/footer/linked-in.png',
-            cid: 'unique@linkedin'
-        }
-    ];
+  public static AttachmentArray: Array<any> = [
+    {
+      path: path.resolve() + config.get('application.publicPath')+'images/logo/application-logo.png',
+      cid: 'unique@application-logo'
+    }
+  ];
+  public static ForgetPasswordAttachmentArray: Array<any> = [
+    {
+      path: path.resolve() + config.get('application.publicPath')+'images/logo/application-logo.png',
+      cid: 'unique@application-logo'
+    },
+    {
+      path:  path.resolve() + config.get('application.publicPath')+'images/banner/password-reset.png',
+      cid: 'unique@password-reset'
+    },
+  ];
+  public static WelcomeAboardAttachmentArray:Array<any>=[
+    {
+      path: path.resolve() + config.get('application.publicPath')+'images/logo/application-logo.png',
+      cid: 'unique@application-logo'
+    },
+    {
+      path:  path.resolve() + config.get('application.publicPath')+'images/banner/welcome-aboard.png',
+      cid: 'unique@welcome-aboard'
+    }
+  ];
 }
 export=MailAttachments;

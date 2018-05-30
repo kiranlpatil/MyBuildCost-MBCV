@@ -1,0 +1,169 @@
+@import '../../../../css/common';
+
+.error-messages {
+  color: $error;
+  font-size: 10px;
+  font-style: italic;
+  margin: 0;
+  position: absolute;
+  line-height: 15px;
+}
+.wrapper {
+  background-color: $white;
+  min-height: calc(100vh - 80px);
+  padding: 40px 0 20px;
+  text-align: center;
+
+  .inner-wrapper {
+    margin: 0 auto;
+    max-width: 450px;
+  }
+
+  .dashboard-profile-content {
+    text-align: left;
+
+    h5 {
+      color: $name;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0 0 15px;
+      padding: 0 15px;
+      background: transparent !important;
+      border-bottom: 0 solid $border-color;
+    }
+
+    h5 > .glyphicon-remove {
+      color: $white;
+      font-size: 13px;
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      cursor: pointer;
+    }
+
+    p {
+      text-align: left;
+      margin: 0 0 15px;
+    }
+  }
+
+  .candidate-profile-content {
+    width: 60%;
+  }
+
+  p {
+    padding: 0 15px;
+  }
+
+  .btn-modal {
+    background: transparent;
+    padding: 0;
+  }
+
+  .form-group {
+    margin-bottom: 25px;
+  }
+
+  .profile-form {
+    border-top: 1px solid $border-color;
+    margin-top: 20px;
+    padding-top: 20px;
+
+    label {
+      width: 100%;
+      z-index: 1 !important;
+    }
+
+    label > span {
+      cursor: pointer;
+      float: right;
+    }
+  }
+
+  .in {
+    .modal-dialog {
+      transform: translate(0, -25%);
+    }
+  }
+
+  .fb-email-input {
+    pointer-events: none;
+  }
+
+  .hide-list {
+    display: none;
+  }
+
+  .btn-primary {
+    display: table;
+    margin: 0 auto 20px;
+  }
+}
+
+//modal
+.modal {
+  .modal-dialog {
+    h5 {
+      background: $theme-color !important;
+      color: $body-text;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0;
+    }
+  }
+
+  .modal-content {
+    border: 0;
+    margin: 7px 0;
+  }
+
+  .modal-body {
+    padding: 25px;
+    text-align: left;
+
+    p {
+      text-align: left;
+    }
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .dashboard-profile {
+    .dashboard-profile-content {
+      width: 75%;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .dashboard-profile {
+    vertical-align: top;
+    padding-bottom: 65px;
+
+    .dashboard-profile-content {
+      top: 50px;
+      margin-bottom: 0;
+      padding: 15px 0 0;
+      width: calc(100% - 30px);
+      border: 0;
+      box-shadow: none;
+    }
+
+    form {
+      padding: 15px 0 0;
+    }
+  }
+
+  .wrapper {
+    padding: 20px 10px 0 10px;
+    .description-container {
+      display: inline-block;
+      .description {
+        width: auto;
+      }
+    }
+    .btn-primary {
+      margin: 0 auto 25px;
+    }
+  }
+}

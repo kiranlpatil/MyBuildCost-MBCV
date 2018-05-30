@@ -1,3 +1,3 @@
 *.js
 *.js.map
-/.idea
+env/env-config.interface.metadata.json

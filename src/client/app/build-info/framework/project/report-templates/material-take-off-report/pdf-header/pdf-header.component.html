@@ -1,0 +1,39 @@
+<h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
+  {{getMaterialTakeOffElements().MATERIAL_TAKE_OFF_REPORT_HEADING}}
+</h2>
+<div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
+  {{generatedDate | date:'dd MMMM yyyy'}}
+</div>
+
+<div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
+  <div *ngIf="companyName !== 'undefined' && companyName !== '' && company_name !== null" style="padding-bottom: 5px;">
+    <strong>{{getPDFReportHeaders().COMPANY_NAME}}</strong>
+    <span>{{companyName}}</span>
+  </div>
+
+  <div  style="padding-bottom: 5px;">
+    <strong>{{getPDFReportHeaders().PROJECT_NAME}}</strong>
+    <span>{{projectName}}</span>
+  </div>
+
+  <div  style="padding-bottom: 5px;" *ngIf="buildingName !== getMaterialTakeOffElements().ALL_BUILDINGS">
+    <strong>{{getPDFReportHeaders().BUILDING_NAME}}</strong>
+    <span>{{ buildingName }}</span>
+  </div>
+
+  <div  style="padding-bottom: 5px;" *ngIf="buildingName === getMaterialTakeOffElements().ALL_BUILDINGS">
+    <strong>{{getPDFReportHeaders().BUILDING}}</strong>
+    <span>{{ buildingName }}</span>
+  </div>
+
+  <div  style="padding-bottom: 5px;" *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD">
+    <strong>{{getPDFReportHeaders().COST_HEAD_NAME}}</strong>
+    <span>{{ elementName }}</span>
+  </div>
+
+  <div  style="padding-bottom: 5px;" *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL">
+    <strong>{{getPDFReportHeaders().MATERIAL_NAME}}</strong>
+    <span>{{ elementName }}</span>
+  </div>
+</div>
+

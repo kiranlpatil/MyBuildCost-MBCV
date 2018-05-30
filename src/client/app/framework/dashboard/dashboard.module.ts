@@ -3,16 +3,18 @@
  */
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard.component';
-import { ProfileService } from '../shared/profileservice/profile.service';
+import { CandidateDashboardHeaderComponent } from '../../user/candidate-dashboard-header/candidate-dashboard-header.component';
+import { ProfileService } from '../../framework/shared/profileservice/profile.service';
 import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { AppModule } from '../../app.module';
-import { DashboardService } from './dashboard.service';
+import { DashboardService } from '../../user/services/dashboard.service';
 
 @NgModule({
-  imports : [AppModule],
-  declarations: [DashboardComponent,HeaderComponent, FooterComponent],
+  imports: [AppModule],
+  declarations: [DashboardComponent, HeaderComponent, CandidateDashboardHeaderComponent, FooterComponent],
   exports: [DashboardComponent],
   providers: [DashboardService, ProfileService]
 })
-export class DashboardModule { }
+export class DashboardModule {
+}

@@ -1,34 +1,31 @@
-<section class="wrapper activate-user" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+<cn-user-header></cn-user-header>
 
-  <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
-  <app-loader></app-loader>
-
-  <img class="app-logo" src={{MY_LOGO_PATH}} alt="Application Logo">
-  <p>{{MY_TAG_LINE}}</p>
-
-  <div class="col-lg-4 col-lg-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 content">
-
-    <h1>{{resultStatus}}!</h1>
-
-    <div class="clearfix">&nbsp;</div>
-
-    <p>{{emailBody}} </p>
-
-    <div class="clearfix">&nbsp;</div>
-
-    <a class="btn btn-default"(click)="navigateTo();">LOGIN</a>
-
+<section class="container activate-user">
+  <div class="page-background">
+    <div class="inner-content clearfix">
+      <div class="content" *ngIf="!isEmailVerification;else other_content">
+        <div class="inner-content">
+          <h5>{{activationMessageHeading}}</h5>
+          <p>{{activationMessageSubHeading}}<br /></p>
+          <p>{{activationMessage}}</p>
+          <div class="btn-group">
+            <a class="btn btn-primary" (click)="navigateTo();">Sign In</a>
+          </div>
+        </div>
+        <ng-template #other_content>
+          <div class="content" >
+            <div class="inner-content">
+              <h5>{{emailVerificationMessageHeading}}</h5>
+              <p>{{emailVerificationMessage}}<br /></p>
+              <div class="btn-group">
+                <a class="btn btn-success" (click)="navigateTo();">Sign In</a>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
   </div>
-
-  <div class="clearfix">&nbsp;</div>
-
-  <div class="other-links footer">
-    <a>{{UNDER_LICENCE}}</a>
-  </div>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
-
 </section>
 
 
