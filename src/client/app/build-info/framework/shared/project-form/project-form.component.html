@@ -1,66 +1,66 @@
-<form class="col-xs-12 form-details" [formGroup]="projectForm" (submit)="submitForm()">
+<form class="col-xs-12 form-details fadein-element" [formGroup]="projectForm" (submit)="submitForm()">
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.name" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().PROJECT_NAME}}</label>
     <input type="text" [(ngModel)]="projectModel.name" formControlName="name" id="name" class="form-control" placeholder="Enter project name" required/>
   </div>
 
-  <div  class="form-group project-address-field">
+  <div  class="form-group fadein-sub-element project-address-field">
     <control-messages [control]="projectForm.controls.region" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().PROJECT_ADDRESS}}</label>
     <textarea [(ngModel)]="projectModel.region" formControlName="region" id="region" class="form-control" placeholder="Enter project address"></textarea>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.plotArea" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().PLOT_AREA}}<small> {{getLabels().AREA_UNIT_IN_SQFT}}</small></label>
     <input type="number" [(ngModel)]="projectModel.plotArea" formControlName="plotArea" id="plotArea" class="form-control" placeholder="Enter plot area" required/>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.plotPeriphery" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().PLOT_PERIPHERY_LENGTH}}<small> {{getLabels().AREA_UNIT_IN_RFT}}</small></label>
     <input type="number" [(ngModel)]="projectModel.plotPeriphery" formControlName="plotPeriphery" id="plotPeriphery" class="form-control" placeholder="Enter plot periphery length" required/>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.podiumArea" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().PODIUM_AREA}}<small> {{getLabels().AREA_UNIT_IN_SQFT}}</small></label>
     <input type="number" [(ngModel)]="projectModel.podiumArea" formControlName="podiumArea" id="podiumArea" class="form-control" placeholder="Enter podium area" required/>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.openSpace" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().OPEN_SPACE}}<small> {{getLabels().AREA_UNIT_IN_SQFT}}</small></label>
     <input type="number" [(ngModel)]="projectModel.openSpace" formControlName="openSpace" id="openSpace" class="form-control" placeholder="Enter open space" required/>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.slabArea" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().SLAB_AREA_OF_CLUB_HOUSE}}<small> {{getLabels().AREA_UNIT_IN_SQFT}}</small></label>
     <input type="number" [(ngModel)]="projectModel.slabArea" formControlName="slabArea" id="slabArea"  class="form-control" placeholder="Enter slab area" required/>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.poolCapacity" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().SWIMMING_POOL_CAPACITY}}<small> {{getLabels().UNIT_IN_LITERS}}</small></label>
     <input type="number" [(ngModel)]="projectModel.poolCapacity" formControlName="poolCapacity" id="poolCapacity"  class="form-control" placeholder="Enter swimming pool capacity" required/>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.projectDuration" [submitStatus] = "submitStatus"  [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().PROJECT_DURATION}}<small> {{getLabels().DURATION_IN_MONTHS}}</small></label>
     <input type="number" [(ngModel)]="projectModel.projectDuration" formControlName="projectDuration" id="projectDuration" class="form-control" placeholder="Enter project duration" required>
   </div>
 
-  <div  class="form-group">
+  <div  class="form-group fadein-sub-element">
     <control-messages [control]="projectForm.controls.totalNumOfBuildings" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().NUM_OF_BUILDINGS}}</label>
     <input type="number" [(ngModel)]="projectModel.totalNumOfBuildings" formControlName="totalNumOfBuildings" id="totalNumOfBuildings" class="form-control" placeholder="Enter total no. of buildings" required/>
   </div>
 
-  <div class="button-group">
+  <div class="button-group fadein-sub-element">
     <button type="submit" class="btn btn-primary">{{submitActionLabel}}</button>
   </div>
 </form>

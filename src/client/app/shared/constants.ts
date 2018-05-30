@@ -211,6 +211,7 @@ export class Messages {
   public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'Selected file already exists';
   public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
+  public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor/Parking Details';
 }
 
 export class NavigationRoutes {
@@ -644,4 +645,18 @@ export class StandardNotes {
     '<li><p>The contents/services under this rate analysis shall be used only for reference. The user shall verify the' +
     ' content before using it. Big Slice Technologies Pvt. Ltd. (OPC) shall not be held responsible for any' +
     ' consequences resulted due to use of the contents/services of this rate analysis.</p></li></ul>';
+}
+
+export class Animations {
+
+  public static defaultDelayFactor = 0.03;
+
+  public static getListItemAnimationStyle(index : number, delayFactor : number) {
+    return {
+      'transition-delay': index * delayFactor + 's',
+      'opacity': 1,
+      // 'margin-top': '5px',
+      'transform': 'scale(1)'
+    };
+  }
 }

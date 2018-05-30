@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
-  ValueConstant, CurrentView, ScrollView
+  ValueConstant, CurrentView, ScrollView, Animations
 } from '../../../../shared/constants';
 import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
@@ -26,8 +26,9 @@ declare let $: any;
   styleUrls: ['cost-summary.component.css'],
 })
 
-export class CostSummaryComponent implements OnInit {
+export class CostSummaryComponent implements OnInit, AfterViewInit {
 
+  animateView: boolean = false;
   @ViewChild('content') content: ElementRef;
   buildingsReport: Array <BuildingReport>;
   amenitiesReport: BuildingReport;
@@ -431,6 +432,17 @@ export class CostSummaryComponent implements OnInit {
 
   getScrollView() {
     return ScrollView;
+  }
+
+  getListItemAnimation(index : number) {
+    return Animations.getListItemAnimationStyle(index, Animations.defaultDelayFactor);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      console.log('animated');
+      this.animateView = true;
+    },150);
   }
 
 }

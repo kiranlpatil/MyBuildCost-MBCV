@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { NavigationRoutes, Button } from '../../../shared/constants';
+import { NavigationRoutes, Button, Animations } from '../../../shared/constants';
 import { ProjectService } from '../project/project.service';
 import { Project } from './../model/project';
 
@@ -11,8 +11,9 @@ import { Project } from './../model/project';
   styleUrls: ['project-list.component.css']
 })
 
-export class ProjectListComponent implements OnInit {
-
+export class ProjectListComponent implements OnInit, AfterViewInit {
+  isVisible: boolean = false;
+  animateView: boolean = false;
   projects : Array<Project>;
 
   constructor(private projectService: ProjectService, private _router: Router) {
@@ -35,6 +36,7 @@ export class ProjectListComponent implements OnInit {
 
   onGetAllProjectSuccess(projects : any) {
     this.projects = projects.data;
+    this.isVisible = true;
   }
 
   onGetAllProjectFailure(error : any) {
@@ -43,5 +45,16 @@ export class ProjectListComponent implements OnInit {
 
   getButton() {
     return Button;
+  }
+
+  getListItemAnimation(index : number) {
+    return Animations.getListItemAnimationStyle(index, 0.1);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      console.log('animated');
+      this.animateView = true;
+    },150);
   }
 }
