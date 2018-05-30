@@ -20,7 +20,7 @@ import { SteelQuantityItems } from '../../../../model/SteelQuantityItems';
   moduleId: module.id,
   selector: 'bi-get-quantity-steel',
   templateUrl: 'get-quantity-steel.component.html',
-  styleUrls: ['get-quantity-steel.component.scss'],
+  styleUrls: ['get-quantity-steel.component.css'],
 })
 
 export class GetSteelQuantityComponent implements OnInit {

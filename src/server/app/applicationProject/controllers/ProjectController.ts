@@ -31,7 +31,7 @@ class ProjectController {
         if(error) {
           next(error);
         } else {
-          logger.info(result._doc.name+' project is created ');
+          logger.info(' project is created ');
           next(new Response(200,result));
         }
       });

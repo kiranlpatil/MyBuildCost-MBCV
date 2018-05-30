@@ -69,26 +69,60 @@ class ProjectService {
       callback(new CostControllException('UserId Not Found', null), null);
     }
 
-    this.projectRepository.create(data, (err, res) => {
-      if (err) {
+    this.userService.checkForValidSubscription(user._id, (err, resp) => {
+      if(err) {
         callback(err, null);
       } else {
-        logger.info('Project service, create has been hit');
-        logger.debug('Project ID : ' + res._id);
-        logger.debug('Project Name : ' + res.name);
-        let projectId = res._id;
-        let newData = {$push: {project: projectId}};
-        let query = {_id: user._id};
-        this.userService.findOneAndUpdate(query, newData, {new: true}, (err, resp) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
-          if (err) {
-            callback(err, null);
-          } else {
-            delete res.category;
-            delete res.rate;
-            callback(null, res);
+        if(resp.subscription) {
+          if(resp.subscription &&
+            resp.subscription.purchased.length > 0) {
+            let prefix = 'Trial Project ';
+            let projectName = prefix.concat(data.name);
+            data.name = projectName;
           }
-        });
+          this.projectRepository.create(data, (err, res) => {
+            if (err) {
+              callback(err, null);
+            } else {
+              logger.info('Project service, create has been hit');
+              logger.debug('Project ID : ' + res._id);
+              logger.debug('Project Name : ' + res.name);
+              let projectId = res._id;
+
+              this.userService.findById(user._id, (err, resp) => {
+                logger.info('Project service, findOneAndUpdate has been hit');
+                if (err) {
+                  callback(err, null);
+                } else {
+
+                  let subscriptionPackageList = resp.subscription;
+                  for(let subscription of subscriptionPackageList) {
+                    if(subscription.projectId.length === 0) {
+                      subscription.projectId.push(projectId);
+                    }
+                  }
+
+                  let newData = {
+                    $push: {project: projectId},
+                    $set : { subscription : subscriptionPackageList}
+                  };
+
+                  let query = {_id: user._id};
+                  this.userService.findOneAndUpdate(query, newData, {new: true}, (err, resp) => {
+                    logger.info('Project service, findOneAndUpdate has been hit');
+                    if (err) {
+                      callback(err, null);
+                    } else {
+                      delete res.category;
+                      delete res.rate;
+                      callback(null, res);
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
       }
     });
   }

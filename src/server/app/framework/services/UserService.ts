@@ -77,6 +77,31 @@ class UserService {
     });
   }
 
+  checkForValidSubscription(userid : string, callback : (error : any, result: any) => void) {
+    let projection = {'subscription': 1};
+    let query = [
+      { $match: {'_id':userid}},
+      { $project : {'subscription':1}},
+      { $unwind: '$subscription'}
+    ];
+    this.userRepository.aggregate(query ,(error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let validSubscriptionPackage;
+        if(result.length > 0) {
+          for(let subscriptionPackage of result) {
+            if(subscriptionPackage.subscription.projectId.length === 0) {
+              validSubscriptionPackage = subscriptionPackage;
+            }
+          }
+        }
+        callback(null, validSubscriptionPackage);
+      }
+    });
+
+  }
+
    assignFreeSubscriptionAndCreateUser(item: any, freeSubscription: SubscriptionPackage, callback: (error: any, result: any) => void) {
     let user: UserModel = item;
     let sendMailService = new SendMailService();
