@@ -86,20 +86,37 @@ export class GetSteelQuantityComponent implements OnInit {
   }
   if(tempArray && tempArray[diameter] ) {
      if((<any>this.totalDiamterQuantity.totalWeightOfDiameter===undefined)) {
-       (<any>this.totalDiamterQuantity.totalWeightOfDiameter)= {};
+       (<any>this.totalDiamterQuantity.totalWeightOfDiameter) = {};
      }
-    (<any>this.totalDiamterQuantity.totalWeightOfDiameter)[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[index]]=
+    (<any>this.totalDiamterQuantity.totalWeightOfDiameter)
+      [this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[index]]=
       tempArray[diameter].reduce((acc:any, val:any) => { return acc + val; });
     return tempArray[diameter].reduce((acc:any, val:any) => { return acc + val; });
   }
     return 0;
   }
   getQuantityTotal():number {
+    let diameters=new Array(0);
+    let diametersKeys:any={};
+    for(let steelQuantityItemIndex in this.steelQuantityItems) {
+      let steelQuantityItem: any =  this.steelQuantityItems[steelQuantityItemIndex];
+      //diametersKeys[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(steelQuantityItem.diameter))]]
+       diametersKeys[
+         this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[
+           this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(steelQuantityItem.diameter))
+           ]]=0;
+    }
+    diameters=Object.keys(diametersKeys)
     let total:number=0;
 
     for(let diameter in this.totalDiamterQuantity.totalWeightOfDiameter) {
-
-      total+=parseFloat((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
+      if(diameter != 'undefined') {
+        if (diameters.indexOf(diameter) != -1) {
+          total += parseFloat((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
+        } else {
+          delete (<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter];
+        }
+      }
     }
     this.total=total;
     return total;
@@ -108,8 +125,8 @@ export class GetSteelQuantityComponent implements OnInit {
     this.steelQuantityItems.push(new SteelQuantityItem('',0,0,0,0));
   }
   deleteQuantityItem(index:number) {
-    this.totalDiamterQuantity.totalWeightOfDiameter[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]]=
-      this.totalDiamterQuantity.totalWeightOfDiameter[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]]- this.steelQuantityItems[index].weight;
+    this.totalDiamterQuantity.totalWeightOfDiameter
+      [this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]] = this.totalDiamterQuantity.totalWeightOfDiameter[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]]- this.steelQuantityItems[index].weight;
     this.steelQuantityItems.splice(index,1);
     //this.steelQuantityItems.length===0?this.addQuantityItem():console.log();
   }
