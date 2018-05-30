@@ -567,7 +567,7 @@ export class Button {
   public static STANDARD_NOTE: string = 'Standard Note / Disclaimer';
 
   //Package details
-  public static MSG_VIEW_PACKAGE_DETAILS: string = 'Your trial period is for 15 days, to view our package details';
+  public static MSG_VIEW_PACKAGE_DETAILS: string = 'Your trial period is for 15 days,<br /> to view our package details';
   public static PACKAGE_DETAILS: string = 'Package details';
   public static CONTINUE_USING_TRIAL: string = 'Continue using trial';
   public static SWITCH_TO_PREMIUM: string = 'Switch to premium';

@@ -8,7 +8,8 @@ import { NavigationRoutes } from '../../../shared/index';
 @Component({
   moduleId: module.id,
   selector: 'bi-package-details',
-  templateUrl: 'package-details.component.html'
+  templateUrl: 'package-details.component.html',
+  styleUrls: ['package-details.component.css']
 })
 export class PackageDetailsComponent implements OnInit {
   packageDetailsList: any;
