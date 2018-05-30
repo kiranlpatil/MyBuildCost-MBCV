@@ -14,9 +14,9 @@
   width: 100%;
 
   .close {
-    width: 10px;
-    height: 20px;
     margin: 0 4px 15px 5px;
+    height: 13px;
+    width: 10px;
   }
   table {
     border-radius: 5px;
@@ -30,6 +30,8 @@
 
         &:first-child {
           border-radius: 5px 0 0 0;
+          padding: 0 9px;
+          text-align: left;
         }
         &:last-child {
           border-radius: 0 5px 0 0;
@@ -124,15 +126,17 @@
       background: $jagged-ice;
       font-size: 11px;
       font-weight: bold;
+      padding: 2px 0 !important;
       text-align: right !important;
 
       &:first-child {
-        text-align: center !important;
+        padding: 3px 9px !important;
+        text-align: left !important;
       }
 
       &:nth-child(7) {
-        padding-left: 15px;
-        text-align: left !important;
+        //padding-left: 15px;
+        text-align: center !important;
       }
 
       width: 98px;
