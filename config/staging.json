@@ -6947,7 +6947,29 @@
         ]
       }
     ]
-  }
+  },
+    {
+      "name" : "External plumbing / drainage line",
+      "priorityId": 36,
+      "rateAnalysisId" : 100578,
+      "categories" : [
+        {
+          "name" : "Inspection chambers",
+          "rateAnalysisId" : 100579,
+          "workItems" : [ ]
+        },
+        {
+          "name" : "Road side open gutter for rain water",
+          "rateAnalysisId" : 100580,
+          "workItems" : [ ]
+        },
+        {
+          "name" : "Underground RCC pipe line",
+          "rateAnalysisId" : 100581,
+          "workItems" : [ ]
+        }
+      ]
+    }
 ],
 
   "configProjectCostHeads" : [
