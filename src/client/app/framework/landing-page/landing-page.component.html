@@ -1,19 +1,19 @@
 <div class="landing-page-wrapper">
   <div class="container">
     <div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
-      <div class="inner-content clearfix">
+      <div class="inner-content clearfix fadein-element">
         <img class="logo-image" src={{MY_LOGO}} alt="Facebook Link">
         <ul>
-          <li>Estimate Project Cost</li>
-          <li>Budget it</li>
-          <li>Control it</li>
+          <li class="fadein-sub-element">Estimate Project Cost</li>
+          <li class="fadein-sub-element">Budget it</li>
+          <li class="fadein-sub-element">Control it</li>
         </ul>
-        <p> Execute project within the approved budget</p>
-        <button  class="btn btn-primary" (click)="goToSignUp()">Start Free Trial</button>
-        <p>Already have an account?</p>
-        <button  class="btn btn-default" (click)="goToSignIn()">Sign In</button>
+        <p class="fadein-sub-element tagline1"> Execute project within the approved budget</p>
+        <button  class="btn btn-primary fadein-sub-element" (click)="goToSignUp()">Start Free Trial</button>
+        <p class="fadein-sub-element tagline2">Already have an account?</p>
+        <button  class="btn btn-default fadein-sub-element" (click)="goToSignIn()">Sign In</button>
       </div>
     </div>
   </div>
 </div>
-<img src="assets/build-info/page_background/page-bg.png" class="mobile-background-image"/>
+<img src="assets/build-info/page_background/page-bg.png" class="mobile-background-image fadein-element"/>

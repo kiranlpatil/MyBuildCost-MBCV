@@ -646,3 +646,17 @@ export class StandardNotes {
     ' content before using it. Big Slice Technologies Pvt. Ltd. (OPC) shall not be held responsible for any' +
     ' consequences resulted due to use of the contents/services of this rate analysis.</p></li></ul>';
 }
+
+export class Animations {
+
+  public static defaultDelayFactor = 0.03;
+
+  public static getListItemAnimationStyle(index : number, delayFactor : number) {
+    return {
+      'transition-delay': index * delayFactor + 's',
+      'opacity': 1,
+      // 'margin-top': '5px',
+      'transform': 'scale(1)'
+    };
+  }
+}

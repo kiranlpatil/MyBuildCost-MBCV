@@ -16,6 +16,17 @@
     width: 120px;
   }
 }
+.fadein-element .fadein-sub-element:nth-child(1)  { animation-delay: 0.00s; }
+.fadein-element .fadein-sub-element:nth-child(2)  { animation-delay: 0.06s; }
+.fadein-element .fadein-sub-element:nth-child(3)  { animation-delay: 0.12s; }
+.fadein-element .fadein-sub-element:nth-child(4)  { animation-delay: 0.18s; }
+.fadein-element .fadein-sub-element:nth-child(5)  { animation-delay: 0.24s; }
+.fadein-element .fadein-sub-element:nth-child(6)  { animation-delay: 0.30s; }
+.fadein-element .fadein-sub-element:nth-child(7)  { animation-delay: 0.36s; }
+.fadein-element .fadein-sub-element:nth-child(8)  { animation-delay: 0.42s; }
+.fadein-element .fadein-sub-element:nth-child(9)  { animation-delay: 0.48s; }
+.fadein-element .fadein-sub-element:nth-child(10) { animation-delay: 0.54s; }
+.fadein-element .fadein-sub-element:nth-child(11) { animation-delay: 0.60s; }
 
 @media screen and (max-width: 767px) {
   .button-group {

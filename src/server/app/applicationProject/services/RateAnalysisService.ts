@@ -457,6 +457,7 @@ class RateAnalysisService {
       workItem.unit = workItemExistArray[0].measurementUnit;
       workItem.isMeasurementSheet = workItemExistArray[0].isMeasurementSheet;
       workItem.isRateAnalysis = workItemExistArray[0].isRateAnalysis;
+      workItem.isSteelWorkItem = workItemExistArray[0].isSteelWorkItem;
       workItem.rateAnalysisPerUnit = workItemExistArray[0].rateAnalysisPerUnit;
       workItem.isItemBreakdownRequired = workItemExistArray[0].isItemBreakdownRequired;
       workItem.length = workItemExistArray[0].length;
@@ -558,6 +559,7 @@ class RateAnalysisService {
             workItem.isMeasurementSheet = configWorkItem.isMeasurementSheet;
             workItem.isRateAnalysis = configWorkItem.isRateAnalysis;
             workItem.rateAnalysisPerUnit = configWorkItem.rateAnalysisPerUnit;
+            workItem.isSteelWorkItem = configWorkItem.isSteelWorkItem;
             workItem.isItemBreakdownRequired = configWorkItem.isItemBreakdownRequired;
             workItem.length = configWorkItem.length;
             workItem.breadthOrWidth = configWorkItem.breadthOrWidth;
