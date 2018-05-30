@@ -31,6 +31,8 @@ import { SharedService } from './shared/services/shared-service';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { AnalyticService } from './shared/services/analytic.service';
 import { CommonAmenitiesComponent } from './build-info/framework/project/cost-summary-report/common-amenities/common-amenities.component';
+import { PackageDetailsComponent } from './build-info/framework/package-details/package-details.component';
+import { PackageDetailsService } from './build-info/framework/package-details/package-details.service';
 import { DashboardHeaderComponent } from './framework/dashboard/dashboard-header/dashboard-header.component';
 import { DashboardUserProfileService } from './framework/dashboard/user-profile/dashboard-user-profile.service';
 import { UserChangePasswordService } from './framework/dashboard/user-change-password/user-change-password.service';
@@ -167,7 +169,10 @@ import { GetSteelQuantityComponent} from './build-info/framework/project/cost-su
     CommonAmenitiesComponent,
     CostSummaryReportComponent,
     AttachmentComponent,
-    CommonAmenitiesReportComponent
+    CommonAmenitiesReportComponent,
+
+    //payment
+    PackageDetailsComponent
   ],
 
   providers: [
@@ -202,7 +207,10 @@ import { GetSteelQuantityComponent} from './build-info/framework/project/cost-su
     BuildingService,
     CostSummaryService,
     MaterialTakeOffService,
-    ProjectNameChangeService
+    ProjectNameChangeService,
+
+      //Payment
+    PackageDetailsService
   ],
   bootstrap: [AppComponent]
 })

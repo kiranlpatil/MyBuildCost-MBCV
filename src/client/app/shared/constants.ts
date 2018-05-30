@@ -203,6 +203,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Flat/Floor/Parking details can not be empty';
   public static LOGIN_INFO: string = 'Enter your details below';
   public static MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS: string = 'Already added all Cost Heads.';
+  public static SUBSCRIPTION_PACKAGES_DETAILS_ARE_NOT_DEFINED: string = 'Subscription packages details are not defined.';
 
   //File Attachment messages
 
@@ -222,6 +223,7 @@ export class NavigationRoutes {
   public static APP_BUILDING: string = 'building';
   public static APP_CREATE_NEW_PROJECT: string = '/create-new-project';
   public static APP_CREATE_PROJECT: string = '/create-project';
+  public static APP_PACKAGE_DETAILS: string = '/package-details';
   public static APP_VIEW_BUILDING_DETAILS: string = 'building/details';
   public static APP_CREATE_BUILDING: string = '/create-building';
   public static APP_CLONE_BUILDING: string = '/clone-building';
@@ -343,6 +345,10 @@ export class API {
 
   public static REPORT_MATERIAL_TAKE_OFF = 'report/materialtakeoff';
   public static MATERIAL_FILTERS_LIST = 'material/filters/list';
+
+  //
+  public static SUBSCRIPTION = 'subscription';
+  public static BASE_PACKAGES_LIST = 'basepackageslist';
 }
 
 export class ImagePath {
@@ -383,6 +389,7 @@ export class Headings {
   public static CHANGE_EMAIL_HEADING: string = 'Change your Email';
   public static CHANGE_MOBILE_NUMBER_HEADING: string = 'Change Your Mobile Number';
   public static RESET_PASSWORD_HEADING: string = 'Reset Password';
+  public static CREATE_TRIAL_PROJECT: string = 'Create Trial Project';
   public static CREATE_YOUR_FIRST_PROJECT: string = 'Create Your First Project';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
   public static EDIT_BUILDING: string = 'Edit Building';
@@ -517,6 +524,12 @@ export class Label {
   //Quantity View
   public static DEFAULT_VIEW = 'default';
 
+  //Package details
+  public static PROJECT: string = 'Project';
+  public static PROJECTS: string = 'Projects';
+  public static BUILDING: string = 'Building';
+  public static BUILDINGS: string = 'Buildings';
+
 }
 
 export class Button {
@@ -530,6 +543,8 @@ export class Button {
   public static NEXT: string = 'Next';
   public static SUBMIT: string = 'Submit';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
+  public static CREATE: string = 'Create';
+  public static CLICK_HERE: string = 'click here';
   public static BACK_TO_HOME: string = 'Back to home';
   public static GO_BACK: string = 'Back';
   public static SAVE: string = 'Save';
@@ -546,6 +561,12 @@ export class Button {
   public static COSTHEAD: string = 'Cost Head';
   public static ATTACH_FILE: string = 'Attach File';
   public static STANDARD_NOTE: string = 'Standard Note / Disclaimer';
+
+  //Package details
+  public static MSG_VIEW_PACKAGE_DETAILS: string = 'Your trial period is for 15 days, to view our package details';
+  public static PACKAGE_DETAILS: string = 'Package details';
+  public static CONTINUE_USING_TRIAL: string = 'Continue using trial';
+  public static SWITCH_TO_PREMIUM: string = 'Switch to premium';
 }
 
 export class Units {

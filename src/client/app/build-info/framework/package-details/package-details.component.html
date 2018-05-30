@@ -1,0 +1,43 @@
+<div>
+
+  <h4>
+    {{getButton().PACKAGE_DETAILS}}
+  </h4>
+  <div class="row col-md-12" >
+    <div *ngFor="let package of packageDetailsList">
+
+      <div class="col-md-2">
+        <span>{{package.basePackage.description}}</span>
+        <br>
+
+        <span>{{package.basePackage.numOfProjects}}</span>
+        <span *ngIf="package.basePackage.numOfProjects > 1; else project">{{getLabels().PROJECTS}}</span>
+            <ng-template #project>
+              <span>{{getLabels().PROJECT}}</span>
+            </ng-template>
+        <br>
+
+        <span>{{package.basePackage.numOfBuildings}}</span>
+        <span *ngIf="package.basePackage.numOfBuildings > 1; else building">{{getLabels().BUILDINGS}}</span>
+            <ng-template #building>
+              <span>{{getLabels().BUILDING}}</span>
+            </ng-template>
+        <br>
+
+        <span>{{package.basePackage.validityDescription}}</span>
+        <br>
+
+        <span *ngIf="package.basePackage.cost !== 0; else free">{{package.basePackage.cost}}</span>
+        <ng-template #free>
+          <span>{{package.basePackage.name}}</span>
+        </ng-template>
+        <br>
+      </div>
+
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary" (click)="goToCreateTrialProject()">{{getButton().CONTINUE_USING_TRIAL}}</button>
+  <button type="button" class="btn btn-primary" (click)="goToCreatePremiumProject()">{{getButton().SWITCH_TO_PREMIUM}}</button>
+
+</div>

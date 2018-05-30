@@ -7,6 +7,5 @@ class BaseSubscriptionPackage {
   numOfProjects: number;
   numOfBuildings:number;
   iterativeDiscount:number;
-
 }
-export = BaseSubscriptionPackage;
+
