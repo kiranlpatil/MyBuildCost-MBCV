@@ -1309,7 +1309,7 @@ class ProjectService {
   updateQuantityOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
                                     quantityDetail: QuantityDetails, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, updateQuantityOfBuildingCostHeads has been hit');
-    let query = {_id: buildingId};
+  /*  let query = {_id: buildingId};
     let projection = {costHeads:{
         $elemMatch :{rateAnalysisId : costHeadId, categories: {
             $elemMatch:{rateAnalysisId: categoryId,workItems: {
@@ -1356,6 +1356,52 @@ class ProjectService {
             }
           });
         }
+    });*/
+    let query = [
+      {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
+      {$unwind: '$costHeads'},
+      {$project: {'costHeads': 1}},
+      {$unwind: '$costHeads.categories'},
+      {$match: {'costHeads.categories.rateAnalysisId': categoryId}},
+      {$project: {'costHeads.categories.workItems': 1}},
+      {$unwind: '$costHeads.categories.workItems'},
+      {$match: {'costHeads.categories.workItems.rateAnalysisId': workItemId}},
+      {$project: {'costHeads.categories.workItems.quantity': 1}},
+    ];
+
+    this.buildingRepository.aggregate(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        if (result.length > 0) {
+          let quantity= result[0].costHeads.categories.workItems.quantity;
+          quantity.isEstimated = true;
+          if(quantity.isDirectQuantity === true) {
+            quantity.isDirectQuantity = false;
+          }
+          this.updateQuantityItemsOfWorkItem( quantity, quantityDetail);
+
+          let query = {_id: buildingId};
+          let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity':quantity}};
+          let arrayFilter = [
+            {'costHead.rateAnalysisId':costHeadId},
+            {'category.rateAnalysisId': categoryId},
+            {'workItem.rateAnalysisId':workItemId}
+          ];
+          this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        }else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
+          callback(error, null);
+        }
+      }
     });
   }
 
@@ -1580,12 +1626,14 @@ class ProjectService {
                 } else {
                   quantityDetails[quantityIndex].quantityItems = quantityDetailsObj.quantityItems;
                   quantityDetails[quantityIndex].isDirectQuantity = false;
-                }*/
-            if(quantityDetailsObj.steelQuantityItems) {
+                   if(quantityDetailsObj.steelQuantityItems) {
               quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
             }else if(quantityDetailsObj.quantityItems.length === 0) {
               quantityDetails[quantityIndex].quantityItems = [];
             }
+                }*/
+                quantityDetails[quantityIndex].quantityItems = [];
+                quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
                 quantityDetails[quantityIndex].isDirectQuantity = true;
                 quantityDetails[quantityIndex].total = quantityDetailsObj.total;
               }
