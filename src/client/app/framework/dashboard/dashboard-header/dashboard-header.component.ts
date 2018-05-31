@@ -62,8 +62,7 @@ export class DashboardHeaderComponent {
       window.sessionStorage.clear();
       window.localStorage.clear();
       }
-    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
-    window.location.replace(host + '/signin');
+      this._router.navigate([NavigationRoutes.APP_LOGIN]);
     }
 
   navigateToWithId(nav:string) {

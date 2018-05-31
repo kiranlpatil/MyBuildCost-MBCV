@@ -101,12 +101,10 @@ export class UserChangePasswordComponent {
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
   logOut() {
-   /* if(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)===null) {
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)===null) {
       window.sessionStorage.clear();
       window.localStorage.clear();
     }
-    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
-    window.location.href = host;*/
     this._router.navigate([NavigationRoutes.APP_LOGIN]);
   }
 
