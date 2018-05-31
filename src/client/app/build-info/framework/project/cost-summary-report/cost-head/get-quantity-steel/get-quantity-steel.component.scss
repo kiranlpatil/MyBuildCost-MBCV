@@ -18,7 +18,7 @@
     tr {
       td {
         .form-control {
-          height: 23px;
+          height: 28px;
           text-align: right;
         }
         select {
@@ -116,6 +116,36 @@
           &:nth-child(11),
           &:nth-child(12) {
             min-width: 90px;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+          }
+        }
+      }
+
+      thead {
+        th {
+          &:nth-child(7) {
+            border-radius: 0;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+            border-radius: 0 5px 0 0;
+          }
+        }
+      }
+
+      .total-amt-row {
+        td {
+          &:nth-child(7) {
+            border-radius: 0;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+            border-radius: 0 0 5px 0;
           }
         }
       }

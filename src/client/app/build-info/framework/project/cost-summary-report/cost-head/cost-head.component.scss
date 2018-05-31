@@ -219,8 +219,10 @@
 
   tr > td,
   tr > th {
+    float: left;
+
     &:nth-child(1) {
-      width: 295px;
+      width: 288px;
     }
 
     &:nth-child(2) {
@@ -249,7 +251,7 @@
     }
 
     &:nth-child(7) {
-      min-width: 100px;
+      min-width: 95px;
       text-align: right;
     }
 
@@ -421,7 +423,7 @@
       float: right;
       margin-right: 5px;
       padding: 0;
-      width: calc(100% - 356px);
+      width: calc(100% - 350px);
     }
 
     .steel-quantity-embedded-table {

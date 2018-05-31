@@ -294,7 +294,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="bg-white">
+              <div class="bg-white hidden-xs">
                 <table class="table table-dashboard add-item-table">
                   <tbody>
                   <tr *ngIf="showWorkItemList==true && compareWorkItemRateAnalysisId==categoryIndex">
@@ -307,7 +307,7 @@
                     <td colspan="6">&nbsp;</td>
                   </tr>
                   <tr>
-                    <td  class="add-items hidden-xs" colspan="7">
+                    <td  class="add-items" colspan="7">
                       <button type="button" class="btn-add-item"
                               (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)" [disabled]="showHideAddItemButton">
                         <span class="glyphicon glyphicon-plus"></span> {{getButton().ADD}} {{getButton().ITEM}}</button>

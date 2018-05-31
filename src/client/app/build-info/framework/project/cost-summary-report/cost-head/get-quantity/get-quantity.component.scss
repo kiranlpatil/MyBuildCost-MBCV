@@ -229,6 +229,14 @@
     margin: 0 0 10px;
     table {
       pointer-events: none;
+
+      tr {
+        td {
+          &:nth-child(7) {
+            border: 0;
+          }
+        }
+      }
     }
     .close {
       margin: 0 4px 5px 5px;
@@ -237,9 +245,6 @@
     thead {
       th {
         &:nth-child(7) {
-          border-radius: 5px 0 0 0;
-        }
-        &:nth-child(7) {
           border-radius: 0 5px 0 0;
         }
       }
@@ -247,9 +252,6 @@
 
     .total-amt-row {
       td {
-        &:nth-child(7) {
-          border-radius: 0 0 0 5px;
-        }
         &:nth-child(7) {
           border: 0;
           border-radius: 0 0 5px 0;

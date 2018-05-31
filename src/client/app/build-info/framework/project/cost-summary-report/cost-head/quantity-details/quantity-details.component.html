@@ -66,7 +66,7 @@
           </div>
         </td>
 
-        <td class="show-embedded-table">
+        <td class="show-embedded-table" [class.steel-quantity-embedded-table]="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_STEEL_QUANTITY_TAB">
           <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
 
               <div>
