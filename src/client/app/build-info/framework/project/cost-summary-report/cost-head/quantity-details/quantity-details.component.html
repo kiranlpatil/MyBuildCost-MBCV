@@ -1,7 +1,7 @@
 <div *ngIf="workItemData">
   <table class="table table-dashboard table-categories">
     <tbody>
-      <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
+      <tr class="delete-quantity-details-row" *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
         <td>
           <span class="mobile-headings">{{getTableHeadings().ITEM}}</span>
           <input placeholder="Flat/Floor/Parking Details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (focus)="changeQuantityName(quantity.name)"

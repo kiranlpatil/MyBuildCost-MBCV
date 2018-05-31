@@ -104,7 +104,7 @@
       color: $dashboard-link;
       display: inline-block;
       font-size: 16px;
-      opacity: 0;
+      //opacity: 0;
       padding: 0 3px 5px 6px;
       position: relative;
       top: 4px;
@@ -201,14 +201,6 @@
     .btn-get-amount {
       opacity: 1;
       transition: opacity 0.5s ease-in-out;
-    }
-
-    &:hover {
-      .delete-cost-head,
-      .add-more-details,
-      .file-attachment > span {
-        opacity: 1;
-      }
     }
   }
   thead > tr {
@@ -412,10 +404,35 @@
         padding: 3px 9px;
       }
 
+      td > .edit-field {
+        .calculator {
+          opacity: 0;
+        }
+      }
+
+      .add-more-details,
+      .delete-cost-head,
+      .file-attachment > span {
+        opacity: 0;
+      }
+
       &:hover {
         background: $azure;
         border: 0;
+
+        .delete-cost-head,
+        .add-more-details,
+        .file-attachment > span {
+          opacity: 1;
+        }
+
+        td > .edit-field {
+          .calculator {
+            opacity: 1;
+          }
+        }
       }
+
     }
 
     #show-embedded-table {
