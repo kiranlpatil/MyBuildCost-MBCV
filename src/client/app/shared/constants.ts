@@ -4,10 +4,6 @@ export class AppSettings {
   // public static HOST_NAME = 'localhost:8080';
   public static HOST_NAME = '52.66.120.228:8080';
 
-  public static get API_ENDPOINT(): string {
-    return this.IP + '/api/';
-  }
-
   public static INITIAL_THEM = 'container-fluid dark-theme';
   public static LIGHT_THEM = 'container-fluid light-theme';
   public static IS_SOCIAL_LOGIN_YES = 'YES';
