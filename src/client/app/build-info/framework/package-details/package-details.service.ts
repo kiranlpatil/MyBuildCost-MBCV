@@ -14,6 +14,13 @@ export class PackageDetailsService extends BaseService {
     var url = API.SUBSCRIPTION + '/' + API.BASE_PACKAGES_LIST;
     return this.httpDelegateService.getAPI(url);
   }
+
+  getSubscriptionPackageByName(packageName:string) {
+    var body = {basePackageName:packageName}
+    var url = API.SUBSCRIPTION + '/'+ API.BY_NAME ;
+    return this.httpDelegateService.postAPI(url,body);
+
+  }
 }
 
 

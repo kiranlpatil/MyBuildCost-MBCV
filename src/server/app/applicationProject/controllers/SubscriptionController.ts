@@ -52,7 +52,7 @@ class SubscriptionController {
   getSubscriptionPackageByName(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Subscription  Controller, getSubscriptionPackageByName has been hit');
-      let basePackageName: string = req.body.basePackageName;
+      let basePackageName: any = req.body.basePackageName;
       let subscriptionService: SubscriptionService = new SubscriptionService();
       subscriptionService.getSubscriptionPackageByName( basePackageName,(error, result) => {
         if(error) {

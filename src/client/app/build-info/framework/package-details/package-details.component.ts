@@ -13,6 +13,7 @@ import { NavigationRoutes } from '../../../shared/index';
 })
 export class PackageDetailsComponent implements OnInit {
   packageDetailsList: any;
+  packageName:any;
 
   constructor(private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService) {
   }
@@ -30,7 +31,8 @@ export class PackageDetailsComponent implements OnInit {
 
   onGetBaseSubscriptionPackageListSuccess(packageDetailsList : any) {
       this.packageDetailsList = packageDetailsList;
-  }
+      this.packageName=packageDetailsList[1].basePackage.name;
+      }
 
   onGetBaseSubscriptionPackageListFailure(error : any) {
     console.log(error);
@@ -45,7 +47,9 @@ export class PackageDetailsComponent implements OnInit {
     this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
   }
 
-  goToCreatePremiumProject() {}
+  goToCreatePremiumProject() {
+    this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,this.packageName]);
+  }
 
 
   getHeadings() {

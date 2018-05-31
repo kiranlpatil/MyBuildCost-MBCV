@@ -1,0 +1,19 @@
+<div>
+  <h1>Confirm your package</h1>
+
+  <div *ngIf="premiumPackageDetails">
+    <span>No.of Projects:{{premiumPackageDetails.basePackage.numOfProjects}}</span><br>
+    <span>No.of Buildings:{{premiumPackageDetails.basePackage.numOfBuildings}}</span><br>
+  <span>Duration:{{premiumPackageDetails.basePackage.validity/365|number:'1.0-0'}}years</span><br>
+ <h1>
+    Total Billed:{{premiumPackageDetails.basePackage.cost}}
+ </h1>
+  <div>
+    <button name="cancel" (click)="onCancelClick()">{{getButton().CANCEL_BUTTON}}</button>
+    <button name="pay" (click)="onPay()">{{getButton().PAY_BUTTON}}</button>
+  </div>
+
+
+  </div>
+
+</div>

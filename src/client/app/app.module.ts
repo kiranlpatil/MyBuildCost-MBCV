@@ -96,6 +96,8 @@ import { DisclaimerComponent } from './shared/disclaimer-component/disclaimer-co
 import {
   SortByCategoryAmountPipe} from './build-info/framework/project/cost-summary-report/cost-head/sort-by-category-amount.pipe';
 import { GetSteelQuantityComponent} from './build-info/framework/project/cost-summary-report/cost-head/get-quantity-steel/get-quantity-steel.component';
+import {PackageSummaryComponent} from "./build-info/framework/package-details/package-summary/package-summary.component";
+import {PackageDefaultComponent} from "./build-info/framework/package-details/packageDefault.component";
 
 @NgModule({
   imports: [
@@ -172,7 +174,9 @@ import { GetSteelQuantityComponent} from './build-info/framework/project/cost-su
     CommonAmenitiesReportComponent,
 
     //payment
-    PackageDetailsComponent
+    PackageDetailsComponent,
+    PackageSummaryComponent,
+    PackageDefaultComponent
   ],
 
   providers: [

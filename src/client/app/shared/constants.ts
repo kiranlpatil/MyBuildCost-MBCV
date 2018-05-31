@@ -223,7 +223,6 @@ export class NavigationRoutes {
   public static APP_BUILDING: string = 'building';
   public static APP_CREATE_NEW_PROJECT: string = '/create-new-project';
   public static APP_CREATE_PROJECT: string = '/create-project';
-  public static APP_PACKAGE_DETAILS: string = '/package-details';
   public static APP_VIEW_BUILDING_DETAILS: string = 'building/details';
   public static APP_CREATE_BUILDING: string = '/create-building';
   public static APP_CLONE_BUILDING: string = '/clone-building';
@@ -236,6 +235,15 @@ export class NavigationRoutes {
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
   public static VERIFY_PHONE: string = '/verify-phone';
+
+
+
+
+  //PAYMENT
+  public static APP_PACKAGE_DETAILS: string = '/package-details';
+  public static APP_PACKAGE_SUMMARY: string = '/package-details/premium-package/';
+
+
 }
 
 export class SessionStorage {
@@ -353,6 +361,8 @@ export class API {
   //
   public static SUBSCRIPTION = 'subscription';
   public static BASE_PACKAGES_LIST = 'basepackageslist';
+  public static BY_NAME = 'by/name';
+
 }
 
 export class ImagePath {
@@ -571,6 +581,8 @@ export class Button {
   public static PACKAGE_DETAILS: string = 'Package details';
   public static CONTINUE_USING_TRIAL: string = 'Continue using trial';
   public static SWITCH_TO_PREMIUM: string = 'Switch to premium';
+  public static PAY_BUTTON: string = 'Pay';
+
 }
 
 export class Units {
