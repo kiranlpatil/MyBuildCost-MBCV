@@ -1,4 +1,4 @@
 /**
  * @ng2 Server Runner `Production`.
  */
-require('./dist/server/prod').init(80, 'prod', 'http');
+require('./dist/server/prod').init(8080, 'prod', 'http');
