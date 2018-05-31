@@ -100,7 +100,6 @@ export class GetSteelQuantityComponent implements OnInit {
     let diametersKeys:any={};
     for(let steelQuantityItemIndex in this.steelQuantityItems) {
       let steelQuantityItem: any =  this.steelQuantityItems[steelQuantityItemIndex];
-      //diametersKeys[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(steelQuantityItem.diameter))]]
        diametersKeys[
          this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[
            this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(steelQuantityItem.diameter))
@@ -110,8 +109,8 @@ export class GetSteelQuantityComponent implements OnInit {
     let total:number=0;
 
     for(let diameter in this.totalDiamterQuantity.totalWeightOfDiameter) {
-      if(diameter != 'undefined') {
-        if (diameters.indexOf(diameter) != -1) {
+      if(diameter !== 'undefined') {
+        if (diameters.indexOf(diameter) !== -1) {
           total += parseFloat((<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter]);
         } else {
           delete (<any>this.totalDiamterQuantity.totalWeightOfDiameter)[diameter];
@@ -128,8 +127,7 @@ export class GetSteelQuantityComponent implements OnInit {
     this.totalDiamterQuantity.totalWeightOfDiameter
       [this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]] = this.totalDiamterQuantity.totalWeightOfDiameter[this.getValueConstant().STEEL_DIAMETER_STRING_VALUES[this.getValueConstant().STEEL_DIAMETER_VALUES.indexOf(parseInt(this.steelQuantityItems[index].diameter))]]- this.steelQuantityItems[index].weight;
     this.steelQuantityItems.splice(index,1);
-    //this.steelQuantityItems.length===0?this.addQuantityItem():console.log();
-  }
+    }
   updateQuantityItem(totalDiameterQuantity : SteelQuantityItems) {
     totalDiameterQuantity.steelQuantityItem=this.steelQuantityItems;
     totalDiameterQuantity.unit=this.workItem.unit;
