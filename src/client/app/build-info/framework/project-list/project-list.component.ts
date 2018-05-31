@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationRoutes, Button, Animations } from '../../../shared/constants';
 import { ProjectService } from '../project/project.service';
@@ -14,6 +14,7 @@ import { Project } from './../model/project';
 export class ProjectListComponent implements OnInit, AfterViewInit {
   isVisible: boolean = false;
   animateView: boolean = false;
+  isSubscriptionExist: boolean = false;
   projects : Array<Project>;
 
   constructor(private projectService: ProjectService, private _router: Router) {
@@ -23,8 +24,12 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     this.getAllProjects();
   }
 
-  createProject() {
-    this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+  createProject(isSubscriptionAvailable : boolean) {
+    if(isSubscriptionAvailable) {
+      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+    } else {
+      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+    }
   }
 
   getAllProjects() {
@@ -36,6 +41,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   onGetAllProjectSuccess(projects : any) {
     this.projects = projects.data;
+    this.isSubscriptionExist = projects.isSubscriptionAvailable;
     this.isVisible = true;
   }
 

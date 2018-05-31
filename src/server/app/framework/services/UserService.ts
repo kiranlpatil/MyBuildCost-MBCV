@@ -720,7 +720,9 @@ class UserService {
         let populatedProject = result[0];
         let projectList = result[0].project;
         let subscriptionList = result[0].subscription;
+
         let projectSubscriptionArray = Array<ProjectSubscriptionDetails>();
+        let isAbleToCreateNewProject : boolean = false;
 
         for(let project of projectList) {
           for(let subscription of subscriptionList) {
@@ -728,41 +730,51 @@ class UserService {
               let projectSubscription = new ProjectSubscriptionDetails();
               projectSubscription.projectName = project.name;
               projectSubscription.projectId = project._id;
+              projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
               projectSubscription.numOfBuildingsAllocated = subscription.numOfBuildings;
 
-              //calculate expiry date
-              let activate_date = new Date(subscription.activationDate);
+              //activation date for project subscription
+              let activation_date = new Date(subscription.activationDate);
               let expiryDate = new Date();
+              projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
+
+              //expiry date for project subscription
               let current_date = new Date();
-              projectSubscription.expiryDate = new Date(expiryDate.setDate(activate_date.getDate() + subscription.validity));
               projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
+
               if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
                 projectSubscription.warningMessage = projectSubscription.numOfDaysToExpire +
                   ' days are remaining to expire. Please renew Project';
               } else if(projectSubscription.numOfDaysToExpire < 0) {
                 projectSubscription.expiryMessage = 'Please renew project. project is expired';
               }
-              projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
+
               projectSubscriptionArray.push(projectSubscription);
+
+            } else if(subscription.projectId.length === 0) {
+              isAbleToCreateNewProject = true;
             }
           }
         }
 
-        callback(null, {data: projectSubscriptionArray, access_token: authInterceptor.issueTokenWithUid(user)});
+        if(projectList.length === 0) {
+          isAbleToCreateNewProject = true;
+        }
+
+        callback(null, {
+          data: projectSubscriptionArray,
+          isSubscriptionAvailable : isAbleToCreateNewProject,
+          access_token: authInterceptor.issueTokenWithUid(user)
+        });
       }
     });
   }
 
   daysdifference(date1 : Date, date2 : Date) {
-    // The number of milliseconds in one day
-    var ONEDAY = 1000 * 60 * 60 * 24;
-    // Convert both dates to milliseconds
-    var date1_ms = date1.getTime();
-    var date2_ms = date2.getTime();
-    // Calculate the difference in milliseconds
-    var difference_ms = Math.abs(date1_ms - date2_ms);
-
-    // Convert back to days and return
+    let ONEDAY = 1000 * 60 * 60 * 24;
+    let date1_ms = date1.getTime();
+    let date2_ms = date2.getTime();
+    let difference_ms = Math.abs(date1_ms - date2_ms);
     return Math.round(difference_ms/ONEDAY);
   }
 }
