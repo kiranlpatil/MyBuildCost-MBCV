@@ -131,9 +131,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
               private loaderService: LoaderService) {
   }
 
-  toggleState() {
+  /*toggleState() {
     this.state = this.state === 'active' ? 'inactive' : 'active';
-  }
+  }*/
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -257,7 +257,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   //Add blank detailed quantity at last
   addNewDetailedQuantity(categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
     this.showWorkItemTab = Label.WORKITEM_DETAILED_QUANTITY_TAB;
-    //this.toggleWorkItemPanel(workItemIndex);
+    this.toggleWorkItemPanel(workItemIndex);
     var element = document.getElementById('collapseDetails'+workItemIndex);
     if(element.classList.contains('hide-body')) {
       element.classList.remove('hide-body');
@@ -342,7 +342,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
     if(this.showWorkItemTab !== Label.WORKITEM_RATE_TAB || this.displayRateView !== displayRateView ||
       this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
-      this.toggleState();
+      //this.toggleState();
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.rate);
       this.currentCategoryIndex = categoryIndex;
@@ -350,7 +350,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
       this.rateView = Label.WORKITEM_RATE_TAB;
       this.setRateFlags(displayRateView, disableRateField);
     } else {
-      this.toggleState();
+      //this.toggleState();
       this.showWorkItemTab = null;
       this.displayRateView = null;
     }
@@ -381,7 +381,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
     if(this.showWorkItemTab !== Label.WORKITEM_RATE_TAB || this.displayRateView !== displayRateView ||
       this.compareCategoryId !== categoryId || this.compareWorkItemId !== workItemId) {
-      this.toggleState();
+      //this.toggleState();
       this.setItemId(categoryId, workItemId);
       this.setWorkItemDataForRateView(workItem.rateAnalysisId, workItem.systemRate);
       this.rateView = Label.WORKITEM_SYSTEM_RATE_TAB;
@@ -389,7 +389,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
       this.currentWorkItemIndex = workItemIndex;
       this.setRateFlags(displayRateView, disableRateField);
     } else {
-      this.toggleState();
+      //this.toggleState();
       this.showWorkItemTab = null;
       this.displayRateView = null;
     }
@@ -609,23 +609,10 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 /*  setSelectedWorkItems(workItemList:any) {
     this.selectedWorkItems = workItemList;
   }*/
-  toggleWorkItemPanel(workItemIndex : number, workItem : WorkItem) {
+
+  toggleWorkItemPanel(workItemIndex : number) {
     var element = document.getElementById('collapseDetails'+workItemIndex);
-
-    // if($('#collapseDetails'+workItemIndex).hasClass('display-body')) {
-    //   $('#collapseDetails'+workItemIndex).removeClass('display-body');
-    //   $('#collapseDetails'+workItemIndex).addClass('hide-body').stop().slideUp();
-    // }
-    // else {
-    //   $('.cost-head-panel-wrapper').removeClass('display-body');
-    //   $('.cost-head-panel-wrapper').addClass('hide-body').slideUp();
-    //   $('#collapseDetails' + workItemIndex+'.cost-head-panel-wrapper').removeClass('hide-body');
-    //   $('#collapseDetails'+workItemIndex+'.cost-head-panel-wrapper').addClass('display-body').stop().slideDown();
-    // }
-
-    if(element.classList.contains('display-body') || (workItem.quantity.quantityItemDetails.length > 0 &&
-        workItem.quantity.quantityItemDetails[0].name === 'default') || workItem.quantity.isDirectQuantity === true ||
-      workItem.quantity.isEstimated === false) {
+    if(element.classList.contains('display-body')) {
       element.classList.remove('display-body');
       element.classList.add('hide-body');
     } else if(element.classList.contains('hide-body')) {
@@ -652,17 +639,13 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   toggleWorkItemView() {
-    setTimeout(() => {
-      if($('#collapse'+this.categoryRateAnalysisId+'.cost-head-panel-wrapper').hasClass('display-body')) {
-        $('#collapse'+this.categoryRateAnalysisId+'.cost-head-panel-wrapper').removeClass('display-body');
-        $('#collapse'+this.categoryRateAnalysisId+'.cost-head-panel-wrapper').addClass('hide-body').stop().slideUp();
-      } else {
-        $('.cost-head-panel-wrapper').removeClass('display-body');
-        $('.cost-head-panel-wrapper').addClass('hide-body').slideUp();
-        $('#collapse' + this.categoryRateAnalysisId+'.cost-head-panel-wrapper').removeClass('hide-body');
-        $('#collapse'+this.categoryRateAnalysisId+'.cost-head-panel-wrapper').addClass('display-body').stop().slideDown();
-      }
-    },50);
+    if($('#collapse'+this.categoryRateAnalysisId).hasClass('display-body')) {
+      $('#collapse'+this.categoryRateAnalysisId).removeClass('display-body');
+      $('#collapse'+this.categoryRateAnalysisId).addClass('hide-body');
+    } else {
+      $('#collapse' + this.categoryRateAnalysisId).removeClass('hide-body');
+      $('#collapse'+this.categoryRateAnalysisId).addClass('display-body');
+    }
   }
 
   // calculation of Quantity * Rate

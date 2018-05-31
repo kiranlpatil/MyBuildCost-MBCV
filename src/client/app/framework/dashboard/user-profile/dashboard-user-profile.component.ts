@@ -66,10 +66,14 @@ export class DashboardProfileComponent implements OnInit {
     //if(this.userForm.valid) {
       this.model = this.userForm.value;
      if( this.model.first_name !== '' ||  this.model.first_name.trim() !== '') {
-       if(this.model.company_name.trim() !== '') {
+       if( this.model.company_name && this.model.company_name !== '' && this.model.company_name.trim() !== '') {
          SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, this.model.company_name);
        } else {
-         this.model.company_name = this.model.company_name.trim();
+         if(this.model.company_name === undefined) {
+           this.model.company_name = undefined;
+         }else {
+           this.model.company_name = this.model.company_name.trim();
+         }
          SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, undefined);
        }
         this.dashboardUserProfileService.updateProfile(this.model)

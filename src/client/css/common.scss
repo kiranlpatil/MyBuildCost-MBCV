@@ -961,6 +961,13 @@ textarea[disabled] {
       top: 7px !important;
     }
   }
+
+  .default-modal {
+    .modal-dialog {
+      margin: 0 auto;
+      top: 25%;
+    }
+  }
 }
 
 
@@ -970,6 +977,13 @@ textarea[disabled] {
       font-weight: 100 !important;
       left: 3px !important;
       top: 7px !important;
+    }
+  }
+
+  .default-modal {
+    .modal-dialog {
+      margin: 0 auto;
+      top: 25%;
     }
   }
 }

@@ -27,7 +27,7 @@
           <input [(ngModel)]="quantityItemSteel.item" id="costitem" class="form-control" [class.required-field]="quantityItemSteel.item == ''"/>
         </td>
         <td>
-          <select [(ngModel)]="quantityItemSteel.diameter">
+          <select [(ngModel)]="quantityItemSteel.diameter" required>
             <option [value]="0"> </option>
             <option *ngFor="let diameter of diameterValuesArray" [value]="diameter" [selected]="quantityItemSteel.diameter == diameter">{{ diameter }}</option>
           </select>
@@ -36,7 +36,7 @@
           <input  type="number" class="get-amount-value" [(ngModel)]="quantityItemSteel.length" id="length" class="form-control" required/>
         </td>
         <td>
-          <input  type="number"   class="get-amount-value" [(ngModel)]="quantityItemSteel.nos" id="nos" class="form-control"/>
+          <input  type="number"   class="get-amount-value" [(ngModel)]="quantityItemSteel.nos" id="nos" class="form-control" required/>
         </td>
         <td *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let j=index">
           <div *ngIf="getDiameterQuantityFun(quantityIndex,diameter,getValueConstant().STEEL_DIAMETER_STRING_VALUES[j],getValueConstant().TOTAL_STEEL_DIAMETER_STRING_VALUES[j])!==0.00">
