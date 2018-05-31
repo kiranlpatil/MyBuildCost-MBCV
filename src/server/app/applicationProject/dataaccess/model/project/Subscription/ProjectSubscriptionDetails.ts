@@ -3,8 +3,8 @@ class ProjectSubscriptionDetails {
   projectName: string;
   projectId: string;
   expiryDate : Date;
-  expiryMessage : string;
-  warningMessage : string;
+  expiryMessage : string = null;
+  warningMessage : string = null;
   numOfDaysToExpire : number;
   numOfBuildingsAllocated : number;
   numOfBuildingsRemaining : number;

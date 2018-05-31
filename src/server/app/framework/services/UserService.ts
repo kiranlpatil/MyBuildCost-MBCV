@@ -19,9 +19,8 @@ import SubscriptionService = require('../../applicationProject/services/Subscrip
 import SubscriptionPackage = require('../../applicationProject/dataaccess/model/project/Subscription/SubscriptionPackage');
 import BaseSubscriptionPackage = require('../../applicationProject/dataaccess/model/project/Subscription/BaseSubscriptionPackage');
 import UserSubscription = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscription');
-import {Types} from 'mongoose';
-import Project = require('../../applicationProject/dataaccess/model/project/Project');
 import ProjectRepository = require('../../applicationProject/dataaccess/repository/ProjectRepository');
+import ProjectSubscriptionDetails = require('../../applicationProject/dataaccess/model/project/Subscription/ProjectSubscriptionDetails');
 
 class UserService {
   APP_NAME: string;
@@ -103,7 +102,6 @@ class UserService {
         callback(null, validSubscriptionPackage);
       }
     });
-
   }
 
    assignFreeSubscriptionAndCreateUser(item: any, freeSubscription: SubscriptionPackage, callback: (error: any, result: any) => void) {
@@ -129,7 +127,7 @@ class UserService {
         }
     });
   }
-//check for building validation
+
   getUserForCheckingBuilding(userId:string,projectId:string,user:User,callback: (error: any, result: any) => void) {
     let query= [
       { $match: {'_id':userId}},
@@ -417,62 +415,6 @@ class UserService {
     });
   }
 
-
- /* sendVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
-
-    this.userRepository.retrieve({'email': field.email}, (err, res) => {
-      if (res.length > 0) {
-        this.recruiterRepository.retrieve({'userId': new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
-          if (err) {
-            callback(err, null);
-          } else {
-            this.company_name = recruiter[0].company_name;
-            let auth = new AuthInterceptor();
-            let token = auth.issueTokenWithUid(recruiter[0]);
-            let host = config.get('application.mail.host');
-            let link = host + 'company-details?access_token=' + token + '&_id=' + res[0]._id + '&companyName=' + this.company_name;
-            let sendMailService = new SendMailService();
-            let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
-              ['$link$',link]]);
-            sendMailService.send(field.email,
-              Messages.EMAIL_SUBJECT_REGISTRATION,
-              'recruiter.mail.html',data,(err: any, result: any) => {
-              if(err) {
-                callback(err,result);
-                return;
-                 }
-                let recruiterService = new RecruiterService();
-                recruiterService.mailOnRecruiterSignupToAdmin(res[0], this.company_name, callback);
-
-              });
-                 } });
-      } else {
-        callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
-      }
-    });
-  }*/
-
-/*  sendRecruiterVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
-
-    this.userRepository.retrieve({'email': field.email}, (err, res) => {
-      if (res.length > 0) {
-        let auth = new AuthInterceptor();
-        let token = auth.issueTokenWithUid(res[0]);
-        let host = config.get('TplSeed.mail.host');
-        let link = host + 'activate-user?access_token=' + token + '&_id=' + res[0]._id;
-        let sendMailService = new SendMailService();
-        let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],['$link$', link]]);
-        sendMailService.send(field.email,
-          Messages.EMAIL_SUBJECT_REGISTRATION,
-          'recruiter.mail.html', data, callback);
-
-      } else {
-        callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
-      }
-    });
-  }*/
-
-
   sendMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
     let sendMailService = new SendMailService();
     let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
@@ -758,7 +700,7 @@ class UserService {
   }
 
   getProjects(user: User, callback:(error : any, result :any)=>void) {
-    let query = {_id : user._id};
+    /*let query = {_id : user._id};
     this.userRepository.findAndPopulate(query, {path: 'project', select: 'name'}, (error, result) => {
       if(error) {
         callback(error, null);
@@ -766,7 +708,62 @@ class UserService {
         let authInterceptor = new AuthInterceptor();
         callback(null, {data: result[0].project, access_token: authInterceptor.issueTokenWithUid(user)});
       }
+    });*/
+
+    let query = {_id: user._id };
+    let populate = {path: 'project', select: ['name','buildings']};
+    this.userRepository.findAndPopulate(query, populate, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let authInterceptor = new AuthInterceptor();
+        let populatedProject = result[0];
+        let projectList = result[0].project;
+        let subscriptionList = result[0].subscription;
+        let projectSubscriptionArray = Array<ProjectSubscriptionDetails>();
+
+        for(let project of projectList) {
+          for(let subscription of subscriptionList) {
+            if(subscription.projectId.indexOf(project._id)) {
+              let projectSubscription = new ProjectSubscriptionDetails();
+              projectSubscription.projectName = project.name;
+              projectSubscription.projectId = project._id;
+              projectSubscription.numOfBuildingsAllocated = subscription.numOfBuildings;
+
+              //calculate expiry date
+              let activate_date = new Date(subscription.activationDate);
+              let expiryDate = new Date();
+              let current_date = new Date();
+              projectSubscription.expiryDate = new Date(expiryDate.setDate(activate_date.getDate() + subscription.validity));
+              projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
+              if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
+                projectSubscription.warningMessage = projectSubscription.numOfDaysToExpire +
+                  ' days are remaining to expire. Please renew Project';
+              } else if(projectSubscription.numOfDaysToExpire < 0) {
+                projectSubscription.expiryMessage = 'Please renew project. project is expired';
+              }
+              projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
+              projectSubscriptionArray.push(projectSubscription);
+            }
+          }
+        }
+
+        callback(null, {data: projectSubscriptionArray, access_token: authInterceptor.issueTokenWithUid(user)});
+      }
     });
+  }
+
+  daysdifference(date1 : Date, date2 : Date) {
+    // The number of milliseconds in one day
+    var ONEDAY = 1000 * 60 * 60 * 24;
+    // Convert both dates to milliseconds
+    var date1_ms = date1.getTime();
+    var date2_ms = date2.getTime();
+    // Calculate the difference in milliseconds
+    var difference_ms = Math.abs(date1_ms - date2_ms);
+
+    // Convert back to days and return
+    return Math.round(difference_ms/ONEDAY);
   }
 }
 
