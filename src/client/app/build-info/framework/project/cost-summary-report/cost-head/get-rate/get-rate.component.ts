@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import {
   Messages, Button, TableHeadings, Label, Headings, ValueConstant,
   StandardNotes
@@ -23,7 +23,7 @@ import { RateItem } from '../../../../model/rate-item';
   styleUrls: ['get-rate.component.css'],
 })
 
-export class GetRateComponent implements OnInit {
+export class GetRateComponent implements OnChanges {
 
   @Input() rate: Rate;
   @Input() categoryDetails :  Array<Category>;
@@ -60,7 +60,8 @@ export class GetRateComponent implements OnInit {
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private commonService: CommonService) {
   }
-  ngOnInit() {
+
+  ngOnChanges() {
     this.calculateTotal();
   }
 
