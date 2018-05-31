@@ -232,6 +232,9 @@ export class NavigationRoutes {
   public static APP_CATEGORY: string = 'category';
   public static APP_COMMON_AMENITIES = 'common-amenities';
   public static APP_DASHBOARD: string = '/dashboard';
+  public static PAYMENT: string = 'payment';
+  public static SUCCESS: string = 'success';
+  public static FAILURE: string = 'failure';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
   public static VERIFY_PHONE: string = '/verify-phone';

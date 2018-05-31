@@ -1,7 +1,8 @@
 import { Route } from '@angular/router';
 import { PackageDetailsComponent } from './package-details.component';
 import { PackageSummaryComponent } from './package-summary/package-summary.component';
-import {PackageDefaultComponent} from "./packageDefault.component";
+import { PackageDefaultComponent } from './packageDefault.component';
+import { PaymentSuccessfulComponent } from '../payment/payment-successful/payment-successful.component';
 
 export const PackageDetailsRoutes: Route[] = [
   {
@@ -9,7 +10,8 @@ export const PackageDetailsRoutes: Route[] = [
     component: PackageDefaultComponent,
     children:[
       {path: '', component: PackageDetailsComponent},
-      {path: 'premium-package/:packageName', component: PackageSummaryComponent}]
+      {path: 'premium-package/:packageName', component: PackageSummaryComponent},
+      {path: 'payment/success', component: PaymentSuccessfulComponent}]
   }
 ];
 

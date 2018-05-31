@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Headings, Button, Label,Messages } from '../../../../shared/constants';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Message, MessageService } from '../../../../shared/index';
 import { PackageDetailsService } from './../package-details.service';
 import { NavigationRoutes } from '../../../../shared/index';
@@ -9,13 +9,14 @@ import { NavigationRoutes } from '../../../../shared/index';
   moduleId: module.id,
   selector: 'bi-package-summary',
   templateUrl: 'package-summary.component.html',
-  styleUrls: ['package-summary.component.scss']
+  styleUrls: ['package-summary.component.css']
 })
 export class PackageSummaryComponent implements OnInit {
   packageName: any;
   premiumPackageDetails:any;
 
-  constructor(private activatedRoute:ActivatedRoute,private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService) {
+  constructor(private activatedRoute:ActivatedRoute,private packageDetailsService : PackageDetailsService,
+              private _router: Router, private messageService : MessageService) {
   }
 
   ngOnInit() {
@@ -25,7 +26,6 @@ export class PackageSummaryComponent implements OnInit {
         this.getSubscriptionPackageByName(this.packageName);
       }
     });
-    console.log('Init');
     }
 
     getSubscriptionPackageByName(packageName : string) {
@@ -40,11 +40,11 @@ export class PackageSummaryComponent implements OnInit {
   onGetSubscriptionPackageByNameFailure(error:any){
     console.log(error);
  }
-  onCancelClick(){
-
+  onCancelClick() {
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
    }
-  onPay(){
-
+  onPay() {
+    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, NavigationRoutes.SUCCESS]);
    }
  getHeadings() {
     return Headings;

@@ -249,7 +249,7 @@ export class CostSummaryService extends BaseService {
 
   //check for limitation of building according to package.
   checkLimitationOfBuilding(userId:string,projectId:string) {
-    var url=API.USER +'/'+userId +'/'+API.PROJECT +'/'+projectId +'/'+API.CHECK_FOR_LIMITATION_OF_BUILDING;
+    var url=API.USER +'/subscription/'+API.PROJECT +'/'+projectId;
   return this.httpDelegateService.getAPI(url);
   }
 

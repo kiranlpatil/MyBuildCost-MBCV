@@ -19,10 +19,10 @@ export class ProjectItemComponent {
   }
 
   navigateToSelectedProject(projectId:string,projectName:string, numberOfDaysToExpire : number) {
-    if(numberOfDaysToExpire > 0) {
+    //if(numberOfDaysToExpire > 0) {
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectId);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, projectName);
       this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
-    }
+    //}
   }
 }

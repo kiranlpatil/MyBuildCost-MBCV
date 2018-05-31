@@ -28,7 +28,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     if(isSubscriptionAvailable) {
       this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
     } else {
-      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+      let packageName = 'Premium';
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName]);
     }
   }
 

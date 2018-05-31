@@ -701,15 +701,6 @@ class UserService {
   }
 
   getProjects(user: User, callback:(error : any, result :any)=>void) {
-    /*let query = {_id : user._id};
-    this.userRepository.findAndPopulate(query, {path: 'project', select: 'name'}, (error, result) => {
-      if(error) {
-        callback(error, null);
-      }else {
-        let authInterceptor = new AuthInterceptor();
-        callback(null, {data: result[0].project, access_token: authInterceptor.issueTokenWithUid(user)});
-      }
-    });*/
 
     let query = {_id: user._id };
     let populate = {path: 'project', select: ['name','buildings']};
