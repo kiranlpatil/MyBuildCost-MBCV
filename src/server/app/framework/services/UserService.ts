@@ -3,6 +3,7 @@ import SendMailService = require('./mailer.service');
 import SendMessageService = require('./sendmessage.service');
 import * as fs from 'fs';
 import * as mongoose from 'mongoose';
+let ObjectId = mongoose.Types.ObjectId;
 import { SentMessageInfo } from 'nodemailer';
 let config = require('config');
 let path = require('path');
@@ -81,7 +82,7 @@ class UserService {
   }
 
   checkForValidSubscription(userid : string, callback : (error : any, result: any) => void) {
-    let projection = {'subscription': 1};
+
     let query = [
       { $match: {'_id':userid}},
       { $project : {'subscription':1}},
@@ -776,6 +777,23 @@ class UserService {
     let date2_ms = date2.getTime();
     let difference_ms = Math.abs(date1_ms - date2_ms);
     return Math.round(difference_ms/ONEDAY);
+  }
+
+  getProjectSubscription(user: User, projectId: string, callback:(error : any, result :any)=>void) {
+
+    let query = [
+      {$match: {'_id':ObjectId(user._id)}},
+      { $project : {'subscription':1}},
+      { $unwind: '$subscription'},
+      { $match: {'subscription.projectId' : ObjectId(projectId)}}
+    ];
+    this.userRepository.aggregate(query ,(error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, result);
+      }
+    });
   }
 }
 

@@ -88,6 +88,7 @@ class UserRoutes {
 
       /*router.use(sharedService.errorHandler);*/
       //Retrive list of project
+      router.get('/subscription/project/:projectId', authInterceptor.requiresAuth, controller.getProjectSubscription);
       router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
         return router;
     }
