@@ -1,12 +1,12 @@
-<div>
-  <h1>Confirm your package</h1>
+<div *ngIf="packageName && packageName=='Premium'">
+  <h1>{{getHeadings().CONFIRM_PACKAGE_HEADING}}</h1>
 
   <div *ngIf="premiumPackageDetails">
-    <span>No.of Projects:{{premiumPackageDetails.basePackage.numOfProjects}}</span><br>
-    <span>No.of Buildings:{{premiumPackageDetails.basePackage.numOfBuildings}}</span><br>
-  <span>Duration:{{premiumPackageDetails.basePackage.validity/365|number:'1.0-0'}}years</span><br>
+    <span>{{getLabels().NO_OF_PROJECTS}}{{premiumPackageDetails.basePackage.numOfProjects}}</span><br>
+    <span>{{getLabels().NO_OF_BUILDING}}{{premiumPackageDetails.basePackage.numOfBuildings}}</span><br>
+  <span>{{getLabels().DURATION}}{{premiumPackageDetails.basePackage.validity/365|number:'1.0-0'}}years</span><br>
  <h1>
-    Total Billed:{{premiumPackageDetails.basePackage.cost}}
+   {{getLabels().TOTAL_BILLED}}{{premiumPackageDetails.basePackage.cost}}
  </h1>
   <div>
     <button name="cancel" (click)="onCancelClick()">{{getButton().CANCEL_BUTTON}}</button>
@@ -17,3 +17,29 @@
   </div>
 
 </div>
+<div *ngIf="packageName && packageName=='Add_building'">
+  <h3 [innerHtml]="getMessages().MSG_ADD_BUILDING_PAYMENT"></h3>
+  <div class="form-group">
+    <label>{{getLabels().NO_OF_BUILDINGS_TO_ADD}}</label>
+    <div>
+    <select (change)="onChange($event.target.value)" class="form-control" id="noOfBuildings" style="width: 50%;
+    display: inline-block">
+      <option [value]='0'>0</option>
+      <option *ngFor="let buildingNumber of noOfBuildingsValues" [value]="buildingNumber">{{ buildingNumber }}</option>
+    </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{getLabels().TOTAL_BILLED}}</label>
+    <div> <span>{{getLabels().INR}}</span>
+      <h4 *ngIf="selectedBuildingValue">{{selectedBuildingValue*500}}</h4>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { Headings, Button, Label,Messages } from '../../../../shared/constants';
+import {Headings, Button, Label, Messages, ValueConstant} from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Message, MessageService, SessionStorage } from '../../../../shared/index';
 import { PackageDetailsService } from './../package-details.service';
@@ -14,6 +14,8 @@ import { NavigationRoutes } from '../../../../shared/index';
 export class PackageSummaryComponent implements OnInit {
   packageName: any;
   premiumPackageDetails:any;
+  selectedBuildingValue:any;
+  noOfBuildingsValues:any[]=ValueConstant.NO_OF_BUILDINGS_VALUES;
 
   constructor(private activatedRoute:ActivatedRoute,private packageDetailsService : PackageDetailsService,
               private _router: Router, private messageService : MessageService) {
@@ -22,7 +24,7 @@ export class PackageSummaryComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.packageName = params['packageName'];
-      if(this.packageName) {
+      if(this.packageName=='Premium') {
         this.getSubscriptionPackageByName(this.packageName);
       }
     });
@@ -40,6 +42,11 @@ export class PackageSummaryComponent implements OnInit {
   onGetSubscriptionPackageByNameFailure(error:any) {
     console.log(error);
  }
+
+  onChange(selectedValue:any) {
+    this.selectedBuildingValue=parseInt(selectedValue);
+  }
+
   onCancelClick() {
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
@@ -55,7 +62,9 @@ export class PackageSummaryComponent implements OnInit {
   getLabels() {
     return Label;
   }
-
+ getMessages(){
+    return Messages;
+ }
   getButton() {
     return Button;
   }

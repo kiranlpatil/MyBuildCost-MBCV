@@ -44,7 +44,8 @@ export class ProjectHeaderComponent implements OnInit {
     if(this.numberOfRemainingBuildings > 0) {
       this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
     } else {
-      let packageName = 'Premium';
+      //change package name with addOn packages
+      let packageName = 'Add_building';
       this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName]);
     }
   }

@@ -217,6 +217,8 @@ export class Messages {
   //Payment Messages
   public static MSG_FOR_REMAINING_BUILDINGS: string = '(You can add';
   public static MSG_FOR_REMAINING_BUILDINGS_ADD: string = ' more buildings to this project)';
+  public static MSG_ADD_BUILDING_PAYMENT: string = 'You have already consumed package of 5 buildings.<br />You can add more buildings by paying INR 500 per building.';
+
 }
 
 export class NavigationRoutes {
@@ -422,6 +424,11 @@ export class Headings {
   public static QUANTITY: string = 'Quantity';
   public static COLON: string = ':';
   public static ITEM: string = 'Item';
+
+
+
+  //Payment headings
+  public static CONFIRM_PACKAGE_HEADING: string ='Confirm your package';
 }
 
 export class TableHeadings {
@@ -553,6 +560,15 @@ export class Label {
   public static PROJECTS: string = 'Projects';
   public static BUILDING: string = 'Building';
   public static BUILDINGS: string = 'Buildings';
+  public static NO_OF_PROJECTS: string = 'No.of Projects:';
+  public static NO_OF_BUILDING: string = 'No.of Buildings:';
+  public static DURATION: string = 'Duration:';
+  public static TOTAL_BILLED: string = 'Total Billed:';
+  public static NO_OF_BUILDINGS_TO_ADD: string = 'Number of building(s) to add';
+  public static INR: string = 'INR';
+
+
+
 
 }
 
@@ -686,6 +702,8 @@ export class ValueConstant {
   public static TOTAL_STEEL_DIAMETER_STRING_VALUES: string[] = ['totalWeightOf6mm','totalWeightOf8mm','totalWeightOf10mm','totalWeightOf12mm','totalWeightOf16mm','totalWeightOf20mm','totalWeightOf25mm','totalWeightOf30mm'];
   public static NUMBER_OF_FRACTION_DIGIT = 2;
   public static FILE_SIZE = 5000000;
+  public static NO_OF_BUILDINGS_VALUES :Number[]= [1,2,3,4,5];
+
 }
 
 export class FileAttachment {
