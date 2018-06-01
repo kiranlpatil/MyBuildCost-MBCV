@@ -13,6 +13,8 @@ import { NavigationRoutes } from '../../../../shared/index';
 })
 export class PackageSummaryComponent implements OnInit {
   packageName: any;
+  premiumPackageExist:any;
+  premiumPackageAvailable:boolean=false;
   premiumPackageDetails:any;
   selectedBuildingValue:any;
   noOfBuildingsValues:any[]=ValueConstant.NO_OF_BUILDINGS_VALUES;
@@ -24,7 +26,9 @@ export class PackageSummaryComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.packageName = params['packageName'];
-      if(this.packageName=='Premium') {
+      this.premiumPackageExist = params['premiumPackageExist'];
+      this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;
+      if(this.packageName==='Premium') {
         this.getSubscriptionPackageByName(this.packageName);
       }
     });

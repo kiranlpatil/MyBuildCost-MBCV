@@ -10,7 +10,7 @@ export const PackageDetailsRoutes: Route[] = [
     component: PackageDefaultComponent,
     children:[
       {path: '', component: PackageDetailsComponent},
-      {path: 'premium-package/:packageName', component: PackageSummaryComponent},
+      {path: 'premium-package/:packageName/:premiumPackageExist', component: PackageSummaryComponent},
       {path: 'payment/success', component: PaymentSuccessfulComponent}]
   }
 ];

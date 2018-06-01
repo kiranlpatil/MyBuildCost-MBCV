@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { SessionStorage, SessionStorageService } from '../../../shared/index';
 import { Menus, NavigationRoutes, CurrentView } from '../../../shared/constants';
 import { CostSummaryService } from '../project/cost-summary-report/cost-summary.service';
@@ -18,13 +18,22 @@ export class ProjectHeaderComponent implements OnInit {
   @Input () isActiveAddBuildingButton?:boolean;
   numberOfRemainingBuildings : number;
   subscriptionValidityMessage : string;
+  premiumPackageExist:any;
+  premiumPackageAvailable:boolean=false;
 
-  constructor(private _router: Router, private costSummaryService : CostSummaryService) {
+
+  constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService) {
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params=> {
+      this.premiumPackageExist=params['premiumPackageExist'];
+      this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;
+      });
+
     this.getCurrentProjectId();
     this.getProjectSubscriptionDetails();
+
   }
 
   getCurrentProjectId() {
@@ -46,7 +55,7 @@ export class ProjectHeaderComponent implements OnInit {
     } else {
       //change package name with addOn packages
       let packageName = 'Add_building';
-      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName]);
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName,this.premiumPackageAvailable]);
     }
   }
 

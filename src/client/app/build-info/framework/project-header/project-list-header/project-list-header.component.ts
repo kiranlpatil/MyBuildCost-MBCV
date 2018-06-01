@@ -19,6 +19,7 @@ export class ProjectListHeaderComponent implements OnInit {
 
   projects : Array<ProjectSubscriptionDetails>;
   selectedProjectName : string;
+  projectId :string;
   currentView : string;
   projectNameSubscription : Subscription;
 
@@ -36,8 +37,9 @@ export class ProjectListHeaderComponent implements OnInit {
     this.currentView = SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
     if( SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== 'undefined' &&
       SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== 'null') {
-      this.selectedProjectName=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
-    }
+      this.selectedProjectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+      this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+      }
     this.getAllProjects();
   }
 
@@ -59,6 +61,7 @@ export class ProjectListHeaderComponent implements OnInit {
             SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID).toString();
         });
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME,  projectList[0].projectName);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID,  projectList[0].projectId);
     }
   }
 

@@ -28,6 +28,12 @@
             <span class="pull-right"> {{premiumPackageDetails.basePackage.cost}} <sup>INR</sup> </span>
           </div>
         </li>
+        <li *ngIf="premiumPackageAvailable">
+          <div class="font-bold">
+            <span>{{getLabels().TOTAL_BILLED}}</span>
+            <span class="pull-right"> {{premiumPackageDetails.basePackage.cost-premiumPackageDetails.basePackage.iterativeDiscount}} <sup>INR</sup> </span>
+          </div>
+        </li>
       </ul>
 
       <div>

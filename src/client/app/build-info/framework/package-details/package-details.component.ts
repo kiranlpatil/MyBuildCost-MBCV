@@ -48,7 +48,7 @@ export class PackageDetailsComponent implements OnInit {
   }
 
   goToCreatePremiumProject() {
-    this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,this.packageName]);
+    this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,this.packageName,false]);
   }
 
 

@@ -3,7 +3,7 @@
     <div class="col-sm-12 no-padding" *ngIf="isVisible">
       <ul class="animated-list">
 
-        <li (click)="createProject(isSubscriptionExist)" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
+        <li (click)="createProject(isSubscriptionExist,premiumPackageAvailable)" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
           <div class="building-image-container">
             <div class="building-image" >
               <img src="assets/build-info/create-new-project/plus-sign.png" />
