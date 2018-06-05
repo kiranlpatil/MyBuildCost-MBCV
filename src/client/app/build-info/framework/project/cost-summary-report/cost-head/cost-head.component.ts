@@ -322,7 +322,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
           } else {
             this.quantityItemsArray = [];
           }
-          // this.workItem.quantity.quantityItemDetails.push(quantityDetail);
+           //this.workItem.quantity.quantityItemDetails.push(quantityDetail);
           this.keyQuantity = this.getLabel().DEFAULT_VIEW;
         }
         this.currentCategoryIndex = categoryIndex;

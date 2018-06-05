@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, OnChanges} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Button, Headings, Label, NavigationRoutes, TableHeadings, ProjectElements } from '../../../../../shared/constants';
 import { BuildingReport } from '../../../model/building-report';
@@ -17,7 +17,7 @@ declare let $: any;
   templateUrl: 'common-amenities.component.html'
 })
 
-export class CommonAmenitiesComponent implements OnInit {
+export class CommonAmenitiesComponent implements OnInit,OnChanges {
   @Input() amenitiesReport: BuildingReport;
   @Input() totalNumberOfBuildings: number;
   @Input() costingByUnit : string;
@@ -42,6 +42,10 @@ export class CommonAmenitiesComponent implements OnInit {
       this.projectId = params['projectId'];
     });
   }
+  ngOnChanges() {
+    $('#collapse-cost-summary-panel'+this.totalNumberOfBuildings).addClass('collapsed');
+    $('#collapse'+this.totalNumberOfBuildings).removeClass('in');
+}
   goToCostHeadView(estimatedItem :EstimateReport) {
     if(!estimatedItem.disableCostHeadView) {
       this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);

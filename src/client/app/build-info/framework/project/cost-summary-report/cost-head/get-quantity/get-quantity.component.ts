@@ -57,50 +57,9 @@ export class GetQuantityComponent implements OnInit {
     if(this.quantityItems.length === 0) {
       this.addQuantityItem();
     }
-    this.updateAllQuantity();
+   this.getQuantityTotal(this.quantityItems);
    this.workItemId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
     }
-
-    updateQuantity(choice:string ) {
-    switch(choice) {
-      case 'updateNos': {
-        this.quantityNumbersTotal =0;
-        for(let quantityIndex in this.quantityItems) {
-          this.quantityNumbersTotal= this.commonService.decimalConversion(this.quantityNumbersTotal +
-            this.quantityItems[quantityIndex].nos);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-      case 'updateLength': {
-        this.lengthTotal = 0;
-        for(let quantityIndex in this.quantityItems)  {
-          this.lengthTotal = this.commonService.decimalConversion(this.lengthTotal +
-            this.quantityItems[quantityIndex].length);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-      case 'updateBreadth' : {
-        this.breadthTotal= 0;
-        for(let quantityIndex in this.quantityItems)  {
-          this.breadthTotal = this.commonService.decimalConversion(this.breadthTotal +
-            this.quantityItems[quantityIndex].breadth);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-      case 'updateHeight' : {
-        this.heightTotal=0;
-        for(let quantityIndex in this.quantityItems)  {
-          this.heightTotal = this.commonService.decimalConversion(this.heightTotal +
-            this.quantityItems[quantityIndex].height);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-    }
-  }
 
   getQuantityTotal(quantityItems : any) {
     this.quantityTotal = 0;
@@ -118,13 +77,6 @@ export class GetQuantityComponent implements OnInit {
         this.quantityItems[quantityIndex].quantity);
       }
 
-  }
-
-  updateAllQuantity() {
-    this.updateQuantity('updateNos');
-    this.updateQuantity('updateLength');
-    this.updateQuantity('updateBreadth');
-    this.updateQuantity('updateHeight');
   }
 
   addQuantityItem() {
@@ -234,7 +186,7 @@ export class GetQuantityComponent implements OnInit {
      message.isError = false;
      message.custom_message = Messages.MSG_SUCCESS_DELETE_QUANTITY_ITEM;
      this.messageService.message(message);
-     this.updateAllQuantity();
+     this.getQuantityTotal(this.quantityItems);
       }
 
   closeQuantityTab() {

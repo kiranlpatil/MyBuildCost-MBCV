@@ -106,7 +106,7 @@ class ProjectService {
     });
   }
 
-  getProjectAndBuildingDetails(projectId: string, buildingId: string, callback: (error: any, result: any) => void) {
+  getProjectAndBuildingDetails(projectId: string, callback: (error: any, result: any) => void) {
     logger.info('Project service, getProjectAndBuildingDetails for sync with rateAnalysis has been hit');
     let query = {_id: projectId};
     let populate = {path: 'buildings'};
@@ -127,7 +127,7 @@ class ProjectService {
     let query = {_id: projectDetails._id};
     let buildingId = '';
 
-    this.getProjectAndBuildingDetails(projectDetails._id, buildingId, (error, projectAndBuildingDetails) => {
+    this.getProjectAndBuildingDetails(projectDetails._id, (error, projectAndBuildingDetails) => {
       if (error) {
         logger.error('Project service, getProjectAndBuildingDetails failed');
         callback(error, null);
@@ -211,7 +211,13 @@ class ProjectService {
       if (error) {
         callback(error, null);
       } else {
-        buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, buildingDetails);
+        this.getProjectAndBuildingDetails(projectId, (error, projectAndBuildingDetails) => {
+          if (error) {
+            logger.error('Project service, getProjectAndBuildingDetails failed');
+            callback(error, null);
+          } else {
+            let projectData = projectAndBuildingDetails.data[0];
+        buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, buildingDetails, projectData);
 
         this.buildingRepository.findOneAndUpdate(query, buildingDetails, {new: true}, (error, result) => {
           logger.info('Project service, findOneAndUpdate has been hit');
@@ -219,15 +225,14 @@ class ProjectService {
             callback(error, null);
           } else {
 
-            this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
+           /* this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
               if (error) {
                 logger.error('Project service, getProjectAndBuildingDetails failed');
                 callback(error, null);
               } else {
-
+*/
 
                 logger.info('Project service, syncProjectWithRateAnalysisData.');
-                let projectData = projectAndBuildingDetails.data[0];
                 let projectCostHeads = this.calculateBudgetCostForCommonAmmenities(projectData.projectCostHeads, projectData);
                 let queryForProject = {'_id': projectId};
                 let updateProjectCostHead = {$set: {'projectCostHeads': projectCostHeads}};
@@ -243,10 +248,12 @@ class ProjectService {
                       callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
                     }
                   });
-              }
-            });
+             /* }
+            });*/
           }
         });
+      }
+    });
       }
     });
   }
@@ -367,7 +374,13 @@ class ProjectService {
 
   getRatesAndCostHeads(projectId: string,oldBuildingDetails: Building, building:Building, costHeads: CostHead[],workItemAggregateData:any,
               user: User, centralizedRates: any, callback: (error: Error, result: Building) => void) {
-    oldBuildingDetails.costHeads = this.calculateBudgetCostForBuilding(building.costHeads, oldBuildingDetails);
+    this.getProjectAndBuildingDetails(projectId,  (error, projectAndBuildingDetails) => {
+      if (error) {
+        logger.error('Project service, getRatesAndCostHeads failed');
+        callback(error, null);
+      } else {
+        let projectData = projectAndBuildingDetails.data[0];
+    oldBuildingDetails.costHeads = this.calculateBudgetCostForBuilding(building.costHeads, oldBuildingDetails, projectData);
     this.cloneCostHeads(costHeads, oldBuildingDetails,workItemAggregateData);
     if(oldBuildingDetails.cloneItems.indexOf(Constants.RATE_ANALYSIS_CLONE) === -1) {
       //oldBuildingDetails.rates=this.getCentralizedRates(rateAnalysisData, oldBuildingDetails.costHeads);
@@ -380,6 +393,8 @@ class ProjectService {
         callback(error, null);
       } else {
         callback(null, res);
+      }
+    });
       }
     });
   }
@@ -399,12 +414,8 @@ class ProjectService {
   }
 
   cloneCategory(categories: Category[], cloneItems: string[],rateAnalysisData:any) {
-    let isClone: boolean =(cloneItems && cloneItems.indexOf(Constants.CATEGORY_CLONE) !== -1);
     for (let categoryIndex in categories) {
       let category = categories[categoryIndex];
-      if (!isClone) {
-        category.active = false;
-      }
       categories[categoryIndex].workItems = this.cloneWorkItems(category.workItems, cloneItems,rateAnalysisData);
     }
     return categories;
@@ -2127,7 +2138,7 @@ class ProjectService {
 
   syncProjectWithRateAnalysisData(projectId: string, buildingId: string, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, syncProjectWithRateAnalysisData has been hit');
-    this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
+    this.getProjectAndBuildingDetails(projectId,  (error, projectAndBuildingDetails) => {
       if (error) {
         logger.error('Project service, getProjectAndBuildingDetails failed');
         callback(error, null);
@@ -2188,7 +2199,7 @@ class ProjectService {
           logger.info('GetAllDataFromRateAnalysis success');
           let buildingCostHeads = rateAnalysis.buildingCostHeads;
           let projectService = new ProjectService();
-          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingData);
+          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingData, projectData);
           let queryForBuilding = {'_id': buildingId};
           let updateCostHead = {$set: {'costHeads': buildingCostHeads, 'rates': rateAnalysis.buildingRates}};
 
@@ -2235,7 +2246,7 @@ class ProjectService {
           let projectService = new ProjectService();
           let buildingCostHeads = rateAnalysis.buildingCostHeads;
 
-          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingDetails);
+          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingDetails, projectDetails);
 
           let query = {'_id': buildingId};
           let newData = {$set: {'costHeads': buildingCostHeads, 'rates': rateAnalysis.buildingRates}};
@@ -2381,7 +2392,7 @@ class ProjectService {
     });
   }
 
-  calculateBudgetCostForBuilding(costHeadsRateAnalysis: any, buildingDetails: any) {
+  calculateBudgetCostForBuilding(costHeadsRateAnalysis: any, buildingDetails: any, projectDetails: any) {
     logger.info('Project service, calculateBudgetCostForBuilding has been hit');
     let costHeads: Array<CostHead> = new Array<CostHead>();
     let budgetedCostAmount: number;
@@ -2594,10 +2605,10 @@ class ProjectService {
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
-        case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS : {
+        case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA_OF_PARKING, buildingDetails.carpetAreaOfParking)
-            .replace(Constants.PLOT_PERIPHERY_LENGTH, buildingDetails.totalCarpetAreaOfUnit)
+            .replace(Constants.PLOT_PERIPHERY_LENGTH, projectDetails.plotPeriphery)
             .replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors);
           budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
