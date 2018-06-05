@@ -19,16 +19,16 @@
       <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control" [class.required-field]="quantityItem.item == ''"/>
     </td>
     <td  class="get-amount-value">
-      <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="updateQuantity('updateNos')" class="form-control" required/>
+      <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
     <td class="get-amount-value" [hidden]="!workItem.length">
-      <input type="number" *ngIf="workItem" [(ngModel)]="quantityItem.length" id="length" (change)="updateQuantity('updateLength')" class="form-control" required/>
+      <input type="number" *ngIf="workItem" [(ngModel)]="quantityItem.length" id="length" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
     <td class="get-amount-value" [hidden]="!workItem.breadthOrWidth">
-      <input  type="number" *ngIf="workItem" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="updateQuantity('updateBreadth')" class="form-control"/>
+      <input  type="number" *ngIf="workItem" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getQuantityTotal(quantityItems)" class="form-control"/>
     </td>
     <td class="get-amount-value" [hidden]="!workItem.height">
-      <input type="number" *ngIf="workItem" [(ngModel)]="quantityItem.height" id="height" (change)="updateQuantity('updateHeight')" class="form-control" required/>
+      <input type="number" *ngIf="workItem" [(ngModel)]="quantityItem.height" id="height" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
     <td class="get-amount-value">
       <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" disabled/>
@@ -47,16 +47,16 @@
       <span>{{getTableHeadings().TOTAL}}</span>
     </td>
     <td class="total-amount text-right">
-      <span>{{quantityNumbersTotal|number}}</span>
+
     </td>
     <td class="total-amount text-right" [hidden]="!workItem.length">
-      <span>{{lengthTotal|number}}</span>
+
     </td>
     <td class="total-amount text-right" [hidden]="!workItem.breadthOrWidth">
-      <span> {{breadthTotal|number}} </span>
+
     </td>
     <td class="total-amount text-right" [hidden]="!workItem.height">
-      <span> {{heightTotal|number}} </span>
+
     </td>
     <td class="total-amount text-right">
       <span> {{quantityTotal|number}} </span>
