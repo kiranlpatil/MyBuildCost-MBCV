@@ -166,7 +166,6 @@
                   </tr>-->
                 </tbody>
               </table>
-                <cost-distribution-chart id="CostDistributionChart{{i}}" [chartId]="i" [buildingReport]="buildingsReport[i]"></cost-distribution-chart>
             </div>
           </div>
           <table class="table table-row-spacing table-dashboard total-table">
@@ -215,7 +214,8 @@
           [amenitiesReport]="amenitiesReport"
           [costingByUnit]="defaultCostingByUnit"
           [costingByArea]="defaultCostingByArea"
-          (getReportDetails)="getCostSummaryReport($event)">
+          (getReportDetails)="getCostSummaryReport($event)"
+          (sednCommonEmenitiesChartStatus)="getStatusOfCommonEmenities($event)">
         </bi-common-amenities>
 
       </div>
@@ -266,6 +266,10 @@
       </div>
     </div>
     <div class="col-xs-3 no-padding right-content">
+    <cost-distribution-chart  *ngIf="!(isShowBuildingCostSummaryChart==false && isShowCommonAmenitiesChart==false)"
+                              [buildingReport]="isShowBuildingCostSummaryChart?
+                              (buildingsReport?buildingsReport[compareIndex]:undefined)
+                              :projectReport?.commonAmenities"></cost-distribution-chart>
       <img src="./assets/build-info/dashboard/ads.png" style="width: 100%; margin-top: 20px;" />
     </div>
   </div>

@@ -50,6 +50,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   estimatedItem: EstimateReport;
   showCostHeadList:boolean=false;
   showGrandTotalPanelBody:boolean=true;
+  isShowBuildingCostSummaryChart:boolean=true;
+  isShowCommonAmenitiesChart:boolean=true;
   //showGrandTotalPanelTable= new Array<boolean>(10);
   compareIndex:number=0;
 
@@ -114,6 +116,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   setBuildingId( i:number, buildingId: string) {
+    this.setChartVisibility(i);
     this.compareIndex = i;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
    this.costSummaryService.moveSelectedBuildingAtTop(this.compareIndex);
@@ -437,7 +440,26 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   getListItemAnimation(index : number) {
     return Animations.getListItemAnimationStyle(index, Animations.defaultDelayFactor);
   }
-
+  getStatusOfCommonEmenities(event:string) {
+    this.isShowBuildingCostSummaryChart=false;
+    if(event==='true') {
+      this.isShowCommonAmenitiesChart=false;
+    } else {
+      this.isShowCommonAmenitiesChart=true;
+    }
+  }
+  setChartVisibility(currentIndex:number) {
+    this.isShowCommonAmenitiesChart=false;
+    if(this.compareIndex===currentIndex && ($('#collapse'+currentIndex).attr('aria-expanded')==='true'||
+        $('#collapse'+currentIndex).attr('aria-expanded')==undefined)) {
+      this.isShowBuildingCostSummaryChart=false;
+    } else {
+      this.isShowBuildingCostSummaryChart=true;
+    }
+    $('#collapse'+this.totalNumberOfBuildings).attr({
+      'aria-expanded':'false'
+    });
+  }
   ngAfterViewInit() {
     setTimeout(() => {
       console.log('animated');
