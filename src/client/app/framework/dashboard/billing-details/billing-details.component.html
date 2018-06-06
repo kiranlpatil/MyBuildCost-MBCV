@@ -1,6 +1,6 @@
- <div>
-   <label>{{getLabel().BILLING_INFO}}</label>
-      <table>
+ <div class="billing-summary-section">
+   <h1>{{getLabel().BILLING_INFO}}</h1>
+      <table class="table">
         <thead>
             <th> {{getLabel().PROJECT_NAME}}</th>
             <th> {{getLabel().VALID_TILL}}</th>
@@ -10,14 +10,14 @@
         <tr *ngFor="let project of projectDetails; let projectIndex =index ">
             <td>
                 {{project.projectName}}
-                <p *ngIf="project.expiryMessage !== null"> {{project.expiryMessage}}</p>
-                <p *ngIf="project.warningMessage !== null"> {{project.warningMessage}}</p>
+                <p class="error-msg" *ngIf="project.expiryMessage !== null"> {{project.expiryMessage}}</p>
+                <p class="warning-msg" *ngIf="project.warningMessage !== null"> {{project.warningMessage}}</p>
               <a *ngIf="(project.warningMessage !== null || project.expiryMessage !== null)" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
             </td>
             <td>
-                {{project.expiryDate | date:'dd/MMMM/yyyy'}}
+                {{project.expiryDate | date:'dd MMMM yyyy'}}
             </td>
-            <td>
+            <td class="numberof-building">
                {{project.numOfBuildingsAllocated}}
               <p *ngIf="project.numOfBuildingsRemaining !== 0">{{getMessage().MSG_FOR_REMAINING_BUILDINGS}}
                 {{project.numOfBuildingsRemaining}}{{getMessage().MSG_FOR_REMAINING_BUILDINGS_ADD}}</p>
@@ -25,6 +25,8 @@
         </tr>
         </tbody>
       </table>
-   <input action="action" (click)="goBack()" type="button" value="go Back" />
-  <button (click)="createProject()">{{ getButton().ADD_PROJECT }}</button>
+   <div class="button-group">
+     <button action="action" (click)="goBack()" type="button" value="go Back" class="btn btn-default"> Back </button>
+     <button class="btn btn-primary" (click)="createProject()">{{ getButton().ADD_PROJECT }}</button>
+   </div>
  </div>
