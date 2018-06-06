@@ -44,29 +44,30 @@
   </div>
 </div>
 
-<div *ngIf="packageName && packageName=='Add_building'">
-  <h3 [innerHtml]="getMessages().MSG_ADD_BUILDING_PAYMENT"></h3>
-  <div class="form-group">
-    <label>{{getLabels().NO_OF_BUILDINGS_TO_ADD}}</label>
-    <div>
-    <select (change)="onChange($event.target.value)" class="form-control" id="noOfBuildings" style="width: 50%;
-    display: inline-block">
-      <option [value]='0'>0</option>
-      <option *ngFor="let buildingNumber of noOfBuildingsValues" [value]="buildingNumber">{{ buildingNumber }}</option>
-    </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <label>{{getLabels().TOTAL_BILLED}}</label>
-    <div> <span>{{getLabels().INR}}</span>
-      <h4 *ngIf="selectedBuildingValue">{{selectedBuildingValue*500}}</h4>
-    </div>
-  </div>
-
+<div class="addmore-package-section" *ngIf="packageName && packageName=='Add_building'">
+  <h1 [innerHtml]="getMessages().MSG_ADD_BUILDING_PAYMENT"></h1>
+  <uL>
+    <li>
+      <div>
+        <label class="pull-left select-label">{{getLabels().NO_OF_BUILDINGS_TO_ADD}}</label>
+        <div class="pull-right">
+          <select (change)="onChange($event.target.value)" class="select-dropdown " id="noOfBuildings">
+            <option [value]='0'>0</option>
+            <option *ngFor="let buildingNumber of noOfBuildingsValues" [value]="buildingNumber">{{ buildingNumber }}</option>
+          </select>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="total-billed-amount">
+        <label class="pull-left">{{getLabels().TOTAL_BILLED}}</label>
+        <div class="pull-right">
+          <span *ngIf="selectedBuildingValue">
+            <sup>{{getLabels().INR}}</sup>
+            <span>{{selectedBuildingValue*500}} </span>
+          </span>
+        </div>
+      </div>
+    </li>
+  </uL>
 </div>
-
-
-
-
-
-
