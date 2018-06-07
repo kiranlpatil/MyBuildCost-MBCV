@@ -1,0 +1,17 @@
+<div  class="modal-dialog modal-md">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h1>{{getHeadings().CREATE_PROJECT_MODAL_HEADING}}</h1><br><br>
+      <h1 *ngIf="!trialProjectExist && !isSubscriptionAvailable">{{getMessage().MSG_CONFIRMATION_CREATE_PROJECT}}</h1><br><br>
+      <div *ngIf="trialProjectExist">
+      <p [innerHtml]="getMessage().MSG_CREATE_PROJECT_CONFIRMATION"></p>
+      </div>
+      <button class="btn btn-primary bi-btn" type="button" (click)="onCancel()" data-dismiss="modal">Cancel</button>
+      <button *ngIf="trialProjectExist" type="button" class="btn btn-default" (click)="onContinue()" data-dismiss="modal">Continue</button>
+      <button *ngIf="!trialProjectExist && !isSubscriptionAvailable" type="button" class="btn btn-default" (click)="onContinue()" data-dismiss="modal">Yes I'm sure</button>
+    </div>
+  </div>
+</div>
+
+
+

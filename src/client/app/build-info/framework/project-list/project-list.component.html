@@ -3,7 +3,7 @@
     <div class="col-sm-12 no-padding" *ngIf="isVisible">
       <ul class="animated-list">
 
-        <li (click)="createProject(isSubscriptionExist,premiumPackageAvailable)" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
+        <li (click)="createProject(isSubscriptionExist,trialProjectExist,premiumPackageAvailable)" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
           <div class="building-image-container">
             <div class="building-image" >
               <img src="assets/build-info/create-new-project/plus-sign.png" />
@@ -16,6 +16,16 @@
           <bi-project-item [project]="project"></bi-project-item>
         </li>
       </ul>
+      <div class="modal fade default-modal" id="createProjectConfirmation" role="dialog">
+        <bi-create-project-confirmation-modal
+          [subscriptionAvailable]="subscriptionAvailable"
+          [trialProjectExist]="trialProjectExist">
+        </bi-create-project-confirmation-modal>
+      </div>
+      <!--<div class="modal fade default-modal" *ngIf="!isSubscriptionAvailable" id="createProjectConfirmation2" role="dialog">
+        <bi-create-project-confirmation-modal></bi-create-project-confirmation-modal>
+      </div>-->
+
     </div>
   </div>
 </section>

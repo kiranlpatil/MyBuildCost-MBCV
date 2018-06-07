@@ -218,6 +218,11 @@ export class Messages {
   public static MSG_FOR_REMAINING_BUILDINGS: string = '(You can add';
   public static MSG_FOR_REMAINING_BUILDINGS_ADD: string = ' more buildings to this project)';
   public static MSG_ADD_BUILDING_PAYMENT: string = 'You have already consumed package of 5 buildings.<br />You can add more buildings by paying INR 500 per building.';
+  public static MSG_CREATE_PROJECT_CONFIRMATION: string = 'Trial package contains only 1 project <br />with 2 buildings you can create new project<br /> by purchasing our premium package.';
+  public static MSG_CONFIRMATION_CREATE_PROJECT: string = 'Are you sure to create new project?';
+  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain estimated cost details from existing project ';
+  public static MSG_ON_RETAIN_PROJECT2: string = ' or create a new project';
+  public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
 
 }
 
@@ -252,6 +257,7 @@ export class NavigationRoutes {
   public static APP_PACKAGE_DETAILS: string = '/package-details';
   public static APP_PACKAGE_SUMMARY: string = '/package-details/premium-package/';
   public static APP_RENEW_PACKAGE: string = '/package-details/renew-package';
+  public static APP_RETAIN_PROJECT: string = '/package-details/retain-project';
 
 
 }
@@ -430,6 +436,7 @@ export class Headings {
 
   //Payment headings
   public static CONFIRM_PACKAGE_HEADING: string ='Confirm your package';
+  public static CREATE_PROJECT_MODAL_HEADING: string ='Create New Project';
 }
 
 export class TableHeadings {
@@ -620,6 +627,10 @@ export class Button {
   public static CONTINUE_USING_TRIAL: string = 'Continue using trial';
   public static SWITCH_TO_PREMIUM: string = 'Switch to premium';
   public static PAY_BUTTON: string = 'Pay';
+  public static PROCEED_TO_PAY_BUTTON: string = 'Proceed to Pay';
+  public static CREATE_NEW_PROJECT_BUTTON: string = 'Create new project';
+  public static CONTINUE_WITH_EXISTING_PROJECT_BUTTON: string = 'Continue with existing project';
+
 
   //Renew project
   public static PROCEED_TO_PAY: string = 'Proceed to Pay';

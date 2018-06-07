@@ -4,6 +4,7 @@ import { NavigationRoutes, Button, Animations } from '../../../shared/constants'
 import { ProjectService } from '../project/project.service';
 import { Project } from './../model/project';
 import {PackageDetailsService} from "../package-details/package-details.service";
+declare var $: any;
 
 @Component({
   moduleId: module.id,
@@ -19,6 +20,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   premiumPackageAvailable:boolean=false;
   projects : Array<any>;
   packageName:any;
+  trialProjectExist:boolean=false;
   premiumPackageDetails:any;
 
 
@@ -29,14 +31,18 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     this.getAllProjects();
   }
 
-  createProject(isSubscriptionAvailable : boolean,premiumPackageExist:boolean) {
+  createProject(isSubscriptionAvailable : boolean,trialProjectExist:boolean,premiumPackageExist:boolean) {
     if(isSubscriptionAvailable) {
       this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
-    } else {
-      let packageName = 'Premium';
-      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName, premiumPackageExist]);
-      }
+    } else if(trialProjectExist) {
+      $('#createProjectConfirmation').modal();
+    }else if(trialProjectExist && !isSubscriptionAvailable) {
+      $('#createProjectConfirmation').modal();
     }
+      /* let packageName = 'Premium';
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName, premiumPackageExist]);*/
+  }
+
 
 
   getAllProjects() {
@@ -50,10 +56,12 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     this.projects = projects.data;
     if(this.projects && this.projects.length >1) {
       this.premiumPackageAvailable=true;
-      this.getSubscriptionPackageByName(this.projects[1].projectName);
-    }else {
-      this.premiumPackageAvailable=false;
-    }
+      //this.getSubscriptionPackageByName('Premium');
+
+    }else if(this.projects.length === 1 && this.projects[0].projectName.includes('Trial')) {
+       this.premiumPackageAvailable=false;
+       this.trialProjectExist=true;
+      }
     this.isSubscriptionExist = projects.isSubscriptionAvailable;
     this.isVisible = true;
   }

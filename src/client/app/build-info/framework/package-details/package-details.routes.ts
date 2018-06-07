@@ -4,6 +4,7 @@ import { PackageSummaryComponent } from './package-summary/package-summary.compo
 import { RenewPackageComponent } from './renew-package/renew-package.component';
 import { PackageDefaultComponent } from './packageDefault.component';
 import { PaymentSuccessfulComponent } from '../payment/payment-successful/payment-successful.component';
+import { RetainProjectComponent } from "../payment/retain-project/retain-project.component";
 
 export const PackageDetailsRoutes: Route[] = [
   {
@@ -13,7 +14,8 @@ export const PackageDetailsRoutes: Route[] = [
       {path: '', component: PackageDetailsComponent},
       {path: 'premium-package/:packageName/:premiumPackageExist', component: PackageSummaryComponent},
       {path: 'renew-package/:projectId/:projectName/:numOfDaysToExpire', component: RenewPackageComponent},
-      {path: 'payment/success', component: PaymentSuccessfulComponent}]
+      {path: 'payment/success', component: PaymentSuccessfulComponent},
+      {path: 'retain-project',component :RetainProjectComponent}]
   }
 ];
 

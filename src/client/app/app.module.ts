@@ -75,7 +75,7 @@ import { GetRateComponent } from './build-info/framework/project/cost-summary-re
 import { CreateNewProjectComponent } from './build-info/framework/create-new-project/create-new-project.component';
 import { ProjectItemComponent } from './build-info/framework/project-list/project-item/project-item.component';
 import { DeleteConfirmationModalComponent } from './shared/delete-confirmation-modal/delete-confirmation-modal.component';
-import { UpdateConfirmationModalComponent } from './shared/update-confirmation-modal/update-confirmation-modal.component';
+import {UpdateConfirmationModalComponent} from './shared/update-confirmation-modal/update-confirmation-modal.component';
 import { ProjectFormComponent } from './build-info/framework/shared/project-form/project-form.component';
 import { BuildingFormComponent } from './build-info/framework/shared/building-form/building-form.component';
 import { QuantityDetailsComponent }
@@ -102,6 +102,8 @@ import { GetSteelQuantityComponent } from './build-info/framework/project/cost-s
 import { PackageSummaryComponent } from './build-info/framework/package-details/package-summary/package-summary.component';
 import { PackageDefaultComponent } from './build-info/framework/package-details/packageDefault.component';
 import { PaymentSuccessfulComponent } from './build-info/framework/payment/payment-successful/payment-successful.component';
+import { CreateProjectConfirmationModalComponent } from './shared/create-project-confirmation-modal/create-project-confirmation-modal.component';
+import {RetainProjectComponent} from "./build-info/framework/payment/retain-project/retain-project.component";
 
 @NgModule({
   imports: [
@@ -165,6 +167,7 @@ import { PaymentSuccessfulComponent } from './build-info/framework/payment/payme
     GroupByPipe,
     DeleteConfirmationModalComponent,
     UpdateConfirmationModalComponent,
+    CreateProjectConfirmationModalComponent,
     DisclaimerComponent,
     ProjectFormComponent,
     BuildingFormComponent,
@@ -183,7 +186,8 @@ import { PaymentSuccessfulComponent } from './build-info/framework/payment/payme
     PackageSummaryComponent,
     PackageDefaultComponent,
     PaymentSuccessfulComponent,
-    RenewPackageComponent
+    RenewPackageComponent,
+    RetainProjectComponent
   ],
 
   providers: [
