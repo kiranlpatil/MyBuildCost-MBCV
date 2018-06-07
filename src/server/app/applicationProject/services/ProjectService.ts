@@ -216,44 +216,55 @@ class ProjectService {
             logger.error('Project service, getProjectAndBuildingDetails failed');
             callback(error, null);
           } else {
+
             let projectData = projectAndBuildingDetails.data[0];
-        buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, buildingDetails, projectData);
+            let building: Array<Building> = projectAndBuildingDetails.data[0].buildings.filter(
+              function (building: any) {
+                return building.name === buildingDetails.name;
+              });
 
-        this.buildingRepository.findOneAndUpdate(query, buildingDetails, {new: true}, (error, result) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
-          if (error) {
-            callback(error, null);
-          } else {
+             if(building.length === 0) {
+             buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, buildingDetails, projectData);
+             this.buildingRepository.findOneAndUpdate(query, buildingDetails, {new: true}, (error, result) => {
+                 logger.info('Project service, findOneAndUpdate has been hit');
+                 if (error) {
+                   callback(error, null);
+                 } else {
 
-           /* this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
-              if (error) {
-                logger.error('Project service, getProjectAndBuildingDetails failed');
-                callback(error, null);
-              } else {
-*/
+                   /* this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
+                  if (error) {
+                    logger.error('Project service, getProjectAndBuildingDetails failed');
+                    callback(error, null);
+                  } else {
+    */
 
                 logger.info('Project service, syncProjectWithRateAnalysisData.');
                 let projectCostHeads = this.calculateBudgetCostForCommonAmmenities(projectData.projectCostHeads, projectData);
                 let queryForProject = {'_id': projectId};
                 let updateProjectCostHead = {$set: {'projectCostHeads': projectCostHeads}};
 
-                logger.info('Calling update project Costheads has been hit');
-                this.projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
-                  (error: any, response: any) => {
-                    if (error) {
-                      logger.error('Error update project Costheads : ' + JSON.stringify(error));
-                      callback(error, null);
-                    } else {
-                      logger.debug('Update project Costheads success');
-                      callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
-                    }
-                  });
-             /* }
-            });*/
+               logger.info('Calling update project Costheads has been hit');
+               this.projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
+                 (error: any, response: any) => {
+                   if (error) {
+                     logger.error('Error update project Costheads : ' + JSON.stringify(error));
+                     callback(error, null);
+                   } else {
+                     logger.debug('Update project Costheads success');
+                     callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+                   }
+                 });
+               /* }
+              });*/
+             }
+           });
+             }else {
+                 let error = new Error();
+                 error.message = messages.MSG_ERROR_BUILDING_NAME_ALREADY_EXIST;
+                 callback(error, null);
+             }
           }
-        });
-      }
-    });
+       });
       }
     });
   }
