@@ -47,6 +47,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
   private showCostDistributionChart(data: any) {
     Highcharts.chart(this.chartID, {
       chart: {
+        type: 'pie',
         plotBackgroundColor: '#f7f7f7',
         plotBorderWidth: 0,
         plotShadow: false,
@@ -56,12 +57,14 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         marginBottom: 0,
         marginLeft: 0,
         marginRight: 0,
+        spacingBottom: 0,
+        height: 580,
       },
       title: {
         text: this.buildingReport.name + ',<br>Construction Cost:<br>' + '(Material+Labour)',
         align: 'center',
         verticalAlign: 'middle',
-        y: -70,
+        y: -100,
         style: {
           fontSize: '1em'
         }
@@ -76,7 +79,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         pie: {
           dataLabels: {
             enabled: true,
-            distance: -50,
+            distance: -150,
             style: {
               fontWeight: 'bold',
               color: 'white'
@@ -89,7 +92,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         }
       },
       series: [{
-        type: 'pie',
+        //type: 'pie',
         name: 'Cost Distribution',
         innerSize: '60%',
         data: data,
@@ -98,10 +101,11 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         labelFormat: '{percentage:.0f}% {name}',
         layout: 'vertical',
         itemWidth: 150,
-        maxHeight: 110,
-        margin: 0,
-        padding: 0,
-        y: 0
+        maxHeight: 300,
+        y: 320,
+        //margin: 0,
+        //padding: 0,
+        verticalAlign: 'top',
       },
       colors: ['#434348', '#3bc698', '#315967', '#6b9bab', '#ff9a9e', '#0097ca', '#ed4731',
         '#37c2c3', '#f26424', '#a1c4fd', '#9ec000', '#e7bc00']
