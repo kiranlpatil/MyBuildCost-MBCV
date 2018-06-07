@@ -95,6 +95,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         data: data,
       }],
       legend: {
+        labelFormat: '{percentage:.0f}% {name}',
         layout: 'vertical',
         itemWidth: 150,
         maxHeight: 110,
