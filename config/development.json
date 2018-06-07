@@ -29,8 +29,8 @@
     "mail": {
       "host": "http://localhost:8080/",
       //"host":"http://7a4647ae.ngrok.io/"
-      "MAIL_SENDER": "redminestatus@techprimelab.com",
-      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
+      "MAIL_SENDER": "bigslicetechnologies@gmail.com",
+      "MAIL_SENDER_PASSWORD": "BuildInfo@25341",
       "ADMIN_MAIL": "swapnil.nakhate@techprimelab.com",
       "TPLGROUP_MAIL":"",
       "MAIL_SERVICE": "Gmail",
@@ -165,7 +165,7 @@
     "Internal Plaster" : "carpetArea * 3.5 * 20",  //a
     "Gypsum punning" : "carpetArea * 2.5 * 18",  //a
     "External plaster" : "carpetArea * 2.5 * 45",
-    "Water proofing" : "carpetArea * 1.35 * 30",
+    "Waterproofing" : "carpetArea * 1.35 * 30",
     "Dado / wall tiling" : "carpetArea * 1.35 * 110",   //a
     "Flooring + skirting + wall tiling (Dado)" : "carpetArea * 1.35 * 110",   //a
     "Window sills / jambs" : "carpetArea * 0.07 * 85", //both
@@ -2050,7 +2050,7 @@
       ]
     },
     {
-      "name" : "Water proofing",
+      "name" : "Waterproofing",
       "priorityId": 7,
       "rateAnalysisId" : 100217,
       "categories" : [
