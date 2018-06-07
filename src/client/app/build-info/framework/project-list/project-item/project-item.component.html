@@ -10,5 +10,5 @@
 <div class="renew-btn-section">
   <div class="error-msg" *ngIf="project.expiryMessage !== null"> {{project.expiryMessage}}</div>
   <div class="warning-msg" *ngIf="project.warningMessage !== null"> {{project.warningMessage}}</div>
-  <a class="renewNow-btn" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
+  <a class="renewNow-btn" *ngIf="(project.warningMessage !== null || project.expiryMessage !== null)" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
 </div>
