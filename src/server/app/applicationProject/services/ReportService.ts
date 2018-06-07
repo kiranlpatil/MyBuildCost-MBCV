@@ -110,6 +110,7 @@ class ReportService {
           callback(null,error);
         }
         projectReport.showHideCostHeadButtons = this.costHeadsList;
+        projectReport.totalAreaOfBuildings = totalArea;
         callback(null,{ data: projectReport, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });

@@ -175,6 +175,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       this.totalNumberOfBuildings = this.projectReport.buildings.length;
     }
     this.amenitiesReport = this.projectReport.commonAmenities;
+    this.projectReport.totalAreaOfBuildings = projects.data.totalAreaOfBuildings;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
 
@@ -372,25 +373,20 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
       this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.buildingsReport[buildindIndex].thumbRule.totalBudgetedCost;
 
-      this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.buildingsReport[buildindIndex].thumbRule.totalRate;
-
       this.grandTotalOfArea = this.grandTotalOfArea + this.buildingsReport[buildindIndex].area;
 
       this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost +
        this.buildingsReport[buildindIndex].estimate.totalEstimatedCost;
-
-      this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate +
-       this.buildingsReport[buildindIndex].estimate.totalRate;
     }
 
     //Calculate total with amenities data
     this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.amenitiesReport.thumbRule.totalBudgetedCost;
 
-    this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.amenitiesReport.thumbRule.totalRate;
+    this.grandTotalOfTotalRate = (this.grandTotalOfBudgetedCost / this.projectReport.totalAreaOfBuildings);
 
     this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost + this.amenitiesReport.estimate.totalEstimatedCost;
 
-    this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate + this.amenitiesReport.estimate.totalRate;
+    this.grandTotalOfEstimatedRate = (this.grandTotalOfEstimatedCost / this.projectReport.totalAreaOfBuildings);
   }
 
   toggleShowGrandTotalPanelBody() {
