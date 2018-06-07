@@ -91,6 +91,10 @@ class UserRoutes {
       router.get('/subscription/project/:projectId', authInterceptor.requiresAuth, controller.getProjectSubscription);
       router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
 
+      // update subscription package
+      router.put('/project/:projectId/updateSubscription/:packageName', authInterceptor.requiresAuth, controller.updateSubscription);
+
+
       //assign subscription package
 /*
       router.put('/:userId/assign/package', logger.logDetail, authInterceptor.requiresAuth,

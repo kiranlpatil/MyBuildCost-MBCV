@@ -14,10 +14,7 @@ class SubscriptionSchema {
         basePackage: {
         type: Object
       },
-        addBuilding: {
-        type: Object
-      },
-        renewal: {
+        addOnPackage: {
         type: Object
       }
     },

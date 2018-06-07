@@ -3,7 +3,6 @@ import BaseSubscriptionPackage = require('./BaseSubscriptionPackage');
 class SubscriptionPackage {
   _id?:string;
   basePackage: BaseSubscriptionPackage;
-  addBuilding: BaseSubscriptionPackage;
-  renewal: BaseSubscriptionPackage;
+  addOnPackage: BaseSubscriptionPackage;
 }
 export = SubscriptionPackage;

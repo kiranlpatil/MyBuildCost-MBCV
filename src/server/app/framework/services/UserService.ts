@@ -814,6 +814,126 @@ class UserService {
       }
     });
   }
+
+  updateSubscription(user : User, projectId: number, packageName: string, callback:(error: any, result: any)=> void) {
+    let query = [
+      {$match: {'_id':ObjectId(user._id)}},
+      { $project : {'subscription':1}},
+      { $unwind: '$subscription'},
+      { $match: {'subscription.projectId' : ObjectId(projectId)}}
+    ];
+   this.userRepository.aggregate(query, (error,result) => {
+     if (error) {
+       callback(error, null);
+     } else {
+       let subscription = result[0].subscription;
+       this.updatePackage(user, subscription, packageName,(error, result) => {
+         if (error) {
+           callback(error, null);
+         } else {
+           callback(null, {data: 'success'});
+         }
+       });
+     }
+   });
+  }
+
+  updatePackage(user: User, subscription: any, packageName: string,  callback:(error: any, result: any)=> void) {
+    let subScriptionService = new SubscriptionService();
+    switch (packageName) {
+      case 'Premium':
+      {
+        subScriptionService.getSubscriptionPackageByName('Premium','BasePackage',
+          (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
+            if(error) {
+              callback(error,null);
+            } else {
+              let result = subscriptionPackage[0];
+              subscription.numOfBuildings = result.basePackage.numOfBuildings;
+              subscription.numOfProjects = result.basePackage.numOfProjects;
+              let noOfDaysToExpiry = this.calculateValidity(subscription);
+              subscription.validity = noOfDaysToExpiry + result.basePackage.validity;
+              subscription.purchased.push(result.basePackage);
+              this.updateSubscriptionPackage(user._id, subscription, (error, result) => {
+                if (error) {
+                  callback(error, null);
+                } else {
+                  callback(null, {data: 'success'});
+                }
+              });
+            }
+          });
+        break;
+      }
+
+      case 'RenewProject':
+      {
+        subScriptionService.getSubscriptionPackageByName('RenewProject','addOnPackage',
+          (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
+            if(error) {
+              callback(error,null);
+            } else {
+              let result = subscriptionPackage[0];
+              let noOfDaysToExpiry = this.calculateValidity(subscription);
+              subscription.validity = noOfDaysToExpiry + result.addOnPackage.validity;
+              subscription.purchased.push(result.addOnPackage);
+              this.updateSubscriptionPackage(user._id, subscription, (error, result) => {
+                if (error) {
+                  callback(error, null);
+                } else {
+                  callback(null, {data: 'success'});
+                }
+              });
+            }
+          });
+        break;
+      }
+
+      case 'Add_building':
+      {
+        subScriptionService.getSubscriptionPackageByName('Add_building','addOnPackage',
+          (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
+            if(error) {
+              callback(error,null);
+            } else {
+              let result = subscriptionPackage[0];
+              subscription.numOfBuildings = subscription.numOfBuildings + result.addOnPackage.numOfBuildings;
+              subscription.purchased.push(result.addOnPackage);
+              this.updateSubscriptionPackage(user._id, subscription, (error, result) => {
+                if (error) {
+                  callback(error, null);
+                } else {
+                  callback(null, {data: 'success'});
+                }
+              });
+            }
+          });
+        break;
+      }
+    }
+  }
+
+  updateSubscriptionPackage( userId: any, subscription: any, callback:(error: any, result: any)=> void) {
+    let query = {_id: userId};
+    let updateQuery = {$set:{'subscription':subscription}};
+    this.userRepository.findOneAndUpdate(query, updateQuery, {new: true}, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data:'success'});
+      }
+    });
+  }
+
+  calculateValidity(subscription: any) {
+    let activationDate = new Date(subscription.activationDate);
+    let expiryDate = new Date(subscription.activationDate);
+    let projectExpiryDate = new Date(expiryDate.setDate(activationDate.getDate() + subscription.validity));
+    let current_date = new Date();
+    let days = this.daysdifference(projectExpiryDate,current_date);
+    return days;
+  }
+
 }
 
 Object.seal(UserService);

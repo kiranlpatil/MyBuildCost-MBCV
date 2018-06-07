@@ -50,7 +50,7 @@ class SubscriptionService {
     if(packageType === 'BasePackage') {
       query = { 'basePackage.name': packageName};
     } else {
-      query = { 'addonPackage.name': packageName};
+      query = { 'addOnPackage.name': packageName};
     }
     this.subscriptionRepository.retrieve(query, callback);
   }
