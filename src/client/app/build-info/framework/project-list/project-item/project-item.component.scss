@@ -82,17 +82,20 @@ h4 {
 }
 
 .renew-btn-section {
+  display: table-cell;
+  margin: 0 auto;
   text-align: center;
+  width: 100%;
 }
 
 .warning-msg {
   color: $warning-msg;
-  font-size: 12px;
+  font-size: 10px;
   float: left;
 }
 .error-msg {
   color: $error;
-  font-size: 12px;
+  font-size: 10px;
   float: left;
 }
 
