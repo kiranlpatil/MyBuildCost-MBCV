@@ -20,7 +20,14 @@
         padding: 8px 0;
         text-align: left;
         width: 33%;
+        .projectName {
+          display: inline-block;
+          width: 100%;
+        }
       }
+    }
+    td:first-child {
+      width: 40% !important;
     }
     th {
       text-align: left;

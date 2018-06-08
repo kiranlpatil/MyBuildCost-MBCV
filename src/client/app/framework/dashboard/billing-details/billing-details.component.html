@@ -9,7 +9,7 @@
         <tbody>
         <tr *ngFor="let project of projectDetails; let projectIndex =index ">
             <td>
-                {{project.projectName}}
+              <div class="projectName"> {{project.projectName}} </div>
                 <p class="error-msg" *ngIf="project.expiryMessage !== null"> {{project.expiryMessage}}</p>
                 <p class="warning-msg" *ngIf="project.warningMessage !== null"> {{project.warningMessage}}</p>
               <a *ngIf="(project.warningMessage !== null || project.expiryMessage !== null)" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
