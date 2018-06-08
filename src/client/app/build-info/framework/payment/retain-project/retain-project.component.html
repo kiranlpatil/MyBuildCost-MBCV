@@ -1,6 +1,5 @@
 <div>
-  <h1>{{getMessage().MSG_ON_RETAIN_PROJECT}}</h1>
-  <h1>project1</h1><br>
+  <h1>{{getMessage().MSG_ON_RETAIN_PROJECT}}{{projectName}}</h1>
   <h1>{{getMessage().MSG_ON_RETAIN_PROJECT2}}</h1>
   <h5>{{getMessage().WARNING_MESSAGE_ON_RETAIN_PROJECT}}</h5>
   <button class="btn btn-primary bi-btn" type="button" (click)="onCreateNewProject()" >{{getButton().CREATE_NEW_PROJECT_BUTTON}}</button>

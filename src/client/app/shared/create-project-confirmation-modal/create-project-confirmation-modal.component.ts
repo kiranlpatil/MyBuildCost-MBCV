@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Headings, Messages } from "../constants";
-import { NavigationRoutes } from "../index";
-import { Router } from "@angular/router";
+import {Headings, Messages, SessionStorage} from "../constants";
+import {NavigationRoutes, SessionStorageService} from "../index";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -13,9 +13,9 @@ import { Router } from "@angular/router";
 export class CreateProjectConfirmationModalComponent implements OnInit {
   @Input() trialProjectExist:boolean;
   @Input() subscriptionAvailable:boolean;
+  projectname:string;
 
-
-  constructor(private _router: Router) {
+  constructor(private _router: Router,private activatedRoute:ActivatedRoute) {
 
   }
 
@@ -33,11 +33,11 @@ export class CreateProjectConfirmationModalComponent implements OnInit {
 
   onCancel() {
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-
-  }
+    }
 
   onContinue() {
-      this._router.navigate([NavigationRoutes.APP_RETAIN_PROJECT]);
+      let projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+      this._router.navigate([NavigationRoutes.APP_RETAIN_PROJECT,projectName]);
   }
 
 

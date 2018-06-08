@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Headings, Button, Label,Messages } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationRoutes } from '../../../../shared/index';
@@ -10,10 +10,17 @@ import { NavigationRoutes } from '../../../../shared/index';
   styleUrls: ['retain-project.component.css']
 })
 
-export class RetainProjectComponent {
-
+export class RetainProjectComponent implements OnInit{
+ projectName:string;
   constructor(private activatedRoute:ActivatedRoute, private _router: Router) {
   }
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.projectName = params['projectName'];
+    });
+  }
+
    getMessage() {
     return Messages;
     }
