@@ -58,7 +58,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         marginLeft: 0,
         marginRight: 0,
         spacingBottom: 0,
-        height: 580,
+        height: 630,
       },
       title: {
         text: this.buildingReport.name + ',<br>Construction Cost:<br>' + '(Material+Labour)',
@@ -103,6 +103,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         itemWidth: 150,
         maxHeight: 300,
         y: 320,
+        itemMarginTop: 5,
         //margin: 0,
         //padding: 0,
         verticalAlign: 'top',
