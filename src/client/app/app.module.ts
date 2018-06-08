@@ -92,7 +92,9 @@ import { DisclaimerComponent } from './shared/disclaimer-component/disclaimer-co
 import {
   SortByCategoryAmountPipe} from './build-info/framework/project/cost-summary-report/cost-head/sort-by-category-amount.pipe';
 import { GetSteelQuantityComponent} from './build-info/framework/project/cost-summary-report/cost-head/get-quantity-steel/get-quantity-steel.component';
-import {CostDistributionChartComponent} from "./build-info/framework/project/cost-distribution-chart/cost-distribution-chart.component";
+import { AdvertisingBannerComponent } from './build-info/framework/project/advertising-banner/advertising-banner.component';
+import { AdvertisingBannerService } from './build-info/framework/project/advertising-banner/advertising-banner.service';
+import { CostDistributionChartComponent } from './build-info/framework/project/cost-distribution-chart/cost-distribution-chart.component';
 
 @NgModule({
   imports: [
@@ -167,7 +169,8 @@ import {CostDistributionChartComponent} from "./build-info/framework/project/cos
     CommonAmenitiesComponent,
     CostSummaryReportComponent,
     AttachmentComponent,
-    CommonAmenitiesReportComponent
+    CommonAmenitiesReportComponent,
+    AdvertisingBannerComponent
   ],
 
   providers: [
@@ -202,7 +205,8 @@ import {CostDistributionChartComponent} from "./build-info/framework/project/cos
     BuildingService,
     CostSummaryService,
     MaterialTakeOffService,
-    ProjectNameChangeService
+    ProjectNameChangeService,
+    AdvertisingBannerService
   ],
   bootstrap: [AppComponent]
 })

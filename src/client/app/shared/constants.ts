@@ -305,6 +305,7 @@ export class API {
   public static PROJECT = 'project';
   public static BUILDING = 'building';
   public static COSTHEAD = 'costhead';
+  public static ADVERTSING_BANNER = 'user/advertising/banners';
   public static COMMON_AMENITIES = 'common-amenities';
   public static ACTIVE_STATUS = 'activeStatus';
   public static ACTIVE_STATUS_FALSE = 'false';

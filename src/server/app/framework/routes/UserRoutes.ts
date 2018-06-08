@@ -79,7 +79,9 @@ class UserRoutes {
       /*router.use(sharedService.errorHandler);*/
       //Retrive list of project
       router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
-        return router;
+      router.get('/advertising/banners', authInterceptor.requiresAuth, controller.getAdvertisingBanner);
+
+      return router;
     }
 }
 
