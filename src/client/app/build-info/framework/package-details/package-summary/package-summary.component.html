@@ -22,12 +22,15 @@
             <span class="pull-right">{{premiumPackageDetails.basePackage.validity/365|number:'1.0-0'}} years </span>
           </div>
         </li>
-        <!--<li>
+
+        <li *ngIf="!premiumPackageAvailable">
           <div class="font-bold">
             <span>{{getLabels().TOTAL_BILLED}}</span>
-
+            <span class="pull-right"> {{premiumPackageDetails.basePackage.cost}} <sup>INR</sup> </span>
           </div>
-        </li>-->
+        </li>
+
+
         <li *ngIf="premiumPackageAvailable">
           <div class="font-bold">
             <span>{{getLabels().TOTAL_BILLED}}</span>

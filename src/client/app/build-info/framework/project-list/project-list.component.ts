@@ -21,7 +21,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   premiumPackageAvailable:boolean=false;
   projects : Array<any>;
   packageName:any;
-  trialProjectExist:boolean=false;
+  isRetainModalActive:boolean=false;
+  isProjectModalActive:boolean=false;
   premiumPackageDetails:any;
 
 
@@ -32,12 +33,12 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     this.getAllProjects();
   }
 
-  createProject(isSubscriptionAvailable : boolean,trialProjectExist:boolean,premiumPackageExist:boolean) {
+  createProject(isSubscriptionAvailable : boolean,isRetainModalActive:boolean,isProjectModalActive:boolean,premiumPackageExist:boolean) {
     if(isSubscriptionAvailable) {
       this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
-    } else if(trialProjectExist) {
+    } else if(isRetainModalActive) {
       $('#createProjectConfirmation').modal();
-    }else if(trialProjectExist && !isSubscriptionAvailable) {
+    }else if(isProjectModalActive) {
       $('#createProjectConfirmation').modal();
     }
      /*  let packageName = 'Premium';
@@ -61,10 +62,15 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
       this.premiumPackageAvailable=true;
       //this.getSubscriptionPackageByName('Premium');
 
-    }else if(this.projects.length === 1 && this.projects[0].projectName.includes('Trial')) {
+    }else if(this.projects.length === 1 && this.projects[0].packageName==='Free') {
        this.premiumPackageAvailable=false;
-       this.trialProjectExist=true;
-      }
+       this.packageName='Free';
+       this.isRetainModalActive=true;
+      }else if(this.projects.length === 1 && this.projects[0].packageName==='Premium') {
+      this.packageName='Premium';
+      this.premiumPackageAvailable=true;
+      this.isProjectModalActive=true;
+    }
     this.isSubscriptionExist = projects.isSubscriptionAvailable;
     this.isVisible = true;
   }

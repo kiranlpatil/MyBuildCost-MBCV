@@ -11,8 +11,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 
 export class CreateProjectConfirmationModalComponent implements OnInit {
-  @Input() trialProjectExist:boolean;
-  @Input() subscriptionAvailable:boolean;
+  @Input() isRetainModalActive:boolean;
+  @Input() isProjectModalActive:boolean;
+  @Input() isSubscriptionAvailable:boolean;
+  @Input() premiumPackageAvailable:boolean;
+  @Input() packageName:string;
+
   projectname:string;
 
   constructor(private _router: Router,private activatedRoute:ActivatedRoute) {
@@ -39,6 +43,13 @@ export class CreateProjectConfirmationModalComponent implements OnInit {
       let projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
       this._router.navigate([NavigationRoutes.APP_RETAIN_PROJECT,projectName]);
   }
+  onProjectModalClick() {
+    if(this.isSubscriptionAvailable) {
+      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+      }else if(!this.isSubscriptionAvailable) {
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,this.packageName,this.premiumPackageAvailable]);
 
+    }
+  }
 
 }

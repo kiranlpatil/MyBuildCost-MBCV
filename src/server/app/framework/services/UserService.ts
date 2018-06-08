@@ -725,7 +725,7 @@ class UserService {
               projectSubscription.projectId = project._id;
               projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
               projectSubscription.numOfBuildingsAllocated = project.buildings.length;
-
+              projectSubscription.packageName = this.checkCurrentPackage(subscription);
               //activation date for project subscription
               let activation_date = new Date(subscription.activationDate);
               let expiryDate = new Date(subscription.activationDate);
@@ -762,6 +762,20 @@ class UserService {
       }
     });
   }
+
+  //To check which is current package occupied by user.
+   checkCurrentPackage(subscription:any) {
+     let activation_date = new Date(subscription.activationDate);
+     let expiryDate = new Date(subscription.activationDate);
+     let current_date = new Date();
+     for(let purchasePackage of subscription.purchased) {
+       //expiry date for each package.
+       expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
+      if(expiryDate >= current_date) {
+        return purchasePackage.name;
+      }
+    }
+    }
 
   daysdifference(date1 : Date, date2 : Date) {
     let ONEDAY = 1000 * 60 * 60 * 24;

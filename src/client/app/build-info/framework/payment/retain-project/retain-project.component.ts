@@ -35,6 +35,14 @@ export class RetainProjectComponent implements OnInit{
     this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Retain',false]);
 
   }
+  onCreateProjectClick() {
+  /*  if(this.isSubscriptionAvailable) {
+      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+    }else if(!this.isSubscriptionAvailable) {
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,this.packageName,this.premiumPackageAvailable]);
+
+    }*/
+  }
 
   goToDashboard() {
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);

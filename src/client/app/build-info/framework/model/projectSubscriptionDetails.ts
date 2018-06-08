@@ -7,5 +7,6 @@ export class ProjectSubscriptionDetails {
   numOfDaysToExpire : number;
   numOfBuildingsAllocated : number;
   numOfBuildingsRemaining : number;
+  packageName:string;
 }
 
