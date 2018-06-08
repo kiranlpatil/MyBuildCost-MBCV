@@ -25,6 +25,8 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   @Input() showHideCostHeadButtonList ?: Array<any>;
 
   @Output() getReportDetails =  new EventEmitter<any>();
+  @Output() sednCommonEmenitiesChartStatus=  new EventEmitter<any>();
+
   projectId: string;
   projectName: string;
   costHeadId:number;
@@ -176,8 +178,10 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   showGrandTotalTable() {
+    this.sednCommonEmenitiesChartStatus.emit($('#collapse'+this.totalNumberOfBuildings).attr('aria-expanded'));
     this.showGrandTotalPanelTable = !this.showGrandTotalPanelTable;
     this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
+
   }
 }
 

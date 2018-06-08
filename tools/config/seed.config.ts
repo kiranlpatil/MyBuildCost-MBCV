@@ -558,6 +558,7 @@ export class SeedConfig {
         'node_modules/@angular/router/bundles/router-testing.umd.js',
       'html2canvas': 'node_modules/html2canvas/dist/html2canvas.min.js',
       'lodash': 'node_modules/lodash/lodash.js',
+      'highcharts': 'node_modules/highcharts/highcharts.js',
       'jspdf': 'node_modules/jspdf/dist/jspdf.min.js',
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -661,6 +662,10 @@ export class SeedConfig {
       },
       loadsh: {
         main: 'dist/lodash.js',
+        defaultExtension: 'js'
+      },
+      highcharts: {
+        main: 'dist/highcharts.js',
         defaultExtension: 'js'
       },
       jspdf: {

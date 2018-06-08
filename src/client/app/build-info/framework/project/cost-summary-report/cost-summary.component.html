@@ -25,6 +25,7 @@
         </ul>
       </div>
     </div>
+
     <div class="col-sm-9 col-xs-12 padding-right30 left-content">
       <div class="panel-group" id="cost-summary-panel">
         <div class="panel panel-default" *ngFor="let building of buildingsReport; let i = index">
@@ -202,6 +203,9 @@
               </tr>
             </tbody>
           </table>
+
+
+
         </div>
         <!--Common Amenity-->
         <bi-common-amenities
@@ -210,8 +214,10 @@
           [amenitiesReport]="amenitiesReport"
           [costingByUnit]="defaultCostingByUnit"
           [costingByArea]="defaultCostingByArea"
-          (getReportDetails)="getCostSummaryReport($event)">
+          (getReportDetails)="getCostSummaryReport($event)"
+          (sednCommonEmenitiesChartStatus)="getStatusOfCommonEmenities($event)">
         </bi-common-amenities>
+
       </div>
 
 
@@ -260,6 +266,10 @@
       </div>
     </div>
     <div class="col-xs-3 no-padding right-content">
+    <cost-distribution-chart  *ngIf="!(isShowBuildingCostSummaryChart==false && isShowCommonAmenitiesChart==false)"
+                              [buildingReport]="isShowBuildingCostSummaryChart?
+                              (buildingsReport?buildingsReport[compareIndex]:undefined)
+                              :projectReport?.commonAmenities"></cost-distribution-chart>
       <advertising-banner></advertising-banner>
     </div>
   </div>
