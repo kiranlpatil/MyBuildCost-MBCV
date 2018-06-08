@@ -50,6 +50,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   estimatedItem: EstimateReport;
   showCostHeadList:boolean=false;
   showGrandTotalPanelBody:boolean=true;
+  isShowBuildingCostSummaryChart:boolean=true;
+  isShowCommonAmenitiesChart:boolean=true;
   //showGrandTotalPanelTable= new Array<boolean>(10);
   compareIndex:number=0;
 
@@ -114,6 +116,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   setBuildingId( i:number, buildingId: string) {
+    this.setChartVisibility(i);
     this.compareIndex = i;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
    this.costSummaryService.moveSelectedBuildingAtTop(this.compareIndex);
@@ -175,6 +178,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       this.totalNumberOfBuildings = this.projectReport.buildings.length;
     }
     this.amenitiesReport = this.projectReport.commonAmenities;
+    this.projectReport.totalAreaOfBuildings = projects.data.totalAreaOfBuildings;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
 
@@ -372,25 +376,20 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
       this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.buildingsReport[buildindIndex].thumbRule.totalBudgetedCost;
 
-      this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.buildingsReport[buildindIndex].thumbRule.totalRate;
-
       this.grandTotalOfArea = this.grandTotalOfArea + this.buildingsReport[buildindIndex].area;
 
       this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost +
        this.buildingsReport[buildindIndex].estimate.totalEstimatedCost;
-
-      this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate +
-       this.buildingsReport[buildindIndex].estimate.totalRate;
     }
 
     //Calculate total with amenities data
     this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.amenitiesReport.thumbRule.totalBudgetedCost;
 
-    this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.amenitiesReport.thumbRule.totalRate;
+    this.grandTotalOfTotalRate = (this.grandTotalOfBudgetedCost / this.projectReport.totalAreaOfBuildings);
 
     this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost + this.amenitiesReport.estimate.totalEstimatedCost;
 
-    this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate + this.amenitiesReport.estimate.totalRate;
+    this.grandTotalOfEstimatedRate = (this.grandTotalOfEstimatedCost / this.projectReport.totalAreaOfBuildings);
   }
 
   toggleShowGrandTotalPanelBody() {
@@ -437,7 +436,26 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   getListItemAnimation(index : number) {
     return Animations.getListItemAnimationStyle(index, Animations.defaultDelayFactor);
   }
-
+  getStatusOfCommonEmenities(event:string) {
+    this.isShowBuildingCostSummaryChart=false;
+    if(event==='true') {
+      this.isShowCommonAmenitiesChart=false;
+    } else {
+      this.isShowCommonAmenitiesChart=true;
+    }
+  }
+  setChartVisibility(currentIndex:number) {
+    this.isShowCommonAmenitiesChart=false;
+    if(this.compareIndex===currentIndex && ($('#collapse'+currentIndex).attr('aria-expanded')==='true'||
+        $('#collapse'+currentIndex).attr('aria-expanded')==undefined)) {
+      this.isShowBuildingCostSummaryChart=false;
+    } else {
+      this.isShowBuildingCostSummaryChart=true;
+    }
+    $('#collapse'+this.totalNumberOfBuildings).attr({
+      'aria-expanded':'false'
+    });
+  }
   ngAfterViewInit() {
     setTimeout(() => {
       console.log('animated');

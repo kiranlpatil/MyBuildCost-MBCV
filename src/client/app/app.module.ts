@@ -36,8 +36,6 @@ import { DashboardUserProfileService } from './framework/dashboard/user-profile/
 import { UserChangePasswordService } from './framework/dashboard/user-change-password/user-change-password.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { HttpDelegateService } from './shared/services/http-delegate.service';
-
-
 //Application IMPORTS
 
 import { ProjectService } from './build-info/framework/project/project.service';
@@ -94,6 +92,9 @@ import { DisclaimerComponent } from './shared/disclaimer-component/disclaimer-co
 import {
   SortByCategoryAmountPipe} from './build-info/framework/project/cost-summary-report/cost-head/sort-by-category-amount.pipe';
 import { GetSteelQuantityComponent} from './build-info/framework/project/cost-summary-report/cost-head/get-quantity-steel/get-quantity-steel.component';
+import { AdvertisingBannerComponent } from './build-info/framework/project/advertising-banner/advertising-banner.component';
+import { AdvertisingBannerService } from './build-info/framework/project/advertising-banner/advertising-banner.service';
+import { CostDistributionChartComponent } from './build-info/framework/project/cost-distribution-chart/cost-distribution-chart.component';
 
 @NgModule({
   imports: [
@@ -150,6 +151,7 @@ import { GetSteelQuantityComponent} from './build-info/framework/project/cost-su
     GetRateComponent,
     ProjectItemComponent,
     QuantityDetailsComponent,
+    CostDistributionChartComponent,
     //MyDashboardComponent,
 
     //Shared Components
@@ -167,7 +169,8 @@ import { GetSteelQuantityComponent} from './build-info/framework/project/cost-su
     CommonAmenitiesComponent,
     CostSummaryReportComponent,
     AttachmentComponent,
-    CommonAmenitiesReportComponent
+    CommonAmenitiesReportComponent,
+    AdvertisingBannerComponent
   ],
 
   providers: [
@@ -202,7 +205,8 @@ import { GetSteelQuantityComponent} from './build-info/framework/project/cost-su
     BuildingService,
     CostSummaryService,
     MaterialTakeOffService,
-    ProjectNameChangeService
+    ProjectNameChangeService,
+    AdvertisingBannerService
   ],
   bootstrap: [AppComponent]
 })

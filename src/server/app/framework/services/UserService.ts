@@ -12,6 +12,8 @@ import ProjectAsset = require('../shared/projectasset');
 import MailAttachments = require('../shared/sharedarray');
 import { asElementData } from '@angular/core/src/view';
 import bcrypt = require('bcrypt');
+let log4js = require('log4js');
+let logger = log4js.getLogger('User service');
 import { MailChimpMailerService } from './mailchimp-mailer.service';
 import UserModel = require('../dataaccess/model/UserModel');
 import User = require('../dataaccess/mongoose/user');
@@ -37,6 +39,7 @@ class UserService {
       if (err) {
         callback(new Error(err), null);
       } else if (res.length > 0) {
+        logger.debug('Email already exist'+JSON.stringify(res));
 
         if (res[0].isActivated === true) {
           callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
@@ -45,9 +48,11 @@ class UserService {
         }
 
       } else {
+        logger.debug('Email not present.'+JSON.stringify(res));
         const saltRounds = 10;
         bcrypt.hash(item.password, saltRounds, (err: any, hash: any) => {
           if (err) {
+            logger.error('Error in creating hash password');
             callback({
               reason: 'Error in creating hash using bcrypt',
               message: 'Error in creating hash using bcrypt',
@@ -55,15 +60,19 @@ class UserService {
               code: 403
             }, null);
           } else {
+            logger.debug('created hash succesfully.');
             item.password = hash;
             let subScriptionService = new SubscriptionService();
             subScriptionService.getSubscriptionPackageByName('Free', (err: any,
                                                                       freeSubscription: Array<SubscriptionPackage>) => {
               if (freeSubscription.length > 0) {
+                logger.debug('freeSubscription length  > 0');
                 this.assignFreeSubscriptionAndCreateUser(item, freeSubscription[0], callback);
               }else {
+                logger.debug('freeSubscription length !==0');
                 subScriptionService.addSubscriptionPackage(config.get('subscription.package.Free'),
                   (err: any, freeSubscription)=> {
+                    logger.debug('assigning free subscription by creating new user');
                     this.assignFreeSubscriptionAndCreateUser(item, freeSubscription, callback);
                 });
               }
@@ -81,10 +90,13 @@ class UserService {
     let user: UserModel = item;
     let sendMailService = new SendMailService();
     this.assignFreeSubscriptionPackage(user, freeSubscription);
+    logger.debug('Creating user with new free trail subscription package');
     this.userRepository.create(user, (err:Error, res:any) => {
       if (err) {
+        logger.error('Failed to Creating user subscription package');
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else {
+        logger.debug('created user succesfully.'+JSON.stringify(res));
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res);
         let host = config.get('application.mail.host');
@@ -92,7 +104,8 @@ class UserService {
         let htmlTemplate = 'welcome-aboard.html';
         let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
           ['$first_name$',res.first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
-        let attachment=MailAttachments.WelcomeAboardAttachmentArray;
+        let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+        logger.debug('sending mail to new user.'+JSON.stringify(attachment));
         sendMailService.send( user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data,attachment,
           (err: any, result: any) => {
             callback(err, result);

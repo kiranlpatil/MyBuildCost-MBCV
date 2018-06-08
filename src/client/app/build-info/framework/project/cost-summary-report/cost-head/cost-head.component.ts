@@ -257,7 +257,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   //Add blank detailed quantity at last
   addNewDetailedQuantity(categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
     this.showWorkItemTab = Label.WORKITEM_DETAILED_QUANTITY_TAB;
-    this.toggleWorkItemPanel(workItemIndex);
+    this.toggleWorkItemPanel(workItemIndex, workItem);
     var element = document.getElementById('collapseDetails'+workItemIndex);
     if(element.classList.contains('hide-body')) {
       element.classList.remove('hide-body');
@@ -322,7 +322,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
           } else {
             this.quantityItemsArray = [];
           }
-          // this.workItem.quantity.quantityItemDetails.push(quantityDetail);
+           //this.workItem.quantity.quantityItemDetails.push(quantityDetail);
           this.keyQuantity = this.getLabel().DEFAULT_VIEW;
         }
         this.currentCategoryIndex = categoryIndex;
@@ -610,9 +610,11 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     this.selectedWorkItems = workItemList;
   }*/
 
-  toggleWorkItemPanel(workItemIndex : number) {
+  toggleWorkItemPanel(workItemIndex : number, workItem:WorkItem) {
     var element = document.getElementById('collapseDetails'+workItemIndex);
-    if(element.classList.contains('display-body')) {
+    if(workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default') {
+      element.classList.add('hide-body');
+    } else if(element.classList.contains('display-body')) {
       element.classList.remove('display-body');
       element.classList.add('hide-body');
     } else if(element.classList.contains('hide-body')) {

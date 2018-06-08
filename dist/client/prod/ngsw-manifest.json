@@ -1,11 +1,11 @@
 {
   "static": {
     "urls": {
-      "/index.html": "1eed5456a51608539b63a908c5287df0a7ff10fd",
+      "/index.html": "dd24f8df527d08b5d278fad3159944df9434928f",
       "/manifest.json": "c48a13fd12025ee09de4a6c086bfd562c37a7e14",
       "/service-worker.js": "13a16a93bb5f4c6649a4e926d4411493c51765fa",
       "/css\\main.css": "1d279a62c8e2101c416367979047048f674a5018",
-      "/js\\app.js": "0f1a5d8a088a585125c41c141a904f5c6047eb7e",
+      "/js\\app.js": "db1a7483175d349dde460093472cf095f004dca5",
       "/js\\shims.js": "c643a10115a4c280374d9d2b28a5280c3641ac8d",
       "/assets\\build-info\\create-new-project\\back.png": "589dcb7eafd1aaab5534d3e5d862bd6cb15a6e2e",
       "/assets\\build-info\\create-new-project\\close.png": "f2a2bc4e7f5543ae6591ce2c4ee8b1214d893892",

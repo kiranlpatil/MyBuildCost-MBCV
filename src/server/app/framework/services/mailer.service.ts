@@ -27,6 +27,7 @@ class SendMailService {
     data.forEach((value: string, key: string) => {
       content = content.replace(key, value);
     });
+    loggerService.logDebug('Sending mail from mail service.');
 
     let mailOptions = {
       from: config.get('application.mail.MAIL_SENDER'),
@@ -41,6 +42,7 @@ class SendMailService {
       if (error) {
         loggerService.logError(' Error in mail send ' + error);
       }
+      loggerService.logDebug(' response in mail send ' + response);
       callback(error, response);
     });
   }

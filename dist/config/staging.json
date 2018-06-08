@@ -2032,9 +2032,8 @@
     ]
   },
   {
-    "name" : "Water proofing",
+    "name" : "waterproofing",
     "priorityId": 7,
-    "rateAnalysisId" : 100217,
     "categories" : [
       {
         "name" : "Brickbat waterproofing",
