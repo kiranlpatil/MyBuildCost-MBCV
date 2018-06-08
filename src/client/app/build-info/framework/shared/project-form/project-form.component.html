@@ -1,6 +1,6 @@
 <form class="col-xs-12 form-details fadein-element" [formGroup]="projectForm" (submit)="submitForm()">
 
-  <div  class="form-group fadein-sub-element">
+  <div  class="form-group fadein-sub-element" [class.disabled-input]="disabledName">
     <control-messages [control]="projectForm.controls.name" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
     <label>{{getLabels().PROJECT_NAME}}</label>
     <input type="text" [(ngModel)]="projectModel.name" formControlName="name" id="name" class="form-control" placeholder="Enter project name" required/>

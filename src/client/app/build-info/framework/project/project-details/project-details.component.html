@@ -3,7 +3,7 @@
   <div class="container">
     <div class="col-sm-6 col-sm-offset-3 details-page">
 
-      <bi-project-form [submitActionLabel]="'Update'" [projectModel]="projectModel" (onSubmitEvent)="updateProject($event)"></bi-project-form>
+      <bi-project-form [submitActionLabel]="'Update'" [projectModel]="projectModel" [disabledName] ="disabledName" (onSubmitEvent)="updateProject($event)"></bi-project-form>
 
     </div>
   </div>

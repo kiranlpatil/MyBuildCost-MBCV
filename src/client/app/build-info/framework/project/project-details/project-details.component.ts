@@ -19,6 +19,7 @@ export class ProjectDetailsComponent implements OnInit {
   projectModel: Project = new Project();
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
+  public disabledName: boolean = false;
 
   constructor(private projectService: ProjectService, private projectNameChangeService : ProjectNameChangeService,
               private messageService: MessageService, private activatedRoute:ActivatedRoute) {
@@ -43,6 +44,11 @@ export class ProjectDetailsComponent implements OnInit {
 
   onGetProjectSuccess(project : any) {
     this.projectModel = project.data[0];
+    if(this.projectModel.name.startsWith('Trial Project')) {
+      this.disabledName = true;
+    }else {
+      this.disabledName = false;
+    }
   }
 
   onGetProjectFailure(error : any) {
