@@ -5,7 +5,7 @@ import { AdvertisingBannerService } from './advertising-banner.service';
   moduleId:module.id,
   selector:'advertising-banner',
   templateUrl:'advertising-banner.component.html',
-  styleUrls:['advertising-banner.component.scss']
+  styleUrls:['advertising-banner.component.css']
 })
 
 export class AdvertisingBannerComponent implements OnInit {
