@@ -1,0 +1,3333 @@
+{
+  "application": {
+    "database": {
+      "host":"127.0.0.1",
+      "name": "Appication-backend",
+      "username": "admin",
+      "password": "jobmosisadmin123",
+      "mongoExport": "/usr/bin/mongoexport"
+    },
+    "exportFileNames": {
+      "candidateProfilesCSV": "candidate-profiles.csv",
+      "candidateCapabilitiesCSV": "candidate-capabilities.csv",
+      "candidateAccountDetailsCSV": "candidate-account-details.csv",
+      "companyDetailsCSV": "company-details.csv",
+      "jobDetailsCSV": "job-details.csv",
+      "companyAccountDetailsCSV": "company-account-details.csv",
+      "usageTrackingCSV": "usage-tracking.csv",
+      "masterKeySkillsCSV": "master-key-skills.csv",
+      "recruiterCandidatesCSV": "my-candidates-detail.csv"
+    },
+    "exportFilePathServer": "/server/prod/public/exported-files/",
+    "downloadFilePathClient": "/public/exported-files/",
+    "publicPath":"/server/prod/app/framework/public/",
+    "profilePath":"/server/prod/public/profileImage",
+    "profilePathForClient":"/public/profileImage/",
+    "limitForQuery" : 10,
+    "mail": {
+      "host":"http://52.43.220.29:3000/",
+      "MAIL_SENDER": "bigslicetechnologies@gmail.com",
+      "MAIL_SENDER_PASSWORD": "BuildInfo@25341",
+      "ADMIN_MAIL": "Jobmosis_TPL@techprimelab.com",
+      "TPLGROUP_MAIL":"",
+      "MAIL_SERVICE": "Gmail",
+      "MAILCHIMP_CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_SUCCESS_LISTID": "a1b8d070ce",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_25%_LISTID": "bd22dce604",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_50%_LISTID": "9856839bad",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_75%_LISTID": "a82db1bff5",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_95%_LISTID": "24cd79227b",
+      "MAIL_CHIMP_SERVICE_KEY": "7ed37fe28217d97fe5785a01207a494e-us16"
+    },
+    "facebookIds":{
+      "clientId" : "1000308350087499",
+      "clientSecretId" : "fdd2b77c78273fc8f7dd6b2dd2dcdac9"
+    },
+    "googlePlusIds":{
+      "clientId" : "244363436693-l4fglqbjitj39t9dsg7lkep5esfoe1bq.apps.googleusercontent.com",
+      "clientSecretId" : "OzWBm3F7biB0NUrdTQ5tmdUM"
+    },
+    "messaging": {
+      "authKey": "152516A0pwPFRp59198cd9",
+      "senderId": "JOBMOS",
+      "routerNumber": "4"
+    },
+    "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
+
+  },
+  "logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
+  },
+  "subscription":{
+    "package":{
+      "Free" : {
+        "basePackage": {
+          "name": "Free",
+          "description": " 1 project and 5 buildings",
+          "validity": 1080,
+          "cost": 300,
+          "numOfProjects": 1,
+          "numOfBuildings": 5,
+          "iterativeDiscount": 1000
+        }
+      }
+    }
+  },
+  "projectCostHeads" : [
+    {
+      "name" : "Club House",
+      "categories" : [
+        {
+          "name" : "In RCC",
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in RCC framed structure",
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : "1200",
+              "directRateUnit" : "Sqft b/up"
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in RCC framed structure",
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : "1500",
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        },
+        {
+          "name" : "In load bearing",
+          "workItems" : [
+            {
+              "name" : "Construction of Ground floor structure of club house in load bearing masonry",
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : "1000",
+              "directRateUnit" : "Sqft b/up"
+            },
+            {
+              "name" : "Construction of G+1 structure of club house in load bearing masonry",
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : "1200",
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Swimming Pool",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Providing a swimming pool with filtration plant, deck etc",
+              "measurementUnit" : "Number",
+              "directRate" : "400000",
+              "directRateUnit" : "Number"
+            },
+            {
+              "name" : "Providing and constructing changing room's block ",
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : "1200",
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Children play area",
+      "categories" : [
+        {
+          "name" : "Play area flooring",
+          "workItems" : [
+            {
+              "name" : "Providing and executing EPDM flooring in children play area",
+              "measurementUnit" : null,
+              "directRate" : "250",
+              "directRateUnit" : "Sqm"
+            }
+          ]
+        },
+        {
+          "name" : "PCC",
+          "workItems" : []
+        }
+      ]
+    },
+    {
+      "name" : "Gym",
+      "categories" : [
+        {
+          "name" : "Gym equipments",
+          "workItems" : [
+            {
+              "name" : "Providing and installing indoor Gym equipments",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and installing outdoor Gym equipments ",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Gym area flooring",
+          "workItems" : [
+            {
+              "name" : "Providing and executing Rubber tile flooring in gym area",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "D G set backup",
+      "categories" : []
+    },
+    {
+      "name" : "Podium",
+      "categories" : []
+    },
+    {
+      "name" : "Landscaping of open spaces (hard+soft)",
+      "categories" : []
+    },
+    {
+      "name" : "Rain water harvesting",
+      "categories" : []
+    },
+    {
+      "name" : "Boards & Signages in common areas",
+      "categories" : []
+    },
+    {
+      "name" : "Electrical light fittings in common areas of project",
+      "categories" : []
+    },
+    {
+      "name" : "Site dev - plumbing & drainage system",
+      "categories" : []
+    },
+    {
+      "name" : "Site dev - Backfilling (plot)",
+      "categories" : []
+    },
+    {
+      "name" : "Site dev - Road work / pavement in side margins",
+      "categories" : []
+    },
+    {
+      "name" : "Kerbing",
+      "categories" : [
+        {
+          "name" : "Kerbing work",
+          "workItems" : [
+            {
+              "name" : "4\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "6\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground with painting",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Project entrance gate",
+      "categories" : []
+    },
+    {
+      "name" : "Compound wall",
+      "categories" : []
+    },
+    {
+      "name" : "Tensile/fabricated car parks in side margins",
+      "categories" : []
+    },
+    {
+      "name" : "Car park marking / parking accessories",
+      "categories" : []
+    },
+    {
+      "name" : "Cleaning & Shifting of debris",
+      "categories" : []
+    },
+    {
+      "name" : "Electricity and diesel charges",
+      "categories" : []
+    },
+    {
+      "name" : "Material Testing",
+      "categories" : []
+    },
+    {
+      "name" : "Departmental Labour",
+      "categories" : []
+    },
+    {
+      "name" : "Safety Measures",
+      "categories" : []
+    },
+    {
+      "name" : "Cleaning of units before possession",
+      "categories" : []
+    },
+    {
+      "name" : "Sample Flat on ground floor with furniture",
+      "categories" : []
+    },
+    {
+      "name" : "Labour camp",
+      "categories" : []
+    },
+    {
+      "name" : "Site Preparation - temporary fencing",
+      "categories" : []
+    },
+    {
+      "name" : "Site preparation- temporary structures/stores",
+      "categories" : []
+    },
+    {
+      "name" : "Temporary electrification",
+      "categories" : []
+    },
+    {
+      "name" : "Temporary plumbing & drainage",
+      "categories" : []
+    },
+    {
+      "name" : "Site office",
+      "categories" : []
+    },
+    {
+      "name" : "Society Office with furniture",
+      "categories" : []
+    },
+    {
+      "name" : "Water charges",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Supplying water tankers for construction activities and curing purpose",
+              "measurementUnit" : "Number",
+              "directRate" : "750",
+              "directRateUnit" : "Number"
+            },
+            {
+              "name" : "Supplying water tankers for Drinking purpose",
+              "measurementUnit" : "Number",
+              "directRate" : "1000",
+              "directRateUnit" : "Number"
+            },
+            {
+              "name" : "Supplying water Jars for drinking purpose",
+              "measurementUnit" : "Number",
+              "directRate" : "40",
+              "directRateUnit" : "Number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Repairs / maintenance charges in defect liability period of 5 years",
+      "categories" : []
+    },
+    {
+      "name" : "Proffessional fees",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Appointing Structural consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Designing cum liaisoning architect for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Designing architect for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Liaisoning architect for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing MEP consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Electrical consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Plumbing consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Environmental consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Landscape consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing Interior designing consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            },
+            {
+              "name" : "Appointing lighting consultant for the project",
+              "measurementUnit" : null,
+              "directRate" : "0",
+              "directRateUnit" : "Job"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Sales and marketing",
+      "categories" : []
+    },
+    {
+      "name" : "Finance cost",
+      "categories" : []
+    },
+    {
+      "name" : "Administrative charges",
+      "categories" : []
+    },
+    {
+      "name" : "Local body-  Project sanctioning charges",
+      "categories" : []
+    },
+    {
+      "name" : "Security charges during project period",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Providing security persons for the site security for the project duration",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "costHeads" : [
+    {
+      "name" : "Soling (plinth)",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "230 mm thk dry rubble soling with murum filling in gaps and compacting",
+              "measurementUnit" : "cum",
+              "directRate" : "100 cft",
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "RCC",
+      "categories" : [
+        {
+          "name" : "P.C.C. on volume basis",
+          "workItems" : [
+            {
+              "name" : "P.C.C. ( M - 7.5 grade)",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "P.C.C. ( M - 10 grade )",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "P.C.C.( M - 15 grade )",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Concrete in cum by volumetric method",
+          "workItems" : [
+            {
+              "name" : "Concrete M 15 in cum, by conventional volumetric method, using farma and mixer ( Only material analysis)",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Concrete M 20 in cum, by conventional volumetric method, using farma and mixer ( Only material analysis)",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Concrete in cum by mix design",
+          "workItems" : [
+            {
+              "name" : "Concrete M 20 in cum, as per mix design, by conventional mixing using weigh batcher and mixer ( Only material analysis)",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Concrete M 25 in cum, as per mix design, by conventional mixing using weigh batcher and mixer ( Only material analysis)",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Concrete M 30 in cum, as per mix design, by conventional mixing using weigh batcher and mixer ( Only material analysis)",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Concrete M 40 in cum, as per mix design, by conventional mixing using weigh batcher and mixer ( Only material analysis)",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Plum concrete in cum",
+          "workItems" : [
+            {
+              "name" : "Plum concrete in cum, with M 7.5 grade PCC and plum @ 50:50, and concrete by conventional volumetric method, using farma and mixer",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "RCC labour on Slab area basis",
+          "workItems" : [
+            {
+              "name" : "Providing RCC labour i/c shuttering on slab area basis",
+              "measurementUnit" : "sft slab area",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Masonry",
+      "categories" : [
+        {
+          "name" : "Fly ash brick masonry",
+          "workItems" : [
+            {
+              "name" : "Fly ash brick masonry, 100 mm (4\") thk, in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 230 mm (9\") thk, in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 150 mm (6\") thick, in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 350 mm (14\") thk, in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 150 mm (6\") thick, in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 230 mm (9\") thk ,in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 230 mm (9\") thk ,in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 150 mm (6\") thick, in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 100 mm (4\") thk, in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 100 mm (4\") thk, in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 350 mm (14\") thk, in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Fly ash brick masonry, 350 mm (14\") thk, in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Rubble masonry",
+          "workItems" : [
+            {
+              "name" : "UCR masonry wall 600mm (24\") thk in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "UCR masonry wall 450mm (18\") thk in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "AAC block masonry ( L:625 x H:250mm )",
+          "workItems" : [
+            {
+              "name" : "AAC block masonry 100mm(4\") thk ( L:625 x H:250mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "AAC block masonry 125mm(5\") thk ( L:625 x H:250mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "AAC block masonry 150mm (6\") thk ( L:625 x H:250mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "AAC block masonry 200mm(8\") thk ( L:625 x H:250mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "AAC block masonry 225mm(9\") thk ( L:625 x H:250mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "AAC block masonry 250mm(10\") thk ( L:625 x H:250mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "AAC block masonry ( L: 600 x H: 200mm )",
+          "workItems" : [
+            {
+              "name" : "AAC block masonry 100mm (4\") thk ( L: 600 x H: 200 mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "AAC block masonry 150mm (6\") thk ( L: 600 x H: 200 mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "AAC block masonry 200mm (8\") thk ( L: 600 x H: 200 mm )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Solid block masonry",
+          "workItems" : [
+            {
+              "name" : "Solid block masonry 150 mm (6\")thk,in CM ( 1:4 )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Solid block masonry 150 mm (6\")thk,in CM ( 1:5 )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Solid block masonry 150 mm (6\")thk,in CM ( 1:6 )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Solid block masonry 200 mm (8\")thk,in CM ( 1:5 )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Solid block masonry 200 mm (8\")thk,in CM ( 1:6 )",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Clay brick masonry",
+          "workItems" : [
+            {
+              "name" : "Clay brick masonry, 150 mm (6\") thick, in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 150 mm (6\") thick, in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 150 mm (6\") thick, in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 100 mm (4\") thk, in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 100 mm (4\") thk, in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 100 mm (4\") thk, in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 230 mm (9\") thick, in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 230 mm (9\") thick, in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 230 mm (9\") thick, in CM 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 350 mm (14\") thk, in CM 1:4",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 350 mm (14\") thk, in CM 1:5",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Clay brick masonry, 350 mm (14\") thk, in cm 1:6",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Wire cut brick masonry",
+          "workItems" : [
+            {
+              "name" : "Cellular clay wire cut brick masonry, 100 mm (4\") thk, in CM 1:5 without pointing",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Cellular clay wire cut brick masonry, 100 mm (4\") thk, in CM 1:4, without pointing.",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Pointing",
+          "workItems" : [
+            {
+              "name" : "Sunk pointing for UCR masonry in CM 1: 3",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Salai pointing for UCR masonry in CM 1: 4",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "RCC band / patli",
+          "workItems" : [
+            {
+              "name" : "RCC band / patli for 4\" thick masonry work",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "RCC band / patli for 5\" thick masonry work",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "RCC band / patli for 6\" thick masonry work",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Masonry labour on b/up area basis",
+          "workItems" : [
+            {
+              "name" : "Providing masonry labour on B/up area basis",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Internal Plaster",
+      "categories" : [
+        {
+          "name" : "On brick masonry",
+          "workItems" : [
+            {
+              "name" : "Internal rough ( tar ) finish plaster 20 mm thk. in CM 1:4 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 20 mm thk. in CM 1:5 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 20 mm thk. in CM 1:6 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 15 mm thk. in CM 1:4 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 15 mm thk. in CM 1:5 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 15 mm thk. in CM 1:6 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:4 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:5 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:6 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 20 mm thk. in CM 1:4 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 20 mm thk. in CM 1:5 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 20 mm thk. in CM 1:6 to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "On AAC block masonry",
+          "workItems" : [
+            {
+              "name" : "Internal rough ( tar ) finish plaster 20 mm thk. in CM 1:4 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 20 mm thk. in CM 1:5 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 20 mm thk. in CM 1:6 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 15 mm thk. in CM 1:4 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 15 mm thk. in CM 1:5 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal rough ( tar ) finish plaster 15 mm thk. in CM 1:6 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:4 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:5 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:6 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 20 mm thk. in CM 1:4 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 20 mm thk. in CM 1:5 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 20 mm thk. in CM 1:6 to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Ready - mix internal plaster, 12 mm thk. on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "On RCC slab bottom",
+          "workItems" : [
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:3 to be applied on RCC slab bottom, casted in metal plate shuttering",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 15 mm thk. in CM 1:4 to be applied on RCC slab bottom, casted in metal plate shuttering",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 10 mm thk. in CM 1:3 to be applied on RCC slab bottom, casted in ply shuttering",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Internal sanla finish plaster 10 mm thk. in CM 1:4 to be applied on RCC slab bottom, casted in ply shuttering",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Internal plaster labour on b/up area basis",
+          "workItems" : [
+            {
+              "name" : "Providing internal plaster labour on b/up area basis",
+              "measurementUnit" : "b/up area",
+              "directRate" : 0,
+              "directRateUnit" : "Sqm per b/up area"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Gypsum punning",
+      "categories" : [
+        {
+          "name" : "Gypsum plaster (punning)",
+          "workItems" : [
+            {
+              "name" : "Gypsum plaster (punning) on AAC block masonry upto 10 mm thk",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Gypsum plaster (punning) on Rough plastered wall upto 10 mm thk",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Gypsum Plaster (punning) on Ceiling (RCC slab bottom) in patra finish - upto 4 mm thick",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Gypsum plaster (punning) on fly ash brick masonry wall upto 10 mm thk",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "External Plaster",
+      "categories" : [
+        {
+          "name" : "Single coat external plaster",
+          "workItems" : [
+            {
+              "name" : "Sand faced plaster, single coat, 20 mm thick, in CM 1:4, to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, single coat, 20 mm thick, in CM 1:5, to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, single coat, 20 mm thick, in CM 1:6, to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Dabba plaster, Single coat, 12 mm thick, in CM 1:6, to be applied on AAC block masonry, with finishing done using dabba to get more granular surface",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Dabba plaster, Single coat, 20 mm thick, in CM 1:6, to be applied on AAC block masonry, with finishing done using dabba to get more granular surface",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, single coat, 20 mm thick, in CM 1:4, to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, single coat, 20 mm thick, in CM 1:5, to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, single coat, 20 mm thick, in CM 1:6, to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Double coat external plaster",
+          "workItems" : [
+            {
+              "name" : "Sand faced plaster, double coat, 30 mm thick, in CM 1:6, to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, double coat, 30 mm thick, in CM 1:6, to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Dabba plaster, double coat, 30 mm thick, in CM 1:6, to be applied on AAC block masonry, with finishing done using dabba to get more granular surface",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, double coat, 30 mm thick, in CM 1:4, to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, double coat, 30 mm thick, in CM 1:5, to be applied on brick masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, double coat, 30 mm thick, in CM 1:5, to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Sand faced plaster, double coat, 30 mm thick, in CM 1:4, to be applied on AAC block masonry",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Water proofing",
+      "categories" : [
+        {
+          "name" : "Brickbat waterproofing",
+          "workItems" : [
+            {
+              "name" : "Brick bat waterproofing up to 150 mm thk for bathroom / toilets with 200 mm sunk",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Brick bat waterproofing upto 150 mm thk for top terraces",
+              "measurementUnit" : "cum",
+              "directRate" : "100 cft",
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Brick Bat waterproofing upto 150 mm thk for attached terraces with 200 mm sunk",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Shahbad stone waterproofing",
+          "workItems" : [
+            {
+              "name" : "Shahbad stone water proofing (Box waterproofing) for vertical surfaces without screeding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "IPS ghotai/ Khadi mal waterproofing",
+          "workItems" : [
+            {
+              "name" : "IPS Ghotai (Khadi maal) waterproofing 50mm thick for UGWT / Smimming pools",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Ghotai plaster waterproofing",
+          "workItems" : [
+            {
+              "name" : "Ghotai plaster for UGWT / Swimming pools",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Chemical waterproofing",
+          "workItems" : [
+            {
+              "name" : "Chemical water proofing with screeding for bathrooms / toilets of typical size 8' X 5' with 50mm sunk (For toilets with suspended plumbing)",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and applying Crystaline chemical waterproofing",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and applying Cementatious waterproofing",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and applying Polyurethane coating for waterproofing",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and applying Acrylic coating for waterproofing",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "External Weather proof coat with crack filling on external plaster and 1 coat of weather proof waterproofing chemical",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Membrane waterproofing",
+          "workItems" : [
+            {
+              "name" : "Providing and applying EPDM membrane  waterproofing with Crystaline method",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and applying Bituminious. membrane  waterproofing with Crystaline method",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Flooring+Skirting",
+      "categories" : [
+        {
+          "name" : "Vitrified tile flooring",
+          "workItems" : [
+            {
+              "name" : "600 X 600 mm Vitrified tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "600 X 1200 mm Vitrified tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "800 X 800 mm Vitrified tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "1200 X 1200 mm Vitrified tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "1000 X 1000 mm Vitrified tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "600 X 150 mm Vitrified tile flooring (wooden look) on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "300 X 300 mm high strength Vitrified tile flooring for parking on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Ceramic tile flooring",
+          "workItems" : [
+            {
+              "name" : "300 X 300 mm Ceramic tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "400 X 400 mm Ceramic tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "450 X 450 mm Ceramic tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Cement tile flooring",
+          "workItems" : [
+            {
+              "name" : "300 X 300 mm Concrete chequered tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "200 mm X 200 mm Designer cement tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "150mm X 150 mm Designer cement tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "100 mm X 200 mm Designer cement tile flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Natural stone flooring",
+          "workItems" : [
+            {
+              "name" : "Black granite flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Dyna) flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Kota flooring (2'0\" x 1' 6\") on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Green marble flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Rough shahabad flooring (2'0\" x 2'0\") on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Stone pebble flooring",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Crema) flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Travertine ) flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Black Marquina) flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Tandoor stone flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Jaisalmer stone flooring on 60mm bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Black granite flooring with flaming & brush finish",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Black granite flooring with leather finish",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Shahbad stone flooring with leather finish",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble ( Satvario ) flooring on 60mm bedding.",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Wooden flooring",
+          "workItems" : [
+            {
+              "name" : "Solid wood flooring with ceramic tile sub base",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Wooden deck flooring on 50mm concrete bedding",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Laminated wooden flooring with ceramic tile sub base.",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Paving block flooring",
+          "workItems" : [
+            {
+              "name" : "Concrete paver block flooring as per selected shape(Non glazed blocks)",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Concrete paver block flooring as per selected shape (Glazed blocks)",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Vitrified tile skirting",
+          "workItems" : [
+            {
+              "name" : "75 mm (3\") X 800 mm vitrified tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "75 mm (3\") X 600 mm vitrified tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "75 mm (3\") X 1000 mm vitrified tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "75 mm (3\") X 1200 mm vitrified tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Ceramic tile skirting",
+          "workItems" : [
+            {
+              "name" : "75 mm (3\") X 400 mm ceramic tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "75 mm (3\") X 300 mm ceramic tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Natural stone skirting",
+          "workItems" : [
+            {
+              "name" : "75 mm (3\") X 600 mm kota tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "75 mm (3\") X 1200 mm marble tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "75 mm (3\") X 1200 mm granite tile skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "75 mm (3\") imported marble (Dyna) skirting",
+              "measurementUnit" : "Sqm",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Dado / wall tiling",
+      "categories" : [
+        {
+          "name" : "Mosaic tile dado / wall cladding",
+          "workItems" : [
+            {
+              "name" : "1\" x 1\" Glass mosaic tile dado (300mm x 300 mm tile size)",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Vitrified tile dado / wall cladding",
+          "workItems" : [
+            {
+              "name" : "600 X 600 mm vitrified tile dado using tile adhesive",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "300 X 600 mm vitrified tile dado using tile adhesive",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "150 X 600 mm vitrified tile dado (wooden look) using tile adhesive",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "600 X 1200 mm vitrified tile dado using tile adhesive",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "150 X 600 mm vitrified tile dado (wooden look)",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "300 X 600 mm vitrified tile dado",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "600 X 600 mm vitrified tile dado",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "600 X 1200 mm vitrified tile dado",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Natural stone dado / wall cladding",
+          "workItems" : [
+            {
+              "name" : "Assorted marble stone wall cladding in strip format ( in the form of 300 x 300 mm tile )",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Assorted sand stone wall cladding in strip format ( in the form of 300 x 300 mm tile )",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Slate stone wall cladding in strip format ( in the form of 300 x 300 mm tile )",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Quartz stone wall cladding in strip format ( in the form of 300 x 300 mm tile )",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Assorted lime stone wall cladding in strip format ( in the form of 300 x 300 mm tile )",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Green marble stone wall cladding",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Black granite stone wall cladding",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Dyna) stone wall cladding",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Crema) stone wall cladding",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Travertine ) stone wall cladding",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Imported marble (Black Marquina) stone wall cladding",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Ceramic tile dado / wall cladding",
+          "workItems" : [
+            {
+              "name" : "300 X 600 mm ceramic tile dado",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "13\" x 18\" Ceramic tile dado",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "8\" x 12\" Ceramic tile dado",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "8\" x 8\" Ceramic tile dado",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Kitchen platforms",
+      "categories" : [
+        {
+          "name" : "Straight kitchen otta/platform",
+          "workItems" : [
+            {
+              "name" : "10 ft long 2'3\" wide black granite kitchen otta with SS sink",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "10 ft long 2'3\" wide green marble kitchen otta with SS sink",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and installing straight kitchen otta/platform",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "L - shape kitchen otta/platform",
+          "workItems" : [
+            {
+              "name" : "L-Shape black granite kitchen otta with SS sink (as per attached drawing)",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "L-Shape green marble kitchen otta with SS sink (as per attached drawing)",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "L-Shape black granite kitchen otta both side fixed with SS sink (as per attached drawing)",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "L-Shape green marble kitchen otta both side fixed wth SS sink (as per attached drawing)",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and installing L-Shape kitchen otta/platform",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Inland kitchen otta/platform",
+          "workItems" : [
+            {
+              "name" : "Providing and installing L-Shape kitchen otta/platform",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Modular kitchen otta/platform",
+          "workItems" : [
+            {
+              "name" : "Providing and installing carcase based modular kitchen otta/platform with overhead cabinets",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Window sills / jambs",
+      "categories" : [
+        {
+          "name" : "3 \" Sills / Jambs",
+          "workItems" : [
+            {
+              "name" : "3\" Black granite window sill / jamb with chamfer & edge polish",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3\" Green marble  window sill / jamb with chamfer & edge polish",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3\" window sill / jamb ",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "8 \" Sills / Jambs",
+          "workItems" : [
+            {
+              "name" : "8\" Black granite window sill / jamb with chamfer & edge polish",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "8\" Green marble  window sill / jamb with chamfer & edge polish",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "8\" Black granite window sill / jamb ( Double patti ) with chamfer & edge polish",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "8\" Green marble window sill / jamb ( Double patti ) with chamfer & edge polish",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "8\" window sill / jamb ",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Staircase treads and risers",
+      "categories" : [
+        {
+          "name" : "Riser for 4' Wide staircase",
+          "workItems" : [
+            {
+              "name" : "4'0\" X 6\" polished kota riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 6\" polished tandoor riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 6\" ceramic tile riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 6\" polished granite riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 6\" polished marble riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 6\" Imported marble (Black Marquina) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 6\" Imported marble ( Dyna ) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 6\" Imported marble (Crema) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Riser for 5' Wide staircase",
+          "workItems" : [
+            {
+              "name" : "5'0\" X 6\" polished kota riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 6\" polished tandoor riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 6\" polished granite riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 6\" polished marble riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 6\" Imported marble (Black Marquina) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 6\" Imported marble ( Dyna ) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 6\" Imported marble (Crema) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Riser for 3' Wide staircase",
+          "workItems" : [
+            {
+              "name" : "3'0\" X 6\" polished kota riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 6\" polished tandoor riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 6\" polished granite riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 6\" polished marble riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 6\" Imported marble (Black Marquina) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 6\" Imported marble ( Dyna ) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 6\" Imported marble (Crema) riser for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Tread for 4' Wide staircase",
+          "workItems" : [
+            {
+              "name" : "4'0\" X 1'0\" polished kota tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 1'0\" polished tandoor tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 1'0\" readymade cement tile tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 1'0\" polished granite tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 1'0\" polished marble tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 1'0\" Imported marble (Black Marquina) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 1'0\" Imported marble ( Dyna ) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "4'0\" X 1'0\" Imported marble (Crema) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Tread for 5' Wide staircase",
+          "workItems" : [
+            {
+              "name" : "5'0\" X 1'0\" polished kota tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 1'0\" polished tandoor tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 1'0\" polished granite tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 1'0\" polished marble tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 1'0\" Imported marble (Black Marquina) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 1'0\" Imported marble ( Dyna ) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "5'0\" X 1'0\" Imported marble (Crema) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Tread for 3' Wide staircase",
+          "workItems" : [
+            {
+              "name" : "3'0\" X 1'0\" polished kota tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 1'0\" polished tandoor tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 1'0\" polished granite tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 1'0\" polished marble tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 1'0\" Imported marble (Black Marquina) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 1'0\" Imported marble ( Dyna ) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "3'0\" X 1'0\" Imported marble (Crema) tread for staircase",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Doors with frames",
+      "categories" : [
+        {
+          "name" : "Flush doors",
+          "workItems" : [
+            {
+              "name" : "Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with both side high gloss/textured laminate",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with both side painted",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with one side door skin & one side plain laminate",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Moulded doors",
+          "workItems" : [
+            {
+              "name" : "Moulded door shutter 30 mm thick with HDF door skin for door opening size 3'0\" W X 7'0\" H",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Moulded door shutter of opening size 3'0\" W X 7'0\" H with PVC door skin",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Moulded shutter for opening size 3'0\" W X 7'0\" H with veneer",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "PVC / FRP doors",
+          "workItems" : [
+            {
+              "name" : "Ready made PVC door shutter of size 2'6\" W x 7'0\" H( commonly used for toilets)",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Concrete door frames",
+          "workItems" : [
+            {
+              "name" : "Concrete door frame for door size 3'0\"x 7'0\".",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Granite / Marble door frames",
+          "workItems" : [
+            {
+              "name" : "Black granite door frame for door size 2'6\" X 7'0\" with chamfer & edge polish.",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Black granite door frame for door size 3'0\" x 7'0\" with chamfer & edge polish.",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Green marble door frame for door size 2'6\" X 7'0\" with chamfer and edge polish.",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Green marble door frame for door size 3'0\" X 7'0\" with chamfer and edge polish.",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Ply door frames",
+          "workItems" : [
+            {
+              "name" : "Ply door frame for door size 3'0\" x 7'0\" with laminate",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Ply door frame for door size 3'0\" x 7'0\" with oil paint",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Ply door frame for door size 3'0\" x 7'0\" with veneer",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Solid wood door frames",
+          "workItems" : [
+            {
+              "name" : "Red meranti door frame of section 8\" x 2\" for door size 3'0\" x 7'0\"",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Red meranti door frame of section 5\" x 2-1/2\" for door size 3'0\" x 7'0\"",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Red meranti door frame of section 5\" x 2-1/2\" for door size 2'6\" x 7'0\"",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Saal wood door frame of section 5\" x 2-1/2\" for door size 3'0\" x 7'0\"",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Saal wood door frame of section 5\" x 2-1/2\" for door size 2'6\" x 7'0\"",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "MS doors with frames",
+          "workItems" : [
+            {
+              "name" : "Providing and installing MS Openable french door with frame as per specifications",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and installing MS safety door of size 3'0\" X 7'0\" with frame ( As per attached drawing)",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and installing MS safety door with frame as per project specifications and drawings",
+              "measurementUnit" : "No",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Fabrication",
+      "categories" : [
+        {
+          "name" : "Window grills ( On plastered jambs )",
+          "workItems" : [
+            {
+              "name" : "MS window grill for window of size 2.4 X 1.8 m as per attached design",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "MS window grill for window of size 1.8 X 1.8 m as per attached design",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "MS window grill for window of size 1.2 X 1.8 m as per attached design",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "MS window grill for window of size 0.9 X 1.8 m as per attached design",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Window grills ( On masonry jambs )",
+          "workItems" : [
+            {
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 2.4 X 1.8 M to be nailed on masonry.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.8 X 1.8 M to be nailed on masonry.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.2 X 1.8 M to be nailed on masonry.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 0.9 X 1.8 M to be nailed on masonry.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Painting",
+      "categories" : [
+        {
+          "name" : "Internal painting",
+          "workItems" : [
+            {
+              "name" : "Solvent based lustre paint with 1 coat primer, 1 coat cement putty, 1 coats acrylic putty,1 coat primer base coat and 2 coats lustre paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Water based lustre paint including 1 coat of primer, 2 coats of Acrylic putty, 1 coat of primer and 2 coats of lustre paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Solvent based lustre paint including 1 coat of primer, 2 coats of Acrylic putty, 1 coat of primer base coat and 2 coats of lustre paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Oil Bound Destemper paint including 2 coats of Acrylic putty and 2 coats of paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Plastic emulsion paint including 2 coats of Acrylic putty and 2 coats of paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "External painting",
+          "workItems" : [
+            {
+              "name" : "Texture paint including 1 coat of texture, 1 coat of primer, 2 coats of 100% external acrylic paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Texture paint including 1 coat of texture, 1 coat of primer, 2 coats of external Semi acrylic paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "External 100% Acrylic paint with 1 coat of Primer and 2 coats of paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "External Semi Acrylic paint with 1 coat of Primer and 2 coats of paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "External Cement paint with 1 coat of Primer and 2 coats of paint",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Roofing",
+      "categories" : [
+        {
+          "name" : "Mangalore tile roofing",
+          "workItems" : [
+            {
+              "name" : "Mangalore tile (Clay - Indian make) roofing on fabricated structure with 3/4\" x 3/4\" MS pipes @ 300 mm c/c as purlins and 2\" x 1\" MS pipe @ 1 m c/c as rafters.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Mangalore tile (Clay - Imported make) roofing on fabrication with 3/\" x 3/4\" MS pipes @ 300 mm c/c as purlins & 2\" X 1\" MS pipe @ 1 m c/c as rafters.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Mangalore tile (Concrete) roofing with 3/4\" x 3/4\" MS pipes @ 300 mm c/c as purlins & 2\" X 1\" MS pipe @ 1 m c/c as rafters.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Mangalore tile (Clay - Imported make) roofing on RCC slab supported on mortar ribs for sloping roof",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Mangalore tile (Clay - Indian make) roofing on RCC slab supported on mortar ribs for sloping roofs",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Mangalore tile (Concrete) roofing on RCC slab supported on mortar ribs of sloping roof.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Excavation",
+      "categories" : [
+        {
+          "name" : "In soil/murum - By Machinery",
+          "workItems" : [
+            {
+              "name" : "Carrying excavation in soft soil/murum by hiring machinery on rental basis",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Carrying excavation in soft soil/murum by using machinery & paying by volumetric measurement",
+              "measurementUnit" : "cum",
+              "directRate" : "90",
+              "directRateUnit" : "Cum"
+            }
+          ]
+        },
+        {
+          "name" : "In soil/murum - Manually",
+          "workItems" : [
+            {
+              "name" : "Carrying excavation in soft soil/murum manually on daily wages",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Carrying excavation in soft soil/murum manually & paying by volumetric measurement",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "In Rock - By machinery",
+          "workItems" : [
+            {
+              "name" : "Carrying excavation in rock by hiring machinery on rental basis",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Carrying excavation in rock by using machinery & paying by volumetric measurement",
+              "measurementUnit" : "cum",
+              "directRate" : "150",
+              "directRateUnit" : "Cum"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Dewatering",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Carrying out dewatering of the excavated pit ",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Garbage chute",
+      "categories" : [
+        {
+          "name" : "Non segregated type",
+          "workItems" : [
+            {
+              "name" : "Providing and installing non segregated type garbage chute system",
+              "measurementUnit" : "No.",
+              "directRate" : "300000",
+              "directRateUnit" : "No."
+            }
+          ]
+        },
+        {
+          "name" : "Segregated type",
+          "workItems" : [
+            {
+              "name" : "Providing and installing garbage chute system with dry and wet garbage segregation",
+              "measurementUnit" : "No.",
+              "directRate" : "400000",
+              "directRateUnit" : "No."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Backfilling (plinth)",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Carrying out backfilling of plinth by machiney using murum available on site and levelling and compacting it manually using compactor",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Carrying out backfilling of plinth by machiney using purchased murum and levelling and compacting it manually using compactor",
+              "measurementUnit" : "cum",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Windows/Sliding doors",
+      "categories" : [
+        {
+          "name" : "Aluminium sections",
+          "workItems" : [
+            {
+              "name" : "Providing and installing aluminium sliding windows as per project specifications",
+              "measurementUnit" : "Sqm",
+              "directRate" : "250",
+              "directRateUnit" : "Sft"
+            },
+            {
+              "name" : "Providing and installing aluminium sliding doors as per  project specifications",
+              "measurementUnit" : "Sqm",
+              "directRate" : "220",
+              "directRateUnit" : "Sft"
+            },
+            {
+              "name" : "Providing and installing aluminium lovoured windows as per  project specifications",
+              "measurementUnit" : "Sqm",
+              "directRate" : "280",
+              "directRateUnit" : "Sft"
+            }
+          ]
+        },
+        {
+          "name" : "UPVC sections",
+          "workItems" : [
+            {
+              "name" : "Providing and installing UPVC sliding windows as per  project specifications",
+              "measurementUnit" : "Sqm",
+              "directRate" : "550",
+              "directRateUnit" : "Sft"
+            },
+            {
+              "name" : "Providing and installing UPVC sliding doors as per  project specifications",
+              "measurementUnit" : "Sqm",
+              "directRate" : "500",
+              "directRateUnit" : "Sft"
+            },
+            {
+              "name" : "Providing and installing UPVC lovoured windows as per  project specifications",
+              "measurementUnit" : "Sqm",
+              "directRate" : "600",
+              "directRateUnit" : "Sft"
+            }
+          ]
+        },
+        {
+          "name" : "MS sections",
+          "workItems" : [
+            {
+              "name" : "Providing and installing MS Openable windows as per project specifications",
+              "measurementUnit" : "Sqm",
+              "directRate" : "200",
+              "directRateUnit" : "Sft"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Lift",
+      "categories" : [
+        {
+          "name" : "GI powder coated lift",
+          "workItems" : [
+            {
+              "name" : "Providing and installing 5 passenger GI powder coated lift",
+              "measurementUnit" : "No.",
+              "directRate" : "500000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing 8 passenger GI powder coated lift",
+              "measurementUnit" : "No.",
+              "directRate" : "650000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing 10 passenger GI powder coated lift",
+              "measurementUnit" : "No.",
+              "directRate" : "750000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing 13 passengerGI powder coated lift",
+              "measurementUnit" : "No.",
+              "directRate" : "800000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing GI powder coated lift as per required capacity and specifications",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "SS lift",
+          "workItems" : [
+            {
+              "name" : "Providing and installing 5 passenger SS lift",
+              "measurementUnit" : "No.",
+              "directRate" : "700000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing 8 passenger SS lift",
+              "measurementUnit" : "No.",
+              "directRate" : "800000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing 10 passenger SS lift",
+              "measurementUnit" : "No.",
+              "directRate" : "900000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing 13 passenger SS lift",
+              "measurementUnit" : "No.",
+              "directRate" : "1100000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing SS lift as per required capacity and specifications",
+              "measurementUnit" : "No.",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Electrical light fittings in common areas of building",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Providing electrical lighting in common areas",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Pest Control",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Providing Pre pest control treatment for the building as directed",
+              "measurementUnit" : "Sqm",
+              "directRate" : "50",
+              "directRateUnit" : "Sqm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Solar water heating system",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Providing and installing Flat plate collector solar water heating system as per required specifications",
+              "measurementUnit" : "litres",
+              "directRate" : "110",
+              "directRateUnit" : "litres"
+            },
+            {
+              "name" : "Providing and installing Evacuated tube collector- ETC ( Glass tube type) solar water heating system as per required specifications",
+              "measurementUnit" : "litres",
+              "directRate" : "130",
+              "directRateUnit" : "litres"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Piped gas system",
+      "categories" : [
+        {
+          "name" : "Piping system",
+          "workItems" : [
+            {
+              "name" : "Designing, providing and installing LPG reticulated system as per approved specifications",
+              "measurementUnit" : "Apartments",
+              "directRate" : "9500",
+              "directRateUnit" : "Apartment"
+            }
+          ]
+        },
+        {
+          "name" : "Gas bank room",
+          "workItems" : [
+            {
+              "name" : "Providing and constructing of Ground floor structure of gas bank in RCC framed structure",
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : "1200",
+              "directRateUnit" : "Sqft b/up"
+            },
+            {
+              "name" : "Providing and constructing of Ground floor structure of gas bank in load bearing masonry",
+              "measurementUnit" : "Sqft b/up",
+              "directRate" : "1000",
+              "directRateUnit" : "Sqft b/up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Sky lounge on top terrace",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Estimated cost will be same as budgeted cost. Estimated cost will be non clickable/non editable.",
+              "measurementUnit" : null,
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Fire fighting system",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Provising and installing fire fighting system as per rules, regulations and design",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : "Job"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Safety and Security automation",
+      "categories" : [
+        {
+          "name" : "CCTV",
+          "workItems" : []
+        },
+        {
+          "name" : "Video door phones",
+          "workItems" : []
+        },
+        {
+          "name" : "Gas leak detectors",
+          "workItems" : []
+        },
+        {
+          "name" : "Panic alarm",
+          "workItems" : []
+        },
+        {
+          "name" : "Boom barrier",
+          "workItems" : []
+        },
+        {
+          "name" : "Automated gates",
+          "workItems" : []
+        },
+        {
+          "name" : "Controlled access lobies",
+          "workItems" : []
+        },
+        {
+          "name" : "Intecom system",
+          "workItems" : []
+        }
+      ]
+    },
+    {
+      "name" : "Shower Enclosures",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Providing and installing sliding type shower partition as per required specifications",
+              "measurementUnit" : "No.",
+              "directRate" : "12000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing partly fixed glass plus partly openable glass door type shower partition as per required specifications",
+              "measurementUnit" : "No.",
+              "directRate" : "14000",
+              "directRateUnit" : "No."
+            },
+            {
+              "name" : "Providing and installing partly fixed glass type shower partition as per required specifications",
+              "measurementUnit" : "No.",
+              "directRate" : "8000",
+              "directRateUnit" : "No."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "False ceiling",
+      "categories" : [
+        {
+          "name" : "Gypsum sheet",
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with gypsum sheets on GI patti framing",
+              "measurementUnit" : "Sqm",
+              "directRate" : "75",
+              "directRateUnit" : "Sqft"
+            }
+          ]
+        },
+        {
+          "name" : "GI powder coated sheet",
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with GI powder coated sheets on GI patti framing",
+              "measurementUnit" : "Sqm",
+              "directRate" : "90",
+              "directRateUnit" : "Sqft"
+            }
+          ]
+        },
+        {
+          "name" : "Polyacrylic sheet",
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with polyacrylic sheets on GI patti framing",
+              "measurementUnit" : "Sqm",
+              "directRate" : "125",
+              "directRateUnit" : "Sqft"
+            }
+          ]
+        },
+        {
+          "name" : "Polycarbonate sheet",
+          "workItems" : [
+            {
+              "name" : "Providing and installing false ceiling with polycarbonate sheets on GI patti framing",
+              "measurementUnit" : "Sqm",
+              "directRate" : "65",
+              "directRateUnit" : "Sqft"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Special elevational features",
+      "categories" : []
+    },
+    {
+      "name" : "Boards & Signages inside building",
+      "categories" : [
+        {
+          "name" : "default",
+          "workItems" : [
+            {
+              "name" : "Boards & Signages inside building",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Electrification",
+      "categories" : [
+        {
+          "name" : "Inside unit/apartment- Point wise",
+          "workItems" : [
+            {
+              "name" : "Providing electrical points inside apartment with wiring considered from switch board to points- Point wise",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Inside unit/apartment- Material wise",
+          "workItems" : [
+            {
+              "name" : "Providing electrical points inside apartment with wiring considered from switch board to points- Material wise",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Wiring",
+          "workItems" : [
+            {
+              "name" : "Providing wiring from DB to switch boards",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing wiring from DB to meter for each unit",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Inside unit/apartment- Point wise",
+          "workItems" : [
+            {
+              "name" : "Providing electrical points in common areas with wiring considered from switch board to points- Point wise",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Inside unit/apartment- Material wise",
+          "workItems" : [
+            {
+              "name" : "Providing electrical points in common areas with wiring considered from switch board to points- Material wise",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Meter board/room",
+          "workItems" : [
+            {
+              "name" : "Providing meters for each unit with main switch, MCB's, Fuse, Common bus bar etc.",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Internal plumbing with vertical lines",
+      "categories" : [
+        {
+          "name" : "Inside toilets/Bathrooms",
+          "workItems" : [
+            {
+              "name" : "Providing and executing internal plumbing along with CP/sanitary fittings inside toilet as per design and specifications",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and executing internal plumbing along with CP/sanitary fittings inside bathroom as per design and specifications",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            },
+            {
+              "name" : "Providing and executing internal plumbing along with CP/sanitary fittings inside WC as per design and specifications",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        },
+        {
+          "name" : "Vertical lines in ducts",
+          "workItems" : [
+            {
+              "name" : "Providing and executing vertical downtake lines for a particular duct as per design and specifications",
+              "measurementUnit" : "Job",
+              "directRate" : null,
+              "directRateUnit" : null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
