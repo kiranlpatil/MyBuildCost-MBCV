@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Headings, Button, Label,Messages } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationRoutes } from '../../../../shared/index';
@@ -14,14 +14,24 @@ import { ProjectNameChangeService } from '../../../../shared/services/project-na
   styleUrls: ['payment-successful.component.css']
 })
 
-export class PaymentSuccessfulComponent {
+export class PaymentSuccessfulComponent implements OnInit{
 
   projectId: string;
+  packageName: string;
   projectModel:  Project = new Project();
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
   constructor(private activatedRoute:ActivatedRoute, private _router: Router, private projectService: ProjectService,
               private projectNameChangeService : ProjectNameChangeService, private messageService : MessageService) {
+  }
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.packageName = params['packageName'];
+      if (this.packageName === 'Retain') {
+        this.getProject();
+      }
+    });
   }
 
   getProject() {
@@ -35,19 +45,11 @@ export class PaymentSuccessfulComponent {
   onGetProjectSuccess(project : any) {
     this.projectModel = project.data[0];
     this.projectModel.name = project.data[0].name.substring(14);
-    this.updateProject(this.projectModel);
   }
 
   onGetProjectFailure(error : any) {
     console.log(error);
   }
-
-  /*getProject() {
-  this.projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-   let projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
-   this.projectModel.name = projectName.substring(14);
-   this.updateProject(this.projectModel);
-  }*/
 
   updateProject(projectModel : Project) {
     this.projectService.updateProject(this.projectId, projectModel)
@@ -68,8 +70,10 @@ export class PaymentSuccessfulComponent {
     console.log(error);
   }
 
-  goToDashboard() {
-    this.getProject();
+  goToNext() {
+  if(this.packageName ==='Retain') {
+    this.updateProject(this.projectModel);
+  }
    // this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 }
