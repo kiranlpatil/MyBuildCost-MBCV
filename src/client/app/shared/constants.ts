@@ -489,7 +489,7 @@ export class Label {
   public static NOT_FOUND_ERROR: string = '404';
   public static REMENBER_ME: string = 'Remember me';
   public static GET_STARTED: string = 'Get Started';
-  public static BILLING_INFO: string = 'Here is a billing summary of your projects';
+  public static BILLING_INFO: string = 'Here is the summary of your account';
   public static VALID_TILL: string = 'Valid Till';
   public static NO_OF_BUILDINGS: string = 'Number of Buildings';
 
@@ -715,7 +715,7 @@ export class Menus {
   public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
   public static COPY_BUILDING = 'Copy Building';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
-  public static BILLING_DETAILS: string = 'Billing Details';
+  public static ACCOUNT_SUMMARY: string = 'Account Summary';
 }
 
 export class ValueConstant {

@@ -14,13 +14,14 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
 
  export class BillingDetailsComponent implements OnInit {
 
+  currentPackage:string;
   projectDetails : Array<ProjectSubscriptionDetails>;
   isAbleToCreateNewProject: boolean = false;
   constructor(private _router: Router, private  projectService: ProjectService) {
 
   }
   ngOnInit() {
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'billingDetails');
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'accountSummary');
     this.getDetailsOfProjectPlan();
   }
 
@@ -34,6 +35,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   onDetailsOfProjectPlanSuccess(projects : any) {
     this.projectDetails = projects.data;
     this.isAbleToCreateNewProject = projects.isSubscriptionAvailable;
+    this.currentPackage = projects.data[0].packageName;
   }
 
   onDetailsOfProjectPlanFailure(error:any) {
@@ -58,12 +60,13 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   }
 
    createProject() {
-      if(this.isAbleToCreateNewProject === true) {
-        this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
-      } else {
-        let packageName = 'Premium';
-        this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,packageName]);
-      }
+     if(this.isAbleToCreateNewProject) {
+       this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+     } else if(!this.isAbleToCreateNewProject && this.currentPackage === 'Free') {
+       this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Retain',false]);
+     }else {
+       this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Premium',false]);
+     }
     }
 
   goToRenew(projectId:string, projectName:string, numOfDaysToExpire : number) {

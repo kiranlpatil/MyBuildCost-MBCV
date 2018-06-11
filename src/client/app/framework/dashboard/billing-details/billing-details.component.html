@@ -4,7 +4,7 @@
         <thead>
             <th> {{getLabel().PROJECT_NAME}}</th>
             <th> {{getLabel().VALID_TILL}}</th>
-            <th> {{getLabel().NO_OF_BUILDINGS}}</th>
+            <th class="number-of-building"> {{getLabel().NO_OF_BUILDINGS}}</th>
         </thead>
         <tbody>
         <tr *ngFor="let project of projectDetails; let projectIndex =index ">

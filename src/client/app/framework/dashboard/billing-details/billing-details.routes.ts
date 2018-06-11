@@ -3,7 +3,7 @@ import { BillingDetailsComponent } from './index';
 
 export const BillingDetailsRoute: Route[] = [
   {
-    path: 'billing',
+    path: 'account-summary',
     component: BillingDetailsComponent
   }
 ];

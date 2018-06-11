@@ -19,7 +19,7 @@ export const DashboardRoutes: Route[] = [
       {path: 'change-password', component: UserChangePasswordComponent},
       {path: 'about', component: AboutComponent},
       {path: 'contact', component: ContactComponent},
-      {path: 'billing', component: BillingDetailsComponent }
+      {path: 'account-summary', component: BillingDetailsComponent }
     ]
   }
 ];
