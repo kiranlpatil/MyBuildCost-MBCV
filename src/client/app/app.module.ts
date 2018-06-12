@@ -226,8 +226,7 @@ import {RetainProjectComponent} from "./build-info/framework/payment/retain-proj
     CostSummaryService,
     MaterialTakeOffService,
     ProjectNameChangeService,
-    AdvertisingBannerService
-    ProjectNameChangeService,
+    AdvertisingBannerService,
 
       //Payment
     PackageDetailsService,

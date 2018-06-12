@@ -211,10 +211,6 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onGetCostSummaryReportFailure(error : any) {
-    console.log('onGetCostInFail()'+error);
-  }
-
   setIdsToInActiveCostHead(buildingId: string, costHeadId: number) {
     this.buildingId = buildingId;
     this.costHeadId = costHeadId;

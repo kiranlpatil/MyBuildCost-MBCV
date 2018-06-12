@@ -6,7 +6,6 @@ import { SessionStorage, SessionStorageService } from '../../../../shared/index'
 import { ProjectService } from '../../project/project.service';
 import {Subscribable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
-import {RetainProjectDetails} from "../../model/retain-project-details";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +19,6 @@ export class RetainProjectComponent implements OnInit {
   isSubscriptionAvailable:boolean;
   packageName:string;
   premiumPackageAvailable:boolean;
- //values:RetainProjectDetails;
   retainDetails:Subscription;
 
   constructor(private activatedRoute:ActivatedRoute, private _router: Router,
