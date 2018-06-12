@@ -665,5 +665,21 @@ class UserController {
     }
   }
 */
+
+
+  getAdvertisingBanner(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      __dirname = './';
+      let filepath = 'banners.json';
+      res.sendFile(filepath, {root: __dirname});
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
 }
 export  = UserController;

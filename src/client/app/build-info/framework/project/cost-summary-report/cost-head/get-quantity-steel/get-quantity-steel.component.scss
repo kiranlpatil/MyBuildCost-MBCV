@@ -1,260 +1,192 @@
 @import '../../../../../../../css/common';
+@import '../get-quantity/get-quantity.component';
+
+.steel-sheet-note {
+  float: right;
+  font-size: 11px;
+  font-weight: 600;
+  margin: 5px;
+}
 
 .get-quantity-section {
-  background: $azure;
-  border: 1px solid $table-border;
-  border-radius: 6px;
-  display: block;
-  float: left;
-  left: 50%;
-  margin: 10px auto 15px;
-  padding: 5px;
-  position: relative;
-  transform: translateX(-50%);
-  width: 100%;
-
-  .close {
-    width: 10px;
-    height: 20px;
-    margin: 0 4px 15px 5px;
-  }
   table {
-    border-radius: 5px;
-    margin: 0;
-    thead {
-      th {
-        background: $jagged-ice;
-        font-size: 11px;
-        text-align: center;
-        padding: 3px 0;
-
-        &:first-child {
-          border-radius: 5px 0 0 0;
-        }
-        &:last-child {
-          border-radius: 0 5px 0 0;
-        }
+    tr > th {
+      span {
+        font-weight: 500;
       }
     }
     tr {
-      background: transparent;
-      border-bottom: 1px solid $azure;
       td {
-        padding: 0;
-        border-right: 1px solid $jagged-ice;
-        border-top: 0 solid transparent;
         .form-control {
-          background: transparent;
-          border: 1px solid transparent;
-          border-radius: 0;
-          box-shadow: none;
-          color: $black-theme-color;
-          display: block;
-          font-size: 11px;
-          //font-weight: bold;
-          height: 27px;
-          padding: 4px 7px;
-          width: 100%;
-          &:focus {
-            box-shadow: 0 0 0 transparent;
-          }
-        }
-        .unit-input {
-          background: transparent;
-          border: 0;
-          box-shadow: 0 0 0;
-          display: table;
-          margin: 0 auto;
-          width: 30px;
-        }
-        input[type='number'] {
+          height: 28px;
           text-align: right;
         }
-        .unit-input {
-          width: 60px;
+        select {
+          background: #ffffff url(../assets/framework/images/form/drop-down.png) no-repeat 94% 50%;
+          border: 0;
+          font-size: 11px;
+          padding: 4px 7px;
         }
-      }
-      .get-delete {
-        border: 0;
-        float: left;
-        height: 28px;
-        padding: 2px;
-        width: 40px;
+
         span {
-          color: $table-btn-bg;
-          float: left;
+          font-size: 11px;
         }
-        .col-xs-2 {
-          display: none;
-        }
-      }
-      td.remark-icon {
-        padding: 5px 9px 5px 0;
-        text-align: left;
-      }
-      .glyphicon.glyphicon-trash {
-        cursor: pointer;
-        top: 6px;
-      }
-      .get-amount-value {
-        background: $white;
-        //box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-      }
-      &:hover {
-        .get-delete {
-          .col-xs-2 {
-            display: block;
+
+        &:first-child {
+          width: 250px;
+          .form-control {
+            text-align: left;
           }
+        }
+
+        &:last-child {
+          width: 40px;
+        }
+      }
+
+      .get-delete {
+        opacity: 0;
+        span {
+          float: none;
+        }
+      }
+
+      &:hover {
+        background: transparent;
+        border: 1px solid transparent;
+        border-bottom: 1px solid $azure;
+        .get-delete {
+          opacity: 1;
         }
       }
     }
 
     .total-amt-row {
-      td {
-        &:first-child {
-          border-radius: 0 0 0 5px;
-        }
-        &:last-child {
-          border: 0;
-          border-radius: 0 0 5px 0;
-        }
-      }
-    }
-    .total-amount {
-      background: $jagged-ice;
-      font-size: 11px;
-      font-weight: bold;
-      text-align: right !important;
+      border: 0;
 
-      &:first-child {
-        text-align: center !important;
-      }
-
-      &:nth-child(7) {
-        padding-left: 15px;
-        text-align: left !important;
-      }
-
-      width: 98px;
-      label {
-        font-size: 11px;
-        font-weight: bold;
-      }
-      span {
-        padding-right: 8px;
+      &:hover {
+        border: 0;
       }
     }
   }
-  .add-new-btn {
-    background: transparent;
-    border: 1px solid $persian-green;
-    border-radius: 2px;
-    color: $persian-green;
-    font-size: 12px;
-    padding: 2px 4px;
-    height: auto;
-    margin: 5px 0;
-    float: left;
-  }
-  .save-btn {
-    background: $persian-green;
-    color: $white;
-    @extend .add-new-btn;
-    float: right;
-    padding: 3px 24px;
+
+  .total-weight {
+    font-size: 11px;
+    font-weight: bold;
+    margin: 10px 0 5px 15px;
   }
 
-  .cancel {
-    background: none;
-    border: 1px solid #6598CA;
-    border-radius: 2px;
-    color: $persian-green;
-    float: right;
-    margin: 5px 3px;
-    padding: 3px 18px;
+  .table-responsive {
+    border: 0;
+    width: 100%;
 
-    &:hover,
-    &:active,
-    &:focus {
-      @extend .cancel;
+    &:hover {
+      border: 0;
     }
   }
-}
-
-.arrow-up {
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid $azure;
-  left: 50%;
-  margin-top: -14px;
-  position: absolute;
-  width: 0;
-  height: 0;
 }
 
 .get-quantity-section:after, .get-quantity-section:before {
-  bottom: 100%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  left: 10.5%;
-  position: absolute;
-  pointer-events: none;
-  width: 0;
-}
-
-.get-quantity-section:after {
-  border-color: rgba(136, 183, 213, 0);
-  border-bottom-color: $azure;
-  border-width: 8px;
-  margin-left: -18px;
-}
-.get-quantity-section:before {
-  border-color: rgba(194, 225, 245, 0);
-  border-bottom-color: $table-border;
-  border-width: 10px;
-  margin-left: -20px;
-}
-
-.required-field {
-  border: 1px solid $error !important;
+  left: 44%;
 }
 
 @media only screen and (max-width: 767px) {
   .get-quantity-section {
-    margin: 0 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 650px;
     table {
-      pointer-events: none;
-    }
-    .close {
-      margin: 0 4px 5px 5px;
-    }
+      tr {
+        td {
+          &:first-child,
+          &:last-child {
+            width: inherit;
+          }
 
-    thead {
-      th {
-        &:nth-child(7) {
-          border-radius: 5px 0 0 0;
+          &:nth-child(4) {
+            min-width: 40px;
+          }
+
+          &:nth-child(5),
+          &:nth-child(6),
+          &:nth-child(7),
+          &:nth-child(8),
+          &:nth-child(9),
+          &:nth-child(10),
+          &:nth-child(11),
+          &:nth-child(12) {
+            min-width: 90px;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+          }
         }
-        &:nth-child(7) {
-          border-radius: 0 5px 0 0;
+      }
+
+      thead {
+        th {
+          &:nth-child(7) {
+            border-radius: 0;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+            border-radius: 0 5px 0 0;
+          }
+        }
+      }
+
+      .total-amt-row {
+        td {
+          &:nth-child(7) {
+            border-radius: 0;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+            border-radius: 0 0 5px 0;
+          }
         }
       }
     }
-
-    .total-amt-row {
-      td {
-        &:nth-child(7) {
-          border-radius: 0 0 0 5px;
-        }
-        &:nth-child(7) {
-          border: 0;
-          border-radius: 0 0 5px 0;
-        }
-      }
-    }
-  }
-  .get-quantity-section:after, .get-quantity-section:before {
-    display: none;
   }
 }
 
+@media only screen and (max-width: 670px) {
+  .get-quantity-section {
+    width: 600px;
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .get-quantity-section {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .get-quantity-section {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .get-quantity-section {
+    width: 300px;
+  }
+
+  .steel-sheet-note {
+    float: left;
+    white-space: normal;
+    width: 88%;
+    word-wrap: break-word;
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .get-quantity-section {
+    width: 280px;
+  }
+}

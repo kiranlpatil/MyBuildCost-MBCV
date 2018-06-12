@@ -21,6 +21,7 @@ export class AppSettings {
 export class Messages {
   public static FROM_REGISTRATION = 'registration';
   public static FROM_ACCOUNT_DETAIL = 'accountdetail';
+  public static MSG_ERROR_UNCAUGHT_EXCEPTION='The server was unable to complete your request. Please try again.';
 
   //Registraion Success messages
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
@@ -339,6 +340,7 @@ export class API {
 
   public static BUILDING = 'building';
   public static COSTHEAD = 'costhead';
+  public static ADVERTSING_BANNER = 'user/advertising/banners';
   public static COMMON_AMENITIES = 'common-amenities';
   public static ACTIVE_STATUS = 'activeStatus';
   public static ACTIVE_STATUS_FALSE = 'false';
@@ -769,9 +771,7 @@ export class Animations {
   public static getListItemAnimationStyle(index : number, delayFactor : number) {
     return {
       'transition-delay': index * delayFactor + 's',
-      'opacity': 1,
-      // 'margin-top': '5px',
-      'transform': 'scale(1)'
+      'opacity': 1
     };
   }
 }

@@ -32,7 +32,6 @@ let config = require('config');
 let log4js = require('log4js');
 import * as mongoose from 'mongoose';
 import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
-import SteelQuantityDetails = require('../dataaccess/model/project/building/SteelQuantityDetails');
 import SteelQuantityItems = require("../dataaccess/model/project/building/SteelQuantityItems");
 
 //import RateItemsAnalysisData = require("../dataaccess/model/project/building/RateItemsAnalysisData");
@@ -141,7 +140,7 @@ class ProjectService {
     });
   }
 
-  getProjectAndBuildingDetails(projectId: string, buildingId: string, callback: (error: any, result: any) => void) {
+  getProjectAndBuildingDetails(projectId: string, callback: (error: any, result: any) => void) {
     logger.info('Project service, getProjectAndBuildingDetails for sync with rateAnalysis has been hit');
     let query = {_id: projectId};
     let populate = {path: 'buildings'};
@@ -162,7 +161,7 @@ class ProjectService {
     let query = {_id: projectDetails._id};
     let buildingId = '';
 
-    this.getProjectAndBuildingDetails(projectDetails._id, buildingId, (error, projectAndBuildingDetails) => {
+    this.getProjectAndBuildingDetails(projectDetails._id, (error, projectAndBuildingDetails) => {
       if (error) {
         logger.error('Project service, getProjectAndBuildingDetails failed');
         callback(error, null);
@@ -260,42 +259,60 @@ class ProjectService {
       if (error) {
         callback(error, null);
       } else {
-        buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, buildingDetails);
-
-        this.buildingRepository.findOneAndUpdate(query, buildingDetails, {new: true}, (error, result) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
+        this.getProjectAndBuildingDetails(projectId, (error, projectAndBuildingDetails) => {
           if (error) {
+            logger.error('Project service, getProjectAndBuildingDetails failed');
             callback(error, null);
           } else {
 
-            this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
-              if (error) {
-                logger.error('Project service, getProjectAndBuildingDetails failed');
-                callback(error, null);
-              } else {
+            let projectData = projectAndBuildingDetails.data[0];
+            let building: Array<Building> = projectAndBuildingDetails.data[0].buildings.filter(
+              function (building: any) {
+                return building.name === buildingDetails.name;
+              });
 
+             if(building.length === 0) {
+             buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, buildingDetails, projectData);
+             this.buildingRepository.findOneAndUpdate(query, buildingDetails, {new: true}, (error, result) => {
+                 logger.info('Project service, findOneAndUpdate has been hit');
+                 if (error) {
+                   callback(error, null);
+                 } else {
+
+                   /* this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
+                  if (error) {
+                    logger.error('Project service, getProjectAndBuildingDetails failed');
+                    callback(error, null);
+                  } else {
+    */
 
                 logger.info('Project service, syncProjectWithRateAnalysisData.');
-                let projectData = projectAndBuildingDetails.data[0];
                 let projectCostHeads = this.calculateBudgetCostForCommonAmmenities(projectData.projectCostHeads, projectData);
                 let queryForProject = {'_id': projectId};
                 let updateProjectCostHead = {$set: {'projectCostHeads': projectCostHeads}};
 
-                logger.info('Calling update project Costheads has been hit');
-                this.projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
-                  (error: any, response: any) => {
-                    if (error) {
-                      logger.error('Error update project Costheads : ' + JSON.stringify(error));
-                      callback(error, null);
-                    } else {
-                      logger.debug('Update project Costheads success');
-                      callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
-                    }
-                  });
-              }
-            });
+               logger.info('Calling update project Costheads has been hit');
+               this.projectRepository.findOneAndUpdate(queryForProject, updateProjectCostHead, {new: true},
+                 (error: any, response: any) => {
+                   if (error) {
+                     logger.error('Error update project Costheads : ' + JSON.stringify(error));
+                     callback(error, null);
+                   } else {
+                     logger.debug('Update project Costheads success');
+                     callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+                   }
+                 });
+               /* }
+              });*/
+             }
+           });
+             }else {
+                 let error = new Error();
+                 error.message = messages.MSG_ERROR_BUILDING_NAME_ALREADY_EXIST;
+                 callback(error, null);
+             }
           }
-        });
+       });
       }
     });
   }
@@ -416,7 +433,13 @@ class ProjectService {
 
   getRatesAndCostHeads(projectId: string,oldBuildingDetails: Building, building:Building, costHeads: CostHead[],workItemAggregateData:any,
               user: User, centralizedRates: any, callback: (error: Error, result: Building) => void) {
-    oldBuildingDetails.costHeads = this.calculateBudgetCostForBuilding(building.costHeads, oldBuildingDetails);
+    this.getProjectAndBuildingDetails(projectId,  (error, projectAndBuildingDetails) => {
+      if (error) {
+        logger.error('Project service, getRatesAndCostHeads failed');
+        callback(error, null);
+      } else {
+        let projectData = projectAndBuildingDetails.data[0];
+    oldBuildingDetails.costHeads = this.calculateBudgetCostForBuilding(building.costHeads, oldBuildingDetails, projectData);
     this.cloneCostHeads(costHeads, oldBuildingDetails,workItemAggregateData);
     if(oldBuildingDetails.cloneItems.indexOf(Constants.RATE_ANALYSIS_CLONE) === -1) {
       //oldBuildingDetails.rates=this.getCentralizedRates(rateAnalysisData, oldBuildingDetails.costHeads);
@@ -429,6 +452,8 @@ class ProjectService {
         callback(error, null);
       } else {
         callback(null, res);
+      }
+    });
       }
     });
   }
@@ -448,7 +473,6 @@ class ProjectService {
   }
 
   cloneCategory(categories: Category[], cloneItems: string[],rateAnalysisData:any) {
-    let isClone: boolean =(cloneItems && cloneItems.indexOf(Constants.CATEGORY_CLONE) !== -1);
     for (let categoryIndex in categories) {
       let category = categories[categoryIndex];
       categories[categoryIndex].workItems = this.cloneWorkItems(category.workItems, cloneItems,rateAnalysisData);
@@ -1351,102 +1375,11 @@ class ProjectService {
     });
   }
 
-  updateSteelQuantityOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                                         workItemId: number, steelQuantityDetails: QuantityDetails, user: User,
-                                         callback: (error: any, result: any) => void) {
-    let query = [
-      {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
-      {$unwind: '$costHeads'},
-      {$project: {'costHeads': 1}},
-      {$unwind: '$costHeads.categories'},
-      {$match: {'costHeads.categories.rateAnalysisId': categoryId}},
-      {$project: {'costHeads.categories.workItems': 1}},
-      {$unwind: '$costHeads.categories.workItems'},
-      {$match: {'costHeads.categories.workItems.rateAnalysisId': workItemId}},
-      {$project: {'costHeads.categories.workItems.quantity': 1}},
-    ];
-
-    this.buildingRepository.aggregate(query, (error, result) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        if (result.length > 0) {
-          let quantity= result[0].costHeads.categories.workItems.quantity;
-          this.updateSteelQuantityDetails(quantity, steelQuantityDetails);
-
-          let query = {_id: buildingId};
-          let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity':quantity}};
-          let arrayFilter = [
-            {'costHead.rateAnalysisId':costHeadId},
-            {'category.rateAnalysisId': categoryId},
-            {'workItem.rateAnalysisId':workItemId}
-          ];
-          this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
-            logger.info('Project service, findOneAndUpdate has been hit');
-            if (error) {
-              callback(error, null);
-            } else {
-              callback(null, {data: steelQuantityDetails.steelQuantityItems, status :'success',
-                      access_token: this.authInterceptor.issueTokenWithUid(user)});
-            }
-          });
-        }else {
-          let error = new Error();
-          error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
-          callback(error, null);
-        }
-      }
-    });
-  }
-
-  updateSteelQuantityDetails(quantity: Quantity, steelQuantityDetails:QuantityDetails) {
-
-    quantity.isEstimated = true;
-    let current_date = new Date();
-    let quantityId = current_date.getUTCMilliseconds();
-
-    if (quantity.steelQuantityDetails.length === 0) {
-      if (steelQuantityDetails.id === undefined) {
-        steelQuantityDetails.id = quantityId;
-        quantity.steelQuantityDetails.push(steelQuantityDetails);
-      } else {
-        quantity.steelQuantityDetails.push(steelQuantityDetails);
-      }
-    }else {
-      let isDefaultExistsSQL = 'SELECT name from ? AS steelQuantityDetails where steelQuantityDetails.name="default"';
-      let isDefaultExistsQuantityDetail = alasql(isDefaultExistsSQL, [quantity.steelQuantityDetails]);
-
-      if (isDefaultExistsQuantityDetail.length > 0) {
-        quantity.steelQuantityDetails = [];
-        quantity.steelQuantityDetails.push(steelQuantityDetails);
-
-      } else {
-        if (steelQuantityDetails.name !== 'default') {
-          let isItemAlreadyExistSQL = 'SELECT id from ? AS steelQuantityDetails where steelQuantityDetails.id=' + steelQuantityDetails.id + '';
-          let isItemAlreadyExists = alasql(isItemAlreadyExistSQL, [quantity.steelQuantityDetails]);
-
-          if (isItemAlreadyExists.length > 0) {
-            for (let quantityIndex = 0; quantityIndex < quantity.steelQuantityDetails.length; quantityIndex++) {
-              if (quantity.steelQuantityDetails[quantityIndex].id === steelQuantityDetails.id) {
-                quantity.steelQuantityDetails[quantityIndex].isDirectQuantity = false;
-                quantity.steelQuantityDetails[quantityIndex].steelQuantityItems =steelQuantityDetails.steelQuantityItems;
-                quantity.steelQuantityDetails[quantityIndex].total = steelQuantityDetails.total;
-              }
-            }
-          } else {
-            steelQuantityDetails.id = quantityId;
-            steelQuantityDetails.isDirectQuantity= false;
-            quantity.steelQuantityDetails.push(steelQuantityDetails);
-          }
-        }
-      }
-    }
-  }
 
   updateQuantityOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
                                     quantityDetail: QuantityDetails, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, updateQuantityOfBuildingCostHeads has been hit');
-    let query = {_id: buildingId};
+  /*  let query = {_id: buildingId};
     let projection = {costHeads:{
         $elemMatch :{rateAnalysisId : costHeadId, categories: {
             $elemMatch:{rateAnalysisId: categoryId,workItems: {
@@ -1493,6 +1426,52 @@ class ProjectService {
             }
           });
         }
+    });*/
+    let query = [
+      {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
+      {$unwind: '$costHeads'},
+      {$project: {'costHeads': 1}},
+      {$unwind: '$costHeads.categories'},
+      {$match: {'costHeads.categories.rateAnalysisId': categoryId}},
+      {$project: {'costHeads.categories.workItems': 1}},
+      {$unwind: '$costHeads.categories.workItems'},
+      {$match: {'costHeads.categories.workItems.rateAnalysisId': workItemId}},
+      {$project: {'costHeads.categories.workItems.quantity': 1}},
+    ];
+
+    this.buildingRepository.aggregate(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        if (result.length > 0) {
+          let quantity= result[0].costHeads.categories.workItems.quantity;
+          quantity.isEstimated = true;
+          if(quantity.isDirectQuantity === true) {
+            quantity.isDirectQuantity = false;
+          }
+          this.updateQuantityItemsOfWorkItem( quantity, quantityDetail);
+
+          let query = {_id: buildingId};
+          let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity':quantity}};
+          let arrayFilter = [
+            {'costHead.rateAnalysisId':costHeadId},
+            {'category.rateAnalysisId': categoryId},
+            {'workItem.rateAnalysisId':workItemId}
+          ];
+          this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        }else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_EMPTY_RESPONSE;
+          callback(error, null);
+        }
+      }
     });
   }
 
@@ -1717,13 +1696,21 @@ class ProjectService {
                 } else {
                   quantityDetails[quantityIndex].quantityItems = quantityDetailsObj.quantityItems;
                   quantityDetails[quantityIndex].isDirectQuantity = false;
-                }*/
-            if(quantityDetailsObj.steelQuantityItems) {
+                   if(quantityDetailsObj.steelQuantityItems) {
               quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
-            }else if(quantityDetailsObj.quantityItems) {
+            }else if(quantityDetailsObj.quantityItems.length === 0) {
               quantityDetails[quantityIndex].quantityItems = [];
             }
-                quantityDetails[quantityIndex].isDirectQuantity = true;
+                }*/
+                if( quantityDetailsObj.quantityItems.length === 0 && quantityDetailsObj.steelQuantityItems.steelQuantityItem.length === 0) {
+                  quantityDetails[quantityIndex].quantityItems = [];
+                  quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
+                  quantityDetails[quantityIndex].isDirectQuantity = true;
+                } else if(quantityDetailsObj.quantityItems.length !== 0 || quantityDetailsObj.steelQuantityItems.steelQuantityItem.length !==0 ) {
+                  quantityDetails[quantityIndex].quantityItems = quantityDetailsObj.quantityItems;
+                  quantityDetails[quantityIndex].steelQuantityItems = quantityDetailsObj.steelQuantityItems;
+                  quantityDetails[quantityIndex].isDirectQuantity = false;
+                }
                 quantityDetails[quantityIndex].total = quantityDetailsObj.total;
               }
             }
@@ -2210,7 +2197,7 @@ class ProjectService {
 
   syncProjectWithRateAnalysisData(projectId: string, buildingId: string, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, syncProjectWithRateAnalysisData has been hit');
-    this.getProjectAndBuildingDetails(projectId, buildingId, (error, projectAndBuildingDetails) => {
+    this.getProjectAndBuildingDetails(projectId,  (error, projectAndBuildingDetails) => {
       if (error) {
         logger.error('Project service, getProjectAndBuildingDetails failed');
         callback(error, null);
@@ -2271,7 +2258,7 @@ class ProjectService {
           logger.info('GetAllDataFromRateAnalysis success');
           let buildingCostHeads = rateAnalysis.buildingCostHeads;
           let projectService = new ProjectService();
-          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingData);
+          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingData, projectData);
           let queryForBuilding = {'_id': buildingId};
           let updateCostHead = {$set: {'costHeads': buildingCostHeads, 'rates': rateAnalysis.buildingRates}};
 
@@ -2318,7 +2305,7 @@ class ProjectService {
           let projectService = new ProjectService();
           let buildingCostHeads = rateAnalysis.buildingCostHeads;
 
-          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingDetails);
+          buildingCostHeads = projectService.calculateBudgetCostForBuilding(buildingCostHeads, buildingDetails, projectDetails);
 
           let query = {'_id': buildingId};
           let newData = {$set: {'costHeads': buildingCostHeads, 'rates': rateAnalysis.buildingRates}};
@@ -2464,7 +2451,7 @@ class ProjectService {
     });
   }
 
-  calculateBudgetCostForBuilding(costHeadsRateAnalysis: any, buildingDetails: any) {
+  calculateBudgetCostForBuilding(costHeadsRateAnalysis: any, buildingDetails: any, projectDetails: any) {
     logger.info('Project service, calculateBudgetCostForBuilding has been hit');
     let costHeads: Array<CostHead> = new Array<CostHead>();
     let budgetedCostAmount: number;
@@ -2677,10 +2664,10 @@ class ProjectService {
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
           break;
         }
-        case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS : {
+        case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : {
           budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
           calculateBudgtedCost = budgetCostFormulae.replace(Constants.CARPET_AREA_OF_PARKING, buildingDetails.carpetAreaOfParking)
-            .replace(Constants.PLOT_PERIPHERY_LENGTH, buildingDetails.totalCarpetAreaOfUnit)
+            .replace(Constants.PLOT_PERIPHERY_LENGTH, projectDetails.plotPeriphery)
             .replace(Constants.NUM_OF_FLOORS, buildingDetails.totalNumOfFloors);
           budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);

@@ -4,7 +4,7 @@ import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
   ValueConstant, CurrentView, ScrollView, Animations
 } from '../../../../shared/constants';
-import {SessionStorage, SessionStorageService, Message, Messages, MessageService, API} from '../../../../shared/index';
+import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
 import { Building } from '../../model/building';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -14,8 +14,9 @@ import { CostHead } from '../../model/costhead';
 import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
-import { LoaderService } from '../../../../shared/loader/loaders.service';
-import { AddCostHeadButton } from '../../model/showHideCostHeadButton';
+import {LoaderService} from '../../../../shared/loader/loaders.service';
+import {AddCostHeadButton} from '../../model/showHideCostHeadButton';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 declare let $: any;
 
@@ -50,6 +51,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   estimatedItem: EstimateReport;
   showCostHeadList:boolean=false;
   showGrandTotalPanelBody:boolean=true;
+  isShowBuildingCostSummaryChart:boolean=true;
+  isShowCommonAmenitiesChart:boolean=true;
   //showGrandTotalPanelTable= new Array<boolean>(10);
   compareIndex:number=0;
   userId:any;
@@ -81,7 +84,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
-              private buildingService: BuildingService, private loaderService : LoaderService) {
+              private buildingService: BuildingService, private loaderService : LoaderService,
+              private errorService:ErrorService) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -116,6 +120,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   setBuildingId( i:number, buildingId: string) {
+    this.setChartVisibility(i);
     this.compareIndex = i;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
    this.costSummaryService.moveSelectedBuildingAtTop(this.compareIndex);
@@ -143,6 +148,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetAllInActiveCostHeadsFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -178,12 +186,20 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       this.totalNumberOfBuildings = this.projectReport.buildings.length;
     }
     this.amenitiesReport = this.projectReport.commonAmenities;
+    this.projectReport.totalAreaOfBuildings = projects.data.totalAreaOfBuildings;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
     if(SessionStorageService.getSessionValue(SessionStorage.FROM_VIEW) === this.getScrollView().GO_TO_RECENT_BUILDING) {
       SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, null);
       this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
     }
+  }
+
+  onGetCostSummaryReportFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
+    console.log('onGetCostInFail()'+error);
   }
 
   //TODO : Check if can merge
@@ -222,6 +238,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onInActiveCostHeadFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
     this.loaderService.stop();
   }
@@ -245,6 +264,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onActiveCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }
@@ -268,6 +290,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onUpdateRateOfThumbRuleFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onAddCostheadSuccess : '+error);
   }
 
@@ -294,6 +319,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onDeleteBuildingFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -313,6 +341,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetBuildingDetailsForCloneFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -337,6 +368,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onCreateBuildingFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -357,6 +391,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onCloneBuildingCostHeadsFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -374,25 +411,20 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
       this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.buildingsReport[buildindIndex].thumbRule.totalBudgetedCost;
 
-      this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.buildingsReport[buildindIndex].thumbRule.totalRate;
-
       this.grandTotalOfArea = this.grandTotalOfArea + this.buildingsReport[buildindIndex].area;
 
       this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost +
        this.buildingsReport[buildindIndex].estimate.totalEstimatedCost;
-
-      this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate +
-       this.buildingsReport[buildindIndex].estimate.totalRate;
     }
 
     //Calculate total with amenities data
     this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.amenitiesReport.thumbRule.totalBudgetedCost;
 
-    this.grandTotalOfTotalRate = this.grandTotalOfTotalRate + this.amenitiesReport.thumbRule.totalRate;
+    this.grandTotalOfTotalRate = (this.grandTotalOfBudgetedCost / this.projectReport.totalAreaOfBuildings);
 
     this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost + this.amenitiesReport.estimate.totalEstimatedCost;
 
-    this.grandTotalOfEstimatedRate = this.grandTotalOfEstimatedRate + this.amenitiesReport.estimate.totalRate;
+    this.grandTotalOfEstimatedRate = (this.grandTotalOfEstimatedCost / this.projectReport.totalAreaOfBuildings);
   }
 
   toggleShowGrandTotalPanelBody() {
@@ -439,7 +471,26 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   getListItemAnimation(index : number) {
     return Animations.getListItemAnimationStyle(index, Animations.defaultDelayFactor);
   }
-
+  getStatusOfCommonEmenities(event:string) {
+    this.isShowBuildingCostSummaryChart=false;
+    if(event==='true') {
+      this.isShowCommonAmenitiesChart=false;
+    } else {
+      this.isShowCommonAmenitiesChart=true;
+    }
+  }
+  setChartVisibility(currentIndex:number) {
+    this.isShowCommonAmenitiesChart=false;
+    if(this.compareIndex===currentIndex && ($('#collapse'+currentIndex).attr('aria-expanded')==='true'||
+        $('#collapse'+currentIndex).attr('aria-expanded')==undefined)) {
+      this.isShowBuildingCostSummaryChart=false;
+    } else {
+      this.isShowBuildingCostSummaryChart=true;
+    }
+    $('#collapse'+this.totalNumberOfBuildings).attr({
+      'aria-expanded':'false'
+    });
+  }
   ngAfterViewInit() {
     setTimeout(() => {
       console.log('animated');

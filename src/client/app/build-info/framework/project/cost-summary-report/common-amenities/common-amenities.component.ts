@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, OnChanges} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Button, Headings, Label, NavigationRoutes, TableHeadings, ProjectElements } from '../../../../../shared/constants';
 import { BuildingReport } from '../../../model/building-report';
@@ -7,6 +7,7 @@ import { EstimateReport } from '../../../model/estimate-report';
 import { CostSummaryService } from '../../cost-summary-report/cost-summary.service';
 import { CostHead } from '../../../model/costhead';
 import { LoaderService } from '../../../../../shared/loader/loaders.service';
+import { ErrorService } from '../../../../../shared/services/error.service';
 
 declare let $: any;
 
@@ -17,7 +18,7 @@ declare let $: any;
   templateUrl: 'common-amenities.component.html'
 })
 
-export class CommonAmenitiesComponent implements OnInit {
+export class CommonAmenitiesComponent implements OnInit,OnChanges {
   @Input() amenitiesReport: BuildingReport;
   @Input() totalNumberOfBuildings: number;
   @Input() costingByUnit : string;
@@ -25,6 +26,8 @@ export class CommonAmenitiesComponent implements OnInit {
   @Input() showHideCostHeadButtonList ?: Array<any>;
 
   @Output() getReportDetails =  new EventEmitter<any>();
+  @Output() sednCommonEmenitiesChartStatus=  new EventEmitter<any>();
+
   projectId: string;
   projectName: string;
   costHeadId:number;
@@ -34,7 +37,8 @@ export class CommonAmenitiesComponent implements OnInit {
   inActiveProjectCostHeads = new Array<CostHead>();
 
   constructor(private activatedRoute: ActivatedRoute, private _router : Router, private costSummaryService : CostSummaryService,
-              private messageService : MessageService, private loaderService : LoaderService) {
+              private messageService : MessageService, private loaderService : LoaderService,
+              private errorService:ErrorService) {
   }
 
   ngOnInit() {
@@ -42,6 +46,10 @@ export class CommonAmenitiesComponent implements OnInit {
       this.projectId = params['projectId'];
     });
   }
+  ngOnChanges() {
+    $('#collapse-cost-summary-panel'+this.totalNumberOfBuildings).addClass('collapsed');
+    $('#collapse'+this.totalNumberOfBuildings).removeClass('in');
+}
   goToCostHeadView(estimatedItem :EstimateReport) {
     if(!estimatedItem.disableCostHeadView) {
       this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
@@ -71,6 +79,9 @@ export class CommonAmenitiesComponent implements OnInit {
   }
 
   onUpdateBudgetedCostAmountFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onAddCostheadSuccess : '+error);
   }
 
@@ -97,6 +108,9 @@ export class CommonAmenitiesComponent implements OnInit {
   }
 
   onGetAllInActiveCostHeadsFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -119,6 +133,9 @@ export class CommonAmenitiesComponent implements OnInit {
   }
 
   onActiveCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }
@@ -147,6 +164,9 @@ export class CommonAmenitiesComponent implements OnInit {
   }
 
   onInactivateCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }
@@ -172,8 +192,10 @@ export class CommonAmenitiesComponent implements OnInit {
   }
 
   showGrandTotalTable() {
+    this.sednCommonEmenitiesChartStatus.emit($('#collapse'+this.totalNumberOfBuildings).attr('aria-expanded'));
     this.showGrandTotalPanelTable = !this.showGrandTotalPanelTable;
     this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
+
   }
 }
 

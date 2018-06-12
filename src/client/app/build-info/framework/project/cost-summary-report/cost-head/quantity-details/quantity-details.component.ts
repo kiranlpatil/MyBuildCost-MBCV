@@ -14,6 +14,7 @@ import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 import { Rate } from '../../../../model/rate';
 import {SteelQuantityItem} from "../../../../model/steelQuantityItem";
 import {SteelQuantityItems} from "../../../../model/SteelQuantityItems";
+import { ErrorService } from '../../../../../../shared/services/error.service';
 declare var $: any;
 
 @Component({
@@ -60,7 +61,7 @@ export class QuantityDetailsComponent implements OnInit {
   flagForFloorwiseQuantity : string = null;
 
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
-              private loaderService: LoaderService) {
+              private loaderService: LoaderService,private errorService:ErrorService) {
   }
 
    ngOnInit() {
@@ -101,7 +102,7 @@ export class QuantityDetailsComponent implements OnInit {
           this.quantityId = quantityDetail.id;
         }else if(showInnerView == this.getLabel().WORKITEM_STEEL_QUANTITY_TAB) {
           if( quantityDetail.steelQuantityItems ) {
-            this.steelquantityItem=quantityDetail.steelQuantityItems;
+            this.steelquantityItem=lodsh.cloneDeep(quantityDetail.steelQuantityItems);
           }else {
             this.steelquantityItem=new SteelQuantityItems();
           }
@@ -139,8 +140,11 @@ export class QuantityDetailsComponent implements OnInit {
     if(quantity.quantityItems===undefined) {
       quantity.quantityItems=[];
     }
-    if((flag === Label.DIRECT_QUANTITY &&  quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
-      (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
+    if((flag === Label.DIRECT_QUANTITY && quantity.quantityItems &&  quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
+      (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
+      $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
+    }else if((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !==0 && quantity.total !== 0) ||
+      (flag === Label.WORKITEM_STEEL_QUANTITY_TAB && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length ===0 && quantity.total !== 0)) {
       $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
     } else {
       if(flag === Label.DIRECT_QUANTITY) {
@@ -154,7 +158,7 @@ export class QuantityDetailsComponent implements OnInit {
   updateDetailedQuanityAfterConfirmation(quantityData : any) {
     if(quantityData.detailedQuantityFlag === Label.DIRECT_QUANTITY) {
       this.updateQuantityDetails(quantityData.quantity, quantityData.detailedQuantityFlag, quantityData.quantityIndex);
-    } else if(quantityData.detailedQuantityFlag === Label.WORKITEM_QUANTITY_TAB) {
+    } else if(quantityData.detailedQuantityFlag === Label.WORKITEM_QUANTITY_TAB ||quantityData.detailedQuantityFlag === Label.WORKITEM_STEEL_QUANTITY_TAB  ) {
       this.getQuantity(quantityData.quantity, quantityData.quantityIndex, quantityData.detailedQuantityFlag);
     }
   }
@@ -176,14 +180,29 @@ export class QuantityDetailsComponent implements OnInit {
       quantityDetailsObj.id =  quantity.id;
       quantityDetailsObj.name = quantity.name;
       quantityDetailsObj.total = quantity.total;
-    /*  if(flag === Label.NAME) {
-        quantityDetailsObj.quantityItems = quantity.quantityItems;
+      if(flag === Label.NAME) {
+        if(quantity.quantityItems || quantity.steelQuantityItems) {
+          quantityDetailsObj.quantityItems = quantity.quantityItems;
+          quantityDetailsObj.steelQuantityItems = quantity.steelQuantityItems;
+        }else {
+          quantityDetailsObj.quantityItems = [];
+          quantityDetailsObj.steelQuantityItems = new SteelQuantityItems();
+        }
       } else if(flag === Label.DIRECT_QUANTITY) {
         quantityDetailsObj.quantityItems = [];
+        quantityDetailsObj.steelQuantityItems = new SteelQuantityItems();
         this.quantityDetails[quantityIndex].quantityItems = [];
+        this.quantityDetails[quantityIndex].steelQuantityItems =  new SteelQuantityItems();
         this.showInnerView = null;
       } else {
         console.log('error');
+      }
+  /*    if(quantity.quantityItems) {
+        quantityDetailsObj.quantityItems = [];
+        this.quantityDetails[quantityIndex].quantityItems = [];
+      } else if(quantity.steelQuantityItems) {
+        quantityDetailsObj.steelQuantityItems = new SteelQuantityItems();
+        this.quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
       }*/
       this.loaderService.start();
 
@@ -248,6 +267,9 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   onUpdateQuantityDetailFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('success : '+JSON.stringify(error));
     this.loaderService.stop();
   }
@@ -338,6 +360,9 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   onDeleteQuantityDetailsByNameFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('Delete Quantity error');
   }
 }

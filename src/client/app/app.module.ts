@@ -41,8 +41,6 @@ import { DashboardUserProfileService } from './framework/dashboard/user-profile/
 import { UserChangePasswordService } from './framework/dashboard/user-change-password/user-change-password.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { HttpDelegateService } from './shared/services/http-delegate.service';
-
-
 //Application IMPORTS
 
 import { ProjectService } from './build-info/framework/project/project.service';
@@ -98,7 +96,10 @@ import {CostSummaryReportComponent} from './build-info/framework/project/report-
 import { DisclaimerComponent } from './shared/disclaimer-component/disclaimer-component';
 import {
   SortByCategoryAmountPipe} from './build-info/framework/project/cost-summary-report/cost-head/sort-by-category-amount.pipe';
-import { GetSteelQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity-steel/get-quantity-steel.component';
+import { GetSteelQuantityComponent} from './build-info/framework/project/cost-summary-report/cost-head/get-quantity-steel/get-quantity-steel.component';
+import { AdvertisingBannerComponent } from './build-info/framework/project/advertising-banner/advertising-banner.component';
+import { AdvertisingBannerService } from './build-info/framework/project/advertising-banner/advertising-banner.service';
+import { CostDistributionChartComponent } from './build-info/framework/project/cost-distribution-chart/cost-distribution-chart.component';
 import { PackageSummaryComponent } from './build-info/framework/package-details/package-summary/package-summary.component';
 import { PackageDefaultComponent } from './build-info/framework/package-details/packageDefault.component';
 import { PaymentSuccessfulComponent } from './build-info/framework/payment/payment-successful/payment-successful.component';
@@ -161,6 +162,7 @@ import {RetainProjectComponent} from "./build-info/framework/payment/retain-proj
     GetRateComponent,
     ProjectItemComponent,
     QuantityDetailsComponent,
+    CostDistributionChartComponent,
     //MyDashboardComponent,
 
     //Shared Components
@@ -180,6 +182,7 @@ import {RetainProjectComponent} from "./build-info/framework/payment/retain-proj
     CostSummaryReportComponent,
     AttachmentComponent,
     CommonAmenitiesReportComponent,
+    AdvertisingBannerComponent,
 
     //payment
     PackageDetailsComponent,
@@ -222,6 +225,8 @@ import {RetainProjectComponent} from "./build-info/framework/payment/retain-proj
     BuildingService,
     CostSummaryService,
     MaterialTakeOffService,
+    ProjectNameChangeService,
+    AdvertisingBannerService
     ProjectNameChangeService,
 
       //Payment

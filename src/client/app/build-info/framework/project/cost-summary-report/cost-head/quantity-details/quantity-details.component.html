@@ -1,7 +1,7 @@
 <div *ngIf="workItemData">
   <table class="table table-dashboard table-categories">
     <tbody>
-      <tr *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
+      <tr class="delete-quantity-details-row" *ngFor="let quantity of quantityDetails; let quantityIndex = index;">
         <td>
           <span class="mobile-headings">{{getTableHeadings().ITEM}}</span>
           <input placeholder="Flat/Floor/Parking Details" class="form-control clear quantity-name" type="text" [(ngModel)]="quantity.name"  (focus)="changeQuantityName(quantity.name)"
@@ -10,16 +10,16 @@
 
         <td>
           <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
-          <div class="edit-field" [class.active-quantity]="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
+          <div class="edit-field"(click)="setQuantityTotal(quantity, quantity.total)" [class.active-quantity]="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
             <input type="number"  [(ngModel)]="quantity.total"
-                   id="quantity" size="10" class="form-control clear" (focus)="setQuantityTotal(quantity, quantity.total)"
+                   id="quantity" size="10" class="form-control clear"
                    (change)="updateFloorwiseQunatityConfirmation(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
             <span class="calculator" id="getQuantity{{quantityIndex}}"
-                *ngIf="!workItem.isSteelWorkItem" (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_QUANTITY_TAB, quantityIndex)">
+                *ngIf="!workItem.isSteelWorkItem && workItem.isMeasurementSheet" (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_QUANTITY_TAB, quantityIndex)">
                  <img src="assets/build-info/dashboard/calculator2.png" />
             </span>
             <span class="calculator" id="getQuantity1{{quantityIndex}}"
-                  *ngIf="workItem.isSteelWorkItem" (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_STEEL_QUANTITY_TAB, quantityIndex)">
+                  *ngIf="workItem.isSteelWorkItem && workItem.isMeasurementSheet" (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_STEEL_QUANTITY_TAB, quantityIndex)">
                  <img src="assets/build-info/dashboard/calculator2.png" />
             </span>
           </div>
@@ -66,7 +66,7 @@
           </div>
         </td>
 
-        <td class="show-embedded-table">
+        <td class="show-embedded-table" [class.steel-quantity-embedded-table]="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_STEEL_QUANTITY_TAB">
           <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_QUANTITY_TAB">
 
               <div>

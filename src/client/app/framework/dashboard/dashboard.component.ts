@@ -58,6 +58,7 @@ export class DashboardComponent implements OnInit {
   onUserProfileError(error: any) {
     var message = new Message();
     message.error_msg = error.err_msg;
+    message.error_code =  error.err_code;
     message.isError = true;
     this.messageService.message(message);
   }

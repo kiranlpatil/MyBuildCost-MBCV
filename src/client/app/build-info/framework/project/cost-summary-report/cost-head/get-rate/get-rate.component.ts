@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import {
   Messages, Button, TableHeadings, Label, Headings, ValueConstant,
   StandardNotes
@@ -14,6 +14,7 @@ import { WorkItem } from '../../../../model/work-item';
 import { Category } from '../../../../model/category';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
 import { RateItem } from '../../../../model/rate-item';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { RateItem } from '../../../../model/rate-item';
   styleUrls: ['get-rate.component.css'],
 })
 
-export class GetRateComponent implements OnInit {
+export class GetRateComponent implements OnChanges {
 
   @Input() rate: Rate;
   @Input() categoryDetails :  Array<Category>;
@@ -58,9 +59,11 @@ export class GetRateComponent implements OnInit {
   selectedItemName: string;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
-              private messageService: MessageService, private commonService: CommonService) {
+              private messageService: MessageService, private commonService: CommonService,
+              private errorService:ErrorService) {
   }
-  ngOnInit() {
+
+  ngOnChanges() {
     this.calculateTotal();
   }
 
@@ -179,6 +182,9 @@ export class GetRateComponent implements OnInit {
   }
 
   onUpdateRateFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
     this.loaderService.stop();
   }
@@ -277,6 +283,9 @@ export class GetRateComponent implements OnInit {
 
 
   onGetRateItemsByOriginalNameFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 

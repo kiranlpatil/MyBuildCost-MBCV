@@ -64,7 +64,7 @@ export class CustomHttp extends Http {
           return Observable.throw(errorInstance);
         } else {
           errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
-          errorInstance.err_code = err.status;
+          errorInstance.err_code = err.err_code?err.err_code:500;
           return Observable.throw(errorInstance);
         }
       });

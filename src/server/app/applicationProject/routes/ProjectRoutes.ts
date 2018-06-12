@@ -244,12 +244,6 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfBuildingCostHeads,
       controller.updateQuantityOfBuildingCostHeads, this._responseInterceptor.exit);
 
-    //Add quantitydetails of steel
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/steelQuantity',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      controller.updateSteelQuantityOfBuildingCostHeads, this._responseInterceptor.exit);
-
-
     //update direct quantity Building
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfBuildingCostHeads,

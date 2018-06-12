@@ -122,7 +122,7 @@ class Constants {
   public static WINDOWS_AND_GLASS_DOORS : string = 'Windows and Glass doors';
   public static ELECTRIFICATION : string = 'Electrification';
   public static PLUMBING : string = 'External plumbing / drainage line';
-  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS : string = 'Electrical light fittings in common areas of building';
+  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : string = 'Electrical light fittings in common areas of building';
   public static PEST_CONTROL : string = 'Pest Control';
   public static SOLAR_WATER_HEATING_SYSTEM : string = 'Solar water heating system';
   public static PIPED_GAS_SYSTEM : string = 'Piped gas system';

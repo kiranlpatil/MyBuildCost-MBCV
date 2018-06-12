@@ -90,6 +90,7 @@ class UserRoutes {
       //Retrive list of project
       router.get('/subscription/project/:projectId', authInterceptor.requiresAuth, controller.getProjectSubscription);
       router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
+      router.get('/advertising/banners', authInterceptor.requiresAuth, controller.getAdvertisingBanner);
 
       // update subscription package
       router.put('/project/:projectId/updateSubscription', authInterceptor.requiresAuth, controller.updateSubscription);

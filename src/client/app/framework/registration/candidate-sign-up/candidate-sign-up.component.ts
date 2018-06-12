@@ -129,9 +129,10 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   }
 
   onRegistrationFalure(error: any) {
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0||error.err_code===500) {
       var message = new Message();
       message.error_msg = error.err_msg;
+      message.error_code =  error.err_code;
       message.isError = true;
       this.messageService.message(message);
     } else {

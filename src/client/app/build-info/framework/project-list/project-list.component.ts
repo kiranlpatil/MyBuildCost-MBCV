@@ -6,6 +6,7 @@ import { Project } from './../model/project';
 import { PackageDetailsService } from '../package-details/package-details.service';
 import { SessionStorage, SessionStorageService } from '../../../shared/index';
 declare var $: any;
+import { ErrorService } from '../../../shared/services/error.service';
 
 @Component({
   moduleId: module.id,
@@ -25,8 +26,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   isProjectModalActive:boolean=false;
   premiumPackageDetails:any;
 
-
-  constructor(private projectService: ProjectService, private _router: Router,private packageDetailsService : PackageDetailsService) {
+  constructor(private projectService: ProjectService, private _router: Router,
+  private packageDetailsService : PackageDetailsService, private errorService:ErrorService) {
   }
 
   ngOnInit() {
@@ -86,6 +87,9 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   onGetAllProjectFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 

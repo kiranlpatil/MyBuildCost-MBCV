@@ -697,33 +697,6 @@ class ProjectController {
     }
   }
 
-  updateSteelQuantityOfBuildingCostHeads(req: express.Request, res: express.Response, next: any): void {
-    try {
-      logger.info('Project controller, update Steel Quantity has been hit');
-      let user = req.user;
-      let projectId = req.params.projectId;
-      let buildingId = req.params.buildingId;
-      let costHeadId = parseInt(req.params.costHeadId);
-      let categoryId = parseInt(req.params.categoryId);
-      let workItemId = parseInt(req.params.workItemId);
-      let steelQuantityDetails = req.body.item;
-     // let steelQuantityDetails = quantityDetails.steelQuantityDetails;
-
-      let projectService = new ProjectService();
-      projectService.updateSteelQuantityOfBuildingCostHeads( projectId, buildingId, costHeadId,
-        categoryId, workItemId, steelQuantityDetails, user, (error, result) => {
-        if(error) {
-          next(error);
-        } else {
-          logger.info('Update Steel Quantity success');
-          next(new Response(200,result));
-        }
-      });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
 
   updateDirectQuantityOfBuildingWorkItems(req: express.Request, res: express.Response, next: any): void {
     try {
