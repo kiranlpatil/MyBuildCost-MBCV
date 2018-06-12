@@ -39,6 +39,10 @@ class Messages {
   public static MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER: string = 'OTP has been sent on your new mobile number';
   public static MSG_SUCCESS_INDUSTRY_DATA_INSERTION: string = 'Data inserted Successfully in Industry';
 
+
+  //Renew
+  public static MSG_SUCCESS_PROJECT_RENEW: string = 'Project has been renewed successfully';
+
   public static MSG_NO_RECORDS_FOUND: string = 'No records found';
 
   //Error Message

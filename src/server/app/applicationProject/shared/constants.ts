@@ -137,6 +137,9 @@ class Constants {
   // Subscription package
   public static BASE_PACKAGE : string = 'basePackage';
 
+  // payment packages
+  public static RENEW_PROJECT : string = 'RenewProject';
+
 
   //Building Category
   public static STEEL : string = 'Steel';

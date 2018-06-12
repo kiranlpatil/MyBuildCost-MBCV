@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Headings, Button, Label,Messages } from '../../../../shared/constants';
+import { Headings, Button, Label,Messages, } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationRoutes } from '../../../../shared/index';
 import { Message, MessageService, SessionStorage, SessionStorageService } from '../../../../shared/index';
@@ -22,16 +22,18 @@ export class PaymentSuccessfulComponent implements OnInit{
   packageName: string;
   projects:any;
   projectModel:  Project = new Project();
+  removeTrialProjectPrefix:  boolean = false;
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
   constructor(private activatedRoute:ActivatedRoute, private _router: Router, private projectService: ProjectService,
-              private projectNameChangeService : ProjectNameChangeService, private packageDetails : PackageDetailsService) {
+              private projectNameChangeService : ProjectNameChangeService, private packageDetails : PackageDetailsService,
+              private messageService : MessageService) {
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.packageName = params['packageName'];
-      if (this.packageName === 'Retain') {
+      if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
         this.getProject();
       }
     });
@@ -47,7 +49,14 @@ export class PaymentSuccessfulComponent implements OnInit{
 
   onGetProjectSuccess(project : any) {
     this.projectModel = project.data[0];
-    this.projectModel.name = project.data[0].name.substring(14);
+    if(project.data[0].name.includes(this.getLabels().PREFIX_TRIAL_PROJECT)) {
+      this.projectModel.name = project.data[0].name.substring(14);
+      this.removeTrialProjectPrefix = true;
+    } else {
+      this.projectModel.name = project.data[0].name;
+    }
+
+
   }
 
   onGetProjectFailure(error : any) {
@@ -60,22 +69,35 @@ export class PaymentSuccessfulComponent implements OnInit{
         user => this.onUpdateProjectSuccess(user),
         error => this.onUpdateProjectFailure(error));
   }
-  onRetainProject() {
-    let body = { basePackageName :'Premium'};
-    this.packageDetails.getRetainProject(this.projectId,body)
-      .subscribe(project=>this.onRetainProjectSuccess(project),
-        error => this.onRetainProjectFailure(error));
+  onRetainOrRenewProject(packageName : string) {
+    let body = { packageName : packageName};
+    this.packageDetails.getRetainOrRenewProject(this.projectId,body)
+      .subscribe(success=>this.onRetainOrRenewProjectSuccess(success),
+        error => this.onRetainOrRenewProjectFailure(error));
   }
 
 
-  onRetainProjectSuccess(project:any) {
-    this.projects=project.data;
-   this.updateProject(this.projectModel);
+  onRetainOrRenewProjectSuccess(success:any) {
+    if(this.removeTrialProjectPrefix) {
+      this.removeTrialProjectPrefix = false;
+      this.updateProject(this.projectModel);
+    }
+    sessionStorage.removeItem(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = success.data;
+    this.messageService.message(message);
    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
 
   }
-  onRetainProjectFailure(error:any) {
-
+  onRetainOrRenewProjectFailure(error:any) {
+    console.log(error);
+    var message = new Message();
+    message.isError = true;
+    message.custom_message = error.err_msg;
+    message.error_msg = error.err_msg;
+    this.messageService.message(message);
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
   onUpdateProjectSuccess(result: any) {
     if (result !== null) {
@@ -91,13 +113,17 @@ export class PaymentSuccessfulComponent implements OnInit{
     console.log(error);
   }
 
+  getLabels() {
+    return Label;
+  }
+
   onContinue() {
-    if (this.packageName === 'Retain') {
-      this.onRetainProject();
-    } else if (this.packageName === 'Add_building') {
+    if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
+      this.onRetainOrRenewProject(this.packageName);
+    }else if (this.packageName === 'Add_building') {
       this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
-      }else {
+    }else {
       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-      }
+    }
   }
 }

@@ -623,7 +623,7 @@ class UserController {
     try {
       let user = req.user;
       let projectId = req.params.projectId;
-      let packageName = req.body.basePackageName;
+      let packageName = req.body.packageName;
       let userService = new UserService();
       userService.updateSubscription(user,projectId, packageName, (error, result)=> {
         if(error) {

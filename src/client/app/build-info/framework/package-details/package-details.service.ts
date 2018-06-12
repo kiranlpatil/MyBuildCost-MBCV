@@ -21,7 +21,7 @@ export class PackageDetailsService extends BaseService {
 
   }
 
-  getRetainProject(projectId:string,body : any) {
+  getRetainOrRenewProject(projectId:string, body : any) {
     var url = API.USER + '/' + API.PROJECT + '/' + projectId +'/'+ API.UPDATE_SUBSCRIPTION;
     return this.httpDelegateService.putAPI(url,body);
   }

@@ -284,6 +284,7 @@ export class SessionStorage {
   public static CURRENT_PROJECT_ID = 'current_project_id';
   public static CURRENT_BUILDING_ID = 'current_project_id';
   public static CURRENT_PROJECT_NAME = 'current_project_name';
+  public static NUMBER_OF_DAYS_TO_EXPIRE = 'number_of_days_to_expire';
   public static CURRENT_BUILDING_NAME = 'current_building_name';
   public static CURRENT_BUILDING = 'current_building_id';
   public static CURRENT_COST_HEAD_ID = 'current_cost_head_id';
@@ -591,6 +592,10 @@ export class Label {
   public static START_DATE: string = 'Start Date';
   public static END_DATE: string = 'End Date';
   public static RENEW_PROJECT_BY: string = 'Renew Project by';
+  public static PACKAGE_RENEW_PROJECT: string = 'RenewProject';
+  public static PACKAGE_REATAIN_PROJECT: string = 'Retain';
+  public static PREFIX_TRIAL_PROJECT: string = 'Trial Project';
+  public static INITIAL_NUMBER_OF_DAYS_TO_EXPIRE: number = 15;
 
 }
 

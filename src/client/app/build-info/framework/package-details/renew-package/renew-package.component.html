@@ -37,6 +37,6 @@
 
   </div>
 
-  <button type="button" class="btn btn-primary">{{getButton().CANCEL_BUTTON}}</button>
-  <button type="button" class="btn btn-primary">{{getButton().PROCEED_TO_PAY}}</button>
+  <button type="button" class="btn btn-primary" (click)="cancel()">{{getButton().CANCEL_BUTTON}}</button>
+  <button type="button" class="btn btn-primary" (click)="proceedToPay()">{{getButton().PROCEED_TO_PAY}}</button>
 </div>

@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { Button, Headings, Label } from '../../../../shared/constants';
+import {Button, Headings, Label, NavigationRoutes} from '../../../../shared/constants';
 import { PackageDetailsService } from '../package-details.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Message, MessageService } from '../../../../shared/index';
@@ -32,7 +32,7 @@ export class RenewPackageComponent implements OnInit {
 
   getSubscriptionPackageByName() {
       let body = {
-        addOnPackageName : 'Renew'
+        addOnPackageName : 'RenewProject'
       };
 
     this.packageDetailsService.getSubscriptionPackageByName(body).subscribe(
@@ -41,9 +41,9 @@ export class RenewPackageComponent implements OnInit {
     );
   }
   onGetSubscriptionPackageByNameSuccess(packageDetails:any) {
-    this.premiumPackageDetails=packageDetails[0].addonPackage;
+    this.premiumPackageDetails=packageDetails[0].addOnPackage;
     this.expiryDate = new Date();
-    this.expiryDate.setDate( this.currentDate.getDate() + 1080);
+    this.expiryDate.setDate( this.currentDate.getDate() + this.numOfDaysToExpire + this.premiumPackageDetails.validity);
   }
   onGetSubscriptionPackageByNameFailure(error:any) {
     console.log(error);
@@ -64,6 +64,14 @@ export class RenewPackageComponent implements OnInit {
 
   getButton() {
     return Button;
+  }
+
+  cancel() {
+    window.history.go(-1);
+  }
+
+  proceedToPay() {
+    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
   }
 
 }

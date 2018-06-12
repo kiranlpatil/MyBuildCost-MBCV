@@ -93,7 +93,10 @@ export class ProjectHeaderComponent implements OnInit {
   }
 
   goToRenew() {
-    this._router.navigate([NavigationRoutes.APP_RENEW_PACKAGE]);
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    let projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+    let numberOfDaysToExpire = SessionStorageService.getSessionValue(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
+    this._router.navigate([NavigationRoutes.APP_RENEW_PACKAGE, projectId, projectName, numberOfDaysToExpire]);
   }
 
 }

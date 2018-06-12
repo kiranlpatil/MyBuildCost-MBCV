@@ -32,11 +32,12 @@ export class ProjectItemComponent implements OnInit {
     if(this.activeStatus && this.project.expiryMessage === null) {
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectId);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, projectName);
+      SessionStorageService.setSessionValue(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE, numberOfDaysToExpire);
       this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
     }
   }
 
-  goToRenew(projectId:string, projectName:string, numOfDaysToExpire : number) {
-    this._router.navigate([NavigationRoutes.APP_RENEW_PACKAGE, projectId, projectName, numOfDaysToExpire]);
+  goToRenew(projectId:string,projectName:string, numberOfDaysToExpire : number) {
+    this._router.navigate([NavigationRoutes.APP_RENEW_PACKAGE, projectId, projectName, numberOfDaysToExpire]);
   }
 }

@@ -22,6 +22,8 @@ import BaseSubscriptionPackage = require('../../applicationProject/dataaccess/mo
 import UserSubscription = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscription');
 import ProjectRepository = require('../../applicationProject/dataaccess/repository/ProjectRepository');
 import ProjectSubscriptionDetails = require('../../applicationProject/dataaccess/model/project/Subscription/ProjectSubscriptionDetails');
+import messages  = require('../../applicationProject/shared/messages');
+import constants  = require('../../applicationProject/shared/constants');
 
 class UserService {
   APP_NAME: string;
@@ -845,9 +847,15 @@ class UserService {
        let subscription = result[0].subscription;
        this.updatePackage(user, subscription, packageName,projectId,(error, result) => {
          if (error) {
+           let error = new Error();
+           error.message = messages.MSG_ERROR_WHILE_CONTACTING;
            callback(error, null);
          } else {
-           callback(null, {data: 'success'});
+           if(packageName === constants.RENEW_PROJECT) {
+             callback(null, {data: messages.MSG_SUCCESS_PROJECT_RENEW});
+           } else {
+             callback(null, {data: 'success'});
+           }
          }
        });
      }
