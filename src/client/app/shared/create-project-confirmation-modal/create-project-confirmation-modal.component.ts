@@ -8,7 +8,7 @@ import {RetainProjectDetails} from "../../build-info/framework/model/retain-proj
   moduleId: module.id,
   selector: 'bi-create-project-confirmation-modal',
   templateUrl: 'create-project-confirmation-modal.component.html',
-  styleUrls: ['update-confirmation-modal.component.css']
+  styleUrls: ['create-project-confirmation-modal.component.css']
 })
 
 export class CreateProjectConfirmationModalComponent implements OnInit {

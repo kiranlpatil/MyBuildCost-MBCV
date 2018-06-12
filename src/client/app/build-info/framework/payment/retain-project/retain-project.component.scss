@@ -1,0 +1,29 @@
+.retain-estimated-details {
+  max-width: 600px;
+  display: table;
+  margin: 100px auto;
+  h1 {
+    font-size: 21px;
+  }
+  p {
+    color: #f15a24;
+    margin-bottom: 20px;
+  }
+  .btn {
+    margin: 0 10px 10px;
+    width: 253px;
+  }
+  .btn-primary {
+   height: 44px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .retain-estimated-details {
+    margin: 20px auto;
+    padding: 0 15px;
+    h1 {
+      font-size: 14px;
+    }
+  }
+}
