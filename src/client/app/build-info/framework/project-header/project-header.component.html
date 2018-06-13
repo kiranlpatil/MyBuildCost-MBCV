@@ -1,6 +1,10 @@
 <header  class="header-container">
   <div class="container">
     <div class="col-sm-9 padding-right30">
+      <div class="project-expiring">
+        <span>{{subscriptionValidityMessage}}</span>
+        <button *ngIf="subscriptionValidityMessage" (click)="goToRenew()">{{getButton().RENEW_NOW}}</button>
+      </div>
       <ul>
         <li>
           <a type="button" (click)="closeMenu()" *ngIf="getCurrentProjectId()" [routerLinkActive]="['active']" [routerLink]="['/project', getCurrentProjectId(),'cost-summary']" cost-summary>{{getMenus().COST_SUMMARY}}</a>

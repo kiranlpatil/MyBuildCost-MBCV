@@ -14,6 +14,7 @@ import { WorkItem } from '../../../../model/work-item';
 import { Category } from '../../../../model/category';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
 import { RateItem } from '../../../../model/rate-item';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 
 
 @Component({
@@ -58,7 +59,8 @@ export class GetRateComponent implements OnChanges {
   selectedItemName: string;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
-              private messageService: MessageService, private commonService: CommonService) {
+              private messageService: MessageService, private commonService: CommonService,
+              private errorService:ErrorService) {
   }
 
   ngOnChanges() {
@@ -180,6 +182,9 @@ export class GetRateComponent implements OnChanges {
   }
 
   onUpdateRateFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
     this.loaderService.stop();
   }
@@ -278,6 +283,9 @@ export class GetRateComponent implements OnChanges {
 
 
   onGetRateItemsByOriginalNameFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 

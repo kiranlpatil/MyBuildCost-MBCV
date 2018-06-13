@@ -165,7 +165,7 @@
                                   </td>
 
                                 <td id="show-embedded-table" [class.steel-quantity-embedded-table]="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB || showWorkItemTab == getLabel().WORKITEM_STEEL_QUANTITY_TAB">
-                                    <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB">
+                                    <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB" [@fadeIn]="state">
                                       <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                                         <bi-get-rate [rate]="rateItemsArray"
                                                      [categoryDetails] ="categoryDetails"

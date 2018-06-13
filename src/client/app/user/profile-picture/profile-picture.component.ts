@@ -99,8 +99,9 @@ export class ProfilePictureComponent {
     this.isLoading = true;
     var message = new Message();
     message.isError = true;
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0||error.err_code===500) {
       message.error_msg = error.err_msg;
+      message.error_code =  error.err_code;
       this.messageService.message(message);
     } else {
       this.isLoading = false;

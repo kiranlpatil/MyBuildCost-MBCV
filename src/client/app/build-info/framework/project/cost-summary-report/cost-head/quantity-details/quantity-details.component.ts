@@ -14,6 +14,7 @@ import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 import { Rate } from '../../../../model/rate';
 import {SteelQuantityItem} from "../../../../model/steelQuantityItem";
 import {SteelQuantityItems} from "../../../../model/SteelQuantityItems";
+import { ErrorService } from '../../../../../../shared/services/error.service';
 declare var $: any;
 
 @Component({
@@ -60,7 +61,7 @@ export class QuantityDetailsComponent implements OnInit {
   flagForFloorwiseQuantity : string = null;
 
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
-              private loaderService: LoaderService) {
+              private loaderService: LoaderService,private errorService:ErrorService) {
   }
 
    ngOnInit() {
@@ -266,6 +267,9 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   onUpdateQuantityDetailFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('success : '+JSON.stringify(error));
     this.loaderService.stop();
   }
@@ -356,6 +360,9 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   onDeleteQuantityDetailsByNameFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('Delete Quantity error');
   }
 }

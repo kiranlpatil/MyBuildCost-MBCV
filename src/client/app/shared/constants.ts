@@ -21,6 +21,7 @@ export class AppSettings {
 export class Messages {
   public static FROM_REGISTRATION = 'registration';
   public static FROM_ACCOUNT_DETAIL = 'accountdetail';
+  public static MSG_ERROR_UNCAUGHT_EXCEPTION='The server was unable to complete your request. Please try again.';
 
   //Registraion Success messages
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
@@ -203,6 +204,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Flat/Floor/Parking details can not be empty';
   public static LOGIN_INFO: string = 'Enter your details below';
   public static MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS: string = 'Already added all Cost Heads.';
+  public static SUBSCRIPTION_PACKAGES_DETAILS_ARE_NOT_DEFINED: string = 'Subscription packages details are not defined.';
 
   //File Attachment messages
 
@@ -212,6 +214,17 @@ export class Messages {
   public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
   public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor/Parking Details';
+
+  //Payment Messages
+  public static MSG_FOR_REMAINING_BUILDINGS: string = '(You can add';
+  public static MSG_FOR_REMAINING_BUILDINGS_ADD: string = ' more buildings to this project)';
+  public static MSG_ADD_BUILDING_PAYMENT: string = 'You have already consumed package of 5 buildings.<br />You can add more buildings by paying INR 500 per building.';
+  public static MSG_CREATE_PROJECT_CONFIRMATION: string = 'Trial package contains only 1 project <br />with 2 buildings you can create new project<br /> by purchasing our <strong>premium package.</strong>';
+  public static MSG_CONFIRMATION_CREATE_PROJECT: string = 'Are you sure to create new project?';
+  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain estimated cost details from existing project ';
+  public static MSG_ON_RETAIN_PROJECT2: string = ' or create a new project';
+  public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
+
 }
 
 export class NavigationRoutes {
@@ -231,9 +244,23 @@ export class NavigationRoutes {
   public static APP_CATEGORY: string = 'category';
   public static APP_COMMON_AMENITIES = 'common-amenities';
   public static APP_DASHBOARD: string = '/dashboard';
+  public static PAYMENT: string = 'payment';
+  public static SUCCESS: string = 'success';
+  public static FAILURE: string = 'failure';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
   public static VERIFY_PHONE: string = '/verify-phone';
+
+
+
+
+  //PAYMENT
+  public static APP_PACKAGE_DETAILS: string = '/package-details';
+  public static APP_PACKAGE_SUMMARY: string = '/package-details/premium-package/';
+  public static APP_RENEW_PACKAGE: string = '/package-details/renew-package';
+  public static APP_RETAIN_PROJECT: string = '/package-details/retain-project';
+
+
 }
 
 export class SessionStorage {
@@ -258,6 +285,7 @@ export class SessionStorage {
   public static CURRENT_PROJECT_ID = 'current_project_id';
   public static CURRENT_BUILDING_ID = 'current_project_id';
   public static CURRENT_PROJECT_NAME = 'current_project_name';
+  public static NUMBER_OF_DAYS_TO_EXPIRE = 'number_of_days_to_expire';
   public static CURRENT_BUILDING_NAME = 'current_building_name';
   public static CURRENT_BUILDING = 'current_building_id';
   public static CURRENT_COST_HEAD_ID = 'current_cost_head_id';
@@ -265,6 +293,10 @@ export class SessionStorage {
   public static CURRENT_WORKITEM_ID = 'current_workitem_id';
   public static COMPANY_NAME = 'company_name';
   public static CREATED_AT = 'createdAt';
+  public static PACKAGE_NAME = 'package_name';
+  public static IS_SUBSCRIPTION_AVAILABLE = 'is_subscription_available';
+  public static PREMIUM_PACKAGE_AVAILABLE = 'premium_package_available';
+
 }
 
 export class LocalStorage {
@@ -299,10 +331,15 @@ export class API {
   public static CHANGE_THEME = 'changetheme';
   public static RESET_PASSWORD = 'user/resetpassword';
   public static GOOGLE_LOGIN = 'googlelogin';
+  public static USER = 'User';
+
 
   //Project
   public static USER_ALL_PROJECTS = 'user/all/project';
   public static PROJECT = 'project';
+  public static PROJECT_NAME = 'projectName';
+  public static CHECK_FOR_LIMITATION_OF_BUILDING = 'checkForLimitationOfBuilding';
+
   public static BUILDING = 'building';
   public static COSTHEAD = 'costhead';
   public static ADVERTSING_BANNER = 'user/advertising/banners';
@@ -344,6 +381,13 @@ export class API {
 
   public static REPORT_MATERIAL_TAKE_OFF = 'report/materialtakeoff';
   public static MATERIAL_FILTERS_LIST = 'material/filters/list';
+
+  //
+  public static SUBSCRIPTION = 'subscription';
+  public static BASE_PACKAGES_LIST = 'basepackageslist';
+  public static BY_NAME = 'by/name';
+  public static UPDATE_SUBSCRIPTION = 'updateSubscription';
+
 }
 
 export class ImagePath {
@@ -384,6 +428,7 @@ export class Headings {
   public static CHANGE_EMAIL_HEADING: string = 'Change your Email';
   public static CHANGE_MOBILE_NUMBER_HEADING: string = 'Change Your Mobile Number';
   public static RESET_PASSWORD_HEADING: string = 'Reset Password';
+  public static CREATE_TRIAL_PROJECT: string = 'Create Trial Project';
   public static CREATE_YOUR_FIRST_PROJECT: string = 'Create Your First Project';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
   public static EDIT_BUILDING: string = 'Edit Building';
@@ -395,6 +440,12 @@ export class Headings {
   public static QUANTITY: string = 'Quantity';
   public static COLON: string = ':';
   public static ITEM: string = 'Item';
+
+
+
+  //Payment headings
+  public static CONFIRM_PACKAGE_HEADING: string ='Confirm your package';
+  public static CREATE_PROJECT_MODAL_HEADING: string ='Create New Project';
 }
 
 export class TableHeadings {
@@ -447,6 +498,9 @@ export class Label {
   public static NOT_FOUND_ERROR: string = '404';
   public static REMENBER_ME: string = 'Remember me';
   public static GET_STARTED: string = 'Get Started';
+  public static BILLING_INFO: string = 'Here is the summary of your account';
+  public static VALID_TILL: string = 'Valid Till';
+  public static NO_OF_BUILDINGS: string = 'Number of Buildings';
 
   //project form
   public static PROJECT_NAME: string = 'Project Name';
@@ -518,6 +572,34 @@ export class Label {
   //Quantity View
   public static DEFAULT_VIEW = 'default';
 
+  //Package details
+  public static PROJECT: string = 'Project';
+  public static PROJECTS: string = 'Projects';
+  public static BUILDING: string = 'Building';
+  public static BUILDINGS: string = 'Buildings';
+  public static NO_OF_PROJECTS: string = 'No.of Projects';
+  public static NO_OF_BUILDING: string = 'No.of Buildings';
+  public static DURATION: string = 'Duration';
+  public static TOTAL_BILLED: string = 'Total Billed';
+  public static NO_OF_BUILDINGS_TO_ADD: string = 'Number of building(s) to add';
+  public static INR: string = 'INR';
+
+
+
+
+  //Renew project
+  public static YOUR_PROJECT: string = 'Your project';
+  public static IS_ABOUT_TO_EXPIRE_IN: string = ', is about to expire in';
+  public static DAYS: string = 'days';
+  public static PLEASE_RENEW_TO_CONTINUE: string = 'Please renew to continue using features of BuildInfo.';
+  public static START_DATE: string = 'Start Date';
+  public static END_DATE: string = 'End Date';
+  public static RENEW_PROJECT_BY: string = 'Renew Project by';
+  public static PACKAGE_RENEW_PROJECT: string = 'RenewProject';
+  public static PACKAGE_REATAIN_PROJECT: string = 'Retain';
+  public static PREFIX_TRIAL_PROJECT: string = 'Trial Project';
+  public static INITIAL_NUMBER_OF_DAYS_TO_EXPIRE: number = 15;
+
 }
 
 export class Button {
@@ -531,6 +613,8 @@ export class Button {
   public static NEXT: string = 'Next';
   public static SUBMIT: string = 'Submit';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
+  public static CREATE: string = 'Create';
+  public static CLICK_HERE: string = 'click here';
   public static BACK_TO_HOME: string = 'Back to home';
   public static GO_BACK: string = 'Back';
   public static SAVE: string = 'Save';
@@ -547,6 +631,23 @@ export class Button {
   public static COSTHEAD: string = 'Cost Head';
   public static ATTACH_FILE: string = 'Attach File';
   public static STANDARD_NOTE: string = 'Standard Note / Disclaimer';
+  public static ADD_PROJECT: string = 'Add Project';
+  public static RENEW_NOW: string = 'Renew now';
+
+  //Package details
+  public static MSG_VIEW_PACKAGE_DETAILS: string = 'Your trial period is for 15 days,<br /> to view our package details';
+  public static PACKAGE_DETAILS: string = 'Package details';
+  public static CONTINUE_USING_TRIAL: string = 'Continue using trial';
+  public static SWITCH_TO_PREMIUM: string = 'Switch to premium';
+  public static PAY_BUTTON: string = 'Pay';
+  public static PROCEED_TO_PAY_BUTTON: string = 'Proceed to Pay';
+  public static CREATE_NEW_PROJECT_BUTTON: string = 'Create new project';
+  public static CONTINUE_WITH_EXISTING_PROJECT_BUTTON: string = 'Continue with existing project';
+
+
+  //Renew project
+  public static PROCEED_TO_PAY: string = 'Proceed to Pay';
+
 }
 
 export class Units {
@@ -627,6 +728,7 @@ export class Menus {
   public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
   public static COPY_BUILDING = 'Copy Building';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
+  public static ACCOUNT_SUMMARY: string = 'Account Summary';
 }
 
 export class ValueConstant {
@@ -637,6 +739,8 @@ export class ValueConstant {
   public static TOTAL_STEEL_DIAMETER_STRING_VALUES: string[] = ['totalWeightOf6mm','totalWeightOf8mm','totalWeightOf10mm','totalWeightOf12mm','totalWeightOf16mm','totalWeightOf20mm','totalWeightOf25mm','totalWeightOf30mm'];
   public static NUMBER_OF_FRACTION_DIGIT = 2;
   public static FILE_SIZE = 5000000;
+  public static NO_OF_BUILDINGS_VALUES :Number[]= [1,2,3,4,5];
+
 }
 
 export class FileAttachment {
@@ -648,6 +752,7 @@ export class CurrentView {
   public static COST_SUMMARY = 'costSummary';
   public static MATERIAL_TAKE_OFF = 'materialTakeOff';
   public static PROJECT_DETAILS = 'projectDetails';
+  public static BILLING_DETAILS = 'billingDetails';
 }
 
 export class ScrollView {

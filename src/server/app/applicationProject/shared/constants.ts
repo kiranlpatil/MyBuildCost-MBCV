@@ -134,6 +134,12 @@ class Constants {
   public static SPECIAL_ELEVATIONAL_FEATURES_IN_FRP_FERRO_GRC : string = 'Special elevational features in FRP/Ferro/GRC';
   public static BOARDS_AND_SIGNAGES_INSIDE_BUILDING : string = 'Boards & Signages inside building';
 
+  // Subscription package
+  public static BASE_PACKAGE : string = 'basePackage';
+
+  // payment packages
+  public static RENEW_PROJECT : string = 'RenewProject';
+
 
   //Building Category
   public static STEEL : string = 'Steel';

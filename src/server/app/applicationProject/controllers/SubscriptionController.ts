@@ -32,13 +32,37 @@ class SubscriptionController {
     }
   }
 
+  getBaseSubscriptionPackageList(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Subscription Controller, getSubscriptionPackageList has been hit');
+      let subscriptionService: SubscriptionService = new SubscriptionService();
+      subscriptionService.getBaseSubscriptionPackageList( (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get base Subscription package list success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   getSubscriptionPackageByName(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Subscription  Controller, getSubscriptionPackageByName has been hit');
-      let basePackageName: string = req.body.basePackageName;
-      let user = req.user;
+      let packageName: any;
+      let packageType : any;
+      if(req.body.basePackageName !== undefined) {
+        packageName = req.body.basePackageName;
+        packageType = 'BasePackage';
+      } else {
+        packageName = req.body.addOnPackageName;
+        packageType = 'AddOnPackage';
+      }
       let subscriptionService: SubscriptionService = new SubscriptionService();
-      subscriptionService.getSubscriptionPackageByName( basePackageName,(error, result) => {
+      subscriptionService.getSubscriptionPackageByName( packageName, packageType, (error, result) => {
         if(error) {
           next(error);
         } else {

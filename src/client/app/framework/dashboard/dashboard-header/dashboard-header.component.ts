@@ -1,11 +1,14 @@
-import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate } from '../../../user/models/candidate';
-import {AppSettings, ImagePath, SessionStorage, LocalStorage, NavigationRoutes} from '../../../shared/constants';
+import {
+  AppSettings, ImagePath, SessionStorage, LocalStorage, NavigationRoutes,
+  CurrentView
+} from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
-import {UserProfile} from '../../../user/models/user';
-import {ProfileService} from '../../shared/profileservice/profile.service';
+import { UserProfile } from '../../../user/models/user';
+import { ProfileService } from '../../shared/profileservice/profile.service';
 
 @Component({
   moduleId: module.id,
@@ -71,7 +74,10 @@ export class DashboardHeaderComponent {
   }
 
   navigateTo(nav:string) {
-    this.deleteProjectDetailsFromSessionStorege();
+    if(nav === '/dashboard') {
+      this.deleteProjectDetailsFromSessionStorege();
+    }
+    //this.deleteProjectDetailsFromSessionStorege();
     this._router.navigate([nav]);
     this.closeMenu();
   }

@@ -22,6 +22,10 @@ export class CreateNewProjectComponent {
     this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
   }
 
+  goToPaymentDetails() {
+    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS]);
+  }
+
   getHeadings() {
     return Headings;
   }

@@ -32,4 +32,15 @@ export class ProjectService extends BaseService {
     return this.httpDelegateService.putAPI(url, modelProject);
   }
 
+  updateProjectStatus(projectId:string) {
+  let url = API.PROJECT + '/' + projectId + '/' + API.ACTIVE_STATUS + '/' + API.ACTIVE_STATUS_FALSE ;
+  let body = { };
+    return this.httpDelegateService.putAPI(url,body);
+  }
+
+  updateProjectNameById(projectId:string,  body : any) {
+    let url = API.PROJECT + '/' + projectId +'/'+ API.PROJECT_NAME;
+    return this.httpDelegateService.putAPI(url,body);
+  }
+
 }

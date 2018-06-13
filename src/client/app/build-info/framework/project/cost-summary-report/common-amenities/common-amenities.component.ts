@@ -7,6 +7,7 @@ import { EstimateReport } from '../../../model/estimate-report';
 import { CostSummaryService } from '../../cost-summary-report/cost-summary.service';
 import { CostHead } from '../../../model/costhead';
 import { LoaderService } from '../../../../../shared/loader/loaders.service';
+import { ErrorService } from '../../../../../shared/services/error.service';
 
 declare let $: any;
 
@@ -36,7 +37,8 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   inActiveProjectCostHeads = new Array<CostHead>();
 
   constructor(private activatedRoute: ActivatedRoute, private _router : Router, private costSummaryService : CostSummaryService,
-              private messageService : MessageService, private loaderService : LoaderService) {
+              private messageService : MessageService, private loaderService : LoaderService,
+              private errorService:ErrorService) {
   }
 
   ngOnInit() {
@@ -77,6 +79,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onUpdateBudgetedCostAmountFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onAddCostheadSuccess : '+error);
   }
 
@@ -103,6 +108,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onGetAllInActiveCostHeadsFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -125,6 +133,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onActiveCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }
@@ -153,6 +164,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onInactivateCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }

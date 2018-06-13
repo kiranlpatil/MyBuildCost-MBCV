@@ -1,0 +1,42 @@
+<div *ngIf="premiumPackageDetails !== undefined">
+
+  <h4>{{getLabels().YOUR_PROJECT}} '{{projectName}}'{{getLabels().IS_ABOUT_TO_EXPIRE_IN}} {{numOfDaysToExpire}} {{getLabels().DAYS}}.</h4>
+  <h4>{{getLabels().PLEASE_RENEW_TO_CONTINUE}}</h4>
+
+  <div class="col-md-12">
+
+    <div class="col-md-6">
+      {{getLabels().START_DATE}}
+    </div>
+    <div class="col-md-6">
+      {{currentDate | date:'dd MMM yyyy'}}
+    </div>
+
+    <div class="col-md-6">
+      {{getLabels().END_DATE}}
+    </div>
+    <div class="col-md-6">
+      {{expiryDate | date:'dd MMM yyyy'}}
+    </div>
+
+    <div class="col-md-6">
+      {{getLabels().RENEW_PROJECT_BY}}
+    </div>
+    <div class="col-md-6">
+        {{premiumPackageDetails.validityDescription}}
+    </div>
+
+    <div class="col-md-6">
+      {{getLabels().TOTAL_BILLED}}
+    </div>
+    <div class="col-md-6">
+        {{premiumPackageDetails.cost}}
+          <br>
+        {{premiumPackageDetails.cost - premiumPackageDetails.iterativeDiscount}}
+    </div>
+
+  </div>
+
+  <button type="button" class="btn btn-primary" (click)="cancel()">{{getButton().CANCEL_BUTTON}}</button>
+  <button type="button" class="btn btn-primary" (click)="proceedToPay()">{{getButton().PROCEED_TO_PAY}}</button>
+</div>

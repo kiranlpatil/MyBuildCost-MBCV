@@ -1,0 +1,13 @@
+<div class="retain-estimated-details">
+  <h1>
+    {{getMessage().MSG_ON_RETAIN_PROJECT}}'{{projectName}}'
+    {{getMessage().MSG_ON_RETAIN_PROJECT2}}
+  </h1>
+  <p>{{getMessage().WARNING_MESSAGE_ON_RETAIN_PROJECT}}</p>
+  <button class="btn btn-primary bi-btn" type="button" (click)="onCreateNewProject()" >
+    {{getButton().CREATE_NEW_PROJECT_BUTTON}}
+  </button>
+  <button type="button" class="btn btn-default" (click)="onContinueWithExixtingProject()" >
+    {{getButton().CONTINUE_WITH_EXISTING_PROJECT_BUTTON}}
+  </button>
+</div>

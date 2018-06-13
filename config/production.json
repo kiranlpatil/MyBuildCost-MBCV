@@ -80,15 +80,28 @@
 
   "subscription":{
     "package":{
-      "Free" : {
+      "Free": {
         "basePackage": {
-          "name": "Free",
-          "description": " 1 project and 5 buildings",
-          "validity": 1080,
-          "cost": 300,
+          "iterativeDiscount": 0,
+          "numOfBuildings": 2,
           "numOfProjects": 1,
+          "cost": 0,
+          "validity": 15,
+          "validityDescription": "15 Days",
+          "description": "Trial",
+          "name": "Free"
+        }
+      },
+      "CostPerPackage": {
+        "basePackage": {
+          "iterativeDiscount": 1000,
           "numOfBuildings": 5,
-          "iterativeDiscount": 1000
+          "numOfProjects": 1,
+          "cost": 3000,
+          "validity": 1080,
+          "validityDescription": "3 Years",
+          "description": "Premium",
+          "name": "Premium"
         }
       }
     }

@@ -28,6 +28,14 @@
 .fadein-element .fadein-sub-element:nth-child(10) { animation-delay: 0.54s; }
 .fadein-element .fadein-sub-element:nth-child(11) { animation-delay: 0.60s; }
 
+.disabled-input {
+  label, input {
+    background: transparent !important;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .button-group {
     .btn {
