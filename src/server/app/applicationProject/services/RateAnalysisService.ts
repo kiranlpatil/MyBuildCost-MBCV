@@ -85,14 +85,19 @@ class RateAnalysisService {
 
   getApiCall(url: string, callback: (error: any, response: any) => void) {
     logger.info('getApiCall for rateAnalysis has bee hit for url : ' + url);
-    request.get({url: url}, function (error: any, response: any, body: any) {
-      if (error) {
-        callback(new CostControllException(error.message, error.stack), null);
-      } else if (!error && response) {
-        let res = JSON.parse(body);
-        callback(null, res);
-      }
-    });
+      request.get({url: url}, function (error: any, response: any, body: any) {
+        if (error) {
+          callback(new CostControllException(error.message, error.stack), null);
+        } else if (!error && response) {
+          try {
+            let res = JSON.parse(body);
+            callback(null, res);
+          }catch (err) {
+            logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(err.message));
+
+          }
+        }
+      });
   }
 
   getRate(workItemId: number, callback: (error: any, data: any) => void) {
