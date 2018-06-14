@@ -126,6 +126,8 @@
     }
   },
 
+  "cronJobMailNotificationValidityDays" : [ 15, 8 , 1],
+
   "thumbRuleRate": {
     "slabArea": {
       "sqft": 20,

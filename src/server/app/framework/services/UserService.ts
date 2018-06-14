@@ -24,6 +24,10 @@ import ProjectRepository = require('../../applicationProject/dataaccess/reposito
 import ProjectSubscriptionDetails = require('../../applicationProject/dataaccess/model/project/Subscription/ProjectSubscriptionDetails');
 import messages  = require('../../applicationProject/shared/messages');
 import constants  = require('../../applicationProject/shared/constants');
+import ProjectSubcription = require('../../applicationProject/dataaccess/model/company/ProjectSubcription');
+let CCPromise = require('promise/lib/es6-extensions');
+let log4js = require('log4js');
+let logger = log4js.getLogger('User service');
 
 class UserService {
   APP_NAME: string;
@@ -31,7 +35,7 @@ class UserService {
   mid_content: any;
   isActiveAddBuildingButton:boolean=false;
   private userRepository: UserRepository;
-  private projectRepository:ProjectRepository;
+  private projectRepository : ProjectRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
@@ -563,6 +567,7 @@ class UserService {
 
     });
   }
+
   getUserById(user:any, callback:(error:any, result:any)=>void) {
     let auth: AuthInterceptor = new AuthInterceptor();
 
@@ -997,6 +1002,137 @@ class UserService {
     return days;
   }
 
+  sendProjectExpiryWarningMails(callback:(error : any, result :any)=>void) {
+    logger.debug('sendProjectExpiryWarningMails is been hit');
+    let query = [
+      { $project : { 'subscription' : 1, 'first_name' : 1, 'email' : 1 }},
+      { $unwind : '$subscription' },
+      { $unwind : '$subscription.projectId' }
+    ];
+
+    this.userRepository.aggregate(query, (error, response) => {
+      if(error) {
+        logger.error('sendProjectExpiryWarningMails error : '+JSON.stringify(error));
+        callback(error, null);
+      } else {
+        logger.debug('sendProjectExpiryWarningMails sucess');
+        let userList = new Array<ProjectSubcription>();
+        let userSubscriptionPromiseArray =[];
+
+        for(let user of response) {
+          logger.debug('geting all user data for sending mail to users.');
+          let validityDays = this.calculateValidity(user.subscription);
+          let valdityDaysValidation = config.get('cronJobMailNotificationValidityDays');
+          if(valdityDaysValidation.includes(validityDays)) {
+            let promiseObject = this.getProjectDataById(user);
+            userSubscriptionPromiseArray.push(promiseObject);
+          }
+        }
+
+        if(userSubscriptionPromiseArray.length !== 0) {
+
+          CCPromise.all(userSubscriptionPromiseArray).then(function(data: Array<any>) {
+
+            logger.debug('data recieved for all users: '+JSON.stringify(data));
+            let sendMailPromiseArray = [];
+
+            for(let user of data) {
+              logger.debug('Calling sendMailForProjectExpiryToUser for user : '+JSON.stringify(user.first_name));
+              let userService = new UserService();
+              let sendMailPromise = userService.sendMailForProjectExpiryToUser(user);
+              sendMailPromiseArray.push(sendMailPromise);
+            }
+
+            CCPromise.all(sendMailPromiseArray).then(function(mailSentData: Array<any>) {
+              logger.debug('mailSentData for all users: '+JSON.stringify(mailSentData));
+              callback(null, { 'data' : 'Mail sent successfully to users.' });
+            }).catch(function(e:any) {
+              logger.error('Promise failed for getting mailSentData ! :' +JSON.stringify(e.message));
+              CCPromise.reject(e.message);
+            });
+
+          }).catch(function(e:any) {
+            logger.error('Promise failed for send mail notification ! :' +JSON.stringify(e.message));
+            CCPromise.reject(e.message);
+          });
+        }
+      }
+    });
+  }
+
+  getProjectDataById(user: any) {
+
+    return new CCPromise(function (resolve: any, reject: any) {
+
+      logger.debug('geting all user data for sending mail to users.');
+
+      let projectSubscription = new ProjectSubcription();
+      let projection = { 'name' : 1 };
+      let projectRepository = new ProjectRepository();
+      let userService = new UserService();
+
+      projectRepository.findByIdWithProjection(user.subscription.projectId, projection, (error , resp) => {
+        if(error) {
+          logger.error('Error in fetching User data'+JSON.stringify(error));
+          reject(error);
+        } else {
+          logger.debug('got ProjectSubscription for user '+ user._id);
+          projectSubscription.userId = user._id;
+          projectSubscription.userEmail = user.email;
+          projectSubscription.first_name = user.first_name;
+          projectSubscription.validityDays = user.subscription.validity;
+          projectSubscription.projectExpiryDate = userService.calculateExpiryDate(user.subscription);
+          projectSubscription.projectName = resp.name;
+          resolve(projectSubscription);
+        }
+      });
+
+    }).catch(function (e: any) {
+      logger.error('Promise failed for individual createPromiseForGetProjectById ! Error: ' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  sendMailForProjectExpiryToUser(user: any) {
+
+    return new CCPromise(function (resolve: any, reject: any) {
+
+      let mailService = new SendMailService();
+
+      let auth = new AuthInterceptor();
+      let token = auth.issueTokenWithUid(user);
+      let host = config.get('application.mail.host');
+      let htmlTemplate = 'project-expiry-notification-mail.html';
+
+      let data:Map<string,string>= new Map([
+        ['$applicationLink$',config.get('application.mail.host')], ['$first_name$',user.first_name],
+        ['$expiry_date$',user.projectExpiryDate], ['$subscription_link$',config.get('application.mail.host')],
+        ['$app_name$','BuildInfo - Cost Control']]);
+
+      let attachment = MailAttachments.AttachmentArray;
+      mailService.send( user.userEmail, Messages.PROJECT_EXPIRY_WARNING, htmlTemplate, data,attachment,
+        (err: any, result: any) => {
+          if(err) {
+            console.log('Failed to send mail to user : '+user.userEmail);
+            reject(err);
+          } else {
+            console.log('Mail sent successfully to user : '+user.userEmail);
+            resolve(result);
+          }
+        });
+
+    }).catch(function (e: any) {
+      logger.error('Promise failed for individual sendMailForProjectExpiryToUser ! Error: ' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  calculateExpiryDate(subscription : any) {
+    let activationDate = new Date(subscription.activationDate);
+    let expiryDate = new Date(subscription.activationDate);
+    let projectExpiryDate = new Date(expiryDate.setDate(activationDate.getDate() + subscription.validity));
+    return projectExpiryDate;
+  }
 }
 
 Object.seal(UserService);
