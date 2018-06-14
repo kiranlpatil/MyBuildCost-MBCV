@@ -20,6 +20,7 @@ export class ProjectHeaderComponent implements OnInit {
   subscriptionValidityMessage : string;
   premiumPackageExist:any;
   premiumPackageAvailable:boolean=false;
+  activeStatus:boolean=false;
 
 
   constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService) {
@@ -61,6 +62,7 @@ export class ProjectHeaderComponent implements OnInit {
 
   checkLimitationOfBuildingSuccess(status:any) {
     this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+    this.activeStatus = status.activeStatus;
     if(status.expiryMessage) {
       this.subscriptionValidityMessage = status.expiryMessage;
     } else if(status.warningMessage) {

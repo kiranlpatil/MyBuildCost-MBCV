@@ -17,6 +17,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   currentPackage:string;
   projectDetails : Array<ProjectSubscriptionDetails>;
   isAbleToCreateNewProject: boolean = false;
+  activeStatus: boolean = false;
   constructor(private _router: Router, private  projectService: ProjectService) {
 
   }
@@ -36,6 +37,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
     this.projectDetails = projects.data;
     this.isAbleToCreateNewProject = projects.isSubscriptionAvailable;
     this.currentPackage = projects.data[0].packageName;
+    this.activeStatus = projects.data[0].activeStatus;
   }
 
   onDetailsOfProjectPlanFailure(error:any) {
@@ -62,8 +64,6 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
    createProject() {
      if(this.isAbleToCreateNewProject) {
        this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
-     } else if(!this.isAbleToCreateNewProject && this.currentPackage === 'Free') {
-       this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Retain',false]);
      }else {
        this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Premium',false]);
      }
