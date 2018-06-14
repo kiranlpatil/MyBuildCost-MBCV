@@ -22,6 +22,7 @@ export class ProjectHeaderComponent implements OnInit {
   packageName:string;
   addBuildingButtonDisable:boolean =false;
   premiumPackageAvailable:boolean=false;
+  activeStatus:boolean=false;
 
 
   constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService) {
@@ -64,7 +65,8 @@ export class ProjectHeaderComponent implements OnInit {
 
   checkLimitationOfBuildingSuccess(status:any) {
     this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
-   this.addBuildingButtonDisable =status.addBuildingDisable;
+    this.activeStatus = status.activeStatus;
+    this.addBuildingButtonDisable =status.addBuildingDisable;
     if(status.expiryMessage) {
       this.subscriptionValidityMessage = status.expiryMessage;
     } else if(status.warningMessage) {

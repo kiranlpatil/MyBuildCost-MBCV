@@ -17,7 +17,7 @@ export class RenewPackageComponent implements OnInit {
   body:any;
   discountValid:boolean=false;
   public currentDate: Date = new Date();
-  public expiryDate: Date;
+  public expiryDate: Date = new Date();
 
   constructor(private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService, private route: ActivatedRoute ) {
   }
@@ -49,10 +49,8 @@ export class RenewPackageComponent implements OnInit {
     }else {
       this.premiumPackageDetails=packageDetails[0].addOnPackage;
     }
-    let newExpiryDate = new Date();
-    let validityOfPackage = this.premiumPackageDetails.validity + parseInt(this.numOfDaysToExpire);
-    this.expiryDate = new Date(newExpiryDate.setDate( this.currentDate.getDate() + validityOfPackage));
-    this.expiryDate.setDate(this.expiryDate.getDate() + parseInt(this.numOfDaysToExpire));
+   this.currentDate.setDate(this.currentDate.getDate() +  parseInt(this.numOfDaysToExpire));
+   this.expiryDate.setDate(this.currentDate.getDate() + this.premiumPackageDetails.validity);
   }
   onGetSubscriptionPackageByNameFailure(error:any) {
     console.log(error);

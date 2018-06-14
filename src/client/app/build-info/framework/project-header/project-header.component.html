@@ -1,9 +1,9 @@
 <header  class="header-container">
   <div class="container">
     <div class="col-sm-9 padding-right30">
-      <div class="project-expiring">
+      <div *ngIf="subscriptionValidityMessage && activeStatus" class="project-expiring">
         <span>{{subscriptionValidityMessage}}</span>
-        <button *ngIf="subscriptionValidityMessage" (click)="goToRenew()">{{getButton().RENEW_NOW}}</button>
+        <button (click)="goToRenew()">{{getButton().RENEW_NOW}}</button>
       </div>
       <ul>
         <li>
