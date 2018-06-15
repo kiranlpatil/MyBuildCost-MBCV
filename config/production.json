@@ -78,6 +78,8 @@
     "replaceConsole": true
   },
 
+  "cronJobMailNotificationValidityDays" : [ 15, 8 , 1],
+
   "subscription":{
     "package":{
       "Free": {

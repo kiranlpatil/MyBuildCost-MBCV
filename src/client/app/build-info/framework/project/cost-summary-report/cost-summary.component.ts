@@ -185,6 +185,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     if(this.projectReport.buildings !== undefined) {
       this.totalNumberOfBuildings = this.projectReport.buildings.length;
     }
+    this.checkBuildingReportExist();
     this.amenitiesReport = this.projectReport.commonAmenities;
     this.projectReport.totalAreaOfBuildings = projects.data.totalAreaOfBuildings;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
@@ -486,6 +487,15 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     $('#collapse'+this.totalNumberOfBuildings).attr({
       'aria-expanded':'false'
     });
+  }
+  checkBuildingReportExist() {
+    if(this.projectReport.buildings.length==0) {
+      this.isShowBuildingCostSummaryChart = false;
+      this.isShowCommonAmenitiesChart = false;
+    } else {
+      this.isShowBuildingCostSummaryChart =true;
+      this.isShowCommonAmenitiesChart =true;
+    }
   }
   ngAfterViewInit() {
     setTimeout(() => {
