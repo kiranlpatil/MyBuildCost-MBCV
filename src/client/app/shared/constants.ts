@@ -436,7 +436,7 @@ export class Headings {
   public static EDIT_BUILDING: string = 'Edit Building';
   public static LIST_BUILDING: string = 'Building List';
   public static ADD_NEW_BUILDING: string = 'Add Building to a Project';
-  public static COMMON_DEVELOPMENT: string = 'Common Development and Amenities';
+  public static COMMON_DEVELOPMENT: string = 'Common Amenities and Development Cost';
   public static ELECTRIC_INFRASTRUCTURE: string = 'Electric Infrastructure ';
   public static CONSTRUCTION_COST: string = 'Construction Cost (Material + Labour)';
   public static QUANTITY: string = 'Quantity';
@@ -458,7 +458,7 @@ export class TableHeadings {
   public static BREADTH: string = 'Breadth';
   public static HEIGHT: string = 'Height';
   public static UNIT: string = 'Unit';
-  public static RATEANALYSIS: string = 'Rate Analysis/Unit';
+  public static RATEANALYSIS: string = 'Rate Analysis';
   public static AMOUNT: string = 'Amount';
   public static COST: string = 'Cost';
   public static TOTAL: string = 'Total';
@@ -705,7 +705,7 @@ export class MaterialTakeOffElements {
   public static SORT = 'sort';
   public static CHECK_SUB_CONTENT_PRESENT = 'checkSubContentPresent';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
-  public static REPORT_EMPTY_MESSAGE = 'Looks like you have not estimated any Cost Head. Please estimate to generate material take off report.';
+  public static REPORT_EMPTY_MESSAGE = 'There is no estimate entered against any cost head. Kindly enter estimate to generate material take off report.';
 }
 
 export class PDFReportHeaders {
