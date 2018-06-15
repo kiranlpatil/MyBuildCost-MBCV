@@ -383,7 +383,7 @@ class UserService {
         let link = host + 'reset-password?access_token=' + token + '&_id=' + res[0]._id;
         let htmlTemplate = 'forgotpassword.html';
         let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
-          ['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+          ['$first_name$',res[0].first_name],['$user_mail$',res[0].email],['$link$',link],['$app_name$',this.APP_NAME]]);
         let attachment=MailAttachments.ForgetPasswordAttachmentArray;
         sendMailService.send( field.email, Messages.EMAIL_SUBJECT_FORGOT_PASSWORD, htmlTemplate, data,attachment,
 (err: any, result: any) => {
