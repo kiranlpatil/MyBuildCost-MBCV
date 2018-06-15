@@ -104,7 +104,7 @@ class Messages {
 
 
   //Building limit error message payment.
-  public static MSG_ERROR_BUILDINGS_PURCHASED_LIMIT: string = 'You can not add more than 5 buildings.';
+  public static MSG_ERROR_BUILDINGS_PURCHASED_LIMIT: string = 'You can not add more than 5 buildings at once.';
 
 
   //Verify errors

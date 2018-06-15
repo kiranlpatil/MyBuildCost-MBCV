@@ -136,7 +136,7 @@ export class PaymentSuccessfulComponent implements OnInit {
         error=>this.onAssignPremiumPackageFailure(error));
   }
   onAssignPremiumPackageSuccess(success: any) {
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
   }
 
   onAssignPremiumPackageFailure(error:any) {

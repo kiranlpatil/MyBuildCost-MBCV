@@ -36,8 +36,10 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   onDetailsOfProjectPlanSuccess(projects : any) {
     this.projectDetails = projects.data;
     this.isAbleToCreateNewProject = projects.isSubscriptionAvailable;
-    this.currentPackage = projects.data[0].packageName;
-    this.activeStatus = projects.data[0].activeStatus;
+    if(projects.data.length!==0) {
+      this.currentPackage = projects.data[0].packageName;
+      this.activeStatus = projects.data[0].activeStatus;
+    }
   }
 
   onDetailsOfProjectPlanFailure(error:any) {

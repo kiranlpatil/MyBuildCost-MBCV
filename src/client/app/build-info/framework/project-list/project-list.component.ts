@@ -66,11 +66,13 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
        this.premiumPackageAvailable=false;
        this.packageName='Free';
        this.isRetainModalActive=true;
-      }else if(this.projects.length >= 1 && this.projects[0].packageName==='Premium') {
-      this.packageName='Premium';
+      }else if(this.projects.length!==0) {
+     if(this.projects.length >= 1 || this.projects[0].packageName==='Premium') {
+       this.packageName='Premium';
       this.premiumPackageAvailable=true;
       this.isProjectModalActive=true;
     }
+   }
     this.isSubscriptionExist = projects.isSubscriptionAvailable;
     this.isVisible = true;
   }
