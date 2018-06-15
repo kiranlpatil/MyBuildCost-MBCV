@@ -3,9 +3,21 @@ import { Category } from '../../../app/build-info/framework/model/category';
 import { WorkItem } from '../../../app/build-info/framework/model/work-item';
 import { ValueConstant } from '../constants';
 import { QuantityDetails } from '../../build-info/framework/model/quantity-details';
+import {Subject} from "rxjs/Subject";
+import {
+  AddBuildingPackageDetails
+} from "../../build-info/framework/model/add-building-package-details";
 
 @Injectable()
 export class CommonService {
+/*  CommonService = new Subject<any>();
+  addBuildingPackageDetails$ = this.CommonService.asObservable();
+
+  change(values:any) {
+    this.CommonService.next(values);
+  }*/
+
+
 
   goBack() {
     window.history.go(-1);

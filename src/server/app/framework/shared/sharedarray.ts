@@ -17,6 +17,16 @@ class MailAttachments {
       cid: 'unique@password-reset'
     },
   ];
+  public static TrialExpiringAttachmentArray: Array<any> = [
+    {
+      path: path.resolve() + config.get('application.publicPath')+'images/logo/application-logo.png',
+      cid: 'unique@application-logo'
+    },
+    {
+      path:  path.resolve() + config.get('application.publicPath')+'images/banner/trial-expiring.png',
+      cid: 'unique@trial-expiring'
+    },
+  ];
   public static WelcomeAboardAttachmentArray:Array<any>=[
     {
       path: path.resolve() + config.get('application.publicPath')+'images/logo/application-logo.png',

@@ -31,7 +31,7 @@ export class PackageDetailsComponent implements OnInit {
 
   onGetBaseSubscriptionPackageListSuccess(packageDetailsList : any) {
       this.packageDetailsList = packageDetailsList;
-      this.packageName=packageDetailsList[1].basePackage.name;
+      this.packageName = packageDetailsList[1].basePackage.name;
       }
 
   onGetBaseSubscriptionPackageListFailure(error : any) {

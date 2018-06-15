@@ -624,8 +624,11 @@ class UserController {
       let user = req.user;
       let projectId = req.params.projectId;
       let packageName = req.body.packageName;
+      let costForBuildingPurchased =req.body.totalBilled;
+      let numberOfBuildingsPurchased = req.body.numOfPurchasedBuildings;
+
       let userService = new UserService();
-      userService.updateSubscription(user,projectId, packageName, (error, result)=> {
+      userService.updateSubscription(user,projectId, packageName,costForBuildingPurchased,numberOfBuildingsPurchased,(error, result)=> {
         if(error) {
           next(error);
         }else {

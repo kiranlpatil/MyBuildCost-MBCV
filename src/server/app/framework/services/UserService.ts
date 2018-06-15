@@ -722,15 +722,22 @@ class UserService {
               callback(error,null);
             } else {
               let premiumPackage = subscriptionPackage[0];
-              let subscription = new UserSubscription();
-              subscription.activationDate = new Date();
-              subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
-              subscription.numOfProjects = premiumPackage.basePackage.numOfProjects;
-              subscription.validity = premiumPackage.basePackage.validity;
-              subscription.projectId = new Array<string>();
-              subscription.purchased = new Array<BaseSubscriptionPackage>();
-              subscription.purchased.push(premiumPackage.basePackage);
-              subScriptionArray.push(subscription);
+              if(subScriptionArray[0].projectId.length === 0) {
+                subScriptionArray[0].numOfBuildings = premiumPackage.basePackage.numOfBuildings;
+                subScriptionArray[0].numOfProjects = premiumPackage.basePackage.numOfProjects;
+                subScriptionArray[0].validity = subScriptionArray[0].validity + premiumPackage.basePackage.validity;
+                subScriptionArray[0].purchased.push(premiumPackage.basePackage);
+              }else {
+                let subscription = new UserSubscription();
+                subscription.activationDate = new Date();
+                subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
+                subscription.numOfProjects = premiumPackage.basePackage.numOfProjects;
+                subscription.validity = premiumPackage.basePackage.validity;
+                subscription.projectId = new Array<string>();
+                subscription.purchased = new Array<BaseSubscriptionPackage>();
+                subscription.purchased.push(premiumPackage.basePackage);
+                subScriptionArray.push(subscription);
+              }
               let query = {'_id': userId};
               let newData = {$set: {'subscription': subScriptionArray}};
               this.userRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
@@ -764,39 +771,41 @@ class UserService {
 
         for(let project of projectList) {
           for(let subscription of subscriptionList) {
-            if(subscription.projectId.indexOf(project._id)) {
-              let projectSubscription = new ProjectSubscriptionDetails();
-              projectSubscription.projectName = project.name;
-              projectSubscription.projectId = project._id;
-              projectSubscription.activeStatus = project.activeStatus;
-              projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
-              projectSubscription.numOfBuildingsAllocated = project.buildings.length;
-              projectSubscription.packageName = this.checkCurrentPackage(subscription);
-              //activation date for project subscription
-              let activation_date = new Date(subscription.activationDate);
-              let expiryDate = new Date(subscription.activationDate);
-              projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
+            if(subscription.projectId.length !== 0) {
+              if(subscription.projectId[0].equals(project._id)) {
+                let projectSubscription = new ProjectSubscriptionDetails();
+                projectSubscription.projectName = project.name;
+                projectSubscription.projectId = project._id;
+                projectSubscription.activeStatus = project.activeStatus;
+                projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
+                projectSubscription.numOfBuildingsAllocated = project.buildings.length;
+                projectSubscription.packageName = this.checkCurrentPackage(subscription);
+                //activation date for project subscription
+                let activation_date = new Date(subscription.activationDate);
+                let expiryDate = new Date(subscription.activationDate);
+                projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
 
-              //expiry date for project subscription
-              let current_date = new Date();
-              projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
+                //expiry date for project subscription
+                let current_date = new Date();
+                projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
 
-              if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
-                projectSubscription.warningMessage =
-                  'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days,' ;
-              } else if(projectSubscription.numOfDaysToExpire < 0) {
-                projectSubscription.expiryMessage =  'Project expired,';
+                if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
+                  projectSubscription.warningMessage =
+                    'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days,' ;
+                } else if(projectSubscription.numOfDaysToExpire < 0) {
+                  projectSubscription.expiryMessage =  'Project expired,';
+                }
+
+                projectSubscriptionArray.push(projectSubscription);
+
               }
-
-              projectSubscriptionArray.push(projectSubscription);
-
-            } else if(subscription.projectId.length === 0) {
+            } else  {
               isAbleToCreateNewProject = true;
             }
           }
         }
 
-        if(projectList.length === 0) {
+        if(projectList.length === 0 && subscriptionList[0].purchased.length !==0) {
           isAbleToCreateNewProject = true;
         }
 
@@ -813,14 +822,19 @@ class UserService {
    checkCurrentPackage(subscription:any) {
      let activation_date = new Date(subscription.activationDate);
      let expiryDate = new Date(subscription.activationDate);
+     let expiryDateOuter = new Date(subscription.activationDate);
      let current_date = new Date();
      for(let purchasePackage of subscription.purchased) {
-       //expiry date for each package.
-       expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
-      if(expiryDate >= current_date) {
-        return purchasePackage.name;
-      }
-    }
+       expiryDateOuter = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
+       for (let purchasePackage of subscription.purchased) {
+         //expiry date for each package.
+         expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
+         if ((expiryDateOuter < expiryDate) && (expiryDate >=current_date)) {
+           return purchasePackage.name;
+           }
+       }
+      return purchasePackage.name='Free';
+     }
     }
 
   daysdifference(date1 : Date, date2 : Date) {
@@ -855,6 +869,14 @@ class UserService {
             projectSubscription.activeStatus = resp[0].activeStatus;
             projectSubscription.numOfBuildingsAllocated = resp[0].buildings.length;
             projectSubscription.numOfBuildingsRemaining = (result[0].subscription.numOfBuildings - resp[0].buildings.length);
+            if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0 && projectSubscription.packageName !== 'Free'){
+              projectSubscription.addBuildingDisable=true;
+              }
+            projectSubscription.packageName = this.checkCurrentPackage(result[0].subscription);
+            if(projectSubscription.packageName === 'Free' && projectSubscription.numOfBuildingsRemaining === 0){
+              projectSubscription.addBuildingDisable=true;
+            }
+
             let activation_date = new Date(result[0].subscription.activationDate);
             let expiryDate = new Date(result[0].subscription.activationDate);
             projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + result[0].subscription.validity));
@@ -876,7 +898,7 @@ class UserService {
     });
   }
 
-  updateSubscription(user : User, projectId: string, packageName: string, callback:(error: any, result: any)=> void) {
+  updateSubscription(user : User, projectId: string, packageName: string,costForBuildingPurchased:any,numberOfBuildingsPurchased:any, callback:(error: any, result: any)=> void) {
     let query = [
       {$match: {'_id':ObjectId(user._id)}},
       { $project : {'subscription':1}},
@@ -888,7 +910,7 @@ class UserService {
        callback(error, null);
      } else {
        let subscription = result[0].subscription;
-       this.updatePackage(user, subscription, packageName,projectId,(error, result) => {
+       this.updatePackage(user, subscription, packageName,costForBuildingPurchased,numberOfBuildingsPurchased,projectId,(error, result) => {
          if (error) {
            let error = new Error();
            error.message = messages.MSG_ERROR_WHILE_CONTACTING;
@@ -905,7 +927,7 @@ class UserService {
    });
   }
 
-  updatePackage(user: User, subscription: any, packageName: string, projectId:string, callback:(error: any, result: any)=> void) {
+  updatePackage(user: User, subscription: any, packageName: string,costForBuildingPurchased:any,numberOfBuildingsPurchased:any, projectId:string, callback:(error: any, result: any)=> void) {
     let subScriptionService = new SubscriptionService();
     switch (packageName) {
       case 'Premium':
@@ -920,6 +942,7 @@ class UserService {
               subscription.numOfProjects = result.basePackage.numOfProjects;
               let noOfDaysToExpiry = this.calculateValidity(subscription);
               subscription.validity = noOfDaysToExpiry + result.basePackage.validity;
+              result.basePackage.cost = costForBuildingPurchased;
               subscription.purchased.push(result.basePackage);
               this.updateSubscriptionPackage(user._id, projectId,subscription, (error, result) => {
                 if (error) {
@@ -943,6 +966,7 @@ class UserService {
               let result = subscriptionPackage[0];
               let noOfDaysToExpiry = this.calculateValidity(subscription);
               subscription.validity = noOfDaysToExpiry + result.addOnPackage.validity;
+              result.addOnPackage.cost = costForBuildingPurchased;
               subscription.purchased.push(result.addOnPackage);
               this.updateSubscriptionPackage(user._id,projectId, subscription, (error, result) => {
                 if (error) {
@@ -964,6 +988,8 @@ class UserService {
               callback(error,null);
             } else {
               let result = subscriptionPackage[0];
+              result.addOnPackage.numOfBuildings = numberOfBuildingsPurchased;
+              result.addOnPackage.cost = costForBuildingPurchased;
               subscription.numOfBuildings = subscription.numOfBuildings + result.addOnPackage.numOfBuildings;
               subscription.purchased.push(result.addOnPackage);
               this.updateSubscriptionPackage(user._id, projectId,subscription, (error, result) => {

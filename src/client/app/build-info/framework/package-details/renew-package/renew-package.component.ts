@@ -3,20 +3,24 @@ import {Button, Headings, Label, NavigationRoutes} from '../../../../shared/cons
 import { PackageDetailsService } from '../package-details.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Message, MessageService } from '../../../../shared/index';
+import {SessionStorage, SessionStorageService} from "../../../../shared/index";
 @Component({
   moduleId: module.id,
   selector: 'bi-renew-package',
   templateUrl: 'renew-package.component.html',
+  styleUrls: ['renew-package.component.css']
 })
 export class RenewPackageComponent implements OnInit {
   premiumPackageDetails:any;
 
   projectId : string;
   projectName : string;
-  numOfDaysToExpire : number;
-
+  numOfDaysToExpire : string;
+  body:any;
+  discountValid:boolean=false;
+  discount: number;
   public currentDate: Date = new Date();
-  public expiryDate: Date;
+  public expiryDate: Date = new Date();
 
   constructor(private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService, private route: ActivatedRoute ) {
   }
@@ -31,19 +35,26 @@ export class RenewPackageComponent implements OnInit {
   }
 
   getSubscriptionPackageByName() {
-      let body = {
-        addOnPackageName : 'RenewProject'
-      };
-
-    this.packageDetailsService.getSubscriptionPackageByName(body).subscribe(
-      packageDetails=>this.onGetSubscriptionPackageByNameSuccess(packageDetails),
+    if (this.projectName.includes(this.getLabels().PREFIX_TRIAL_PROJECT)) {
+       this.body = { basePackageName: 'Premium'};
+    } else {
+       this.body = { addOnPackageName: 'RenewProject'};
+       this.discountValid = true;
+    }
+    this.packageDetailsService.getSubscriptionPackageByName(this.body).subscribe(
+      packageDetails=>this.onGetSubscriptionPackageByNameSuccess(packageDetails,this.body),
       error=>this.onGetSubscriptionPackageByNameFailure(error)
     );
   }
-  onGetSubscriptionPackageByNameSuccess(packageDetails:any) {
-    this.premiumPackageDetails=packageDetails[0].addOnPackage;
-    this.expiryDate = new Date();
-    this.expiryDate.setDate( this.currentDate.getDate() + this.numOfDaysToExpire + this.premiumPackageDetails.validity);
+  onGetSubscriptionPackageByNameSuccess(packageDetails:any, body: any) {
+    if(body.basePackageName) {
+      this.premiumPackageDetails=packageDetails[0].basePackage;
+    }else {
+      this.premiumPackageDetails=packageDetails[0].addOnPackage;
+    }
+   this.currentDate.setDate(this.currentDate.getDate() +  parseInt(this.numOfDaysToExpire));
+   this.expiryDate.setDate(this.currentDate.getDate() + this.premiumPackageDetails.validity);
+   this.discount = this.premiumPackageDetails.cost - this.premiumPackageDetails.iterativeDiscount;
   }
   onGetSubscriptionPackageByNameFailure(error:any) {
     console.log(error);
@@ -71,7 +82,16 @@ export class RenewPackageComponent implements OnInit {
   }
 
   proceedToPay() {
-    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
+    if(this.discountValid) {
+      SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.discount);
+    }else {
+      SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.premiumPackageDetails.cost );
+    }
+    if(this.body.basePackageName) {
+    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_REATAIN_PROJECT,NavigationRoutes.SUCCESS]);
+  }else {
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
+    }
   }
 
 }

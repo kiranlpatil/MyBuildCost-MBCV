@@ -1,9 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import { Headings, Button, Label, Messages, ValueConstant } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
+import {CommonService, MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
 import { PackageDetailsService } from './../package-details.service';
 import { NavigationRoutes } from '../../../../shared/index';
+import {AddBuildingPackageDetails} from "../../model/add-building-package-details";
 
 @Component({
   moduleId: module.id,
@@ -16,11 +17,13 @@ export class PackageSummaryComponent implements OnInit {
   premiumPackageExist: any;
   premiumPackageAvailable: boolean = false;
   premiumPackageDetails: any;
-  selectedBuildingValue: any;
+  selectedBuildingValue: any=1;
+  values = new AddBuildingPackageDetails();
+  totalBilled: number=500;
   noOfBuildingsValues: any[] = ValueConstant.NO_OF_BUILDINGS_VALUES;
 
   constructor(private activatedRoute: ActivatedRoute, private packageDetailsService: PackageDetailsService,
-              private _router: Router, private messageService: MessageService) {
+              private _router: Router, private commonService:CommonService,private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -35,7 +38,9 @@ export class PackageSummaryComponent implements OnInit {
           this.getSubscriptionPackageByName(this.packageName, body);
         }
         });
-  }
+    SessionStorageService.setSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED,this.selectedBuildingValue);
+    SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.totalBilled);
+    }
 
   getSubscriptionPackageByName(packageName: string, body: any) {
     this.packageDetailsService.getSubscriptionPackageByName(body).subscribe(
@@ -54,6 +59,12 @@ export class PackageSummaryComponent implements OnInit {
 
   onChange(selectedValue: any) {
     this.selectedBuildingValue = parseInt(selectedValue);
+    SessionStorageService.setSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED,this.selectedBuildingValue);
+    this.totalBilled = this.selectedBuildingValue*500;
+    SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.totalBilled);
+     /*this.values.numOfBuildingsPurchased = this.selectedBuildingValue;
+     this.values.totalBilled = this.totalBilled ;
+     this.commonService.change(this.values);*/
   }
 
   onCancelClick() {

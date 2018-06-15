@@ -58,7 +58,7 @@
         <label class="pull-left select-label">{{getLabels().NO_OF_BUILDINGS_TO_ADD}}</label>
         <div class="pull-right">
           <select (change)="onChange($event.target.value)" class="select-dropdown " id="noOfBuildings">
-            <option [value]='0'>0</option>
+            <option [value]='1'>1</option>
             <option *ngFor="let buildingNumber of noOfBuildingsValues" [value]="buildingNumber">{{ buildingNumber }}</option>
           </select>
         </div>
@@ -70,11 +70,11 @@
         <div class="pull-right">
           <span *ngIf="selectedBuildingValue">
             <sup>{{getLabels().INR}}</sup>
-            <span>{{selectedBuildingValue*500}} </span>
+            <span>{{totalBilled}} </span>
           </span>
           <span *ngIf="!selectedBuildingValue">
             <sup>{{getLabels().INR}}</sup>
-            <span>0 </span>
+            <span>{{totalBilled}} </span>
           </span>
         </div>
       </div>

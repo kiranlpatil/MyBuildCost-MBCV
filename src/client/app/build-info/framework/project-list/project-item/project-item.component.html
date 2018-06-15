@@ -8,7 +8,7 @@
 </div>
 <h4 [class.disabled-projects]="!activeStatus || project.expiryMessage !== null" (click)="navigateToSelectedProject(project.projectId, project.projectName, project.numOfDaysToExpire)">{{project.projectName}}</h4>
 <div class="renew-btn-section">
-  <div class="error-msg" *ngIf="project.expiryMessage !== null"> {{project.expiryMessage}}</div>
-  <div class="warning-msg" *ngIf="project.warningMessage !== null"> {{project.warningMessage}}</div>
-  <a class="renewNow-btn" *ngIf="(project.warningMessage !== null || project.expiryMessage !== null)" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
+  <div class="error-msg" *ngIf="project.expiryMessage !== null && activeStatus"> {{project.expiryMessage}}</div>
+  <div class="warning-msg" *ngIf="project.warningMessage !== null && activeStatus"> {{project.warningMessage}}</div>
+  <a class="renewNow-btn" *ngIf="(project.warningMessage !== null || project.expiryMessage !== null) && activeStatus" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
 </div>

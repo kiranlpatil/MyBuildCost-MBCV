@@ -294,6 +294,8 @@ export class SessionStorage {
   public static COMPANY_NAME = 'company_name';
   public static CREATED_AT = 'createdAt';
   public static PACKAGE_NAME = 'package_name';
+  public static NO_OF_BUILDINGS_PURCHASED = 'no_of_buildings_purchased';
+  public static TOTAL_BILLED = 'total_billed';
   public static IS_SUBSCRIPTION_AVAILABLE = 'is_subscription_available';
   public static PREMIUM_PACKAGE_AVAILABLE = 'premium_package_available';
 
@@ -434,7 +436,7 @@ export class Headings {
   public static EDIT_BUILDING: string = 'Edit Building';
   public static LIST_BUILDING: string = 'Building List';
   public static ADD_NEW_BUILDING: string = 'Add Building to a Project';
-  public static COMMON_DEVELOPMENT: string = 'Common Development and Amenities';
+  public static COMMON_DEVELOPMENT: string = 'Common Amenities and Development Cost';
   public static ELECTRIC_INFRASTRUCTURE: string = 'Electric Infrastructure ';
   public static CONSTRUCTION_COST: string = 'Construction Cost (Material + Labour)';
   public static QUANTITY: string = 'Quantity';
@@ -456,7 +458,7 @@ export class TableHeadings {
   public static BREADTH: string = 'Breadth';
   public static HEIGHT: string = 'Height';
   public static UNIT: string = 'Unit';
-  public static RATEANALYSIS: string = 'Rate Analysis/Unit';
+  public static RATEANALYSIS: string = 'Rate Analysis';
   public static AMOUNT: string = 'Amount';
   public static COST: string = 'Cost';
   public static TOTAL: string = 'Total';
@@ -597,6 +599,7 @@ export class Label {
   public static RENEW_PROJECT_BY: string = 'Renew Project by';
   public static PACKAGE_RENEW_PROJECT: string = 'RenewProject';
   public static PACKAGE_REATAIN_PROJECT: string = 'Retain';
+  public static PACKAGE_PREMIUM: string = 'Premium';
   public static PREFIX_TRIAL_PROJECT: string = 'Trial Project';
   public static INITIAL_NUMBER_OF_DAYS_TO_EXPIRE: number = 15;
 
@@ -702,7 +705,7 @@ export class MaterialTakeOffElements {
   public static SORT = 'sort';
   public static CHECK_SUB_CONTENT_PRESENT = 'checkSubContentPresent';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
-  public static REPORT_EMPTY_MESSAGE = 'Looks like you have not estimated any Cost Head. Please estimate to generate material take off report.';
+  public static REPORT_EMPTY_MESSAGE = 'There is no estimate entered against any cost head. Kindly enter estimate to generate material take off report.';
 }
 
 export class PDFReportHeaders {
@@ -739,7 +742,7 @@ export class ValueConstant {
   public static TOTAL_STEEL_DIAMETER_STRING_VALUES: string[] = ['totalWeightOf6mm','totalWeightOf8mm','totalWeightOf10mm','totalWeightOf12mm','totalWeightOf16mm','totalWeightOf20mm','totalWeightOf25mm','totalWeightOf30mm'];
   public static NUMBER_OF_FRACTION_DIGIT = 2;
   public static FILE_SIZE = 5000000;
-  public static NO_OF_BUILDINGS_VALUES :Number[]= [1,2,3,4,5];
+  public static NO_OF_BUILDINGS_VALUES :Number[]= [2,3,4,5];
 
 }
 

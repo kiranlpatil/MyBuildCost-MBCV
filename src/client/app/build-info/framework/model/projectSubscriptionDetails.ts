@@ -8,6 +8,8 @@ export class ProjectSubscriptionDetails {
   numOfBuildingsAllocated : number;
   numOfBuildingsRemaining : number;
   packageName:string;
+  addBuildingDisable?:boolean;
   activeStatus:boolean;
+
 }
 
