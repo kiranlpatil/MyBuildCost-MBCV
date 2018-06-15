@@ -23,11 +23,16 @@
       <span class="pull-right">{{premiumPackageDetails.validity/365|number:'1.0-0'}} years </span>
     </li>
 
-    <li class="font-bold">
-      <span> {{getLabels().TOTAL_BILLED}} </span>
-      <span class="pull-right"> {{premiumPackageDetails.cost}}</span>
-      <br>
-      <span class="pull-right" *ngIf="discountValid">{{premiumPackageDetails.cost - premiumPackageDetails.iterativeDiscount}}</span>
+
+    <li>
+      <div class="font-bold">
+        <span>{{getLabels().TOTAL_BILLED}}</span>
+        <div class="totalBillAmount pull-right">
+          <span  class="col-xs-12 pull-right no-padding text-right" [class.lineThrough] = "discountValid" > <sup>INR</sup> {{premiumPackageDetails.cost}} </span>
+          <span class="col-xs-12 pull-right no-padding text-right font-18" *ngIf="discountValid">
+            <sup>INR</sup> {{discount}} </span>
+        </div>
+      </div>
     </li>
   </ul>
 

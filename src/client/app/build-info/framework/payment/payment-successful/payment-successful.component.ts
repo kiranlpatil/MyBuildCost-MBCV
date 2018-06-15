@@ -119,9 +119,9 @@ export class PaymentSuccessfulComponent implements OnInit {
       message.custom_message = success.data;
       this.messageService.message(message);
       sessionStorage.removeItem(SessionStorage.NO_OF_BUILDINGS_PURCHASED);
-      sessionStorage.removeItem(SessionStorage.TOTAL_BILLED);
       this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
     }
+    sessionStorage.removeItem(SessionStorage.TOTAL_BILLED);
   }
     onRetainOrRenewProjectFailure(error:any) {
     console.log(error);

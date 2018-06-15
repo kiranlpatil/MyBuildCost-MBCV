@@ -3,6 +3,7 @@ import {Button, Headings, Label, NavigationRoutes} from '../../../../shared/cons
 import { PackageDetailsService } from '../package-details.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Message, MessageService } from '../../../../shared/index';
+import {SessionStorage, SessionStorageService} from "../../../../shared/index";
 @Component({
   moduleId: module.id,
   selector: 'bi-renew-package',
@@ -17,6 +18,7 @@ export class RenewPackageComponent implements OnInit {
   numOfDaysToExpire : string;
   body:any;
   discountValid:boolean=false;
+  discount: number;
   public currentDate: Date = new Date();
   public expiryDate: Date = new Date();
 
@@ -52,6 +54,7 @@ export class RenewPackageComponent implements OnInit {
     }
    this.currentDate.setDate(this.currentDate.getDate() +  parseInt(this.numOfDaysToExpire));
    this.expiryDate.setDate(this.currentDate.getDate() + this.premiumPackageDetails.validity);
+   this.discount = this.premiumPackageDetails.cost - this.premiumPackageDetails.iterativeDiscount;
   }
   onGetSubscriptionPackageByNameFailure(error:any) {
     console.log(error);
@@ -79,6 +82,11 @@ export class RenewPackageComponent implements OnInit {
   }
 
   proceedToPay() {
+    if(this.discountValid) {
+      SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.discount);
+    }else {
+      SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.premiumPackageDetails.cost );
+    }
     if(this.body.basePackageName) {
     this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_REATAIN_PROJECT,NavigationRoutes.SUCCESS]);
   }else {
