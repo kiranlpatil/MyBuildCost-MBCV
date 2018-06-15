@@ -57,7 +57,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   onGetAllProjectSuccess(projects : any) {
    this.projects = projects.data;
-   if(this.projects) {
+   if(this.projects.length !== 0) {
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, this.projects[0].projectName);
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, this.projects[0].projectId);
 

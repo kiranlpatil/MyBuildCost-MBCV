@@ -78,10 +78,10 @@ export class ProjectListHeaderComponent implements OnInit {
       function( projectDetails: ProjectSubscriptionDetails){
           return projectDetails.projectName === projectName;
         });
-    if(this.activeStatus) {
+  //  if(this.activeStatus) {
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectList[0].projectId);
       this._router.navigate([NavigationRoutes.APP_PROJECT, projectList[0].projectId, NavigationRoutes.APP_COST_SUMMARY]);
-    }
+   // }
  }
 
   getMenus() {

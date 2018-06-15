@@ -34,9 +34,9 @@ export class ProjectHeaderComponent implements OnInit {
       this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;
       });
 
-    this.getCurrentProjectId();
-    this.getProjectSubscriptionDetails();
-
+    if(this.getCurrentProjectId()) {
+      this.getProjectSubscriptionDetails();
+    }
   }
 
   getCurrentProjectId() {

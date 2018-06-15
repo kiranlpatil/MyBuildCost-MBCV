@@ -220,7 +220,7 @@ export class Messages {
   public static MSG_FOR_REMAINING_BUILDINGS: string = '(You can add';
   public static MSG_FOR_REMAINING_BUILDINGS_ADD: string = ' more buildings to this project)';
   public static MSG_ADD_BUILDING_PAYMENT: string = 'You have already consumed package of 5 buildings.<br />You can add more buildings by paying INR 500 per building.';
-  public static MSG_CREATE_PROJECT_CONFIRMATION: string = 'Trial package contains only 1 project <br />with 2 buildings you can create new project<br /> by purchasing our <strong>premium package.</strong>';
+  public static MSG_CREATE_PROJECT_CONFIRMATION: string = 'Trial package contains only 1 project <br />with 5 buildings you can create new project<br /> by purchasing our <strong>premium package.</strong>';
   public static MSG_CONFIRMATION_CREATE_PROJECT: string = 'Are you sure to create new project?';
   public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain estimated cost details from existing project ';
   public static MSG_ON_RETAIN_PROJECT2: string = ' or create a new project';

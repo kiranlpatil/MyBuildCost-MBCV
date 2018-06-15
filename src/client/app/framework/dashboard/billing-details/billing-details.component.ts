@@ -57,7 +57,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
 
   goBack() {
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
-    window.history.go(-1);
+    window.history.back();
     return false;
   }
 
@@ -65,7 +65,12 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
      if(this.isAbleToCreateNewProject) {
        this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
      }else {
-       this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Premium',false]);
+      let premiumPackageAvailable = SessionStorageService.getSessionValue(SessionStorage.PREMIUM_PACKAGE_AVAILABLE)!== 'false' ? true : false;
+      if(premiumPackageAvailable) {
+        this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Premium',true]);
+      }else {
+        this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Premium',false]);
+      }
      }
     }
 
