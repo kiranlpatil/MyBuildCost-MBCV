@@ -26,6 +26,10 @@ import ProjectRepository = require('../../applicationProject/dataaccess/reposito
 import ProjectSubscriptionDetails = require('../../applicationProject/dataaccess/model/project/Subscription/ProjectSubscriptionDetails');
 import messages  = require('../../applicationProject/shared/messages');
 import constants  = require('../../applicationProject/shared/constants');
+import ProjectSubcription = require('../../applicationProject/dataaccess/model/company/ProjectSubcription');
+let CCPromise = require('promise/lib/es6-extensions');
+let log4js = require('log4js');
+let logger = log4js.getLogger('User service');
 
 class UserService {
   APP_NAME: string;
@@ -33,7 +37,7 @@ class UserService {
   mid_content: any;
   isActiveAddBuildingButton:boolean=false;
   private userRepository: UserRepository;
-  private projectRepository:ProjectRepository;
+  private projectRepository : ProjectRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
@@ -392,7 +396,7 @@ class UserService {
         let link = host + 'reset-password?access_token=' + token + '&_id=' + res[0]._id;
         let htmlTemplate = 'forgotpassword.html';
         let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
-          ['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+          ['$first_name$',res[0].first_name],['$user_mail$',res[0].email],['$link$',link],['$app_name$',this.APP_NAME]]);
         let attachment=MailAttachments.ForgetPasswordAttachmentArray;
         sendMailService.send( field.email, Messages.EMAIL_SUBJECT_FORGOT_PASSWORD, htmlTemplate, data,attachment,
 (err: any, result: any) => {
@@ -576,6 +580,7 @@ class UserService {
 
     });
   }
+
   getUserById(user:any, callback:(error:any, result:any)=>void) {
     let auth: AuthInterceptor = new AuthInterceptor();
 
@@ -730,15 +735,22 @@ class UserService {
               callback(error,null);
             } else {
               let premiumPackage = subscriptionPackage[0];
-              let subscription = new UserSubscription();
-              subscription.activationDate = new Date();
-              subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
-              subscription.numOfProjects = premiumPackage.basePackage.numOfProjects;
-              subscription.validity = premiumPackage.basePackage.validity;
-              subscription.projectId = new Array<string>();
-              subscription.purchased = new Array<BaseSubscriptionPackage>();
-              subscription.purchased.push(premiumPackage.basePackage);
-              subScriptionArray.push(subscription);
+              if(subScriptionArray[0].projectId.length === 0) {
+                subScriptionArray[0].numOfBuildings = premiumPackage.basePackage.numOfBuildings;
+                subScriptionArray[0].numOfProjects = premiumPackage.basePackage.numOfProjects;
+                subScriptionArray[0].validity = subScriptionArray[0].validity + premiumPackage.basePackage.validity;
+                subScriptionArray[0].purchased.push(premiumPackage.basePackage);
+              }else {
+                let subscription = new UserSubscription();
+                subscription.activationDate = new Date();
+                subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
+                subscription.numOfProjects = premiumPackage.basePackage.numOfProjects;
+                subscription.validity = premiumPackage.basePackage.validity;
+                subscription.projectId = new Array<string>();
+                subscription.purchased = new Array<BaseSubscriptionPackage>();
+                subscription.purchased.push(premiumPackage.basePackage);
+                subScriptionArray.push(subscription);
+              }
               let query = {'_id': userId};
               let newData = {$set: {'subscription': subScriptionArray}};
               this.userRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
@@ -772,39 +784,41 @@ class UserService {
 
         for(let project of projectList) {
           for(let subscription of subscriptionList) {
-            if(subscription.projectId.indexOf(project._id)) {
-              let projectSubscription = new ProjectSubscriptionDetails();
-              projectSubscription.projectName = project.name;
-              projectSubscription.projectId = project._id;
-              projectSubscription.activeStatus = project.activeStatus;
-              projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
-              projectSubscription.numOfBuildingsAllocated = project.buildings.length;
-              projectSubscription.packageName = this.checkCurrentPackage(subscription);
-              //activation date for project subscription
-              let activation_date = new Date(subscription.activationDate);
-              let expiryDate = new Date(subscription.activationDate);
-              projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
+            if(subscription.projectId.length !== 0) {
+              if(subscription.projectId[0].equals(project._id)) {
+                let projectSubscription = new ProjectSubscriptionDetails();
+                projectSubscription.projectName = project.name;
+                projectSubscription.projectId = project._id;
+                projectSubscription.activeStatus = project.activeStatus;
+                projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
+                projectSubscription.numOfBuildingsAllocated = project.buildings.length;
+                projectSubscription.packageName = this.checkCurrentPackage(subscription);
+                //activation date for project subscription
+                let activation_date = new Date(subscription.activationDate);
+                let expiryDate = new Date(subscription.activationDate);
+                projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
 
-              //expiry date for project subscription
-              let current_date = new Date();
-              projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
+                //expiry date for project subscription
+                let current_date = new Date();
+                projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
 
-              if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
-                projectSubscription.warningMessage =
-                  'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days,' ;
-              } else if(projectSubscription.numOfDaysToExpire < 0) {
-                projectSubscription.expiryMessage =  'Project expired,';
+                if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
+                  projectSubscription.warningMessage =
+                    'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days,' ;
+                } else if(projectSubscription.numOfDaysToExpire < 0) {
+                  projectSubscription.expiryMessage =  'Project expired,';
+                }
+
+                projectSubscriptionArray.push(projectSubscription);
+
               }
-
-              projectSubscriptionArray.push(projectSubscription);
-
-            } else if(subscription.projectId.length === 0) {
+            } else  {
               isAbleToCreateNewProject = true;
             }
           }
         }
 
-        if(projectList.length === 0) {
+        if(projectList.length === 0 && subscriptionList[0].purchased.length !==0) {
           isAbleToCreateNewProject = true;
         }
 
@@ -821,14 +835,19 @@ class UserService {
    checkCurrentPackage(subscription:any) {
      let activation_date = new Date(subscription.activationDate);
      let expiryDate = new Date(subscription.activationDate);
+     let expiryDateOuter = new Date(subscription.activationDate);
      let current_date = new Date();
      for(let purchasePackage of subscription.purchased) {
-       //expiry date for each package.
-       expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
-      if(expiryDate >= current_date) {
-        return purchasePackage.name;
-      }
-    }
+       expiryDateOuter = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
+       for (let purchasePackage of subscription.purchased) {
+         //expiry date for each package.
+         expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
+         if ((expiryDateOuter < expiryDate) && (expiryDate >=current_date)) {
+           return purchasePackage.name;
+           }
+       }
+      return purchasePackage.name='Free';
+     }
     }
 
   daysdifference(date1 : Date, date2 : Date) {
@@ -863,6 +882,14 @@ class UserService {
             projectSubscription.activeStatus = resp[0].activeStatus;
             projectSubscription.numOfBuildingsAllocated = resp[0].buildings.length;
             projectSubscription.numOfBuildingsRemaining = (result[0].subscription.numOfBuildings - resp[0].buildings.length);
+            if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0 && projectSubscription.packageName !== 'Free'){
+              projectSubscription.addBuildingDisable=true;
+              }
+            projectSubscription.packageName = this.checkCurrentPackage(result[0].subscription);
+            if(projectSubscription.packageName === 'Free' && projectSubscription.numOfBuildingsRemaining === 0){
+              projectSubscription.addBuildingDisable=true;
+            }
+
             let activation_date = new Date(result[0].subscription.activationDate);
             let expiryDate = new Date(result[0].subscription.activationDate);
             projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + result[0].subscription.validity));
@@ -884,7 +911,7 @@ class UserService {
     });
   }
 
-  updateSubscription(user : User, projectId: string, packageName: string, callback:(error: any, result: any)=> void) {
+  updateSubscription(user : User, projectId: string, packageName: string,costForBuildingPurchased:any,numberOfBuildingsPurchased:any, callback:(error: any, result: any)=> void) {
     let query = [
       {$match: {'_id':ObjectId(user._id)}},
       { $project : {'subscription':1}},
@@ -896,7 +923,7 @@ class UserService {
        callback(error, null);
      } else {
        let subscription = result[0].subscription;
-       this.updatePackage(user, subscription, packageName,projectId,(error, result) => {
+       this.updatePackage(user, subscription, packageName,costForBuildingPurchased,numberOfBuildingsPurchased,projectId,(error, result) => {
          if (error) {
            let error = new Error();
            error.message = messages.MSG_ERROR_WHILE_CONTACTING;
@@ -913,7 +940,7 @@ class UserService {
    });
   }
 
-  updatePackage(user: User, subscription: any, packageName: string, projectId:string, callback:(error: any, result: any)=> void) {
+  updatePackage(user: User, subscription: any, packageName: string,costForBuildingPurchased:any,numberOfBuildingsPurchased:any, projectId:string, callback:(error: any, result: any)=> void) {
     let subScriptionService = new SubscriptionService();
     switch (packageName) {
       case 'Premium':
@@ -928,6 +955,7 @@ class UserService {
               subscription.numOfProjects = result.basePackage.numOfProjects;
               let noOfDaysToExpiry = this.calculateValidity(subscription);
               subscription.validity = noOfDaysToExpiry + result.basePackage.validity;
+              result.basePackage.cost = costForBuildingPurchased;
               subscription.purchased.push(result.basePackage);
               this.updateSubscriptionPackage(user._id, projectId,subscription, (error, result) => {
                 if (error) {
@@ -951,6 +979,7 @@ class UserService {
               let result = subscriptionPackage[0];
               let noOfDaysToExpiry = this.calculateValidity(subscription);
               subscription.validity = noOfDaysToExpiry + result.addOnPackage.validity;
+              result.addOnPackage.cost = costForBuildingPurchased;
               subscription.purchased.push(result.addOnPackage);
               this.updateSubscriptionPackage(user._id,projectId, subscription, (error, result) => {
                 if (error) {
@@ -972,6 +1001,8 @@ class UserService {
               callback(error,null);
             } else {
               let result = subscriptionPackage[0];
+              result.addOnPackage.numOfBuildings = numberOfBuildingsPurchased;
+              result.addOnPackage.cost = costForBuildingPurchased;
               subscription.numOfBuildings = subscription.numOfBuildings + result.addOnPackage.numOfBuildings;
               subscription.purchased.push(result.addOnPackage);
               this.updateSubscriptionPackage(user._id, projectId,subscription, (error, result) => {
@@ -1010,6 +1041,137 @@ class UserService {
     return days;
   }
 
+  sendProjectExpiryWarningMails(callback:(error : any, result :any)=>void) {
+    logger.debug('sendProjectExpiryWarningMails is been hit');
+    let query = [
+      { $project : { 'subscription' : 1, 'first_name' : 1, 'email' : 1 }},
+      { $unwind : '$subscription' },
+      { $unwind : '$subscription.projectId' }
+    ];
+
+    this.userRepository.aggregate(query, (error, response) => {
+      if(error) {
+        logger.error('sendProjectExpiryWarningMails error : '+JSON.stringify(error));
+        callback(error, null);
+      } else {
+        logger.debug('sendProjectExpiryWarningMails sucess');
+        let userList = new Array<ProjectSubcription>();
+        let userSubscriptionPromiseArray =[];
+
+        for(let user of response) {
+          logger.debug('geting all user data for sending mail to users.');
+          let validityDays = this.calculateValidity(user.subscription);
+          let valdityDaysValidation = config.get('cronJobMailNotificationValidityDays');
+          if(valdityDaysValidation.includes(validityDays)) {
+            let promiseObject = this.getProjectDataById(user);
+            userSubscriptionPromiseArray.push(promiseObject);
+          }
+        }
+
+        if(userSubscriptionPromiseArray.length !== 0) {
+
+          CCPromise.all(userSubscriptionPromiseArray).then(function(data: Array<any>) {
+
+            logger.debug('data recieved for all users: '+JSON.stringify(data));
+            let sendMailPromiseArray = [];
+
+            for(let user of data) {
+              logger.debug('Calling sendMailForProjectExpiryToUser for user : '+JSON.stringify(user.first_name));
+              let userService = new UserService();
+              let sendMailPromise = userService.sendMailForProjectExpiryToUser(user);
+              sendMailPromiseArray.push(sendMailPromise);
+            }
+
+            CCPromise.all(sendMailPromiseArray).then(function(mailSentData: Array<any>) {
+              logger.debug('mailSentData for all users: '+JSON.stringify(mailSentData));
+              callback(null, { 'data' : 'Mail sent successfully to users.' });
+            }).catch(function(e:any) {
+              logger.error('Promise failed for getting mailSentData ! :' +JSON.stringify(e.message));
+              CCPromise.reject(e.message);
+            });
+
+          }).catch(function(e:any) {
+            logger.error('Promise failed for send mail notification ! :' +JSON.stringify(e.message));
+            CCPromise.reject(e.message);
+          });
+        }
+      }
+    });
+  }
+
+  getProjectDataById(user: any) {
+
+    return new CCPromise(function (resolve: any, reject: any) {
+
+      logger.debug('geting all user data for sending mail to users.');
+
+      let projectSubscription = new ProjectSubcription();
+      let projection = { 'name' : 1 };
+      let projectRepository = new ProjectRepository();
+      let userService = new UserService();
+
+      projectRepository.findByIdWithProjection(user.subscription.projectId, projection, (error , resp) => {
+        if(error) {
+          logger.error('Error in fetching User data'+JSON.stringify(error));
+          reject(error);
+        } else {
+          logger.debug('got ProjectSubscription for user '+ user._id);
+          projectSubscription.userId = user._id;
+          projectSubscription.userEmail = user.email;
+          projectSubscription.first_name = user.first_name;
+          projectSubscription.validityDays = user.subscription.validity;
+          projectSubscription.projectExpiryDate = userService.calculateExpiryDate(user.subscription);
+          projectSubscription.projectName = resp.name;
+          resolve(projectSubscription);
+        }
+      });
+
+    }).catch(function (e: any) {
+      logger.error('Promise failed for individual createPromiseForGetProjectById ! Error: ' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  sendMailForProjectExpiryToUser(user: any) {
+
+    return new CCPromise(function (resolve: any, reject: any) {
+
+      let mailService = new SendMailService();
+
+      let auth = new AuthInterceptor();
+      let token = auth.issueTokenWithUid(user);
+      let host = config.get('application.mail.host');
+      let htmlTemplate = 'project-expiry-notification-mail.html';
+
+      let data:Map<string,string>= new Map([
+        ['$applicationLink$',config.get('application.mail.host')], ['$first_name$',user.first_name],
+        ['$expiry_date$',user.projectExpiryDate], ['$subscription_link$',config.get('application.mail.host')],
+        ['$app_name$','BuildInfo - Cost Control']]);
+
+      let attachment = MailAttachments.AttachmentArray;
+      mailService.send( user.userEmail, Messages.PROJECT_EXPIRY_WARNING, htmlTemplate, data,attachment,
+        (err: any, result: any) => {
+          if(err) {
+            console.log('Failed to send mail to user : '+user.userEmail);
+            reject(err);
+          } else {
+            console.log('Mail sent successfully to user : '+user.userEmail);
+            resolve(result);
+          }
+        });
+
+    }).catch(function (e: any) {
+      logger.error('Promise failed for individual sendMailForProjectExpiryToUser ! Error: ' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  calculateExpiryDate(subscription : any) {
+    let activationDate = new Date(subscription.activationDate);
+    let expiryDate = new Date(subscription.activationDate);
+    let projectExpiryDate = new Date(expiryDate.setDate(activationDate.getDate() + subscription.validity));
+    return projectExpiryDate;
+  }
 }
 
 Object.seal(UserService);

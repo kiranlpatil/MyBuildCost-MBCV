@@ -73,8 +73,8 @@ class ProjectService {
         callback(err, null);
       } else {
         if(resp.subscription) {
-          if(resp.subscription &&
-            resp.subscription.purchased.length > 0) {
+          if(resp.subscription.validity === 15 &&
+            resp.subscription.purchased.length === 1) {
             let prefix = 'Trial Project ';
             let projectName = prefix.concat(data.name);
             data.name = projectName;

@@ -78,12 +78,14 @@
     "replaceConsole": true
   },
 
+  "cronJobMailNotificationValidityDays" : [ 15, 8 , 1],
+
   "subscription":{
     "package":{
       "Free": {
         "basePackage": {
           "iterativeDiscount": 0,
-          "numOfBuildings": 2,
+          "numOfBuildings": 5,
           "numOfProjects": 1,
           "cost": 0,
           "validity": 15,

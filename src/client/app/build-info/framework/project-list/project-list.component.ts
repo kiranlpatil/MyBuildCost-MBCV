@@ -57,9 +57,11 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   onGetAllProjectSuccess(projects : any) {
    this.projects = projects.data;
-  /* if(this.projects) {
+   if(this.projects) {
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, this.projects[0].projectName);
-     }*/
+     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, this.projects[0].projectId);
+
+   }
   if(this.projects.length === 1 && this.projects[0].packageName==='Free') {
        this.premiumPackageAvailable=false;
        this.packageName='Free';

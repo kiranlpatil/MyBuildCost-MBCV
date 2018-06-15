@@ -15,11 +15,14 @@ export class ProjectHeaderComponent implements OnInit {
 
   @Input() isClassVisible: boolean;
   @Output() toggleClassView = new EventEmitter<boolean>();
-  @Input () isActiveAddBuildingButton?:boolean;
+  @Input () isActiveAddBuildingButton? :any;
   numberOfRemainingBuildings : number;
   subscriptionValidityMessage : string;
   premiumPackageExist:any;
+  packageName:string;
+  addBuildingButtonDisable:boolean =false;
   premiumPackageAvailable:boolean=false;
+  activeStatus:boolean=false;
 
 
   constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService) {
@@ -52,15 +55,18 @@ export class ProjectHeaderComponent implements OnInit {
   goToCreateBuilding() {
     if(this.numberOfRemainingBuildings > 0) {
       this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
-    } else {
-      //change package name with addOn packages
+      } else {
       let packageName = 'Add_building';
       this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName,this.premiumPackageAvailable]);
     }
   }
 
+
+
   checkLimitationOfBuildingSuccess(status:any) {
     this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+    this.activeStatus = status.activeStatus;
+    this.addBuildingButtonDisable =status.addBuildingDisable;
     if(status.expiryMessage) {
       this.subscriptionValidityMessage = status.expiryMessage;
     } else if(status.warningMessage) {

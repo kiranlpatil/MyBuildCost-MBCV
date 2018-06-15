@@ -1,42 +1,41 @@
-<div *ngIf="premiumPackageDetails !== undefined">
+<div class="renew-package-section" *ngIf="premiumPackageDetails !== undefined">
 
-  <h4>{{getLabels().YOUR_PROJECT}} '{{projectName}}'{{getLabels().IS_ABOUT_TO_EXPIRE_IN}} {{numOfDaysToExpire}} {{getLabels().DAYS}}.</h4>
-  <h4>{{getLabels().PLEASE_RENEW_TO_CONTINUE}}</h4>
+  <h1>
+    {{getLabels().YOUR_PROJECT}}
+    <span>'{{projectName}}'</span>{{getLabels().IS_ABOUT_TO_EXPIRE_IN}}
+    {{numOfDaysToExpire}} {{getLabels().DAYS}}.
+    {{getLabels().PLEASE_RENEW_TO_CONTINUE}}
+  </h1>
 
-  <div class="col-md-12">
+  <ul>
+    <li>
+      <span>{{getLabels().START_DATE}}</span>
+      <span class="pull-right">{{currentDate | date:'dd MMM yyyy'}}</span>
+    </li>
 
-    <div class="col-md-6">
-      {{getLabels().START_DATE}}
-    </div>
-    <div class="col-md-6">
-      {{currentDate | date:'dd MMM yyyy'}}
-    </div>
+    <li>
+      <span> {{getLabels().END_DATE}} </span>
+      <span class="pull-right"> {{expiryDate | date:'dd MMM yyyy'}} </span>
+    </li>
 
-    <div class="col-md-6">
-      {{getLabels().END_DATE}}
-    </div>
-    <div class="col-md-6">
-      {{expiryDate | date:'dd MMM yyyy'}}
-    </div>
+    <li class="font-bold">
+      <span>{{getLabels().RENEW_PROJECT_BY}}</span>
+      <span class="pull-right">{{premiumPackageDetails.validity/365|number:'1.0-0'}} years </span>
+    </li>
 
-    <div class="col-md-6">
-      {{getLabels().RENEW_PROJECT_BY}}
-    </div>
-    <div class="col-md-6">
-        {{premiumPackageDetails.validityDescription}}
-    </div>
 
-    <div class="col-md-6">
-      {{getLabels().TOTAL_BILLED}}
-    </div>
-    <div class="col-md-6">
-        {{premiumPackageDetails.cost}}
-          <br>
-        {{premiumPackageDetails.cost - premiumPackageDetails.iterativeDiscount}}
-    </div>
+    <li>
+      <div class="font-bold">
+        <span>{{getLabels().TOTAL_BILLED}}</span>
+        <div class="totalBillAmount pull-right">
+          <span  class="col-xs-12 pull-right no-padding text-right" [class.lineThrough] = "discountValid" > <sup>INR</sup> {{premiumPackageDetails.cost}} </span>
+          <span class="col-xs-12 pull-right no-padding text-right font-18" *ngIf="discountValid">
+            <sup>INR</sup> {{discount}} </span>
+        </div>
+      </div>
+    </li>
+  </ul>
 
-  </div>
-
-  <button type="button" class="btn btn-primary" (click)="cancel()">{{getButton().CANCEL_BUTTON}}</button>
+  <button type="button" class="btn btn-default" (click)="cancel()">{{getButton().CANCEL_BUTTON}}</button>
   <button type="button" class="btn btn-primary" (click)="proceedToPay()">{{getButton().PROCEED_TO_PAY}}</button>
 </div>

@@ -1,7 +1,7 @@
 @import '../../../../css/variables';
 
 .billing-summary-section {
-  max-width: 600px;
+  min-width: 600px;
   display: table;
   margin: 0 auto;
   h1 {
@@ -43,6 +43,7 @@
     p {
       font-size: 10px;
       float: left;
+      margin: 0;
     }
     a {
       color: $table-btn-bg;
@@ -62,6 +63,8 @@
         text-align: left;
         float: none;
         display: inline-flex;
+        margin-top: -4px;
+        margin-bottom: 0;
         padding-left: 10px;
         position: absolute;
         width: 142px;
@@ -85,6 +88,8 @@
 
 @media only screen and (max-width: 767px) {
   .billing-summary-section {
+    min-width: 100%;
+    max-width: 600px;
     padding: 0 15px;
     .table {
       tr {

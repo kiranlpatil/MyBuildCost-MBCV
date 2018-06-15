@@ -188,8 +188,11 @@ class Constants {
     'GROUP BY materialName, costHeadName, buildingName, quantityName, unit ';
   public static ALASQL_MATERIAL_NOT_LABOUR = ' materialName NOT LIKE "%Labour%" ';
   public static ALASQL_MATERIAL_NOT_LABOR = ' materialName NOT LIKE "%Labor%" ';
+  public static ALASQL_MATERIAL_NOT_LAB_DOT = ' materialName NOT LIKE "%Lab.%" ';
+  public static ALASQL_MATERIAL_NOT_LAB = ' materialName NOT LIKE "%Lab%" ';
   public static ALASQL_AND_MATERIAL_NOT_LABOUR = ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOUR +
-    ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR;
+    ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB
+    + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB_DOT;
 
   // Error Messages
   public static MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION = 'Oop\'s! looks like you haven\'t provided Cost Estimation for ';

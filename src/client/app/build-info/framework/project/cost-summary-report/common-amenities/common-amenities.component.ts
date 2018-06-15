@@ -192,7 +192,8 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   showGrandTotalTable() {
-    this.sednCommonEmenitiesChartStatus.emit($('#collapse'+this.totalNumberOfBuildings).attr('aria-expanded'));
+    if(this.totalNumberOfBuildings) {
+    this.sednCommonEmenitiesChartStatus.emit($('#collapse'+this.totalNumberOfBuildings).attr('aria-expanded'));}
     this.showGrandTotalPanelTable = !this.showGrandTotalPanelTable;
     this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
 

@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import { Headings, Button, Label,Messages, } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavigationRoutes } from '../../../../shared/index';
+import {CommonService, NavigationRoutes} from '../../../../shared/index';
 import { Message, MessageService, SessionStorage, SessionStorageService } from '../../../../shared/index';
 import { Project } from '../../model/project';
 import { ProjectService } from '../../project/project.service';
 import { ProjectNameChangeService } from '../../../../shared/services/project-name-change.service';
 import {ProjectSubscriptionDetails} from "../../model/projectSubscriptionDetails";
 import {PackageDetailsService} from "../../package-details/package-details.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   moduleId: module.id,
@@ -16,40 +17,60 @@ import {PackageDetailsService} from "../../package-details/package-details.servi
   styleUrls: ['payment-successful.component.css']
 })
 
-export class PaymentSuccessfulComponent implements OnInit{
+export class PaymentSuccessfulComponent implements OnInit {
 
   projectId: string;
   packageName: string;
-  projects:any;
-  projectModel:  Project = new Project();
-  removeTrialProjectPrefix:  boolean = false;
+  projects: any;
+  projectModel: Project = new Project();
+  removeTrialProjectPrefix: boolean = false;
+  numOfPurchasedBuilding:number;
+  totalBilled :number;
+  addBuildingPackageDetails :any;
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
-  constructor(private activatedRoute:ActivatedRoute, private _router: Router, private projectService: ProjectService,
-              private projectNameChangeService : ProjectNameChangeService, private packageDetails : PackageDetailsService,
-              private messageService : MessageService) {
+
+
+  constructor(private activatedRoute: ActivatedRoute, private _router: Router, private projectService: ProjectService,
+              private projectNameChangeService: ProjectNameChangeService, private packageDetails: PackageDetailsService,
+              private messageService: MessageService,private commonService:CommonService) {
+
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.packageName = params['packageName'];
+      this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
       if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
         this.getProject();
       }
     });
+   /* this.addBuildingPackageDetails = this.commonService.addBuildingPackageDetails$
+      .skipWhile(data=> { return data.length ;})
+      .subscribe(
+      values => {
+        if(values) {
+          this.numOfPurchasedBuilding = values.numOfBuildingsPurchased ;
+          this.totalBilled = values.totalBilled;
+        }
+      },(error => console.log(error)));*/
+
+    this.numOfPurchasedBuilding =parseInt( SessionStorageService.getSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED));
+    this.totalBilled =parseInt( SessionStorageService.getSessionValue(SessionStorage.TOTAL_BILLED));
+    console.log("numOfPurchasedBuilding::"+this.numOfPurchasedBuilding);
+    console.log("totalBilled::"+this.totalBilled);
   }
 
   getProject() {
-    this.projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     this.projectService.getProject(this.projectId).subscribe(
       project => this.onGetProjectSuccess(project),
       error => this.onGetProjectFailure(error)
     );
   }
 
-  onGetProjectSuccess(project : any) {
+  onGetProjectSuccess(project: any) {
     this.projectModel = project.data[0];
-    if(project.data[0].name.includes(this.getLabels().PREFIX_TRIAL_PROJECT)) {
+    if (project.data[0].name.includes(this.getLabels().PREFIX_TRIAL_PROJECT)) {
       this.projectModel.name = project.data[0].name.substring(14);
       this.removeTrialProjectPrefix = true;
     } else {
@@ -59,39 +80,50 @@ export class PaymentSuccessfulComponent implements OnInit{
 
   }
 
-  onGetProjectFailure(error : any) {
+  onGetProjectFailure(error: any) {
     console.log(error);
   }
 
   updateProjectNameById() {
-    let body = { name :  this.projectModel.name};
-    this.projectService.updateProjectNameById(this.projectId,body)
+    let body = {name: this.projectModel.name};
+    this.projectService.updateProjectNameById(this.projectId, body)
       .subscribe(
         user => this.onUpdateProjectNameByIdSuccess(user),
         error => this.onUpdateProjectNameByIdFailure(error));
   }
-  onRetainOrRenewProject(packageName : string) {
-    let body = { packageName : packageName};
-    this.packageDetails.getRetainOrRenewProject(this.projectId,body)
-      .subscribe(success=>this.onRetainOrRenewProjectSuccess(success),
+
+  onRetainOrRenewProject(packageName: string) {
+    let body = {packageName: packageName ,
+      numOfPurchasedBuildings: this.numOfPurchasedBuilding,
+      totalBilled: this.totalBilled };
+    this.packageDetails.getRetainOrRenewProject(this.projectId, body)
+      .subscribe(success => this.onRetainOrRenewProjectSuccess(success),
         error => this.onRetainOrRenewProjectFailure(error));
   }
 
-
-  onRetainOrRenewProjectSuccess(success:any) {
-    if(this.removeTrialProjectPrefix) {
-      this.removeTrialProjectPrefix = false;
-      this.updateProjectNameById();
+  onRetainOrRenewProjectSuccess(success: any) {
+    if (this.packageName === 'Retain' || this.packageName === 'Premium') {
+      if (this.removeTrialProjectPrefix) {
+        this.removeTrialProjectPrefix = false;
+        this.updateProjectNameById();
+      }
+      sessionStorage.removeItem(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = success.data;
+      this.messageService.message(message);
+      this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    }else if(this.packageName === 'Add_building') {
+      let message = new Message();
+      message.isError = false;
+      message.custom_message = success.data;
+      this.messageService.message(message);
+      sessionStorage.removeItem(SessionStorage.NO_OF_BUILDINGS_PURCHASED);
+      this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
     }
-    sessionStorage.removeItem(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
-    var message = new Message();
-    message.isError = false;
-    message.custom_message = success.data;
-    this.messageService.message(message);
-   this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-
+    sessionStorage.removeItem(SessionStorage.TOTAL_BILLED);
   }
-  onRetainOrRenewProjectFailure(error:any) {
+    onRetainOrRenewProjectFailure(error:any) {
     console.log(error);
     var message = new Message();
     message.isError = true;
@@ -138,14 +170,17 @@ export class PaymentSuccessfulComponent implements OnInit{
 
 
   onContinue() {
-    if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
+    if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT) {
+      this.onRetainOrRenewProject('Premium');
+    } else if (this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
       this.onRetainOrRenewProject(this.packageName);
-    }else if (this.packageName === 'Add_building') {
-      this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
-    }else if(this.packageName === 'Premium') {
+    }else if(this.packageName === this.getLabels().PACKAGE_PREMIUM ) {
       this.assignPremiumPackage();
+    }else if (this.packageName === 'Add_building') {
+      this.onRetainOrRenewProject(this.packageName);
     }else {
       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
     }
+
   }
 }

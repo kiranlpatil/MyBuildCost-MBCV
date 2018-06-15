@@ -92,6 +92,8 @@ class UserRoutes {
       router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
       router.get('/advertising/banners', authInterceptor.requiresAuth, controller.getAdvertisingBanner);
 
+      /*router.get('/projectExpiry/sendmails', controller.sendProjectExpiryMails);*/
+
       // update subscription package
       router.put('/project/:projectId/updateSubscription', authInterceptor.requiresAuth, controller.updateSubscription);
 
