@@ -26,7 +26,6 @@ export class PaymentSuccessfulComponent implements OnInit {
   removeTrialProjectPrefix: boolean = false;
   numOfPurchasedBuilding:number;
   totalBilled :number;
-  addBuildingPackageDetails :any;
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
 
@@ -45,21 +44,10 @@ export class PaymentSuccessfulComponent implements OnInit {
         this.getProject();
       }
     });
-   /* this.addBuildingPackageDetails = this.commonService.addBuildingPackageDetails$
-      .skipWhile(data=> { return data.length ;})
-      .subscribe(
-      values => {
-        if(values) {
-          this.numOfPurchasedBuilding = values.numOfBuildingsPurchased ;
-          this.totalBilled = values.totalBilled;
-        }
-      },(error => console.log(error)));*/
 
     this.numOfPurchasedBuilding =parseInt( SessionStorageService.getSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED));
     this.totalBilled =parseInt( SessionStorageService.getSessionValue(SessionStorage.TOTAL_BILLED));
-    console.log("numOfPurchasedBuilding::"+this.numOfPurchasedBuilding);
-    console.log("totalBilled::"+this.totalBilled);
-  }
+    }
 
   getProject() {
     this.projectService.getProject(this.projectId).subscribe(
@@ -113,13 +101,6 @@ export class PaymentSuccessfulComponent implements OnInit {
       message.custom_message = success.data;
       this.messageService.message(message);
       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-    }else if(this.packageName === 'Add_building') {
-      let message = new Message();
-      message.isError = false;
-      message.custom_message = success.data;
-      this.messageService.message(message);
-      sessionStorage.removeItem(SessionStorage.NO_OF_BUILDINGS_PURCHASED);
-      this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
     }
     sessionStorage.removeItem(SessionStorage.TOTAL_BILLED);
   }
@@ -127,7 +108,7 @@ export class PaymentSuccessfulComponent implements OnInit {
     console.log(error);
     var message = new Message();
     message.isError = true;
-    message.custom_message = error.err_msg;
+   // message.custom_message = error.err_msg;
     message.error_msg = error.err_msg;
     this.messageService.message(message);
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
@@ -136,9 +117,7 @@ export class PaymentSuccessfulComponent implements OnInit {
     if (result !== null) {
       this.projectNameChangeService.change(result.data.name);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, result.data.name);
-      //SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID,this.projects[0].projectId);
-
-    }
+      }
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 
@@ -176,8 +155,6 @@ export class PaymentSuccessfulComponent implements OnInit {
       this.onRetainOrRenewProject(this.packageName);
     }else if(this.packageName === this.getLabels().PACKAGE_PREMIUM ) {
       this.assignPremiumPackage();
-    }else if (this.packageName === 'Add_building') {
-      this.onRetainOrRenewProject(this.packageName);
     }else {
       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
     }

@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { Headings, Button, Label, Messages, ValueConstant } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
-import {CommonService, MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
+import {CommonService,Message, MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
 import { PackageDetailsService } from './../package-details.service';
 import { NavigationRoutes } from '../../../../shared/index';
 import {AddBuildingPackageDetails} from "../../model/add-building-package-details";
@@ -18,8 +18,9 @@ export class PackageSummaryComponent implements OnInit {
   premiumPackageAvailable: boolean = false;
   premiumPackageDetails: any;
   selectedBuildingValue: any=1;
-  values = new AddBuildingPackageDetails();
   totalBilled: number=500;
+  sum : number =0;
+  projectId:any;
   noOfBuildingsValues: any[] = ValueConstant.NO_OF_BUILDINGS_VALUES;
 
   constructor(private activatedRoute: ActivatedRoute, private packageDetailsService: PackageDetailsService,
@@ -48,6 +49,32 @@ export class PackageSummaryComponent implements OnInit {
       error => this.onGetSubscriptionPackageByNameFailure(error)
     );
   }
+  updateSubscription(body:any) {
+    this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.packageDetailsService.getRetainOrRenewProject(this.projectId, body)
+      .subscribe(success => this.onRetainOrRenewProjectSuccess(success),
+        error => this.onRetainOrRenewProjectFailure(error));
+  }
+
+
+  onRetainOrRenewProjectSuccess(success: any) {
+    let message = new Message();
+      message.isError = false;
+      message.custom_message = success.data;
+      this.messageService.message(message);
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
+
+    //this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
+      }
+
+  onRetainOrRenewProjectFailure(error:any) {
+    console.log(error);
+    var message = new Message();
+    message.isError = true;
+    // message.custom_message = error.err_msg;
+    message.error_msg = error.err_msg;
+    this.messageService.message(message);
+    }
 
   onGetSubscriptionPackageByNameSuccess(packageDetails: any) {
     this.premiumPackageDetails = packageDetails[0];
@@ -62,14 +89,11 @@ export class PackageSummaryComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED,this.selectedBuildingValue);
     this.totalBilled = this.selectedBuildingValue*500;
     SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.totalBilled);
-     /*this.values.numOfBuildingsPurchased = this.selectedBuildingValue;
-     this.values.totalBilled = this.totalBilled ;
-     this.commonService.change(this.values);*/
-  }
+    }
 
   onCancelClick() {
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    window.history.back();
   }
 
    onCancel() {
@@ -78,9 +102,16 @@ export class PackageSummaryComponent implements OnInit {
    }
   onPay() {
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
-    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.packageName,NavigationRoutes.SUCCESS]);
+    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
+      }
+  onProceedToPay() {
+    if(this.packageName === 'Add_building') {
+      let body = { packageName: 'Add_building',
+        numOfPurchasedBuildings:this.selectedBuildingValue,
+        totalBilled :this.totalBilled };
+      this.updateSubscription(body);
+    }
   }
-
   getHeadings() {
     return Headings;
   }

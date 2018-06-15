@@ -57,9 +57,10 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   compareIndex:number=0;
   userId:any;
   baseUrl:string;
-
   totalNumberOfBuildings : number;
-
+  numberOfRemainingBuildings :number;
+  activeStatus:boolean;
+  addBuildingButtonDisable:boolean;
  public inActiveCostHeadArray: Array<CostHead>;
   cloneBuildingForm: FormGroup;
   cloneBuildingModel: Building = new Building();
@@ -113,8 +114,33 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
         this.onChangeCostingByUnit(this.defaultCostingByUnit);
       }
     });
+    this.getProjectSubscriptionDetails();
   }
 
+  getProjectSubscriptionDetails () {
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
+      status=>this.checkLimitationOfBuildingSuccess(status),
+      error=>this.checkLimitationOfBuildingFailure(error)
+    );
+  }
+
+
+  checkLimitationOfBuildingSuccess(status:any) {
+    this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+    this.activeStatus = status.activeStatus;
+    this.addBuildingButtonDisable =status.addBuildingDisable;
+   /* if(status.expiryMessage) {
+      this.subscriptionValidityMessage = status.expiryMessage;
+    } else if(status.warningMessage) {
+      this.subscriptionValidityMessage = status.warningMessage;
+    }*/
+  }
+
+  checkLimitationOfBuildingFailure(error:any) {
+    console.log(error);
+  }
   showDropdown(e: any) {
       e.stopPropagation();
   }
@@ -329,7 +355,13 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   cloneBuilding(buildingId: string) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
-    this._router.navigate([NavigationRoutes.APP_CLONE_BUILDING]);
+    if(this.numberOfRemainingBuildings > 0) {
+      this._router.navigate([NavigationRoutes.APP_CLONE_BUILDING]);
+    } else {
+      let packageName = 'Add_building';
+      let premiumPackageAvailable = SessionStorageService.getSessionValue(SessionStorage.PREMIUM_PACKAGE_AVAILABLE);
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName,premiumPackageAvailable]);
+    }
   }
 
   onGetBuildingDetailsForCloneSuccess(building: any) {

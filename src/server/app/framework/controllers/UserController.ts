@@ -630,18 +630,18 @@ class UserController {
       let userService = new UserService();
       userService.updateSubscription(user,projectId, packageName,costForBuildingPurchased,numberOfBuildingsPurchased,(error, result)=> {
         if(error) {
-          next(error);
+          next({
+            reason: Messages.MSG_ERROR_BUILDINGS_PURCHASED_LIMIT,
+            message: Messages.MSG_ERROR_BUILDINGS_PURCHASED_LIMIT,
+            stackTrace: new Error(),
+            code: 400
+          });
         }else {
           res.send(result);
         }
       });
     }catch(e) {
-      next({
-        reason: e.message,
-        message: e.message,
-        stackTrace: new  Error(),
-        code: 403
-      });
+      console.log(e);
     }
   }
   assignPremiumPackage(req: express.Request, res: express.Response, next: any): void {

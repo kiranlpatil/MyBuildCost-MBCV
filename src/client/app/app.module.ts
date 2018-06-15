@@ -105,6 +105,7 @@ import { PackageDefaultComponent } from './build-info/framework/package-details/
 import { PaymentSuccessfulComponent } from './build-info/framework/payment/payment-successful/payment-successful.component';
 import { CreateProjectConfirmationModalComponent } from './shared/create-project-confirmation-modal/create-project-confirmation-modal.component';
 import {RetainProjectComponent} from "./build-info/framework/payment/retain-project/retain-project.component";
+import {PaymentFailureComponent} from "./build-info/framework/payment/payment-failure/payment-failure.component";
 
 @NgModule({
   imports: [
@@ -190,7 +191,8 @@ import {RetainProjectComponent} from "./build-info/framework/payment/retain-proj
     PackageDefaultComponent,
     PaymentSuccessfulComponent,
     RenewPackageComponent,
-    RetainProjectComponent
+    RetainProjectComponent,
+    PaymentFailureComponent
   ],
 
   providers: [

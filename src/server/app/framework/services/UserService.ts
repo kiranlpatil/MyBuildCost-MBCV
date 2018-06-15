@@ -998,20 +998,25 @@ class UserService {
         subScriptionService.getSubscriptionPackageByName('Add_building','addOnPackage',
           (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
             if(error) {
-              callback(error,null);
+              callback(new Error(Messages.MSG_ERROR_BUILDINGS_PURCHASED_LIMIT), null);
             } else {
-              let result = subscriptionPackage[0];
-              result.addOnPackage.numOfBuildings = numberOfBuildingsPurchased;
-              result.addOnPackage.cost = costForBuildingPurchased;
-              subscription.numOfBuildings = subscription.numOfBuildings + result.addOnPackage.numOfBuildings;
-              subscription.purchased.push(result.addOnPackage);
-              this.updateSubscriptionPackage(user._id, projectId,subscription, (error, result) => {
-                if (error) {
-                  callback(error, null);
-                } else {
-                  callback(null, {data: 'success'});
-                }
-              });
+              let projectBuildingsLimit = subscription.numOfBuildings + numberOfBuildingsPurchased;
+              if(projectBuildingsLimit <= 10) {
+                let result = subscriptionPackage[0];
+                result.addOnPackage.numOfBuildings = numberOfBuildingsPurchased;
+                result.addOnPackage.cost = costForBuildingPurchased;
+                subscription.numOfBuildings = subscription.numOfBuildings + result.addOnPackage.numOfBuildings;
+                subscription.purchased.push(result.addOnPackage);
+                this.updateSubscriptionPackage(user._id, projectId,subscription, (error, result) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    callback(null, {data: 'success'});
+                  }
+                });
+              } else {
+                callback(new Error(Messages.MSG_ERROR_BUILDINGS_PURCHASED_LIMIT), null);
+              }
             }
           });
         break;

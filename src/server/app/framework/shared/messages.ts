@@ -102,6 +102,11 @@ class Messages {
 
   public static MSG_ERROR_FAILED_TO_UPDATE_CANDIDATE_FIELD: string = 'Failed to update candidate field';
 
+
+  //Building limit error message payment.
+  public static MSG_ERROR_BUILDINGS_PURCHASED_LIMIT: string = 'You can not add more than 5 buildings.';
+
+
   //Verify errors
   public static MSG_ERROR_CHECK_EMAIL_ACCOUNT: string = 'User already has an account associated with this email address.'; //should be same to MSG_ERROR_EMAIL_ACTIVE_NOW
 

@@ -55,7 +55,7 @@
                     </cost-summary-report-pdf>
                   </div>
                 </li>
-                <li><p  data-toggle="modal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
+                <li><p *ngIf="!addBuildingButtonDisable" data-toggle="modal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
                 <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
                 <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
                 <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
@@ -69,7 +69,7 @@
                   <tr>
                     <th rowspan="2" class="border-left">{{ getLabel().COST_HEAD }}</th>
                     <th colspan="2" class="border-left table-heading">
-                      {{ getLabel().REPORT_BY_THUMBRULE }}
+                      {{ getLabel().BUDGETED_COST }}
                       <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
                       <div class="white-bg"></div>
                     </th>

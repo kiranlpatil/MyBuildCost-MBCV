@@ -213,6 +213,7 @@ export class Messages {
   public static  MSG_ERROR_VALIDATION_OF_FILE_ALREADY_EXITS = 'Selected file already exists';
   public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
+  public static  MSG_ERROR_CANNOT_SELECT_BUILDINGS = 'Cannot select more than 5 buildings.';
   public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor/Parking Details';
 
   //Payment Messages
@@ -224,6 +225,7 @@ export class Messages {
   public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain estimated cost details from existing project ';
   public static MSG_ON_RETAIN_PROJECT2: string = ' or create a new project';
   public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
+  public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';
 
 }
 
@@ -259,6 +261,7 @@ export class NavigationRoutes {
   public static APP_PACKAGE_SUMMARY: string = '/package-details/premium-package/';
   public static APP_RENEW_PACKAGE: string = '/package-details/renew-package';
   public static APP_RETAIN_PROJECT: string = '/package-details/retain-project';
+  public static APP_PAYMENT_FAILURE: string = '/package-details/payment/failure';
 
 
 }
@@ -448,6 +451,7 @@ export class Headings {
   //Payment headings
   public static CONFIRM_PACKAGE_HEADING: string ='Confirm your package';
   public static CREATE_PROJECT_MODAL_HEADING: string ='Create New Project';
+  public static PAYMENT_UNSUCCESSFUL: string ='Payment Unsuccessful';
 }
 
 export class TableHeadings {
@@ -642,6 +646,7 @@ export class Button {
   public static PACKAGE_DETAILS: string = 'Package details';
   public static CONTINUE_USING_TRIAL: string = 'Continue using trial';
   public static SWITCH_TO_PREMIUM: string = 'Switch to premium';
+  public static GO_TO_DASHBOARD: string = 'Go to Dashboard';
   public static PAY_BUTTON: string = 'Pay';
   public static PROCEED_TO_PAY_BUTTON: string = 'Proceed to Pay';
   public static CREATE_NEW_PROJECT_BUTTON: string = 'Create new project';

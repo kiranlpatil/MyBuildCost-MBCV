@@ -57,7 +57,7 @@
       <div>
         <label class="pull-left select-label">{{getLabels().NO_OF_BUILDINGS_TO_ADD}}</label>
         <div class="pull-right">
-          <select (change)="onChange($event.target.value)" class="select-dropdown " id="noOfBuildings">
+          <select [(ngModel)]=selectedBuildingValue (change)="onChange($event.target.value)" class="select-dropdown " id="noOfBuildings">
             <option [value]='1'>1</option>
             <option *ngFor="let buildingNumber of noOfBuildingsValues" [value]="buildingNumber">{{ buildingNumber }}</option>
           </select>
@@ -82,6 +82,6 @@
   </uL>
   <div>
     <button class="btn btn-default" name="cancel" (click)="onCancel()">{{getButton().CANCEL_BUTTON}}</button>
-    <button class="btn btn-primary" name="pay" (click)="onPay()">{{getButton().PROCEED_TO_PAY_BUTTON}}</button>
+    <button class="btn btn-primary" name="pay" (click)="onProceedToPay()">{{getButton().PROCEED_TO_PAY_BUTTON}}</button>
   </div>
 </div>
