@@ -192,11 +192,20 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   showGrandTotalTable() {
-    if(this.totalNumberOfBuildings) {
-    this.sednCommonEmenitiesChartStatus.emit($('#collapse'+this.totalNumberOfBuildings).attr('aria-expanded'));}
     this.showGrandTotalPanelTable = !this.showGrandTotalPanelTable;
-    this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
+    this.  savingCurrentAmenitiesIDInSessionStorage();
+      this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
 
+  }
+  savingCurrentAmenitiesIDInSessionStorage() {
+    if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)===this.amenitiesReport.name) {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, null);
+      if(this.totalNumberOfBuildings)
+        this.sednCommonEmenitiesChartStatus.emit('true');
+    }else {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING,this.amenitiesReport.name);
+      if(this.totalNumberOfBuildings)
+        this.sednCommonEmenitiesChartStatus.emit('false');}
   }
 }
 

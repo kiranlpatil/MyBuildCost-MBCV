@@ -1,7 +1,7 @@
 {
   "banners": [
     {
-      "path": "./assets/build-info/dashboard/ads.png",
+      "path": "banners/ads.png",
       "title":"Binani Cement"
     }
   ]

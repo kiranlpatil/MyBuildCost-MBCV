@@ -67,6 +67,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   clonedBuildingDetails: Array<CostHead>;
   showHideCostHeadButtonsList: Array<AddCostHeadButton>;
   isActiveAddBuildingButton:boolean=false;
+  openBuildingNameAmenities:string='amenities';
   public costIn: any[] = [
     { 'costInId': ProjectElements.RS_PER_SQFT},
     { 'costInId': ProjectElements.RS_PER_SQMT}
@@ -109,6 +110,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW, CurrentView.COST_SUMMARY);
     this.activatedRoute.params.subscribe(params => {
+      this.onBuildingChange(params);
       this.projectId = params['projectId'];
       if(this.projectId) {
         this.onChangeCostingByUnit(this.defaultCostingByUnit);
@@ -148,7 +150,11 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   setBuildingId( i:number, buildingId: string) {
     this.setChartVisibility(i);
     this.compareIndex = i;
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
+    if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)===buildingId) {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, null);
+    }else {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);}
+
    this.costSummaryService.moveSelectedBuildingAtTop(this.compareIndex);
   }
 
@@ -216,9 +222,13 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     this.projectReport.totalAreaOfBuildings = projects.data.totalAreaOfBuildings;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
+    this.openRecentBuilding();
     if(SessionStorageService.getSessionValue(SessionStorage.FROM_VIEW) === this.getScrollView().GO_TO_RECENT_BUILDING) {
       SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, null);
-      this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
+      this.compareIndex=this.projectReport.buildings.length - 1;
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING,
+        this.projectReport.buildings[this.projectReport.buildings.length - 1]._id);
+            this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
     }
   }
 
@@ -527,6 +537,32 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     } else {
       this.isShowBuildingCostSummaryChart =true;
       this.isShowCommonAmenitiesChart =true;
+    }
+  }
+  onBuildingChange(params:any) {
+    if(this.projectId!==undefined && this.projectId !== params['projectId']) {
+      this.compareIndex = 0;
+      if (SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) === this.openBuildingNameAmenities) {
+        SessionStorageService.removeSessionValue(SessionStorage.CURRENT_BUILDING);
+      }
+    }
+  }
+  openRecentBuilding() {
+    let recentBuildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    if(this.projectId===recentBuildingId) {
+      for(let building of this.projectReport.buildings){
+        if(building._id===SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)) {
+          this.compareIndex=this.projectReport.buildings.indexOf(building);
+        }
+      }
+      if(this.compareIndex &&
+        SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) !== this.openBuildingNameAmenities)
+        this.costSummaryService.moveRecentBuildingAtTop( this.compareIndex);
+      if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) === this.openBuildingNameAmenities) {
+        this.getStatusOfCommonEmenities('false');
+        this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length);
+
+      }
     }
   }
   ngAfterViewInit() {
