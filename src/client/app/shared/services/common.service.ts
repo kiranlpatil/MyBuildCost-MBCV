@@ -10,12 +10,12 @@ import {
 
 @Injectable()
 export class CommonService {
-/*  CommonService = new Subject<any>();
-  addBuildingPackageDetails$ = this.CommonService.asObservable();
+  CommonService = new Subject<any>();
+  deleteEvent$ = this.CommonService.asObservable();
 
   change(values:any) {
     this.CommonService.next(values);
-  }*/
+  }
 
 
 

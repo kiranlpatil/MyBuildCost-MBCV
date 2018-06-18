@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+//import {CommonService} from "../";
 
 @Component({
   moduleId: module.id,
@@ -14,10 +15,12 @@ export class DeleteConfirmationModalComponent {
 
 
   constructor() {
+
   }
 
   deleteElement() {
     this.deleteElementEvent.emit(this.elementType);
+
   }
 
 }

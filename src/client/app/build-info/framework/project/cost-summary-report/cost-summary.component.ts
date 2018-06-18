@@ -4,7 +4,10 @@ import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
   ValueConstant, CurrentView, ScrollView, Animations
 } from '../../../../shared/constants';
-import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../shared/index';
+import {
+  SessionStorage, SessionStorageService, Message, Messages, MessageService,
+  CommonService
+} from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
 import { Building } from '../../model/building';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -67,6 +70,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   clonedBuildingDetails: Array<CostHead>;
   showHideCostHeadButtonsList: Array<AddCostHeadButton>;
   isActiveAddBuildingButton:boolean=false;
+  subscription:any;
   public costIn: any[] = [
     { 'costInId': ProjectElements.RS_PER_SQFT},
     { 'costInId': ProjectElements.RS_PER_SQMT}
@@ -86,7 +90,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
               private buildingService: BuildingService, private loaderService : LoaderService,
-              private errorService:ErrorService) {
+              private errorService:ErrorService,private commonService: CommonService) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -115,6 +119,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       }
     });
     this.getProjectSubscriptionDetails();
+    this.subscription = this.commonService.deleteEvent$
+      .subscribe(item =>this.getProjectSubscriptionDetails()
+      );
   }
 
   getProjectSubscriptionDetails () {
@@ -220,6 +227,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, null);
       this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
     }
+     this.commonService.change(projects);
   }
 
   onGetCostSummaryReportFailure(error : any) {
