@@ -182,6 +182,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
       app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
       app.use('/public', express.static(path.resolve(__dirname+ _serverDir + '/public')));
+      app.use('/banners', express.static(path.resolve(__dirname + '/banners')));
+
 
       /**
        * Spa Res Sender.
