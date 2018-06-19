@@ -7,10 +7,12 @@
       <div class="package-container" *ngFor="let package of packageDetailsList">
         <div [class.trial]="package.basePackage.cost === 0" [class.premium]="package.basePackage.cost !== 0">
           <div class="package-image">
-            <img src="assets/build-info/package-details/free-plan.png">
+            <img *ngIf="package.basePackage.name==='Free'" src="assets/build-info/package-details/free-plan.png">
+            <img *ngIf="package.basePackage.name==='Premium'" src="assets/build-info/package-details/premium-plan.png">
           </div>
 
-          <p class="package-name">{{package.basePackage.description}}</p>
+          <p *ngIf="package.basePackage.name==='Free'" class="package-name">Trial</p>
+          <p *ngIf="package.basePackage.name==='Premium'" class="package-name">Premium</p>
 
           <p *ngIf="package.basePackage.numOfProjects > 1; else project">{{package.basePackage.numOfProjects}} {{getLabels().PROJECTS}}</p>
           <ng-template #project>
@@ -22,7 +24,10 @@
             <p>{{package.basePackage.numOfBuildings}} {{getLabels().BUILDING}}</p>
           </ng-template>
 
-          <p>{{package.basePackage.validityDescription}}</p>
+
+
+          <p *ngIf="package.basePackage.name==='Free'">{{package.basePackage.validity}} Days</p>
+          <p *ngIf="package.basePackage.name==='Premium'">{{package.basePackage.validity/365|number:'1.0-0'}} Years</p>
 
           <p class="package-cost" *ngIf="package.basePackage.cost !== 0; else free">{{package.basePackage.cost}}<sup> INR</sup></p>
           <ng-template #free>
