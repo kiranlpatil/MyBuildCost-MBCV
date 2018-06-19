@@ -7,7 +7,8 @@
       <div class="package-container" *ngFor="let package of packageDetailsList">
         <div [class.trial]="package.basePackage.cost === 0" [class.premium]="package.basePackage.cost !== 0">
           <div class="package-image">
-            <img src="assets/build-info/package-details/free-plan.png">
+            <img *ngIf="package.basePackage.name==='Free'" src="assets/build-info/package-details/free-plan.png">
+            <img *ngIf="package.basePackage.name==='Premium'" src="assets/build-info/package-details/premium-plan.png">
           </div>
 
           <p *ngIf="package.basePackage.name==='Free'" class="package-name">Trial</p>
