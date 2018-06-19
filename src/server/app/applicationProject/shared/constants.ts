@@ -193,7 +193,9 @@ class Constants {
   public static ALASQL_AND_MATERIAL_NOT_LABOUR = ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOUR +
     ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB
     + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB_DOT;
-
+  public static ALASQL_MATERIAL_NOT_LABOUR_NO_LIKE = Constants.ALASQL_MATERIAL_NOT_LABOUR +
+    ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB
+    + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB_DOT;
   // Error Messages
   public static MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION = 'Oop\'s! looks like you haven\'t provided Cost Estimation for ';
 }
