@@ -45,6 +45,11 @@
       <div>
         <button class="btn btn-default" name="cancel" (click)="onCancelClick()">{{getButton().CANCEL_BUTTON}}</button>
         <button class="btn btn-primary" name="pay" (click)="onPay()">{{getButton().PAY_BUTTON}}</button>
+
+        <div class='pm-button'><a href='https://www.payumoney.com/sandbox/paybypayumoney/#/7FBB62B536EDA0D82112CD53C896AD1B'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/11.png' /></a></div>
+
+        <!--<div class='pm-button'><a href='https://www.payumoney.com/sandbox/paybypayumoney/#/A41D405EAD713E328300472482EE539E'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div>-->
+
       </div>
     </div>
   </div>
@@ -52,7 +57,7 @@
 
 <div class="addmore-package-section" *ngIf="packageName && packageName=='Add_building'">
   <h1 [innerHtml]="getMessages().MSG_ADD_BUILDING_PAYMENT"></h1>
-  <uL>
+  <ul>
     <li>
       <div>
         <label class="pull-left select-label">{{getLabels().NO_OF_BUILDINGS_TO_ADD}}</label>
@@ -79,7 +84,8 @@
         </div>
       </div>
     </li>
-  </uL>
+  </ul>
+
   <div>
     <button class="btn btn-default" name="cancel" (click)="onCancel()">{{getButton().CANCEL_BUTTON}}</button>
     <button class="btn btn-primary" name="pay" (click)="onProceedToPay()">{{getButton().PROCEED_TO_PAY_BUTTON}}</button>
