@@ -226,6 +226,7 @@ export class Messages {
   public static MSG_ON_RETAIN_PROJECT2: string = ' or create a new project';
   public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
   public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';
+  public static PROJECT_EXPIRED: string = 'Project Expired';
 
 }
 
@@ -298,6 +299,7 @@ export class SessionStorage {
   public static CREATED_AT = 'createdAt';
   public static PACKAGE_NAME = 'package_name';
   public static NO_OF_BUILDINGS_PURCHASED = 'no_of_buildings_purchased';
+  public static CREATE_NEW_PROJECT = 'create_new_project';
   public static TOTAL_BILLED = 'total_billed';
   public static IS_SUBSCRIPTION_AVAILABLE = 'is_subscription_available';
   public static PREMIUM_PACKAGE_AVAILABLE = 'premium_package_available';
@@ -595,8 +597,9 @@ export class Label {
 
   //Renew project
   public static YOUR_PROJECT: string = 'Your project';
-  public static IS_ABOUT_TO_EXPIRE_IN: string = ', is about to expire in';
-  public static DAYS: string = 'days';
+  public static IS_ABOUT_TO_EXPIRE_IN: string = ' is about to expire in ';
+  public static IS_ABOUT_TO_EXPIRED: string = ' is expired.';
+  public static DAYS: string = 'days.';
   public static PLEASE_RENEW_TO_CONTINUE: string = 'Please renew to continue using features of BuildInfo.';
   public static START_DATE: string = 'Start Date';
   public static END_DATE: string = 'End Date';

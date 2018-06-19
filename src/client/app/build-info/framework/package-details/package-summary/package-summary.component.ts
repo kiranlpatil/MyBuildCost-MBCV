@@ -21,6 +21,8 @@ export class PackageSummaryComponent implements OnInit {
   totalBilled: number=500;
   sum : number =0;
   projectId:any;
+  projectName:string;
+  createNewProject:boolean=false;
   noOfBuildingsValues: any[] = ValueConstant.NO_OF_BUILDINGS_VALUES;
 
   constructor(private activatedRoute: ActivatedRoute, private packageDetailsService: PackageDetailsService,
@@ -28,11 +30,12 @@ export class PackageSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createNewProject=SessionStorageService.getSessionValue(SessionStorage.CREATE_NEW_PROJECT)!== 'false' ? true : false;
     this.activatedRoute.params.subscribe(params => {
       this.packageName = params['packageName'];
       this.premiumPackageExist = params['premiumPackageExist'];
       this.premiumPackageAvailable = this.premiumPackageExist !== 'false' ? true : false;
-      if (this.packageName === 'Premium' || this.packageName === 'Retain') {
+      if (this.packageName === 'Premium' || this.packageName === 'Retain' || this.packageName === 'Free' ) {
           let body = {
             basePackageName: 'Premium'
           };
@@ -102,6 +105,7 @@ export class PackageSummaryComponent implements OnInit {
    }
   onPay() {
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
+    sessionStorage.removeItem(SessionStorage.CREATE_NEW_PROJECT);
     this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
       }
   onProceedToPay() {

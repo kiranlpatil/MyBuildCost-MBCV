@@ -20,7 +20,7 @@ export class RetainProjectComponent implements OnInit {
   packageName:string;
   premiumPackageAvailable:boolean;
   retainDetails:Subscription;
-
+  createNewProject :boolean =false;
   constructor(private activatedRoute:ActivatedRoute, private _router: Router,
               private projectService: ProjectService,private commonService:CommonService) {
 
@@ -29,7 +29,12 @@ export class RetainProjectComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.projectName = params['projectName'];
+      /*if(this.projectName && (this.projectName.indexOf('Trial Project'))!== -1) {
+        this.createNewProject=true;
+        SessionStorageService.setSessionValue(SessionStorage.CREATE_NEW_PROJECT,this.createNewProject);
+        }*/
     });
+
     this.packageName=SessionStorageService.getSessionValue(SessionStorage.PACKAGE_NAME);
     this.premiumPackageAvailable=SessionStorageService.getSessionValue(SessionStorage.PREMIUM_PACKAGE_AVAILABLE)!== 'false' ? true : false;
     this.isSubscriptionAvailable=SessionStorageService.getSessionValue(SessionStorage.IS_SUBSCRIPTION_AVAILABLE)!== 'false' ? true : false;
@@ -43,26 +48,14 @@ export class RetainProjectComponent implements OnInit {
     }
 
     onCreateNewProject() {
-      let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      this.projectService.updateProjectStatus(projectId).subscribe(
-        success => this.onUpdateProjectStatusSuccess(success),
-        error => this.onUpdateProjectStatusFailure(error)
-      );
+      if(this.isSubscriptionAvailable) {
+        this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+      }else if(!this.isSubscriptionAvailable) {
+        this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,this.packageName,this.premiumPackageAvailable]);
+      }
       }
 
-  onUpdateProjectStatusSuccess(success : any) {
-    if(this.isSubscriptionAvailable) {
-      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
-    }else if(!this.isSubscriptionAvailable) {
-      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Premium',this.premiumPackageAvailable]);
 
-    }
-    console.log(success);
-  }
-
-  onUpdateProjectStatusFailure(error : any) {
-    console.log(error);
-  }
 
   onContinueWithExixtingProject() {
     this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,'Retain',false]);

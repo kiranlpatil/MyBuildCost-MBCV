@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { SessionStorage, SessionStorageService } from '../../../shared/index';
+import {CommonService, SessionStorage, SessionStorageService} from '../../../shared/index';
 import { Menus, NavigationRoutes, CurrentView, Button } from '../../../shared/constants';
 import { CostSummaryService } from '../project/cost-summary-report/cost-summary.service';
 
@@ -23,9 +23,12 @@ export class ProjectHeaderComponent implements OnInit {
   addBuildingButtonDisable:boolean =false;
   premiumPackageAvailable:boolean=false;
   activeStatus:boolean=false;
+  subscription:any;
+  item :any;
 
 
-  constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService) {
+
+  constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService,private commonService:CommonService) {
   }
 
   ngOnInit() {
@@ -37,6 +40,9 @@ export class ProjectHeaderComponent implements OnInit {
     if(this.getCurrentProjectId()) {
       this.getProjectSubscriptionDetails();
     }
+    this.subscription = this.commonService.deleteEvent$
+      .subscribe(item =>this.getProjectSubscriptionDetails()
+      );
   }
 
   getCurrentProjectId() {

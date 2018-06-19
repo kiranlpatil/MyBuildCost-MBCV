@@ -800,13 +800,18 @@ class UserService {
 
                 //expiry date for project subscription
                 let current_date = new Date();
+                var newExipryDate = new Date(projectSubscription.expiryDate);
+                newExipryDate.setDate(projectSubscription.expiryDate.getDate() + 30);
+                let noOfDays =  this.daysdifference(newExipryDate,  current_date);
                 projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
 
                 if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
                   projectSubscription.warningMessage =
                     'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days,' ;
-                } else if(projectSubscription.numOfDaysToExpire < 0) {
+                } else if(projectSubscription.numOfDaysToExpire < 0 &&  noOfDays > 0) {
                   projectSubscription.expiryMessage =  'Project expired,';
+                }else if(noOfDays < 0) {
+                  projectSubscription.activeStatus = false;
                 }
 
                 projectSubscriptionArray.push(projectSubscription);
@@ -838,7 +843,7 @@ class UserService {
      let expiryDateOuter = new Date(subscription.activationDate);
      let current_date = new Date();
      for(let purchasePackage of subscription.purchased) {
-       expiryDateOuter = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
+       expiryDateOuter = new Date(expiryDateOuter.setDate(activation_date.getDate() + purchasePackage.validity));
        for (let purchasePackage of subscription.purchased) {
          //expiry date for each package.
          expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + purchasePackage.validity));
@@ -846,7 +851,11 @@ class UserService {
            return purchasePackage.name;
            }
        }
-      return purchasePackage.name='Free';
+       if(purchasePackage.name ==='Free') {
+         return purchasePackage.name='Free';
+       }else {
+         return purchasePackage.name='Premium';
+       }
      }
     }
 
@@ -896,13 +905,19 @@ class UserService {
 
             //expiry date for project subscription
             let current_date = new Date();
+            var newExipryDate = new Date(projectSubscription.expiryDate);
+            newExipryDate.setDate(projectSubscription.expiryDate.getDate() + 30);
+            let noOfDays =  this.daysdifference(newExipryDate,  current_date);
+
             projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
 
             if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >=0) {
               projectSubscription.warningMessage =
                 'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days.' ;
-            } else if(projectSubscription.numOfDaysToExpire < 0) {
+            } else if(projectSubscription.numOfDaysToExpire < 0 && noOfDays > 0) {
               projectSubscription.expiryMessage = 'Project expired,';
+            }else if(noOfDays < 0) {
+              projectSubscription.activeStatus = false;
             }
             callback(null, projectSubscription);
           }
@@ -985,7 +1000,7 @@ class UserService {
                 if (error) {
                   callback(error, null);
                 } else {
-                  callback(null, {data: 'success'});
+                  callback(null, {data: 'Project Renewed successfully'});
                 }
               });
             }
@@ -1024,18 +1039,32 @@ class UserService {
     }
   }
 
-  updateSubscriptionPackage( userId: any, projectId:string,subscription: any, callback:(error: any, result: any)=> void) {
-    let query = {_id: userId};
-    //TODO for more objects in subscription .
-    let updateQuery = {$set:{'subscription.$[]':subscription}};
-    this.userRepository.findOneAndUpdate(query, updateQuery, {new: true}, (error, result) => {
+  updateSubscriptionPackage( userId: any, projectId:string,updatedSubscription: any, callback:(error: any, result: any)=> void) {
+    let projection = {subscription: 1};
+    this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, {data:'success'});
+        let subScriptionArray = result.subscription;
+        for (let subscriptionIndex =0; subscriptionIndex< subScriptionArray.length; subscriptionIndex++) {
+          if (subScriptionArray[subscriptionIndex].projectId.length !== 0) {
+            if (subScriptionArray[subscriptionIndex].projectId[0].equals(projectId)) {
+              subScriptionArray[subscriptionIndex] = updatedSubscription;
+            }
+          }
+        }
+        let query = {'_id': userId};
+        let newData = {$set: {'subscription': subScriptionArray}};
+        this.userRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, {data:'success'});
+          }
+        });
       }
     });
-  }
+   }
 
   calculateValidity(subscription: any) {
     let activationDate = new Date(subscription.activationDate);

@@ -17,8 +17,6 @@ export class RenewPackageComponent implements OnInit {
   projectName : string;
   numOfDaysToExpire : string;
   body:any;
-  discountValid:boolean=false;
-  discount: number;
   public currentDate: Date = new Date();
   public expiryDate: Date = new Date();
 
@@ -31,6 +29,7 @@ export class RenewPackageComponent implements OnInit {
       this.projectName = params['projectName'];
       this.numOfDaysToExpire = params['numOfDaysToExpire'];
     });
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, this.projectId);
     this.getSubscriptionPackageByName();
   }
 
@@ -39,7 +38,6 @@ export class RenewPackageComponent implements OnInit {
        this.body = { basePackageName: 'Premium'};
     } else {
        this.body = { addOnPackageName: 'RenewProject'};
-       this.discountValid = true;
     }
     this.packageDetailsService.getSubscriptionPackageByName(this.body).subscribe(
       packageDetails=>this.onGetSubscriptionPackageByNameSuccess(packageDetails,this.body),
@@ -54,7 +52,7 @@ export class RenewPackageComponent implements OnInit {
     }
    this.currentDate.setDate(this.currentDate.getDate() +  parseInt(this.numOfDaysToExpire));
    this.expiryDate.setDate(this.currentDate.getDate() + this.premiumPackageDetails.validity);
-   this.discount = this.premiumPackageDetails.cost - this.premiumPackageDetails.iterativeDiscount;
+    SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.premiumPackageDetails.cost );
   }
   onGetSubscriptionPackageByNameFailure(error:any) {
     console.log(error);
@@ -82,11 +80,6 @@ export class RenewPackageComponent implements OnInit {
   }
 
   proceedToPay() {
-    if(this.discountValid) {
-      SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.discount);
-    }else {
-      SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.premiumPackageDetails.cost );
-    }
     if(this.body.basePackageName) {
     this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_REATAIN_PROJECT,NavigationRoutes.SUCCESS]);
   }else {

@@ -26,6 +26,7 @@ export class PaymentSuccessfulComponent implements OnInit {
   removeTrialProjectPrefix: boolean = false;
   numOfPurchasedBuilding:number;
   totalBilled :number;
+  createNewProject :boolean=false;
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
 
@@ -47,7 +48,9 @@ export class PaymentSuccessfulComponent implements OnInit {
 
     this.numOfPurchasedBuilding =parseInt( SessionStorageService.getSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED));
     this.totalBilled =parseInt( SessionStorageService.getSessionValue(SessionStorage.TOTAL_BILLED));
-    }
+    this.createNewProject=SessionStorageService.getSessionValue(SessionStorage.CREATE_NEW_PROJECT)!== 'false' ? true : false;
+
+  }
 
   getProject() {
     this.projectService.getProject(this.projectId).subscribe(
@@ -90,7 +93,7 @@ export class PaymentSuccessfulComponent implements OnInit {
   }
 
   onRetainOrRenewProjectSuccess(success: any) {
-    if (this.packageName === 'Retain' || this.packageName === 'Premium') {
+    if (this.packageName === 'Retain' || this.packageName === 'Premium' || this.packageName === 'RenewProject') {
       if (this.removeTrialProjectPrefix) {
         this.removeTrialProjectPrefix = false;
         this.updateProjectNameById();
@@ -136,8 +139,28 @@ export class PaymentSuccessfulComponent implements OnInit {
         error=>this.onAssignPremiumPackageFailure(error));
   }
   onAssignPremiumPackageSuccess(success: any) {
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    if(this.packageName === 'Free') {
+       let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+       this.projectService.updateProjectStatus(projectId).subscribe(
+         success => this.onUpdateProjectStatusSuccess(success),
+         error => this.onUpdateProjectStatusFailure(error)
+       );
+    } else {
+      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+    }
+
   }
+
+  onUpdateProjectStatusSuccess(success : any) {
+    this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+    console.log(success);
+  }
+
+  onUpdateProjectStatusFailure(error : any) {
+    console.log(error);
+  }
+
+
 
   onAssignPremiumPackageFailure(error:any) {
     var message = new Message();
@@ -155,7 +178,9 @@ export class PaymentSuccessfulComponent implements OnInit {
       this.onRetainOrRenewProject(this.packageName);
     }else if(this.packageName === this.getLabels().PACKAGE_PREMIUM ) {
       this.assignPremiumPackage();
-    }else if(this.packageName === 'Add_building') {
+    }else if(this.packageName === 'Free') {
+      this.assignPremiumPackage();
+    } else if(this.packageName === 'Add_building') {
       this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
       } else {
       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);

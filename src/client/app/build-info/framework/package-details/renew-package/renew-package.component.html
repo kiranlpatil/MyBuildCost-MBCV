@@ -2,8 +2,8 @@
 
   <h1>
     {{getLabels().YOUR_PROJECT}}
-    <span>'{{projectName}}'</span>{{getLabels().IS_ABOUT_TO_EXPIRE_IN}}
-    {{numOfDaysToExpire}} {{getLabels().DAYS}}.
+    <b>'{{projectName}}'</b> <span *ngIf="numOfDaysToExpire > 0">{{getLabels().IS_ABOUT_TO_EXPIRE_IN}}{{numOfDaysToExpire}} {{getLabels().DAYS}}</span>
+     <span *ngIf="numOfDaysToExpire<0">{{getLabels().IS_ABOUT_TO_EXPIRED}}</span>
     {{getLabels().PLEASE_RENEW_TO_CONTINUE}}
   </h1>
 
@@ -28,9 +28,7 @@
       <div class="font-bold">
         <span>{{getLabels().TOTAL_BILLED}}</span>
         <div class="totalBillAmount pull-right">
-          <span  class="col-xs-12 pull-right no-padding text-right" [class.lineThrough] = "discountValid" > <sup>INR</sup> {{premiumPackageDetails.cost}} </span>
-          <span class="col-xs-12 pull-right no-padding text-right font-18" *ngIf="discountValid">
-            <sup>INR</sup> {{discount}} </span>
+          <span  class="col-xs-12 pull-right no-padding text-right"> <sup>INR</sup> {{premiumPackageDetails.cost}} </span>
         </div>
       </div>
     </li>
