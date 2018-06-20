@@ -424,7 +424,7 @@ class UserService {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(result);
         let host = config.get('application.mail.host');
-        let link = host + 'activate-user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
+        let link = host + 'signin?access_token=' + token + '&_id=' + result._id;
         let sendMailService = new SendMailService();
         let data: Map<string, string> = new Map([['$applicationLink$',config.get('application.mail.host')],
           ['$link$', link]]);
@@ -643,7 +643,6 @@ class UserService {
           code: 400
         }, null);
       } else {
-
         this.SendChangeMailVerification(data, (error, result) => {
           if (error) {
             if (error.message === Messages.MSG_ERROR_CHECK_EMAIL_ACCOUNT) {
