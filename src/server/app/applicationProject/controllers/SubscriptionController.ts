@@ -99,7 +99,7 @@ class SubscriptionController {
     try {
       console.log('payment success : '+ JSON.stringify(req.body));
       let pkgName = req.body.productinfo;
-      let redirectUrl = config.get('application.browser.IP') +'/package-details/payment/'+pkgName+'/success';
+      let redirectUrl = config.get('application.browser.IP') +'package-details/payment/'+pkgName+'/success';
       res.redirect(redirectUrl);
     } catch(e) {
       next(new CostControllException(e.message,e.stack));
@@ -110,7 +110,7 @@ class SubscriptionController {
     try {
       let body = req.body;
       console.log('payment failed : '+ JSON.stringify(body));
-      res.redirect(config.get('application.browser.IP') +'/package-details/payment/failure');
+      res.redirect(config.get('application.browser.IP') +'package-details/payment/failure');
     } catch(e) {
       next(new CostControllException(e.message,e.stack));
     }

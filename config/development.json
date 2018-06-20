@@ -51,6 +51,11 @@
       "clientId" : " 377995296702-0tr9nbma4lgekn5690r1f4bn3q1in5mm.apps.googleusercontent.com",
       "clientSecretId" : "-EHuNLqtYrRuwS_ZZ48PGHJC"
     },
+    "messaging": {
+      "authKey": "152516A0pwPFRp59198cd9",
+      "senderId": "JOBMOS",
+      "routerNumber": "4"
+    },
     "browser" : {
       "IP" : "http://localhost:5555/"
     },
