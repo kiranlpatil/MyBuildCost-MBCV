@@ -21,7 +21,6 @@ export class ProjectListHeaderComponent implements OnInit {
   selectedProjectName : string;
   projectId :string;
   currentView : string;
-  activeStatus : boolean;
   projectNameSubscription : Subscription;
 
   constructor(private projectService: ProjectService, private _router: Router,
@@ -52,14 +51,14 @@ export class ProjectListHeaderComponent implements OnInit {
   }
 
   onGetAllProjectsSuccess(projects : any) {
-    this.projects = projects.data;
-    for(let projectIndex =0; projectIndex< this.projects.length; projectIndex++) {
-      if(!this.projects[projectIndex].activeStatus) {
-        this.projects.splice(projectIndex,1);
+    let array = projects.data;
+    let activeProjects =[];
+    for(let projectIndex =0; projectIndex< array.length; projectIndex++) {
+      if(array[projectIndex].activeStatus) {
+       activeProjects.push(array[projectIndex]);
       }
     }
-
-    this.activeStatus = projects.data.activeStatus;
+    this.projects = activeProjects;
     if((this.currentView === 'costSummary'|| this.currentView === 'materialTakeOff' || this.currentView === 'projectDetails')
       && SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) === null ) {
       let projectList : Array<ProjectSubscriptionDetails>;
