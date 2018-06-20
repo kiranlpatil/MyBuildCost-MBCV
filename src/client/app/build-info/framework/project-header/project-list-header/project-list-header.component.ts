@@ -21,7 +21,6 @@ export class ProjectListHeaderComponent implements OnInit {
   selectedProjectName : string;
   projectId :string;
   currentView : string;
-  activeStatus : boolean;
   projectNameSubscription : Subscription;
 
   constructor(private projectService: ProjectService, private _router: Router,
@@ -52,8 +51,14 @@ export class ProjectListHeaderComponent implements OnInit {
   }
 
   onGetAllProjectsSuccess(projects : any) {
-    this.projects = projects.data;
-    this.activeStatus = projects.data.activeStatus;
+    let array = projects.data;
+    let activeProjects =[];
+    for(let projectIndex =0; projectIndex< array.length; projectIndex++) {
+      if(array[projectIndex].activeStatus) {
+       activeProjects.push(array[projectIndex]);
+      }
+    }
+    this.projects = activeProjects;
     if((this.currentView === 'costSummary'|| this.currentView === 'materialTakeOff' || this.currentView === 'projectDetails')
       && SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) === null ) {
       let projectList : Array<ProjectSubscriptionDetails>;
@@ -78,10 +83,9 @@ export class ProjectListHeaderComponent implements OnInit {
       function( projectDetails: ProjectSubscriptionDetails){
           return projectDetails.projectName === projectName;
         });
-  //  if(this.activeStatus) {
+
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectList[0].projectId);
       this._router.navigate([NavigationRoutes.APP_PROJECT, projectList[0].projectId, NavigationRoutes.APP_COST_SUMMARY]);
-   // }
  }
 
   getMenus() {

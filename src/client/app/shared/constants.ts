@@ -113,7 +113,7 @@ export class Messages {
 
 
   public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and you will receive a verification code on it.';
-  public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new email id and we will send you a reset password link.';
+  public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new account email address and we will send you a link to reset your email.' ;
   public static MSG_EMAIL_ACTIVATION = 'Your email has been activated. You may start using your account with new email address' +
     ' immediately.';
   public static MSG_CONTACT_US = 'Please provide the following details and we will get back to you soon.';
