@@ -216,6 +216,9 @@ export class Messages {
   public static  MSG_ERROR_CANNOT_SELECT_BUILDINGS = 'Cannot select more than 5 buildings.';
   public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor/Parking Details';
 
+  //Payment form
+  public static PAYMENT_FORM_FILED_MISSING: string = 'Please fill all details.';
+
   //Payment Messages
   public static MSG_FOR_REMAINING_BUILDINGS: string = '(You can add';
   public static MSG_FOR_REMAINING_BUILDINGS_ADD: string = ' more buildings to this project)';

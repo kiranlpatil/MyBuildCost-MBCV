@@ -6,6 +6,9 @@ import { PayUMoneyService } from './payUMoney.service';
 import { NavigationRoutes } from '../../../shared/constants';
 import { CommonService } from '../../../shared/services/common.service';
 import { ValidationService } from '../../../shared/customvalidations/validation.service';
+import { Message } from '../../../shared/index';
+import { Messages } from '../../../shared/constants';
+import { MessageService } from '../../../shared/services/message.service';
 
 @Component ({
   moduleId:module.id,
@@ -21,7 +24,7 @@ export class PayUMoneyComponent implements OnInit {
   public isShowErrorMessage: boolean = false;
 
   constructor(private payUMoneyService : PayUMoneyService,  private _router : Router, private commonService : CommonService,
-              private formBuilder : FormBuilder) {
+              private formBuilder : FormBuilder, private messageService :  MessageService) {
 
     this.payUMoneyForm = this.formBuilder.group({
       firstname: ['', ValidationService.requireFirstNameValidator],
@@ -51,6 +54,11 @@ export class PayUMoneyComponent implements OnInit {
         PayUMoneyModel => this.onGetHashSuccess(PayUMoneyModel),
         error => this.onGetHashFailure(error)
       );
+    } else {
+      let message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.PAYMENT_FORM_FILED_MISSING;
+      this.messageService.message(message);
     }
   }
 
