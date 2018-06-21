@@ -194,7 +194,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   goToCostHeadView( buildingId : string, buildingName:string, estimatedItem :any) {
-
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WINDOW_POSITION, $(window).scrollTop());
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING_NAME, buildingName);
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
@@ -556,14 +556,14 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     }
   }
   openRecentBuilding() {
-    let recentBuildingId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    if(this.projectId===recentBuildingId) {
+    let recentProjectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    if(this.projectId===recentProjectId) {
       for(let building of this.projectReport.buildings){
         if(building._id===SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)) {
           this.compareIndex=this.projectReport.buildings.indexOf(building);
         }
       }
-      if(this.compareIndex &&
+      if((this.compareIndex ||this.compareIndex===0) &&
         SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) !== this.openBuildingNameAmenities)
         this.costSummaryService.moveRecentBuildingAtTop( this.compareIndex);
       if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) === this.openBuildingNameAmenities) {

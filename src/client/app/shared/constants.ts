@@ -292,6 +292,7 @@ export class SessionStorage {
   public static NUMBER_OF_DAYS_TO_EXPIRE = 'number_of_days_to_expire';
   public static CURRENT_BUILDING_NAME = 'current_building_name';
   public static CURRENT_BUILDING = 'current_building_id';
+  public static CURRENT_WINDOW_POSITION = 'current_window_position';
   public static CURRENT_COST_HEAD_ID = 'current_cost_head_id';
   public static CURRENT_COST_HEAD_NAME = 'current_cost_head';
   public static CURRENT_WORKITEM_ID = 'current_workitem_id';

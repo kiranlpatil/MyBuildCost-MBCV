@@ -52,6 +52,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
 }
   goToCostHeadView(estimatedItem :EstimateReport) {
     if(!estimatedItem.disableCostHeadView) {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_WINDOW_POSITION, $(window).scrollTop());
       this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
       this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
       this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_COMMON_AMENITIES,

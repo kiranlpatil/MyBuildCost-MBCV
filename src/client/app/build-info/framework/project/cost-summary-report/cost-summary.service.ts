@@ -276,9 +276,13 @@ export class CostSummaryService extends BaseService {
         let collapseTag = '#collapse' + compareIndex;
         $(collapseTag).ready(function () {
           var divPos = $(collapseCostSummaryPanelTag).offset().top;
+          let scrollTo=SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)?
+            SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)
+            : divPos - 8;
           $('html, body').animate({
-            scrollTop: divPos - 8
-          }, 500);
+            scrollTop: scrollTo
+          },500);
+          setTimeout(() =>  SessionStorageService.removeSessionValue(SessionStorage.CURRENT_WINDOW_POSITION), 600);
         });
     });
   }

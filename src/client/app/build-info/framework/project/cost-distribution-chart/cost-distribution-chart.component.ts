@@ -135,7 +135,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
     });
   }
 
-  private createDataForChart(estimatedCostsHeadList: any, budgetedCostsHeadList: any) {debugger
+  private createDataForChart(estimatedCostsHeadList: any, budgetedCostsHeadList: any) {
    let costHeadList=estimatedCostsHeadList.concat(budgetedCostsHeadList);
     costHeadList.sort((a:[string,number], b:[string,number]) => {
       return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
