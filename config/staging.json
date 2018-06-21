@@ -644,11 +644,9 @@
         },
         {
           "name" : "Plum concrete in cum",
-          "rateAnalysisId" : 100095,
           "workItems" : [
             {
               "name" : "Plum concrete in cum, with M 7.5 grade PCC and plum @ 50:50, and concrete by conventional volumetric method, using farma and mixer",
-              "rateAnalysisId" : 100096,
               "isMeasurementSheet" : true,
               "measurementUnit" : "cum",
               "isRateAnalysis" : true,
@@ -3459,7 +3457,7 @@
           "name" : "Cement tile flooring",
           "workItems" : [
             {
-              "name" : "300 X 300 mm Concrete chequered tile flooring on 60mm bedding",
+              "name" : "300 mm  X 300 mm Concrete chequered tile flooring on 60mm bedding",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
@@ -3824,7 +3822,7 @@
           "name" : "Paving block flooring",
           "workItems" : [
             {
-              "name" : "Concrete paver block flooring as per selected shape(Non glazed blocks)",
+              "name" : "Concrete paver block flooring (Non glazed blocks)",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
@@ -3839,7 +3837,7 @@
               "height" : false
             },
             {
-              "name" : "Concrete paver block flooring as per selected shape (Glazed blocks)",
+              "name" : "Concrete paver block flooring (Glazed blocks)",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
