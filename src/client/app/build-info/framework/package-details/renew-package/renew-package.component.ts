@@ -3,7 +3,9 @@ import {Button, Headings, Label, NavigationRoutes} from '../../../../shared/cons
 import { PackageDetailsService } from '../package-details.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Message, MessageService } from '../../../../shared/index';
-import {SessionStorage, SessionStorageService} from "../../../../shared/index";
+import { SessionStorage, SessionStorageService } from '../../../../shared/index';
+import { SubscribedPackage } from '../../model/SubscribedPackage';
+import { CommonService } from '../../../../shared/services/common.service';
 @Component({
   moduleId: module.id,
   selector: 'bi-renew-package',
@@ -20,7 +22,8 @@ export class RenewPackageComponent implements OnInit {
   public currentDate: Date = new Date();
   public expiryDate: Date = new Date();
 
-  constructor(private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService, private route: ActivatedRoute ) {
+  constructor(private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService,
+              private route: ActivatedRoute, private commonService : CommonService) {
   }
 
   ngOnInit() {
@@ -50,6 +53,12 @@ export class RenewPackageComponent implements OnInit {
     }else {
       this.premiumPackageDetails=packageDetails[0].addOnPackage;
     }
+
+    let subscribedPackage = new SubscribedPackage();
+    subscribedPackage.name = this.premiumPackageDetails.name;
+    subscribedPackage.amount = this.premiumPackageDetails.cost;
+    this.commonService.updatePurchasepackageInfo(subscribedPackage);
+
    this.currentDate.setDate(this.currentDate.getDate() +  parseInt(this.numOfDaysToExpire));
    this.expiryDate.setDate(this.currentDate.getDate() + this.premiumPackageDetails.validity);
     SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.premiumPackageDetails.cost );
@@ -81,9 +90,11 @@ export class RenewPackageComponent implements OnInit {
 
   proceedToPay() {
     if(this.body.basePackageName) {
-    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_REATAIN_PROJECT,NavigationRoutes.SUCCESS]);
+      this._router.navigate(['project', NavigationRoutes.PAYMENT]);
+    //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_REATAIN_PROJECT,NavigationRoutes.SUCCESS]);
   }else {
-      this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
+      this._router.navigate(['project', NavigationRoutes.PAYMENT]);
+      //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
     }
   }
 

@@ -60,19 +60,18 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
    if(this.projects.length !== 0) {
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, this.projects[0].projectName);
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, this.projects[0].projectId);
-
    }
-  if(this.projects.length === 1 && this.projects[0].packageName==='Free') {
+    if(this.projects.length === 1 && this.projects[0].packageName==='Free') {
        this.premiumPackageAvailable=false;
        this.packageName='Free';
        this.isRetainModalActive=true;
-      }else if(this.projects.length!==0) {
-     if(this.projects.length >= 1 || this.projects[0].packageName==='Premium') {
-       this.packageName='Premium';
-      this.premiumPackageAvailable=true;
-      this.isProjectModalActive=true;
+    } else if(this.projects.length!==0) {
+       if(this.projects.length >= 1 || this.projects[0].packageName==='Premium') {
+        this.packageName='Premium';
+        this.premiumPackageAvailable=true;
+        this.isProjectModalActive=true;
+      }
     }
-   }
     this.isSubscriptionExist = projects.isSubscriptionAvailable;
     this.isVisible = true;
   }

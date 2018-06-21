@@ -53,7 +53,7 @@ export class RetainProjectComponent implements OnInit {
       }else if(!this.isSubscriptionAvailable) {
         this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY,this.packageName,this.premiumPackageAvailable]);
       }
-      }
+    }
 
 
 

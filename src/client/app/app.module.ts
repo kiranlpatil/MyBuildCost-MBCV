@@ -106,6 +106,8 @@ import { PaymentSuccessfulComponent } from './build-info/framework/payment/payme
 import { CreateProjectConfirmationModalComponent } from './shared/create-project-confirmation-modal/create-project-confirmation-modal.component';
 import {RetainProjectComponent} from "./build-info/framework/payment/retain-project/retain-project.component";
 import {PaymentFailureComponent} from "./build-info/framework/payment/payment-failure/payment-failure.component";
+import { PayUMoneyComponent } from './build-info/framework/payUMoney/payUMoney.component';
+import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.service';
 
 @NgModule({
   imports: [
@@ -192,7 +194,8 @@ import {PaymentFailureComponent} from "./build-info/framework/payment/payment-fa
     PaymentSuccessfulComponent,
     RenewPackageComponent,
     RetainProjectComponent,
-    PaymentFailureComponent
+    PaymentFailureComponent,
+    PayUMoneyComponent
   ],
 
   providers: [
@@ -232,7 +235,8 @@ import {PaymentFailureComponent} from "./build-info/framework/payment/payment-fa
 
       //Payment
     PackageDetailsService,
-    RenewPackageService
+    RenewPackageService,
+    PayUMoneyService
   ],
   bootstrap: [AppComponent]
 })

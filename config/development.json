@@ -56,10 +56,19 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
-    "filePathForMasterDataExcel" : "/src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "browser" : {
+      "IP" : "http://localhost:5555/"
+    },
     "filePathForProfileImage" : "/src/server/app/framework/public/profileimage",
     "filePathForAttachment": "/src/server/app/framework/public/attachment-files"
 
+  },
+
+  "payUMoney" : {
+    "merchentKey" : "UQ2iexyF",
+    "saltKey" : "jCC3ytHKOA",
+    "authHeader" : "WY4YNJEYPrAbCEUyoCoNDEcJxSvk/8glz7QaUsFqzRQ=",
+    "isProdMode" : false
   },
 
   /*"logger" : {

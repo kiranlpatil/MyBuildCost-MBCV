@@ -26,7 +26,7 @@
     "profilePathForClient":"/public/profileImage/",
     "limitForQuery" : 10,
     "mail": {
-      "host":"http://104.211.102.201:8080/",
+      "host":"http://104.211.102.201:80/",
       "MAIL_SENDER": "bigslicetechnologies@gmail.com",
       "MAIL_SENDER_PASSWORD": "BuildInfo@25341",
       "ADMIN_MAIL": "buildinfo@techprimelab.com",
@@ -55,9 +55,19 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
+     "browser" : {
+      "IP" : "http://104.211.102.201:80/"
+    },
     "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
 
+  },
+
+  "payUMoney" : {
+    "merchentKey" : "UQ2iexyF",
+    "saltKey" : "jCC3ytHKOA",
+    "authHeader" : "WY4YNJEYPrAbCEUyoCoNDEcJxSvk/8glz7QaUsFqzRQ=",
+    "isProdMode" : false
   },
 
   "logger" : {

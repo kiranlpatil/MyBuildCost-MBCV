@@ -1,0 +1,88 @@
+<div class="col-md-4"></div>
+
+<div class="col-md-4">
+  <h1>Please enter your details</h1>
+
+  <form (submit)="submitPaymentForm()">
+    <table>
+        <tr>
+          <td>First Name : </td>
+          <td><input name="firstname" id="firstname" [(ngModel)]="payUMoney.firstname"/></td>
+        </tr>
+      <tr>
+        <td>Last Name : </td>
+        <td><input name="lastname" id="lastname" [(ngModel)]="payUMoney.lastname"/></td>
+      </tr>
+      <tr>
+        <td>Email : </td>
+        <td><input name="email" id="email" [(ngModel)]="payUMoney.email"/></td>
+      </tr>
+      <tr>
+        <td>Phone : </td>
+        <td><input name="phone" type="number" [(ngModel)]="payUMoney.phone"/></td>
+      </tr>
+      <tr>
+        <td>Package Info : </td>
+        <td colspan="3">
+          <input name="productinfo" [(ngModel)]="payUMoney.productinfo" disabled/>
+        </td>
+      </tr>
+      <tr>
+        <td>Amount : </td>
+        <td>
+          <input name="amount" id="amount" [(ngModel)]="payUMoney.amount" disabled/>
+        </td>
+      </tr>
+      <tr>
+        <td> <button (click)="goToDashboard()">Cancel</button></td>
+        <td>
+          <button type="submit">Proceed to Pay</button>
+        </td>
+      </tr>
+
+      </table>
+  </form>
+
+  <!--<form class="col-xs-12 form-details" [formGroup]="payUMoneyForm" (submit)="submitPaymentForm()">
+
+    &lt;!&ndash;<div class="form-group">
+      <control-messages [control]="payUMoneyForm.controls.firstname" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="payUMoney.firstname" id="firstname" class="form-control" placeholder="Enter first name" required/>
+    </div>&ndash;&gt;
+
+    <div  class="form-group">
+      <control-messages [control]="payUMoneyForm.controls.lastname" [submitStatus]="submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+      <label>Last Name</label>
+      <input type="text" formControlName="lastname" id="lastname" class="form-control" placeholder="Enter last name" required />
+    </div>
+
+    &lt;!&ndash;<div  class="form-group">
+      &lt;!&ndash;<control-messages [control]="payUMoneyForm.controls.email" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>&ndash;&gt;
+      <label>Email</label>
+      <input type="email" [(ngModel)]="payUMoney.email" id="email" class="form-control" placeholder="Enter email" required />
+    </div>
+
+    <div  class="form-group">
+      &lt;!&ndash;<control-messages [control]="payUMoneyForm.controls.phone" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>&ndash;&gt;
+      <label>Phone</label>
+      <input type="number" [(ngModel)]="payUMoney.phone" id="phone" class="form-control" placeholder="Enter phone number" required />
+    </div>&ndash;&gt;
+
+    <div  class="form-group">
+      <label>Package Info</label>
+      <input type="text" [(ngModel)]="payUMoney.productinfo" id="packageInfo" class="form-control" disabled/>
+    </div>
+
+    <div  class="form-group">
+      <label>Amount</label>
+      <input type="number" [(ngModel)]="payUMoney.amount" id="amount" class="form-control" disabled/>
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="btn btn-default" (click)="goToDashboard()">Cancel</button>
+      <button type="submit" class="btn btn-primary">Proceed to Pay</button>
+    </div>
+  </form>-->
+
+</div>

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {CommonService,Message, MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
 import { PackageDetailsService } from './../package-details.service';
 import { NavigationRoutes } from '../../../../shared/index';
-import {AddBuildingPackageDetails} from "../../model/add-building-package-details";
+import { SubscribedPackage } from '../../model/SubscribedPackage';
 
 @Component({
   moduleId: module.id,
@@ -62,13 +62,13 @@ export class PackageSummaryComponent implements OnInit {
 
   onRetainOrRenewProjectSuccess(success: any) {
     let message = new Message();
-      message.isError = false;
-      message.custom_message = success.data;
-      this.messageService.message(message);
-      this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
-
+    message.isError = false;
+    message.custom_message = success.data;
+    this.messageService.message(message);
+    this._router.navigate(['project', NavigationRoutes.PAYMENT]);
+    //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
     //this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
-      }
+  }
 
   onRetainOrRenewProjectFailure(error:any) {
     console.log(error);
@@ -77,10 +77,19 @@ export class PackageSummaryComponent implements OnInit {
     // message.custom_message = error.err_msg;
     message.error_msg = error.err_msg;
     this.messageService.message(message);
-    }
+  }
 
   onGetSubscriptionPackageByNameSuccess(packageDetails: any) {
     this.premiumPackageDetails = packageDetails[0];
+    let subscribedPackage = new SubscribedPackage();
+    if(this.premiumPackageAvailable) {
+      subscribedPackage.amount = (this.premiumPackageDetails.basePackage.cost - this.premiumPackageDetails.basePackage.iterativeDiscount);
+      subscribedPackage.name = this.premiumPackageDetails.basePackage.name;
+    } else {
+      subscribedPackage.amount = this.premiumPackageDetails.basePackage.cost;
+      subscribedPackage.name = this.premiumPackageDetails.basePackage.name;
+    }
+    this.commonService.updatePurchasepackageInfo(subscribedPackage);
   }
 
   onGetSubscriptionPackageByNameFailure(error: any) {
@@ -103,19 +112,31 @@ export class PackageSummaryComponent implements OnInit {
      let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
      this._router.navigate([NavigationRoutes.APP_PROJECT,projectId,NavigationRoutes.APP_COST_SUMMARY]);
    }
+
   onPay() {
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
     sessionStorage.removeItem(SessionStorage.CREATE_NEW_PROJECT);
-    this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
-      }
+    //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
+    this._router.navigate(['project', NavigationRoutes.PAYMENT]);
+  }
+
   onProceedToPay() {
     if(this.packageName === 'Add_building') {
-      let body = { packageName: 'Add_building',
+      let body = {
+        packageName: 'Add_building',
         numOfPurchasedBuildings:this.selectedBuildingValue,
-        totalBilled :this.totalBilled };
+        totalBilled :this.totalBilled
+      };
+
+      let subscribedPackage = new SubscribedPackage();
+      subscribedPackage.name = body.packageName;
+      subscribedPackage.amount = body.totalBilled;
+      this.commonService.updatePurchasepackageInfo(subscribedPackage);
+
       this.updateSubscription(body);
     }
   }
+
   getHeadings() {
     return Headings;
   }

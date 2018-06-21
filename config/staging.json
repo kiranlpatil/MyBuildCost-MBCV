@@ -55,9 +55,19 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
+    "browser" : {
+      "IP" : "http://52.66.120.228:8080/"
+    },
     "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
 
+  },
+
+  "payUMoney" : {
+    "merchentKey" : "UQ2iexyF",
+    "saltKey" : "jCC3ytHKOA",
+    "authHeader" : "WY4YNJEYPrAbCEUyoCoNDEcJxSvk/8glz7QaUsFqzRQ=",
+    "isProdMode" : false
   },
 
   "logger" : {

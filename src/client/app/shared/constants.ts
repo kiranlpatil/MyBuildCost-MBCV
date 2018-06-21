@@ -113,7 +113,7 @@ export class Messages {
 
 
   public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and you will receive a verification code on it.';
-  public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new email id and we will send you a reset password link.';
+  public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new account email address and we will send you a link to reset your email.' ;
   public static MSG_EMAIL_ACTIVATION = 'Your email has been activated. You may start using your account with new email address' +
     ' immediately.';
   public static MSG_CONTACT_US = 'Please provide the following details and we will get back to you soon.';
@@ -215,6 +215,9 @@ export class Messages {
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
   public static  MSG_ERROR_CANNOT_SELECT_BUILDINGS = 'Cannot select more than 5 buildings.';
   public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor/Parking Details';
+
+  //Payment form
+  public static PAYMENT_FORM_FILED_MISSING: string = 'Please fill all details.';
 
   //Payment Messages
   public static MSG_FOR_REMAINING_BUILDINGS: string = '(You can add';
@@ -391,6 +394,7 @@ export class API {
 
   //
   public static SUBSCRIPTION = 'subscription';
+  public static PAY_U_MONEY = 'payUMoney';
   public static BASE_PACKAGES_LIST = 'basepackageslist';
   public static BY_NAME = 'by/name';
   public static UPDATE_SUBSCRIPTION = 'updateSubscription';

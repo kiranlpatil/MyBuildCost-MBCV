@@ -7,17 +7,23 @@ import {Subject} from "rxjs/Subject";
 import {
   AddBuildingPackageDetails
 } from "../../build-info/framework/model/add-building-package-details";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class CommonService {
-  CommonService = new Subject<any>();
+  CommonService = new BehaviorSubject<any>('null');
   deleteEvent$ = this.CommonService.asObservable();
+  updatepackageInfo$ = this.CommonService.asObservable();
 
   change(values:any) {
     this.CommonService.next(values);
   }
 
-
+  updatePurchasepackageInfo(packageInfo : any) {
+    if(packageInfo !== null) {
+      this.CommonService.next(packageInfo);
+    }
+  }
 
   goBack() {
     window.history.go(-1);
