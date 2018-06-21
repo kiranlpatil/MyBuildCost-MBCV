@@ -16,6 +16,9 @@ class ProjectSchema {
         type: String,
         required: true
       },
+      activeStatus: {
+        type: Boolean
+      },
       region: {
         type: String
       },

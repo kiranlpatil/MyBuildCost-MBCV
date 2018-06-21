@@ -79,9 +79,10 @@ export class UserChangePasswordComponent {
 
   onChangePasswordFailure(error: any) {
     this.loaderService.stop();
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0 || error.err_code===500 ) {
       var message = new Message();
       message.error_msg = error.err_msg;
+      message.error_code =  error.err_code;
       message.isError = true;
       this.messageService.message(message);
     } else {
@@ -101,12 +102,10 @@ export class UserChangePasswordComponent {
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
   logOut() {
-   /* if(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)===null) {
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)===null) {
       window.sessionStorage.clear();
       window.localStorage.clear();
     }
-    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
-    window.location.href = host;*/
     this._router.navigate([NavigationRoutes.APP_LOGIN]);
   }
 

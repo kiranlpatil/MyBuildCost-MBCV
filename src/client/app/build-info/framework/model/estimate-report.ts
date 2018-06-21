@@ -3,6 +3,7 @@ export class EstimateReport {
   rate: number;
   total : number;
   rateAnalysisId: number;
+  disableCostHeadView : boolean;
 
   constructor() {
     this.rate = 0;

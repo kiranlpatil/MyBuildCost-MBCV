@@ -7,6 +7,7 @@ import CentralizedRate = require('./CentralizedRate');
 class Project {
   _id?:string;
   name: string;
+  activeStatus:boolean;
   region: string;
   plotPeriphery: number;
   projectDuration: number;

@@ -1,0 +1,88 @@
+<div class="confirm-your-package-section" *ngIf="packageName && (packageName=='Premium' || packageName=='Retain' || packageName==='Free')">
+  <h1>{{getHeadings().CONFIRM_PACKAGE_HEADING}}</h1>
+
+  <div *ngIf="premiumPackageDetails">
+    <div class="col-xs-12">
+      <ul>
+        <li>
+          <div>
+            <span>{{getLabels().NO_OF_PROJECTS}}</span>
+            <span class="pull-right">{{premiumPackageDetails.basePackage.numOfProjects}}</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>{{getLabels().NO_OF_BUILDING}}</span>
+            <span class="pull-right">{{premiumPackageDetails.basePackage.numOfBuildings}}</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>{{getLabels().DURATION}}</span>
+            <span class="pull-right">{{premiumPackageDetails.basePackage.validity/365|number:'1.0-0'}} years </span>
+          </div>
+        </li>
+
+        <li *ngIf="!premiumPackageAvailable">
+          <div class="font-bold">
+            <span>{{getLabels().TOTAL_BILLED}}</span>
+            <span class="pull-right"> {{premiumPackageDetails.basePackage.cost}} <sup>INR</sup> </span>
+          </div>
+        </li>
+
+
+        <li *ngIf="premiumPackageAvailable">
+          <div class="font-bold">
+            <span>{{getLabels().TOTAL_BILLED}}</span>
+            <div class="totalBillAmount pull-right">
+              <span class="col-xs-12 pull-right no-padding text-right lineThrough"> <sup>INR</sup> {{premiumPackageDetails.basePackage.cost}} </span>
+              <span class="col-xs-12 pull-right no-padding text-right font-18"> <sup>INR</sup> {{premiumPackageDetails.basePackage.cost-premiumPackageDetails.basePackage.iterativeDiscount}} </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div>
+        <button class="btn btn-default" name="cancel" (click)="onCancelClick()">{{getButton().CANCEL_BUTTON}}</button>
+        <button class="btn btn-primary" name="pay" (click)="onPay()">{{getButton().PAY_BUTTON}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="addmore-package-section" *ngIf="packageName && packageName=='Add_building'">
+  <h1 [innerHtml]="getMessages().MSG_ADD_BUILDING_PAYMENT"></h1>
+  <ul>
+    <li>
+      <div>
+        <label class="pull-left select-label">{{getLabels().NO_OF_BUILDINGS_TO_ADD}}</label>
+        <div class="pull-right">
+          <select [(ngModel)]=selectedBuildingValue (change)="onChange($event.target.value)" class="select-dropdown " id="noOfBuildings">
+            <option [value]='1'>1</option>
+            <option *ngFor="let buildingNumber of noOfBuildingsValues" [value]="buildingNumber">{{ buildingNumber }}</option>
+          </select>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="total-billed-amount">
+        <label class="pull-left">{{getLabels().TOTAL_BILLED}}</label>
+        <div class="pull-right">
+          <span *ngIf="selectedBuildingValue">
+            <sup>{{getLabels().INR}}</sup>
+            <span>{{totalBilled}} </span>
+          </span>
+          <span *ngIf="!selectedBuildingValue">
+            <sup>{{getLabels().INR}}</sup>
+            <span>{{totalBilled}} </span>
+          </span>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div>
+    <button class="btn btn-default" name="cancel" (click)="onCancel()">{{getButton().CANCEL_BUTTON}}</button>
+    <button class="btn btn-primary" name="pay" (click)="onProceedToPay()">{{getButton().PROCEED_TO_PAY_BUTTON}}</button>
+  </div>
+</div>

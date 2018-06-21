@@ -1,0 +1,25 @@
+.inner-paragraph {
+  p {
+    color: #434c5e;
+    font-size: 21px;
+    margin: 15px 0 25px;
+    text-align: center;
+  }
+  strong {
+    font-weight: bold;
+  }
+}
+.create-project-confirmation {
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .create-project-confirmation {
+    p {
+      font-size: 14px;
+    }
+    .btn {
+      width: 100px;
+    }
+  }
+}

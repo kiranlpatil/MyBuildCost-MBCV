@@ -2,6 +2,7 @@ import { Building } from './building';
 
 export class Project {
   _id?:string;
+  activeStatus:boolean;
   name: string = '';
   region: string = '';
   plotArea: number;
@@ -13,4 +14,7 @@ export class Project {
   totalNumOfBuildings:number;
   projectDuration: number;
   buildings: Building[] = new Array(0);
+  constructor() {
+    this.activeStatus = true;
+  }
 }

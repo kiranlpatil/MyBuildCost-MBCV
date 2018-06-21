@@ -1,0 +1,25 @@
+<div  class="modal-dialog modal-md">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="onCancel()" data-dismiss="modal">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h5 class="modal-title">{{getHeadings().CREATE_PROJECT_MODAL_HEADING}}</h5>
+    </div>
+    <div class="modal-body create-project-confirmation">
+      <div class="inner-paragraph">
+        <p *ngIf="isRetainModalActive" [innerHtml]="getMessage().MSG_CREATE_PROJECT_CONFIRMATION"></p>
+        <p *ngIf="isProjectModalActive">
+          {{getMessage().MSG_CONFIRMATION_CREATE_PROJECT}}
+        </p>
+      </div>
+      <button class="btn btn-primary bi-btn" type="button" (click)="onCancel()" data-dismiss="modal">Cancel</button>
+      <button *ngIf="isRetainModalActive" type="button" class="btn btn-default" (click)="onContinue()" data-dismiss="modal">Continue</button>
+      <button *ngIf="isProjectModalActive" type="button" class="btn btn-default" (click)="onProjectModalClick()" data-dismiss="modal">Yes I'm sure</button>
+    </div>
+  </div>
+</div>
+
+
+
+

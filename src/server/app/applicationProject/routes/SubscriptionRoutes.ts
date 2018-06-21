@@ -9,7 +9,7 @@ import ReportRequestValidator = require('../interceptor/request/validation/Subsc
 
 var router = express.Router();
 
-class SubscriptionRout {
+class SubscriptionRoutes {
   private _subscriptionController: SubscriptionController;
   private authInterceptor: AuthInterceptor;
   private loggerInterceptor: LoggerInterceptor;
@@ -30,8 +30,16 @@ class SubscriptionRout {
     var controller = this._subscriptionController;
 
     //Add Subscription Package
-    router.post('/', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      this.reportRequestValidator.addSubscriptionPackage, controller.addSubscriptionPackage, this._responseInterceptor.exit);
+    router.post('/',  controller.addSubscriptionPackage, this._responseInterceptor.exit);
+
+    router.post('/payUMoney',  controller.generatePayUMoneyTransacction, this._responseInterceptor.exit);
+
+    router.post('/payment/success',  controller.successPayment, this._responseInterceptor.exit);
+
+    router.post('/payment/failure',  controller.failurePayment, this._responseInterceptor.exit);
+
+    router.get('/basepackageslist', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getBaseSubscriptionPackageList, this._responseInterceptor.exit);
 
     router.post('/by/name', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       this.reportRequestValidator.getSubscriptionPackageByName, controller.getSubscriptionPackageByName, this._responseInterceptor.exit);
@@ -40,5 +48,5 @@ class SubscriptionRout {
   }
 }
 
-Object.seal(SubscriptionRout);
-export = SubscriptionRout;
+Object.seal(SubscriptionRoutes);
+export = SubscriptionRoutes;

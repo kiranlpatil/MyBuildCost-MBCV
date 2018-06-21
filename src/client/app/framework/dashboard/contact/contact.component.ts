@@ -60,8 +60,9 @@ export class ContactComponent implements OnInit {
 
   onContactFailure(error: any) {
     var message = new Message();
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       message.error_msg = error.err_msg;
+      message.error_code =  error.err_code;
       message.isError = true;
       this.messageService.message(message);
     } else {

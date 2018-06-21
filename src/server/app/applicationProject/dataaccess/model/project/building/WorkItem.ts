@@ -7,6 +7,17 @@ class WorkItem {
   name: string;
   rateAnalysisId: number;
   quantity: Quantity;
+
+  isMeasurementSheet : boolean;
+  isRateAnalysis : boolean;
+  rateAnalysisPerUnit: number;
+  rateAnalysisUnit : string;
+  isItemBreakdownRequired : boolean;
+  length: boolean;
+  breadthOrWidth : boolean;
+  height : boolean;
+  isSteelWorkItem : boolean=false;
+
   unit: string;
   rate: Rate;
   systemRate: Rate;
@@ -26,6 +37,7 @@ class WorkItem {
     this.attachmentDetails = new Array<AttachmentDetailsModel>();
     this.amount = 0;
     this.isDirectRate = false;
+    this.isSteelWorkItem = false;
     this.active=false;
     this.remarks = '';
   }

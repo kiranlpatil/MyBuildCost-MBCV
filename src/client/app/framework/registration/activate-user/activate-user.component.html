@@ -3,10 +3,9 @@
 <section class="container activate-user">
   <div class="page-background">
     <div class="inner-content clearfix">
-      <div class="content" *ngIf="!isEmailVerification;else other_content">
+      <div class="content" *ngIf="isEmailVerification;else other_content">
         <div class="inner-content">
           <h5>{{activationMessageHeading}}</h5>
-          <p>{{activationMessageSubHeading}}<br /></p>
           <p>{{activationMessage}}</p>
           <div class="btn-group">
             <a class="btn btn-primary" (click)="navigateTo();">Sign In</a>

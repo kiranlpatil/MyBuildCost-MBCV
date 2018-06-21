@@ -1,14 +1,15 @@
 import { QuantityItem } from './quantity-item';
+import { SteelQuantityItems} from "./SteelQuantityItems";
 
 export class QuantityDetails {
   id : number;
   name: string;
   total: number;
-  quantityItems : Array<QuantityItem>;
-
+  isDirectQuantity : boolean;
+  quantityItems ?: Array<QuantityItem>;
+  steelQuantityItems?: SteelQuantityItems;
   constructor() {
-    this.id = 0;
     this.total = 0;
-    this.quantityItems = new Array<QuantityItem>();
+    //his.quantityItems = new Array<QuantityItem>();
   }
 }

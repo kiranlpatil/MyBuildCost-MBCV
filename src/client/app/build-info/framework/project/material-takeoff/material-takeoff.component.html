@@ -2,24 +2,34 @@
 <section class="wrapper">
   <div class="container">
     <div class="col-sm-9 col-xs-12 padding-right30 left-content">
-      <div *ngIf="isMaterialTakeOffReportPresent" class="pull-left no-padding">
-        <select class="select-costing no-margin" (change)="onChangeGroupBy($event.target.value)">
-          <option *ngFor="let elementWiseReport of elementWiseReports" [value]="elementWiseReport.elementKey">{{
-            elementWiseReport.elementValue }}</option>
-        </select>
-      </div>
-      <div *ngIf="isMaterialTakeOffReportPresent" class="pull-left padding-left15">
-        {{ elementHeading }}
-        <select class="select-costing no-margin" (change)="onChangeSecondFilter($event.target.value)">
-          <option *ngFor="let element of elements" [value]="element">{{ element }}</option>
-        </select>
-      </div>
-      <div *ngIf="isMaterialTakeOffReportPresent" class="pull-left padding-left15">
-        {{getMaterialTakeOffElements().BUILDING}}
-        <select  class="select-costing no-margin" [(ngModel)]="building" (change)="onChangeBuilding($event.target.value)">
-          <option [value]=getMaterialTakeOffElements().ALL_BUILDINGS>{{getMaterialTakeOffElements().ALL_BUILDINGS}}</option>
-          <option *ngFor="let building of buildings" [value]="building">{{ building }}</option>
-        </select>
+      <div *ngIf="isMaterialTakeOffReportPresent" class="dropdown filter-dropdrown">
+        <div class="page-heading text-center visible-xs">
+          Material Takeoff: {{ (elementWiseReport === 'material' ? 'Material Wise' : 'Cost Head Wise' ) }}
+        </div>
+        <a class="dropdown-toggle visible-xs" type="button" id="dropdownMenuFilter" data-toggle="dropdown">
+          <img src="assets/build-info/filter/sort.png" alt="Filter"/>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuFilter">
+          <li *ngIf="isMaterialTakeOffReportPresent" (click)="showDropdown($event)" class="pull-left no-padding material-wise-selection">
+            <select class="select-costing no-margin" (change)="onChangeGroupBy($event.target.value)">
+              <option *ngFor="let elementWiseReport of elementWiseReports" [value]="elementWiseReport.elementKey">{{
+                elementWiseReport.elementValue }}</option>
+            </select>
+          </li>
+          <li *ngIf="isMaterialTakeOffReportPresent" (click)="showDropdown($event)" class="pull-left padding-left15 cost-head-selection">
+            {{ elementHeading }}
+            <select class="select-costing no-margin" (change)="onChangeSecondFilter($event.target.value)">
+              <option *ngFor="let element of elements" [value]="element">{{ element }}</option>
+            </select>
+          </li>
+          <li *ngIf="isMaterialTakeOffReportPresent" (click)="showDropdown($event)" class="pull-left padding-left15 building-selection">
+            {{getMaterialTakeOffElements().BUILDING}}
+            <select  class="select-costing no-margin" [(ngModel)]="building" (change)="onChangeBuilding($event.target.value)">
+              <option [value]=getMaterialTakeOffElements().ALL_BUILDINGS>{{getMaterialTakeOffElements().ALL_BUILDINGS}}</option>
+              <option *ngFor="let building of buildings" [value]="building">{{ building }}</option>
+            </select>
+          </li>
+        </ul>
       </div>
       <div *ngIf="elementFound">
         <bi-material-take-off-report
@@ -35,7 +45,7 @@
       </div>
     </div>
     <div class="col-xs-3 no-padding right-content">
-      <img src="./assets/build-info/dashboard/ads.png" style="width: 100%; margin-top: 20px;" />
+      <advertising-banner></advertising-banner>
     </div>
   </div>
 </section>

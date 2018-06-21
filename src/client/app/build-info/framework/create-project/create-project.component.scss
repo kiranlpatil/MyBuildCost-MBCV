@@ -27,3 +27,17 @@
 .create-new-header {
   height: 0;
 }
+
+@media screen and (max-width: 767px) {
+  .page-background {
+    .inner-content {
+      padding: 10px 0 5px;
+      .content > h4 {
+        font-size: 24px;
+        font-weight: 100;
+        margin-bottom: 0;
+        text-align: center;
+      }
+    }
+  }
+}

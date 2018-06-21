@@ -5,33 +5,30 @@
     <thead>
       <th>{{getTableHeadings().ITEM}}</th>
       <th>{{getTableHeadings().NUMBERS}}</th>
-      <th>{{getTableHeadings().LENGTH}}</th>
-      <th>{{getTableHeadings().BREADTH}}</th>
-      <th>{{getTableHeadings().HEIGHT}}</th>
+      <th [hidden]="!workItem.length">{{getTableHeadings().LENGTH}}</th>
+      <th [hidden]="!workItem.breadthOrWidth">{{getTableHeadings().BREADTH}}</th>
+      <th [hidden]="!workItem.height">{{getTableHeadings().HEIGHT}}</th>
       <th>{{getTableHeadings().QUANTITY}}</th>
       <th class="text-left">{{getTableHeadings().UNIT}}</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
+      <th class="hidden-xs">&nbsp;</th>
+      <th class="hidden-xs">&nbsp;</th>
     </thead>
   <tbody>
   <tr *ngFor="let quantityItem of quantityItems;  let quantityIndex= index ">
     <td class="get-amount-value">
       <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control" [class.required-field]="quantityItem.item == ''"/>
     </td>
-    <!--<td class="remark-icon">
-      <img title="{{quantityItem.remarks}}" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
-    </td>-->
     <td  class="get-amount-value">
-      <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="updateQuantity('updateNos')" class="form-control" required/>
+      <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
-    <td class="get-amount-value">
-      <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="updateQuantity('updateLength')" class="form-control" required/>
+    <td class="get-amount-value" [hidden]="!workItem.length">
+      <input type="number" *ngIf="workItem" [(ngModel)]="quantityItem.length" id="length" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
-    <td class="get-amount-value">
-      <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="updateQuantity('updateBreadth')" class="form-control"/>
+    <td class="get-amount-value" [hidden]="!workItem.breadthOrWidth">
+      <input  type="number" *ngIf="workItem" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getQuantityTotal(quantityItems)" class="form-control"/>
     </td>
-    <td class="get-amount-value">
-      <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="updateQuantity('updateHeight')" class="form-control" required/>
+    <td class="get-amount-value" [hidden]="!workItem.height">
+      <input type="number" *ngIf="workItem" [(ngModel)]="quantityItem.height" id="height" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
     <td class="get-amount-value">
       <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" disabled/>
@@ -39,7 +36,7 @@
     <td class="get-amount-value text-left get-unit">
       {{workItemUnit}}
     </td>
-    <td colspan="2" class="get-amount-value get-delete text-center">
+    <td colspan="2" class="get-amount-value get-delete text-center hidden-xs">
       <div class="col-xs-2">
       <span title="Delete Quantity Item" (click)="deleteQuantityItem(quantityIndex)" class="glyphicon glyphicon-trash"></span>
       </div>
@@ -47,19 +44,19 @@
   </tr>
   <tr class="total-amt-row">
     <td class="total-amount text-center">
-      <label>{{getTableHeadings().TOTAL}}</label>
+      <span>{{getTableHeadings().TOTAL}}</span>
     </td>
     <td class="total-amount text-right">
-      <span>{{quantityNumbersTotal|number}}</span>
+
     </td>
-    <td class="total-amount text-right">
-      <span>{{lengthTotal|number}}</span>
+    <td class="total-amount text-right" [hidden]="!workItem.length">
+
     </td>
-    <td class="total-amount text-right">
-      <span> {{breadthTotal|number}} </span>
+    <td class="total-amount text-right" [hidden]="!workItem.breadthOrWidth">
+
     </td>
-    <td class="total-amount text-right">
-      <span> {{heightTotal|number}} </span>
+    <td class="total-amount text-right" [hidden]="!workItem.height">
+
     </td>
     <td class="total-amount text-right">
       <span> {{quantityTotal|number}} </span>
@@ -67,17 +64,17 @@
     <td class="total-amount text-left">
       {{workItemUnit}}
     </td>
-    <td colspan="2" class="total-amount">
+    <td colspan="2" class="total-amount hidden-xs">
       &nbsp;
     </td>
   </tr>
   </tbody>
   </table>
 
-  <button type="button" class="add-new-btn" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
-  <button type="submit" class="save-btn" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
-  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
-  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button type="button" class="add-new-btn hidden-xs" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
+  <button type="submit" class="save-btn hidden-xs" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
 </div>
 
 <div class="modal fade" id="deleteQuantity" role="dialog">

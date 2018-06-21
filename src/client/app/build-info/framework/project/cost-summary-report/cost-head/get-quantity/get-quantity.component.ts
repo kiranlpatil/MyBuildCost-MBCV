@@ -32,6 +32,8 @@ export class GetQuantityComponent implements OnInit {
   @Input() keyQuantity : string;
   @Input() quantityId : number;
   @Input() innerView: string;
+  @Input() workItem ?: WorkItem;
+
 
   @Output() closeQuantityView = new EventEmitter();
   @Output() closeInnerView = new EventEmitter();
@@ -52,50 +54,12 @@ export class GetQuantityComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.updateAllQuantity();
+    if(this.quantityItems.length === 0) {
+      this.addQuantityItem();
+    }
+   this.getQuantityTotal(this.quantityItems);
    this.workItemId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
     }
-
-    updateQuantity(choice:string ) {
-    switch(choice) {
-      case 'updateNos': {
-        this.quantityNumbersTotal =0;
-        for(let quantityIndex in this.quantityItems) {
-          this.quantityNumbersTotal= this.commonService.decimalConversion(this.quantityNumbersTotal +
-            this.quantityItems[quantityIndex].nos);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-      case 'updateLength': {
-        this.lengthTotal = 0;
-        for(let quantityIndex in this.quantityItems)  {
-          this.lengthTotal = this.commonService.decimalConversion(this.lengthTotal +
-            this.quantityItems[quantityIndex].length);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-      case 'updateBreadth' : {
-        this.breadthTotal= 0;
-        for(let quantityIndex in this.quantityItems)  {
-          this.breadthTotal = this.commonService.decimalConversion(this.breadthTotal +
-            this.quantityItems[quantityIndex].breadth);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-      case 'updateHeight' : {
-        this.heightTotal=0;
-        for(let quantityIndex in this.quantityItems)  {
-          this.heightTotal = this.commonService.decimalConversion(this.heightTotal +
-            this.quantityItems[quantityIndex].height);
-        }
-        this.getQuantityTotal(this.quantityItems);
-      }
-        break;
-    }
-  }
 
   getQuantityTotal(quantityItems : any) {
     this.quantityTotal = 0;
@@ -105,19 +69,14 @@ export class GetQuantityComponent implements OnInit {
       var number = this.quantityItems[quantityIndex].nos;
       var length = this.quantityItems[quantityIndex].length;
       var height = this.quantityItems[quantityIndex].height;
+      var breadth =this.quantityItems[quantityIndex].breadth;
 
-      this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion( number * length * height );
+      this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion( number * (this.workItem.length?length:1)*
+        (this.workItem.breadthOrWidth?breadth:1)*(this.workItem.height?height:1) );
       this.quantityTotal = this.commonService.decimalConversion(this.quantityTotal +
         this.quantityItems[quantityIndex].quantity);
       }
 
-  }
-
-  updateAllQuantity() {
-    this.updateQuantity('updateNos');
-    this.updateQuantity('updateLength');
-    this.updateQuantity('updateBreadth');
-    this.updateQuantity('updateHeight');
   }
 
   addQuantityItem() {
@@ -142,6 +101,7 @@ export class GetQuantityComponent implements OnInit {
       quantityObj.id = this.quantityId;
       quantityObj.name = this.keyQuantity;
       quantityObj.quantityItems = quantityItems;
+      quantityObj.total = this.quantityTotal;
       this.loaderService.start();
       let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.costSummaryService.updateQuantityItems(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
@@ -186,7 +146,7 @@ export class GetQuantityComponent implements OnInit {
         return workItemData.rateAnalysisId === workItemId;
       });
 
-    this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
+   // this.commonService.calculateTotalOfQuantityItemDetails(workItemData[0]);
 
       if(workItemData[0].quantity.total !== 0) {
         workItemData[0].quantity.isEstimated = true;
@@ -226,7 +186,7 @@ export class GetQuantityComponent implements OnInit {
      message.isError = false;
      message.custom_message = Messages.MSG_SUCCESS_DELETE_QUANTITY_ITEM;
      this.messageService.message(message);
-     this.updateAllQuantity();
+     this.getQuantityTotal(this.quantityItems);
       }
 
   closeQuantityTab() {

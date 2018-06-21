@@ -110,6 +110,7 @@ class ReportService {
           callback(null,error);
         }
         projectReport.showHideCostHeadButtons = this.costHeadsList;
+        projectReport.totalAreaOfBuildings = totalArea;
         callback(null,{ data: projectReport, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
@@ -199,6 +200,16 @@ class ReportService {
     return estimateReport;
   }
 
+  getEstimatedReportForNonCategories(thumbRuleReport: ThumbRuleReport) {
+    let estimateReport = new EstimateReport();
+    estimateReport.name = thumbRuleReport.name;
+    estimateReport.rateAnalysisId = thumbRuleReport.rateAnalysisId;
+    estimateReport.total = thumbRuleReport.amount;
+    estimateReport.disableCostHeadView = true;
+    estimateReport.rate = thumbRuleReport.rate;
+    return estimateReport;
+  }
+
   generateReportForProjectCostHeads(projectCostHeads:  Array<CostHead>, projectRates: Array<CentralizedRate>, totalArea: number,
                                      rateUnit: string) {
     let commonAmenitiesReport : Array<BuildingReport> = new Array<BuildingReport>();
@@ -253,7 +264,12 @@ class ReportService {
 
       //Estimated cost Report
       let estimateReport = new EstimateReport();
-      estimateReport = this.getEstimatedReport(projectRates, costHead, totalArea, rateUnit);
+      if(costHead.categories.length > 0) {
+        estimateReport = this.getEstimatedReport(projectRates, costHead, totalArea, rateUnit);
+      } else {
+        estimateReport = this.getEstimatedReportForNonCategories(thumbRuleReport);
+      }
+
       estimatedReports.push(estimateReport);
     }else {
       costHeadButtonForBuilding.showHideAddCostHeadButton=false;
@@ -353,18 +369,18 @@ class ReportService {
           let materialTakeOffReport: MaterialTakeOffReport = new MaterialTakeOffReport( null, null, null);
           materialTakeOffReport.secondaryView = {};
           this.populateMaterialTakeOffReportFromRowData(materialReportRowData, materialTakeOffReport, elementWiseReport, building);
-          this.calculateTotalOfMaterialTakeReport(materialTakeOffReport, elementWiseReport);
+          this.calculateTotalOfMaterialTakeReport(materialTakeOffReport, elementWiseReport, building);
           let responseData = {};
           responseData[element]= materialTakeOffReport;
           callback(null, responseData);
         }else {
-          callback(new CostControllException('Material TakeOff Report Not Found For '+ building , null), null);
+          callback(new CostControllException(Constants.MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION + element , null), null);
         }
       }
     });
   }
 
-  calculateTotalOfMaterialTakeReport(materialTakeOffReport : any, elementWiseReport : string) {
+  calculateTotalOfMaterialTakeReport(materialTakeOffReport : any, elementWiseReport : string, building : string) {
 
     let reportTotal = 0;
     let recordUnit;
@@ -412,7 +428,7 @@ class ReportService {
       reportTotal = reportTotal + contentTotal;
       recordUnit = table.footer.columnThree;
 
-      if (elementWiseReport === Constants.STR_MATERIAL) {
+      if (elementWiseReport === Constants.STR_MATERIAL && building === Constants.STR_ALL_BUILDING) {
         materialTakeOffReport.subTitle.columnTwo = reportTotal;
         materialTakeOffReport.subTitle.columnThree = recordUnit;
         materialTakeOffReport.subTitle.columnOne = ': ' + reportTotal + ' ' + materialTakeOffReport.subTitle.columnThree;
@@ -581,7 +597,7 @@ class ReportService {
     let costHeadList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray);
     column = Constants.STR_Material_NAME;
     let materialList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray,
-      Constants.ALASQL_MATERIAL_NOT_LABOUR);
+      Constants.ALASQL_MATERIAL_NOT_LABOUR_NO_LIKE);
     let materialTakeOffFiltersObject: MaterialTakeOffFiltersListDTO = new MaterialTakeOffFiltersListDTO(buildingList, costHeadList,
       materialList);
     return materialTakeOffFiltersObject;
@@ -644,22 +660,33 @@ class ReportService {
       this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
         materialTakeOffFlatDetailsArray, workItem.quantity.total);
     } else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
-      for (let quantity of workItem.quantity.quantityItemDetails) {
-        quantityName = quantity.name;
-        this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
-          materialTakeOffFlatDetailsArray, quantity.total);
-      }
+        for (let quantity of workItem.quantity.quantityItemDetails) {
+          quantityName = quantity.name;
+          this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
+            materialTakeOffFlatDetailsArray, quantity.total);
+        }
     }
   }
 
   private createAndAddMaterialDTOObjectInDTOArray(workItem: WorkItem, buildingName: string, costHeadName: string, categoryName: string,
                   workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,
                                                   quantity: number) {
-    for (let rateItem of workItem.rate.rateItems) {
-      let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-        workItemName, rateItem.itemName, quantityName, (quantity / workItem.rate.quantity) * rateItem.quantity,
-        rateItem.unit);
-      materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
+    if(categoryName === Constants.STEEL) {
+      for (let quantityItem of workItem.quantity.quantityItemDetails) {
+          for(let material of Object.keys(quantityItem.steelQuantityItems.totalWeightOfDiameter)) {
+            let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
+              workItemName, material, quantityName, quantityItem.steelQuantityItems.totalWeightOfDiameter[material],
+              quantityItem.steelQuantityItems.unit);
+            materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
+          }
+      }
+    } else {
+      for (let rateItem of workItem.rate.rateItems) {
+        let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
+          workItemName, rateItem.itemName, quantityName, (quantity / workItem.rate.quantity) * rateItem.quantity,
+          rateItem.unit);
+        materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
+      }
     }
   }
 }

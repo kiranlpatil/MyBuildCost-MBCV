@@ -13,8 +13,16 @@ export class WorkItem {
   amount: number;
   active: boolean;
   remarks: string;
+  isRateAnalysis : boolean;
+  rateAnalysisPerUnit : number;
+  rateAnalysisUnit : string;
+  isItemBreakdownRequired : boolean=false;
+  length : boolean;
+  isSteelWorkItem:boolean;
+  breadthOrWidth : boolean;
+  height : boolean;
   attachmentDetails: AttachmentDetailsModel[];
-
+  isMeasurementSheet:boolean=false;
   constructor(name: string, rateAnalysisId: number) {
     this.name = name;
     this.rateAnalysisId = rateAnalysisId;

@@ -1,0 +1,39 @@
+<div class="renew-package-section" *ngIf="premiumPackageDetails !== undefined">
+
+  <h1>
+    {{getLabels().YOUR_PROJECT}}
+    <b>'{{projectName}}'</b> <span *ngIf="numOfDaysToExpire > 0">{{getLabels().IS_ABOUT_TO_EXPIRE_IN}}{{numOfDaysToExpire}} {{getLabels().DAYS}}</span>
+     <span *ngIf="numOfDaysToExpire<0">{{getLabels().IS_ABOUT_TO_EXPIRED}}</span>
+    {{getLabels().PLEASE_RENEW_TO_CONTINUE}}
+  </h1>
+
+  <ul>
+    <li>
+      <span>{{getLabels().START_DATE}}</span>
+      <span class="pull-right">{{currentDate | date:'dd MMM yyyy'}}</span>
+    </li>
+
+    <li>
+      <span> {{getLabels().END_DATE}} </span>
+      <span class="pull-right"> {{expiryDate | date:'dd MMM yyyy'}} </span>
+    </li>
+
+    <li class="font-bold">
+      <span>{{getLabels().RENEW_PROJECT_BY}}</span>
+      <span class="pull-right">{{premiumPackageDetails.validity/365|number:'1.0-0'}} years </span>
+    </li>
+
+
+    <li>
+      <div class="font-bold">
+        <span>{{getLabels().TOTAL_BILLED}}</span>
+        <div class="totalBillAmount pull-right">
+          <span  class="col-xs-12 pull-right no-padding text-right"> <sup>INR</sup> {{premiumPackageDetails.cost}} </span>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <button type="button" class="btn btn-default" (click)="cancel()">{{getButton().CANCEL_BUTTON}}</button>
+  <button type="button" class="btn btn-primary" (click)="proceedToPay()">{{getButton().PROCEED_TO_PAY}}</button>
+</div>

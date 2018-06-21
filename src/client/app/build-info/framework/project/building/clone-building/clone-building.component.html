@@ -7,7 +7,7 @@
   <div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND_TRANSPARENT + ')'}">
     <div class="inner-content clearfix">
       <div class="content">
-       <!-- <h4>{{getHeadings().ADD_NEW_BUILDING}}</h4>-->
+        <h4 class="visibe-xs hidden-sm hidden-md hidden-lg">{{getMenus().COPY_BUILDING}}</h4>
         <bi-building-form [submitActionLabel]="'Done'" (onSubmitEvent)="onSubmit($event)" [buildingModel]="cloneBuildingModel" *ngIf="cloneBuildingModel" [buildingName]="oldBuildingName"></bi-building-form>
       </div>
     </div>

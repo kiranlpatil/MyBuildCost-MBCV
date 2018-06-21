@@ -5,6 +5,7 @@ import { ProjectService } from '../project.service';
 import { Project } from './../../model/project';
 import { Message, MessageService,SessionStorage, SessionStorageService } from '../../../../shared/index';
 import { ProjectNameChangeService } from '../../../../shared/services/project-name-change.service';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 @Component({
   moduleId: module.id,
@@ -19,9 +20,11 @@ export class ProjectDetailsComponent implements OnInit {
   projectModel: Project = new Project();
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
+  public disabledName: boolean = false;
 
   constructor(private projectService: ProjectService, private projectNameChangeService : ProjectNameChangeService,
-              private messageService: MessageService, private activatedRoute:ActivatedRoute) {
+              private messageService: MessageService, private activatedRoute:ActivatedRoute,
+              private errorService:ErrorService) {
   }
 
   ngOnInit() {
@@ -43,9 +46,17 @@ export class ProjectDetailsComponent implements OnInit {
 
   onGetProjectSuccess(project : any) {
     this.projectModel = project.data[0];
+    if(this.projectModel.name.startsWith('Trial Project')) {
+      this.disabledName = true;
+    }else {
+      this.disabledName = false;
+    }
   }
 
   onGetProjectFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -73,8 +84,10 @@ export class ProjectDetailsComponent implements OnInit {
 
     var message = new Message();
 
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0||error.err_code===500) {
       message.error_msg = error.err_msg;
+      message.error_code =  error.err_code;
+
       message.isError = true;
       this.messageService.message(message);
     } else {

@@ -4,7 +4,7 @@ import sharedService = require('../../shared/logger/shared.service');
 import ProjectRoutes = require('./../../../applicationProject/routes/ProjectRoutes');
 import ReportRoutes = require('./../../../applicationProject/routes/ReportRoutes');
 import RateAnalysisRoutes = require('./../../../applicationProject/routes/RateAnalysisRoutes');
-import SubscriptionRout = require("../../../applicationProject/routes/SubscriptionRout");
+import SubscriptionRout = require("../../../applicationProject/routes/SubscriptionRoutes");
 
 var app = express();
 

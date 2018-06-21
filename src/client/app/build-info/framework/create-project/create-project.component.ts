@@ -37,6 +37,9 @@ export class CreateProjectComponent implements  OnInit {
   onCreateProjectSuccess(project : any) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, project._id);
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, project.name);
+    if(project.name !== undefined && project.name.includes(this.getLabels().PREFIX_TRIAL_PROJECT)) {
+      SessionStorageService.setSessionValue(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE, this.getLabels().INITIAL_NUMBER_OF_DAYS_TO_EXPIRE);
+    }
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_PROJECT_CREATION;
@@ -47,8 +50,9 @@ export class CreateProjectComponent implements  OnInit {
   onCreateProjectFailure(error : any) {
     console.log(error);
     var message = new Message();
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0||error.err_code===500) {
       message.error_msg = error.err_msg;
+      message.error_code =  error.err_code;
       message.isError = true;
       this.messageService.message(message);
     } else {

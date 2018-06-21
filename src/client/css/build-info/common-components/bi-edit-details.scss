@@ -17,17 +17,18 @@
       }
 
       .form-control {
-        color: $body-text;
+        color: $body-text !important;
         border-left :0;
         border-top: 0;
+        border-radius: 0 !important;
         border-right: 0;
-        font-size: 18px;
-        padding: 0 0 6px;
+        font-size: 18px !important;
+        padding: 0 0 6px !important;
 
         &:focus {
-          border-left :0;
-          border-top: 0;
-          border-right: 0;
+          border-left :0 !important;
+          border-top: 0 !important;
+          border-right: 0 !important;
         }
       }
 
@@ -44,5 +45,11 @@
       position: absolute;
       transform: translateX(-50%);
     }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .details-page {
+    padding: 0;
   }
 }

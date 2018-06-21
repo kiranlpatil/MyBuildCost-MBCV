@@ -1,0 +1,82 @@
+<div class="get-quantity-section">
+  <button *ngIf="innerView !== getLabel().WORKITEM_STEEL_QUANTITY_TAB" class="close" (click)="closeQuantityTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView === getLabel().WORKITEM_STEEL_QUANTITY_TAB" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <span class="steel-sheet-note">Calculated weight for each bar displayed in below columns</span>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr class="no-border">
+        <th>{{ getTableHeadings().ITEM }}</th>
+        <th>{{ getTableHeadings().DIAMETER }} <span>({{ getTableHeadings().MM_UNIT }})</span></th>
+        <th>{{ getTableHeadings().LENGTH }} <span>({{ getTableHeadings().MTR_UNIT }})</span></th>
+        <th>{{ getTableHeadings().NUMBERS }}</th>
+        <th>{{ getTableHeadings().SIX_MM }}</th>
+        <th>{{ getTableHeadings().EIGHT_MM }}</th>
+        <th>{{ getTableHeadings().TEN_MM }}</th>
+        <th>{{ getTableHeadings().TWELVE_MM }}</th>
+        <th>{{ getTableHeadings().SIXTEEN_MM }}</th>
+        <th>{{ getTableHeadings().TWENTY_MM }}</th>
+        <th>{{ getTableHeadings().TWENTYFIVE_MM }}</th>
+        <th>{{ getTableHeadings().THIRTY_MM }}</th>
+        <th class="hidden-xs">&nbsp;</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let quantityItemSteel of steelQuantityItems;  let quantityIndex= index ">
+        <td>
+          <input [(ngModel)]="quantityItemSteel.item" id="costitem" class="form-control" [class.required-field]="quantityItemSteel.item == ''"/>
+        </td>
+        <td>
+          <select [(ngModel)]="quantityItemSteel.diameter" required>
+            <option [value]="0"> </option>
+            <option *ngFor="let diameter of diameterValuesArray" [value]="diameter" [selected]="quantityItemSteel.diameter == diameter">{{ diameter }}</option>
+          </select>
+        </td>
+        <td>
+          <input  type="number" class="get-amount-value" [(ngModel)]="quantityItemSteel.length" id="length" class="form-control" required/>
+        </td>
+        <td>
+          <input  type="number"   class="get-amount-value" [(ngModel)]="quantityItemSteel.nos" id="nos" class="form-control" required/>
+        </td>
+        <td *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let j=index">
+          <div *ngIf="getDiameterQuantityFun(quantityIndex,diameter,getValueConstant().STEEL_DIAMETER_STRING_VALUES[j],getValueConstant().TOTAL_STEEL_DIAMETER_STRING_VALUES[j])!==0.00">
+            <input class="form-control" value="{{getDiameterQuantityFun(quantityIndex,diameter,getValueConstant().STEEL_DIAMETER_STRING_VALUES[j],getValueConstant().TOTAL_STEEL_DIAMETER_STRING_VALUES[j])|number:'1.2-2'}}kg" disabled>
+          </div>
+        </td>
+        <td class="get-amount-value get-delete text-center hidden-xs">
+          <span title="Delete Quantity Item"  class="glyphicon glyphicon-trash" (click)="deleteQuantityItem(quantityIndex)"></span>
+        </td>
+      </tr>
+      <tr class="total-amt-row">
+        <td class="total-amount text-center">
+          <span>{{ getTableHeadings().WEIGHT_IN_KG }}</span>
+        </td>
+        <td class="total-amount text-right">&nbsp;</td>
+        <td class="total-amount text-right">&nbsp;</td>
+        <td class="total-amount text-right">&nbsp;</td>
+        <td class="total-amount text-right" *ngFor="let diameter of getValueConstant().STEEL_DIAMETER_VALUES;let k=index">
+          <div *ngIf="getTotalDiameterQuantity(diameter,k)!==0.00">
+            <span>{{getTotalDiameterQuantity(diameter,k)|number:'1.2-2'}}kg</span>
+          </div>
+        </td>
+        <td class="total-amount hidden-xs">&nbsp;</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-left total-weight">
+    <span>Total weight: {{getQuantityTotal()|number:'1.2-2'}} kg </span>
+  </div>
+
+  <button type="button" class="add-new-btn hidden-xs" (click)="addQuantityItem()">+ {{ getButton().ADD }} {{ getButton().ROW }}</button>
+  <button type="submit" class="save-btn hidden-xs" (click)="updateQuantityItem(totalDiamterQuantity)">{{ getButton().SAVE }}</button>
+  <button *ngIf="innerView !== getLabel().WORKITEM_STEEL_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button *ngIf="innerView === getLabel().WORKITEM_STEEL_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+
+
+</div>
+
+<!--<div class="modal fade" id="deleteQuantity" role="dialog">
+  <bi-delete-confirmation-modal [elementType]="deleteConfirmationQuantityItem" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
+</div>-->

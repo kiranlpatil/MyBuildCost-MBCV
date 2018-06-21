@@ -2,13 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '../../../../model/category';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { WorkItem } from '../../../../model/work-item';
-import { Button, Label, Messages, ValueConstant } from '../../../../../../shared/constants';
+import { Button, Label, Messages, TableHeadings, ValueConstant } from '../../../../../../shared/constants';
 import * as lodsh from 'lodash';
 import { QuantityDetails } from '../../../../model/quantity-details';
-import { Message, MessageService, SessionStorage, SessionStorageService } from '../../../../../../shared/index';
+import {
+  CommonService, Message, MessageService, SessionStorage,
+  SessionStorageService
+} from '../../../../../../shared/index';
 import { CostSummaryService } from '../../cost-summary.service';
 import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 import { Rate } from '../../../../model/rate';
+import {SteelQuantityItem} from "../../../../model/steelQuantityItem";
+import {SteelQuantityItems} from "../../../../model/SteelQuantityItems";
+import { ErrorService } from '../../../../../../shared/services/error.service';
+declare var $: any;
 
 @Component({
   moduleId: module.id,
@@ -28,27 +35,33 @@ export class QuantityDetailsComponent implements OnInit {
   @Input() baseUrl : string;
 
   @Output() categoriesTotalAmount = new EventEmitter<number>();
+  @Output() categoriesTotalAmountOfQty = new EventEmitter<number>();
   @Output() refreshWorkItemList = new EventEmitter();
   @Output() quantityName = new EventEmitter<String>();
   @Output() workItemRateId = new EventEmitter<number>();
 
   workItemId : number;
   quantityId : number;
+  currentId : number;
+  currentQtyName : string;
   rateItemsArray : Rate;
   unit:string='';
   previousRateQuantity : number = 0;
   quantityIncrement : number = 1;
-
+  total : number;
+  steelquantityItem:any;
   currentFloorIndex : number;
   showInnerView : string;
-
+  quantity : QuantityDetails;
   quantityItemsArray: any = {};
   workItemData: WorkItem;
   keyQuantity: string;
   currentQuantityName: string;
   showQuantityTab : string = null;
+  flagForFloorwiseQuantity : string = null;
+
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
-              private loaderService: LoaderService) {
+              private loaderService: LoaderService,private errorService:ErrorService) {
   }
 
    ngOnInit() {
@@ -70,28 +83,204 @@ export class QuantityDetailsComponent implements OnInit {
     return Button;
   }
 
+  getTableHeadings() {
+    return TableHeadings;
+  }
+
   setCategoriesTotal( categoriesTotal : number) {
     this.categoriesTotalAmount.emit(categoriesTotal);
   }
 
   getQuantity(quantityDetail : QuantityDetails, floorIndex : number, showInnerView : string) {
-    if(floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
-      this.setFloorIndex(floorIndex);
-      if(quantityDetail.quantityItems.length !== 0) {
-        this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
-        this.keyQuantity = quantityDetail.name;
-        this.quantityId = quantityDetail.id;
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemRateAnalysisId);
+    if(quantityDetail.name !== undefined) {
+      if (floorIndex !== this.currentFloorIndex || this.showInnerView !== showInnerView) {
+        this.setFloorIndex(floorIndex);
+        if (showInnerView !== this.getLabel().WORKITEM_STEEL_QUANTITY_TAB && quantityDetail.quantityItems && quantityDetail.quantityItems.length !== 0 ) {
+          this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
+          this.keyQuantity = quantityDetail.name;
+          this.quantityId = quantityDetail.id;
+        }else if(showInnerView == this.getLabel().WORKITEM_STEEL_QUANTITY_TAB) {
+          if( quantityDetail.steelQuantityItems ) {
+            this.steelquantityItem=lodsh.cloneDeep(quantityDetail.steelQuantityItems);
+          }else {
+            this.steelquantityItem=new SteelQuantityItems();
+          }
+          this.keyQuantity = quantityDetail.name;
+          this.quantityId = quantityDetail.id;
+        } else {
+          if (!quantityDetail.isDirectQuantity) {
+            this.quantityItemsArray = lodsh.cloneDeep(quantityDetail.quantityItems);
+            this.keyQuantity = quantityDetail.name;
+            if(quantityDetail.id === undefined && this.currentQtyName === quantityDetail.name) {
+              this.quantityId = this.currentId ;
+            }else {
+              this.quantityId = quantityDetail.id;
+            }
+          } else {
+            this.quantityItemsArray = [];
+            this.keyQuantity = quantityDetail.name;
+            this.quantityId = quantityDetail.id;
+          }
+        }
+        this.showInnerView = showInnerView;
       } else {
-        this.quantityItemsArray = [];
-        quantityDetail.name = this.keyQuantity;
-        quantityDetail.id =undefined;
+        this.showInnerView = null;
       }
-      this.showInnerView = this.getLabel().WORKITEM_QUANTITY_TAB;
-    }else {
-      this.showInnerView = null;
+    } else {
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
+      this.messageService.message(message);
     }
   }
 
+  updateFloorwiseQunatityConfirmation(quantity :any, flag : string, quantityIndex ?: number) {
+    this.flagForFloorwiseQuantity = flag;
+    if(quantity.quantityItems===undefined) {
+      quantity.quantityItems=[];
+    }
+    if((flag === Label.DIRECT_QUANTITY && quantity.quantityItems &&  quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
+      (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
+      $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
+    }else if((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !==0 && quantity.total !== 0) ||
+      (flag === Label.WORKITEM_STEEL_QUANTITY_TAB && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length ===0 && quantity.total !== 0)) {
+      $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
+    } else {
+      if(flag === Label.DIRECT_QUANTITY) {
+        this.updateQuantityDetails(quantity, flag, quantityIndex);
+      } else if(flag === Label.WORKITEM_QUANTITY_TAB || flag === Label.WORKITEM_STEEL_QUANTITY_TAB ) {
+        this.getQuantity(quantity, quantityIndex, flag);
+      }
+    }
+  }
+
+  updateDetailedQuanityAfterConfirmation(quantityData : any) {
+    if(quantityData.detailedQuantityFlag === Label.DIRECT_QUANTITY) {
+      this.updateQuantityDetails(quantityData.quantity, quantityData.detailedQuantityFlag, quantityData.quantityIndex);
+    } else if(quantityData.detailedQuantityFlag === Label.WORKITEM_QUANTITY_TAB ||quantityData.detailedQuantityFlag === Label.WORKITEM_STEEL_QUANTITY_TAB  ) {
+      this.getQuantity(quantityData.quantity, quantityData.quantityIndex, quantityData.detailedQuantityFlag);
+    }
+  }
+
+  setQuantityTotal(quantity : QuantityDetails, total: number) {
+    this.quantity = quantity;
+    this.total = total;
+  }
+
+  updateTotal(obj : any) {
+    this.quantity.total = obj.total;
+  }
+
+  updateQuantityDetails(quantity :any, flag : string, quantityIndex ?: number) {
+    this.quantity = quantity;
+    let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+    if(this.validateQuantityName(quantity.name)) {
+      let quantityDetailsObj : QuantityDetails = new QuantityDetails();
+      quantityDetailsObj.id =  quantity.id;
+      quantityDetailsObj.name = quantity.name;
+      quantityDetailsObj.total = quantity.total;
+      if(flag === Label.NAME) {
+        if(quantity.quantityItems || quantity.steelQuantityItems) {
+          quantityDetailsObj.quantityItems = quantity.quantityItems;
+          quantityDetailsObj.steelQuantityItems = quantity.steelQuantityItems;
+        }else {
+          quantityDetailsObj.quantityItems = [];
+          quantityDetailsObj.steelQuantityItems = new SteelQuantityItems();
+        }
+      } else if(flag === Label.DIRECT_QUANTITY) {
+        quantityDetailsObj.quantityItems = [];
+        quantityDetailsObj.steelQuantityItems = new SteelQuantityItems();
+        this.quantityDetails[quantityIndex].quantityItems = [];
+        this.quantityDetails[quantityIndex].steelQuantityItems =  new SteelQuantityItems();
+        this.showInnerView = null;
+      } else {
+        console.log('error');
+      }
+  /*    if(quantity.quantityItems) {
+        quantityDetailsObj.quantityItems = [];
+        this.quantityDetails[quantityIndex].quantityItems = [];
+      } else if(quantity.steelQuantityItems) {
+        quantityDetailsObj.steelQuantityItems = new SteelQuantityItems();
+        this.quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
+      }*/
+      this.loaderService.start();
+
+      this.costSummaryService.updateQuantityDetails(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
+        this.workItemRateAnalysisId,quantityDetailsObj).subscribe(
+        success => this.onUpdateQuantityDetailSuccess(success, flag),
+        error => this.onUpdateQuantityDetailFailure(error)
+      );
+    } else {
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
+      this.messageService.message(message);
+    }
+  }
+
+  onUpdateQuantityDetailSuccess(success :any, flag : string) {
+    var message = new Message();
+    message.isError = false;
+
+    if(success.data.id) {
+      this.currentQtyName = success.data.name;
+      this.currentId = success.data.id;
+      this.quantity.id = success.data.id;
+    }
+
+    if(flag ===  Label.NAME) {
+      this.loaderService.stop();
+      let categoryDetailsTotalAmount = this.calculate();
+      this.categoriesTotalAmountOfQty.emit(categoryDetailsTotalAmount);
+      message.custom_message = Messages.MSG_SUCCESS_UPDATE_QUANTITY_NAME_WORKITEM;
+      this.messageService.message(message);
+    } else {
+      this.loaderService.stop();
+      let categoryDetailsTotalAmount = this.calculate();
+      this.categoriesTotalAmountOfQty.emit(categoryDetailsTotalAmount);
+      message.custom_message = Messages.MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM;
+      this.messageService.message(message);
+     // this.refreshWorkItemList.emit();
+    }
+  }
+
+  calculate() {
+    let quantityItemDetailsTotal = 0;
+    for(let quantityItemDetail of this.workItemData.quantity.quantityItemDetails) {
+      quantityItemDetailsTotal = quantityItemDetailsTotal + quantityItemDetail.total;
+    }
+    this.workItemData.quantity.total = quantityItemDetailsTotal;
+    this.workItemData.amount = quantityItemDetailsTotal * this.workItemData.rate.total;
+    let categoryDetailsTotalAmount = 0;
+    for(let categoryData of this.categoryDetails) {
+      if(categoryData.rateAnalysisId === this.categoryRateAnalysisId) {
+        let categoryTotalAmount = 0;
+        for(let workItemData of this.workItemsList) {
+          categoryTotalAmount =categoryTotalAmount + workItemData.amount;
+        }
+        categoryData.amount = categoryTotalAmount;
+      }
+      categoryDetailsTotalAmount = categoryDetailsTotalAmount + categoryData.amount;
+    }
+    return categoryDetailsTotalAmount;
+  }
+
+  onUpdateQuantityDetailFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
+    console.log('success : '+JSON.stringify(error));
+    this.loaderService.stop();
+  }
+
+  validateQuantityName(quantityName: string) {
+    if(quantityName === '' || quantityName === undefined || quantityName.trim()=== '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
   setFloorIndex(floorIndex : number) {
     this.currentFloorIndex = floorIndex;
   }
@@ -171,6 +360,9 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   onDeleteQuantityDetailsByNameFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('Delete Quantity error');
   }
 }

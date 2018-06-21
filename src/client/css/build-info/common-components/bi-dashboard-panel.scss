@@ -71,10 +71,11 @@
     }
 
     .menu-items {
+      height: 24px;
       position: absolute;
-      right: 5px;
+      right: 10px;
       top: 23px;
-      width: 16px;
+      width: 24px;
     }
 
     .menu-items > .dropdown-menu {
@@ -83,7 +84,6 @@
       box-shadow: 10px 10px 10px $panel-shadow;
       min-width: 170px;
       padding: 5px 0 0;
-      z-index: 98;
     }
 
     .menu-items > .dropdown-menu li {
@@ -103,32 +103,32 @@
     }
 
     .menu-items.open > a {
-      background-color: $page-background;
+      background-color: $menu-item-hover-color;
     }
 
     .menu-items > a {
       border-radius: 2px;
       height: 24px;
       padding: 0;
-      width: 11px;
+      width: 24px;
 
       &:focus,
       &:hover,
       &:active {
-        background-color: $page-background;
+        background-color: $menu-item-hover-color;
       }
     }
 
     .menu-items > a > img {
       display: block;
-      padding: 3px 4px;
+      padding: 3px 10px;
       position: relative;
       top: 2px;
     }
 
     .menu-items > ul {
       left: inherit;
-      right: 6px;
+      right: 0;
       top: 30px;
     }
   }
@@ -148,5 +148,46 @@
 .grand-total-table {
   .panel-title {
     padding: 20px 0;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+  .panel-default {
+    .panel-heading {
+      .menu-items {
+        right: 5px;
+        top: 10px;
+        width: 14px;
+      }
+
+      .menu-items > a {
+        width: 14px;
+      }
+
+      .menu-items > a > img {
+        padding: 3px 5px;
+      }
+
+      a {
+        .caret {
+          left: 7px;
+        }
+      }
+
+      a > .slab-area {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 5px 0 0 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .grand-total-table {
+    .panel-title {
+      padding: 0;
+    }
   }
 }

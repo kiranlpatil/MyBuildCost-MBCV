@@ -86,3 +86,22 @@ ul {
   }
 }
 
+
+@media only screen and (max-width: 767px) {
+  ul {
+    li {
+      .file-actions {
+        opacity: 1;
+      }
+    }
+  }
+
+  .attachment-actions {
+    .btn-attach-file {
+      .btn-primary {
+        line-height: 15px;
+      }
+    }
+  }
+}
+

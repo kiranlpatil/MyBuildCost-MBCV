@@ -35,12 +35,22 @@ class ProjectRoutes {
     //Create new project
     router.post('/',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.createProject,
     controller.createProject, this._responseInterceptor.exit);
+
+    //update projectStatus
+    router.put('/:projectId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      validator.updateProjectStatus, controller.updateProjectStatus, this._responseInterceptor.exit);
+
     //Retrive details of project
     router.get('/:projectId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
         validator.getProjectById, controller.getProjectById, this._responseInterceptor.exit);
     //Update project details
     router.put('/:projectId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.updateProjectById, controller.updateProjectById, this._responseInterceptor.exit);
+
+    //Update project Name
+    router.put('/:projectId/projectName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      validator.updateProjectNameById, controller.updateProjectNameById, this._responseInterceptor.exit);
+
     //Fetch rateItem names having same original name
     router.put('/:projectId/rates/rateItem', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.getProjectRateItemsByOriginalName, controller.getProjectRateItemsByOriginalName, this._responseInterceptor.exit);
@@ -95,6 +105,11 @@ class ProjectRoutes {
     router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.deleteQuantityOfProjectCostHeadsByName,
       controller.deleteQuantityOfProjectCostHeadsByName, this._responseInterceptor.exit);
+
+    //update direct quantity and floor name of Project
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/directQuantity/quantityItemDetails',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfProjectCostHeads,
+      controller.updateQuantityDetailsOfProject, this._responseInterceptor.exit);
 
     /*Project- Routes: Rate*/
 
@@ -175,10 +190,6 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
       this._requestInterceptor.intercept, validator.getCategoriesOfBuildingCostHead, controller.getCostHeadDetailsOfBuilding,
       this._responseInterceptor.exit);
 
-    //Add new costhead in building
-    router.put('/building/:buildingId/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
-      controller.addCostHeadBuilding, this._responseInterceptor.exit);
-
     //Update budgeted cost for costhead
     router.put('/:projectId/building/:buildingId/costhead',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
      validator.updateBudgetedCostForBuildingCostHead, controller.updateBudgetedCostForCostHead, this._responseInterceptor.exit);
@@ -247,6 +258,12 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfProjectWorkItems,
       controller.updateDirectQuantityOfProjectWorkItems, this._responseInterceptor.exit);
+
+    //update direct quantity and floor name of quantity Details
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/directQuantity/quantityItemDetails',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfBuildingCostHeads,
+      controller.updateQuantityDetailsOfBuilding, this._responseInterceptor.exit);
+
 
     //Delete quantityitem from  quantity
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',

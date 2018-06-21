@@ -7,9 +7,13 @@ import { HttpDelegateService } from '../../../../shared/services/http-delegate.s
 import { QuantityItem } from '../../model/quantity-item';
 import { Rate } from '../../model/rate';
 import { ProjectElements } from '../../../../shared/constants';
+import { QuantityDetails } from '../../model/quantity-details';
+
+declare let $: any;
 
 @Injectable()
 export class CostSummaryService extends BaseService {
+
 
   constructor(protected messageService: MessageService, protected httpDelegateService : HttpDelegateService) {
     super();
@@ -153,6 +157,17 @@ export class CostSummaryService extends BaseService {
 
     return this.httpDelegateService.putAPI(url, body);
   }
+  updateQuantityDetails(baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                        quantityDetailsObj : QuantityDetails) {
+
+    var body= {  item : quantityDetailsObj };
+
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
+      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT_QUANTITY +
+      '/'+ API.QUANTITY_ITEM_DETAILS;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
 
   deleteQuantityDetailsByName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number, quantityName:string) {
     var body= { item: { name : quantityName } };
@@ -230,5 +245,45 @@ export class CostSummaryService extends BaseService {
       costHeadId + '/' + API.CATEGORY + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + API.DELETE_FILE;
     let body = {assignedFileName : assignedFileName };
     return this.httpDelegateService.putAPI(url, body);
+  }
+
+  //check for limitation of building according to package.
+  checkLimitationOfBuilding(userId:string,projectId:string) {
+    var url=API.USER +'/subscription/'+API.PROJECT +'/'+projectId;
+  return this.httpDelegateService.getAPI(url);
+  }
+
+  moveSelectedBuildingAtTop(compareIndex : number) {
+    let collapseCostSummaryPanelTag = '#collapse-cost-summary-panel' + compareIndex;
+    if($(collapseCostSummaryPanelTag).hasClass('collapsed')) {
+      $('.collapse').removeClass('in');
+      let collapseTag = '#collapse' + compareIndex;
+      $(collapseTag).ready(function () {
+        var divPos = $(collapseCostSummaryPanelTag).offset().top;
+        $('html, body').animate({
+          scrollTop: divPos - 8
+        }, 500);
+      });
+    }
+  }
+
+  moveRecentBuildingAtTop(compareIndex : number) {
+    let collapseCostSummaryPanelTag = '#collapse-cost-summary-panel' + compareIndex;
+    $(collapseCostSummaryPanelTag).ready(function () {
+        $(collapseCostSummaryPanelTag).removeClass('collapsed');
+        $('.collapse').removeClass('in');
+        $('#collapse'+compareIndex).addClass('in');
+        let collapseTag = '#collapse' + compareIndex;
+        $(collapseTag).ready(function () {
+          var divPos = $(collapseCostSummaryPanelTag).offset().top;
+          let scrollTo=SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)?
+            SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)
+            : divPos - 8;
+          $('html, body').animate({
+            scrollTop: scrollTo
+          },500);
+          setTimeout(() =>  SessionStorageService.removeSessionValue(SessionStorage.CURRENT_WINDOW_POSITION), 600);
+        });
+    });
   }
 }

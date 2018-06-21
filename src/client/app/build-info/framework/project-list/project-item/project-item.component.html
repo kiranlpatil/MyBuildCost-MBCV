@@ -1,9 +1,14 @@
-<div class="building-image-container">
+<div class="building-image-container" [class.disabled-projects]="!activeStatus || project.expiryMessage !== null">
   <div class="building-image">
     <img src="assets/build-info/create-new-project/create-new-project.png" />
     <div class="project-actions">
-      <button class="btn btn-view" (click)="navigateToSelectedProject(project._id,project.name)">View</button>
+      <button class="btn btn-view" (click)="navigateToSelectedProject(project.projectId, project.projectName, project.numOfDaysToExpire)">View</button>
     </div>
   </div>
 </div>
-<h4 (click)="navigateToSelectedProject(project._id,project.name)">{{project.name}}</h4>
+<h4 [class.disabled-projects]="!activeStatus || project.expiryMessage !== null" (click)="navigateToSelectedProject(project.projectId, project.projectName, project.numOfDaysToExpire)">{{project.projectName}}</h4>
+<div class="renew-btn-section">
+  <div class="error-msg" *ngIf="project.expiryMessage !== null && activeStatus"> {{project.expiryMessage}}</div>
+  <div class="warning-msg" *ngIf="project.warningMessage !== null && activeStatus"> {{project.warningMessage}}</div>
+  <a class="renewNow-btn" *ngIf="(project.warningMessage !== null || project.expiryMessage !== null) && activeStatus" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
+</div>

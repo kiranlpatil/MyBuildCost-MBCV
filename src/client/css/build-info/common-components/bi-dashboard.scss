@@ -38,7 +38,7 @@
     border-radius: 4px;
     padding: 1px 4px;
     height: auto;
-    margin: 5px 0;
+    margin: 6px 0;
     font-weight: 600;
     font-size: 12px;
     min-width: 75px;
@@ -74,9 +74,15 @@
     }
   }
 }
-button[disabled]{
+
+.btn.disabled,
+.btn[disabled],
+button[disabled],
+fieldset[disabled] .btn {
+  opacity: 0.4;
   cursor:not-allowed;
 }
+
 .building-name {
   .btn-print {
     position: absolute;
@@ -134,6 +140,16 @@ button[disabled]{
 
     .profile-email {
       background: none;
+      color: $black-theme-color;
+      font-size: 14px;
+      margin-bottom: 2px;
+      padding: 0 !important;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+
+    .profile-email {
+      background: none;
       color: $placeholder-color;
       font-size: 13px;
       margin-bottom: 2px;
@@ -153,6 +169,76 @@ button[disabled]{
   #disclaimer {
     ul {
       padding-left: 17px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .filter-dropdrown {
+    .dropdown-menu {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      display: block;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      top: 0;
+      z-index: unset;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .wrapper {
+    min-height: calc(100vh - 50px);
+  }
+
+  .filter-dropdrown {
+    margin: 0 -10px;
+
+    .dropdown-menu {
+      border: 0;
+      border-radius: 0;
+      box-shadow: 0 30px 62px rgba(0,0,0,.150);
+      margin: 0 0 10px;
+      min-width: 100%;
+      outline: 0;
+      padding: 0 10px 15px;
+      position: relative;
+    }
+
+    .page-heading {
+      padding: 10px;
+      position: relative;
+      width: 100%;
+    }
+
+    a {
+      color: $body-text;
+      margin-right: 5px;
+      padding: 5px;
+      position: absolute;
+      right: 0;
+      top: 4px;
+      z-index: 1;
+    }
+  }
+
+  .open > .page-heading {
+    background: $white;
+  }
+
+  .building-name {
+    .btn-print {
+      right: 5px;
+    }
+  }
+
+  .costhead-building-name {
+    .btn-print {
+      top: 23px;
     }
   }
 }

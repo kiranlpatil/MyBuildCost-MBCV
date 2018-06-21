@@ -9,6 +9,7 @@ import {
   Message,
   MessageService
 } from './shared/index';
+import { Messages } from './shared/constants';
 
 
 
@@ -41,7 +42,7 @@ export class AppComponent {
     this.subscription = messageService.messageObservable$.subscribe(
       (message: Message) => {
         if (message.isError === true) {
-          let err = message.error_msg.error;
+          let err = message.error_msg;
           if (err === 'Could not attach click handler to the selectedElement. Reason: selectedElement not found.') {
             message.isError = false;
           } else {
@@ -57,6 +58,9 @@ export class AppComponent {
   showError(message: Message) {
     this.isShowErrorMessage = false;
     this.errorMessage = message.error_msg;
+    if(message.error_code===500) {
+      this.errorMessage= Messages.MSG_ERROR_UNCAUGHT_EXCEPTION;
+    }
     this.customMessage = message.custom_message;
     setTimeout(function () {
       this.closeErrorMessage();

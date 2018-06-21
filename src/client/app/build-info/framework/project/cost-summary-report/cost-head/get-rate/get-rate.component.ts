@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import {
   Messages, Button, TableHeadings, Label, Headings, ValueConstant,
-  StandardNotes
+  StandardNotes, ProjectElements
 } from '../../../../../../shared/constants';
 import {
   SessionStorage, SessionStorageService,
@@ -14,6 +14,7 @@ import { WorkItem } from '../../../../model/work-item';
 import { Category } from '../../../../model/category';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
 import { RateItem } from '../../../../model/rate-item';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 
 
 @Component({
@@ -23,13 +24,15 @@ import { RateItem } from '../../../../model/rate-item';
   styleUrls: ['get-rate.component.css'],
 })
 
-export class GetRateComponent implements OnInit {
+export class GetRateComponent implements OnChanges {
 
   @Input() rate: Rate;
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
   @Input() workItemRateAnalysisId : number;
   @Input() workItemsList : Array<WorkItem>;
+  @Input() workItemUnit :any;
+  @Input() totalByUnit :number;
   @Input() ratePerUnitAmount : number;
   @Input() baseUrl : string;
   @Input() rateView: string;
@@ -56,15 +59,20 @@ export class GetRateComponent implements OnInit {
   selectedRateItemKey : string;
   type : string;
   selectedItemName: string;
+  //totalByUnit :  number = 0;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
-              private messageService: MessageService, private commonService: CommonService) {
+              private messageService: MessageService, private commonService: CommonService,
+              private errorService:ErrorService) {
   }
-  ngOnInit() {
+
+  ngOnChanges() {
+    console.log(this.rate);
     this.calculateTotal();
   }
 
   calculateTotal(choice?:string) {
+    this.totalByUnit = 0;
     this.ratePerUnitAmount = 0;
     this.totalAmount = 0;
     this.totalAmountOfLabour = 0;
@@ -107,8 +115,25 @@ export class GetRateComponent implements OnInit {
       this.totalAmount = this.totalAmountOfMaterial + this.totalAmountOfLabour +this.totalAmountOfMaterialAndLabour;
     }
     this.ratePerUnitAmount = this.totalAmount / this.rate.quantity;
-    this.rate.total= this.ratePerUnitAmount;
+    this.rate.total = this.rateTotalByUnit();
     }
+
+  rateTotalByUnit() {
+    if (this.workItemUnit === 'Sqm') {
+      this.totalByUnit = this.ratePerUnitAmount * 10.764;
+      this.rate.total = this.totalByUnit;
+    } else if (this.workItemUnit === 'Rm') {
+      this.totalByUnit = this.ratePerUnitAmount * 3.28;
+      this.rate.total = this.totalByUnit;
+    } else if (this.workItemUnit === 'cum') {
+      this.totalByUnit = this.ratePerUnitAmount * 35.28;
+      this.rate.total = this.totalByUnit;
+    } else {
+      this.rate.total = this.ratePerUnitAmount;
+    }
+    return this.rate.total;
+  }
+
   updateRate(rateItemsArray: Rate) {
     if (this.validateRateItem(rateItemsArray.rateItems)) {
       this.loaderService.start();
@@ -155,7 +180,7 @@ export class GetRateComponent implements OnInit {
 
     for(let workItemData of this.workItemsList) {
       if(workItemData.rateAnalysisId === this.workItemRateAnalysisId) {
-        workItemData.rate.total = this.ratePerUnitAmount;
+        workItemData.rate.total = this.totalByUnit;
         if(workItemData.rate.total !== 0) {
           workItemData.rate.isEstimated = true;
           if(workItemData.quantity.isEstimated && workItemData.rate.isEstimated) {
@@ -179,6 +204,9 @@ export class GetRateComponent implements OnInit {
   }
 
   onUpdateRateFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
     this.loaderService.stop();
   }
@@ -277,6 +305,9 @@ export class GetRateComponent implements OnInit {
 
 
   onGetRateItemsByOriginalNameFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -298,5 +329,9 @@ export class GetRateComponent implements OnInit {
 
   getStandardNotes() {
     return StandardNotes;
+  }
+
+  getProjectElements() {
+    return ProjectElements;
   }
 }

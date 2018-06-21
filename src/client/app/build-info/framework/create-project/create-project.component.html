@@ -7,7 +7,7 @@
   <div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND_TRANSPARENT + ')'}">
     <div class="inner-content clearfix">
       <div class="content">
-        <!--<h4>{{getHeadings().CREATE_NEW_PROJECT}}</h4>-->
+        <h4 class="visibe-xs hidden-sm hidden-md hidden-lg">{{getHeadings().CREATE_NEW_PROJECT}}</h4>
         <bi-project-form [submitActionLabel]="'Next'" (onSubmitEvent)="onSubmit($event)"></bi-project-form>
       </div>
     </div>

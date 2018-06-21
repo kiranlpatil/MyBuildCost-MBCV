@@ -42,12 +42,56 @@
   }
   .inner-content {
     .btn-primary {
-      margin: 15px 0 25px;
+      margin: 15px 0;
+    }
+
+    .logo-image {
+      margin: -250px 0 20px;
+    }
+
+    ul {
+      margin-top: -80px;
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  .signup-page-wrapper {
+    .container {
+      .inner-content {
+        padding: 20px 0;
+        h4 {
+          font-size: 20px;
+          font-weight: 600;
+        }
+        .btn {
+          padding: 5px 35px;
+        }
+        .btn-primary {
+          font-size: 14px;
+        }
+        .content {
+          width: 100%;
+        }
+      }
     }
   }
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 768px) {
+  .page-background {
+    .inner-content {
+      .logo-image {
+        margin: 0 0 20px;
+      }
+
+      ul {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .container {
     background: no-repeat fixed 50% 100%;
     background-image: url('../assets/build-info/page_background/page-bg.png');

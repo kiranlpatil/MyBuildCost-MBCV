@@ -1,0 +1,121 @@
+@import '../../../../css/variables';
+
+.billing-summary-section {
+  min-width: 600px;
+  display: table;
+  margin: 0 auto;
+  h1 {
+    color: $heading;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    margin: 30px 0 20px 0;
+  }
+  .table {
+    tr {
+      border-bottom: 1px solid $row-border;
+      font-size: 14px;
+      td {
+        font-size: 14px;
+        padding: 8px 0;
+        text-align: left;
+        width: 33%;
+        .projectName {
+          display: inline-block;
+          padding-right: 8px;
+          width: 100%;
+        }
+      }
+    }
+    td:first-child {
+      width: 40% !important;
+    }
+    th {
+      text-align: left;
+      padding: 8px 0;
+      width: 33%;
+    }
+    .number-of-building {
+      float: left;
+      text-align: center;
+      width: 150px;
+    }
+    p {
+      font-size: 10px;
+      float: left;
+      margin: 0;
+    }
+    a {
+      color: $table-btn-bg;
+      float: left;
+      font-size: 10px;
+      padding-left: 5px;
+    }
+    .warning-msg {
+      color: $warning-msg;
+    }
+    .error-msg {
+      color: $error;
+    }
+    .numberof-building {
+      text-align: center !important;
+      p {
+        text-align: left;
+        float: none;
+        display: inline-flex;
+        margin-top: -4px;
+        margin-bottom: 0;
+        padding-left: 10px;
+        position: absolute;
+        width: 142px;
+      }
+    }
+  }
+  .btn-primary {
+    height: 44px;
+    line-height: 20px;
+    margin: 0;
+    padding: 10px 25px;
+    width: 122px;
+  }
+
+  .btn-default {
+    margin-right: 10px;
+    padding: 10px 25px;
+    width: 122px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .billing-summary-section {
+    min-width: 100%;
+    max-width: 600px;
+    padding: 0 15px;
+    .table {
+      tr {
+        font-size: 12px;
+        td {
+          font-size: 12px;
+        }
+      }
+      th {
+        font-size: 12px;
+        padding: 8px 0;
+      }
+      td {
+        padding: 8px;
+      }
+      p {
+        margin: 0;
+      }
+      a {
+        padding-left: 0;
+      }
+      .numberof-building {
+        p {
+          position: inherit;
+        }
+      }
+    }
+  }
+}

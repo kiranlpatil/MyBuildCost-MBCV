@@ -2,7 +2,6 @@
 
 .panel-group {
   border-bottom: 0;
-  float: initial;
   margin: 0;
   padding: 0;
 }
@@ -11,7 +10,12 @@
   .panel-heading {
     min-height: 56px;
     a {
-      padding: 13px 20px 13px 30px;
+      padding: 13px 0 13px 30px;
+    }
+
+    .total {
+      font-size: 14px;
+      font-weight: normal;
     }
   }
 
@@ -41,13 +45,16 @@
 }
 
 .material-takeoff-report {
-  margin-top: 25px;
+  margin-top: 0;
   .panel-group {
     padding: 10px 0 0;
     tr {
       td {
         width: auto;
       }
+    }
+    .panel-group {
+      padding: 5px 0 0;
     }
   }
   .item-header {
@@ -154,4 +161,104 @@
   margin: 4px 0;
   border-radius: 8px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+@media only screen and (max-width: 767px) {
+  .panel-default {
+    .panel-heading {
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
+      border-radius: 0;
+      float: left;
+      height: auto;
+      min-height: inherit;
+      width: 100%;
+
+      a {
+        background: $white;
+        float: left;
+        font-size: 18px;
+        overflow: auto;
+        padding: 10px 0 10px 10px;
+        position: relative;
+        text-overflow: clip;
+        white-space: normal;
+      }
+
+      a > .caret {
+        top: 17px;
+      }
+
+      .slab-area {
+        display: inline-block !important;
+        width: auto !important;
+      }
+      .col-xs-2,
+      .col-xs-3 {
+        padding: 0 5px;
+      }
+    }
+  }
+  .material-takeoff-report {
+    margin-top: -5px;
+    .item-header {
+      display: none;
+    }
+
+    .item-footer {
+      border-radius: 0;
+      margin: 5px 0 0;
+    }
+
+    .panel-group {
+      padding: 0;
+
+      .panel-default {
+        float: left;
+        margin-bottom: 15px;
+        width: 100%;
+
+        &:first-child {
+          margin-top: 5px;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .inner-item-list {
+      border-radius: 0;
+      min-height: inherit;
+      margin: 0;
+
+      .panel-default {
+        margin: 0;
+      }
+      .panel-body {
+        float: left;
+        width: 100%;
+      }
+
+      .panel-heading {
+        float: left;
+        min-height: inherit;
+      }
+    }
+  }
+
+  .building-name {
+    background: $header-bg !important;
+    border-radius: 0;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
+    font-size: 12px;
+    margin: 0;
+    padding: 10px 25px 10px 10px !important;
+
+    .slab-area {
+      display: inline-block !important;
+      width: auto !important;
+    }
+  }
 }

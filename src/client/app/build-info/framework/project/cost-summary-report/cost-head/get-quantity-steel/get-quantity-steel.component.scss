@@ -1,0 +1,192 @@
+@import '../../../../../../../css/common';
+@import '../get-quantity/get-quantity.component';
+
+.steel-sheet-note {
+  float: right;
+  font-size: 11px;
+  font-weight: 600;
+  margin: 5px;
+}
+
+.get-quantity-section {
+  table {
+    tr > th {
+      span {
+        font-weight: 500;
+      }
+    }
+    tr {
+      td {
+        .form-control {
+          height: 28px;
+          text-align: right;
+        }
+        select {
+          background: #ffffff url(../assets/framework/images/form/drop-down.png) no-repeat 94% 50%;
+          border: 0;
+          font-size: 11px;
+          padding: 4px 7px;
+        }
+
+        span {
+          font-size: 11px;
+        }
+
+        &:first-child {
+          width: 250px;
+          .form-control {
+            text-align: left;
+          }
+        }
+
+        &:last-child {
+          width: 40px;
+        }
+      }
+
+      .get-delete {
+        opacity: 0;
+        span {
+          float: none;
+        }
+      }
+
+      &:hover {
+        background: transparent;
+        border: 1px solid transparent;
+        border-bottom: 1px solid $azure;
+        .get-delete {
+          opacity: 1;
+        }
+      }
+    }
+
+    .total-amt-row {
+      border: 0;
+
+      &:hover {
+        border: 0;
+      }
+    }
+  }
+
+  .total-weight {
+    font-size: 11px;
+    font-weight: bold;
+    margin: 10px 0 5px 15px;
+  }
+
+  .table-responsive {
+    border: 0;
+    width: 100%;
+
+    &:hover {
+      border: 0;
+    }
+  }
+}
+
+.get-quantity-section:after, .get-quantity-section:before {
+  left: 44%;
+}
+
+@media only screen and (max-width: 767px) {
+  .get-quantity-section {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 650px;
+    table {
+      tr {
+        td {
+          &:first-child,
+          &:last-child {
+            width: inherit;
+          }
+
+          &:nth-child(4) {
+            min-width: 40px;
+          }
+
+          &:nth-child(5),
+          &:nth-child(6),
+          &:nth-child(7),
+          &:nth-child(8),
+          &:nth-child(9),
+          &:nth-child(10),
+          &:nth-child(11),
+          &:nth-child(12) {
+            min-width: 90px;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+          }
+        }
+      }
+
+      thead {
+        th {
+          &:nth-child(7) {
+            border-radius: 0;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+            border-radius: 0 5px 0 0;
+          }
+        }
+      }
+
+      .total-amt-row {
+        td {
+          &:nth-child(7) {
+            border-radius: 0;
+          }
+
+          &:nth-child(12) {
+            border: 0;
+            border-radius: 0 0 5px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .get-quantity-section {
+    width: 600px;
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .get-quantity-section {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .get-quantity-section {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .get-quantity-section {
+    width: 300px;
+  }
+
+  .steel-sheet-note {
+    float: left;
+    white-space: normal;
+    width: 88%;
+    word-wrap: break-word;
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .get-quantity-section {
+    width: 280px;
+  }
+}

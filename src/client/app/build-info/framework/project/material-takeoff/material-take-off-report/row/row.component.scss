@@ -2,15 +2,23 @@
 
 .row-list {
   //color: #8290A8;
-  padding: 0;
+  display: table;
   font-size: 12px;
-  margin: 0 1px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  .row-lists {
+    display: table-cell;
+    float: none;
+  }
+
   .border-right {
     border-right: 1px solid $row-border;
     padding-bottom: 6px !important;
   }
-  .col-md-6 {
-    padding: 0 0 0 40px;
+  .col-sm-8 {
+    padding: 0 10px 0 40px;
   }
   .row-lists {
     line-height: 1.4;
@@ -35,7 +43,7 @@
     padding: 15px;
     white-space: initial;
   }
-  .col-md-6 {
+  .col-sm-8 {
     overflow: hidden;
     padding-left: 30px;
     white-space: normal;
@@ -56,7 +64,7 @@
   }
 }
 
-.item-footer-row{
+.item-footer-row {
   padding: 13px 0 13px 15px;
   .border-right {
     border-right: 1px solid $row-border;
@@ -95,5 +103,45 @@
 .material-take-off-sub-items {
   .item-description {
     padding-left: 35px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .row-list {
+    .row-lists {
+      padding: 0 5px 5px;
+    }
+
+    .col-xs-7 {
+      padding: 0 0 0 5px;
+    }
+
+    .border-right {
+      border-right: 0;
+    }
+  }
+
+  .item-inner-row {
+    .row-lists {
+      float: left;
+      padding: 15px 5px;
+    }
+
+    .col-xs-7 {
+      padding-left: 25px;
+    }
+
+    .border-right {
+      border-right: 0;
+    }
+  }
+
+  .item-footer-row {
+    .border-right {
+      border-right: 0;
+    }
+    .row-lists {
+      padding: 5px;
+    }
   }
 }

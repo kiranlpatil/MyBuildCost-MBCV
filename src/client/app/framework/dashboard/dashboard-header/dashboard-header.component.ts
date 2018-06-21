@@ -1,11 +1,14 @@
-import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate } from '../../../user/models/candidate';
-import { AppSettings, ImagePath, SessionStorage, LocalStorage } from '../../../shared/constants';
+import {
+  AppSettings, ImagePath, SessionStorage, LocalStorage, NavigationRoutes,
+  CurrentView
+} from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
-import {UserProfile} from "../../../user/models/user";
-import {ProfileService} from "../../shared/profileservice/profile.service";
+import { UserProfile } from '../../../user/models/user';
+import { ProfileService } from '../../shared/profileservice/profile.service';
 
 @Component({
   moduleId: module.id,
@@ -58,13 +61,12 @@ export class DashboardHeaderComponent {
   }
 
   logOut() {
-    if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))!=1) {
+    if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))!==1) {
       window.sessionStorage.clear();
       window.localStorage.clear();
+      }
+      this._router.navigate([NavigationRoutes.APP_LOGIN]);
     }
-    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
-    window.location.href = host;
-  }
 
   navigateToWithId(nav:string) {
     var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
@@ -72,15 +74,18 @@ export class DashboardHeaderComponent {
   }
 
   navigateTo(nav:string) {
-    this.deleteProjectDetailsFromSessionStorege();
+    if(nav === '/dashboard') {
+      this.deleteProjectDetailsFromSessionStorege();
+    }
+    //this.deleteProjectDetailsFromSessionStorege();
     this._router.navigate([nav]);
     this.closeMenu();
   }
 
   deleteProjectDetailsFromSessionStorege() {
-    sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_ID);
-    sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_NAME);
-    sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
+    // sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_ID);
+     sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_NAME);
+    // sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
   }
 
   toggleMenu() {
@@ -94,5 +99,12 @@ export class DashboardHeaderComponent {
 
   closeMenu() {
     this.isClassVisible = false;
+  }
+
+  toggleDashboardMenu(value:boolean) {
+    this.isClassVisible = value;
+  }
+  getCurrentProjectId() {
+    return SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
   }
 }

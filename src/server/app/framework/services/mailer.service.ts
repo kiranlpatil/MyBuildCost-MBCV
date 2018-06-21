@@ -9,22 +9,25 @@ let config = require('config');
 let loggerService = new LoggerService('MAILCHIMP_MAILER_SERVICE');
 
 class SendMailService {
+  //process.env.NODE_TLS_REJECT_UNAUTHORIZED : any = '0';
   static smtpTransport = nodemailer.createTransport({
     service: config.get('application.mail.MAIL_SERVICE'),
     auth: {
       user: config.get('application.mail.MAIL_SENDER'),
       pass: config.get('application.mail.MAIL_SENDER_PASSWORD')
-    }
+    },
+    tls: { rejectUnauthorized: false }
   });
 
   send(sendmailTo: string, subject: string, templateName: string,
-       data: Map<string, string>,
-       callback: (error: Error, result: SentMessageInfo) => void,attachment?:any[], carbonCopy?: string) {
+       data: Map<string, string>, attachment?:any[],
+       callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string) {
 
     let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
     data.forEach((value: string, key: string) => {
       content = content.replace(key, value);
     });
+    loggerService.logDebug('Sending mail from mail service.');
 
     let mailOptions = {
       from: config.get('application.mail.MAIL_SENDER'),
@@ -39,6 +42,7 @@ class SendMailService {
       if (error) {
         loggerService.logError(' Error in mail send ' + error);
       }
+      loggerService.logDebug(' response in mail send ' + response);
       callback(error, response);
     });
   }
