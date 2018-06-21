@@ -124,8 +124,8 @@ class Constants {
   public static PLUMBING : string = 'External plumbing / drainage line';
   public static INTERNAL_PLUMBING_WITH_VERTICAL_LINES : string = 'Internal plumbing with vertical lines';
   public static WINDOWS_SLIDING_DOORS : string = 'Windows/Sliding doors';
-  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : string = 'Electrical light fittings in common areas of building';
-  public static PEST_CONTROL : string = 'Pest Control';
+  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : string = 'Electrical light fittings inside building';
+  public static PEST_CONTROL : string = 'Pest Control / Antitermite treatment';
   public static SOLAR_WATER_HEATING_SYSTEM : string = 'Solar water heating system';
   public static PIPED_GAS_SYSTEM : string = 'Piped gas system';
   public static SKY_LOUNGE_ON_TOP_TERRACE : string = 'Sky lounge on top terrace';

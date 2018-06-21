@@ -184,9 +184,9 @@
     "Doors with frames" : "10000 * (3 * numOfOneBHK + 4 * numOfTwoBHK + 6 * numOfThreeBHK + 8 * numOfFourBHK + 10 * numOfFiveBHK) + 15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)", //a door frames
     "External plumbing / drainage line" : "50000 * (numOfOneBHK * 1 + numOfTwoBHK * 2 + numOfThreeBHK * 3 + numOfFourBHK * 4 + numOfFiveBHK * 5) + 6000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",   //plumbing
     "Lift" : "(150000 * numOfFloors * numOfLifts)",
-    "Electrical light fittings in common areas of building" : "((carpetAreaOfParking / 400) * 500 + (plotPeripheryLength / 40) * 5000 + ( numOfFloors * 3) * 700)",
+    "Electrical light fittings inside building" : "((carpetAreaOfParking / 400) * 500 + (plotPeripheryLength / 40) * 5000 + ( numOfFloors * 3) * 700)",
     "Garbage chute" : "(60000 * (numOfFloors - numOfParkingFloors))",
-    "Pest Control" : "carpetArea * 1.35 * 2",
+    "Pest Control / Antitermite treatment" : "carpetArea * 1.35 * 2",
     "Solar water heating system" : "carpetArea * 1.35 * 20",
     "Piped gas system" : "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
     "Sky lounge on top terrace" : "slabArea / (numOfFloors + numOfParkingFloors) * 150",
@@ -470,7 +470,7 @@
       ]
     },
     {
-      "name" : "Pest Control",
+      "name" : "Pest Control / Antitermite treatment",
       "rateAnalysisId" : 100512,
       "priorityId": 5,
       "categories" : [
@@ -7351,7 +7351,7 @@
       ]
     },
     {
-      "name" : "Electrical light fittings in common areas of building",
+      "name" : "Electrical light fittings inside building",
       "rateAnalysisId" : 100509,
       "priorityId": 29,
       "categories" : [
@@ -8033,15 +8033,12 @@
     {
       "name" : "Site Preparation - temporary fencing",
       "priorityId": 100,
-      "rateAnalysisId" : 200181,
       "categories" : [
         {
           "name" : "Barbed wire fencing",
-          "rateAnalysisId" : 200182,
           "workItems" : [
             {
               "name" : "4 ft high Barbed wire 12 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
-              "rateAnalysisId" : 200183,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8057,7 +8054,6 @@
             },
             {
               "name" : "4 ft high Barbed wire 12 x 12 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
-              "rateAnalysisId" : 200184,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8073,7 +8069,6 @@
             },
             {
               "name" : "4 ft high Barbed wire 14 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
-              "rateAnalysisId" : 200185,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8091,11 +8086,9 @@
         },
         {
           "name" : "Fabricated GI sheet fencing",
-          "rateAnalysisId" : 200186,
           "workItems" : [
             {
               "name" : "Temporary fabricated GI sheet fencing 10' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS angle horizontal support (Check image, notes)",
-              "rateAnalysisId" : 200187,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8111,7 +8104,6 @@
             },
             {
               "name" : "Temporary fabricated GI sheet fencing 8' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS  angle horizontal support (Check image, notes)",
-              "rateAnalysisId" : 200188,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8143,7 +8135,6 @@
             },
             {
               "name" : "Temporary fabricated GI sheet fencing 10 ft high with 50 x 50 x 12 g hollow pipe for vertical and cross supports at 8' c/c and 25 x 25 x 18 g hollow pipe for horizontal support (Check image, notes)",
-              "rateAnalysisId" : 200190,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8159,7 +8150,6 @@
             },
             {
               "name" : "Temporary fabricated GI sheet fencing 12' high with 75 x 40 C channel vertical supports at 8' c/c and 50 x 50 x 5 angle for cross supports (Check image, notes)",
-              "rateAnalysisId" : 200191,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8177,11 +8167,9 @@
         },
         {
           "name" : "Chainlink fencing",
-          "rateAnalysisId" : 200192,
           "workItems" : [
             {
               "name" : "4 ft high Chainlink fencing with cement poles of 4\" x 4\" x 6' ht. at 8' c/c (Check image)",
-              "rateAnalysisId" : 200193,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -8197,7 +8185,6 @@
             },
             {
               "name" : "5 ft high Chainlink fencing with MS angle pole 40 X 40 X 5mm 6' ht. at 5' c/c (Check image )",
-              "rateAnalysisId" : 200194,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
