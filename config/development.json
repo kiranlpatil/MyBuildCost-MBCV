@@ -470,7 +470,7 @@
           "name" : "Work Items",
           "workItems" : [
             {
-              "name" : "230 mm thk dry rubble soling with murum filling in gaps and compacting",
+              "name" : "230 mm thk dry rubble soling with murum filling in gaps",
               "isMeasurementSheet" : true,
               "measurementUnit" : "cum",
               "isRateAnalysis" : true,
@@ -662,11 +662,9 @@
         },
         {
           "name" : "Plum concrete in cum",
-          "rateAnalysisId" : 100095,
           "workItems" : [
             {
               "name" : "Plum concrete in cum, with M 7.5 grade PCC and plum @ 50:50, and concrete by conventional volumetric method, using farma and mixer",
-              "rateAnalysisId" : 100096,
               "isMeasurementSheet" : true,
               "measurementUnit" : "cum",
               "isRateAnalysis" : true,
@@ -3477,7 +3475,7 @@
           "name" : "Cement tile flooring",
           "workItems" : [
             {
-              "name" : "300 X 300 mm Concrete chequered tile flooring on 60mm bedding",
+              "name" : "300 mm  X 300 mm Concrete chequered tile flooring on 60mm bedding",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
@@ -3842,7 +3840,7 @@
           "name" : "Paving block flooring",
           "workItems" : [
             {
-              "name" : "Concrete paver block flooring as per selected shape(Non glazed blocks)",
+              "name" : "Concrete paver block flooring (Non glazed blocks)",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
@@ -3857,7 +3855,7 @@
               "height" : false
             },
             {
-              "name" : "Concrete paver block flooring as per selected shape (Glazed blocks)",
+              "name" : "Concrete paver block flooring (Glazed blocks)",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
@@ -7757,6 +7755,177 @@
       ]
     },
     {
+      "name" : "Site Preparation - temporary fencing",
+      "priorityId": 100,
+      "categories" : [
+        {
+          "name" : "Barbed wire fencing",
+          "workItems" : [
+            {
+              "name" : "4 ft high Barbed wire 12 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "4 ft high Barbed wire 12 x 12 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "4 ft high Barbed wire 14 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Fabricated GI sheet fencing",
+          "workItems" : [
+            {
+              "name" : "Temporary fabricated GI sheet fencing 10' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS angle horizontal support (Check image, notes)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 8' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS  angle horizontal support (Check image, notes)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 8 ft high with 50 x 50 x 12 g hollow pipe for vertical and cross supports at 8' c/c and 25 x 25 x 18 g hollow pipe for horizontal support (Check image, notes)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 10 ft high with 50 x 50 x 12 g hollow pipe for vertical and cross supports at 8' c/c and 25 x 25 x 18 g hollow pipe for horizontal support (Check image, notes)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "Temporary fabricated GI sheet fencing 12' high with 75 x 40 C channel vertical supports at 8' c/c and 50 x 50 x 5 angle for cross supports (Check image, notes)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        },
+        {
+          "name" : "Chainlink fencing",
+          "workItems" : [
+            {
+              "name" : "4 ft high Chainlink fencing with cement poles of 4\" x 4\" x 6' ht. at 8' c/c (Check image)",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            },
+            {
+              "name" : "5 ft high Chainlink fencing with MS angle pole 40 X 40 X 5mm 6' ht. at 5' c/c (Check image )",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : "Rft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : null,
+              "breadthOrWidth" : null,
+              "height" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name" : "Site dev - plumbing & drainage system",
       "priorityId": 119,
       "categories" : [
@@ -8048,177 +8217,6 @@
   ],
 
   "configProjectCostHeads" : [
-    {
-      "name" : "Site Preparation - temporary fencing",
-      "priorityId": 100,
-      "categories" : [
-        {
-          "name" : "Barbed wire fencing",
-          "workItems" : [
-            {
-              "name" : "4 ft high Barbed wire 12 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            },
-            {
-              "name" : "4 ft high Barbed wire 12 x 12 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            },
-            {
-              "name" : "4 ft high Barbed wire 14 x 14 Swg fencing with 5 lines at 9\" c/c using cement poles of 4\"x 4\"x 6' ht. at 8' c/c ( Check image)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            }
-          ]
-        },
-        {
-          "name" : "Fabricated GI sheet fencing",
-          "workItems" : [
-            {
-              "name" : "Temporary fabricated GI sheet fencing 10' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS angle horizontal support (Check image, notes)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            },
-            {
-              "name" : "Temporary fabricated GI sheet fencing 8' high with 50 x 50 x 5 MS angle vertical and cross supports at 8' c/c and 35 x 35 x 5 MS  angle horizontal support (Check image, notes)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            },
-            {
-              "name" : "Temporary fabricated GI sheet fencing 8 ft high with 50 x 50 x 12 g hollow pipe for vertical and cross supports at 8' c/c and 25 x 25 x 18 g hollow pipe for horizontal support (Check image, notes)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            },
-            {
-              "name" : "Temporary fabricated GI sheet fencing 10 ft high with 50 x 50 x 12 g hollow pipe for vertical and cross supports at 8' c/c and 25 x 25 x 18 g hollow pipe for horizontal support (Check image, notes)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            },
-            {
-              "name" : "Temporary fabricated GI sheet fencing 12' high with 75 x 40 C channel vertical supports at 8' c/c and 50 x 50 x 5 angle for cross supports (Check image, notes)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            }
-          ]
-        },
-        {
-          "name" : "Chainlink fencing",
-          "workItems" : [
-            {
-              "name" : "4 ft high Chainlink fencing with cement poles of 4\" x 4\" x 6' ht. at 8' c/c (Check image)",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            },
-            {
-              "name" : "5 ft high Chainlink fencing with MS angle pole 40 X 40 X 5mm 6' ht. at 5' c/c (Check image )",
-              "isMeasurementSheet" : true,
-              "measurementUnit" : "Rm",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : null,
-              "rateAnalysisUnit" : "Rft",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : null,
-              "breadthOrWidth" : null,
-              "height" : null
-            }
-          ]
-        }
-      ]
-    },
     {
       "name" : "Site preparation- temporary structures/stores",
       "priorityId": 101,
