@@ -37,6 +37,7 @@ export class CreateProjectComponent implements  OnInit {
   onCreateProjectSuccess(project : any) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, project._id);
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, project.name);
+    SessionStorageService.setSessionValue(SessionStorage.STATUS, project.activeStatus);
     if(project.name !== undefined && project.name.includes(this.getLabels().PREFIX_TRIAL_PROJECT)) {
       SessionStorageService.setSessionValue(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE, this.getLabels().INITIAL_NUMBER_OF_DAYS_TO_EXPIRE);
     }

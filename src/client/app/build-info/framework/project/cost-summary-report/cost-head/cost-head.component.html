@@ -1,4 +1,4 @@
-<section class="wrapper">
+<section *ngIf="status" class="wrapper">
   <header class="create-new-header">
     <button class="btn-back" (click)="goBack()"><img src="../../../../../../assets/build-info/create-new-project/back.png" /><span>{{getButton().GO_BACK}}</span></button>
   </header>
@@ -323,6 +323,7 @@
     </div>
   </div>
 </section>
+<h1 *ngIf="!status"> Project Expired</h1>
 
 <div class="modal fade default-modal" id="deleteWorkItem" role="dialog">
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationWorkItem" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>

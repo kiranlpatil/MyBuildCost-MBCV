@@ -1,6 +1,7 @@
-<bi-project-header [isActiveAddBuildingButton]="isActiveAddBuildingButton"></bi-project-header>
+<span *ngIf="status"><bi-project-header [isActiveAddBuildingButton]="isActiveAddBuildingButton"></bi-project-header></span>
+<span *ngIf="!status"><h1>Project Expired</h1></span>
 <section class="wrapper">
-  <div class="container">
+  <div *ngIf="status" class="container">
     <div class="col-sm-9 col-xs-12 padding-right30 left-content">
       <div class="dropdown filter-dropdrown">
         <a class="dropdown-toggle visible-xs" type="button" id="dropdownMenuFilter" data-toggle="dropdown">

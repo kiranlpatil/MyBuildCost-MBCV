@@ -85,6 +85,7 @@ export class DashboardHeaderComponent {
   deleteProjectDetailsFromSessionStorege() {
     // sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_ID);
      sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_NAME);
+     sessionStorage.removeItem(SessionStorage.STATUS);
     // sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
   }
 

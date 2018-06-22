@@ -90,6 +90,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   unit:string='';
   showCategoryList: boolean = false;
   displayCategory: boolean = false;
+  status: string;
   fileNamesList:Array<AttachmentDetailsModel>;
   workItemsList: Array<WorkItem>;
   deleteConfirmationCategory = ProjectElements.CATEGORY;
@@ -137,6 +138,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }*/
 
   ngOnInit() {
+    this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
 
       this.projectId = params['projectId'];

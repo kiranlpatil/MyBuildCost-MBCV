@@ -61,14 +61,16 @@ export class ProjectListHeaderComponent implements OnInit {
     this.projects = activeProjects;
     if((this.currentView === 'costSummary'|| this.currentView === 'materialTakeOff' || this.currentView === 'projectDetails')
       && SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) === null ) {
-      let projectList : Array<ProjectSubscriptionDetails>;
-      projectList = this.projects.filter(
-        function( projectDetails: ProjectSubscriptionDetails){
-          return projectDetails.projectId.toString() ===
-            SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID).toString();
-        });
-      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME,  projectList[0].projectName);
-      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID,  projectList[0].projectId);
+      if (this.projects.length !== 0) {
+        let projectList: Array<ProjectSubscriptionDetails>;
+        projectList = this.projects.filter(
+          function (projectDetails: ProjectSubscriptionDetails) {
+            return projectDetails.projectId.toString() ===
+              SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID).toString();
+          });
+        SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, projectList[0].projectName);
+        SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectList[0].projectId);
+      }
     }
   }
 
@@ -77,16 +79,18 @@ export class ProjectListHeaderComponent implements OnInit {
   }
 
   selectedProject(projectName:string) {
-     SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, projectName);
-    let projectList : Array<ProjectSubscriptionDetails>;
-    projectList = this.projects.filter(
-      function( projectDetails: ProjectSubscriptionDetails){
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, projectName);
+    if (this.projects.length !== 0) {
+      let projectList: Array<ProjectSubscriptionDetails>;
+      projectList = this.projects.filter(
+        function (projectDetails: ProjectSubscriptionDetails) {
           return projectDetails.projectName === projectName;
         });
 
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectList[0].projectId);
       this._router.navigate([NavigationRoutes.APP_PROJECT, projectList[0].projectId, NavigationRoutes.APP_COST_SUMMARY]);
- }
+    }
+  }
 
   getMenus() {
     return Menus;

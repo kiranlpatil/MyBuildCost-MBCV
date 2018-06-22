@@ -70,6 +70,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   clonedBuildingDetails: Array<CostHead>;
   showHideCostHeadButtonsList: Array<AddCostHeadButton>;
   isActiveAddBuildingButton:boolean=false;
+  status:string;
   openBuildingNameAmenities:string='amenities';
   subscription:any;
   public costIn: any[] = [
@@ -113,6 +114,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW, CurrentView.COST_SUMMARY);
+    this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
       this.onBuildingChange(params);
       this.projectId = params['projectId'];
