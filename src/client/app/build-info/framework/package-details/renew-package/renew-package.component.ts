@@ -94,7 +94,7 @@ export class RenewPackageComponent implements OnInit {
     //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_REATAIN_PROJECT,NavigationRoutes.SUCCESS]);
   }else {
       this._router.navigate(['project', NavigationRoutes.PAYMENT]);
-      //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
+    //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
     }
   }
 

@@ -707,7 +707,7 @@ class UserService {
     }
   }
 
-  assignPremiumPackage(user:User,userId:string,callback: (error: any, result: any) => void) {
+  assignPremiumPackage(user:User,userId:string, cost: number,callback: (error: any, result: any) => void) {
     let projection = {subscription: 1};
     this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
       if(error) {
@@ -732,6 +732,7 @@ class UserService {
                 subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
                 subscription.numOfProjects = premiumPackage.basePackage.numOfProjects;
                 subscription.validity = premiumPackage.basePackage.validity;
+                premiumPackage.basePackage.cost = cost;
                 subscription.projectId = new Array<string>();
                 subscription.purchased = new Array<BaseSubscriptionPackage>();
                 subscription.purchased.push(premiumPackage.basePackage);

@@ -26,6 +26,7 @@ export class PaymentSuccessfulComponent implements OnInit {
   removeTrialProjectPrefix: boolean = false;
   numOfPurchasedBuilding:number;
   totalBilled :number;
+  subscription :any;
   createNewProject :boolean=false;
   public isShowErrorMessage: boolean = true;
   public errorMessage: boolean = false;
@@ -45,12 +46,13 @@ export class PaymentSuccessfulComponent implements OnInit {
         this.getProject();
       }
     });
-    this.updateSubscription();
-    this.numOfPurchasedBuilding =parseInt( SessionStorageService.getSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED));
+    this.numOfPurchasedBuilding =parseInt(SessionStorageService.getSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED));
     this.totalBilled =parseInt( SessionStorageService.getSessionValue(SessionStorage.TOTAL_BILLED));
-    this.createNewProject=SessionStorageService.getSessionValue(SessionStorage.CREATE_NEW_PROJECT)!== 'false' ? true : false;
-
-  }
+    this.subscription = this.commonService.updatepackageInfo$
+      .subscribe(item =>this.totalBilled = item.amount!==undefined?item.amount:0
+      );
+    this.updateSubscription();
+    }
 
   getProject() {
     this.projectService.getProject(this.projectId).subscribe(
@@ -97,10 +99,10 @@ export class PaymentSuccessfulComponent implements OnInit {
         this.updateProjectNameById();
       }
       sessionStorage.removeItem(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
-      var message = new Message();
+     /* var message = new Message();
       message.isError = false;
       message.custom_message = success.data;
-      this.messageService.message(message);
+      this.messageService.message(message);*/
       //this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
     }
     sessionStorage.removeItem(SessionStorage.TOTAL_BILLED);
@@ -109,14 +111,13 @@ export class PaymentSuccessfulComponent implements OnInit {
     console.log(error);
     var message = new Message();
     message.isError = true;
-   // message.custom_message = error.err_msg;
     message.error_msg = error.err_msg;
     this.messageService.message(message);
    // this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
   onUpdateProjectNameByIdSuccess(result: any) {
     if (result !== null) {
-      this.projectNameChangeService.change(result.data.name);
+      this.projectNameChangeService.change(result.data);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, result.data.name);
       }
     //this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
@@ -131,8 +132,9 @@ export class PaymentSuccessfulComponent implements OnInit {
   }
 
   assignPremiumPackage() {
+    let body = { totalBilled : this.totalBilled };
     let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
-    this.packageDetails.assignPremiumPackage(userId)
+    this.packageDetails.assignPremiumPackage(userId, body)
       .subscribe(success => this.onAssignPremiumPackageSuccess(success),
         error=>this.onAssignPremiumPackageFailure(error));
   }
@@ -158,17 +160,6 @@ export class PaymentSuccessfulComponent implements OnInit {
     console.log(error);
   }
 
-
-
-  onAssignPremiumPackageFailure(error:any) {
-    var message = new Message();
-    message.isError = true;
-    message.custom_message = error.err_msg;
-    message.error_msg = error.err_msg;
-    this.messageService.message(message);
-  }
-
-
   updateSubscription() {
     if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT) {
       this.onRetainOrRenewProject('Premium');
@@ -179,25 +170,32 @@ export class PaymentSuccessfulComponent implements OnInit {
     }else if(this.packageName === 'Free') {
       this.assignPremiumPackage();
     } else if(this.packageName === 'Add_building') {
-     this.onRetainOrRenewProject(this.packageName);
-      } else {
+      this.onRetainOrRenewProject(this.packageName);
+    } else {
       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
     }
 
   }
+  onAssignPremiumPackageFailure(error:any) {
+    var message = new Message();
+    message.isError = true;
+    message.custom_message = error.err_msg;
+    message.error_msg = error.err_msg;
+    this.messageService.message(message);
+  }
 
-   onContinue() {
-     if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
-       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-       }else if(this.packageName === this.getLabels().PACKAGE_PREMIUM || this.packageName === 'Free') {
-       this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
-       }else if(this.packageName === 'Add_building') {
-       this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
-       }else {
-       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+  onContinue() {
+    if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
+      this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    }else if(this.packageName === this.getLabels().PACKAGE_PREMIUM || this.packageName === 'Free') {
+      this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
+    }else if(this.packageName === 'Add_building') {
+      this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
+    }else {
+      this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
 
-     }
-   }
+    }
+  }
 
 
 

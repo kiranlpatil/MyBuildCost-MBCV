@@ -648,8 +648,9 @@ class UserController {
     try {
       let user = req.user;
       let userId =req.params.userId;
+      let cost =req.body.totalBilled;
       let userService = new UserService();
-      userService.assignPremiumPackage(user,userId,(error, result)=> {
+      userService.assignPremiumPackage(user,userId,cost,(error, result)=> {
         if(error) {
           next(error);
         }else {
