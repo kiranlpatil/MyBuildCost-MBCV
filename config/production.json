@@ -4509,7 +4509,7 @@
               "name" : "Providing and installing straight kitchen otta/platform",
               "rateAnalysisId" : 100325,
               "isMeasurementSheet" : false,
-              "measurementUnit" : "Rm,
+              "measurementUnit" : "Rm",
               "isRateAnalysis" : false,
               "rateAnalysisPerUnit" : null,
               "rateAnalysisUnit" : null,
