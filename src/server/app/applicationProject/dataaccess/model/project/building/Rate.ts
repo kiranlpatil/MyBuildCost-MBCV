@@ -15,7 +15,7 @@ class Rate {
     this.isEstimated = false;
     this.quantity = 0;
     this.rateItems = new Array<RateItem>();
-    this.unit = 'sqft';
+    this.unit = '';
   }
 }
 export = Rate;
