@@ -41,7 +41,7 @@ export class DashboardHeaderComponent {
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
     this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
     this.user_email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
-    this.first_letter =(this.user_first_name).toString().charAt(0);
+    this.first_letter =this.user_first_name?(this.user_first_name).toString().charAt(0):'';
     profileService.profileUpdateObservable$.subscribe(
       (user: UserProfile) => {
         if (user.first_name) {

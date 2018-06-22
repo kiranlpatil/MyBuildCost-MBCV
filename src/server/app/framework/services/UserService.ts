@@ -720,7 +720,7 @@ class UserService {
     }
   }
 
-  assignPremiumPackage(user:User,userId:string,callback: (error: any, result: any) => void) {
+  assignPremiumPackage(user:User,userId:string, cost: number,callback: (error: any, result: any) => void) {
     let projection = {subscription: 1};
     this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
       if(error) {
@@ -745,6 +745,7 @@ class UserService {
                 subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
                 subscription.numOfProjects = premiumPackage.basePackage.numOfProjects;
                 subscription.validity = premiumPackage.basePackage.validity;
+                premiumPackage.basePackage.cost = cost;
                 subscription.projectId = new Array<string>();
                 subscription.purchased = new Array<BaseSubscriptionPackage>();
                 subscription.purchased.push(premiumPackage.basePackage);
@@ -889,12 +890,13 @@ class UserService {
             projectSubscription.projectId = resp[0]._id;
             projectSubscription.activeStatus = resp[0].activeStatus;
             projectSubscription.numOfBuildingsAllocated = resp[0].buildings.length;
+            projectSubscription.numOfBuildingsExist = result[0].subscription.numOfBuildings;
             projectSubscription.numOfBuildingsRemaining = (result[0].subscription.numOfBuildings - resp[0].buildings.length);
-            if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0 && projectSubscription.packageName !== 'Free'){
+            if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0 && projectSubscription.packageName !== 'Free') {
               projectSubscription.addBuildingDisable=true;
               }
             projectSubscription.packageName = this.checkCurrentPackage(result[0].subscription);
-            if(projectSubscription.packageName === 'Free' && projectSubscription.numOfBuildingsRemaining === 0){
+            if(projectSubscription.packageName === 'Free' && projectSubscription.numOfBuildingsRemaining === 0) {
               projectSubscription.addBuildingDisable=true;
             }
 
@@ -1012,11 +1014,10 @@ class UserService {
         subScriptionService.getSubscriptionPackageByName('Add_building','addOnPackage',
           (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
             if(error) {
-              callback(new Error(Messages.MSG_ERROR_BUILDINGS_PURCHASED_LIMIT), null);
+              callback(error,null);
             } else {
               let projectBuildingsLimit = subscription.numOfBuildings + numberOfBuildingsPurchased;
-              if(projectBuildingsLimit <= 10) {
-                let result = subscriptionPackage[0];
+              let result = subscriptionPackage[0];
                 result.addOnPackage.numOfBuildings = numberOfBuildingsPurchased;
                 result.addOnPackage.cost = costForBuildingPurchased;
                 subscription.numOfBuildings = subscription.numOfBuildings + result.addOnPackage.numOfBuildings;
@@ -1028,11 +1029,8 @@ class UserService {
                     callback(null, {data: 'success'});
                   }
                 });
-              } else {
-                callback(new Error(Messages.MSG_ERROR_BUILDINGS_PURCHASED_LIMIT), null);
-              }
-            }
-          });
+                }
+        });
         break;
       }
     }

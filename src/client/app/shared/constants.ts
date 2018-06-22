@@ -111,6 +111,10 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_NUMBER_OF_FLOORS = 'Total number of floors should be more than number of parking floors';
   public static MSG_ERROR_VALIDATION_SAME_BUILDING_NAME = 'Building with same name already exists.';
 
+//payment error messages
+
+  public static BUILDING_PURCHASED_ERROR = 'You can add only 5 buildings at once.';
+
 
   public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and you will receive a verification code on it.';
   public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new account email address and we will send you a link to reset your email.' ;

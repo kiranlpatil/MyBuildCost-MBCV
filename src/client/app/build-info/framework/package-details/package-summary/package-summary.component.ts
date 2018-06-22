@@ -5,6 +5,7 @@ import {CommonService,Message, MessageService, SessionStorage, SessionStorageSer
 import { PackageDetailsService } from './../package-details.service';
 import { NavigationRoutes } from '../../../../shared/index';
 import { SubscribedPackage } from '../../model/SubscribedPackage';
+import {CostSummaryService} from "../../project/cost-summary-report/cost-summary.service";
 
 @Component({
   moduleId: module.id,
@@ -22,15 +23,15 @@ export class PackageSummaryComponent implements OnInit {
   sum : number =0;
   projectId:any;
   projectName:string;
-  createNewProject:boolean=false;
+  numOfBuildingsForProject : number;
+  numOfBuildingsAllocated : number;
   noOfBuildingsValues: any[] = ValueConstant.NO_OF_BUILDINGS_VALUES;
 
   constructor(private activatedRoute: ActivatedRoute, private packageDetailsService: PackageDetailsService,
-              private _router: Router, private commonService:CommonService,private messageService: MessageService) {
+     private costSummaryService :CostSummaryService,private _router: Router, private commonService:CommonService,private messageService: MessageService) {
   }
 
   ngOnInit() {
-    this.createNewProject=SessionStorageService.getSessionValue(SessionStorage.CREATE_NEW_PROJECT)!== 'false' ? true : false;
     this.activatedRoute.params.subscribe(params => {
       this.packageName = params['packageName'];
       this.premiumPackageExist = params['premiumPackageExist'];
@@ -46,39 +47,39 @@ export class PackageSummaryComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.totalBilled);
     }
 
+
+  getProjectSubscriptionDetails () {
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
+      status=>this.checkLimitationOfBuildingSuccess(status),
+      error=>this.checkLimitationOfBuildingFailure(error)
+    );
+  }
+
+  checkLimitationOfBuildingSuccess(projectSubscriptionDetails:any) {
+    this.numOfBuildingsAllocated = projectSubscriptionDetails.numOfBuildingsAllocated;
+    let noOfBuildingsPurchased = SessionStorageService.getSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED);
+    this.numOfBuildingsForProject = this.numOfBuildingsAllocated + parseInt(noOfBuildingsPurchased);
+    if(this.numOfBuildingsForProject <=10) {
+      this._router.navigate(['project', NavigationRoutes.PAYMENT]);
+    }else {
+      let message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.BUILDING_PURCHASED_ERROR;
+      this.messageService.message(message);
+    }
+   }
+
+  checkLimitationOfBuildingFailure(error:any) {
+    console.log(error);
+  }
   getSubscriptionPackageByName(packageName: string, body: any) {
     this.packageDetailsService.getSubscriptionPackageByName(body).subscribe(
       packageDetails => this.onGetSubscriptionPackageByNameSuccess(packageDetails),
       error => this.onGetSubscriptionPackageByNameFailure(error)
     );
   }
-  updateSubscription(body:any) {
-    this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.packageDetailsService.getRetainOrRenewProject(this.projectId, body)
-      .subscribe(success => this.onRetainOrRenewProjectSuccess(success),
-        error => this.onRetainOrRenewProjectFailure(error));
-  }
-
-
-  onRetainOrRenewProjectSuccess(success: any) {
-    let message = new Message();
-    message.isError = false;
-    message.custom_message = success.data;
-    this.messageService.message(message);
-    this._router.navigate(['project', NavigationRoutes.PAYMENT]);
-    //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
-    //this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
-  }
-
-  onRetainOrRenewProjectFailure(error:any) {
-    console.log(error);
-    var message = new Message();
-    message.isError = true;
-    // message.custom_message = error.err_msg;
-    message.error_msg = error.err_msg;
-    this.messageService.message(message);
-  }
-
   onGetSubscriptionPackageByNameSuccess(packageDetails: any) {
     this.premiumPackageDetails = packageDetails[0];
     let subscribedPackage = new SubscribedPackage();
@@ -127,13 +128,12 @@ export class PackageSummaryComponent implements OnInit {
         numOfPurchasedBuildings:this.selectedBuildingValue,
         totalBilled :this.totalBilled
       };
-
       let subscribedPackage = new SubscribedPackage();
       subscribedPackage.name = body.packageName;
       subscribedPackage.amount = body.totalBilled;
       this.commonService.updatePurchasepackageInfo(subscribedPackage);
+      this.getProjectSubscriptionDetails();
 
-      this.updateSubscription(body);
     }
   }
 

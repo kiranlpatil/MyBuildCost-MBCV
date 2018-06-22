@@ -133,7 +133,7 @@ class Constants {
   public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation';
   public static SHOWER_ENCLOSURES : string = 'Shower Enclosures';
   public static FALSE_CEILING : string = 'False ceiling';
-  public static STAIRCASE_TREADS_AND_RISERS : string = 'Staircase treads and risers';
+  public static STAIRCASE_TREADS_AND_RISERS : string = 'Staircase Treads and Risers';
   public static SPECIAL_ELEVATIONAL_FEATURES : string = 'Special elevational features';
   public static BOARDS_AND_SIGNAGES_INSIDE_BUILDING : string = 'Boards & Signages inside building';
 

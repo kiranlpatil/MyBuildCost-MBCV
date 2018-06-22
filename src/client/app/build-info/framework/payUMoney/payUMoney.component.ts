@@ -86,6 +86,8 @@ export class PayUMoneyComponent implements OnInit {
   onGetHashSuccess(PayUMoneyModel : any) {
     console.log('calling payment : '+JSON.stringify(PayUMoneyModel.data));
     window.location.href = PayUMoneyModel.data;
+    //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
+
   }
 
   onGetHashFailure(error : Error) {

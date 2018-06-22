@@ -358,6 +358,7 @@ class RateAnalysisService {
         }
       }
     }
+
     this.getWorkItemsFromRateAnalysis(workItemsWithoutCategories, rateItemsRateAnalysis,
       unitsRateAnalysis, notesRateAnalysis, buildingWorkItems, configWorkItems);
 
@@ -440,6 +441,8 @@ class RateAnalysisService {
       workItem.rate.total = configWorkItem.directRate;
       workItem.rate.unit = configWorkItem.directRatePerUnit;
       workItem.rate.isEstimated = true;
+    } else {
+      logger.error('WorkItem error for rateAnalysis : '+configWorkItem.name);
     }
 
     return workItem;
@@ -479,6 +482,7 @@ class RateAnalysisService {
       let notes = '';
       let imageURL = '';
       workItem.rate.rateItems = rateItemsByWorkItem;
+      workItem.rate.unit = workItemExistArray[0].rateAnalysisUnit;
 
       if (rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
         let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = '+

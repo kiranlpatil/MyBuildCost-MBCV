@@ -65,7 +65,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
 
 
   //let sendProjectExpiryWarningMail = new CronJob('00 */5 0 * * *', function() {
-  let sendProjectExpiryWarningMail = new CronJob('01 0 0 * * *', function() {
+  let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
       let userService : UserService = new UserService();
       let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
       userService.sendProjectExpiryWarningMails((error, success) => {

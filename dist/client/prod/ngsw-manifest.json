@@ -1,12 +1,12 @@
 {
   "static": {
     "urls": {
-      "/index.html": "d6bbcef5f1a40262e582622127a07bfe7fa24bdb",
+      "/index.html": "2cc8fbe48356a68459c19f21993ab81ca0b085fb",
       "/manifest.json": "c48a13fd12025ee09de4a6c086bfd562c37a7e14",
       "/service-worker.js": "13a16a93bb5f4c6649a4e926d4411493c51765fa",
       "/banners\\ads.png": "4645aa5c542dbec1ca788fac67e50dd16564290a",
       "/css\\main.css": "3c09681c456c6129666e0bfdc29f8f439b677262",
-      "/js\\app.js": "886cc85c0dcf9f9b7ef8d7d05eea745a4ea2508b",
+      "/js\\app.js": "2146b03cec0b0d144809f237bb84df9507ff20ad",
       "/js\\shims.js": "c643a10115a4c280374d9d2b28a5280c3641ac8d",
       "/assets\\build-info\\create-new-project\\back.png": "589dcb7eafd1aaab5534d3e5d862bd6cb15a6e2e",
       "/assets\\build-info\\create-new-project\\close.png": "f2a2bc4e7f5543ae6591ce2c4ee8b1214d893892",
@@ -42,8 +42,8 @@
       "/assets\\build-info\\page_background\\page-bg-transparent.png": "7b4d8881375984165cff4dd8dd915dc4b0a694aa",
       "/assets\\build-info\\page_background\\page-bg.png": "1bd161d1373c00eba8733dcb51f8146ccf42358b",
       "/assets\\build-info\\profile-pic\\sprite.png": "af72b7d601db549a4072f699c226b5dccbb0ec7d",
-      "/assets\\framework\\fonts\\glyphicons-halflings-regular.svg": "297c73ba85f235221fae20e8dd1c844857dc3276",
       "/assets\\framework\\fonts\\glyphicons-halflings-regular.eot": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3",
+      "/assets\\framework\\fonts\\glyphicons-halflings-regular.svg": "297c73ba85f235221fae20e8dd1c844857dc3276",
       "/assets\\framework\\fonts\\glyphicons-halflings-regular.ttf": "44bc1850f570972267b169ae18f1cb06b611ffa2",
       "/assets\\framework\\fonts\\glyphicons-halflings-regular.woff": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f",
       "/assets\\framework\\fonts\\glyphicons-halflings-regular.woff2": "ca35b697d99cae4d1b60f2d60fcd37771987eb07",

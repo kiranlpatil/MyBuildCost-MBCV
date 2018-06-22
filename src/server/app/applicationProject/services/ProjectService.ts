@@ -209,7 +209,7 @@ class ProjectService {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, {data:'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null, {data:response.name, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

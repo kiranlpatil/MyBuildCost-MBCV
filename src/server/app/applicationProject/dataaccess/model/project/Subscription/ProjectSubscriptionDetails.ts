@@ -10,6 +10,7 @@ class ProjectSubscriptionDetails {
   numOfBuildingsRemaining : number;
   packageName:string;
   addBuildingDisable?:boolean;
+  numOfBuildingsExist?:number;
   activeStatus:boolean;
 }
 export = ProjectSubscriptionDetails;
