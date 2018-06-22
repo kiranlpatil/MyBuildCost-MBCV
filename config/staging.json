@@ -8138,9 +8138,11 @@
         },
         {
           "name" : "Water pumps",
+          "rateAnalysisId" : 200072,
           "workItems" : [
             {
               "name" : "Providing water pumping system from UGWT to OHWT",
+              "rateAnalysisId" : 200073,
               "isMeasurementSheet" : false,
               "measurementUnit" : null,
               "isRateAnalysis" : false,
@@ -8156,6 +8158,7 @@
             },
             {
               "name" : "Providing hydropneumatic system for water pumping from UGWT to individual units",
+              "rateAnalysisId" : 200074,
               "isMeasurementSheet" : false,
               "measurementUnit" : null,
               "isRateAnalysis" : false,
