@@ -40,7 +40,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         indexOf(estimateCost)].amount;
         let name= this.buildingReport.thumbRule.thumbRuleReports[this.buildingReport.estimate.estimatedCosts.
         indexOf(estimateCost)].name;
-        budgetedCostsHeadList.push(['<span class="glyphicon glyphicon-star" style="color:#C0C0C0;"></span>'
+        budgetedCostsHeadList.push(['<span class="glyphicon glyphicon-star" style="color:#C0C0C0;font-size:9px"></span>'
                                      +name,amount]);
       }
     }
@@ -67,7 +67,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         height: 630,
       },
       title: {
-        text: this.buildingReport.name + ',<br>Construction Cost:<br>' + '(Material+Labour)',
+        text: ((this.buildingReport.name==='amenities')?'Common Amenities':this.buildingReport.name) + ',<br>Construction Cost:<br>' + '(Material+Labour)',
         align: 'center',
         verticalAlign: 'middle',
         y: -100,
@@ -117,15 +117,21 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         innerSize: '60%',
         data: data,
       }],
+      xAxis: {
+        labels: {
+          staggerLines: 2
+        },
+        tickPixelInterval: 50
+      },
       legend: {
         useHTML:true,
         symbolRadius:0,
         labelFormat: '{percentage:.0f}% {name}',
         layout: 'vertical',
-        itemWidth: 150,
+        //itemWidth: 150,
         maxHeight: 300,
         y: 320,
-        itemMarginTop: 5,
+        itemMarginTop: 0,
         //margin: 0,
         //padding: 0,
         verticalAlign: 'top'

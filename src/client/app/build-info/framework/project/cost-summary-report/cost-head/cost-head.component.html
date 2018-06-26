@@ -67,10 +67,10 @@
                                   <div class="edit-field" [class.active-quantity]="(showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
                                     <input type="number" [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
                                            (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
-                                            id="directQuantity" size="10" class="form-control clear">
+                                            id="directQuantity" size="10" class="form-control clear" title="Guantity">
                                     <span class="calculator"
                                           id="getQuantity{{categoryIndex}}"
-                                          *ngIf="workItem.isMeasurementSheet"
+                                          *ngIf="workItem.isMeasurementSheet" title="Get Quantity"
                                           (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex);">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
                                     </span>
@@ -89,14 +89,14 @@
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().RATE_PER_UNIT}}</span>
                                   <div class="edit-field" [class.active-rate]="(showWorkItemTab == getLabel().WORKITEM_RATE_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
-                                    <input *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
+                                    <input title="Workitem Rate" *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
                                     <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
                                       {{workItem.rate.total|number : '1.2-2'}}
                                     </div>
                                     <div class="edit-rate-null" *ngIf="!workItem.isDirectRate && !workItem.rate.isEstimated">
                                       -
                                     </div>
-                                     <span class="calculator"
+                                     <span title="Get Rate" class="calculator"
                                            id ="getRate{{categoryIndex}}"
                                            *ngIf="workItem.isDirectRate === false"
                                            (click)="getRate( getLabel().GET_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, false, categoryIndex, workItemIndex)">
@@ -127,7 +127,7 @@
                                   <div  *ngIf=" workItem.isDirectRate === false">
                                    <button class="btn-get-amount"
                                            [class.active]="(rateView==='systemRA' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
-                                           type="button"
+                                           type="button" title="Systern RA"
                                            (click)="getSystemRate( getLabel().GET_SYSTEM_RATE, category.rateAnalysisId, workItem.rateAnalysisId, workItem, true, categoryIndex, workItemIndex)">{{getButton().SYSTEM_RA}}
                                    </button>
                                   </div>
@@ -139,10 +139,10 @@
                                 <td>
                                     <div class="file-attachment" [class.attachment-menu-open]="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                       <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
-                                        <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Files" />
+                                        <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Files" title="Attach Files" />
                                       </span>
                                       <span class="file-attached" *ngIf="workItem.attachmentDetails.length != 0" (click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
-                                        <img src="assets/build-info/dashboard/file-attached.png" alt="Attach Files" />
+                                        <img src="assets/build-info/dashboard/file-attached.png" alt="Attach Files" title="Attach Files" />
                                       </span>
                                       <div class="attachment-menu" *ngIf="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
                                         <bi-attachment [costHeadId]="costHeadId"
@@ -308,7 +308,7 @@
                   </tr>
                   <tr>
                     <td  class="add-items" colspan="7">
-                      <button type="button" class="btn-add-item"
+                      <button title="Add Item" type="button" class="btn-add-item"
                               (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)" [disabled]="showHideAddItemButton">
                         <span class="glyphicon glyphicon-plus"></span> {{getButton().ADD}} {{getButton().ITEM}}</button>
                     </td>

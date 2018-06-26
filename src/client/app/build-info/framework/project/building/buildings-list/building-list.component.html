@@ -8,7 +8,7 @@
         <li *ngFor="let building of buildings">
           <button type="button" class="btn btn-primary">{{building.name}}</button>
           <span data-toggle="modal" data-target="#delete" (click)="setBuildingId(building._id)" class="glyphicon glyphicon-trash"></span>
-          <span (click)="navigateToEditBuildingDetails(building._id)" class="glyphicon glyphicon-pencil"></span>
+          <span title="Edit Building" (click)="navigateToEditBuildingDetails(building._id)" class="glyphicon glyphicon-pencil"></span>
           <span data-toggle="modal" data-target="#myModal"(click)="cloneBuilding(building._id)" class="glyphicon glyphicon-duplicate"></span>
           <br/><br/>
         </li>

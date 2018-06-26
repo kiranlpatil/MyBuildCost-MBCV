@@ -1,7 +1,11 @@
 <!--Edit enabled-->
 <div *ngIf="rate!==undefined" [ngClass]="(rateView == 'rate') ? 'get-rate-section' : ((rateView == 'cost' || innerView == getLabel().GET_RATE_BY_QUANTITY) ? 'get-cost-section' : 'get-systemRA-section')">
-  <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="close" (click)="closeRateTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
-  <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" title="close" class="close" (click)="closeRateTab()">
+    <img src="assets/framework/images/close/close-black.svg" />
+  </button>
+  <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" title="close" class="close" (click)="closeInnerViewTab()">
+    <img src="assets/framework/images/close/close-black.svg" />
+  </button>
   <div class="pull-left">
     <div class="pull-left" *ngIf="rate!==undefined">
       <div class="pull-left quantity-label">
@@ -96,10 +100,10 @@
       <tfoot>
         <tr>
           <td rowspan="2">
-            <button *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeRateTab()">{{getButton().CANCEL_BUTTON}}</button>
-            <button *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+            <button title="Cancel" *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeRateTab()">{{getButton().CANCEL_BUTTON}}</button>
+            <button title="Cancel" *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
 
-            <button type="button" *ngIf="!disableRateField" class="save-btn hidden-xs" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
+            <button title="Save" type="button" *ngIf="!disableRateField" class="save-btn hidden-xs" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
           </td>
           <td class="grand-total-amount" colspan="4">
             <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}:</label>

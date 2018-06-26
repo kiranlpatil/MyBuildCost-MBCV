@@ -9,7 +9,9 @@
         </a>
       </h4>
       <div class="dropdown menu-items">
-        <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
+        <a title="Download/Print" class="dropdown-toggle" data-toggle="dropdown">
+          <img src="assets/build-info/dashboard/dots.png" />
+        </a>
         <ul class="dropdown-menu">
           <li class="first-child-list">
             <div class="download-pdf-list">
@@ -64,7 +66,7 @@
                   </span>
                   <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
                 <div class="edit-field">
-                  <input type="number"
+                  <input title="Budgeted Cost" type="number"
                          [(ngModel)]="thumbRuleItem.amount"
                          id="thumbRuleItem.amount"
                          (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
@@ -99,14 +101,14 @@
                           </span>
                 </div>
                 <button *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
-                        type="button" class="btn-get-amount"
+                        type="button" class="btn-get-amount" title="Estimate Cost"
                         (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
               </td>
               <td class="delete-cost-head">
                 <div data-toggle="modal"
                      data-target="#deleteCosthead"
                      (click)="setIdsToInActiveCostHead(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateAnalysisId)">
-                  <img alt="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
+                  <img alt="Delete Cost Head" title="Delete Cost Head" src="assets/build-info/dashboard/delete.png" />
                 </div>
               </td>
             </tr>
@@ -123,7 +125,7 @@
             </tr>
             <tr class="add-item-row hidden-xs">
               <td colspan="5" class="add-items">
-                <button type="button" class="btn btn-add-item"
+                <button title="Add Cost Head" type="button" class="btn btn-add-item"
                         (click)="getAllInActiveProjectCostHeads()" [disabled]="showHideCostHeadButtonList[showHideCostHeadButtonList.length-1].showHideAddCostHeadButton">
                   <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
                 </button>
@@ -201,6 +203,6 @@
       </tbody>
     </table>
   </div>
-<div class="modal fade default-modal" id="deleteCosthead" role="dialog">
-  <bi-delete-confirmation-modal [elementType]="deleteConfirmationCostHead" (deleteElementEvent)="deleteProjectCostHead($event)"></bi-delete-confirmation-modal>
-</div>
+  <div class="modal fade default-modal" id="deleteCosthead" role="dialog">
+    <bi-delete-confirmation-modal [elementType]="deleteConfirmationCostHead" (deleteElementEvent)="deleteProjectCostHead($event)"></bi-delete-confirmation-modal>
+  </div>

@@ -1,6 +1,10 @@
 <div *ngIf="quantityItems!==undefined" class="get-quantity-section">
-  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeQuantityTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
-  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="close" (click)="closeInnerViewTab()"><img src="assets/framework/images/close/close-black.svg" /></button>
+  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" title="Close" class="close" (click)="closeQuantityTab()">
+    <img src="assets/framework/images/close/close-black.svg" />
+  </button>
+  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" title="Close" class="close" (click)="closeInnerViewTab()">
+    <img src="assets/framework/images/close/close-black.svg" />
+  </button>
   <table class="table">
     <thead>
       <th>{{getTableHeadings().ITEM}}</th>
@@ -71,10 +75,10 @@
   </tbody>
   </table>
 
-  <button type="button" class="add-new-btn hidden-xs" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
-  <button type="submit" class="save-btn hidden-xs" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
-  <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
-  <button *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button title="Add Row" type="button" class="add-new-btn hidden-xs" (click)="addQuantityItem()">+ {{getButton().ADD}} {{getButton().ROW}}</button>
+  <button title="Save" type="submit" class="save-btn hidden-xs" (click)="updateQuantityItem(quantityItems)">{{getButton().SAVE}}</button>
+  <button title="Cancel" *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeQuantityTab()">{{getButton().CANCEL_BUTTON}}</button>
+  <button title="Cancel" *ngIf="innerView === getLabel().WORKITEM_QUANTITY_TAB" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
 </div>
 
 <div class="modal fade" id="deleteQuantity" role="dialog">

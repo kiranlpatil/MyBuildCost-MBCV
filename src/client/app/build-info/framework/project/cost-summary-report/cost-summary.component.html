@@ -44,7 +44,7 @@
               </a>
             </h4>
             <div class="dropdown menu-items">
-              <a class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
+              <a title="Download/Print" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/build-info/dashboard/dots.png" /></a>
               <ul class="dropdown-menu">
                 <li class="first-child-list">
                   <div class="download-pdf-list">
@@ -103,7 +103,7 @@
                       </span>
                       <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
                       <div class="edit-field">
-                        <input type="number"
+                        <input type="number" title="Budgeted Cost"
                                [(ngModel)]="thumbRuleItem.amount"
                                id="thumbRuleItem.amount"
                                (blur)="changeBudgetedCostAmountOfBuildingCostHead(building._id, thumbRuleItem.name, thumbRuleItem.amount)"
@@ -128,7 +128,7 @@
                           {{ building.estimate.estimatedCosts[i].total | number: '1.0-0' }}
                         </span>
                       </div>
-                      <button *ngIf="building.estimate.estimatedCosts[i].total == 0"
+                      <button title="Estimate Cost" *ngIf="building.estimate.estimatedCosts[i].total == 0"
                               type="button" class="btn-get-amount"
                               (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">Estimate Cost</button>
                     </td>
@@ -153,7 +153,7 @@
                   </tr>
                   <tr class="add-item-row hidden-xs">
                     <td colspan="5" class="add-items">
-                      <button  type="button" class="btn btn-add-item"
+                      <button title="Add Cost Head"  type="button" class="btn btn-add-item"
                                [disabled]="showHideCostHeadButtonsList[i].showHideAddCostHeadButton" (click)="getAllInActiveCostHeads(building._id)" >
                         <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
                       </button>
