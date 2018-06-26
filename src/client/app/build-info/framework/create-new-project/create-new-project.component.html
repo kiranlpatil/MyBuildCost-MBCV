@@ -2,8 +2,13 @@
   <div class="inner-content clearfix">
     <div class="create-new-project">
       <img src="assets/build-info/create-new-project/create-new-project.png" alt="Create New Project"/>
-      <p>{{getHeadings().CREATE_YOUR_FIRST_PROJECT}}</p>
-      <button type="button" class="btn btn-primary" (click)="goToCreateProject()">{{getButton().CREATE_NEW_PROJECT}}</button>
+      <p>{{getHeadings().CREATE_TRIAL_PROJECT}}</p>
+      <button type="button" class="btn btn-primary" (click)="goToCreateProject()">{{getButton().CREATE}}</button>
+      <div class="view-package-details">
+        <p><span innerHTML="{{getButton().MSG_VIEW_PACKAGE_DETAILS}}"></span>
+          <a (click)="goToPaymentDetails()">{{getButton().CLICK_HERE}}.</a>
+        </p>
+      </div>
     </div>
     <div class="get-started">
       <img src="assets/build-info/create-new-project/get-started.png" alt="Get Started"/>

@@ -1,0 +1,48 @@
+@import '../../../../../css/variables';
+
+.payment-successful-section {
+  max-width: 570px;
+  display: table;
+  margin: 0 auto;
+  h1 {
+    color: $heading;
+    font-size: 36px;
+    font-weight: 300;
+    margin: 30px 0 20px 0;
+  }
+  p {
+    color: $heading;
+    font-size: 21px;
+  }
+  .successful-icon {
+    margin: 50px 0 20px;
+  }
+  .btn-primary {
+    height: 44px;
+    line-height: 20px;
+    margin: 20px 0;
+    padding: 10px 25px;
+    width: 130px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .payment-successful-section {
+    margin: 0 15px;
+    h1 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+    }
+    .successful-icon {
+      margin: 30px 0 20px;
+      img {
+        width: 80px;
+      }
+    }
+    br {
+      display: none;
+    }
+  }
+}

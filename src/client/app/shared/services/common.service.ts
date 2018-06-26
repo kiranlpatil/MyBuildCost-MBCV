@@ -3,9 +3,27 @@ import { Category } from '../../../app/build-info/framework/model/category';
 import { WorkItem } from '../../../app/build-info/framework/model/work-item';
 import { ValueConstant } from '../constants';
 import { QuantityDetails } from '../../build-info/framework/model/quantity-details';
+import {Subject} from "rxjs/Subject";
+import {
+  AddBuildingPackageDetails
+} from "../../build-info/framework/model/add-building-package-details";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class CommonService {
+  CommonService = new BehaviorSubject<any>('null');
+  deleteEvent$ = this.CommonService.asObservable();
+  updatepackageInfo$ = this.CommonService.asObservable();
+
+  change(values:any) {
+    this.CommonService.next(values);
+  }
+
+  updatePurchasepackageInfo(packageInfo : any) {
+    if(packageInfo !== null) {
+      this.CommonService.next(packageInfo);
+    }
+  }
 
   goBack() {
     window.history.go(-1);

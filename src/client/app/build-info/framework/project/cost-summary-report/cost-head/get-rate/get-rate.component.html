@@ -110,8 +110,14 @@
         </tr>
         <tr>
           <td class="grand-total-amount" colspan="4">
-            <label>Rate per unit:</label>
+            <label>Rate per {{rate.unit}}:</label>
             <span>{{ ratePerUnitAmount|number: '1.2-2'}}</span>
+          </td>
+        </tr>
+        <tr *ngIf="totalByUnit !== 0">
+          <td class="grand-total-amount" colspan="4">
+            <label>Rate per {{workItemUnit}}:</label>
+            <span>{{ totalByUnit|number: '1.2-2'}}</span>
           </td>
         </tr>
       </tfoot>
@@ -119,30 +125,30 @@
   </div>
   <table class="notes-table">
     <thead>
-      <th>
-        <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#notes">{{ getLabel().NOTES }}</a></li>
-          <li *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB"><a data-toggle="tab" href="#disclaimer">{{getButton().STANDARD_NOTE}}</a></li>
-        </ul>
-      </th>
-      <th></th>
+    <th>
+      <ul class="nav nav-tabs">
+        <li class="active" *ngIf="rate.notes != ''"><a data-toggle="tab" href="#notes">{{ getLabel().NOTES }}</a></li>
+        <li [class.active]= "(rate.notes === '')" *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB"><a data-toggle="tab" href="#disclaimer">{{getButton().STANDARD_NOTE}}</a></li>
+      </ul>
+    </th>
+    <th></th>
     </thead>
     <tbody>
-      <tr>
-        <td class="alignment-top">
-          <div class="tab-content">
-            <div id="notes" class="tab-pane fade in active">
-              <p>{{rate.notes}}</p>
-            </div>
-            <div id="disclaimer" class="tab-pane fade"  *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB" >
-              <bi-disclaimer-component [note]="getStandardNotes().Notes"></bi-disclaimer-component>
-            </div>
+    <tr>
+      <td class="alignment-top">
+        <div class="tab-content">
+          <div id="notes" *ngIf="rate.notes != ''" class="tab-pane fade in active" >
+            <p>{{rate.notes}}</p>
           </div>
-        </td>
-        <td class="alignment-top">
-          <img *ngIf="rate.imageURL != ''" id="rateImageURL" src="{{rate.imageURL}}">
-        </td>
-      </tr>
+          <div id="disclaimer" class="tab-pane fade" [class.active]="(rate.notes === '')" [class.in]="(rate.notes === '')" *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB" >
+            <bi-disclaimer-component [note]="getStandardNotes().Notes"></bi-disclaimer-component>
+          </div>
+        </div>
+      </td>
+      <td class="alignment-top">
+        <img *ngIf="rate.imageURL != ''" id="rateImageURL" src="{{rate.imageURL}}">
+      </td>
+    </tr>
     </tbody>
   </table>
 </div>

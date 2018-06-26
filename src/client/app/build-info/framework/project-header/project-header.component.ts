@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SessionStorage, SessionStorageService } from '../../../shared/index';
-import { Menus, NavigationRoutes, CurrentView } from '../../../shared/constants';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CommonService, SessionStorage, SessionStorageService} from '../../../shared/index';
+import { Menus, NavigationRoutes, CurrentView, Button } from '../../../shared/constants';
+import { CostSummaryService } from '../project/cost-summary-report/cost-summary.service';
 
 @Component({
   moduleId: module.id,
@@ -14,20 +15,73 @@ export class ProjectHeaderComponent implements OnInit {
 
   @Input() isClassVisible: boolean;
   @Output() toggleClassView = new EventEmitter<boolean>();
+  @Input () isActiveAddBuildingButton? :any;
+  numberOfRemainingBuildings : number;
+  subscriptionValidityMessage : string;
+  premiumPackageExist:any;
+  packageName:string;
+  addBuildingButtonDisable:boolean =false;
+  premiumPackageAvailable:boolean=false;
+  activeStatus:boolean=false;
+  subscription:any;
+  item :any;
 
-  constructor(private _router: Router) {
+
+
+  constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService,private commonService:CommonService) {
   }
 
   ngOnInit() {
-    this.getCurrentProjectId();
+    this.activatedRoute.params.subscribe(params=> {
+      this.premiumPackageExist=params['premiumPackageExist'];
+      this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;
+      });
+
+    if(this.getCurrentProjectId()) {
+      this.getProjectSubscriptionDetails();
+    }
+    this.subscription = this.commonService.deleteEvent$
+      .subscribe(item =>this.getProjectSubscriptionDetails()
+      );
   }
 
   getCurrentProjectId() {
     return SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
   }
 
+  getProjectSubscriptionDetails () {
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
+      status=>this.checkLimitationOfBuildingSuccess(status),
+      error=>this.checkLimitationOfBuildingFailure(error)
+    );
+  }
+
   goToCreateBuilding() {
-    this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
+    if(this.numberOfRemainingBuildings > 0) {
+      this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
+      } else {
+      let packageName = 'Add_building';
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName,this.premiumPackageAvailable]);
+    }
+  }
+
+
+
+  checkLimitationOfBuildingSuccess(status:any) {
+    this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+    this.activeStatus = status.activeStatus;
+    this.addBuildingButtonDisable =status.addBuildingDisable;
+    if(status.expiryMessage) {
+      this.subscriptionValidityMessage = status.expiryMessage;
+    } else if(status.warningMessage) {
+      this.subscriptionValidityMessage = status.warningMessage;
+    }
+  }
+
+  checkLimitationOfBuildingFailure(error:any) {
+    console.log(error);
   }
 
   getMenus() {
@@ -44,6 +98,17 @@ export class ProjectHeaderComponent implements OnInit {
 
   closeMenu() {
     this.toggleClassView.emit(false);
+  }
+
+  getButton() {
+    return Button;
+  }
+
+  goToRenew() {
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    let projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
+    let numberOfDaysToExpire = SessionStorageService.getSessionValue(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
+    this._router.navigate([NavigationRoutes.APP_RENEW_PACKAGE, projectId, projectName, numberOfDaysToExpire]);
   }
 
 }

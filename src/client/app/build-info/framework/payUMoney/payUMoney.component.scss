@@ -1,0 +1,24 @@
+.payumoney-inner-wrapper {
+  margin: 50px auto;
+  max-width: 400px;
+  h1 {
+    font-size: 28px;
+    margin: 20px 0;
+  }
+  .disabled-values input[disabled] {
+    background: #f3f3f3;
+  }
+  .btn {
+    width: 130px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .payumoney-inner-wrapper {
+    margin: 0 15px 20px;
+    h1 {
+      font-size: 18px;
+    }
+  }
+}

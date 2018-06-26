@@ -247,15 +247,11 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  /*moveAtTop(compareIndex : number, collapseCostSummaryPanelTag :any) {
-    let collapseTag = '#collapse' + compareIndex;
-    $(collapseTag).ready(function () {
-      var divPos = $(collapseCostSummaryPanelTag).offset().top;
-      $('html, body').animate({
-        scrollTop: divPos - 8
-      }, 500);
-    });
-  }*/
+  //check for limitation of building according to package.
+  checkLimitationOfBuilding(userId:string,projectId:string) {
+    var url=API.USER +'/subscription/'+API.PROJECT +'/'+projectId;
+  return this.httpDelegateService.getAPI(url);
+  }
 
   moveSelectedBuildingAtTop(compareIndex : number) {
     let collapseCostSummaryPanelTag = '#collapse-cost-summary-panel' + compareIndex;
@@ -280,9 +276,13 @@ export class CostSummaryService extends BaseService {
         let collapseTag = '#collapse' + compareIndex;
         $(collapseTag).ready(function () {
           var divPos = $(collapseCostSummaryPanelTag).offset().top;
+          let scrollTo=SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)?
+            SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)
+            : divPos - 8;
           $('html, body').animate({
-            scrollTop: divPos - 8
-          }, 500);
+            scrollTop: scrollTo
+          },500);
+          setTimeout(() =>  SessionStorageService.removeSessionValue(SessionStorage.CURRENT_WINDOW_POSITION), 600);
         });
     });
   }

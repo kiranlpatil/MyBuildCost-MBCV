@@ -232,59 +232,6 @@ class UserController {
       });
     }
   }
-  /*updateProfileField(req: express.Request, res: express.Response, next: any) {
-    try {
-      //let newUserData: UserModel = <UserModel>req.body;
-
-      let params = req.query;
-      delete params.access_token;
-      let user = req.user;
-      let _id: string = user._id;
-      let fName: string = req.params.fname;
-      if (fName == 'guide_tour') {
-        var data = {'guide_tour': req.body};
-      }
-      let auth: AuthInterceptor = new AuthInterceptor();
-      let userService = new UserService();
-      userService.update(_id, data, (error, result) => {
-        if (error) {
-          next(error);
-        }
-        else {
-          userService.retrieve(_id, (error, result) => {
-            if (error) {
-              next({
-                reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_WRONG_TOKEN,
-                stackTrace: new Error(),
-                code: 400
-              });
-            }
-            else {
-              res.send({
-                "status": "success",
-                "data": {
-                  "first_name": result[0].first_name,
-                  "last_name": result[0].last_name,
-                  "email": result[0].email,
-                  "_id": result[0].userId,
-                  "guide_tour": result[0].guide_tour
-                }
-              });
-            }
-          });
-        }
-      });
-    }
-    catch (e) {
-      next({
-        reason: e.message,
-        message: e.message,
-        stackTrace: new Error(),
-        code: 403
-      });
-    }
-  }*/
 
   retrieve(req: express.Request, res: express.Response, next: any) {
     try {
@@ -310,51 +257,6 @@ class UserController {
       });*/
     }
   }
-
-  /*verificationMail(req: express.Request, res: express.Response, next: any) {
-    try {
-      let userService = new UserService();
-      let user = req.user;
-      let params = req.body;
-      userService.sendVerificationMail(params, (error, result) => {
-        if (error) {
-          next({
-            reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
-            message: Messages.MSG_ERROR_WHILE_CONTACTING,
-            stackTrace: new Error(),
-            code: 400
-          });
-        }
-        else {
-          res.status(200).send({
-            "status": Messages.STATUS_SUCCESS,
-            "data": {"message": Messages.MSG_SUCCESS_EMAIL_REGISTRATION}
-          });
-        }
-      });
-    }
-    catch (e) {
-      next({
-        reason: e.message,
-        message: e.message,
-        stackTrace: new Error(),
-        code: 403
-      });
-
-    }
-  }*/
-  /*verifyAccount(req: express.Request, res: express.Response, next: any) {
-    try {
-
-      let user = req.user;
-      let params = req.query;
-      delete params.access_token;
-      let userService = new UserService();
-      userService.verifyAccount(user, (error, result)=> {
-
-      });
-    }
-  }*/
 
   changeEmailId(req: express.Request, res: express.Response, next: any) {
 
@@ -405,6 +307,28 @@ class UserController {
         message: e.message,
         stackTrace: new Error(),
         code: 403
+      });
+    }
+  }
+
+  checkForLimitationOfBuilding(req:express.Request,res:express.Response,next:any) {
+    try {
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let userId =req.params.userId;
+      let projectService = new UserService();
+      projectService.getUserForCheckingBuilding(userId,projectId,user,(error:any,result:any) => {
+        if(error) {
+          next(error);
+        }else {
+          res.send(result);
+          }
+      });
+    } catch (e) {
+      next({
+        reason:e.message,
+        message:e.message,
+        stackTrace: new Error()
       });
     }
   }
@@ -594,72 +518,6 @@ class UserController {
     }
   }
 
-  /*notifications(req: express.Request, res: express.Response, next: any) {
-    try {
-      let user = req.user;
-      let auth: AuthInterceptor = new AuthInterceptor();
-      let token = auth.issueTokenWithUid(user);
-
-      //retrieve notification for a particular user
-      let params = {_id: user._id};
-      let userService = new UserService();
-
-      userService.retrieve(params, (error, result) => {
-        if (error) {
-          next(error);
-        } else if (result.length > 0) {
-          let token = auth.issueTokenWithUid(user);
-          res.send({
-            'status': 'success',
-            'data': result[0].notifications,
-            'code' : 200,
-            access_token: token
-          });
-        }
-      });
-    } catch (e) {
-      next({
-        reason: e.message,
-        message: e.message,
-        stackTrace: new Error(),
-        code: 403
-      });
-    }
-  }
-
-  pushNotifications(req: express.Request, res: express.Response, next: any) {
-    try {
-      let user = req.user;
-      let body_data = req.body;
-      let auth: AuthInterceptor = new AuthInterceptor();
-      let token = auth.issueTokenWithUid(user);
-
-      //retrieve notification for a particular user
-      let params = {_id: user._id};
-      let userService = new UserService();
-      let data = {$push: {notifications: body_data}};
-
-      userService.findOneAndUpdate(params, data, {new: true}, (error, result) => {
-        if (error) {
-          next(error);
-        } else {
-          let token = auth.issueTokenWithUid(user);
-          res.send({
-            'status': 'Success',
-            'data': result.notifications,
-            'code': 200
-          });
-        }
-      });
-    } catch (e) {
-      next({
-        reason: e.message,
-        message: e.message,
-        stackTrace: new Error(),
-        code: 403
-      });
-    }
-  }*/
   updatePicture(req: express.Request, res: express.Response, next: any): void {
     __dirname = path.resolve() + config.get('application.profilePath');
     let form = new multiparty.Form({uploadDir: __dirname});
@@ -739,6 +597,101 @@ class UserController {
     }
   }
 
+  getProjectSubscription(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let projectId =  req.params.projectId;
+      let userService  = new UserService();
+      userService.getProjectSubscription(user, projectId,(error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          res.send(result);
+        }
+      });
+    } catch(e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: new Error(),
+        code: 403
+      });
+    }
+  }
+
+  updateSubscription(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let packageName = req.body.packageName;
+      let costForBuildingPurchased =req.body.totalBilled;
+      let numberOfBuildingsPurchased = req.body.numOfPurchasedBuildings;
+
+      let userService = new UserService();
+      userService.updateSubscription(user,projectId, packageName,costForBuildingPurchased,numberOfBuildingsPurchased,(error, result)=> {
+        if(error) {
+          next(error);
+        }else {
+          res.send(result);
+        }
+      });
+    }catch(e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: new  Error(),
+        code: 403
+      });
+    }
+  }
+  assignPremiumPackage(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let userId =req.params.userId;
+      let cost =req.body.totalBilled;
+      let userService = new UserService();
+      userService.assignPremiumPackage(user,userId,cost,(error, result)=> {
+        if(error) {
+          next(error);
+        }else {
+          res.send(result);
+        }
+      });
+    }catch(e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: new  Error(),
+        code: 403
+      });
+    }
+  }
+
+/*
+  assignUserSubscriptionPackage(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let projectId =  req.params.projectId;
+      let userService  = new UserService();
+      userService.getProjectSubscription(user, projectId,(error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          res.send(result);
+        }
+      });
+    } catch(e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: new Error(),
+        code: 403
+      });
+    }
+  }
+*/
+
+
   getAdvertisingBanner(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       __dirname = './';
@@ -753,5 +706,26 @@ class UserController {
       });
     }
   }
+
+  sendProjectExpiryMails(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let userService  = new UserService();
+      userService.sendProjectExpiryWarningMails((error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          res.send(result);
+        }
+    });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
+
 }
 export  = UserController;

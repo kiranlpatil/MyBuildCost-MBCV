@@ -57,6 +57,16 @@ class UserRoutes {
       router.put('/verify/changedEmailId/:id', logger.logDetail, authInterceptor.requiresAuth,
         authInterceptor.secureApiCheck, controller.verifyChangedEmailId);
 
+
+
+      /* Check for limitation of buildings*/
+      router.get('/:userId/project/:projectId/checkForLimitationOfBuilding',logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck,controller.checkForLimitationOfBuilding);
+
+
+
+
+
       //User settings
       router.put('/change/emailId/:id', logger.logDetail, authInterceptor.requiresAuth,
         authInterceptor.secureApiCheck, controller.changeEmailId);
@@ -78,8 +88,23 @@ class UserRoutes {
 
       /*router.use(sharedService.errorHandler);*/
       //Retrive list of project
+      router.get('/subscription/project/:projectId', authInterceptor.requiresAuth, controller.getProjectSubscription);
       router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
       router.get('/advertising/banners', authInterceptor.requiresAuth, controller.getAdvertisingBanner);
+
+      /*router.get('/projectExpiry/sendmails', controller.sendProjectExpiryMails);*/
+
+      // update subscription package
+      router.put('/project/:projectId/updateSubscription', authInterceptor.requiresAuth, controller.updateSubscription);
+
+      //assign premium package to user
+      router.put('/:userId/assignPremium',authInterceptor.requiresAuth, controller.assignPremiumPackage);
+
+      //assign subscription package
+/*
+      router.put('/:userId/assign/package', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.changePassword);
+*/
 
       return router;
     }

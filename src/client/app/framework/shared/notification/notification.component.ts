@@ -55,7 +55,8 @@ export class NotificationComponent implements OnInit {
   onGetNotificationFailure(error: any) {
     var message = new Message();
     message.isError = true;
-    message.error_msg = error;
+    message.error_msg = error.err_msg;
+    message.error_code =  error.err_code;
     message.custom_message = 'Network Not Found';
     this.messageService.message(message);
   }

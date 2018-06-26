@@ -47,10 +47,10 @@ class ProjectInterceptor {
   createProject(req: any, res: any, next: any) {
     if ((req.body.name === undefined) || (req.body.region === undefined) || (req.body.plotArea === undefined) || (req.body.plotPeriphery === undefined) ||
       (req.body.podiumArea === undefined) || (req.body.openSpace === undefined) || (req.body.slabArea === undefined) || (req.body.poolCapacity === undefined) ||
-      (req.body.projectDuration === undefined) || (req.body.totalNumOfBuildings === undefined) ||
+      (req.body.projectDuration === undefined) || (req.body.totalNumOfBuildings === undefined) ||(req.body.activeStatus === undefined) ||
       (req.body.name === '') || (req.body.region === '') || (req.body.plotArea === '') ||
       (req.body.plotPeriphery === '') || (req.body.podiumArea === '') || (req.body.openSpace === '') ||
-      (req.body.slabArea === '') || (req.body.poolCapacity === '') || (req.body.projectDuration === '') ||
+      (req.body.slabArea === '') || (req.body.poolCapacity === '') || (req.body.projectDuration === '') ||(req.body.activeStatus === '') ||
       (req.body.totalNumOfBuildings === '')) {
       next({
         reason: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -130,6 +130,62 @@ class ProjectInterceptor {
             (req.body.totalNumOfBuildings === undefined) || (req.body.name === '') || (req.body.region === '') || (req.body.plotArea === '') ||
             (req.body.plotPeriphery === '') || (req.body.podiumArea === '') || (req.body.openSpace === '') ||
             (req.body.slabArea === '') || (req.body.poolCapacity === undefined) || (req.body.projectDuration === '') || (req.body.totalNumOfBuildings === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+  updateProjectNameById(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var name = req.body.name;
+    ProjectInterceptor.validateProjectId(projectId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((name === undefined) || (name === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+  updateProjectStatus(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var activeStatus = req.params.activeStatus;
+    ProjectInterceptor.validateProjectId(projectId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((activeStatus === undefined) || (activeStatus === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,

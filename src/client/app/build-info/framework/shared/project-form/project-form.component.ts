@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
 import { Project } from '../../model/project';
@@ -11,9 +11,10 @@ import { Label } from '../../../../shared/constants';
   styleUrls: ['project-form.component.css']
 })
 
-export class ProjectFormComponent {
+export class ProjectFormComponent implements OnInit{
 
   @Input() submitActionLabel: string;
+  @Input() disabledName?: boolean;
   @Input() projectModel?:Project= new Project();
   @Output() onSubmitEvent = new EventEmitter<Project>();
 
@@ -38,9 +39,13 @@ export class ProjectFormComponent {
 
   }
 
+  ngOnInit() {
+   console.log(this.disabledName);
+  }
   submitForm() {
     if(this.projectForm.valid) {
     this.projectModel = this.projectForm.value;
+    this.projectModel.activeStatus = true;
       this.onSubmitEvent.emit(this.projectModel);
     } else {
       this.isShowErrorMessage = true;

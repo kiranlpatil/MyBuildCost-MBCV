@@ -7,6 +7,7 @@ import { EstimateReport } from '../../../model/estimate-report';
 import { CostSummaryService } from '../../cost-summary-report/cost-summary.service';
 import { CostHead } from '../../../model/costhead';
 import { LoaderService } from '../../../../../shared/loader/loaders.service';
+import { ErrorService } from '../../../../../shared/services/error.service';
 
 declare let $: any;
 
@@ -36,7 +37,8 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   inActiveProjectCostHeads = new Array<CostHead>();
 
   constructor(private activatedRoute: ActivatedRoute, private _router : Router, private costSummaryService : CostSummaryService,
-              private messageService : MessageService, private loaderService : LoaderService) {
+              private messageService : MessageService, private loaderService : LoaderService,
+              private errorService:ErrorService) {
   }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
 }
   goToCostHeadView(estimatedItem :EstimateReport) {
     if(!estimatedItem.disableCostHeadView) {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_WINDOW_POSITION, $(window).scrollTop());
       this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
       this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
       this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_COMMON_AMENITIES,
@@ -77,6 +80,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onUpdateBudgetedCostAmountFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onAddCostheadSuccess : '+error);
   }
 
@@ -103,6 +109,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onGetAllInActiveCostHeadsFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -125,6 +134,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onActiveCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }
@@ -153,6 +165,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onInactivateCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }
@@ -178,10 +193,20 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   showGrandTotalTable() {
-    this.sednCommonEmenitiesChartStatus.emit($('#collapse'+this.totalNumberOfBuildings).attr('aria-expanded'));
     this.showGrandTotalPanelTable = !this.showGrandTotalPanelTable;
-    this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
+    this.  savingCurrentAmenitiesIDInSessionStorage();
+      this.costSummaryService.moveSelectedBuildingAtTop(this.totalNumberOfBuildings);
 
+  }
+  savingCurrentAmenitiesIDInSessionStorage() {
+    if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)===this.amenitiesReport.name) {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, null);
+      if(this.totalNumberOfBuildings)
+        this.sednCommonEmenitiesChartStatus.emit('true');
+    }else {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING,this.amenitiesReport.name);
+      if(this.totalNumberOfBuildings)
+        this.sednCommonEmenitiesChartStatus.emit('false');}
   }
 }
 

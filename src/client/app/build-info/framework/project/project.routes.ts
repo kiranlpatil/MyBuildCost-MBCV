@@ -6,6 +6,7 @@ import { CostSummaryComponent } from './cost-summary-report/cost-summary.compone
 import { CostHeadComponent } from './cost-summary-report/cost-head/cost-head.component';
 import { MaterialTakeoffComponent } from './material-takeoff/material-takeoff.component';
 import { CommonAmenitiesComponent } from './cost-summary-report/common-amenities/common-amenities.component';
+import { PayUMoneyComponent } from '../payUMoney/payUMoney.component';
 
 export const ProjectRoutes: Route[] = [
   {
@@ -13,6 +14,7 @@ export const ProjectRoutes: Route[] = [
     component: ProjectComponent,
     children:[
       {path: '', component: ProjectComponent},
+      {path: 'payment', component: PayUMoneyComponent},
       {path: 'list', component: ProjectListComponent},
       {path: ':projectId/details', component: ProjectDetailsComponent},
       {path: ':projectId/cost-summary', component: CostSummaryComponent},

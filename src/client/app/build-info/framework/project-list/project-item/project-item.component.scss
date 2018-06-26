@@ -81,6 +81,37 @@ h4 {
   font-size: 18px;
 }
 
+.renew-btn-section {
+  display: table-cell;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.warning-msg {
+  color: $warning-msg;
+  font-size: 10px;
+  float: left;
+}
+.error-msg {
+  color: $error;
+  font-size: 10px;
+  float: left;
+}
+
+.renewNow-btn {
+  color: $table-btn-bg;
+  float: left;
+  font-size: 10px;
+  padding-left: 5px;
+}
+
+.disabled-projects {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 @media only screen and (max-width: 630px) {
   h4 {
     font-size: 16px;

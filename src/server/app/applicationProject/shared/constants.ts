@@ -98,15 +98,15 @@ class Constants {
   public static SITE_SECURITY : string = 'Site security';
 
   //Building Cost Heads
-  public static RCC : string = 'RCC';
+  public static RCC : string = 'RCC / PCC / Concrete';
   public static EXTERNAL_PLASTER : string = 'External plaster';
   public static FABRICATION : string = 'Fabrication';
   public static PAINTING : string = 'Painting';
-  public static KITCHEN_OTTA : string = 'Kitchen otta';
+  public static KITCHEN_PLATFORMS : string = 'Kitchen platforms';
   public static SOLING : string = 'Soling (plinth)';
   public static MASONRY : string = 'Masonry';
   public static INTERNAL_PLASTER : string = 'Internal Plaster';
-  public static GYPSUM_PUNNING : string = 'Gypsum punning';
+  public static GYPSUM_PUNNING : string = 'Gypsum / POP plaster (punning)';
   public static WATER_PROOFING : string = 'Water proofing';
   public static DEWATERING : string = 'Dewatering';
   public static GARBAGE_CHUTE : string = 'Garbage chute';
@@ -116,14 +116,16 @@ class Constants {
   public static FLOORING : string = 'Flooring';
   public static EXCAVATION : string = 'Excavation';
   public static BACKFILLING_PLINTH : string = 'Backfilling (plinth)';
-  public static FLOORING_SKIRTING_WALL_TILING_DADO : string = 'Flooring + skirting + wall tiling (Dado)';
+  public static FLOORING_SKIRTING_DADO_WALL_TILING : string = 'Flooring / skirting / wall tiling';
   public static WINDOWS_SILLS_OR_JAMBS : string = 'Window sills / jambs';
   public static DOORS_WITH_FRAMES_AND_HARDWARE : string = 'Doors with frames and hardware';
   public static WINDOWS_AND_GLASS_DOORS : string = 'Windows and Glass doors';
   public static ELECTRIFICATION : string = 'Electrification';
   public static PLUMBING : string = 'External plumbing / drainage line';
-  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : string = 'Electrical light fittings in common areas of building';
-  public static PEST_CONTROL : string = 'Pest Control';
+  public static INTERNAL_PLUMBING_WITH_VERTICAL_LINES : string = 'Internal plumbing with vertical lines';
+  public static WINDOWS_SLIDING_DOORS : string = 'Windows/Sliding doors';
+  public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : string = 'Electrical light fittings inside building';
+  public static PEST_CONTROL : string = 'Pest Control / Antitermite treatment';
   public static SOLAR_WATER_HEATING_SYSTEM : string = 'Solar water heating system';
   public static PIPED_GAS_SYSTEM : string = 'Piped gas system';
   public static SKY_LOUNGE_ON_TOP_TERRACE : string = 'Sky lounge on top terrace';
@@ -131,8 +133,15 @@ class Constants {
   public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation';
   public static SHOWER_ENCLOSURES : string = 'Shower Enclosures';
   public static FALSE_CEILING : string = 'False ceiling';
-  public static SPECIAL_ELEVATIONAL_FEATURES_IN_FRP_FERRO_GRC : string = 'Special elevational features in FRP/Ferro/GRC';
+  public static STAIRCASE_TREADS_AND_RISERS : string = 'Staircase Treads and Risers';
+  public static SPECIAL_ELEVATIONAL_FEATURES : string = 'Special elevational features';
   public static BOARDS_AND_SIGNAGES_INSIDE_BUILDING : string = 'Boards & Signages inside building';
+
+  // Subscription package
+  public static BASE_PACKAGE : string = 'basePackage';
+
+  // payment packages
+  public static RENEW_PROJECT : string = 'RenewProject';
 
 
   //Building Category
@@ -182,9 +191,14 @@ class Constants {
     'GROUP BY materialName, costHeadName, buildingName, quantityName, unit ';
   public static ALASQL_MATERIAL_NOT_LABOUR = ' materialName NOT LIKE "%Labour%" ';
   public static ALASQL_MATERIAL_NOT_LABOR = ' materialName NOT LIKE "%Labor%" ';
+  public static ALASQL_MATERIAL_NOT_LAB_DOT = ' materialName NOT LIKE "%Lab.%" ';
+  public static ALASQL_MATERIAL_NOT_LAB = ' materialName NOT LIKE "%Lab%" ';
   public static ALASQL_AND_MATERIAL_NOT_LABOUR = ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOUR +
-    ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR;
-
+    ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB
+    + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB_DOT;
+  public static ALASQL_MATERIAL_NOT_LABOUR_NO_LIKE = Constants.ALASQL_MATERIAL_NOT_LABOUR +
+    ' AND ' + Constants.ALASQL_MATERIAL_NOT_LABOR + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB
+    + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB_DOT;
   // Error Messages
   public static MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION = 'Oop\'s! looks like you haven\'t provided Cost Estimation for ';
 }

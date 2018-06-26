@@ -4,7 +4,10 @@ import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
   ValueConstant, CurrentView, ScrollView, Animations
 } from '../../../../shared/constants';
-import { SessionStorage, SessionStorageService,  Message, Messages, MessageService } from '../../../../shared/index';
+import {
+  SessionStorage, SessionStorageService, Message, Messages, MessageService,
+  CommonService
+} from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
 import { Building } from '../../model/building';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -14,8 +17,9 @@ import { CostHead } from '../../model/costhead';
 import { EstimateReport } from '../../model/estimate-report';
 import { BuildingReport } from '../../model/building-report';
 import ProjectReport = require('../../model/project-report');
-import { LoaderService } from '../../../../shared/loader/loaders.service';
-import { AddCostHeadButton } from '../../model/showHideCostHeadButton';
+import {LoaderService} from '../../../../shared/loader/loaders.service';
+import {AddCostHeadButton} from '../../model/showHideCostHeadButton';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 declare let $: any;
 
@@ -54,15 +58,21 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   isShowCommonAmenitiesChart:boolean=true;
   //showGrandTotalPanelTable= new Array<boolean>(10);
   compareIndex:number=0;
-
+  userId:any;
+  baseUrl:string;
   totalNumberOfBuildings : number;
-
+  numberOfRemainingBuildings :number;
+  activeStatus:boolean;
+  addBuildingButtonDisable:boolean;
  public inActiveCostHeadArray: Array<CostHead>;
   cloneBuildingForm: FormGroup;
   cloneBuildingModel: Building = new Building();
   clonedBuildingDetails: Array<CostHead>;
   showHideCostHeadButtonsList: Array<AddCostHeadButton>;
-
+  isActiveAddBuildingButton:boolean=false;
+  status:string;
+  openBuildingNameAmenities:string='amenities';
+  subscription:any;
   public costIn: any[] = [
     { 'costInId': ProjectElements.RS_PER_SQFT},
     { 'costInId': ProjectElements.RS_PER_SQMT}
@@ -81,7 +91,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
-              private buildingService: BuildingService, private loaderService : LoaderService) {
+              private buildingService: BuildingService, private loaderService : LoaderService,
+              private errorService:ErrorService,private commonService: CommonService) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -103,14 +114,44 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW, CurrentView.COST_SUMMARY);
+    this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
+      this.onBuildingChange(params);
       this.projectId = params['projectId'];
       if(this.projectId) {
         this.onChangeCostingByUnit(this.defaultCostingByUnit);
       }
     });
+    this.getProjectSubscriptionDetails();
+    this.subscription = this.commonService.deleteEvent$
+      .subscribe(item =>this.getProjectSubscriptionDetails()
+      );
   }
 
+  getProjectSubscriptionDetails () {
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
+      status=>this.checkLimitationOfBuildingSuccess(status),
+      error=>this.checkLimitationOfBuildingFailure(error)
+    );
+  }
+
+
+  checkLimitationOfBuildingSuccess(status:any) {
+    this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+    this.activeStatus = status.activeStatus;
+    this.addBuildingButtonDisable =status.addBuildingDisable;
+   /* if(status.expiryMessage) {
+      this.subscriptionValidityMessage = status.expiryMessage;
+    } else if(status.warningMessage) {
+      this.subscriptionValidityMessage = status.warningMessage;
+    }*/
+  }
+
+  checkLimitationOfBuildingFailure(error:any) {
+    console.log(error);
+  }
   showDropdown(e: any) {
       e.stopPropagation();
   }
@@ -118,7 +159,11 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   setBuildingId( i:number, buildingId: string) {
     this.setChartVisibility(i);
     this.compareIndex = i;
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
+    if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)===buildingId) {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, null);
+    }else {
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);}
+
    this.costSummaryService.moveSelectedBuildingAtTop(this.compareIndex);
   }
 
@@ -144,11 +189,14 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetAllInActiveCostHeadsFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
   goToCostHeadView( buildingId : string, buildingName:string, estimatedItem :any) {
-
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WINDOW_POSITION, $(window).scrollTop());
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING_NAME, buildingName);
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
@@ -172,23 +220,32 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetCostSummaryReportSuccess(projects : any) {
+    this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     this.projectReport = new ProjectReport( projects.data.buildings, projects.data.commonAmenities[0]) ;
     this.buildingsReport = this.projectReport.buildings;
     if(this.projectReport.buildings !== undefined) {
       this.totalNumberOfBuildings = this.projectReport.buildings.length;
     }
+    this.checkBuildingReportExist();
     this.amenitiesReport = this.projectReport.commonAmenities;
     this.projectReport.totalAreaOfBuildings = projects.data.totalAreaOfBuildings;
     this.showHideCostHeadButtonsList = projects.data.showHideCostHeadButtons;
     this.calculateGrandTotal();
-
+    this.openRecentBuilding();
     if(SessionStorageService.getSessionValue(SessionStorage.FROM_VIEW) === this.getScrollView().GO_TO_RECENT_BUILDING) {
       SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, null);
-      this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
+      this.compareIndex=this.projectReport.buildings.length - 1;
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING,
+        this.projectReport.buildings[this.projectReport.buildings.length - 1]._id);
+            this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
     }
+     this.commonService.change(projects);
   }
 
   onGetCostSummaryReportFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onGetCostInFail()'+error);
   }
 
@@ -224,6 +281,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onInActiveCostHeadFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
     this.loaderService.stop();
   }
@@ -247,6 +307,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onActiveCostHeadFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onActiveCostHeadFailure()'+error);
     this.loaderService.stop();
   }
@@ -270,6 +333,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onUpdateRateOfThumbRuleFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onAddCostheadSuccess : '+error);
   }
 
@@ -296,6 +362,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onDeleteBuildingFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -306,7 +375,13 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   cloneBuilding(buildingId: string) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
-    this._router.navigate([NavigationRoutes.APP_CLONE_BUILDING]);
+    if(this.numberOfRemainingBuildings > 0) {
+      this._router.navigate([NavigationRoutes.APP_CLONE_BUILDING]);
+    } else {
+      let packageName = 'Add_building';
+      let premiumPackageAvailable = SessionStorageService.getSessionValue(SessionStorage.PREMIUM_PACKAGE_AVAILABLE);
+      this._router.navigate([NavigationRoutes.APP_PACKAGE_SUMMARY, packageName,premiumPackageAvailable]);
+    }
   }
 
   onGetBuildingDetailsForCloneSuccess(building: any) {
@@ -315,6 +390,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetBuildingDetailsForCloneFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -339,6 +417,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onCreateBuildingFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -359,6 +440,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onCloneBuildingCostHeadsFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -455,6 +539,41 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     $('#collapse'+this.totalNumberOfBuildings).attr({
       'aria-expanded':'false'
     });
+  }
+  checkBuildingReportExist() {
+    if(this.projectReport.buildings.length==0) {
+      this.isShowBuildingCostSummaryChart = false;
+      this.isShowCommonAmenitiesChart = false;
+    } else {
+      this.isShowBuildingCostSummaryChart =true;
+      this.isShowCommonAmenitiesChart =true;
+    }
+  }
+  onBuildingChange(params:any) {
+    if(this.projectId!==undefined && this.projectId !== params['projectId']) {
+      this.compareIndex = 0;
+      if (SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) === this.openBuildingNameAmenities) {
+        SessionStorageService.removeSessionValue(SessionStorage.CURRENT_BUILDING);
+      }
+    }
+  }
+  openRecentBuilding() {
+    let recentProjectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    if(this.projectId===recentProjectId) {
+      for(let building of this.projectReport.buildings){
+        if(building._id===SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)) {
+          this.compareIndex=this.projectReport.buildings.indexOf(building);
+        }
+      }
+      if((this.compareIndex ||this.compareIndex===0) &&
+        SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) !== this.openBuildingNameAmenities)
+        this.costSummaryService.moveRecentBuildingAtTop( this.compareIndex);
+      if(SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) === this.openBuildingNameAmenities) {
+        this.getStatusOfCommonEmenities('false');
+        this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length);
+
+      }
+    }
   }
   ngAfterViewInit() {
     setTimeout(() => {

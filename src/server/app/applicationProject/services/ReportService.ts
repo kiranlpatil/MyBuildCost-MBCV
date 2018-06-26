@@ -597,7 +597,7 @@ class ReportService {
     let costHeadList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray);
     column = Constants.STR_Material_NAME;
     let materialList: Array<string> = this.getDistinctArrayOfStringFromAlasql(column, materialTakeOffFlatDetailsArray,
-      Constants.ALASQL_MATERIAL_NOT_LABOUR);
+      Constants.ALASQL_MATERIAL_NOT_LABOUR_NO_LIKE);
     let materialTakeOffFiltersObject: MaterialTakeOffFiltersListDTO = new MaterialTakeOffFiltersListDTO(buildingList, costHeadList,
       materialList);
     return materialTakeOffFiltersObject;

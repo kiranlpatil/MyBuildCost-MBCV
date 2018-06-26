@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRequestOptions, LoaderService, MessageService } from './shared/index';
 import { DashboardComponent } from './framework/dashboard/dashboard.component';
 import { AboutComponent } from './framework/dashboard/about/about.component';
+import { BillingDetailsComponent } from './framework/dashboard/billing-details/billing-details.component';
 import { ContactComponent } from './framework/dashboard/contact/contact.component';
 import { DashboardHomeComponent } from './framework/dashboard/dashboard-home/dashboard-home.component';
 import { HeaderComponent } from './framework/shared/header/header.component';
@@ -31,6 +32,10 @@ import { SharedService } from './shared/services/shared-service';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { AnalyticService } from './shared/services/analytic.service';
 import { CommonAmenitiesComponent } from './build-info/framework/project/cost-summary-report/common-amenities/common-amenities.component';
+import { RenewPackageComponent } from './build-info/framework/package-details/renew-package/renew-package.component';
+import { RenewPackageService } from './build-info/framework/package-details/renew-package/renew-package.service';
+import { PackageDetailsComponent } from './build-info/framework/package-details/package-details.component';
+import { PackageDetailsService } from './build-info/framework/package-details/package-details.service';
 import { DashboardHeaderComponent } from './framework/dashboard/dashboard-header/dashboard-header.component';
 import { DashboardUserProfileService } from './framework/dashboard/user-profile/dashboard-user-profile.service';
 import { UserChangePasswordService } from './framework/dashboard/user-change-password/user-change-password.service';
@@ -68,7 +73,7 @@ import { GetRateComponent } from './build-info/framework/project/cost-summary-re
 import { CreateNewProjectComponent } from './build-info/framework/create-new-project/create-new-project.component';
 import { ProjectItemComponent } from './build-info/framework/project-list/project-item/project-item.component';
 import { DeleteConfirmationModalComponent } from './shared/delete-confirmation-modal/delete-confirmation-modal.component';
-import { UpdateConfirmationModalComponent } from './shared/update-confirmation-modal/update-confirmation-modal.component';
+import {UpdateConfirmationModalComponent} from './shared/update-confirmation-modal/update-confirmation-modal.component';
 import { ProjectFormComponent } from './build-info/framework/shared/project-form/project-form.component';
 import { BuildingFormComponent } from './build-info/framework/shared/building-form/building-form.component';
 import { QuantityDetailsComponent }
@@ -95,6 +100,14 @@ import { GetSteelQuantityComponent} from './build-info/framework/project/cost-su
 import { AdvertisingBannerComponent } from './build-info/framework/project/advertising-banner/advertising-banner.component';
 import { AdvertisingBannerService } from './build-info/framework/project/advertising-banner/advertising-banner.service';
 import { CostDistributionChartComponent } from './build-info/framework/project/cost-distribution-chart/cost-distribution-chart.component';
+import { PackageSummaryComponent } from './build-info/framework/package-details/package-summary/package-summary.component';
+import { PackageDefaultComponent } from './build-info/framework/package-details/packageDefault.component';
+import { PaymentSuccessfulComponent } from './build-info/framework/payment/payment-successful/payment-successful.component';
+import { CreateProjectConfirmationModalComponent } from './shared/create-project-confirmation-modal/create-project-confirmation-modal.component';
+import {RetainProjectComponent} from "./build-info/framework/payment/retain-project/retain-project.component";
+import {PaymentFailureComponent} from "./build-info/framework/payment/payment-failure/payment-failure.component";
+import { PayUMoneyComponent } from './build-info/framework/payUMoney/payUMoney.component';
+import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.service';
 
 @NgModule({
   imports: [
@@ -118,6 +131,7 @@ import { CostDistributionChartComponent } from './build-info/framework/project/c
     HeaderComponent,
     NotificationComponent,
     SocialIconComponent,
+    BillingDetailsComponent,
 
     //Application COMPONENT
     DashboardHeaderComponent,
@@ -158,6 +172,7 @@ import { CostDistributionChartComponent } from './build-info/framework/project/c
     GroupByPipe,
     DeleteConfirmationModalComponent,
     UpdateConfirmationModalComponent,
+    CreateProjectConfirmationModalComponent,
     DisclaimerComponent,
     ProjectFormComponent,
     BuildingFormComponent,
@@ -170,7 +185,17 @@ import { CostDistributionChartComponent } from './build-info/framework/project/c
     CostSummaryReportComponent,
     AttachmentComponent,
     CommonAmenitiesReportComponent,
-    AdvertisingBannerComponent
+    AdvertisingBannerComponent,
+
+    //payment
+    PackageDetailsComponent,
+    PackageSummaryComponent,
+    PackageDefaultComponent,
+    PaymentSuccessfulComponent,
+    RenewPackageComponent,
+    RetainProjectComponent,
+    PaymentFailureComponent,
+    PayUMoneyComponent
   ],
 
   providers: [
@@ -206,7 +231,12 @@ import { CostDistributionChartComponent } from './build-info/framework/project/c
     CostSummaryService,
     MaterialTakeOffService,
     ProjectNameChangeService,
-    AdvertisingBannerService
+    AdvertisingBannerService,
+
+      //Payment
+    PackageDetailsService,
+    RenewPackageService,
+    PayUMoneyService
   ],
   bootstrap: [AppComponent]
 })

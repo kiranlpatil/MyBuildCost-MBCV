@@ -23,9 +23,9 @@ export class UserHeaderComponent {
   onSignUp() {
     this._router.navigate([NavigationRoutes.APP_REGISTRATION]);
   }
-  onApplicantSignUp() {
+  /*onApplicantSignUp() {
     this._router.navigate(['/applicant-signup']);
-  }
+  }*/
 
     onHomePage() {
       window.sessionStorage.clear();

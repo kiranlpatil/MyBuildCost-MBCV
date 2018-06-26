@@ -18,6 +18,7 @@ import { AttachmentDetailsModel } from '../../../model/attachment-details';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import Any = jasmine.Any;
 import {SteelQuantityItems} from "../../../model/SteelQuantityItems";
+import { ErrorService } from '../../../../../shared/services/error.service';
 
 declare var $: any;
 
@@ -89,6 +90,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   unit:string='';
   showCategoryList: boolean = false;
   displayCategory: boolean = false;
+  status: string;
   fileNamesList:Array<AttachmentDetailsModel>;
   workItemsList: Array<WorkItem>;
   deleteConfirmationCategory = ProjectElements.CATEGORY;
@@ -128,7 +130,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private _router: Router, private messageService: MessageService, private commonService : CommonService,
-              private loaderService: LoaderService) {
+              private loaderService: LoaderService, private errorService:ErrorService) {
   }
 
   /*toggleState() {
@@ -136,6 +138,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }*/
 
   ngOnInit() {
+    this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
 
       this.projectId = params['projectId'];
@@ -188,6 +191,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onGetCategoriesFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
     this.loaderService.stop();
   }
@@ -302,6 +308,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
           this.quantityItemsArray = lodsh.cloneDeep(defaultQuantityDetail[0].quantityItems);
           this.keyQuantity = defaultQuantityDetail[0].name;
           this.quantityId = defaultQuantityDetail[0].id;
+
         } else if (quantityDetails.length !== 0 && quantityDetails[0].name === Label.DEFAULT_VIEW && this.workItem.isSteelWorkItem) {
 
           this.workItem.quantity.quantityItemDetails = [];
@@ -464,6 +471,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onDeActivateWorkItemFailure(error: any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('InActive WorkItem error : '+JSON.stringify(error));
     this.loaderService.stop();
   }
@@ -489,6 +499,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onGetInActiveWorkItemsFailure(error:any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('Get WorkItemList error : '+error);
   }
 
@@ -528,6 +541,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onActivateWorkItemFailure(error:any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('Active WorkItem error : '+error);
     this.loaderService.stop();
   }
@@ -570,6 +586,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onChangeDirectQuantityFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('error : '+JSON.stringify(error));
     this.loaderService.stop();
   }
@@ -594,6 +613,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onUpdateDirectRateFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     this.loaderService.stop();
   }
 
@@ -659,6 +681,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onGetActiveWorkItemsOfCategoryFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log('onGetActiveWorkItemsOfCategoryFailure error : '+JSON.stringify(error));
   }
 
@@ -770,8 +795,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
   onGetPresentFilesForWorkItemFailure(error: any) {
     let message = new Message();
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       message.error_msg = error.err_msg;
+      message.error_code =  error.err_code;
       message.isError = true;
       this.messageService.message(message);
     } else {

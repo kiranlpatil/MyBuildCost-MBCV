@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, Input, OnChanges} from '@angular/core';
-import {BuildingReport} from '../../model/building-report';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
+import { BuildingReport } from '../../model/building-report';
 import * as Highcharts from 'highcharts';
 
 @Component({
@@ -12,6 +12,7 @@ import * as Highcharts from 'highcharts';
 export class CostDistributionChartComponent implements AfterViewInit, OnChanges {
   @Input() buildingReport: BuildingReport;
   private chartID: string = 'chart'; //TODO remove this
+  private isShowBudgetedCostLabel:boolean;
 
   ngOnChanges() {
     if (!this.buildingReport)
@@ -28,24 +29,29 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
   }
 
   private triggerChart() {
-    let costsHeadList=[];//array fo array(costHeadName,total)
-    let notEstimated: number = 0;
+    let budgetedCostsHeadList=[];//array fo array(costHeadName,amount)
+    let estimatedCostsHeadList=[];
+    this.isShowBudgetedCostLabel=false;//array fo array(costHeadName,amount)
     for (let estimateCost of this.buildingReport.estimate.estimatedCosts) {
       if (estimateCost.total > 0) {
-        costsHeadList.push([estimateCost.name, estimateCost.total]);
+        estimatedCostsHeadList.push([estimateCost.name, estimateCost.total]);
       } else {
-        notEstimated += this.buildingReport.thumbRule.thumbRuleReports[this.buildingReport.estimate.estimatedCosts.
-                        indexOf(estimateCost)].amount;
+        let amount= this.buildingReport.thumbRule.thumbRuleReports[this.buildingReport.estimate.estimatedCosts.
+        indexOf(estimateCost)].amount;
+        let name= this.buildingReport.thumbRule.thumbRuleReports[this.buildingReport.estimate.estimatedCosts.
+        indexOf(estimateCost)].name;
+        budgetedCostsHeadList.push(['<span class="glyphicon glyphicon-star" style="color:#C0C0C0;"></span>'
+                                     +name,amount]);
       }
     }
-    let data = this.createDataForChart(costsHeadList, notEstimated);
+    let data = this.createDataForChart(estimatedCostsHeadList, budgetedCostsHeadList);
     if (document.getElementById(this.chartID)) {
       this.showCostDistributionChart(data);
     }
   }
 
   private showCostDistributionChart(data: any) {
-    Highcharts.chart(this.chartID, {
+    var chart =  Highcharts.chart(this.chartID, {
       chart: {
         type: 'pie',
         plotBackgroundColor: '#f7f7f7',
@@ -88,16 +94,32 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
           showInLegend: true,
           startAngle: 0,
           endAngle: 360,
-          center: ['50%', '36%']
+          center: ['50%', '36%'],
+          events: {
+            afterAnimate: function() {
+              let chart = this.chart;
+              let legend = chart.legend;
+              let tooltip = this.chart.tooltip;
+              for (let item of legend.allItems) {
+                item.legendItem.on('mouseover', function (e:any) {
+                  let data = item.series.data[item.index];
+                  tooltip.refresh(data);
+                }).on('mouseout', function (e:any) {
+                  tooltip.hide();
+                });
+              }
+            }
+          }
         }
       },
       series: [{
-        //type: 'pie',
         name: 'Cost Distribution',
         innerSize: '60%',
         data: data,
       }],
       legend: {
+        useHTML:true,
+        symbolRadius:0,
         labelFormat: '{percentage:.0f}% {name}',
         layout: 'vertical',
         itemWidth: 150,
@@ -106,22 +128,24 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         itemMarginTop: 5,
         //margin: 0,
         //padding: 0,
-        verticalAlign: 'top',
+        verticalAlign: 'top'
       },
-      colors: ['#434348', '#3bc698', '#315967', '#6b9bab', '#ff9a9e', '#0097ca', '#ed4731',
-        '#37c2c3', '#f26424', '#a1c4fd', '#9ec000', '#e7bc00']
+      colors: ['#e7bc00', '#3bc698', '#315967', '#6b9bab', '#ff9a9e', '#0097ca', '#ed4731',
+        '#37c2c3', '#f26424', '#434348', '#9ec000', '#e7bc00']
     });
   }
 
-  private createDataForChart(costsHeadList: any, notEstimated: any) {
-    costsHeadList.sort((a:[string,number], b:[string,number]) => {
+  private createDataForChart(estimatedCostsHeadList: any, budgetedCostsHeadList: any) {
+   let costHeadList=estimatedCostsHeadList.concat(budgetedCostsHeadList);
+    costHeadList.sort((a:[string,number], b:[string,number]) => {
       return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
     });
-
     let chartData = new Array();
     let other: number = 0;
-    for (let costHead of costsHeadList) {
+    for (let costHead of costHeadList) {
       if (chartData.length < 10) {
+        if(budgetedCostsHeadList.indexOf(costHead)!==-1) {
+          this.isShowBudgetedCostLabel=true;}
         chartData.push({
           name: costHead[0],
           y: costHead[1],
@@ -133,18 +157,6 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         other += costHead[1];
       }
     }
-
-    if (notEstimated > 0) {
-      chartData.push({
-        name: 'Not Estimated',
-        y: notEstimated,
-        dataLabels: {
-          enabled: false
-        },
-        color: '#e7bc00'
-      });
-    }
-
     if (other > 0) {
       chartData.push({
         name: 'Other',

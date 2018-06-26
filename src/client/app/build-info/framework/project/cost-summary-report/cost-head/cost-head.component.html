@@ -1,4 +1,4 @@
-<section class="wrapper">
+<section *ngIf="status" class="wrapper">
   <header class="create-new-header">
     <button class="btn-back" (click)="goBack()"><img src="../../../../../../assets/build-info/create-new-project/back.png" /><span>{{getButton().GO_BACK}}</span></button>
   </header>
@@ -165,15 +165,17 @@
                                   </td>
 
                                 <td id="show-embedded-table" [class.steel-quantity-embedded-table]="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB || showWorkItemTab == getLabel().WORKITEM_STEEL_QUANTITY_TAB">
-                                    <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB">
+                                    <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB" [@fadeIn]="state">
                                       <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
                                         <bi-get-rate [rate]="rateItemsArray"
                                                      [categoryDetails] ="categoryDetails"
                                                      [rateView]="rateView"
                                                      [workItemsList] ="workItemsList"
+                                                     [workItemUnit] = "workItem.unit"
                                                      [categoryRateAnalysisId]="category.rateAnalysisId"
                                                      [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                                      [ratePerUnitAmount]="ratePerUnitAmount"
+                                                     [totalByUnit]="totalByUnit"
                                                      (categoriesTotalAmount)="setCategoriesTotal($event)"
                                                      (closeRateView)="closeRateView($event)"
                                                      [baseUrl] = "baseUrl"
@@ -321,6 +323,7 @@
     </div>
   </div>
 </section>
+<h1 *ngIf="!status"> Project Expired</h1>
 
 <div class="modal fade default-modal" id="deleteWorkItem" role="dialog">
   <bi-delete-confirmation-modal [elementType]="deleteConfirmationWorkItem" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>

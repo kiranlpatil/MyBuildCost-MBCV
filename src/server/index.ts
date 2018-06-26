@@ -7,8 +7,9 @@ import * as fs from 'fs';
 import LoggerService = require('./app/framework/shared/logger/LoggerService');
 import * as sharedService from './app/framework/shared/logger/shared.service';
 import Middlewares = require('./app/framework/middlewares/base/MiddlewaresBase');
-import RateAnalysis = require("./app/applicationProject/dataaccess/model/RateAnalysis/RateAnalysis");
-import RateAnalysisService = require("./app/applicationProject/services/RateAnalysisService");
+import RateAnalysis = require('./app/applicationProject/dataaccess/model/RateAnalysis/RateAnalysis');
+import RateAnalysisService = require('./app/applicationProject/services/RateAnalysisService');
+import UserService = require('./app/framework/services/UserService');
 var log4js = require('log4js');
 var config = require('config');
 /*var logDir = 'Logs';*/
@@ -61,6 +62,26 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     true
   );
   syncAtEveryFifteenMinute.start();
+
+
+  //let sendProjectExpiryWarningMail = new CronJob('00 */5 0 * * *', function() {
+  let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
+      let userService : UserService = new UserService();
+      let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
+      userService.sendProjectExpiryWarningMails((error, success) => {
+        if(error) {
+          _loggerService.logError('Error in sendProjectExpiryWarningMail for users : ' +error);
+        } else {
+          _loggerService.logDebug('ProjectExpiryWarningMail send successfully to all users.');
+        }
+      });
+    }, function () {
+      console.log('restart server');
+    },
+    true
+  );
+
+  sendProjectExpiryWarningMail.start();
   //logger log4js initialization
   /*
     console.log('Logger Initialization');
@@ -160,7 +181,9 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
       app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
       app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+      app.use('/banners', express.static(path.resolve(__dirname, _clientDir + '/banners')));
       app.use('/public', express.static(path.resolve(__dirname+ _serverDir + '/public')));
+
 
       /**
        * Spa Res Sender.
@@ -202,6 +225,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
       app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
       app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+      app.use('/banners', express.static(path.resolve(__dirname, _clientDir + '/banners')));
       app.use('/public', express.static(path.resolve(__dirname+ _serverDir+'/public')));
 
       /**

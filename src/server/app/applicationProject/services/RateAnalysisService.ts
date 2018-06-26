@@ -85,14 +85,19 @@ class RateAnalysisService {
 
   getApiCall(url: string, callback: (error: any, response: any) => void) {
     logger.info('getApiCall for rateAnalysis has bee hit for url : ' + url);
-    request.get({url: url}, function (error: any, response: any, body: any) {
-      if (error) {
-        callback(new CostControllException(error.message, error.stack), null);
-      } else if (!error && response) {
-        let res = JSON.parse(body);
-        callback(null, res);
-      }
-    });
+      request.get({url: url}, function (error: any, response: any, body: any) {
+        if (error) {
+          callback(new CostControllException(error.message, error.stack), null);
+        } else if (!error && response) {
+          try {
+            let res = JSON.parse(body);
+            callback(null, res);
+          }catch (err) {
+            logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(err.message));
+
+          }
+        }
+      });
   }
 
   getRate(workItemId: number, callback: (error: any, data: any) => void) {
@@ -353,6 +358,7 @@ class RateAnalysisService {
         }
       }
     }
+
     this.getWorkItemsFromRateAnalysis(workItemsWithoutCategories, rateItemsRateAnalysis,
       unitsRateAnalysis, notesRateAnalysis, buildingWorkItems, configWorkItems);
 
@@ -435,6 +441,8 @@ class RateAnalysisService {
       workItem.rate.total = configWorkItem.directRate;
       workItem.rate.unit = configWorkItem.directRatePerUnit;
       workItem.rate.isEstimated = true;
+    } else {
+      logger.error('WorkItem error for rateAnalysis : '+configWorkItem.name);
     }
 
     return workItem;
@@ -474,6 +482,7 @@ class RateAnalysisService {
       let notes = '';
       let imageURL = '';
       workItem.rate.rateItems = rateItemsByWorkItem;
+      workItem.rate.unit = workItemExistArray[0].rateAnalysisUnit;
 
       if (rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
         let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = '+

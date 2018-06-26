@@ -1,11 +1,14 @@
 import SubscriptionService = require('../services/SubscriptionService');
 import Response = require('../interceptor/response/Response');
 import * as express from "express";
-import CostControllException = require('../exception/CostControllException');
-
 let config = require('config');
+var hashKey = require('js-sha512');
+let payumoney = require('payumoney-node');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Subscription Controller');
+import CostControllException = require('../exception/CostControllException');
+import { PayUMoneyModel } from '../../framework/dataaccess/model/PayUMoneyModel';
+
 class SubscriptionController {
   private  _subscriptionService : SubscriptionService;
 
@@ -32,13 +35,37 @@ class SubscriptionController {
     }
   }
 
+  getBaseSubscriptionPackageList(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Subscription Controller, getSubscriptionPackageList has been hit');
+      let subscriptionService: SubscriptionService = new SubscriptionService();
+      subscriptionService.getBaseSubscriptionPackageList( (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get base Subscription package list success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   getSubscriptionPackageByName(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Subscription  Controller, getSubscriptionPackageByName has been hit');
-      let basePackageName: string = req.body.basePackageName;
-      let user = req.user;
+      let packageName: any;
+      let packageType : any;
+      if(req.body.basePackageName !== undefined) {
+        packageName = req.body.basePackageName;
+        packageType = 'BasePackage';
+      } else {
+        packageName = req.body.addOnPackageName;
+        packageType = 'AddOnPackage';
+      }
       let subscriptionService: SubscriptionService = new SubscriptionService();
-      subscriptionService.getSubscriptionPackageByName( basePackageName,(error, result) => {
+      subscriptionService.getSubscriptionPackageByName( packageName, packageType, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -50,6 +77,45 @@ class SubscriptionController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+
+  generatePayUMoneyTransacction(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let paymentBody = req.body;
+      let subscriptionService: SubscriptionService = new SubscriptionService();
+      subscriptionService.makePayUMoneyPayment(paymentBody,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get Subscription success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  successPayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      console.log('payment success : '+ JSON.stringify(req.body));
+      let pkgName = req.body.productinfo;
+      let redirectUrl = config.get('application.browser.IP') +'package-details/payment/'+pkgName+'/success';
+      res.redirect(redirectUrl);
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  failurePayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let body = req.body;
+      console.log('payment failed : '+ JSON.stringify(body));
+      res.redirect(config.get('application.browser.IP') +'package-details/payment/failure');
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
 }
 
 export = SubscriptionController;

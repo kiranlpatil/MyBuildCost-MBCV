@@ -73,6 +73,11 @@
                    (click)="navigateTo('/dashboard/details');">Account Details
                 </a>
               </li>
+              <li role="menuitem" [routerLinkActive]="['active']">
+                <a class="dropdown-item" [routerLink]="['/dashboard/account-summary']"
+                 (click)="navigateTo('/dashboard/account-summary');">Account Summary
+                </a>
+              </li>
               <li role="menuitem">
                 <a class="dropdown-item" (click)="logOut()">
                   Sign Out

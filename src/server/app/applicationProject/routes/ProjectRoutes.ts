@@ -35,12 +35,22 @@ class ProjectRoutes {
     //Create new project
     router.post('/',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.createProject,
     controller.createProject, this._responseInterceptor.exit);
+
+    //update projectStatus
+    router.put('/:projectId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      validator.updateProjectStatus, controller.updateProjectStatus, this._responseInterceptor.exit);
+
     //Retrive details of project
     router.get('/:projectId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
         validator.getProjectById, controller.getProjectById, this._responseInterceptor.exit);
     //Update project details
     router.put('/:projectId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.updateProjectById, controller.updateProjectById, this._responseInterceptor.exit);
+
+    //Update project Name
+    router.put('/:projectId/projectName', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      validator.updateProjectNameById, controller.updateProjectNameById, this._responseInterceptor.exit);
+
     //Fetch rateItem names having same original name
     router.put('/:projectId/rates/rateItem', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.getProjectRateItemsByOriginalName, controller.getProjectRateItemsByOriginalName, this._responseInterceptor.exit);

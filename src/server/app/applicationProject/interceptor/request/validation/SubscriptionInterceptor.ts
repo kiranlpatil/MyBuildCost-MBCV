@@ -17,13 +17,17 @@ class SubscriptionInterceptor {
   }
 
   getSubscriptionPackageByName(req: any, res: any, next: any) {
-    if((req.body.basePackageName === null || req.body.basePackageName === undefined)) {
-      next({
-        reason: Messages.MSG_ERROR_EMPTY_FIELD,
-        message: Messages.MSG_ERROR_EMPTY_FIELD,
-        stackTrace: new Error(),
-        code: 400
-      });
+    if(req.body.basePackageName === null || req.body.basePackageName === undefined) {
+      if(req.body.addOnPackageName === null || req.body.addOnPackageName === undefined) {
+        next({
+          reason: Messages.MSG_ERROR_EMPTY_FIELD,
+          message: Messages.MSG_ERROR_EMPTY_FIELD,
+          stackTrace: new Error(),
+          code: 400
+        });
+      } else {
+        next();
+      }
     } else {
       next();
     }

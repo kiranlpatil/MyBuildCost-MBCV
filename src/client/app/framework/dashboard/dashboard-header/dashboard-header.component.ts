@@ -1,11 +1,14 @@
-import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate } from '../../../user/models/candidate';
-import {AppSettings, ImagePath, SessionStorage, LocalStorage, NavigationRoutes} from '../../../shared/constants';
+import {
+  AppSettings, ImagePath, SessionStorage, LocalStorage, NavigationRoutes,
+  CurrentView
+} from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
-import {UserProfile} from '../../../user/models/user';
-import {ProfileService} from '../../shared/profileservice/profile.service';
+import { UserProfile } from '../../../user/models/user';
+import { ProfileService } from '../../shared/profileservice/profile.service';
 
 @Component({
   moduleId: module.id,
@@ -38,7 +41,7 @@ export class DashboardHeaderComponent {
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
     this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
     this.user_email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
-    this.first_letter =(this.user_first_name).toString().charAt(0);
+    this.first_letter =this.user_first_name?(this.user_first_name).toString().charAt(0):'';
     profileService.profileUpdateObservable$.subscribe(
       (user: UserProfile) => {
         if (user.first_name) {
@@ -71,7 +74,10 @@ export class DashboardHeaderComponent {
   }
 
   navigateTo(nav:string) {
-    this.deleteProjectDetailsFromSessionStorege();
+    if(nav === '/dashboard') {
+      this.deleteProjectDetailsFromSessionStorege();
+    }
+    //this.deleteProjectDetailsFromSessionStorege();
     this._router.navigate([nav]);
     this.closeMenu();
   }
@@ -79,6 +85,7 @@ export class DashboardHeaderComponent {
   deleteProjectDetailsFromSessionStorege() {
     // sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_ID);
      sessionStorage.removeItem(SessionStorage.CURRENT_PROJECT_NAME);
+     sessionStorage.removeItem(SessionStorage.STATUS);
     // sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
   }
 

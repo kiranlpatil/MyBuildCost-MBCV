@@ -65,6 +65,28 @@
     }
   }
 }
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.4;
+}
+.project-expiring {
+  position: absolute;
+  right: 35px;
+  top: -85px;
+  text-align: right;
+  span {
+    font-size: 10px;
+  }
+  button {
+    background: transparent;
+    border: 0;
+    color: #6598CA;
+    font-size: 10px;
+    font-weight: 400;
+    padding: 0;
+  }
+}
 
 @media screen and (max-width: 767px) {
 
@@ -98,5 +120,11 @@
     .add-building-link {
       display: none;
     }
+  }
+  .project-expiring {
+    position: inherit;
+    padding-left: 20px;
+    top: inherit;
+    text-align: left;
   }
 }

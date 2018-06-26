@@ -1,6 +1,10 @@
 <header  class="header-container">
   <div class="container">
     <div class="col-sm-9 padding-right30">
+      <div *ngIf="subscriptionValidityMessage && activeStatus" class="project-expiring">
+        <span>{{subscriptionValidityMessage}}</span>
+        <button (click)="goToRenew()">{{getButton().RENEW_NOW}}</button>
+      </div>
       <ul>
         <li>
           <a type="button" (click)="closeMenu()" *ngIf="getCurrentProjectId()" [routerLinkActive]="['active']" [routerLink]="['/project', getCurrentProjectId(),'cost-summary']" cost-summary>{{getMenus().COST_SUMMARY}}</a>
@@ -13,7 +17,7 @@
         </li>
       </ul>
       <div  class="add-building-link" *ngIf="getCurrentView() === currentView().COST_SUMMARY">
-        <a (click)="goToCreateBuilding()"><span class="glyphicon glyphicon-plus"></span>{{getMenus().ADD_BUILDING}}</a>
+        <a [class.disabled]="addBuildingButtonDisable" (click)="goToCreateBuilding()"><span class="glyphicon glyphicon-plus"></span>{{getMenus().ADD_BUILDING}}</a>
       </div>
     </div>
   </div>

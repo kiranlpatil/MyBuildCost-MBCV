@@ -2,18 +2,32 @@
   <div class="container">
     <div class="col-sm-12 no-padding" *ngIf="isVisible">
       <ul class="animated-list">
-        <li class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
+
+        <li (click)="createProject(isSubscriptionExist,isRetainModalActive,isProjectModalActive,premiumPackageAvailable)" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
           <div class="building-image-container">
-            <div class="building-image" (click)="createProject()">
+            <div class="building-image" >
               <img src="assets/build-info/create-new-project/plus-sign.png" />
             </div>
           </div>
-          <h4 (click)="createProject()">{{getButton().CREATE_NEW_PROJECT}}</h4>
+          <h4>{{ getButton().CREATE_NEW_PROJECT }}</h4>
         </li>
+
         <li *ngFor="let project of projects; let i = index" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
           <bi-project-item [project]="project"></bi-project-item>
         </li>
       </ul>
+
+      <div class="modal fade default-modal" id="createProjectConfirmation" role="dialog">
+        <bi-create-project-confirmation-modal
+          [isProjectModalActive]="isProjectModalActive"
+          [isRetainModalActive]="isRetainModalActive"
+          [isSubscriptionAvailable]="isSubscriptionExist"
+          [packageName]="packageName"
+          [premiumPackageAvailable]="premiumPackageAvailable">
+        </bi-create-project-confirmation-modal>
+      </div>
+
+
     </div>
   </div>
 </section>

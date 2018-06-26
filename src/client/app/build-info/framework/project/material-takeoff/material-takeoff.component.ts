@@ -5,6 +5,7 @@ import { MaterialTakeOffElements, CurrentView } from '../../../../shared/constan
 import { MaterialTakeOffFilters } from '../../model/material-take-off-filters';
 import { MaterialTakeOffElement } from '../../model/material-take-off-element';
 import { Message, MessageService,SessionStorage, SessionStorageService } from '../../../../shared/index';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 declare let $: any;
 
@@ -34,7 +35,7 @@ export class MaterialTakeoffComponent implements OnInit {
   materialTakeOffReport :any;
 
   constructor( private activatedRoute:ActivatedRoute,  private _router : Router, private materialTakeoffService : MaterialTakeOffService,
-               private messageService : MessageService) {
+               private messageService : MessageService , private errorService:ErrorService) {
 
     let costHeadElement = new MaterialTakeOffElement();
     costHeadElement.elementKey = MaterialTakeOffElements.ELEMENT_WISE_REPORT_COST_HEAD;
@@ -77,6 +78,9 @@ export class MaterialTakeoffComponent implements OnInit {
   }
 
   onGetMaterialFiltersListFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     console.log(error);
   }
 
@@ -154,6 +158,7 @@ export class MaterialTakeoffComponent implements OnInit {
     message.isError = true;
     message.custom_message = error.err_msg;
     message.error_msg = error.err_msg;
+    message.error_code =  error.err_code;
     this.messageService.message(message);
   }
 }

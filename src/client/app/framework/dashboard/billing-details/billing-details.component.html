@@ -1,0 +1,33 @@
+ <div class="billing-summary-section">
+   <h1>{{getLabel().BILLING_INFO}}</h1>
+      <table class="table">
+        <thead>
+            <th> {{getLabel().PROJECT_NAME}}</th>
+            <th> {{getLabel().VALID_TILL}}</th>
+            <th class="number-of-building"> {{getLabel().NO_OF_BUILDINGS}}</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let project of projectDetails; let projectIndex =index ">
+            <td>
+              <div class="projectName"> {{project.projectName}} </div>
+                <p class="error-msg" *ngIf="project.expiryMessage !== null && project.activeStatus"> {{project.expiryMessage}}</p>
+                <p class="warning-msg" *ngIf="project.warningMessage !== null && project.activeStatus "> {{project.warningMessage}}</p>
+                <p class="error-msg"  *ngIf="!project.activeStatus">{{getMessage().PROJECT_EXPIRED}}</p>
+              <a *ngIf="(project.warningMessage !== null || project.expiryMessage !== null) && project.activeStatus" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
+            </td>
+            <td>
+                {{project.expiryDate | date:'dd MMMM yyyy'}}
+            </td>
+            <td class="numberof-building">
+               {{project.numOfBuildingsAllocated}}
+              <p *ngIf="project.numOfBuildingsRemaining !== 0">{{getMessage().MSG_FOR_REMAINING_BUILDINGS}}
+                {{project.numOfBuildingsRemaining}}{{getMessage().MSG_FOR_REMAINING_BUILDINGS_ADD}}</p>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+   <div class="button-group">
+     <button action="action" (click)="goBack()" type="button" value="go Back" class="btn btn-default"> Back </button>
+     <button class="btn btn-primary" (click)="createProject()">{{ getButton().ADD_PROJECT }}</button>
+   </div>
+ </div>

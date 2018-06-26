@@ -52,6 +52,7 @@ export class ActivateUserComponent implements OnInit {
   }
 
   OnNewRegistrationSuccess(res: any) {
+    console.log(res);
     this.USER_ACTIVATION_STATUS = Messages.MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS;
     this.USER_ACTIVATION_MESSAGE = Messages.MSG_SUCCESS_MAIL_VERIFICATION_BODY;
   }
