@@ -1370,11 +1370,10 @@
           ]
         },
         {
-          "name" : "RCC band ",
+          "name" : "RCC band",
           "workItems" : [
             {
-              "name" : "RCC band / patli for 4\" thick masonry work",
-              "rateAnalysisId" : 100153,
+              "name" : "RCC band / patli for  4\" thick masonry work",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -1389,8 +1388,7 @@
               "height" : false
             },
             {
-              "name" : "RCC band / patli for 5\" thick masonry work",
-              "rateAnalysisId" : 100154,
+              "name" : "RCC band / patli for  5\" thick masonry work",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
@@ -1404,8 +1402,7 @@
               "height" : false
             },
             {
-              "name" : "RCC band / patli for 6\" thick masonry work",
-              "rateAnalysisId" : 100155,
+              "name" : "RCC band / patli for  6\" thick masonry work",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
