@@ -53,21 +53,10 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     sharedService.mailToAdmin(error);
   });
 
-  let syncAtEveryFifteenMinute = new CronJob('00 *!/5 * * * *', function() {
+  let syncAtEveryFifteenMinute = new CronJob('00 */5 * * * *', function() {
 
       let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
       rateAnalysisServices.SyncRateAnalysis();
-
-      /!*let userService : UserService = new UserService();
-      let _loggerService: LoggerService = new LoggerService('ProjectExpiryWarningMail');
-      userService.sendProjectExpiryWarningMails((error, success) => {
-        if(error) {
-          _loggerService.logError('Error in sendProjectExpiryWarningMail for users : ' +error);
-        } else {
-          _loggerService.logDebug('ProjectExpiryWarningMail send successfully to all users.');
-        }
-      });*!/
-
     }, function () {
       console.log('restart server');
     },
@@ -76,7 +65,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   syncAtEveryFifteenMinute.start();
 
 
-  let sendProjectExpiryWarningMail = new CronJob('00 50 23 * * *', function() {
+  let sendProjectExpiryWarningMail = new CronJob('00 32 11 * * *', function() {
   //let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
       logger.debug('sendProjectExpiryWarningMail in debug mode');
       let userService : UserService = new UserService();
