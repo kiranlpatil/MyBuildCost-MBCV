@@ -94,8 +94,9 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     },
     true
   );
-
+  console.log('sendProjectExpiryWarningMail status : before :', sendProjectExpiryWarningMail.running);
   sendProjectExpiryWarningMail.start();
+  console.log('sendProjectExpiryWarningMail status : after :', sendProjectExpiryWarningMail.running);
   //logger log4js initialization
   /*
     console.log('Logger Initialization');
