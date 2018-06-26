@@ -1093,9 +1093,13 @@ class UserService {
           logger.debug('geting all user data for sending mail to users.');
           let validityDays = this.calculateValidity(user.subscription);
           let valdityDaysValidation = config.get('cronJobMailNotificationValidityDays');
+          logger.debug('validityDays : '+validityDays);
           if(valdityDaysValidation.includes(validityDays)) {
+            logger.debug('calling promise');
             let promiseObject = this.getProjectDataById(user);
             userSubscriptionPromiseArray.push(promiseObject);
+          } else {
+            logger.debug('invalid validityDays : '+validityDays);
           }
         }
 
@@ -1125,6 +1129,8 @@ class UserService {
             logger.error('Promise failed for send mail notification ! :' +JSON.stringify(e.message));
             CCPromise.reject(e.message);
           });
+        } else {
+          logger.info('No any project is expired.');
         }
       }
     });
