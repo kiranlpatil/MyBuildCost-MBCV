@@ -76,7 +76,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   syncAtEveryFifteenMinute.start();
 
 
-  /*let sendProjectExpiryWarningMail = new CronJob('00 *!/2 0 * * *', function() {
+  let sendProjectExpiryWarningMail = new CronJob('00 50 23 * * *', function() {
   //let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
       let userService : UserService = new UserService();
       let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
@@ -93,7 +93,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     true
   );
 
-  sendProjectExpiryWarningMail.start();*/
+  sendProjectExpiryWarningMail.start();
   //logger log4js initialization
   /*
     console.log('Logger Initialization');
