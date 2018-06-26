@@ -56,9 +56,9 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   let syncAtEveryFifteenMinute = new CronJob('00 */5 * * * *', function() {
 
       let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
-      rateAnalysisServices.SyncRateAnalysis();
+      //rateAnalysisServices.SyncRateAnalysis();
 
-      let userService : UserService = new UserService();
+      /*let userService : UserService = new UserService();
       let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
       userService.sendProjectExpiryWarningMails((error, success) => {
         if(error) {
@@ -66,7 +66,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
         } else {
           _loggerService.logDebug('ProjectExpiryWarningMail send successfully to all users.');
         }
-      });
+      });*/
 
     }, function () {
       console.log('restart server');
@@ -76,10 +76,11 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   syncAtEveryFifteenMinute.start();
 
 
-  /*let sendProjectExpiryWarningMail = new CronJob('00 *!/2 0 * * *', function() {
+  let sendProjectExpiryWarningMail = new CronJob('00 */2 0 * * *', function() {
   //let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
       let userService : UserService = new UserService();
-      let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
+      let _loggerService: LoggerService = new LoggerService('sendProjectExpiryWarningMail');
+      _loggerService.logDebug('ProjectExpiryWarningMail started.');
       userService.sendProjectExpiryWarningMails((error, success) => {
         if(error) {
           _loggerService.logError('Error in sendProjectExpiryWarningMail for users : ' +error);
@@ -93,7 +94,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     true
   );
 
-  sendProjectExpiryWarningMail.start();*/
+  sendProjectExpiryWarningMail.start();
   //logger log4js initialization
   /*
     console.log('Logger Initialization');
