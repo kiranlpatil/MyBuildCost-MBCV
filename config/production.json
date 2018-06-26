@@ -66,10 +66,10 @@
   },
 
   "payUMoney" : {
-    "merchentKey" : "UQ2iexyF",
-    "saltKey" : "jCC3ytHKOA",
-    "authHeader" : "WY4YNJEYPrAbCEUyoCoNDEcJxSvk/8glz7QaUsFqzRQ=",
-    "isProdMode" : false
+    "merchentKey" : "DjKdAIlf",
+    "saltKey" : "ATWDvTAT3O",
+    "authHeader" : "ecjhMbRj/VlJ0nOQEaKoN18NWy18qHDCvJ48P9IAetM=",
+    "isProdMode" : true
   },
 
   "logger" : {
