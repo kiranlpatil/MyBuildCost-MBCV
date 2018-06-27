@@ -1174,7 +1174,7 @@ class UserService {
 
       let data:Map<string,string>= new Map([
         ['$applicationLink$',config.get('application.mail.host')], ['$first_name$',user.first_name],
-        ['$expiry_date$',user.projectExpiryDate], ['$subscription_link$',config.get('application.mail.host')],
+        ['$expiry_date$',user.projectExpiryDate], ['$subscription_link$',config.get('application.mail.host')+ 'signin'],
         ['$app_name$','BuildInfo - Cost Control']]);
 
       let attachment = MailAttachments.AttachmentArray;
