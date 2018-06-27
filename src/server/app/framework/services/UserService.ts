@@ -120,6 +120,7 @@ class UserService {
       if (err) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else {
+        callback(err, res);
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res);
         let host = config.get('application.mail.host');
@@ -130,7 +131,11 @@ class UserService {
         let attachment=MailAttachments.WelcomeAboardAttachmentArray;
         sendMailService.send( user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data,attachment,
           (err: any, result: any) => {
-            callback(err, result);
+          if(err) {
+            logger.error(JSON.stringify(err));
+          }
+          logger.debug('Sending Mail : '+JSON.stringify(result));
+            //callback(err, result);
           });
         }
     });
