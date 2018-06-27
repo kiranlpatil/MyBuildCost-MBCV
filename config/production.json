@@ -4373,7 +4373,7 @@
           "rateAnalysisId" : 100316,
           "workItems" : [
             {
-              "name" : "300 X 600 mm ceramic tile dado",
+              "name" : "300 x 600 mm ceramic tile dado",
               "rateAnalysisId" : 100317,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
@@ -4655,7 +4655,7 @@
           "rateAnalysisId" : 100337,
           "workItems" : [
             {
-              "name" : "3\" Black granite window sill / jamb with chamfer & edge polish",
+              "name" : "3\" Black granite window sill with chamfer & edge polish",
               "rateAnalysisId" : 100338,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4670,7 +4670,7 @@
               "height" : false
             },
             {
-              "name" : "3\" Green marble  window sill / jamb with chamfer & edge polish",
+              "name" : "3\" Green marble window sill with chamfer & edge polish",
               "rateAnalysisId" : 100339,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4685,7 +4685,22 @@
               "height" : false
             },
             {
-              "name" : "3\" window sill / jamb of selected stone and edge finish as per design",
+              "name" : "3\" Black granite window jambs with chamfer & edge polish",
+              "rateAnalysisId" : 140000,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "Rft",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "3\" Green marble window jambs with chamfer & edge polish",
               "rateAnalysisId" : 100340,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4699,6 +4714,21 @@
               "breadthOrWidth" : false,
               "height" : false
             }
+            /*{
+              "name" : "3\" window sill / jamb of selected stone and edge finish as per design",
+              "rateAnalysisId" : 100340,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "Rft",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            }*/
           ]
         },
         {
@@ -4706,7 +4736,7 @@
           "rateAnalysisId" : 100341,
           "workItems" : [
             {
-              "name" : "8\" Black granite window sill / jamb with chamfer & edge polish",
+              "name" : "8\" Black granite window sill with chamfer & edge polish",
               "rateAnalysisId" : 100342,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4721,7 +4751,7 @@
               "height" : false
             },
             {
-              "name" : "8\" Green marble  window sill / jamb with chamfer & edge polish",
+              "name" : "8\" Green marble window sill with chamfer & edge polish",
               "rateAnalysisId" : 100343,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4736,7 +4766,7 @@
               "height" : false
             },
             {
-              "name" : "8\" Black granite window sill / jamb ( Double patti ) with chamfer & edge polish",
+              "name" : "8\" Black granite window sill ( Double patti ) with chamfer & edge polish",
               "rateAnalysisId" : 100344,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4751,7 +4781,7 @@
               "height" : false
             },
             {
-              "name" : "8\" Green marble window sill / jamb ( Double patti ) with chamfer & edge polish",
+              "name" : "8\" Green marble  window sill  ( Double patti ) with chamfer & edge polish",
               "rateAnalysisId" : 100345,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4766,7 +4796,7 @@
               "height" : false
             },
             {
-              "name" : "8\"  window sill / jamb ( Double patti ) with with selected stone and edge finish as per design",
+              "name" : "8\" Black granite window jambs with chamfer & edge polish",
               "rateAnalysisId" : 102100,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -4781,8 +4811,38 @@
               "height" : false
             },
             {
-              "name" : "8\" window sill / jamb with selected stone and edge finish as per design",
+              "name" : "8\" Green marble window jambs with chamfer & edge polish",
               "rateAnalysisId" : 102101,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "Rft",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "8\" Black granite window jambs ( Double patti ) with chamfer & edge polish.",
+              "rateAnalysisId" : 140002,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "Rft",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "8\" Green marble window jambs ( Double patti ) with chamfer & edge polish.",
+              "rateAnalysisId" : 140003,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
               "isRateAnalysis" : true,
