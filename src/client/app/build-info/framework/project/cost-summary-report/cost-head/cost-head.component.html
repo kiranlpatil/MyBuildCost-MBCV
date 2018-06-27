@@ -67,7 +67,7 @@
                                   <div class="edit-field" [class.active-quantity]="(showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
                                     <input type="number" [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
                                            (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
-                                            id="directQuantity" size="10" class="form-control clear" title="Guantity">
+                                            id="directQuantity" size="10" class="form-control clear" title="Quantity">
                                     <span class="calculator"
                                           id="getQuantity{{categoryIndex}}"
                                           *ngIf="workItem.isMeasurementSheet" title="Get Quantity"

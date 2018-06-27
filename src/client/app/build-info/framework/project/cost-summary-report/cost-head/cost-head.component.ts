@@ -159,8 +159,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_ID, this.costHeadId);
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_COST_HEAD_NAME, this.costHeadName);
-      this.getCategories(this.projectId, this.costHeadId);
-
+      if(this.status) {
+        this.getCategories(this.projectId, this.costHeadId);
+      }
     });
   }
 
