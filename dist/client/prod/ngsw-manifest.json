@@ -1,18 +1,13 @@
 {
   "static": {
     "urls": {
-      "/index.html": "c04bc2b1a761d8d6f60384740a3145e4e25779a7",
+      "/index.html": "e7495b5d42944dda093e4111e62950fed3d842cd",
       "/manifest.json": "c48a13fd12025ee09de4a6c086bfd562c37a7e14",
       "/service-worker.js": "13a16a93bb5f4c6649a4e926d4411493c51765fa",
       "/banners\\ads.png": "4645aa5c542dbec1ca788fac67e50dd16564290a",
       "/css\\main.css": "c0a1e6a10a81576b7aafa23ef064519f6bcf2ce6",
-      "/js\\app.js": "441826aeb64f87b0dc913a9a97e5b46c2e568a9f",
+      "/js\\app.js": "f44ae09b0cb757c266c44307bf7d161bf3496757",
       "/js\\shims.js": "c643a10115a4c280374d9d2b28a5280c3641ac8d",
-      "/assets\\framework\\fonts\\glyphicons-halflings-regular.eot": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3",
-      "/assets\\framework\\fonts\\glyphicons-halflings-regular.svg": "297c73ba85f235221fae20e8dd1c844857dc3276",
-      "/assets\\framework\\fonts\\glyphicons-halflings-regular.ttf": "44bc1850f570972267b169ae18f1cb06b611ffa2",
-      "/assets\\framework\\fonts\\glyphicons-halflings-regular.woff": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f",
-      "/assets\\framework\\fonts\\glyphicons-halflings-regular.woff2": "ca35b697d99cae4d1b60f2d60fcd37771987eb07",
       "/assets\\build-info\\create-new-project\\back.png": "60b7d928926c89d3d48ba35697bdf6b2648d61e0",
       "/assets\\build-info\\create-new-project\\close.png": "58411f1b07a274975f12da20695ce34ed7255b43",
       "/assets\\build-info\\create-new-project\\create-new-project.png": "c10a8b930aa68d9dd2240d49c4eaef869fe4df85",
@@ -47,6 +42,13 @@
       "/assets\\build-info\\page_background\\page-bg-transparent.png": "7b4d8881375984165cff4dd8dd915dc4b0a694aa",
       "/assets\\build-info\\page_background\\page-bg.png": "1bd161d1373c00eba8733dcb51f8146ccf42358b",
       "/assets\\build-info\\profile-pic\\sprite.png": "af72b7d601db549a4072f699c226b5dccbb0ec7d",
+      "/assets\\framework\\fonts\\glyphicons-halflings-regular.eot": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3",
+      "/assets\\framework\\fonts\\glyphicons-halflings-regular.svg": "297c73ba85f235221fae20e8dd1c844857dc3276",
+      "/assets\\framework\\fonts\\glyphicons-halflings-regular.ttf": "44bc1850f570972267b169ae18f1cb06b611ffa2",
+      "/assets\\framework\\fonts\\glyphicons-halflings-regular.woff": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f",
+      "/assets\\framework\\fonts\\glyphicons-halflings-regular.woff2": "ca35b697d99cae4d1b60f2d60fcd37771987eb07",
+      "/assets\\build-info\\header\\icons\\print.png": "b188b0cf2d568fb015d2f30c5c3fba2f7c9526cf",
+      "/assets\\build-info\\header\\icons\\share.png": "ffe6f75f796f4b23f7b20601a50905bc538bc740",
       "/assets\\framework\\images\\close\\close-black.svg": "208a38534329c519265c642652695aa009b6ffe3",
       "/assets\\framework\\images\\close\\close.svg": "e53e91fdcd2dbd7c4c29714d4aaf1b1a1ec8cd99",
       "/assets\\framework\\images\\dashboard\\default-company-logo.png": "538c4b99612415f591666c6e42a981ecb7416f2f",
@@ -83,9 +85,7 @@
       "/assets\\framework\\images\\icons\\password-grey.svg": "17601bc99ab32406bfcae47bf16efaae1ca725b2",
       "/assets\\framework\\images\\icons\\password.svg": "a54cf788f964441c2ddf575ce1a1eef61cf87af5",
       "/assets\\framework\\images\\logo\\favicon.ico": "a556dc92d75e5450944452e3c2ef5e8b05883d17",
-      "/assets\\framework\\images\\page_background\\page-bg.png": "e5edac6bd81edfb74c880503133558481f89a03d",
-      "/assets\\build-info\\header\\icons\\print.png": "b188b0cf2d568fb015d2f30c5c3fba2f7c9526cf",
-      "/assets\\build-info\\header\\icons\\share.png": "ffe6f75f796f4b23f7b20601a50905bc538bc740"
+      "/assets\\framework\\images\\page_background\\page-bg.png": "e5edac6bd81edfb74c880503133558481f89a03d"
     }
   },
   "routing": {

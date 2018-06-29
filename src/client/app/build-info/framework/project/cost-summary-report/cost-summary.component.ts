@@ -559,7 +559,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
   openRecentBuilding() {
     let recentProjectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    if(this.projectId===recentProjectId) {
+    if(this.status && this.projectId===recentProjectId) {
       for(let building of this.projectReport.buildings){
         if(building._id===SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)) {
           this.compareIndex=this.projectReport.buildings.indexOf(building);
