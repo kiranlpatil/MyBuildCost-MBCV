@@ -149,7 +149,7 @@ class UserService {
           }
           logger.debug('Sending Mail : '+JSON.stringify(result));
             //callback(err, result);
-          });
+          },config.get('application.mail.ADMIN_MAIL'));
         }
     });
   }

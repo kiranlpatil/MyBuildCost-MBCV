@@ -21,7 +21,7 @@ class SendMailService {
 
   send(sendmailTo: string, subject: string, templateName: string,
        data: Map<string, string>, attachment?:any[],
-       callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string) {
+       callback: (error: Error, result: SentMessageInfo) => void, blankCarbonCopy?: string) {
 
     let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
     data.forEach((value: string, key: string) => {
@@ -32,7 +32,7 @@ class SendMailService {
     let mailOptions = {
       from: config.get('application.mail.MAIL_SENDER'),
       to: sendmailTo,
-      cc: carbonCopy,
+      bcc: blankCarbonCopy,
       subject: subject,
       html: content,
       attachments:attachment
