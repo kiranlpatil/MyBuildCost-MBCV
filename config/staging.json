@@ -506,7 +506,7 @@
           "name" : "P.C.C. on volume basis",
           "workItems" : [
             {
-              "name" : "P.C.C.  ( M - 7.5 grade )",
+              "name" : "P.C.C. ( M - 7.5 grade )",
               "isMeasurementSheet" : true,
               "measurementUnit" : "cum",
               "isRateAnalysis" : true,
@@ -1972,6 +1972,41 @@
             },
             {
               "name" : "Gypsum plaster (punning) on fly ash brick masonry wall upto 10 mm thk",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "sft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            }
+          ]
+        },
+        {
+          "name" : "POP plaster (punning)",
+          "workItems" : [
+            {
+              "name" : "POP punning on Rough plastered wall - upto 10 mm thk",
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "sft",
+              "isDirectRate" : false,
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            },
+            {
+              "name" : "POP Plaster (punning) on Ceiling (RCC slab bottom) in patra finish - upto 4 mm thick",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
@@ -3454,7 +3489,7 @@
           "name" : "Cement tile flooring",
           "workItems" : [
             {
-              "name" : "300 mm  X 300 mm Concrete chequered tile flooring on 60mm bedding",
+              "name" : "300 mm X 300 mm Concrete chequered tile flooring on 60mm bedding",
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : true,
@@ -4779,7 +4814,7 @@
               "height" : false
             },
             {
-              "name" : "8\" Green marble  window sill  ( Double patti ) with chamfer & edge polish",
+              "name" : "8\" Green marble window sill ( Double patti ) with chamfer & edge polish",
               "rateAnalysisId" : 100345,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
@@ -5982,6 +6017,66 @@
             {
               "name" : "Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with one side door skin & one side plain laminate",
               "rateAnalysisId" : 100402,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No.",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "per No",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Door shutter 30 mm thick  for door opening size 2'6\" W x 7'0\" H with both side plain laminate",
+              "rateAnalysisId" : 140400,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No.",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "per No",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with both side plain laminate",
+              "rateAnalysisId" : 140401,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No.",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "per No",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with both side Veneer finish",
+              "rateAnalysisId" : 140402,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No.",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : "per No",
+              "directRate" : null,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Door shutter 30 mm thick for door opening size 2'6\" W x 7'0\" H with both side oil painted",
+              "rateAnalysisId" : 140403,
               "isMeasurementSheet" : false,
               "measurementUnit" : "No.",
               "isRateAnalysis" : true,
@@ -9267,6 +9362,70 @@
               "length" : null,
               "breadthOrWidth" : null,
               "height" : null
+            },
+            {
+              "name" : "4\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
+              "rateAnalysisId" : 200098,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "rft",
+              "directRate" : null,
+              "isDirectRate" : false,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "6\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
+              "rateAnalysisId" : 200099,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "rft",
+              "directRate" : null,
+              "isDirectRate" : false,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground",
+              "rateAnalysisId" : 200100,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "rft",
+              "directRate" : null,
+              "isDirectRate" : false,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground with painting",
+              "rateAnalysisId" : 200101,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
+              "rateAnalysisUnit" : "rft",
+              "directRate" : null,
+              "isDirectRate" : false,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
             }
           ]
         }
