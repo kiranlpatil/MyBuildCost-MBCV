@@ -1,5 +1,4 @@
 {
-
   "application": {
     "database": {
       "host": "127.0.0.1",
@@ -283,7 +282,6 @@
     "buildingRate": "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "buildingUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "buildingRateAnalysisNotes": "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-
     "amenitiesCostHeads": "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "amenitiesCategories": "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "amenitiesWorkItems": "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
