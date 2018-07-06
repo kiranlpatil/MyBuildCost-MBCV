@@ -1,0 +1,13 @@
+"use strict";
+var EstimateReport = (function () {
+    function EstimateReport() {
+        this.rate = 0;
+        this.total = 0;
+        this.rateAnalysisId = 0;
+        this.disableCostHeadView = false;
+    }
+    return EstimateReport;
+}());
+module.exports = EstimateReport;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9hcHBsaWNhdGlvblByb2plY3QvZGF0YWFjY2Vzcy9tb2RlbC9wcm9qZWN0L3JlcG9ydHMvRXN0aW1hdGVSZXBvcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBO0lBT0U7UUFDRSxJQUFJLENBQUMsSUFBSSxHQUFHLENBQUMsQ0FBQztRQUNkLElBQUksQ0FBQyxLQUFLLEdBQUcsQ0FBQyxDQUFDO1FBQ2YsSUFBSSxDQUFDLGNBQWMsR0FBRyxDQUFDLENBQUM7UUFDeEIsSUFBSSxDQUFDLG1CQUFtQixHQUFHLEtBQUssQ0FBQztJQUNuQyxDQUFDO0lBQ0gscUJBQUM7QUFBRCxDQWJBLEFBYUMsSUFBQTtBQUNELGlCQUFTLGNBQWMsQ0FBQyIsImZpbGUiOiJhcHAvYXBwbGljYXRpb25Qcm9qZWN0L2RhdGFhY2Nlc3MvbW9kZWwvcHJvamVjdC9yZXBvcnRzL0VzdGltYXRlUmVwb3J0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiY2xhc3MgRXN0aW1hdGVSZXBvcnQge1xyXG4gIG5hbWU6IHN0cmluZztcclxuICByYXRlOiBudW1iZXI7XHJcbiAgdG90YWwgOiBudW1iZXI7XHJcbiAgcmF0ZUFuYWx5c2lzSWQ6IG51bWJlcjtcclxuICBkaXNhYmxlQ29zdEhlYWRWaWV3ID86IGJvb2xlYW47XHJcblxyXG4gIGNvbnN0cnVjdG9yKCkge1xyXG4gICAgdGhpcy5yYXRlID0gMDtcclxuICAgIHRoaXMudG90YWwgPSAwO1xyXG4gICAgdGhpcy5yYXRlQW5hbHlzaXNJZCA9IDA7XHJcbiAgICB0aGlzLmRpc2FibGVDb3N0SGVhZFZpZXcgPSBmYWxzZTtcclxuICB9XHJcbn1cclxuZXhwb3J0ID0gRXN0aW1hdGVSZXBvcnQ7XHJcbiJdfQ==
