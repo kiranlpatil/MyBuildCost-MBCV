@@ -300,7 +300,7 @@ class RateAnalysisService {
         }
       }
 
-      let workItemsRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, workItem.C3 AS name' +
+      let workItemsRateAnalysisSQL = 'SELECT workItem.C2 AS rateAnalysisId, TRIM(workItem.C3) AS name' +
         ' FROM ? AS workItem where workItem.C4 = ' + categoriesByCostHead[categoryIndex].rateAnalysisId;
 
       let workItemsByCategory = alasql(workItemsRateAnalysisSQL, [workItemsRateAnalysis]);

@@ -42,16 +42,17 @@ export class PaymentSuccessfulComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.packageName = params['packageName'];
       this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
+      /*if (this.packageName === this.getLabels().PACKAGE_REATAIN_PROJECT || this.packageName === this.getLabels().PACKAGE_RENEW_PROJECT) {
         this.getProject();
-      }
+      }*/
     });
+    this.getProject();
     this.numOfPurchasedBuilding =parseInt(SessionStorageService.getSessionValue(SessionStorage.NO_OF_BUILDINGS_PURCHASED));
     this.totalBilled =parseInt( SessionStorageService.getSessionValue(SessionStorage.TOTAL_BILLED));
     this.subscription = this.commonService.updatepackageInfo$
       .subscribe(item =>this.totalBilled = item.amount!==undefined?item.amount:0
       );
-    this.updateSubscription();
+   // this.updateSubscription();
     }
 
   getProject() {
@@ -69,6 +70,7 @@ export class PaymentSuccessfulComponent implements OnInit {
     } else {
       this.projectModel.name = project.data[0].name;
     }
+    this.updateSubscription();
     }
 
   onGetProjectFailure(error: any) {
@@ -97,6 +99,12 @@ export class PaymentSuccessfulComponent implements OnInit {
       if (this.removeTrialProjectPrefix) {
         this.removeTrialProjectPrefix = false;
         this.updateProjectNameById();
+      }else {
+        let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+        this.projectService.updateProjectActiveStatus(projectId).subscribe(
+          success => this.onUpdateProjectStatusSuccess(success),
+          error => this.onUpdateProjectStatusFailure(error)
+        );
       }
       sessionStorage.removeItem(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
      /* var message = new Message();

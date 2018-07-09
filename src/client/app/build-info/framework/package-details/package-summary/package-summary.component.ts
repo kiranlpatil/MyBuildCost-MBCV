@@ -85,11 +85,12 @@ export class PackageSummaryComponent implements OnInit {
     let subscribedPackage = new SubscribedPackage();
     if(this.premiumPackageAvailable) {
       subscribedPackage.amount = (this.premiumPackageDetails.basePackage.cost - this.premiumPackageDetails.basePackage.iterativeDiscount);
-      subscribedPackage.name = this.premiumPackageDetails.basePackage.name;
+      subscribedPackage.name = this.packageName;
     } else {
       subscribedPackage.amount = this.premiumPackageDetails.basePackage.cost;
-      subscribedPackage.name = this.premiumPackageDetails.basePackage.name;
+      subscribedPackage.name = this.packageName;
     }
+    SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED, subscribedPackage.amount);
     this.commonService.updatePurchasepackageInfo(subscribedPackage);
   }
 
