@@ -3,7 +3,8 @@ import CostHead = require('../project/building/CostHead');
 
 
 class RateAnalysis {
-  _id?:string;
+  _id : string;
+  region : string;
   buildingRates : Array<CentralizedRate>;
   buildingCostHeads: Array<CostHead>;
   projectRates : Array<CentralizedRate>;

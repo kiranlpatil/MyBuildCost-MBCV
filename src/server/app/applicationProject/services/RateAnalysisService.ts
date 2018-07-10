@@ -154,30 +154,36 @@ class RateAnalysisService {
     });
   }
 
-  convertCostHeadsFromRateAnalysisToCostControl(entity: string, callback: (error: any, data: any) => void) {
+  convertCostHeadsFromRateAnalysisToCostControl(entity: string, region: any, callback: (error: any, data: any) => void) {
     logger.info('convertCostHeadsFromRateAnalysisToCostControl has been hit');
 
-    let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS);
+    let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS)
+      + region.RegionId + config.get(Constants.RATE_ANALYSIS_API + Constants.RATE_ANALYSIS_API_ENDPOINT);
     let costHeadRateAnalysisPromise = this.createPromise(costHeadURL);
     logger.info('costHeadRateAnalysisPromise for has been hit');
 
-    let categoryURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_CATEGORIES);
+    let categoryURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_CATEGORIES)
+      + region.RegionId + config.get(Constants.RATE_ANALYSIS_API + Constants.RATE_ANALYSIS_API_ENDPOINT);
     let categoryRateAnalysisPromise = this.createPromise(categoryURL);
     logger.info('categoryRateAnalysisPromise for has been hit');
 
-    let workItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_WORKITEMS);
+    let workItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_WORKITEMS)
+      + region.RegionId + config.get(Constants.RATE_ANALYSIS_API + Constants.RATE_ANALYSIS_API_ENDPOINT);
     let workItemRateAnalysisPromise = this.createPromise(workItemURL);
     logger.info('workItemRateAnalysisPromise for has been hit');
 
-    let rateItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_RATE);
+    let rateItemURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_RATE)
+      + region.RegionId + config.get(Constants.RATE_ANALYSIS_API + Constants.RATE_ANALYSIS_API_ENDPOINT);
     let rateItemRateAnalysisPromise = this.createPromise(rateItemURL);
     logger.info('rateItemRateAnalysisPromise for has been hit');
 
-    let rateAnalysisNotesURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_NOTES);
+    let rateAnalysisNotesURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_NOTES)
+      + region.RegionId + config.get(Constants.RATE_ANALYSIS_API + Constants.RATE_ANALYSIS_API_ENDPOINT);
     let notesRateAnalysisPromise = this.createPromise(rateAnalysisNotesURL);
     logger.info('notesRateAnalysisPromise for has been hit');
 
-    let allUnitsFromRateAnalysisURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_UNIT);
+    let allUnitsFromRateAnalysisURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_UNIT)
+      + region.RegionId + config.get(Constants.RATE_ANALYSIS_API + Constants.RATE_ANALYSIS_API_ENDPOINT);
     let unitsRateAnalysisPromise = this.createPromise(allUnitsFromRateAnalysisURL);
     logger.info('unitsRateAnalysisPromise for has been hit');
 
@@ -515,13 +521,26 @@ class RateAnalysisService {
     return null;
   }
 
-  SyncRateAnalysis() {
+  syncAllRegions() {
+    this.getAllregionsFromRateAnalysis((error, response) => {
+      if(error) {
+        console.log('error : '+JSON.stringify(error));
+      } else {
+        console.log('response : '+JSON.stringify(response));
+        for(let region of response) {
+          this.SyncRateAnalysis(region);
+        }
+      }
+    });
+  }
+
+  SyncRateAnalysis(region : any) {
     let rateAnalysisService = new RateAnalysisService();
-    this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, (error: any, buildingData: any)=> {
+    this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, region,(error: any, buildingData: any)=> {
       if(error) {
         logger.error('RateAnalysis Sync Failed.');
       } else {
-        this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, (error: any, projectData: any)=> {
+        this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, region, (error: any, projectData: any)=> {
           if (error) {
             logger.error('RateAnalysis Sync Failed.');
           } else {
@@ -538,7 +557,7 @@ class RateAnalysisService {
             let buildingRates = this.getRates(buildingData, buildingCostHeads);
             let projectRates = this.getRates(projectData, projectCostHeads);
             let rateAnalysis = new RateAnalysis(buildingCostHeads, buildingRates, projectCostHeads, projectRates);
-            this.saveRateAnalysis(rateAnalysis);
+            this.saveRateAnalysis(rateAnalysis, region);
           }
         });
       }
@@ -617,15 +636,17 @@ class RateAnalysisService {
     return distinctRates;
   }
 
-  saveRateAnalysis(rateAnalysis: RateAnalysis) {
+  saveRateAnalysis(rateAnalysis: RateAnalysis, region : any) {
     logger.info('saveRateAnalysis is been hit');
-    let query = {};
-    this.rateAnalysisRepository.retrieve({}, (error:any, rateAnalysisArray: Array<RateAnalysis>) => {
+    let query = { 'region' : region.RegionCode };
+    rateAnalysis.region = region.RegionCode;
+    logger.info('Updating RateAnalysis for '+region.RegionCode);
+    this.rateAnalysisRepository.retrieve({ 'region' : region.RegionCode }, (error:any, rateAnalysisArray: Array<RateAnalysis>) => {
       if(error) {
         logger.error('Unable to retrive synced RateAnalysis');
       } else {
         if(rateAnalysisArray.length >0) {
-          query = { _id : rateAnalysisArray[0]._id};
+          query = { 'region' : region.RegionCode };
           let update = {$set: {
             'projectCostHeads': rateAnalysis.projectCostHeads,
             'projectRates': rateAnalysis.projectRates,
@@ -639,7 +660,7 @@ class RateAnalysisService {
               logger.info('Updated RateAnalysis.');
             }
           });
-        }else {
+        } else {
           this.rateAnalysisRepository.create(rateAnalysis, (error: any, result: RateAnalysis) => {
             if(error) {
               logger.error('saveRateAnalysis failed => ' + error.message);
@@ -669,6 +690,24 @@ class RateAnalysisService {
 
   getAggregateData(query: any, callback:(error:any, aggregateData: any) =>void) {
     this.rateAnalysisRepository.aggregate(query,callback);
+  }
+
+  getAllregionsFromRateAnalysis(callback: (error: any, result: any) => void) {
+    logger.info('Rate Analysis Service, getCostHeads has been hit');
+    let regionListFromRateAnalysis : Array<any>;
+    let url = config.get('rateAnalysisAPI.getAllregions');
+    request.get({url: url}, function (error: any, response: any, body: any) {
+      if (error) {
+        logger.error('Error for getting all regions.');
+        logger.error(JSON.stringify(error));
+        callback(error,null);
+      } else if (!error && response) {
+        let resp = JSON.parse(body);
+        regionListFromRateAnalysis = resp['Regions'];
+        console.log('regionListFromRateAnalysis : ' + JSON.stringify(regionListFromRateAnalysis));
+        callback(null, regionListFromRateAnalysis);
+      }
+    });
   }
 }
 

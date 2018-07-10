@@ -2273,8 +2273,8 @@ class ProjectService {
     let rateAnalysisService = new RateAnalysisService();
     let buildingRepository = new BuildingRepository();
     let projectRepository = new ProjectRepository();
-
-    rateAnalysisService.getCostControlRateAnalysis({}, {},(error: any, rateAnalysis: RateAnalysis) => {
+    let query = { 'region' : config.get('costControlRegionCode')};
+    rateAnalysisService.getCostControlRateAnalysis(query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateCostHeadsForBuildingAndProject : convertCostHeadsFromRateAnalysisToCostControl : '
             + JSON.stringify(error));
@@ -2321,7 +2321,8 @@ class ProjectService {
       let projectService = new ProjectService();
       let buildingRepository = new BuildingRepository();
       logger.info('Inside updateBudgetRatesForBuildingCostHeads promise.');
-      rateAnalysisService.getCostControlRateAnalysis( {}, {},(error: any, rateAnalysis: RateAnalysis) => {
+      let query = { 'region' : config.get('costControlRegionCode')};
+      rateAnalysisService.getCostControlRateAnalysis( query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in promise updateBudgetRatesForBuildingCostHeads : ' + JSON.stringify(error));
           reject(error);
@@ -2444,7 +2445,8 @@ class ProjectService {
       let rateAnalysisService = new RateAnalysisService();
       let projectRepository = new ProjectRepository();
       logger.info('Inside updateBudgetRatesForProjectCostHeads promise.');
-      rateAnalysisService.getCostControlRateAnalysis({},{},(error: any, rateAnalysis: RateAnalysis) => {
+      let query = { 'region' : config.get('costControlRegionCode')};
+      rateAnalysisService.getCostControlRateAnalysis(query,{},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
           reject(error);

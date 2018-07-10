@@ -97,7 +97,7 @@ class RateAnalysisController {
     try {
       let rateAnalysisService = new RateAnalysisService();
 
-      rateAnalysisService.SyncRateAnalysis();
+      rateAnalysisService.syncAllRegions();
           /*next(new Response(200,'done'));*/
     } catch(e) {
       next(new CostControllException(e.message,e.stack));
