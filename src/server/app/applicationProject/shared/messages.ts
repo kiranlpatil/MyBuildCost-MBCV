@@ -156,6 +156,9 @@ class Messages {
 
   //Building with same name
   public static MSG_ERROR_BUILDING_NAME_ALREADY_EXIST = 'Building with same name is already exist.';
+
+  //Regions Data
+  public static MSG_ERROR_REGIONS_ARE_NOT_PRESENT = 'Regions are not present';
 }
 export=Messages;
 

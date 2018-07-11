@@ -14,6 +14,7 @@ import Constants = require('../shared/constants');
 import RateAnalysisRepository = require('../dataaccess/repository/RateAnalysisRepository');
 import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
 import { AttachmentDetailsModel } from '../dataaccess/model/project/building/AttachmentDetails';
+import messages  = require('../../applicationProject/shared/messages');
 
 let request = require('request');
 let config = require('config');
@@ -706,6 +707,49 @@ class RateAnalysisService {
         regionListFromRateAnalysis = resp['Regions'];
         console.log('regionListFromRateAnalysis : ' + JSON.stringify(regionListFromRateAnalysis));
         callback(null, regionListFromRateAnalysis);
+      }
+    });
+  }
+
+  getAllRegionNames(callback: (error: any, result: Array<any>) => void) {
+    let query = [
+      {$unwind: '$region'},
+      {$project: {'region': 1, _id:0}}
+    ];
+    this.rateAnalysisRepository.aggregate(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        if (result.length > 0) {
+          callback(error, result);
+        }else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_REGIONS_ARE_NOT_PRESENT;
+          callback(error, null);
+        }
+      }
+    });
+  }
+
+  getAllDataforDropdown(region: string, callback: (error: any, result: Array<any>) => void) {
+    let query = [
+      {$match: {'region': region}},
+      {$project: {'buildingCostHeads': 1, _id : 0}},
+      {$unwind: '$buildingCostHeads'},
+      {$project: {'buildingCostHeads.name': 1, 'buildingCostHeads.rateAnalysisId' : 1, 'buildingCostHeads.categories' : 1 }}
+    ];
+    this.rateAnalysisRepository.aggregate(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let costHeadData = result;
+        if (costHeadData.length > 0) {
+          callback(error, costHeadData);
+        }else {
+          let error = new Error();
+          error.message = messages.MSG_ERROR_REGIONS_ARE_NOT_PRESENT;
+          callback(error, null);
+        }
       }
     });
   }
