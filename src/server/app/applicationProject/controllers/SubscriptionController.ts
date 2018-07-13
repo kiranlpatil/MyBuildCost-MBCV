@@ -106,6 +106,17 @@ class SubscriptionController {
     }
   }
 
+  successPayuMoney(req: express.Request, res: express.Response, next: any): void {
+    try {
+      console.log('payment success : '+ JSON.stringify(req.body));
+      let pkgName = req.body.productinfo;
+      let redirectUrl = 'http://5d477bbb.ngrok.io/about';
+      res.render(redirectUrl);
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   failurePayment(req: express.Request, res: express.Response, next: any): void {
     try {
       let body = req.body;

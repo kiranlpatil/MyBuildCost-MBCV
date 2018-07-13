@@ -36,6 +36,8 @@ class SubscriptionRoutes {
 
     router.post('/payment/success',  controller.successPayment, this._responseInterceptor.exit);
 
+    router.post('/pay/success',  controller.successPayuMoney, this._responseInterceptor.exit);
+
     router.post('/payment/failure',  controller.failurePayment, this._responseInterceptor.exit);
 
     router.get('/basepackageslist', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,

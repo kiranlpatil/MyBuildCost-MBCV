@@ -39,6 +39,10 @@ class RateAnalysisRoutes {
     router.get('/costHead/:costHeadId/workItem/:workItemId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRate, this._responseInterceptor.exit);
 
+    router.get('/regions', controller.getAllRegionNames, this._responseInterceptor.exit);
+
+    router.get('/allData/:regionName', controller.getAllDataForDropdown, this._responseInterceptor.exit);
+
     router.get('/sync', controller.SyncRateAnalysis);
     return router;
   }

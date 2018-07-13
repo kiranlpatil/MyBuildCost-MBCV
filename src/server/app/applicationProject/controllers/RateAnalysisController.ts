@@ -7,7 +7,7 @@ var log4js = require('log4js');
 var logger=log4js.getLogger('Rate Analysis Controller');
 
 class RateAnalysisController {
-  private _rateAnalysisService : RateAnalysisService;
+  private _rateAnalysisService: RateAnalysisService;
 
   constructor() {
     this._rateAnalysisService = new RateAnalysisService();
@@ -19,16 +19,16 @@ class RateAnalysisController {
       let rateAnalysisService = new RateAnalysisService();
       let url = config.get('rateAnalysisAPI.costHeads');
       let user = req.user;
-      rateAnalysisService.getCostHeads( url, user, (error, result) => {
-        if(error) {
+      rateAnalysisService.getCostHeads(url, user, (error, result) => {
+        if (error) {
           next(error);
         } else {
           logger.info('Get Rate Analysis CostHeads success');
-          next(new Response(200,result));
+          next(new Response(200, result));
         }
       });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
+    } catch (e) {
+      next(new CostControllException(e.message, e.stack));
     }
   }
 
@@ -39,16 +39,16 @@ class RateAnalysisController {
       let user = req.user;
       let url = config.get('rateAnalysisAPI.workItems');
 
-      rateAnalysisService.getWorkItems( url, user,(error, result) => {
-        if(error) {
+      rateAnalysisService.getWorkItems(url, user, (error, result) => {
+        if (error) {
           next(error);
         } else {
           logger.info('Get Rate Analysis Work Items success');
-          next(new Response(200,result));
+          next(new Response(200, result));
         }
       });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
+    } catch (e) {
+      next(new CostControllException(e.message, e.stack));
     }
   }
 
@@ -97,13 +97,45 @@ class RateAnalysisController {
     try {
       let rateAnalysisService = new RateAnalysisService();
 
-      rateAnalysisService.SyncRateAnalysis();
+      rateAnalysisService.syncAllRegions();
           /*next(new Response(200,'done'));*/
     } catch(e) {
       next(new CostControllException(e.message,e.stack));
     }
   }
 
+  getAllRegionNames(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let rateAnalysisService = new RateAnalysisService();
+      rateAnalysisService.getAllRegionNames((error, result) => {
+        if (error) {
+          next(error);
+        } else {
+          next(new Response(200, result));
+        }
+      });
+    } catch (e) {
+      next(new CostControllException(e.message, e.stack));
+    }
+
+  }
+
+  getAllDataForDropdown(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let region = req.params.regionName;
+      let rateAnalysisService = new RateAnalysisService();
+      rateAnalysisService.getAllDataForDropdown(region,(error, result) => {
+        if (error) {
+          next(error);
+        } else {
+          next(new Response(200, result));
+        }
+      });
+    } catch (e) {
+      next(new CostControllException(e.message, e.stack));
+    }
+
+  }
 }
 
 export  = RateAnalysisController;

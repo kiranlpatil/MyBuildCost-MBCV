@@ -393,11 +393,12 @@ class ProjectService {
               let rateAnalysisData;
               if (oldBuildingDetails.cloneItems && oldBuildingDetails.cloneItems.indexOf(Constants.RATE_ANALYSIS_CLONE) === -1) {
                 let rateAnalysisService: RateAnalysisService = new RateAnalysisService();
+                let costControlRegion = config.get('costControlRegionCode');
                 let query = [
                   {
-                    $project:{
-                      'buildingCostHeads.categories.workItems':1
-                    }
+                    $match: { 'region': costControlRegion }
+                  },{
+                    $project: { 'buildingCostHeads.categories.workItems':1 }
                   },
                   {$unwind: '$buildingCostHeads'},
                   {$unwind: '$buildingCostHeads.categories'},
@@ -410,7 +411,10 @@ class ProjectService {
                   if (error) {
                     callback(error, null);
                   } else {
-                    rateAnalysisService.getCostControlRateAnalysis({},{'buildingRates':1}, (err: any, data:any)=>{
+                    let regionName = config.get('costControlRegionCode');
+                    let aggregateQuery = { 'region' : regionName };
+                    rateAnalysisService.getCostControlRateAnalysis(aggregateQuery,
+                      {'buildingRates':1}, (err: any, data:any) => {
                       if(err) {
                         callback(error, null);
                       }else {
@@ -424,18 +428,13 @@ class ProjectService {
                 this.getRatesAndCostHeads(projectId,oldBuildingDetails, building, costHeads,null, user,
                   null, callback);
               }
-
             }
           });
-
-
         } else {
           let error = new Error();
           error.message = messages.MSG_ERROR_BUILDING_NAME_ALREADY_EXIST;
           callback(error, null);
         }
-
-
       }
     });
 
@@ -2273,8 +2272,8 @@ class ProjectService {
     let rateAnalysisService = new RateAnalysisService();
     let buildingRepository = new BuildingRepository();
     let projectRepository = new ProjectRepository();
-
-    rateAnalysisService.getCostControlRateAnalysis({}, {},(error: any, rateAnalysis: RateAnalysis) => {
+    let query = { 'region' : config.get('costControlRegionCode')};
+    rateAnalysisService.getCostControlRateAnalysis(query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateCostHeadsForBuildingAndProject : convertCostHeadsFromRateAnalysisToCostControl : '
             + JSON.stringify(error));
@@ -2321,7 +2320,8 @@ class ProjectService {
       let projectService = new ProjectService();
       let buildingRepository = new BuildingRepository();
       logger.info('Inside updateBudgetRatesForBuildingCostHeads promise.');
-      rateAnalysisService.getCostControlRateAnalysis( {}, {},(error: any, rateAnalysis: RateAnalysis) => {
+      let query = { 'region' : config.get('costControlRegionCode')};
+      rateAnalysisService.getCostControlRateAnalysis( query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in promise updateBudgetRatesForBuildingCostHeads : ' + JSON.stringify(error));
           reject(error);
@@ -2444,7 +2444,8 @@ class ProjectService {
       let rateAnalysisService = new RateAnalysisService();
       let projectRepository = new ProjectRepository();
       logger.info('Inside updateBudgetRatesForProjectCostHeads promise.');
-      rateAnalysisService.getCostControlRateAnalysis({},{},(error: any, rateAnalysis: RateAnalysis) => {
+      let query = { 'region' : config.get('costControlRegionCode')};
+      rateAnalysisService.getCostControlRateAnalysis(query,{},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
           reject(error);

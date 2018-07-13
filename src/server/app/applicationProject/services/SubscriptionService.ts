@@ -77,8 +77,8 @@ class SubscriptionService {
     payUMoneyModel.productinfo = paymentBody.productinfo;
     payUMoneyModel.amount = paymentBody.amount;
     payUMoneyModel.txnid = this.generateTransactionId(30);
-    payUMoneyModel.furl = config.get('application.mail.host')+'api/subscription/payment/failure';
-    payUMoneyModel.surl = config.get('application.mail.host')+'api/subscription/payment/success';
+    payUMoneyModel.surl = 'http://9f79c8c5.ngrok.io/api/subscription/pay/success';
+    payUMoneyModel.furl = 'http://9f79c8c5.ngrok.io/api/subscription/pay/failure';
 
 
     payumoney.makePayment(payUMoneyModel, function(error:any, response:any) {

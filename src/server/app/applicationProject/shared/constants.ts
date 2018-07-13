@@ -5,6 +5,7 @@ class Constants {
   public static BUILDING : string = 'building';
   public static SQUARE_METER : string = 'SqureMeter';
   public static RATE_ANALYSIS_API : string = 'rateAnalysisAPI.';
+  public static RATE_ANALYSIS_API_ENDPOINT : string = 'EndPoint';
   public static RATE_ANALYSIS_COSTHEADS : string = 'CostHeads';
   public static RATE_ANALYSIS_CATEGORIES : string = 'Categories';
   public static RATE_ANALYSIS_WORKITEMS : string = 'WorkItems';

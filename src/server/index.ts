@@ -1,18 +1,13 @@
 import * as http from 'http';
 import * as express from 'express';
 import * as path from 'path';
-/*import * as routes from "./routes";*/
-/*import * as cnextRoutes from "./cnext-routes";*/
-import * as fs from 'fs';
 import LoggerService = require('./app/framework/shared/logger/LoggerService');
 import * as sharedService from './app/framework/shared/logger/shared.service';
 import Middlewares = require('./app/framework/middlewares/base/MiddlewaresBase');
-import RateAnalysis = require('./app/applicationProject/dataaccess/model/RateAnalysis/RateAnalysis');
 import RateAnalysisService = require('./app/applicationProject/services/RateAnalysisService');
 import UserService = require('./app/framework/services/UserService');
 var log4js = require('log4js');
 var config = require('config');
-/*var logDir = 'Logs';*/
 
 var spdy = require('spdy');
 __dirname = './';
@@ -53,10 +48,11 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     sharedService.mailToAdmin(error);
   });
 
-  let syncAtEveryFifteenMinute = new CronJob('00 */5 * * * *', function() {
+  let syncAtEveryFifteenMinute = new CronJob('00 */15 * * * *', function() {
 
       let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
-      rateAnalysisServices.SyncRateAnalysis();
+      rateAnalysisServices.syncAllRegions();
+
     }, function () {
       console.log('restart server');
     },
