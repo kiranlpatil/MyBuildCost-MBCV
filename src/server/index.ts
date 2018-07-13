@@ -53,7 +53,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     sharedService.mailToAdmin(error);
   });
 
-  let syncAtEveryFifteenMinute = new CronJob('00 */5 * * * *', function() {
+  let syncAtEveryFifteenMinute = new CronJob('00 00 02 * * *', function() {
 
       let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
       rateAnalysisServices.SyncRateAnalysis();
