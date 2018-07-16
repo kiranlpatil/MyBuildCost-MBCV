@@ -13,9 +13,9 @@
           {{getMessage().MSG_CONFIRMATION_CREATE_PROJECT}}
         </p>
       </div>
-      <button class="btn btn-primary bi-btn" type="button" (click)="onCancel()" data-dismiss="modal">Cancel</button>
-      <button *ngIf="isRetainModalActive" type="button" class="btn btn-default" (click)="onContinue()" data-dismiss="modal">Continue</button>
-      <button *ngIf="isProjectModalActive" type="button" class="btn btn-default" (click)="onProjectModalClick()" data-dismiss="modal">Yes I'm sure</button>
+      <button class="btn btn-default bi-btn" type="button" (click)="onCancel()" data-dismiss="modal">Cancel</button>
+      <button *ngIf="isRetainModalActive" type="button" class="btn btn-primary" (click)="onContinue()" data-dismiss="modal">Check the package</button>
+      <button *ngIf="isProjectModalActive" type="button" class="btn btn-primary" (click)="onProjectModalClick()" data-dismiss="modal">Yes I'm sure</button>
     </div>
   </div>
 </div>

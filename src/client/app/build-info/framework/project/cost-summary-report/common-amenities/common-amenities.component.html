@@ -66,7 +66,7 @@
                   </span>
                   <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
                 <div class="edit-field">
-                  <input title="Budgeted Cost" type="number"
+                  <input title="Edit Budgeted Cost" type="number"
                          [(ngModel)]="thumbRuleItem.amount"
                          id="thumbRuleItem.amount"
                          (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"

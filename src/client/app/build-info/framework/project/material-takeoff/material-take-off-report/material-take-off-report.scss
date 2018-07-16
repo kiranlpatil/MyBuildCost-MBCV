@@ -11,6 +11,10 @@
     min-height: 56px;
     a {
       padding: 13px 0 13px 30px;
+      .ellipsis-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     .total {

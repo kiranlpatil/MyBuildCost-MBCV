@@ -17,7 +17,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-     this.APP_TITLE = 'BuildInfo - Cost Control App';
+     this.APP_TITLE = 'My Build Cost';
      this.FAV_ICON = ImagePath.FAV_ICON;
      this.SPLASH_SCREEN = ImagePath.BODY_BACKGROUND;
      this.APP_LOGO = ImagePath.MY_WHITE_LOGO;
