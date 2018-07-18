@@ -58,6 +58,7 @@
     },
     "browser": {
       "IP": "http://localhost:5555/"
+      // "IP": "http://localhost:5555/"  //CORDOVA APP
     },
     "filePathForProfileImage": "/src/server/app/framework/public/profileimage",
     "filePathForAttachment": "/src/server/app/framework/public/attachment-files"

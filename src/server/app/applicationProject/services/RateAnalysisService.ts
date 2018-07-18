@@ -201,24 +201,31 @@ class RateAnalysisService {
       unitsRateAnalysisPromise
     ]).then(function (data: Array<any>) {
       logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
-      let costHeadsRateAnalysis = data[0][Constants.RATE_ANALYSIS_ITEM_TYPE];
-      let categoriesRateAnalysis = data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE];
-      let workItemsRateAnalysis = data[2][Constants.RATE_ANALYSIS_ITEMS];
-      let rateItemsRateAnalysis = data[3][Constants.RATE_ANALYSIS_DATA];
-      let notesRateAnalysis = data[4][Constants.RATE_ANALYSIS_DATA];
-      let unitsRateAnalysis = data[5][Constants.RATE_ANALYSIS_UOM];
 
-      let buildingCostHeads: Array<CostHead> = [];
-      let rateAnalysisService = new RateAnalysisService();
+      if(data[0][Constants.RATE_ANALYSIS_ITEM_TYPE] && data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE] &&
+        data[2][Constants.RATE_ANALYSIS_ITEMS] && data[3][Constants.RATE_ANALYSIS_DATA] &&
+        data[4][Constants.RATE_ANALYSIS_DATA] && data[5][Constants.RATE_ANALYSIS_UOM]) {
 
-      rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
-        rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
-      logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
-      callback(null, {
-        'buildingCostHeads': buildingCostHeads,
-        'rates': rateItemsRateAnalysis,
-        'units': unitsRateAnalysis
-      });
+        let costHeadsRateAnalysis = data[0][Constants.RATE_ANALYSIS_ITEM_TYPE];
+        let categoriesRateAnalysis = data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE];
+        let workItemsRateAnalysis = data[2][Constants.RATE_ANALYSIS_ITEMS];
+        let rateItemsRateAnalysis = data[3][Constants.RATE_ANALYSIS_DATA];
+        let notesRateAnalysis = data[4][Constants.RATE_ANALYSIS_DATA];
+        let unitsRateAnalysis = data[5][Constants.RATE_ANALYSIS_UOM];
+
+        let buildingCostHeads: Array<CostHead> = [];
+        let rateAnalysisService = new RateAnalysisService();
+
+        rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
+          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
+        logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
+        callback(null, {
+          'buildingCostHeads': buildingCostHeads,
+          'rates': rateItemsRateAnalysis,
+          'units': unitsRateAnalysis
+        });
+
+      }
     }).catch(function (e: any) {
       logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e.message));
       CCPromise.reject(e.message);
@@ -663,7 +670,7 @@ class RateAnalysisService {
             if (error) {
               logger.error('saveRateAnalysis failed => ' + error.message);
             } else {
-              logger.info('Updated RateAnalysis.');
+              logger.info('Updated RateAnalysis for region :'+region.Region);
             }
           });
         } else {
@@ -671,7 +678,7 @@ class RateAnalysisService {
             if (error) {
               logger.error('saveRateAnalysis failed => ' + error.message);
             } else {
-              logger.info('Saved RateAnalysis.');
+              logger.info('Saved RateAnalysis for region : '+region.Region);
             }
           });
         }
