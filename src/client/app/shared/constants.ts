@@ -651,7 +651,7 @@ export class Button {
   public static COSTHEAD: string = 'Cost Head';
   public static ATTACH_FILE: string = 'Attach File';
   public static STANDARD_NOTE: string = 'Standard Note / Disclaimer';
-  public static ADD_PROJECT: string = 'Add Project';
+  public static ADD_PROJECT: string = 'Add New Project';
   public static RENEW_NOW: string = 'Renew now';
 
   //Package details
@@ -745,7 +745,7 @@ export class Menus {
   public static CLONE = 'Add new building with same details';
   public static EDIT = 'Edit';
   public static DELETE = 'Delete';
-  public static ADD_BUILDING = 'Add Building';
+  public static ADD_BUILDING = 'Add first Building';
   public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
   public static COPY_BUILDING = 'Copy Building';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';

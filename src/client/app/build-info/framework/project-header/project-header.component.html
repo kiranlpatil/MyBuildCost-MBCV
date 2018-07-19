@@ -17,7 +17,7 @@
         </li>
       </ul>
       <div  class="add-building-link" *ngIf="getCurrentView() === currentView().COST_SUMMARY">
-        <a title="Add Building" [class.disabled]="addBuildingButtonDisable" (click)="goToCreateBuilding()"><span class="glyphicon glyphicon-plus"></span>{{getMenus().ADD_BUILDING}}</a>
+        <a title="Add first Building" [class.disabled]="addBuildingButtonDisable" (click)="goToCreateBuilding()"><span class="glyphicon glyphicon-plus"></span>{{getMenus().ADD_BUILDING}}</a>
       </div>
     </div>
   </div>
