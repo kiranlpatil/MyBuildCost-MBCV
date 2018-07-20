@@ -510,7 +510,7 @@ export class Label {
   public static CONTACT_FIELD_LABEL: string = 'Mobile Number';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
   public static NAME: string = 'Name';
-  public static ACCEPT_NAME: string = 'By clicking "Continue" I agree to Build Info\'s';
+  public static ACCEPT_NAME: string = 'By clicking "Continue" I agree to My Build Cost';
   public static TERMS_AND_CONDITIONS_NAME: string = 'Terms of Service';
   public static PRIVACY_POLICY: string = 'Privacy Policy';
   public static START_FREE: string = 'Get started absolutely free';

@@ -149,7 +149,7 @@ class UserService {
           }
           logger.debug('Sending Mail : '+JSON.stringify(result));
             //callback(err, result);
-          });
+          },config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
         }
     });
   }
@@ -1187,7 +1187,8 @@ class UserService {
 
       let data:Map<string,string>= new Map([
         ['$applicationLink$',config.get('application.mail.host')], ['$first_name$',user.first_name],
-        ['$expiry_date$',user.projectExpiryDate], ['$subscription_link$',config.get('application.mail.host')],
+        ['$project_name$',user.projectName],
+        ['$expiry_date$',user.projectExpiryDate], ['$subscription_link$',config.get('application.mail.host')+ 'signin'],
         ['$app_name$','BuildInfo - Cost Control']]);
 
       let attachment = MailAttachments.AttachmentArray;
@@ -1212,7 +1213,8 @@ class UserService {
     let activationDate = new Date(subscription.activationDate);
     let expiryDate = new Date(subscription.activationDate);
     let projectExpiryDate = new Date(expiryDate.setDate(activationDate.getDate() + subscription.validity));
-    return projectExpiryDate;
+    let readabledate = projectExpiryDate.toDateString();
+    return readabledate;
   }
 }
 

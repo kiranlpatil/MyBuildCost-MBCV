@@ -48,15 +48,16 @@ export class RenewPackageComponent implements OnInit {
     );
   }
   onGetSubscriptionPackageByNameSuccess(packageDetails:any, body: any) {
+    let subscribedPackage = new SubscribedPackage();
     if(body.basePackageName) {
       this.premiumPackageDetails=packageDetails[0].basePackage;
+      subscribedPackage.name =  this.getLabels().PACKAGE_REATAIN_PROJECT;
+      subscribedPackage.amount = this.premiumPackageDetails.cost;
     }else {
       this.premiumPackageDetails=packageDetails[0].addOnPackage;
+      subscribedPackage.name = this.premiumPackageDetails.name;
+      subscribedPackage.amount = this.premiumPackageDetails.cost;
     }
-
-    let subscribedPackage = new SubscribedPackage();
-    subscribedPackage.name = this.premiumPackageDetails.name;
-    subscribedPackage.amount = this.premiumPackageDetails.cost;
     this.commonService.updatePurchasepackageInfo(subscribedPackage);
 
    this.currentDate.setDate(this.currentDate.getDate() +  parseInt(this.numOfDaysToExpire));
