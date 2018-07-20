@@ -2412,15 +2412,12 @@
     {
       "name": "Water proofing",
       "priorityId": 11,
-      "rateAnalysisId": 100217,
       "categories": [
         {
           "name": "Brickbat waterproofing",
-          "rateAnalysisId": 100218,
           "workItems": [
             {
               "name": "Brick bat waterproofing up to 150 mm thk for bathroom / toilets with 200 mm sunk",
-              "rateAnalysisId": 100219,
               "isMeasurementSheet": true,
               "measurementUnit": "Sqm",
               "isRateAnalysis": true,
@@ -2436,7 +2433,6 @@
             },
             {
               "name": "Brick bat waterproofing upto 150 mm thk for top terraces",
-              "rateAnalysisId": 100220,
               "isMeasurementSheet": true,
               "measurementUnit": "Sqm",
               "isRateAnalysis": true,
@@ -2452,7 +2448,6 @@
             },
             {
               "name": "Brick Bat waterproofing upto 150 mm thk for attached terraces with 200 mm sunk",
-              "rateAnalysisId": 100221,
               "isMeasurementSheet": true,
               "measurementUnit": "Sqm",
               "isRateAnalysis": true,
@@ -2470,11 +2465,9 @@
         },
         {
           "name": "Shahbad stone waterproofing",
-          "rateAnalysisId": 100222,
           "workItems": [
             {
               "name": "Shahbad stone water proofing (Box waterproofing) for vertical surfaces without screeding",
-              "rateAnalysisId": 100223,
               "isMeasurementSheet": true,
               "measurementUnit": "Sqm",
               "isRateAnalysis": true,
@@ -2492,11 +2485,9 @@
         },
         {
           "name": "IPS ghotai/ Khadi mal waterproofing",
-          "rateAnalysisId": 100224,
           "workItems": [
             {
               "name": "IPS Ghotai (Khadi maal) waterproofing 50mm thick for UGWT / Smimming pools",
-              "rateAnalysisId": 100225,
               "isMeasurementSheet": true,
               "measurementUnit": "Sqm",
               "isRateAnalysis": true,
@@ -2513,11 +2504,9 @@
         },
         {
           "name": "Ghotai plaster waterproofing",
-          "rateAnalysisId": 100226,
           "workItems": [
             {
               "name": "Ghotai plaster for UGWT / Swimming pools",
-              "rateAnalysisId": 100227,
               "isMeasurementSheet": true,
               "measurementUnit": "Sqm",
               "isRateAnalysis": true,
@@ -2534,11 +2523,9 @@
         },
         {
           "name": "Chemical waterproofing",
-          "rateAnalysisId": 100228,
           "workItems": [
             {
               "name": "Chemical water proofing with screeding for bathrooms / toilets of typical size 8' X 5' with 50mm sunk (For toilets with suspended plumbing)",
-              "rateAnalysisId": 100229,
               "isMeasurementSheet": true,
               "measurementUnit": "Sqm",
               "isRateAnalysis": true,
