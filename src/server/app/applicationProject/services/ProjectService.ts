@@ -277,12 +277,14 @@ class ProjectService {
           } else {
 
             let projectData = projectAndBuildingDetails.data[0];
-            let building: Array<Building> = projectAndBuildingDetails.data[0].buildings.filter(
-              function (building: any) {
-                return building.name === buildingDetails.name;
-              });
-
-             if(building.length === 0) {
+            let buildings: Array<Building> = projectAndBuildingDetails.data[0].buildings;
+            let isBuildingNameExits: boolean = false;
+            for(let building of buildings) {
+              if ((building.name === buildingDetails.name) && (building._id.toString() !== buildingId)) {
+                isBuildingNameExits = true;
+              }
+            }
+            if(!isBuildingNameExits) {
              buildingDetails.costHeads = this.calculateBudgetCostForBuilding(result.costHeads, buildingDetails, projectData);
              this.buildingRepository.findOneAndUpdate(query, buildingDetails, {new: true}, (error, result) => {
                  logger.info('Project service, findOneAndUpdate has been hit');
