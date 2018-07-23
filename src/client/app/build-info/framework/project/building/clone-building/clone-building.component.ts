@@ -39,6 +39,7 @@ export class CloneBuildingComponent  implements  OnInit {
   }
   fetchBuilding() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.loaderService.start();
     this.buildingService.getBuilding(projectId,this.buildingId).subscribe(
       building => this.onGetBuildingSuccess(building),
       error => this.onGetBuildingFailure(error)
@@ -49,11 +50,12 @@ export class CloneBuildingComponent  implements  OnInit {
     this.cloneBuildingModel = building.data;
     this.oldBuildingName = this.cloneBuildingModel.name;
     this.cloneBuildingModel.name = '';
+    this.loaderService.stop();
   }
 
   onGetBuildingFailure(error : any) {
     let message = new Message();
-
+    this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       message.error_msg = error.err_msg;
       message.isError = true;

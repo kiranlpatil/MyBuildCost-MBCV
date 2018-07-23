@@ -166,7 +166,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   getCategories(projectId: string, costHeadId: number) {
-
+    this.loaderService.start();
     this.costSummaryService.getCategories(this.baseUrl, costHeadId).subscribe(
       categoryDetails => this.onGetCategoriesSuccess(categoryDetails),
       error => this.onGetCategoriesFailure(error)
@@ -179,6 +179,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     if(this.categoryRateAnalysisId !== undefined && this.categoryRateAnalysisId !== null) {
       this.getActiveWorkItemsOfCategory(this.categoryRateAnalysisId);
     }
+    this.loaderService.stop();
   }
 
   calculateCategoriesTotal() {
@@ -786,6 +787,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   getPresentFilesForWorkItem(workItemId:number) {
+    this.loaderService.start();
     this.costSummaryService.getPresentFilesForWorkItem(this.baseUrl,this.costHeadId,this.categoryId,workItemId).subscribe(
       fileNamesList => this.onGetPresentFilesForWorkItemSuccess(fileNamesList),
       error => this.onGetPresentFilesForWorkItemFailure(error)

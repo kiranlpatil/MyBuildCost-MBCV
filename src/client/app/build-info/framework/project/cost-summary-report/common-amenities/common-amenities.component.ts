@@ -64,6 +64,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   changeBudgetedCostAmountOfProjectCostHead(costHead: string, amount: number) {
     if (amount !== null) {
       let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+      this.loaderService.start();
       this.costSummaryService.changeBudgetedCostAmountOfProjectCostHead( projectId,  costHead, amount).subscribe(
         buildingDetails => this.onUpdateBudgetedCostAmountSuccess(buildingDetails),
         error => this.onUpdateBudgetedCostAmountFailure(error)
@@ -72,6 +73,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onUpdateBudgetedCostAmountSuccess(buildingDetails : any) {
+    this.loaderService.stop();
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_UPDATE_THUMBRULE_RATE_COSTHEAD;
@@ -80,6 +82,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onUpdateBudgetedCostAmountFailure(error : any) {
+
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }

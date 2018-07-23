@@ -38,6 +38,7 @@ export class BuildingDetailsComponent implements OnInit {
 
   getBuilding() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.loaderService.start();
     this.buildingService.getBuilding(projectId,this.buildingId).subscribe(
       building => this.onGetBuildingSuccess(building),
       error => this.onGetBuildingFailure(error)
@@ -45,10 +46,12 @@ export class BuildingDetailsComponent implements OnInit {
   }
 
   onGetBuildingSuccess(building : any) {
+    this.loaderService.stop();
     this.buildingModel = building.data;
   }
 
   onGetBuildingFailure(error : any) {
+    this.loaderService.stop();
     var message = new Message();
 
     if (error.err_code === 404 || error.err_code === 0) {

@@ -83,6 +83,7 @@ export class BuildingListComponent implements OnInit {
 
   updateBuildingByCostHead(cloneCostHead: any) {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.loaderService.start();
     this.buildingService.cloneBuilding(projectId, this.clonedBuildingId, cloneCostHead).subscribe(
       project => this.onCloneBuildingCostHeadsSuccess(project),
       error => this.onCloneBuildingCostHeadsFailure(error)
@@ -91,10 +92,12 @@ export class BuildingListComponent implements OnInit {
 
   onCloneBuildingCostHeadsSuccess(project: any) {
     this.getProject();
+    this.loaderService.stop();
   }
 
   onCloneBuildingCostHeadsFailure(error: any) {
     console.log(error);
+    this.loaderService.stop();
   }
 
   createBuilding() {

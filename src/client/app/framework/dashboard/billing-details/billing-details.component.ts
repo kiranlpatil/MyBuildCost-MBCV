@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Messages, SessionStorage, SessionStorageService } from '../../../shared/index';
+import {LoaderService, Messages, SessionStorage, SessionStorageService} from '../../../shared/index';
 import { Button, Label, NavigationRoutes } from '../../../shared/constants';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../../build-info/framework/project/project.service';
@@ -18,7 +18,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   projectDetails : Array<ProjectSubscriptionDetails>;
   isAbleToCreateNewProject: boolean = false;
   activeStatus: boolean = false;
-  constructor(private _router: Router, private  projectService: ProjectService) {
+  constructor(private _router: Router, private  projectService: ProjectService, private loaderService: LoaderService) {
 
   }
   ngOnInit() {
@@ -27,6 +27,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   }
 
   getDetailsOfProjectPlan() {
+    this.loaderService.start();
     this.projectService.getAllProjects().subscribe(
       projects => this.onDetailsOfProjectPlanSuccess(projects),
       error => this.onDetailsOfProjectPlanFailure(error)
@@ -34,6 +35,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   }
 
   onDetailsOfProjectPlanSuccess(projects : any) {
+    this.loaderService.stop();
     this.projectDetails = projects.data;
     this.isAbleToCreateNewProject = projects.isSubscriptionAvailable;
     if(projects.data.length!==0) {
@@ -43,6 +45,7 @@ import { ProjectSubscriptionDetails } from '../../../build-info/framework/model/
   }
 
   onDetailsOfProjectPlanFailure(error:any) {
+    this.loaderService.stop();
     console.log(error);
   }
 
