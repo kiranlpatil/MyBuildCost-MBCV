@@ -58,7 +58,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     },
     true
   );
-  syncAtEveryFifteenMinute.start();
+  //syncAtEveryFifteenMinute.start();
 
 
   let sendProjectExpiryWarningMail = new CronJob('00 55 23 * * *', function() {

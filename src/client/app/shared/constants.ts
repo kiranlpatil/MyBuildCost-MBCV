@@ -205,7 +205,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
   public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields cannot be empty';
-  public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Flat/Floor/Parking details can not be empty';
+  public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Flat/Floor details can not be empty';
   public static LOGIN_INFO: string = 'Enter your details below';
   public static MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS: string = 'Already added all Cost Heads.';
   public static SUBSCRIPTION_PACKAGES_DETAILS_ARE_NOT_DEFINED: string = 'Subscription packages details are not defined.';
@@ -218,7 +218,7 @@ export class Messages {
   public static  MSG_ERROR_VALIDATION_OF_FILE_UPLOADED_SUCCESSFUL = 'File uploaded successfully';
   public static  MSG_ERROR_VALIDATION_OF_FILE_DELETED_SUCCESSFUL = 'File deleted successfully';
   public static  MSG_ERROR_CANNOT_SELECT_BUILDINGS = 'Cannot select more than 5 buildings.';
-  public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor/Parking Details';
+  public static ADD_MORE_DETAILS_TITLE: string = 'Add Flat/Floor Details';
 
   //Payment form
   public static PAYMENT_FORM_FILED_MISSING: string = 'Please fill all details.';
@@ -228,9 +228,9 @@ export class Messages {
   public static MSG_FOR_REMAINING_BUILDINGS_ADD: string = ' more buildings to this project)';
   public static MSG_ADD_BUILDING_PAYMENT: string = 'You have already consumed package of 5 buildings.<br />You can add more buildings by paying INR 500 per building.';
   public static MSG_CREATE_PROJECT_CONFIRMATION: string = 'Trial package contains only 1 project <br />with 5 buildings you can create new project<br /> by purchasing our <strong>premium package.</strong>';
-  public static MSG_CONFIRMATION_CREATE_PROJECT: string = 'Are you sure to create new project?';
-  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain estimated cost details from existing project ';
-  public static MSG_ON_RETAIN_PROJECT2: string = ' or create a new project';
+  public static MSG_CONFIRMATION_CREATE_PROJECT: string = 'For creating new project you will have to upgrade to premium package (valid for 1 new project)';
+  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain existing ';
+  public static MSG_ON_RETAIN_PROJECT2: string = ' or you would like to create a new project.';
   public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
   public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';
   public static PROJECT_EXPIRED: string = 'Project Expired';
@@ -595,8 +595,8 @@ export class Label {
   public static PROJECTS: string = 'Projects';
   public static BUILDING: string = 'Building';
   public static BUILDINGS: string = 'Buildings';
-  public static NO_OF_PROJECTS: string = 'No.of Projects';
-  public static NO_OF_BUILDING: string = 'No.of Buildings';
+  public static NO_OF_PROJECTS: string = 'No. of Projects';
+  public static NO_OF_BUILDING: string = 'No. of Buildings';
   public static DURATION: string = 'Duration';
   public static TOTAL_BILLED: string = 'Total Billed';
   public static NO_OF_BUILDINGS_TO_ADD: string = 'Number of building(s) to add';
@@ -610,10 +610,10 @@ export class Label {
   public static IS_ABOUT_TO_EXPIRE_IN: string = ' is about to expire in ';
   public static IS_ABOUT_TO_EXPIRED: string = ' is expired.';
   public static DAYS: string = 'days.';
-  public static PLEASE_RENEW_TO_CONTINUE: string = 'Please renew to continue using features of BuildInfo.';
+  public static PLEASE_RENEW_TO_CONTINUE: string = 'Please upgrade to premium package to continue the usage.';
   public static START_DATE: string = 'Start Date';
   public static END_DATE: string = 'End Date';
-  public static RENEW_PROJECT_BY: string = 'Renew Project by';
+  public static RENEW_PROJECT_BY: string = 'Package Duration';
   public static PACKAGE_RENEW_PROJECT: string = 'RenewProject';
   public static PACKAGE_REATAIN_PROJECT: string = 'Retain';
   public static PACKAGE_PREMIUM: string = 'Premium';
@@ -651,7 +651,7 @@ export class Button {
   public static COSTHEAD: string = 'Cost Head';
   public static ATTACH_FILE: string = 'Attach File';
   public static STANDARD_NOTE: string = 'Standard Note / Disclaimer';
-  public static ADD_PROJECT: string = 'Add Project';
+  public static ADD_PROJECT: string = 'Add New Project';
   public static RENEW_NOW: string = 'Renew now';
 
   //Package details
@@ -742,10 +742,10 @@ export class Menus {
   public static MATERIAL_TAKEOFF = 'Material Takeoff';
   public static PROJECT_DETAILS = 'Project Details';
   public static MY_PROJECTS = 'My Projects';
-  public static CLONE = 'Copy As New Building';
+  public static CLONE = 'Add new building with same details';
   public static EDIT = 'Edit';
   public static DELETE = 'Delete';
-  public static ADD_BUILDING = 'Add Building';
+  public static ADD_BUILDING = 'Add first Building';
   public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
   public static COPY_BUILDING = 'Copy Building';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';

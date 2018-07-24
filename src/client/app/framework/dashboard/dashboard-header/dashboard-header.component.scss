@@ -6,15 +6,19 @@
   z-index: 99;
 }
 
+.Weblink {
+  color: #6598CA;
+}
+
 .container {
   position: relative;
 }
 
-@media only screen and (max-width: 1280px) {
+/*@media only screen and (max-width: 1280px) {
   .container {
     width: 700px;
   }
-}
+}*/
 
 @media only screen and (max-width: 980px) {
   .container {

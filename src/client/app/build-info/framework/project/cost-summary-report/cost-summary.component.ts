@@ -213,6 +213,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   onChangeCostingByUnit(costingByUnit:any) {
     this.defaultCostingByUnit=costingByUnit;
+    this.loaderService.start();
     this.costSummaryService.getCostSummaryReport( this.projectId, this.defaultCostingByUnit, this.defaultCostingByArea).subscribe(
       projectCostIn => this.onGetCostSummaryReportSuccess(projectCostIn),
       error => this.onGetCostSummaryReportFailure(error)
@@ -240,9 +241,11 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
             this.costSummaryService.moveRecentBuildingAtTop( this.projectReport.buildings.length - 1);
     }
      this.commonService.change(projects);
+     this.loaderService.stop();
   }
 
   onGetCostSummaryReportFailure(error : any) {
+    this.loaderService.stop();
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
@@ -252,6 +255,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   //TODO : Check if can merge
   onChangeCostingByArea(costingByArea:any) {
     this.defaultCostingByArea=costingByArea;
+    this.loaderService.start();
     this.costSummaryService.getCostSummaryReport( this.projectId, this.defaultCostingByUnit, this.defaultCostingByArea).subscribe(
       projectCostPer => this.onGetCostSummaryReportSuccess(projectCostPer),
       error => this.onGetCostSummaryReportFailure(error)
@@ -317,6 +321,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   changeBudgetedCostAmountOfBuildingCostHead(buildingId: string, costHead: string, amount: number) {
     if (amount !== null) {
       let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+      this.loaderService.start();
       this.costSummaryService.changeBudgetedCostAmountOfBuildingCostHead( projectId, buildingId, costHead, amount).subscribe(
         buildingDetails => this.onUpdateRateOfThumbRuleSuccess(buildingDetails),
         error => this.onUpdateRateOfThumbRuleFailure(error)
@@ -326,6 +331,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   onUpdateRateOfThumbRuleSuccess(buildingDetails : any) {
     var message = new Message();
+    this.loaderService.stop();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_UPDATE_THUMBRULE_RATE_COSTHEAD;
     this.messageService.message(message);
@@ -333,6 +339,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onUpdateRateOfThumbRuleFailure(error : any) {
+    this.loaderService.stop();
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
@@ -345,6 +352,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   deleteBuilding() {
     let projectId=SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    this.loaderService.start();
     this.buildingService.deleteBuilding( projectId, this.buildingId).subscribe(
       project => this.onDeleteBuildingSuccess(project),
       error => this.onDeleteBuildingFailure(error)
@@ -352,6 +360,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onDeleteBuildingSuccess(result : any) {
+    this.loaderService.stop();
     if (result !== null) {
       var message = new Message();
       message.isError = false;
@@ -362,6 +371,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onDeleteBuildingFailure(error : any) {
+    this.loaderService.stop();
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }

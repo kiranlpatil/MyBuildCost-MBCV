@@ -360,6 +360,7 @@ export class QuantityDetailsComponent implements OnInit {
   }
 
   onDeleteQuantityDetailsByNameFailure(error: any) {
+    this.loaderService.stop();
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }

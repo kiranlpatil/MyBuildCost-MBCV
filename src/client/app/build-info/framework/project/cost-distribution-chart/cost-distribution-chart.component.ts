@@ -40,7 +40,7 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         indexOf(estimateCost)].amount;
         let name= this.buildingReport.thumbRule.thumbRuleReports[this.buildingReport.estimate.estimatedCosts.
         indexOf(estimateCost)].name;
-        budgetedCostsHeadList.push(['<span class="glyphicon glyphicon-star" style="color:#C0C0C0;font-size:9px"></span>'
+        budgetedCostsHeadList.push(['<span class="glyphicon glyphicon-star" style="color:#777777;font-size:9px"></span>'
                                      +name,amount]);
       }
     }

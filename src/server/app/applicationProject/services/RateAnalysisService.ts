@@ -94,11 +94,16 @@ class RateAnalysisService {
         callback(new CostControllException(error.message, error.stack), null);
       } else if (!error && response) {
         try {
-          let res = JSON.parse(body);
-          callback(null, res);
+          if(response.statusCode === 200) {
+            let res = JSON.parse(body);
+            callback(null, res);
+          } else {
+            let error = new Error();
+            error.message = 'Unable to make a get request for url : ' + url;
+            callback(error, null);
+          }
         } catch (err) {
           logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(err.message));
-
         }
       }
     });
@@ -201,24 +206,31 @@ class RateAnalysisService {
       unitsRateAnalysisPromise
     ]).then(function (data: Array<any>) {
       logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
-      let costHeadsRateAnalysis = data[0][Constants.RATE_ANALYSIS_ITEM_TYPE];
-      let categoriesRateAnalysis = data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE];
-      let workItemsRateAnalysis = data[2][Constants.RATE_ANALYSIS_ITEMS];
-      let rateItemsRateAnalysis = data[3][Constants.RATE_ANALYSIS_DATA];
-      let notesRateAnalysis = data[4][Constants.RATE_ANALYSIS_DATA];
-      let unitsRateAnalysis = data[5][Constants.RATE_ANALYSIS_UOM];
 
-      let buildingCostHeads: Array<CostHead> = [];
-      let rateAnalysisService = new RateAnalysisService();
+      if(data[0][Constants.RATE_ANALYSIS_ITEM_TYPE] && data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE] &&
+        data[2][Constants.RATE_ANALYSIS_ITEMS] && data[3][Constants.RATE_ANALYSIS_DATA] &&
+        data[4][Constants.RATE_ANALYSIS_DATA] && data[5][Constants.RATE_ANALYSIS_UOM]) {
 
-      rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
-        rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
-      logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
-      callback(null, {
-        'buildingCostHeads': buildingCostHeads,
-        'rates': rateItemsRateAnalysis,
-        'units': unitsRateAnalysis
-      });
+        let costHeadsRateAnalysis = data[0][Constants.RATE_ANALYSIS_ITEM_TYPE];
+        let categoriesRateAnalysis = data[1][Constants.RATE_ANALYSIS_SUBITEM_TYPE];
+        let workItemsRateAnalysis = data[2][Constants.RATE_ANALYSIS_ITEMS];
+        let rateItemsRateAnalysis = data[3][Constants.RATE_ANALYSIS_DATA];
+        let notesRateAnalysis = data[4][Constants.RATE_ANALYSIS_DATA];
+        let unitsRateAnalysis = data[5][Constants.RATE_ANALYSIS_UOM];
+
+        let buildingCostHeads: Array<CostHead> = [];
+        let rateAnalysisService = new RateAnalysisService();
+
+        rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
+          rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, buildingCostHeads);
+        logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
+        callback(null, {
+          'buildingCostHeads': buildingCostHeads,
+          'rates': rateItemsRateAnalysis,
+          'units': unitsRateAnalysis
+        });
+
+      }
     }).catch(function (e: any) {
       logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e.message));
       CCPromise.reject(e.message);
@@ -526,7 +538,13 @@ class RateAnalysisService {
   }
 
   syncAllRegions() {
-    this.getAllregionsFromRateAnalysis((error, response) => {
+    let regionObj = {
+      'RegionId' : 1,
+      'RegionCode' : 'MH',
+      'Region' : 'Maharashtra Pune Circle'
+    };
+    this.SyncRateAnalysis(regionObj);
+    /*this.getAllregionsFromRateAnalysis((error, response) => {
       if (error) {
         console.log('error : ' + JSON.stringify(error));
       } else {
@@ -535,7 +553,7 @@ class RateAnalysisService {
           this.SyncRateAnalysis(region);
         }
       }
-    });
+    });*/
   }
 
   SyncRateAnalysis(region: any) {
@@ -641,7 +659,7 @@ class RateAnalysisService {
   }
 
   saveRateAnalysis(rateAnalysis: RateAnalysis, region: any) {
-    logger.info('saveRateAnalysis is been hit');
+    logger.info('saveRateAnalysis is been hit : ' + region.Region);
     let query = {'region': region.Region};
     rateAnalysis.region = region.Region;
     logger.info('Updating RateAnalysis for ' + region.Region);
@@ -663,7 +681,7 @@ class RateAnalysisService {
             if (error) {
               logger.error('saveRateAnalysis failed => ' + error.message);
             } else {
-              logger.info('Updated RateAnalysis.');
+              logger.info('Updated RateAnalysis for region :'+region.Region);
             }
           });
         } else {
@@ -671,7 +689,7 @@ class RateAnalysisService {
             if (error) {
               logger.error('saveRateAnalysis failed => ' + error.message);
             } else {
-              logger.info('Saved RateAnalysis.');
+              logger.info('Saved RateAnalysis for region : '+region.Region);
             }
           });
         }
@@ -708,10 +726,15 @@ class RateAnalysisService {
         logger.error(JSON.stringify(error));
         callback(error, null);
       } else if (!error && response) {
-        let resp = JSON.parse(body);
-        regionListFromRateAnalysis = resp['Regions'];
-        console.log('regionListFromRateAnalysis : ' + JSON.stringify(regionListFromRateAnalysis));
-        callback(null, regionListFromRateAnalysis);
+        if(response.statusCode===200) {
+          let resp = JSON.parse(body);
+          regionListFromRateAnalysis = resp['Regions'];
+          console.log('regionListFromRateAnalysis : ' + JSON.stringify(regionListFromRateAnalysis));
+          callback(null, regionListFromRateAnalysis);
+        }else {
+          console.log('regionListFromRateAnalysis : NOT FOUND. Internal server error!');
+          callback('regionListFromRateAnalysis : NOT FOUND. Internal server error!',null);
+        }
       }
     });
   }
