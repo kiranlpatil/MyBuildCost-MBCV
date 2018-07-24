@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import {Button, Headings, Label, NavigationRoutes} from '../../../../shared/constants';
 import { PackageDetailsService } from '../package-details.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Message, MessageService } from '../../../../shared/index';
+import { LoaderService, Message, MessageService} from '../../../../shared/index';
 import { SessionStorage, SessionStorageService } from '../../../../shared/index';
 import { SubscribedPackage } from '../../model/SubscribedPackage';
 import { CommonService } from '../../../../shared/services/common.service';
@@ -23,7 +23,7 @@ export class RenewPackageComponent implements OnInit {
   public expiryDate: Date = new Date();
 
   constructor(private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService,
-              private route: ActivatedRoute, private commonService : CommonService) {
+              private route: ActivatedRoute, private commonService : CommonService, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
@@ -42,12 +42,14 @@ export class RenewPackageComponent implements OnInit {
     } else {
        this.body = { addOnPackageName: 'RenewProject'};
     }
+    this.loaderService.start();
     this.packageDetailsService.getSubscriptionPackageByName(this.body).subscribe(
       packageDetails=>this.onGetSubscriptionPackageByNameSuccess(packageDetails,this.body),
       error=>this.onGetSubscriptionPackageByNameFailure(error)
     );
   }
   onGetSubscriptionPackageByNameSuccess(packageDetails:any, body: any) {
+    this.loaderService.stop();
     let subscribedPackage = new SubscribedPackage();
     if(body.basePackageName) {
       this.premiumPackageDetails=packageDetails[0].basePackage;
@@ -65,6 +67,7 @@ export class RenewPackageComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.TOTAL_BILLED,this.premiumPackageDetails.cost );
   }
   onGetSubscriptionPackageByNameFailure(error:any) {
+    this.loaderService.stop();
     console.log(error);
     var message = new Message();
     message.isError = true;

@@ -1,7 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import { Headings, Button, Label, Messages, ValueConstant } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
-import {CommonService,Message, MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
+import {
+  CommonService, LoaderService, Message, MessageService, SessionStorage,
+  SessionStorageService
+} from '../../../../shared/index';
 import { PackageDetailsService } from './../package-details.service';
 import { NavigationRoutes } from '../../../../shared/index';
 import { SubscribedPackage } from '../../model/SubscribedPackage';
@@ -28,7 +31,8 @@ export class PackageSummaryComponent implements OnInit {
   noOfBuildingsValues: any[] = ValueConstant.NO_OF_BUILDINGS_VALUES;
 
   constructor(private activatedRoute: ActivatedRoute, private packageDetailsService: PackageDetailsService,
-     private costSummaryService :CostSummaryService,private _router: Router, private commonService:CommonService,private messageService: MessageService) {
+              private costSummaryService :CostSummaryService,private _router: Router, private commonService:CommonService,
+              private messageService: MessageService, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
@@ -75,12 +79,14 @@ export class PackageSummaryComponent implements OnInit {
     console.log(error);
   }
   getSubscriptionPackageByName(packageName: string, body: any) {
+    this.loaderService.start();
     this.packageDetailsService.getSubscriptionPackageByName(body).subscribe(
       packageDetails => this.onGetSubscriptionPackageByNameSuccess(packageDetails),
       error => this.onGetSubscriptionPackageByNameFailure(error)
     );
   }
   onGetSubscriptionPackageByNameSuccess(packageDetails: any) {
+    this.loaderService.stop();
     this.premiumPackageDetails = packageDetails[0];
     let subscribedPackage = new SubscribedPackage();
     if(this.premiumPackageAvailable) {
@@ -95,6 +101,7 @@ export class PackageSummaryComponent implements OnInit {
   }
 
   onGetSubscriptionPackageByNameFailure(error: any) {
+    this.loaderService.stop();
     console.log(error);
   }
 

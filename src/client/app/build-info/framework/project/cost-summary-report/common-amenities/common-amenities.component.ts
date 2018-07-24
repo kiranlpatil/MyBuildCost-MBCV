@@ -101,7 +101,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
     if(inActiveCostHeads.data.length !== 0) {
       this.inActiveProjectCostHeads = inActiveCostHeads.data;
       this.showProjectCostHeadList = true;
-      this.getReportDetails.emit();
+    //  this.getReportDetails.emit();
     } else {
       this.showProjectCostHeadList = false;
       let message = new Message();

@@ -213,6 +213,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   onChangeCostingByUnit(costingByUnit:any) {
     this.defaultCostingByUnit=costingByUnit;
+    this.loaderService.start();
     this.costSummaryService.getCostSummaryReport( this.projectId, this.defaultCostingByUnit, this.defaultCostingByArea).subscribe(
       projectCostIn => this.onGetCostSummaryReportSuccess(projectCostIn),
       error => this.onGetCostSummaryReportFailure(error)
