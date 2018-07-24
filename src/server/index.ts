@@ -53,22 +53,12 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
       rateAnalysisServices.syncAllRegions();
 
-      let userService : UserService = new UserService();
-      let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
-      userService.sendProjectExpiryWarningMails((error, success) => {
-        if(error) {
-          _loggerService.logError('Error in sendProjectExpiryWarningMail for users : ' +error);
-        } else {
-          _loggerService.logDebug('ProjectExpiryWarningMail send successfully to all users.');
-        }
-      });
-
     }, function () {
       console.log('restart server');
     },
     true
   );
-  syncAtEveryFifteenMinute.start();
+  //syncAtEveryFifteenMinute.start();
 
 
   let sendProjectExpiryWarningMail = new CronJob('00 50 23 * * *', function() {

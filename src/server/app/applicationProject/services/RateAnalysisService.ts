@@ -94,11 +94,16 @@ class RateAnalysisService {
         callback(new CostControllException(error.message, error.stack), null);
       } else if (!error && response) {
         try {
-          let res = JSON.parse(body);
-          callback(null, res);
+          if(response.statusCode === 200) {
+            let res = JSON.parse(body);
+            callback(null, res);
+          } else {
+            let error = new Error();
+            error.message = 'Unable to make a get request for url : ' + url;
+            callback(error, null);
+          }
         } catch (err) {
           logger.error('Promise failed for individual ! url:' + url + ':\n error :' + JSON.stringify(err.message));
-
         }
       }
     });
@@ -533,7 +538,13 @@ class RateAnalysisService {
   }
 
   syncAllRegions() {
-    this.getAllregionsFromRateAnalysis((error, response) => {
+    let regionObj = {
+      'RegionId' : 1,
+      'RegionCode' : 'MH',
+      'Region' : 'Maharashtra Pune Circle'
+    };
+    this.SyncRateAnalysis(regionObj);
+    /*this.getAllregionsFromRateAnalysis((error, response) => {
       if (error) {
         console.log('error : ' + JSON.stringify(error));
       } else {
@@ -542,7 +553,7 @@ class RateAnalysisService {
           this.SyncRateAnalysis(region);
         }
       }
-    });
+    });*/
   }
 
   SyncRateAnalysis(region: any) {
