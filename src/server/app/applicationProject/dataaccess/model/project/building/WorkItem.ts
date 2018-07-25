@@ -6,6 +6,7 @@ import { AttachmentDetailsModel } from './AttachmentDetails';
 class WorkItem {
   name: string;
   rateAnalysisId: number;
+  workItemId: number;
   quantity: Quantity;
 
   isMeasurementSheet : boolean;
