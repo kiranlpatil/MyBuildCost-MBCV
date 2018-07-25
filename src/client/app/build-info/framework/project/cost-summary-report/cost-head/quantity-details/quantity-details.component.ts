@@ -12,8 +12,7 @@ import {
 import { CostSummaryService } from '../../cost-summary.service';
 import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 import { Rate } from '../../../../model/rate';
-import {SteelQuantityItem} from "../../../../model/steelQuantityItem";
-import {SteelQuantityItems} from "../../../../model/SteelQuantityItems";
+import { SteelQuantityItems } from '../../../../model/SteelQuantityItems';
 import { ErrorService } from '../../../../../../shared/services/error.service';
 declare var $: any;
 
@@ -257,6 +256,9 @@ export class QuantityDetailsComponent implements OnInit {
       if(categoryData.rateAnalysisId === this.categoryRateAnalysisId) {
         let categoryTotalAmount = 0;
         for(let workItemData of this.workItemsList) {
+          if(this.workItem.rateAnalysisId === workItemData.rateAnalysisId) {
+            workItemData.isDetailedQuantity = true;
+          }
           categoryTotalAmount =categoryTotalAmount + workItemData.amount;
         }
         categoryData.amount = categoryTotalAmount;
