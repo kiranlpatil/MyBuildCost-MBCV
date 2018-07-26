@@ -1,8 +1,8 @@
 export class AppSettings {
   // public static IP = 'http://localhost:8080';
-  public static IP = 'http://52.66.120.228:8080'; // build info staging
+  public static IP = 'http://13.232.139.161:8080'; // build info staging
   // public static HOST_NAME = 'localhost:8080';
-  public static HOST_NAME = '52.66.120.228:8080';
+  public static HOST_NAME = '13.232.139.161:8080';
 
   public static INITIAL_THEM = 'container-fluid dark-theme';
   public static LIGHT_THEM = 'container-fluid light-theme';
