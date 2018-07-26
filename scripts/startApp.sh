@@ -1,5 +1,5 @@
 fuser kill `sudo lsof -t -i:8080`
-cd /home/bitnami/apps/costcontrol/costcontroal-automation/dist/
+cd /home/bitnami/apps/costcontrol/costcontrol-automation/dist/
 mkdir -p logs
 npm -v
 npm install
