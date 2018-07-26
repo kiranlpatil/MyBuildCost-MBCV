@@ -1,4 +1,4 @@
-kill `sudo lsof -t -i:8080`
+fuser kill `sudo lsof -t -i:8080`
 cd /home/bitnami/apps/costcontrol/dist/
 mkdir -p logs
 chown -R ubuntu /home/bitnami/apps/costcontrol
