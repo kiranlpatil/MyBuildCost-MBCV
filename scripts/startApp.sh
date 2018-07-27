@@ -1,5 +1,5 @@
-fuser -k 8080/tcp
-cd /home/ubuntu/apps/costcontrol-automation/
+sudo kill `sudo lsof -t -i:8080`
+cd /home/ubuntu/apps/costcontrol-automation/dist/
 mkdir -p logs
 npm -v
 npm install
