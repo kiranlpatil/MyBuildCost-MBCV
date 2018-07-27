@@ -1,5 +1,5 @@
 fuser kill `sudo lsof -t -i:8080`
-cd /home/ubuntu/apps/costcontrol-automation/dist/
+cd /home/ubuntu/apps/costcontrol-automation/
 mkdir -p logs
 npm -v
 npm install
