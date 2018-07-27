@@ -431,6 +431,9 @@
             opacity: 1;
           }
         }
+        .calculator.disabled {
+          opacity: 0.5 !important;
+        }
       }
 
     }
@@ -477,6 +480,13 @@
 }
 .disable-link {
   pointer-events: none;
+}
+.disabled {
+    input {
+    background: transparent !important;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 @media only screen and (max-width: 767px) {

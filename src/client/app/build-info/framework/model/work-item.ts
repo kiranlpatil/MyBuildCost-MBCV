@@ -23,6 +23,7 @@ export class WorkItem {
   height : boolean;
   attachmentDetails: AttachmentDetailsModel[];
   isMeasurementSheet:boolean=false;
+  isDetailedQuantity:boolean=false;
   constructor(name: string, rateAnalysisId: number) {
     this.name = name;
     this.rateAnalysisId = rateAnalysisId;

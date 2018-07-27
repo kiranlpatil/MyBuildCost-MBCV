@@ -346,8 +346,13 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     console.log('onAddCostheadSuccess : '+error);
   }
 
-  setIdForDeleteBuilding(buildingId : string) {
+  setIdForDeleteBuilding(buildingId : string, estimatedCost: number) {
     this.buildingId = buildingId;
+    if(estimatedCost === 0) {
+      $('#deleteBuilding').modal();
+    } else {
+      $('#restriction').modal();
+    }
   }
 
   deleteBuilding() {

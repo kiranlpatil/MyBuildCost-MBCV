@@ -58,7 +58,7 @@
                 </li>
                 <li><p *ngIf="!addBuildingButtonDisable" data-toggle="modal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
                 <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
-                <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
+                <li><p (click)="setIdForDeleteBuilding(building._id, building.estimate.totalEstimatedCost)">{{getMenus().DELETE}}</p></li>
                 <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
               </ul>
             </div>
@@ -283,6 +283,18 @@
 
   <div class="modal fade default-modal" id="deleteBuilding" role="dialog">
     <bi-delete-confirmation-modal [elementType]="deleteConfirmationBuilding" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
+  </div>
+
+  <div class="modal fade default-modal" id="restriction" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p class="modal-icon"><i><img src="./assets/build-info/dashboard/warning-big.png"/></i></p>
+          <p>Building can be deleted only when total estimated cost is zero.</p>
+          <button class="btn btn-primary bi-btn" type="button" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </section>

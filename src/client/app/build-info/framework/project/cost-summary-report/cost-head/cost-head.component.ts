@@ -123,6 +123,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   private currentWorkItemIndex: number;
 
   private disableRateField:boolean = false;
+  private isDetailedQuantity:boolean = false;
   private rateView : string;
   private previousRateQuantity:number = 0;
   private quantityIncrement:number = 1;
@@ -683,6 +684,12 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   onGetActiveWorkItemsOfCategorySuccess(workItemsList : any) {
     this.workItemsList = workItemsList.data.workItems;
+    for(let workItem of this.workItemsList) {
+      if (workItem.quantity.quantityItemDetails &&
+          (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
+          workItem.isDetailedQuantity = true;
+       }
+    }
     this.showHideAddItemButton=workItemsList.data.showHideAddButton;
     this.toggleWorkItemView();
   }
