@@ -18,6 +18,7 @@ export class BuildingFormComponent {
   @Input() submitActionLabel: string;
   @Input() buildingModel?: Building = new Building();
   @Input() buildingName?:string;
+  @Input() disableFormFields?:boolean;
   @Output() onSubmitEvent = new EventEmitter<Building>();
 
   buildingForm: FormGroup;
