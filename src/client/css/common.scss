@@ -994,19 +994,16 @@ textarea[disabled] {
 
 .disclaimer-section {
   background: $page-background;
-  padding: 0 0 15px;
   h1 {
-    font-size: 14px;
+    font-size: 10px;
     font-weight: bold;
-    max-width: 980px;
     margin: 0 auto;
     padding: 10px 0;
     text-align: left;
   }
   p {
-    font-size: 12px;
+    font-size: 9px;
     margin: 0 auto;
-    max-width: 980px;
     text-align: left;
   }
 }
