@@ -97,7 +97,7 @@ hooks:
 #   in the script specified in "location".
   AfterInstall:
     - location: scripts/startApp.sh
-      timeout: 600
+      timeout: 6000
 #      runas:
 #    - location:
 #      timeout:
