@@ -5,6 +5,7 @@ import { AttachmentDetailsModel } from './attachment-details';
 export class WorkItem {
   name: string;
   rateAnalysisId: number;
+  workItemId: number;
   quantity: Quantity;
   unit: string;
   rate: Rate;

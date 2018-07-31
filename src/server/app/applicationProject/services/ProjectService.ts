@@ -606,23 +606,26 @@ class ProjectService {
       } else {
         let costHeadList = building.costHeads;
         let inActiveWorkItems: Array<WorkItem> = new Array<WorkItem>();
+        let workItems: Array<WorkItem> = new Array<WorkItem>();
 
         for (let costHeadData of costHeadList) {
           if (costHeadId === costHeadData.rateAnalysisId) {
             for (let categoryData of costHeadData.categories) {
               if (categoryId === categoryData.rateAnalysisId) {
                 for (let workItemData of categoryData.workItems) {
-                  if (!workItemData.active) {
                     inActiveWorkItems.push(workItemData);
-                  }
                 }
               }
             }
           }
         }
-        let inActiveWorkItemsListWithBuildingRates = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, building.rates, false);
+
+        let abc = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, building.rates, false);
+        let abcd = this.getWorkItemListWithCentralizedRates(inActiveWorkItems, building.rates, true);
+        workItems = abc.workItems.concat(abcd.workItems);
+
         callback(null, {
-          data: inActiveWorkItemsListWithBuildingRates.workItems,
+          data: workItems,
           access_token: this.authInterceptor.issueTokenWithUid(user)
         });
       }
@@ -1303,25 +1306,104 @@ class ProjectService {
     });
   }
 
-  updateWorkItemStatusOfBuildingCostHeads(buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
-                                          workItemActiveStatus: boolean, user: User, callback: (error: any, result: any) => void) {
+  updateWorkItemStatusOfBuildingCostHeads(buildingId: string, costHeadId: number, categoryId: number, workItemRAId: number,
+                                          workItemId: number, workItemActiveStatus: boolean, workItem : any, user: User,
+                                          callback: (error: any, result: any) => void) {
     logger.info('Project service, update Workitem has been hit');
     let query = {_id: buildingId};
-    let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].active':workItemActiveStatus}};
-    let arrayFilter = [
-      {'costHead.rateAnalysisId':costHeadId},
-      {'category.rateAnalysisId': categoryId},
-      {'workItem.rateAnalysisId':workItemId}
-    ];
+    let abhu = workItem;
+    if(workItemActiveStatus) {
+      // activate workitem
+      this.checkDuplicatesOfWorkItem(buildingId,costHeadId, categoryId, workItemRAId, (error, response) => {
+        if(error) {
+          callback(error, null);
+        } else {
+          let arrayFilter;
+          let updateQuery;
+          if(response.active) {
+            console.log('workitem : '+abhu);
+            abhu.workItemId = response.workItemId +1;
+            updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': abhu }};
+            arrayFilter = [
+              {'costHead.rateAnalysisId': costHeadId},
+              {'category.rateAnalysisId': categoryId}
+            ];
+          } else {
+            updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].active':workItemActiveStatus}};
+            arrayFilter = [
+              {'costHead.rateAnalysisId': costHeadId},
+              {'category.rateAnalysisId': categoryId},
+              {'workItem.rateAnalysisId': workItemRAId,
+                'workItem.workItemId': workItemId
+              }
+            ];
+          }
 
-    this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
-      logger.info('Project service, findOneAndUpdate has been hit');
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-      }
-    });
+          this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        }
+      });
+
+    } else {
+      //deactivate workitem
+      let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].active':workItemActiveStatus}};
+      let arrayFilter = [
+        {'costHead.rateAnalysisId': costHeadId},
+        {'category.rateAnalysisId': categoryId},
+        {'workItem.rateAnalysisId': workItemRAId,
+          'workItem.workItemId': workItemId
+        }
+      ];
+
+      this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
+        logger.info('Project service, findOneAndUpdate has been hit');
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+        }
+      });
+    }
+
+  }
+
+  checkDuplicatesOfWorkItem(buildingId: string, costHeadId: number, categoryId: number,
+                            workItemRAId: number, callback :(error:any, response:any)=> void) {
+
+  let query = [
+    {$match:{'_id':ObjectId(buildingId),'costHeads.rateAnalysisId':costHeadId}},
+    {$unwind: '$costHeads'},
+    {$unwind: '$costHeads.categories'},
+    {$unwind: '$costHeads.categories.workItems'},
+    {$match: {'costHeads.categories.workItems.rateAnalysisId': workItemRAId }},
+    {$project : {'costHeads.categories.workItems':1}}
+  ];
+
+  console.log('costHeadId : '+costHeadId + ' categoryId : '+categoryId + ' workItemRAId : '+workItemRAId);
+
+  this.buildingRepository.aggregate(query, (error, result) => {
+   if (error) {
+      console.log('error : '+JSON.stringify(error));
+      callback(error, null);
+   } else {
+     console.log('Data : '+JSON.stringify(result));
+     let isDuplicateSQL = 'SELECT MAX(workItemList.costHeads.categories.workItems.workItemId) AS maxWorkItemId ' +
+       'from ? AS workItemList';
+     let isDuplicateSQLDetail = alasql(isDuplicateSQL, [result]);
+
+     let getWorkItemSQL = 'SELECT * FROM ? AS AggregationWorkItems WHERE AggregationWorkItems.costHeads.categories.workItems.workItemId = ?';
+     let isWorkItemDetail = alasql(getWorkItemSQL, [result, isDuplicateSQLDetail[0].maxWorkItemId]);
+
+     console.log('isWorkItemDetail : ' + JSON.stringify(isWorkItemDetail[0].costHeads.categories.workItems));
+     callback(null, isWorkItemDetail[0].costHeads.categories.workItems);
+   }
+  });
   }
 
   // Update WorkItem Status Of Project CostHeads

@@ -76,6 +76,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   costHeadId:number;
   buildingId:any;
   workItemId: number;
+  ccWorkItemID: number;
   quantityId: number;
   total: number;
   categoryId: number;
@@ -449,16 +450,17 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  setIdsForDeleteWorkItem(categoryId: string, workItemId: string,workItemIndex:number) {
+  setIdsForDeleteWorkItem(categoryId: string, workItemId: string, ccWorkItemId: number, workItemIndex:number) {
     this.categoryId = parseInt(categoryId);
     this.workItemId =  parseInt(workItemId);
+    this.ccWorkItemID = ccWorkItemId;
     this.compareWorkItemId = workItemIndex;
   }
 
   deactivateWorkItem() {
     this.loaderService.start();
     let costHeadId=parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-    this.costSummaryService.deactivateWorkItem( this.baseUrl, costHeadId, this.categoryId, this.workItemId ).subscribe(
+    this.costSummaryService.deactivateWorkItem( this.baseUrl, costHeadId, this.categoryId, this.workItemId , this.ccWorkItemID).subscribe(
         success => this.onDeActivateWorkItemSuccess(success),
       error => this.onDeActivateWorkItemFailure(error)
     );
@@ -529,7 +531,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     let categoryId=this.categoryRateAnalysisId;
 
     this.costSummaryService.activateWorkItem( this.baseUrl, this.costHeadId, categoryId,
-      workItemObject[0].rateAnalysisId).subscribe(
+      workItemObject[0]).subscribe(
       success => this.onActivateWorkItemSuccess(success),
       error => this.onActivateWorkItemFailure(error)
     );

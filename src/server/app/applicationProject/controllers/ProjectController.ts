@@ -603,14 +603,18 @@ class ProjectController {
     logger.info('Project controller, update WorkItem has been hit');
     try {
       let user = req.user;
+      let body = req.body;
       let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
+      let workItemRAId = parseInt(req.params.workItemRAId);
       let workItemId = parseInt(req.params.workItemId);
-      let workItemActiveStatus = req.params.activeStatus === 'true' ? true : false;
+      let workItemActiveStatus = JSON.parse(req.params.activeStatus);
+
       let projectService: ProjectService = new ProjectService();
-      projectService.updateWorkItemStatusOfBuildingCostHeads( buildingId, costHeadId, categoryId,workItemId, workItemActiveStatus, user,(error, result) => {
+      projectService.updateWorkItemStatusOfBuildingCostHeads( buildingId, costHeadId, categoryId,
+        workItemRAId, workItemId, workItemActiveStatus, body, user,(error, result) => {
         if(error) {
           next(error);
         } else {

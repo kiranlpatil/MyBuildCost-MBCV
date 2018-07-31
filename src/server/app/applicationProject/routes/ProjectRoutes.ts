@@ -220,7 +220,7 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
 
     /*Building- Routes: WorkItem*/
     ///Add and remove a costhead by setting status of workitems to true and false
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemRAId/:workItemId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, validator.updateWorkItemStatusOfBuildingCostHeads, controller.updateWorkItemStatusOfBuildingCostHeads, this._responseInterceptor.exit);
 
     //Retrieve list of inactive workitems

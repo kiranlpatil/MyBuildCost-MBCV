@@ -8,6 +8,7 @@ import { QuantityItem } from '../../model/quantity-item';
 import { Rate } from '../../model/rate';
 import { ProjectElements } from '../../../../shared/constants';
 import { QuantityDetails } from '../../model/quantity-details';
+import { WorkItem } from '../../model/work-item';
 
 declare let $: any;
 
@@ -106,10 +107,9 @@ export class CostSummaryService extends BaseService {
   }
 
   // WorkItem  CRUD API
-  deactivateWorkItem( baseUrl: string, costHeadId : number, subCategoryId : number, workItemId : number) {
-    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+
-      costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
-      API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_FALSE;
+  deactivateWorkItem( baseUrl: string, costHeadId : number, subCategoryId : number, workItemId : number, ccWorkItemID: number) {
+    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+ costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/'
+      + API.WORKITEM + '/' + workItemId +'/'+ ccWorkItemID + '/' + API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_FALSE;
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
@@ -122,11 +122,10 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  activateWorkItem(baseUrl : string, costHeadId : number, subCategoryId : number, workItemId : number) {
-    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+
-      costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
-      API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_TRUE;
-    let body = {};
+  activateWorkItem(baseUrl : string, costHeadId : number, subCategoryId : number, workItem : WorkItem) {
+    var url =  baseUrl + '/' + API.COSTHEAD + '/' + costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' +
+      API.WORKITEM + '/' + workItem.rateAnalysisId +'/'+ workItem.workItemId + '/' + API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_TRUE;
+    let body = workItem;
 
     return this.httpDelegateService.putAPI(url, body);
   }

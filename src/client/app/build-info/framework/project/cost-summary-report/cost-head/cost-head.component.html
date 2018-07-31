@@ -159,7 +159,7 @@
                                       <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
                                     <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head" title="Delete Work Item"
-                                         (click)="setIdsForDeleteWorkItem(category.rateAnalysisId,workItem.rateAnalysisId,workItemIndex )">
+                                         (click)="setIdsForDeleteWorkItem(category.rateAnalysisId, workItem.rateAnalysisId, workItem.workItemId, workItemIndex )">
                                       <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />
                                     </div>
                                   </td>
@@ -312,7 +312,7 @@
                   <tr>
                     <td  class="add-items" colspan="7">
                       <button title="Add Item" type="button" class="btn-add-item"
-                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)" [disabled]="showHideAddItemButton">
+                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)">
                         <span class="glyphicon glyphicon-plus"></span> {{getButton().ADD}} {{getButton().ITEM}}</button>
                     </td>
                   </tr>
