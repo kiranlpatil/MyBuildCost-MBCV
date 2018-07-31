@@ -3,7 +3,7 @@
   <div class="panel panel-default"  *ngIf="amenitiesReport !== undefined" >
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a id="collapse-cost-summary-panel{{totalNumberOfBuildings}}" data-parent="#cost-summary-panel" data-toggle="collapse" href="#collapse{{totalNumberOfBuildings}}" (click)="showGrandTotalTable()">
+        <a id="collapse-cost-summary-panel{{totalNumberOfBuildings}}" class="collapsed" data-parent="#cost-summary-panel" data-toggle="collapse" href="#collapse{{totalNumberOfBuildings}}" (click)="showGrandTotalTable()">
           {{getHeadings().COMMON_DEVELOPMENT}}
           <span class="caret"></span>
         </a>
