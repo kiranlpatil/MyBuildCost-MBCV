@@ -1570,7 +1570,7 @@ class ProjectService {
   }
 
   updateDirectQuantityOfBuildingWorkItems(projectId: string, buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
-                                          directQuantity: number, user: User, callback: (error: any, result: any) => void) {
+                                          ccWorkItemId: number, directQuantity: number, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, updateDirectQuantityOfBuildingCostHeads has been hit');
     let projection = {costHeads: 1};
     let query = {_id: buildingId};
@@ -1583,7 +1583,7 @@ class ProjectService {
     let arrayFilter = [
       {'costHead.rateAnalysisId':costHeadId},
       {'category.rateAnalysisId': categoryId},
-      {'workItem.rateAnalysisId':workItemId}
+      {'workItem.rateAnalysisId':workItemId, 'workItem.workItemId': ccWorkItemId}
     ];
     this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
       logger.info('Project service, findOneAndUpdate has been hit');

@@ -575,7 +575,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     if(workItem.quantity.quantityItemDetails.length !== 0) {
       $('#updateDirectQuantity'+workItemIndex).modal();
     } else {
-      this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.quantity.total);
+      this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);
     }
   }
 
@@ -592,11 +592,11 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     return null;
   }
 
-  changeDirectQuantity(categoryId : number, workItemId: number, directQuantity : number) {
+  changeDirectQuantity(categoryId : number, workItemId: number, ccWorkItemId: number, directQuantity : number) {
     if( directQuantity !== null ||  directQuantity !== 0) {
       this.loaderService.start();
       this.costSummaryService.updateDirectQuantityAmount(this.baseUrl, this.costHeadId, categoryId,
-        workItemId, directQuantity).subscribe(
+        workItemId, ccWorkItemId, directQuantity).subscribe(
         workItemList => this.onChangeDirectQuantitySuccess(workItemList),
         error => this.onChangeDirectQuantityFailure(error)
       );
@@ -742,7 +742,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   updateElement(updatedWorkitem : any) {
      this.changeDirectQuantity(updatedWorkitem.categoryId , updatedWorkitem.workitem.rateAnalysisId,
-       updatedWorkitem.workitem.quantity.total);
+       updatedWorkitem.workitem.workItemId ,updatedWorkitem.workitem.quantity.total);
   }
 
   updateTotal(totalObj:any) {
