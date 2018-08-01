@@ -54,7 +54,9 @@
     <input type="number" [(ngModel)]="buildingModel.numOfLifts" formControlName="numOfLifts" id="numOfLifts" class="form-control" placeholder="Enter no of lifts" />
   </div>
 
-  <p class="form-sub-heading">{{ getLabels().APARTMENT_CONFIGURATION }}</p>
+  <div  class="form-group clearfix" style="margin-bottom: 5px;" [class.disabled-input]="disableFormFields">
+    <label class="form-sub-heading" style="margin: 0;">{{ getLabels().APARTMENT_CONFIGURATION }}</label>
+  </div>
   <div class="row" [class.disabled-input]="disableFormFields">
     <div class="col-sm-6">
       <div  class="form-group">
