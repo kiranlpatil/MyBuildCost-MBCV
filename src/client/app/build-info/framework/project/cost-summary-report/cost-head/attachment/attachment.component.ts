@@ -129,7 +129,7 @@ export class AttachmentComponent implements OnInit {
   removeAttachment() {
     this.loaderService.start();
     this.costSummaryService.removeAttachment(this.baseUrl, this.costHeadId,this.categoryId,this.workItemId,
-      this.assignedFileName).subscribe(
+      this.ccWorkItemId, this.assignedFileName).subscribe(
       success => this.onRemoveAttachmentSuccess(success,this.assignedFileName),
       error => this.onRemoveAttachmentFailure(error)
     );

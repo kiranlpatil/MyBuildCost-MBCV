@@ -3221,8 +3221,8 @@ class ProjectService {
     return attachmentList;
   }
 
-  removeAttachmentOfBuildingWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                                     workItemId: number, assignedFileName: any, callback: (error: any, result: any) => void) {
+  removeAttachmentOfBuildingWorkItem(projectId: string, buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
+                                     ccWorkItemId: number, assignedFileName: any, callback: (error: any, result: any) => void) {
     logger.info('Project service, removeAttachmentOfBuildingWorkItem has been hit');
     let projection = { costHeads : 1 };
     this.buildingRepository.findByIdWithProjection(buildingId, projection, (error, building) => {
@@ -3230,7 +3230,7 @@ class ProjectService {
         callback(error, null);
       } else {
         let costHeadList = building.costHeads;
-        this.deleteFile(costHeadList, costHeadId, categoryId, workItemId, assignedFileName);
+        this.deleteFile(costHeadList, costHeadId, categoryId, workItemId, ccWorkItemId, assignedFileName);
 
         let query = { _id : buildingId };
         let data = { $set : {'costHeads' : building.costHeads }};
@@ -3252,14 +3252,14 @@ class ProjectService {
   }
 
 
-  deleteFile(costHeadList: any, costHeadId: number, categoryId: number, workItemId: number, assignedFileName: any) {
+  deleteFile(costHeadList: any, costHeadId: number, categoryId: number, workItemId: number, ccWorkItemId: number, assignedFileName: any) {
 
     let costHead = costHeadList.filter(function(currentCostHead: CostHead){ return currentCostHead.rateAnalysisId === costHeadId; });
     let categories = costHead[0].categories;
     let category = categories.filter(function (currentCategory: Category) { return currentCategory.rateAnalysisId === categoryId; });
     let workItems = category[0].workItems;
     let workItem = workItems.filter(function (currentWorkItem: WorkItem) {
-      if(currentWorkItem.rateAnalysisId === workItemId) {
+      if(currentWorkItem.rateAnalysisId === workItemId && currentWorkItem.workItemId === ccWorkItemId) {
         let attachmentList = currentWorkItem.attachmentDetails;
         for (let fileIndex in attachmentList) {
           if (attachmentList[fileIndex].assignedFileName === assignedFileName) {

@@ -305,7 +305,7 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       controller.getPresentFilesForBuildingWorkItem, this._responseInterceptor.exit);
 
     //remove attached file from workItem
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/deleteFile',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForBuildingWorkItem,
       controller.removeAttachmentOfBuildingWorkItem,this._responseInterceptor.exit);
 

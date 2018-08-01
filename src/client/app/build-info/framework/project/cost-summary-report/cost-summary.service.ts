@@ -239,9 +239,9 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  removeAttachment(baseUrl: string, costHeadId:number, categoryId:number, workItemId:number, assignedFileName:any) {
+  removeAttachment(baseUrl: string, costHeadId:number, categoryId:number, workItemId:number, ccWorkItemId:number, assignedFileName:any) {
     var url = baseUrl +'/' + API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORY
-      + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + API.DELETE_FILE;
+      + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + ccWorkItemId + '/' + API.DELETE_FILE;
     let body = {assignedFileName : assignedFileName };
     return this.httpDelegateService.putAPI(url, body);
   }
