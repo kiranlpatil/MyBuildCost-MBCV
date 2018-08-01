@@ -108,6 +108,7 @@ import {RetainProjectComponent} from "./build-info/framework/payment/retain-proj
 import {PaymentFailureComponent} from "./build-info/framework/payment/payment-failure/payment-failure.component";
 import { PayUMoneyComponent } from './build-info/framework/payUMoney/payUMoney.component';
 import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.service';
+import {AmountValidationDirective} from "./build-info/framework/project/amount-validation.directive";
 
 @NgModule({
   imports: [
@@ -195,7 +196,8 @@ import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.ser
     RenewPackageComponent,
     RetainProjectComponent,
     PaymentFailureComponent,
-    PayUMoneyComponent
+    PayUMoneyComponent,
+    AmountValidationDirective
   ],
 
   providers: [

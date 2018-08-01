@@ -99,14 +99,15 @@
                       <span *ngIf="thumbRuleItem.rate !== 0">{{ thumbRuleItem.rate | number: '1.2-2' }}</span>
                       <span *ngIf="thumbRuleItem.rate === 0">-</span>
                     </td>
-                    <td class="border-left">
+                    <td class="border-left" [class.validate-amount] = 'thumbRuleItem?.amount?.toString().split(".")[0]?.length>9 ||
+                                                       thumbRuleItem?.amount?.toString().split(".")[1]?.length>2'>
                       <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
-                      <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0">
+                      <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0 && thumbRuleItem.amount!==''">
                         {{thumbRuleItem.amount | number: '1.0-0'  }}
                       </span>
                       <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
-                      <div class="edit-field">
-                        <input type="number" title="Edit Budgeted Cost"
+                      <div class="edit-field"  >
+                        <input type="number" amountValidate="true" title="Edit Budgeted Cost"
                                [(ngModel)]="thumbRuleItem.amount"
                                id="thumbRuleItem.amount"
                                (blur)="changeBudgetedCostAmountOfBuildingCostHead(building._id, thumbRuleItem.name, thumbRuleItem.amount)"

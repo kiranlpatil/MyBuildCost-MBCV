@@ -620,7 +620,14 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   changeDirectRate(categoryId : number, workItemId: number, directRate : number) {
-    if(directRate !== null || directRate !== 0) {
+    if(directRate && !directRate.toString().match(/^\d{1,7}(\.\d{1,2})?$/)) {
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+      this.messageService.message(message);
+      return;
+    }
+    if(directRate !== null && directRate !== 0 ) {
       this.loaderService.start();
       this.costSummaryService.updateDirectRate(this.baseUrl, this.costHeadId, categoryId, workItemId, directRate).subscribe(
         success => this.onUpdateDirectRateSuccess(success),

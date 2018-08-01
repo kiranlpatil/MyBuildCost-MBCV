@@ -12,7 +12,7 @@ import { WorkItem } from '../../../../model/work-item';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
 import { QuantityDetails } from '../../../../model/quantity-details';
-
+declare var $: any;
 @Component({
   moduleId: module.id,
   selector: 'bi-get-quantity',
@@ -71,16 +71,34 @@ export class GetQuantityComponent implements OnInit {
       var number = this.quantityItems[quantityIndex].nos;
       var length = this.quantityItems[quantityIndex].length;
       var height = this.quantityItems[quantityIndex].height;
-      var breadth =this.quantityItems[quantityIndex].breadth;
+      var breadth = this.quantityItems[quantityIndex].breadth;
+      if (this.validateQuantityItems(number, length, height, breadth)) {
 
-      this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion( number * (this.workItem.length?length:1)*
-        (this.workItem.breadthOrWidth?breadth:1)*(this.workItem.height?height:1) );
-      this.quantityTotal = this.commonService.decimalConversion(this.quantityTotal +
-        this.quantityItems[quantityIndex].quantity);
+        this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion(number * (this.workItem.length ? length : 1) *
+          (this.workItem.breadthOrWidth ? breadth : 1) * (this.workItem.height ? height : 1));
+        this.quantityTotal = this.commonService.decimalConversion(this.quantityTotal +
+          this.quantityItems[quantityIndex].quantity);
+      }else {
+        this.quantityItems[quantityIndex].quantity=0;
+        var message = new Message();
+        message.isError = true;
+        message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+        this.messageService.message(message);
       }
-
+    }
   }
-
+validateQuantityItems(number:number,length:number,height:number,breadth:number) {
+    if(number===null || length===null || height===null ||breadth===null) {
+     return true;
+  }
+    if( number.toString().match(/^\d{1,7}(\.\d{1,2})?$/) &&
+       length.toString().match(/^\d{1,7}(\.\d{1,2})?$/)&&
+       height.toString().match(/^\d{1,7}(\.\d{1,2})?$/)&&
+      breadth.toString().match(/^\d{1,7}(\.\d{1,2})?$/)) {
+      return true;
+    }
+    return false;
+}
   addQuantityItem() {
     let quantity = new QuantityItem();
     quantity.item = '';
@@ -95,7 +113,13 @@ export class GetQuantityComponent implements OnInit {
   }
 
   updateQuantityItem(quantityItems : Array<QuantityItem>) {
-
+    if($('input').hasClass('validate-amount') ) {
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+      this.messageService.message(message);
+      return;
+    }
     if(this.validateQuantityItem(quantityItems) && (this.keyQuantity !== ''
         && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
 
@@ -112,7 +136,7 @@ export class GetQuantityComponent implements OnInit {
         error => this.onUpdateQuantityItemsFailure(error)
       );
     } else {
-      var message = new Message();
+      message = new Message();
       message.isError = true;
       if(this.keyQuantity !== null && this.keyQuantity !== undefined) {
         message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
@@ -213,5 +237,8 @@ export class GetQuantityComponent implements OnInit {
 
   getHeadings() {
     return Headings;
+  }
+  getMessages() {
+    return Messages;
   }
 }
