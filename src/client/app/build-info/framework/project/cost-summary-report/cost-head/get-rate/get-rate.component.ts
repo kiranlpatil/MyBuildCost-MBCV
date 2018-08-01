@@ -30,6 +30,7 @@ export class GetRateComponent implements OnChanges {
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
   @Input() workItemRateAnalysisId : number;
+  @Input() ccWorkItemId : number;
   @Input() workItemsList : Array<WorkItem>;
   @Input() workItemUnit :any;
   @Input() totalByUnit :number;
@@ -149,7 +150,8 @@ export class GetRateComponent implements OnChanges {
       rate.imageURL = rateItemsArray.imageURL;
       rate.notes = rateItemsArray.notes;
 
-      this.costSummaryService.updateRate(this.baseUrl, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
+      this.costSummaryService.updateRate(this.baseUrl, costHeadId,
+        this.categoryRateAnalysisId, workItemId, this.ccWorkItemId, rate).subscribe(
         success => this.onUpdateRateSuccess(success),
         error => this.onUpdateRateFailure(error)
       );

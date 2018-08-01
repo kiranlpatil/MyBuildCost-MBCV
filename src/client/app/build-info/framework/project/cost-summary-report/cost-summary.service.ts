@@ -179,10 +179,10 @@ export class CostSummaryService extends BaseService {
 
   //Rate API
   updateRate( baseUrl: string, costHeadId : number,categoryId : number, workItemId : number,
-              rateItemsArray : Rate) {
+              ccWorkItemId: number, rateItemsArray : Rate) {
     var body=rateItemsArray;
-    var url = baseUrl + '/' + API.RATE + '/' + API.COSTHEAD+ '/' +
-      costHeadId + '/' + API.CATEGORY + '/' + categoryId + '/' + API.WORKITEM + '/' + workItemId ;
+    var url = baseUrl + '/' + API.RATE + '/' + API.COSTHEAD+ '/' + costHeadId + '/' + API.CATEGORY
+      + '/' + categoryId + '/' + API.WORKITEM + '/' + workItemId + '/' + ccWorkItemId;
 
     return this.httpDelegateService.putAPI(url, body);
   }

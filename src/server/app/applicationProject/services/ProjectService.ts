@@ -731,8 +731,9 @@ class ProjectService {
     });
   }
 
-  updateRateOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                                workItemId: number, rate: Rate, user: User, callback: (error: any, result: any) => void) {
+  updateRateOfBuildingCostHeads(projectId: string, buildingId: string, costHeadId: number,
+                                categoryId: number, workItemId: number, ccWorkItemId: number,
+                                rate: Rate, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, updateRateOfBuildingCostHeads has been hit');
     rate.isEstimated = true;
     let query = {_id: buildingId};
@@ -740,9 +741,11 @@ class ProjectService {
       }};
 
     let arrayFilter = [
-      {'costHead.rateAnalysisId':costHeadId},
+      {'costHead.rateAnalysisId': costHeadId},
       {'category.rateAnalysisId': categoryId},
-      {'workItem.rateAnalysisId':workItemId}
+      {'workItem.rateAnalysisId': workItemId,
+       'workItem.workItemId': ccWorkItemId
+      }
     ];
     this.buildingRepository.findOneAndUpdate(query, updateQuery,{arrayFilters:arrayFilter, new: true}, (error, result) => {
       if (error) {
@@ -789,79 +792,6 @@ class ProjectService {
         }
       }
     });
-    /*this.buildingRepository.findById(buildingId, (error, building:Building) => {
-      logger.info('Project service, findById has been hit');
-      if (error) {
-        callback(error, null);
-      } else {
-        let costHeads = building.costHeads;
-        let centralizedRates = building.rates;
-        for (let costHeadData of costHeads) {
-          if (costHeadData.rateAnalysisId === costHeadId) {
-            for (let categoryData of costHeadData.categories) {
-              if (categoryData.rateAnalysisId === categoryId) {
-                for (let workItemData of categoryData.workItems) {
-                  if (workItemData.rateAnalysisId === workItemId) {
-                    workItemData.rate = rate;
-                    workItemData.rate.isEstimated = true;
-                    break;
-                  }
-                }
-                break;
-              }
-            }
-            break;
-          }
-        }
-        let query = {'_id': buildingId};
-        let newData = {$set: {'costHeads': costHeads}};
-
-        this.buildingRepository.findOneAndUpdate(query, updateQuery,{arrayFilters:arrayFilter, new: true}, (error, result) => {
-          if (error) {
-            callback(error, null);
-          } else {
-            if (result) {
-              console.log('building CostHeads Updated');
-
-              let rateItems = rate.rateItems;
-              let promiseArrayForUpdateBuildingCentralizedRates = [];
-
-              for (let rate of rateItems) {
-
-                let rateObjectExistSQL = 'SELECT * FROM ? AS rates WHERE rates.itemName= ?';
-                let rateExistArray = alasql(rateObjectExistSQL, [centralizedRates, rate.itemName]);
-                if (rateExistArray.length > 0) {
-                  if (rateExistArray[0].rate !== rate.rate) {
-                    //update rate of rateItem
-                    let updateRatePromise = this.updateCentralizedRateForBuilding(buildingId, rate.itemName, rate.rate);
-                    promiseArrayForUpdateBuildingCentralizedRates.push(updateRatePromise);
-                  }
-                } else {
-                  //create new rateItem
-                  let rateItem: CentralizedRate = new CentralizedRate(rate.itemName, rate.originalItemName, rate.rate);
-                  let addNewRateItemPromise = this.addNewCentralizedRateForBuilding(buildingId, rateItem);
-                  promiseArrayForUpdateBuildingCentralizedRates.push(addNewRateItemPromise);
-                }
-              }
-
-              if (promiseArrayForUpdateBuildingCentralizedRates.length !== 0) {
-                CCPromise.all(promiseArrayForUpdateBuildingCentralizedRates).then(function (data: Array<any>) {
-
-                  console.log('Rates Array updated : ' + JSON.stringify(centralizedRates));
-                  callback(null, {'data': 'success'});
-
-                }).catch(function (e: any) {
-                  logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e.message));
-                  CCPromise.reject(e.message);
-                });
-              } else {
-                callback(null, {'data': 'success'});
-              }
-            }
-          }
-        });
-      }
-    });*/
   }
 
   //Update Direct Rate of building costheads
@@ -888,26 +818,6 @@ class ProjectService {
         callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
-      /*let projection = {'costHeads':1};
-      this.buildingRepository.findByIdWithProjection(buildingId, projection, (error, building) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        let costHeadList = building.costHeads;
-        this.updateDirectRate(costHeadList, costHeadId, categoryId, workItemId, directRate);
-
-        let query = {_id: buildingId};
-        let data = {$set: {'costHeads': costHeadList}};
-        this.buildingRepository.findOneAndUpdate(query, data, {new: true}, (error, building) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
-          if (error) {
-            callback(error, null);
-          } else {
-            callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-        });
-      }
-    });*/
   }
 
   updateDirectRate(costHeadList: Array<CostHead>, costHeadId: number, categoryId: number,
@@ -992,79 +902,6 @@ class ProjectService {
         }
       }
     });
-    /*this.projectRepository.findById(projectId, (error, project : Project) => {
-      logger.info('Project service, findById has been hit');
-      if (error) {
-        callback(error, null);
-      } else {
-        let projectCostHeads = project.projectCostHeads;
-        let centralizedRatesOfProjects = project.rates;
-        for (let costHeadData of projectCostHeads) {
-          if (costHeadData.rateAnalysisId === costHeadId) {
-            for (let categoryData of costHeadData.categories) {
-              if (categoryData.rateAnalysisId === categoryId) {
-                for (let workItemData of categoryData.workItems) {
-                  if (workItemData.rateAnalysisId === workItemId) {
-                    workItemData.rate = rate;
-                    workItemData.rate.isEstimated = true;
-                    break;
-                  }
-                }
-                break;
-              }
-            }
-            break;
-          }
-        }
-        let query = {'_id': projectId};
-        let newData = {$set: {'projectCostHeads': projectCostHeads}};
-        this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (error, result) => {
-          if (error) {
-            callback(error, null);
-          } else {
-
-            let rateItems = rate.rateItems;
-            let promiseArrayForProjectCentralizedRates = [];
-
-            for (let rate of rateItems) {
-
-              let rateObjectExistSQL = 'SELECT * FROM ? AS rates WHERE rates.itemName= ?';
-              let rateExistArray = alasql(rateObjectExistSQL, [centralizedRatesOfProjects, rate.itemName]);
-              if (rateExistArray.length > 0) {
-                if (rateExistArray[0].rate !== rate.rate) {
-                  //update rate of rateItem
-                  let updateRateOfProjectPromise = this.updateCentralizedRateForProject(projectId, rate.itemName, rate.rate);
-                  promiseArrayForProjectCentralizedRates.push(updateRateOfProjectPromise);
-                }
-              } else {
-                //create new rateItem
-                let rateItem: CentralizedRate = new CentralizedRate(rate.itemName, rate.originalItemName, rate.rate);
-                let addNewRateOfProjectPromise = this.addNewCentralizedRateForProject(projectId, rateItem);
-                promiseArrayForProjectCentralizedRates.push(addNewRateOfProjectPromise);
-              }
-            }
-
-            if (promiseArrayForProjectCentralizedRates.length !== 0) {
-
-              CCPromise.all(promiseArrayForProjectCentralizedRates).then(function (data: Array<any>) {
-
-                console.log('Rates Array updated : ' + JSON.stringify(centralizedRatesOfProjects));
-                callback(null, {'data': 'success'});
-
-              }).catch(function (e: any) {
-                logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e.message));
-                let errorObj = new Error();
-                errorObj.message = e;
-                callback(errorObj, null);
-              });
-
-            } else {
-              callback(null, {'data': 'success'});
-            }
-          }
-        });
-      }
-    });*/
   }
 
   //Update Direct Rates of Project Costheads
@@ -1091,27 +928,6 @@ class ProjectService {
         callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
-    /*let projection = {'projectCostHeads':1};
-    this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
-      if (error) {
-        callback(error, null);
-      } else {
-
-        let costHeadList = project.projectCostHeads;
-        this.updateDirectRate(costHeadList, costHeadId, categoryId, workItemId, directRate);
-
-        let query = {_id: projectId};
-        let data = {$set: {'projectCostHeads': costHeadList}};
-        this.projectRepository.findOneAndUpdate(query, data, {new: true}, (error, project) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
-          if (error) {
-            callback(error, null);
-          } else {
-            callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-        });
-      }
-    });*/
   }
 
   deleteQuantityOfBuildingCostHeadsByName(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
@@ -1150,23 +966,6 @@ class ProjectService {
             }
           }
         }
-
-        /*let query = { _id : buildingId, costHeads:{
-            $elemMatch :{rateAnalysisId : costHeadId, categories: {
-                $elemMatch:{rateAnalysisId: categoryId,workItems: {
-                    $elemMatch: {rateAnalysisId:workItemId, 'quantity.$.quantityItemDetails':{$elemMatch:{name: itemName}}}}}}}} };
-        //let data = { $set : {'costHeads' : building.costHeads }};
-        let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.$.quantityItemDetails.$[quantityItemDetail].total':
-              {$subtract:
-                  ['costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.$.total',
-                  'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.$.quantityItemDetails.$[quantityItemDetail].total']}},
-        $pull:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.$.quantityItemDetails.$[quantityItemDetail].name':itemName}};
-        let arrayFilter = [
-          {'costHead.rateAnalysisId':costHeadId},
-          {'category.rateAnalysisId': categoryId},
-          {'workItem.rateAnalysisId':workItemId},
-          {'quantityItemDetail.name':itemName}
-        ];*/
 
         let query = {_id: buildingId};
         let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem]':updatedWorkItem}};
@@ -1474,54 +1273,7 @@ class ProjectService {
                                     workItemId: number, ccWorkItemId : number,  quantityDetail: QuantityDetails,
                                     user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, updateQuantityOfBuildingCostHeads has been hit');
-  /*  let query = {_id: buildingId};
-    let projection = {costHeads:{
-        $elemMatch :{rateAnalysisId : costHeadId, categories: {
-            $elemMatch:{rateAnalysisId: categoryId,workItems: {
-                $elemMatch: {rateAnalysisId:workItemId}}}}}}}
-    this.buildingRepository.retrieveWithProjection(query, projection,(error, building) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        let costHeadList = building[0].costHeads;
-        let quantity  : Quantity;
-        for (let costHead of costHeadList) {
-            let categoriesOfCostHead = costHead.categories;
-            for (let categoryData of categoriesOfCostHead) {
-              if (categoryId === categoryData.rateAnalysisId) {
-                for (let workItemData of categoryData.workItems) {
-                  if (workItemId === workItemData.rateAnalysisId) {
-                    quantity = workItemData.quantity;
-                    quantity.isEstimated = true;
-                    if(quantity.isDirectQuantity === true) {
-                      quantity.isDirectQuantity = false;
-                    }
-                    this.updateQuantityItemsOfWorkItem( quantity, quantityDetail);
-                    break;
-                  }
-                }
-                break;
-              }
-            }
-        }
 
-          let query = {_id: buildingId};
-          let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity':quantity}};
-          let arrayFilter = [
-            {'costHead.rateAnalysisId':costHeadId},
-            {'category.rateAnalysisId': categoryId},
-            {'workItem.rateAnalysisId':workItemId}
-          ];
-          this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
-            logger.info('Project service, findOneAndUpdate has been hit');
-            if (error) {
-              callback(error, null);
-            } else {
-              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-            }
-          });
-        }
-    });*/
     let query = [
       {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
       {$unwind: '$costHeads'},
@@ -1595,26 +1347,6 @@ class ProjectService {
         callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
-    /*let projection = { costHeads : 1 };
-    this.buildingRepository.findByIdWithProjection(buildingId, projection, (error, building) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        let costHeadList = building.costHeads;
-        this.updateQuantityDetails(costHeadList, costHeadId, categoryId, workItemId, directQuantity);
-
-        let query = {_id: buildingId};
-        let data = {$set: {'costHeads': costHeadList}};
-        this.buildingRepository.findOneAndUpdate(query, data, {new: true}, (error, building) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
-          if (error) {
-            callback(error, null);
-          } else {
-            callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-        });
-      }
-    });*/
   }
 
   updateDirectQuantityOfProjectWorkItems(projectId: string, costHeadId: number, categoryId: number, workItemId: number,
@@ -1640,26 +1372,6 @@ class ProjectService {
         callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
-    /*let projection = { projectCostHeads : 1 };
-    this.projectRepository.findByIdWithProjection(projectId, projection,(error, project) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        let costHeadList = project.projectCostHeads;
-        this.updateQuantityDetails(costHeadList, costHeadId, categoryId, workItemId, directQuantity);
-
-        let query = {_id: projectId};
-        let data = {$set: {'projectCostHeads': costHeadList}};
-        this.projectRepository.findOneAndUpdate(query, data, {new: true}, (error, building) => {
-          logger.info('Project service, findOneAndUpdate has been hit');
-          if (error) {
-            callback(error, null);
-          } else {
-            callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-        });
-      }
-    });*/
   }
 
   updateQuantityDetailsOfProject(projectId: string, costHeadId: number, categoryId: number,
@@ -1786,18 +1498,6 @@ class ProjectService {
             for (let quantityIndex = 0; quantityIndex < quantityDetails.length; quantityIndex++) {
               if (quantityDetails[quantityIndex].id === quantityDetailsObj.id) {
                 quantityDetails[quantityIndex].name = quantityDetailsObj.name;
-            /*    if( quantityDetailsObj.quantityItems.length === 0) {
-                  quantityDetails[quantityIndex].quantityItems = [];
-                  quantityDetails[quantityIndex].isDirectQuantity = true;
-                } else {
-                  quantityDetails[quantityIndex].quantityItems = quantityDetailsObj.quantityItems;
-                  quantityDetails[quantityIndex].isDirectQuantity = false;
-                   if(quantityDetailsObj.steelQuantityItems) {
-              quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
-            }else if(quantityDetailsObj.quantityItems.length === 0) {
-              quantityDetails[quantityIndex].quantityItems = [];
-            }
-                }*/
                 if( quantityDetailsObj.quantityItems.length === 0 && quantityDetailsObj.steelQuantityItems.steelQuantityItem.length === 0) {
                   quantityDetails[quantityIndex].quantityItems = [];
                   quantityDetails[quantityIndex].steelQuantityItems = new SteelQuantityItems();
@@ -1870,26 +1570,6 @@ class ProjectService {
            // quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
             quantity.quantityItemDetails.push(quantityDetail);
           }
-          /*else {
-                     if(quantityDetail.id === undefined) {
-                         quantityDetail.id = quantityId;
-                         quantityDetail.isDirectQuantity = false;
-                        // quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
-                         quantity.quantityItemDetails.push(quantityDetail);
-
-                     }else {
-                       for (let quantityIndex = 0; quantityIndex < quantity.quantityItemDetails.length; quantityIndex++) {
-                           if (quantity.quantityItemDetails[quantityIndex].id === quantityDetail.id) {
-                             quantity.quantityItemDetails[quantityIndex].name = quantityDetail.name;
-                             quantity.quantityItemDetails[quantityIndex].isDirectQuantity = false;
-                             quantity.quantityItemDetails[quantityIndex].quantityItems = quantityDetail.quantityItems;
-                             quantity.quantityItemDetails[quantityIndex].total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?',
-                               [quantityDetail.quantityItems]);
-                            }
-                        }
-                     }
-                   }
-                 }*/
         }else {
           quantity.quantityItemDetails = [];
        //   console.log('quantity : '+JSON.stringify(quantity));

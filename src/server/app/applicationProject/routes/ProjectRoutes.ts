@@ -276,7 +276,7 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     router.get('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.getRate, controller.getRate, this._responseInterceptor.exit);
     //Update rate of workitem
-    router.put('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
+    router.put('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateRateOfBuildingCostHeads,
       controller.updateRateOfBuildingCostHeads, this._responseInterceptor.exit);
 
