@@ -213,7 +213,7 @@
 
 
                                   <div *ngIf="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB">
-                                    <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+                                    <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId && compareCCWorkItemId === workItem.workItemId">
 
                                     <bi-get-quantity-steel
                                       [steelQuantityItems]="steelQuantityItemsArray.steelQuantityItem"
@@ -221,6 +221,7 @@
                                       [workItemsList] ="workItemsList"
                                       [categoryDetails] ="categoryDetails"
                                       [workItem]="workItem"
+                                      [ccWorkItemId]="workItem.workItemId"
                                       [workItemUnit] = "workItem.unit"
                                       (categoriesTotalAmount)="setCategoriesTotal($event)"
                                       (refreshWorkItemList)="refreshWorkItemList($event)"
@@ -229,7 +230,8 @@
                                       [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                       [keyQuantity]="keyQuantity"
                                       [quantityId]="quantityId"
-                                      [baseUrl] = "baseUrl"></bi-get-quantity-steel>
+                                      [baseUrl] = "baseUrl">
+                                    </bi-get-quantity-steel>
                                   </div>
                                   </div>
 
