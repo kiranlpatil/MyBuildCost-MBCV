@@ -82,7 +82,7 @@ class ProjectRoutes {
 
 
     ///Add and remove a costhead by setting status of workitems to true and false
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/activestatus/:activeStatus',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/activestatus/:activeStatus',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.updateWorkItemStatusOfProjectCostHeads, controller.updateWorkItemStatusOfProjectCostHeads,
       this._responseInterceptor.exit);

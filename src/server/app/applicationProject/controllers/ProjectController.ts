@@ -641,10 +641,11 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      let workItemActiveStatus = req.params.activeStatus === 'true' ? true : false;
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let workItemActiveStatus = JSON.parse(req.params.activeStatus);
       let projectService: ProjectService = new ProjectService();
-      projectService.updateWorkItemStatusOfProjectCostHeads( projectId, costHeadId, categoryId,workItemId,
-        workItemActiveStatus, user,(error, result) => {
+      projectService.updateWorkItemStatusOfProjectCostHeads( projectId, costHeadId, categoryId, workItemId,
+        ccWorkItemId, workItemActiveStatus, user,(error, result) => {
         if(error) {
           next(error);
         } else {

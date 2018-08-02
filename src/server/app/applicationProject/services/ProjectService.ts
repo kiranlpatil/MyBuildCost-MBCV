@@ -1206,7 +1206,7 @@ class ProjectService {
   }
 
   // Update WorkItem Status Of Project CostHeads
-  updateWorkItemStatusOfProjectCostHeads(projectId: string, costHeadId: number, categoryId: number, workItemId: number,
+  updateWorkItemStatusOfProjectCostHeads(projectId: string, costHeadId: number, categoryId: number, workItemId: number, ccWorkItemId: number,
                                          workItemActiveStatus: boolean, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, Update WorkItem Status Of Project Cost Heads has been hit');
     let query = {_id: projectId};
@@ -1214,7 +1214,7 @@ class ProjectService {
     let arrayFilter = [
       {'costHead.rateAnalysisId':costHeadId},
       {'category.rateAnalysisId': categoryId},
-      {'workItem.rateAnalysisId':workItemId}
+      {'workItem.rateAnalysisId':workItemId, 'workItem.workItemId' : ccWorkItemId}
     ];
     this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
       logger.info('Project service, Update WorkItem Status Of Project Cost Heads ,findOneAndUpdate has been hit');
