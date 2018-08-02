@@ -440,13 +440,28 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   calculateQuantity(workItem : WorkItem) {
     this.previousRateQuantity = lodsh.cloneDeep(workItem.rate.quantity);
-    this.rateItemsArray.quantity = lodsh.cloneDeep(workItem.quantity.total);
+    let quantity = lodsh.cloneDeep(workItem.quantity.total);
+    this.rateItemsArray.quantity = parseFloat(this.changeQuantityByWorkItemUnit(quantity, workItem.unit, this.rateItemsArray.unit).toFixed(2));
     this.quantityIncrement = this.rateItemsArray.quantity / this.previousRateQuantity;
     for (let rateItemsIndex = 0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
       this.rateItemsArray.rateItems[rateItemsIndex].quantity = parseFloat((
         this.rateItemsArray.rateItems[rateItemsIndex].quantity *
         this.quantityIncrement).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
     }
+  }
+
+  changeQuantityByWorkItemUnit(quantity: number, workItemUnit: string, rateUnit: string) {
+    let quantityTotal: number = 0;
+    if (workItemUnit === 'Sqm' && rateUnit !== 'Sqm') {
+      quantityTotal = quantity * 10.764;
+    } else if (workItemUnit === 'Rm' && rateUnit !== 'Rm') {
+      quantityTotal = quantity * 3.28;
+    } else if (workItemUnit === 'cum' && rateUnit !== 'cum') {
+      quantityTotal = quantity * 35.28;
+    } else {
+      quantityTotal = quantity;
+    }
+    return quantityTotal;
   }
 
   setIdsForDeleteWorkItem(categoryId: string, workItemId: string,workItemIndex:number) {
