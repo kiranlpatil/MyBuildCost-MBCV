@@ -786,11 +786,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let quantityDetailsObj = req.body.item;
 
       let projectService = new ProjectService();
       projectService.updateQuantityDetailsOfBuilding( projectId, buildingId, costHeadId,
-        categoryId, workItemId, quantityDetailsObj, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, quantityDetailsObj, user, (error, result) => {
           if(error) {
             next(error);
           } else {
@@ -811,11 +812,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let quantityDetailsObj = req.body.item;
 
       let projectService = new ProjectService();
       projectService.updateQuantityDetailsOfProject( projectId, costHeadId,
-        categoryId, workItemId, quantityDetailsObj, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, quantityDetailsObj, user, (error, result) => {
           if(error) {
             next(error);
           } else {

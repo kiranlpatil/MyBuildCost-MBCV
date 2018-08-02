@@ -157,13 +157,12 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
   updateQuantityDetails(baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
-                        quantityDetailsObj : QuantityDetails) {
+                        ccWorkItemId: number, quantityDetailsObj : QuantityDetails) {
 
     var body= {  item : quantityDetailsObj };
 
-    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
-      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT_QUANTITY +
-      '/'+ API.QUANTITY_ITEM_DETAILS;
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY + '/' + categoryId
+      + '/' + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/'+ API.DIRECT_QUANTITY + '/'+ API.QUANTITY_ITEM_DETAILS;
 
     return this.httpDelegateService.putAPI(url, body);
   }

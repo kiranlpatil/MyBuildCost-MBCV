@@ -31,6 +31,7 @@ export class QuantityDetailsComponent implements OnInit {
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
   @Input() workItemRateAnalysisId : number;
+  @Input() ccWorkItemId : number;
   @Input() baseUrl : string;
 
   @Output() categoriesTotalAmount = new EventEmitter<number>();
@@ -65,7 +66,6 @@ export class QuantityDetailsComponent implements OnInit {
 
    ngOnInit() {
     this.workItemData = this.workItem;
-
   }
 
   changeQuantityName(keyQuantity: string) {
@@ -206,7 +206,7 @@ export class QuantityDetailsComponent implements OnInit {
       this.loaderService.start();
 
       this.costSummaryService.updateQuantityDetails(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
-        this.workItemRateAnalysisId,quantityDetailsObj).subscribe(
+        this.workItemRateAnalysisId, this.ccWorkItemId, quantityDetailsObj).subscribe(
         success => this.onUpdateQuantityDetailSuccess(success, flag),
         error => this.onUpdateQuantityDetailFailure(error)
       );

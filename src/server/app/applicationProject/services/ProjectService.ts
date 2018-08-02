@@ -1375,7 +1375,7 @@ class ProjectService {
   }
 
   updateQuantityDetailsOfProject(projectId: string, costHeadId: number, categoryId: number,
-                                 workItemId: number, quantityDetailsObj: QuantityDetails,
+                                 workItemId: number, ccWorkItemId: number, quantityDetailsObj: QuantityDetails,
                                  user: User, callback: (error: any, result: any) => void) {
     let query = [
       {$match: {'_id': ObjectId(projectId), 'projectCostHeads.rateAnalysisId': costHeadId}},
@@ -1385,7 +1385,9 @@ class ProjectService {
       {$match: {'projectCostHeads.categories.rateAnalysisId': categoryId}},
       {$project: {'projectCostHeads.categories.workItems': 1}},
       {$unwind: '$projectCostHeads.categories.workItems'},
-      {$match: {'projectCostHeads.categories.workItems.rateAnalysisId': workItemId}},
+      {$match: {
+        'projectCostHeads.categories.workItems.rateAnalysisId': workItemId,
+        'projectCostHeads.categories.workItems.workItemId': ccWorkItemId }},
       {$project: {'projectCostHeads.categories.workItems.quantity': 1}},
     ];
 
@@ -1402,7 +1404,7 @@ class ProjectService {
           let arrayFilter = [
             {'costHead.rateAnalysisId':costHeadId},
             {'category.rateAnalysisId': categoryId},
-            {'workItem.rateAnalysisId':workItemId}
+            {'workItem.rateAnalysisId': workItemId, 'workItem.workItemId': ccWorkItemId}
           ];
           this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
             logger.info('Project service, findOneAndUpdate has been hit');
@@ -1423,7 +1425,7 @@ class ProjectService {
 
 
   updateQuantityDetailsOfBuilding(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
-                                  workItemId: number, quantityDetailsObj: QuantityDetails,
+                                  workItemId: number, ccWorkItemId: number, quantityDetailsObj: QuantityDetails,
                                   user: User, callback: (error: any, result: any) => void) {
     let query = [
         {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
@@ -1433,7 +1435,9 @@ class ProjectService {
         {$match: {'costHeads.categories.rateAnalysisId': categoryId}},
         {$project: {'costHeads.categories.workItems': 1}},
         {$unwind: '$costHeads.categories.workItems'},
-        {$match: {'costHeads.categories.workItems.rateAnalysisId': workItemId}},
+        {$match: {
+          'costHeads.categories.workItems.rateAnalysisId': workItemId,
+          'costHeads.categories.workItems.workItemId': ccWorkItemId}},
         {$project: {'costHeads.categories.workItems.quantity': 1}},
       ];
 
@@ -1450,7 +1454,9 @@ class ProjectService {
             let arrayFilter = [
               {'costHead.rateAnalysisId':costHeadId},
               {'category.rateAnalysisId': categoryId},
-              {'workItem.rateAnalysisId':workItemId}
+              {'workItem.rateAnalysisId':workItemId,
+                'workItem.workItemId':ccWorkItemId,
+              }
             ];
             this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
               logger.info('Project service, findOneAndUpdate has been hit');
