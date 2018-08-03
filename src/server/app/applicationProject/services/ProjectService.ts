@@ -1422,7 +1422,7 @@ class ProjectService {
   }
 
   updateDirectQuantityOfProjectWorkItems(projectId: string, costHeadId: number, categoryId: number, workItemId: number,
-                                         directQuantity: number, user: User, callback: (error: any, result: any) => void) {
+                                         ccWorkItemId: number, directQuantity: number, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, updateDirectQuantityOfProjectWorkItems has been hit');
     let query = {_id: projectId};
     let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity.isEstimated':true,
@@ -1432,9 +1432,9 @@ class ProjectService {
       }};
 
     let arrayFilter = [
-      {'costHead.rateAnalysisId':costHeadId},
-      {'category.rateAnalysisId': categoryId},
-      {'workItem.rateAnalysisId':workItemId}
+      { 'costHead.rateAnalysisId': costHeadId },
+      { 'category.rateAnalysisId': categoryId },
+      { 'workItem.rateAnalysisId': workItemId, 'workItem.workItemId': ccWorkItemId }
     ];
     this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
       logger.info('Project service, findOneAndUpdate has been hit');
