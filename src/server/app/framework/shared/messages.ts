@@ -10,8 +10,9 @@ class Messages {
   public static EMAIL_SUBJECT_REGISTRATION: string = ' Registration successful';
   public static EMAIL_SUBJECT_CHANGE_EMAILID: string = 'Confirmation for change in email address.';
   public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'Reset your password';
-  public static EMAIL_SUBJECT_CANDIDATE_REGISTRATION: string = 'Welcome to Build-Info.An online solution for cost estimation of your construction projects.';
+  public static EMAIL_SUBJECT_CANDIDATE_REGISTRATION: string = 'Welcome to My Build Cost, an online solution for cost estimation of your construction projects.';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
+  public static EMAIL_SUBJECT_UPGRADED_SUBSCRIPTION: string = 'You have successfully upgraded the subscription of My Build Cost.';
   public static PROJECT_EXPIRY_WARNING: string = 'Project expiry warning';
 
   //Sendmail
