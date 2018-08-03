@@ -1619,6 +1619,7 @@ class ProjectService {
 
       if (isDefaultExistsQuantityDetail.length > 0) {
         quantityDetail.id = quantityId;
+        quantity.isDirectQuantity = false;
         quantity.quantityItemDetails = [];
       //  quantityDetail.total = alasql('VALUE OF SELECT ROUND(SUM(quantity),2) FROM ?', [quantityDetail.quantityItems]);
         quantity.quantityItemDetails.push(quantityDetail);
@@ -1662,14 +1663,14 @@ class ProjectService {
   }
 
 //Update Quantity Of Project Cost Heads
-  updateQuantityOfProjectCostHeads(projectId: string, costHeadId: number, categoryId: number, workItemId: number,
+  updateQuantityOfProjectCostHeads(projectId: string, costHeadId: number, categoryId: number, workItemId: number, ccWorkItemId:number,
                                    quantityDetails: QuantityDetails, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, Update Quantity Of Project Cost Heads has been hit');
     let query = {_id: projectId};
     let projection = {projectCostHeads:{
         $elemMatch :{rateAnalysisId : costHeadId, categories: {
             $elemMatch:{rateAnalysisId: categoryId,workItems: {
-                $elemMatch: {rateAnalysisId:workItemId}}}}}}}
+                $elemMatch: {rateAnalysisId:workItemId, workItemId: ccWorkItemId}}}}}}};
     this.projectRepository.retrieveWithProjection(query, projection, (error, project) => {
       if (error) {
         callback(error, null);
@@ -1683,7 +1684,7 @@ class ProjectService {
               if (categoryId === categoryData.rateAnalysisId) {
                 let workItemsOfCategory = categoryData.workItems;
                 for (let workItemData of workItemsOfCategory) {
-                  if (workItemId === workItemData.rateAnalysisId) {
+                  if (workItemId === workItemData.rateAnalysisId && ccWorkItemId === workItemData.workItemId) {
                     quantity = workItemData.quantity;
                     quantity.isEstimated = true;
                     this.updateQuantityItemsOfWorkItem( quantity, quantityDetails);
@@ -1699,9 +1700,9 @@ class ProjectService {
         let query = {_id: projectId};
         let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].quantity':quantity}};
         let arrayFilter = [
-          {'costHead.rateAnalysisId':costHeadId},
-          {'category.rateAnalysisId': categoryId},
-          {'workItem.rateAnalysisId':workItemId}
+          { 'costHead.rateAnalysisId': costHeadId },
+          { 'category.rateAnalysisId': categoryId },
+          { 'workItem.rateAnalysisId': workItemId, 'workItem.workItemId': ccWorkItemId}
         ];
         this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, project) => {
           logger.info('Project service, findOneAndUpdate has been hit');

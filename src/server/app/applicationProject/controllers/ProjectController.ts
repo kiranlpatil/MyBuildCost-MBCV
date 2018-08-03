@@ -845,11 +845,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let quantityDetails = req.body.item;
 
       let projectService = new ProjectService();
       projectService.updateQuantityOfProjectCostHeads( projectId, costHeadId,
-        categoryId, workItemId, quantityDetails, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, quantityDetails, user, (error, result) => {
         if(error) {
           next(error);
         } else {

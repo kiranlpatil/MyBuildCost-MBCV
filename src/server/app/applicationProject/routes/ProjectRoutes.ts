@@ -96,7 +96,7 @@ class ProjectRoutes {
     /*Project- Routes: Quantity*/
 
     //Add quantityitem in quantity
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfProjectCostHeads,
       controller.updateQuantityOfProjectCostHeads, this._responseInterceptor.exit);
 
