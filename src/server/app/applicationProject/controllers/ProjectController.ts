@@ -478,11 +478,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let directRate = req.body.directRate;
 
       let projectService = new ProjectService();
       projectService.updateDirectRateOfProjectWorkItems( projectId, costHeadId,categoryId ,workItemId,
-        directRate, user, (error, result) => {
+        ccWorkItemId, directRate, user, (error, result) => {
         if(error) {
           next(error);
         } else {

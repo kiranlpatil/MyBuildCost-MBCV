@@ -907,7 +907,7 @@ class ProjectService {
 
   //Update Direct Rates of Project Costheads
   updateDirectRateOfProjectWorkItems(projectId: string, costHeadId: number, categoryId: number, workItemId: number,
-                                     directRate: number, user: User, callback: (error: any, result: any) => void) {
+                                     ccWorkItemId:number, directRate: number, user: User, callback: (error: any, result: any) => void) {
 
     logger.info('Project service, updateDirectRateOfProjectWorkItems has been hit');
     let query = {_id: projectId};
@@ -919,7 +919,7 @@ class ProjectService {
     let arrayFilter = [
       {'costHead.rateAnalysisId':costHeadId},
       {'category.rateAnalysisId': categoryId},
-      {'workItem.rateAnalysisId':workItemId}
+      {'workItem.rateAnalysisId':workItemId, 'workItem.workItemId': ccWorkItemId}
     ];
     this.projectRepository.findOneAndUpdate(query, updateQuery,{arrayFilters:arrayFilter, new: true}, (error, building) => {
       logger.info('Project service, findOneAndUpdate has been hit');
@@ -1121,7 +1121,6 @@ class ProjectService {
           let arrayFilter;
           let updateQuery;
           if(response.active) {
-            console.log('workitem : '+abhu);
             newWorkItem.workItemId = response.workItemId +1;
             newWorkItem.active = true;
             updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': newWorkItem }};

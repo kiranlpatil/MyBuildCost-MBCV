@@ -119,7 +119,7 @@ class ProjectRoutes {
       controller.updateRateOfProjectCostHeads, this._responseInterceptor.exit);
 
     //Update DirectRate  of workItem
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/rate',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/direct/rate',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectRateOfProjectWorkItems,
       controller.updateDirectRateOfProjectWorkItems, this._responseInterceptor.exit);
 
