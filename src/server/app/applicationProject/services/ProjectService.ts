@@ -1111,7 +1111,7 @@ class ProjectService {
                                           callback: (error: any, result: any) => void) {
     logger.info('Project service, update Workitem has been hit');
     let query = {_id: buildingId};
-    let abhu = workItem;
+    let newWorkItem = workItem;
     if(workItemActiveStatus) {
       // activate workitem
       this.checkDuplicatesOfWorkItem(buildingId,costHeadId, categoryId, workItemRAId, (error, response) => {
@@ -1122,8 +1122,9 @@ class ProjectService {
           let updateQuery;
           if(response.active) {
             console.log('workitem : '+abhu);
-            abhu.workItemId = response.workItemId +1;
-            updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': abhu }};
+            newWorkItem.workItemId = response.workItemId +1;
+            newWorkItem.active = true;
+            updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
             arrayFilter = [
               {'costHead.rateAnalysisId': costHeadId},
               {'category.rateAnalysisId': categoryId}
@@ -1223,6 +1224,7 @@ class ProjectService {
         } else {
           if(response.active) {
             newWorkItem.workItemId = response.workItemId +1;
+            newWorkItem.active = true;
             updateQuery = {$push : {'projectCostHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
             arrayFilter = [
               {'costHead.rateAnalysisId': costHeadId},
