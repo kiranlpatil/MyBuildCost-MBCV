@@ -154,6 +154,11 @@
     }
   },
 
+  "sampleProject" : {
+    "userId" : " ",
+    "projectId" : "5b61afab28243725007df775"
+  },
+
   "rate": {
     "default": [
       {

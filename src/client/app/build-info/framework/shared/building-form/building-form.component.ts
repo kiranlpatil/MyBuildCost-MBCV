@@ -33,7 +33,7 @@ export class BuildingFormComponent {
     this.cloneItemsStatus.fill(false).fill(true,0,1);
     this.view = SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
     this.buildingForm = this.formBuilder.group({
-      name: ['', ValidationService.requiredBuildingName],
+      name: ['', [ValidationService.requiredBuildingName, ValidationService.alphabatesValidator]],
       totalSlabArea: ['', ValidationService.requiredSlabArea],
       totalCarpetAreaOfUnit: ['', ValidationService.requiredCarpetArea],
       totalSaleableAreaOfUnit: ['', ValidationService.requiredSalebleArea],

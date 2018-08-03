@@ -861,6 +861,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
   onGetPresentFilesForWorkItemSuccess(fileNamesList : any) {
      this.fileNamesList = fileNamesList.response.data;
+     this.loaderService.stop();
   }
   onGetPresentFilesForWorkItemFailure(error: any) {
     let message = new Message();

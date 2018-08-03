@@ -3,5 +3,5 @@
  */
 export class ErrorInstance {
   err_msg: String;
-  err_code: String;
+  err_code: number;
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CommonService, SessionStorage, SessionStorageService} from '../../../shared/index';
+import {AppSettings, CommonService, SessionStorage, SessionStorageService} from '../../../shared/index';
 import { Menus, NavigationRoutes, CurrentView, Button } from '../../../shared/constants';
 import { CostSummaryService } from '../project/cost-summary-report/cost-summary.service';
 
@@ -21,6 +21,7 @@ export class ProjectHeaderComponent implements OnInit {
   premiumPackageExist:any;
   packageName:string;
   addBuildingButtonDisable:boolean =false;
+  buttonDisableForSampleProject:boolean =false;
   premiumPackageAvailable:boolean=false;
   activeStatus:boolean=false;
   subscription:any;
@@ -37,8 +38,10 @@ export class ProjectHeaderComponent implements OnInit {
       this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;
       });
 
-    if(this.getCurrentProjectId()) {
+    if(this.getCurrentProjectId()!== AppSettings.SAMPLE_PROJECT_ID ) {
       this.getProjectSubscriptionDetails();
+    }else {
+      this.buttonDisableForSampleProject = true;
     }
     this.subscription = this.commonService.deleteEvent$
       .subscribe(item =>this.getProjectSubscriptionDetails()
@@ -52,7 +55,7 @@ export class ProjectHeaderComponent implements OnInit {
   getProjectSubscriptionDetails () {
     let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    if(projectId && userId) {
+    if((projectId !== AppSettings.SAMPLE_PROJECT_ID) && userId) {
       this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
         status=>this.checkLimitationOfBuildingSuccess(status),
         error=>this.checkLimitationOfBuildingFailure(error)

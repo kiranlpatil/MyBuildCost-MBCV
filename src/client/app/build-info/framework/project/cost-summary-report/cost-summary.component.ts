@@ -20,6 +20,7 @@ import ProjectReport = require('../../model/project-report');
 import { LoaderService } from '../../../../shared/loader/loaders.service';
 import { AddCostHeadButton } from '../../model/showHideCostHeadButton';
 import { ErrorService } from '../../../../shared/services/error.service';
+import { AppSettings } from '../../../../shared/index';
 
 declare let $: any;
 
@@ -128,19 +129,24 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
         this.onChangeCostingByUnit(this.defaultCostingByUnit);
       }
     });
-    this.getProjectSubscriptionDetails();
-    this.subscription = this.commonService.deleteEvent$
-      .subscribe(item =>this.getProjectSubscriptionDetails()
-      );
+    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID) {
+      this.getProjectSubscriptionDetails();
+    }
+
+      this.subscription = this.commonService.deleteEvent$
+        .subscribe(item => this.getProjectSubscriptionDetails()
+        );
   }
 
   getProjectSubscriptionDetails () {
     let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
-      status=>this.checkLimitationOfBuildingSuccess(status),
-      error=>this.checkLimitationOfBuildingFailure(error)
-    );
+    if(projectId !== AppSettings.SAMPLE_PROJECT_ID) {
+      this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
+        status => this.checkLimitationOfBuildingSuccess(status),
+        error => this.checkLimitationOfBuildingFailure(error)
+      );
+    }
   }
 
 
