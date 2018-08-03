@@ -72,7 +72,7 @@ class UserService {
                                                                       freeSubscription: Array<SubscriptionPackage>) => {
               if (freeSubscription.length > 0) {
                 this.assignFreeSubscriptionAndCreateUser(item, freeSubscription[0], callback);
-              }else {
+              } else {
                 subScriptionService.addSubscriptionPackage(config.get('subscription.package.Free'),
                   (err: any, freeSubscription)=> {
                     this.assignFreeSubscriptionAndCreateUser(item, freeSubscription, callback);
@@ -151,7 +151,7 @@ class UserService {
     this.userRepository.aggregate(query,(error,result)=> {
       if(error) {
         callback(error,null);
-      }else {
+      } else {
         if(result.length > 0) {
           for(let subscriptionPackage of result) {
               if(subscriptionPackage && subscriptionPackage.subscription.projectId!==null) {
@@ -164,7 +164,7 @@ class UserService {
                     let noOfBuildings=result.buildings.length;
                     if(subscriptionPackage && noOfBuildings <= subscriptionPackage.subscription.numOfBuildings) {
                       this.isActiveAddBuildingButton=false;
-                    }else {
+                    } else {
                       this.isActiveAddBuildingButton=true;
                     }
                     }
@@ -717,7 +717,7 @@ class UserService {
     this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
       if(error) {
         callback(error,null);
-      }else {
+      } else {
         let subScriptionArray = result.subscription;
         let subScriptionService = new SubscriptionService();
         subScriptionService.getSubscriptionPackageByName('Premium','BasePackage',
@@ -731,7 +731,7 @@ class UserService {
                 subScriptionArray[0].numOfProjects = premiumPackage.basePackage.numOfProjects;
                 subScriptionArray[0].validity = subScriptionArray[0].validity + premiumPackage.basePackage.validity;
                 subScriptionArray[0].purchased.push(premiumPackage.basePackage);
-              }else {
+              } else {
                 let subscription = new UserSubscription();
                 subscription.activationDate = new Date();
                 subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
@@ -802,7 +802,7 @@ class UserService {
                     'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days,' ;
                 } else if(projectSubscription.numOfDaysToExpire <= 0 &&  noOfDays >= 0) {
                   projectSubscription.expiryMessage =  'Project expired,';
-                }else if(noOfDays < 0) {
+                } else if(noOfDays < 0) {
                   projectSubscription.activeStatus = false;
                 }
 
@@ -860,7 +860,7 @@ class UserService {
        }
        if(purchasePackage.name ==='Free') {
          return purchasePackage.name='Free';
-       }else {
+       } else {
          return purchasePackage.name='Premium';
        }
      }
@@ -924,7 +924,7 @@ class UserService {
                 'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days.' ;
             } else if(projectSubscription.numOfDaysToExpire <= 0 && noOfDays >= 0) {
               projectSubscription.expiryMessage = 'Project expired,';
-            }else if(noOfDays < 0) {
+            } else if(noOfDays < 0) {
               projectSubscription.activeStatus = false;
             }
             callback(null, projectSubscription);

@@ -1,6 +1,8 @@
 <div class="confirm-your-package-section" *ngIf="packageName && (packageName=='Premium' || packageName=='Retain' || packageName==='Free')">
   <h1>{{getHeadings().CONFIRM_PACKAGE_HEADING}}</h1>
-
+  <p *ngIf="premiumPackageAvailable">
+    Special discount for existing premium users
+  </p>
   <div *ngIf="premiumPackageDetails">
     <div class="col-xs-12">
       <ul>

@@ -37,5 +37,15 @@ class MailAttachments {
       cid: 'unique@welcome-aboard'
     }
   ];
+  public static FirstTimeSubscribedAttachmentArray:Array<any>=[
+    {
+      path: path.resolve() + config.get('application.publicPath')+'images/logo/application-logo.png',
+      cid: 'unique@application-logo'
+    },
+    {
+      path:  path.resolve() + config.get('application.publicPath')+'images/banner/successfully-subscribed.png',
+      cid: 'unique@first-time-subscribed'
+    }
+  ];
 }
 export=MailAttachments;
