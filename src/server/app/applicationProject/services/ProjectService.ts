@@ -739,8 +739,7 @@ class ProjectService {
     logger.info('Project service, updateRateOfBuildingCostHeads has been hit');
     rate.isEstimated = true;
     let query = {_id: buildingId};
-    let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].rate':rate
-      }};
+    let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].rate':rate}};
 
     let arrayFilter = [
       {'costHead.rateAnalysisId': costHeadId},
@@ -845,8 +844,8 @@ class ProjectService {
   }
 
 //Update rate of project cost heads
-  updateRateOfProjectCostHeads(projectId: string, costHeadId: number, categoryId: number,
-                               workItemId: number, rate: Rate, user: User, callback: (error: any, result: any) => void) {
+  updateRateOfProjectCostHeads(projectId: string, costHeadId: number, categoryId: number,workItemId: number,
+                               ccWorkItemId: number, rate: Rate, user: User, callback: (error: any, result: any) => void) {
     logger.info('Project service, Update rate of project cost heads has been hit');
     rate.isEstimated = true;
     let query = {_id: projectId};
@@ -856,7 +855,7 @@ class ProjectService {
     let arrayFilter = [
       {'costHead.rateAnalysisId':costHeadId},
       {'category.rateAnalysisId': categoryId},
-      {'workItem.rateAnalysisId':workItemId}
+      {'workItem.rateAnalysisId':workItemId, 'workItem.workItemId': ccWorkItemId }
     ];
     this.projectRepository.findOneAndUpdate(query, updateQuery,{arrayFilters:arrayFilter, new: true}, (error, result) => {
       if (error) {

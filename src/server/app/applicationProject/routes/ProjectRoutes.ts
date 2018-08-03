@@ -114,7 +114,7 @@ class ProjectRoutes {
     /*Project- Routes: Rate*/
 
     //Update rate of workitem
-    router.put('/:projectId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
+    router.put('/:projectId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateRateOfProjectCostHeads,
       controller.updateRateOfProjectCostHeads, this._responseInterceptor.exit);
 

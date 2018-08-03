@@ -450,9 +450,11 @@ class ProjectController {
       let costHeadId =parseInt(req.params.costHeadId);
       let categoryId =parseInt(req.params.categoryId);
       let workItemId =parseInt(req.params.workItemId);
+      let ccWorkItemId =parseInt(req.params.ccWorkItemId);
       let rate : Rate = <Rate> req.body;
       let projectService = new ProjectService();
-      projectService.updateRateOfProjectCostHeads( projectId, costHeadId,categoryId ,workItemId, rate, user, (error, result) => {
+      projectService.updateRateOfProjectCostHeads( projectId, costHeadId,categoryId ,workItemId,
+        ccWorkItemId, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
