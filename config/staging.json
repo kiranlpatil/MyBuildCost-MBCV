@@ -93,6 +93,11 @@
     1
   ],
 
+  "sampleProject" : {
+    "userId" : " ",
+    "projectId" : "5b6816dabde73d08d907d638"
+  },
+
   "subscription": {
     "package": {
       "Free": {
