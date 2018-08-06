@@ -116,6 +116,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, this.userForm.value.email);
     SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);
     SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');
+    SessionStorageService.setSessionValue(SessionStorage.SELECTED_AREA, null);
+    SessionStorageService.setSessionValue(SessionStorage.SELECTED_UNIT, null);
     this.navigateToDashboard();
   }
 

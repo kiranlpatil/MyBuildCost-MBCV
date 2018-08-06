@@ -62,6 +62,13 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
 
 
   changeBudgetedCostAmountOfProjectCostHead(costHead: string, amount: number) {
+    if(amount !== null && amount &&  amount.toString().match(/^\d{1,9}(\.\d{1,2})?$/)===null ) {
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE_BUDGETED;
+      this.messageService.message(message);
+      return;
+    }
     if (amount !== null) {
       let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
       this.loaderService.start();
@@ -178,7 +185,9 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   getHeadings() {
     return Headings;
   }
-
+  getMessages() {
+    return Messages;
+  }
   getTableHeadings() {
     return TableHeadings;
   }

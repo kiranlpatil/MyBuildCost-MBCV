@@ -82,7 +82,7 @@ class ProjectRoutes {
 
 
     ///Add and remove a costhead by setting status of workitems to true and false
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/activestatus/:activeStatus',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/activestatus/:activeStatus',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.updateWorkItemStatusOfProjectCostHeads, controller.updateWorkItemStatusOfProjectCostHeads,
       this._responseInterceptor.exit);
@@ -96,7 +96,7 @@ class ProjectRoutes {
     /*Project- Routes: Quantity*/
 
     //Add quantityitem in quantity
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfProjectCostHeads,
       controller.updateQuantityOfProjectCostHeads, this._responseInterceptor.exit);
 
@@ -107,36 +107,36 @@ class ProjectRoutes {
       controller.deleteQuantityOfProjectCostHeadsByName, this._responseInterceptor.exit);
 
     //update direct quantity and floor name of Project
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/directQuantity/quantityItemDetails',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/directQuantity/quantityItemDetails',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfProjectCostHeads,
       controller.updateQuantityDetailsOfProject, this._responseInterceptor.exit);
 
     /*Project- Routes: Rate*/
 
     //Update rate of workitem
-    router.put('/:projectId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
+    router.put('/:projectId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateRateOfProjectCostHeads,
       controller.updateRateOfProjectCostHeads, this._responseInterceptor.exit);
 
     //Update DirectRate  of workItem
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/rate',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/direct/rate',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectRateOfProjectWorkItems,
       controller.updateDirectRateOfProjectWorkItems, this._responseInterceptor.exit);
 
     /* Attachment Routes */
 
     //update file in workItem
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/uploadFile',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/uploadFile',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToProjectWorkItem,
       controller.addAttachmentToProjectWorkItem, this._responseInterceptor.exit);
 
     //Retrive all present files from workItem
-    router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/fileNameList',
+    router.get('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/fileNameList',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForProjectWorkItem,
       controller.getPresentFilesForProjectWorkItem, this._responseInterceptor.exit);
 
     //remove attached file from workItem
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/deleteFile',
       this.authInterceptor.requiresAuth, validator.checkPresentFilesForProjectWorkItem,
       controller.removeAttachmentOfProjectWorkItem, this._responseInterceptor.exit);
 
@@ -220,7 +220,7 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
 
     /*Building- Routes: WorkItem*/
     ///Add and remove a costhead by setting status of workitems to true and false
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemRAId/:workItemId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, validator.updateWorkItemStatusOfBuildingCostHeads, controller.updateWorkItemStatusOfBuildingCostHeads, this._responseInterceptor.exit);
 
     //Retrieve list of inactive workitems
@@ -245,28 +245,28 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     /*Building- Routes: Quantity*/
 
     //Add quantityitem in quantity
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfBuildingCostHeads,
       controller.updateQuantityOfBuildingCostHeads, this._responseInterceptor.exit);
 
     //update direct quantity Building
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/direct/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfBuildingCostHeads,
       controller.updateDirectQuantityOfBuildingWorkItems, this._responseInterceptor.exit);
 
     //update direct quantity Project
-    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/quantity',
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/direct/quantity',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectQuantityOfProjectWorkItems,
       controller.updateDirectQuantityOfProjectWorkItems, this._responseInterceptor.exit);
 
     //update direct quantity and floor name of quantity Details
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/directQuantity/quantityItemDetails',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/directQuantity/quantityItemDetails',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateQuantityOfBuildingCostHeads,
       controller.updateQuantityDetailsOfBuilding, this._responseInterceptor.exit);
 
 
     //Delete quantityitem from  quantity
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/quantity/item',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/quantity/item',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.deleteQuantityOfBuildingCostHeadsByName,
       controller.deleteQuantityOfBuildingCostHeadsByName, this._responseInterceptor.exit);
 
@@ -276,12 +276,12 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     router.get('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.getRate, controller.getRate, this._responseInterceptor.exit);
     //Update rate of workitem
-    router.put('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId',
+    router.put('/:projectId/building/:buildingId/rate/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateRateOfBuildingCostHeads,
       controller.updateRateOfBuildingCostHeads, this._responseInterceptor.exit);
 
     //Update DirectRate  of workItem
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/direct/rate',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/direct/rate',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectRateOfBuildingWorkItems,
       controller.updateDirectRateOfBuildingWorkItems, this._responseInterceptor.exit);
 
@@ -295,17 +295,17 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     /* Attachment Routes */
 
     //update file in workItem
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/uploadFile',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/uploadFile',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.addAttachmentToBuildingWorkItem,
       controller.addAttachmentToBuildingWorkItem, this._responseInterceptor.exit);
 
     //Retrive all present files from workItem
-    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/fileNameList',
+    router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/fileNameList',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.checkPresentFilesForBuildingWorkItem,
       controller.getPresentFilesForBuildingWorkItem, this._responseInterceptor.exit);
 
     //remove attached file from workItem
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/deleteFile',
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/deleteFile',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForBuildingWorkItem,
       controller.removeAttachmentOfBuildingWorkItem,this._responseInterceptor.exit);
 

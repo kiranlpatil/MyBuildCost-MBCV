@@ -58,6 +58,9 @@
       padding: 6px 10px;
       vertical-align: middle;
       vertical-align: middle;
+      &:last-child {
+        border: none;
+      }
     }
 
     td {
@@ -114,7 +117,7 @@
 
       .calculator {
         cursor: pointer;
-        opacity: 0;
+        //opacity: 0;
         position: absolute;
         top: 5px;
         right: 0;
@@ -124,7 +127,7 @@
 
       .disabled {
         cursor: not-allowed;
-        opacity: 0.4;
+        opacity: 0.4!important;
         pointer-events: none;
       }
 

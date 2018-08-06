@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Quantity } from '../../build-info/framework/model/quantity';
+import { ProjectElements } from '../constants';
 
 @Component({
   moduleId: module.id,
@@ -12,6 +13,7 @@ export class UpdateConfirmationModalComponent {
 
   @Input() elementType: string;
   @Input() categoryId: string;
+  @Input() currentQuantity: string;
   @Input() workitem: string;
   @Input() workItemIndex ?: string;
   @Input() categoryIndex ?: string;
@@ -43,5 +45,9 @@ export class UpdateConfirmationModalComponent {
       total: this.total
     };
     this.updateTotalEvent.emit(totalObj);
+  }
+
+  getProjectElements() {
+    return ProjectElements;
   }
 }

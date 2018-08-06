@@ -45,14 +45,16 @@
               <tbody>
                 <tr *ngFor="let item of rateItem.value; let i=index">
                   <td class="datalist-input" *ngIf="rateView === getLabel().WORKITEM_RATE_TAB">
-                    <input id="itemDescription" class="form-control remark-input" (mouseover)="getRateItemsByOriginalName(item, i)"
+                    <input id="itemDescription" class="form-control remark-input"
+                           (mouseover)="getRateItemsByOriginalName(item, i)"
                            list="RateItems" [(ngModel)]="item.itemName"  (focus)="getItemName($event)" (input)="setItemName($event, 'changeEvent')" (blur)="setItemName($event)"/>
                       <datalist id="RateItems" >
                         <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}"></option>    
                      </datalist>
                   </td>
                   <td *ngIf="rateView !== getLabel().WORKITEM_RATE_TAB">
-                    <input id="itemDescription" class="form-control remark-input" [(ngModel)]="item.itemName" [disabled]="disableRateField"/>
+                    <input id="itemDescription" class="form-control remark-input"
+                           [(ngModel)]="item.itemName" [disabled]="disableRateField"/>
                   </td>
                   <!--<td>
                     <span class="glyphicon glyphicon-chevron-down" (click)="getRateItemsByOriginalName(item, i)"></span>
@@ -61,7 +63,10 @@
                     </select>
                   </td>-->
                   <td>
-                    <input type="number" [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right hidden-xs"
+                    <input type="number" amountValidate="true"
+                           [class.validate-amount] = 'item?.quantity?.toString().split(".")[0]?.length>7 ||
+                                                     item?.quantity?.toString().split(".")[1]?.length>2'
+                           [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right hidden-xs"
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                     <span class="visible-xs mobile-quantity-value" [class.disable-mobile-quantity-value]="disableRateField">{{item.quantity}} {{item.unit}}</span>
                   </td>
@@ -69,7 +74,10 @@
                     <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-left" [disabled]="disableRateField" readonly/>
                   </td>
                   <td>
-                    <input type="number" [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
+                    <input type="number" amountValidate="true"
+                           [class.validate-amount] = 'item?.rate?.toString().split(".")[0]?.length>7 ||
+                                                     item?.rate?.toString().split(".")[1]?.length>2'
+                    [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                   </td>
                   <td>

@@ -13,13 +13,13 @@
         <ul class="col-sm-7 dropdown-menu padding-top-7" role="menu" aria-labelledby="dropdownMenuFilter">
           <li (click)="showDropdown($event)">
             <label>{{ getLabel().COSTING_BY_UNIT }}</label>
-            <select class="select-costing" (change)="onChangeCostingByUnit($event.target.value)">
+            <select class="select-costing" [(ngModel)]="defaultCostingByUnit" (change)="onChangeCostingByUnit($event.target.value)">
               <option *ngFor="let cIn of costIn" [value]="cIn.costInId">{{ cIn.costInId }}</option>
             </select>
           </li>
           <li (click)="showDropdown($event)">
             <label>{{ getLabel().COSTING_PER_AREA }}</label>
-            <select class="select-costing no-margin" (change)="onChangeCostingByArea($event.target.value)">
+            <select class="select-costing no-margin" [(ngModel)]= "defaultCostingByArea" (change)="onChangeCostingByArea($event.target.value)">
               <option *ngFor="let cPer of costPer" [value]="cPer.costPerId">{{(cPer.costPerId === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((cPer.costPerId === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</option>
             </select>
           </li>
@@ -58,34 +58,37 @@
                 </li>
                 <li><p *ngIf="!addBuildingButtonDisable" data-toggle="modal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
                 <li><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
-                <li><p data-toggle="modal" data-target="#deleteBuilding" (click)="setIdForDeleteBuilding(building._id)">{{getMenus().DELETE}}</p></li>
+                <li><p (click)="setIdForDeleteBuilding(building._id, building.estimate.totalEstimatedCost)">{{getMenus().DELETE}}</p></li>
                 <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
               </ul>
             </div>
           </div>
+          <table class="table table-row-spacing table-dashboard cost-summary-table">
+            <thead class="cost-summary-table-header">
+              <tr>
+                <th rowspan="2" class="border-left">{{ getLabel().COST_HEAD }}</th>
+                <th colspan="2" class="border-left table-heading">
+                  {{ getLabel().BUDGETED_COST }}
+                  <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+                  <div class="white-bg"></div>
+                </th>
+                <th colspan="2" class="border-left table-heading">
+                  {{ getLabel().ESTIMATED_COST }} <span class="sub-heading">{{ getLabel().AS_PER_PROJECT }}</span>
+                  <div class="white-bg"></div>
+                </th>
+              </tr>
+              <tr class="cost-summary-row-list">
+                <th class="text-center"><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
+                <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
+                <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}}</span></th>
+                <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
           <div id="collapse{{i}}" class="panel-collapse collapse" [class.in]="i===0">
             <div class="panel-body">
               <table class="table table-row-spacing table-dashboard cost-summary-table">
-                <thead>
-                  <tr>
-                    <th rowspan="2" class="border-left">{{ getLabel().COST_HEAD }}</th>
-                    <th colspan="2" class="border-left table-heading">
-                      {{ getLabel().BUDGETED_COST }}
-                      <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
-                      <div class="white-bg"></div>
-                    </th>
-                    <th colspan="2" class="border-left table-heading">
-                      {{ getLabel().ESTIMATED_COST }} <span class="sub-heading">{{ getLabel().AS_PER_PROJECT }}</span>
-                      <div class="white-bg"></div>
-                    </th>
-                  </tr>
-                  <tr class="cost-summary-row-list">
-                    <th class="text-center"><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{ defaultCostingByArea }}</span></th>
-                    <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
-                    <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}}</span></th>
-                    <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
-                  </tr>
-                </thead>
                 <tbody class="animated-list" *ngIf="(building.thumbRule && building.estimate)">
                   <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReports; let i = index" class="delete-cost-head-cell animate-item"
                       [ngStyle]="animateView ? getListItemAnimation(i) : null">
@@ -96,14 +99,15 @@
                       <span *ngIf="thumbRuleItem.rate !== 0">{{ thumbRuleItem.rate | number: '1.2-2' }}</span>
                       <span *ngIf="thumbRuleItem.rate === 0">-</span>
                     </td>
-                    <td class="border-left">
+                    <td class="border-left" [class.validate-amount] = 'thumbRuleItem?.amount?.toString().split(".")[0]?.length>9 ||
+                                                       thumbRuleItem?.amount?.toString().split(".")[1]?.length>2'>
                       <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
-                      <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0">
+                      <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0 && thumbRuleItem.amount!==''">
                         {{thumbRuleItem.amount | number: '1.0-0'  }}
                       </span>
                       <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
-                      <div class="edit-field">
-                        <input type="number" title="Edit Budgeted Cost"
+                      <div class="edit-field"  >
+                        <input type="number" amountValidate="true" title="Edit Budgeted Cost"
                                [(ngModel)]="thumbRuleItem.amount"
                                id="thumbRuleItem.amount"
                                (blur)="changeBudgetedCostAmountOfBuildingCostHead(building._id, thumbRuleItem.name, thumbRuleItem.amount)"
@@ -228,6 +232,25 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
+
+              <div class="dropdown menu-items" style="z-index: 99;">
+                <a title="Download/Print" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="assets/build-info/dashboard/dots.png" />
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="first-child-list">
+                    <div class="download-pdf-list">
+                      <span><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Download/Print</span>
+                      <complete-project-report-pdf [amenitiesReport]="amenitiesReport"
+                                                   [buildingReports]="buildingsReport"
+                                                   [costingByUnit]="costingByUnit"
+                                                   [costingByArea]="costingByArea">
+                      </complete-project-report-pdf>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
               <table class="table table-dashboard">
                 <tbody>
                   <tr>
@@ -252,7 +275,7 @@
                             {{ grandTotalOfEstimatedRate|number: '1.2-2' }}
                       </span>
                     </td>
-                    <td>
+                    <td style="padding-right: 40px;">
                       <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }}</span>
                       <span class="estimated-cost" *ngIf="grandTotalOfEstimatedCost === 0">-</span>
                       <span class="estimated-cost" *ngIf="grandTotalOfEstimatedCost !== 0">
@@ -285,4 +308,22 @@
     <bi-delete-confirmation-modal [elementType]="deleteConfirmationBuilding" (deleteElementEvent)="deleteElement($event)"></bi-delete-confirmation-modal>
   </div>
 
+  <div class="modal fade default-modal" id="restriction" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p class="modal-icon"><i><img src="./assets/build-info/dashboard/warning-big.png"/></i></p>
+          <p>Building can be deleted only when total estimated cost is zero.</p>
+          <button class="btn btn-primary bi-btn" type="button" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer-section container">
+    <div class="col-sm-9 padding-right30">
+      <h1> Disclaimer </h1>
+      <p [innerHtml]="getMessage().DISCLAIMER_MESSAGE"></p>
+    </div>
+  </div>
 </section>

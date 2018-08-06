@@ -43,7 +43,10 @@ class RateAnalysisService {
   getCostHeads(url: string, user: User, callback: (error: any, result: any) => void) {
     logger.info('Rate Analysis Service, getCostHeads has been hit');
     request.get({url: url}, function (error: any, response: any, body: any) {
-      if (error) {
+      if (error || (!error && response.statusCode !== 200) ) {
+        if(!error && response.statusCode !== 200) {
+          callback('Get cost Heads response NOT FOUND', null);
+        }
         callback(error, null);
       } else if (!error && response) {
         console.log('RESPONSE JSON : ' + JSON.stringify(JSON.parse(body)));
@@ -56,7 +59,10 @@ class RateAnalysisService {
   getWorkItems(url: string, user: User, callback: (error: any, result: any) => void) {
     logger.info('Rate Analysis Service, getWorkItems has been hit');
     request.get({url: url}, function (error: any, response: any, body: any) {
-      if (error) {
+      if (error || (!error && response.statusCode !== 200)) {
+        if(!error && response.statusCode !== 200) {
+          callback('Get work items response NOT FOUND', null);
+        }
         callback(error, null);
       } else if (!error && response) {
         let res = JSON.parse(body);
@@ -69,7 +75,10 @@ class RateAnalysisService {
     logger.info('Rate Analysis Service, getWorkItemsByCostHeadId has been hit');
     let workItems: Array<WorkItem> = [];
     request.get({url: url}, function (error: any, response: any, body: any) {
-      if (error) {
+      if (error || (!error && response.statusCode !== 200)) {
+        if(!error && response.statusCode !== 200) {
+          callback('Get work items by cost Head NOT FOUND', null);
+        }
         callback(error, null);
       } else if (!error && response) {
         let res = JSON.parse(body);

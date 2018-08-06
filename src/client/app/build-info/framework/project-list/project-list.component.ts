@@ -21,6 +21,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   isSubscriptionExist: boolean = false;
   premiumPackageAvailable:boolean=false;
   projects : Array<any>;
+  sampleProject : any;
   packageName:any;
   isRetainModalActive:boolean=false;
   isProjectModalActive:boolean=false;
@@ -57,6 +58,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   onGetAllProjectSuccess(projects : any) {
    this.projects = projects.data;
+   this.sampleProject = projects.sampleProject;
    if(this.projects.length !== 0) {
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, this.projects[0].projectName);
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, this.projects[0].projectId);

@@ -11,6 +11,7 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
   public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
+  public static SAMPLE_PROJECT_ID = '5b63e2eaa99b9925448f7ab8';
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
@@ -234,7 +235,12 @@ export class Messages {
   public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
   public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';
   public static PROJECT_EXPIRED: string = 'Project Expired';
+  public static DISCLAIMER_MESSAGE: string = 'The Budgeted cost is based on thumb rule and may vary from project-to-project or place-to-place depending on construction methods and practices. <br/>The material consumption constants, material/labour rates in Rate analysis are based on various sources from the construction industry. <br/> All the in built contents/data of My Build Cost shall be used only for reference. The user shall verify the contents before using it. Big Slice Technologies Pvt Ltd (OPC), its Director/s, employees/representatives shall not be held responsible for any consequences resulted due to use of the contents/data of My Build Cost';
+  public static AMOUNT_VALIDATION_MESSAGE: string = 'This number format can have maximum 7 digits with 2 decimals. (e.g. 1234567.12).';
+  public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 2 decimals. (e.g. 123456789.12).';
 
+  //Sample Project
+  public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'You can\'t modified sample Project';
 }
 
 export class NavigationRoutes {
@@ -312,6 +318,8 @@ export class SessionStorage {
   public static IS_SUBSCRIPTION_AVAILABLE = 'is_subscription_available';
   public static PREMIUM_PACKAGE_AVAILABLE = 'premium_package_available';
   public static STATUS = 'project_status';
+  public static SELECTED_AREA = 'selectedArea';
+  public static SELECTED_UNIT = 'selectedUnit';
 
 }
 
@@ -681,7 +689,9 @@ export class ProjectElements {
   public static WORK_ITEM = ' a WorkItem';
   public static BUILDING = 'Building';
   public static QUANTITY_ITEM = 'Quantity Item';
-  public static DIRECT_QUANTITY = 'Direct Quantity';
+  public static DIRECT_QUANTITY = 'Direct quantity';
+  public static MEASUREMENT_SHEET = 'Measurement sheet';
+  public static FLOORWISE_QUANTITY = 'Floorwise quantity';
   public static QUANTITY_DETAILS = ' a Quantity Details';
   public static QUANTITY = 'Quantity';
   public static ATTACHMENT = ' an Attachment';

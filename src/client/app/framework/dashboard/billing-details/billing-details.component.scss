@@ -1,5 +1,9 @@
 @import '../../../../css/variables';
-
+.expiryDateNA {
+  display: block;
+  text-align: center;
+  width: 60px;
+}
 .billing-summary-section {
   min-width: 600px;
   display: table;

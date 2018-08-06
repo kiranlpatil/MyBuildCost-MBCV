@@ -14,7 +14,7 @@
             <input type="number"  [(ngModel)]="quantity.total"
                    id="quantity" size="10" class="form-control clear"
                    (change)="updateFloorwiseQunatityConfirmation(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
-            <span class="calculator" id="getQuantity{{quantityIndex}}"
+            <span class="calculator" id="getQuantity{{quantityIndex}}" title="Add Measurement"
                 *ngIf="!workItem.isSteelWorkItem && workItem.isMeasurementSheet" (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_QUANTITY_TAB, quantityIndex)">
                  <img src="assets/build-info/dashboard/calculator2.png" />
             </span>
@@ -76,6 +76,7 @@
                                  [workItemUnit] = "workItem.unit"
                                  [categoryRateAnalysisId]="categoryRateAnalysisId"
                                  [workItemRateAnalysisId]="workItemRateAnalysisId"
+                                 [ccWorkItemId]="ccWorkItemId"
                                  [categoryDetails] ="categoryDetails"
                                  [keyQuantity]="keyQuantity"
                                  [quantityId]="quantityId"
@@ -119,7 +120,8 @@
 
           <div class="modal fade default-modal" id="updateFloorwiseQuantityModal{{quantityIndex}}" role="dialog">
             <bi-update-confirmation-modal
-              [elementType]="updateConfirmationForDirectQuantity"
+              [elementType]="existingQuantityType"
+              [currentQuantity]="currentQuantityType"
               [quantity]="quantity"
               [total]="total"
               [workItemUnit]="workItemData.unit"

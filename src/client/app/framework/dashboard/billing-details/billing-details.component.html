@@ -16,12 +16,22 @@
               <a *ngIf="(project.warningMessage !== null || project.expiryMessage !== null) && project.activeStatus" (click)="goToRenew(project.projectId, project.projectName, project.numOfDaysToExpire)"> {{getButton().RENEW_NOW}}</a>
             </td>
             <td>
+              <div *ngIf="(project.expiryMessage !== null || project.expiryMessage === null || project.warningMessage !== null ) && project.activeStatus">
                 {{project.expiryDate | date:'dd MMMM yyyy'}}
+              </div>
+              <div *ngIf="(project.expiryMessage === null && !project.activeStatus)">
+                <span class="expiryDateNA">-</span>
+              </div>
             </td>
-            <td class="numberof-building">
+            <td class="numberof-building" >
+              <div *ngIf="(project.expiryMessage !== null || project.expiryMessage === null|| project.warningMessage !== null ) && project.activeStatus">
                {{project.numOfBuildingsAllocated}}
               <p *ngIf="project.numOfBuildingsRemaining !== 0">{{getMessage().MSG_FOR_REMAINING_BUILDINGS}}
                 {{project.numOfBuildingsRemaining}}{{getMessage().MSG_FOR_REMAINING_BUILDINGS_ADD}}</p>
+              </div>
+              <div *ngIf="(project.expiryMessage === null && !project.activeStatus)">
+                -
+              </div>
             </td>
         </tr>
         </tbody>

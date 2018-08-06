@@ -2,7 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '../../../../model/category';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { WorkItem } from '../../../../model/work-item';
-import { Button, Label, Messages, TableHeadings, ValueConstant } from '../../../../../../shared/constants';
+import {
+  Button, Label, Messages, ProjectElements, TableHeadings,
+  ValueConstant
+} from '../../../../../../shared/constants';
 import * as lodsh from 'lodash';
 import { QuantityDetails } from '../../../../model/quantity-details';
 import {
@@ -12,8 +15,7 @@ import {
 import { CostSummaryService } from '../../cost-summary.service';
 import { LoaderService } from '../../../../../../shared/loader/loaders.service';
 import { Rate } from '../../../../model/rate';
-import {SteelQuantityItem} from "../../../../model/steelQuantityItem";
-import {SteelQuantityItems} from "../../../../model/SteelQuantityItems";
+import { SteelQuantityItems } from '../../../../model/SteelQuantityItems';
 import { ErrorService } from '../../../../../../shared/services/error.service';
 declare var $: any;
 
@@ -32,6 +34,7 @@ export class QuantityDetailsComponent implements OnInit {
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
   @Input() workItemRateAnalysisId : number;
+  @Input() ccWorkItemId : number;
   @Input() baseUrl : string;
 
   @Output() categoriesTotalAmount = new EventEmitter<number>();
@@ -39,11 +42,14 @@ export class QuantityDetailsComponent implements OnInit {
   @Output() refreshWorkItemList = new EventEmitter();
   @Output() quantityName = new EventEmitter<String>();
   @Output() workItemRateId = new EventEmitter<number>();
+  @Output() ccWorkItemRateId = new EventEmitter<number>();
 
   workItemId : number;
   quantityId : number;
   currentId : number;
   currentQtyName : string;
+  currentQuantityType : string;
+  existingQuantityType : string;
   rateItemsArray : Rate;
   unit:string='';
   previousRateQuantity : number = 0;
@@ -66,7 +72,6 @@ export class QuantityDetailsComponent implements OnInit {
 
    ngOnInit() {
     this.workItemData = this.workItem;
-
   }
 
   changeQuantityName(keyQuantity: string) {
@@ -137,13 +142,23 @@ export class QuantityDetailsComponent implements OnInit {
 
   updateFloorwiseQunatityConfirmation(quantity :any, flag : string, quantityIndex ?: number) {
     this.flagForFloorwiseQuantity = flag;
+    if(flag === Label.DIRECT_QUANTITY) {
+      quantity.isDirectQuantity = true;
+    }
     if(quantity.quantityItems===undefined) {
       quantity.quantityItems=[];
     }
     if((flag === Label.DIRECT_QUANTITY && quantity.quantityItems &&  quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
       (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
+      if(flag === Label.DIRECT_QUANTITY) {
+        this.existingQuantityType = ProjectElements.DIRECT_QUANTITY;
+        this.currentQuantityType = ProjectElements.MEASUREMENT_SHEET;
+      } else {
+        this.existingQuantityType = ProjectElements.MEASUREMENT_SHEET;
+        this.currentQuantityType = ProjectElements.DIRECT_QUANTITY;
+      }
       $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
-    }else if((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !==0 && quantity.total !== 0) ||
+    } else if((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !==0 && quantity.total !== 0) ||
       (flag === Label.WORKITEM_STEEL_QUANTITY_TAB && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length ===0 && quantity.total !== 0)) {
       $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
     } else {
@@ -207,7 +222,7 @@ export class QuantityDetailsComponent implements OnInit {
       this.loaderService.start();
 
       this.costSummaryService.updateQuantityDetails(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
-        this.workItemRateAnalysisId,quantityDetailsObj).subscribe(
+        this.workItemRateAnalysisId, this.ccWorkItemId, quantityDetailsObj).subscribe(
         success => this.onUpdateQuantityDetailSuccess(success, flag),
         error => this.onUpdateQuantityDetailFailure(error)
       );
@@ -257,6 +272,9 @@ export class QuantityDetailsComponent implements OnInit {
       if(categoryData.rateAnalysisId === this.categoryRateAnalysisId) {
         let categoryTotalAmount = 0;
         for(let workItemData of this.workItemsList) {
+          if(this.workItem.rateAnalysisId === workItemData.rateAnalysisId) {
+            workItemData.isDetailedQuantity = true;
+          }
           categoryTotalAmount =categoryTotalAmount + workItemData.amount;
         }
         categoryData.amount = categoryTotalAmount;
@@ -322,16 +340,17 @@ export class QuantityDetailsComponent implements OnInit {
 
   setQuantityNameForDelete(quantityName: string) {
     this.quantityName.emit(quantityName);
+    this.ccWorkItemRateId.emit(this.ccWorkItemId);
     this.workItemRateId.emit(this.workItemRateAnalysisId);
   }
 
-  deleteQuantityDetailsByName(quantityName: string, workItemRateID:number) {
+  deleteQuantityDetailsByName(quantityName: string, workItemRateID:number, ccWorkItemID:number) {
     if(quantityName !== null && quantityName !== undefined && quantityName !== '') {
       this.currentQuantityName = quantityName;
       this.loaderService.start();
       let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.costSummaryService.deleteQuantityDetailsByName(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
-        workItemRateID, quantityName).subscribe(
+        workItemRateID, ccWorkItemID, quantityName).subscribe(
         success => this.onDeleteQuantityDetailsByNameSuccess(success),
         error => this.onDeleteQuantityDetailsByNameFailure(error)
       );

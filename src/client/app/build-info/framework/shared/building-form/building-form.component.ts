@@ -18,6 +18,7 @@ export class BuildingFormComponent {
   @Input() submitActionLabel: string;
   @Input() buildingModel?: Building = new Building();
   @Input() buildingName?:string;
+  @Input() disableFormFields?:boolean;
   @Output() onSubmitEvent = new EventEmitter<Building>();
 
   buildingForm: FormGroup;
@@ -32,7 +33,7 @@ export class BuildingFormComponent {
     this.cloneItemsStatus.fill(false).fill(true,0,1);
     this.view = SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
     this.buildingForm = this.formBuilder.group({
-      name: ['', ValidationService.requiredBuildingName],
+      name: ['', [ValidationService.requiredBuildingName, ValidationService.alphabatesValidator]],
       totalSlabArea: ['', ValidationService.requiredSlabArea],
       totalCarpetAreaOfUnit: ['', ValidationService.requiredCarpetArea],
       totalSaleableAreaOfUnit: ['', ValidationService.requiredSalebleArea],
@@ -81,5 +82,10 @@ export class BuildingFormComponent {
   }
   onCancel() {
     window.history.back();
+  }
+  validateBuildingName(event:any) {
+    if(event.keyCode===34||event.keyCode===39) {
+      event.preventDefault();
+    }
   }
 }

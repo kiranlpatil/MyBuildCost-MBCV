@@ -18,7 +18,7 @@
         <div class="panel panel-default animate-item" *ngFor=" let category of categoryDetails| sortByCategoryAmount; let categoryIndex = index "
              [ngStyle]="animateView ? getListItemAnimation(secondaryViewDataIndex) : null">
           <div class="panel-heading">
-            <div class="panel-title clearfix" (click)="getActiveWorkItemsOfCategory(category.rateAnalysisId)">
+            <div class="panel-title clearfix" (click)="getActiveWorkItemsOfCategory(category.rateAnalysisId); getInActiveWorkItems(category.rateAnalysisId,categoryIndex);">
               <a data-parent="#cost-head-panels" class="collapsed cost-head-lists">
                 <span class="caret"></span>
                 <span class="category-name">{{ category.name }}</span>
@@ -53,9 +53,14 @@
                                   <div class="panel-heading">
                                     <div class="panel-title clearfix" >
                                       <a data-toggle="collapse" href="#collapseDetails{{workItemIndex}}"
-                                         class="work-item-panel-row collapsed" data-parent="#category-panel" (click)="toggleWorkItemPanel(workItemIndex, workItem)">
+                                         class="work-item-panel-row" data-parent="#category-panel" (click)="toggleWorkItemPanel(workItemIndex, workItem)" aria-expanded="true">
                                       <span class="caret"
-                                            *ngIf="workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default'"></span>{{ workItem.name }}</a>
+                                            *ngIf="workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default'"></span>
+                                        {{ workItem.name }}
+                                     <!-- <div class="edit-field">
+                                        <input [(ngModel)]="workItem.name" id="workItemName" class="form-control clear" title="Change item name"/>
+                                      </div>-->
+                                      </a>
                                     </div>
                                   </div>
                                 </td>
@@ -64,12 +69,14 @@
                                 </td>-->
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().QUANTITY}}</span>
-                                  <div class="edit-field" [class.active-quantity]="(showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
-                                    <input type="number" [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
+                                  <div class="edit-field"
+                                       [class.disabled]="workItem.isDetailedQuantity" [class.active-quantity]="(showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
+                                    <input type="number" amountValidate="true"
+                                           [(ngModel)]="workItem.quantity.total" (focus)="setQuantityTotal(workItem.quantity.total)"
                                            (change)="showUpdateDirectQuantityModal(workItem, category.rateAnalysisId, workItemIndex)"
                                             id="directQuantity" size="10" class="form-control clear" title="Add Quantity">
                                     <span class="calculator"
-                                          id="getQuantity{{categoryIndex}}"
+                                          id="getQuantity{{categoryIndex}}" [class.disabled]="workItem.isDetailedQuantity"
                                           *ngIf="workItem.isMeasurementSheet" title="Add Measurement"
                                           (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex);">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
@@ -89,7 +96,11 @@
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().RATE_PER_UNIT}}</span>
                                   <div class="edit-field" [class.active-rate]="(showWorkItemTab == getLabel().WORKITEM_RATE_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
-                                    <input title="Workitem Rate" *ngIf="workItem.isDirectRate" type = "number" [(ngModel)]="workItem.rate.total" (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
+                                    <input amountValidate="true" title="Workitem Rate" *ngIf="workItem.isDirectRate" type = "number"
+                                           [class.validate-amount] = 'workItem?.rate?.total?.toString().split(".")[0].length>7 ||
+                                           workItem?.rate?.total?.toString().split(".")[1]?.length>2 ||workItem?.rate?.total?.toString().split(".").length>2 '
+                                           [(ngModel)]="workItem.rate.total"
+                                           (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.workItemId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
                                     <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
                                       {{workItem.rate.total|number : '1.2-2'}}
                                     </div>
@@ -138,10 +149,10 @@
 
                                 <td>
                                     <div class="file-attachment" [class.attachment-menu-open]="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
-                                      <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
+                                      <span  *ngIf="workItem.attachmentDetails.length == 0"(click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, workItem.workItemId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/attach-file.png" alt="Attach Support Files" title="Attach Support Files" />
                                       </span>
-                                      <span class="file-attached" *ngIf="workItem.attachmentDetails.length != 0" (click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, categoryIndex, workItemIndex)">
+                                      <span class="file-attached" *ngIf="workItem.attachmentDetails.length != 0" (click)="setVariable(category.rateAnalysisId, workItem.rateAnalysisId, workItem.workItemId, categoryIndex, workItemIndex)">
                                         <img src="assets/build-info/dashboard/file-attached.png" alt="Attach Support Files" title="Attach Support Files" />
                                       </span>
                                       <div class="attachment-menu" *ngIf="(showAttachmentView == getLabel().ATTACH_FILE && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)">
@@ -159,14 +170,14 @@
                                       <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
                                     <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head" title="Delete Work Item"
-                                         (click)="setIdsForDeleteWorkItem(category.rateAnalysisId,workItem.rateAnalysisId,workItemIndex )">
+                                         (click)="setIdsForDeleteWorkItem(category.rateAnalysisId, workItem.rateAnalysisId, workItem.workItemId, workItemIndex )">
                                       <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />
                                     </div>
                                   </td>
 
                                 <td id="show-embedded-table" [class.steel-quantity-embedded-table]="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB || showWorkItemTab == getLabel().WORKITEM_STEEL_QUANTITY_TAB">
                                     <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB" [@fadeIn]="state">
-                                      <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+                                      <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId && compareCCWorkItemId === workItem.workItemId">
                                         <bi-get-rate [rate]="rateItemsArray"
                                                      [categoryDetails] ="categoryDetails"
                                                      [rateView]="rateView"
@@ -174,6 +185,7 @@
                                                      [workItemUnit] = "workItem.unit"
                                                      [categoryRateAnalysisId]="category.rateAnalysisId"
                                                      [workItemRateAnalysisId]="workItem.rateAnalysisId"
+                                                     [ccWorkItemId]="workItem.workItemId"
                                                      [ratePerUnitAmount]="ratePerUnitAmount"
                                                      [totalByUnit]="totalByUnit"
                                                      (categoriesTotalAmount)="setCategoriesTotal($event)"
@@ -185,7 +197,7 @@
                                     </div>
 
                                   <div *ngIf="showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB">
-                                    <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+                                    <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId && compareCCWorkItemId === workItem.workItemId">
                                       <!-- <span class="glyphicon glyphicon-remove" (click)="closeQuantityTab()"></span>-->
                                     <bi-get-quantity [quantityItems]="quantityItemsArray"
                                                        [categoryDetails] ="categoryDetails"
@@ -197,6 +209,7 @@
                                                        (closeQuantityView) = "closeQuantityView($event)"
                                                        [categoryRateAnalysisId]="category.rateAnalysisId"
                                                        [workItemRateAnalysisId]="workItem.rateAnalysisId"
+                                                       [ccWorkItemId]="workItem.workItemId"
                                                        [keyQuantity]="keyQuantity"
                                                        [quantityId]="quantityId"
                                                        [baseUrl] = "baseUrl">
@@ -206,7 +219,7 @@
 
 
                                   <div *ngIf="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB">
-                                    <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId">
+                                    <div *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId && compareCCWorkItemId === workItem.workItemId">
 
                                     <bi-get-quantity-steel
                                       [steelQuantityItems]="steelQuantityItemsArray.steelQuantityItem"
@@ -214,6 +227,7 @@
                                       [workItemsList] ="workItemsList"
                                       [categoryDetails] ="categoryDetails"
                                       [workItem]="workItem"
+                                      [ccWorkItemId]="workItem.workItemId"
                                       [workItemUnit] = "workItem.unit"
                                       (categoriesTotalAmount)="setCategoriesTotal($event)"
                                       (refreshWorkItemList)="refreshWorkItemList($event)"
@@ -222,7 +236,8 @@
                                       [workItemRateAnalysisId]="workItem.rateAnalysisId"
                                       [keyQuantity]="keyQuantity"
                                       [quantityId]="quantityId"
-                                      [baseUrl] = "baseUrl"></bi-get-quantity-steel>
+                                      [baseUrl] = "baseUrl">
+                                    </bi-get-quantity-steel>
                                   </div>
                                   </div>
 
@@ -231,6 +246,7 @@
                                 <div class="modal fade default-modal" id="updateDirectQuantity{{workItemIndex}}" role="dialog">
                                   <bi-update-confirmation-modal
                                     [elementType]="updateConfirmationForDirectQuantity"
+                                    [currentQuantity]="currentQuantityType"
                                     [categoryId]="categoryId"
                                     [workitem]="workItem"
                                     [total]="total"
@@ -241,7 +257,8 @@
 
                                 <div class="modal fade default-modal" id="updateMeasurementQuantity{{workItemIndex}}" role="dialog">
                                   <bi-update-confirmation-modal
-                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [elementType]="updateConfirmationForMeasurementSheet"
+                                    [currentQuantity]="currentQuantityType"
                                     [categoryId]="categoryId"
                                     [workitem]="workItem"
                                     [workItemIndex] = "workItemIndex"
@@ -252,7 +269,8 @@
 
                                 <div class="modal fade default-modal" id="addFloorwiseQuantity{{workItemIndex}}" role="dialog">
                                   <bi-update-confirmation-modal
-                                    [elementType]="updateConfirmationForDirectQuantity"
+                                    [elementType]="updateConfirmationForFloorwiseQuantity"
+                                    [currentQuantity]="currentQuantityType"
                                     [categoryId]="categoryId"
                                     [workitem]="workItem"
                                     [workItemIndex] = "workItemIndex"
@@ -276,9 +294,11 @@
                                           (categoriesTotalAmountOfQty)="setCategoriesTotalOfQty($event)"
                                           (quantityName)="setQuantityName($event)"
                                           (workItemRateId)="setWorkItemId($event)"
+                                          (ccWorkItemRateId)="setccWorkItemRateId($event)"
                                           (refreshWorkItemList)="refreshCategoryList($event)"
                                           [categoryRateAnalysisId]="category.rateAnalysisId"
                                           [workItemRateAnalysisId]="workItem.rateAnalysisId"
+                                          [ccWorkItemId]="workItem.workItemId"
                                           [baseUrl] = "baseUrl">
                                         </bi-quantity-details>
                                       </div>
@@ -297,7 +317,7 @@
               <div class="bg-white hidden-xs">
                 <table class="table table-dashboard add-item-table">
                   <tbody>
-                  <tr *ngIf="showWorkItemList==true && compareWorkItemRateAnalysisId==categoryIndex">
+                  <tr *ngIf="compareWorkItemRateAnalysisId==categoryIndex">
                     <td>
                       <select  class="select-item" (change)="onChangeActivateSelectedWorkItem($event.target.value)">
                         <option [value]="selectItem">Select Work Items</option>
@@ -306,13 +326,13 @@
                     </td>
                     <td colspan="6">&nbsp;</td>
                   </tr>
-                  <tr>
+                  <!--<tr>
                     <td  class="add-items" colspan="7">
                       <button title="Add Item" type="button" class="btn-add-item"
-                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)" [disabled]="showHideAddItemButton">
+                              (click)="getInActiveWorkItems(category.rateAnalysisId,categoryIndex)">
                         <span class="glyphicon glyphicon-plus"></span> {{getButton().ADD}} {{getButton().ITEM}}</button>
                     </td>
-                  </tr>
+                  </tr>-->
                   </tbody>
                 </table>
               </div>
