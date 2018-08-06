@@ -11,7 +11,7 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
   public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
-  public static SAMPLE_PROJECT_ID = '5b63e2eaa99b9925448f7ab8';
+  public static SAMPLE_PROJECT_ID = '5b6816dabde73d08d907d638';
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
