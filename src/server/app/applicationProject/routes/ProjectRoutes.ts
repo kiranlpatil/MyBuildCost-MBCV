@@ -113,7 +113,7 @@ class ProjectRoutes {
 
     //update workitem name of project costhead
     router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/workItemName',
-      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateWorkItemNameOfProjectCostHeads,
       controller.updateQuantityDetailsOfProject, this._responseInterceptor.exit);
 
     /*Project- Routes: Rate*/
@@ -225,11 +225,13 @@ this._requestInterceptor.intercept, validator.setCostHeadStatus, controller.setC
 
     /*Building- Routes: WorkItem*/
     ///Add and remove a costhead by setting status of workitems to true and false
-    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemRAId/:workItemId/activeStatus/:activeStatus', this.authInterceptor.requiresAuth,
-      this._requestInterceptor.intercept, validator.updateWorkItemStatusOfBuildingCostHeads, controller.updateWorkItemStatusOfBuildingCostHeads, this._responseInterceptor.exit);
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemRAId/:workItemId/activeStatus/:activeStatus',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateWorkItemStatusOfBuildingCostHeads,
+      controller.updateWorkItemStatusOfBuildingCostHeads, this._responseInterceptor.exit);
 
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/workitemName',
-    this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.updateWorkItemNameOfBuildingCostHeads, this._responseInterceptor.exit);
+    this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateWorkItemnameOfBuildingCostHeads,
+      controller.updateWorkItemNameOfBuildingCostHeads, this._responseInterceptor.exit);
 
     //Retrieve list of inactive workitems
     router.get('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem',
