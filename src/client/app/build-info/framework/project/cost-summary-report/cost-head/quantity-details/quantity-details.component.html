@@ -120,7 +120,8 @@
 
           <div class="modal fade default-modal" id="updateFloorwiseQuantityModal{{quantityIndex}}" role="dialog">
             <bi-update-confirmation-modal
-              [elementType]="updateConfirmationForDirectQuantity"
+              [elementType]="existingQuantityType"
+              [currentQuantity]="currentQuantityType"
               [quantity]="quantity"
               [total]="total"
               [workItemUnit]="workItemData.unit"

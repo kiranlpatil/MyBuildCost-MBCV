@@ -2,7 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '../../../../model/category';
 import { QuantityItem } from '../../../../model/quantity-item';
 import { WorkItem } from '../../../../model/work-item';
-import { Button, Label, Messages, TableHeadings, ValueConstant } from '../../../../../../shared/constants';
+import {
+  Button, Label, Messages, ProjectElements, TableHeadings,
+  ValueConstant
+} from '../../../../../../shared/constants';
 import * as lodsh from 'lodash';
 import { QuantityDetails } from '../../../../model/quantity-details';
 import {
@@ -45,6 +48,8 @@ export class QuantityDetailsComponent implements OnInit {
   quantityId : number;
   currentId : number;
   currentQtyName : string;
+  currentQuantityType : string;
+  existingQuantityType : string;
   rateItemsArray : Rate;
   unit:string='';
   previousRateQuantity : number = 0;
@@ -137,13 +142,23 @@ export class QuantityDetailsComponent implements OnInit {
 
   updateFloorwiseQunatityConfirmation(quantity :any, flag : string, quantityIndex ?: number) {
     this.flagForFloorwiseQuantity = flag;
+    if(flag === Label.DIRECT_QUANTITY) {
+      quantity.isDirectQuantity = true;
+    }
     if(quantity.quantityItems===undefined) {
       quantity.quantityItems=[];
     }
     if((flag === Label.DIRECT_QUANTITY && quantity.quantityItems &&  quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
       (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
+      if(flag === Label.DIRECT_QUANTITY) {
+        this.existingQuantityType = ProjectElements.DIRECT_QUANTITY;
+        this.currentQuantityType = ProjectElements.MEASUREMENT_SHEET;
+      } else {
+        this.existingQuantityType = ProjectElements.MEASUREMENT_SHEET;
+        this.currentQuantityType = ProjectElements.DIRECT_QUANTITY;
+      }
       $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
-    }else if((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !==0 && quantity.total !== 0) ||
+    } else if((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !==0 && quantity.total !== 0) ||
       (flag === Label.WORKITEM_STEEL_QUANTITY_TAB && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length ===0 && quantity.total !== 0)) {
       $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
     } else {
