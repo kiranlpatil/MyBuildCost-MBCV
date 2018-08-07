@@ -635,6 +635,35 @@ class ProjectController {
     }
   }
 
+  updateWorkItemNameOfBuildingCostHeads(req: express.Request, res: express.Response, next: any): void {
+    logger.info('Project controller, update WorkItem has been hit');
+    try {
+      let user = req.user;
+      let body = req.body;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+
+      let projectService: ProjectService = new ProjectService();
+      projectService.updateWorkItemNameOfBuildingCostHeads( buildingId, costHeadId, categoryId,
+        workItemId, ccWorkItemId, body, user,(error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('Update workItem Details success ');
+            logger.debug('update WorkItem for Project ID : '+projectId+', Building ID : '+buildingId+
+              ', CostHead : '+costHeadId);
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
  // Update WorkItem Status Of Project CostHeads
   updateWorkItemStatusOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
     logger.info('Project controller, Update WorkItem Status Of Project Cost Heads has been hit');
@@ -812,6 +841,32 @@ class ProjectController {
   }
 
   updateQuantityDetailsOfProject(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, update DirectQuantity Of BuildingQuantityItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let workItemName = req.body.workItemName;
+
+      let projectService = new ProjectService();
+      projectService.updateWorkitemNameOfProjectCostHeads( projectId, costHeadId,
+        categoryId, workItemId, ccWorkItemId, workItemName, user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('update DirectQuantity Of BuildingQuantityItems success');
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateWorkItemNameOfProjectCostHead(req: express.Request, res: express.Response, next: any): void {
     try {
       logger.info('Project controller, update DirectQuantity Of BuildingQuantityItems has been hit');
       let user = req.user;

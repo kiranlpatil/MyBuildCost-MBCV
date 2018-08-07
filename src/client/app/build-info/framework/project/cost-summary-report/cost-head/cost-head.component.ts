@@ -680,11 +680,32 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     //this.displayRateView = null;
   }
 
+  updateWorkItemName(categoryId: number, workItem : any) {
+    this.loaderService.start();
+    console.log('WorkItem name : ' + workItem.name);
+    let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+    this.costSummaryService.updateWorkItemName( this.baseUrl, costHeadId, categoryId, workItem.rateAnalysisId,
+      workItem.workItemId, workItem.name).subscribe(
+      workItemsList => this.onUpdateWorkItemNameSuccess(workItemsList),
+      error => this.onUpdateWorkItemNameFailure(error)
+    );
+  }
 
+  onUpdateWorkItemNameSuccess(workItem : any) {
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_UPDATE_WORKITEM_NAME;
+    this.messageService.message(message);
+    this.refreshCategoryList();
+    this.loaderService.stop();
+  }
 
-/*  setSelectedWorkItems(workItemList:any) {
-    this.selectedWorkItems = workItemList;
-  }*/
+  onUpdateWorkItemNameFailure(error : any) {
+    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
+    this.loaderService.stop();
+  }
 
   toggleWorkItemPanel(workItemIndex : number, workItem:WorkItem) {
     var element = document.getElementById('collapseDetails'+workItemIndex);

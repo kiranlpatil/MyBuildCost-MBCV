@@ -91,18 +91,19 @@
           <div *ngIf="quantityIndex === currentFloorIndex && showInnerView === getLabel().WORKITEM_STEEL_QUANTITY_TAB">
             <bi-get-quantity-steel [steelQuantityItems]="steelquantityItem.steelQuantityItem"
                                    [totalDiamterQuantity]="steelquantityItem"
-                                 [quantityDetails]="quantityDetails"
+                                   [quantityDetails]="quantityDetails"
                                    [workItem]="workItem"
+                                   [ccWorkItemId]="ccWorkItemId"
                                    [categoryDetails] ="categoryDetails"
-                                 [categoryRateAnalysisId]="categoryRateAnalysisId"
-                                 [workItemRateAnalysisId]="workItemRateAnalysisId"
-                                 [keyQuantity]="keyQuantity"
-                                 [quantityId]="quantityId"
-                                 [workItemsList] ="workItemsList"
-                                 [innerView]="getLabel().WORKITEM_STEEL_QUANTITY_TAB"
-                                 (closeInnerView)="closeInnerView($event)"
-                                 (categoriesTotalAmount)="setCategoriesTotal($event)"
-                                 [baseUrl] = "baseUrl">
+                                   [categoryRateAnalysisId]="categoryRateAnalysisId"
+                                   [workItemRateAnalysisId]="workItemRateAnalysisId"
+                                   [keyQuantity]="keyQuantity"
+                                   [quantityId]="quantityId"
+                                   [workItemsList] ="workItemsList"
+                                   [innerView]="getLabel().WORKITEM_STEEL_QUANTITY_TAB"
+                                   (closeInnerView)="closeInnerView($event)"
+                                   (categoriesTotalAmount)="setCategoriesTotal($event)"
+                                   [baseUrl] = "baseUrl">
                 </bi-get-quantity-steel>
           </div>
 

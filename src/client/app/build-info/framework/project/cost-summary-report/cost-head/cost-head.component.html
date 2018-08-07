@@ -56,10 +56,10 @@
                                          class="work-item-panel-row" data-parent="#category-panel" (click)="toggleWorkItemPanel(workItemIndex, workItem)" aria-expanded="true">
                                       <span class="caret"
                                             *ngIf="workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default'"></span>
-                                        {{ workItem.name }}
-                                     <!-- <div class="edit-field">
-                                        <input [(ngModel)]="workItem.name" id="workItemName" class="form-control clear" title="Change item name"/>
-                                      </div>-->
+                                        <!--{{ workItem.name }}-->
+                                      <div class="edit-field">
+                                        <input [(ngModel)]="workItem.name" id="workItemName" (change)="updateWorkItemName(category.rateAnalysisId, workItem)" class="form-control clear" title="Change item name"/>
+                                      </div>
                                       </a>
                                     </div>
                                   </div>
@@ -227,7 +227,7 @@
                                       [workItemsList] ="workItemsList"
                                       [categoryDetails] ="categoryDetails"
                                       [workItem]="workItem"
-                                      [ccWorkItemId]="workItem.workItemId"
+                                      [ccWorkItemId]="workItem?.workItemId"
                                       [workItemUnit] = "workItem.unit"
                                       (categoriesTotalAmount)="setCategoriesTotal($event)"
                                       (refreshWorkItemList)="refreshWorkItemList($event)"

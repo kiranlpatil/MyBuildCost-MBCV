@@ -23,6 +23,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   projects : Array<any>;
   sampleProject : any;
   packageName:any;
+  isSamplePrjUser:boolean=false;
   isRetainModalActive:boolean=false;
   isProjectModalActive:boolean=false;
   premiumPackageDetails:any;
@@ -59,6 +60,11 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   onGetAllProjectSuccess(projects : any) {
    this.projects = projects.data;
    this.sampleProject = projects.sampleProject;
+   for(let project of this.projects) {
+     if(project.projectId === this.sampleProject[0].projectId) {
+       this.isSamplePrjUser = true;
+     }
+   }
    if(this.projects.length !== 0) {
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, this.projects[0].projectName);
      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, this.projects[0].projectId);

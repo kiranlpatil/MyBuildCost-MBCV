@@ -196,6 +196,14 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
+  updateWorkItemName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                    ccWorkItemId: number, workItemName : number) {
+    var body= { workItemName : workItemName };
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY +'/'+ categoryId +
+      '/' + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/' + API.WORKITEM_NAME;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
 
   getRateItems( projectId : String, buildingId : string, costheadId : number, categoryId : number, workItemId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/'+ API.COSTHEAD +'/' +

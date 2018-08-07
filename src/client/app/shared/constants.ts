@@ -1,8 +1,8 @@
 export class AppSettings {
-  // public static IP = 'http://localhost:8080';
-  public static IP = 'http://13.232.139.161:8080'; // build info staging
-  // public static HOST_NAME = 'localhost:8080';
-  public static HOST_NAME = '13.232.139.161:8080';
+  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://13.232.139.161:8080'; // build info staging
+  public static HOST_NAME = 'localhost:8080';
+  //public static HOST_NAME = '13.232.139.161:8080';
 
   public static INITIAL_THEM = 'container-fluid dark-theme';
   public static LIGHT_THEM = 'container-fluid light-theme';
@@ -11,13 +11,34 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
   public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
+
+  /*
+  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
+  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
+  */
+
+  /*
+    // Localhost Project and User Id
+    public static SAMPLE_PROJECT_ID = '5b644d4993310206e4f0d94e';
+    public static SAMPLE_PROJECT_USER_ID = '5b643c9d8e94d52c74075f50';
+  */
+
+
+  // Staging Project and User Id
   public static SAMPLE_PROJECT_ID = '5b6816dabde73d08d907d638';
+  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
+
+
+/*
+  // Production Project and User Id
+  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
+  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
+*/
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
   }
 }
-
 
 
 export class Messages {
@@ -197,6 +218,7 @@ export class Messages {
   public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM: string = 'Quantity for Work Item updated successfully.';
   public static MSG_SUCCESS_UPDATE_DIRECT_RATE_OF_WORKITEM: string = 'Rate for Work Item updated successfully.';
   public static MSG_SUCCESS_UPDATE_QUANTITY_NAME_WORKITEM: string = 'Title for Work Item updated successfully.';
+  public static MSG_SUCCESS_UPDATE_WORKITEM_NAME: string = 'Workitem name updated successfully';
 
   //Quantity view required fields
   public static MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED = 'Enter item';
@@ -241,7 +263,7 @@ export class Messages {
   public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 2 decimals. (e.g. 123456789.12).';
 
   //Sample Project
-  public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'You can\'t modified sample Project';
+  public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'Sample project helps you understand how the application works. Modified values will not be calculated or saved.';
 }
 
 export class NavigationRoutes {
@@ -382,6 +404,7 @@ export class API {
   public static QUANTITY_ITEM_DETAILS = 'quantityItemDetails';
   public static ITEM = 'item';
   public static DIRECT = 'direct';
+  public static WORKITEM_NAME = 'workitemName';
   public static DIRECT_QUANTITY = 'directQuantity';
   public static FILE = 'uploadFile';
   public static FILE_LIST = 'fileNameList';

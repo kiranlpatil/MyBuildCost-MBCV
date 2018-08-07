@@ -1298,6 +1298,30 @@ class ProjectService {
     });
   }
 
+  updateWorkItemNameOfBuildingCostHeads( buildingId: string, costHeadId: number, categoryId: number,
+                                         workItemId: number, ccWorkItemId: number, body: any, user: User,
+                                          callback: (error: any, result: any) => void) {
+    logger.info('Project service, update Workitem has been hit');
+
+    let query = {_id: buildingId};
+    let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].name': body.workItemName}};
+    let arrayFilter = [
+      {'costHead.rateAnalysisId': costHeadId},
+      {'category.rateAnalysisId': categoryId},
+      {'workItem.rateAnalysisId': workItemId, 'workItem.workItemId' : ccWorkItemId}
+    ];
+
+    this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+
+  }
+
   updateBudgetedCostForCostHead(buildingId: string, costHeadBudgetedAmount: any, user: User,
                                 callback: (error: any, result: any) => void) {
     logger.info('Project service, updateBudgetedCostForCostHead has been hit');
@@ -1495,6 +1519,25 @@ class ProjectService {
     });
   }
 
+  updateWorkitemNameOfProjectCostHeads(projectId: string, costHeadId: number, categoryId: number,
+                                 workItemId: number, ccWorkItemId: number, workItemName: string,
+                                 user: User, callback: (error: any, result: any) => void) {
+    let query = { _id: projectId };
+    let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].name':workItemName}};
+    let arrayFilter = [
+      { 'costHead.rateAnalysisId': costHeadId },
+      { 'category.rateAnalysisId': categoryId },
+      { 'workItem.rateAnalysisId': workItemId,'workItem.workItemId': ccWorkItemId }
+    ];
+    this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data :'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
 
   updateQuantityDetailsOfBuilding(projectId: string, buildingId: string, costHeadId: number, categoryId: number,
                                   workItemId: number, ccWorkItemId: number, quantityDetailsObj: QuantityDetails,
