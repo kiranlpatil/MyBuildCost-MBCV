@@ -1872,6 +1872,9 @@ class ProjectService {
         workItem.rate.rateItems = this.getRatesFromCentralizedrates(rateItemsOfWorkItem, centralizedRates);
 
         let arrayOfRateItems = workItem.rate.rateItems;
+        for(let rateItemIndex = 0; rateItemIndex < arrayOfRateItems.length; rateItemIndex++) {
+          arrayOfRateItems[rateItemIndex].totalAmount = arrayOfRateItems[rateItemIndex].quantity * arrayOfRateItems[rateItemIndex].rate;
+        }
         let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?', [arrayOfRateItems]);
         let totalByUnit = totalOfAllRateItems / workItem.rate.quantity;
         if (!workItem.isDirectRate) {

@@ -538,6 +538,7 @@ class RateAnalysisService {
 
       //System rate
 
+      workItem.systemRate.unit = workItem.rate.unit;
       workItem.systemRate.rateItems = rateItemsByWorkItem;
       workItem.systemRate.notes = notes;
       workItem.systemRate.imageURL = imageURL;
