@@ -11,7 +11,8 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
   public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
-  public static SAMPLE_PROJECT_ID = '5b602b894960730aa89c76a8';
+  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
+  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
@@ -241,7 +242,7 @@ export class Messages {
   public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 2 decimals. (e.g. 123456789.12).';
 
   //Sample Project
-  public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'You can\'t modified sample Project';
+  public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'Sample project helps you understand how the application works. Modified values will not be calculated or saved.';
 }
 
 export class NavigationRoutes {

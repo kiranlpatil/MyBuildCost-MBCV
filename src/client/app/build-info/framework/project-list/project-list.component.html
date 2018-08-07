@@ -16,7 +16,7 @@
           <bi-project-item [project]="project"></bi-project-item>
         </li>
 
-        <li>
+        <li *ngIf="!isSamplePrjUser">
           <bi-project-item [project]="sampleProject[0]"></bi-project-item>
         </li>
       </ul>

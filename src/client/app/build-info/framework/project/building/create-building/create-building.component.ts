@@ -32,13 +32,8 @@ export class CreateBuildingComponent  implements  OnInit {
   }
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    if(this.isUserSignIn === 1) {
-      window.history.back();
-    } else {
-      this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-    }
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
-  //  this._router.navigate([NavigationRoutes.APP_PROJECT,projectId,NavigationRoutes.APP_COST_SUMMARY]);
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 
   onSubmit(buildingModel : Building) {

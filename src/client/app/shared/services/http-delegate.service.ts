@@ -23,7 +23,8 @@ export class HttpDelegateService extends BaseService {
   }
 
   putAPI(url : string, body : any): Observable<any> {
-    if(this.validate(url)) {
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    if(this.validate(url) || userId === AppSettings.SAMPLE_PROJECT_USER_ID) {
       let headers = new Headers({'Content-Type': 'application/json'});
       let options = new RequestOptions({headers: headers});
       return this.http.put(url, JSON.stringify(body), options)
@@ -38,7 +39,8 @@ export class HttpDelegateService extends BaseService {
   }
 
   postAPI(url : string, body : any): Observable<any> {
-    if(this.validate(url)) {
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    if(this.validate(url) || userId === AppSettings.SAMPLE_PROJECT_USER_ID) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(url, JSON.stringify(body), options)
@@ -61,6 +63,7 @@ export class HttpDelegateService extends BaseService {
   }
 
   xhrAPIRequest(url: any, body: any) {
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let files = body;
     return new Promise((resolve: any, reject: any) => {
       var formData: any = new FormData();
@@ -76,7 +79,7 @@ export class HttpDelegateService extends BaseService {
           }
         }
       };
-      if((url.substring(34,58)) !== AppSettings.SAMPLE_PROJECT_ID ) {
+      if(((url.substring(34,58)) !== AppSettings.SAMPLE_PROJECT_ID ) || userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
         xhr.open('PUT', url, true);
         xhr.setRequestHeader('Authorization', 'Bearer ' + SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN));
         xhr.send(formData);

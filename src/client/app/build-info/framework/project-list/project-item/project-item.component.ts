@@ -37,6 +37,8 @@ export class ProjectItemComponent implements OnInit {
       this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
     } else {
       SessionStorageService.setSessionValue(SessionStorage.STATUS,this.project.activeStatus);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectId);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_NAME, projectName);
       this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
     }
   }
