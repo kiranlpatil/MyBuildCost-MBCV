@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Label, NavigationRoutes, ValueConstant} from '../../../../shared/constants';
 import {ValidationService} from '../../../../shared/customvalidations/validation.service';
@@ -13,8 +13,8 @@ import {Router} from "@angular/router";
   styleUrls: ['building-form.component.css']
 })
 
-export class BuildingFormComponent {
-
+export class BuildingFormComponent implements AfterViewInit {
+  @ViewChild('buildingName') inputBuildingName:ElementRef;
   @Input() submitActionLabel: string;
   @Input() buildingModel?: Building = new Building();
   @Input() buildingName?:string;
@@ -87,5 +87,9 @@ export class BuildingFormComponent {
     if(event.keyCode===34||event.keyCode===39) {
       event.preventDefault();
     }
+  }
+
+  ngAfterViewInit() {
+    this.inputBuildingName.nativeElement.focus();
   }
 }
