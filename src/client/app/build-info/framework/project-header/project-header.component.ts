@@ -29,7 +29,8 @@ export class ProjectHeaderComponent implements OnInit {
 
 
 
-  constructor(private _router: Router,private activatedRoute:ActivatedRoute, private costSummaryService : CostSummaryService,private commonService:CommonService) {
+  constructor(private _router: Router,private activatedRoute:ActivatedRoute,
+              private costSummaryService : CostSummaryService,private commonService:CommonService) {
   }
 
   ngOnInit() {
@@ -38,9 +39,9 @@ export class ProjectHeaderComponent implements OnInit {
       this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;
       });
 
-    if(this.getCurrentProjectId()!== AppSettings.SAMPLE_PROJECT_ID ) {
+    if(this.getCurrentProjectId() && this.getCurrentProjectId()!== AppSettings.SAMPLE_PROJECT_ID ) {
       this.getProjectSubscriptionDetails();
-    }else {
+    } else {
       this.buttonDisableForSampleProject = true;
     }
     this.subscription = this.commonService.deleteEvent$
@@ -55,7 +56,7 @@ export class ProjectHeaderComponent implements OnInit {
   getProjectSubscriptionDetails () {
     let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    if((projectId !== AppSettings.SAMPLE_PROJECT_ID) && userId) {
+    if(projectId && userId && (projectId !== AppSettings.SAMPLE_PROJECT_ID)) {
       this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
         status=>this.checkLimitationOfBuildingSuccess(status),
         error=>this.checkLimitationOfBuildingFailure(error)
