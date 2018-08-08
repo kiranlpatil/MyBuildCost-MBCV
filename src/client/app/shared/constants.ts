@@ -722,13 +722,13 @@ export class ProjectElements {
   public static SALEABLE_AREA = 'Saleable Area';
   public static CARPET_AREA = 'Carpet Area';
   public static RS_PER_SQFT = 'Rs/Sqft';
-  public static RS_SYMBOL_PER_SQFT = '&#8377;/Sqft';
+  public static RS_SYMBOL_PER_SQFT = 'Rs/Sqft';
   public static RS_PER_SQMT = 'Rs/Sqmt';
-  public static RS_SYMBOL_PER_SQMT = '&#8377;/Sqmt';
+  public static RS_SYMBOL_PER_SQMT = 'Rs/Sqmt';
   public static SQUAREFEET = 'sqft';
   public static SQUAREMETER = 'sqmt';
   public static RS = 'Rs';
-  public static RS_SYMBOL = '&#8377;';
+  public static RS_SYMBOL = 'Rs';
 }
 
 export class MaterialTakeOffElements {
