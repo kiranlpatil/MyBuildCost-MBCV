@@ -48,5 +48,8 @@ export class ProjectService extends BaseService {
     let url = API.PROJECT + '/' + projectId +'/'+ API.PROJECT_NAME;
     return this.httpDelegateService.putAPI(url,body);
   }
-
+  removeProjectImage(projectId:string, imageName:string, body : any) {
+    let url = API.PROJECT + '/' + projectId +'/'+ API.PROJECT_IMAGE_REMOVE+imageName;
+    return this.httpDelegateService.getAPI(url);
+  }
 }

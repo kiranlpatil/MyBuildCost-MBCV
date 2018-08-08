@@ -71,6 +71,7 @@ export class Messages {
   public static MSG_ERROR_SOMETHING_WRONG: string = 'Internal Server Error.';
   public static MSG_ERROR_IMAGE_TYPE: string = 'Please try again. Make sure to upload only image file with extensions JPG, JPEG, GIF, PNG.';
   public static MSG_ERROR_IMAGE_SIZE: string = 'Please make sure the image size is less than 5 MB.';
+  public static MSG_IMAGE_DELETE: string = 'Project image is deleted successfully.';
 
   //Registration validation messages
   public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your e-mail address';
@@ -382,6 +383,8 @@ export class API {
   //Project
   public static USER_ALL_PROJECTS = 'user/all/project';
   public static PROJECT = 'project';
+  public static PROJECT_IMAGE_UPLOAD = '/image/upload';
+  public static PROJECT_IMAGE_REMOVE = 'image/remove/';
   public static PROJECT_NAME = 'projectName';
   public static CHECK_FOR_LIMITATION_OF_BUILDING = 'checkForLimitationOfBuilding';
 
@@ -447,7 +450,7 @@ export class ImagePath {
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
-  public static PROFILE_IMG_ICON = './assets/framework/images/dashboard/default-profile.png';
+  public static   PROFILE_IMG_ICON = './assets/build-info/dashboard/default-company-logo.png';
   public static COMPANY_LOGO_IMG_ICON = './assets/framework/images/dashboard/default-company-buildinfo-logo.png';
   public static EMAIL_ICON = './assets/framework/images/icons/e-mail.svg';
   public static EMAIL_ICON_GREY = './assets/framework/images/icons/e-mail-grey.svg';

@@ -761,7 +761,7 @@ class UserService {
   getProjects(user: User, callback:(error : any, result :any)=>void) {
 
     let query = {_id: user._id };
-    let populate = {path: 'project', select: ['name','buildings','activeStatus']};
+    let populate = {path: 'project', select: ['name','projectImage','buildings','activeStatus']};
     this.userRepository.findAndPopulate(query, populate, (error, result) => {
       if (error) {
         callback(error, null);
@@ -784,6 +784,8 @@ class UserService {
                 projectSubscription.activeStatus = project.activeStatus;
                 projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
                 projectSubscription.numOfBuildingsAllocated = project.buildings.length;
+                if(project && project.projectImage)
+                projectSubscription.projectImage = project.projectImage;
                 projectSubscription.packageName = this.checkCurrentPackage(subscription);
                 //activation date for project subscription
                 let activation_date = new Date(subscription.activationDate);
@@ -902,7 +904,9 @@ class UserService {
               projectSubscription.numOfBuildingsAllocated = resp[0].buildings.length;
               projectSubscription.numOfBuildingsExist = result[0].subscription.numOfBuildings;
               projectSubscription.numOfBuildingsRemaining = (result[0].subscription.numOfBuildings - resp[0].buildings.length);
-
+              if(resp[0] && resp[0].projectImage) {
+                projectSubscription.projectImage = resp[0].projectImage;
+              }
               if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0
                 && projectSubscription.packageName !== 'Free') {
                 projectSubscription.addBuildingDisable=true;

@@ -318,6 +318,14 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/deleteFile',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForBuildingWorkItem,
       controller.removeAttachmentOfBuildingWorkItem,this._responseInterceptor.exit);
+    //get project image URL
+    router.put('/image/upload',this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept,
+      controller.getImageURl, this._responseInterceptor.exit);
+    //remove project image
+    router.get('/:projectId/image/remove/:imageName',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.removeProjectImage, this._responseInterceptor.exit);
 
 
     return router;

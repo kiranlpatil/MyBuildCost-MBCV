@@ -27,7 +27,9 @@ export class ProjectItemComponent implements OnInit {
   getButton() {
     return Button;
   }
-
+  getImagePath() {
+    return AppSettings.IP+this.project.projectImage;
+  }
   navigateToSelectedProject(projectId:string,projectName:string, numberOfDaysToExpire : number) {
     if((projectId === AppSettings.SAMPLE_PROJECT_ID) || this.activeStatus && this.project.expiryMessage === null && this.project.numOfBuildingsAllocated !== 0) {
       SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectId);

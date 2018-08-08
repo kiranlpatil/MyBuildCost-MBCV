@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as multiparty from 'multiparty';
 import ProjectService = require('./../services/ProjectService');
 import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
@@ -10,7 +11,8 @@ import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 let config = require('config');
 let log4js = require('log4js');
 let logger=log4js.getLogger('Project Controller');
-
+let path = require('path');
+var fs = require('fs');
 
 class ProjectController {
   private _projectService : ProjectService;
@@ -1222,7 +1224,66 @@ class ProjectController {
       });
     }
   }
+  getImageURl(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      __dirname = path.resolve() + config.get('application.profilePath');
+      let form = new multiparty.Form({uploadDir: __dirname});
+      form.parse(req, (err: Error, fields: any, files: any) => {
+        if (err) {
+          next({
+            reason: 'error oooo',
+            message:'error oooo',
+            stackTrace: new Error(),
+            actualError: err,
+            code: 403
+          });
+        } else {
+          let path = JSON.stringify(files.file[0].path);
+          let image_path = files.file[0].path;
+          let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
+          let projectService = new ProjectService();
+          path = config.get('application.profilePathForClient') + originalFilename.replace(/"/g, '');
 
+          projectService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
+            if (err) {
+              next(err);
+            } else {
+              res.status(200).send({ tempath });
+            }
+          });
+        }
+
+      });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
+  removeProjectImage(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let projectService = new ProjectService();
+      var projectId = req.params.projectId;
+      var imageName = req.params.imageName;
+      projectService.removeImageOfProject( projectId ,imageName,(error, response) => {
+          if (error) {
+            next(error);
+          } else {
+            res.status(200).send({response});
+          }
+        });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
   getPresentFilesForBuildingWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       let projectService = new ProjectService();

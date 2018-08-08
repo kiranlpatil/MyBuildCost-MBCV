@@ -21,9 +21,9 @@
     "exportFilePathServer": "/src/server/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",
     "publicPath": "/src/server/app/framework/public/",
-    "profilePath": "/src/server/public/profileImage",
+    "profilePath": "/src/server/public/project-image",
+    "profilePathForClient": "/public/project-image/",
     "attachmentPath": "\\src\\server\\public\\attachment-files",
-    "profilePathForClient": "/public/profileImage/",
     "limitForQuery": 10,
     "mail": {
       "host": "http://localhost:8080/",
@@ -155,8 +155,8 @@
   },
 
   "sampleProject" : {
-    "userId" : "5b67f5923ee1a527f40efc21",
-    "projectId" : "5b67f5b93ee1a527f40efc22"
+    "userId" : " ",
+    "projectId" : "5b0ce4148083de2051ba221b"
   },
 
   "rate": {

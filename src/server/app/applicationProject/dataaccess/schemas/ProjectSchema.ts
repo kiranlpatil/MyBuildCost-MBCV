@@ -57,7 +57,10 @@ class ProjectSchema {
       },
       activation_date: {
         type: Date,
-      }
+      },
+        projectImage: {
+          type: String
+        }
     },
       {
         versionKey: false,

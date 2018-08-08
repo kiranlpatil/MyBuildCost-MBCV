@@ -6,7 +6,8 @@
         <li (click)="createProject(isSubscriptionExist,isRetainModalActive,isProjectModalActive,premiumPackageAvailable)" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
           <div class="building-image-container">
             <div class="building-image" title="Create New Project" >
-              <img src="assets/build-info/create-new-project/plus-sign.png" />
+              <img *ngIf="project?.projectImage" src="getImagePath()" />
+              <img *ngIf="!project?.projectImage"src="assets/build-info/create-new-project/plus-sign.png" />
             </div>
           </div>
           <h4>{{ getButton().CREATE_NEW_PROJECT }}</h4>

@@ -11,6 +11,7 @@ export class ProjectSubscriptionDetails {
   addBuildingDisable?:boolean;
   numOfBuildingsExist:number;
   activeStatus:boolean;
+  projectImage:string;
 
 }
 

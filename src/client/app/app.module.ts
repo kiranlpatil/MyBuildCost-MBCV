@@ -110,6 +110,8 @@ import { PayUMoneyComponent } from './build-info/framework/payUMoney/payUMoney.c
 import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.service';
 import {AmountValidationDirective} from "./build-info/framework/project/amount-validation.directive";
 import {CompleteProjectReportComponent} from "./build-info/framework/project/report-templates/complete-project-report/complete-project-report.component";
+import {ProjectImageComponent} from "./build-info/framework/project/project-image/project-image.component";
+import {ProjectImageService} from "./build-info/framework/project/project-image/project-image.service";
 
 @NgModule({
   imports: [
@@ -198,7 +200,8 @@ import {CompleteProjectReportComponent} from "./build-info/framework/project/rep
     RetainProjectComponent,
     PaymentFailureComponent,
     PayUMoneyComponent,
-    AmountValidationDirective
+    AmountValidationDirective,
+    ProjectImageComponent
   ],
 
   providers: [
@@ -235,6 +238,7 @@ import {CompleteProjectReportComponent} from "./build-info/framework/project/rep
     MaterialTakeOffService,
     ProjectNameChangeService,
     AdvertisingBannerService,
+    ProjectImageService,
 
       //Payment
     PackageDetailsService,

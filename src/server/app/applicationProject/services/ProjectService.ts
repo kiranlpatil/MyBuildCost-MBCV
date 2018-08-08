@@ -3469,8 +3469,28 @@ class ProjectService {
       }
     });
   }
-
-
+  removeImageOfProject(projectId: string ,imageName:string,callback: (error: any, result: any) => void) {
+    let query = {'_id': projectId};
+    let updateData = {$unset: {projectImage:''}};
+    this.projectRepository.findOneAndUpdate(query, updateData, {}, (error, response) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        fs.unlink('.'+ config.get('application.profilePath')+'/'+ imageName, (err:Error) => {
+          if (err) {
+            logger.error(err);
+          }
+        });
+        callback(null, true);
+      }
+    });
+  }
+  UploadImage(tempPath: any, fileName: any, cb: any) {
+    let targetpath = fileName;
+    fs.rename(tempPath, targetpath, function (err:any) {
+      cb(null, tempPath);
+    });
+  }
   private calculateThumbRuleReportForCostHead(budgetedCostAmount: number, costHeadFromRateAnalysis: any,
                                               buildingData: any, costHeads: Array<CostHead>) {
     if (budgetedCostAmount >= 0) {
