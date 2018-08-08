@@ -629,7 +629,7 @@ export class Label {
   public static BUILDINGS: string = 'Buildings';
   public static NO_OF_PROJECTS: string = 'No. of Projects';
   public static NO_OF_BUILDING: string = 'No. of Buildings';
-  public static DURATION: string = 'Duration';
+  public static DURATION: string = 'Package Duration';
   public static TOTAL_BILLED: string = 'Total Billed';
   public static NO_OF_BUILDINGS_TO_ADD: string = 'Number of building(s) to add';
   public static INR: string = 'INR';
@@ -779,7 +779,7 @@ export class Menus {
   public static CLONE = 'Add new building with same details';
   public static EDIT = 'Edit';
   public static DELETE = 'Delete';
-  public static ADD_BUILDING = 'Add first Building';
+  public static ADD_BUILDING = 'Add Building';
   public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
   public static COPY_BUILDING = 'Copy Building';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
