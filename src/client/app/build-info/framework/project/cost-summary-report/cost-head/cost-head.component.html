@@ -49,7 +49,7 @@
                           <div class="panel panel-default">
                             <table>
                               <tr id="show-embedded-table-row">
-                                <td>
+                                <td class="relative-position">
                                   <div class="panel-heading">
                                     <div class="panel-title clearfix" >
                                       <a data-toggle="collapse" href="#collapseDetails{{workItemIndex}}"
@@ -63,6 +63,11 @@
                                       </a>
                                     </div>
                                   </div>
+                                  <button class="add-more-details fixed-plus-btn" *ngIf="workItem.isItemBreakdownRequired"
+                                          (click)="showAddFloorwiseQuantityModal(workItem, workItemIndex, category.rateAnalysisId, categoryIndex)"
+                                          title="{{getMessages().ADD_MORE_DETAILS_TITLE}}">
+                                    <span class="glyphicon glyphicon-plus-sign"></span>
+                                  </button>
                                 </td>
                                 <!--<td>
                                   <button class="add-more-details-btn">{{getButton().ADD_MORE_DETAILS}} </button>
@@ -164,11 +169,11 @@
                                                        [workItem]="workItem"></bi-attachment>
                                       </div>
                                     </div>
-                                    <button class="add-more-details" *ngIf="workItem.isItemBreakdownRequired"
+                                    <!--<button class="add-more-details" *ngIf="workItem.isItemBreakdownRequired"
                                             (click)="showAddFloorwiseQuantityModal(workItem, workItemIndex, category.rateAnalysisId, categoryIndex)"
                                             title="{{getMessages().ADD_MORE_DETAILS_TITLE}}">
                                       <span class="glyphicon glyphicon-plus-sign"></span>
-                                    </button>
+                                    </button>-->
                                     <div data-toggle="modal" data-target="#deleteWorkItem" class="delete-cost-head" title="Delete Work Item"
                                          (click)="setIdsForDeleteWorkItem(category.rateAnalysisId, workItem.rateAnalysisId, workItem.workItemId, workItemIndex )">
                                       <img alt="Delete Work Item" src="assets/build-info/dashboard/delete-blue.png" />

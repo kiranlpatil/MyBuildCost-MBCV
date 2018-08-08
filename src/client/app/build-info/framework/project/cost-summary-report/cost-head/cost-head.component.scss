@@ -233,7 +233,7 @@
     float: left;
 
     &:nth-child(1) {
-      width: 288px;
+      width: 310px;
     }
 
     &:nth-child(2) {
@@ -262,7 +262,7 @@
     }
 
     &:nth-child(7) {
-      min-width: 95px;
+      min-width: 68px;
       text-align: right;
     }
 
@@ -725,4 +725,14 @@
 .validate-amount {
   border: 1px solid red !important;
 
+}
+
+.relative-position {
+  position: relative;
+}
+
+.fixed-plus-btn {
+  position: absolute !important;
+  right: 0;
+  top: 16px !important;
 }
