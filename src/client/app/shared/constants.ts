@@ -11,8 +11,8 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
   public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
-  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
-  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
+  public static SAMPLE_PROJECT_ID = '5b4c8f44b3a2d31c208b39bd';
+  public static SAMPLE_PROJECT_USER_ID = '5b4c8f2db3a2d31c208b39bc';
 
 
   /*
@@ -627,7 +627,7 @@ export class Label {
   public static BUILDINGS: string = 'Buildings';
   public static NO_OF_PROJECTS: string = 'No. of Projects';
   public static NO_OF_BUILDING: string = 'No. of Buildings';
-  public static DURATION: string = 'Duration';
+  public static DURATION: string = 'Package Duration';
   public static TOTAL_BILLED: string = 'Total Billed';
   public static NO_OF_BUILDINGS_TO_ADD: string = 'Number of building(s) to add';
   public static INR: string = 'INR';
@@ -777,7 +777,7 @@ export class Menus {
   public static CLONE = 'Add new building with same details';
   public static EDIT = 'Edit';
   public static DELETE = 'Delete';
-  public static ADD_BUILDING = 'Add first Building';
+  public static ADD_BUILDING = 'Add Building';
   public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
   public static COPY_BUILDING = 'Copy Building';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
