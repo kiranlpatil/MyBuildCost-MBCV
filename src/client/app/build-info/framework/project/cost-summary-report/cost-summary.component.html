@@ -1,7 +1,9 @@
 <span *ngIf="status"><bi-project-header [isActiveAddBuildingButton]="isActiveAddBuildingButton"></bi-project-header></span>
 <span *ngIf="!status"><h1>Project Expired</h1></span>
 <section class="wrapper">
+
   <div *ngIf="status" class="container">
+
     <div class="col-sm-9 col-xs-12 padding-right30 left-content">
       <div class="dropdown filter-dropdrown">
         <a class="dropdown-toggle visible-xs" type="button" id="dropdownMenuFilter" data-toggle="dropdown">
@@ -28,6 +30,7 @@
     </div>
 
     <div class="col-sm-9 col-xs-12 padding-right30 left-content">
+
       <div class="panel-group" id="cost-summary-panel">
         <div class="panel panel-default" *ngFor="let building of buildingsReport; let i = index">
           <div class="panel-heading">
@@ -226,8 +229,6 @@
 
       </div>
 
-
-
       <div class="panel-group no-border grand-total-table">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -290,6 +291,7 @@
         </div>
       </div>
     </div>
+
     <div class="col-xs-3 no-padding right-content">
     <cost-distribution-chart  *ngIf="!(isShowBuildingCostSummaryChart==false && isShowCommonAmenitiesChart==false)"
                               [buildingReport]="isShowBuildingCostSummaryChart?
@@ -297,6 +299,7 @@
                               :projectReport?.commonAmenities"></cost-distribution-chart>
       <advertising-banner></advertising-banner>
     </div>
+
   </div>
 
   <!--Delete modals-->

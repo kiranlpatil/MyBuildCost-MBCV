@@ -49,6 +49,7 @@
                           <div class="panel panel-default">
                             <table>
                               <tr id="show-embedded-table-row">
+
                                 <td>
                                   <div class="panel-heading">
                                     <div class="panel-title clearfix" >
@@ -64,6 +65,7 @@
                                     </div>
                                   </div>
                                 </td>
+
                                 <!--<td>
                                   <button class="add-more-details-btn">{{getButton().ADD_MORE_DETAILS}} </button>
                                 </td>-->
@@ -88,11 +90,13 @@
 
                                   </div>
                                 </td>
+
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().UNIT}}</span>
                                   <span class="value" *ngIf="workItem.unit">{{ workItem.unit }}</span>
                                   <span class="value" *ngIf="!workItem.unit">-</span>
                                 </td>
+
                                 <td>
                                   <span class="mobile-headings">{{getTableHeadings().RATE_PER_UNIT}}</span>
                                   <div class="edit-field" [class.active-rate]="(showWorkItemTab == getLabel().WORKITEM_RATE_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
@@ -175,8 +179,10 @@
                                     </div>
                                   </td>
 
-                                <td id="show-embedded-table" [class.steel-quantity-embedded-table]="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB" *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB || showWorkItemTab == getLabel().WORKITEM_STEEL_QUANTITY_TAB">
-                                    <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB" [@fadeIn]="state">
+                                <td id="show-embedded-table" [class.steel-quantity-embedded-table]="showWorkItemTab==getLabel().WORKITEM_STEEL_QUANTITY_TAB"
+                                    *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB || showWorkItemTab == getLabel().WORKITEM_QUANTITY_TAB || showWorkItemTab == getLabel().WORKITEM_STEEL_QUANTITY_TAB">
+
+                                  <div *ngIf="showWorkItemTab == getLabel().WORKITEM_RATE_TAB" [@fadeIn]="state">
                                       <div class="get-rate-component" *ngIf="compareWorkItemId == workItem.rateAnalysisId && compareCategoryId === category.rateAnalysisId && compareCCWorkItemId === workItem.workItemId">
                                         <bi-get-rate [rate]="rateItemsArray"
                                                      [categoryDetails] ="categoryDetails"
@@ -284,7 +290,10 @@
                                 <td colspan="8" class="add-work-item">
                                   <div id="collapseDetails{{workItemIndex}}"  class="panel-collapse collapse">
                                     <div class="panel-body">
-                                      <div *ngIf="showWorkItemTab !== getLabel().WORKITEM_RATE_TAB && showWorkItemTab !== getLabel().WORKITEM_SYSTEM_RATE_TAB && showWorkItemTab!==getLabel().WORKITEM_RATE_BY_QUANTITY_TAB && showWorkItemTab!==getLabel().WORKITEM_QUANTITY_TAB && showWorkItemTab!==getLabel().WORKITEM_STEEL_QUANTITY_TAB">
+                                      <div *ngIf="showWorkItemTab !== getLabel().WORKITEM_RATE_TAB && showWorkItemTab !== getLabel().WORKITEM_SYSTEM_RATE_TAB
+                                      && showWorkItemTab!==getLabel().WORKITEM_RATE_BY_QUANTITY_TAB && showWorkItemTab!==getLabel().WORKITEM_QUANTITY_TAB
+                                      && showWorkItemTab!==getLabel().WORKITEM_STEEL_QUANTITY_TAB">
+
                                         <bi-quantity-details
                                           [quantityDetails]="workItem.quantity.quantityItemDetails"
                                           [workItem] ="workItem"
@@ -301,6 +310,7 @@
                                           [ccWorkItemId]="workItem.workItemId"
                                           [baseUrl] = "baseUrl">
                                         </bi-quantity-details>
+
                                       </div>
                                     </div>
                                   </div>

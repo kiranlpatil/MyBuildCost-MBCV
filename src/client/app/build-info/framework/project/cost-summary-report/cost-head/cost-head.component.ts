@@ -259,6 +259,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   showAddFloorwiseQuantityModal(workItem : WorkItem, workItemIndex : number, categoryId: number, categoryIndex : number) {
     if(workItem.quantity.isDirectQuantity ||
       (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default')) {
+      this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
       $('#addFloorwiseQuantity'+workItemIndex).modal();
     } else if(workItem.quantity.quantityItemDetails ||
       (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
@@ -274,6 +275,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   //Add blank detailed quantity at last
   addNewDetailedQuantity(categoryId: number, workItem: WorkItem, categoryIndex: number, workItemIndex:number) {
     this.showWorkItemTab = Label.WORKITEM_DETAILED_QUANTITY_TAB;
+    workItem.quantity.isDirectQuantity = false;
     this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
 
     this.toggleWorkItemPanel(workItemIndex, workItem);
