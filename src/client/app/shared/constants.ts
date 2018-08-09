@@ -251,7 +251,7 @@ export class Messages {
   public static MSG_ADD_BUILDING_PAYMENT: string = 'You have already consumed package of 5 buildings.<br />You can add more buildings by paying INR 500 per building.';
   public static MSG_CREATE_PROJECT_CONFIRMATION: string = 'Trial package contains only 1 project <br />with 5 buildings you can create new project<br /> by purchasing our <strong>premium package.</strong>';
   public static MSG_CONFIRMATION_CREATE_PROJECT: string = 'For creating new project you will have to upgrade to premium package (valid for 1 new project)';
-  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain existing ';
+  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain estimated cost details from existing ';
   public static MSG_ON_RETAIN_PROJECT2: string = ' or you would like to create a new project.';
   public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
   public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';

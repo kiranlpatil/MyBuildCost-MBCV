@@ -282,14 +282,16 @@ export class CostSummaryService extends BaseService {
         $('#collapse'+compareIndex).addClass('in');
         let collapseTag = '#collapse' + compareIndex;
         $(collapseTag).ready(function () {
-          var divPos = $(collapseCostSummaryPanelTag).offset().top;
-          let scrollTo=SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)?
-            SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)
-            : divPos - 8;
-          $('html, body').animate({
-            scrollTop: scrollTo
-          },500);
-          setTimeout(() =>  SessionStorageService.removeSessionValue(SessionStorage.CURRENT_WINDOW_POSITION), 600);
+          if($(collapseCostSummaryPanelTag).offset() !== undefined) {
+            var divPos = $(collapseCostSummaryPanelTag).offset().top;
+            let scrollTo=SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)?
+              SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)
+              : divPos - 8;
+            $('html, body').animate({
+              scrollTop: scrollTo
+            },500);
+            setTimeout(() =>  SessionStorageService.removeSessionValue(SessionStorage.CURRENT_WINDOW_POSITION), 600);
+          }
         });
     });
   }
