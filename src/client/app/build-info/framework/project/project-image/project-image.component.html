@@ -1,10 +1,11 @@
 <div>
   <div>
-    <img  *ngIf="image_path && !isLoading" src={{image_path}} alt="Profile Picture">
+
     <div class="default-upload-img">
+      <img *ngIf="isLoading" src="assets/build-info/loader/loader.gif" alt="Loader" >
+      <img class="upload-img" *ngIf="image_path && !isLoading" src={{image_path}} alt="Profile Picture">
       <img  *ngIf="!image_path && !isLoading" src="assets/build-info/create-new-project/create-new-project.png" alt="Profile Picture">
     </div>
-    <img *ngIf="isLoading" src="assets/build-info/loader/loader.gif" alt="Loader" >
 
     <div class="file">
       <img src="assets/build-info/dashboard/camera.png" width="35" />

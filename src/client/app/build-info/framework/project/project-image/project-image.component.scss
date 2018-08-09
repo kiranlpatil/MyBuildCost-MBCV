@@ -4,7 +4,11 @@
   height: 150px;
   text-align: center;
   vertical-align: middle;
+  margin-bottom: 10px;
   width: 150px;
+  img.upload-img {
+    width: 100%;
+  }
 }
 
 .file {
@@ -16,4 +20,8 @@
 .file input {
   position: absolute;
   opacity: 0;
+  right: 0;
+  width: 34px;
+  height: 35px;
+  bottom: 0;
 }
