@@ -22,7 +22,7 @@
     "downloadFilePathClient": "/public/exported-files/",
     "publicPath":"/src/server/app/framework/public/",
     "profilePath": "/src/server/public/project-image",
-    "profilePathForClient": "/public/project-image/",
+    "profilePathForClient": "/server/public/project-image/",
     "attachmentPath":"/src/server/public/attachment-files",
     "limitForQuery" : 10,
     "mail": {
