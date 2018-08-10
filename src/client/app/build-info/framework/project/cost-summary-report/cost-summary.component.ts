@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import {
   NavigationRoutes, ProjectElements, Button, Menus, Headings, Label,
@@ -21,6 +21,7 @@ import { LoaderService } from '../../../../shared/loader/loaders.service';
 import { AddCostHeadButton } from '../../model/showHideCostHeadButton';
 import { ErrorService } from '../../../../shared/services/error.service';
 import { AppSettings } from '../../../../shared/index';
+import { ProjectHeaderComponent } from '../../project-header/project-header.component';
 
 declare let $: any;
 
@@ -35,6 +36,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   animateView: boolean = false;
   @ViewChild('content') content: ElementRef;
+  @ViewChild(ProjectHeaderComponent) addBuildingButton: ProjectHeaderComponent;
   buildingsReport: Array <BuildingReport>;
   amenitiesReport: BuildingReport;
   projectReport: ProjectReport;
@@ -133,9 +135,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       this.getProjectSubscriptionDetails();
     }
 
-      this.subscription = this.commonService.deleteEvent$
+    /*  this.subscription = this.commonService.deleteEvent$
         .subscribe(item => this.getProjectSubscriptionDetails()
-        );
+        );*/
   }
 
   getProjectSubscriptionDetails () {
@@ -154,6 +156,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
     this.activeStatus = status.activeStatus;
     this.addBuildingButtonDisable =status.addBuildingDisable;
+    this.addBuildingButton.addBuildingButtonDisable = status.addBuildingDisable;
+    this.addBuildingButton.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
    /* if(status.expiryMessage) {
       this.subscriptionValidityMessage = status.expiryMessage;
     } else if(status.warningMessage) {
@@ -393,6 +397,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       message.custom_message = Messages.MSG_SUCCESS_DELETE_BUILDING;
       this.messageService.message(message);
       this.onChangeCostingByUnit(this.defaultCostingByUnit);
+      this.getProjectSubscriptionDetails();
       }
   }
 

@@ -44,9 +44,9 @@ export class ProjectHeaderComponent implements OnInit {
     } else {
       this.buttonDisableForSampleProject = true;
     }
-    this.subscription = this.commonService.deleteEvent$
+   /* this.subscription = this.commonService.deleteEvent$
       .subscribe(item =>this.getProjectSubscriptionDetails()
-      );
+      );*/
   }
 
   getCurrentProjectId() {
