@@ -53,15 +53,28 @@
                                   <div class="panel-heading">
                                     <div class="panel-title clearfix" >
                                       <a data-toggle="collapse" href="#collapseDetails{{workItemIndex}}"
-                                         class="work-item-panel-row" data-parent="#category-panel" (click)="toggleWorkItemPanel(workItemIndex, workItem)" aria-expanded="true">
+                                         class="work-item-panel-row collapsed" data-parent="#category-panel" (click)="toggleWorkItemPanel(workItemIndex, workItem)" aria-expanded="false">
                                       <span class="caret"
                                             *ngIf="workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default'"></span>
                                         <!--{{ workItem.name }}-->
-                                      <div class="edit-field">
-                                        <input [(ngModel)]="workItem.name" id="workItemName" (change)="updateWorkItemName(category.rateAnalysisId, workItem)" class="form-control clear" title="Change item name"/>
-                                      </div>
                                       </a>
                                     </div>
+                                  </div>
+                                  <div class="edit-field">
+                                    <!--<input [(ngModel)]="workItem.name"
+                                           id="workItemName"
+                                           (change)="updateWorkItemName(category.rateAnalysisId, workItem)"
+                                           (blur)="workItemNameFocus = !workItemNameFocus"
+                                           [hidden]="!workItemNameFocus"
+                                           class="form-control clear"
+                                           title="Change item name" />
+                                    <span [hidden]="workItemNameFocus" (click)="toggleInput()">{{ workItem.name }}</span>-->
+                                    <textarea [(ngModel)]="workItem.name"
+                                              id="workItemName"
+                                              (change)="updateWorkItemName(category.rateAnalysisId, workItem)"
+                                              class="form-control clear workItemNameTextarea"
+                                              title="Change item name"></textarea>
+                                    <!--<span [hidden]="workItemNameFocus" (click)="toggleInput()">{{ workItem.name }}</span>-->
                                   </div>
                                   <button class="add-more-details fixed-plus-btn" *ngIf="workItem.isItemBreakdownRequired"
                                           (click)="showAddFloorwiseQuantityModal(workItem, workItemIndex, category.rateAnalysisId, categoryIndex)"

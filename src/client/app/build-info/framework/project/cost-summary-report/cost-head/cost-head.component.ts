@@ -106,6 +106,8 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   public showQuantityDetails:boolean=false;
   public state = 'inactive';
 
+  public workItemNameFocus:boolean = false;
+
   private showWorkItemList:boolean=false;
   private showWorkItemTab : string = null;
   private showQuantityTab : string = null;
@@ -142,7 +144,14 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   /*toggleState() {
     this.state = this.state === 'active' ? 'inactive' : 'active';
   }*/
-
+  public toggleInput() {
+    this.workItemNameFocus = true;
+    setTimeout(() => {
+      if(this.workItemNameFocus) {
+        document.getElementById('workItemName').focus();
+      }
+    },100);
+  }
   ngOnInit() {
     this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
@@ -926,5 +935,16 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     setTimeout(() => {
       this.animateView = true;
     },150);
+
+    // let textareaInput = document.querySelector('.workItemNameTextarea');
+    //
+    // textareaInput.addEventListener('keydown', (e:any) => {
+    //   setTimeout(function() {
+    //     e.target.style.cssText = 'height:auto; padding:0';
+    //     // for box-sizing other than "content-box" use:
+    //     // e.target.style.cssText = '-moz-box-sizing:content-box';
+    //     e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
+    //   }.bind(this),0);
+    // });
   }
 }
