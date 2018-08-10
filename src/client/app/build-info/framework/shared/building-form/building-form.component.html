@@ -1,111 +1,115 @@
-<form class="col-xs-12 form-details" [formGroup]="buildingForm" (submit)="submitForm()">
+<div class="container">
+  <div class="row">
+    <form class="col-sm-6 col-sm-offset-3 col-xs-12 form-details" [formGroup]="buildingForm" (submit)="submitForm()">
 
-  <div  class="form-group">
-    <control-messages [control]="buildingForm.controls.name" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().BUILDING_NAME }}</label>
-    <input #buildingName type="text" [(ngModel)]="buildingModel.name" (keypress)="validateBuildingName($event)" formControlName="name" id="name" class="form-control" placeholder="Enter building name" required />
-  </div>
-
-  <div  class="form-group" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.totalSlabArea" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().SLAB_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
-    <input type="number" [(ngModel)]="buildingModel.totalSlabArea" formControlName="totalSlabArea" id="totalSlabArea" class="form-control" placeholder="Enter slab area" required/>
-  </div>
-
-  <div  class="form-group carpet-area" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.totalCarpetAreaOfUnit" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().CARPET_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
-    <input type="number" class="form-control" [(ngModel)]="buildingModel.totalCarpetAreaOfUnit" formControlName="totalCarpetAreaOfUnit" id="totalCarpetAreaOfUnit" placeholder="Enter carpet area" required/>
-  </div>
-
-  <div  class="form-group" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.totalSaleableAreaOfUnit" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().SALEABLE_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
-    <input type="number" class="form-control" [(ngModel)]="buildingModel.totalSaleableAreaOfUnit" formControlName="totalSaleableAreaOfUnit" id="totalSaleableAreaOfUnit" placeholder="Enter saleable area" required/>
-  </div>
-
-  <div  class="form-group" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.plinthArea" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().PLINTH_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
-    <input type="number" [(ngModel)]="buildingModel.plinthArea" formControlName="plinthArea" id="plinthArea" class="form-control" placeholder="Enter plinth Area" required/>
-  </div>
-
-  <div  class="form-group" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.totalNumOfFloors" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().NUM_OF_FLOORS }}<small> {{ getLabels().EXCLUDING_PARKING_FLOORS }}</small></label>
-    <input type="number" [(ngModel)]="buildingModel.totalNumOfFloors" formControlName="totalNumOfFloors" id="totalNumOfFloors" class="form-control" placeholder="Enter no. of floors " required/>
-  </div>
-
-  <div  class="form-group" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.numOfParkingFloors" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().NUM_OF_PARKING_FLOORS }}</label>
-    <input type="number" [(ngModel)]="buildingModel.numOfParkingFloors" formControlName="numOfParkingFloors" id="numOfParkingFloors" class="form-control" placeholder="Enter no. of parking floors" required/>
-  </div>
-
-  <div  class="form-group" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.carpetAreaOfParking" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-    <label>{{ getLabels().CARPET_AREA_OF_PARKING }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
-    <input type="number" class="form-control" [(ngModel)]="buildingModel.carpetAreaOfParking" formControlName="carpetAreaOfParking" id="carpetAreaOfParking" placeholder="Enter carpet area for parking area" required/>
-  </div>
-
-  <div  class="form-group" [class.disabled-input]="disableFormFields">
-    <control-messages [control]="buildingForm.controls.numOfLifts" [submitStatus] = "submitStatus"></control-messages>
-    <label>{{ getLabels().NUM_OF_LIFTS }}</label>
-    <input type="number" [(ngModel)]="buildingModel.numOfLifts" formControlName="numOfLifts" id="numOfLifts" class="form-control" placeholder="Enter no of lifts" />
-  </div>
-
-  <div  class="form-group clearfix" style="margin-bottom: 5px;" [class.disabled-input]="disableFormFields">
-    <label class="form-sub-heading" style="margin: 0;">{{ getLabels().APARTMENT_CONFIGURATION }}</label>
-  </div>
-  <div class="row" [class.disabled-input]="disableFormFields">
-    <div class="col-sm-6">
       <div  class="form-group">
-        <control-messages [control]="buildingForm.controls.numOfOneBHK" [submitStatus] = "submitStatus"></control-messages>
-        <label>{{ getLabels().NUM_OF_ONE_BHK }}</label>
-        <input type="number" [(ngModel)]="buildingModel.numOfOneBHK" formControlName="numOfOneBHK" id="numOfOneBHK" class="form-control" />
+        <control-messages [control]="buildingForm.controls.name" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().BUILDING_NAME }}</label>
+        <input #buildingName type="text" [(ngModel)]="buildingModel.name" (keypress)="validateBuildingName($event)" formControlName="name" id="name" class="form-control" placeholder="Enter building name" required />
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div  class="form-group">
-        <control-messages [control]="buildingForm.controls.numOfTwoBHK" [submitStatus] = "submitStatus"></control-messages>
-        <label>{{ getLabels().NUM_OF_TWO_BHK }}</label>
-        <input type="number" [(ngModel)]="buildingModel.numOfTwoBHK" formControlName="numOfTwoBHK" id="numOfTwoBHK" class="form-control" />
+
+      <div  class="form-group" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.totalSlabArea" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().SLAB_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
+        <input type="number" [(ngModel)]="buildingModel.totalSlabArea" formControlName="totalSlabArea" id="totalSlabArea" class="form-control" placeholder="Enter slab area" required/>
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div  class="form-group">
-        <control-messages [control]="buildingForm.controls.numOfThreeBHK" [submitStatus] = "submitStatus"></control-messages>
-        <label>{{ getLabels().NUM_OF_THREE_BHK }}</label>
-        <input type="number" [(ngModel)]="buildingModel.numOfThreeBHK" formControlName="numOfThreeBHK" id="numOfThreeBHK" class="form-control" />
+
+      <div  class="form-group carpet-area" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.totalCarpetAreaOfUnit" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().CARPET_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
+        <input type="number" class="form-control" [(ngModel)]="buildingModel.totalCarpetAreaOfUnit" formControlName="totalCarpetAreaOfUnit" id="totalCarpetAreaOfUnit" placeholder="Enter carpet area" required/>
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div   class="form-group">
-        <control-messages [control]="buildingForm.controls.numOfFourBHK" [submitStatus] = "submitStatus"></control-messages>
-        <label>{{ getLabels().NUM_OF_FOUR_BHK }}</label>
-        <input type="number" [(ngModel)]="buildingModel.numOfFourBHK" formControlName="numOfFourBHK" id="numOfFourBHK" class="form-control" />
+
+      <div  class="form-group" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.totalSaleableAreaOfUnit" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().SALEABLE_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
+        <input type="number" class="form-control" [(ngModel)]="buildingModel.totalSaleableAreaOfUnit" formControlName="totalSaleableAreaOfUnit" id="totalSaleableAreaOfUnit" placeholder="Enter saleable area" required/>
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div  class="form-group">
-        <control-messages [control]="buildingForm.controls.numOfFiveBHK" [submitStatus] = "submitStatus"></control-messages>
-        <label>{{ getLabels().NUM_OF_FIVE_BHK }}</label>
-        <input type="number" [(ngModel)]="buildingModel.numOfFiveBHK" formControlName="numOfFiveBHK" id="numOfFiveBHK" class="form-control" />
+
+      <div  class="form-group" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.plinthArea" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().PLINTH_AREA }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
+        <input type="number" [(ngModel)]="buildingModel.plinthArea" formControlName="plinthArea" id="plinthArea" class="form-control" placeholder="Enter plinth Area" required/>
       </div>
-    </div>
+
+      <div  class="form-group" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.totalNumOfFloors" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().NUM_OF_FLOORS }}<small> {{ getLabels().EXCLUDING_PARKING_FLOORS }}</small></label>
+        <input type="number" [(ngModel)]="buildingModel.totalNumOfFloors" formControlName="totalNumOfFloors" id="totalNumOfFloors" class="form-control" placeholder="Enter no. of floors " required/>
+      </div>
+
+      <div  class="form-group" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.numOfParkingFloors" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().NUM_OF_PARKING_FLOORS }}</label>
+        <input type="number" [(ngModel)]="buildingModel.numOfParkingFloors" formControlName="numOfParkingFloors" id="numOfParkingFloors" class="form-control" placeholder="Enter no. of parking floors" required/>
+      </div>
+
+      <div  class="form-group" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.carpetAreaOfParking" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
+        <label>{{ getLabels().CARPET_AREA_OF_PARKING }}<small> {{ getLabels().AREA_UNIT_IN_SQFT }}</small></label>
+        <input type="number" class="form-control" [(ngModel)]="buildingModel.carpetAreaOfParking" formControlName="carpetAreaOfParking" id="carpetAreaOfParking" placeholder="Enter carpet area for parking area" required/>
+      </div>
+
+      <div  class="form-group" [class.disabled-input]="disableFormFields">
+        <control-messages [control]="buildingForm.controls.numOfLifts" [submitStatus] = "submitStatus"></control-messages>
+        <label>{{ getLabels().NUM_OF_LIFTS }}</label>
+        <input type="number" [(ngModel)]="buildingModel.numOfLifts" formControlName="numOfLifts" id="numOfLifts" class="form-control" placeholder="Enter no of lifts" />
+      </div>
+
+      <div  class="form-group clearfix" style="margin-bottom: 5px;" [class.disabled-input]="disableFormFields">
+        <label class="form-sub-heading" style="margin: 0;">{{ getLabels().APARTMENT_CONFIGURATION }}</label>
+      </div>
+      <div class="row" [class.disabled-input]="disableFormFields">
+        <div class="col-sm-6">
+          <div  class="form-group">
+            <control-messages [control]="buildingForm.controls.numOfOneBHK" [submitStatus] = "submitStatus"></control-messages>
+            <label>{{ getLabels().NUM_OF_ONE_BHK }}</label>
+            <input type="number" [(ngModel)]="buildingModel.numOfOneBHK" formControlName="numOfOneBHK" id="numOfOneBHK" class="form-control" />
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div  class="form-group">
+            <control-messages [control]="buildingForm.controls.numOfTwoBHK" [submitStatus] = "submitStatus"></control-messages>
+            <label>{{ getLabels().NUM_OF_TWO_BHK }}</label>
+            <input type="number" [(ngModel)]="buildingModel.numOfTwoBHK" formControlName="numOfTwoBHK" id="numOfTwoBHK" class="form-control" />
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div  class="form-group">
+            <control-messages [control]="buildingForm.controls.numOfThreeBHK" [submitStatus] = "submitStatus"></control-messages>
+            <label>{{ getLabels().NUM_OF_THREE_BHK }}</label>
+            <input type="number" [(ngModel)]="buildingModel.numOfThreeBHK" formControlName="numOfThreeBHK" id="numOfThreeBHK" class="form-control" />
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div   class="form-group">
+            <control-messages [control]="buildingForm.controls.numOfFourBHK" [submitStatus] = "submitStatus"></control-messages>
+            <label>{{ getLabels().NUM_OF_FOUR_BHK }}</label>
+            <input type="number" [(ngModel)]="buildingModel.numOfFourBHK" formControlName="numOfFourBHK" id="numOfFourBHK" class="form-control" />
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div  class="form-group">
+            <control-messages [control]="buildingForm.controls.numOfFiveBHK" [submitStatus] = "submitStatus"></control-messages>
+            <label>{{ getLabels().NUM_OF_FIVE_BHK }}</label>
+            <input type="number" [(ngModel)]="buildingModel.numOfFiveBHK" formControlName="numOfFiveBHK" id="numOfFiveBHK" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <p class="form-sub-heading" *ngIf="view=='cloneBuilding'">{{ getLabels().CLONE_BUILDING_MESSAGE }}{{buildingName}}</p>
+      <div  class="form-group"  *ngIf="view=='cloneBuilding'">
+        <div class="default-checkbox"*ngFor="let cloneItem of cloneItemsArray;let i=index">
+        <input id="checkbox{{i}}" type="checkbox" name="choices"
+               value="{{cloneItem}}" (click)="selectItem($event)" [disabled]="!cloneItemsStatus[i]" [checked]="cloneItems.indexOf(cloneItem)!= -1"/>
+          <label for="checkbox{{i}}">{{ cloneItem }}</label>
+        </div>
+      </div>
+      <!--  <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">
+          <b>{{ errorMessage }}</b></div>-->
+      <div class="button-group">
+        <button type="button" class="btn btn-default" (click)="onCancel()"  *ngIf="view=='cloneBuilding'">Cancel</button>
+        <button type="submit" class="btn btn-primary">{{ submitActionLabel }}</button>
+      </div>
+    </form>
   </div>
-  <p class="form-sub-heading" *ngIf="view=='cloneBuilding'">{{ getLabels().CLONE_BUILDING_MESSAGE }}{{buildingName}}</p>
-  <div  class="form-group"  *ngIf="view=='cloneBuilding'">
-    <div class="default-checkbox"*ngFor="let cloneItem of cloneItemsArray;let i=index">
-    <input id="checkbox{{i}}" type="checkbox" name="choices"
-           value="{{cloneItem}}" (click)="selectItem($event)" [disabled]="!cloneItemsStatus[i]" [checked]="cloneItems.indexOf(cloneItem)!= -1"/>
-      <label for="checkbox{{i}}">{{ cloneItem }}</label>
-    </div>
-  </div>
-  <!--  <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">
-      <b>{{ errorMessage }}</b></div>-->
-  <div class="button-group">
-    <button type="button" class="btn btn-default" (click)="onCancel()"  *ngIf="view=='cloneBuilding'">Cancel</button>
-    <button type="submit" class="btn btn-primary">{{ submitActionLabel }}</button>
-  </div>
-</form>
+</div>
