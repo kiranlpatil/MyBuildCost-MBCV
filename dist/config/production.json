@@ -23,7 +23,7 @@
     "publicPath":"/src/server/app/framework/public/",
     "profilePath":"/src/server/public/profileImage",
     "attachmentPath":"/src/server/public/attachment-files",
-    "profilePathForClient":"/public/profileImage/",
+    "profilePathForClient":"/server/public/profileImage/",
     "limitForQuery" : 10,
     "mail": {
       "host":"http://costcontrol.buildinfo.co.in/",
