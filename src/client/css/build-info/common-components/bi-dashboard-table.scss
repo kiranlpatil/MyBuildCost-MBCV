@@ -57,7 +57,6 @@
       line-height: 14px;
       padding: 6px 10px;
       vertical-align: middle;
-      vertical-align: middle;
       &:last-child {
         border: none;
       }
@@ -100,7 +99,7 @@
       width: 100px;
 
       input {
-        background: url('../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
+        background: url('../../../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
         border: 1px solid transparent;
         box-shadow: none;
         color: $heading;
@@ -157,13 +156,19 @@
           font-size: 12px;
           height: 40px;
           margin: 0;
-          padding: 3px 36px 3px 3px;
+          overflow: hidden;
+          padding: 3px 24px 3px 3px;
           resize: none;
           text-align: left;
           transition: opacity 0.5s ease-in-out;
           width: 100%;
           &[hidden] {
             display: none;
+          }
+          &:focus {
+            background: white!important;
+            border: 1px solid transparent!important;
+            box-shadow: 0 0 0px 1px rgba(101, 152, 202, 1);
           }
         }
         span {
@@ -198,12 +203,12 @@
 
       td > .edit-field {
         textarea {
-          background: url('../../../assets/build-info/dashboard/edit.png') no-repeat 91% 46%;
+          background: url('../../../assets/build-info/dashboard/edit.png') no-repeat 98% 10%;
           border: 1px solid $gray;
         }
 
         textarea[readonly] {
-          background: url('../../../assets/build-info/dashboard/edit-bg.png') no-repeat 91% 46%;
+          background: url('../../../assets/build-info/dashboard/edit-bg.png') no-repeat 98% 10%;
           border: 1px solid transparent;
         }
 
@@ -240,7 +245,7 @@
   }
 
   .select-item {
-    background: transparent url(../assets/framework/images/form/drop-down.png) no-repeat 92% 50%;
+    background: transparent url(../../../assets/framework/images/form/drop-down.png) no-repeat 92% 50%;
     border: 0;
     border-radius: 0;
     color: $heading;
@@ -320,7 +325,7 @@
         float: left;
         margin: 0;
         text-align: left;
-        width: 100%;
+        width: calc(100% - 15px);
 
         input {
           border: 1px solid transparent;

@@ -17,7 +17,7 @@
         </li>
       </ul>
       <div  class="add-building-link" *ngIf="getCurrentView() === currentView().COST_SUMMARY">
-        <span *ngIf="!addBuildingButtonDisable" title="Add first Building">
+        <span *ngIf="!addBuildingButtonDisable" title="Add Building">
           <a [class.disabled]="buttonDisableForSampleProject" (click)="goToCreateBuilding()"><span class="glyphicon glyphicon-plus"></span>{{getMenus().ADD_BUILDING}}</a>
         </span>
         <span *ngIf="addBuildingButtonDisable" title="Upgrade to Premium package to add more buildings.">

@@ -471,7 +471,7 @@ export class ProjectAsset {
   static _year: Date = new Date();
   static currentYear = ProjectAsset._year.getFullYear();
   public static UNDER_LICENECE = '© ' + ProjectAsset.currentYear + ' www.buildinfo.com';
-  public static APP_NAME = 'Cost Control';
+  public static APP_NAME = 'My Build Cost';
   public static TAG_LINE = 'Help you to decide cost';
 }
 

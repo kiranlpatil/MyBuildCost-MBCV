@@ -167,6 +167,9 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .quantity-details-wrapper {
+    padding: 0;
+  }
   .table-categories {
     tbody > tr {
       border-bottom: 2px solid $border-color;

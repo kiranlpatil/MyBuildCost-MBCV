@@ -3,7 +3,7 @@
     <header class="create-new-header ">
       <button class="btn-back" (click)="goBack()"><img src="../../../../../../assets/build-info/create-new-project/back.png" /><span>{{getButton().GO_BACK}}</span></button>
     </header>
-    <div class="col-sm-6 col-sm-offset-3 details-page">
+    <div class="col-sm-12 details-page">
       <h4>{{getHeadings().EDIT_BUILDING}}</h4>
       <bi-building-form [submitActionLabel]="'Update'" [buildingModel]="buildingModel" (onSubmitEvent)="updateBuilding($event)"></bi-building-form>
     </div>

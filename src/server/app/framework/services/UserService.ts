@@ -923,10 +923,14 @@ class UserService {
               if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0
                 && projectSubscription.packageName !== 'Free') {
                 projectSubscription.addBuildingDisable=true;
+              } else {
+                projectSubscription.addBuildingDisable=false;
               }
               projectSubscription.packageName = this.checkCurrentPackage(result[0].subscription);
               if(projectSubscription.packageName === 'Free' && projectSubscription.numOfBuildingsRemaining === 0) {
                 projectSubscription.addBuildingDisable=true;
+              } else {
+                projectSubscription.addBuildingDisable=false;
               }
 
               let activation_date = new Date(result[0].subscription.activationDate);
