@@ -712,9 +712,10 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onUpdateWorkItemNameFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
-      this.errorService.onError(error);
-    }
+    var message = new Message();
+    message.isError = true;
+    message.error_msg = error.err_msg;
+    this.messageService.message(message);
     this.loaderService.stop();
   }
 

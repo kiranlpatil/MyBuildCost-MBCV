@@ -1158,6 +1158,7 @@ class ProjectService {
           let updateQuery;
           if(response.active) {
             newWorkItem.workItemId = response.workItemId +1;
+            newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
             updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
             arrayFilter = [
@@ -1259,6 +1260,7 @@ class ProjectService {
         } else {
           if(response.active) {
             newWorkItem.workItemId = response.workItemId +1;
+            newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
             updateQuery = {$push : {'projectCostHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
             arrayFilter = [
@@ -1346,16 +1348,49 @@ class ProjectService {
       {'category.rateAnalysisId': categoryId},
       {'workItem.rateAnalysisId': workItemId, 'workItem.workItemId' : ccWorkItemId}
     ];
-
-    this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
-      logger.info('Project service, findOneAndUpdate has been hit');
-      if (error) {
+    let checkDuplicateName = this.checkIfBuildingWorkItemNameAlreadyExists(buildingId, costHeadId, workItemId,
+      body.workItemName, (error, result) => {
+      if(error) {
         callback(error, null);
       } else {
-        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+        if(result.length === 0) {
+          this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        } else {
+          let msg = Constants.MSG_ERROR_DUPLICATE_ITEM + body.workItemName;
+          callback(new CostControllException(msg, null), null);
+        }
       }
     });
+  }
 
+  checkIfBuildingWorkItemNameAlreadyExists(buildingId : string, costHeadId : number, workItemRAId : number,
+                           workItemName :string, callback:(error: any, result : any) => void) {
+    let query = [
+      {$match: {'_id': ObjectId(buildingId), 'costHeads.rateAnalysisId': costHeadId}},
+      {$unwind: '$costHeads'},
+      {$unwind: '$costHeads.categories'},
+      {$unwind: '$costHeads.categories.workItems'},
+      {$match: {'costHeads.categories.workItems.rateAnalysisId': workItemRAId,
+                'costHeads.categories.workItems.name' : workItemName}},
+      {$project: {'costHeads.categories.workItems' : 1}}
+    ];
+
+    this.buildingRepository.aggregate(query, (error, result) => {
+      if (error) {
+        console.log('error : '+JSON.stringify(error));
+        callback(error, null);
+      } else {
+        console.log('Data : '+JSON.stringify(result));
+         callback(null, result);
+      }
+    });
   }
 
   updateBudgetedCostForCostHead(buildingId: string, costHeadBudgetedAmount: any, user: User,
@@ -1559,18 +1594,54 @@ class ProjectService {
                                  workItemId: number, ccWorkItemId: number, workItemName: string,
                                  user: User, callback: (error: any, result: any) => void) {
     let query = { _id: projectId };
-    let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].name':workItemName}};
-    let arrayFilter = [
-      { 'costHead.rateAnalysisId': costHeadId },
-      { 'category.rateAnalysisId': categoryId },
-      { 'workItem.rateAnalysisId': workItemId,'workItem.workItemId': ccWorkItemId }
-    ];
-    this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
-      logger.info('Project service, findOneAndUpdate has been hit');
-      if (error) {
+
+    this.checkIfProjectWorkItemNameAlreadyExists(projectId, costHeadId, workItemId,
+      workItemName, (error, result)=> {
+      if(error) {
         callback(error, null);
       } else {
-        callback(null, {data :'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+        if(result.length === 0) {
+          let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].name':workItemName}};
+          let arrayFilter = [
+            { 'costHead.rateAnalysisId': costHeadId },
+            { 'category.rateAnalysisId': categoryId },
+            { 'workItem.rateAnalysisId': workItemId,'workItem.workItemId': ccWorkItemId }
+          ];
+          this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null, {data :'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        } else {
+          let msg = Constants.MSG_ERROR_DUPLICATE_ITEM + workItemName;
+          callback(new CostControllException(msg, null), null);
+        }
+      }
+      });
+  }
+
+  checkIfProjectWorkItemNameAlreadyExists(projectId : string, costHeadId : number, workItemRAId : number,
+                                          workItemName :string, callback:(error: any, result : any) => void) {
+    let query = [
+      {$match: {'_id': ObjectId(projectId), 'projectCostHeads.rateAnalysisId': costHeadId}},
+      {$unwind: '$projectCostHeads'},
+      {$unwind: '$projectCostHeads.categories'},
+      {$unwind: '$projectCostHeads.categories.workItems'},
+      {$match: {'projectCostHeads.categories.workItems.rateAnalysisId': workItemRAId,
+        'projectCostHeads.categories.workItems.name' : workItemName}},
+      {$project: {'projectCostHeads.categories.workItems' : 1}}
+    ];
+
+    this.projectRepository.aggregate(query, (error, result) => {
+      if (error) {
+        console.log('error : '+JSON.stringify(error));
+        callback(error, null);
+      } else {
+        console.log('Data : '+JSON.stringify(result));
+        callback(null, result);
       }
     });
   }
