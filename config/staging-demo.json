@@ -21,8 +21,8 @@
     "exportFilePathServer": "/server/prod/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",
     "publicPath":"/server/prod/app/framework/public/",
-    "profilePath":"/server/prod/public/profileImage",
-    "profilePathForClient":"/public/profileImage/",
+    "profilePath": "/src/server/public/project-image",
+    "profilePathForClient": "/public/project-image/",
     "limitForQuery" : 10,
     "mail": {
       "host":"http://52.66.120.228:8080/",

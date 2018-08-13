@@ -17,6 +17,7 @@ class Project {
   openSpace:number;
   poolCapacity:number;
   totalNumOfBuildings:number;
+  projectImage:string;
   buildings: Array<Building>;
   rates: Array<CentralizedRate>;
   projectCostHeads : Array<CostHead>;

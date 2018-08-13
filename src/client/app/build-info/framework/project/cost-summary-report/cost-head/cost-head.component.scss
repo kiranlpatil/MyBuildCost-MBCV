@@ -7,6 +7,15 @@
   .panel-group {
     border: 0;
     padding: 3px 0;
+    .panel {
+      &>.panel-collapse {
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        margin-top: -5px;
+        overflow: hidden;
+      }
+    }
   }
 
   .panel-heading {
@@ -42,6 +51,16 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       width: calc(100% - 300px);
+    }
+  }
+  #cost-head-panels {
+    &>.panel {
+      &>.panel-collapse {
+        &>.panel-body {
+          font-size: 0;
+          margin-top: 5px;
+        }
+      }
     }
   }
   .panel-body {
@@ -91,7 +110,7 @@
 
 .table-categories {
   border-bottom: 1px solid $border-color;
-  margin: 0 auto;
+  margin: 0 auto 5px auto;
   width: calc(100% - 30px);
   tr {
     border: 0;
@@ -172,9 +191,9 @@
       display: inline-block;
     }
 
-    .file-attachment > span {
+    /*.file-attachment > span {
       opacity: 0;
-    }
+    }*/
 
     .file-attachment > span > img {
       width: 100%;
@@ -191,7 +210,7 @@
     .delete-cost-head {
       background: transparent;
       display: inline-block;
-      opacity: 0;
+      opacity: 1;
       padding: 0;
       position: relative;
       right: inherit;
@@ -214,7 +233,7 @@
     float: left;
 
     &:nth-child(1) {
-      width: 288px;
+      width: 310px;
     }
 
     &:nth-child(2) {
@@ -243,7 +262,7 @@
     }
 
     &:nth-child(7) {
-      min-width: 95px;
+      min-width: 68px;
       text-align: right;
     }
 
@@ -346,7 +365,7 @@
 }
 
 .add-item-table{
-  margin: -5px auto 0;
+  margin: -1px auto 0;
   width: calc(100% - 30px);
 
   tr {
@@ -382,11 +401,13 @@
   .work-item-panel-row {
     display: block;
     font-weight: 400 !important;
+    height: 25px;
     overflow: hidden;
     padding: 0 0 0 30px !important;
     position: relative;
     text-overflow: clip;
     white-space: inherit;
+    width: 6px;
   }
 
   .panel-heading {
@@ -395,6 +416,7 @@
   }
 
   table  {
+    width: 100%;
     #show-embedded-table-row {
       background-color: $azure;
       border: 0;
@@ -404,17 +426,17 @@
         padding: 3px 9px;
       }
 
-      td > .edit-field {
+      /*td > .edit-field {
         .calculator {
           opacity: 0;
         }
-      }
+      }*/
 
-      .add-more-details,
+      /*.add-more-details,
       .delete-cost-head,
       .file-attachment > span {
         opacity: 0;
-      }
+      }*/
 
       &:hover {
         background: $azure;
@@ -430,6 +452,9 @@
           .calculator {
             opacity: 1;
           }
+        }
+        .calculator.disabled {
+          opacity: 0.5 !important;
         }
       }
 
@@ -478,6 +503,13 @@
 .disable-link {
   pointer-events: none;
 }
+.disabled {
+    input {
+    background: transparent !important;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   .container {
@@ -489,6 +521,15 @@
 
     .panel-group {
       padding: 0;
+      .panel {
+        &>.panel-collapse {
+          box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          margin-top: -5px;
+          overflow: initial;
+        }
+      }
     }
 
     .panel-default {
@@ -518,6 +559,12 @@
           }
         }
       }
+    }
+  }
+
+  .bg-white {
+    &:first-child {
+      padding-top: 0;
     }
   }
 
@@ -553,6 +600,7 @@
   .table-categories {
     border-bottom: 2px solid $border-color;
     float: left;
+    margin: 0 auto;
     width: 100%;
     thead {
       display: none;
@@ -608,6 +656,7 @@
 
     td > .edit-field {
       margin: 2px 0;
+      padding: 0 5px;
       text-align: left;
         input {
           text-align: left;
@@ -648,7 +697,7 @@
       font-weight: 600 !important;
       .caret {
         left: 0;
-        top: 5px;
+        top: 10px;
       }
     }
 
@@ -676,4 +725,17 @@
     }
   }
 }
+.validate-amount {
+  border: 1px solid red !important;
 
+}
+
+.relative-position {
+  position: relative;
+}
+
+.fixed-plus-btn {
+  position: absolute !important;
+  right: 0;
+  top: 10px !important;
+}

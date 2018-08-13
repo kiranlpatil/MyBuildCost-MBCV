@@ -3,7 +3,7 @@
   <div class="panel panel-default"  *ngIf="amenitiesReport !== undefined" >
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a id="collapse-cost-summary-panel{{totalNumberOfBuildings}}" data-parent="#cost-summary-panel" data-toggle="collapse" href="#collapse{{totalNumberOfBuildings}}" (click)="showGrandTotalTable()">
+        <a id="collapse-cost-summary-panel{{totalNumberOfBuildings}}" class="collapsed" data-parent="#cost-summary-panel" data-toggle="collapse" href="#collapse{{totalNumberOfBuildings}}" (click)="showGrandTotalTable()">
           {{getHeadings().COMMON_DEVELOPMENT}}
           <span class="caret"></span>
         </a>
@@ -25,31 +25,33 @@
         </ul>
       </div>
     </div>
+    <table class="table table-row-spacing table-dashboard cost-summary-table">
+      <thead class="cost-summary-table-header">
+        <tr>
+          <th rowspan="2" class="border-left">{{getLabel().AMENITY_COST_HEAD}}</th>
+          <th colspan="2" class="border-left table-heading">
+            {{getLabel().BUDGETED_COST}}
+            <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+            <div class="white-bg"></div>
+          </th>
+          <th colspan="2" class="border-left table-heading">
+            {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+            <div class="white-bg"></div>
+          </th>
+        </tr>
+        <tr class="cost-summary-row-list">
+          <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
+          <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
+          <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
+          <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
+        </tr>
+      </thead>
+    </table>
 
     <div id="collapse{{totalNumberOfBuildings}}" class="panel-collapse collapse">
       <div class="panel-body">
 
         <table class="table table-row-spacing table-dashboard cost-summary-table">
-          <thead>
-            <tr>
-              <th rowspan="2" class="border-left">{{getLabel().AMENITY_COST_HEAD}}</th>
-              <th colspan="2" class="border-left table-heading">
-                {{getLabel().BUDGETED_COST}}
-                <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
-                <div class="white-bg"></div>
-              </th>
-              <th colspan="2" class="border-left table-heading">
-                {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
-                <div class="white-bg"></div>
-              </th>
-            </tr>
-            <tr class="cost-summary-row-list">
-              <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
-              <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
-              <th><span class="sub-heading">{{costingByUnit}}<br/>{{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
-              <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
-            </tr>
-          </thead>
           <tbody *ngIf="amenitiesReport.thumbRule  && amenitiesReport.estimate" >
             <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index" class="delete-cost-head-cell">
               <td class="border-left">{{thumbRuleItem.name}}</td>
@@ -59,14 +61,15 @@
                 <span *ngIf="thumbRuleItem.rate !== 0">{{thumbRuleItem.rate| number: '1.2-2'}}</span>
                 <span *ngIf="thumbRuleItem.rate === 0">-</span>
               </td>
-              <td class="border-left">
+              <td class="border-left" [class.validate-amount] = 'thumbRuleItem?.amount?.toString().split(".")[0]?.length>9 ||
+                                                          thumbRuleItem?.amount?.toString().split(".")[1]?.length>2'>
                 <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
                  <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0">
                       {{thumbRuleItem.amount | number: '1.0-0'  }}
                   </span>
                   <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
                 <div class="edit-field">
-                  <input title="Edit Budgeted Cost" type="number"
+                  <input title="Edit Budgeted Cost" type="number" amountValidate="true"
                          [(ngModel)]="thumbRuleItem.amount"
                          id="thumbRuleItem.amount"
                          (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
@@ -131,7 +134,7 @@
                 </button>
               </td>
             </tr>
-            <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate && !showGrandTotalPanelTable">
+            <!--<tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate && !showGrandTotalPanelTable">
               <td class="border-left">{{getLabel().TOTAL}}</td>
               <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
               <td class="border-left">
@@ -161,13 +164,13 @@
                     {{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}
                 </span>
               </td>
-            </tr>
+            </tr>-->
           </tbody>
         </table>
       </div>
     </div>
 
-    <table class="table table-row-spacing table-dashboard total-table" *ngIf="showGrandTotalPanelTable">
+    <table class="table table-row-spacing table-dashboard total-table">
       <tbody>
         <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
           <td class="border-left">{{getLabel().TOTAL}}</td>

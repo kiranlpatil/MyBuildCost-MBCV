@@ -79,7 +79,7 @@ class UserService {
               if (freeSubscription.length > 0) {
                 logger.debug('freeSubscription length  > 0');
                 this.assignFreeSubscriptionAndCreateUser(item, freeSubscription[0], callback);
-              }else {
+              } else {
                 logger.debug('freeSubscription length !==0');
                 subScriptionService.addSubscriptionPackage(config.get('subscription.package.Free'),
                   (err: any, freeSubscription)=> {
@@ -164,7 +164,7 @@ class UserService {
     this.userRepository.aggregate(query,(error,result)=> {
       if(error) {
         callback(error,null);
-      }else {
+      } else {
         if(result.length > 0) {
           for(let subscriptionPackage of result) {
               if(subscriptionPackage && subscriptionPackage.subscription.projectId!==null) {
@@ -177,7 +177,7 @@ class UserService {
                     let noOfBuildings=result.buildings.length;
                     if(subscriptionPackage && noOfBuildings <= subscriptionPackage.subscription.numOfBuildings) {
                       this.isActiveAddBuildingButton=false;
-                    }else {
+                    } else {
                       this.isActiveAddBuildingButton=true;
                     }
                     }
@@ -730,7 +730,7 @@ class UserService {
     this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
       if(error) {
         callback(error,null);
-      }else {
+      } else {
         let subScriptionArray = result.subscription;
         let subScriptionService = new SubscriptionService();
         subScriptionService.getSubscriptionPackageByName('Premium','BasePackage',
@@ -744,7 +744,7 @@ class UserService {
                 subScriptionArray[0].numOfProjects = premiumPackage.basePackage.numOfProjects;
                 subScriptionArray[0].validity = subScriptionArray[0].validity + premiumPackage.basePackage.validity;
                 subScriptionArray[0].purchased.push(premiumPackage.basePackage);
-              }else {
+              } else {
                 let subscription = new UserSubscription();
                 subscription.activationDate = new Date();
                 subscription.numOfBuildings = premiumPackage.basePackage.numOfBuildings;
@@ -774,7 +774,7 @@ class UserService {
   getProjects(user: User, callback:(error : any, result :any)=>void) {
 
     let query = {_id: user._id };
-    let populate = {path: 'project', select: ['name','buildings','activeStatus']};
+    let populate = {path: 'project', select: ['name','projectImage','buildings','activeStatus']};
     this.userRepository.findAndPopulate(query, populate, (error, result) => {
       if (error) {
         callback(error, null);
@@ -785,8 +785,8 @@ class UserService {
         let subscriptionList = result[0].subscription;
 
         let projectSubscriptionArray = Array<ProjectSubscriptionDetails>();
+        let sampleProjectSubscriptionArray = Array<ProjectSubscriptionDetails>();
         let isAbleToCreateNewProject : boolean = false;
-
         for(let project of projectList) {
           for(let subscription of subscriptionList) {
             if(subscription.projectId.length !== 0) {
@@ -797,6 +797,8 @@ class UserService {
                 projectSubscription.activeStatus = project.activeStatus;
                 projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
                 projectSubscription.numOfBuildingsAllocated = project.buildings.length;
+                if(project && project.projectImage)
+                projectSubscription.projectImage = project.projectImage;
                 projectSubscription.packageName = this.checkCurrentPackage(subscription);
                 //activation date for project subscription
                 let activation_date = new Date(subscription.activationDate);
@@ -815,7 +817,7 @@ class UserService {
                     'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days,' ;
                 } else if(projectSubscription.numOfDaysToExpire <= 0 &&  noOfDays >= 0) {
                   projectSubscription.expiryMessage =  'Project expired,';
-                }else if(noOfDays < 0) {
+                } else if(noOfDays < 0) {
                   projectSubscription.activeStatus = false;
                 }
 
@@ -832,10 +834,25 @@ class UserService {
           isAbleToCreateNewProject = true;
         }
 
-        callback(null, {
-          data: projectSubscriptionArray,
-          isSubscriptionAvailable : isAbleToCreateNewProject,
-          access_token: authInterceptor.issueTokenWithUid(user)
+        let projectId = config.get('sampleProject.' + 'projectId');
+        let projection = {'name': 1, 'activeStatus': 1};
+        this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
+          if(error) {
+            callback(error, null);
+          } else {
+            let data = project;
+            let sampleProjectSubscription = new ProjectSubscriptionDetails();
+            sampleProjectSubscription.projectName = project.name;
+            sampleProjectSubscription.projectId = project._id;
+            sampleProjectSubscription.activeStatus = project.activeStatus;
+            sampleProjectSubscriptionArray.push(sampleProjectSubscription);
+          }
+          callback(null, {
+            data: projectSubscriptionArray,
+            sampleProject: sampleProjectSubscriptionArray,
+            isSubscriptionAvailable : isAbleToCreateNewProject,
+            access_token: authInterceptor.issueTokenWithUid(user)
+          });
         });
       }
     });
@@ -858,7 +875,7 @@ class UserService {
        }
        if(purchasePackage.name ==='Free') {
          return purchasePackage.name='Free';
-       }else {
+       } else {
          return purchasePackage.name='Premium';
        }
      }
@@ -890,49 +907,65 @@ class UserService {
           if (error) {
             callback(error, null);
           } else {
-            let projectSubscription = new ProjectSubscriptionDetails();
-            projectSubscription.projectName = resp[0].name;
-            projectSubscription.projectId = resp[0]._id;
-            projectSubscription.activeStatus = resp[0].activeStatus;
-            projectSubscription.numOfBuildingsAllocated = resp[0].buildings.length;
-            projectSubscription.numOfBuildingsExist = result[0].subscription.numOfBuildings;
-            projectSubscription.numOfBuildingsRemaining = (result[0].subscription.numOfBuildings - resp[0].buildings.length);
-            if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0 && projectSubscription.packageName !== 'Free') {
-              projectSubscription.addBuildingDisable=true;
+
+            if(resp.length > 0 && result.length > 0) {
+
+              let projectSubscription = new ProjectSubscriptionDetails();
+              projectSubscription.projectName = resp[0].name;
+              projectSubscription.projectId = resp[0]._id;
+              projectSubscription.activeStatus = resp[0].activeStatus;
+              projectSubscription.numOfBuildingsAllocated = resp[0].buildings.length;
+              projectSubscription.numOfBuildingsExist = result[0].subscription.numOfBuildings;
+              projectSubscription.numOfBuildingsRemaining = (result[0].subscription.numOfBuildings - resp[0].buildings.length);
+              if(resp[0] && resp[0].projectImage) {
+                projectSubscription.projectImage = resp[0].projectImage;
               }
-            projectSubscription.packageName = this.checkCurrentPackage(result[0].subscription);
-            if(projectSubscription.packageName === 'Free' && projectSubscription.numOfBuildingsRemaining === 0) {
-              projectSubscription.addBuildingDisable=true;
+              if(result[0].subscription.numOfBuildings === 10 && projectSubscription.numOfBuildingsRemaining ===0
+                && projectSubscription.packageName !== 'Free') {
+                projectSubscription.addBuildingDisable=true;
+              } else {
+                projectSubscription.addBuildingDisable=false;
+              }
+              projectSubscription.packageName = this.checkCurrentPackage(result[0].subscription);
+              if(projectSubscription.packageName === 'Free' && projectSubscription.numOfBuildingsRemaining === 0) {
+                projectSubscription.addBuildingDisable=true;
+              } else {
+                projectSubscription.addBuildingDisable=false;
+              }
+
+              let activation_date = new Date(result[0].subscription.activationDate);
+              let expiryDate = new Date(result[0].subscription.activationDate);
+              projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + result[0].subscription.validity));
+
+              //expiry date for project subscription
+              let current_date = new Date();
+              var newExipryDate = new Date(projectSubscription.expiryDate);
+              newExipryDate.setDate(projectSubscription.expiryDate.getDate() + 30);
+              let noOfDays =  this.daysdifference(newExipryDate,  current_date);
+
+              projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
+
+              if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >0) {
+                projectSubscription.warningMessage =
+                  'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days.' ;
+              } else if(projectSubscription.numOfDaysToExpire <= 0 && noOfDays >= 0) {
+                projectSubscription.expiryMessage = 'Project expired,';
+              } else if(noOfDays < 0) {
+                projectSubscription.activeStatus = false;
+              }
+              callback(null, projectSubscription);
+
+            } else {
+              callback(null, null);
             }
-
-            let activation_date = new Date(result[0].subscription.activationDate);
-            let expiryDate = new Date(result[0].subscription.activationDate);
-            projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + result[0].subscription.validity));
-
-            //expiry date for project subscription
-            let current_date = new Date();
-            var newExipryDate = new Date(projectSubscription.expiryDate);
-            newExipryDate.setDate(projectSubscription.expiryDate.getDate() + 30);
-            let noOfDays =  this.daysdifference(newExipryDate,  current_date);
-
-            projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
-
-            if(projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire >0) {
-              projectSubscription.warningMessage =
-                'Expiring in ' +  Math.round(projectSubscription.numOfDaysToExpire) + ' days.' ;
-            } else if(projectSubscription.numOfDaysToExpire <= 0 && noOfDays >= 0) {
-              projectSubscription.expiryMessage = 'Project expired,';
-            }else if(noOfDays < 0) {
-              projectSubscription.activeStatus = false;
-            }
-            callback(null, projectSubscription);
           }
         });
       }
     });
   }
 
-  updateSubscription(user : User, projectId: string, packageName: string,costForBuildingPurchased:any,numberOfBuildingsPurchased:any, callback:(error: any, result: any)=> void) {
+  updateSubscription(user : User, projectId: string, packageName: string, costForBuildingPurchased:any,
+                     numberOfBuildingsPurchased:any, callback:(error: any, result: any)=> void) {
     let query = [
       {$match: {'_id':ObjectId(user._id)}},
       { $project : {'subscription':1}},

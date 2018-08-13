@@ -2,7 +2,11 @@
   <div class="modal-content">
     <div class="modal-body">
       <p class="modal-icon"><i><img src="./assets/build-info/dashboard/warning-big.png"/></i></p>
-      <p>If you add measurement sheet, your dirctly added quanity would be deleted.</p>
+      <!--<p>If you add measurement sheet, your dirctly added quanity would be deleted.</p>-->
+      <p>
+        If you add <strong>{{elementType}}</strong>, your <strong>{{currentQuantity}}</strong> will be deleted.
+      </p>
+
       <button class="btn btn-primary bi-btn" type="button" (click)="updateElement()" data-dismiss="modal">Yes I&#39;m Sure</button>
       <button type="button" class="btn btn-default" (click)="cancel()" data-dismiss="modal">Cancel</button>
     </div>

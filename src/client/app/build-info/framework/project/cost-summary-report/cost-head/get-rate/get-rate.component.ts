@@ -15,6 +15,7 @@ import { Category } from '../../../../model/category';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
 import { RateItem } from '../../../../model/rate-item';
 import { ErrorService } from '../../../../../../shared/services/error.service';
+declare var $: any;
 
 
 @Component({
@@ -30,6 +31,7 @@ export class GetRateComponent implements OnChanges {
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
   @Input() workItemRateAnalysisId : number;
+  @Input() ccWorkItemId : number;
   @Input() workItemsList : Array<WorkItem>;
   @Input() workItemUnit :any;
   @Input() totalByUnit :number;
@@ -80,6 +82,11 @@ export class GetRateComponent implements OnChanges {
     this.totalAmountOfMaterialAndLabour = 0;
 
     for (let rateItemsIndex in this.rate.rateItems) {
+     if(this.rate.rateItems[rateItemsIndex].quantity!==null && this.rate.rateItems[rateItemsIndex].rate !==null &&
+       !this.validateMeasurementSheetItems(this.rate.rateItems[rateItemsIndex].quantity,this.rate.rateItems[rateItemsIndex].rate)) {
+       this.rate.rateItems[rateItemsIndex].totalAmount=0;
+      continue;
+     }
       if(choice === 'changeTotalQuantity') {
         this.rate.rateItems[rateItemsIndex].quantity = parseFloat((
           this.rate.rateItems[rateItemsIndex].quantity *
@@ -117,7 +124,20 @@ export class GetRateComponent implements OnChanges {
     this.ratePerUnitAmount = this.totalAmount / this.rate.quantity;
     this.rate.total = this.rateTotalByUnit();
     }
-
+  validateMeasurementSheetItems(quantity:number,rate:number) {
+    if(quantity===null || rate===null ) {
+      return true;
+    }
+    if( quantity.toString().match(/^\d{1,7}(\.\d{1,2})?$/) &&
+      rate.toString().match(/^\d{1,7}(\.\d{1,2})?$/) ) {
+      return true;
+    }
+    var message = new Message();
+    message.isError = true;
+    message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+    this.messageService.message(message);
+    return false;
+  }
   rateTotalByUnit() {
     if (this.workItemUnit === 'Sqm' && this.rate.unit !== 'Sqm') {
       this.totalByUnit = this.ratePerUnitAmount * 10.764;
@@ -135,6 +155,13 @@ export class GetRateComponent implements OnChanges {
   }
 
   updateRate(rateItemsArray: Rate) {
+    if($('input').hasClass('validate-amount') ) {
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+      this.messageService.message(message);
+      return;
+    }
     if (this.validateRateItem(rateItemsArray.rateItems)) {
       this.loaderService.start();
       let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
@@ -149,7 +176,8 @@ export class GetRateComponent implements OnChanges {
       rate.imageURL = rateItemsArray.imageURL;
       rate.notes = rateItemsArray.notes;
 
-      this.costSummaryService.updateRate(this.baseUrl, costHeadId, this.categoryRateAnalysisId, workItemId, rate).subscribe(
+      this.costSummaryService.updateRate(this.baseUrl, costHeadId,
+        this.categoryRateAnalysisId, workItemId, this.ccWorkItemId, rate).subscribe(
         success => this.onUpdateRateSuccess(success),
         error => this.onUpdateRateFailure(error)
       );
@@ -333,5 +361,8 @@ export class GetRateComponent implements OnChanges {
 
   getProjectElements() {
     return ProjectElements;
+  }
+  getMessages() {
+    return Messages;
   }
 }

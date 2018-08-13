@@ -1,6 +1,5 @@
 <div class="confirm-your-package-section" *ngIf="packageName && (packageName=='Premium' || packageName=='Retain' || packageName==='Free')">
   <h1>{{getHeadings().CONFIRM_PACKAGE_HEADING}}</h1>
-
   <div *ngIf="premiumPackageDetails">
     <div class="col-xs-12">
       <ul>
@@ -36,7 +35,15 @@
             <span>{{getLabels().TOTAL_BILLED}}</span>
             <div class="totalBillAmount pull-right">
               <span class="col-xs-12 pull-right no-padding text-right lineThrough"> <sup>INR</sup> {{premiumPackageDetails.basePackage.cost}} </span>
-              <span class="col-xs-12 pull-right no-padding text-right font-18"> <sup>INR</sup> {{premiumPackageDetails.basePackage.cost-premiumPackageDetails.basePackage.iterativeDiscount}} </span>
+            </div>
+            <span class="discount-text" *ngIf="premiumPackageAvailable">
+              Special discount for existing premium users
+            </span>
+            <div class="totalBillAmount pull-right">
+              <span class="col-xs-12 pull-right no-padding text-right font-18">
+                  <sup>INR</sup>
+                  {{premiumPackageDetails.basePackage.cost-premiumPackageDetails.basePackage.iterativeDiscount}}
+                </span>
             </div>
           </div>
         </li>

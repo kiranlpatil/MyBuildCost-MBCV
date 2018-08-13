@@ -8,6 +8,7 @@ import { QuantityItem } from '../../model/quantity-item';
 import { Rate } from '../../model/rate';
 import { ProjectElements } from '../../../../shared/constants';
 import { QuantityDetails } from '../../model/quantity-details';
+import { WorkItem } from '../../model/work-item';
 
 declare let $: any;
 
@@ -106,10 +107,9 @@ export class CostSummaryService extends BaseService {
   }
 
   // WorkItem  CRUD API
-  deactivateWorkItem( baseUrl: string, costHeadId : number, subCategoryId : number, workItemId : number) {
-    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+
-      costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
-      API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_FALSE;
+  deactivateWorkItem( baseUrl: string, costHeadId : number, subCategoryId : number, workItemId : number, ccWorkItemID: number) {
+    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+ costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/'
+      + API.WORKITEM + '/' + workItemId +'/'+ ccWorkItemID + '/' + API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_FALSE;
     let body = {};
 
     return this.httpDelegateService.putAPI(url, body);
@@ -122,11 +122,10 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  activateWorkItem(baseUrl : string, costHeadId : number, subCategoryId : number, workItemId : number) {
-    var url =  baseUrl +'/'+ API.COSTHEAD +'/'+
-      costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' + API.WORKITEM + '/' + workItemId +'/'+
-      API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_TRUE;
-    let body = {};
+  activateWorkItem(baseUrl : string, costHeadId : number, subCategoryId : number, workItem : WorkItem) {
+    var url =  baseUrl + '/' + API.COSTHEAD + '/' + costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' +
+      API.WORKITEM + '/' + workItem.rateAnalysisId +'/'+ workItem.workItemId + '/' + API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_TRUE;
+    let body = workItem;
 
     return this.httpDelegateService.putAPI(url, body);
   }
@@ -141,38 +140,38 @@ export class CostSummaryService extends BaseService {
   }
 
   updateQuantityItems( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
-                      quantityItemsArray : any) {
+                       ccWorkItemId:number, quantityItemsArray : any) {
     var body= { item : quantityItemsArray };
     var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
-      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY;
+      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/' + API.QUANTITY;
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
   updateDirectQuantityAmount( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
-                       directQuantity : number) {
+                              ccWorkItemId: number, directQuantity : number) {
     var body= { directQuantity : directQuantity };
-    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
-      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT + '/'+ API.QUANTITY;
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY +'/'+ categoryId +'/'
+      + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/' + API.DIRECT + '/'+ API.QUANTITY;
 
     return this.httpDelegateService.putAPI(url, body);
   }
   updateQuantityDetails(baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
-                        quantityDetailsObj : QuantityDetails) {
+                        ccWorkItemId: number, quantityDetailsObj : QuantityDetails) {
 
     var body= {  item : quantityDetailsObj };
 
-    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
-      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT_QUANTITY +
-      '/'+ API.QUANTITY_ITEM_DETAILS;
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY + '/' + categoryId
+      + '/' + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/'+ API.DIRECT_QUANTITY + '/'+ API.QUANTITY_ITEM_DETAILS;
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  deleteQuantityDetailsByName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number, quantityName:string) {
+  deleteQuantityDetailsByName( baseUrl: string, costHeadId : number, categoryId : number,
+                               workItemId : number, ccWorkItemID: number, quantityName:string) {
     var body= { item: { name : quantityName } };
-    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
-      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.QUANTITY + '/' + API.ITEM;
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY +'/'+ categoryId +
+      '/' + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemID + '/' + API.QUANTITY + '/' + API.ITEM;
 
     return this.httpDelegateService.putAPI(url, body);
   }
@@ -180,23 +179,31 @@ export class CostSummaryService extends BaseService {
 
   //Rate API
   updateRate( baseUrl: string, costHeadId : number,categoryId : number, workItemId : number,
-              rateItemsArray : Rate) {
+              ccWorkItemId: number, rateItemsArray : Rate) {
     var body=rateItemsArray;
-    var url = baseUrl + '/' + API.RATE + '/' + API.COSTHEAD+ '/' +
-      costHeadId + '/' + API.CATEGORY + '/' + categoryId + '/' + API.WORKITEM + '/' + workItemId ;
+    var url = baseUrl + '/' + API.RATE + '/' + API.COSTHEAD+ '/' + costHeadId + '/' + API.CATEGORY
+      + '/' + categoryId + '/' + API.WORKITEM + '/' + workItemId + '/' + ccWorkItemId;
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
   updateDirectRate( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
-                    directRate : number) {
+                    ccWorkItemId: number, directRate : number) {
     var body= { directRate : directRate };
-    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId +
-      '/'+ API.CATEGORY +'/'+ categoryId +'/' + API.WORKITEM + '/' + workItemId + '/'+ API.DIRECT + '/'+ API.RATE;
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY +'/'+ categoryId +
+      '/' + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/' + API.DIRECT + '/'+ API.RATE;
 
     return this.httpDelegateService.putAPI(url, body);
   }
 
+  updateWorkItemName( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                    ccWorkItemId: number, workItemName : number) {
+    var body= { workItemName : workItemName };
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY +'/'+ categoryId +
+      '/' + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/' + API.WORKITEM_NAME;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
 
   getRateItems( projectId : String, buildingId : string, costheadId : number, categoryId : number, workItemId : number) {
     var url = API.PROJECT + '/' + projectId + '/' + API.BUILDING + '/' + buildingId + '/' + API.RATE + '/'+ API.COSTHEAD +'/' +
@@ -228,21 +235,21 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.putAPI(url, body);
   }
 
-  addAttachment(baseUrl: string, costHeadId:number,categoryId:number,workItemId:number, filesToUpload: Array<File> ) {
-    var url = AppSettings.API_ENDPOINT + baseUrl + '/' + API.COSTHEAD +'/' +
-      costHeadId + '/' + API.CATEGORY + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/'+ API.FILE;
+  addAttachment(baseUrl: string, costHeadId:number,categoryId:number,workItemId:number, ccWorkItemId:number, filesToUpload: Array<File> ) {
+    var url = AppSettings.API_ENDPOINT + baseUrl + '/' + API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORY
+      + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/'+ ccWorkItemId + '/' + API.FILE;
     let body = {fileName : filesToUpload };
     return this.httpDelegateService.xhrAPIRequest(url, body);
   }
-  getPresentFilesForWorkItem(baseUrl: string, costHeadId:number,categoryId:number,workItemId:number) {
-    var url = baseUrl +'/' + API.COSTHEAD +'/' +
-    costHeadId + '/' + API.CATEGORY + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + API.FILE_LIST;
+  getPresentFilesForWorkItem(baseUrl: string, costHeadId:number, categoryId:number, workItemId:number, ccWorkItemId:number) {
+    var url = baseUrl +'/' + API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORY + '/' +
+      categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + ccWorkItemId + '/' + API.FILE_LIST;
     return this.httpDelegateService.getAPI(url);
   }
 
-  removeAttachment(baseUrl: string, costHeadId:number, categoryId:number, workItemId:number, assignedFileName:any) {
-    var url = baseUrl +'/' + API.COSTHEAD +'/' +
-      costHeadId + '/' + API.CATEGORY + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + API.DELETE_FILE;
+  removeAttachment(baseUrl: string, costHeadId:number, categoryId:number, workItemId:number, ccWorkItemId:number, assignedFileName:any) {
+    var url = baseUrl +'/' + API.COSTHEAD +'/' + costHeadId + '/' + API.CATEGORY
+      + '/'+categoryId + '/' + API.WORKITEM + '/'+workItemId + '/' + ccWorkItemId + '/' + API.DELETE_FILE;
     let body = {assignedFileName : assignedFileName };
     return this.httpDelegateService.putAPI(url, body);
   }
@@ -275,14 +282,16 @@ export class CostSummaryService extends BaseService {
         $('#collapse'+compareIndex).addClass('in');
         let collapseTag = '#collapse' + compareIndex;
         $(collapseTag).ready(function () {
-          var divPos = $(collapseCostSummaryPanelTag).offset().top;
-          let scrollTo=SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)?
-            SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)
-            : divPos - 8;
-          $('html, body').animate({
-            scrollTop: scrollTo
-          },500);
-          setTimeout(() =>  SessionStorageService.removeSessionValue(SessionStorage.CURRENT_WINDOW_POSITION), 600);
+          if($(collapseCostSummaryPanelTag).offset() !== undefined) {
+            var divPos = $(collapseCostSummaryPanelTag).offset().top;
+            let scrollTo=SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)?
+              SessionStorageService.getSessionValue(SessionStorage.CURRENT_WINDOW_POSITION)
+              : divPos - 8;
+            $('html, body').animate({
+              scrollTop: scrollTo
+            },500);
+            setTimeout(() =>  SessionStorageService.removeSessionValue(SessionStorage.CURRENT_WINDOW_POSITION), 600);
+          }
         });
     });
   }

@@ -1,9 +1,9 @@
 export class AppSettings {
-  // public static IP = 'http://localhost:8080';
-  public static IP = 'http://52.66.120.228:8080'; // build info staging
-  // public static HOST_NAME = 'localhost:8080';
-  public static HOST_NAME = '52.66.120.228:8080';
+  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://13.232.139.161:8080'; // build info staging
+  public static HOST_NAME = 'localhost:8080';
 
+  //public static HOST_NAME = '13.232.139.161:8080';
   public static INITIAL_THEM = 'container-fluid dark-theme';
   public static LIGHT_THEM = 'container-fluid light-theme';
   public static IS_SOCIAL_LOGIN_YES = 'YES';
@@ -11,6 +11,27 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
   public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
+  public static SAMPLE_PROJECT_ID = '5b4c8f44b3a2d31c208b39bd';
+  public static SAMPLE_PROJECT_USER_ID = '5b4c8f2db3a2d31c208b39bc';
+
+
+  /*
+    // Localhost Project and User Id
+    public static SAMPLE_PROJECT_ID = '5b644d4993310206e4f0d94e';
+    public static SAMPLE_PROJECT_USER_ID = '5b643c9d8e94d52c74075f50';
+  */
+
+/*
+  // Staging Project and User Id
+  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
+  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
+*/
+
+/*
+  // Production Project and User Id
+  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
+  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
+*/
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
@@ -50,6 +71,7 @@ export class Messages {
   public static MSG_ERROR_SOMETHING_WRONG: string = 'Internal Server Error.';
   public static MSG_ERROR_IMAGE_TYPE: string = 'Please try again. Make sure to upload only image file with extensions JPG, JPEG, GIF, PNG.';
   public static MSG_ERROR_IMAGE_SIZE: string = 'Please make sure the image size is less than 5 MB.';
+  public static MSG_IMAGE_DELETE: string = 'Project image is deleted successfully.';
 
   //Registration validation messages
   public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your e-mail address';
@@ -195,6 +217,7 @@ export class Messages {
   public static MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM: string = 'Quantity for Work Item updated successfully.';
   public static MSG_SUCCESS_UPDATE_DIRECT_RATE_OF_WORKITEM: string = 'Rate for Work Item updated successfully.';
   public static MSG_SUCCESS_UPDATE_QUANTITY_NAME_WORKITEM: string = 'Title for Work Item updated successfully.';
+  public static MSG_SUCCESS_UPDATE_WORKITEM_NAME: string = 'Workitem name updated successfully';
 
   //Quantity view required fields
   public static MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED = 'Enter item';
@@ -229,12 +252,17 @@ export class Messages {
   public static MSG_ADD_BUILDING_PAYMENT: string = 'You have already consumed package of 5 buildings.<br />You can add more buildings by paying INR 500 per building.';
   public static MSG_CREATE_PROJECT_CONFIRMATION: string = 'Trial package contains only 1 project <br />with 5 buildings you can create new project<br /> by purchasing our <strong>premium package.</strong>';
   public static MSG_CONFIRMATION_CREATE_PROJECT: string = 'For creating new project you will have to upgrade to premium package (valid for 1 new project)';
-  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain existing ';
+  public static MSG_ON_RETAIN_PROJECT: string = 'Would you like to retain estimated cost details from existing ';
   public static MSG_ON_RETAIN_PROJECT2: string = ' or you would like to create a new project.';
   public static WARNING_MESSAGE_ON_RETAIN_PROJECT: string = 'Creating new project will delete your existing project data';
   public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';
   public static PROJECT_EXPIRED: string = 'Project Expired';
+  public static DISCLAIMER_MESSAGE: string = 'The Budgeted cost is based on thumb rule and may vary from project-to-project or place-to-place depending on construction methods and practices. <br/>The material consumption constants, material/labour rates in Rate analysis are based on various sources from the construction industry. <br/> All the in built contents/data of My Build Cost shall be used only for reference. The user shall verify the contents before using it. Big Slice Technologies Pvt Ltd (OPC), its Director/s, employees/representatives shall not be held responsible for any consequences resulted due to use of the contents/data of My Build Cost';
+  public static AMOUNT_VALIDATION_MESSAGE: string = 'This number format can have maximum 7 digits with 2 decimals. (e.g. 1234567.12).';
+  public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 2 decimals. (e.g. 123456789.12).';
 
+  //Sample Project
+  public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'Sample project helps you understand how the application works. Modified values will not be calculated or saved.';
 }
 
 export class NavigationRoutes {
@@ -312,6 +340,8 @@ export class SessionStorage {
   public static IS_SUBSCRIPTION_AVAILABLE = 'is_subscription_available';
   public static PREMIUM_PACKAGE_AVAILABLE = 'premium_package_available';
   public static STATUS = 'project_status';
+  public static SELECTED_AREA = 'selectedArea';
+  public static SELECTED_UNIT = 'selectedUnit';
 
 }
 
@@ -353,6 +383,8 @@ export class API {
   //Project
   public static USER_ALL_PROJECTS = 'user/all/project';
   public static PROJECT = 'project';
+  public static PROJECT_IMAGE_UPLOAD = '/image/upload';
+  public static PROJECT_IMAGE_REMOVE = 'image/remove/';
   public static PROJECT_NAME = 'projectName';
   public static CHECK_FOR_LIMITATION_OF_BUILDING = 'checkForLimitationOfBuilding';
 
@@ -373,6 +405,7 @@ export class API {
   public static QUANTITY_ITEM_DETAILS = 'quantityItemDetails';
   public static ITEM = 'item';
   public static DIRECT = 'direct';
+  public static WORKITEM_NAME = 'workitemName';
   public static DIRECT_QUANTITY = 'directQuantity';
   public static FILE = 'uploadFile';
   public static FILE_LIST = 'fileNameList';
@@ -417,7 +450,7 @@ export class ImagePath {
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
-  public static PROFILE_IMG_ICON = './assets/framework/images/dashboard/default-profile.png';
+  public static   PROFILE_IMG_ICON = './assets/build-info/dashboard/default-company-logo.png';
   public static COMPANY_LOGO_IMG_ICON = './assets/framework/images/dashboard/default-company-buildinfo-logo.png';
   public static EMAIL_ICON = './assets/framework/images/icons/e-mail.svg';
   public static EMAIL_ICON_GREY = './assets/framework/images/icons/e-mail-grey.svg';
@@ -436,7 +469,7 @@ export class ProjectAsset {
   static _year: Date = new Date();
   static currentYear = ProjectAsset._year.getFullYear();
   public static UNDER_LICENECE = '© ' + ProjectAsset.currentYear + ' www.buildinfo.com';
-  public static APP_NAME = 'Cost Control';
+  public static APP_NAME = 'My Build Cost';
   public static TAG_LINE = 'Help you to decide cost';
 }
 
@@ -597,7 +630,7 @@ export class Label {
   public static BUILDINGS: string = 'Buildings';
   public static NO_OF_PROJECTS: string = 'No. of Projects';
   public static NO_OF_BUILDING: string = 'No. of Buildings';
-  public static DURATION: string = 'Duration';
+  public static DURATION: string = 'Package Duration';
   public static TOTAL_BILLED: string = 'Total Billed';
   public static NO_OF_BUILDINGS_TO_ADD: string = 'Number of building(s) to add';
   public static INR: string = 'INR';
@@ -681,7 +714,9 @@ export class ProjectElements {
   public static WORK_ITEM = ' a WorkItem';
   public static BUILDING = 'Building';
   public static QUANTITY_ITEM = 'Quantity Item';
-  public static DIRECT_QUANTITY = 'Direct Quantity';
+  public static DIRECT_QUANTITY = 'Direct quantity';
+  public static MEASUREMENT_SHEET = 'Measurement sheet';
+  public static FLOORWISE_QUANTITY = 'Floorwise quantity';
   public static QUANTITY_DETAILS = ' a Quantity Details';
   public static QUANTITY = 'Quantity';
   public static ATTACHMENT = ' an Attachment';
@@ -690,13 +725,13 @@ export class ProjectElements {
   public static SALEABLE_AREA = 'Saleable Area';
   public static CARPET_AREA = 'Carpet Area';
   public static RS_PER_SQFT = 'Rs/Sqft';
-  public static RS_SYMBOL_PER_SQFT = '&#8377;/Sqft';
+  public static RS_SYMBOL_PER_SQFT = 'Rs/Sqft';
   public static RS_PER_SQMT = 'Rs/Sqmt';
-  public static RS_SYMBOL_PER_SQMT = '&#8377;/Sqmt';
+  public static RS_SYMBOL_PER_SQMT = 'Rs/Sqmt';
   public static SQUAREFEET = 'sqft';
   public static SQUAREMETER = 'sqmt';
   public static RS = 'Rs';
-  public static RS_SYMBOL = '&#8377;';
+  public static RS_SYMBOL = 'Rs';
 }
 
 export class MaterialTakeOffElements {
@@ -745,7 +780,7 @@ export class Menus {
   public static CLONE = 'Add new building with same details';
   public static EDIT = 'Edit';
   public static DELETE = 'Delete';
-  public static ADD_BUILDING = 'Add first Building';
+  public static ADD_BUILDING = 'Add Building';
   public static ADD_BUILDING_TO_PROJECT = 'Add Building to Project';
   public static COPY_BUILDING = 'Copy Building';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';

@@ -25,6 +25,7 @@ $tolerance-color: $amber-bg;
   height: 100vh;
   left: 0;
   position: fixed;
+  pointer-events: none;
   top: 0;
   width: 100%;
   z-index: 9999;

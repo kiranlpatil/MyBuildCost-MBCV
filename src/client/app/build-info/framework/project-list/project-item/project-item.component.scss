@@ -16,7 +16,9 @@
     overflow: hidden;
     position: relative;
     width: 140px;
-
+    img.upload-img {
+      width: 100%;
+    }
     .project-actions {
       background: $modal-bg;
       height: 100%;

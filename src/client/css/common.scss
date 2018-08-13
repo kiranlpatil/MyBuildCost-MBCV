@@ -987,3 +987,23 @@ textarea[disabled] {
     }
   }
 }
+
+#restriction .modal-dialog{
+  top: 26% !important;
+}
+
+.disclaimer-section {
+  background: $page-background;
+  h1 {
+    font-size: 10px;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 10px 0;
+    text-align: left;
+  }
+  p {
+    font-size: 9px;
+    margin: 0 auto;
+    text-align: left;
+  }
+}

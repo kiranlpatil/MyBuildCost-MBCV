@@ -22,6 +22,7 @@ export class CloneBuildingComponent  implements  OnInit {
   public isUserSignIn:number;
   buildingId:string;
   oldBuildingName: string;
+  disableFormFields: boolean = false;
 
 
 
@@ -48,6 +49,7 @@ export class CloneBuildingComponent  implements  OnInit {
 
   onGetBuildingSuccess(building : any) {
     this.cloneBuildingModel = building.data;
+    this.disableFormFields = true;
     this.oldBuildingName = this.cloneBuildingModel.name;
     this.cloneBuildingModel.name = '';
     this.loaderService.stop();

@@ -21,6 +21,7 @@ export class ProjectFormComponent implements OnInit{
   projectForm:  FormGroup;
   public isShowErrorMessage: boolean = false;
   public errorMessage: boolean = false;
+  public imageName: string;
 
   constructor( private formBuilder: FormBuilder) {
 
@@ -45,13 +46,16 @@ export class ProjectFormComponent implements OnInit{
   submitForm() {
     if(this.projectForm.valid) {
     this.projectModel = this.projectForm.value;
+    this.projectModel.projectImage=this.imageName;
     this.projectModel.activeStatus = true;
       this.onSubmitEvent.emit(this.projectModel);
     } else {
       this.isShowErrorMessage = true;
     }
   }
-
+  onProjectImageUpload(event:any) {
+    this.imageName=event;
+  }
   getLabels() {
     return Label;
   }

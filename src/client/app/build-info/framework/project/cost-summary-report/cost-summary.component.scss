@@ -1,4 +1,5 @@
 @import '../../../../../css/common';
+@import '../../../../shared/delete-confirmation-modal/delete-confirmation-modal.component';
 
 .clone-modal {
   .modal-dialog {
@@ -129,7 +130,6 @@
       &:nth-child(7) {
         border-radius: 0 6px 6px 0;
         text-align: right;
-        width: 120px;
       }
     }
 
@@ -240,7 +240,45 @@
     }
   }
 }
-
+.cost-summary-table {
+  .cost-summary-table-header {
+    tr {
+      &:nth-child(1) {
+        th {
+          &:nth-child(1) {
+            width: 190px;
+          }
+          &:nth-child(2) {
+            width: auto;
+          }
+          &:nth-child(3) {
+            width: auto;
+          }
+        }
+      }
+      &:nth-child(2) {
+        th {
+          &:nth-child(1),
+          &:nth-child(3) {
+            width: 120px;
+          }
+          &:nth-child(2) {
+            width: 140px;
+          }
+          &:nth-child(4) {
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
+#cost-summary-panel {
+  .panel-body {
+    border: 0;
+    padding: 0;
+  }
+}
 @media only screen and (max-width: 767px) {
   .wrapper {
     padding: 0;
@@ -451,7 +489,13 @@
         top: 20px;
       }
     }
+
   }
+
+}
+.validate-amount {
+  border: 1px solid red !important;
+
 }
 
 

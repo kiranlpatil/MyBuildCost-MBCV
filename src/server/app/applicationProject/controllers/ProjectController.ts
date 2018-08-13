@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as multiparty from 'multiparty';
 import ProjectService = require('./../services/ProjectService');
 import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
@@ -10,7 +11,8 @@ import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 let config = require('config');
 let log4js = require('log4js');
 let logger=log4js.getLogger('Project Controller');
-
+let path = require('path');
+var fs = require('fs');
 
 class ProjectController {
   private _projectService : ProjectService;
@@ -392,11 +394,12 @@ class ProjectController {
       let costHeadId =parseInt(req.params.costHeadId);
       let categoryId =parseInt(req.params.categoryId);
       let workItemId =parseInt(req.params.workItemId);
+      let ccWorkItemId =parseInt(req.params.ccWorkItemId);
       let rate : Rate = <Rate> req.body;
       let projectService = new ProjectService();
       console.log(' workitemId => '+ workItemId);
       projectService.updateRateOfBuildingCostHeads( projectId, buildingId, costHeadId,categoryId ,
-        workItemId, rate, user, (error, result) => {
+        workItemId, ccWorkItemId, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -420,11 +423,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let directRate = req.body.directRate;
 
       let projectService = new ProjectService();
       projectService.updateDirectRateOfBuildingWorkItems( projectId, buildingId, costHeadId,
-        categoryId, workItemId, directRate, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, directRate, user, (error, result) => {
           if(error) {
             next(error);
           } else {
@@ -448,9 +452,11 @@ class ProjectController {
       let costHeadId =parseInt(req.params.costHeadId);
       let categoryId =parseInt(req.params.categoryId);
       let workItemId =parseInt(req.params.workItemId);
+      let ccWorkItemId =parseInt(req.params.ccWorkItemId);
       let rate : Rate = <Rate> req.body;
       let projectService = new ProjectService();
-      projectService.updateRateOfProjectCostHeads( projectId, costHeadId,categoryId ,workItemId, rate, user, (error, result) => {
+      projectService.updateRateOfProjectCostHeads( projectId, costHeadId,categoryId ,workItemId,
+        ccWorkItemId, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -474,11 +480,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let directRate = req.body.directRate;
 
       let projectService = new ProjectService();
       projectService.updateDirectRateOfProjectWorkItems( projectId, costHeadId,categoryId ,workItemId,
-        directRate, user, (error, result) => {
+        ccWorkItemId, directRate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -501,11 +508,12 @@ class ProjectController {
     let costHeadId = parseInt(req.params.costHeadId);
     let categoryId = parseInt(req.params.categoryId);
     let workItemId = parseInt(req.params.workItemId);
+    let ccWorkItemId = parseInt(req.params.ccWorkItemId);
     let itemName = req.body.item.name;
 
     let projectservice = new ProjectService();
     projectservice.deleteQuantityOfBuildingCostHeadsByName( projectId, buildingId, costHeadId,
-      categoryId, workItemId, itemName, user, (error, result) => {
+      categoryId, workItemId, ccWorkItemId, itemName, user, (error, result) => {
       if (error) {
         next(error);
       } else {
@@ -603,14 +611,18 @@ class ProjectController {
     logger.info('Project controller, update WorkItem has been hit');
     try {
       let user = req.user;
+      let body = req.body;
       let projectId = req.params.projectId;
       let buildingId = req.params.buildingId;
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
+      let workItemRAId = parseInt(req.params.workItemRAId);
       let workItemId = parseInt(req.params.workItemId);
-      let workItemActiveStatus = req.params.activeStatus === 'true' ? true : false;
+      let workItemActiveStatus = JSON.parse(req.params.activeStatus);
+
       let projectService: ProjectService = new ProjectService();
-      projectService.updateWorkItemStatusOfBuildingCostHeads( buildingId, costHeadId, categoryId,workItemId, workItemActiveStatus, user,(error, result) => {
+      projectService.updateWorkItemStatusOfBuildingCostHeads( buildingId, costHeadId, categoryId,
+        workItemRAId, workItemId, workItemActiveStatus, body, user,(error, result) => {
         if(error) {
           next(error);
         } else {
@@ -625,19 +637,50 @@ class ProjectController {
     }
   }
 
+  updateWorkItemNameOfBuildingCostHeads(req: express.Request, res: express.Response, next: any): void {
+    logger.info('Project controller, update WorkItem has been hit');
+    try {
+      let user = req.user;
+      let body = req.body;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+
+      let projectService: ProjectService = new ProjectService();
+      projectService.updateWorkItemNameOfBuildingCostHeads( buildingId, costHeadId, categoryId,
+        workItemId, ccWorkItemId, body, user,(error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('Update workItem Details success ');
+            logger.debug('update WorkItem for Project ID : '+projectId+', Building ID : '+buildingId+
+              ', CostHead : '+costHeadId);
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
  // Update WorkItem Status Of Project CostHeads
   updateWorkItemStatusOfProjectCostHeads(req: express.Request, res: express.Response, next: any): void {
     logger.info('Project controller, Update WorkItem Status Of Project Cost Heads has been hit');
     try {
       let user = req.user;
+      let body = req.body;
       let projectId = req.params.projectId;
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      let workItemActiveStatus = req.params.activeStatus === 'true' ? true : false;
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let workItemActiveStatus = JSON.parse(req.params.activeStatus);
       let projectService: ProjectService = new ProjectService();
-      projectService.updateWorkItemStatusOfProjectCostHeads( projectId, costHeadId, categoryId,workItemId,
-        workItemActiveStatus, user,(error, result) => {
+      projectService.updateWorkItemStatusOfProjectCostHeads( projectId, costHeadId, categoryId, workItemId,
+        ccWorkItemId, workItemActiveStatus, body, user,(error, result) => {
         if(error) {
           next(error);
         } else {
@@ -700,11 +743,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let quantityDetails = req.body.item;
 
       let projectService = new ProjectService();
       projectService.updateQuantityOfBuildingCostHeads( projectId, buildingId, costHeadId,
-        categoryId, workItemId, quantityDetails, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, quantityDetails, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -727,11 +771,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let directQuantity = req.body.directQuantity;
 
       let projectService = new ProjectService();
       projectService.updateDirectQuantityOfBuildingWorkItems( projectId, buildingId, costHeadId,
-        categoryId, workItemId, directQuantity, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, directQuantity, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -752,11 +797,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let directQuantity = req.body.directQuantity;
 
       let projectService = new ProjectService();
       projectService.updateDirectQuantityOfProjectWorkItems( projectId, costHeadId,
-        categoryId, workItemId, directQuantity, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, directQuantity, user, (error, result) => {
           if(error) {
             next(error);
           } else {
@@ -778,11 +824,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let quantityDetailsObj = req.body.item;
 
       let projectService = new ProjectService();
       projectService.updateQuantityDetailsOfBuilding( projectId, buildingId, costHeadId,
-        categoryId, workItemId, quantityDetailsObj, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, quantityDetailsObj, user, (error, result) => {
           if(error) {
             next(error);
           } else {
@@ -803,11 +850,38 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let workItemName = req.body.workItemName;
+
+      let projectService = new ProjectService();
+      projectService.updateWorkitemNameOfProjectCostHeads( projectId, costHeadId,
+        categoryId, workItemId, ccWorkItemId, workItemName, user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('update DirectQuantity Of BuildingQuantityItems success');
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateWorkItemNameOfProjectCostHead(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, update DirectQuantity Of BuildingQuantityItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let quantityDetailsObj = req.body.item;
 
       let projectService = new ProjectService();
       projectService.updateQuantityDetailsOfProject( projectId, costHeadId,
-        categoryId, workItemId, quantityDetailsObj, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, quantityDetailsObj, user, (error, result) => {
           if(error) {
             next(error);
           } else {
@@ -829,11 +903,12 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let quantityDetails = req.body.item;
 
       let projectService = new ProjectService();
       projectService.updateQuantityOfProjectCostHeads( projectId, costHeadId,
-        categoryId, workItemId, quantityDetails, user, (error, result) => {
+        categoryId, workItemId, ccWorkItemId, quantityDetails, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -1130,8 +1205,10 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let fileData = req;
-      projectService.addAttachmentToWorkItem( projectId, buildingId ,costHeadId, categoryId, workItemId,fileData ,(error, response) => {
+      projectService.addAttachmentToWorkItem( projectId, buildingId ,costHeadId, categoryId, workItemId,
+        ccWorkItemId, fileData ,(error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1147,7 +1224,66 @@ class ProjectController {
       });
     }
   }
+  getImageURl(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      __dirname = path.resolve() + config.get('application.profilePath');
+      let form = new multiparty.Form({uploadDir: __dirname});
+      form.parse(req, (err: Error, fields: any, files: any) => {
+        if (err) {
+          next({
+            reason: 'Error in project ImageParsing',
+            message:'Error in project ImageParsing',
+            stackTrace: new Error(),
+            actualError: err,
+            code: 403
+          });
+        } else {
+          let path = JSON.stringify(files.file[0].path);
+          let image_path = files.file[0].path;
+          let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
+          let projectService = new ProjectService();
+          path = config.get('application.profilePathForClient') + originalFilename.replace(/"/g, '');
 
+          projectService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
+            if (err) {
+              next(err);
+            } else {
+              res.status(200).send({ tempath });
+            }
+          });
+        }
+
+      });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
+  removeProjectImage(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let projectService = new ProjectService();
+      var projectId = req.params.projectId;
+      var imageName = req.params.imageName;
+      projectService.removeImageOfProject( projectId ,imageName,(error, response) => {
+          if (error) {
+            next(error);
+          } else {
+            res.status(200).send({response});
+          }
+        });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
   getPresentFilesForBuildingWorkItem(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       let projectService = new ProjectService();
@@ -1156,7 +1292,9 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      projectService.getPresentFilesForBuildingWorkItem(projectId, buildingId, costHeadId, categoryId, workItemId, (error, response) => {
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      projectService.getPresentFilesForBuildingWorkItem(projectId, buildingId, costHeadId, categoryId,
+        workItemId, ccWorkItemId,(error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1180,9 +1318,10 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let assignedFileName = req.body.assignedFileName;
-      projectService.removeAttachmentOfBuildingWorkItem(projectId, buildingId, costHeadId, categoryId, workItemId,
-        assignedFileName,(error, response) => {
+      projectService.removeAttachmentOfBuildingWorkItem(projectId, buildingId, costHeadId,
+        categoryId, workItemId, ccWorkItemId, assignedFileName,(error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1206,8 +1345,10 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let fileData = req;
-      projectService.addAttachmentToProjectWorkItem( projectId, costHeadId, categoryId, workItemId,fileData ,(error, response) => {
+      projectService.addAttachmentToProjectWorkItem( projectId, costHeadId, categoryId,
+        workItemId, ccWorkItemId, fileData ,(error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1230,7 +1371,9 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
-      projectService.getPresentFilesForProjectWorkItem(projectId, costHeadId, categoryId, workItemId, (error, response) => {
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      projectService.getPresentFilesForProjectWorkItem(projectId, costHeadId, categoryId,
+        workItemId, ccWorkItemId, (error, response) => {
         if (error) {
           next(error);
         } else {
@@ -1253,8 +1396,10 @@ class ProjectController {
       let costHeadId = parseInt(req.params.costHeadId);
       let categoryId = parseInt(req.params.categoryId);
       let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
       let assignedFileName = req.body.assignedFileName;
-      projectService.removeAttachmentOfProjectWorkItem(projectId,costHeadId, categoryId, workItemId,assignedFileName,(error, response) => {
+      projectService.removeAttachmentOfProjectWorkItem(projectId,costHeadId, categoryId,
+        workItemId, ccWorkItemId, assignedFileName,(error, response) => {
         if (error) {
           next(error);
         } else {

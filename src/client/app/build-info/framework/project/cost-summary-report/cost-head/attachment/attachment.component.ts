@@ -28,6 +28,7 @@ export class AttachmentComponent implements OnInit {
 
   fileInputVar : any;
   workItemId :number;
+  ccWorkItemId :number;
   private filesToUpload: Array<File>;
   private fileExtension: string;
   private message = new Message();
@@ -44,6 +45,7 @@ export class AttachmentComponent implements OnInit {
 
   ngOnInit() {
     this.workItemId = this.workItem.rateAnalysisId;
+    this.ccWorkItemId = this.workItem.workItemId;
     this.attachmentFilesCheck = this.workItem.attachmentDetails;
     this.path = AppSettings.IP + AppSettings.PUBLIC + AppSettings.ATTACHMENT_FILES;
   }
@@ -82,7 +84,8 @@ export class AttachmentComponent implements OnInit {
   addAttachment() {
     if (this.validFile()) {
         this.loaderService.start();
-        this.costSummaryService.addAttachment(this.baseUrl, this.costHeadId, this.categoryId, this.workItemId, this.filesToUpload).then(
+        this.costSummaryService.addAttachment(this.baseUrl, this.costHeadId, this.categoryId,
+          this.workItemId, this.ccWorkItemId, this.filesToUpload).then(
           success => this.onAddAttachmentSuccess(success),
           error => this.onAddAttachmentFailure(error)
         );
@@ -126,7 +129,7 @@ export class AttachmentComponent implements OnInit {
   removeAttachment() {
     this.loaderService.start();
     this.costSummaryService.removeAttachment(this.baseUrl, this.costHeadId,this.categoryId,this.workItemId,
-      this.assignedFileName).subscribe(
+      this.ccWorkItemId, this.assignedFileName).subscribe(
       success => this.onRemoveAttachmentSuccess(success,this.assignedFileName),
       error => this.onRemoveAttachmentFailure(error)
     );

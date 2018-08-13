@@ -108,6 +108,10 @@ import {RetainProjectComponent} from "./build-info/framework/payment/retain-proj
 import {PaymentFailureComponent} from "./build-info/framework/payment/payment-failure/payment-failure.component";
 import { PayUMoneyComponent } from './build-info/framework/payUMoney/payUMoney.component';
 import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.service';
+import {AmountValidationDirective} from "./build-info/framework/project/amount-validation.directive";
+import {CompleteProjectReportComponent} from "./build-info/framework/project/report-templates/complete-project-report/complete-project-report.component";
+import {ProjectImageComponent} from "./build-info/framework/project/project-image/project-image.component";
+import {ProjectImageService} from "./build-info/framework/project/project-image/project-image.service";
 
 @NgModule({
   imports: [
@@ -179,7 +183,7 @@ import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.ser
 
     //report pdf
     CostHeadReportComponent,
-
+    CompleteProjectReportComponent,
     PageNotFoundComponent,
     CommonAmenitiesComponent,
     CostSummaryReportComponent,
@@ -195,7 +199,9 @@ import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.ser
     RenewPackageComponent,
     RetainProjectComponent,
     PaymentFailureComponent,
-    PayUMoneyComponent
+    PayUMoneyComponent,
+    AmountValidationDirective,
+    ProjectImageComponent
   ],
 
   providers: [
@@ -232,6 +238,7 @@ import { PayUMoneyService } from './build-info/framework/payUMoney/payUMoney.ser
     MaterialTakeOffService,
     ProjectNameChangeService,
     AdvertisingBannerService,
+    ProjectImageService,
 
       //Payment
     PackageDetailsService,

@@ -8,7 +8,7 @@
     <div class="inner-content clearfix">
       <div class="content">
         <h4 class="visibe-xs hidden-sm hidden-md hidden-lg">{{getMenus().COPY_BUILDING}}</h4>
-        <bi-building-form [submitActionLabel]="'Done'" (onSubmitEvent)="onSubmit($event)" [buildingModel]="cloneBuildingModel" *ngIf="cloneBuildingModel" [buildingName]="oldBuildingName"></bi-building-form>
+        <bi-building-form [submitActionLabel]="'Done'" (onSubmitEvent)="onSubmit($event)" [buildingModel]="cloneBuildingModel" *ngIf="cloneBuildingModel" [buildingName]="oldBuildingName"  [disableFormFields] = "disableFormFields"></bi-building-form>
       </div>
     </div>
   </div>

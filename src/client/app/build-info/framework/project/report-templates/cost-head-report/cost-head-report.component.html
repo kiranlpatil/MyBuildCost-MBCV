@@ -7,7 +7,12 @@
     <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;"
         *ngIf="viewType === 'common-amenities'"> : {{costHeadName}}</h2>
     <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
-      {{generatedDate | date:'dd MMMM yyyy'}}
+      <span style="float: left;"> {{generatedDate | date:'dd MMMM yyyy'}} </span>
+      Powered by
+      <span style="float: right; margin-top: -60px; bottom: 0;">
+      <img src="http://costcontrol.buildinfo.co.in/assets/build-info/header/buildinfo-logo.png" width="80" />
+    </span>
+      <!--<span style="color:#716edc!important;font-size:11px;text-transform: uppercase;">My Build Cost</span>-->
     </div>
     <div style="font-size:12px;text-align: left;margin: 15px auto;width: 100%;max-width: 750px;">
       <div *ngIf="comapnyName !== 'undefined' && comapnyName !== '' && company_name !== null" style="padding-bottom: 5px;">
@@ -23,14 +28,18 @@
         <span>{{buildingName}}</span>
       </div>
     </div>
+
     <div style="font-size:10px; text-align: left;" *ngFor="let category of categoryDetails">
       <table *ngIf="category.workItems.length !== 0 && isWorkItemsActive(category.workItems)" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 30px auto 0 auto;">
         <thead style="font-size:12px;page-break-inside: avoid;">
           <th width="60%">{{category.name}}</th>
-          <th width="40%" style="text-align: right" *ngIf="category.amount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{category.amount |number :'1.0-0'}}</th>
+          <th width="40%" style="text-align: right" *ngIf="category.amount !== 0">
+            <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>
+            {{category.amount |number :'1.0-0'}}</th>
           <th width="40%" style="text-align: right" *ngIf="category.amount == 0">-</th>
         </thead>
       </table>
+
       <table *ngIf="category.workItems.length !== 0 && isWorkItemsActive(category.workItems)" border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 5px auto;">
         <thead style="page-break-inside: avoid;">
           <th width="52%" style="padding: 10px 5px;">WorkItem Name </th>
@@ -60,7 +69,9 @@
       <table *ngIf="isCategoryHavingWorkItem(categoryDetails)" border="1" bordercolor="#888" style="font-size:10px;margin: 10px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
         <thead style="font-size:12px; font-weight: bold;page-break-inside: avoid;">
           <th style="border: none;padding: 5px;width:60%">Total</th>
-          <th style="border: none;padding: 5px;width:40%;text-align: right" *ngIf="categoryDetailsTotalAmount !== 0"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
+          <th style="border: none;padding: 5px;width:40%;text-align: right" *ngIf="categoryDetailsTotalAmount !== 0">
+            <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>
+            {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
           <th style="border: none;padding: 5px;width:40%;text-align: right" *ngIf="categoryDetailsTotalAmount === 0">-</th>
         </thead>
       </table>

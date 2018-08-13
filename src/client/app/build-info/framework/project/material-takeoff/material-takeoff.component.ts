@@ -4,7 +4,7 @@ import { MaterialTakeOffService } from './material-takeoff.service';
 import { MaterialTakeOffElements, CurrentView } from '../../../../shared/constants';
 import { MaterialTakeOffFilters } from '../../model/material-take-off-filters';
 import { MaterialTakeOffElement } from '../../model/material-take-off-element';
-import { LoaderService, Message, MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
+import { LoaderService, Message, Messages, MessageService, SessionStorage, SessionStorageService} from '../../../../shared/index';
 import { ErrorService } from '../../../../shared/services/error.service';
 
 declare let $: any;
@@ -137,6 +137,10 @@ export class MaterialTakeoffComponent implements OnInit {
 
   getMaterialTakeOffElements() {
     return MaterialTakeOffElements;
+  }
+
+  getMessage() {
+    return Messages;
   }
 
   getMaterialTakeOffReport(elementWiseReport : string, selectedElement : string, building : string) {

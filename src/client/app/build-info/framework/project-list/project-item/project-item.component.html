@@ -1,6 +1,7 @@
 <div class="building-image-container" [class.disabled-projects]="!activeStatus || project.expiryMessage !== null">
   <div class="building-image">
-    <img src="assets/build-info/create-new-project/create-new-project.png" />
+    <img *ngIf="!project?.projectImage" src="assets/build-info/create-new-project/create-new-project.png" />
+    <img class="upload-img"  *ngIf="project?.projectImage" [src]='getImagePath()' />
     <div class="project-actions">
       <button class="btn btn-view" (click)="navigateToSelectedProject(project.projectId, project.projectName, project.numOfDaysToExpire)">View</button>
     </div>

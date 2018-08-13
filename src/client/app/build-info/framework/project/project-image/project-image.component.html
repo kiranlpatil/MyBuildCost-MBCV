@@ -1,0 +1,17 @@
+<div class="default-upload-img-wrapper">
+  <div class="default-upload-img">
+    <img *ngIf="isLoading" src="assets/build-info/loader/loader.gif" alt="Loader" >
+    <img class="upload-img" *ngIf="image_path && !isLoading" src={{image_path}} alt="Profile Picture">
+    <img  *ngIf="!image_path && !isLoading" src="assets/build-info/create-new-project/create-new-project.png" alt="Profile Picture">
+  </div>
+
+  <div class="file">
+    <img src="assets/build-info/dashboard/camera.png" width="35" />
+    <span>Change Project Image</span>
+  </div>
+  <!--<button  *ngIf="image_path && !isLoading" type="button" (click)="removeProjectImage()" placeholder="Remove Image">Remove</button>-->
+  <input  id="file-upload" type="file" (change)="uploadProjectImage($event)" placeholder="Upload Image">
+  <!--<input  id="file-upload" type="file" (change)="uploadProjectImage($event)" placeholder="Upload Image">
+  <button  *ngIf="image_path && !isLoading" type="button" (click)="removeProjectImage()" placeholder="Remove Image">Remove</button>-->
+</div>
+<button *ngIf="image_path && !isLoading" type="button" (click)="removeProjectImage()" placeholder="Remove Image" class="remove-btn">Remove</button>

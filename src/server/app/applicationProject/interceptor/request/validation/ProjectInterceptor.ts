@@ -647,10 +647,83 @@ class ProjectInterceptor {
     });
   }
 
+  updateWorkItemnameOfBuildingCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var buildingId = req.params.buildingId;
+    var costHeadId = req.params.costHeadId;
+    var categoryId = req.params.categoryId;
+    var workItemRAId = req.params.workItemId;
+    var ccWorkItemId = req.params.ccWorkItemId;
+    var workItemName = req.body.workItemName;
+
+    ProjectInterceptor.validateIdsForUpdateRate(projectId, buildingId, costHeadId, categoryId, workItemRAId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((req.params.ccWorkItemId === undefined) || (req.params.ccWorkItemId === '') ||
+            (workItemName === undefined) || (workItemName=== '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
   updateWorkItemStatusOfBuildingCostHeads(req: any, res: any, next: any) {
     var projectId = req.params.projectId;
     var buildingId = req.params.buildingId;
     var costHeadId = req.params.costHeadId;
+    var categoryId = req.params.categoryId;
+    var workItemRAId = req.params.workItemRAId;
+    var ccWorkItemId = req.params.workItemId;
+    var activeStatus = req.params.activeStatus;
+
+    ProjectInterceptor.validateIdsForUpdateRate(projectId, buildingId, costHeadId, categoryId, workItemRAId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((ccWorkItemId === undefined) || (ccWorkItemId === '') ||
+            (activeStatus === undefined) || (activeStatus=== '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
+  updateWorkItemNameOfBuildingCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var buildingId = req.params.buildingId;
+    var costHeadId = req.params.costHeadId;
+    var workItemName = req.body.workItemName;
     ProjectInterceptor.validateCostHeadIds(projectId, buildingId, costHeadId, (error, result) => {
       if (error) {
         next(error);
@@ -915,6 +988,39 @@ class ProjectInterceptor {
         } else {
           if ((req.params.categoryId === undefined) || (req.params.workItemId === undefined) || (directQuantity === undefined) ||
             (req.params.categoryId === '') || (req.params.workItemId === '') || (directQuantity === '')) {
+            next({
+              reason: Messages.MSG_ERROR_EMPTY_FIELD,
+              message: Messages.MSG_ERROR_EMPTY_FIELD,
+              stackTrace: new Error(),
+              code: 400
+            });
+          }
+        }
+        next();
+      }
+    });
+  }
+
+  updateWorkItemNameOfProjectCostHeads(req: any, res: any, next: any) {
+    var projectId = req.params.projectId;
+    var costHeadId = parseInt(req.params.costHeadId);
+    var categoryId = parseInt(req.params.categoryId);
+    var workItemId = parseInt(req.params.workItemId);
+    var workItemName = req.body.workItemName;
+    ProjectInterceptor.validateProjectCostHeadIds(projectId, costHeadId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        if (result === false) {
+          next({
+            reason: Messages.MSG_ERROR_EMPTY_FIELD,
+            message: Messages.MSG_ERROR_EMPTY_FIELD,
+            stackTrace: new Error(),
+            code: 400
+          });
+        } else {
+          if ((categoryId === undefined) || (workItemId === undefined) || (workItemName === undefined) ||
+            (categoryId === null) || (workItemId === null) || (workItemName === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,

@@ -15,6 +15,10 @@
         <li *ngFor="let project of projects; let i = index" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">
           <bi-project-item [project]="project"></bi-project-item>
         </li>
+
+        <li *ngIf="!isSamplePrjUser">
+          <bi-project-item [project]="sampleProject[0]"></bi-project-item>
+        </li>
       </ul>
 
       <div class="modal fade default-modal" id="createProjectConfirmation" role="dialog">

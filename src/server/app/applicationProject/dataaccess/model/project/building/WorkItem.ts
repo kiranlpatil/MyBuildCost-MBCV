@@ -6,6 +6,7 @@ import { AttachmentDetailsModel } from './AttachmentDetails';
 class WorkItem {
   name: string;
   rateAnalysisId: number;
+  workItemId: number;
   quantity: Quantity;
 
   isMeasurementSheet : boolean;
@@ -33,6 +34,7 @@ class WorkItem {
     this.rateAnalysisId = rateAnalysisId;
     this.quantity = new Quantity();
     this.rate = new Rate();
+    this.workItemId = 1;
     this.systemRate = new Rate();
     this.attachmentDetails = new Array<AttachmentDetailsModel>();
     this.amount = 0;

@@ -87,7 +87,7 @@
           float: left;
         }
         .col-xs-2 {
-          display: none;
+          display: block;
         }
       }
       td.remark-icon {
@@ -263,4 +263,7 @@
     display: none;
   }
 }
+.validate-amount {
+  border: 1px solid red !important;
 
+}

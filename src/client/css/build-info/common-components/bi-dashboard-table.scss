@@ -57,7 +57,9 @@
       line-height: 14px;
       padding: 6px 10px;
       vertical-align: middle;
-      vertical-align: middle;
+      &:last-child {
+        border: none;
+      }
     }
 
     td {
@@ -97,7 +99,7 @@
       width: 100px;
 
       input {
-        background: url('../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
+        background: url('../../../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
         border: 1px solid transparent;
         box-shadow: none;
         color: $heading;
@@ -114,7 +116,7 @@
 
       .calculator {
         cursor: pointer;
-        opacity: 0;
+        //opacity: 0;
         position: absolute;
         top: 5px;
         right: 0;
@@ -124,10 +126,67 @@
 
       .disabled {
         cursor: not-allowed;
-        opacity: 0.4;
+        opacity: 0.4!important;
         pointer-events: none;
       }
 
+    }
+
+    td {
+      .panel-heading {
+        float: left;
+        .work-item-panel-row {
+          display: inline-block!important;
+          height: 15px;
+          width: 15px;
+        }
+
+      }
+      .edit-field {
+        float: left;
+        text-align: left!important;
+        width: calc(100% - 35px);
+        textarea {
+          background: url('../../../assets/build-info/dashboard/edit-bg.png') no-repeat 98% 46%;
+          border: 1px solid transparent;
+          box-shadow: none;
+          color: $heading;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 12px;
+          height: 40px;
+          margin: 0;
+          overflow: hidden;
+          padding: 3px 24px 3px 3px;
+          resize: none;
+          text-align: left;
+          transition: opacity 0.5s ease-in-out;
+          width: 100%;
+          &[hidden] {
+            display: none;
+          }
+          &:focus {
+            background: white!important;
+            border: 1px solid transparent!important;
+            box-shadow: 0 0 0px 1px rgba(101, 152, 202, 1);
+          }
+        }
+        span {
+          text-align: left;
+        }
+      }
+    }
+    &:hover {
+      td {
+        .work-item-panel-row {
+          .edit-field {
+            input {
+              background: url('../../../assets/build-info/dashboard/edit.png') no-repeat 98% 46%;
+              border: 1px solid $gray;
+            }
+          }
+        }
+      }
     }
 
     td > .active-rate,
@@ -143,13 +202,13 @@
       }
 
       td > .edit-field {
-        input {
-          background: url('../assets/build-info/dashboard/edit.png') no-repeat 95% 46%;
+        textarea {
+          background: url('../../../assets/build-info/dashboard/edit.png') no-repeat 98% 10%;
           border: 1px solid $gray;
         }
 
-        input[readonly] {
-          background: url('../assets/build-info/dashboard/edit-bg.png') no-repeat 95% 46%;
+        textarea[readonly] {
+          background: url('../../../assets/build-info/dashboard/edit-bg.png') no-repeat 98% 10%;
           border: 1px solid transparent;
         }
 
@@ -186,7 +245,7 @@
   }
 
   .select-item {
-    background: transparent url(../assets/framework/images/form/drop-down.png) no-repeat 92% 50%;
+    background: transparent url(../../../assets/framework/images/form/drop-down.png) no-repeat 92% 50%;
     border: 0;
     border-radius: 0;
     color: $heading;
@@ -266,7 +325,7 @@
         float: left;
         margin: 0;
         text-align: left;
-        width: 100%;
+        width: calc(100% - 15px);
 
         input {
           border: 1px solid transparent;

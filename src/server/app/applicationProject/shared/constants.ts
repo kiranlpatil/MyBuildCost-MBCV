@@ -202,5 +202,6 @@ class Constants {
     + ' AND ' + Constants.ALASQL_MATERIAL_NOT_LAB_DOT;
   // Error Messages
   public static MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION = 'Oop\'s! looks like you haven\'t provided Cost Estimation for ';
+  public static MSG_ERROR_DUPLICATE_ITEM = 'Item with the same name already exists, Please update the name for item ';
 }
 export=Constants;

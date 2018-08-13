@@ -1,0 +1,47 @@
+.default-upload-img-wrapper{
+  margin: 23px auto;
+  position: relative;
+  width: 150px;
+  input {
+    left: 0;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+.remove-btn {
+  border: none;
+  background: none;
+  color: #ff6000;
+  display: block;
+  font-size: 12px;
+  margin: 0 auto;
+}
+.default-upload-img {
+  border: 1px solid #ccc;
+  display: table-cell;
+  height: 150px;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 10px;
+  width: 150px;
+  img.upload-img {
+    width: 100%;
+  }
+}
+
+.file {
+  margin: 6px 0;
+  overflow: hidden;
+  position: relative;
+  img {
+    opacity: 0.5;
+    width: 20px;
+  }
+  span {
+    color: #6598CA;
+    font-size: 12px;
+  }
+}

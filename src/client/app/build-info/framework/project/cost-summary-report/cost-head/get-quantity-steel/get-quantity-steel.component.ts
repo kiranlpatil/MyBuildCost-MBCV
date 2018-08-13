@@ -30,6 +30,7 @@ export class GetSteelQuantityComponent implements OnInit {
   @Input() categoryDetails :  Array<Category>;
   @Input() categoryRateAnalysisId : number;
   @Input() workItemRateAnalysisId : number;
+  @Input() ccWorkItemId : number;
   @Input() workItemsList : Array<WorkItem>;
   @Input() baseUrl : string;
   @Input() workItemUnit : string;
@@ -54,7 +55,9 @@ export class GetSteelQuantityComponent implements OnInit {
   }
   ngOnInit() {
     if(this.steelQuantityItems.length === 0) {
-      this.addQuantityItem();
+      for(let i=0; i<5; i++) {
+        this.addQuantityItem();
+      }
     }
     this.workItemId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID));
   }
@@ -135,11 +138,11 @@ export class GetSteelQuantityComponent implements OnInit {
       quantityObj.id = this.quantityId;
       quantityObj.name = this.keyQuantity;
       quantityObj.steelQuantityItems = totalDiameterQuantity;
-      quantityObj.total=this.total;
+      quantityObj.total= parseFloat(this.total.toFixed(2));
       this.loaderService.start();
       let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.costSummaryService.updateQuantityItems(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
-        this.workItemId, quantityObj).subscribe(
+        this.workItemId, this.ccWorkItemId, quantityObj).subscribe(
         success => this.onUpdateQuantityItemsSuccess(success),
         error => this.onUpdateQuantityItemsFailure(error)
       );

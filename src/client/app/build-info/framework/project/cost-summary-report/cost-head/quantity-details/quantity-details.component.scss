@@ -1,5 +1,7 @@
 @import '../../../../../../../css/common';
-
+.quantity-details-wrapper {
+  padding: 0 0 0 20px;
+}
 .table-categories {
   //border-bottom: 1px solid $border-color;
 
@@ -9,19 +11,24 @@
   }
 
   .delete-quantity-details-row {
+    td {
+      &:first-child {
+        width: 290px;
+      }
+    }
     .delete-Quantity-details {
       cursor: pointer;
       margin-top: 5px;
-      opacity: 0;
+      opacity: 1;
       transition: opacity 0.5s ease-in-out;
       width: 20px;
     }
 
-    td > .edit-field {
+    /*td > .edit-field {
       .calculator {
         opacity: 0;
       }
-    }
+    }*/
 
     &:hover {
       .delete-Quantity-details {
@@ -84,7 +91,7 @@
 
     &:nth-child(7) {
       text-align: right;
-      width: 95px;
+      width: 70px;
     }
 
 
@@ -160,6 +167,9 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .quantity-details-wrapper {
+    padding: 0;
+  }
   .table-categories {
     tbody > tr {
       border-bottom: 2px solid $border-color;

@@ -3,6 +3,10 @@
 
 .panel-default {
   margin-top: 5px;
+  .panel-body {
+    border: 0;
+    padding: 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {

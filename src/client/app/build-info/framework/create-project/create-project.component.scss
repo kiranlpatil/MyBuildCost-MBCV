@@ -6,14 +6,20 @@
 
   .inner-content {
     padding: 30px 0;
+    display: block;
+    height: auto;
+    vertical-align: initial;
 
-    /*.content {
-      margin-top: 25px;
-    }*/
+    .content {
+      width: 100%;
+    }
 
     .content > h4 {
       margin-bottom: 30px;
       text-align: left;
+    }
+    .width-600 {
+      width: 600px;
     }
   }
 }
@@ -37,6 +43,9 @@
         font-weight: 100;
         margin-bottom: 0;
         text-align: center;
+      }
+      .width-600 {
+        width: auto;
       }
     }
   }
