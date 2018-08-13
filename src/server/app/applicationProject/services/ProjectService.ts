@@ -32,7 +32,7 @@ let config = require('config');
 let log4js = require('log4js');
 import * as mongoose from 'mongoose';
 import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
-import SteelQuantityItems = require("../dataaccess/model/project/building/SteelQuantityItems");
+import SteelQuantityItems = require('../dataaccess/model/project/building/SteelQuantityItems');
 
 //import RateItemsAnalysisData = require("../dataaccess/model/project/building/RateItemsAnalysisData");
 
