@@ -18,7 +18,7 @@ export class AppSettings {
   */
 
   /*
-    // Localhost Project and User Id new
+    // Localhost Project and User Id
     public static SAMPLE_PROJECT_ID = '5b644d4993310206e4f0d94e';
     public static SAMPLE_PROJECT_USER_ID = '5b643c9d8e94d52c74075f50';
   */
