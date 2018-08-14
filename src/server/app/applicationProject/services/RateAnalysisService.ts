@@ -18,7 +18,8 @@ import messages  = require('../../applicationProject/shared/messages');
 import RACategory = require('../dataaccess/model/RateAnalysis/RACategory');
 import RAWorkItem = require('../dataaccess/model/RateAnalysis/RAWorkItem');
 import RACostHead = require('../dataaccess/model/RateAnalysis/RACostHead');
-
+import SavedRateRepository = require('../dataaccess/repository/SavedRateRepository');
+import RASavedRate = require("../dataaccess/model/RateAnalysis/RASavedRate");
 let request = require('request');
 let config = require('config');
 var log4js = require('log4js');
@@ -32,12 +33,14 @@ class RateAnalysisService {
   private authInterceptor: AuthInterceptor;
   private userService: UserService;
   private rateAnalysisRepository: RateAnalysisRepository;
+  private savedRateRepository : SavedRateRepository;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.authInterceptor = new AuthInterceptor();
     this.userService = new UserService();
     this.rateAnalysisRepository = new RateAnalysisRepository();
+    this.savedRateRepository = new SavedRateRepository();
   }
 
   getCostHeads(url: string, user: User, callback: (error: any, result: any) => void) {
@@ -827,6 +830,83 @@ class RateAnalysisService {
         }
       }
     }
+  }
+
+  saveRateForWorkItem(userId: string, workItemName: string, workItemId: number, rate:any,
+                      callback:(error: any, result: Array<any>) => void) {
+    let query = {'userId': userId};
+    this.savedRateRepository.retrieve(query, (error: any, savedRateArray: Array<RASavedRate>) => {
+      if (error) {
+        logger.error('Unable to retrive  Saved Rate');
+      } else {
+        if (savedRateArray.length > 0) {
+          let workItemListOfUser = savedRateArray[0].workItemList;
+            let isWorkItemExistSQL = 'SELECT * FROM ? AS workitems WHERE workitems.rateAnalysisId= ?';
+            let workItemExistArray = alasql(isWorkItemExistSQL, [workItemListOfUser, workItemId]);
+            if(workItemExistArray.length !== 0) {
+              for (let workItem of workItemListOfUser) {
+                if (workItem.rateAnalysisId === workItemId) {
+                  workItem.rate = rate;
+                }
+              }
+            } else {
+              let raWorkItem = new RAWorkItem();
+              raWorkItem.name = workItemName;
+              raWorkItem.rateAnalysisId = workItemId;
+              raWorkItem.rate = rate;
+              workItemListOfUser.push(raWorkItem);
+            }
+          let query =  {'userId': userId};
+          let updateQuery = {$set:
+              {'workItemList':workItemListOfUser},
+          };
+          this.savedRateRepository.findOneAndUpdate(query, updateQuery,{new: true}, (error, result) => {
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null,result);
+            }
+          });
+        } else {
+          let raSavedRate = new RASavedRate();
+          raSavedRate.userId = userId;
+          let raWorkItem = new RAWorkItem();
+          raWorkItem.name = workItemName;
+          raWorkItem.rateAnalysisId = workItemId;
+          raWorkItem.rate = rate;
+          raSavedRate.workItemList.push(raWorkItem);
+          this.savedRateRepository.create(raSavedRate, (error: any, result: RASavedRate) => {
+            if (error) {
+              callback(error, null);
+              logger.error('saveRate failed => ' + error.message);
+            } else {
+              callback(null,result);
+              logger.info('Saved Rate : '+userId);
+            }
+          });
+        }
+      }
+    });
+  }
+
+  getSavedRateForWorkItem(userId:string, workItemId: number, callback: (error: any, result: Array<Rate>) => void) {
+    let query = {'userId': userId};
+    this.savedRateRepository.retrieve(query, (error: any, savedRateArray: Array<RASavedRate>) => {
+      if (error) {
+        callback(error, null);
+        logger.error('Unable to retrive  Saved Rate');
+      } else {
+          let workItemListOfUser = savedRateArray[0].workItemList;
+          let savedRate;
+          for(let workItem of workItemListOfUser) {
+            if (workItem.rateAnalysisId === workItemId) {
+              savedRate = workItem.rate;
+              break;
+            }
+         }
+        callback(null, savedRate);
+      }
+    });
   }
 }
 Object.seal(RateAnalysisService);
