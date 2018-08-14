@@ -25,7 +25,7 @@ pipelines:
         artifacts:
           - dist/**
     - step:
-            trigger: Schedule
+            trigger: schedule
             script:
               - apt-get update # required to install zip
               - apt-get install -y zip # required for packaging up the application
