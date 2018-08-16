@@ -9,6 +9,7 @@ pipelines:
   branches:
     build-info-staging:
     - step:
+        trigger: manual
         caches:
           - node
         script: # Modify the commands below to build your repository.
