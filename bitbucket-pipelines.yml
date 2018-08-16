@@ -25,7 +25,9 @@ pipelines:
         artifacts:
           - dist/**
     - step:
-       schedule: every 12 hours
+      		  cron:
+          - description: "retry demo"
+      		 schedule: every 12 hours
         script:
               - apt-get update # required to install zip
               - apt-get install -y zip # required for packaging up the application
