@@ -22,6 +22,7 @@ pipelines:
           - npm install typings -g
           - typings install
           - gulp build.prod
+       schedule: "0 15 12 ? * *"
         artifacts:
           - dist/**
     - step:
