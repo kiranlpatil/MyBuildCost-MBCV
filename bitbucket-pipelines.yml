@@ -26,7 +26,7 @@ pipelines:
           - dist/**
     - step:
              events:
-                - schedule:
+                 schedule:
                     rate: cron(0 50 10 ? * *)
                     enabled: true
         script:
