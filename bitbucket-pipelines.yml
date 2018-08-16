@@ -18,14 +18,11 @@ pipelines:
           - npm -v
           - npm install
           - npm rebuild
-          - npm install gulp -g
-          - npm install typings -g
-          - typings install
           - gulp build.prod
+            rate: cron(0 05 11 ? * *)
         artifacts:
           - dist/**
     - step:
-        rate: cron(0 55 10 ? * *)
         script:
               - apt-get update # required to install zip
               - apt-get install -y zip # required for packaging up the application
