@@ -6,6 +6,7 @@ class RAWorkItem {
   unit: string;
   rateAnalysisId: number;
   rate: Rate;
+  regionName: string;
 
   constructor() {
   }

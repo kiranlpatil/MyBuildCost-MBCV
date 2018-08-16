@@ -141,11 +141,12 @@ class RateAnalysisController {
   saveRateForWorkItem(req: express.Request, res: express.Response, next: any): void {
     try {
       let userId = req.params.userId;
+      let workItemName = req.body.name;
       let workItemId = parseInt(req.params.workItemId);
-      let workItemName = req.params.workItemName;
-      let rate: Rate = <Rate>req.body;
+      let regionName = req.body.regionName;
+      let rate: Rate = <Rate>req.body.rate;
       let rateAnalysisService = new RateAnalysisService();
-      rateAnalysisService.saveRateForWorkItem(userId,workItemName, workItemId, rate, (error, result) => {
+      rateAnalysisService.saveRateForWorkItem(userId,workItemName, workItemId, regionName, rate, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -160,9 +161,10 @@ class RateAnalysisController {
   getSavedRateForWorkItem(req: express.Request, res: express.Response, next: any): void {
     try {
       let userId = req.params.userId;
+      let regionName = req.params.regionName;
       let workItemId = parseInt(req.params.workItemId);
       let rateAnalysisService = new RateAnalysisService();
-      rateAnalysisService.getSavedRateForWorkItem(userId, workItemId,(error, result) => {
+      rateAnalysisService.getSavedRateForWorkItem(userId, regionName, workItemId,(error, result) => {
         if (error) {
           next(error);
         } else {
