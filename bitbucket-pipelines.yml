@@ -11,7 +11,7 @@ pipelines:
     - step:
         caches:
           - node
-        script: # Modify the commands below to build your repository.
+        script: # Modify the commands below to build your repository..
           - echo $APPLICATION_NAME
           - echo $APPLICATION_NAME
           - node -v
