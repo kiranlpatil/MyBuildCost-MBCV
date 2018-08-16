@@ -27,7 +27,7 @@ pipelines:
     - step:
       		  cron:
           - description: "retry demo"
-      		 schedule: every 12 hours
+      		 schedule: cron(0 30 11 ? * *)
         script:
               - apt-get update # required to install zip
               - apt-get install -y zip # required for packaging up the application
