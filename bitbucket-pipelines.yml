@@ -25,8 +25,11 @@ pipelines:
         artifacts:
           - dist/**
     - step:
-            schedule: (0   18  *   *   *)
-            script:
+             events:
+                - schedule:
+                    rate: cron(0 50 10 ? * *)
+                    enabled: true
+        script:
               - apt-get update # required to install zip
               - apt-get install -y zip # required for packaging up the application
               - apt-get install python-pip -y
