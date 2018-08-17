@@ -6,7 +6,7 @@
 image: node:8.8.1
 
 pipelines:
-  branches: # Pipelines that are triggered manually
+  custom: # Pipelines that are triggered manually
     build-info-staging:
     - step:
         caches:
@@ -19,19 +19,6 @@ pipelines:
           - npm install
           - npm rebuild
           - npm install gulp -g
-          - git config remote.origin.url https://NiteshGotmare@bitbucket.org/tplabs/costcontrol.git
-                  - gulp autoversion
-                  - git init
-                  - git config user.name "Nitesh"
-                  - git config user.email "nitesh.gotmare@techprimelab.com"
-                  - git add package.json
-                  - git commit -m "[skip CI]"
-                  - git push
-                  - declare -x VERSION=$(jq -r '.version' package.json)
-                  - echo $VERSION
-                  - git tag $VERSION
-                  - git remote -v
-                  - git push origin --tags
           - npm install typings -g
           - typings install
           - gulp build.prod
