@@ -15,7 +15,7 @@
         <input [(ngModel)]="rate.quantity" id="rateQuantity" type="number" class="form-control quantity-count"
                (change)="onTotalQuantityChange(rate.quantity)"
                (focus)="getPreviousQuantity(rate.quantity)"
-               [disabled]="disableRateField"/>
+               [disabled]="true"/>
       </div>
       <div class="pull-left">
         <span class="quantity-sqft">
