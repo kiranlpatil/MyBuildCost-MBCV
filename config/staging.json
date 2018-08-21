@@ -6182,50 +6182,6 @@
           ]
         },
         {
-          "name" : "Inside unit/apartment- Point wise",
-          "rateAnalysisId" : 100566,
-          "workItems" : [
-            {
-              "name" : "Providing electrical points in common areas with wiring considered from switch board to points- Point wise",
-              "rateAnalysisId" : 100567,
-              "isMeasurementSheet" : false,
-              "measurementUnit" : "Job",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 0,
-              "rateAnalysisUnit" : "Per Job",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : false,
-              "breadthOrWidth" : false,
-              "height" : false
-            }
-          ]
-        },
-        {
-          "name" : "Inside unit/apartment- Material wise",
-          "rateAnalysisId" : 100568,
-          "workItems" : [
-            {
-              "name" : "Providing electrical points in common areas with wiring considered from switch board to points- Material wise",
-              "rateAnalysisId" : 100569,
-              "isMeasurementSheet" : false,
-              "measurementUnit" : "Job",
-              "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 0,
-              "rateAnalysisUnit" : "Per Job",
-              "isDirectRate" : false,
-              "directRate" : null,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : false,
-              "breadthOrWidth" : false,
-              "height" : false
-            }
-          ]
-        },
-        {
           "name" : "Meter board/room",
           "rateAnalysisId" : 100570,
           "workItems" : [
