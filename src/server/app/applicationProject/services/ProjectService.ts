@@ -649,7 +649,9 @@ class ProjectService {
             for (let categoryData of costHeadData.categories) {
               if (categoryId === categoryData.rateAnalysisId) {
                 for (let workItemData of categoryData.workItems) {
+                  if(workItemData.workItemId === 1) {
                     inActiveWorkItems.push(workItemData);
+                  }
                 }
               }
             }
@@ -684,7 +686,9 @@ class ProjectService {
             for (let categoryData of costHeadData.categories) {
               if (categoryId === categoryData.rateAnalysisId) {
                 for (let workItemData of categoryData.workItems) {
+                  if(workItemData.workItemId === 1) {
                     inActiveWorkItems.push(workItemData);
+                  }
                 }
               }
             }
@@ -1158,6 +1162,8 @@ class ProjectService {
           let updateQuery;
           if(response.active) {
             newWorkItem.workItemId = response.workItemId +1;
+            let quantityObj = new Quantity();
+            newWorkItem.quantity = quantityObj;
             newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
             updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
@@ -1260,6 +1266,8 @@ class ProjectService {
         } else {
           if(response.active) {
             newWorkItem.workItemId = response.workItemId +1;
+            let quantityObj = new Quantity();
+            newWorkItem.quantity = quantityObj;
             newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
             updateQuery = {$push : {'projectCostHeads.$[costHead].categories.$[category].workItems': newWorkItem }};

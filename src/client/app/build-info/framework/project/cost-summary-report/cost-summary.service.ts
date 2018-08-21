@@ -122,7 +122,7 @@ export class CostSummaryService extends BaseService {
     return this.httpDelegateService.getAPI(url);
   }
 
-  activateWorkItem(baseUrl : string, costHeadId : number, subCategoryId : number, workItem : WorkItem) {
+  addWorkItem(baseUrl : string, costHeadId : number, subCategoryId : number, workItem : WorkItem) {
     var url =  baseUrl + '/' + API.COSTHEAD + '/' + costHeadId + '/'+ API.CATEGORY +'/'+ subCategoryId +'/' +
       API.WORKITEM + '/' + workItem.rateAnalysisId +'/'+ workItem.workItemId + '/' + API.ACTIVE_STATUS +'/'+ API.ACTIVE_STATUS_TRUE;
     let body = workItem;

@@ -546,7 +546,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     console.log('Get WorkItemList error : '+error);
   }
 
-  onChangeActivateSelectedWorkItem(selectedWorkItem:any) {
+  onSelectedWorkItem(selectedWorkItem:any) {
     this.loaderService.start();
     this.showWorkItemList=false;
     let workItemList  =  this.workItemListArray;
@@ -559,14 +559,14 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
     let categoryId=this.categoryRateAnalysisId;
 
-    this.costSummaryService.activateWorkItem( this.baseUrl, this.costHeadId, categoryId,
+    this.costSummaryService.addWorkItem( this.baseUrl, this.costHeadId, categoryId,
       workItemObject[0]).subscribe(
-      success => this.onActivateWorkItemSuccess(success),
-      error => this.onActivateWorkItemFailure(error)
+      success => this.onAddWorkItemSuccess(success),
+      error => this.onAddWorkItemFailure(error)
     );
   }
 
-  onActivateWorkItemSuccess(success : string) {
+  onAddWorkItemSuccess(success : string) {
 
     var message = new Message();
     message.isError = false;
@@ -581,7 +581,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     this.refreshCategoryList();
   }
 
-  onActivateWorkItemFailure(error:any) {
+  onAddWorkItemFailure(error:any) {
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
