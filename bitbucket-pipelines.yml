@@ -6,7 +6,7 @@
 image: node:8.8.1
 
 pipelines:
-  branches: # Pipelines that are triggered manually
+  custom: # Pipelines that are triggered manually
   #custom:
     build-info-staging:
     - step:
