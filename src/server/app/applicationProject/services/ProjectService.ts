@@ -3592,6 +3592,24 @@ class ProjectService {
       }
     });
   }
+  updateProjectImage(projectId: string ,imageName:string,oldImageName:string,callback: (error: any, result: any) => void) {
+    let query = {'_id': projectId};
+    let updateData = {$set: {projectImage:imageName}};
+    this.projectRepository.findOneAndUpdate(query, updateData, {}, (error, response) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        if(oldImageName && oldImageName!=='newUser' ) {
+          fs.unlink('.' + config.get('application.profilePath') + '/' + oldImageName, (err: Error) => {
+            if (err) {
+              logger.error(err);
+            }
+          });
+        }
+        callback(null, true);
+      }
+    });
+  }
   UploadImage(tempPath: any, fileName: any, cb: any) {
     let targetpath = fileName;
     fs.rename(tempPath, targetpath, function (err:any) {

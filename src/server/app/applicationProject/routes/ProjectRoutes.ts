@@ -319,7 +319,7 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,validator.checkPresentFilesForBuildingWorkItem,
       controller.removeAttachmentOfBuildingWorkItem,this._responseInterceptor.exit);
     //get project image URL
-    router.put('/image/upload',this.authInterceptor.requiresAuth,
+    router.put('/image/upload/:projectId/:imageName',this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept,
       controller.getImageURl, this._responseInterceptor.exit);
     //remove project image

@@ -72,6 +72,7 @@ export class Messages {
   public static MSG_ERROR_IMAGE_TYPE: string = 'Please try again. Make sure to upload only image file with extensions JPG, JPEG, GIF, PNG.';
   public static MSG_ERROR_IMAGE_SIZE: string = 'Please make sure the image size is less than 5 MB.';
   public static MSG_IMAGE_DELETE: string = 'Project image is deleted successfully.';
+  public static MSG_IMAGE_UPDATE: string = 'Project image is updated successfully.';
 
   //Registration validation messages
   public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your e-mail address';

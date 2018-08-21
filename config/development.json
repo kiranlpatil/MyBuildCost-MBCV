@@ -2532,7 +2532,7 @@
             {
               "name": "Chemical water proofing with screeding for bathrooms / toilets of typical size 8' X 5' with 50mm sunk (For toilets with suspended plumbing)",
               "isMeasurementSheet": true,
-              "measurementUnit": "Sqm",
+              "measurementUnit": "No",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "sft",
@@ -9672,7 +9672,7 @@
               "rateAnalysisPerUnit": null,
               "rateAnalysisUnit": null,
               "isDirectRate": true,
-              "directRate": 200,
+              "directRate": 2000,
               "directRatePerUnit": "Sqft",
               "isItemBreakdownRequired": false,
               "length": null,

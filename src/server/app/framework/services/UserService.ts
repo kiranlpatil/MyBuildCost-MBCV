@@ -822,7 +822,7 @@ class UserService {
         }
 
         let projectId = config.get('sampleProject.' + 'projectId');
-        let projection = {'name': 1, 'activeStatus': 1};
+        let projection = {'name': 1, 'activeStatus': 1,'projectImage':1};
         this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
           if(error) {
             callback(error, null);
@@ -832,6 +832,8 @@ class UserService {
             sampleProjectSubscription.projectName = project.name;
             sampleProjectSubscription.projectId = project._id;
             sampleProjectSubscription.activeStatus = project.activeStatus;
+            if(project && project.projectImage)
+              sampleProjectSubscription.projectImage = project.projectImage;
             sampleProjectSubscriptionArray.push(sampleProjectSubscription);
           }
           callback(null, {
