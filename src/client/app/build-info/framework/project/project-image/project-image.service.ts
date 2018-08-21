@@ -12,8 +12,8 @@ export class ProjectImageService extends BaseService {
   constructor(protected http: Http, protected messageService: MessageService) {
     super();
   }
-  projectImageUpload(files: Array<File>) {
-    var url = AppSettings.API_ENDPOINT +API.PROJECT+ API.PROJECT_IMAGE_UPLOAD;
+  projectImageUpload(projectId:string,imageName:string,files: Array<File>) {
+    var url = AppSettings.API_ENDPOINT +API.PROJECT+ API.PROJECT_IMAGE_UPLOAD+'/'+ projectId +'/'+imageName;
     return new Promise((resolve: any, reject: any) => {
       var formData: any = new FormData();
       var xhr = new XMLHttpRequest();

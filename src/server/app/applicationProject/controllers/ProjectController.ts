@@ -1248,7 +1248,21 @@ class ProjectController {
             if (err) {
               next(err);
             } else {
-              res.status(200).send({ tempath });
+
+              let projectService = new ProjectService();
+              var projectId = req.params.projectId;
+              var imageName = req.params.imageName;
+              if(projectId !== 'newUser') {
+              projectService.updateProjectImage( projectId ,tempath,imageName,(error, response) => {
+                if (error) {
+                  next(error);
+                } else {
+                  res.status(200).send({ tempath });
+                }
+              });
+              }else {
+                res.status(200).send({ tempath });
+              }
             }
           });
         }
