@@ -130,6 +130,12 @@
   }
   .datalist-input {
     line-height: 0;
+    input {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: break-word;
+      word-break: keep-all;
+    }
   }
 
   .get-rate-table {
