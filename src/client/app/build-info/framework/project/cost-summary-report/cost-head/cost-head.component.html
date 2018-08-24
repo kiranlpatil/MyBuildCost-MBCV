@@ -343,7 +343,7 @@
                   <tbody>
                   <tr *ngIf="compareWorkItemRateAnalysisId==categoryIndex">
                     <td>
-                      <select  class="select-item" (change)="onChangeActivateSelectedWorkItem($event.target.value)">
+                      <select  class="select-item" (change)="onSelectedWorkItem($event.target.value)">
                         <option [value]="selectItem">Select Work Items</option>
                         <option *ngFor="let workItems of workItemListArray" [value]="workItems.name">{{ workItems.name }}</option>
                       </select>

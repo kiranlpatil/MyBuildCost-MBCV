@@ -132,7 +132,8 @@ export class GetSteelQuantityComponent implements OnInit {
     this.steelQuantityItems.splice(index,1);
     }
   updateQuantityItem(totalDiameterQuantity : SteelQuantityItems) {
-    totalDiameterQuantity.steelQuantityItem=this.steelQuantityItems;
+    let currentSteelQuantityItems = this.validateSteelQuantityIems(this.steelQuantityItems);
+    totalDiameterQuantity.steelQuantityItem = currentSteelQuantityItems;
     totalDiameterQuantity.unit=this.workItem.unit;
     let quantityObj : QuantityDetails = new QuantityDetails();
       quantityObj.id = this.quantityId;
@@ -147,6 +148,16 @@ export class GetSteelQuantityComponent implements OnInit {
         error => this.onUpdateQuantityItemsFailure(error)
       );
       }
+
+  validateSteelQuantityIems(steelQuantityItems: Array<SteelQuantityItem>) {
+    for (let quantityItemIndex =steelQuantityItems.length-1; quantityItemIndex >=0;  quantityItemIndex--) {
+      if (steelQuantityItems[quantityItemIndex].item === '' || steelQuantityItems[quantityItemIndex].item === undefined) {
+        steelQuantityItems.splice(quantityItemIndex,1);
+      }
+    }
+    return steelQuantityItems;
+  }
+
   onUpdateQuantityItemsSuccess(success : string) {
 
     var message = new Message();

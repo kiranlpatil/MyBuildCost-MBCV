@@ -129,6 +129,11 @@
         opacity: 0.4!important;
         pointer-events: none;
       }
+      &:hover {
+        input {
+          border: 1px solid $gray;
+        }
+      }
 
     }
 
@@ -162,6 +167,8 @@
           text-align: left;
           transition: opacity 0.5s ease-in-out;
           width: 100%;
+          word-break: keep-all;
+          word-wrap: break-word;
           &[hidden] {
             display: none;
           }
@@ -264,6 +271,27 @@
   }
 }
 
+#category-panel {
+  .edit-field {
+    &:hover {
+      input {
+        background: url('../../../assets/build-info/dashboard/edit.png') no-repeat 98% 46%;
+        border: 1px solid $gray;
+      }
+    }
+  }
+}
+
+#show-embedded-table-row {
+  .edit-field {
+    &:hover {
+      input {
+        background: transparent;
+        border: 1px solid $gray;
+      }
+    }
+  }
+}
 
 .total-table {
   margin-top: -4px;

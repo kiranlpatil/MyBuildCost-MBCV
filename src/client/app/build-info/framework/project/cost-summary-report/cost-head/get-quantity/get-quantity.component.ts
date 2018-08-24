@@ -121,13 +121,12 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
       this.messageService.message(message);
       return;
     }
-    if(this.validateQuantityItem(quantityItems) && (this.keyQuantity !== ''
-        && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
-
+    if((this.keyQuantity !== '' && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
+      let quantityItemsArray = this.validateQuantityItem(quantityItems);
       let quantityObj : QuantityDetails = new QuantityDetails();
       quantityObj.id = this.quantityId;
       quantityObj.name = this.keyQuantity;
-      quantityObj.quantityItems = quantityItems;
+      quantityObj.quantityItems = quantityItemsArray;
       quantityObj.total = this.quantityTotal;
       this.loaderService.start();
       let costHeadId = parseFloat(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
@@ -137,27 +136,20 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
         error => this.onUpdateQuantityItemsFailure(error)
       );
     } else {
-      message = new Message();
+     let message = new Message();
       message.isError = true;
-      if(this.keyQuantity !== null && this.keyQuantity !== undefined) {
-        message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
-      } else {
-        message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
-      }
+      message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
       this.messageService.message(message);
     }
   }
 
   validateQuantityItem(quantityItems : Array<QuantityItem>) {
-    for(let quantityItemData of quantityItems) {
-      if((quantityItemData.item === '' || quantityItemData.item === undefined ||  quantityItemData.item.trim() === '') ||
-        (quantityItemData.nos === undefined || quantityItemData.nos === null) ||
-        (quantityItemData.length === undefined || quantityItemData.length === null) ||
-        (quantityItemData.height === undefined || quantityItemData.height === null)) {
-        return false;
+    for (let quantityItemIndex =quantityItems.length-1; quantityItemIndex >=0;  quantityItemIndex--) {
+      if (quantityItems[quantityItemIndex].item === '' || quantityItems[quantityItemIndex].item === undefined) {
+        quantityItems.splice(quantityItemIndex,1);
       }
     }
-    return true;
+    return quantityItems;
   }
 
   onUpdateQuantityItemsSuccess(success : string) {

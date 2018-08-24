@@ -156,6 +156,18 @@
   }
 }
 
+.cost-summary-table,
+#category-panel {
+  .edit-field {
+    &:hover {
+      input {
+        background: url('../../../assets/build-info/dashboard/edit.png') no-repeat 98% 46%;
+        border: 1px solid $gray;
+      }
+    }
+  }
+}
+
 .add-cost-head {
   td {
     &:last-child {

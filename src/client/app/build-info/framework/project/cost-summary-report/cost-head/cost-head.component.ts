@@ -546,7 +546,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     console.log('Get WorkItemList error : '+error);
   }
 
-  onChangeActivateSelectedWorkItem(selectedWorkItem:any) {
+  onSelectedWorkItem(selectedWorkItem:any) {
     this.loaderService.start();
     this.showWorkItemList=false;
     let workItemList  =  this.workItemListArray;
@@ -559,14 +559,14 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
     let categoryId=this.categoryRateAnalysisId;
 
-    this.costSummaryService.activateWorkItem( this.baseUrl, this.costHeadId, categoryId,
+    this.costSummaryService.addWorkItem( this.baseUrl, this.costHeadId, categoryId,
       workItemObject[0]).subscribe(
-      success => this.onActivateWorkItemSuccess(success),
-      error => this.onActivateWorkItemFailure(error)
+      success => this.onAddWorkItemSuccess(success),
+      error => this.onAddWorkItemFailure(error)
     );
   }
 
-  onActivateWorkItemSuccess(success : string) {
+  onAddWorkItemSuccess(success : string) {
 
     var message = new Message();
     message.isError = false;
@@ -581,7 +581,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     this.refreshCategoryList();
   }
 
-  onActivateWorkItemFailure(error:any) {
+  onAddWorkItemFailure(error:any) {
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
@@ -601,7 +601,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     this.currentWorkItemIndex = workItemIndex;
     this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
 
-    if(workItem.quantity.quantityItemDetails.length !== 0) {
+    if(workItem.quantity.quantityItemDetails.length !== 0 &&
+      ((workItem.quantity.quantityItemDetails[0].quantityItems && workItem.quantity.quantityItemDetails[0].quantityItems.length!== 0) ||
+      (workItem.quantity.quantityItemDetails[0].steelQuantityItems && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length!== 0))) {
       $('#updateDirectQuantity'+workItemIndex).modal();
     } else {
       this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);

@@ -14,7 +14,7 @@ import {Router} from "@angular/router";
 })
 
 export class BuildingFormComponent implements AfterViewInit {
-  @ViewChild('buildingName') inputBuildingName:ElementRef;
+  @ViewChild('focusToBuildingName') inputBuildingName:ElementRef;
   @Input() submitActionLabel: string;
   @Input() buildingModel?: Building = new Building();
   @Input() buildingName?:string;

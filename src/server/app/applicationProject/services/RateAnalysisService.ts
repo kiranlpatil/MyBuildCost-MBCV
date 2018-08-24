@@ -577,6 +577,8 @@ class RateAnalysisService {
       workItem.systemRate.notes = notes;
       workItem.systemRate.imageURL = imageURL;
       return workItem;
+    } else {
+      logger.error('Workitem not found in configuration : ' + categoryWorkitem.name);
     }
     return null;
   }
