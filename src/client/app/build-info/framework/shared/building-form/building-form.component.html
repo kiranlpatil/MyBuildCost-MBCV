@@ -5,7 +5,7 @@
       <div  class="form-group">
         <control-messages [control]="buildingForm.controls.name" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
         <label>{{ getLabels().BUILDING_NAME }}</label>
-        <input #buildingName type="text" [(ngModel)]="buildingModel.name" (keypress)="validateBuildingName($event)" formControlName="name" id="name" class="form-control" placeholder="Enter building name" required />
+        <input #focusToBuildingName type="text" [(ngModel)]="buildingModel.name" (keypress)="validateBuildingName($event)" formControlName="name" id="name" class="form-control" placeholder="Enter building name" required />
       </div>
 
       <div  class="form-group" [class.disabled-input]="disableFormFields">

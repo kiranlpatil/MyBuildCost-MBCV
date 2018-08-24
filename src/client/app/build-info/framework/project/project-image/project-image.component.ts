@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from '@angular/core';
 import {Message} from '../../../../shared/models/message';
 import {AppSettings, Messages} from '../../../../shared/constants';
 import {MessageService} from '../../../../shared/services/message.service';
@@ -15,6 +15,8 @@ import {ProjectService} from '../project.service';
 export class ProjectImageComponent implements OnChanges {
   @Output() onProjectImageUpload = new EventEmitter();
   @Input() projectModel: any;
+  @ViewChild('fileInput')
+  fileInputVariable: ElementRef;
   private filesToUpload: Array<File>;
   private image_path: string;
   private isLoading: boolean = false;
@@ -60,6 +62,7 @@ export class ProjectImageComponent implements OnChanges {
       if (this.filesToUpload[0].size <= 5242880) {
         this.projectImageService.projectImageUpload(id,imageName,this.filesToUpload).then((result: any) => {
           if (result !== null) {
+            this.fileInputVariable.nativeElement.value = '';
             this.uploadProjectImageSuccess(result);
           }
         }, (error: any) => {

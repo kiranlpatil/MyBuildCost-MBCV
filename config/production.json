@@ -516,7 +516,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -530,7 +530,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -544,7 +544,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -2495,10 +2495,10 @@
             {
               "name": "Chemical water proofing with screeding for bathrooms / toilets of typical size 8' X 5' with 50mm sunk (For toilets with suspended plumbing)",
               "isMeasurementSheet": true,
-              "measurementUnit": "Sqm",
+              "measurementUnit": "No",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 100,
-              "rateAnalysisUnit": "sft",
+              "rateAnalysisUnit": "No",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -6172,50 +6172,6 @@
               ]
             },
             {
-              "name": "Inside unit/apartment- Point wise",
-              "rateAnalysisId": 100566,
-              "workItems": [
-                {
-                  "name": "Providing electrical points in common areas with wiring considered from switch board to points- Point wise",
-                  "rateAnalysisId": 100567,
-                  "isMeasurementSheet": false,
-                  "measurementUnit": "Job",
-                  "isRateAnalysis": true,
-                  "rateAnalysisPerUnit": 0,
-                  "rateAnalysisUnit": "Per Job",
-                  "isDirectRate": false,
-                  "directRate": null,
-                  "directRatePerUnit": null,
-                  "isItemBreakdownRequired": false,
-                  "length": false,
-                  "breadthOrWidth": false,
-                  "height": false
-                }
-              ]
-            },
-            {
-              "name": "Inside unit/apartment- Material wise",
-              "rateAnalysisId": 100568,
-              "workItems": [
-                {
-                  "name": "Providing electrical points in common areas with wiring considered from switch board to points- Material wise",
-                  "rateAnalysisId": 100569,
-                  "isMeasurementSheet": false,
-                  "measurementUnit": "Job",
-                  "isRateAnalysis": true,
-                  "rateAnalysisPerUnit": 0,
-                  "rateAnalysisUnit": "Per Job",
-                  "isDirectRate": false,
-                  "directRate": null,
-                  "directRatePerUnit": null,
-                  "isItemBreakdownRequired": false,
-                  "length": false,
-                  "breadthOrWidth": false,
-                  "height": false
-                }
-              ]
-            },
-            {
               "name": "Meter board/room",
               "rateAnalysisId": 100570,
               "workItems": [
@@ -9636,7 +9592,7 @@
               "rateAnalysisPerUnit": null,
               "rateAnalysisUnit": null,
               "isDirectRate": true,
-              "directRate": 200,
+              "directRate": 2000,
               "directRatePerUnit": "Sqft",
               "isItemBreakdownRequired": false,
               "length": null,
@@ -9647,7 +9603,7 @@
               "name": "Providing and executing suitable flooring in gym area",
               "rateAnalysisId": 200026,
               "isMeasurementSheet": true,
-              "measurementUnit": null,
+              "measurementUnit": "Sqm",
               "isRateAnalysis": false,
               "rateAnalysisPerUnit": null,
               "rateAnalysisUnit": null,

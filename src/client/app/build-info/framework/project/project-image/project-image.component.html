@@ -10,7 +10,7 @@
     <span>Change Project Image</span>
   </div>
   <!--<button  *ngIf="image_path && !isLoading" type="button" (click)="removeProjectImage()" placeholder="Remove Image">Remove</button>-->
-  <input  id="file-upload" type="file" (change)="uploadProjectImage($event)" placeholder="Upload Image">
+  <input #fileInput  id="file-upload" type="file" (change)="uploadProjectImage($event)" placeholder="Upload Image">
   <!--<input  id="file-upload" type="file" (change)="uploadProjectImage($event)" placeholder="Upload Image">
   <button  *ngIf="image_path && !isLoading" type="button" (click)="removeProjectImage()" placeholder="Remove Image">Remove</button>-->
 </div>
