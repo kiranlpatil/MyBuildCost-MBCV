@@ -261,7 +261,7 @@ class UserService {
     let generateOtpObject = {
       new_mobile_number: params.mobile_number,
       old_mobile_number: user.mobile_number,
-      userId: user._id
+      _id: user._id
     };
     this.generateOtp(generateOtpObject, (error, result) => {
       if (error) {
@@ -301,40 +301,33 @@ class UserService {
   }
 
   generateOtp(generateOtpObject: any, callback: (error: any, result: any) => void) {
-    let queryToGetUser = {'_id': generateOtpObject.userId};
-    this.userRepository.retrieve(queryToGetUser, (err, res) => {
-      if (err) {
-        callback(err, null);
-      } else if (res && res.length > 0) {
-        let query = {'_id': generateOtpObject.userId};
-        let otp = Math.floor((Math.random() * 99999) + 100000);
-        let updateData = {'mobile_number': generateOtpObject.new_mobile_number, 'otp': otp};
-        this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-          if (error) {
-            callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-          } else {
-            let messaging = config.get('application.messaging');
-            let messageForEndUser = 'The One Time Password(OTP) for' + ' ' + messaging.appName + ' ' + 'account is' + ' ' + otp
-              + ' ' + '. Use this OTP to verify your account.';
-            console.log('msg sent to user :', messageForEndUser);
-            let url = messaging.url + '?user=' + messaging.user + '&password=' + messaging.password + '&msisdn=91' + generateOtpObject.new_mobile_number
-              + '&sid=' + messaging.sid + '&msg=' + messageForEndUser + '&fl=' + messaging.fl + '&gwid=' + messaging.gwid;
-
-            // call post api of Orca info solutions to send OTP
-            /*request.post({url: url, json: ''}, (error: any, response: any, body: any) => {
-              if (error) {
-                callback(error, null);
-              } else if (!error && response) {
-                let res = body;
-                callback(null, res);
-              }
-            });*/
-            // end of post api
-            callback(null, result);
-          }
-        });
-      } else {
+    let query = {'_id': generateOtpObject._id};
+    let otp = Math.floor((Math.random() * 99999) + 100000);
+    let updateData = {'mobile_number': generateOtpObject.new_mobile_number, 'otp': otp};
+    // find user by _id and update user with new mobile number and new otp
+    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+      } else {
+        let messaging = config.get('application.messaging');
+        let messageForEndUser = 'The One Time Password(OTP) for' + ' ' + messaging.appName + ' ' + 'account is' + ' ' + otp
+          + ' ' + '. Use this OTP to verify your account.';
+        console.log('message sent to user:', messageForEndUser);
+        let url = messaging.url + '?user=' + messaging.user + '&password=' + messaging.password + '&msisdn=91'
+          + generateOtpObject.new_mobile_number + '&sid=' + messaging.sid + '&msg=' + messageForEndUser + '&fl='
+          + messaging.fl + '&gwid=' + messaging.gwid;
+
+        // call post api of Orca info solutions to send OTP
+        /*request.post({url: url, json: ''}, (error: any, response: any, body: any) => {
+          if (error) {
+            callback(error, null);
+          } else if (!error && response) {
+            let res = body;
+            callback(null, res);
+          }
+        });*/
+        // end of post api
+        callback(null, result);
       }
     });
   }
