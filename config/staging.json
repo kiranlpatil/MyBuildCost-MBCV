@@ -5,7 +5,7 @@
       "host": "127.0.0.1",
       "name": "Build-info-staging",
       "username": "admin",
-      "password": "MyBuildCost@TPL$654",
+      "password": "buildinfoadmin123",
       "mongoExport": "/usr/bin/mongoexport"
     },
     "exportFileNames": {
