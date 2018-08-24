@@ -138,7 +138,7 @@ export class Messages {
 
 //payment error messages
 
-  public static BUILDING_PURCHASED_ERROR = 'You can add only 5 buildings at once.';
+  public static BUILDING_PURCHASED_ERROR = 'You can add total 10 buildings to the project';
 
 
   public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and you will receive a verification code on it.';
@@ -230,7 +230,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_HEIGHT_REQUIRED = 'Enter height';
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
-  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields cannot be empty';
+  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Item name cannot be blank once you add any of the measurement details against the item.';
   public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Flat/Floor details can not be empty';
   public static LOGIN_INFO: string = 'Enter your details below';
   public static MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS: string = 'Already added all Cost Heads.';
