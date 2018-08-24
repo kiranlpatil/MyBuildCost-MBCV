@@ -333,11 +333,11 @@ class UserService {
   }
 
   verifyOtp(params: any, user: any, callback: (error: any, result: any) => void) {
-    let mailChimpMailerService = new MailChimpMailerService();
-
-    let query = {'_id': user._id, 'isActivated': false};
+    // let query = {'_id': user._id, 'isActivated': false};
+    let query = {'_id': user._id};
     let updateData = {'isActivated': true, 'activation_date': new Date()};
     if (user.otp === params.otp) {
+      // find user by _id and update user for otp verification
       this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
           callback(error, null);
@@ -346,8 +346,6 @@ class UserService {
             'status': 'Success',
             'data': {'message': 'User Account verified successfully'}
           });
-          mailChimpMailerService.onCandidateSignSuccess(result);
-
         }
       });
     } else {
@@ -358,7 +356,6 @@ class UserService {
         code: 400
       }, null);
     }
-
   }
 
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {

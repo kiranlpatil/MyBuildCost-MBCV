@@ -76,7 +76,7 @@ class UserController {
     try {
       let userService = new UserService();
       let user = req.user;
-      let params = req.body;  //mobile_number(new)
+      let params = req.body;  // mobile_number (new mobile number)
       userService.sendOtp(params, user, (error, result)=> {
         if(error) {
           res.send(error);
@@ -97,7 +97,6 @@ class UserController {
 
   verifyOtp(req: express.Request, res: express.Response, next: any) {
     try {
-
       let user = req.user;
       let params = req.body;
       let userService = new UserService();
