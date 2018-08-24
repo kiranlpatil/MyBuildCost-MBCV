@@ -725,6 +725,90 @@ class UserController {
       });
     }
   }
+  getUserExistenceStatus(req: express.Request, res: express.Response, next: any) {
+    try {
+      let userService = new UserService();
+      let mobile_number =req.body.mobile_number;
+      userService.userExistenceStatus(mobile_number,(error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          res.status(200).send(result);
+        }
+      });
+    } catch (e) {
+      res.send(e);
+    }
+  }
+  verifyPassword(req: express.Request, res: express.Response, next: any) {
+    try {
+      let userService = new UserService();
+      let password =req.body.password;
+      let id =req.body.id;
+          userService.findById(id,(error, result) => {
+            if (error) {
+              next(error);
+            } else {
+              console.log(result);
+              bcrypt.compare(password, result.password, (err: any, isSame: any) => {
+                if (err) {
+                  next({
+                    reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
+                    message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
+                    stackTrace: new Error(),
+                    actualError: err,
+                    code: 500
+                  }, null);
+                } else {
+                  if (isSame) {
+                    res.status(200).send(result);
+                  } else {
+                    next({
+                      reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                      message: Messages.MSG_ERROR_WRONG_PASSWORD,
+                      stackTrace: new Error(),
+                      code: 400
+                    }, null);
+                  }
+                }
+              });
+            }
+          });
+    } catch (e) {
+      res.send(e);
+    }
+  }
+  setUserPassword(req: express.Request, res: express.Response, next: any) {
+    try {
+      let userService = new UserService();
+      let password =req.body.password;
+      let id =req.body.id;
+      const saltRounds = 10;
+      bcrypt.hash(password, saltRounds, (err: any, hash: any) => {
+        if (err) {
+          next({
+            reason: 'Error in creating hash using bcrypt',
+            message: 'Error in creating hash using bcrypt',
+            stackTrace: new Error(),
+            code: 403
+          }, null);
+        } else {
+          let encodedPassword = hash;
+          let query = {'_id': id};
+          let updateData = {'password': encodedPassword};
+          userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+            if (error) {
+              next(error);
+            } else {
+              res.send({ data:'success'});
+            }
+          });
 
+        }
+      });
+    } catch (e) {
+      res.send(e);
+    }
+  }
 }
 export  = UserController;

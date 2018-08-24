@@ -1245,6 +1245,69 @@ class UserService {
     let readabledate = projectExpiryDate.toDateString();
     return readabledate;
   }
+  userExistenceStatus(mobileNumber: any, callback:(error: any, result: any) => void) {
+      let query = {'mobile_number': mobileNumber};
+      this.userRepository.retrieve(query, (error, result) => {
+        if (error) {
+          callback(error, null);
+        } else if (result.length > 0 && result[0].isActivated === true) {
+          if (!result[0].password || result[0].password === undefined) {
+            callback(null, {data:{isPasswordSet:false,id:result[0]._id}});
+          }
+          callback(null, {data:{isRegistered:true,id:result[0]._id}});
+        } else if (result.length > 0 && result[0].isActivated === false) {
+          /*this.sendOtp( {mobile_number:mobileNumber},{_id:result[0]._id},(err:any,res:any)=> {
+            if(err) {
+              callback(err,null);
+              return;
+            }*/
+            callback(null,{data:{isActivated:false,id:result[0]._id}});
+
+          //});
+      } else {
+          var item= {mobile_number:mobileNumber,isActivated: false };
+          let subScriptionService = new SubscriptionService();
+          subScriptionService.getSubscriptionPackageByName('Free','BasePackage', (err: any,
+                                                                                  freeSubscription: Array<SubscriptionPackage>) => {
+            if (freeSubscription.length > 0) {
+              this.assignFreeSubscriptionAndCreateUser(item, freeSubscription[0], (err: any, model:any) => {
+                if(err) {
+                  callback(err,null);
+                  return;
+                }
+                /*this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
+                  if(err) {
+                    callback(err,null);
+                    return;
+                  }*/
+                  callback(null,{data:{isRegistered:false,id:model._id}});
+
+               // });
+              });
+            } else {
+              subScriptionService.addSubscriptionPackage(config.get('subscription.package.Free'),
+                (err: any, freeSubscription)=> {
+                  this.assignFreeSubscriptionAndCreateUser(item, freeSubscription, (err: any, model:any) => {
+                    if(err) {
+                      callback(err,null);
+                      return;
+                    }
+                    /*this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
+                      if(err) {
+                        callback(err,null);
+                        return;
+                      }*/
+                      callback(null,{data:{isRegistered:false,id:model._id}});
+
+                   // });
+                  });
+                });
+            }
+
+          });
+        }
+      });
+  }
 }
 
 Object.seal(UserService);
