@@ -28,6 +28,7 @@ let logger = log4js.getLogger('User service');
 let ObjectId = mongoose.Types.ObjectId;
 let config = require('config');
 let path = require('path');
+let request = require('request');
 
 class UserService {
   APP_NAME: string;
@@ -281,6 +282,13 @@ class UserService {
             'message': Messages.MSG_SUCCESS_OTP
           }
         }, null);
+      } else if (result.ErrorCode === '000') {
+        callback({
+          'status': Messages.STATUS_SUCCESS,
+          'data': {
+            'message': Messages.MSG_SUCCESS_OTP
+          }
+        }, null);
       } else {
         callback({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
@@ -311,8 +319,24 @@ class UserService {
               mobileNo: field.new_mobile_number,
               otp: otp
             };
-            let sendMessageService = new SendMessageService();
-            sendMessageService.sendMessageDirect(Data, callback);
+            // let sendMessageService = new SendMessageService();
+            // sendMessageService.sendMessageDirect(Data, callback);
+            let messaging = config.get('application.messaging');
+            let messageForEndUser = 'The One Time Password(OTP) for' + ' ' + messaging.appName + ' ' + 'account is' + ' ' + otp
+              + ' ' + '. Use this OTP to verify your account.';
+            let url = messaging.url + '?user=' + messaging.user +'&password=' + messaging.password + '&msisdn=91' + field.new_mobile_number
+              + '&sid=' + messaging.sid + '&msg=' + messageForEndUser + '&fl=' + messaging.fl + '&gwid=' + messaging.gwid;
+
+            // call post api of Orca info solutions to send OTP
+            request.post({url: url, json: ''}, (error: any, response: any, body: any) => {
+              if (error) {
+                callback(error, null);
+              } else if (!error && response) {
+                let res = body;
+                callback(null, res);
+              }
+            });
+            // end of post api
           }
         });
       } else {

@@ -52,6 +52,16 @@
       "clientSecretId": "-EHuNLqtYrRuwS_ZZ48PGHJC"
     },
     "messaging": {
+      // Orca info solutions credentials
+      "appName": "Rate Analysis",
+      "url": "http://user.orcainfosolutions.com/vendorsms/pushsms.aspx",
+      "user": "mycivilcalc",
+      "password": "mycivilcalc123",
+      "sid": "RATEAN",
+      "fl": "0",
+      "gwid": "2",
+
+      // msg91 credentials
       "authKey": "152516A0pwPFRp59198cd9",
       "senderId": "JOBMOS",
       "routerNumber": "4"

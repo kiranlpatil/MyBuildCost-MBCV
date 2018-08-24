@@ -222,7 +222,7 @@
     "path": "^0.12.7",
     "payumoney-node": "^2.0.1",
     "promise": "^8.0.1",
-    "request": "^2.83.0",
+    "request": "^2.88.0",
     "rxjs": "5.4.3",
     "sort-object-array": "^1.0.1",
     "spdy": "^3.4.4",
