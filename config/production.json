@@ -26,7 +26,7 @@
     "attachmentPath":"/src/server/public/attachment-files",
     "limitForQuery" : 10,
     "mail": {
-      "host":"http://costcontrol.buildinfo.co.in/",
+      "host":"http://mybuildcost.buildinfo.co.in/",
       /*"MAIL_SENDER": "redminestatus@techprimelab.com",
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",*/
       "MAIL_SENDER": "bigslicetechnologies@gmail.com",
@@ -59,7 +59,7 @@
       "routerNumber": "4"
     },
      "browser" : {
-      "IP" : "http://costcontrol.buildinfo.co.in/"
+      "IP" : "http://mybuildcost.buildinfo.co.in/"
     },
     "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
