@@ -359,7 +359,7 @@ class UserService {
           if (error) {
             callback(error, null);
           } else if (!error && response) {
-            let res = body;
+            let res = JSON.parse(response.body);
             callback(null, res);
           }
         });*/
