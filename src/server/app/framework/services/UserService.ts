@@ -312,19 +312,19 @@ class UserService {
           callback(error, null);
         }
       } else if (result && result._doc) {
-        callback({
+        callback(null, {
           'status': Messages.STATUS_SUCCESS,
           'data': {
             'message': Messages.MSG_SUCCESS_OTP
           }
-        }, null);
+        });
       } else if (result.ErrorCode === '000') {
-        callback({
+        callback(null, {
           'status': Messages.STATUS_SUCCESS,
           'data': {
             'message': Messages.MSG_SUCCESS_OTP
           }
-        }, null);
+        });
       } else {
         callback({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
@@ -1327,7 +1327,7 @@ class UserService {
           callback(error, null);
         } else if (result.length > 0 && result[0].isActivated === true) {
           if (!result[0].password || result[0].password === undefined) {
-            callback(null,{
+            callback(null, {
               data: {
                 isPasswordSet: false,
                 id: result[0]._id,
@@ -1335,7 +1335,7 @@ class UserService {
               }
             });
           } else {
-            callback(null,{
+            callback(null, {
               data: {
                 isRegistered: true,
                 id: result[0]._id,
@@ -1344,67 +1344,67 @@ class UserService {
             });
           }
         } else if (result.length > 0 && result[0].isActivated === false) {
-          /*this.sendOtp( {mobile_number:mobileNumber},{_id:result[0]._id},(err:any,res:any)=> {
+          this.sendOtp( {mobile_number:mobileNumber},{_id:result[0]._id},(err:any,res:any)=> {
             if(err) {
-              callback(err,null);
-              return;
-            }*/
-          callback(null,{
-            data: {
-              isActivated: false,
-              id: result[0]._id,
-              user: result[0]
+              callback(err, null);
+            } else {
+              callback(null,{
+                data: {
+                  isActivated: false,
+                  id: result[0]._id,
+                  user: result[0]
+                }
+              });
             }
           });
-          //});
       } else {
           var item= {mobile_number:mobileNumber,isActivated: false ,typeOfApp: 'RAapp'};
-          let subScriptionService = new SubscriptionService();
+          let subscriptionService = new SubscriptionService();
 
-          subScriptionService.getSubscriptionPackageByName('Trial', 'BasePackage', (err: any,
+          subscriptionService.getSubscriptionPackageByName('Trial', 'BasePackage', (err: any,
                                                                                     trialSubscription: Array<SubscriptionPackage>) => {
 
             if (trialSubscription.length > 0) {
               this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model:any) => {
                 if(err) {
-                  callback(err,null);
+                  callback(err, null);
                   return;
                 }
-                /*this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
+                this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
                   if(err) {
                     callback(err,null);
-                    return;
-                  }*/
-                callback(null,{
-                  data: {
-                    isRegistered: false,
-                    id: model._id,
-                    user: model
-                  }
-                });
-                // });
-              });
-            } else {
-              subScriptionService.addSubscriptionPackage(config.get('subscription.package.Trial'),
-                (error: any, trialSubscription) => {
-                  this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model:any) => {
-                    if(err) {
-                      callback(err,null);
-                      return;
-                    }
-                    /*this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
-                      if(err) {
-                        callback(err,null);
-                        return;
-                      }*/
-                    callback(null,{
+                  } else {
+                    callback(null, {
                       data: {
                         isRegistered: false,
                         id: model._id,
                         user: model
                       }
                     });
-                    // });
+                  }
+                });
+              });
+            } else {
+              subscriptionService.addSubscriptionPackage(config.get('subscription.package.Trial'),
+                (error: any, trialSubscription) => {
+                  this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model:any) => {
+                    if(err) {
+                      callback(err, null);
+                      return;
+                    }
+                    this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
+                      if(err) {
+                        callback(err,null);
+                      } else {
+                        callback(null, {
+                          data: {
+                            isRegistered: false,
+                            id: model._id,
+                            user: model
+                          }
+                        });
+                      }
+                    });
                   });
                 });
             }
