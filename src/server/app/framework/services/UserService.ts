@@ -1,15 +1,14 @@
-import UserRepository = require('../dataaccess/repository/UserRepository');
-import SendMailService = require('./mailer.service');
-import SendMessageService = require('./sendmessage.service');
 import * as fs from 'fs';
 import * as mongoose from 'mongoose';
 import {SentMessageInfo} from 'nodemailer';
+import bcrypt = require('bcrypt');
+import UserRepository = require('../dataaccess/repository/UserRepository');
+import SendMailService = require('./mailer.service');
+import SendMessageService = require('./sendmessage.service');
 import Messages = require('../shared/messages');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import ProjectAsset = require('../shared/projectasset');
 import MailAttachments = require('../shared/sharedarray');
-import bcrypt = require('bcrypt');
-import {MailChimpMailerService} from './mailchimp-mailer.service';
 import UserModel = require('../dataaccess/model/UserModel');
 import User = require('../dataaccess/mongoose/user');
 import SubscriptionService = require('../../applicationProject/services/SubscriptionService');
@@ -21,8 +20,8 @@ import ProjectSubscriptionDetails = require('../../applicationProject/dataaccess
 import messages  = require('../../applicationProject/shared/messages');
 import constants  = require('../../applicationProject/shared/constants');
 import ProjectSubcription = require('../../applicationProject/dataaccess/model/company/ProjectSubcription');
-
 import UserSubscriptionForRA = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscriptionForRA');
+
 let CCPromise = require('promise/lib/es6-extensions');
 let log4js = require('log4js');
 let logger = log4js.getLogger('User service');
@@ -70,19 +69,19 @@ class UserService {
           } else {
             item.password = hash;
             let subScriptionService = new SubscriptionService();
-            if(item.typeOfApp !== 'RAapp') {
-            subScriptionService.getSubscriptionPackageByName('Free', 'BasePackage', (err: any,
-                                                                                     freeSubscription: Array<SubscriptionPackage>) => {
-              if (freeSubscription.length > 0) {
-                this.assignFreeSubscriptionAndCreateUser(item, freeSubscription[0], callback);
-              } else {
-                subScriptionService.addSubscriptionPackage(config.get('subscription.package.Free'),
-                  (err: any, freeSubscription) => {
-                    this.assignFreeSubscriptionAndCreateUser(item, freeSubscription, callback);
-                  });
-              }
-            });
-          } else {
+            if (item.typeOfApp !== 'RAapp') {
+              subScriptionService.getSubscriptionPackageByName('Free', 'BasePackage', (err: any,
+                                                                                       freeSubscription: Array<SubscriptionPackage>) => {
+                if (freeSubscription.length > 0) {
+                  this.assignFreeSubscriptionAndCreateUser(item, freeSubscription[0], callback);
+                } else {
+                  subScriptionService.addSubscriptionPackage(config.get('subscription.package.Free'),
+                    (err: any, freeSubscription) => {
+                      this.assignFreeSubscriptionAndCreateUser(item, freeSubscription, callback);
+                    });
+                }
+              });
+            } else {
               subScriptionService.getSubscriptionPackageByName('Trial', 'BasePackage', (err: any,
                                                                                         trialSubscription: Array<SubscriptionPackage>) => {
 
@@ -129,12 +128,12 @@ class UserService {
   assignFreeSubscriptionAndCreateUser(item: any, freeSubscription: SubscriptionPackage, callback: (error: any, result: any) => void) {
     let user: UserModel = item;
     let sendMailService = new SendMailService();
-    if(item.typeOfApp !== 'RAapp') {
+    if (item.typeOfApp !== 'RAapp') {
       this.assignFreeSubscriptionPackage(user, freeSubscription);
     } else {
       this.assignTrialSubscriptionPackage(user, freeSubscription);
     }
-    this.userRepository.create(user, (err:Error, res:any) => {
+    this.userRepository.create(user, (err: Error, res: any) => {
       if (err) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else {
@@ -212,16 +211,16 @@ class UserService {
   }
 
   assignTrialSubscriptionPackage(user: UserModel, freeSubscription: SubscriptionPackage) {
-   let subscription = new UserSubscriptionForRA();
+    let subscription = new UserSubscriptionForRA();
     subscription.activationDate = new Date();
     subscription.validity = freeSubscription.basePackage.validity;
     subscription.name = freeSubscription.basePackage.name;
-    subscription.description= freeSubscription.basePackage.description;
+    subscription.description = freeSubscription.basePackage.description;
     subscription.cost = freeSubscription.basePackage.cost;
     user.subscriptionForRA = subscription;
   }
 
-  login(data: any, typeOfApp: any, callback:(error: any, result: any) => void) {
+  login(data: any, typeOfApp: any, callback: (error: any, result: any) => void) {
     this.retrieve({'email': data.email}, (error, result) => {
       if (error) {
         callback(error, null);
@@ -255,15 +254,15 @@ class UserService {
                 },
                 access_token: token
               };
-              if(typeOfApp === 'RAapp') {
-                this.getUserSubscriptionDetails(result[0]._id, (error, result)=> {
-                  if(error) {
-                    callback(error,null);
-                  }else {
+              if (typeOfApp === 'RAapp') {
+                this.getUserSubscriptionDetails(result[0]._id, (error, result) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
                     callback(null, {data: resData, subscriptionDetails: result});
-                   }
+                  }
                 });
-              }else {
+              } else {
                 callback(null, resData);
               }
             } else {
@@ -759,17 +758,17 @@ class UserService {
     }
   }
 
-  getUserSubscriptionDetails(userId: string,callback: (error: any, result: any) => void) {
+  getUserSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
     let projection = {subscriptionForRA: 1};
-    this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
+    this.userRepository.findByIdWithProjection(userId, projection, (error, result) => {
       if (error) {
-      callback(error, null);
+        callback(error, null);
       } else {
         let subscriptionData = result.subscriptionForRA;
         let subscriptionDetails = this.getSubscriptionData(subscriptionData);
         callback(null, subscriptionDetails);
-       }
-     });
+      }
+    });
   }
 
   getSubscriptionData(subscriptionData: UserSubscriptionForRA) {
@@ -797,7 +796,7 @@ class UserService {
     return subscriptionDetails;
   }
 
-  assignPremiumPackage(user:User,userId:string, cost: number,callback: (error: any, result: any) => void) {
+  assignPremiumPackage(user: User, userId: string, cost: number, callback: (error: any, result: any) => void) {
     let projection = {subscription: 1};
     this.userRepository.findByIdWithProjection(userId, projection, (error, result) => {
       if (error) {
@@ -1320,97 +1319,98 @@ class UserService {
     let readabledate = projectExpiryDate.toDateString();
     return readabledate;
   }
-  userExistenceStatus(mobileNumber: any, callback:(error: any, result: any) => void) {
-      let query = {'mobile_number': mobileNumber};
-      this.userRepository.retrieve(query, (error, result) => {
-        if (error) {
-          callback(error, null);
-        } else if (result.length > 0 && result[0].isActivated === true) {
-          if (!result[0].password || result[0].password === undefined) {
-            callback(null, {
-              data: {
-                isPasswordSet: false,
-                id: result[0]._id,
-                user: result[0]
-              }
-            });
+
+  userExistenceStatus(mobileNumber: any, callback: (error: any, result: any) => void) {
+    let query = {'mobile_number': mobileNumber};
+    this.userRepository.retrieve(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else if (result.length > 0 && result[0].isActivated === true) {
+        if (!result[0].password || result[0].password === undefined) {
+          callback(null, {
+            data: {
+              isPasswordSet: false,
+              id: result[0]._id,
+              user: result[0]
+            }
+          });
+        } else {
+          callback(null, {
+            data: {
+              isRegistered: true,
+              id: result[0]._id,
+              user: result[0]
+            }
+          });
+        }
+      } else if (result.length > 0 && result[0].isActivated === false) {
+        this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+          if (err) {
+            callback(err, null);
           } else {
             callback(null, {
               data: {
-                isRegistered: true,
+                isActivated: false,
                 id: result[0]._id,
                 user: result[0]
               }
             });
           }
-        } else if (result.length > 0 && result[0].isActivated === false) {
-          this.sendOtp( {mobile_number:mobileNumber},{_id:result[0]._id},(err:any,res:any)=> {
-            if(err) {
-              callback(err, null);
-            } else {
-              callback(null,{
-                data: {
-                  isActivated: false,
-                  id: result[0]._id,
-                  user: result[0]
-                }
-              });
-            }
-          });
+        });
       } else {
-          var item= {mobile_number:mobileNumber,isActivated: false ,typeOfApp: 'RAapp'};
-          let subscriptionService = new SubscriptionService();
+        var item = {mobile_number: mobileNumber, isActivated: false, typeOfApp: 'RAapp'};
+        let subscriptionService = new SubscriptionService();
 
-          subscriptionService.getSubscriptionPackageByName('Trial', 'BasePackage', (err: any,
-                                                                                    trialSubscription: Array<SubscriptionPackage>) => {
+        subscriptionService.getSubscriptionPackageByName('Trial', 'BasePackage', (err: any,
+                                                                                  trialSubscription: Array<SubscriptionPackage>) => {
 
-            if (trialSubscription.length > 0) {
-              this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model:any) => {
-                if(err) {
+          if (trialSubscription.length > 0) {
+            this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model: any) => {
+              if (err) {
+                callback(err, null);
+                return;
+              }
+              this.sendOtp({mobile_number: mobileNumber}, {_id: model._id}, (err: any, res: any) => {
+                if (err) {
                   callback(err, null);
-                  return;
-                }
-                this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
-                  if(err) {
-                    callback(err,null);
-                  } else {
-                    callback(null, {
-                      data: {
-                        isRegistered: false,
-                        id: model._id,
-                        user: model
-                      }
-                    });
-                  }
-                });
-              });
-            } else {
-              subscriptionService.addSubscriptionPackage(config.get('subscription.package.Trial'),
-                (error: any, trialSubscription) => {
-                  this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model:any) => {
-                    if(err) {
-                      callback(err, null);
-                      return;
+                } else {
+                  callback(null, {
+                    data: {
+                      isRegistered: false,
+                      id: model._id,
+                      user: model
                     }
-                    this.sendOtp( {mobile_number:mobileNumber},{_id:model._id},(err:any,res:any)=> {
-                      if(err) {
-                        callback(err,null);
-                      } else {
-                        callback(null, {
-                          data: {
-                            isRegistered: false,
-                            id: model._id,
-                            user: model
-                          }
-                        });
-                      }
-                    });
+                  });
+                }
+              });
+            });
+          } else {
+            subscriptionService.addSubscriptionPackage(config.get('subscription.package.Trial'),
+              (error: any, trialSubscription) => {
+                this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model: any) => {
+                  if (err) {
+                    callback(err, null);
+                    return;
+                  }
+                  this.sendOtp({mobile_number: mobileNumber}, {_id: model._id}, (err: any, res: any) => {
+                    if (err) {
+                      callback(err, null);
+                    } else {
+                      callback(null, {
+                        data: {
+                          isRegistered: false,
+                          id: model._id,
+                          user: model
+                        }
+                      });
+                    }
                   });
                 });
-            }
-          });
-        }
-      });
+              });
+          }
+        });
+      }
+    });
   }
 }
 
