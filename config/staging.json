@@ -118,6 +118,14 @@
           "description": "Premium",
           "name": "Premium"
         }
+      },
+      "Trial": {
+        "basePackage": {
+          "cost": 0,
+          "validity": 15,
+          "description": "15 Days",
+          "name": "Trial"
+        }
       }
     }
   },
