@@ -7,6 +7,9 @@ class UsageTracking {
   isMobile: boolean;
   isDesktop: boolean;
   deviceOS : string;
+  appType: string;
+  mobileNumber: number;
+  email: string;
 
   constructor() {}
 }

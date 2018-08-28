@@ -28,6 +28,15 @@ class UsageTrackingSchema {
         },
         deviceOS: {
           type: String
+        },
+        appType: {
+          type: String
+        },
+        mobileNumber: {
+          type: Number
+        },
+        email: {
+          type: String
         }
       },
       {
