@@ -106,17 +106,6 @@ class SubscriptionController {
     }
   }
 
-  successPayuMoney(req: express.Request, res: express.Response, next: any): void {
-    try {
-      console.log('payment success : '+ JSON.stringify(req.body));
-      let pkgName = req.body.productinfo;
-      let redirectUrl = 'http://5d477bbb.ngrok.io/about';
-      res.render(redirectUrl);
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
   failurePayment(req: express.Request, res: express.Response, next: any): void {
     try {
       let body = req.body;
@@ -127,6 +116,41 @@ class SubscriptionController {
     }
   }
 
+  makePayUMoneyPayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let paymentBody = req.body;
+      let subscriptionService: SubscriptionService = new SubscriptionService();
+      subscriptionService.makeRAPayment(paymentBody,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get Subscription success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  successRateAnalysisPayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      console.log('payment success : '+ JSON.stringify(req.body));
+      // this._subscriptionService.updatePackageForRateAnalysisUser();
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  failureRateAnalysisPayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let body = req.body;
+      console.log('payment failed : '+ JSON.stringify(body));
+      // res.redirect(config.get('application.browser.IP') +'package-details/payment/failure');
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 
 export = SubscriptionController;

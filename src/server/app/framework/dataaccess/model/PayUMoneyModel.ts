@@ -10,4 +10,5 @@ export class PayUMoneyModel {
   email: string = '';
   surl : string = '';
   furl : string = '';
+  userId : string;
 }
