@@ -141,6 +141,14 @@
           "description": "15 Days",
           "name": "Trial"
         }
+      },
+      "Premium": {
+        "basePackage": {
+          "cost": 750,
+          "validity": 1095,
+          "description": "1 Year",
+          "name": "RAPremium"
+        }
       }
     }
   },
