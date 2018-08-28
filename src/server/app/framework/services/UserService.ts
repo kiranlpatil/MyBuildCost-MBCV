@@ -764,6 +764,17 @@ class UserService {
      });
   }
 
+  getPaymentStatusOfUser(userId: string,callback: (error: any, result: any) => void) {
+    let projection = { paymentStatus: 1 };
+    this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, result);
+      }
+    });
+  }
+
   getSubscriptionData(subscriptionData: UserSubscriptionForRA) {
     let subscriptionDetails = new UserSubscriptionForRA();
     subscriptionDetails.name = subscriptionData.name;
@@ -1062,7 +1073,8 @@ class UserService {
     });
   }
 
-  updatePackage(user: User, subscription: any, packageName: string, costForBuildingPurchased: any, numberOfBuildingsPurchased: any, projectId: string, callback: (error: any, result: any) => void) {
+  updatePackage(user: User, subscription: any, packageName: string, costForBuildingPurchased: any,
+                numberOfBuildingsPurchased: any, projectId: string, callback: (error: any, result: any) => void) {
     let subScriptionService = new SubscriptionService();
     switch (packageName) {
       case 'Premium': {
@@ -1330,7 +1342,7 @@ class UserService {
               subscription.description = result.basePackage.description;
               subscription.cost = result.basePackage.cost;
               let query = {'_id': userId};
-              let updateData = {'subscriptionForRA': subscription};
+              let updateData = {'subscriptionForRA': subscription, 'paymentStatus' : 'RAPremiumSuccess'};
               this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
                 if (error) {
                   callback(error, null);
@@ -1341,6 +1353,19 @@ class UserService {
             }
           });
       }
+
+  updatePaymentStatus(userId: string, callback: (error: any, result: any) => void) {
+
+    let query = {'_id': userId};
+    let updateData = {'paymentStatus' : 'RAPremiumFailure'};
+    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, result);
+      }
+    });
+  }
 }
 
 Object.seal(UserService);

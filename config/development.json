@@ -57,7 +57,8 @@
       "routerNumber": "4"
     },
     "browser": {
-      "IP": "http://localhost:5555/"
+      "IP": "http://localhost:5555/",
+      "rateAnalysisIP": "http://localhost:4200/"
       // "IP": "http://localhost:5555/"  //CORDOVA APP
     },
     "filePathForProfileImage": "/src/server/app/framework/public/profileimage",

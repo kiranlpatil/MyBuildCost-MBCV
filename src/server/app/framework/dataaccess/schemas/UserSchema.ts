@@ -89,6 +89,9 @@ class UserSchema {
       activation_date: {
         type: Date,
       },
+      paymentStatus: {
+        type: String
+      },
       created_date: {
         type: Date,
         default: new Date()

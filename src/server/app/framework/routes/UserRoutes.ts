@@ -109,7 +109,11 @@ class UserRoutes {
 */
       // RA Pro getUserSubscriptionDetails
       router.get('/:userId/subscriptionDetails',authInterceptor.requiresAuth, controller.getUserSubscriptionDetails);
+
       router.put('/:userId/updateSubscription', controller.updateSubscriptionDetails);
+
+      router.get('/:userId/checkPaymentStatus',authInterceptor.requiresAuth, controller.checkPaymentStatusOfUser);
+
       return router;
     }
 }

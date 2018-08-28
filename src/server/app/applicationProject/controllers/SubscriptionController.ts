@@ -8,12 +8,15 @@ var log4js = require('log4js');
 var logger=log4js.getLogger('Subscription Controller');
 import CostControllException = require('../exception/CostControllException');
 import { PayUMoneyModel } from '../../framework/dataaccess/model/PayUMoneyModel';
+import UserService = require('../../framework/services/UserService');
 
 class SubscriptionController {
   private  _subscriptionService : SubscriptionService;
+  private _userService : UserService;
 
   constructor() {
     this._subscriptionService = new SubscriptionService();
+    this._userService = new UserService();
   }
 
   addSubscriptionPackage(req: express.Request, res: express.Response, next: any): void {
@@ -135,8 +138,15 @@ class SubscriptionController {
 
   successRateAnalysisPayment(req: express.Request, res: express.Response, next: any): void {
     try {
-      console.log('payment success : '+ JSON.stringify(req.body));
-      // this._subscriptionService.updatePackageForRateAnalysisUser();
+      let userId = req.params.userId;
+      let userService = new UserService();
+      userService.updateSubscriptionDetails(userId,(error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          res.redirect(config.get('application.browser.rateAnalysisIP') +'payment/success');
+        }
+      });
     } catch(e) {
       next(new CostControllException(e.message,e.stack));
     }
@@ -145,8 +155,15 @@ class SubscriptionController {
   failureRateAnalysisPayment(req: express.Request, res: express.Response, next: any): void {
     try {
       let body = req.body;
-      console.log('payment failed : '+ JSON.stringify(body));
-      // res.redirect(config.get('application.browser.IP') +'package-details/payment/failure');
+      let userId = req.params.userId;
+      let userService = new UserService();
+      userService.updatePaymentStatus(userId,(error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          res.redirect(config.get('application.browser.rateAnalysisIP') +'payment/failure');
+        }
+      });
     } catch(e) {
       next(new CostControllException(e.message,e.stack));
     }

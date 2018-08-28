@@ -19,6 +19,7 @@ interface   UserModel {
   activation_date: Date;
   projects: Array<Project>;
   subscription: Array<UserSubscription>;
+  paymentStatus: string;
   subscriptionForRA: UserSubscriptionForRA;
 }
 export = UserModel;
