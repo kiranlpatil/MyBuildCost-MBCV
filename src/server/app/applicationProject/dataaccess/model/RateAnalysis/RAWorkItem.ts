@@ -7,10 +7,13 @@ class RAWorkItem {
   unit: string;
   rateAnalysisId: number;
   rate: Rate;
-  regionName: string;
-  contractorAddOns :Array<ContractingAddOn> = new Array<ContractingAddOn>();
+  regionName ?: string;
+  contractingAddOns :Array<ContractingAddOn> = new Array<ContractingAddOn>();
 
-  constructor() {
+  constructor(name:string, id:number) {
+    this.name = name;
+    this.rateAnalysisId = id;
+    this.rate = new Rate();
   }
 }
 export = RAWorkItem;

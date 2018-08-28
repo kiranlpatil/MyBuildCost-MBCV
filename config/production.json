@@ -26,7 +26,7 @@
     "attachmentPath":"/src/server/public/attachment-files",
     "limitForQuery" : 10,
     "mail": {
-      "host":"http://costcontrol.buildinfo.co.in/",
+      "host":"http://mybuildcost.buildinfo.co.in/",
       /*"MAIL_SENDER": "redminestatus@techprimelab.com",
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",*/
       "MAIL_SENDER": "bigslicetechnologies@gmail.com",
@@ -59,7 +59,7 @@
       "routerNumber": "4"
     },
      "browser" : {
-      "IP" : "http://costcontrol.buildinfo.co.in/"
+      "IP" : "http://mybuildcost.buildinfo.co.in/"
     },
     "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
@@ -93,8 +93,8 @@
 
   "cronJobMailNotificationValidityDays" : [ 15, 8 , 1],
 
-  "subscription":{
-    "package":{
+  "subscription": {
+    "package": {
       "Free": {
         "basePackage": {
           "iterativeDiscount": 0,
@@ -117,6 +117,14 @@
           "validityDescription": "3 Years",
           "description": "Premium",
           "name": "Premium"
+        }
+      },
+      "Trial": {
+        "basePackage": {
+          "cost": 0,
+          "validity": 15,
+          "description": "15 Days",
+          "name": "Trial"
         }
       }
     }
@@ -163,7 +171,7 @@
     ]
   },
 
-  "costControlRegionCode" : "Maharashtra Pune Circle",
+  "costControlRegionCode" : "Maharashtra Pune",
 
   "SqureMeter":0.0929,
 
@@ -521,7 +529,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -535,7 +543,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -549,7 +557,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,

@@ -9,6 +9,7 @@ class RateAnalysis {
   buildingCostHeads: Array<CostHead>;
   projectRates : Array<CentralizedRate>;
   projectCostHeads: Array<CostHead>;
+  appType: string;
 
   constructor(buildingCostHeads: Array<CostHead>, buildingRates: Array<CentralizedRate>,
               projectCostHeads: Array<CostHead>, projectRates: Array<CentralizedRate>) {

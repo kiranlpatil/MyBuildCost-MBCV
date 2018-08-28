@@ -118,6 +118,14 @@
           "description": "Premium",
           "name": "Premium"
         }
+      },
+      "Trial": {
+        "basePackage": {
+          "cost": 0,
+          "validity": 15,
+          "description": "15 Days",
+          "name": "Trial"
+        }
       }
     }
   },
@@ -162,7 +170,7 @@
     ]
   },
 
-  "costControlRegionCode" : "Maharashtra Pune Circle",
+  "costControlRegionCode" : "Maharashtra Pune",
 
   "SqureMeter": 0.0929,
 
@@ -531,7 +539,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -545,7 +553,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
@@ -559,7 +567,7 @@
               "measurementUnit": "cum",
               "isRateAnalysis": true,
               "rateAnalysisPerUnit": 1,
-              "rateAnalysisUnit": "cum",
+              "rateAnalysisUnit": "cft",
               "directRate": null,
               "directRatePerUnit": null,
               "isItemBreakdownRequired": true,
