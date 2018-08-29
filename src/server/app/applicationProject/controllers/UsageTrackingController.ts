@@ -17,10 +17,9 @@ class UsageTrackingController {
     try {
       logger.info('Subscription Controller, addSubscriptionPackage has been hit');
       let deviceDetails = req.body;
-      let user = req.user;
 
       let userDeviceDetails = new UsageTracking();
-      userDeviceDetails.userId = user._id;
+      userDeviceDetails.userId = deviceDetails.userId;
       userDeviceDetails.deviceId = deviceDetails.deviceId;
       userDeviceDetails.browser = deviceDetails.browser;
       userDeviceDetails.deviceOS = deviceDetails.os;
