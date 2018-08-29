@@ -98,22 +98,20 @@ class UserRoutes {
     //assign premium package to user
     router.put('/:userId/assignPremium', authInterceptor.requiresAuth, controller.assignPremiumPackage);
 
-    //assign subscription package
-    /*
-          router.put('/:userId/assign/package', logger.logDetail, authInterceptor.requiresAuth,
-            authInterceptor.secureApiCheck, controller.changePassword);
-    */
-    // RA Pro getUserSubscriptionDetails
-    router.get('/:userId/subscriptionDetails', controller.getUserSubscriptionDetails);
+      //assign subscription package
+/*
+      router.put('/:userId/assign/package', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.changePassword);
+*/
+      // RA Pro getUserSubscriptionDetails
+      router.get('/:userId/subscriptionDetails',controller.getUserSubscriptionDetails);
 
     //  Rate Analysis user Routes
     router.put('/check/exists/:appType', controller.getUserExistenceStatus);
-    router.put('/set/password', authInterceptor.requiresAuth, controller.setUserPassword);
+    router.put('/set/password',authInterceptor.requiresAuth, controller.setUserPassword);
     router.put('/verify/password', authInterceptor.requiresAuth, controller.verifyPassword);
-
-
-    return router;
-  }
+      router.put('/:userId/updateSubscription', controller.updateSubscriptionDetails);return router;
+    }
 }
 
 Object.seal(UserRoutes);

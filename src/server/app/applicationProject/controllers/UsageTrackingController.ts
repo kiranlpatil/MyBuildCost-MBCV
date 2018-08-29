@@ -27,6 +27,9 @@ class UsageTrackingController {
       userDeviceDetails.isDesktop = deviceDetails.isDesktop;
       userDeviceDetails.isMobile = deviceDetails.isMobile;
       userDeviceDetails.platform = deviceDetails.platform;
+      userDeviceDetails.appType = deviceDetails.appType;
+      userDeviceDetails.mobileNumber = deviceDetails.mobileNumber;
+      userDeviceDetails.email = deviceDetails.email;
 
       let usageTrackingService: UsageTrackingService = new UsageTrackingService();
       usageTrackingService.addUserDeviceDetails( userDeviceDetails,(error, result) => {

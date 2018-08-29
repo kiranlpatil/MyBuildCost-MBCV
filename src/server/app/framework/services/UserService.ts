@@ -22,6 +22,7 @@ import constants  = require('../../applicationProject/shared/constants');
 import ProjectSubcription = require('../../applicationProject/dataaccess/model/company/ProjectSubcription');
 import UserSubscriptionForRA = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscriptionForRA');
 
+import Constants = require("../../applicationProject/shared/constants");
 let CCPromise = require('promise/lib/es6-extensions');
 let log4js = require('log4js');
 let logger = log4js.getLogger('User service');
@@ -145,25 +146,23 @@ class UserService {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else {
         callback(err, res);
-        if(user && user.email) {
-          let auth = new AuthInterceptor();
-          let token = auth.issueTokenWithUid(res);
-          let host = config.get('application.mail.host');
-          let link = host + 'signin?access_token=' + token + '&_id=' + res._id;
-          let htmlTemplate = 'welcome-aboard.html';
-          let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
-            ['$first_name$', res.first_name], ['$link$', link], ['$app_name$', this.APP_NAME]]);
-          let attachment = MailAttachments.WelcomeAboardAttachmentArray;
-          sendMailService.send(user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data, attachment,
-            (err: any, result: any) => {
-              if (err) {
-                logger.error(JSON.stringify(err));
-              }
-              logger.debug('Sending Mail : ' + JSON.stringify(result));
-              //callback(err, result);
-            }, config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
-        }
-      }
+        if(user && user.email) {let auth = new AuthInterceptor();
+        let token = auth.issueTokenWithUid(res);
+        let host = config.get('application.mail.host');
+        let link = host + 'signin?access_token=' + token + '&_id=' + res._id;
+        let htmlTemplate = 'welcome-aboard.html';
+        let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
+          ['$first_name$',res.first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+        let attachment=MailAttachments.WelcomeAboardAttachmentArray;
+        sendMailService.send( user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data,attachment,
+          (err: any, result: any) => {
+          if(err) {
+            logger.error(JSON.stringify(err));
+          }
+          logger.debug('Sending Mail : '+JSON.stringify(result));
+            //callback(err, result);
+          },config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
+        }}
     });
   }
 
@@ -801,17 +800,19 @@ class UserService {
     subscriptionDetails.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscriptionData.validity));
     let current_date = new Date();
     subscriptionDetails.noOfDaysToExpiry = this.daysdifference(subscriptionDetails.expiryDate, current_date);
-    if (subscriptionDetails.noOfDaysToExpiry <= 5 && subscriptionDetails.noOfDaysToExpiry > 0) {
-      if (subscriptionData.name === 'Trial') {
-        subscriptionDetails.warningMsgForPackage = 'Trial period will expire in ' + Math.round(subscriptionDetails.noOfDaysToExpiry) + ' days';
-      } else {
-        subscriptionDetails.warningMsgForPackage = 'Paid version will expire in ' + Math.round(subscriptionDetails.noOfDaysToExpiry) + ' days';
-      }
+    if (subscriptionDetails.noOfDaysToExpiry <= Constants.TRIAL_PERIOD && subscriptionDetails.noOfDaysToExpiry > 0 && subscriptionData.name === 'Trial') {
+      subscriptionDetails.warningMsgForPackage = 'Your trial period will expire in ' +
+        Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s)';
+
+    } else if (subscriptionDetails.noOfDaysToExpiry <= Constants.PREMIUM_PERIOD && subscriptionDetails.noOfDaysToExpiry > 0 && subscriptionData.name === 'RAPremium') {
+      subscriptionDetails.warningMsgForPackage = 'Your package will expire in ' +
+        Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s)';
+
     } else if (subscriptionDetails.noOfDaysToExpiry <= 0) {
       if (subscriptionData.name === 'Trial') {
-        subscriptionDetails.expiryMsgForPackage = 'Trial period has expired';
+        subscriptionDetails.expiryMsgForPackage = 'Your trial period is expired!';
       } else {
-        subscriptionDetails.expiryMsgForPackage = 'Paid version has expired';
+        subscriptionDetails.expiryMsgForPackage = 'Your package is expired!';
       }
       subscriptionDetails.isPackageExpired = true;
     }
@@ -1446,6 +1447,33 @@ class UserService {
       }
     });
   }
+
+  updateSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
+        let subScriptionService = new SubscriptionService();
+        subScriptionService.getSubscriptionPackageByName('RAPremium', 'BasePackage',
+          (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
+            if (error) {
+              callback(error, null);
+            } else {
+              let result = subscriptionPackage[0];
+              let subscription = new UserSubscriptionForRA();
+              subscription.activationDate = new Date();
+              subscription.validity = result.basePackage.validity;
+              subscription.name = result.basePackage.name;
+              subscription.description = result.basePackage.description;
+              subscription.cost = result.basePackage.cost;
+              let query = {'_id': userId};
+              let updateData = {'subscriptionForRA': subscription};
+              this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+                if (error) {
+                  callback(error, null);
+                } else {
+                  callback(null, result);
+                }
+              });
+            }
+          });
+      }
 }
 
 Object.seal(UserService);
