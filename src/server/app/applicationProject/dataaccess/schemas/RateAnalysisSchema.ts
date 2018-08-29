@@ -13,7 +13,8 @@ class RateAnalysisSchema {
         buildingCostHeads: [{}],
         buildingRates: [{}],
         projectCostHeads: [{}],
-        projectRates: [{}]
+        projectRates: [{}],
+        appType: String
       },
       {
         versionKey: false,

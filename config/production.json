@@ -93,8 +93,8 @@
 
   "cronJobMailNotificationValidityDays" : [ 15, 8 , 1],
 
-  "subscription":{
-    "package":{
+  "subscription": {
+    "package": {
       "Free": {
         "basePackage": {
           "iterativeDiscount": 0,
@@ -117,6 +117,14 @@
           "validityDescription": "3 Years",
           "description": "Premium",
           "name": "Premium"
+        }
+      },
+      "Trial": {
+        "basePackage": {
+          "cost": 0,
+          "validity": 15,
+          "description": "15 Days",
+          "name": "Trial"
         }
       }
     }
@@ -163,7 +171,7 @@
     ]
   },
 
-  "costControlRegionCode" : "Maharashtra Pune Circle",
+  "costControlRegionCode" : "Maharashtra Pune",
 
   "SqureMeter":0.0929,
 
@@ -247,20 +255,25 @@
     "Site security" : "plotArea / 10000 * 10500 * targetedProjectCompletionPeriod"
   },
 
-  "rateAnalysisAPI" : {
-    "buildingCostHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "buildingCategories" : "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "buildingWorkItems" : "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "buildingRate" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "buildingUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "buildingRateAnalysisNotes" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-
-    "amenitiesCostHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "amenitiesCategories" : "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "amenitiesWorkItems" : "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "amenitiesRate" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "amenitiesUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "amenitiesRateAnalysisNotes" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA"
+  "rateAnalysisAPI": {
+    "startPoint" : "http://mobileapiv4.buildinfo.co.in/",
+    "getAllregions" : "http://mobileapiv4.buildinfo.co.in/Region/RegionsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&NeedFullData=y&AppCode=RA",
+    "buildingCostHeads": "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "buildingCategories": "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "buildingWorkItems": "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "buildingRate": "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "buildingUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "buildingRateAnalysisNotes": "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "amenitiesCostHeads": "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "amenitiesCategories": "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "amenitiesWorkItems": "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "amenitiesRate": "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "amenitiesUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "amenitiesRateAnalysisNotes": "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "rateAnalysisRegionResult": "RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "contractorAddOns" : "ContractorAddons/ContractorAddonsResult",
+    "contractorEndpoint" : "?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&NeedFullData=y&AppCode=RA",
+    "EndPoint" : "&NeedFullData=y&AppCode=RA"
   },
 
   "configCostHeads": [

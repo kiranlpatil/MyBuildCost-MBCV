@@ -2,6 +2,7 @@ import Quantity = require('./Quantity');
 import Rate = require('./Rate');
 import Constants = require('../../../../shared/constants');
 import { AttachmentDetailsModel } from './AttachmentDetails';
+import ContractingAddOn = require('./ContractingAddOn');
 
 class WorkItem {
   name: string;
@@ -27,6 +28,7 @@ class WorkItem {
   remarks: string;
   active: boolean;
   attachmentDetails:AttachmentDetailsModel[];
+  contractingAddOns: Array<ContractingAddOn>;
 
 
   constructor(name:string, rateAnalysisId:number) {
@@ -37,6 +39,7 @@ class WorkItem {
     this.workItemId = 1;
     this.systemRate = new Rate();
     this.attachmentDetails = new Array<AttachmentDetailsModel>();
+    this.contractingAddOns = new Array<ContractingAddOn>();
     this.amount = 0;
     this.isDirectRate = false;
     this.isSteelWorkItem = false;

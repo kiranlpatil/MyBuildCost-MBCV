@@ -45,6 +45,8 @@ class RateAnalysisRoutes {
 
     router.get('/sync', controller.SyncRateAnalysis);
 
+    router.get('/sync/all/regions', controller.syncAllRateAnalysisRegions);
+
     router.put('/user/:userId/workItem/:workItemId/saveRate', controller.saveRateForWorkItem, this._responseInterceptor.exit);
 
     router.get('/user/:userId/region/:regionName/workItem/:workItemId/getSavedRate', controller.getSavedRateForWorkItem,

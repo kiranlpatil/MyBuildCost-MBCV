@@ -2,7 +2,8 @@ import * as express from 'express';
 import Response = require('../interceptor/response/Response');
 import CostControllException = require('../exception/CostControllException');
 import RateAnalysisService = require('../services/RateAnalysisService');
-import Rate = require("../dataaccess/model/project/building/Rate");
+import Rate = require('../dataaccess/model/project/building/Rate');
+import ContractingAddOn = require('../dataaccess/model/project/building/ContractingAddOn');
 let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Rate Analysis Controller');
@@ -105,6 +106,17 @@ class RateAnalysisController {
     }
   }
 
+  syncAllRateAnalysisRegions(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let rateAnalysisService = new RateAnalysisService();
+
+      rateAnalysisService.syncAllRateAnalysisRegions();
+      /*next(new Response(200,'done'));*/
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   getAllRegionNames(req: express.Request, res: express.Response, next: any): void {
     try {
       let rateAnalysisService = new RateAnalysisService();
@@ -145,8 +157,9 @@ class RateAnalysisController {
       let workItemId = parseInt(req.params.workItemId);
       let regionName = req.body.regionName;
       let rate: Rate = <Rate>req.body.rate;
+      let contractorAddOns: Array<ContractingAddOn> = req.body.contractorAddOns;
       let rateAnalysisService = new RateAnalysisService();
-      rateAnalysisService.saveRateForWorkItem(userId,workItemName, workItemId, regionName, rate, (error, result) => {
+      rateAnalysisService.saveRateForWorkItem(userId,workItemName, workItemId, regionName, rate, contractorAddOns,(error, result) => {
         if(error) {
           next(error);
         } else {

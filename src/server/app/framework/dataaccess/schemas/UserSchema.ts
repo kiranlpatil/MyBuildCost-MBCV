@@ -96,7 +96,13 @@ class UserSchema {
       project : [{type: Schema.Types.ObjectId, ref: 'Project'}],
       subscription: {
         type: Object
-      }
+      },
+      typeOfApp: {
+        type: String
+      },
+      subscriptionForRA: {
+        type: Object
+      },
     }, {versionKey: false});
     return schema;
   }

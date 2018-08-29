@@ -107,7 +107,9 @@ class UserRoutes {
       router.put('/:userId/assign/package', logger.logDetail, authInterceptor.requiresAuth,
         authInterceptor.secureApiCheck, controller.changePassword);
 */
-
+      // RA Pro getUserSubscriptionDetails
+      router.get('/:userId/subscriptionDetails',authInterceptor.requiresAuth, controller.getUserSubscriptionDetails);
+      router.put('/:userId/updateSubscription', controller.updateSubscriptionDetails);
       return router;
     }
 }

@@ -5,8 +5,12 @@ class Constants {
   public static BUILDING : string = 'building';
   public static SQUARE_METER : string = 'SqureMeter';
   public static RATE_ANALYSIS_API : string = 'rateAnalysisAPI.';
+  public static START_POINT : string = 'startPoint';
   public static RATE_ANALYSIS_API_ENDPOINT : string = 'EndPoint';
+  public static RA_CONTRACTOR_API_ENDPOINT : string = 'contractorEndpoint';
+  public static RA_REGION_RESULT : string = 'rateAnalysisRegionResult';
   public static RATE_ANALYSIS_COSTHEADS : string = 'CostHeads';
+  public static RATE_ANALYSIS_CONTRACTOR_ADD_ONS : string = 'contractorAddOns';
   public static RATE_ANALYSIS_CATEGORIES : string = 'Categories';
   public static RATE_ANALYSIS_WORKITEMS : string = 'WorkItems';
   public static RATE_ANALYSIS_RATE : string = 'Rate';
@@ -17,6 +21,8 @@ class Constants {
   public static RATE_ANALYSIS_ITEMS : string = 'Items';
   public static RATE_ANALYSIS_DATA : string = 'RateAnalysisData';
   public static RATE_ANALYSIS_UOM : string = 'UOM';
+  public static CONTRACTING_ADD_ONS : string = 'ContractingAddOn';
+  public static RATEANALYSIS_ADD_ON_DATA : string = 'RateAnalysisAddonData';
   public static THUMBRULE_RATE : string = 'thumbRuleRate';
   public static COST_HEAD_CLONE='Cost Head';
   public static WORK_ITEM_CLONE='Work Item';
@@ -203,5 +209,7 @@ class Constants {
   // Error Messages
   public static MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION = 'Oop\'s! looks like you haven\'t provided Cost Estimation for ';
   public static MSG_ERROR_DUPLICATE_ITEM = 'Item with the same name already exists, Please update the name for item ';
+  public static TRIAL_PERIOD = 5;
+  public static PREMIUM_PERIOD = 5;
 }
 export=Constants;

@@ -123,6 +123,14 @@
           "description": "Premium",
           "name": "Premium"
         }
+      },
+      "Trial": {
+        "basePackage": {
+          "cost": 0,
+          "validity": 15,
+          "description": "15 Days",
+          "name": "Trial"
+        }
       }
     }
   },
@@ -167,7 +175,7 @@
     ]
   },
 
-  "costControlRegionCode" : "Maharashtra Pune Circle",
+  "costControlRegionCode" : "Maharashtra Pune",
 
   "SqureMeter": 0.0929,
 
@@ -263,6 +271,7 @@
   },
 
   "rateAnalysisAPI": {
+    "startPoint" : "http://mobileapiv4.buildinfo.co.in/",
     "getAllregions" : "http://mobileapiv4.buildinfo.co.in/Region/RegionsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&NeedFullData=y&AppCode=RA",
     "buildingCostHeads": "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
     "buildingCategories": "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
@@ -276,6 +285,9 @@
     "amenitiesRate": "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
     "amenitiesUnit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
     "amenitiesRateAnalysisNotes": "http://mobileapiv4.buildinfo.co.in/RateAnalysisNotes/RateAnalysisNotesResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "rateAnalysisRegionResult": "RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
+    "contractorAddOns" : "ContractorAddons/ContractorAddonsResult",
+    "contractorEndpoint" : "?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&NeedFullData=y&AppCode=RA",
     "EndPoint" : "&NeedFullData=y&AppCode=RA"
   },
 

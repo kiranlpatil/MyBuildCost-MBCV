@@ -59,8 +59,9 @@ class UserController {
     try {
       let userService = new UserService();
       let params = req.body;
+      let typeOfApp = req.body.typeOfApp;
       delete params.access_token;
-      userService.login(params, (error, result)=> {
+      userService.login(params, typeOfApp, (error, result)=> {
         if(error) {
           next(error);
         } else {
@@ -667,6 +668,48 @@ class UserController {
     }
   }
 
+  getUserSubscriptionDetails(req: express.Request, res: express.Response, next: any): void {
+      try {
+        let user = req.user;
+        let userId =req.params.userId;
+        let userService = new UserService();
+        userService.getUserSubscriptionDetails(userId,(error, result)=> {
+          if(error) {
+            next(error);
+          }else {
+          res.send(result);
+        }
+      });
+    }catch(e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: new  Error(),
+        code: 403
+      });
+    }
+}
+
+  updateSubscriptionDetails(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let userId = req.params.userId;
+      let userService = new UserService();
+      userService.updateSubscriptionDetails(userId,(error, result)=> {
+        if(error) {
+          next(error);
+        }else {
+          res.send(result);
+        }
+      });
+    }catch(e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: new  Error(),
+        code: 403
+      });
+    }
+  }
 /*
   assignUserSubscriptionPackage(req: express.Request, res: express.Response, next: any): void {
     try {
