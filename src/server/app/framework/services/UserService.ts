@@ -23,6 +23,7 @@ import ProjectSubcription = require('../../applicationProject/dataaccess/model/c
 import UserSubscriptionForRA = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscriptionForRA');
 
 import Constants = require("../../applicationProject/shared/constants");
+
 let CCPromise = require('promise/lib/es6-extensions');
 let log4js = require('log4js');
 let logger = log4js.getLogger('User service');
@@ -48,7 +49,7 @@ class UserService {
   createUser(item: any, callback: (error: any, result: any) => void) {
 
     let query;
-    if(item.typeOfApp === 'RAapp') {
+    if (item.typeOfApp === 'RAapp') {
       query = {'mobile_number': item.mobile_number};
     } else {
       query = {'email': item.email};
@@ -146,23 +147,25 @@ class UserService {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else {
         callback(err, res);
-        if(user && user.email) {let auth = new AuthInterceptor();
-        let token = auth.issueTokenWithUid(res);
-        let host = config.get('application.mail.host');
-        let link = host + 'signin?access_token=' + token + '&_id=' + res._id;
-        let htmlTemplate = 'welcome-aboard.html';
-        let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
-          ['$first_name$',res.first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
-        let attachment=MailAttachments.WelcomeAboardAttachmentArray;
-        sendMailService.send( user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data,attachment,
-          (err: any, result: any) => {
-          if(err) {
-            logger.error(JSON.stringify(err));
-          }
-          logger.debug('Sending Mail : '+JSON.stringify(result));
-            //callback(err, result);
-          },config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
-        }}
+        if (user && user.email) {
+          let auth = new AuthInterceptor();
+          let token = auth.issueTokenWithUid(res);
+          let host = config.get('application.mail.host');
+          let link = host + 'signin?access_token=' + token + '&_id=' + res._id;
+          let htmlTemplate = 'welcome-aboard.html';
+          let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
+            ['$first_name$', res.first_name], ['$link$', link], ['$app_name$', this.APP_NAME]]);
+          let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+          sendMailService.send(user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data, attachment,
+            (err: any, result: any) => {
+              if (err) {
+                logger.error(JSON.stringify(err));
+              }
+              logger.debug('Sending Mail : ' + JSON.stringify(result));
+              //callback(err, result);
+            }, config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
+        }
+      }
     });
   }
 
@@ -231,7 +234,7 @@ class UserService {
   login(data: any, typeOfApp: any, callback: (error: any, result: any) => void) {
 
     let query;
-    if(typeOfApp === 'RAapp') {
+    if (typeOfApp === 'RAapp') {
       query = {'mobile_number': data.mobile_number};
     } else {
       query = {'email': data.email};
@@ -1364,18 +1367,25 @@ class UserService {
         });
       } else if (appType === 'web-app' && result.length > 0 && result[0].isActivated === true) {
         if (!result[0].password || result[0].password === undefined) {
-          callback(null, {
-              'isActivated': true,
-              'isPasswordSet': false,
-              'id': result[0]._id,
-              'user': result[0]
+          this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+            if (err) {
+              callback(err, null);
+            } else {
+              callback(null, {
+                'isActivated': true,
+                'isPasswordSet': false,
+                'id': result[0]._id,
+                'mobileNumber': res.data.newMobileNumber,
+                'user': result[0]
+              });
+            }
           });
         } else {
           callback(null, {
-              'isActivated': true,
-              'isPasswordSet': true,
-              'id': result[0]._id,
-              'user': result[0]
+            'isActivated': true,
+            'isPasswordSet': true,
+            'id': result[0]._id,
+            'user': result[0]
           });
         }
       } else if (result.length > 0 && result[0].isActivated === false) {
@@ -1384,11 +1394,11 @@ class UserService {
             callback(err, null);
           } else {
             callback(null, {
-                'isActivated': false,
-                'isPasswordSet': false,
-                'id': result[0]._id,
-                'mobileNumber': res.data.newMobileNumber,
-                'user': result[0]
+              'isActivated': false,
+              'isPasswordSet': false,
+              'id': result[0]._id,
+              'mobileNumber': res.data.newMobileNumber,
+              'user': result[0]
             });
           }
         });
@@ -1410,11 +1420,11 @@ class UserService {
                   callback(err, null);
                 } else {
                   callback(null, {
-                      'isActivated': false,
-                      'isPasswordSet': false,
-                      'id': model._id,
-                      'mobileNumber': res.data.newMobileNumber,
-                      'user': model
+                    'isActivated': false,
+                    'isPasswordSet': false,
+                    'id': model._id,
+                    'mobileNumber': res.data.newMobileNumber,
+                    'user': model
                   });
                 }
               });
@@ -1432,11 +1442,11 @@ class UserService {
                       callback(err, null);
                     } else {
                       callback(null, {
-                          'isActivated': false,
-                          'isPasswordSet': false,
-                          'id': model._id,
-                          'mobileNumber': res.data.newMobileNumber,
-                          'user': model
+                        'isActivated': false,
+                        'isPasswordSet': false,
+                        'id': model._id,
+                        'mobileNumber': res.data.newMobileNumber,
+                        'user': model
                       });
                     }
                   });
@@ -1449,31 +1459,31 @@ class UserService {
   }
 
   updateSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
-        let subScriptionService = new SubscriptionService();
-        subScriptionService.getSubscriptionPackageByName('RAPremium', 'BasePackage',
-          (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
+    let subScriptionService = new SubscriptionService();
+    subScriptionService.getSubscriptionPackageByName('RAPremium', 'BasePackage',
+      (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          let result = subscriptionPackage[0];
+          let subscription = new UserSubscriptionForRA();
+          subscription.activationDate = new Date();
+          subscription.validity = result.basePackage.validity;
+          subscription.name = result.basePackage.name;
+          subscription.description = result.basePackage.description;
+          subscription.cost = result.basePackage.cost;
+          let query = {'_id': userId};
+          let updateData = {'subscriptionForRA': subscription};
+          this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
             if (error) {
               callback(error, null);
             } else {
-              let result = subscriptionPackage[0];
-              let subscription = new UserSubscriptionForRA();
-              subscription.activationDate = new Date();
-              subscription.validity = result.basePackage.validity;
-              subscription.name = result.basePackage.name;
-              subscription.description = result.basePackage.description;
-              subscription.cost = result.basePackage.cost;
-              let query = {'_id': userId};
-              let updateData = {'subscriptionForRA': subscription};
-              this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-                if (error) {
-                  callback(error, null);
-                } else {
-                  callback(null, result);
-                }
-              });
+              callback(null, result);
             }
           });
-      }
+        }
+      });
+  }
 }
 
 Object.seal(UserService);
