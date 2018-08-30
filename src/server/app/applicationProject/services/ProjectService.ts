@@ -1166,6 +1166,7 @@ class ProjectService {
             newWorkItem.quantity = quantityObj;
             newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
+            newWorkItem.amount = 0;
             updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
             arrayFilter = [
               {'costHead.rateAnalysisId': costHeadId},
