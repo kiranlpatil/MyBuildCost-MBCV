@@ -25,7 +25,7 @@ class SubscriptionRoutes {
 
     var controller = this._usageTrackingController;
 
-    router.post('/track', this.authInterceptor.requiresAuth, controller.addUserDeviceDetails, this._responseInterceptor.exit);
+    router.post('/track', controller.addUserDeviceDetails, this._responseInterceptor.exit);
 
     return router;
   }
