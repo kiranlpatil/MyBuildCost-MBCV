@@ -2857,8 +2857,7 @@ class ProjectService {
               .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
               .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
               .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
-              .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK)
-              .replace(Constants.TOTAL_NUM_OF_BUILDINGS, projectDetails.totalNumOfBuildings); //total number of buildings
+              .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
           }
           budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);

@@ -215,7 +215,7 @@
     "Piped gas system": "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
     "Sky lounge on top terrace": "slabArea / (numOfFloors + numOfParkingFloors) * 150",
     "Fire fighting system": "( 50000 * numOfFloors)",
-    "Safety and Security automation": "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 3500 * 2  + 3500 * numOfBuildings + 15000",
+    "Safety and Security automation": "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",
     "Shower Enclosures": "15000 * (1 * numOfOneBHK + 1 * numOfTwoBHK + 2 * numOfThreeBHK + 3 * numOfFourBHK + 4 * numOfFiveBHK)",
     "False ceiling": "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
     "Special elevational features": "carpetArea * 1.35 * 25",
