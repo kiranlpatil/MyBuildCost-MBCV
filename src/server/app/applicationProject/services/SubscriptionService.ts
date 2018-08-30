@@ -124,10 +124,14 @@ class SubscriptionService {
     payUMoneyModel.amount = paymentBody.amount;
     payUMoneyModel.txnid = this.generateTransactionId(30);
     let deviceType = paymentBody.deviceType;
-     payUMoneyModel.surl = config.get('application.mail.host') + 'api/subscription/rapayment/user/'+ paymentBody.userId +'/success';
-    // payUMoneyModel.surl = 'http://e59c2f46.ngrok.io/' + 'api/subscription/rapayment/user/'+ paymentBody.userId +'/success/' + deviceType;
-     payUMoneyModel.furl = config.get('application.mail.host') + 'api/subscription/rapayment/user/'+ paymentBody.userId +'/failure';
-    // payUMoneyModel.furl = 'http://e59c2f46.ngrok.io/' + 'api/subscription/rapayment/user/'+ paymentBody.userId +'/failure/' + deviceType;
+     payUMoneyModel.surl = config.get('application.mail.host') +
+       'api/subscription/rapayment/user/'+ paymentBody.userId +'/success/' + deviceType;
+    // payUMoneyModel.surl = 'http://9ecadd7b.ngrok.io/' +
+    // 'api/subscription/rapayment/user/'+ paymentBody.userId +'/success/' + deviceType;
+     payUMoneyModel.furl = config.get('application.mail.host') +
+       'api/subscription/rapayment/user/'+ paymentBody.userId +'/failure/' + deviceType;
+    // payUMoneyModel.furl = 'http://9ecadd7b.ngrok.io/' +
+    // 'api/subscription/rapayment/user/'+ paymentBody.userId +'/failure/' + deviceType;
 
     payumoney.makePayment(payUMoneyModel, function(error:any, response:any) {
       if (error) {

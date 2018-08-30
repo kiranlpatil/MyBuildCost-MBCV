@@ -770,6 +770,7 @@ class UserService {
       if (error) {
         callback(error, null);
       } else {
+        logger.error('payemnt status of User : '+JSON.stringify(result));
         callback(null, result);
       }
     });
@@ -1362,6 +1363,7 @@ class UserService {
       if (error) {
         callback(error, null);
       } else {
+        logger.error('Payement success failure : '+ JSON.stringify(result));
         callback(null, result);
       }
     });
