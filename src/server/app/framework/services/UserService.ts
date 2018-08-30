@@ -22,7 +22,8 @@ import constants  = require('../../applicationProject/shared/constants');
 import ProjectSubcription = require('../../applicationProject/dataaccess/model/company/ProjectSubcription');
 import UserSubscriptionForRA = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscriptionForRA');
 
-import Constants = require("../../applicationProject/shared/constants");
+import Constants = require('../../applicationProject/shared/constants');
+import LoggerService = require('../shared/logger/LoggerService');
 
 let CCPromise = require('promise/lib/es6-extensions');
 let log4js = require('log4js');
@@ -39,10 +40,12 @@ class UserService {
   isActiveAddBuildingButton: boolean = false;
   private userRepository: UserRepository;
   private projectRepository: ProjectRepository;
+  private loggerService: LoggerService;
 
   constructor() {
     this.userRepository = new UserRepository();
     this.projectRepository = new ProjectRepository();
+    this.loggerService = new LoggerService('UserService');
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
@@ -345,6 +348,20 @@ class UserService {
             'newMobileNumber': result.new_mobile_number
           }
         });
+      } else if (result.ErrorCode === '021') {
+        let tempError: any = new Object();
+        tempError.reason = Messages.MSG_ERROR_INSUFFICIENT_CREDITS;
+        tempError.code = 500;
+        tempError.message = Messages.MSG_ERROR_INSUFFICIENT_CREDITS;
+        tempError.stack = JSON.stringify(result);
+        this.loggerService.logErrorObj(new Error(Messages.MSG_ERROR_INSUFFICIENT_CREDITS));
+        this.sendMailOnErrorWithOutCallback(tempError);
+        callback({
+          reason: Messages.MSG_ERROR_INSUFFICIENT_CREDITS,
+          message: Messages.MSG_ERROR_INSUFFICIENT_CREDITS,
+          stackTrace: new Error(),
+          code: 400
+        }, null);
       } else {
         callback({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
@@ -517,6 +534,11 @@ class UserService {
         ['$message$', errorInfo.message], ['$error$', errorInfo.stackTrace.stack]]);
 
     } else if (errorInfo.stack) {
+      data = new Map([['$applicationLink$', config.get('application.mail.host')],
+        ['$time$', current_Time], ['$host$', config.get('application.mail.host')],
+        ['$reason$', errorInfo.reason], ['$code$', errorInfo.code],
+        ['$message$', errorInfo.message], ['$error$', errorInfo.stack]]);
+    }  else if (errorInfo.reason) {
       data = new Map([['$applicationLink$', config.get('application.mail.host')],
         ['$time$', current_Time], ['$host$', config.get('application.mail.host')],
         ['$reason$', errorInfo.reason], ['$code$', errorInfo.code],
@@ -1483,6 +1505,14 @@ class UserService {
           });
         }
       });
+  }
+
+  sendMailOnErrorWithOutCallback(errorInfo: any) {
+    this.sendMailOnError(errorInfo, (error: any, result: any) => {
+      if (error) {
+        this.loggerService.logErrorObj(error);
+      }
+    });
   }
 }
 

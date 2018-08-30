@@ -91,6 +91,7 @@ class Messages {
 
   // Error Reason
   // public static MSG_ERROR_RSN_MESSAGE_NOT_SENT:string = 'message could not send';
+  public static MSG_ERROR_INSUFFICIENT_CREDITS: string = 'Insufficient credits to send sms';
   public static MSG_ERROR_RSN_USER_NOT_FOUND: string = 'User not found';
   public static MSG_ERROR_CREATE_JOB: string = 'error while creating job';
   public static MSG_ERROR_UPDATE_JOB: string = 'error while updating job';
