@@ -11,7 +11,6 @@ export class Project {
   openSpace:number;
   poolCapacity:number;
   plotPeriphery: number;
-  totalNumOfBuildings:number;
   projectDuration: number;
   buildings: Building[] = new Array(0);
   projectImage:string;

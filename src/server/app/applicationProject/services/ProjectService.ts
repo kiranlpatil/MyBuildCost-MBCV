@@ -182,8 +182,7 @@ class ProjectService {
             projectDetails.podiumArea === projectData.podiumArea &&
             projectDetails.poolCapacity === projectData.poolCapacity &&
             projectDetails.projectDuration ===projectData.projectDuration &&
-            projectDetails.slabArea === projectData.slabArea &&
-            projectDetails.totalNumOfBuildings === projectData.totalNumOfBuildings) {
+            projectDetails.slabArea === projectData.slabArea) {
             isBudgetCostCalculationRequired=false;
           }
           if(isBudgetCostCalculationRequired) {
@@ -3051,10 +3050,7 @@ class ProjectService {
           break;
         }
         case Constants.BOARDS_AND_SIGNAGES_IN_COMMON_AREAS : {
-          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.TOTAL_NUMBER_OF_BUILDINGS, projectDetails.totalNumOfBuildings);
-          budgetedCostAmount = eval(calculateBudgtedCost);
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_PROJECT : {

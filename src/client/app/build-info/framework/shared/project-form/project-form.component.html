@@ -59,12 +59,6 @@
       <input type="number" [(ngModel)]="projectModel.projectDuration" formControlName="projectDuration" id="projectDuration" class="form-control" placeholder="Enter project duration" required>
     </div>
 
-    <div  class="form-group fadein-sub-element">
-      <control-messages [control]="projectForm.controls.totalNumOfBuildings" [submitStatus] = "submitStatus" [isShowErrorMessage]="isShowErrorMessage"></control-messages>
-      <label>{{getLabels().NUM_OF_BUILDINGS}}</label>
-      <input type="number" [(ngModel)]="projectModel.totalNumOfBuildings" formControlName="totalNumOfBuildings" id="totalNumOfBuildings" class="form-control" placeholder="Enter total no. of buildings" required/>
-    </div>
-
     <div class="button-group fadein-sub-element">
       <button type="submit" class="btn btn-primary">{{submitActionLabel}}</button>
     </div>

@@ -34,8 +34,7 @@ export class ProjectFormComponent implements OnInit{
       openSpace : ['', ValidationService.requiredOpenSpace],
       slabArea : ['',ValidationService.requiredSlabArea],
       poolCapacity : ['',ValidationService.requiredSwimmingPoolCapacity],
-      projectDuration : ['', ValidationService.requiredProjectDuration],
-      totalNumOfBuildings : ['', ValidationService.requiredNumOfBuildings]
+      projectDuration : ['', ValidationService.requiredProjectDuration]
     });
 
   }

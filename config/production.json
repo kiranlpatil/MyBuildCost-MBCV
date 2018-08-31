@@ -221,7 +221,7 @@
     "Podium" : "podiumArea * 700",
     "Landscaping of open spaces (hard+soft)" : "150 * openSpace + plotPeripheryLength / 10 * 600",
     "Rain water harvesting" : "plotArea / 30000 * 400000",
-    "Boards & Signages in common areas" : "100000 + 1000 * totalNumberOfBuildings",
+    "Boards & Signages in common areas" : 100000,
     "Electrical light fittings in common areas of project" : "plotPeripheryLength / 20 * 2500 + openSpace / 500 * 1000",
     "Site dev - electrical infrastructure" : "30000 * numOfOneBHK + 40000 * numOfTwoBHK + 50000 * numOfThreeBHK + 55000 * numOfFourBHK + 60000 * numOfFiveBHK",
     "Site dev - plumbing & drainage system" : "totalCarpetAreaOfUnit * 1.35 * 20",
