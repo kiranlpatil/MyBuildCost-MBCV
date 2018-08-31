@@ -246,15 +246,14 @@
     "Garbage chute": "(60000 * (numOfFloors - numOfParkingFloors))",
     "Anti termite / Pest Control treatment": "carpetArea * 1.35 * 2",
     "Solar water heating system": "carpetArea * 1.35 * 20",
-    "Piped gas system": "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
     "Sky lounge on top terrace": "slabArea / (numOfFloors + numOfParkingFloors) * 150",
-    "Fire fighting system": "( 50000 * numOfFloors)",
     "Safety and Security automation": "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",
     "Shower Enclosures": "15000 * (1 * numOfOneBHK + 1 * numOfTwoBHK + 2 * numOfThreeBHK + 3 * numOfFourBHK + 4 * numOfFiveBHK)",
     "False ceiling": "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
     "Special elevational features": "carpetArea * 1.35 * 25",
     "Boards & Signages inside building": "700 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 60000 + 100 * numOfFloors",
     "Staircase Treads and Risers": "carpetArea *1.35*7",
+    "Roofing" : 0,
     //COMMON ammenities
 
     "Club House": "totalSlabAreaOfClubHouse * 1200",
@@ -296,7 +295,12 @@
     "Finance cost": "totalCarpetAreaOfUnit * 1.35 * 100",
     "Administrative charges": "totalCarpetAreaOfUnit * 1.35 * 40",
     "Local body-  Project sanctioning charges": "totalCarpetAreaOfUnit * 1.35 * 150",
-    "Site security": "plotArea / 10000 * 10500 * targetedProjectCompletionPeriod"
+    "Site security": "plotArea / 10000 * 10500 * targetedProjectCompletionPeriod",
+    "Games and sports" : 50000,
+    "Safety and Security automation- Project" : "plotArea / 5000 * 5000 + 30000 * 2",
+    "Machinery/Tools/Scaffolding" : "plotArea * 3",
+    "Piped gas system": "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
+    "Fire fighting system": "( 50000 * numOfFloors)"
   },
 
   "rateAnalysisAPI": {
@@ -1257,6 +1261,7 @@
         },
         {
           "name": "Post tensioning",
+          "rateAnalysisId" : 300009,
           "workItems": [
             {
               "name" : "Providing and placing in position post tensioned strands in RCC members as per design",
@@ -7297,7 +7302,7 @@
         },
         {
           "name" : "Kitchen- Internal",
-          "rateAnalysisId" : 100573,
+          "rateAnalysisId" : 300010,
           "workItems" : [
             {
               "name" : "Providing and executing internal plumbing along with CP fittings inside kitchen as per design and specifications",
@@ -8102,11 +8107,11 @@
               "height" : true
             },
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 2.4 X 1.8 M to be nailed on plastered jamb",
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 2.4 X 1.8 M.",
               "isMeasurementSheet" : false,
               "measurementUnit" : "No.",
               "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisPerUnit" : 1,
               "rateAnalysisUnit" : "No.",
               "directRate" : null,
               "directRatePerUnit" : null,
@@ -8116,11 +8121,11 @@
               "height" : false
             },
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.8 X 1.8 M to be nailed on plastered jamb",
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.8 X 1.8M",
               "isMeasurementSheet" : false,
               "measurementUnit" : "No.",
               "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisPerUnit" : 1,
               "rateAnalysisUnit" : "No.",
               "directRate" : null,
               "directRatePerUnit" : null,
@@ -8130,11 +8135,11 @@
               "height" : false
             },
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.2 X 1.8 M to be nailed on plastered jamb",
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 1.2 X 1.8M",
               "isMeasurementSheet" : false,
               "measurementUnit" : "No.",
               "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisPerUnit" : 1,
               "rateAnalysisUnit" : "No.",
               "directRate" : null,
               "directRatePerUnit" : null,
@@ -8144,11 +8149,11 @@
               "height" : false
             },
             {
-              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 0.9 X 1.8 M to be nailed on plastred jamb",
+              "name" : "MS window grill using 25 x 25mm MS pipes & 10 x 10mm solid square bars for window of size 0.9 X 1.8M",
               "isMeasurementSheet" : false,
               "measurementUnit" : "No.",
               "isRateAnalysis" : true,
-              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisPerUnit" : 1,
               "rateAnalysisUnit" : "No.",
               "directRate" : null,
               "directRatePerUnit" : null,
@@ -8237,6 +8242,7 @@
         },
         {
           "name" : "Railings for terraces/balconies",
+          "rateAnalysisId" : 300005,
           "workItems" : [
             {
               "name" : "Proving and fixing fabricated metal railing to the attached terraces/balconies of units as per the design",
@@ -8302,6 +8308,7 @@
         },
         {
           "name" : "Railings for staircase/passages",
+          "rateAnalysisId" : 300006,
           "workItems" : [
             {
               "name" : "Proving and fixing fabricated metal railing to the staircase/passage as per the design",
@@ -8367,6 +8374,7 @@
         },
         {
           "name" : "Railings for staircase mid landing",
+          "rateAnalysisId" : 300007,
           "workItems" : [
             {
               "name" : "Proving and fixing fabricated metal railing for the staircase midlanding as per the design",
@@ -8432,6 +8440,7 @@
         },
         {
           "name" : "Rolling /collapsible shutter",
+          "rateAnalysisId" : 300008,
           "workItems" : [
             {
               "name" : "Providing and fixing fabricated metal rolling shutter as per the design",
@@ -8731,15 +8740,12 @@
           ]
         },
         {
-          "name" : "MS sheets roofing",
-          "rateAnalysisId" : 100456,
-          "workItems" : []
-        },
-        {
           "name" : "Shingle roof",
+          "rateAnalysisId" : 300001,
           "workItems" : [
             {
               "name" : "Providing and fixing shingle roofing on sloping roof",
+              "rateAnalysisId" : 300002,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : false,
@@ -8756,9 +8762,11 @@
         },
         {
           "name" : "GI sheets roofing",
+          "rateAnalysisId" : 300003,
           "workItems" : [
             {
               "name" : "Providing and fixing GI sheet roofing of selected profile supported on MS framing as per design",
+              "rateAnalysisId" : 300004,
               "isMeasurementSheet" : true,
               "measurementUnit" : "Sqm",
               "isRateAnalysis" : false,
@@ -8994,70 +9002,6 @@
       ]
     },
     {
-      "name": "Piped gas system",
-      "priorityId": 25,
-      "rateAnalysisId": 100519,
-      "categories": [
-        {
-          "name": "Piping system",
-          "rateAnalysisId": 100520,
-          "workItems": [
-            {
-              "name": "Designing, providing and installing LPG reticulated system as per approved specifications",
-              "rateAnalysisId": 100521,
-              "isMeasurementSheet": false,
-              "measurementUnit": "Apartments",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "directRate": 9500,
-              "directRatePerUnit": "Per Apartment",
-              "isItemBreakdownRequired": false,
-              "length": false,
-              "breadthOrWidth": false,
-              "height": false
-            }
-          ]
-        },
-        {
-          "name": "Gas bank room",
-          "rateAnalysisId": 100522,
-          "workItems": [
-            {
-              "name": "Providing and constructing of Ground floor structure of gas bank in RCC framed structure",
-              "rateAnalysisId": 100523,
-              "isMeasurementSheet": false,
-              "measurementUnit": "Sqft b/up",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "directRate": 1200,
-              "directRatePerUnit": "Per Sqft b/up",
-              "isItemBreakdownRequired": false,
-              "length": false,
-              "breadthOrWidth": false,
-              "height": false
-            },
-            {
-              "name": "Providing and constructing of Ground floor structure of gas bank in load bearing masonry",
-              "rateAnalysisId": 100524,
-              "isMeasurementSheet": false,
-              "measurementUnit": "Sqft b/up",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "directRate": 1000,
-              "directRatePerUnit": "Per Sqft b/up",
-              "isItemBreakdownRequired": false,
-              "length": false,
-              "breadthOrWidth": false,
-              "height": false
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "Solar water heating system",
       "rateAnalysisId": 100515,
       "priorityId": 26,
@@ -9127,34 +9071,6 @@
               "rateAnalysisUnit": null,
               "directRate": 80,
               "directRatePerUnit": "Per litres",
-              "isItemBreakdownRequired": false,
-              "length": false,
-              "breadthOrWidth": false,
-              "height": false
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Fire fighting system",
-      "priorityId": 27,
-      "rateAnalysisId": 100528,
-      "categories": [
-        {
-          "name": "Work Items",
-          "rateAnalysisId": 100529,
-          "workItems": [
-            {
-              "name": "Provising and installing fire fighting system as per rules, regulations and design",
-              "rateAnalysisId": 100530,
-              "isMeasurementSheet": false,
-              "measurementUnit": "Job",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "directRate": 0,
-              "directRatePerUnit": "Job",
               "isItemBreakdownRequired": false,
               "length": false,
               "breadthOrWidth": false,
@@ -10816,7 +10732,7 @@
           "rateAnalysisId": 200008,
           "workItems": [
             {
-              "name": "Providing a swimming pool with filtration plant, deck etc",
+              "name": "Providing a swimming pool of required dimensions with filtration plant, deck etc",
               "rateAnalysisId": 200009,
               "isMeasurementSheet": false,
               "measurementUnit": "Job",
@@ -10864,7 +10780,7 @@
               "height": true
             },
             {
-              "name": "Providing and constructing changing room's block ",
+              "name": "Providing a plunge pool with all fittings and accessories ",
               "rateAnalysisId": 5100010,
               "isMeasurementSheet": false,
               "measurementUnit": "No",
@@ -13082,6 +12998,201 @@
               "length": null,
               "breadthOrWidth": null,
               "height": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fire fighting system",
+      "priorityId": 142,
+      "rateAnalysisId": 100528,
+      "categories": [
+        {
+          "name": "Work Items",
+          "rateAnalysisId": 100529,
+          "workItems": [
+            {
+              "name": "Provising and installing fire fighting system as per rules, regulations and design",
+              "rateAnalysisId": 100530,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 0,
+              "directRatePerUnit": "Job",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            },
+            {
+              "name": "Provising and installing MS powder coated/Wooden fire rated doors with frames as per rules and regulations",
+              "rateAnalysisId": 3000110,
+              "isMeasurementSheet": false,
+              "measurementUnit": "No",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 15000,
+              "directRatePerUnit": "No",
+              "isItemBreakdownRequired": true,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Piped gas system",
+      "priorityId": 141,
+      "rateAnalysisId": 100519,
+      "categories": [
+        {
+          "name": "Piping system",
+          "rateAnalysisId": 100520,
+          "workItems": [
+            {
+              "name": "Designing, providing and installing LPG reticulated system as per approved specifications",
+              "rateAnalysisId": 100521,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Apartments",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 9500,
+              "directRatePerUnit": "Per Apartment",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            }
+          ]
+        },
+        {
+          "name": "Gas bank room",
+          "rateAnalysisId": 100522,
+          "workItems": [
+            {
+              "name": "Providing and constructing of Ground floor structure of gas bank in RCC framed structure",
+              "rateAnalysisId": 100523,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Sqft b/up",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 1200,
+              "directRatePerUnit": "Per Sqft b/up",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            },
+            {
+              "name": "Providing and constructing of Ground floor structure of gas bank in load bearing masonry",
+              "rateAnalysisId": 100524,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Sqft b/up",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 1000,
+              "directRatePerUnit": "Per Sqft b/up",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Machinery/Tools/Scaffolding",
+      "priorityId": 142,
+      "rateAnalysisId": 300011,
+      "categories": [
+        {
+          "name": "Work Items",
+          "rateAnalysisId": 300012,
+          "workItems": [
+            {
+              "name": "Hiring of machinery for various purposes",
+              "rateAnalysisId": 300013,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Month",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 0,
+              "directRatePerUnit": "Month",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            },
+            {
+              "name": "Purchasing tools and machinery for various purposes",
+              "rateAnalysisId": 300014,
+              "isMeasurementSheet": false,
+              "measurementUnit": "No",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 0,
+              "directRatePerUnit": "No",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            },
+            {
+              "name": "Providing, erecting and dismantling bamboo scaffolding on rental basis",
+              "rateAnalysisId": 300015,
+              "isMeasurementSheet": true,
+              "measurementUnit": "Sqft",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 12,
+              "directRatePerUnit": "Sqft",
+              "isItemBreakdownRequired": false,
+              "length": true,
+              "breadthOrWidth": false,
+              "height": true
+            },
+            {
+              "name": "Providing, erecting and dismantling metal H frame/ Cup lock scaffolding on rental basis",
+              "rateAnalysisId": 300016,
+              "isMeasurementSheet": true,
+              "measurementUnit": "Sqft",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 15,
+              "directRatePerUnit": "Sqft",
+              "isItemBreakdownRequired": false,
+              "length": true,
+              "breadthOrWidth": false,
+              "height": true
+            },
+            {
+              "name": "Erecting and dismantling bamboo/ Metal scaffolding ( Only labour)",
+              "rateAnalysisId": 300017,
+              "isMeasurementSheet": true,
+              "measurementUnit": "Sqft",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 7,
+              "directRatePerUnit": "Sqft",
+              "isItemBreakdownRequired": false,
+              "length": true,
+              "breadthOrWidth": false,
+              "height": true
             }
           ]
         }
