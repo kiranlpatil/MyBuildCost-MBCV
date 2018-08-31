@@ -1166,6 +1166,7 @@ class ProjectService {
             newWorkItem.quantity = quantityObj;
             newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
+            newWorkItem.amount = 0;
             updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
             arrayFilter = [
               {'costHead.rateAnalysisId': costHeadId},
@@ -2857,8 +2858,7 @@ class ProjectService {
               .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
               .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
               .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
-              .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK)
-              .replace(Constants.TOTAL_NUM_OF_BUILDINGS, projectDetails.totalNumOfBuildings); //total number of buildings
+              .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
           }
           budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);

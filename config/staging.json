@@ -210,12 +210,12 @@
     "Lift": "(150000 * numOfFloors * numOfLifts)",
     "Electrical light fittings inside building": "((carpetAreaOfParking / 400) * 500 + (plotPeripheryLength / 40) * 5000 + ( numOfFloors * 3) * 700)",
     "Garbage chute": "(60000 * (numOfFloors - numOfParkingFloors))",
-    "Pest Control / Antitermite treatment": "carpetArea * 1.35 * 2",
+    "Anti termite / Pest Control treatment": "carpetArea * 1.35 * 2",
     "Solar water heating system": "carpetArea * 1.35 * 20",
     "Piped gas system": "12000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 300000",
     "Sky lounge on top terrace": "slabArea / (numOfFloors + numOfParkingFloors) * 150",
     "Fire fighting system": "( 50000 * numOfFloors)",
-    "Safety and Security automation": "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK) + 3500 * 2  + 3500 * numOfBuildings + 15000",
+    "Safety and Security automation": "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",
     "Shower Enclosures": "15000 * (1 * numOfOneBHK + 1 * numOfTwoBHK + 2 * numOfThreeBHK + 3 * numOfFourBHK + 4 * numOfFiveBHK)",
     "False ceiling": "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
     "Special elevational features": "carpetArea * 1.35 * 25",
@@ -499,7 +499,7 @@
       ]
     },
     {
-      "name": "Pest Control / Antitermite treatment",
+      "name": "Anti termite / Pest Control treatment",
       "rateAnalysisId": 100512,
       "priorityId": 5,
       "categories": [
