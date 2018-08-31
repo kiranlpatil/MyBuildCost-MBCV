@@ -124,12 +124,12 @@
       },
       "CostPerPackage": {
         "basePackage": {
-          "iterativeDiscount": 1000,
+          "iterativeDiscount": 1170,
           "numOfBuildings": 5,
           "numOfProjects": 1,
-          "cost": 3000,
-          "validity": 1080,
-          "validityDescription": "3 Years",
+          "cost": 11700,
+          "validity": 365,
+          "validityDescription": "1 Years",
           "description": "Premium",
           "name": "Premium"
         }
