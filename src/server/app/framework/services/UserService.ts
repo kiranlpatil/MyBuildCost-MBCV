@@ -1387,6 +1387,20 @@ class UserService {
             });
           }
         });
+      } else if (appType === 'forgot-password-flow' && result.length > 0 && result[0].isActivated === true) {
+        this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, {
+              'isActivated': true,
+              'isPasswordSet': false,
+              'id': result[0]._id,
+              'mobileNumber': res.data.newMobileNumber,
+              'user': result[0]
+            });
+          }
+        });
       } else if (appType === 'web-app' && result.length > 0 && result[0].isActivated === true) {
         if (!result[0].password || result[0].password === undefined) {
           this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
