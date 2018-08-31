@@ -305,7 +305,7 @@
               "rateAnalysisId": 100465,
               "isMeasurementSheet": false,
               "measurementUnit": "Hr",
-              "isRateAnalysis": ,
+              "isRateAnalysis":false,
               "rateAnalysisPerUnit": null,
               "rateAnalysisUnit": null,
               "directRate": 750,
