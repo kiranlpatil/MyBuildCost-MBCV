@@ -671,6 +671,7 @@ export class Button {
   public static NEXT: string = 'Next';
   public static SUBMIT: string = 'Submit';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
+  public static CREATE_TRIAL_PROJECT: string = 'Create Trial Project';
   public static CREATE: string = 'Create';
   public static CLICK_HERE: string = 'click here';
   public static BACK_TO_HOME: string = 'Back to home';

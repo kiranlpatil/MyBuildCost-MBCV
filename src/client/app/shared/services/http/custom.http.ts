@@ -53,7 +53,7 @@ export class CustomHttp extends Http {
             errorInstance.err_msg = err.statusText;
           } else if (err.status === 403 || err.status === 400 ) {
             errorInstance.err_code = err.status;
-            errorInstance.err_msg = JSON.parse(err._body).error.messaget;
+            errorInstance.err_msg = JSON.parse(err._body).error.message;
           } else if (err.status === 404) {
             errorInstance.err_msg = Messages.MSG_ERROR_SERVER_ERROR;
             errorInstance.err_code = err.status;
