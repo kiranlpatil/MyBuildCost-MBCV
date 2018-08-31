@@ -39,7 +39,7 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
 
   onLoginFailure(error: any) {
     SessionStorageService.setSessionValue(SessionStorage.PASSWORD, '');
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 ||error.err_code === 401 || error.err_code === 0) {
       var message = new Message();
       message.error_msg = error.message;
       message.isError = true;

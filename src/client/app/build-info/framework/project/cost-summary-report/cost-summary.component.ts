@@ -205,7 +205,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetAllInActiveCostHeadsFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -264,7 +264,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   onGetCostSummaryReportFailure(error : any) {
     this.loaderService.stop();
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('onGetCostInFail()'+error);
@@ -303,7 +303,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onInActiveCostHeadFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -329,7 +329,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onActiveCostHeadFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('onActiveCostHeadFailure()'+error);
@@ -365,7 +365,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   onUpdateRateOfThumbRuleFailure(error : any) {
     this.loaderService.stop();
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401|| error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('onAddCostheadSuccess : '+error);
@@ -403,7 +403,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   onDeleteBuildingFailure(error : any) {
     this.loaderService.stop();
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 ||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -431,7 +431,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onGetBuildingDetailsForCloneFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -458,7 +458,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onCreateBuildingFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -481,7 +481,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onCloneBuildingCostHeadsFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);

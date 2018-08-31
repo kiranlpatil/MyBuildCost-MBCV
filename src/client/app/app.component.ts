@@ -9,7 +9,7 @@ import {
   Message,
   MessageService
 } from './shared/index';
-import { Messages } from './shared/constants';
+import { Messages, NavigationRoutes } from './shared/constants';
 
 
 
@@ -62,12 +62,17 @@ export class AppComponent {
       this.errorMessage= Messages.MSG_ERROR_UNCAUGHT_EXCEPTION;
     }
     this.customMessage = message.custom_message;
+    var timeout =8888;
+    if(message.error_code===401 || message.error_msg===Messages.MSG_ERROR_UNAUTHORIZED) {
+      this.errorMessage= Messages.MSG_ERROR_UNAUTHORIZED_FOR_USER;
+      timeout=3333;
+    }
     setTimeout(function () {
       this.closeErrorMessage();
-      if(message.error_code===401) {
+      if(message.error_code===401 || message.error_msg===Messages.MSG_ERROR_UNAUTHORIZED) {
         this.logOut();
       }
-    }.bind(this), 8888);
+    }.bind(this), timeout);
   }
 
   showSuccess(message: Message) {
@@ -89,6 +94,6 @@ export class AppComponent {
     window.sessionStorage.clear();
     window.localStorage.clear();
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
-    window.location.href = host;
+    this._router.navigate([NavigationRoutes.APP_LOGIN]);
   }
 }
