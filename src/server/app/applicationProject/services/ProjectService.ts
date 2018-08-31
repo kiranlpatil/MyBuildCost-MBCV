@@ -182,8 +182,7 @@ class ProjectService {
             projectDetails.podiumArea === projectData.podiumArea &&
             projectDetails.poolCapacity === projectData.poolCapacity &&
             projectDetails.projectDuration ===projectData.projectDuration &&
-            projectDetails.slabArea === projectData.slabArea &&
-            projectDetails.totalNumOfBuildings === projectData.totalNumOfBuildings) {
+            projectDetails.slabArea === projectData.slabArea) {
             isBudgetCostCalculationRequired=false;
           }
           if(isBudgetCostCalculationRequired) {
@@ -1166,6 +1165,7 @@ class ProjectService {
             newWorkItem.quantity = quantityObj;
             newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
+            newWorkItem.amount = 0;
             updateQuery = {$push : {'costHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
             arrayFilter = [
               {'costHead.rateAnalysisId': costHeadId},
@@ -1173,13 +1173,23 @@ class ProjectService {
             ];
           } else {
             updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].active':workItemActiveStatus}};
-            arrayFilter = [
-              {'costHead.rateAnalysisId': costHeadId},
-              {'category.rateAnalysisId': categoryId},
-              {'workItem.rateAnalysisId': workItemRAId,
-                'workItem.workItemId': workItemId
-              }
-            ];
+            if(!response.active && response.workItemId > 1) {
+              arrayFilter = [
+                {'costHead.rateAnalysisId': costHeadId},
+                {'category.rateAnalysisId': categoryId},
+                {'workItem.rateAnalysisId': workItemRAId,
+                  'workItem.workItemId': response.workItemId
+                }
+              ];
+            } else {
+              arrayFilter = [
+                {'costHead.rateAnalysisId': costHeadId},
+                {'category.rateAnalysisId': categoryId},
+                {'workItem.rateAnalysisId': workItemRAId,
+                  'workItem.workItemId': workItemId
+                }
+              ];
+            }
           }
 
           this.buildingRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
@@ -1256,7 +1266,7 @@ class ProjectService {
     logger.info('Project service, Update WorkItem Status Of Project Cost Heads has been hit');
     let query = {_id: projectId};
     let newWorkItem = workItem;
-    let updateQuery;
+    let updateQuery: any;
     let arrayFilter;
     if(workItemActiveStatus) {
       this.checkDuplicatesOfProjectWorkItem(projectId, costHeadId, categoryId, workItemId, ccWorkItemId,(error, response)=> {
@@ -1268,6 +1278,7 @@ class ProjectService {
             newWorkItem.workItemId = response.workItemId +1;
             let quantityObj = new Quantity();
             newWorkItem.quantity = quantityObj;
+            newWorkItem.amount = 0;
             newWorkItem.name = newWorkItem.workItemId + '-'+ newWorkItem.name;
             newWorkItem.active = true;
             updateQuery = {$push : {'projectCostHeads.$[costHead].categories.$[category].workItems': newWorkItem }};
@@ -1277,12 +1288,23 @@ class ProjectService {
             ];
           } else {
             updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].active':workItemActiveStatus}};
-            arrayFilter = [
-              {'costHead.rateAnalysisId': costHeadId},
-              {'category.rateAnalysisId': categoryId},
-              {'workItem.rateAnalysisId': workItemId, 'workItem.workItemId' : ccWorkItemId}
-            ];
+            if(!response.active && response.workItemId > 1) {
+              arrayFilter = [
+                {'costHead.rateAnalysisId': costHeadId},
+                {'category.rateAnalysisId': categoryId},
+                {'workItem.rateAnalysisId': workItemId,
+                  'workItem.workItemId': response.workItemId
+                }
+              ];
+            } else {
+              arrayFilter = [
+                {'costHead.rateAnalysisId': costHeadId},
+                {'category.rateAnalysisId': categoryId},
+                {'workItem.rateAnalysisId': workItemId, 'workItem.workItemId' : ccWorkItemId}
+              ];
+            }
           }
+
           this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, response) => {
             logger.info('Project service, Update WorkItem Status Of Project Cost Heads ,findOneAndUpdate has been hit');
             if (error) {
@@ -2857,8 +2879,7 @@ class ProjectService {
               .replace(Constants.NUM_OF_TWO_BHK, buildingDetails.numOfTwoBHK)
               .replace(Constants.NUM_OF_THREE_BHK, buildingDetails.numOfThreeBHK)
               .replace(Constants.NUM_OF_FOUR_BHK, buildingDetails.numOfFourBHK)
-              .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK)
-              .replace(Constants.TOTAL_NUM_OF_BUILDINGS, projectDetails.totalNumOfBuildings); //total number of buildings
+              .replace(Constants.NUM_OF_FIVE_BHK, buildingDetails.numOfFiveBHK);
           }
           budgetedCostAmount = eval(calculateBudgtedCost);
           this.calculateThumbRuleReportForCostHead(budgetedCostAmount, costHead, buildingDetails, costHeads);
@@ -3051,10 +3072,7 @@ class ProjectService {
           break;
         }
         case Constants.BOARDS_AND_SIGNAGES_IN_COMMON_AREAS : {
-          budgetCostFormulae = config.get(Constants.BUDGETED_COST_FORMULAE + costHead.name).toString();
-          calculateBudgtedCost = budgetCostFormulae.replace(Constants.TOTAL_NUMBER_OF_BUILDINGS, projectDetails.totalNumOfBuildings);
-          budgetedCostAmount = eval(calculateBudgtedCost);
-          this.calculateThumbRuleReportForProjectCostHead(budgetedCostAmount, costHead, projectDetails, costHeads);
+          this.setFixedBudgetedCost(budgetedCostAmount, costHead, projectDetails, costHeads);
           break;
         }
         case Constants.ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_PROJECT : {

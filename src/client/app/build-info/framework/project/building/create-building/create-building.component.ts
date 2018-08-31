@@ -32,8 +32,13 @@ export class CreateBuildingComponent  implements  OnInit {
   }
   goBack() {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
+    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    if(buildingId === null) {
+      this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    } else {
+      this._router.navigate([NavigationRoutes.APP_PROJECT, projectId, NavigationRoutes.APP_COST_SUMMARY]);
+    }
   }
 
   onSubmit(buildingModel : Building) {
@@ -89,11 +94,12 @@ export class CreateBuildingComponent  implements  OnInit {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
 
     this.buildingService.syncBuildingWithRateAnalysis(projectId, building.data._id).subscribe(
-      project => this.onSyncBuildingWithRateAnalysisSuccess(project),
+      project => this.onSyncBuildingWithRateAnalysisSuccess(project, building.data._id),
       error => this.onSyncBuildingWithRateAnalysisFailure(error));
   }
 
-  onSyncBuildingWithRateAnalysisSuccess(project : any) {
+  onSyncBuildingWithRateAnalysisSuccess(project : any,  buildingId: any) {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     SessionStorageService.setSessionValue(SessionStorage.FROM_VIEW, this.getScrollView().GO_TO_RECENT_BUILDING);
     this.loaderService.stop();
