@@ -46,15 +46,15 @@
                 <tr *ngFor="let item of rateItem.value; let i=index">
                   <td class="datalist-input" *ngIf="rateView === getLabel().WORKITEM_RATE_TAB">
                     <input id="itemDescription" class="form-control remark-input"
-                           (mouseover)="getRateItemsByOriginalName(item, i)"
-                           list="RateItems" [(ngModel)]="item.itemName"  (focus)="getItemName($event)" (input)="setItemName($event, 'changeEvent')" (blur)="setItemName($event)"/>
-                      <datalist id="RateItems" >
+                           (mouseover)="getRateItemsByOriginalName(item, i)" [title]="item.itemName"
+                           list="RateItems" [(ngModel)]="item.itemName"  (focus)="getItemName($event)" (input)="setItemName($event, 'changeEvent')" (blur)="setItemName($event)" />
+                      <datalist id="RateItems">
                         <option *ngFor="let rateItem of arrayOfRateItems" value="{{rateItem.itemName}}"></option>    
                      </datalist>
                   </td>
                   <td *ngIf="rateView !== getLabel().WORKITEM_RATE_TAB">
                     <input id="itemDescription" class="form-control remark-input"
-                           [(ngModel)]="item.itemName" [disabled]="disableRateField"/>
+                           [(ngModel)]="item.itemName" [disabled]="disableRateField" [title]="item.itemName" />
                   </td>
                   <!--<td>
                     <span class="glyphicon glyphicon-chevron-down" (click)="getRateItemsByOriginalName(item, i)"></span>
