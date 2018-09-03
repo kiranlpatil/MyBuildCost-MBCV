@@ -9,7 +9,8 @@
               <img src="assets/build-info/create-new-project/plus-sign.png" />
             </div>
           </div>
-          <h4>{{ getButton().CREATE_NEW_PROJECT }}</h4>
+          <h4 *ngIf="projects.length>0">{{ getButton().CREATE_NEW_PROJECT }}</h4>
+          <h4 *ngIf="projects.length==0">{{ getButton().CREATE_TRIAL_PROJECT }}</h4>
         </li>
 
         <li *ngFor="let project of projects; let i = index" class="animate-item" [ngStyle]="animateView ? getListItemAnimation(i) : null">

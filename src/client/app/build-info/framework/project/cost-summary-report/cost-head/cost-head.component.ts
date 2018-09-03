@@ -209,7 +209,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onGetCategoriesFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 401 ||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -512,7 +512,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onDeActivateWorkItemFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('InActive WorkItem error : '+JSON.stringify(error));
@@ -540,7 +540,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onGetInActiveWorkItemsFailure(error:any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('Get WorkItemList error : '+error);
@@ -582,7 +582,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onAddWorkItemFailure(error:any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 ||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('Active WorkItem error : '+error);
@@ -645,7 +645,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onChangeDirectQuantityFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 ||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('error : '+JSON.stringify(error));
@@ -680,7 +680,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onUpdateDirectRateFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     this.loaderService.stop();
@@ -798,7 +798,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onGetActiveWorkItemsOfCategoryFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 ||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('onGetActiveWorkItemsOfCategoryFailure error : '+JSON.stringify(error));
@@ -924,7 +924,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   onGetPresentFilesForWorkItemFailure(error: any) {
     let message = new Message();
-    if (error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if (error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       message.error_msg = error.err_msg;
       message.error_code =  error.err_code;
       message.isError = true;

@@ -42,7 +42,9 @@ export class AppSettings {
 export class Messages {
   public static FROM_REGISTRATION = 'registration';
   public static FROM_ACCOUNT_DETAIL = 'accountdetail';
+  public static MSG_ERROR_UNAUTHORIZED = 'Unauthorized';
   public static MSG_ERROR_UNCAUGHT_EXCEPTION='The server was unable to complete your request. Please try again.';
+  public static MSG_ERROR_UNAUTHORIZED_FOR_USER='You are an unauthorized user please sign in or sign up.';
 
   //Registraion Success messages
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
@@ -667,6 +669,7 @@ export class Button {
   public static NEXT: string = 'Next';
   public static SUBMIT: string = 'Submit';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
+  public static CREATE_TRIAL_PROJECT: string = 'Create Trial Project';
   public static CREATE: string = 'Create';
   public static CLICK_HERE: string = 'click here';
   public static BACK_TO_HOME: string = 'Back to home';

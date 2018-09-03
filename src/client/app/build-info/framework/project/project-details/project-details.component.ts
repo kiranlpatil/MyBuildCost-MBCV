@@ -57,7 +57,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   onGetProjectFailure(error : any) {
     this.loaderService.stop();
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -89,7 +89,7 @@ export class ProjectDetailsComponent implements OnInit {
 
     var message = new Message();
     this.loaderService.stop();
-    if (error.err_code === 404 || error.err_code === 0||error.err_code===500) {
+    if (error.err_code === 404 || error.err_code === 401  || error.err_code === 0||error.err_code===500) {
       message.error_msg = error.err_msg;
       message.error_code =  error.err_code;
 
