@@ -213,7 +213,7 @@
     "Anti termite / Pest Control treatment": "carpetArea * 1.35 * 2",
     "Solar water heating system": "carpetArea * 1.35 * 20",
     "Sky lounge on top terrace": "slabArea / (numOfFloors + numOfParkingFloors) * 150",
-    "Safety and Security automation": "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",
+    "Safety and Security automation- Building": "15000 * (numOfOneBHK + numOfTwoBHK + numOfThreeBHK + numOfFourBHK + numOfFiveBHK)",
     "Shower Enclosures": "15000 * (1 * numOfOneBHK + 1 * numOfTwoBHK + 2 * numOfThreeBHK + 3 * numOfFourBHK + 4 * numOfFiveBHK)",
     "False ceiling": "100 * (40 * numOfOneBHK + 80 * numOfTwoBHK + 120 * numOfThreeBHK + 160 * numOfFourBHK + 200 * numOfFiveBHK)",
     "Special elevational features": "carpetArea * 1.35 * 25",
@@ -7228,7 +7228,7 @@
               "rateAnalysisUnit" : "No",
               "directRate" : null,
               "directRatePerUnit" : "No",
-              "isItemBreakdownRequired" : false,
+              "isItemBreakdownRequired" : true,
               "length" : false,
               "breadthOrWidth" : false,
               "height" : false
@@ -7243,7 +7243,7 @@
               "rateAnalysisUnit" : "No",
               "directRate" : null,
               "directRatePerUnit" : "No",
-              "isItemBreakdownRequired" : false,
+              "isItemBreakdownRequired" : true,
               "length" : false,
               "breadthOrWidth" : false,
               "height" : false
@@ -7258,7 +7258,7 @@
               "rateAnalysisUnit" : "No",
               "directRate" : null,
               "directRatePerUnit" : "No",
-              "isItemBreakdownRequired" : false,
+              "isItemBreakdownRequired" : true,
               "length" : false,
               "breadthOrWidth" : false,
               "height" : false
@@ -9025,21 +9025,6 @@
               "length": false,
               "breadthOrWidth": false,
               "height": false
-            },
-            {
-              "name": "Providing and installing Evacuated tube collector- ETC ( Glass tube type) solar water heating system as per required specifications",
-              "rateAnalysisId": 100518,
-              "isMeasurementSheet": false,
-              "measurementUnit": "litres",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "directRate": 80,
-              "directRatePerUnit": "Per litres",
-              "isItemBreakdownRequired": false,
-              "length": false,
-              "breadthOrWidth": false,
-              "height": false
             }
           ]
         }
@@ -9141,6 +9126,69 @@
             {
               "name": "Providing EPABX intercom system in the project",
               "rateAnalysisId": 102207,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 0,
+              "directRatePerUnit": "Per Job",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            }
+          ]
+        },
+        {
+          "name": "CCTV",
+          "rateAnalysisId": 500500,
+          "workItems": [
+            {
+              "name": "Providing and installing CCTV system as required--- Remove frm here.",
+              "rateAnalysisId":  500501,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 0,
+              "directRatePerUnit": "Per Job",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            }
+          ]
+        },
+        {
+          "name": "Boom barrier",
+          "rateAnalysisId": 500502,
+          "workItems": [
+            {
+              "name": "Providing Boom barriers at the gates as required--- Remove frm here.",
+              "rateAnalysisId": 500503,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 0,
+              "directRatePerUnit": "Per Job",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            }
+          ]
+        },
+        {
+          "name": "Automated gates",
+          "rateAnalysisId": 500504,
+          "workItems": [
+            {
+              "name": "Providing automated gate for the project as per design--- Remove frm here.",
+              "rateAnalysisId": 500505,
               "isMeasurementSheet": false,
               "measurementUnit": "Job",
               "isRateAnalysis": false,
@@ -10956,7 +11004,7 @@
           "workItems": [
             {
               "name": "Providing a steam room along with fittings and accessories and clock rooms",
-              "rateAnalysisId": 200025,
+              "rateAnalysisId": 500025,
               "isMeasurementSheet": false,
               "measurementUnit": "Job",
               "isRateAnalysis": false,
@@ -11183,70 +11231,66 @@
               "breadthOrWidth": null,
               "height": null
             },
-            {
+      /*      {
               "name" : "4\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
-              "rateAnalysisId" : 200098,
-              "isMeasurementSheet" : false,
+              "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
-              "isRateAnalysis" : false,
-              "rateAnalysisPerUnit" : null,
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
               "rateAnalysisUnit" : null,
-              "isDirectRate" : true,
-              "directRate" : 0,
+              "isDirectRate" : false,
+              "directRate" : null,
               "directRatePerUnit" : "Rft",
               "isItemBreakdownRequired" : false,
-              "length" : null,
+              "length" : true,
               "breadthOrWidth" : null,
               "height" : null
             },
             {
               "name" : "6\" thick kerbing work, for planters / road dividers - 6\" below ground and 1' above ground",
-              "rateAnalysisId" : 200099,
-              "isMeasurementSheet" : false,
+              "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
-              "isRateAnalysis" : false,
-              "rateAnalysisPerUnit" : null,
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
               "rateAnalysisUnit" : null,
-              "isDirectRate" : true,
-              "directRate" : 0,
+              "isDirectRate" : false,
+              "directRate" : null,
               "directRatePerUnit" : "Rft",
               "isItemBreakdownRequired" : false,
-              "length" : null,
+              "length" : true,
               "breadthOrWidth" : null,
               "height" : null
             },
             {
               "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground",
-              "rateAnalysisId" : 200100,
-              "isMeasurementSheet" : false,
+              "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
-              "isRateAnalysis" : false,
-              "rateAnalysisPerUnit" : null,
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
               "rateAnalysisUnit" : null,
-              "isDirectRate" : true,
-              "directRate" : 0,
+              "isDirectRate" : false,
+              "directRate" : null,
               "directRatePerUnit" : "Rft",
               "isItemBreakdownRequired" : false,
-              "length" : null,
+              "length" : true,
               "breadthOrWidth" : null,
               "height" : null
             },
             {
               "name" : "4\" thick kerbing work, for planters / footpaths - 6\" below ground and 6\" above ground with painting",
-              "rateAnalysisId" : 200101,
-              "isMeasurementSheet" : false,
+              "isMeasurementSheet" : true,
               "measurementUnit" : "Rm",
-              "isRateAnalysis" : false,
-              "rateAnalysisPerUnit" : null,
+              "isRateAnalysis" : true,
+              "rateAnalysisPerUnit" : 100,
               "rateAnalysisUnit" : null,
-              "isDirectRate" : true,
-              "directRate" : 0,
+              "isDirectRate" : false,
+              "directRate" : null,
               "directRatePerUnit" : "Rft",
               "isItemBreakdownRequired" : false,
-              "length" : null,
+              "length" : true,
               "breadthOrWidth" : null,
               "height" : null
-            },
+            },*/
             {
               "name": "Providing and executing concrete pavement with stamping as per required thickness, grade of concrete and stamp design",
               "rateAnalysisId": 201536,
@@ -11819,7 +11863,7 @@
               "height": null
             },
             {
-              "name": "Providing and installing mechanical puzzle car park system",
+              "name": "Providing and installing fabricated car parking with tensile fabric or alternative roofing material",
               "rateAnalysisId": 200115,
               "isMeasurementSheet": false,
               "measurementUnit": "No",
