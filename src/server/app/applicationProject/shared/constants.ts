@@ -140,7 +140,7 @@ class Constants {
   public static PIPED_GAS_SYSTEM : string = 'Piped gas system';
   public static SKY_LOUNGE_ON_TOP_TERRACE : string = 'Sky lounge on top terrace';
   public static FIRE_FIGHTING_SYSTEM : string = 'Fire fighting system';
-  public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation';
+  public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation- Building';
   public static SHOWER_ENCLOSURES : string = 'Shower Enclosures';
   public static FALSE_CEILING : string = 'False ceiling';
   public static STAIRCASE_TREADS_AND_RISERS : string = 'Staircase Treads and Risers';
