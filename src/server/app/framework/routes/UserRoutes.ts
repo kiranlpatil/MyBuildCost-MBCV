@@ -1,4 +1,3 @@
-
 import express = require('express');
 import UserController = require('./../controllers/UserController');
 import AuthInterceptor = require('./../interceptor/auth.interceptor');
@@ -22,10 +21,10 @@ class UserRoutes {
     }
     get routes () : express.Router {
 
-        var controller = this._userController;
-        var logger = this._loggerInterceptor;
-        var userInterceptor = this._userInterceptor;
-        var authInterceptor = this._authInterceptor;
+    var controller = this._userController;
+    var logger = this._loggerInterceptor;
+    var userInterceptor = this._userInterceptor;
+    var authInterceptor = this._authInterceptor;
 
       //Dashboard
       router.post('/login', logger.logDetail, userInterceptor.login, controller.login);
@@ -58,49 +57,45 @@ class UserRoutes {
         authInterceptor.secureApiCheck, controller.verifyChangedEmailId);
 
 
-
       /* Check for limitation of buildings*/
       router.get('/:userId/project/:projectId/checkForLimitationOfBuilding',logger.logDetail, authInterceptor.requiresAuth,
         authInterceptor.secureApiCheck,controller.checkForLimitationOfBuilding);
 
 
+    //User settings
+    router.put('/change/emailId/:id', logger.logDetail, authInterceptor.requiresAuth,
+      authInterceptor.secureApiCheck, controller.changeEmailId);
+    router.put('/change/mobileNumber/:id', logger.logDetail, authInterceptor.requiresAuth,
+      authInterceptor.secureApiCheck, controller.changeMobileNumber);
+    router.put('/change/password/:id', logger.logDetail, authInterceptor.requiresAuth,
+      authInterceptor.secureApiCheck, userInterceptor.changePassword, controller.changePassword);
 
+    //User Notification
+    /*router.get('/notification/:id', logger.logDetail, authInterceptor.requiresAuth,
+      authInterceptor.secureApiCheck, controller.notifications);
+    router.put('/notification/:id', logger.logDetail, authInterceptor.requiresAuth,
+      authInterceptor.secureApiCheck, controller.pushNotifications);
 
+    router.put('/:id/fieldName/:fname', logger.logDetail, authInterceptor.requiresAuth,
+      authInterceptor.secureApiCheck, controller.updateProfileField);
+      router.post('/sendVerificationMail/:id', logger.logDetail, authInterceptor.requiresAuth,
+      authInterceptor.secureApiCheck, controller.sendVerificationMail);*/
 
-      //User settings
-      router.put('/change/emailId/:id', logger.logDetail, authInterceptor.requiresAuth,
-        authInterceptor.secureApiCheck, controller.changeEmailId);
-      router.put('/change/mobileNumber/:id', logger.logDetail, authInterceptor.requiresAuth,
-        authInterceptor.secureApiCheck, controller.changeMobileNumber);
-      router.put('/change/password/:id', logger.logDetail, authInterceptor.requiresAuth,
-        authInterceptor.secureApiCheck, userInterceptor.changePassword, controller.changePassword);
+    /*router.use(sharedService.errorHandler);*/
+    //Retrive list of project
+    router.get('/subscription/project/:projectId', authInterceptor.requiresAuth, controller.getProjectSubscription);
+    router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
+    router.get('/advertising/banners', authInterceptor.requiresAuth, controller.getAdvertisingBanner);
 
-      //User Notification
-      /*router.get('/notification/:id', logger.logDetail, authInterceptor.requiresAuth,
-        authInterceptor.secureApiCheck, controller.notifications);
-      router.put('/notification/:id', logger.logDetail, authInterceptor.requiresAuth,
-        authInterceptor.secureApiCheck, controller.pushNotifications);
+    //router.get('/getMails', controller.sendProjectExpiryMails);
 
-      router.put('/:id/fieldName/:fname', logger.logDetail, authInterceptor.requiresAuth,
-        authInterceptor.secureApiCheck, controller.updateProfileField);
-        router.post('/sendVerificationMail/:id', logger.logDetail, authInterceptor.requiresAuth,
-        authInterceptor.secureApiCheck, controller.sendVerificationMail);*/
+    /*router.get('/projectExpiry/sendmails', controller.sendProjectExpiryMails);*/
 
-      /*router.use(sharedService.errorHandler);*/
-      //Retrive list of project
-      router.get('/subscription/project/:projectId', authInterceptor.requiresAuth, controller.getProjectSubscription);
-      router.get('/all/project', authInterceptor.requiresAuth, controller.getProjects);
-      router.get('/advertising/banners', authInterceptor.requiresAuth, controller.getAdvertisingBanner);
+    // update subscription package
+    router.put('/project/:projectId/updateSubscription', authInterceptor.requiresAuth, controller.updateSubscription);
 
-      //router.get('/getMails', controller.sendProjectExpiryMails);
-
-      /*router.get('/projectExpiry/sendmails', controller.sendProjectExpiryMails);*/
-
-      // update subscription package
-      router.put('/project/:projectId/updateSubscription', authInterceptor.requiresAuth, controller.updateSubscription);
-
-      //assign premium package to user
-      router.put('/:userId/assignPremium',authInterceptor.requiresAuth, controller.assignPremiumPackage);
+    //assign premium package to user
+    router.put('/:userId/assignPremium', authInterceptor.requiresAuth, controller.assignPremiumPackage);
 
       //assign subscription package
 /*
@@ -108,8 +103,16 @@ class UserRoutes {
         authInterceptor.secureApiCheck, controller.changePassword);
 */
       // RA Pro getUserSubscriptionDetails
-      router.get('/:userId/subscriptionDetails',authInterceptor.requiresAuth, controller.getUserSubscriptionDetails);
+      router.get('/:userId/subscriptionDetails',controller.getUserSubscriptionDetails);
+
+      router.get('/:userId/checkPaymentStatus',authInterceptor.requiresAuth, controller.checkPaymentStatusOfUser);
+
+      //  Rate Analysis user Routes
+      router.put('/check/exists/:appType', controller.getUserExistenceStatus);
+      router.put('/set/password',authInterceptor.requiresAuth, controller.setUserPassword);
+      router.put('/verify/password', authInterceptor.requiresAuth, controller.verifyPassword);
       router.put('/:userId/updateSubscription', controller.updateSubscriptionDetails);
+
       return router;
     }
 }

@@ -8,12 +8,15 @@ var log4js = require('log4js');
 var logger=log4js.getLogger('Subscription Controller');
 import CostControllException = require('../exception/CostControllException');
 import { PayUMoneyModel } from '../../framework/dataaccess/model/PayUMoneyModel';
+import UserService = require('../../framework/services/UserService');
 
 class SubscriptionController {
   private  _subscriptionService : SubscriptionService;
+  private _userService : UserService;
 
   constructor() {
     this._subscriptionService = new SubscriptionService();
+    this._userService = new UserService();
   }
 
   addSubscriptionPackage(req: express.Request, res: express.Response, next: any): void {
@@ -106,17 +109,6 @@ class SubscriptionController {
     }
   }
 
-  successPayuMoney(req: express.Request, res: express.Response, next: any): void {
-    try {
-      console.log('payment success : '+ JSON.stringify(req.body));
-      let pkgName = req.body.productinfo;
-      let redirectUrl = 'http://5d477bbb.ngrok.io/about';
-      res.render(redirectUrl);
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
   failurePayment(req: express.Request, res: express.Response, next: any): void {
     try {
       let body = req.body;
@@ -127,6 +119,84 @@ class SubscriptionController {
     }
   }
 
+  makePayUMoneyPayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let paymentBody = req.body;
+      let subscriptionService: SubscriptionService = new SubscriptionService();
+      subscriptionService.makeRAPayment(paymentBody,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get Subscription success');
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  successRateAnalysisPayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let userId = req.params.userId;
+      let deviceType = req.params.deviceType;
+      let userService = new UserService();
+      userService.updateSubscriptionDetails(userId,(error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          if(deviceType === 'mobile') {
+            console.log('Success Done');
+          } else {
+            res.redirect(config.get('application.browser.rateAnalysisIP') +'payment/success');
+          }
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  failureRateAnalysisPayment(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let body = req.body;
+      let userId = req.params.userId;
+      let deviceType = req.params.deviceType;
+      let paymentStatus = 'failure';
+      let userService = new UserService();
+      userService.updatePaymentStatus(userId, paymentStatus,(error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          if(deviceType === 'mobile') {
+            console.log('Failure Done');
+          } else {
+            res.redirect(config.get('application.browser.rateAnalysisIP') + 'payment/failure');
+          }
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  resetPaymentStatus(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let body = req.body;
+      let userId = req.params.userId;
+      let userService = new UserService();
+      let paymentStatus = '';
+      userService.updatePaymentStatus(userId, paymentStatus, (error, result)=> {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 
 export = SubscriptionController;

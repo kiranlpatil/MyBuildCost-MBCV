@@ -58,7 +58,7 @@ export class CloneBuildingComponent  implements  OnInit {
   onGetBuildingFailure(error : any) {
     let message = new Message();
     this.loaderService.stop();
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 ||error.err_code === 401 || error.err_code === 0) {
       message.error_msg = error.err_msg;
       message.isError = true;
       this.messageService.message(message);
@@ -141,7 +141,7 @@ export class CloneBuildingComponent  implements  OnInit {
 
   onCloneBuildingFailure(error : any) {
     let message = new Message();
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 401 ||error.err_code === 0) {
       message.error_msg = error.err_msg;
       message.isError = true;
       this.messageService.message(message);

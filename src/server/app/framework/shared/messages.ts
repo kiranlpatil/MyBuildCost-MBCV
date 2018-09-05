@@ -9,6 +9,7 @@ class Messages {
   //Email subject
   public static EMAIL_SUBJECT_REGISTRATION: string = ' Registration successful';
   public static EMAIL_SUBJECT_CHANGE_EMAILID: string = 'Confirmation for change in email address.';
+  public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'Confirmation of user contact.';
   public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'Reset your password';
   public static EMAIL_SUBJECT_CANDIDATE_REGISTRATION: string = 'Welcome to My Build Cost, an online solution for cost estimation of your construction projects.';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
@@ -31,6 +32,8 @@ class Messages {
   public static MSG_SUCCESS_OTP: string = 'OTP has been sent on your verified mobile number.';
   public static MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER: string = 'OTP has been sent on your new mobile number';
   public static MSG_SUCCESS_INDUSTRY_DATA_INSERTION: string = 'Data inserted Successfully in Industry';
+  public static MSG_SUCCESS_SET_PASSWORD: string = 'Password has been set successfully.';
+  public static MSG_SUCCESS_VERIFY_PASSWORD: string = 'Password has been verified successfully.';
 
   public static MSG_NO_RECORDS_FOUND: string = 'No records found';
 
@@ -41,7 +44,7 @@ class Messages {
   public static MSG_ERROR_REGISTRATION_MOBILE_NUMBER: string = 'This mobile number is already in use by an existing ' +
     'user. Please enter another mobile number.';//Dont Change It
   public static MSG_ERROR_USER_NOT_FOUND: string = 'Sorry. There is no user registered with this email address.';//Dont Change it
-  public static MSG_ERROR_USER_NOT_FOUND_Mail_SEND: string = 'E-mail has been sent successfully on your '+
+  public static MSG_ERROR_USER_NOT_FOUND_Mail_SEND: string = 'E-mail has been sent successfully on your ' +
     'registered email to reset password.';//Dont Change it
   public static MSG_ERROR_EMAIL_ACTIVE_NOW: string = 'User already has an account associated with this email address.';//DontChnge It
   public static MSG_ERROR_TOKEN_SESSION: string = 'Your session has expired.';
@@ -56,7 +59,7 @@ class Messages {
   public static MSG_ERROR_PROVIDE_ID: string = 'Provide user ID';
   public static MSG_ERROR_ACCOUNT_STATUS: string = 'Your account is still inactive.' +
     ' Verify your account by clicking the verification link sent on your email.';//dont change It
-  public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Your account is not active please contact Technical support'+
+  public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Your account is not active please contact Technical support' +
     ' team to activate your account.';//Dont CHange It
   public static MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT: string = 'Please contact the administrator to activate your account.';//Dont CHange It
   public static MSG_ERROR_BCRYPT_CREATION: string = 'Error in creating hash using bcrypt.';//Dont CHange It
@@ -88,6 +91,7 @@ class Messages {
 
   // Error Reason
   // public static MSG_ERROR_RSN_MESSAGE_NOT_SENT:string = 'message could not send';
+  public static MSG_ERROR_INSUFFICIENT_CREDITS: string = 'Insufficient credits to send sms';
   public static MSG_ERROR_RSN_USER_NOT_FOUND: string = 'User not found';
   public static MSG_ERROR_CREATE_JOB: string = 'error while creating job';
   public static MSG_ERROR_UPDATE_JOB: string = 'error while updating job';
@@ -141,7 +145,8 @@ class Messages {
   public static MSG_ERROR_FETCHING_MANAGED_CANDIDATES = 'Error In fetching managed candidates by recruiter';
   public static MSG_ERROR_EXPORTING_MANAGED_CANDIDATES = 'Error In exporting managed candidates by recruiter';
 }
-export=Messages;
+
+export = Messages;
 
 
 

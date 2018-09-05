@@ -20,9 +20,10 @@ class SendMailService {
   });
 
   send(sendmailTo: string, subject: string, templateName: string,
-       data: Map<string, string>, attachment?:any[],
+       data: Map<string, string>, attachment:any[],
        callback: (error: Error, result: SentMessageInfo) => void, blankCarbonCopy?: string) {
 
+    let tempAttachment = attachment ? attachment : [];
     let content = fs.readFileSync(path.resolve() + config.get('application.publicPath') + 'templates/' + templateName).toString();
     data.forEach((value: string, key: string) => {
       content = content.replace(key, value);
@@ -35,7 +36,7 @@ class SendMailService {
       bcc: blankCarbonCopy,
       subject: subject,
       html: content,
-      attachments:attachment
+      attachments:tempAttachment
       /*attachment?attachment: MailAttachments.WelcomeAboardAttachmentArray*/
     };
     SendMailService.smtpTransport.sendMail(mailOptions, function (error: Error, response: SentMessageInfo) {

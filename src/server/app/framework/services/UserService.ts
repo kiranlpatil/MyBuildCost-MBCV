@@ -1,12 +1,10 @@
+import * as fs from 'fs';
+import * as mongoose from 'mongoose';
+import {SentMessageInfo} from 'nodemailer';
+import bcrypt = require('bcrypt');
 import UserRepository = require('../dataaccess/repository/UserRepository');
 import SendMailService = require('./mailer.service');
 import SendMessageService = require('./sendmessage.service');
-import * as fs from 'fs';
-import * as mongoose from 'mongoose';
-let ObjectId = mongoose.Types.ObjectId;
-import { SentMessageInfo } from 'nodemailer';
-let config = require('config');
-let path = require('path');
 import Messages = require('../shared/messages');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import ProjectAsset = require('../shared/projectasset');
@@ -28,27 +26,43 @@ import messages  = require('../../applicationProject/shared/messages');
 import constants  = require('../../applicationProject/shared/constants');
 import ProjectSubcription = require('../../applicationProject/dataaccess/model/company/ProjectSubcription');
 import UserSubscriptionForRA = require('../../applicationProject/dataaccess/model/project/Subscription/UserSubscriptionForRA');
-import Constants = require("../../applicationProject/shared/constants");
+
+import Constants = require('../../applicationProject/shared/constants');
+import LoggerService = require('../shared/logger/LoggerService');
+
 let CCPromise = require('promise/lib/es6-extensions');
 let log4js = require('log4js');
 let logger = log4js.getLogger('User service');
+let ObjectId = mongoose.Types.ObjectId;
+let config = require('config');
+let path = require('path');
+let request = require('request');
 
 class UserService {
   APP_NAME: string;
   company_name: string;
   mid_content: any;
-  isActiveAddBuildingButton:boolean=false;
+  isActiveAddBuildingButton: boolean = false;
   private userRepository: UserRepository;
-  private projectRepository : ProjectRepository;
+  private projectRepository: ProjectRepository;
+  private loggerService: LoggerService;
 
   constructor() {
     this.userRepository = new UserRepository();
     this.projectRepository = new ProjectRepository();
+    this.loggerService = new LoggerService('UserService');
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve({'email': item.email}, (err, res) => {
+
+    let query;
+    if (item.typeOfApp === 'RAapp') {
+      query = {'mobile_number': item.mobile_number};
+    } else {
+      query = {'email': item.email};
+    }
+    this.userRepository.retrieve(query, (err, res) => {
       if (err) {
         callback(new Error(err), null);
       } else if (res.length > 0) {
@@ -147,22 +161,24 @@ class UserService {
       } else {
         logger.debug('created user succesfully.'+JSON.stringify(res));
         callback(err, res);
-        let auth = new AuthInterceptor();
-        let token = auth.issueTokenWithUid(res);
-        let host = config.get('application.mail.host');
-        let link = host + 'signin?access_token=' + token + '&_id=' + res._id;
-        let htmlTemplate = 'welcome-aboard.html';
-        let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
-          ['$first_name$', res.first_name], ['$link$', link], ['$app_name$', this.APP_NAME]]);
-        let attachment = MailAttachments.WelcomeAboardAttachmentArray;
-        sendMailService.send(user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data, attachment,
-          (err: any, result: any) => {
-            if (err) {
-              logger.error(JSON.stringify(err));
-            }
-            logger.debug('Sending Mail : ' + JSON.stringify(result));
-            //callback(err, result);
-          }, config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
+        if (user && user.email) {
+          let auth = new AuthInterceptor();
+          let token = auth.issueTokenWithUid(res);
+          let host = config.get('application.mail.host');
+          let link = host + 'signin?access_token=' + token + '&_id=' + res._id;
+          let htmlTemplate = 'welcome-aboard.html';
+          let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
+            ['$first_name$', res.first_name], ['$link$', link], ['$app_name$', this.APP_NAME]]);
+          let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+          sendMailService.send(user.email, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION, htmlTemplate, data, attachment,
+            (err: any, result: any) => {
+              if (err) {
+                logger.error(JSON.stringify(err));
+              }
+              logger.debug('Sending Mail : ' + JSON.stringify(result));
+              //callback(err, result);
+            }, config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
+        }
       }
     });
   }
@@ -230,7 +246,15 @@ class UserService {
   }
 
   login(data: any, typeOfApp: any, callback: (error: any, result: any) => void) {
-    this.retrieve({'email': data.email}, (error, result) => {
+
+    let query;
+    if (typeOfApp === 'RAapp') {
+      query = {'mobile_number': data.mobile_number, 'typeOfApp': 'RAapp'};
+    } else {
+      query = {'email': data.email};
+    }
+
+    this.retrieve(query, (error, result) => {
       if (error) {
         callback(error, null);
       } else if (result.length > 0 && result[0].isActivated === true) {
@@ -303,12 +327,11 @@ class UserService {
   }
 
   sendOtp(params: any, user: any, callback: (error: any, result: any) => void) {
-    let Data = {
+    let generateOtpObject = {
       new_mobile_number: params.mobile_number,
-      old_mobile_number: user.mobile_number,
       _id: user._id
     };
-    this.generateOtp(Data, (error, result) => {
+    this.generateOtp(generateOtpObject, (error, result) => {
       if (error) {
         if (error === Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
           callback({
@@ -320,12 +343,35 @@ class UserService {
         } else {
           callback(error, null);
         }
-      } else if (result.length > 0) {
-        callback({
+      } else if (result && result._doc) {
+        callback(null, {
           'status': Messages.STATUS_SUCCESS,
           'data': {
-            'message': Messages.MSG_SUCCESS_OTP
+            'message': Messages.MSG_SUCCESS_OTP,
+            'newMobileNumber': result._doc.new_mobile_number
           }
+        });
+      } else if (result.ErrorCode === '000') {
+        callback(null, {
+          'status': Messages.STATUS_SUCCESS,
+          'data': {
+            'message': Messages.MSG_SUCCESS_OTP,
+            'newMobileNumber': result.new_mobile_number
+          }
+        });
+      } else if (result.ErrorCode === '021') {
+        let tempError: any = new Object();
+        tempError.reason = Messages.MSG_ERROR_INSUFFICIENT_CREDITS;
+        tempError.code = 500;
+        tempError.message = Messages.MSG_ERROR_INSUFFICIENT_CREDITS;
+        tempError.stack = JSON.stringify(result);
+        this.loggerService.logErrorObj(new Error(Messages.MSG_ERROR_INSUFFICIENT_CREDITS));
+        this.sendMailOnErrorWithOutCallback(tempError);
+        callback({
+          reason: Messages.MSG_ERROR_INSUFFICIENT_CREDITS,
+          message: Messages.MSG_ERROR_INSUFFICIENT_CREDITS,
+          stackTrace: new Error(),
+          code: 400
         }, null);
       } else {
         callback({
@@ -338,41 +384,49 @@ class UserService {
     });
   }
 
-  generateOtp(field: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve({'mobile_number': field.new_mobile_number, 'isActivated': true}, (err, res) => {
-
-      if (err) {
-      } else if (res.length > 0 && (res[0]._id) !== field._id) {
+  generateOtp(generateOtpObject: any, callback: (error: any, result: any) => void) {
+    let query = {'_id': generateOtpObject._id};
+    let otp = Math.floor((Math.random() * 999) + 1000);
+    // TODO decide whether to update 'mobile_number' with 'new_mobile_number'
+    // let updateData = {'mobile_number': generateOtpObject.new_mobile_number, 'otp': otp};
+    let updateData = {'otp': otp};
+    // find user by _id and update user with new mobile number and new otp
+    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-      } else if (res.length === 0) {
-
-        let query = {'_id': field._id};
-        let otp = Math.floor((Math.random() * 99999) + 100000);
-        let updateData = {'mobile_number': field.new_mobile_number, 'otp': otp};
-        this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-          if (error) {
-            callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-          } else {
-            let Data = {
-              mobileNo: field.new_mobile_number,
-              otp: otp
-            };
-            let sendMessageService = new SendMessageService();
-            sendMessageService.sendMessageDirect(Data, callback);
-          }
-        });
       } else {
-        callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+        let messaging = config.get('application.messaging');
+        let messageForEndUser = 'The One Time Password(OTP) for' + ' ' + messaging.appName + ' ' + 'account is' + ' ' + otp
+          + '' + '. Use this OTP to verify your account.';
+        console.log('message sent to user:', messageForEndUser);
+        let url = messaging.url + '?user=' + messaging.user + '&password=' + messaging.password + '&msisdn=91'
+          + generateOtpObject.new_mobile_number + '&sid=' + messaging.sid + '&msg=' + messageForEndUser + '&fl='
+          + messaging.fl + '&gwid=' + messaging.gwid;
+
+        // call post api of Orca info solutions to send OTP
+        /*request.post({url: url, json: ''}, (error: any, response: any, body: any) => {
+          if (error) {
+            callback(error, null);
+          } else if (!error && response) {
+            let res = JSON.parse(response.body);
+            // TODO check new_mobile_number against orca info response
+            res.new_mobile_number = generateOtpObject.new_mobile_number;
+            callback(null, res);
+          }
+        });*/
+        // end of post api
+        result._doc.new_mobile_number = generateOtpObject.new_mobile_number;
+        callback(null, result);
       }
     });
   }
 
   verifyOtp(params: any, user: any, callback: (error: any, result: any) => void) {
-    let mailChimpMailerService = new MailChimpMailerService();
-
-    let query = {'_id': user._id, 'isActivated': false};
+    // let query = {'_id': user._id, 'isActivated': false};
+    let query = {'_id': user._id};
     let updateData = {'isActivated': true, 'activation_date': new Date()};
-    if (user.otp === params.otp) {
+    if (user.otp === parseInt(params.otp)) {
+      // find user by _id and update user for otp verification
       this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
           callback(error, null);
@@ -381,8 +435,6 @@ class UserService {
             'status': 'Success',
             'data': {'message': 'User Account verified successfully'}
           });
-          mailChimpMailerService.onCandidateSignSuccess(result);
-
         }
       });
     } else {
@@ -393,7 +445,6 @@ class UserService {
         code: 400
       }, null);
     }
-
   }
 
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {
@@ -494,6 +545,11 @@ class UserService {
         ['$message$', errorInfo.message], ['$error$', errorInfo.stackTrace.stack]]);
 
     } else if (errorInfo.stack) {
+      data = new Map([['$applicationLink$', config.get('application.mail.host')],
+        ['$time$', current_Time], ['$host$', config.get('application.mail.host')],
+        ['$reason$', errorInfo.reason], ['$code$', errorInfo.code],
+        ['$message$', errorInfo.message], ['$error$', errorInfo.stack]]);
+    }  else if (errorInfo.reason) {
       data = new Map([['$applicationLink$', config.get('application.mail.host')],
         ['$time$', current_Time], ['$host$', config.get('application.mail.host')],
         ['$reason$', errorInfo.reason], ['$code$', errorInfo.code],
@@ -759,17 +815,29 @@ class UserService {
     }
   }
 
-  getUserSubscriptionDetails(userId: string,callback: (error: any, result: any) => void) {
+  getUserSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
     let projection = {subscriptionForRA: 1};
-    this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
+    this.userRepository.findByIdWithProjection(userId, projection, (error, result) => {
       if (error) {
-      callback(error, null);
+        callback(error, null);
       } else {
         let subscriptionData = result.subscriptionForRA;
         let subscriptionDetails = this.getSubscriptionData(subscriptionData);
         callback(null, subscriptionDetails);
-       }
-     });
+      }
+    });
+  }
+
+  getPaymentStatusOfUser(userId: string,callback: (error: any, result: any) => void) {
+    let projection = { paymentStatus: 1 };
+    this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
+      if (error) {
+        callback(error, null);
+      } else {
+        logger.error('payemnt status of User : '+JSON.stringify(result));
+        callback(null, result);
+      }
+    });
   }
 
   getSubscriptionData(subscriptionData: UserSubscriptionForRA) {
@@ -799,21 +867,21 @@ class UserService {
     return subscriptionDetails;
   }
 
-  assignPremiumPackage(user:User,userId:string, cost: number,callback: (error: any, result: any) => void) {
+  assignPremiumPackage(user: User, userId: string, cost: number, callback: (error: any, result: any) => void) {
     let projection = {subscription: 1};
-    this.userRepository.findByIdWithProjection(userId,projection,(error,result)=> {
-      if(error) {
-        callback(error,null);
+    this.userRepository.findByIdWithProjection(userId, projection, (error, result) => {
+      if (error) {
+        callback(error, null);
       } else {
         let subScriptionArray = result.subscription;
         let subScriptionService = new SubscriptionService();
-        subScriptionService.getSubscriptionPackageByName('Premium','BasePackage',
+        subScriptionService.getSubscriptionPackageByName('Premium', 'BasePackage',
           (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
-            if(error) {
-              callback(error,null);
+            if (error) {
+              callback(error, null);
             } else {
               let premiumPackage = subscriptionPackage[0];
-              if(subScriptionArray[0].projectId.length === 0) {
+              if (subScriptionArray[0].projectId.length === 0) {
                 subScriptionArray[0].numOfBuildings = premiumPackage.basePackage.numOfBuildings;
                 subScriptionArray[0].numOfProjects = premiumPackage.basePackage.numOfProjects;
                 subScriptionArray[0].validity = subScriptionArray[0].validity + premiumPackage.basePackage.validity;
@@ -836,19 +904,19 @@ class UserService {
                 if (err) {
                   callback(err, null);
                 } else {
-                  callback(null, {data:'success'});
+                  callback(null, {data: 'success'});
                 }
               });
             }
-        });
+          });
       }
     });
   }
 
-  getProjects(user: User, callback:(error : any, result :any)=>void) {
+  getProjects(user: User, callback: (error: any, result: any) => void) {
 
-    let query = {_id: user._id };
-    let populate = {path: 'project', select: ['name','projectImage','buildings','activeStatus']};
+    let query = {_id: user._id};
+    let populate = {path: 'project', select: ['name', 'projectImage', 'buildings', 'activeStatus']};
     this.userRepository.findAndPopulate(query, populate, (error, result) => {
       if (error) {
         callback(error, null);
@@ -860,19 +928,19 @@ class UserService {
 
         let projectSubscriptionArray = Array<ProjectSubscriptionDetails>();
         let sampleProjectSubscriptionArray = Array<ProjectSubscriptionDetails>();
-        let isAbleToCreateNewProject : boolean = false;
-        for(let project of projectList) {
-          for(let subscription of subscriptionList) {
-            if(subscription.projectId.length !== 0) {
-              if(subscription.projectId[0].equals(project._id)) {
+        let isAbleToCreateNewProject: boolean = false;
+        for (let project of projectList) {
+          for (let subscription of subscriptionList) {
+            if (subscription.projectId.length !== 0) {
+              if (subscription.projectId[0].equals(project._id)) {
                 let projectSubscription = new ProjectSubscriptionDetails();
                 projectSubscription.projectName = project.name;
                 projectSubscription.projectId = project._id;
                 projectSubscription.activeStatus = project.activeStatus;
                 projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
                 projectSubscription.numOfBuildingsAllocated = project.buildings.length;
-                if(project && project.projectImage)
-                projectSubscription.projectImage = project.projectImage;
+                if (project && project.projectImage)
+                  projectSubscription.projectImage = project.projectImage;
                 projectSubscription.packageName = this.checkCurrentPackage(subscription);
                 //activation date for project subscription
                 let activation_date = new Date(subscription.activationDate);
@@ -1070,7 +1138,8 @@ class UserService {
     });
   }
 
-  updatePackage(user: User, subscription: any, packageName: string, costForBuildingPurchased: any, numberOfBuildingsPurchased: any, projectId: string, callback: (error: any, result: any) => void) {
+  updatePackage(user: User, subscription: any, packageName: string, costForBuildingPurchased: any,
+                numberOfBuildingsPurchased: any, projectId: string, callback: (error: any, result: any) => void) {
     let subScriptionService = new SubscriptionService();
     switch (packageName) {
       case 'Premium': {
@@ -1254,16 +1323,16 @@ class UserService {
       logger.debug('geting all user data for sending mail to users.');
 
       let projectSubscription = new ProjectSubcription();
-      let projection = { 'name' : 1 };
+      let projection = {'name': 1};
       let projectRepository = new ProjectRepository();
       let userService = new UserService();
 
-      projectRepository.findByIdWithProjection(user.subscription.projectId, projection, (error , resp) => {
-        if(error) {
-          logger.error('Error in fetching User data'+JSON.stringify(error));
+      projectRepository.findByIdWithProjection(user.subscription.projectId, projection, (error, resp) => {
+        if (error) {
+          logger.error('Error in fetching User data' + JSON.stringify(error));
           reject(error);
         } else {
-          logger.debug('got ProjectSubscription for user '+ user._id);
+          logger.debug('got ProjectSubscription for user ' + user._id);
           projectSubscription.userId = user._id;
           projectSubscription.userEmail = user.email;
           projectSubscription.first_name = user.first_name;
@@ -1291,20 +1360,20 @@ class UserService {
       let host = config.get('application.mail.host');
       let htmlTemplate = 'project-expiry-notification-mail.html';
 
-      let data:Map<string,string>= new Map([
-        ['$applicationLink$',config.get('application.mail.host')], ['$first_name$',user.first_name],
-        ['$project_name$',user.projectName],
-        ['$expiry_date$',user.projectExpiryDate], ['$subscription_link$',config.get('application.mail.host')+ 'signin'],
-        ['$app_name$','BuildInfo - Cost Control']]);
+      let data: Map<string, string> = new Map([
+        ['$applicationLink$', config.get('application.mail.host')], ['$first_name$', user.first_name],
+        ['$project_name$', user.projectName],
+        ['$expiry_date$', user.projectExpiryDate], ['$subscription_link$', config.get('application.mail.host') + 'signin'],
+        ['$app_name$', 'BuildInfo - Cost Control']]);
 
       let attachment = MailAttachments.AttachmentArray;
-      mailService.send( user.userEmail, Messages.PROJECT_EXPIRY_WARNING, htmlTemplate, data,attachment,
+      mailService.send(user.userEmail, Messages.PROJECT_EXPIRY_WARNING, htmlTemplate, data, attachment,
         (err: any, result: any) => {
-          if(err) {
-            console.log('Failed to send mail to user : '+user.userEmail);
+          if (err) {
+            console.log('Failed to send mail to user : ' + user.userEmail);
             reject(err);
           } else {
-            console.log('Mail sent successfully to user : '+user.userEmail);
+            console.log('Mail sent successfully to user : ' + user.userEmail);
             resolve(result);
           }
         });
@@ -1315,7 +1384,7 @@ class UserService {
     });
   }
 
-  calculateExpiryDate(subscription : any) {
+  calculateExpiryDate(subscription: any) {
     let activationDate = new Date(subscription.activationDate);
     let expiryDate = new Date(subscription.activationDate);
     let projectExpiryDate = new Date(expiryDate.setDate(activationDate.getDate() + subscription.validity));
@@ -1323,32 +1392,180 @@ class UserService {
     return readabledate;
   }
 
-  updateSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
-        let subScriptionService = new SubscriptionService();
-        subScriptionService.getSubscriptionPackageByName('RAPremium', 'BasePackage',
-          (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
-            if (error) {
-              callback(error, null);
+  getUserExistenceStatus(mobileNumber: number, appType: string, callback: (error: any, result: any) => void) {
+    let query = {'mobile_number': mobileNumber};
+    this.userRepository.retrieve(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else if (appType === 'mobile-app' && result.length > 0 && result[0].isActivated === true) {
+        this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, {
+              'isActivated': false,
+              'isPasswordSet': false,
+              'id': result[0]._id,
+              'mobileNumber': res.data.newMobileNumber,
+              'user': result[0]
+            });
+          }
+        });
+      } else if (appType === 'forgot-password-flow' && result.length > 0 && result[0].isActivated === true) {
+        this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, {
+              'isActivated': true,
+              'isPasswordSet': false,
+              'id': result[0]._id,
+              'mobileNumber': res.data.newMobileNumber,
+              'user': result[0]
+            });
+          }
+        });
+      } else if (appType === 'web-app' && result.length > 0 && result[0].isActivated === true) {
+        if (!result[0].password || result[0].password === undefined) {
+          this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+            if (err) {
+              callback(err, null);
             } else {
-              let result = subscriptionPackage[0];
-              let subscription = new UserSubscriptionForRA();
-              subscription.activationDate = new Date();
-              subscription.validity = result.basePackage.validity;
-              subscription.name = result.basePackage.name;
-              subscription.description = result.basePackage.description;
-              subscription.cost = result.basePackage.cost;
-              let query = {'_id': userId};
-              let updateData = {'subscriptionForRA': subscription};
-              this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-                if (error) {
-                  callback(error, null);
-                } else {
-                  callback(null, result);
-                }
+              callback(null, {
+                'isActivated': true,
+                'isPasswordSet': false,
+                'id': result[0]._id,
+                'mobileNumber': res.data.newMobileNumber,
+                'user': result[0]
               });
             }
           });
+        } else {
+          callback(null, {
+            'isActivated': true,
+            'isPasswordSet': true,
+            'id': result[0]._id,
+            'user': result[0]
+          });
+        }
+      } else if (result.length > 0 && result[0].isActivated === false) {
+        this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, {
+              'isActivated': false,
+              'isPasswordSet': false,
+              'id': result[0]._id,
+              'mobileNumber': res.data.newMobileNumber,
+              'user': result[0]
+            });
+          }
+        });
+      } else {
+        var item = {mobile_number: mobileNumber, isActivated: false, typeOfApp: 'RAapp'};
+        let subscriptionService = new SubscriptionService();
+
+        subscriptionService.getSubscriptionPackageByName('Trial', 'BasePackage', (err: any,
+                                                                                  trialSubscription: Array<SubscriptionPackage>) => {
+
+          if (trialSubscription.length > 0) {
+            this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model: any) => {
+              if (err) {
+                callback(err, null);
+                return;
+              }
+              this.sendOtp({mobile_number: mobileNumber}, {_id: model._id}, (err: any, res: any) => {
+                if (err) {
+                  callback(err, null);
+                } else {
+                  callback(null, {
+                    'isActivated': false,
+                    'isPasswordSet': false,
+                    'id': model._id,
+                    'mobileNumber': res.data.newMobileNumber,
+                    'user': model
+                  });
+                }
+              });
+            });
+          } else {
+            subscriptionService.addSubscriptionPackage(config.get('subscription.package.Trial'),
+              (error: any, trialSubscription) => {
+                this.assignFreeSubscriptionAndCreateUser(item, trialSubscription[0], (err: any, model: any) => {
+                  if (err) {
+                    callback(err, null);
+                    return;
+                  }
+                  this.sendOtp({mobile_number: mobileNumber}, {_id: model._id}, (err: any, res: any) => {
+                    if (err) {
+                      callback(err, null);
+                    } else {
+                      callback(null, {
+                        'isActivated': false,
+                        'isPasswordSet': false,
+                        'id': model._id,
+                        'mobileNumber': res.data.newMobileNumber,
+                        'user': model
+                      });
+                    }
+                  });
+                });
+              });
+          }
+        });
       }
+    });
+  }
+
+  updateSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
+    let subScriptionService = new SubscriptionService();
+    subScriptionService.getSubscriptionPackageByName('RAPremium', 'BasePackage',
+      (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          let result = subscriptionPackage[0];
+          let subscription = new UserSubscriptionForRA();
+          subscription.activationDate = new Date();
+          subscription.validity = result.basePackage.validity;
+          subscription.name = result.basePackage.name;
+          subscription.description = result.basePackage.description;
+          subscription.cost = result.basePackage.cost;
+          let query = {'_id': userId};
+          let updateData = {'subscriptionForRA': subscription, 'paymentStatus' : 'success'};
+          this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+            if (error) {
+              callback(error, null);
+            } else {
+              callback(null, result);
+            }
+          });
+        }
+      });
+  }
+
+  sendMailOnErrorWithOutCallback(errorInfo: any) {
+    this.sendMailOnError(errorInfo, (error: any, result: any) => {
+      if (error) {
+        this.loggerService.logErrorObj(error);
+      }
+    });
+  }
+
+  updatePaymentStatus(userId: string, paymentStatus: string, callback: (error: any, result: any) => void) {
+
+    let query = {'_id': userId};
+    let updateData = {'paymentStatus' : paymentStatus};
+    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        logger.error('Payment success failure : '+ JSON.stringify(result));
+        callback(null, result);
+      }
+    });
+  }
 }
 
 Object.seal(UserService);

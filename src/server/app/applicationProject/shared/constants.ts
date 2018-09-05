@@ -103,6 +103,9 @@ class Constants {
   public static ADMINISTRATIVE_CHARGES : string = 'Administrative charges';
   public static LOCAL_BODY_PROJECT_SANCTIONING_CHARGES : string = 'Local body-  Project sanctioning charges';
   public static SITE_SECURITY : string = 'Site security';
+  public static GAMES_AND_SPORTS : string = 'Games and sports';
+  public static SAFETY_AND_SECURITY_PROJECT : string = 'Safety and Security automation- Project';
+  public static MACHINERY_TOOLS_SCAFFOLDING : string = 'Machinery/Tools/Scaffolding';
 
   //Building Cost Heads
   public static RCC : string = 'RCC / PCC / Concrete';
@@ -137,12 +140,13 @@ class Constants {
   public static PIPED_GAS_SYSTEM : string = 'Piped gas system';
   public static SKY_LOUNGE_ON_TOP_TERRACE : string = 'Sky lounge on top terrace';
   public static FIRE_FIGHTING_SYSTEM : string = 'Fire fighting system';
-  public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation';
+  public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation- Building';
   public static SHOWER_ENCLOSURES : string = 'Shower Enclosures';
   public static FALSE_CEILING : string = 'False ceiling';
   public static STAIRCASE_TREADS_AND_RISERS : string = 'Staircase Treads and Risers';
   public static SPECIAL_ELEVATIONAL_FEATURES : string = 'Special elevational features';
   public static BOARDS_AND_SIGNAGES_INSIDE_BUILDING : string = 'Boards & Signages inside building';
+  public static ROOFING : string = 'Roofing';
 
   // Subscription package
   public static BASE_PACKAGE : string = 'basePackage';

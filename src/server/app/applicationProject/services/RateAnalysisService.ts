@@ -964,7 +964,7 @@ class RateAnalysisService {
         if(result.length > 0) {
           let workItem = new RAWorkItem();
           workItem.rate = result[0].workItemList.rate;
-          workItem.contractingAddOns = result[0].workItemList.contractorAddOns;
+          workItem.contractingAddOns = result[0].workItemList.contractingAddOns;
           callback(null, workItem);
         } else {
           callback(null, null);
