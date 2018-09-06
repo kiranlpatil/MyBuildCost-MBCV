@@ -79,9 +79,23 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     true
   );
 
-  console.log('sendProjectExpiryWarningMail status : before :', sendProjectExpiryWarningMail.running);
   sendProjectExpiryWarningMail.start();
-  console.log('sendProjectExpiryWarningMail status : after :', sendProjectExpiryWarningMail.running);
+
+
+  let synchAllRegionsForRateAnalysis = new CronJob('00  50 01 * * *', function() {
+      //let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
+      let rateAnalysisService : RateAnalysisService = new RateAnalysisService();
+      let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
+      _loggerService.logDebug('Starting to synch all regions from RateAnalysis');
+      rateAnalysisService.syncAllRateAnalysisRegions();
+    }, function () {
+      console.log('restart server');
+    },
+    true
+  );
+
+  synchAllRegionsForRateAnalysis.start();
+
   //logger log4js initialization
   /*
     console.log('Logger Initialization');
