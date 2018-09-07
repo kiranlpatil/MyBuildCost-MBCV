@@ -25,25 +25,28 @@
     <td  class="get-amount-value">
       <input type="number"  amountValidate="true"
              [class.validate-amount] = 'quantityItem?.nos?.toString().split(".")[0]?.length>7 ||
-                                        quantityItem?.nos?.toString().split(".")[1]?.length>2  '
+                                        quantityItem?.nos?.toString().split(".")[1]?.length>4  '
              [(ngModel)]="quantityItem.nos" id="numbers" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
     <td class="get-amount-value" [hidden]="!workItem.length">
       <input type="number" *ngIf="workItem"  amountValidate="true"
-             [class.validate-amount] = 'quantityItem?.length?.toString().split(".")[0]?.length>7 ||
-                                        quantityItem?.length?.toString().split(".")[1]?.length>2  '
+             [class.validate-amount] = '(quantityItem?.length?.toString().indexOf("-")<0 && quantityItem?.length?.toString().split(".")[0]?.length>7) ||
+                                        (quantityItem?.length?.toString().indexOf("-") ===0 && quantityItem?.length?.toString().split(".")[0]?.length>8 )||
+                                        quantityItem?.length?.toString().split(".")[1]?.length>4 '
              [(ngModel)]="quantityItem.length" id="length" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
     <td class="get-amount-value" [hidden]="!workItem.breadthOrWidth">
       <input  type="number" *ngIf="workItem"  amountValidate="true"
-              [class.validate-amount] = 'quantityItem?.breadth?.toString().split(".")[0]?.length>7 ||
-                                        quantityItem?.breadth?.toString().split(".")[1]?.length>2  '
+              [class.validate-amount] = '( quantityItem?.breadth?.toString().indexOf("-")<0 && quantityItem?.breadth?.toString().split(".")[0]?.length>7 )||
+                                       (quantityItem?.breadth?.toString().indexOf("-") ===0 && quantityItem?.breadth?.toString().split(".")[0]?.length>8 )||
+                                        quantityItem?.breadth?.toString().split(".")[1]?.length>4 '
               [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getQuantityTotal(quantityItems)" class="form-control"/>
     </td>
     <td class="get-amount-value" [hidden]="!workItem.height">
       <input type="number" *ngIf="workItem"  amountValidate="true"
-             [class.validate-amount] = 'quantityItem?.height?.toString().split(".")[0]?.length>7 ||
-                                        quantityItem?.height?.toString().split(".")[1]?.length>2  '
+             [class.validate-amount] = '(quantityItem?.height?.toString().indexOf("-")<0 && quantityItem?.height?.toString().split(".")[0]?.length>7)||
+                                        (quantityItem?.height?.toString().indexOf("-")===0 &&quantityItem?.height?.toString().split(".")[0]?.length>8 )||
+                                        quantityItem?.height?.toString().split(".")[1]?.length>4 '
              [(ngModel)]="quantityItem.height" id="height" (change)="getQuantityTotal(quantityItems)" class="form-control" required/>
     </td>
     <td class="get-amount-value">

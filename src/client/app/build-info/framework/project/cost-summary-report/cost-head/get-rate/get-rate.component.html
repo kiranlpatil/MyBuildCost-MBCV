@@ -65,7 +65,7 @@
                   <td>
                     <input type="number" amountValidate="true"
                            [class.validate-amount] = 'item?.quantity?.toString().split(".")[0]?.length>7 ||
-                                                     item?.quantity?.toString().split(".")[1]?.length>2'
+                                                     item?.quantity?.toString().split(".")[1]?.length>4'
                            [(ngModel)]="item.quantity" id="itemQuantity" class="form-control text-right hidden-xs"
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                     <span class="visible-xs mobile-quantity-value" [class.disable-mobile-quantity-value]="disableRateField">{{item.quantity}} {{item.unit}}</span>
@@ -76,7 +76,7 @@
                   <td>
                     <input type="number" amountValidate="true"
                            [class.validate-amount] = 'item?.rate?.toString().split(".")[0]?.length>7 ||
-                                                     item?.rate?.toString().split(".")[1]?.length>2'
+                                                     item?.rate?.toString().split(".")[1]?.length>4'
                     [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                   </td>

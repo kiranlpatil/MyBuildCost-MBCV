@@ -128,8 +128,8 @@ export class GetRateComponent implements OnChanges {
     if(quantity===null || rate===null ) {
       return true;
     }
-    if( quantity.toString().match(/^\d{1,7}(\.\d{1,2})?$/) &&
-      rate.toString().match(/^\d{1,7}(\.\d{1,2})?$/) ) {
+    if( quantity.toString().match(/^\d{1,7}(\.\d{1,4})?$/) &&
+      rate.toString().match(/^\d{1,7}(\.\d{1,4})?$/) ) {
       return true;
     }
     var message = new Message();

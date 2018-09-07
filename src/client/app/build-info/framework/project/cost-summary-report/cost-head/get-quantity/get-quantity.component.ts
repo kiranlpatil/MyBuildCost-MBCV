@@ -67,14 +67,12 @@ export class GetQuantityComponent implements OnInit {
   getQuantityTotal(quantityItems : any) {
     this.quantityTotal = 0;
     this.quantityItems = quantityItems;
-
     for(let quantityIndex in this.quantityItems) {
       var number = this.quantityItems[quantityIndex].nos;
       var length = this.quantityItems[quantityIndex].length;
       var height = this.quantityItems[quantityIndex].height;
       var breadth = this.quantityItems[quantityIndex].breadth;
       if (this.validateQuantityItems(number, length, height, breadth)) {
-
         this.quantityItems[quantityIndex].quantity = this.commonService.decimalConversion(number * (this.workItem.length ? length : 1) *
           (this.workItem.breadthOrWidth ? breadth : 1) * (this.workItem.height ? height : 1));
         this.quantityTotal = this.commonService.decimalConversion(this.quantityTotal +
@@ -84,6 +82,9 @@ export class GetQuantityComponent implements OnInit {
         var message = new Message();
         message.isError = true;
         message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+        if(number.toString().indexOf('-') === 0) {
+          message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE_ITEM_NUMBER;
+        }
         this.messageService.message(message);
       }
     }
@@ -92,10 +93,10 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
     if(number===null || length===null || height===null ||breadth===null) {
      return true;
   }
-    if( number.toString().match(/^\d{1,7}(\.\d{1,2})?$/) &&
-       length.toString().match(/^\d{1,7}(\.\d{1,2})?$/)&&
-       height.toString().match(/^\d{1,7}(\.\d{1,2})?$/)&&
-      breadth.toString().match(/^\d{1,7}(\.\d{1,2})?$/)) {
+    if( number.toString().match(/^\d{1,7}(\.\d{1,4})?$/) &&
+       length.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/)&&
+       height.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/)&&
+      breadth.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/)) {
       return true;
     }
     return false;

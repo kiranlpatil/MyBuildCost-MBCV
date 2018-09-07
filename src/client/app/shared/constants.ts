@@ -263,8 +263,9 @@ export class Messages {
   public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';
   public static PROJECT_EXPIRED: string = 'Project Expired';
   public static DISCLAIMER_MESSAGE: string = 'The Budgeted cost is based on thumb rule and may vary from project-to-project or place-to-place depending on construction methods and practices. <br/>The material consumption constants, material/labour rates in Rate analysis are based on various sources from the construction industry. <br/> All the in built contents/data of My Build Cost shall be used only for reference. The user shall verify the contents before using it. Big Slice Technologies Pvt Ltd (OPC), its Director/s, employees/representatives shall not be held responsible for any consequences resulted due to use of the contents/data of My Build Cost';
-  public static AMOUNT_VALIDATION_MESSAGE: string = 'This number format can have maximum 7 digits with 2 decimals. (e.g. 1234567.12).';
-  public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 2 decimals. (e.g. 123456789.12).';
+  public static AMOUNT_VALIDATION_MESSAGE: string = 'This number format can have maximum 7 digits with 4 decimals. (e.g. 1234567.1234).';
+  public static AMOUNT_VALIDATION_MESSAGE_ITEM_NUMBER: string = 'Item number should not be negative.';
+  public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 4 decimals. (e.g. 123456789.1234).';
 
   //Sample Project
   public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'Sample project helps you understand how the application works. Modified values will not be calculated or saved.';
