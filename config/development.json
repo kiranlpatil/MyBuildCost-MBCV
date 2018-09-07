@@ -1293,6 +1293,87 @@
             }
 
           ]
+        },
+        {
+          "name": "Piling",
+          "rateAnalysisId" : 363512,
+          "workItems": [
+            {
+              "name" : "Providing and executing piling work as per the design",
+              "rateAnalysisId" : 363513,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 500,
+              "directRatePerUnit" : "Rm",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            },
+            {
+              "name" : "Providing and executing pile cap as per the design",
+              "rateAnalysisId" : 363514,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : false,
+              "length" : false,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+
+          ]
+        },
+        {
+          "name": "Expansion joint treatment",
+          "rateAnalysisId" : 363515,
+          "workItems": [
+            {
+              "name" : "Providing and executing expansion joint treatment with filler as per specifications",
+              "rateAnalysisId" : 363516,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Rm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+
+          ]
+        },
+        {
+          "name": "Rebarring",
+          "rateAnalysisId" : 363517,
+          "workItems": [
+            {
+              "name" : "Providing and executing rebarring in concrete with suitable chemical including drilling",
+              "rateAnalysisId" : 363518,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : null,
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 0,
+              "directRatePerUnit" : null,
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : false
+            }
+
+          ]
         }
 
       ]
@@ -7962,6 +8043,43 @@
               "breadthOrWidth" : false,
               "height" : false
             }
+          ]
+        },
+        {
+          "name" : "Duct shuttering",
+          "rateAnalysisId" : 363518,
+          "workItems" : [
+            {
+              "name" : "Providing and installing wooden shutters with frame as per project specifications and drawings for electrical/fire fighting ducts",
+              "rateAnalysisId" : 363520,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : null,
+              "directRate" : 2500,
+              "directRatePerUnit" : "Sqm",
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            },
+            {
+              "name" : "Providing and installing fibre cement board shutters with suitable frame for plumbing ducts",
+              "rateAnalysisId" : 363521,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : 0,
+              "rateAnalysisUnit" : null,
+              "directRate" : 1600,
+              "directRatePerUnit" : "Sqm",
+              "isItemBreakdownRequired" : true,
+              "length" : true,
+              "breadthOrWidth" : false,
+              "height" : true
+            }
+
           ]
         }
       ]
