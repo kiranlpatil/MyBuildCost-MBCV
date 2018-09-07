@@ -62,7 +62,7 @@ class Constants {
   public static TARGETED_PROJECT_COMPLETION_PERIOD : string = 'targetedProjectCompletionPeriod';
 
   //Common Ammenities Cost Heads
-  public static SAFETY_MEASURES : string = 'Safety Measures';
+  public static SAFETY_MEASURES : string = 'Safety measures';
   public static CLUB_HOUSE : string = 'Club House';
   public static SWIMMING_POOL : string = 'Swimming Pool';
   public static CHILDREN_PLAY_AREA : string = 'Children play area';

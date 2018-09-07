@@ -291,7 +291,7 @@
     "Electricity and diesel charges": "(totalCarpetAreaOfUnit * 1.35 / 2) * targetedProjectCompletionPeriod",
     "Material Testing": "totalCarpetAreaOfUnit * 1.35 * 2",
     "Departmental Labour": "plotArea / 10000 * 300 * 30 * targetedProjectCompletionPeriod",
-    "Safety Measures": "totalCarpetAreaOfUnit * 1.35 * 5",
+    "Safety measures": "totalCarpetAreaOfUnit * 1.35 * 5",
     "Cleaning of units before possession": "totalCarpetAreaOfUnit * 1.35 * 2.5",
     "Sample Flat": 6000000,
     "Labour camp": "totalCarpetAreaOfUnit * 1.35 * 10",
@@ -1360,15 +1360,15 @@
             {
               "name" : "Providing and executing rebarring in concrete with suitable chemical including drilling",
               "rateAnalysisId" : 363518,
-              "isMeasurementSheet" : true,
-              "measurementUnit" : null,
+              "isMeasurementSheet" : false,
+              "measurementUnit" : "No",
               "isRateAnalysis" : false,
               "rateAnalysisPerUnit" : null,
               "rateAnalysisUnit" : null,
               "directRate" : 0,
-              "directRatePerUnit" : null,
-              "isItemBreakdownRequired" : false,
-              "length" : true,
+              "directRatePerUnit" : "No",
+              "isItemBreakdownRequired" : true,
+              "length" : false,
               "breadthOrWidth" : false,
               "height" : false
             }
@@ -8911,6 +8911,27 @@
               "height" : false
             }
           ]
+        },
+        {
+          "name" : "Shahbad stone/deck sheet roofing",
+          "rateAnalysisId" : 363522,
+          "workItems" : [
+            {
+              "name" : "Providing shahbad stone/deck sheet roofing supported on MS framing as per design and laying PCC above it",
+              "rateAnalysisId" : 363523,
+              "isMeasurementSheet" : true,
+              "measurementUnit" : "Sqm",
+              "isRateAnalysis" : false,
+              "rateAnalysisPerUnit" : null,
+              "rateAnalysisUnit" : null,
+              "directRate" : 2300,
+              "directRatePerUnit" : "Sqm",
+              "isItemBreakdownRequired" : false,
+              "length" : true,
+              "breadthOrWidth" : true,
+              "height" : false
+            }
+          ]
         }
       ]
     },
@@ -9123,6 +9144,27 @@
               "rateAnalysisUnit": null,
               "directRate": 400000,
               "directRatePerUnit": "Per No.",
+              "isItemBreakdownRequired": false,
+              "length": false,
+              "breadthOrWidth": false,
+              "height": false
+            }
+          ]
+        },
+        {
+          "name": "Sprinkling system",
+          "rateAnalysisId": 363524,
+          "workItems": [
+            {
+              "name": "Providing and executing water sprinking system for the garbage chute",
+              "rateAnalysisId": 363525,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 0,
+              "directRatePerUnit": "Job",
               "isItemBreakdownRequired": false,
               "length": false,
               "breadthOrWidth": false,
@@ -9515,6 +9557,27 @@
               "height": false
             }
           ]
+        },
+        {
+          "name": "Fibre cement sheet",
+          "rateAnalysisId": 363526,
+          "workItems": [
+            {
+              "name": "Providing and installing false ceiling with fibre cement sheets on suitable framing ",
+              "rateAnalysisId": 363527,
+              "isMeasurementSheet": true,
+              "measurementUnit": "Sqm",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "directRate": 160,
+              "directRatePerUnit": "Sqft",
+              "isItemBreakdownRequired": true,
+              "length": true,
+              "breadthOrWidth": true,
+              "height": false
+            }
+          ]
         }
       ]
     },
@@ -9770,7 +9833,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9785,7 +9848,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9800,7 +9863,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9820,7 +9883,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9835,7 +9898,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9850,7 +9913,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9865,7 +9928,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9880,7 +9943,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9900,7 +9963,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -9915,7 +9978,7 @@
               "isMeasurementSheet": true,
               "measurementUnit": "Rm",
               "isRateAnalysis": true,
-              "rateAnalysisPerUnit": null,
+              "rateAnalysisPerUnit": 100,
               "rateAnalysisUnit": "Rft",
               "isDirectRate": false,
               "directRate": null,
@@ -10189,6 +10252,189 @@
               "isDirectRate": true,
               "directRate": 0,
               "directRatePerUnit": "Job",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
+            }
+          ]
+        },
+        {
+          "name": "Water purification/softner system",
+          "rateAnalysisId": 363529,
+          "workItems": [
+            {
+              "name": "Providing and installing water purification/softner system for tanker/borewell water",
+              "rateAnalysisId": 363530,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 0,
+              "directRatePerUnit": "Job",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Safety measures",
+      "priorityId": 130,
+      "categories": [
+        {
+          "name": "Safety net",
+          "workItems": [
+            {
+              "name": "Installation & removal of safety net, 3 m wide, along with building periphery, using 6 m long,1-1/2\" dia GI pipe.",
+              /* "rateAnalysisId": 200149,*/
+              "isMeasurementSheet": true,
+              "measurementUnit": "Rm",
+              "isRateAnalysis": true,
+              "rateAnalysisPerUnit": 100,
+              "rateAnalysisUnit": "Rft",
+              "isDirectRate": false,
+              "directRate": null,
+              "directRatePerUnit": null,
+              "isItemBreakdownRequired": false,
+              "length": true,
+              "breadthOrWidth": null,
+              "height": null
+            },
+            {
+              "name": "Installation & removal of safety net, 3 m wide, along with building periphery, using 6 m long,1-1/2\" dia MS pipe",
+              /* "rateAnalysisId": 200150,*/
+              "isMeasurementSheet": true,
+              "measurementUnit": "Rm",
+              "isRateAnalysis": true,
+              "rateAnalysisPerUnit": 100,
+              "rateAnalysisUnit": "Rft",
+              "isDirectRate": false,
+              "directRate": null,
+              "directRatePerUnit": null,
+              "isItemBreakdownRequired": false,
+              "length": true,
+              "breadthOrWidth": null,
+              "height": null
+            },
+            {
+              "name": "Labour for installation and removal of safety net at various slab levels",
+              "rateAnalysisId": 290250,
+              "isMeasurementSheet": true,
+              "measurementUnit": "Sqm",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 45,
+              "directRatePerUnit": "Sqm",
+              "isItemBreakdownRequired": true,
+              "length": true,
+              "breadthOrWidth": true,
+              "height": false
+            },
+            {
+              "name": "Providing and installing safety railings on periphery",
+              "rateAnalysisId": 200151,
+              "isMeasurementSheet": true,
+              "measurementUnit": "Rm",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 0,
+              "directRatePerUnit": "Rft",
+              "isItemBreakdownRequired": false,
+              "length": true,
+              "breadthOrWidth": null,
+              "height": null
+            },
+            {
+              "name": "Providing and installing safety platforms on periphery",
+              "rateAnalysisId": 200152,
+              "isMeasurementSheet": true,
+              "measurementUnit": "Rm",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 0,
+              "directRatePerUnit": "Rft",
+              "isItemBreakdownRequired": false,
+              "length": true,
+              "breadthOrWidth": null,
+              "height": null
+            }
+          ]
+        },
+        {
+          "name": "Safety gear",
+          "rateAnalysisId": 200153,
+          "workItems": [
+            {
+              "name": "Providing and using Safety helmets for staff and workers",
+              "rateAnalysisId": 200154,
+              "isMeasurementSheet": false,
+              "measurementUnit": "No",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 350,
+              "directRatePerUnit": "No",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
+            },
+            {
+              "name": "Providing and using safety belts for workers",
+              "rateAnalysisId": 200155,
+              "isMeasurementSheet": false,
+              "measurementUnit": "No",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 650,
+              "directRatePerUnit": "No",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
+            },
+            {
+              "name": "Providing and using reflective jackets for workers",
+              "rateAnalysisId": 200156,
+              "isMeasurementSheet": false,
+              "measurementUnit": "No",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 150,
+              "directRatePerUnit": "No",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
+            },
+            {
+              "name": "Providing and using safety rubber shoes for workers",
+              "rateAnalysisId": 200157,
+              "isMeasurementSheet": false,
+              "measurementUnit": "No",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 250,
+              "directRatePerUnit": "No",
               "isItemBreakdownRequired": false,
               "length": null,
               "breadthOrWidth": null,
@@ -11301,15 +11547,15 @@
     {
       "name": "D G set backup",
       "priorityId": 113,
-      "rateAnalysisId": 200027,
+      "rateAnalysisId": 363550,
       "categories": [
         {
           "name": "Work Items",
-          "rateAnalysisId": 200028,
+          "rateAnalysisId": 363551,
           "workItems": [
             {
-              "name": "Providing and installing DG back up of required capacity",
-              "rateAnalysisId": 200029,
+              "name": "Providing and installing DG back up of required capacity with AMF panel and changeover",
+              "rateAnalysisId": 363552,
               "isMeasurementSheet": false,
               "measurementUnit": "No",
               "isRateAnalysis": false,
@@ -11607,6 +11853,22 @@
               "length": null,
               "breadthOrWidth": null,
               "height": null
+            },
+            {
+              "name": "Providing and installing the feeder pillar of the required capacity",
+              "rateAnalysisId": 363528,
+              "isMeasurementSheet": false,
+              "measurementUnit": "No",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 0,
+              "directRatePerUnit": "No",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
             }
           ]
         }
@@ -11864,6 +12126,28 @@
             {
               "name": "Providing hydropneumatic system for water pumping from UGWT to individual units",
               "rateAnalysisId": 200074,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 0,
+              "directRatePerUnit": "Job",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
+            }
+          ]
+        },
+        {
+          "name": "Water purification/softner system",
+          "rateAnalysisId": 363529,
+          "workItems": [
+            {
+              "name": "Providing and installing water purification/softner system for tanker/borewell water",
+              "rateAnalysisId": 363530,
               "isMeasurementSheet": false,
               "measurementUnit": "Job",
               "isRateAnalysis": false,
@@ -12540,169 +12824,6 @@
       ]
     },
     {
-      "name": "Safety Measures",
-      "priorityId": 130,
-      "rateAnalysisId": 200147,
-      "categories": [
-        {
-          "name": "Safety net/railings",
-          "rateAnalysisId": 200148,
-          "workItems": [
-            {
-              "name": "Installation & removal of safety net, 3 m wide, along with building periphery, using 6 m long,1-1/2\" dia GI pipe.",
-              "rateAnalysisId": 200149,
-              "isMeasurementSheet": true,
-              "measurementUnit": "Rm",
-              "isRateAnalysis": true,
-              "rateAnalysisPerUnit": 100,
-              "rateAnalysisUnit": "Rft",
-              "isDirectRate": false,
-              "directRate": null,
-              "directRatePerUnit": null,
-              "isItemBreakdownRequired": false,
-              "length": true,
-              "breadthOrWidth": null,
-              "height": null
-            },
-            {
-              "name": "Installation & removal of safety net, 3 m wide, along with building periphery, using 6 m long,1-1/2\" dia MS pipe",
-              "rateAnalysisId": 200150,
-              "isMeasurementSheet": true,
-              "measurementUnit": "Rm",
-              "isRateAnalysis": true,
-              "rateAnalysisPerUnit": 100,
-              "rateAnalysisUnit": "Rft",
-              "isDirectRate": false,
-              "directRate": null,
-              "directRatePerUnit": null,
-              "isItemBreakdownRequired": false,
-              "length": true,
-              "breadthOrWidth": null,
-              "height": null
-            },
-            {
-              "name": "Labour for installation and removal of safety net at various slab levels",
-              "rateAnalysisId": 290250,
-              "isMeasurementSheet": true,
-              "measurementUnit": "Sqm",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "isDirectRate": true,
-              "directRate": 45,
-              "directRatePerUnit": "Sqm",
-              "isItemBreakdownRequired": true,
-              "length": true,
-              "breadthOrWidth": true,
-              "height": false
-            },
-            {
-              "name": "Providing and installing safety railings on periphery",
-              "rateAnalysisId": 200151,
-              "isMeasurementSheet": true,
-              "measurementUnit": "Rm",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "isDirectRate": true,
-              "directRate": 0,
-              "directRatePerUnit": "Rft",
-              "isItemBreakdownRequired": false,
-              "length": true,
-              "breadthOrWidth": null,
-              "height": null
-            },
-            {
-              "name": "Providing and installing safety platforms on periphery",
-              "rateAnalysisId": 200152,
-              "isMeasurementSheet": true,
-              "measurementUnit": "Rm",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "isDirectRate": true,
-              "directRate": 0,
-              "directRatePerUnit": "Rft",
-              "isItemBreakdownRequired": false,
-              "length": true,
-              "breadthOrWidth": null,
-              "height": null
-            }
-          ]
-        },
-        {
-          "name": "Safety gear",
-          "rateAnalysisId": 200153,
-          "workItems": [
-            {
-              "name": "Providing and using Safety helmets for staff and workers",
-              "rateAnalysisId": 200154,
-              "isMeasurementSheet": false,
-              "measurementUnit": "No",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "isDirectRate": true,
-              "directRate": 350,
-              "directRatePerUnit": "No",
-              "isItemBreakdownRequired": false,
-              "length": null,
-              "breadthOrWidth": null,
-              "height": null
-            },
-            {
-              "name": "Providing and using safety belts for workers",
-              "rateAnalysisId": 200155,
-              "isMeasurementSheet": false,
-              "measurementUnit": "No",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "isDirectRate": true,
-              "directRate": 650,
-              "directRatePerUnit": "No",
-              "isItemBreakdownRequired": false,
-              "length": null,
-              "breadthOrWidth": null,
-              "height": null
-            },
-            {
-              "name": "Providing and using reflective jackets for workers",
-              "rateAnalysisId": 200156,
-              "isMeasurementSheet": false,
-              "measurementUnit": "No",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "isDirectRate": true,
-              "directRate": 150,
-              "directRatePerUnit": "No",
-              "isItemBreakdownRequired": false,
-              "length": null,
-              "breadthOrWidth": null,
-              "height": null
-            },
-            {
-              "name": "Providing and using safety rubber shoes for workers",
-              "rateAnalysisId": 200157,
-              "isMeasurementSheet": false,
-              "measurementUnit": "No",
-              "isRateAnalysis": false,
-              "rateAnalysisPerUnit": null,
-              "rateAnalysisUnit": null,
-              "isDirectRate": true,
-              "directRate": 250,
-              "directRatePerUnit": "No",
-              "isItemBreakdownRequired": false,
-              "length": null,
-              "breadthOrWidth": null,
-              "height": null
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "Society Office with furniture",
       "priorityId": 131,
       "rateAnalysisId": 200208,
@@ -12964,6 +13085,22 @@
             {
               "name": "Appointing lighting consultant for the project",
               "rateAnalysisId": 200231,
+              "isMeasurementSheet": false,
+              "measurementUnit": "Job",
+              "isRateAnalysis": false,
+              "rateAnalysisPerUnit": null,
+              "rateAnalysisUnit": null,
+              "isDirectRate": true,
+              "directRate": 0,
+              "directRatePerUnit": "Job",
+              "isItemBreakdownRequired": false,
+              "length": null,
+              "breadthOrWidth": null,
+              "height": null
+            },
+            {
+              "name": "Appointing Quantity and Cost estimation consultant for the project ",
+              "rateAnalysisId": 363531,
               "isMeasurementSheet": false,
               "measurementUnit": "Job",
               "isRateAnalysis": false,
