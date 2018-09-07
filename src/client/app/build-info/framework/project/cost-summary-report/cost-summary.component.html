@@ -103,7 +103,7 @@
                       <span *ngIf="thumbRuleItem.rate === 0">-</span>
                     </td>
                     <td class="border-left" [class.validate-amount] = 'thumbRuleItem?.amount?.toString().split(".")[0]?.length>9 ||
-                                                       thumbRuleItem?.amount?.toString().split(".")[1]?.length>2'>
+                                                       thumbRuleItem?.amount?.toString().split(".")[1]?.length>4'>
                       <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
                       <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0 && thumbRuleItem.amount!==''">
                         {{thumbRuleItem.amount | number: '1.0-0'  }}

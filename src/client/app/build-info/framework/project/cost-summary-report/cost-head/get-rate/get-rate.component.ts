@@ -128,8 +128,8 @@ export class GetRateComponent implements OnChanges {
     if(quantity===null || rate===null ) {
       return true;
     }
-    if( quantity.toString().match(/^\d{1,7}(\.\d{1,2})?$/) &&
-      rate.toString().match(/^\d{1,7}(\.\d{1,2})?$/) ) {
+    if( quantity.toString().match(/^\d{1,7}(\.\d{1,4})?$/) &&
+      rate.toString().match(/^\d{1,7}(\.\d{1,4})?$/) ) {
       return true;
     }
     var message = new Message();
@@ -232,7 +232,7 @@ export class GetRateComponent implements OnChanges {
   }
 
   onUpdateRateFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -333,7 +333,7 @@ export class GetRateComponent implements OnChanges {
 
 
   onGetRateItemsByOriginalNameFailure(error: any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);

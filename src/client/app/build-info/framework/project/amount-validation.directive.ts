@@ -12,6 +12,9 @@ export class AmountValidationDirective {
       if(e.keyCode===190 &&event.target.value.toString().indexOf('.')>-1 ) {
         event.preventDefault();
       }
+      if(e.keyCode===189 &&event.target.value.toString().indexOf('-')>-1 ) {
+        event.preventDefault();
+      }
     }
   }
 }

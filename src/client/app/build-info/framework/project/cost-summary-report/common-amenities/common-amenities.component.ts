@@ -62,7 +62,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
 
 
   changeBudgetedCostAmountOfProjectCostHead(costHead: string, amount: number) {
-    if(amount !== null && amount &&  amount.toString().match(/^\d{1,9}(\.\d{1,2})?$/)===null ) {
+    if(amount !== null && amount &&  amount.toString().match(/^\d{1,9}(\.\d{1,4})?$/)===null ) {
       var message = new Message();
       message.isError = true;
       message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE_BUDGETED;
@@ -90,7 +90,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
 
   onUpdateBudgetedCostAmountFailure(error : any) {
 
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 ||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('onAddCostheadSuccess : '+error);
@@ -119,7 +119,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onGetAllInActiveCostHeadsFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);
@@ -144,7 +144,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onActiveCostHeadFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('onActiveCostHeadFailure()'+error);
@@ -175,7 +175,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   }
 
   onInactivateCostHeadFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('onActiveCostHeadFailure()'+error);

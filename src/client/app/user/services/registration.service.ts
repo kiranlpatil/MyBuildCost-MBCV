@@ -33,12 +33,13 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
     SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
     SessionStorageService.setSessionValue(SessionStorage.IS_USER_SIGN_IN, 0);
     SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
-      this._router.navigate([NavigationRoutes.APP_CREATE_NEW_PROJECT]);
+      //this._router.navigate([NavigationRoutes.APP_CREATE_NEW_PROJECT]);
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 
   onLoginFailure(error: any) {
     SessionStorageService.setSessionValue(SessionStorage.PASSWORD, '');
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 ||error.err_code === 401 || error.err_code === 0) {
       var message = new Message();
       message.error_msg = error.message;
       message.isError = true;

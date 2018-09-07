@@ -44,9 +44,6 @@ class ProjectSchema {
         poolCapacity: {
         type: Number
       },
-        totalNumOfBuildings: {
-        type: Number
-      },
       plotPeriphery: {
         type: Number
       },

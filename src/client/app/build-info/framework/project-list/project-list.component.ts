@@ -98,7 +98,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   onGetAllProjectFailure(error : any) {
-    if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if(error.err_code === 404 || error.err_code === 401 ||error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log(error);

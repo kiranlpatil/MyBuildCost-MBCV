@@ -5,7 +5,9 @@ class  RACategory {
   rateAnalysisId: number;
   workItems : Array<RAWorkItem>;
 
-  constructor() {
+  constructor(name:string, rateId:number) {
+    this.name = name;
+    this.rateAnalysisId = rateId;
   }
 }
 export  = RACategory;

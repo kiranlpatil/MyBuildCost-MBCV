@@ -47,11 +47,10 @@ class ProjectInterceptor {
   createProject(req: any, res: any, next: any) {
     if ((req.body.name === undefined) || (req.body.region === undefined) || (req.body.plotArea === undefined) || (req.body.plotPeriphery === undefined) ||
       (req.body.podiumArea === undefined) || (req.body.openSpace === undefined) || (req.body.slabArea === undefined) || (req.body.poolCapacity === undefined) ||
-      (req.body.projectDuration === undefined) || (req.body.totalNumOfBuildings === undefined) ||(req.body.activeStatus === undefined) ||
+      (req.body.projectDuration === undefined) ||(req.body.activeStatus === undefined) ||
       (req.body.name === '') || (req.body.region === '') || (req.body.plotArea === '') ||
       (req.body.plotPeriphery === '') || (req.body.podiumArea === '') || (req.body.openSpace === '') ||
-      (req.body.slabArea === '') || (req.body.poolCapacity === '') || (req.body.projectDuration === '') ||(req.body.activeStatus === '') ||
-      (req.body.totalNumOfBuildings === '')) {
+      (req.body.slabArea === '') || (req.body.poolCapacity === '') || (req.body.projectDuration === '') ||(req.body.activeStatus === '')) {
       next({
         reason: Messages.MSG_ERROR_EMPTY_FIELD,
         message: Messages.MSG_ERROR_EMPTY_FIELD,
@@ -127,9 +126,9 @@ class ProjectInterceptor {
           if ((req.body.name === undefined) || (req.body.region === undefined) || (req.body.plotArea === undefined) ||
             (req.body.plotPeriphery === undefined) || (req.body.podiumArea === undefined) || (req.body.openSpace === undefined) ||
             (req.body.slabArea === undefined) || (req.body.poolCapacity === undefined) || (req.body.projectDuration === undefined) ||
-            (req.body.totalNumOfBuildings === undefined) || (req.body.name === '') || (req.body.region === '') || (req.body.plotArea === '') ||
+             (req.body.name === '') || (req.body.region === '') || (req.body.plotArea === '') ||
             (req.body.plotPeriphery === '') || (req.body.podiumArea === '') || (req.body.openSpace === '') ||
-            (req.body.slabArea === '') || (req.body.poolCapacity === undefined) || (req.body.projectDuration === '') || (req.body.totalNumOfBuildings === '')) {
+            (req.body.slabArea === '') || (req.body.poolCapacity === undefined) || (req.body.projectDuration === '')) {
             next({
               reason: Messages.MSG_ERROR_EMPTY_FIELD,
               message: Messages.MSG_ERROR_EMPTY_FIELD,

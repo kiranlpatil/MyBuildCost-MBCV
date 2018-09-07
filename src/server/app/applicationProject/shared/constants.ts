@@ -5,8 +5,12 @@ class Constants {
   public static BUILDING : string = 'building';
   public static SQUARE_METER : string = 'SqureMeter';
   public static RATE_ANALYSIS_API : string = 'rateAnalysisAPI.';
+  public static START_POINT : string = 'startPoint';
   public static RATE_ANALYSIS_API_ENDPOINT : string = 'EndPoint';
+  public static RA_CONTRACTOR_API_ENDPOINT : string = 'contractorEndpoint';
+  public static RA_REGION_RESULT : string = 'rateAnalysisRegionResult';
   public static RATE_ANALYSIS_COSTHEADS : string = 'CostHeads';
+  public static RATE_ANALYSIS_CONTRACTOR_ADD_ONS : string = 'contractorAddOns';
   public static RATE_ANALYSIS_CATEGORIES : string = 'Categories';
   public static RATE_ANALYSIS_WORKITEMS : string = 'WorkItems';
   public static RATE_ANALYSIS_RATE : string = 'Rate';
@@ -17,6 +21,8 @@ class Constants {
   public static RATE_ANALYSIS_ITEMS : string = 'Items';
   public static RATE_ANALYSIS_DATA : string = 'RateAnalysisData';
   public static RATE_ANALYSIS_UOM : string = 'UOM';
+  public static CONTRACTING_ADD_ONS : string = 'ContractingAddOn';
+  public static RATEANALYSIS_ADD_ON_DATA : string = 'RateAnalysisAddonData';
   public static THUMBRULE_RATE : string = 'thumbRuleRate';
   public static COST_HEAD_CLONE='Cost Head';
   public static WORK_ITEM_CLONE='Work Item';
@@ -56,7 +62,7 @@ class Constants {
   public static TARGETED_PROJECT_COMPLETION_PERIOD : string = 'targetedProjectCompletionPeriod';
 
   //Common Ammenities Cost Heads
-  public static SAFETY_MEASURES : string = 'Safety Measures';
+  public static SAFETY_MEASURES : string = 'Safety measures';
   public static CLUB_HOUSE : string = 'Club House';
   public static SWIMMING_POOL : string = 'Swimming Pool';
   public static CHILDREN_PLAY_AREA : string = 'Children play area';
@@ -97,6 +103,9 @@ class Constants {
   public static ADMINISTRATIVE_CHARGES : string = 'Administrative charges';
   public static LOCAL_BODY_PROJECT_SANCTIONING_CHARGES : string = 'Local body-  Project sanctioning charges';
   public static SITE_SECURITY : string = 'Site security';
+  public static GAMES_AND_SPORTS : string = 'Games and sports';
+  public static SAFETY_AND_SECURITY_PROJECT : string = 'Safety and Security automation- Project';
+  public static MACHINERY_TOOLS_SCAFFOLDING : string = 'Machinery/Tools/Scaffolding';
 
   //Building Cost Heads
   public static RCC : string = 'RCC / PCC / Concrete';
@@ -126,17 +135,18 @@ class Constants {
   public static INTERNAL_PLUMBING_WITH_VERTICAL_LINES : string = 'Internal plumbing with vertical lines';
   public static WINDOWS_SLIDING_DOORS : string = 'Windows/Sliding doors';
   public static ELECTRICAL_LIGHT_FITTINGS_IN_COMMON_AREAS_OF_BUILDINGS : string = 'Electrical light fittings inside building';
-  public static PEST_CONTROL : string = 'Pest Control / Antitermite treatment';
+  public static PEST_CONTROL : string = 'Anti termite / Pest Control treatment';
   public static SOLAR_WATER_HEATING_SYSTEM : string = 'Solar water heating system';
   public static PIPED_GAS_SYSTEM : string = 'Piped gas system';
   public static SKY_LOUNGE_ON_TOP_TERRACE : string = 'Sky lounge on top terrace';
   public static FIRE_FIGHTING_SYSTEM : string = 'Fire fighting system';
-  public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation';
+  public static SAFETY_AND_SECURITY_AUTOMATION : string = 'Safety and Security automation- Building';
   public static SHOWER_ENCLOSURES : string = 'Shower Enclosures';
   public static FALSE_CEILING : string = 'False ceiling';
   public static STAIRCASE_TREADS_AND_RISERS : string = 'Staircase Treads and Risers';
   public static SPECIAL_ELEVATIONAL_FEATURES : string = 'Special elevational features';
   public static BOARDS_AND_SIGNAGES_INSIDE_BUILDING : string = 'Boards & Signages inside building';
+  public static ROOFING : string = 'Roofing';
 
   // Subscription package
   public static BASE_PACKAGE : string = 'basePackage';
@@ -203,5 +213,7 @@ class Constants {
   // Error Messages
   public static MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION = 'Oop\'s! looks like you haven\'t provided Cost Estimation for ';
   public static MSG_ERROR_DUPLICATE_ITEM = 'Item with the same name already exists, Please update the name for item ';
+  public static TRIAL_PERIOD = 5;
+  public static PREMIUM_PERIOD = 5;
 }
 export=Constants;

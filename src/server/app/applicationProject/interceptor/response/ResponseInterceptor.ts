@@ -30,7 +30,13 @@ class ResponseInterceptor {
       res.status(500).send(data);
     }else {
       logger.info('Response to URL => '+ req.baseUrl);
-      logger.info('Data => '+ JSON.stringify(response.data));
+      if(response && response.code && response.code === 401) {
+        let data = {
+          message: response.message,
+          cause: response.stack
+        };
+        res.status(response.code ).send(response.data);
+      }
       res.status(response.status).send(response.data);
     }
   }

@@ -116,7 +116,7 @@
                                   <div class="edit-field" [class.active-rate]="(showWorkItemTab == getLabel().WORKITEM_RATE_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
                                     <input amountValidate="true" title="Workitem Rate" *ngIf="workItem.isDirectRate" type = "number"
                                            [class.validate-amount] = 'workItem?.rate?.total?.toString().split(".")[0].length>7 ||
-                                           workItem?.rate?.total?.toString().split(".")[1]?.length>2 ||workItem?.rate?.total?.toString().split(".").length>2 '
+                                           workItem?.rate?.total?.toString().split(".")[1]?.length>4 ||workItem?.rate?.total?.toString().split(".").length>4 '
                                            [(ngModel)]="workItem.rate.total"
                                            (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.workItemId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
                                     <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">

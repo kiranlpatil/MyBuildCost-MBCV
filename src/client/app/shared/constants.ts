@@ -20,9 +20,9 @@ export class AppSettings {
   */
 
   /*
-    // Localhost Project and User Id new
-    public static SAMPLE_PROJECT_ID = '5b644d4993310206e4f0d94e';
-    public static SAMPLE_PROJECT_USER_ID = '5b643c9d8e94d52c74075f50';
+    // Localhost Project and User Id
+    public static SAMPLE_PROJECT_ID = '5b56e4df051fbf1d24d0c342';
+    public static SAMPLE_PROJECT_USER_ID = '5b56e47f051fbf1d24d0c341';
   */
 
 /*
@@ -46,7 +46,9 @@ export class AppSettings {
 export class Messages {
   public static FROM_REGISTRATION = 'registration';
   public static FROM_ACCOUNT_DETAIL = 'accountdetail';
+  public static MSG_ERROR_UNAUTHORIZED = 'Unauthorized';
   public static MSG_ERROR_UNCAUGHT_EXCEPTION='The server was unable to complete your request. Please try again.';
+  public static MSG_ERROR_UNAUTHORIZED_FOR_USER='You are an unauthorized user please sign in or sign up.';
 
   //Registraion Success messages
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
@@ -140,7 +142,7 @@ export class Messages {
 
 //payment error messages
 
-  public static BUILDING_PURCHASED_ERROR = 'You can add total 10 buildings to the project';
+  public static BUILDING_PURCHASED_ERROR = 'You can add only 5 buildings at once.';
 
 
   public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and you will receive a verification code on it.';
@@ -263,8 +265,9 @@ export class Messages {
   public static PAYMENT_CANCEL_MESSAGE: string = 'Your payment has been cancelled';
   public static PROJECT_EXPIRED: string = 'Project Expired';
   public static DISCLAIMER_MESSAGE: string = 'The Budgeted cost is based on thumb rule and may vary from project-to-project or place-to-place depending on construction methods and practices. <br/>The material consumption constants, material/labour rates in Rate analysis are based on various sources from the construction industry. <br/> All the in built contents/data of My Build Cost shall be used only for reference. The user shall verify the contents before using it. Big Slice Technologies Pvt Ltd (OPC), its Director/s, employees/representatives shall not be held responsible for any consequences resulted due to use of the contents/data of My Build Cost';
-  public static AMOUNT_VALIDATION_MESSAGE: string = 'This number format can have maximum 7 digits with 2 decimals. (e.g. 1234567.12).';
-  public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 2 decimals. (e.g. 123456789.12).';
+  public static AMOUNT_VALIDATION_MESSAGE: string = 'This number format can have maximum 7 digits with 4 decimals. (e.g. 1234567.1234).';
+  public static AMOUNT_VALIDATION_MESSAGE_ITEM_NUMBER: string = 'Item number should not be negative.';
+  public static AMOUNT_VALIDATION_MESSAGE_BUDGETED: string = 'This number format can have maximum 9 digits with 4 decimals. (e.g. 123456789.1234).';
 
   //Sample Project
   public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'Sample project helps you understand how the application works. Modified values will not be calculated or saved.';
@@ -671,6 +674,7 @@ export class Button {
   public static NEXT: string = 'Next';
   public static SUBMIT: string = 'Submit';
   public static CREATE_NEW_PROJECT: string = 'Create New Project';
+  public static CREATE_TRIAL_PROJECT: string = 'Create Trial Project';
   public static CREATE: string = 'Create';
   public static CLICK_HERE: string = 'click here';
   public static BACK_TO_HOME: string = 'Back to home';

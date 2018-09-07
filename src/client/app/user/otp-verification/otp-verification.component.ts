@@ -95,7 +95,7 @@ export class OtpVerificationComponent {
     this.onMobileNumberChangeSuccess.emit();
   }
   onVerifyPhoneFailure(error: any) {
-    if (error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if (error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.showErrorMessage(error);
     } else {
       this.isShowErrorMessage = false;
@@ -107,7 +107,7 @@ export class OtpVerificationComponent {
     this.showInformationMessage(successMessage);
   }
   resendOtpFailure(error: any) {
-    if (error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
+    if (error.err_code === 404 ||error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
       this.showErrorMessage(error);
     } else {
       this.isShowErrorMessage = false;
