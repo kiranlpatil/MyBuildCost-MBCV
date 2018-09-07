@@ -1,9 +1,9 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
-  //public static IP = 'http://13.232.139.161:8080'; // build info staging
-  public static HOST_NAME = 'localhost:8080';
+  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://13.232.139.161:8080'; // build info staging
+  //public static HOST_NAME = 'localhost:8080';
+  public static HOST_NAME = '13.232.139.161:8080';
 
-  //public static HOST_NAME = '13.232.139.161:8080';
   public static INITIAL_THEM = 'container-fluid dark-theme';
   public static LIGHT_THEM = 'container-fluid light-theme';
   public static IS_SOCIAL_LOGIN_YES = 'YES';
@@ -11,9 +11,11 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
   public static PUBLIC = '/server/public';
   public static ATTACHMENT_FILES = '/attachment-files/';
-  public static SAMPLE_PROJECT_ID = '5b4c8f44b3a2d31c208b39bd';
-  public static SAMPLE_PROJECT_USER_ID = '5b4c8f2db3a2d31c208b39bc';
 
+  /*
+  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
+  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
+  */
 
   /*
     // Localhost Project and User Id
@@ -21,11 +23,11 @@ export class AppSettings {
     public static SAMPLE_PROJECT_USER_ID = '5b56e47f051fbf1d24d0c341';
   */
 
-/*
+
   // Staging Project and User Id
-  public static SAMPLE_PROJECT_ID = '5b67f5b93ee1a527f40efc22';
-  public static SAMPLE_PROJECT_USER_ID = '5b67f5923ee1a527f40efc21';
-*/
+  public static SAMPLE_PROJECT_ID = '5b7ffd2a88029f0e1f0e4793';
+  public static SAMPLE_PROJECT_USER_ID = '5b7ffd1588029f0e1f0e4792';
+
 
 /*
   // Production Project and User Id
@@ -230,7 +232,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_QUANTITY_HEIGHT_REQUIRED = 'Enter height';
   public static MSG_ERROR_VALIDATION_QUANTITY_QUANTITY_REQUIRED = 'Enter quantity';
   public static MSG_ERROR_VALIDATION_QUANTITY_UNIT_REQUIRED = 'Enter unit';
-  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Fields cannot be empty';
+  public static MSG_ERROR_VALIDATION_QUANTITY_REQUIRED = 'Item name cannot be blank once you add any of the measurement details against the item.';
   public static MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED = 'Flat/Floor details can not be empty';
   public static LOGIN_INFO: string = 'Enter your details below';
   public static MSG_SUCCESS_ALREADY_ADDED_ALL_COSTHEADS: string = 'Already added all Cost Heads.';

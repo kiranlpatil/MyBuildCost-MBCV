@@ -61,10 +61,11 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   //syncAtEveryFifteenMinute.start();
 
 
-  let sendProjectExpiryWarningMail = new CronJob('00 50 23 * * *', function() {
-  //let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
+  let sendProjectExpiryWarningMail = new CronJob('00 55 23 * * *', function() {
+      logger.debug('sendProjectExpiryWarningMail in debug mode');
       let userService : UserService = new UserService();
-      let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
+      let _loggerService: LoggerService = new LoggerService('sendProjectExpiryWarningMail');
+      _loggerService.logDebug('ProjectExpiryWarningMail started.');
       userService.sendProjectExpiryWarningMails((error, success) => {
         if(error) {
           _loggerService.logError('Error in sendProjectExpiryWarningMail for users : ' +error);
@@ -229,8 +230,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       /**
        * Client Dir
        */
-      _clientDir = './dist/client/prod';
-      _serverDir = '/dist/server/prod';
+      _clientDir = './client/prod';
+      _serverDir = '/server/prod';
 
       /**
        * Static.
@@ -247,7 +248,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
        * @param res {any}
        */
       var renderIndex = function (req: express.Request, res: express.Response) {
-        _clientDir = '/dist/client/prod';
+        _clientDir = '/client/prod';
         res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
       };
 

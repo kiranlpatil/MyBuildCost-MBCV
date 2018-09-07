@@ -9,6 +9,11 @@ import Messages = require('../shared/messages');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import ProjectAsset = require('../shared/projectasset');
 import MailAttachments = require('../shared/sharedarray');
+import { asElementData } from '@angular/core/src/view';
+import bcrypt = require('bcrypt');
+let log4js = require('log4js');
+let logger = log4js.getLogger('User service');
+import { MailChimpMailerService } from './mailchimp-mailer.service';
 import UserModel = require('../dataaccess/model/UserModel');
 import User = require('../dataaccess/mongoose/user');
 import SubscriptionService = require('../../applicationProject/services/SubscriptionService');
@@ -61,6 +66,7 @@ class UserService {
       if (err) {
         callback(new Error(err), null);
       } else if (res.length > 0) {
+        logger.debug('Email already exist'+JSON.stringify(res));
 
         if (res[0].isActivated === true) {
           callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
@@ -69,9 +75,11 @@ class UserService {
         }
 
       } else {
+        logger.debug('Email not present.'+JSON.stringify(res));
         const saltRounds = 10;
         bcrypt.hash(item.password, saltRounds, (err: any, hash: any) => {
           if (err) {
+            logger.error('Error in creating hash password');
             callback({
               reason: 'Error in creating hash using bcrypt',
               message: 'Error in creating hash using bcrypt',
@@ -79,6 +87,7 @@ class UserService {
               code: 403
             }, null);
           } else {
+            logger.debug('created hash succesfully.');
             item.password = hash;
             let subScriptionService = new SubscriptionService();
             if (item.typeOfApp !== 'RAapp') {
@@ -147,8 +156,10 @@ class UserService {
     }
     this.userRepository.create(user, (err: Error, res: any) => {
       if (err) {
+        logger.error('Failed to Creating user subscription package');
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else {
+        logger.debug('created user succesfully.'+JSON.stringify(res));
         callback(err, res);
         if (user && user.email) {
           let auth = new AuthInterceptor();
@@ -393,7 +404,7 @@ class UserService {
           + messaging.fl + '&gwid=' + messaging.gwid;
 
         // call post api of Orca info solutions to send OTP
-        /*request.post({url: url, json: ''}, (error: any, response: any, body: any) => {
+        request.post({url: url, json: ''}, (error: any, response: any, body: any) => {
           if (error) {
             callback(error, null);
           } else if (!error && response) {
@@ -402,10 +413,10 @@ class UserService {
             res.new_mobile_number = generateOtpObject.new_mobile_number;
             callback(null, res);
           }
-        });*/
+        });
         // end of post api
-        result._doc.new_mobile_number = generateOtpObject.new_mobile_number;
-        callback(null, result);
+        // result._doc.new_mobile_number = generateOtpObject.new_mobile_number;
+        // callback(null, result);
       }
     });
   }

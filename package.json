@@ -228,7 +228,6 @@
     "spdy": "^3.4.4",
     "systemjs": "0.20.14",
     "typescript-ioc": "^1.0.2",
-    "typings": "^2.1.1",
     "winston": "^2.2.0",
     "xlsx-to-json": "^0.3.0",
     "zone.js": "^0.8.7"

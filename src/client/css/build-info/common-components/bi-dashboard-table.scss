@@ -271,7 +271,7 @@
   }
 }
 
-#category-panel {
+#category-panel{
   .edit-field {
     &:hover {
       input {
@@ -282,7 +282,8 @@
   }
 }
 
-#show-embedded-table-row {
+#show-embedded-table-row,
+#category-panel .delete-quantity-details-row {
   .edit-field {
     &:hover {
       input {

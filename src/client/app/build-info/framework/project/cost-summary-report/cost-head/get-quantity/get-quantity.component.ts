@@ -122,8 +122,8 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
       this.messageService.message(message);
       return;
     }
-    if((this.keyQuantity !== '' && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
-      let quantityItemsArray = this.validateQuantityItem(quantityItems);
+    if(this.validateQuantityItemName(quantityItems) && (this.keyQuantity !== '' && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
+     let quantityItemsArray = this.validateQuantityItem(quantityItems);
       let quantityObj : QuantityDetails = new QuantityDetails();
       quantityObj.id = this.quantityId;
       quantityObj.name = this.keyQuantity;
@@ -139,7 +139,11 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
     } else {
      let message = new Message();
       message.isError = true;
-      message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
+      if(this.keyQuantity !== null && this.keyQuantity !== undefined) {
+        message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_REQUIRED;
+      } else {
+        message.error_msg = Messages.MSG_ERROR_VALIDATION_QUANTITY_NAME_REQUIRED;
+      }
       this.messageService.message(message);
     }
   }
@@ -153,6 +157,18 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
     return quantityItems;
   }
 
+  validateQuantityItemName(quantityItems : Array<QuantityItem>) {
+    for (let quantityItemIndex =quantityItems.length-1; quantityItemIndex >=0;  quantityItemIndex--) {
+      if ((quantityItems[quantityItemIndex].item === '' || quantityItems[quantityItemIndex].item === undefined) &&
+        ((quantityItems[quantityItemIndex].nos !== 0 || quantityItems[quantityItemIndex].nos === undefined) ||
+          (quantityItems[quantityItemIndex].length !== 0 || quantityItems[quantityItemIndex].length === undefined) ||
+          (quantityItems[quantityItemIndex].height !== 0 || quantityItems[quantityItemIndex].height === undefined) ||
+          (quantityItems[quantityItemIndex].breadth !== 0 || quantityItems[quantityItemIndex].breadth === undefined))) {
+        return false;
+      }
+    }
+    return true;
+  }
   onUpdateQuantityItemsSuccess(success : string) {
 
     var message = new Message();

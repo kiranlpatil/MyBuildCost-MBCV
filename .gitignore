@@ -45,7 +45,6 @@ clientErrorLogs
 package-lock.json
 
 /tools/**/*.js
-dev
 docs
 lib
 test

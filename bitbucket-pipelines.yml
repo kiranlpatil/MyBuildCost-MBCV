@@ -6,12 +6,12 @@
 image: node:8.8.1
 
 pipelines:
-  branches:
-    ng4-staging:
+  custom: # Pipelines that are triggered automatically
+    build-info-staging:
     - step:
         caches:
           - node
-        script: # Modify the commands below to build your repository.
+        script: # Modify the commands below to build your repository..
           - echo $APPLICATION_NAME
           - echo $APPLICATION_NAME
           - node -v
@@ -21,7 +21,7 @@ pipelines:
           - npm install gulp -g
           - npm install typings -g
           - typings install
-          - gulp build.prod.aot
+          - gulp build.prod
         artifacts:
           - dist/**
     - step:

@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var AttachmentDetailsModel = (function () {
+    function AttachmentDetailsModel() {
+    }
+    return AttachmentDetailsModel;
+}());
+exports.AttachmentDetailsModel = AttachmentDetailsModel;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9hcHBsaWNhdGlvblByb2plY3QvZGF0YWFjY2Vzcy9tb2RlbC9wcm9qZWN0L2J1aWxkaW5nL0F0dGFjaG1lbnREZXRhaWxzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7SUFBQTtJQUdBLENBQUM7SUFBRCw2QkFBQztBQUFELENBSEEsQUFHQyxJQUFBO0FBSFksd0RBQXNCIiwiZmlsZSI6ImFwcC9hcHBsaWNhdGlvblByb2plY3QvZGF0YWFjY2Vzcy9tb2RlbC9wcm9qZWN0L2J1aWxkaW5nL0F0dGFjaG1lbnREZXRhaWxzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNsYXNzIEF0dGFjaG1lbnREZXRhaWxzTW9kZWwge1xyXG4gIGZpbGVOYW1lOiBzdHJpbmc7XHJcbiAgYXNzaWduZWRGaWxlTmFtZTogc3RyaW5nO1xyXG59XHJcbiJdfQ==
