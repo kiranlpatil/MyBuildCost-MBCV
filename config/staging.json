@@ -21,10 +21,10 @@
     },
     "exportFilePathServer": "/server/prod/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",
-    "publicPath": "/server/prod/app/framework/public/",
-    "profilePath": "/server/prod/public/project-image",
+    "publicPath": "/src/server/app/framework/public/",
+    "profilePath": "/src/server/public/project-image",
     "profilePathForClient": "/public/project-image/",
-    "attachmentPath": "/server/prod/public/attachment-files",
+    "attachmentPath": "/src/server/public/attachment-files",
     "limitForQuery": 10,
     "mail": {
       "host": "http://13.232.139.161:8080/",
@@ -66,7 +66,8 @@
       "routerNumber": "4"
     },
     "browser": {
-      "IP": "http://13.232.139.161:8080/"
+      "IP": "http://13.232.139.161:8080/",
+      "rateAnalysisIP": "http://13.232.139.161:8080/"
     },
     "filePathForMasterDataExcel": "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage": "/server/prod/app/framework/public/profileimage",
