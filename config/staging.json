@@ -21,10 +21,10 @@
     },
     "exportFilePathServer": "/server/prod/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",
-    "publicPath": "/src/server/app/framework/public/",
-    "profilePath": "/src/server/public/project-image",
+    "publicPath": "/server/prod/app/framework/public/",
+    "profilePath": "/server/prod/public/project-image",
     "profilePathForClient": "/public/project-image/",
-    "attachmentPath": "/src/server/public/attachment-files",
+    "attachmentPath": "/server/prod/public/attachment-files",
     "limitForQuery": 10,
     "mail": {
       "host": "http://13.232.139.161:8080/",
