@@ -66,7 +66,8 @@
       "routerNumber": "4"
     },
     "browser": {
-      "IP": "http://52.66.120.228:8080/"
+      "IP": "http://13.232.139.161:8080/",
+      "rateAnalysisIP": "http://13.232.139.161:8080/"
     },
     "filePathForMasterDataExcel": "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage": "/server/prod/app/framework/public/profileimage",

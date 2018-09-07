@@ -69,7 +69,8 @@
       "routerNumber": "4"
     },
      "browser" : {
-      "IP" : "http://mybuildcost.buildinfo.co.in/"
+      "IP" : "http://mybuildcost.buildinfo.co.in/"/*,
+       "rateAnalysisIP": "http://rateanlaysis.buildinfo.co.in/"*/
     },
     "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage",
