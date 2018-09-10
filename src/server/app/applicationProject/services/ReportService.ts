@@ -662,8 +662,20 @@ class ReportService {
     } else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
         for (let quantity of workItem.quantity.quantityItemDetails) {
           quantityName = quantity.name;
-          this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
-            materialTakeOffFlatDetailsArray, quantity.total);
+
+          if(categoryName === Constants.STEEL) {
+              if(quantity && quantity.steelQuantityItems && quantity.steelQuantityItems.totalWeightOfDiameter) {
+                for(let material of Object.keys(quantity.steelQuantityItems.totalWeightOfDiameter)) {
+                  let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
+                    workItemName, material, quantity.name, quantity.steelQuantityItems.totalWeightOfDiameter[material],
+                    quantity.steelQuantityItems.unit);
+                  materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
+                }
+              }
+          } else {
+            this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
+              materialTakeOffFlatDetailsArray, quantity.total);
+          }
         }
     }
   }
@@ -671,23 +683,12 @@ class ReportService {
   private createAndAddMaterialDTOObjectInDTOArray(workItem: WorkItem, buildingName: string, costHeadName: string, categoryName: string,
                   workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,
                                                   quantity: number) {
-    if(categoryName === Constants.STEEL) {
-      for (let quantityItem of workItem.quantity.quantityItemDetails) {
-          for(let material of Object.keys(quantityItem.steelQuantityItems.totalWeightOfDiameter)) {
-            let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-              workItemName, material, quantityName, quantityItem.steelQuantityItems.totalWeightOfDiameter[material],
-              quantityItem.steelQuantityItems.unit);
-            materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
-          }
-      }
-    } else {
       for (let rateItem of workItem.rate.rateItems) {
         let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
           workItemName, rateItem.itemName, quantityName, (quantity / workItem.rate.quantity) * rateItem.quantity,
           rateItem.unit);
         materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
       }
-    }
   }
 }
 

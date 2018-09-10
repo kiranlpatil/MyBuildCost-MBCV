@@ -853,17 +853,17 @@ class UserService {
     subscriptionDetails.noOfDaysToExpiry = this.daysdifference(subscriptionDetails.expiryDate, current_date);
     if (subscriptionDetails.noOfDaysToExpiry <= Constants.TRIAL_PERIOD && subscriptionDetails.noOfDaysToExpiry > 0 && subscriptionData.name === 'Trial') {
       subscriptionDetails.warningMsgForPackage = 'Your trial period will expire in ' +
-        Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s)';
+        Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s).';
 
     } else if (subscriptionDetails.noOfDaysToExpiry <= Constants.PREMIUM_PERIOD && subscriptionDetails.noOfDaysToExpiry > 0 && subscriptionData.name === 'RAPremium') {
       subscriptionDetails.warningMsgForPackage = 'Your package will expire in ' +
-        Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s)';
+        Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s).';
 
     } else if (subscriptionDetails.noOfDaysToExpiry <= 0) {
       if (subscriptionData.name === 'Trial') {
-        subscriptionDetails.expiryMsgForPackage = 'Your trial period is expired!';
+        subscriptionDetails.expiryMsgForPackage = 'Your trial period has expired.';
       } else {
-        subscriptionDetails.expiryMsgForPackage = 'Your package is expired!';
+        subscriptionDetails.expiryMsgForPackage = 'Your package has expired.';
       }
       subscriptionDetails.isPackageExpired = true;
     }
