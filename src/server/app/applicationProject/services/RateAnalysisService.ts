@@ -1188,7 +1188,7 @@ class RateAnalysisService {
 
       let rateItemsRateAnalysisSQL = 'SELECT rateItem.C2 AS itemName, rateItem.C2 AS originalItemName,' +
         'rateItem.C12 AS rateAnalysisId, rateItem.C6 AS type,' +
-        'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit,' +
+        'ROUND(rateItem.C7,2) AS quantity, ROUND(rateItem.C3,2) AS rate, unit.C2 AS unit, rateItem.C8 AS workItemUnitId,' +
         'ROUND(rateItem.C3 * rateItem.C7,2) AS totalAmount, rateItem.C5 AS totalQuantity, rateItem.C13 AS notesRateAnalysisId  ' +
         'FROM ? AS rateItem JOIN ? AS unit ON unit.C1 = rateItem.C9 where rateItem.C1 = '
         + categoryWorkitem.rateAnalysisId;
@@ -1196,7 +1196,10 @@ class RateAnalysisService {
       let notes = '';
       let imageURL = '';
       workItem.rate.rateItems = rateItemsByWorkItem;
-      //workItem.rate.unit = rateItemsByWorkItem[0].rateAnalysisUnit;
+
+      let getWorkItemUnitSQL = 'SELECT units.C2 AS rateQuantityUnit FROM ? AS units WHERE units.C1 = '+rateItemsByWorkItem[0].workItemUnitId;
+      let workItemRateQuantityUnit = alasql(getWorkItemUnitSQL, [unitsRateAnalysis]);
+      workItem.rate.unit = workItemRateQuantityUnit[0].rateQuantityUnit;
 
       if (rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
         let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = ' +
