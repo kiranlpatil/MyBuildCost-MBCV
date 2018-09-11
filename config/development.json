@@ -24,6 +24,7 @@
     "profilePath": "/src/server/public/project-image",
     "profilePathForClient": "/public/project-image/",
     "attachmentPath": "\\src\\server\\public\\attachment-files",
+    "userFile": "/src/server/public/exported-files/AllData.xlsx",
     "limitForQuery": 10,
     "mail": {
       "host": "http://localhost:8080/",

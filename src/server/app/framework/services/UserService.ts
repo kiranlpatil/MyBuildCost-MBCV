@@ -1536,7 +1536,8 @@ class UserService {
   }
 
   updateUserData( callback: (err: any, result: any) => void) {
-    let rr = 'C:\\Users\\Nilesh\\Webstorm Projects\\costcontrol\\AllData.xlsx';
+   // let rr = 'C:\\Users\\Nilesh\\Webstorm Projects\\costcontrol\\AllData.xlsx';
+    let rr =  path.resolve() + config.get('application.userFile');
     xlsxj({
       input: rr,
       output: null
