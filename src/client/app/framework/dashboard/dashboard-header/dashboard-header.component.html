@@ -22,7 +22,7 @@
             <a class="dropdown-item"  [routerLink]="['/dashboard']" (click)="navigateTo('/dashboard');">My Projects</a>
           </li>
           <li role="menuitem">
-            <a class="dropdown-item">Learn</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#learn-modal">Learn</a>
           </li>
           <li role="menuitem">
             <a href="http://buildinfo.co.in" target="_blank" class="dropdown-item Weblink">Build info</a>
@@ -40,8 +40,8 @@
           <li role="menuitem" [routerLinkActive]="['active']">
             <a class="dropdown-item"  [routerLink]="['/dashboard']" (click)="navigateTo('/dashboard');">My Projects</a>
           </li>
-          <li role="menuitem">
-            <a class="dropdown-item">Learn</a>
+          <li role="menuitem" [routerLinkActive]="['active']">
+            <a class="dropdown-item" (click)="navigateTo('/dashboard');" data-toggle="modal" data-target="#learn-modal">Learn</a>
           </li>
         </ul>
       </div>
@@ -93,3 +93,16 @@
     </div>
   </nav>
 </header>
+
+<div class="modal fade" id="learn-modal" tabindex="-1" role="dialog" aria-labelledby="learn-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <h4> Demo video will be available soon </h4>
+      </div>
+    </div>
+  </div>
+</div>
