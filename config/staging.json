@@ -68,7 +68,7 @@
     },
     "browser": {
       "IP": "http://13.232.139.161:8080/",
-      "rateAnalysisIP": "http://13.232.139.161:8080/"
+      "rateAnalysisIP": "http://13.232.139.161:3000/"
     },
     "filePathForMasterDataExcel": "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage": "/server/prod/app/framework/public/profileimage",
