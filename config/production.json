@@ -24,6 +24,7 @@
     "profilePath": "/src/server/public/project-image",
     "profilePathForClient": "/public/project-image/",
     "attachmentPath":"/src/server/public/attachment-files",
+    "userFile": "/server/prod/public/exported-files/AllData.xlsx",
     "limitForQuery" : 10,
     "mail": {
       "host":"http://mybuildcost.buildinfo.co.in/",
@@ -69,8 +70,8 @@
       "routerNumber": "4"
     },
      "browser" : {
-      "IP" : "http://mybuildcost.buildinfo.co.in/"/*,
-       "rateAnalysisIP": "http://rateanlaysis.buildinfo.co.in/"*/
+      "IP" : "http://mybuildcost.buildinfo.co.in/",
+       "rateAnalysisIP": "http://rateanalysis.buildinfo.co.in:3000/"
     },
     "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage",
