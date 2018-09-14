@@ -366,6 +366,10 @@
           width: 100%;
         }
 
+        textarea {
+          pointer-events: none;
+        }
+
         .calculator {
           opacity: 1;
           right: 2px;

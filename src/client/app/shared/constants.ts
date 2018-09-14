@@ -348,6 +348,7 @@ export class SessionStorage {
   public static STATUS = 'project_status';
   public static SELECTED_AREA = 'selectedArea';
   public static SELECTED_UNIT = 'selectedUnit';
+  public static IS_JUST_LOGGED_IN = 'is_just_logged_in';
 
 }
 
