@@ -1281,9 +1281,9 @@ class UserService {
         for (let user of response) {
           logger.debug('geting all user data for sending mail to users.');
           let validityDays = this.calculateValidity(user.subscription);
-          let valdityDaysValidation = config.get('cronJobMailNotificationValidityDays');
+         let valdityDaysValidation = config.get('cronJobMailNotificationValidityDays');
           logger.debug('validityDays : ' + validityDays);
-          if (valdityDaysValidation.includes(validityDays)) {
+          if ( valdityDaysValidation.indexOf(validityDays)>=0) {
             logger.debug('calling promise');
             let promiseObject = this.getProjectDataById(user);
             userSubscriptionPromiseArray.push(promiseObject);
