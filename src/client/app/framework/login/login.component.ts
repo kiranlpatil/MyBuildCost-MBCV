@@ -181,6 +181,7 @@ export class LoginComponent implements OnInit {
   successRedirect(res: any) {
     SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
     SessionStorageService.setSessionValue(SessionStorage.IS_USER_SIGN_IN, 1);
+    SessionStorageService.setSessionValue(SessionStorage.IS_JUST_LOGGED_IN, 1);
     SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }

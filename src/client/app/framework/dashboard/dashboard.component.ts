@@ -31,6 +31,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.newUser = parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN));
+    let userJustLoggedIn = parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_JUST_LOGGED_IN));
+
+    if (userJustLoggedIn === 1 && document.documentElement.clientWidth <= 767) {
+      this.showInfoMessageIfMobileView();
+    }
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {
@@ -82,5 +87,12 @@ export class DashboardComponent implements OnInit {
     } else {
       return '0';
     }
+  }
+  showInfoMessageIfMobileView() {
+    SessionStorageService.setSessionValue(SessionStorage.IS_JUST_LOGGED_IN, 0);
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = 'Data editing / data entry is not allowed on mobile. Please log in on desktop/laptop for the same.';
+    this.messageService.message(message);
   }
 }
