@@ -816,7 +816,16 @@ class UserService {
   getUserSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
     let projection = {subscriptionForRA: 1};
     this.userRepository.findByIdWithProjection(userId, projection, (error, result) => {
-      if (error) {
+      if (error ||result === null) {
+        if(result === null) {
+          callback({
+            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            stackTrace: new Error(),
+            code: 401
+          }, null);
+          return;
+        }
         callback(error, null);
       } else {
         let subscriptionData = result.subscriptionForRA;
