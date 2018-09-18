@@ -231,7 +231,7 @@ export class QuantityDetailsComponent implements OnInit {
       this.costSummaryService.updateQuantityDetails(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
         this.workItemRateAnalysisId, this.ccWorkItemId, quantityDetailsObj).subscribe(
         success => this.onUpdateQuantityDetailSuccess(success, flag),
-        error => this.onUpdateQuantityDetailFailure(error)
+        error => this.onUpdateQuantityDetailFailure(error, flag)
       );
     } else {
       var message = new Message();
@@ -291,12 +291,17 @@ export class QuantityDetailsComponent implements OnInit {
     return categoryDetailsTotalAmount;
   }
 
-  onUpdateQuantityDetailFailure(error: any) {
+  onUpdateQuantityDetailFailure(error: any, flag: any) {
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('success : '+JSON.stringify(error));
     this.loaderService.stop();
+    if(flag === this.getLabel().NAME) {
+      this.quantity.name =  this.keyQuantity;
+    } else {
+      this.quantity.total = this.total;
+    }
   }
 
   validateQuantityName(quantityName: string) {

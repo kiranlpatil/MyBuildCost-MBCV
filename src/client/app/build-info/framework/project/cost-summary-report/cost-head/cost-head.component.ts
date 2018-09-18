@@ -266,13 +266,21 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
       }
 
   showAddFloorwiseQuantityModal(workItem : WorkItem, workItemIndex : number, categoryId: number, categoryIndex : number) {
-    if(workItem.quantity.isDirectQuantity ||
-      (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default')) {
-      this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
-      $('#addFloorwiseQuantity'+workItemIndex).modal();
-    } else if(workItem.quantity.quantityItemDetails ||
-      (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
-      this.addNewDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID  ||  userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
+      if (workItem.quantity.isDirectQuantity ||
+        (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default')) {
+        this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
+        $('#addFloorwiseQuantity' + workItemIndex).modal();
+      } else if (workItem.quantity.quantityItemDetails ||
+        (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
+        this.addNewDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+      }
+    } else {
+      var errorInstance = new ErrorInstance();
+      errorInstance.err_msg = Messages.MSG_FOR_UPDATING_SAMPLE_PROJECT;
+      errorInstance.err_code = 404;
+      this.errorService.onError(errorInstance);
     }
   }
 
@@ -584,15 +592,24 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   showUpdateDirectQuantityModal(workItem : WorkItem, categoryId : number, workItemIndex : number) {
-    this.currentWorkItemIndex = workItemIndex;
-    this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID  ||  userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
+      this.currentWorkItemIndex = workItemIndex;
+      this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
 
-    if(workItem.quantity.quantityItemDetails.length !== 0 &&
-      ((workItem.quantity.quantityItemDetails[0].quantityItems && workItem.quantity.quantityItemDetails[0].quantityItems.length!== 0) ||
-      (workItem.quantity.quantityItemDetails[0].steelQuantityItems && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length!== 0))) {
-      $('#updateDirectQuantity'+workItemIndex).modal();
+      if (workItem.quantity.quantityItemDetails.length !== 0 &&
+        ((workItem.quantity.quantityItemDetails[0].quantityItems && workItem.quantity.quantityItemDetails[0].quantityItems.length !== 0) ||
+          (workItem.quantity.quantityItemDetails[0].steelQuantityItems && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length !== 0))) {
+        $('#updateDirectQuantity' + workItemIndex).modal();
+      } else {
+        this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);
+      }
     } else {
-      this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);
+      workItem.quantity.total = this.total;
+      var errorInstance = new ErrorInstance();
+      errorInstance.err_msg = Messages.MSG_FOR_UPDATING_SAMPLE_PROJECT;
+      errorInstance.err_code = 404;
+      this.errorService.onError(errorInstance);
     }
   }
 
