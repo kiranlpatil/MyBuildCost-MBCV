@@ -155,7 +155,7 @@
                 <td>
                   <p>{{rate.notes}}</p>
                 </td>
-                <td class="alignment-top">
+                <td class="alignment-top" *ngIf="rate.imageURL != ''">
                   <img *ngIf="rate.imageURL != ''" id="rateImageURL" src="{{rate.imageURL}}">
                 </td>
               </tr>
