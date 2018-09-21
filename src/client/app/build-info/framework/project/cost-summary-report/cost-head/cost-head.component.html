@@ -97,7 +97,11 @@
                                           id="getQuantity{{categoryIndex}}" [class.disabled]="workItem.isDetailedQuantity"
                                           *ngIf="workItem.isMeasurementSheet" title="Add Measurement Sheet"
                                           (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex);">
-                                       <img src="assets/build-info/dashboard/calculator2.png" />
+                                      <span *ngIf="!workItem.isMeasurmentSheetPresent"><img src="assets/build-info/dashboard/calculator2.png" /></span>
+                                      <span *ngIf="workItem.isMeasurmentSheetPresent">
+                                        <img src="assets/build-info/dashboard/calculator2.png" />
+                                        <span class="calculator-dot"></span>
+                                      </span>
                                     </span>
                                     <!--<span class="calculator" *ngIf="workItem.isSteelWorkItem" id="getQuantity1{{categoryIndex}}" [class.disabled]="!workItem.isMeasurementSheet" (click)="updateMeasurementSheet(category.rateAnalysisId, workItem, categoryIndex, workItemIndex,getLabel().WORKITEM_STEEL_QUANTITY_TAB)">
                                        <img src="assets/build-info/dashboard/calculator2.png" />
@@ -313,6 +317,7 @@
                                           [workItem] ="workItem"
                                           [workItemsList] ="workItemsList"
                                           [categoryDetails] ="categoryDetails"
+                                          (updateMeasurmentFlag)="updateMeasurmentFlag(workItem)"
                                           (categoriesTotalAmount)="setCategoriesTotal($event)"
                                           (categoriesTotalAmountOfQty)="setCategoriesTotalOfQty($event)"
                                           (quantityName)="setQuantityName($event)"

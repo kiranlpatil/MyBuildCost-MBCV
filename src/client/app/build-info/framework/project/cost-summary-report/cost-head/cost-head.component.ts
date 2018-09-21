@@ -725,7 +725,8 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   toggleWorkItemPanel(workItemIndex : number, workItem:WorkItem) {
-    var element = document.getElementById('collapseDetails'+workItemIndex);
+    var element = document.getElementById('collapseDetails' + workItemIndex);
+    this.detailedQty(workItem);
     if(workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default') {
       element.classList.add('hide-body');
     } else if(element.classList.contains('display-body')) {
@@ -737,7 +738,20 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-    getActiveWorkItemsOfCategory(categoryId : number) {
+  detailedQty(workItem: WorkItem) {
+    if (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default') {
+      for (let floorwiseQty of workItem.quantity.quantityItemDetails) {
+        if ((floorwiseQty.quantityItems && floorwiseQty.quantityItems.length > 0) ||
+          (floorwiseQty.steelQuantityItems && floorwiseQty.steelQuantityItems.steelQuantityItem.length > 0)) {
+          floorwiseQty.isMeasurmentSheetPresentForFloor = true;
+        } else {
+          floorwiseQty.isMeasurmentSheetPresentForFloor = false;
+        }
+      }
+    }
+  }
+
+  getActiveWorkItemsOfCategory(categoryId : number) {
       this.closeAllTabs();
       let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.categoryId = categoryId;
@@ -755,6 +769,14 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
           (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
           workItem.isDetailedQuantity = true;
        }
+      if((workItem.quantity.quantityItemDetails && workItem.quantity.quantityItemDetails.length !== 0 &&
+          workItem.quantity.quantityItemDetails[0].name === 'default' && workItem.quantity.quantityItemDetails[0].quantityItems
+          && workItem.quantity.quantityItemDetails[0].quantityItems.length > 0) ||
+        (workItem.quantity.quantityItemDetails && workItem.quantity.quantityItemDetails.length !== 0 &&
+          workItem.quantity.quantityItemDetails[0].name === 'default' &&  workItem.quantity.quantityItemDetails[0].steelQuantityItems
+          && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length > 0)) {
+        workItem.isMeasurmentSheetPresent = true;
+      }
     }
     this.showHideAddItemButton=workItemsList.data.showHideAddButton;
     this.toggleWorkItemView();
@@ -874,8 +896,13 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   setCategoriesTotalOfQty( categoriesTotal : number) {
     this.categoryDetailsTotalAmount = categoriesTotal;
+    if(this.workItem)
+    this.workItem.isMeasurmentSheetPresent = false;
   }
 
+  updateMeasurmentFlag(workItem: any) {
+    this.detailedQty(workItem);
+  }
   closeRateView() {
     this.showWorkItemTab = null;
     this.displayRateView = null;

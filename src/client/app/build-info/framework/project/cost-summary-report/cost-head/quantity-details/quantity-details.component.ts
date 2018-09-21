@@ -43,6 +43,7 @@ export class QuantityDetailsComponent implements OnInit {
   @Output() quantityName = new EventEmitter<String>();
   @Output() workItemRateId = new EventEmitter<number>();
   @Output() ccWorkItemRateId = new EventEmitter<number>();
+  @Output() updateMeasurmentFlag = new EventEmitter();
 
   workItemId : number;
   quantityId : number;
@@ -261,6 +262,7 @@ export class QuantityDetailsComponent implements OnInit {
       this.loaderService.stop();
       let categoryDetailsTotalAmount = this.calculate();
       this.categoriesTotalAmountOfQty.emit(categoryDetailsTotalAmount);
+      this.updateMeasurmentFlag.emit(1);
       message.custom_message = Messages.MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM;
       this.messageService.message(message);
      // this.refreshWorkItemList.emit();

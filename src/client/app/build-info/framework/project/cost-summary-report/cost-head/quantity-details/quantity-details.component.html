@@ -16,11 +16,19 @@
                    (change)="updateFloorwiseQunatityConfirmation(quantity, getLabel().DIRECT_QUANTITY, quantityIndex)">
             <span class="calculator" id="getQuantity{{quantityIndex}}" title="Add Measurement Sheet"
                 *ngIf="!workItem.isSteelWorkItem && workItem.isMeasurementSheet" (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_QUANTITY_TAB, quantityIndex)">
+               <span *ngIf="!quantity.isMeasurmentSheetPresentForFloor"><img src="assets/build-info/dashboard/calculator2.png" /></span>
+               <span *ngIf="quantity.isMeasurmentSheetPresentForFloor">
                  <img src="assets/build-info/dashboard/calculator2.png" />
+                 <span class="calculator-dot"></span>
+               </span>
             </span>
             <span class="calculator" id="getQuantity1{{quantityIndex}}"
                   *ngIf="workItem.isSteelWorkItem && workItem.isMeasurementSheet" (click)="updateFloorwiseQunatityConfirmation(quantity, getLabel().WORKITEM_STEEL_QUANTITY_TAB, quantityIndex)">
+              <span *ngIf="!quantity.isMeasurmentSheetPresentForFloor"><img src="assets/build-info/dashboard/calculator2.png" /></span>
+               <span *ngIf="quantity.isMeasurmentSheetPresentForFloor">
                  <img src="assets/build-info/dashboard/calculator2.png" />
+                 <span class="calculator-dot"></span>
+               </span>
             </span>
           </div>
         </td>
