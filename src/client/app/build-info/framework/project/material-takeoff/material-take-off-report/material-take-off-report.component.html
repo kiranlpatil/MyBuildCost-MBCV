@@ -1,7 +1,7 @@
 <section class="material-takeoff-report">
   <div class="panel-group no-border"  *ngFor="let materialKey of materialTakeOffReport | keys; let materialDataIndex = index">
     <div class="panel panel-default">
-      <div class="panel-heading">
+      <div class="panel-heading long-title">
         <h4 class="panel-title">
           <a class="building-name">
             <span class="" [title]="materialKey">{{materialKey}}</span>
@@ -36,7 +36,7 @@
               <div class="panel panel-default no-border">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" class="collapsed">
+                    <a data-toggle="collapse" href="#secondaryViewData{{secondaryViewDataIndex}}" class="collapsed font-19">
                       <span class="caret"></span>
 
                       <div class="col-sm-8 col-xs-7 row-lists border-right item-description ellipsis-text">
