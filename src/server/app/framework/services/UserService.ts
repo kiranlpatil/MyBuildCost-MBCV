@@ -827,7 +827,16 @@ class UserService {
   getUserSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
     let projection = {subscriptionForRA: 1};
     this.userRepository.findByIdWithProjection(userId, projection, (error, result) => {
-      if (error) {
+      if (error ||result === null) {
+        if(result === null) {
+          callback({
+            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            stackTrace: new Error(),
+            code: 401
+          }, null);
+          return;
+        }
         callback(error, null);
       } else {
         let subscriptionData = result.subscriptionForRA;
@@ -1531,26 +1540,47 @@ class UserService {
 
   updateSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
     let subScriptionService = new SubscriptionService();
+    let subscription = new UserSubscriptionForRA();
     subScriptionService.getSubscriptionPackageByName('RAPremium', 'BasePackage',
       (error: any, subscriptionPackage: Array<SubscriptionPackage>) => {
         if (error) {
           callback(error, null);
         } else {
-          let result = subscriptionPackage[0];
-          let subscription = new UserSubscriptionForRA();
-          subscription.activationDate = new Date();
-          subscription.validity = result.basePackage.validity;
-          subscription.name = result.basePackage.name;
-          subscription.description = result.basePackage.description;
-          subscription.cost = result.basePackage.cost;
-          let query = {'_id': userId};
-          let updateData = {'subscriptionForRA': subscription, 'paymentStatus': 'success'};
-          this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+          let query = {'_id' :userId };
+          this.userRepository.retrieve(query, (error, result) => {
             if (error) {
               callback(error, null);
             } else {
-              callback(null, result);
+              if(result[0].subscriptionForRA.name === 'Trial') {
+                let result = subscriptionPackage[0];
+                subscription.activationDate = new Date();
+                subscription.validity = result.basePackage.validity;
+                subscription.name = result.basePackage.name;
+                subscription.description = result.basePackage.description;
+                subscription.cost = result.basePackage.cost;
+              } else if (result[0].subscriptionForRA.name === 'RAPremium') {
+                let packageDetails = subscriptionPackage[0];
+                let activation_date = new Date( result[0].subscriptionForRA.activationDate);
+                let expiryDate = new Date( result[0].subscriptionForRA.activationDate);
+                let actualexpiryDate = new Date(expiryDate.setDate(activation_date.getDate() + packageDetails.basePackage.validity));
+                subscription.activationDate = new Date();
+                let current_date = new Date();
+                subscription.validity = this.daysdifference(actualexpiryDate, current_date)+packageDetails.basePackage.validity;
+                subscription.name = packageDetails.basePackage.name;
+                subscription.description = packageDetails.basePackage.description;
+                subscription.cost = packageDetails.basePackage.cost;
+              }
+
             }
+            let query = {'_id': userId};
+            let updateData = {'subscriptionForRA': subscription, 'paymentStatus': 'success'};
+            this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+              if (error) {
+                callback(error, null);
+              } else {
+                callback(null, result);
+              }
+            });
           });
         }
       });

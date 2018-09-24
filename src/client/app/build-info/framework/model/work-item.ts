@@ -25,6 +25,7 @@ export class WorkItem {
   attachmentDetails: AttachmentDetailsModel[];
   isMeasurementSheet:boolean=false;
   isDetailedQuantity:boolean=false;
+  isMeasurmentSheetPresent:boolean=false;
   constructor(name: string, rateAnalysisId: number) {
     this.name = name;
     this.rateAnalysisId = rateAnalysisId;

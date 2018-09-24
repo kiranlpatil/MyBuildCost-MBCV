@@ -147,19 +147,29 @@
     </thead>
     <tbody>
     <tr>
-      <td class="alignment-top">
+      <td class="alignment-top notes-col">
         <div class="tab-content">
           <div id="notes" *ngIf="rate.notes != ''" class="tab-pane fade in active" >
-            <p>{{rate.notes}}</p>
+            <table>
+              <tr>
+                <td>
+                  <p>{{rate.notes}}</p>
+                </td>
+                <td class="alignment-top" *ngIf="rate.imageURL != ''">
+                  <img *ngIf="rate.imageURL != ''" id="rateImageURL" src="{{rate.imageURL}}">
+                </td>
+              </tr>
+            </table>
+
           </div>
           <div id="disclaimer" class="tab-pane fade" [class.active]="(rate.notes === '')" [class.in]="(rate.notes === '')" *ngIf="rateView === getLabel().WORKITEM_SYSTEM_RATE_TAB" >
             <bi-disclaimer-component [note]="getStandardNotes().Notes"></bi-disclaimer-component>
           </div>
         </div>
       </td>
-      <td class="alignment-top">
+      <!--<td class="alignment-top">
         <img *ngIf="rate.imageURL != ''" id="rateImageURL" src="{{rate.imageURL}}">
-      </td>
+      </td>-->
     </tr>
     </tbody>
   </table>

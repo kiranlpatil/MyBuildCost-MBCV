@@ -43,6 +43,7 @@ export class QuantityDetailsComponent implements OnInit {
   @Output() quantityName = new EventEmitter<String>();
   @Output() workItemRateId = new EventEmitter<number>();
   @Output() ccWorkItemRateId = new EventEmitter<number>();
+  @Output() updateMeasurmentFlag = new EventEmitter();
 
   workItemId : number;
   quantityId : number;
@@ -67,7 +68,7 @@ export class QuantityDetailsComponent implements OnInit {
   flagForFloorwiseQuantity : string = null;
 
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
-              private loaderService: LoaderService,private errorService:ErrorService) {
+              private loaderService: LoaderService,private errorService:ErrorService, private commonService:CommonService) {
   }
 
    ngOnInit() {
@@ -231,7 +232,7 @@ export class QuantityDetailsComponent implements OnInit {
       this.costSummaryService.updateQuantityDetails(this.baseUrl, costHeadId, this.categoryRateAnalysisId,
         this.workItemRateAnalysisId, this.ccWorkItemId, quantityDetailsObj).subscribe(
         success => this.onUpdateQuantityDetailSuccess(success, flag),
-        error => this.onUpdateQuantityDetailFailure(error)
+        error => this.onUpdateQuantityDetailFailure(error, flag)
       );
     } else {
       var message = new Message();
@@ -261,6 +262,7 @@ export class QuantityDetailsComponent implements OnInit {
       this.loaderService.stop();
       let categoryDetailsTotalAmount = this.calculate();
       this.categoriesTotalAmountOfQty.emit(categoryDetailsTotalAmount);
+      this.updateMeasurmentFlag.emit(1);
       message.custom_message = Messages.MSG_SUCCESS_UPDATE_DIRECT_QUANTITY_OF_WORKITEM;
       this.messageService.message(message);
      // this.refreshWorkItemList.emit();
@@ -291,12 +293,17 @@ export class QuantityDetailsComponent implements OnInit {
     return categoryDetailsTotalAmount;
   }
 
-  onUpdateQuantityDetailFailure(error: any) {
+  onUpdateQuantityDetailFailure(error: any, flag: any) {
     if(error.err_code === 404 || error.err_code === 0 || error.err_code===500) {
       this.errorService.onError(error);
     }
     console.log('success : '+JSON.stringify(error));
     this.loaderService.stop();
+    if(flag === this.getLabel().NAME) {
+      this.quantity.name =  this.keyQuantity;
+    } else {
+      this.quantity.total = this.total;
+    }
   }
 
   validateQuantityName(quantityName: string) {
@@ -336,7 +343,7 @@ export class QuantityDetailsComponent implements OnInit {
 
   calculateQuantity(workItem : WorkItem, costQuantity : number) {
     this.previousRateQuantity = lodsh.cloneDeep(workItem.rate.quantity);
-    this.rateItemsArray.quantity = costQuantity;
+    this.rateItemsArray.quantity = parseFloat(this.commonService.changeQuantityByWorkItemUnit(costQuantity, workItem.unit, this.rateItemsArray.unit).toFixed(2));
     this.quantityIncrement = this.rateItemsArray.quantity / this.previousRateQuantity;
     for (let rateItemsIndex = 0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
       this.rateItemsArray.rateItems[rateItemsIndex].quantity = parseFloat((

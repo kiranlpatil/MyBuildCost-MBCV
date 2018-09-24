@@ -21,6 +21,10 @@ export class CompleteProjectReportComponent {
   @Input() buildingReports: any;
   @Input() costingByUnit: any;
   @Input() costingByArea: any;
+  @Input() grandTotalOfTotalRate: any;
+  @Input() grandTotalOfBudgetedCost: any;
+  @Input() grandTotalOfEstimatedRate: any;
+  @Input() grandTotalOfEstimatedCost: any;
 
   isBudgeted: boolean = false;
   isEstimated: boolean = false;

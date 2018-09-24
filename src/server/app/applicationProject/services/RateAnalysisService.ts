@@ -985,7 +985,7 @@ class RateAnalysisService {
           promiseArray.push(promise);
         }
         CCPromise.all(promiseArray).then(function (data: Array<any>) {
-          console.log('datae : '+data);
+          console.log('Succees in region synch.');
         }).catch(function (e: any) {
           logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e.message));
           CCPromise.reject(e.message);
@@ -1197,11 +1197,12 @@ class RateAnalysisService {
       let imageURL = '';
       workItem.rate.rateItems = rateItemsByWorkItem;
 
-      let getWorkItemUnitSQL = 'SELECT units.C2 AS rateQuantityUnit FROM ? AS units WHERE units.C1 = '+rateItemsByWorkItem[0].workItemUnitId;
-      let workItemRateQuantityUnit = alasql(getWorkItemUnitSQL, [unitsRateAnalysis]);
-      workItem.rate.unit = workItemRateQuantityUnit[0].rateQuantityUnit;
-
       if (rateItemsByWorkItem && rateItemsByWorkItem.length > 0) {
+
+        let getWorkItemUnitSQL = 'SELECT units.C2 AS rateQuantityUnit FROM ? AS units WHERE units.C1 = '+rateItemsByWorkItem[0].workItemUnitId;
+        let workItemRateQuantityUnit = alasql(getWorkItemUnitSQL, [unitsRateAnalysis]);
+        workItem.rate.unit = workItemRateQuantityUnit[0].rateQuantityUnit;
+
         let notesRateAnalysisSQL = 'SELECT notes.C2 AS notes, notes.C3 AS imageURL FROM ? AS notes where notes.C1 = ' +
           rateItemsByWorkItem[0].notesRateAnalysisId;
         let notesList = alasql(notesRateAnalysisSQL, [notesRateAnalysis]);
@@ -1210,6 +1211,7 @@ class RateAnalysisService {
 
         workItem.rate.quantity = rateItemsByWorkItem[0].totalQuantity;
       } else {
+        logger.error('rateItemsByWorkItem not available for workitem : ' + workItem.name);
         workItem.rate.quantity = 1;
       }
       workItem.rate.notes = notes;

@@ -79,7 +79,7 @@ export class HttpDelegateService extends BaseService {
           }
         }
       };
-      if(((url.substring(34,58)) !== AppSettings.SAMPLE_PROJECT_ID ) || userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
+      if(((this.validateAttachmentUrl(url)) !== AppSettings.SAMPLE_PROJECT_ID ) || userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
         xhr.open('PUT', url, true);
         xhr.setRequestHeader('Authorization', 'Bearer ' + SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN));
         xhr.send(formData);
@@ -102,6 +102,12 @@ export class HttpDelegateService extends BaseService {
     } else {
       return true;
     }
+  }
+
+  validateAttachmentUrl(url: any) {
+    var currentId  = url.match('project/(.*)/building');
+    var projectId = currentId[1];
+    return projectId;
   }
 
 }

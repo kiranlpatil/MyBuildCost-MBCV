@@ -12,6 +12,7 @@ import { WorkItem } from '../../../../model/work-item';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
 import { QuantityDetails } from '../../../../model/quantity-details';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 declare var $: any;
 @Component({
   moduleId: module.id,
@@ -51,7 +52,8 @@ export class GetQuantityComponent implements OnInit {
   heightTotal: number = 0;
 
   constructor(private costSummaryService : CostSummaryService,  private loaderService: LoaderService,
-              private messageService: MessageService, private _router : Router, private commonService: CommonService) {
+              private messageService: MessageService, private _router : Router, private commonService: CommonService,
+              private errorService: ErrorService) {
   }
 
   ngOnInit() {
@@ -203,10 +205,9 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
   }
 
   onUpdateQuantityItemsFailure(error: any) {
-    var message = new Message();
-    message.isError = true;
-    message.error_msg = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
-    this.messageService.message(message);
+    if(error.err_code === 404 || error.err_code === 401 || error.err_code === 0 || error.err_code===500) {
+      this.errorService.onError(error);
+    }
     this.loaderService.stop();
   }
 

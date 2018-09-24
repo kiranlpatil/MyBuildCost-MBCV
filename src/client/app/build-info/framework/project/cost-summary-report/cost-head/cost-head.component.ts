@@ -1,7 +1,7 @@
 import {Component, OnInit, OnChanges, ViewChild, AfterViewInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Messages, ProjectElements, NavigationRoutes, TableHeadings, Button, Label, ValueConstant, Animations } from '../../../../../shared/constants';
-import { API,SessionStorage, SessionStorageService, Message, MessageService } from '../../../../../shared/index';
+import { Messages, ProjectElements, NavigationRoutes, TableHeadings, Button, Label, ValueConstant, Animations, AppSettings } from '../../../../../shared/constants';
+import { API,SessionStorage, SessionStorageService, Message, MessageService, ErrorInstance } from '../../../../../shared/index';
 import { Rate } from '../../../model/rate';
 import { CommonService } from '../../../../../shared/services/common.service';
 import { CostSummaryService } from '../cost-summary.service';
@@ -266,13 +266,21 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
       }
 
   showAddFloorwiseQuantityModal(workItem : WorkItem, workItemIndex : number, categoryId: number, categoryIndex : number) {
-    if(workItem.quantity.isDirectQuantity ||
-      (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default')) {
-      this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
-      $('#addFloorwiseQuantity'+workItemIndex).modal();
-    } else if(workItem.quantity.quantityItemDetails ||
-      (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
-      this.addNewDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID  ||  userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
+      if (workItem.quantity.isDirectQuantity ||
+        (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default')) {
+        this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
+        $('#addFloorwiseQuantity' + workItemIndex).modal();
+      } else if (workItem.quantity.quantityItemDetails ||
+        (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
+        this.addNewDetailedQuantity(categoryId, workItem, categoryIndex, workItemIndex);
+      }
+    } else {
+      var errorInstance = new ErrorInstance();
+      errorInstance.err_msg = Messages.MSG_FOR_UPDATING_SAMPLE_PROJECT;
+      errorInstance.err_code = 404;
+      this.errorService.onError(errorInstance);
     }
   }
 
@@ -456,7 +464,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   calculateQuantity(workItem : WorkItem) {
     this.previousRateQuantity = lodsh.cloneDeep(workItem.rate.quantity);
     let quantity = lodsh.cloneDeep(workItem.quantity.total);
-    this.rateItemsArray.quantity = parseFloat(this.changeQuantityByWorkItemUnit(quantity, workItem.unit, this.rateItemsArray.unit).toFixed(2));
+    this.rateItemsArray.quantity = parseFloat(this.commonService.changeQuantityByWorkItemUnit(quantity, workItem.unit, this.rateItemsArray.unit).toFixed(2));
     this.quantityIncrement = this.rateItemsArray.quantity / this.previousRateQuantity;
     for (let rateItemsIndex = 0; rateItemsIndex < this.rateItemsArray.rateItems.length; rateItemsIndex++) {
       this.rateItemsArray.rateItems[rateItemsIndex].quantity = parseFloat((
@@ -472,21 +480,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     this.compareWorkItemId = workItemIndex;
   }
 
-  changeQuantityByWorkItemUnit(quantity: number, workItemUnit: string, rateUnit: string) {
-    let quantityTotal: number = 0;
-    if (workItemUnit === 'Sqm' && rateUnit !== 'Sqm') {
-      quantityTotal = quantity * 10.764;
-    } else if (workItemUnit === 'Rm' && rateUnit !== 'Rm') {
-      quantityTotal = quantity * 3.28;
-    } else if (workItemUnit === 'cum' && rateUnit !== 'cum') {
-      quantityTotal = quantity * 35.28;
-    } else {
-      quantityTotal = quantity;
-    }
-    return quantityTotal;
-  }
-
-  deactivateWorkItem() {
+   deactivateWorkItem() {
     this.loaderService.start();
     let costHeadId=parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
     this.costSummaryService.deactivateWorkItem( this.baseUrl, costHeadId, this.categoryId, this.workItemId , this.ccWorkItemID).subscribe(
@@ -598,15 +592,24 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   showUpdateDirectQuantityModal(workItem : WorkItem, categoryId : number, workItemIndex : number) {
-    this.currentWorkItemIndex = workItemIndex;
-    this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
+    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID  ||  userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
+      this.currentWorkItemIndex = workItemIndex;
+      this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
 
-    if(workItem.quantity.quantityItemDetails.length !== 0 &&
-      ((workItem.quantity.quantityItemDetails[0].quantityItems && workItem.quantity.quantityItemDetails[0].quantityItems.length!== 0) ||
-      (workItem.quantity.quantityItemDetails[0].steelQuantityItems && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length!== 0))) {
-      $('#updateDirectQuantity'+workItemIndex).modal();
+      if (workItem.quantity.quantityItemDetails.length !== 0 &&
+        ((workItem.quantity.quantityItemDetails[0].quantityItems && workItem.quantity.quantityItemDetails[0].quantityItems.length !== 0) ||
+          (workItem.quantity.quantityItemDetails[0].steelQuantityItems && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length !== 0))) {
+        $('#updateDirectQuantity' + workItemIndex).modal();
+      } else {
+        this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);
+      }
     } else {
-      this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);
+      workItem.quantity.total = this.total;
+      var errorInstance = new ErrorInstance();
+      errorInstance.err_msg = Messages.MSG_FOR_UPDATING_SAMPLE_PROJECT;
+      errorInstance.err_code = 404;
+      this.errorService.onError(errorInstance);
     }
   }
 
@@ -722,7 +725,8 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   toggleWorkItemPanel(workItemIndex : number, workItem:WorkItem) {
-    var element = document.getElementById('collapseDetails'+workItemIndex);
+    var element = document.getElementById('collapseDetails' + workItemIndex);
+    this.detailedQty(workItem);
     if(workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name === 'default') {
       element.classList.add('hide-body');
     } else if(element.classList.contains('display-body')) {
@@ -734,7 +738,20 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-    getActiveWorkItemsOfCategory(categoryId : number) {
+  detailedQty(workItem: WorkItem) {
+    if (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default') {
+      for (let floorwiseQty of workItem.quantity.quantityItemDetails) {
+        if ((floorwiseQty.quantityItems && floorwiseQty.quantityItems.length > 0) ||
+          (floorwiseQty.steelQuantityItems && floorwiseQty.steelQuantityItems.steelQuantityItem.length > 0)) {
+          floorwiseQty.isMeasurmentSheetPresentForFloor = true;
+        } else {
+          floorwiseQty.isMeasurmentSheetPresentForFloor = false;
+        }
+      }
+    }
+  }
+
+  getActiveWorkItemsOfCategory(categoryId : number) {
       this.closeAllTabs();
       let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
       this.categoryId = categoryId;
@@ -752,6 +769,14 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
           (workItem.quantity.quantityItemDetails.length > 0 && workItem.quantity.quantityItemDetails[0].name !== 'default')) {
           workItem.isDetailedQuantity = true;
        }
+      if((workItem.quantity.quantityItemDetails && workItem.quantity.quantityItemDetails.length !== 0 &&
+          workItem.quantity.quantityItemDetails[0].name === 'default' && workItem.quantity.quantityItemDetails[0].quantityItems
+          && workItem.quantity.quantityItemDetails[0].quantityItems.length > 0) ||
+        (workItem.quantity.quantityItemDetails && workItem.quantity.quantityItemDetails.length !== 0 &&
+          workItem.quantity.quantityItemDetails[0].name === 'default' &&  workItem.quantity.quantityItemDetails[0].steelQuantityItems
+          && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length > 0)) {
+        workItem.isMeasurmentSheetPresent = true;
+      }
     }
     this.showHideAddItemButton=workItemsList.data.showHideAddButton;
     this.toggleWorkItemView();
@@ -871,8 +896,13 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
   setCategoriesTotalOfQty( categoriesTotal : number) {
     this.categoryDetailsTotalAmount = categoriesTotal;
+    if(this.workItem)
+    this.workItem.isMeasurmentSheetPresent = false;
   }
 
+  updateMeasurmentFlag(workItem: any) {
+    this.detailedQty(workItem);
+  }
   closeRateView() {
     this.showWorkItemTab = null;
     this.displayRateView = null;

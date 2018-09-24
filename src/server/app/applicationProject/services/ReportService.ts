@@ -684,11 +684,22 @@ class ReportService {
                   workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,
                                                   quantity: number) {
       for (let rateItem of workItem.rate.rateItems) {
+        let workItemQuantity = this.getQuanityForWorkItem(workItem.unit, workItem.rate.unit, (quantity / workItem.rate.quantity) * rateItem.quantity);
         let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-          workItemName, rateItem.itemName, quantityName, (quantity / workItem.rate.quantity) * rateItem.quantity,
-          rateItem.unit);
+          workItemName, rateItem.itemName, quantityName, workItemQuantity, rateItem.unit);
         materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
       }
+  }
+
+  private getQuanityForWorkItem(workItemUnit: string, workItemRateUnit: string, rateItemQuantity: number) {
+    if (workItemUnit === 'Sqm' && workItemRateUnit !== 'Sqm') {
+      rateItemQuantity = rateItemQuantity * 10.764;
+    } else if (workItemUnit === 'Rm' && workItemRateUnit !== 'Rm') {
+      rateItemQuantity = rateItemQuantity * 3.28;
+    } else if (workItemUnit === 'cum' && workItemRateUnit !== 'cum') {
+      rateItemQuantity = rateItemQuantity * 35.28;
+    }
+    return rateItemQuantity;
   }
 }
 

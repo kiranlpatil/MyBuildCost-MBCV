@@ -663,6 +663,17 @@ control-messages {
   }
 }
 
+.calculator-dot {
+  background: red;
+  border-radius: 100%;
+  height: 6px;
+  float: left;
+  margin: -16px 11px;
+  position: relative;
+  z-index: 9;
+  width: 6px;
+}
+
 .fadein-element {
   animation: element-fade-in 0.5s ease;
   animation-fill-mode: forwards;

@@ -1738,6 +1738,7 @@ class ProjectService {
         quantityDetailsObj.id = newQuantityId;
         quantityDetailsObj.isDirectQuantity = false;
         quantityDetails.push(quantityDetailsObj);
+        quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?', [quantityDetails]);
     } else {
       let isDefaultExistsSQL = 'SELECT name from ? AS quantityDetails where quantityDetails.name="default"';
       let isDefaultExistsQuantityDetail = alasql(isDefaultExistsSQL, [quantityDetails]);
@@ -1747,6 +1748,7 @@ class ProjectService {
         quantityDetailsObj.id = newQuantityId;
         quantityDetailsObj.isDirectQuantity = false;
         quantity.quantityItemDetails.push(quantityDetailsObj);
+        quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?', [ quantity.quantityItemDetails]);
       } else {
         if (quantityDetailsObj.name !== 'default') {
           let isItemAlreadyExistSQL = 'SELECT id from ? AS quantityDetails where quantityDetails.id=' + quantityDetailsObj.id + '';
@@ -1768,10 +1770,12 @@ class ProjectService {
                 quantityDetails[quantityIndex].total = quantityDetailsObj.total;
               }
             }
+            quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?', [quantityDetails]);
           } else {
             quantityDetailsObj.id = newQuantityId;
             quantityDetailsObj.isDirectQuantity = false;
             quantity.quantityItemDetails.push(quantityDetailsObj);
+            quantity.total = alasql('VALUE OF SELECT SUM(total) FROM ?', [quantity.quantityItemDetails]);
           }
         }
       }

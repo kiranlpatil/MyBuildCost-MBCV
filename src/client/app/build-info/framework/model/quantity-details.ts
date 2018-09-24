@@ -6,6 +6,7 @@ export class QuantityDetails {
   name: string;
   total: number;
   isDirectQuantity : boolean;
+  isMeasurmentSheetPresentForFloor ?: boolean;
   quantityItems ?: Array<QuantityItem>;
   steelQuantityItems?: SteelQuantityItems;
   constructor() {

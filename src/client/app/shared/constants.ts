@@ -579,9 +579,9 @@ export class Label {
 
   //Building form
   public static BUILDING_NAME: string = 'Building Name';
-  public static SLAB_AREA: string = 'Slab Area ';
-  public static CARPET_AREA: string = 'Carpet area including Balconies/attached terraces ';
-  public static SALEABLE_AREA: string = 'Saleable Area ';
+  public static SLAB_AREA: string = 'Total Slab Area ';
+  public static CARPET_AREA: string = 'Total Carpet area including Balconies/attached terraces ';
+  public static SALEABLE_AREA: string = 'Total Saleable Area ';
   public static PLINTH_AREA: string = 'Plinth Area ';
   public static NUM_OF_FLOORS: string = 'No. of floors ';
   public static NUM_OF_PARKING_FLOORS: string = 'No. of parking floors';

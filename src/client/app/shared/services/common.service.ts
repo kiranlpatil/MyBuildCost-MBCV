@@ -94,4 +94,19 @@ export class CommonService {
     elem.parentNode.removeChild(elem);
     document.getElementById('tpl-app').style.display = 'initial';
   }
+
+  changeQuantityByWorkItemUnit(quantity: number, workItemUnit: string, rateUnit: string) {
+    let quantityTotal: number = 0;
+    if (workItemUnit === 'Sqm' && rateUnit !== 'Sqm') {
+      quantityTotal = quantity * 10.764;
+    } else if (workItemUnit === 'Rm' && rateUnit !== 'Rm') {
+      quantityTotal = quantity * 3.28;
+    } else if (workItemUnit === 'cum' && rateUnit !== 'cum') {
+      quantityTotal = quantity * 35.28;
+    } else {
+      quantityTotal = quantity;
+    }
+    return quantityTotal;
+  }
+
 }

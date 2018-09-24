@@ -50,6 +50,30 @@
 
 .material-takeoff-report {
   margin-top: 0;
+  .panel-heading.long-title {
+    a {
+      position: initial;
+      overflow: initial;
+      text-overflow: initial;
+      white-space: initial;
+      font-size: 19px;
+      float: left;
+    }
+  }
+  .panel-heading.max-height-auto {
+    max-height: 150px;
+    min-height: auto;
+    float: left;
+    width: 100%;
+    .panel-heading.long-title {
+      a {
+        font-size: 17px;
+      }
+    }
+  }
+  .font-19 {
+    font-size: 19px;
+  }
   .panel-group {
     padding: 10px 0 0;
     tr {
