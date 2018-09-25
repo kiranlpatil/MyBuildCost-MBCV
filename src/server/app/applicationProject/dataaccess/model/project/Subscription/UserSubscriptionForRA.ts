@@ -9,6 +9,7 @@ class UserSubscriptionForRA {
   expiryMsgForPackage: string = null;
   warningMsgForPackage: string = null;
   isPackageExpired :boolean = false;
+  testUser: boolean = false;
   constructor() {
   }
 }

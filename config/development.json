@@ -167,6 +167,10 @@
     }
   },
 
+  "testUser" : {
+    "mobile_number" : 7588676542
+  },
+
   "cronJobMailNotificationValidityDays": [
     15,
     8,
