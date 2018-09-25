@@ -147,6 +147,9 @@
     }
   },
 
+  "testUser" : {
+    "mobile_number" : 9623019617
+  },
 
   "thumbRuleRate": {
     "slabArea": {

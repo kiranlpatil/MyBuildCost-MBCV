@@ -825,7 +825,7 @@ class UserService {
   }
 
   getUserSubscriptionDetails(userId: string, callback: (error: any, result: any) => void) {
-    let projection = {subscriptionForRA: 1};
+    let projection = {subscriptionForRA: 1, mobile_number: 1};
     this.userRepository.findByIdWithProjection(userId, projection, (error, result) => {
       if (error ||result === null) {
         if(result === null) {
@@ -839,8 +839,12 @@ class UserService {
         }
         callback(error, null);
       } else {
+        let testUserMobileNumber = config.get('testUser.mobile_number');
         let subscriptionData = result.subscriptionForRA;
         let subscriptionDetails = this.getSubscriptionData(subscriptionData);
+        if(result.mobile_number === testUserMobileNumber) {
+          subscriptionDetails.testUser = true;
+        }
         callback(null, subscriptionDetails);
       }
     });
@@ -1418,19 +1422,30 @@ class UserService {
       if (error) {
         callback(error, null);
       } else if (appType === 'mobile-app' && result.length > 0 && result[0].isActivated === true) {
-        this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
-          if (err) {
-            callback(err, null);
-          } else {
-            callback(null, {
-              'isActivated': false,
-              'isPasswordSet': false,
-              'id': result[0]._id,
-              'mobileNumber': res.data.newMobileNumber,
-              'user': result[0]
-            });
-          }
-        });
+        let testUserMobileNumber = config.get('testUser.mobile_number');
+        if(mobileNumber !== testUserMobileNumber) {
+          this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
+            if (err) {
+              callback(err, null);
+            } else {
+              callback(null, {
+                'isActivated': false,
+                'isPasswordSet': false,
+                'id': result[0]._id,
+                'mobileNumber': res.data.newMobileNumber,
+                'user': result[0]
+              });
+            }
+          });
+        } else {
+          callback(null, {
+            'isActivated': false,
+            'isPasswordSet': false,
+            'id': result[0]._id,
+            'mobileNumber': mobileNumber,
+            'user': result[0]
+          });
+        }
       } else if (appType === 'forgot-password-flow' && result.length > 0 && result[0].isActivated === true) {
         this.sendOtp({mobile_number: mobileNumber}, {_id: result[0]._id}, (err: any, res: any) => {
           if (err) {
@@ -1563,9 +1578,13 @@ class UserService {
                 let activation_date = new Date( result[0].subscriptionForRA.activationDate);
                 let expiryDate = new Date( result[0].subscriptionForRA.activationDate);
                 let actualexpiryDate = new Date(expiryDate.setDate(activation_date.getDate() + packageDetails.basePackage.validity));
+                if(actualexpiryDate > new Date()) {
+                  let current_date = new Date();
+                  subscription.validity = this.daysdifference(actualexpiryDate, current_date) + packageDetails.basePackage.validity;
+                } else if(actualexpiryDate <= new Date()) {
+                  subscription.validity = packageDetails.basePackage.validity;
+                }
                 subscription.activationDate = new Date();
-                let current_date = new Date();
-                subscription.validity = this.daysdifference(actualexpiryDate, current_date)+packageDetails.basePackage.validity;
                 subscription.name = packageDetails.basePackage.name;
                 subscription.description = packageDetails.basePackage.description;
                 subscription.cost = packageDetails.basePackage.cost;
