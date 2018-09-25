@@ -1567,9 +1567,13 @@ class UserService {
                 let activation_date = new Date( result[0].subscriptionForRA.activationDate);
                 let expiryDate = new Date( result[0].subscriptionForRA.activationDate);
                 let actualexpiryDate = new Date(expiryDate.setDate(activation_date.getDate() + packageDetails.basePackage.validity));
+                if(actualexpiryDate > new Date()) {
+                  let current_date = new Date();
+                  subscription.validity = this.daysdifference(actualexpiryDate, current_date) + packageDetails.basePackage.validity;
+                } else if(actualexpiryDate <= new Date()) {
+                  subscription.validity = packageDetails.basePackage.validity;
+                }
                 subscription.activationDate = new Date();
-                let current_date = new Date();
-                subscription.validity = this.daysdifference(actualexpiryDate, current_date)+packageDetails.basePackage.validity;
                 subscription.name = packageDetails.basePackage.name;
                 subscription.description = packageDetails.basePackage.description;
                 subscription.cost = packageDetails.basePackage.cost;
