@@ -22,13 +22,11 @@ pipelines:
           - gulp build.prod
         artifacts:
           - dist/**
-          - ls
-          - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/dist" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
-#    - step:
-#           script:
-#              - apt-get update # required to install zip
-#              - apt-get install -y zip # required for packaging up the application
+    - step:
+           script:
+              - apt-get update # required to install zip
+              - apt-get install -y zip # required for packaging up the application
 #              - apt-get install python-pip -y
 #              - pip install boto3==1.3.0 # required for codedeploy_deploy.py
-#              - zip -r /tmp/artifact.zip dist/** appspec.yml package.json scripts # package up the application for deployment
+              - zip -r /tmp/artifact.zip dist/** # package up the application for deployment
 #              - python codedeploy_deploy.py # run the deployment script
