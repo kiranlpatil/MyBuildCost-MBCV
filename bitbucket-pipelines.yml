@@ -29,7 +29,6 @@ pipelines:
 #              - apt-get install python-pip -y
 #              - pip install boto3==1.3.0 # required for codedeploy_deploy.py
               - zip -r dist_artifacts.zip dist/** # package up the application for deployment
-              - echo "Please find below dist folder : "
+              - echo 'Hi please find below zip'
               - ls
-#              - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/dist_artifacts.zip" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
 #              - python codedeploy_deploy.py # run the deployment script
