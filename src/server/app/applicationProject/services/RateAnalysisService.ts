@@ -22,6 +22,8 @@ import SavedRateRepository = require('../dataaccess/repository/SavedRateReposito
 import RASavedRate = require('../dataaccess/model/RateAnalysis/RASavedRate');
 import BuildingRepository = require('../dataaccess/repository/BuildingRepository');
 import UserRepository = require("../../framework/dataaccess/repository/UserRepository");
+import ProjectRepository = require("../dataaccess/repository/ProjectRepository");
+import ProjectService = require("./ProjectService");
 let request = require('request');
 let config = require('config');
 var log4js = require('log4js');
@@ -38,6 +40,7 @@ class RateAnalysisService {
   private buildingRepository: BuildingRepository;
   private savedRateRepository : SavedRateRepository;
   private userRepository : UserRepository;
+  private projectRepository : ProjectRepository;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
@@ -47,6 +50,7 @@ class RateAnalysisService {
     this.savedRateRepository = new SavedRateRepository();
     this.buildingRepository = new BuildingRepository();
     this.userRepository = new UserRepository();
+    this.projectRepository = new ProjectRepository();
   }
 
   getCostHeads(url: string, user: User, callback: (error: any, result: any) => void) {
@@ -1277,15 +1281,46 @@ class RateAnalysisService {
         logger.error('Unable to retrive synced RateAnalysis');
       } else {
         if(costHeadsArray.length !== 0) {
-          let rateAnalysisData = costHeadsArray[0].buildingCostHeads;
+          let rateAnalysisCostHeads = costHeadsArray[0].buildingCostHeads;
           let findAllUsers = {};
-          let populateQuery = {path: 'project'};
-
-          this.userRepository.findAndPopulate(findAllUsers, populateQuery, (error:any, projectList : any)=> {
+          let populateQuery = {path: 'project', select: ['name', 'project']};
+          this.userRepository.findAndPopulate(findAllUsers, populateQuery, (error:any, userList : any)=> {
             if(error) {
               logger.error('Error : ' + JSON.stringify(error));
             } else {
-              logger.debug('Success : ' + JSON.stringify(projectList));
+              if (userList.length !== 0) {
+                for (let user of userList) {
+                  if (user.project.length !== 0) {
+                    for (let project of user.project) {
+                      let projectId = project._id;
+                      let populateQuery = {path: 'buildings', select: ['name', 'buildings', 'projectCostHeads']};
+                      this.projectRepository.findAndPopulate(projectId, populateQuery, (error: any, projectList: any) => {
+                        if (error) {
+                          logger.error('Error : ' + JSON.stringify(error));
+                        } else {
+                          let buildingArray = projectList[0].buildings;
+                          let projectCostHeads = projectList[0].projectCostHeads;
+                          if(buildingArray.length !==0) {
+                            for(let building of buildingArray) {
+                              let buildingId = building._id;
+                              let projection = {'costHeads': 1, _id: 0};
+                              this.buildingRepository.findByIdWithProjection(buildingId,projection, (error: any, buildingData: any) => {
+                                if (error) {
+                                  logger.error('Error : ' + JSON.stringify(error));
+                                } else {
+                                  let costHeadList = buildingData.costHeads;
+                                  this.synchCostHedsWithLatestRateAnalysis(costHeadList,rateAnalysisCostHeads);
+                                  this.updateNewCostHeads(building._id,costHeadList);
+                                }
+                              });
+                            }
+                          }
+                        }
+                      });
+                    }
+                  }
+                }
+              }
             }
           });
           /*let findQuery = {};
@@ -1306,25 +1341,68 @@ class RateAnalysisService {
     });
   }
 
-  synchBuildingWithLatestRateAnalysis(building: any, rateAnalysisData: any) {
-    let costHeadsList = building.costHeads;
-    for(let costHead of costHeadsList) {
-      let costHeadExistSQL = 'SELECT * FROM ? AS rateAnalysisList WHERE rateAnalysisList.name = '+ costHead.name;
-      let costHeadExist = alasql(costHeadExistSQL, [rateAnalysisData]);
-      if(costHeadExist.length === 0) {
-        costHeadsList.push(costHeadExist[0]);
+  synchCostHedsWithLatestRateAnalysis(costHeadsList: any, rateAnalysisCostHeads: any) {
+    for(let costHead of rateAnalysisCostHeads) {
+      let buildingCostHead = this.getFilterData(costHead.name, costHeadsList);
+      if(buildingCostHead.length === 0) {
+        costHeadsList.push(buildingCostHead[0]);
       } else {
-        this.checkCategoryExist(costHead, costHead.categories);
+        let rateAnalysisCostHead = this.getFilterData(costHead.name, rateAnalysisCostHeads);
+        buildingCostHead[0].priorityId = rateAnalysisCostHead[0].priorityId;
+        this.checkCategoryExist(buildingCostHead[0].categories, rateAnalysisCostHead[0].categories);
       }
     }
   }
 
-  checkCategoryExist(costHead: any, categories: any) {
-    for(let category of categories) {
-      console.log('Category : ' + JSON.stringify(category));
+  checkCategoryExist(buildingCategories: any, rateAnalysisCategories: any) {
+    for(let category of rateAnalysisCategories) {
+      let buildingCategory = this.getFilterData(category.name, buildingCategories);
+      if(buildingCategory.length === 0) {
+        buildingCategories.push(buildingCategory[0]);
+      } else {
+        let rateAnalysisCategory = this.getFilterData(category.name, rateAnalysisCategories);
+        this.checkWorkItemExist(buildingCategory[0].workItems, rateAnalysisCategory[0].workItems);
+      }
     }
   }
 
+  checkWorkItemExist(buildingWorkItems: any, rateAnalysisWorkItems: any) {
+    for(let workItem of rateAnalysisWorkItems) {
+      let buildingWorkItem = this.getFilterData(workItem.name, buildingWorkItems);
+      if(buildingWorkItem.length === 0) {
+        buildingWorkItems.push(buildingWorkItem[0]);
+      } else {
+        let rateAnalysisWorkItem = this.getFilterData(workItem.name, rateAnalysisWorkItems);
+        this.checkRateItemExist(buildingWorkItem[0].rate, rateAnalysisWorkItem[0].rate);
+      }
+    }
+  }
+
+  checkRateItemExist(buildingRate: any, rateAnalysisRate: any) {
+     if(rateAnalysisRate.rateItems.length !== 0) {
+       for (let rateItem of rateAnalysisRate.rateItems) {
+         let buildingRateItem = this.getFilterData(rateItem, buildingRate.rateItems);
+         if (buildingRateItem.length === 0) {
+           buildingRate.rateItems.push(buildingRateItem[0]);
+         }
+       }
+     }
+  }
+
+  getFilterData(element: string, arrayOfElement: any) {
+    const elementObject = arrayOfElement.filter(
+      function (elementObj: any) {
+        return elementObj.name === element;
+      });
+    return elementObject;
+  }
+
+  updateNewCostHeads(buildingId: string,costHeadList: Array<CostHead>) {
+    let query = {'_id': buildingId};
+    let newData = {$set: {'costHeads': costHeadList}};
+    this.buildingRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
+    });
+  }
 }
 
 Object.seal(RateAnalysisService);
