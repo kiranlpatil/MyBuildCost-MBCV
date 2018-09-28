@@ -66,7 +66,7 @@ class UserService {
     if (item.typeOfApp === 'RAapp') {
       query = {'mobile_number': item.mobile_number};
     } else {
-      query = {'email': item.email};
+      query = {'email': item.email, 'typeOfApp':{ $exists: false }};
     }
     this.userRepository.retrieve(query, (err, res) => {
       if (err) {
@@ -139,6 +139,15 @@ class UserService {
       if (error) {
         callback(error, null);
       } else {
+        if(result.length === 0) {
+          callback({
+            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            stackTrace: new Error(),
+            code: 401
+          }, null);
+          return;
+        }
         let validSubscriptionPackage;
         if (result.length > 0) {
           for (let subscriptionPackage of result) {
@@ -257,7 +266,7 @@ class UserService {
     if (typeOfApp === 'RAapp') {
       query = {'mobile_number': data.mobile_number, 'typeOfApp': 'RAapp'};
     } else {
-      query = {'email': data.email};
+      query = {'email': data.email,'typeOfApp':{ $exists: false }};
     }
 
     this.retrieve(query, (error, result) => {
@@ -268,7 +277,7 @@ class UserService {
           if (err) {
             callback({
               reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-              message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
+              message: Messages.MSG_ERROR_USER_NOT_PRESENT,
               stackTrace: new Error(),
               actualError: err,
               code: 500
@@ -319,7 +328,7 @@ class UserService {
           reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
           message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
           stackTrace: new Error(),
-          code: 500
+          code: 400
         }, null);
       } else {
         callback({
