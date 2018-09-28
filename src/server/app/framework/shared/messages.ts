@@ -62,6 +62,7 @@ class Messages {
   public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Your account is not active please contact Technical support' +
     ' team to activate your account.';//Dont CHange It
   public static MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT: string = 'Please contact the administrator to activate your account.';//Dont CHange It
+  public static MSG_ERROR_VERIFY_PASSWORD: string = 'Error in bycrpt compare function.';
   public static MSG_ERROR_BCRYPT_CREATION: string = 'Error in creating hash using bcrypt.';//Dont CHange It
   public static MSG_ERROR_INVALID_ID: string = 'Invalid Userid';
   public static MSG_ERROR_USER_NOT_PRESENT: string = 'Enter a valid login ID / password.';

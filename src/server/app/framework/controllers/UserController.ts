@@ -425,7 +425,7 @@ class UserController {
         if (err) {
           next({
             reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-            message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
+            message: Messages.MSG_ERROR_VERIFY_PASSWORD,
             stackTrace: new Error(),
             code: 400
           });
@@ -831,7 +831,7 @@ updateSubscriptionDetails(req: express.Request, res: express.Response, next: any
             if (err) {
               next({
                 reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-                message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
+                message: Messages.MSG_ERROR_VERIFY_PASSWORD,
                 stackTrace: new Error(),
                 actualError: err,
                 code: 500
