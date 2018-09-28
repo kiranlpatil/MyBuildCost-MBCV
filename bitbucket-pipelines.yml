@@ -38,8 +38,8 @@ pipelines:
     - step:
           script: #Download zip to staging server
           - curl -O -L -o mybuildcost https://bitbucket.org/tplabs/costcontrol/downloads/new_artifact.zip -u 'AnilGadge:Anil$1993'
-          - sudo apt-get update
-          - sudo apt-get install unzip
+          - apt-get update
+          - apt-get install unzip
           - unzip -v
           - ls
           #- unzip new_artifact.zip -d destination_folder
