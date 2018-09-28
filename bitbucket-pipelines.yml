@@ -34,3 +34,13 @@ pipelines:
               - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/new_artifact.zip" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
               - ls
               #- python codedeploy_deploy.py # run the deployment script
+
+    - step:
+          script: #Download zip to staging server
+          - curl -O -L -o rapro https://bitbucket.org/tplabs/costcontrol/downloads/new_artifact.zip -u 'AnilGadge:Anil$1993'
+          - sudo apt-get update
+          - sudo apt-get install unzip
+          - unzip -v
+          - ls
+          #- unzip new_artifact.zip -d destination_folder
+
