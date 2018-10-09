@@ -1,11 +1,11 @@
-<div [hidden]="isShowErrorMessage" class="toaster-message toaster-error" (click)="closeErrorMessage()">
+<div *ngIf="!isShowErrorMessage" class="toaster-message toaster-error" (click)="closeErrorMessage()">
   <div class="col-sm-1 col-xs-1"><span class="glyphicon glyphicon-warning-sign"></span></div>
   <div class="col-sm-10 col-xs-10"><p>{{errorMessage}}</p></div>
   <div class="col-sm-1 col-xs-1">
     <button (click)="closeErrorMessage()" class="btn-close"><img src="assets/framework/images/close/close-black.svg" width="10"></button>
   </div>
 </div>
-<div [hidden]="isShowSuccessMessage" class="toaster-message toaster-success" (click)="closeSuccessMessage()">
+<div *ngIf="!isShowSuccessMessage" class="toaster-message toaster-success" (click)="closeSuccessMessage()">
   <div class="col-sm-1 col-xs-1"><span class="glyphicon glyphicon-ok"></span></div>
   <div class="col-sm-10 col-xs-10"><p>{{customMessage}}</p></div>
   <div class="col-sm-1 col-xs-1">

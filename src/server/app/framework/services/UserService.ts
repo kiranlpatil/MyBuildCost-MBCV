@@ -935,20 +935,37 @@ class UserService {
 
   getProjects(user: User, callback: (error: any, result: any) => void) {
 
-    let query = {_id: user._id};
+    //let query = {_id: user._id };
+    let sampleProjectUserId =  ObjectId(config.get('sampleProject.' + 'userId'));
+    let sampleProjectId =  ObjectId(config.get('sampleProject.' + 'projectId'));
+    let query = {_id:{$in:[ user._id,sampleProjectUserId]}};
     let populate = {path: 'project', select: ['name', 'projectImage', 'buildings', 'activeStatus']};
     this.userRepository.findAndPopulate(query, populate, (error, result) => {
       if (error) {
         callback(error, null);
       } else {
         let authInterceptor = new AuthInterceptor();
-        let populatedProject = result[0];
-        let projectList = result[0].project;
-        let subscriptionList = result[0].subscription;
-
+        let projectList,subscriptionList,sampleProject;
         let projectSubscriptionArray = Array<ProjectSubscriptionDetails>();
         let sampleProjectSubscriptionArray = Array<ProjectSubscriptionDetails>();
         let isAbleToCreateNewProject: boolean = false;
+        if (result[0] && result[0].project[0] && result[0].project[0]._id.equals(sampleProjectId)) {
+           projectList = result[1].project;
+           subscriptionList = result[1].subscription;
+          sampleProject = result[0].project[0];
+        } else {
+          projectList = result[0].project;
+          subscriptionList = result[0].subscription;
+          sampleProject = result[1].project[0];
+        }
+
+        let sampleProjectSubscription = new ProjectSubscriptionDetails();
+        sampleProjectSubscription.projectName = sampleProject.name;
+        sampleProjectSubscription.projectId = sampleProject._id;
+        sampleProjectSubscription.activeStatus = sampleProject.activeStatus;
+        if (sampleProject && sampleProject.projectImage)
+          sampleProjectSubscription.projectImage = sampleProject.projectImage;
+        sampleProjectSubscriptionArray.push(sampleProjectSubscription);
         for (let project of projectList) {
           for (let subscription of subscriptionList) {
             if (subscription.projectId.length !== 0) {
@@ -992,11 +1009,11 @@ class UserService {
           }
         }
 
-        if (projectList.length === 0 && subscriptionList[0].purchased.length !== 0) {
+        if (projectList.length === 0&& subscriptionList[0].purchased.length !== 0) {
           isAbleToCreateNewProject = true;
         }
 
-        let projectId = config.get('sampleProject.' + 'projectId');
+       /* let projectId = config.get('sampleProject.' + 'projectId');
         let projection = {'name': 1, 'activeStatus': 1, 'projectImage': 1};
         this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
           if (error) {
@@ -1017,6 +1034,12 @@ class UserService {
             isSubscriptionAvailable: isAbleToCreateNewProject,
             access_token: authInterceptor.issueTokenWithUid(user)
           });
+        });*/
+        callback(null, {
+          data: projectSubscriptionArray,
+          sampleProject: sampleProjectSubscriptionArray,
+          isSubscriptionAvailable: isAbleToCreateNewProject,
+          access_token: authInterceptor.issueTokenWithUid(user)
         });
       }
     });
