@@ -395,7 +395,7 @@ class ProjectService {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, {data: response, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
@@ -1140,7 +1140,7 @@ class ProjectService {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, {data: response, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

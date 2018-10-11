@@ -114,19 +114,11 @@ export class LoginComponent implements OnInit {
     }
 
     this.model.email = this.model.email.toLowerCase();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.currentPosition.bind(this), this.locationError.bind(this));
-    }
-    window.scrollTo(0,0);
-  }
-
-  currentPosition(position: any) {
     this.loginService.userLogin(this.model)
       .subscribe(
         res => (this.onUserLoginSuccess(res)),
         error => (this.onUserLoginFailure(error)));
   }
-
   onUserLoginSuccess(res: any) {
     if(this.isRememberPassword) {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
@@ -169,13 +161,6 @@ export class LoginComponent implements OnInit {
       this.isShowErrorMessage = false;
       this.error_msg = error.err_msg;
     }
-  }
-
-  locationError(error: any) {
-    this.loginService.userLogin(this.model)
-      .subscribe(
-        res => (this.onUserLoginSuccess(res)),
-        error => (this.onUserLoginFailure(error)));
   }
 
   successRedirect(res: any) {

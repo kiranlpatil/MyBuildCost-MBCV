@@ -40,6 +40,7 @@ export class DashboardProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'accountDetails');
     this.dashboardUserProfileService.getUserProfile()
       .subscribe(
         (body: any) => this.setUserDetails(body),

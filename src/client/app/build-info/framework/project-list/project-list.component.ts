@@ -33,6 +33,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'projectList');
     this.getAllProjects();
   }
 

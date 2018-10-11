@@ -8,11 +8,12 @@ import RateAnalysisService = require('./app/applicationProject/services/RateAnal
 import UserService = require('./app/framework/services/UserService');
 var log4js = require('log4js');
 var config = require('config');
+var compression = require('compression')
 
 var spdy = require('spdy');
 __dirname = './';
-var _clientDir = '/dist/client/dev';
-var _serverDir = '/dist/server/dev';
+var _clientDir = '/client/dev';
+var _serverDir = '/server/dev';
 var app = express();
 var CronJob = require('cron').CronJob;
 
@@ -262,7 +263,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       app.get('/*', renderIndex);
     }
   }
-
+  app.use(compression());
   /**
    * Server with gzip compression.
    */
