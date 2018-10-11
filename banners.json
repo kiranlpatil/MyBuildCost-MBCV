@@ -1,7 +1,11 @@
 {
   "banners": [
     {
-      "path": "./banners/ads.png",
+      "path": "./banners/Kanix_New.jpg",
+      "title": "Binani Cement"
+    },
+    {
+      "path": "./banners/Evershine_New.jpg",
       "title": "Binani Cement"
     }
   ]
