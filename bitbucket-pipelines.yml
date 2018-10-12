@@ -27,6 +27,6 @@ pipelines:
            script:
               - apt-get update
               - apt-get install -y zip
-              - zip -r MBC_ProdArtifacts.zip dist/** package.json app.server.prod2.js app.server.prod.js
+              - zip -r MBC_ProdArtifacts.zip dist/** package.json app.server.prod2.js app.server.prod.js config
               - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/scripts/startApp.sh" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
               - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/MBC_ProdArtifacts.zip" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
