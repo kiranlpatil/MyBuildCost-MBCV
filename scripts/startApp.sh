@@ -8,4 +8,4 @@ sudo node -v
 sudo npm install --unsafe -perm
 mkdir -p logs
 sudo rm -rf MBC_ProdArtifacts.zip
-node app.server.prod.js --NODE_ENV=production> /dev/null 2> /dev/null < /dev/null &
+sudo node app.server.prod.js --NODE_ENV=production> /dev/null 2> /dev/null < /dev/null &
