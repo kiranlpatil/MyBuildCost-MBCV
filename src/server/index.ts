@@ -230,8 +230,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       /**
        * Client Dir
        */
-      _clientDir = './client/prod';
-      _serverDir = '/server/prod';
+      _clientDir = './dist/client/prod';
+      _serverDir = '/dist/server/prod';
 
       /**
        * Static.
@@ -248,7 +248,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
        * @param res {any}
        */
       var renderIndex = function (req: express.Request, res: express.Response) {
-        _clientDir = '/client/prod';
+        _clientDir = '/dist/client/prod';
         res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
       };
 
