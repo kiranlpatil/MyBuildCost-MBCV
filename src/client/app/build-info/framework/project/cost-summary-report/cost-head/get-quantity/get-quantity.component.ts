@@ -84,7 +84,9 @@ export class GetQuantityComponent implements OnInit {
         var message = new Message();
         message.isError = true;
         message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
-        if(number.toString().indexOf('-') === 0) {
+        if(length.toString().indexOf('-') === 0||
+          height.toString().indexOf('-') === 0 ||
+          breadth.toString().indexOf('-') === 0) {
           message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE_ITEM_NUMBER;
         }
         this.messageService.message(message);
@@ -95,10 +97,10 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
     if(number===null || length===null || height===null ||breadth===null) {
      return true;
   }
-    if( number.toString().match(/^\d{1,7}(\.\d{1,4})?$/) &&
-       length.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/)&&
-       height.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/)&&
-      breadth.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/)) {
+    if( number.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/) &&
+       length.toString().match(/^\d{1,7}(\.\d{1,4})?$/)&&
+       height.toString().match(/^\d{1,7}(\.\d{1,4})?$/)&&
+      breadth.toString().match(/^\d{1,7}(\.\d{1,4})?$/)) {
       return true;
     }
     return false;
@@ -117,11 +119,7 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
   }
 
   updateQuantityItem(quantityItems : Array<QuantityItem>) {
-    if($('input').hasClass('validate-amount') ) {
-      var message = new Message();
-      message.isError = true;
-      message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
-      this.messageService.message(message);
+    if (this.validateQuantityItemsOnSave(quantityItems)) {
       return;
     }
     if(this.validateQuantityItemName(quantityItems) && (this.keyQuantity !== '' && this.keyQuantity !== null && this.keyQuantity !== undefined)) {
@@ -225,6 +223,25 @@ validateQuantityItems(number:number,length:number,height:number,breadth:number) 
      this.messageService.message(message);
      this.getQuantityTotal(this.quantityItems);
       }
+
+  validateQuantityItemsOnSave(quantityItems: Array<QuantityItem> )  {
+    for (let item of quantityItems) {
+      let isValid =this.validateQuantityItems(item.nos ,item.length ,item.height ,item.breadth);
+      if(!isValid) {
+        var message = new Message();
+        message.isError = true;
+        message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+        if(item.length.toString().indexOf('-') === 0 ||
+          item.height.toString().indexOf('-') === 0 ||
+          item.breadth.toString().indexOf('-') === 0) {
+          message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE_ITEM_NUMBER;
+        }
+        this.messageService.message(message);
+        return true;
+      }
+    }
+    return false;
+  }
 
   closeQuantityTab() {
     this.closeQuantityView.emit('');

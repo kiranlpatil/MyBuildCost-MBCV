@@ -1,8 +1,8 @@
-<div *ngFor="let banner of banners">
+<div class="banner-ads" *ngFor="let banner of banners">
   <div title="{{banner?.title}}">
   <a target="_blank"
        href="{{banner?.url}}" >
-    <img [ngStyle]="(banner.url==undefine ||banner.url.length<=0) && {'pointer-events': 'none'}"src="{{banner?.path}}" style="width: 100%; margin-top: 20px;"/>
+    <img [ngStyle]="(banner.url==undefine ||banner.url.length<=0) && {'pointer-events': 'none'}"src="{{banner?.path}}" style="width: 100%;"/>
   </a>
   </div>
 </div>

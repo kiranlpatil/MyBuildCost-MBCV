@@ -36,11 +36,14 @@ export class ProjectListHeaderComponent implements OnInit {
   ngOnInit() {
     this.currentView = SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
     if( SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== 'undefined' &&
-      SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== 'null') {
+      SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== 'null' &&
+      SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME) !== null) {
       this.selectedProjectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
       this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-      }
-    this.getAllProjects();
+    }
+    if(this.currentView === 'costSummary') {
+      this.getAllProjects();
+    }
   }
 
   getAllProjects() {

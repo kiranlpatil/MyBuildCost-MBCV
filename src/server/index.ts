@@ -8,11 +8,12 @@ import RateAnalysisService = require('./app/applicationProject/services/RateAnal
 import UserService = require('./app/framework/services/UserService');
 var log4js = require('log4js');
 var config = require('config');
+var compression = require('compression')
 
 var spdy = require('spdy');
 __dirname = './';
-var _clientDir = '/dist/client/dev';
-var _serverDir = '/dist/server/dev';
+var _clientDir = '/client/dev';
+var _serverDir = '/server/dev';
 var app = express();
 var CronJob = require('cron').CronJob;
 
@@ -61,11 +62,10 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   //syncAtEveryFifteenMinute.start();
 
 
-  let sendProjectExpiryWarningMail = new CronJob('00 55 23 * * *', function() {
-      logger.debug('sendProjectExpiryWarningMail in debug mode');
+  let sendProjectExpiryWarningMail = new CronJob('00 50 23 * * *', function() {
+  //let sendProjectExpiryWarningMail = new CronJob('00 00 01 * * *', function() {
       let userService : UserService = new UserService();
-      let _loggerService: LoggerService = new LoggerService('sendProjectExpiryWarningMail');
-      _loggerService.logDebug('ProjectExpiryWarningMail started.');
+      let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
       userService.sendProjectExpiryWarningMails((error, success) => {
         if(error) {
           _loggerService.logError('Error in sendProjectExpiryWarningMail for users : ' +error);
@@ -266,7 +266,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       app.get('/*', renderIndex);
     }
   }
-
+  app.use(compression());
   /**
    * Server with gzip compression.
    */
