@@ -12,8 +12,8 @@ var compression = require('compression')
 
 var spdy = require('spdy');
 __dirname = './';
-var _clientDir = '/dist/client/dev';
-var _serverDir = '/dist/server/dev';
+var _clientDir = '/client/dev';
+var _serverDir = '/server/dev';
 var app = express();
 var CronJob = require('cron').CronJob;
 
@@ -230,8 +230,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       /**
        * Client Dir
        */
-      _clientDir = './dist/client/prod';
-      _serverDir = '/dist/server/prod';
+      _clientDir = './client/prod';
+      _serverDir = '/server/prod';
 
       /**
        * Static.
@@ -248,7 +248,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
        * @param res {any}
        */
       var renderIndex = function (req: express.Request, res: express.Response) {
-        _clientDir = '/dist/client/prod';
+        _clientDir = '/client/prod';
         res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
       };
 
