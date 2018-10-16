@@ -7,16 +7,10 @@
       "password": "",
       "mongoExport": "/usr/bin/mongoexport"
     },
-    "exportFileNames": {
-      "candidateProfilesCSV": "candidate-profiles.csv",
-      "candidateCapabilitiesCSV": "candidate-capabilities.csv",
-      "candidateAccountDetailsCSV": "candidate-account-details.csv",
-      "companyDetailsCSV": "company-details.csv",
-      "jobDetailsCSV": "job-details.csv",
-      "companyAccountDetailsCSV": "company-account-details.csv",
-      "usageTrackingCSV": "usage-tracking.csv",
-      "masterKeySkillsCSV": "master-key-skills.csv",
-      "recruiterCandidatesCSV": "my-candidates-detail.csv"
+    "exportedFileNames" : {
+      "buildingCostHeads" : "buildingCostHeads.xlsx",
+      "projectCostHeads" : "projectCostHeads.xlsx",
+      "fixedAmountCostHeads" : "fixedAmountCostHeads.xlsx"
     },
     "exportFilePathServer": "/src/server/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",
@@ -43,14 +37,6 @@
       "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_75%_LISTID": "a82db1bff5",
       "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_95%_LISTID": "24cd79227b",
       "MAIL_CHIMP_SERVICE_KEY": "7ed37fe28217d97fe5785a01207a494e-us16"
-    },
-    "facebookIds": {
-      "clientId": "1802774049959105",
-      "clientSecretId": "5bc0ff0093f79d67fcdf02d87a219206"
-    },
-    "googlePlusIds": {
-      "clientId": " 377995296702-0tr9nbma4lgekn5690r1f4bn3q1in5mm.apps.googleusercontent.com",
-      "clientSecretId": "-EHuNLqtYrRuwS_ZZ48PGHJC"
     },
     "messaging": {
       // Orca info solutions credentials

@@ -1256,7 +1256,12 @@ class RateAnalysisService {
   }
 
   exportDataToCSV(callback : (error:any, res:any)=> void) {
+    this.writeBuildingCostHeads();
+    this.writeProjectCostHeads();
+    this.writeFixedAmountCostHeads();
+  }
 
+  writeBuildingCostHeads() {
     const dataList = config.get('configCostHeads');
     const fields = ['name', 'priorityId', 'rateAnalysisId', 'categories.name', 'categories.rateAnalysisId',
       'categories.workItems.name','categories.workItems.rateAnalysisId','categories.workItems.isMeasurementSheet',
@@ -1267,8 +1272,58 @@ class RateAnalysisService {
 
     const json2csvParser = new Json2csvParser({ fields , unwind: ['categories','categories.workItems']});
     const csvData = json2csvParser.parse(dataList);
-    let fileName = path.resolve() + config.get('application.userFile');
-    fs.writeFile(fileName, csvData, 'utf-8', function (err: any, response: any) {
+    let fileName = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.buildingCostHeads');
+    this.writeExcelFile(fileName, csvData,(err: any, response: any) => {
+      if (err) {
+        console.log('Error ');
+      } else {
+        console.log('Success ');
+      }
+    });
+  }
+
+  writeProjectCostHeads() {
+    const dataList = config.get('configProjectCostHeads');
+    const fields = ['name', 'priorityId', 'rateAnalysisId', 'categories.name', 'categories.rateAnalysisId',
+      'categories.workItems.name','categories.workItems.rateAnalysisId','categories.workItems.isMeasurementSheet',
+      'categories.workItems.measurementUnit','categories.workItems.isRateAnalysis','categories.workItems.rateAnalysisPerUnit',
+      'categories.workItems.rateAnalysisUnit','categories.workItems.directRate','categories.workItems.directRatePerUnit',
+      'categories.workItems.isItemBreakdownRequired','categories.workItems.length','categories.workItems.breadthOrWidth',
+      'categories.workItems.height'];
+
+    const json2csvParser = new Json2csvParser({ fields , unwind: ['categories','categories.workItems']});
+    const csvData = json2csvParser.parse(dataList);
+    let fileName = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.projectCostHeads');
+    this.writeExcelFile(fileName, csvData,(err: any, response: any) => {
+      if (err) {
+        console.log('Error ');
+      } else {
+        console.log('Success ');
+      }
+    });
+  }
+
+  writeFixedAmountCostHeads() {
+    const dataList = config.get('fixedCostConfigProjectCostHeads');
+    const fields = ['name', 'priorityId', 'rateAnalysisId'];
+    const json2csvParser = new Json2csvParser({ fields });
+    const csvData = json2csvParser.parse(dataList);
+    let fileName = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.fixedAmountCostHeads');
+    this.writeExcelFile(fileName, csvData,(err: any, response: any) => {
+      if (err) {
+        console.log('Error ');
+      } else {
+        console.log('Success ');
+      }
+    });
+  }
+
+  writeExcelFile(fileName: string, data : any, callback : (error:any, result:any)=> void) {
+
+    fs.writeFile(fileName, data, 'utf-8', function (err: any, response: any) {
       if (err) {
         console.log('Error ');
         callback(err, null);
@@ -1280,22 +1335,69 @@ class RateAnalysisService {
   }
 
   readFromExcel(callback : (error:any, res:any)=> void) {
-    let fileName = 'config_heads.xlsx';
-    // let fileName = path.resolve() + config.get('application.userFile');
-    xlsxj({
-      input: fileName,
-      output: null
-    }, (err: any, result: any) => {
-      if (err) {
-        // callback(err, null);
-        console.log('Error ');
-      } else {
-        // callback(null,result);
-        console.log('Success');
-        if(result.length > 0) {
-          this.convertJSON(result);
-        }
+
+    let fileNameForProjectCostHeads = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.projectCostHeads');
+    let fileNameForBuildingCostHeads = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.buildingCostHeads');
+    let fileNameForFixedAmountCostHeads = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.fixedAmountCostHeads');
+
+    let createPromiseForReadingProjectCostHead = this.createPromiseToReadFile(fileNameForProjectCostHeads);
+    let createPromiseForReadingBuildingCostHead = this.createPromiseToReadFile(fileNameForBuildingCostHeads);
+    let createPromiseForReadingFixedAmountCostHead = this.createPromiseToReadFile(fileNameForFixedAmountCostHeads);
+
+    CCPromise.all([
+      createPromiseForReadingBuildingCostHead,
+      createPromiseForReadingProjectCostHead,
+      createPromiseForReadingFixedAmountCostHead
+    ]).then(function (data: Array<any>) {
+      logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
+
+      if(data.length > 0) {
+
+        let buildingCostHeads = data[0];
+        let projectCostHeads = data[1];
+        let fixedAmountCostHeads = data[2];
+
+        let rateAnalysisModel = new RateAnalysis(buildingCostHeads,  null, projectCostHeads, null);
+        rateAnalysisModel.fixedAmountCostHeads = fixedAmountCostHeads;
+        let rateAnalysisService = new RateAnalysisService();
+        rateAnalysisService.saveConfigData(rateAnalysisModel, (error:any, result:any)=> {
+          if(error) {
+            console.log('Error : '+JSON.stringify(error));
+            callback(error, null);
+          } else {
+            console.log('Result : '+JSON.stringify(result));
+            callback(null, result);
+          }
+        });
       }
+    }).catch(function (e: any) {
+      logger.error(' Promise failed for readFromExcel :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  createPromiseToReadFile(filePath: string) {
+    return new CCPromise(function (resolve: any, reject: any) {
+      logger.info('creating Promise for file read has been hit : ' + filePath);
+      xlsxj({
+        input: filePath,
+        output: null
+      }, (err: any, result: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          if(result.length > 0) {
+            let rateAnalysisService = new RateAnalysisService();
+            resolve(rateAnalysisService.convertJSON(result));
+          }
+        }
+      });
+    }).catch(function (e: any) {
+      logger.error('creating Promise for file read has been hit : ' + filePath + ':\n error :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
     });
   }
 
@@ -1314,7 +1416,9 @@ class RateAnalysisService {
             let costHead = costHeadArray[0];
             let costheadObj = new CostHead();
             costheadObj.name = costHead.name;
-            costheadObj.rateAnalysisId = parseInt(costHead.rateAnalysisId);
+            if(costHead.rateAnalysisId) {
+              costheadObj.rateAnalysisId = parseInt(costHead.rateAnalysisId);
+            }
             costheadObj.priorityId = parseInt(costHead.priorityId);
             costheadObj.categories = this.getDistinctCategories(costHeadArray, costHead.name);
             costheadsList.push(costheadObj);
@@ -1322,13 +1426,7 @@ class RateAnalysisService {
         }
       }
     console.log('costheadList : '+costheadsList);
-    this.saveConfigData(costheadsList, (error:any, result:any)=>{
-      if(error) {
-        console.log('Error : '+JSON.stringify(error));
-      } else {
-        console.log('Result : '+JSON.stringify(result));
-      }
-    });
+    return costheadsList;
   }
 
   getDistinctCategories(distinctCostHeadList: Array<any>, costheadName : string) {
@@ -1345,7 +1443,11 @@ class RateAnalysisService {
 
         if(categoryObjects.length > 0) {
           let categoryObj = categoryObjects[0];
-          let category = new Category(categoryObj.categoryName, parseInt(categoryObj.categoryRateAnalysisId));
+          if(parseInt(categoryObj.categoryRateAnalysisId)) {
+            let category = new Category(categoryObj.categoryName, parseInt(categoryObj.categoryRateAnalysisId));
+          } else {
+            let category = new Category(categoryObj.categoryName, null);
+          }
           category.workItems = this.getDistinctWorkItems(distinctCostHeadList, categoryObj.categoryName);
           categoriesList.push(category);
         }
@@ -1380,16 +1482,15 @@ class RateAnalysisService {
     return workItemsList;
   }
 
-  saveConfigData(costHeadList: Array<any>, callback :(error:any, result: any) => void) {
-    let query = {region: 'configCostHeads'};
+  saveConfigData(rateAnalysisModel: RateAnalysis, callback :(error:any, result: any) => void) {
+    let query = { appType: 'configCostHeads' };
     this.rateAnalysisRepository.retrieve(query, (error, result) => {
       if (error) {
         callback(error, null);
       } else {
         if(result.length > 0) {
-          let query = { _id: result._id };
-          let updateData = { $set : { buildingCostHeads : costHeadList }};
-          this.rateAnalysisRepository.findOneAndUpdate(query, updateData, {},(error:any, result:any)=> {
+          let query = { _id: result[0]._id };
+          this.rateAnalysisRepository.findOneAndUpdate(query, rateAnalysisModel, {},(error:any, result:any)=> {
             if(error) {
               callback(null, error);
             } else {
@@ -1397,7 +1498,6 @@ class RateAnalysisService {
             }
           });
         } else {
-          let rateAnalysisModel = new RateAnalysis(costHeadList, null,  null, null);
           rateAnalysisModel.appType = 'configCostHeads';
           this.rateAnalysisRepository.create(rateAnalysisModel, (err: any, response:any)=> {
             if(err) {

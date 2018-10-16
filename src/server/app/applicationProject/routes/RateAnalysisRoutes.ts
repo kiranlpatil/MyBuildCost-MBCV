@@ -53,9 +53,9 @@ class RateAnalysisRoutes {
       this._responseInterceptor.exit);
 
     //export configuration file
-    router.get('/export/radata', controller.exportRateAnalysisData);
+    router.get('/export/radata', controller.exportRateAnalysisData, this._responseInterceptor.exit);
 
-    router.get('/import/radata', controller.importRateAnalysisData);
+    router.get('/import/radata', controller.importRateAnalysisData, this._responseInterceptor.exit);
 
     return router;
   }
