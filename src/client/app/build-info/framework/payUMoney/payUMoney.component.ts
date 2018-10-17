@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PayUMoneyModel } from '../model/PayUMoneyModel';
 import { PayUMoneyService } from './payUMoney.service';
-import { NavigationRoutes } from '../../../shared/constants';
+import {NavigationRoutes, SessionStorage} from '../../../shared/constants';
 import { CommonService } from '../../../shared/services/common.service';
 import { ValidationService } from '../../../shared/customvalidations/validation.service';
 import { Message } from '../../../shared/index';
 import { Messages } from '../../../shared/constants';
 import { MessageService } from '../../../shared/services/message.service';
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Component ({
   moduleId:module.id,
@@ -38,6 +39,7 @@ export class PayUMoneyComponent implements OnInit {
   }
 
   ngOnInit() {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'paymentForm');
     this.subscription = this.commonService.updatepackageInfo$
       .subscribe(item => {
         if(item !== undefined || item !== null) {

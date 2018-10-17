@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
@@ -61,3 +62,4 @@ export class NotificationComponent implements OnInit {
     this.messageService.message(message);
   }
 }
+*/

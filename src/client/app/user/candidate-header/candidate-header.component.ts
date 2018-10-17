@@ -1,3 +1,4 @@
+/*
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate, Section } from '../models/candidate';
@@ -82,3 +83,4 @@ export class CandidateHeaderComponent {
     this.closeMenu();
   }
 }
+*/

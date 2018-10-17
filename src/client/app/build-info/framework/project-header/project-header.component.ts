@@ -26,6 +26,9 @@ export class ProjectHeaderComponent implements OnInit {
   activeStatus:boolean=false;
   subscription:any;
   item :any;
+  status : string ;
+  view : string ;
+  projectHeaderviews = ['accountSummary','paymentForm'] ;
 
 
 
@@ -34,6 +37,9 @@ export class ProjectHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.view =SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
+    console.log(this.view);
+    console.log(this.projectHeaderviews.indexOf(this.view)<0);
     this.activatedRoute.params.subscribe(params=> {
       this.premiumPackageExist=params['premiumPackageExist'];
       this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;
@@ -41,8 +47,10 @@ export class ProjectHeaderComponent implements OnInit {
 
     if(this.getCurrentProjectId() && this.getCurrentProjectId()!== AppSettings.SAMPLE_PROJECT_ID ) {
       this.getProjectSubscriptionDetails();
-    } else {
+      this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
+    } else if(this.getCurrentProjectId()=== AppSettings.SAMPLE_PROJECT_ID ) {
       this.buttonDisableForSampleProject = true;
+      this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     }
    /* this.subscription = this.commonService.deleteEvent$
       .subscribe(item =>this.getProjectSubscriptionDetails()
@@ -111,10 +119,12 @@ export class ProjectHeaderComponent implements OnInit {
   }
 
   goToRenew() {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'paymentForm');
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
     let projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
     let numberOfDaysToExpire = SessionStorageService.getSessionValue(SessionStorage.NUMBER_OF_DAYS_TO_EXPIRE);
     this._router.navigate([NavigationRoutes.APP_RENEW_PACKAGE, projectId, projectName, numberOfDaysToExpire]);
+    //this.view = 'paymentForm';
   }
 
 }

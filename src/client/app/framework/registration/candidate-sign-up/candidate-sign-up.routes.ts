@@ -6,11 +6,11 @@ import { CandidateSignUpComponent } from './candidate-sign-up.component';
 
 export const CandidateSignUpRoutes: Route[] = [
   {
-    path: 'registration',
+    path: '',
     component: CandidateSignUpComponent
-  },
+  }/*,
   {
     path: 'applicant-signup/:id',
     component: CandidateSignUpComponent
-  }
+  }*/
 ];

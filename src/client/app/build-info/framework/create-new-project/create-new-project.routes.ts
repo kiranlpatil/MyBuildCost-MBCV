@@ -4,7 +4,7 @@ import { CreateNewProjectComponent } from './create-new-project.component';
 
 export const CreateNewProjectRoutes: Route[] = [
   {
-    path: 'create-new-project',
+    path: '',
     component: CreateNewProjectComponent
   }
 ];

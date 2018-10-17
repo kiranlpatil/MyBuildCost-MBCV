@@ -108,4 +108,7 @@ export class DashboardHeaderComponent {
   getCurrentProjectId() {
     return SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
   }
+  setCurrentView() {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'accountSummary');
+  }
 }

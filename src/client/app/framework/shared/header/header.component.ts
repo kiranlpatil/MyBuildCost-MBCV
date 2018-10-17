@@ -1,3 +1,4 @@
+/*
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { CommonService, Message, MessageService } from '../../../shared/index';
 import { Router } from '@angular/router';
@@ -116,3 +117,4 @@ export class HeaderComponent implements OnInit {
     this.isOpenNotification = false;
   }
 }
+*/

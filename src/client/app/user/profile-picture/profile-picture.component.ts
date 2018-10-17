@@ -1,3 +1,4 @@
+/*
 import { Component, EventEmitter, Output } from '@angular/core';
 import { UserProfile } from '../models/user';
 import { DashboardService } from '../services/dashboard.service';
@@ -112,3 +113,4 @@ export class ProfilePictureComponent {
   }
 
 }
+*/
