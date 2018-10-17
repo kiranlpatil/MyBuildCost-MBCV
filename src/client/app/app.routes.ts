@@ -1,35 +1,60 @@
 import { Routes } from '@angular/router';
-import { DashboardRoutes } from './framework/dashboard/index';
 import { StartRoutes } from './framework/start/start.routes';
-import { AboutRoutes } from './framework/dashboard/about/index';
 import { ActivateUserRoutes } from './framework/registration/activate-user/activate-user.routes';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-import { ProjectRoutes } from './build-info/framework/project/project.routes';
-import { BuildingRoutes } from './build-info/framework/project/building/building.routes';
 import { LandingPageRoutes } from './framework/landing-page/landing-page.routes';
-import { CreateNewProjectRoutes } from './build-info/framework/create-new-project/create-new-project.routes';
-import { CreateProjectRoutes } from './build-info/framework/create-project/create-project.routes';
-import { CreateBuildingRoutes } from './build-info/framework/project/building/create-building/create-building.routes';
-import { CloneBuildingRoutes } from './build-info/framework/project/building/clone-building/clone-building.routes';
-import { PackageDetailsRoutes } from './build-info/framework/package-details/package-details.routes';
 
 
 export const routes: Routes = [
-
-  ...ActivateUserRoutes,
-  ...DashboardRoutes,
-  ...AboutRoutes,
-  ...ProjectRoutes,
   ...LandingPageRoutes,
-  ...BuildingRoutes,
-  ...CreateProjectRoutes,
-  ...CreateBuildingRoutes,
-  ...CloneBuildingRoutes,
-  ...CreateNewProjectRoutes,
-  ...PackageDetailsRoutes,
   ...StartRoutes,
+  ...ActivateUserRoutes,
+  {
+    path:'dashboard',
+    loadChildren: 'app/framework/dashboard/dashboard.module#DashboardModule'
+  },{
+    path:'building',
+    loadChildren: 'app/build-info/framework/project/building/building.module#BuildingModule'
+  },
+  {
+    path:'project',
+    loadChildren: 'app/framework/dashboard/dashboard.module#DashboardModule'
+  },
+  {
+    path:'create-project',
+    loadChildren: 'app/build-info/framework/create-project/create-project.module#CreateProjectModule'
+  },
+  {
+    path:'create-building',
+    loadChildren: 'app/build-info/framework/project/building/create-building/create-building.module#CreateBuildingModule'
+  },
+  {
+    path:'create-new-project',
+    loadChildren: 'app/framework/dashboard/dashboard.module#DashboardModule'
+  }/*,
+  {
+    path:'package-details',
+    loadChildren: 'app/framework/dashboard/dashboard.module#DashboardModule'
+  }*/,
+  {
+    path:'reset-password',
+    loadChildren: 'app/framework/login/forgot-password/reset-password/reset-password.module#ResetPasswordModule'
+  },
+  {
+    path:'forgot-password',
+    loadChildren: 'app/framework/login/forgot-password/forgot-password.module#ForgotPasswordModule'
+  },
+  {
+    path:'signin',
+    loadChildren: 'app/framework/login/login.module#LoginModule'
+  },
+  {
+    path:'registration',
+    loadChildren: 'app/framework/registration/candidate-sign-up/candidate-sign-up.module#CandidateSignUpModule'
+  },
   {
     path:'**',
     component: PageNotFoundComponent
   }
+
 ];

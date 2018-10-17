@@ -1,3 +1,4 @@
+/*
 import { Component, Input } from '@angular/core';
 import { Candidate } from '../models/candidate';
 
@@ -12,3 +13,4 @@ export class CandidateDashboardHeaderComponent {
   @Input() candidate: Candidate;
 
 }
+*/

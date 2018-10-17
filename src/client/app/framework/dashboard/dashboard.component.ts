@@ -38,11 +38,12 @@ export class DashboardComponent implements OnInit {
     }
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
-    } else {
+    } else if(!SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW)) {
+      console.log(SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW));
       this.getUserProfile();
     }
   }
-  getUserProfile() {
+  getUserProfile() {debugger
     this.dashboardService.getUserProfile()
       .subscribe(
         userprofile => this.onUserProfileSuccess(userprofile),

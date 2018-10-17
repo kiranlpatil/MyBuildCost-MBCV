@@ -10,7 +10,7 @@ import { PayUMoneyComponent } from '../payUMoney/payUMoney.component';
 
 export const ProjectRoutes: Route[] = [
   {
-    path: 'project',
+    path: '',
     component: ProjectComponent,
     children:[
       {path: '', component: ProjectComponent},

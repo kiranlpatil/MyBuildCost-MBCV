@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../../shared/index';
 import { ImagePath, Messages } from '../../../shared/constants';
@@ -20,3 +21,4 @@ export class AboutComponent implements OnInit {
     document.body.scrollTop = 0;
   }
 }
+*/

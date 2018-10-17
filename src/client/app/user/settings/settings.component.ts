@@ -1,3 +1,4 @@
+/*
 import {Component, OnInit} from "@angular/core";
 import {
   AppSettings,
@@ -113,3 +114,4 @@ export class SettingsComponent implements OnInit {
     return Headings;
   }
 }
+*/

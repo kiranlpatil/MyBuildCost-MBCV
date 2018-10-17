@@ -1,3 +1,4 @@
+/*
 import { Component } from '@angular/core';
 import { SessionStorage, Messages } from '../../../shared/constants';
 import { Login } from '../../../user/models/login';
@@ -49,3 +50,4 @@ export class CandidateSignUpVerificationComponent {
   }
 
 }
+*/

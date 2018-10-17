@@ -1,3 +1,4 @@
+/*
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangeMobileService } from './change-mobile.service';
@@ -157,3 +158,4 @@ export class ChangeMobileComponent implements OnInit {
     this.onMobileNumberChangeComplete.emit();
   }
 }
+*/

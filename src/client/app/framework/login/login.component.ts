@@ -18,6 +18,7 @@ import { Label, LocalStorage, Messages, ProjectAsset } from '../../shared/consta
 import { SharedService } from '../../shared/services/shared-service';
 import { RegistrationService } from '../../user/services/registration.service';
 import { LocalStorageService } from './../../shared/services/local-storage.service';
+import {LoaderService} from "../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder,
               private sharedService: SharedService, private activatedRoute: ActivatedRoute,
-              private registrationService:RegistrationService) {
+              private registrationService:RegistrationService, private loaderService: LoaderService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -120,6 +121,7 @@ export class LoginComponent implements OnInit {
         error => (this.onUserLoginFailure(error)));
   }
   onUserLoginSuccess(res: any) {
+    this.loaderService.start();
     if(this.isRememberPassword) {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);

@@ -3,7 +3,7 @@ import {ForgotPasswordComponent} from "./forgot-password.component";
 
 export const ForgotPasswordRoutes: Route[] = [
   {
-    path: 'forgot-password',
+    path: '',
     component: ForgotPasswordComponent
   }
 ];

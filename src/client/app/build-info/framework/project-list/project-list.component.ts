@@ -7,6 +7,7 @@ import { PackageDetailsService } from '../package-details/package-details.servic
 import { SessionStorage, SessionStorageService } from '../../../shared/index';
 declare var $: any;
 import { ErrorService } from '../../../shared/services/error.service';
+import {LoaderService} from "../../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,
@@ -28,7 +29,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   isProjectModalActive:boolean=false;
   premiumPackageDetails:any;
 
-  constructor(private projectService: ProjectService, private _router: Router,
+  constructor(private projectService: ProjectService, private _router: Router, private loaderService: LoaderService,
   private packageDetailsService : PackageDetailsService, private errorService:ErrorService) {
   }
 
@@ -59,7 +60,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   onGetAllProjectSuccess(projects : any) {
-   this.projects = projects.data;
+    this.loaderService.stop();
+    this.projects = projects.data;
    this.sampleProject = projects.sampleProject;
    for(let project of this.projects) {
      if(project.projectId === this.sampleProject[0].projectId) {

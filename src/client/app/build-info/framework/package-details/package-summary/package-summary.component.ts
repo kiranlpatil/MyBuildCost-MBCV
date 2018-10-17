@@ -124,6 +124,7 @@ export class PackageSummaryComponent implements OnInit {
 
   onPay() {
     sessionStorage.removeItem(SessionStorage.CURRENT_VIEW);
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'paymentForm');
     sessionStorage.removeItem(SessionStorage.CREATE_NEW_PROJECT);
     //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT, this.packageName, NavigationRoutes.SUCCESS]);
     this._router.navigate(['project', NavigationRoutes.PAYMENT]);

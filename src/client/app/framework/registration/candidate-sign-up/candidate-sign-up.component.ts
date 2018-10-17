@@ -47,7 +47,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   private MY_LOGO: string;
   private loginModel:Login;
 
- constructor(private analyticService: AnalyticService, private commonService: CommonService, private _router: Router,
+ constructor(private commonService: CommonService, private _router: Router,
               private candidateService: CandidateSignUpService, private messageService: MessageService,
              private formBuilder: FormBuilder, private sharedService: SharedService, private errorService: ErrorService,
              private activatedRoute: ActivatedRoute,
