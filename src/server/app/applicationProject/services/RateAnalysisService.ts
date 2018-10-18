@@ -179,7 +179,8 @@ class RateAnalysisService {
     });
   }
 
-  convertCostHeadsFromRateAnalysisToCostControl(entity: string, region: any, callback: (error: any, data: any) => void) {
+  convertCostHeadsFromRateAnalysisToCostControl(entity: string, region: any, configCostHeads: Array<CostHead>,
+                                                callback: (error: any, data: any) => void) {
     logger.info('convertCostHeadsFromRateAnalysisToCostControl has been hit');
 
     let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS)
@@ -258,7 +259,7 @@ class RateAnalysisService {
         let buildingCostHeads: Array<CostHead> = [];
         let rateAnalysisService = new RateAnalysisService();
 
-        rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
+        rateAnalysisService.getCostHeadsFromRateAnalysis(configCostHeads, costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
           rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, contractingAddOns, contractorAddOnResult, buildingCostHeads);
         logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
         callback(null, {
@@ -293,7 +294,7 @@ class RateAnalysisService {
     });
   }
 
-  getCostHeadsFromRateAnalysis(costHeadsRateAnalysis: any, categoriesRateAnalysis: any,
+  getCostHeadsFromRateAnalysis(configCostHeads: any, costHeadsRateAnalysis: any, categoriesRateAnalysis: any,
                                workItemsRateAnalysis: any, rateItemsRateAnalysis: any,
                                unitsRateAnalysis: any, notesRateAnalysis: any,
                                contractingAddOns: any, contractorAddOnResult: any,
@@ -305,7 +306,6 @@ class RateAnalysisService {
       if (config.has('budgetedCostFormulae.' + costHeadsRateAnalysis[costHeadIndex].C2)) {
         let costHead = new CostHead();
         costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
-        let configCostHeads = config.get('configCostHeads');
         let categories = new Array<Category>();
 
         if (configCostHeads.length > 0) {
@@ -338,7 +338,7 @@ class RateAnalysisService {
         costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
         buildingCostHeads.push(costHead);
       } else {
-        console.log('CostHead Unavaialabel : ' + costHeadsRateAnalysis[costHeadIndex].C2);
+        console.log('CostHead Unavailaable : ' + costHeadsRateAnalysis[costHeadIndex].C2);
       }
     }
   }
@@ -635,20 +635,21 @@ class RateAnalysisService {
 
   SyncRateAnalysis(region: any) {
     let rateAnalysisService = new RateAnalysisService();
-    this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, region, (error: any, costHeadsData: any) => {
+    let query = {'appType': 'configCostHeads'};
+    this.rateAnalysisRepository.retrieve(query, (error: any, rateAnalysisArray: Array<RateAnalysis>) => {
       if (error) {
-        logger.error('RateAnalysis Sync Failed.');
+        logger.error('Unable to retrive synced RateAnalysis');
       } else {
-        if(costHeadsData) {
-          let query = {'appType': 'configCostHeads'};
-          this.rateAnalysisRepository.retrieve(query, (error: any, rateAnalysisArray: Array<RateAnalysis>) => {
-            if (error) {
-              logger.error('Unable to retrive synced RateAnalysis');
-            } else {
-              let configData = rateAnalysisArray[0];
-              let configCostHeads = configData.buildingCostHeads;
-              let configProjectCostHeads = configData.projectCostHeads;
-              let fixedCostConfigProjectCostHeads = configData.fixedAmountCostHeads;
+        let configData = rateAnalysisArray[0];
+        let configCostHeads = configData.buildingCostHeads;
+        let configProjectCostHeads = configData.projectCostHeads;
+        let fixedCostConfigProjectCostHeads = configData.fixedAmountCostHeads;
+        this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, region,
+          configCostHeads, (error: any, costHeadsData: any) => {
+          if (error) {
+            logger.error('RateAnalysis Sync Failed.');
+          } else {
+            if(costHeadsData) {
               let buildingCostHeads = JSON.parse(JSON.stringify(costHeadsData.buildingCostHeads));
               let projectCostHeads = JSON.parse(JSON.stringify(costHeadsData.buildingCostHeads));
               this.convertConfigCostHeads(configCostHeads, buildingCostHeads);
@@ -662,8 +663,8 @@ class RateAnalysisService {
               rateAnalysis.appType = 'MyBuildCost';
               this.saveRateAnalysis(rateAnalysis, region);
             }
-          });
-        }
+          }
+        });
       }
     });
   }
@@ -1472,24 +1473,30 @@ class RateAnalysisService {
           workItemId = parseInt(configWorkItem.WorkItemRateAnalysisId);
         }
         let workItemObj = new ConfigWorkItem(configWorkItem.workItemName, workItemId);
-        workItemObj.isRateAnalysis = configWorkItem.isRateAnalysis;
+        workItemObj.isRateAnalysis = (configWorkItem.isRateAnalysis.toUpperCase() === 'TRUE');
         if(configWorkItem.directRate) {
           workItemObj.directRate = parseInt(configWorkItem.directRate);
         } else {
           workItemObj.directRate = 0;
         }
         workItemObj.directRatePerUnit = configWorkItem.directRatePerUnit;
-        workItemObj.isMeasurementSheet = configWorkItem.isMeasurementSheet;
+        workItemObj.isMeasurementSheet = (configWorkItem.isMeasurementSheet.toUpperCase() === 'TRUE');
         workItemObj.measurementUnit = configWorkItem.measurementUnit;
         let rateAnalysisPerUnit : number = 0;
         if(configWorkItem.rateAnalysisPerUnit) {
           workItemObj.rateAnalysisPerUnit = rateAnalysisPerUnit;
         }
         workItemObj.rateAnalysisUnit = configWorkItem.rateAnalysisUnit;
-        workItemObj.isItemBreakdownRequired = configWorkItem.isItemBreakdownRequired;
-        workItemObj.length = configWorkItem.length;
-        workItemObj.breadthOrWidth = configWorkItem.breadthOrWidth;
-        workItemObj.height = configWorkItem.height;
+        workItemObj.isItemBreakdownRequired = (configWorkItem.isItemBreakdownRequired.toUpperCase() === 'TRUE');
+        if(!workItemObj.isItemBreakdownRequired) {
+          workItemObj.length = false;
+          workItemObj.breadthOrWidth = false;
+          workItemObj.height = false;
+        } else {
+          workItemObj.length = (configWorkItem.length.toUpperCase() === 'TRUE');
+          workItemObj.breadthOrWidth = (configWorkItem.breadthOrWidth.toUpperCase() === 'TRUE');
+          workItemObj.height = (configWorkItem.height.toUpperCase() === 'TRUE');
+        }
         workItemsList.push(workItemObj);
       }
     }

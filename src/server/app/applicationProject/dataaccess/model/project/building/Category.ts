@@ -9,7 +9,7 @@ class  Category {
 
   constructor(name:string, rateAnalysisId ?: number) {
     this.name = name;
-    if(rateAnalysisId) {
+    if(rateAnalysisId || rateAnalysisId === 0) {
       this.rateAnalysisId = rateAnalysisId;
     }
     this.amount = 0;
