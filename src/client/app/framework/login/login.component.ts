@@ -18,6 +18,7 @@ import { Label, LocalStorage, Messages, ProjectAsset } from '../../shared/consta
 import { SharedService } from '../../shared/services/shared-service';
 import { RegistrationService } from '../../user/services/registration.service';
 import { LocalStorageService } from './../../shared/services/local-storage.service';
+import {LoaderService} from "../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder,
               private sharedService: SharedService, private activatedRoute: ActivatedRoute,
-              private registrationService:RegistrationService) {
+              private registrationService:RegistrationService, private loaderService: LoaderService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -114,20 +115,13 @@ export class LoginComponent implements OnInit {
     }
 
     this.model.email = this.model.email.toLowerCase();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.currentPosition.bind(this), this.locationError.bind(this));
-    }
-    window.scrollTo(0,0);
-  }
-
-  currentPosition(position: any) {
     this.loginService.userLogin(this.model)
       .subscribe(
         res => (this.onUserLoginSuccess(res)),
         error => (this.onUserLoginFailure(error)));
   }
-
   onUserLoginSuccess(res: any) {
+    this.loaderService.start();
     if(this.isRememberPassword) {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
@@ -169,13 +163,6 @@ export class LoginComponent implements OnInit {
       this.isShowErrorMessage = false;
       this.error_msg = error.err_msg;
     }
-  }
-
-  locationError(error: any) {
-    this.loginService.userLogin(this.model)
-      .subscribe(
-        res => (this.onUserLoginSuccess(res)),
-        error => (this.onUserLoginFailure(error)));
   }
 
   successRedirect(res: any) {

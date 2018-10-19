@@ -5,14 +5,17 @@ import { SessionStorage, AppSettings, NavigationRoutes } from '../../shared/cons
 import { ThemeChangeService } from '../../shared/services/themechange.service';
 import { Message } from '../../shared/models/message';
 import { MessageService } from '../../shared/services/message.service';
+import {LoaderService} from "../../shared/loader/loaders.service";
 
 @Injectable()
 export class RegistrationService {
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
-constructor(private _router: Router, private themeChangeService: ThemeChangeService, private messageService: MessageService){ }
+constructor(private _router: Router, private loaderService: LoaderService,
+            private themeChangeService: ThemeChangeService, private messageService: MessageService){ }
 
   onGetUserDataSuccess(res: any) {
+    this.loaderService.start();
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
     SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
     SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, res.data.first_name);

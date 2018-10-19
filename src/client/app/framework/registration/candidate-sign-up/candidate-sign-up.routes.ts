@@ -8,9 +8,9 @@ export const CandidateSignUpRoutes: Route[] = [
   {
     path: 'registration',
     component: CandidateSignUpComponent
-  },
+  }/*,
   {
     path: 'applicant-signup/:id',
     component: CandidateSignUpComponent
-  }
+  }*/
 ];

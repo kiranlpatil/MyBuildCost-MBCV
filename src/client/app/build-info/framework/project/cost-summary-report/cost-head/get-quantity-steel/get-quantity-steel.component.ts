@@ -132,6 +132,10 @@ export class GetSteelQuantityComponent implements OnInit {
     this.steelQuantityItems.splice(index,1);
     }
   updateQuantityItem(totalDiameterQuantity : SteelQuantityItems) {
+    if (this.valueValidationSteelQuantityItems(this.steelQuantityItems)) {
+      return;
+    }
+
     let currentSteelQuantityItems = this.validateSteelQuantityIems(this.steelQuantityItems);
     totalDiameterQuantity.steelQuantityItem = currentSteelQuantityItems;
     totalDiameterQuantity.unit=this.workItem.unit;
@@ -157,7 +161,33 @@ export class GetSteelQuantityComponent implements OnInit {
     }
     return steelQuantityItems;
   }
-
+  validatingEachItem(steelQuantityItems: SteelQuantityItem) {
+      if(steelQuantityItems.nos===null || steelQuantityItems.length===null
+        || steelQuantityItems.diameter === null) {
+        return true;
+      }
+      if( steelQuantityItems.nos.toString().match(/^-?\d{1,7}(\.\d{1,4})?$/) &&
+        steelQuantityItems.length.toString().match(/^\d{1,7}(\.\d{1,4})?$/)) {
+        return true;
+      }
+      return false;
+  }
+  valueValidationSteelQuantityItems(steelQuantityItems: Array<SteelQuantityItem>) {
+    for (let quantityItemIndex =steelQuantityItems.length-1; quantityItemIndex >=0;  quantityItemIndex--) {
+      let isValid =this.validatingEachItem(steelQuantityItems[quantityItemIndex]);
+      if(!isValid) {
+        var message = new Message();
+        message.isError = true;
+        message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE;
+        if(steelQuantityItems[quantityItemIndex].length.toString().indexOf('-') === 0 ) {
+          message.error_msg = this.getMessages().AMOUNT_VALIDATION_MESSAGE_ITEM_NUMBER;
+        }
+        this.messageService.message(message);
+        return true;
+      }
+    }
+    return false;
+    }
   onUpdateQuantityItemsSuccess(success : string) {
 
     var message = new Message();
@@ -214,7 +244,9 @@ export class GetSteelQuantityComponent implements OnInit {
   getLabel() {
     return Label;
   }
-
+  getMessages() {
+    return Messages;
+  }
   getHeadings() {
     return Headings;
   }

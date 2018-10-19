@@ -992,7 +992,7 @@ class UserService {
           }
         }
 
-        if (projectList.length === 0 && subscriptionList[0].purchased.length !== 0) {
+        if (projectList.length === 0&& subscriptionList[0].purchased.length !== 0) {
           isAbleToCreateNewProject = true;
         }
 
