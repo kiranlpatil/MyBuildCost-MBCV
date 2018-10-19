@@ -23,6 +23,7 @@ export class CommonAmenitiesComponent implements OnInit,OnChanges {
   @Input() totalNumberOfBuildings: number;
   @Input() costingByUnit : string;
   @Input() costingByArea : string;
+  @Input() grandTotalOfArea : number;
   @Input() showHideCostHeadButtonList ?: Array<any>;
 
   @Output() getReportDetails =  new EventEmitter<any>();
