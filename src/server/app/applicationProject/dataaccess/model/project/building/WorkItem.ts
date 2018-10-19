@@ -1,6 +1,5 @@
 import Quantity = require('./Quantity');
 import Rate = require('./Rate');
-import Constants = require('../../../../shared/constants');
 import { AttachmentDetailsModel } from './AttachmentDetails';
 import ContractingAddOn = require('./ContractingAddOn');
 

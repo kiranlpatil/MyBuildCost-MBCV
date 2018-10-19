@@ -112,6 +112,8 @@ import {AmountValidationDirective} from "./build-info/framework/project/amount-v
 import {CompleteProjectReportComponent} from "./build-info/framework/project/report-templates/complete-project-report/complete-project-report.component";
 import {ProjectImageComponent} from "./build-info/framework/project/project-image/project-image.component";
 import {ProjectImageService} from "./build-info/framework/project/project-image/project-image.service";
+import { AdminComponent } from './build-info/framework/admin/admin.component';
+import { AdminService } from './build-info/framework/admin/admin.service';
 
 @NgModule({
   imports: [
@@ -201,7 +203,8 @@ import {ProjectImageService} from "./build-info/framework/project/project-image/
     PaymentFailureComponent,
     PayUMoneyComponent,
     AmountValidationDirective,
-    ProjectImageComponent
+    ProjectImageComponent,
+    AdminComponent
   ],
 
   providers: [
@@ -243,7 +246,8 @@ import {ProjectImageService} from "./build-info/framework/project/project-image/
       //Payment
     PackageDetailsService,
     RenewPackageService,
-    PayUMoneyService
+    PayUMoneyService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

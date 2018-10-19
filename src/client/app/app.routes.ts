@@ -12,6 +12,7 @@ import { CreateProjectRoutes } from './build-info/framework/create-project/creat
 import { CreateBuildingRoutes } from './build-info/framework/project/building/create-building/create-building.routes';
 import { CloneBuildingRoutes } from './build-info/framework/project/building/clone-building/clone-building.routes';
 import { PackageDetailsRoutes } from './build-info/framework/package-details/package-details.routes';
+import { AdminRoutes } from './build-info/framework/admin/admin.routes';
 
 
 export const routes: Routes = [
@@ -27,6 +28,7 @@ export const routes: Routes = [
   ...CloneBuildingRoutes,
   ...CreateNewProjectRoutes,
   ...PackageDetailsRoutes,
+  ...AdminRoutes,
   ...StartRoutes,
   {
     path:'**',

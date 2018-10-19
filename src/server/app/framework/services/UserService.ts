@@ -1744,6 +1744,7 @@ if(duplicateUser.hasOwnProperty("RAP")){
       }
     });
   }
+
   updatePaymentStatus(userId: string, paymentStatus: string, callback: (error: any, result: any) => void) {
 
     let query = {'_id': userId};
