@@ -219,6 +219,14 @@ class RateAnalysisController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+  migrateDataOfAllUsers(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let rateAnalysisService = new RateAnalysisService();
+      rateAnalysisService.syncNewDataForAllUsers();
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 
 }
 

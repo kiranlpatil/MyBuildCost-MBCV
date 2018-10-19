@@ -16,7 +16,7 @@ import RateAnalysisService = require('./RateAnalysisService');
 import Category = require('../dataaccess/model/project/building/Category');
 import alasql = require('alasql');
 import Constants = require('../shared/constants');
-import ProjectService = require('./ProjectService');
+//import ProjectService = require('./ProjectService');
 import CentralizedRate = require('../dataaccess/model/project/CentralizedRate');
 import WorkItem = require('../dataaccess/model/project/building/WorkItem');
 import MaterialTakeOffFlatDetailsDTO = require('../dataaccess/dto/Report/MaterialTakeOffFlatDetailsDTO');
@@ -31,6 +31,7 @@ import MaterialTakeOffTableViewFooter = require('../dataaccess/model/project/rep
 import CostControllException = require('../exception/CostControllException');
 import MaterialTakeOffView = require('../dataaccess/model/project/reports/MaterialTakeOffView');
 import { AddCostHeadButton } from '../dataaccess/model/project/reports/showHideCostHeadButton';
+import {ProjectService} from './ProjectService';
 
 let config = require('config');
 var log4js = require('log4js');

@@ -56,7 +56,7 @@ class RateAnalysisRoutes {
     router.get('/export/radata', controller.exportRateAnalysisData, this._responseInterceptor.exit);
 
     router.get('/import/radata', controller.importRateAnalysisData, this._responseInterceptor.exit);
-
+    router.get('/sync/all/user/data', controller.migrateDataOfAllUsers);
     return router;
   }
 }

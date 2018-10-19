@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as multiparty from 'multiparty';
-import ProjectService = require('./../services/ProjectService');
+//import ProjectService = require('./../services/ProjectService');
 import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
 import Response = require('../interceptor/response/Response');
@@ -8,6 +8,7 @@ import CostControllException = require('../exception/CostControllException');
 import CostHead = require('../dataaccess/model/project/building/CostHead');
 import Rate = require('../dataaccess/model/project/building/Rate');
 import WorkItem = require('../dataaccess/model/project/building/WorkItem');
+import { ProjectService } from '../services/ProjectService';
 let config = require('config');
 let log4js = require('log4js');
 let logger=log4js.getLogger('Project Controller');
