@@ -23,7 +23,7 @@ import RASavedRate = require('../dataaccess/model/RateAnalysis/RASavedRate');
 import BuildingRepository = require('../dataaccess/repository/BuildingRepository');
 import UserRepository = require('../../framework/dataaccess/repository/UserRepository');
 import ProjectRepository = require('../dataaccess/repository/ProjectRepository');
-import {ProjectService} from './ProjectService';
+import { ProjectService } from './ProjectService';
 import ConfigWorkItem = require('../dataaccess/model/project/building/ConfigWorkItem');
 //var ProjectService = require('./ProjectService');
 let request = require('request');

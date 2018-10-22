@@ -1817,144 +1817,180 @@ if(duplicateUser.hasOwnProperty("RAP")){
   }
 
   exportUserData(callback:(error: any, result: any)=> void) {
-    let findAllUsersOfRA = {'typeOfApp': 'RAapp'};
-    this.userRepository.retrieve(findAllUsersOfRA,(error:any, userList : any)=> {
-      if(error) {
-        callback(error,null);
-      } else {
-        for(let user of userList) {
-          user.typeOfApp = 'RateAnalysis';
+   let rateAnalysisUsersFile =  this.createRateAnalysisUsersFile(callback);
+   let buildInfoUsersFile = this.createBuildInfoUsersFile(callback);
+   let usageTrackingFile = this.createUsageTrackingFile(callback);
+   Promise.all([
+     rateAnalysisUsersFile,
+     buildInfoUsersFile,
+     usageTrackingFile
+   ]).then((data: any) => {
+     callback(null, {
+       'status': 'Success',
+       'data': {'message': 'File created successfully'}
+     });
+   }).catch(function (e: any) {
+      logger.error(' Promise failed for creating Excel Files ! :' + JSON.stringify(e.message));
+     Promise.reject(e.message);
+    });
+  }
+
+  createRateAnalysisUsersFile(callback: (error: any, result: any) => void) {
+    return new Promise((resolve: any, reject: any) => {
+      let findAllUsersOfRA = {'typeOfApp': 'RAapp'};
+      this.userRepository.retrieve(findAllUsersOfRA, (error: any, userList: any) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          for (let user of userList) {
+            user.typeOfApp = 'RateAnalysis';
             if (user.subscriptionForRA.name === "RAPremium") {
               user.isPaidUser = true;
             } else {
               user.isPaidUser = false;
             }
-          let activation_date = new Date(user.subscriptionForRA.activationDate);
-          let expiryDate = new Date(user.subscriptionForRA.activationDate);
-          let newExpiryDate = new Date(expiryDate.setDate(activation_date.getDate() + user.subscriptionForRA.validity));
-          let current_date = new Date();
-          user.subscriptionForRA.numOfDaysToExpire = this.daysdifference(newExpiryDate, current_date);
-          if (user.subscriptionForRA.numOfDaysToExpire > 0) {
-            user.subscriptionForRA.isPackageExpired = false;
-          } else {
-            user.subscriptionForRA.isPackageExpired = true;
-          }
-          user.subscriptionForRA.expiryDate = newExpiryDate.toLocaleDateString('zh-CN');
-        }
-
-        var fields = [{ label:'Email', value:'email'},{ label:'Mobile Number', value:'mobile_number'},
-          { label:'App Type', value:'typeOfApp'},{ label:'IsPaidUser', value:'isPaidUser'},
-          { label:'Subscription.PackageName', value:'subscriptionForRA.name'},
-          { label:'Subscription.ExpiryDate', value:'subscriptionForRA.expiryDate'},
-          { label:'Subscription.IsExpired', value:'subscriptionForRA.isPackageExpired'}];
-
-        var csv = json2csv({ data: userList, fields: fields });
-        var pathOfFile=  path.resolve() + config.get('application.exportFilePathServer') + 'RateAnalysisUsers.csv';
-        this.createCsvFile(pathOfFile, csv);
-      }
-    });
-
-    let findAllUsersOfMBC= {'typeOfApp':{ $exists: false }};
-    this.userRepository.retrieve(findAllUsersOfMBC,(error:any, userList : any)=> {
-      if(error) {
-        callback(error,null);
-      } else {
-        let arrayPromises: any = new Array(0);
-        for (let user of userList) {
-          user.typeOfApp = 'MyBuildCost';
-          if (user.subscription[0].validity >15 || user.subscription.length >= 2) {
-            user.isPaidUser = true;
-          } else {
-            user.isPaidUser = false;
-          }
-          for (let subscription of user.subscription) {
-            if (subscription.projectId.length !== 0) {
-              let tempPromise = this.getProjectName(subscription,user);
-              arrayPromises.push(tempPromise);
+            let activation_date = new Date(user.subscriptionForRA.activationDate);
+            let expiryDate = new Date(user.subscriptionForRA.activationDate);
+            let newExpiryDate = new Date(expiryDate.setDate(activation_date.getDate() + user.subscriptionForRA.validity));
+            let current_date = new Date();
+            user.subscriptionForRA.numOfDaysToExpire = this.daysdifference(newExpiryDate, current_date);
+            if (user.subscriptionForRA.numOfDaysToExpire > 0) {
+              user.subscriptionForRA.isPackageExpired = false;
             } else {
-              this.projectSubscriptionDetails(subscription,user);
+              user.subscriptionForRA.isPackageExpired = true;
+            }
+            user.subscriptionForRA.expiryDate = newExpiryDate.toLocaleDateString('zh-CN');
+          }
+
+          var fields = [{label: 'Email', value: 'email'}, {label: 'Mobile Number', value: 'mobile_number'},
+            {label: 'App Type', value: 'typeOfApp'}, {label: 'IsPaidUser', value: 'isPaidUser'},
+            {label: 'Subscription.PackageName', value: 'subscriptionForRA.name'},
+            {label: 'Subscription.ExpiryDate', value: 'subscriptionForRA.expiryDate'},
+            {label: 'Subscription.IsExpired', value: 'subscriptionForRA.isPackageExpired'}];
+
+          var csv = json2csv({data: userList, fields: fields});
+          var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'RateAnalysisUsers.csv';
+          this.createCsvFile(pathOfFile, csv);
+          resolve(userList);
+        }
+      });
+
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
+  }
+
+  createBuildInfoUsersFile(callback: (error: any, result: any) => void) {
+    return new Promise((resolve: any, reject: any) => {
+      let findAllUsersOfMBC = {'typeOfApp': {$exists: false}};
+      this.userRepository.retrieve(findAllUsersOfMBC, (error: any, userList: any) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          let arrayPromises: any = new Array(0);
+          for (let user of userList) {
+            user.typeOfApp = 'MyBuildCost';
+            if (user.subscription[0].validity > 15 || user.subscription.length >= 2) {
+              user.isPaidUser = true;
+            } else {
+              user.isPaidUser = false;
+            }
+            for (let subscription of user.subscription) {
+              if (subscription.projectId.length !== 0) {
+                let tempPromise = this.getProjectName(subscription, user);
+                arrayPromises.push(tempPromise);
+              } else {
+                this.projectSubscriptionDetails(subscription, user);
+              }
             }
           }
-        }
 
-        Promise.all(arrayPromises)
-          .then((data: any) => {
-            var csvData = ['Email,Mobile_Number,App_Type,IsPaidUser,Subscription_ProjectName,Subscription_PackageName,Subscription_ExpiryDate,Subscription_IsExpired'];
-            for (let user of userList) {
-              var csvRow1 = {
-                Email: user.email,
-                Mobile_Number: user.mobile_number,
-                App_Type: user.typeOfApp,
-                IsPaidUser: user.isPaidUser};
+          Promise.all(arrayPromises)
+            .then((data: any) => {
+              var csvData = ['Email,Mobile_Number,App_Type,IsPaidUser,Subscription_ProjectName,Subscription_PackageName,Subscription_ExpiryDate,Subscription_IsExpired'];
+              for (let user of userList) {
+                var csvRow1 = {
+                  Email: user.email,
+                  Mobile_Number: user.mobile_number,
+                  App_Type: user.typeOfApp,
+                  IsPaidUser: user.isPaidUser
+                };
                 for (let subscription of user.subscription) {
-                let csvRow2 = JSON.parse(JSON.stringify(csvRow1));
-                csvRow2.Subscription_ProjectName = subscription.projectDetails.projectName;
-                csvRow2.Subscription_PackageName = subscription.projectDetails.packageName;
-                csvRow2.Subscription_ExpiryDate = subscription.projectDetails.expiryDate;
-                csvRow2.Subscription_IsExpired = subscription.projectDetails.activeStatus;
-                csvData.push(csvRow2);
+                  let csvRow2 = JSON.parse(JSON.stringify(csvRow1));
+                  csvRow2.Subscription_ProjectName = subscription.projectDetails.projectName;
+                  csvRow2.Subscription_PackageName = subscription.projectDetails.packageName;
+                  csvRow2.Subscription_ExpiryDate = subscription.projectDetails.expiryDate;
+                  csvRow2.Subscription_IsExpired = subscription.projectDetails.activeStatus;
+                  csvData.push(csvRow2);
                 }
-             }
+              }
 
-            var fields = [{label: 'Email', value: 'Email'}, {label: 'Mobile Number', value: 'Mobile_Number'},
-              {label: 'App Type', value: 'App_Type'}, {label: 'IsPaidUser', value: 'IsPaidUser'},
-              {label: 'Subscription.ProjectName', value: 'Subscription_ProjectName'},
-              {label: 'Subscription.PackageName', value: 'Subscription_PackageName'},
-              {label: 'Subscription.ExpiryDate', value: 'Subscription_ExpiryDate'},
-              {label: 'Subscription.IsExpired', value: 'Subscription_IsExpired'}];
+              var fields = [{label: 'Email', value: 'Email'}, {label: 'Mobile Number', value: 'Mobile_Number'},
+                {label: 'App Type', value: 'App_Type'}, {label: 'IsPaidUser', value: 'IsPaidUser'},
+                {label: 'Subscription.ProjectName', value: 'Subscription_ProjectName'},
+                {label: 'Subscription.PackageName', value: 'Subscription_PackageName'},
+                {label: 'Subscription.ExpiryDate', value: 'Subscription_ExpiryDate'},
+                {label: 'Subscription.IsExpired', value: 'Subscription_IsExpired'}];
 
-            var csv = json2csv({data: csvData, fields:fields});
-            var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'MyBuildCostUser.csv';
-            this.createCsvFile(pathOfFile, csv);
-          })
-          .catch((error: Error) => {
-            Promise.reject(error);
-          });
-      }
-    });
-
-    let usageTrackingForUsers = {};
-    let query = {path: '_id', select: ['userId']};
-    this.usageTrackingRepository.findAndPopulate(usageTrackingForUsers,query, (err:any, userData: any) => {
-      if(err) {
-        callback(err, null);
-      } else {
-        let arrayPromise: any = new Array(0);
-        for (let user of userData) {
-          if (user.userId) {
-            let tempPromise = this.getMobileAndEmail(user);
-            arrayPromise.push(tempPromise);
-          }
-          if (user.appType === undefined || user.appType === 'MyBuildCost') {
-            user.appType = 'MyBuildCost';
-          } else if (user.appType && user.appType === 'mcc') {
-            user.appType = 'MyCivilCalC';
-          }
+              var csv = json2csv({data: csvData, fields: fields});
+              var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'MyBuildCostUser.csv';
+              this.createCsvFile(pathOfFile, csv);
+              resolve(userList);
+            })
+            .catch((error: Error) => {
+              Promise.reject(error);
+            });
         }
+      });
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
+  }
 
-        Promise.all(arrayPromise)
-          .then((data: any) => {
-            console.log('created usageFile');
-            var fields = [{label: 'Email', value: 'email'}, {label: 'Mobile Number', value: 'mobileNumber'},
-              {label: 'App Type', value: 'appType'}, {label: 'UserId', value: 'userId'},
-              {label: 'DeviceId', value: 'deviceId'}, {label: 'Platform', value: 'platform'},
-              {label: 'Device OS', value: 'deviceOS'}, {label: 'Used From Mobile', value: 'isMobile'},
-              {label: 'Used From Desktop', value: 'isDesktop'}, {label: 'Browser', value: 'browser'},
-              {label: 'Used On Time', value: 'createdAt'}];
+  createUsageTrackingFile(callback: (error: any, result: any) => void) {
+    return new Promise((resolve: any, reject: any) => {
+      let usageTrackingForUsers = {};
+      let query = {path: '_id', select: ['userId']};
+      this.usageTrackingRepository.findAndPopulate(usageTrackingForUsers, query, (err: any, userData: any) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          let arrayPromise: any = new Array(0);
+          for (let user of userData) {
+            if (user.userId) {
+              let tempPromise = this.getMobileAndEmail(user);
+              arrayPromise.push(tempPromise);
+            }
+            if (user.appType === undefined || user.appType === 'MyBuildCost') {
+              user.appType = 'MyBuildCost';
+            } else if (user.appType && user.appType === 'mcc') {
+              user.appType = 'MyCivilCalC';
+            }
+          }
 
-            var csv = json2csv({data: userData, fields: fields});
-            var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'AppUsageDetails.csv';
-            this.createCsvFile(pathOfFile, csv);
-          })
-          .catch((error: Error) => {
-            Promise.reject(error);
-          });
-         callback(null, {
-          'status': 'Success',
-          'data': {'message': 'File created successfully'}
-        });
-      }
-   });
+          Promise.all(arrayPromise)
+            .then((data: any) => {
+              console.log('created usageFile');
+              var fields = [{label: 'Email', value: 'email'}, {label: 'Mobile Number', value: 'mobileNumber'},
+                {label: 'App Type', value: 'appType'}, {label: 'UserId', value: 'userId'},
+                {label: 'DeviceId', value: 'deviceId'}, {label: 'Platform', value: 'platform'},
+                {label: 'Device OS', value: 'deviceOS'}, {label: 'Used From Mobile', value: 'isMobile'},
+                {label: 'Used From Desktop', value: 'isDesktop'}, {label: 'Browser', value: 'browser'},
+                {label: 'Used On Time', value: 'createdAt'}];
+
+              var csv = json2csv({data: userData, fields: fields});
+              var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'AppUsageDetails.csv';
+              this.createCsvFile(pathOfFile, csv);
+              resolve(userData);
+            })
+            .catch((error: Error) => {
+              Promise.reject(error);
+            });
+        }
+      });
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
   }
 
   getMobileAndEmail(user:any) {
