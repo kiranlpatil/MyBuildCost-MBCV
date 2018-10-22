@@ -129,7 +129,7 @@
                                     <div class="edit-rate-null" *ngIf="!workItem.isDirectRate && !workItem.rate.isEstimated && anySubscriptionAvailable">
                                       -
                                     </div>
-                                    <div class="edit-rate-null" *ngIf="!anySubscriptionAvailable">
+                                    <div class="edit-rate-null" *ngIf="!anySubscriptionAvailable && !workItem.isDirectRate">
                                       -
                                     </div>
                                      <span title="Get Rate" class="calculator"
