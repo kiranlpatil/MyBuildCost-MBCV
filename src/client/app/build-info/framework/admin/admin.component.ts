@@ -15,9 +15,6 @@ import { SessionStorageService } from '../../../shared/services/session.service'
 export class AdminComponent implements OnInit{
 
   displayLinks: boolean = false;
-  usagePath: any;
-  myBuildUserPath: any;
-  raUserPath:any;
   isAdmin: boolean = false;
 
   constructor(private _router: Router, private adminService : AdminService, private loaderService: LoaderService,
@@ -42,10 +39,6 @@ export class AdminComponent implements OnInit{
     this.loaderService.stop();
     if(success.status)
     this.displayLinks = true;
-
-    this.usagePath = AppSettings.IP + AppSettings.PUBLIC + API.EXPORT_APP_USAGE_DETAILS;
-    this.myBuildUserPath = AppSettings.IP + AppSettings.PUBLIC + API.EXPORT_MY_BUILD_COST_USER ;
-    this.raUserPath = AppSettings.IP + AppSettings.PUBLIC + API.EXPORT_RATE_ANALYSIS_USER ;
   }
 
   createAllExcelFilesFailure(error: any) {

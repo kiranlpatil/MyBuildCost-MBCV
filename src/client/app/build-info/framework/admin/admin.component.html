@@ -7,19 +7,17 @@
   <br>
   <h3> Export User and Usage Tracking Files of BuildInfo </h3>
   <br>
-  <button (click)="createExcelFiles()"> Start Export</button>
+  <button (click)="createExcelFiles()"> Export Report</button>
   <br>
 
   <div *ngIf="displayLinks">
       <h5> Files are successfully created, to download file click on each file</h5>
       <br>
-      <a download="MyBuildCostUser.csv" href="{{ myBuildUserPath }}">MyBuildCost UsersFile</a>
-
+      <a download="MyBuildCostUser.csv" href="./public/exported-files/MyBuildCostUser.csv">MyBuildCost UsersFile</a>
       <br>
-      <a download="RateAnalysisUsers.csv" href="{{ raUserPath }}">RateAnalysis UsersFile</a>
-
+      <a download="RateAnalysisUsers.csv" href="./public/exported-files/RateAnalysisUsers.csv">RateAnalysis UsersFile</a>
       <br>
-      <a download="AppUsageDetails.csv" href="{{ usagePath }}">UsageTracking File</a>
+      <a download="AppUsageDetails.csv" href="./public/exported-files/AppUsageDetails.csv">UsageTracking File</a>
   </div>
 
 </div>
