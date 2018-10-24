@@ -34,7 +34,6 @@ export class AttachmentComponent implements OnInit {
   private message = new Message();
   private fileName: string;
   private assignedFileName: any;
-  private path: any;
   private attachmentFiles: Array<AttachmentDetailsModel>;
   private attachmentFilesCheck: Array<AttachmentDetailsModel>;
   private enableUploadOption: boolean = false;
@@ -47,7 +46,6 @@ export class AttachmentComponent implements OnInit {
     this.workItemId = this.workItem.rateAnalysisId;
     this.ccWorkItemId = this.workItem.workItemId;
     this.attachmentFilesCheck = this.workItem.attachmentDetails;
-    this.path = AppSettings.IP + AppSettings.PUBLIC + AppSettings.ATTACHMENT_FILES;
   }
 
   onFileSelect(fileInput: any) {
