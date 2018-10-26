@@ -8,6 +8,7 @@ class RAWorkItem {
   rateAnalysisId: number;
   rate: Rate;
   regionName ?: string;
+  isFree:boolean;
   contractingAddOns :Array<ContractingAddOn> = new Array<ContractingAddOn>();
 
   constructor(name:string, id:number) {
