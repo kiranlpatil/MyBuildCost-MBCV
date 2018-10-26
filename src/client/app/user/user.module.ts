@@ -35,6 +35,7 @@ import {RenewPackageComponent} from "../build-info/framework/package-details/ren
 import {PaymentSuccessfulComponent} from "../build-info/framework/payment/payment-successful/payment-successful.component";
 import {PaymentFailureComponent} from "../build-info/framework/payment/payment-failure/payment-failure.component";
 import {RetainProjectComponent} from "../build-info/framework/payment/retain-project/retain-project.component";
+import {UpdateSubscriptionStatusService} from "../shared/services/update-subscription-status.service";
 
 @NgModule({
   imports: [CommonModule,FormsModule,SharedModule,ReactiveFormsModule, /*TODO Abhijeet Ng2AutoCompleteModule,*/ UserRoutingModule],
@@ -83,7 +84,8 @@ import {RetainProjectComponent} from "../build-info/framework/payment/retain-pro
     ProfileDetailsService,
     PackageDetailsService,
     RenewPackageService,
-    PayUMoneyService
+    PayUMoneyService,
+    UpdateSubscriptionStatusService
   ]
 })
 

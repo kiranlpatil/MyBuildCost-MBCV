@@ -8,6 +8,7 @@ import { SessionStorage, SessionStorageService } from '../../../shared/index';
 declare var $: any;
 import { ErrorService } from '../../../shared/services/error.service';
 import {LoaderService} from "../../../shared/loader/loaders.service";
+import {UpdateSubscriptionStatusService} from "../../../shared/services/update-subscription-status.service";
 
 @Component({
   moduleId: module.id,
@@ -30,7 +31,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   premiumPackageDetails:any;
 
   constructor(private projectService: ProjectService, private _router: Router, private loaderService: LoaderService,
-  private packageDetailsService : PackageDetailsService, private errorService:ErrorService) {
+  private packageDetailsService : PackageDetailsService,private updateSubscriptionStatusService:UpdateSubscriptionStatusService,
+  private errorService:ErrorService) {
   }
 
   ngOnInit() {
@@ -85,8 +87,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     }
     this.isSubscriptionExist = projects.isSubscriptionAvailable;
     this.isVisible = true;
+    this.updateSubscriptionStatusService.change(projects.isAnySubscriptionAvailable);
   }
-
   getSubscriptionPackageByName(packageName : string) {
     this.packageDetailsService.getSubscriptionPackageByName(packageName).subscribe(
       packageDetails=>this.onGetSubscriptionPackageByNameSuccess(packageDetails),

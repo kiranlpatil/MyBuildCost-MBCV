@@ -10,6 +10,9 @@ class UsageTracking {
   appType: string;
   mobileNumber: number;
   email: string;
+  workItemName ?: string;
+  regionName ?: string;
+  isPaidWorkItem ?: boolean;
 
   constructor() {}
 }

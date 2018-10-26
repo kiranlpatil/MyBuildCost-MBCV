@@ -57,4 +57,12 @@ export class LoginService extends BaseService {
       .catch(this.handleError);
   }
 
+  userTrack(data: any): Observable<Login> {
+    var body = JSON.stringify(data);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post('usage/track',body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 }

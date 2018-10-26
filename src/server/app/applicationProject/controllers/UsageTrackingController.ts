@@ -29,6 +29,9 @@ class UsageTrackingController {
       userDeviceDetails.appType = deviceDetails.appType;
       userDeviceDetails.mobileNumber = deviceDetails.mobileNumber;
       userDeviceDetails.email = deviceDetails.email;
+      userDeviceDetails.workItemName = deviceDetails.workItemName;
+      userDeviceDetails.regionName = deviceDetails.regionName;
+      userDeviceDetails.isPaidWorkItem = deviceDetails.isPaidWorkItem;
 
       let usageTrackingService: UsageTrackingService = new UsageTrackingService();
       usageTrackingService.addUserDeviceDetails( userDeviceDetails,(error, result) => {

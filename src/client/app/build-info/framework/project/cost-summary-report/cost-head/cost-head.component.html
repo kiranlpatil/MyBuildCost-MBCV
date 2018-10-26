@@ -123,10 +123,13 @@
                                            workItem?.rate?.total?.toString().split(".")[1]?.length>4 ||workItem?.rate?.total?.toString().split(".").length>4 '
                                            [(ngModel)]="workItem.rate.total"
                                            (change)="changeDirectRate(category.rateAnalysisId,workItem.rateAnalysisId, workItem.workItemId, workItem.rate.total)" id="directRate1" size="10" class="form-control clear">
-                                    <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated">
+                                    <div class="edit-rate" *ngIf="!workItem.isDirectRate && workItem.rate.isEstimated && anySubscriptionAvailable">
                                       {{workItem.rate.total|number : '1.2-2'}}
                                     </div>
-                                    <div class="edit-rate-null" *ngIf="!workItem.isDirectRate && !workItem.rate.isEstimated">
+                                    <div class="edit-rate-null" *ngIf="!workItem.isDirectRate && !workItem.rate.isEstimated && anySubscriptionAvailable">
+                                      -
+                                    </div>
+                                    <div class="edit-rate-null" *ngIf="!anySubscriptionAvailable">
                                       -
                                     </div>
                                      <span title="Get Rate" class="calculator"
