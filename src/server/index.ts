@@ -19,10 +19,6 @@ var CronJob = require('cron').CronJob;
 
 export function init(port: number, mode: string, protocol: string, dist_runner: string) {
 
-
-
-
-
   var loggerConfig=config.get('logger');
 
   log4js.configure(loggerConfig);
@@ -31,8 +27,6 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   logger.info('Initialization info');
   logger.error('Initialization error');
   logger.debug('Initialization debug');
-
-
 
   process.on('uncaughtException', function (err:any) {
     let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
@@ -49,7 +43,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     sharedService.mailToAdmin(error);
   });
 
-  let syncAtEveryFifteenMinute = new CronJob('00 */55 * * * *', function() {
+  let syncAtEveryFifteenMinute = new CronJob('00 00 12 * * *', function() {
 
       let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
       rateAnalysisServices.syncAllRegions();
