@@ -134,8 +134,8 @@
       "Trial": {
         "basePackage": {
           "cost": 0,
-          "validity": 15,
-          "description": "15 Days",
+          "validity": 0,
+          "description": "Permenent Free",
           "name": "Trial"
         }
       }
