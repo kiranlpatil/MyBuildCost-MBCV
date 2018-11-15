@@ -2050,6 +2050,25 @@ if(duplicateUser.hasOwnProperty("RAP")){
       }
     });
   }
+
+  sendNotificationToBigSlice(mobileNumber: number) {
+    let mailService = new SendMailService();
+
+    let htmlTemplate = 'ra-new-user-registered.html';
+
+    let data: Map<string, string> = new Map([
+      ['$mobileNumber$', mobileNumber]]);
+
+    let attachment = MailAttachments.RaAttachmentArray;
+    mailService.send(config.get('application.mail.BUILDINFO_ADMIN_MAIL'), Messages.RA_NEW_USER_REGISTERED, htmlTemplate, data, attachment,
+      (err: any, result: any) => {
+        if (err) {
+          console.log('Failed to send mail to Big slice on RA user registration');
+        } else {
+          console.log('Mail sent successfully to Big slice on RA user registration');
+        }
+      });
+  }
 }
 
 Object.seal(UserService);

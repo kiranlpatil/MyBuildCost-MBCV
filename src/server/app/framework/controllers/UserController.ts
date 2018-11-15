@@ -103,11 +103,16 @@ class UserController {
     try {
       let user = req.user;
       let params = req.body;
+      let mobileNumber = req.body.mobileNumber;
+      let isPasswordAlreadySet = req.body.isPasswordAlreadySet;
       let userService = new UserService();
       userService.verifyOtp(params, user, (error, result) => {
         if (error) {
           next(error);
         } else {
+          if(!isPasswordAlreadySet) {
+            userService.sendNotificationToBigSlice(mobileNumber);
+          }
           res.send(result);
         }
       });
@@ -863,6 +868,8 @@ updateSubscriptionDetails(req: express.Request, res: express.Response, next: any
       let userService = new UserService();
       let password = req.body.password;
       let id = req.body.id;
+      let mobileNumber = req.body.mobileNumber;
+      let isPasswordAlreadySet = req.body.isPasswordAlreadySet;
       const saltRounds = 10;
       bcrypt.hash(password, saltRounds, (err: any, hash: any) => {
         if (err) {
@@ -880,6 +887,9 @@ updateSubscriptionDetails(req: express.Request, res: express.Response, next: any
             if (error) {
               next(error);
             } else {
+              if (!isPasswordAlreadySet) {
+                userService.sendNotificationToBigSlice(mobileNumber);
+              }
               res.status(200).send({
                 status: Messages.STATUS_SUCCESS
               });
