@@ -15,6 +15,7 @@ import { Category } from '../../../../model/category';
 import { CommonService } from '../../../../../../../app/shared/services/common.service';
 import { RateItem } from '../../../../model/rate-item';
 import { ErrorService } from '../../../../../../shared/services/error.service';
+import {UpdateSubscriptionStatusService} from "../../../../../../shared/services/update-subscription-status.service";
 declare var $: any;
 
 
@@ -61,11 +62,17 @@ export class GetRateComponent implements OnChanges {
   selectedRateItemKey : string;
   type : string;
   selectedItemName: string;
+  anySubscriptionAvailable : boolean;
+  subscription :any;
   //totalByUnit :  number = 0;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private commonService: CommonService,
-              private errorService:ErrorService) {
+              private errorService:ErrorService,private updateSubscriptionStatusService:UpdateSubscriptionStatusService) {
+    this.subscription = this.updateSubscriptionStatusService.changeSubscriptionStatus$.subscribe(
+      (isAnySubscriptionAvailable:boolean )=> {
+        this.anySubscriptionAvailable= isAnySubscriptionAvailable;}
+    );
   }
 
   ngOnChanges() {

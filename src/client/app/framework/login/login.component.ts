@@ -18,7 +18,8 @@ import { Label, LocalStorage, Messages, ProjectAsset } from '../../shared/consta
 import { SharedService } from '../../shared/services/shared-service';
 import { RegistrationService } from '../../user/services/registration.service';
 import { LocalStorageService } from './../../shared/services/local-storage.service';
-
+import { LoaderService } from '../../shared/loader/loaders.service';
+//import { DeviceUUID } from 'device_uuid';
 @Component({
   moduleId: module.id,
   selector: 'tpl-login',
@@ -28,17 +29,10 @@ import { LocalStorageService } from './../../shared/services/local-storage.servi
 
 export class LoginComponent implements OnInit {
   @ViewChild('toaster') toaster: ElementRef;
-  private model = new Login();
+  //deviceDetails = DeviceUUID().parse();
   userForm: FormGroup;
   error_msg: string;
   isShowErrorMessage: boolean = true;
-  private MY_LOGO_PATH: string;
-  private EMAIL_ICON: string;
-  private PASSWORD_ICON: string;
-  private APP_NAME: string;
-  private MY_TAG_LINE: string;
-  private UNDER_LICENCE: string;
-  private BODY_BACKGROUND: string;
   submitStatus: boolean;
   mainHeaderMenuHideShow: string;
   isChrome: boolean;
@@ -46,11 +40,19 @@ export class LoginComponent implements OnInit {
   isFromCareerPlugin: boolean = false;
   recruiterReferenceId: string;
   isRememberPassword: boolean = false;
+  private MY_LOGO_PATH: string;
+  private EMAIL_ICON: string;
+  private PASSWORD_ICON: string;
+  private APP_NAME: string;
+  private MY_TAG_LINE: string;
+  private UNDER_LICENCE: string;
+  private BODY_BACKGROUND: string;
+  private model = new Login();
 
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder,
               private sharedService: SharedService, private activatedRoute: ActivatedRoute,
-              private registrationService:RegistrationService) {
+              private registrationService:RegistrationService, private loaderService: LoaderService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -120,6 +122,7 @@ export class LoginComponent implements OnInit {
         error => (this.onUserLoginFailure(error)));
   }
   onUserLoginSuccess(res: any) {
+    this.loaderService.start();
     if(this.isRememberPassword) {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
@@ -146,6 +149,27 @@ export class LoginComponent implements OnInit {
       SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
     }
     this.successRedirect(res);
+    // this.userTrack(res);
+  }
+
+/*  userTrack(res: any) {
+    this.deviceDetails.deviceId = new DeviceUUID().get();
+    this.deviceDetails.email = res.data.email;
+    this.deviceDetails.mobileNumber = res.data.mobile_number;
+    this.deviceDetails.appType = 'MyBuildCost';
+    this.deviceDetails.userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    this.loginService.userTrack(this.deviceDetails)
+      .subscribe(
+        res => (this.onUserTrackSuccess(res)),
+        error => (this.onUserTrackFailure(error)));
+  }*/
+
+  onUserTrackSuccess(res:any) {
+    console.log('success');
+  }
+
+  onUserTrackFailure(err: any) {
+    console.log('failure');
   }
 
   onUserLoginFailure(error: any) {

@@ -140,8 +140,8 @@
       "Trial": {
         "basePackage": {
           "cost": 0,
-          "validity": 15,
-          "description": "15 Days",
+          "validity": 0,
+          "description": "Permenent Free",
           "name": "Trial"
         }
       }
@@ -309,6 +309,7 @@
     "rateAnalysisRegionResult": "RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=",
     "contractorAddOns" : "ContractorAddons/ContractorAddonsResult",
     "contractorEndpoint" : "?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&NeedFullData=y&AppCode=RA",
+    "liteVersionItems":"http://rateanalysisapi.buildinfo.co.in/ItemsLite/itemsLiteResult?&lastUpdatedDate=null",
     "EndPoint" : "&NeedFullData=y&AppCode=RA"
   },
 

@@ -14,7 +14,7 @@ pipelines:
         script: # Modify the commands below to build your repository..
           - node -v
           - npm -v
-          - npm install
+          - npm install --unsafe -perm
           - npm rebuild
           - npm install gulp -g
           - npm install typings -g

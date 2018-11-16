@@ -35,8 +35,8 @@ declare let $: any;
 export class CostSummaryComponent implements OnInit, AfterViewInit {
 
   animateView: boolean = false;
-  @ViewChild('content') content: ElementRef;
-  @ViewChild(ProjectHeaderComponent) addBuildingButton: ProjectHeaderComponent;
+  //@ViewChild('content') content: ElementRef;
+ // @ViewChild(ProjectHeaderComponent) addBuildingButton: ProjectHeaderComponent;
   buildingsReport: Array <BuildingReport>;
   amenitiesReport: BuildingReport;
   projectReport: ProjectReport;
@@ -115,7 +115,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {debugger
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW, CurrentView.COST_SUMMARY);
     this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
@@ -156,8 +156,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
     this.activeStatus = status.activeStatus;
     this.addBuildingButtonDisable =status.addBuildingDisable;
-    this.addBuildingButton.addBuildingButtonDisable = status.addBuildingDisable;
-    this.addBuildingButton.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+    //this.addBuildingButton.addBuildingButtonDisable = status.addBuildingDisable;
+    //this.addBuildingButton.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
    /* if(status.expiryMessage) {
       this.subscriptionValidityMessage = status.expiryMessage;
     } else if(status.warningMessage) {

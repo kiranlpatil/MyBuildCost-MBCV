@@ -32,7 +32,8 @@ import alasql = require('alasql');
 import Constants = require('../../applicationProject/shared/constants');
 import LoggerService = require('../shared/logger/LoggerService');
 import Mobile = require("../../applicationProject/dataaccess/model/Users/Mobile");
-import MobileArray = require("../../applicationProject/dataaccess/model/Users/MobileArray");
+import json2csv = require("json2csv");
+import UsageTrackingRepository = require("../../applicationProject/dataaccess/repository/UsageTrackingRepository");
 
 let CCPromise = require('promise/lib/es6-extensions');
 let log4js = require('log4js');
@@ -42,22 +43,26 @@ let config = require('config');
 let path = require('path');
 let request = require('request');
 let xlsxj = require('xlsx-to-json');
+var async =  require('async');
 
 class UserService {
   APP_NAME: string;
   company_name: string;
   mid_content: any;
+  projectName: string;
   isActiveAddBuildingButton: boolean = false;
   highestDateUser: Array<NewUser>;
   private userRepository: UserRepository;
   private projectRepository: ProjectRepository;
   private loggerService: LoggerService;
+  private usageTrackingRepository : UsageTrackingRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
     this.projectRepository = new ProjectRepository();
     this.loggerService = new LoggerService('UserService');
     this.APP_NAME = ProjectAsset.APP_NAME;
+    this.usageTrackingRepository = new UsageTrackingRepository();
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
@@ -879,19 +884,13 @@ class UserService {
     subscriptionDetails.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscriptionData.validity));
     let current_date = new Date();
     subscriptionDetails.noOfDaysToExpiry = this.daysdifference(subscriptionDetails.expiryDate, current_date);
-    if (subscriptionDetails.noOfDaysToExpiry <= Constants.TRIAL_PERIOD && subscriptionDetails.noOfDaysToExpiry > 0 && subscriptionData.name === 'Trial') {
-      subscriptionDetails.warningMsgForPackage = 'Your trial period will expire in ' +
-        Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s).';
-
-    } else if (subscriptionDetails.noOfDaysToExpiry <= Constants.PREMIUM_PERIOD && subscriptionDetails.noOfDaysToExpiry > 0 && subscriptionData.name === 'RAPremium') {
-      subscriptionDetails.warningMsgForPackage = 'Your package will expire in ' +
+     if (subscriptionDetails.noOfDaysToExpiry <= Constants.PREMIUM_PERIOD && subscriptionDetails.noOfDaysToExpiry > 0 && subscriptionData.name === 'RAPremium') {
+      subscriptionDetails.warningMsgForPackage = 'Your subscription will expire in ' +
         Math.round(subscriptionDetails.noOfDaysToExpiry) + ' day(s).';
 
     } else if (subscriptionDetails.noOfDaysToExpiry <= 0) {
-      if (subscriptionData.name === 'Trial') {
-        subscriptionDetails.expiryMsgForPackage = 'Your trial period has expired.';
-      } else {
-        subscriptionDetails.expiryMsgForPackage = 'Your package has expired.';
+     if(subscriptionData.name === 'RAPremium') {
+        subscriptionDetails.expiryMsgForPackage = 'Your subscription has expired.';
       }
       subscriptionDetails.isPackageExpired = true;
     }
@@ -1003,12 +1002,13 @@ class UserService {
           }
         }
 
-        if (projectList.length === 0&& subscriptionList[0].purchased.length !== 0) {
+        if (projectList.length === 0 && subscriptionList[0].purchased.length !== 0) {
           isAbleToCreateNewProject = true;
         }
 
         let projectId = config.get('sampleProject.' + 'projectId');
         let projection = {'name': 1, 'activeStatus': 1, 'projectImage': 1};
+        let isAnySubscriptionAvailable =this.checkUserHaveActiveSubcription(subscriptionList,projectSubscriptionArray);
         this.projectRepository.findByIdWithProjection(projectId, projection, (error, project) => {
           if (error) {
             callback(error, null);
@@ -1026,12 +1026,63 @@ class UserService {
             data: projectSubscriptionArray,
             sampleProject: sampleProjectSubscriptionArray,
             isSubscriptionAvailable: isAbleToCreateNewProject,
+            isAnySubscriptionAvailable: isAnySubscriptionAvailable,
             access_token: authInterceptor.issueTokenWithUid(user)
           });
         });
       }
     });
   }
+checkUserHaveActiveSubcription (subscriptionList :any ,projectSubscriptionArray:any) {
+
+  let isAnySubscriptionAvailable: boolean = false;
+  if(subscriptionList && subscriptionList.length === 1) {
+    if (subscriptionList.length === projectSubscriptionArray.length) {
+      for (let project of projectSubscriptionArray) {
+        if (project.expiryMessage || !project.activeStatus) {
+          // if never go to else means all projects are expired.
+        } else {
+          isAnySubscriptionAvailable = true;
+        }
+      }
+    }else {
+      if(projectSubscriptionArray.length === 0) {
+        isAnySubscriptionAvailable = true;
+      }
+    }
+  }else if(subscriptionList && subscriptionList.length >1) {
+    if(subscriptionList &&subscriptionList[0] &&
+      subscriptionList[0].purchased && subscriptionList[0].purchased.length > 1) {
+      if (subscriptionList.length === projectSubscriptionArray.length) {
+        for (let project of projectSubscriptionArray) {
+          if (project.expiryMessage || !project.activeStatus) {
+            // if never go to else means all projects are expired.
+          } else {
+            isAnySubscriptionAvailable = true;
+          }
+        }
+      }else {
+        isAnySubscriptionAvailable = true;
+      }
+    } else {
+      if (subscriptionList.length-1 === projectSubscriptionArray.length-1) {
+        for (let project of projectSubscriptionArray) {
+          if (project.projectId === subscriptionList[0].projectId[0]) {
+            continue;
+          }
+          if (project.expiryMessage || !project.activeStatus) {
+            // if never go to else means all projects are expired.
+          } else {
+            isAnySubscriptionAvailable = true;
+          }
+        }
+      }else if (subscriptionList.length-1 > projectSubscriptionArray.length-1) {
+        isAnySubscriptionAvailable = true;
+      }
+    }
+  }
+   return isAnySubscriptionAvailable;
+}
 
   //To check which is current package occupied by user.
   checkCurrentPackage(subscription: any) {
@@ -1767,6 +1818,267 @@ if(duplicateUser.hasOwnProperty("RAP")){
         callback(null, result);
       }
     });
+  }
+
+  exportUserData(callback:(error: any, result: any)=> void) {
+   let rateAnalysisUsersFile =  this.createRateAnalysisUsersFile(callback);
+   let buildInfoUsersFile = this.createBuildInfoUsersFile(callback);
+   let usageTrackingFile = this.createUsageTrackingFile(callback);
+   Promise.all([
+     rateAnalysisUsersFile,
+     buildInfoUsersFile,
+     usageTrackingFile
+   ]).then((data: any) => {
+     callback(null, {
+       'status': 'Success',
+       'data': {'message': 'File created successfully'}
+     });
+   }).catch(function (e: any) {
+      logger.error(' Promise failed for creating Excel Files ! :' + JSON.stringify(e.message));
+     Promise.reject(e.message);
+    });
+  }
+
+  createRateAnalysisUsersFile(callback: (error: any, result: any) => void) {
+    return new Promise((resolve: any, reject: any) => {
+      let findAllUsersOfRA = {'typeOfApp': 'RAapp'};
+      this.userRepository.retrieve(findAllUsersOfRA, (error: any, userList: any) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          for (let user of userList) {
+            user.typeOfApp = 'RateAnalysis';
+            if (user.subscriptionForRA.name === "RAPremium") {
+              user.isPaidUser = true;
+            } else {
+              user.isPaidUser = false;
+            }
+            let activation_date = new Date(user.subscriptionForRA.activationDate);
+            let expiryDate = new Date(user.subscriptionForRA.activationDate);
+            let newExpiryDate = new Date(expiryDate.setDate(activation_date.getDate() + user.subscriptionForRA.validity));
+            let current_date = new Date();
+            user.subscriptionForRA.numOfDaysToExpire = this.daysdifference(newExpiryDate, current_date);
+            if (user.subscriptionForRA.numOfDaysToExpire > 0) {
+              user.subscriptionForRA.isPackageExpired = false;
+            } else {
+              user.subscriptionForRA.isPackageExpired = true;
+            }
+            user.subscriptionForRA.expiryDate = newExpiryDate.toLocaleDateString('zh-CN');
+          }
+
+          var fields = [{label: 'Email', value: 'email'}, {label: 'Mobile Number', value: 'mobile_number'},
+            {label: 'App Type', value: 'typeOfApp'}, {label: 'IsPaidUser', value: 'isPaidUser'},
+            {label: 'Subscription.PackageName', value: 'subscriptionForRA.name'},
+            {label: 'Subscription.ExpiryDate', value: 'subscriptionForRA.expiryDate'},
+            {label: 'Subscription.IsExpired', value: 'subscriptionForRA.isPackageExpired'}];
+
+          var csv = json2csv({data: userList, fields: fields});
+          var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'RateAnalysisUsers.csv';
+          this.createCsvFile(pathOfFile, csv);
+          resolve(userList);
+        }
+      });
+
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
+  }
+
+  createBuildInfoUsersFile(callback: (error: any, result: any) => void) {
+    return new Promise((resolve: any, reject: any) => {
+      let findAllUsersOfMBC = {'typeOfApp': {$exists: false}};
+      this.userRepository.retrieve(findAllUsersOfMBC, (error: any, userList: any) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          let arrayPromises: any = new Array(0);
+          for (let user of userList) {
+            user.typeOfApp = 'MyBuildCost';
+            if (user.subscription[0].validity > 15 || user.subscription.length >= 2) {
+              user.isPaidUser = true;
+            } else {
+              user.isPaidUser = false;
+            }
+            for (let subscription of user.subscription) {
+              if (subscription.projectId.length !== 0) {
+                let tempPromise = this.getProjectName(subscription, user);
+                arrayPromises.push(tempPromise);
+              } else {
+                this.projectSubscriptionDetails(subscription, user);
+              }
+            }
+          }
+
+          Promise.all(arrayPromises)
+            .then((data: any) => {
+              var csvData = ['Email,Mobile_Number,App_Type,IsPaidUser,Subscription_ProjectName,Subscription_PackageName,Subscription_ExpiryDate,Subscription_IsExpired'];
+              for (let user of userList) {
+                var csvRow1 = {
+                  Email: user.email,
+                  Mobile_Number: user.mobile_number,
+                  App_Type: user.typeOfApp,
+                  IsPaidUser: user.isPaidUser
+                };
+                for (let subscription of user.subscription) {
+                  let csvRow2 = JSON.parse(JSON.stringify(csvRow1));
+                  csvRow2.Subscription_ProjectName = subscription.projectDetails.projectName;
+                  csvRow2.Subscription_PackageName = subscription.projectDetails.packageName;
+                  csvRow2.Subscription_ExpiryDate = subscription.projectDetails.expiryDate;
+                  csvRow2.Subscription_IsExpired = subscription.projectDetails.activeStatus;
+                  csvData.push(csvRow2);
+                }
+              }
+
+              var fields = [{label: 'Email', value: 'Email'}, {label: 'Mobile Number', value: 'Mobile_Number'},
+                {label: 'App Type', value: 'App_Type'}, {label: 'IsPaidUser', value: 'IsPaidUser'},
+                {label: 'Subscription.ProjectName', value: 'Subscription_ProjectName'},
+                {label: 'Subscription.PackageName', value: 'Subscription_PackageName'},
+                {label: 'Subscription.ExpiryDate', value: 'Subscription_ExpiryDate'},
+                {label: 'Subscription.IsExpired', value: 'Subscription_IsExpired'}];
+
+              var csv = json2csv({data: csvData, fields: fields});
+              var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'MyBuildCostUser.csv';
+              this.createCsvFile(pathOfFile, csv);
+              resolve(userList);
+            })
+            .catch((error: Error) => {
+              Promise.reject(error);
+            });
+        }
+      });
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
+  }
+
+  createUsageTrackingFile(callback: (error: any, result: any) => void) {
+    return new Promise((resolve: any, reject: any) => {
+      let usageTrackingForUsers = {};
+      let query = {path: '_id', select: ['userId']};
+      this.usageTrackingRepository.findAndPopulate(usageTrackingForUsers, query, (err: any, userData: any) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          let arrayPromise: any = new Array(0);
+          for (let user of userData) {
+            if (user.userId) {
+              let tempPromise = this.getMobileAndEmail(user);
+              arrayPromise.push(tempPromise);
+            }
+            if (user.appType === undefined || user.appType === 'MyBuildCost') {
+              user.appType = 'MyBuildCost';
+            } else if (user.appType && user.appType === 'mcc') {
+              user.appType = 'MyCivilCalC';
+            }
+          }
+
+          Promise.all(arrayPromise)
+            .then((data: any) => {
+              console.log('created usageFile');
+              var fields = [{label: 'Email', value: 'email'}, {label: 'Mobile Number', value: 'mobileNumber'},
+                {label: 'App Type', value: 'appType'}, {label: 'UserId', value: 'userId'},
+                {label: 'DeviceId', value: 'deviceId'}, {label: 'Platform', value: 'platform'},
+                {label: 'Device OS', value: 'deviceOS'}, {label: 'Used From Mobile', value: 'isMobile'},
+                {label: 'Used From Desktop', value: 'isDesktop'}, {label: 'Browser', value: 'browser'},
+                {label: 'WorkItem', value: 'workItemName'}, {label: 'Region Name', value: 'regionName'},
+                {label: 'IsPaidWorkItem', value: 'isPaidWorkItem'}, {label: 'Used On Time', value: 'createdAt'}];
+
+              var csv = json2csv({data: userData, fields: fields});
+              var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'AppUsageDetails.csv';
+              this.createCsvFile(pathOfFile, csv);
+              resolve(userData);
+            })
+            .catch((error: Error) => {
+              Promise.reject(error);
+            });
+        }
+      });
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
+  }
+
+  getMobileAndEmail(user:any) {
+    return new Promise((resolve: any, reject: any) => {
+      let query = {_id: user.userId};
+      let populate = {path: '_id', select: ['mobile_number', 'email']};
+      this.userRepository.findAndPopulate(query, populate, (error, result) => {
+        if (result.length !== 0) {
+          user.mobileNumber = result[0].mobile_number;
+          user.email = result[0].email;
+        }
+          resolve(user);
+      });
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
+  }
+
+  getProjectName(subscription:any, user:any) {
+    return new Promise((resolve: any, reject: any) => {
+      let query = {_id: subscription.projectId[0]};
+      let populate = {path: 'buildings', select: ['name']};
+      this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+        if (result.length !== 0)
+        var projectName = result[0].name;
+        this.projectSubscriptionDetails(subscription,user, projectName);
+        resolve(subscription);
+      });
+    }).catch((error: Error) => {
+      Promise.reject(error);
+    });
+  }
+
+  projectSubscriptionDetails(subscription:any,user:any, projectName ?:string,) {
+    let projectSubscription = new ProjectSubscriptionDetails();
+    projectSubscription.projectName = projectName;
+    for(let i=0; i<subscription.purchased.length; i++) {
+      if(subscription.purchased[i].name) {
+        projectSubscription.packageName = subscription.purchased[i].name;
+      }
+    }
+    //activation date for project subscription
+    let activation_date = new Date(subscription.activationDate);
+    let expiryDate = new Date(subscription.activationDate);
+    let newExpiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
+    let current_date = new Date();
+    projectSubscription.numOfDaysToExpire = this.daysdifference(newExpiryDate, current_date);
+    projectSubscription.expiryDate = newExpiryDate.toLocaleDateString('zh-CN');
+
+    if (projectSubscription.numOfDaysToExpire > 0) {
+      projectSubscription.activeStatus = false;
+    } else {
+      projectSubscription.activeStatus = true;
+    }
+    subscription.projectDetails = projectSubscription;
+  }
+
+  createCsvFile(path: string, csv: string | void) {
+    fs.writeFile(path, csv, function (err: any, data: any) {
+      if (err) {
+        throw err;
+      } else {
+      }
+    });
+  }
+
+  sendNotificationToBigSlice(mobileNumber: number) {
+    let mailService = new SendMailService();
+
+    let htmlTemplate = 'ra-new-user-registered.html';
+
+    let data: Map<string, string> = new Map([
+      ['$mobileNumber$', mobileNumber]]);
+
+    let attachment = MailAttachments.RaAttachmentArray;
+    mailService.send(config.get('application.mail.BUILDINFO_ADMIN_MAIL'), Messages.RA_NEW_USER_REGISTERED, htmlTemplate, data, attachment,
+      (err: any, result: any) => {
+        if (err) {
+          console.log('Failed to send mail to Big slice on RA user registration');
+        } else {
+          console.log('Mail sent successfully to Big slice on RA user registration');
+        }
+      });
   }
 }
 

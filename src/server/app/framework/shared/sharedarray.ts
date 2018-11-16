@@ -47,5 +47,11 @@ class MailAttachments {
       cid: 'unique@first-time-subscribed'
     }
   ];
+  public static RaAttachmentArray: Array<any> = [
+    {
+      path: path.resolve() + config.get('application.publicPath')+'images/logo/grey_ra.png',
+      cid: 'unique@ra-application-logo'
+    }
+  ];
 }
 export=MailAttachments;

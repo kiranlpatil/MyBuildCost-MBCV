@@ -7,6 +7,7 @@ import { SessionStorage,SessionStorageService } from '../../../../shared/index';
 import { Project } from './../../model/project';
 import { ProjectNameChangeService } from '../../../../shared/services/project-name-change.service';
 import { ProjectSubscriptionDetails } from '../../model/projectSubscriptionDetails';
+import {UpdateSubscriptionStatusService} from "../../../../shared/services/update-subscription-status.service";
 
 @Component({
   moduleId: module.id,
@@ -24,7 +25,8 @@ export class ProjectListHeaderComponent implements OnInit {
   projectNameSubscription : Subscription;
 
   constructor(private projectService: ProjectService, private _router: Router,
-              private projectNameChangeService : ProjectNameChangeService) {
+              private projectNameChangeService : ProjectNameChangeService,
+              private updateSubscriptionStatusService:UpdateSubscriptionStatusService) {
 
     this.projectNameSubscription = projectNameChangeService.changeProjectName$.subscribe(
       projectName => {
@@ -75,6 +77,8 @@ export class ProjectListHeaderComponent implements OnInit {
         SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT_ID, projectList[0].projectId);
       }
     }
+    this.updateSubscriptionStatusService.change(projects.isAnySubscriptionAvailable);
+
   }
 
   onGetAllProjectsFailure(error : any) {

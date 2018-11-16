@@ -74,7 +74,7 @@
                     <input [(ngModel)]="item.unit" id="itemUnit" class="form-control text-left" [disabled]="disableRateField" readonly/>
                   </td>
                   <td>
-                    <input type="number" amountValidate="true"
+                    <input *ngIf="anySubscriptionAvailable; else elseBlock" type="number" amountValidate="true"
                            [class.validate-amount] = 'item?.rate?.toString().split(".")[0]?.length>7 ||
                                                      item?.rate?.toString().split(".")[1]?.length>4'
                     [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
@@ -82,7 +82,7 @@
                   </td>
                   <td>
                     <!--<input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>-->
-                    {{item.totalAmount|number : '1.2-2'}}
+                    <span *ngIf="anySubscriptionAvailable; else elseBlock"> {{item.totalAmount|number : '1.2-2'}}</span>
                   </td>
                 </tr>
                </tbody>
@@ -94,11 +94,14 @@
                 <td class="hidden-xs total-amount">
                   <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
-                <td>
+                <td *ngIf="anySubscriptionAvailable">
                   <div *ngIf="(rateItem.key === 'M')">{{ totalAmountOfMaterial|number : '1.2-2'}} </div>
                   <div *ngIf="(rateItem.key === 'L')">{{ totalAmountOfLabour|number : '1.2-2'}} </div>
                   <div *ngIf="(rateItem.key === 'M + L')">{{ totalAmountOfMaterialAndLabour|number : '1.2-2'}} </div>
                 </td>
+                <td *ngIf="!anySubscriptionAvailable">
+                <div>-</div>
+              </td>
               </tr>
               </tfoot>
             </table>
@@ -117,19 +120,19 @@
             <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}:</label>
             <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A_B_C}}:</label>
             <label *ngIf="totalAmountOfMaterial && !totalAmountOfLabour && !totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A}}:</label>
-            <span>{{ totalAmount|number: '1.2-2'}}</span>
+            <span *ngIf="anySubscriptionAvailable; else elseBlock">{{ totalAmount|number: '1.2-2'}}</span>
           </td>
         </tr>
         <tr>
           <td class="grand-total-amount" colspan="4">
             <label>Rate per {{rate.unit}}:</label>
-            <span>{{ ratePerUnitAmount|number: '1.2-2'}}</span>
+            <span *ngIf="anySubscriptionAvailable; else elseBlock">{{ ratePerUnitAmount|number: '1.2-2'}}</span>
           </td>
         </tr>
         <tr *ngIf="totalByUnit !== 0">
           <td class="grand-total-amount" colspan="4">
             <label>Rate per {{workItemUnit}}:</label>
-            <span>{{ totalByUnit|number: '1.2-2'}}</span>
+            <span *ngIf="anySubscriptionAvailable; else elseBlock">{{ totalByUnit|number: '1.2-2'}}</span>
           </td>
         </tr>
       </tfoot>
@@ -175,4 +178,4 @@
   </table>
 </div>
 
-
+<ng-template #elseBlock><span>-</span></ng-template>

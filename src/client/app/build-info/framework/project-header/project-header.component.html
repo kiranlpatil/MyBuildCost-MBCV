@@ -1,4 +1,4 @@
-<header  class="header-container">
+<header *ngIf="status && (projectHeaderviews.indexOf(view)<0)" class="header-container">
   <div class="container">
     <div class="col-sm-9 padding-right30">
       <div *ngIf="subscriptionValidityMessage && activeStatus" class="project-expiring">

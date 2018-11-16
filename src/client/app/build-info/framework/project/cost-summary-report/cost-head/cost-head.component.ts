@@ -19,6 +19,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import Any = jasmine.Any;
 import { SteelQuantityItems } from '../../../model/SteelQuantityItems';
 import { ErrorService } from '../../../../../shared/services/error.service';
+import {UpdateSubscriptionStatusService} from "../../../../../shared/services/update-subscription-status.service";
 
 declare var $: any;
 
@@ -103,6 +104,8 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   updateConfirmationForMeasurementSheet = ProjectElements.MEASUREMENT_SHEET;
   updateConfirmationForFloorwiseQuantity = ProjectElements.FLOORWISE_QUANTITY;
   currentQuantityType: string;
+  subscription:any;
+  anySubscriptionAvailable:boolean;
   public showQuantityDetails:boolean=false;
   public state = 'inactive';
 
@@ -133,12 +136,18 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   private quantityIncrement:number = 1;
   private displayRateView: string = null;
 
+
   private selectedWorkItemData : Array<WorkItem> = [];
 
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private _router: Router, private messageService: MessageService, private commonService : CommonService,
-              private loaderService: LoaderService, private errorService:ErrorService) {
+              private loaderService: LoaderService, private errorService:ErrorService,
+              private updateSubscriptionStatusService:UpdateSubscriptionStatusService) {
+    this.subscription = this.updateSubscriptionStatusService.changeSubscriptionStatus$.subscribe(
+      (isAnySubscriptionAvailable:boolean )=> {
+        this.anySubscriptionAvailable= isAnySubscriptionAvailable;}
+    );
   }
 
   /*toggleState() {

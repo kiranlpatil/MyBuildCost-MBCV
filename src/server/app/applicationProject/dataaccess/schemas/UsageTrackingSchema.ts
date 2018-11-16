@@ -35,6 +35,15 @@ class UsageTrackingSchema {
         mobileNumber: {
           type: Number
         },
+        workItemName: {
+          type: String
+        },
+        regionName: {
+          type: String
+        },
+        isPaidWorkItem: {
+          type: Boolean
+        },
         email: {
           type: String
         }
