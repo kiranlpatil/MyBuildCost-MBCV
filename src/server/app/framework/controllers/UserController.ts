@@ -110,7 +110,7 @@ class UserController {
         if (error) {
           next(error);
         } else {
-          if(!isPasswordAlreadySet) {
+          if(!isPasswordAlreadySet && !user.isActivated) {
             userService.sendNotificationToBigSlice(mobileNumber);
           }
           res.send(result);
