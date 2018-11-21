@@ -267,56 +267,65 @@ class UserService {
       if (error) {
         callback(error, null);
       } else if (result.length > 0 && result[0].isActivated === true) {
-        bcrypt.compare(data.password, result[0].password, (err: any, isSame: any) => {
-          if (err) {
-            callback({
-              reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-              message: Messages.MSG_ERROR_USER_NOT_PRESENT,
-              stackTrace: new Error(),
-              actualError: err,
-              code: 500
-            }, null);
-          } else {
-            /*console.log('got user');*/
-            if (isSame) {
-              let auth = new AuthInterceptor();
-              let token = auth.issueTokenWithUid(result[0]);
-              var resData: any = {
-                'status': Messages.STATUS_SUCCESS,
-                'data': {
-                  'first_name': result[0].first_name,
-                  'last_name': result[0].last_name,
-                  'company_name': result[0].company_name,
-                  'email': result[0].email,
-                  '_id': result[0]._id,
-                  'current_theme': result[0].current_theme,
-                  'picture': result[0].picture,
-                  'mobile_number': result[0].mobile_number,
-                  'access_token': token
-                },
-                access_token: token
-              };
-              if (typeOfApp === 'RAapp') {
-                this.getUserSubscriptionDetails(result[0]._id, (error, result) => {
-                  if (error) {
-                    callback(error, null);
-                  } else {
-                    callback(null, {data: resData, subscriptionDetails: result});
-                  }
-                });
-              } else {
-                callback(null, resData);
-              }
-            } else {
+        if (result[0].password) {
+          bcrypt.compare(data.password, result[0].password, (err: any, isSame: any) => {
+            if (err) {
               callback({
-                reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_WRONG_PASSWORD,
+                reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
+                message: Messages.MSG_ERROR_USER_NOT_PRESENT,
                 stackTrace: new Error(),
-                code: 400
+                actualError: err,
+                code: 500
               }, null);
+            } else {
+              /*console.log('got user');*/
+              if (isSame) {
+                let auth = new AuthInterceptor();
+                let token = auth.issueTokenWithUid(result[0]);
+                var resData: any = {
+                  'status': Messages.STATUS_SUCCESS,
+                  'data': {
+                    'first_name': result[0].first_name,
+                    'last_name': result[0].last_name,
+                    'company_name': result[0].company_name,
+                    'email': result[0].email,
+                    '_id': result[0]._id,
+                    'current_theme': result[0].current_theme,
+                    'picture': result[0].picture,
+                    'mobile_number': result[0].mobile_number,
+                    'access_token': token
+                  },
+                  access_token: token
+                };
+                if (typeOfApp === 'RAapp') {
+                  this.getUserSubscriptionDetails(result[0]._id, (error, result) => {
+                    if (error) {
+                      callback(error, null);
+                    } else {
+                      callback(null, {data: resData, subscriptionDetails: result});
+                    }
+                  });
+                } else {
+                  callback(null, resData);
+                }
+              } else {
+                callback({
+                  reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                  message: Messages.MSG_ERROR_WRONG_PASSWORD,
+                  stackTrace: new Error(),
+                  code: 400
+                }, null);
+              }
             }
-          }
-        });
+          });
+      } else {
+          callback({
+            reason: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT_SET_PASSWORD,
+            message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT_SET_PASSWORD,
+            stackTrace: new Error(),
+            code: 400
+          }, null);
+        }
       } else if (result.length > 0 && result[0].isActivated === false) {
         callback({
           reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,

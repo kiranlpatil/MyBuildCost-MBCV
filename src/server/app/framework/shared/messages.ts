@@ -89,6 +89,7 @@ class Messages {
   public static MSG_ERROR_COMPLEXITY_CODE_MISSING: string = 'Code is not given for complexity.';
   public static MSG_ERROR_CAPABILITY_CODE_MISSING: string = 'Code is not given for capability.';
   public static MSG_ERROR_AREA_OF_WORK_CODE_MISSING: string = 'Code is not given for area of work.';
+  public static MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT_SET_PASSWORD: string = 'You have not set a password, please register to set your password';
   //
 
   // Error Reason
