@@ -986,22 +986,16 @@ class RateAnalysisService {
   }
 
   syncAllRateAnalysisRegions() {
-    let promiseArray: Array<any> = new Array<any>();
     this.getAllregionsFromRateAnalysis((error, response) => {
       if (error) {
         console.log('error : ' + JSON.stringify(error));
       } else {
         console.log('response : ' + JSON.stringify(response));
-        for (let region of response) {
-          let promise = this.createPromiseTosynchRegionFromRateAnalysis(region);
-          promiseArray.push(promise);
-        }
-        CCPromise.all(promiseArray).then(function (data: Array<any>) {
-          console.log('Succees in region synch.');
-        }).catch(function (e: any) {
-          logger.error(' Promise failed for convertCostHeadsFromRateAnalysisToCostControl ! :' + JSON.stringify(e.message));
-          CCPromise.reject(e.message);
-        });
+        response.reduce((promiseArray:any, arrayItem:any) => {
+          return promiseArray.then(() =>  {
+            return this.createPromiseTosynchRegionFromRateAnalysis(arrayItem);
+          });
+          }, CCPromise.resolve());
       }
     });
   }
@@ -1011,12 +1005,12 @@ class RateAnalysisService {
       let rateAnalysisService = new RateAnalysisService();
       rateAnalysisService.synchRegionForRateAnalysis(region, (error:any, result:any) => {
         if(error) {
-          CCPromise.reject(error);
+          reject(error);
         } else if(result) {
           let rateAnalysis = new RateAnalysis(result, null, null, null);
           rateAnalysis.appType = 'RateAnalysis';
           rateAnalysisService.saveRateAnalysis(rateAnalysis, region);
-          CCPromise.resolve();
+          resolve();
         }
       });
       //CCPromise.resolve();
