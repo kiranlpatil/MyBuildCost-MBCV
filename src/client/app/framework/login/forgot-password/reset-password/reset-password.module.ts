@@ -12,8 +12,8 @@ import {ResetPasswordService} from "./reset-password.service";
   imports: [CommonModule,
     UserModule,
     SharedModule,
-    FormsModule, ReactiveFormsModule
-    //RouterModule.forChild(ResetPasswordRoutes)
+    FormsModule, ReactiveFormsModule,
+    RouterModule.forChild(ResetPasswordRoutes)
   ],
   declarations: [ResetPasswordComponent],
   providers: [ResetPasswordService]
