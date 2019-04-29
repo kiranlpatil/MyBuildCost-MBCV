@@ -28,7 +28,7 @@
     "userFile": "/server/prod/public/exported-files/AllData.xlsx",
     "limitForQuery": 10,
     "mail": {
-      "host": "http://13.232.139.161:8080/",
+      "host": "http://13.233.116.191:8080/",
       "MAIL_SENDER": "redminestatus@techprimelab.com",
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
       "ADMIN_MAIL": "buildinfo@techprimelab.com",
@@ -67,12 +67,12 @@
       "routerNumber": "4"
     },
     "browser": {
-      "IP": "http://13.232.139.161:8080/",
-      "rateAnalysisIP": "http://13.232.139.161:3000/"
+      "IP": "http://13.233.116.191:8080/",
+      "rateAnalysisIP": "http://13.233.116.191:3000/"
     },
     "filePathForMasterDataExcel": "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage": "/server/prod/app/framework/public/profileimage",
-    "backendAPI" : "http://13.232.139.161:8080/"
+    "backendAPI" : "http://13.233.116.191:8080/"
   },
 
   "payUMoney": {
