@@ -1,12 +1,22 @@
-#JobMosis job portal QUICK START:
+#Costcontrol QUICK START:
 
-Steps for JobMosis In Short:-
+Steps for Costcontrol In Short:-
 
-JobMosis has both http and https configuration.In below context we discuss about how we can use that configuration.
+Costcontrol has both http and https configuration.In below context we discuss about how we can use that configuration.
 
-pre for JobMosis Requirements:- 1. latest node version
-                                2. latest npm version
-                                3. mongodb
+pre for Costcontrol Requirements:- 1. node version 8.9.0
+                                   2. npm version 5.6.0
+                                   3. mongodb version 3.6.14 
+                                   4. ROBO 3T
+                                   5. Studio 3T
+                                   
+If you get error "Error: findAndUpdate Failed. The featureCompatibilityVersion must be 3.6 to use arrayFilters."  for any API,
+then 
+ 1. check your feature compatibility version from mongo DB shell using command -
+     db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )     
+ 2. If version is not 3.6 then set it to 3.6 using command - 
+     db.adminCommand( { setFeatureCompatibilityVersion: "3.6" } )
+ and try again.                                        
 
 steps: 1.npm install    //npm install --unsafe -perm
        2.typings install (1) for install specific package defination -----> typings install dt~mongoose --save --global
