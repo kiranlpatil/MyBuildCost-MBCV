@@ -82,18 +82,18 @@ export class CommonService {
     return parseFloat((value).toFixed(ValueConstant.NUMBER_OF_FRACTION_DIGIT));
   }
 
-  downloadToPdf(content : any) {
-    let contentDiv = document.createElement('div');
-    contentDiv.innerHTML = content;
-    contentDiv.setAttribute('id','print-div');
-    document.getElementById('tpl-app').style.display = 'none';
-    window.document.body.appendChild(contentDiv);
-    window.document.close();
-    window.print();
-    var elem = document.querySelector('#print-div');
-    elem.parentNode.removeChild(elem);
-    document.getElementById('tpl-app').style.display = 'initial';
-  }
+  // downloadToPdf(content : any) {
+  //   let contentDiv = document.createElement('div');
+  //   contentDiv.innerHTML = content;
+  //   contentDiv.setAttribute('id','print-div');
+  //   document.getElementById('tpl-app').style.display = 'none';
+  //   window.document.body.appendChild(contentDiv);
+  //   window.document.close();
+  //   window.print();
+  //   var elem = document.querySelector('#print-div');
+  //   elem.parentNode.removeChild(elem);
+  //   document.getElementById('tpl-app').style.display = 'initial';
+  // }
 
   changeQuantityByWorkItemUnit(quantity: number, workItemUnit: string, rateUnit: string) {
     let quantityTotal: number = 0;
