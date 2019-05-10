@@ -180,7 +180,7 @@ class Constants {
 
   //ALSQL uses constants
   public static ALASQL_FROM = ' FROM ? ';
-  public static ALASQL_GROUP_BY_MATERIAL_TAKEOFF_MATERIAL_WISE = 'GROUP BY buildingName, costHeadName, workItemName, quantityName, unit ';
+  public static ALASQL_GROUP_BY_MATERIAL_TAKEOFF_MATERIAL_WISE = 'GROUP BY buildingName, costHeadName, workItemName, quantityName, unit,rate ';
   public static ALASQL_ORDER_BY_MATERIAL_TAKEOFF_MATERIAL_WISE = 'ORDER BY buildingName, costHeadName, workItemName,quantityName ';
   public static ALASQL_SELECT_MATERIAL_TAKEOFF_MATERIAL_WISE =
     'SELECT buildingName AS header, costHeadName, workItemName AS rowValue, SUM(quantity) AS Total, unit,rate ';

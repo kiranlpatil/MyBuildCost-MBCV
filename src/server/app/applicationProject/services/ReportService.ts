@@ -324,7 +324,6 @@ class ReportService {
     for(let building: Building of buildings) {
       buildingName = building.name;
       this.addMaterialDTOForActiveCostHeadInDTOArray(building, buildingName, materialTakeOffFlatDetailsArray);
-
     }
     return materialTakeOffFlatDetailsArray;
   }
@@ -373,7 +372,7 @@ class ReportService {
           let responseData = {};
           responseData[element]= materialTakeOffReport;
           callback(null, responseData);
-        }else {
+        } else {
           callback(new CostControllException(Constants.MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION + element , null), null);
         }
       }
