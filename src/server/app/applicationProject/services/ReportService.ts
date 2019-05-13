@@ -419,13 +419,12 @@ class ReportService {
           }
           table.content[content].columnTwo = Math.ceil(table.content[content].columnTwo);
           contentTotal = contentTotal + table.content[content].columnTwo;
-
         }
 
         //footer
         table.footer.columnTwo = contentTotal;
-         table.footer.columnFour = Math.round(totalAmount);
-        secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree + ' ' + '₹'+ Math.round(totalAmount); // todo ask swapnil for showing total in title
+         table.footer.columnFour = totalAmount.toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+        secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree + ' ' + '₹'+' '+totalAmount.toFixed(Constants.NUMBER_OF_FRACTION_DIGIT); // todo ask swapnil for showing total in title
       }
 
       reportTotal = reportTotal + contentTotal; //todo rate total for all buildings
