@@ -25,8 +25,13 @@
     <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
       <th style="text-align:center;padding: 10px 5px;width: 30%;" rowspan="2" >Amenity Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
-      <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
+      <th colspan="2" style="text-align: center;padding: 10px 5px;">
+        {{ getLabel().BUDGETED_COST }}
+        <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+      </th>
+      <th colspan="2" style="text-align: center;padding: 10px 5px;">
+        {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+      </th>
     </tr>
     <tr style="page-break-inside: avoid">
       <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByArea }} (
@@ -121,7 +126,10 @@
     <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
       <th style="text-align:center;padding: 10px 15px;width: 40%;" rowspan="2" >Amenity Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 15px;">By Thumbrule</th>
+      <th colspan="2" style="text-align: center;padding: 10px 15px;">
+        {{ getLabel().BUDGETED_COST }}
+        <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+      </th>
     </tr>
     <tr style="page-break-inside: avoid">
       <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }} (
@@ -187,7 +195,9 @@
     <thead style="display: table-header-group">
       <tr style="page-break-inside: avoid">
         <th style="text-align:center;padding: 10px 15px;width: 40%;" rowspan="2" >Amenity Cost Head</th>
-        <th colspan="2" style="text-align: center;padding: 10px 15px;">Estimated</th>
+        <th colspan="2" style="text-align: center;padding: 10px 15px;">
+          {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+        </th>
       </tr>
       <tr style="page-break-inside: avoid">
         <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }} (

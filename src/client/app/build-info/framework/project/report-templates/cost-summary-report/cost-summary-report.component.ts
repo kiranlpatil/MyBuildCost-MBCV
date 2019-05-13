@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { SessionStorageService } from '../../../../../shared/services/session.service';
-import { SessionStorage } from '../../../../../shared/constants';
+import { Label, SessionStorage} from '../../../../../shared/constants';
 import { ProjectElements } from '../../../../../shared/constants';
 import { SharedService } from '../../../../../shared/services/shared-service';
 
@@ -45,6 +45,9 @@ export class CostSummaryReportComponent {
 
   getProjectElements() {
     return ProjectElements;
+  }
+  getLabel() {
+    return Label;
   }
 }
 

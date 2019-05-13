@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { SessionStorage } from '../../../../../shared/constants';
+import {Label, SessionStorage} from '../../../../../shared/constants';
 import { SessionStorageService } from '../../../../../shared/services/session.service';
 import { ProjectElements } from '../../../../../shared/constants';
 import { SharedService } from '../../../../../shared/services/shared-service';
@@ -48,5 +48,9 @@ export class CommonAmenitiesReportComponent {
 
   getProjectElements() {
     return ProjectElements;
+  }
+
+  getLabel() {
+    return Label;
   }
 }

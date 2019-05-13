@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { SessionStorage, SessionStorageService } from '../../../../../shared/index';
 import { ProjectElements } from '../../../../../shared/constants';
 import { WorkItem } from '../../../model/work-item';
+import {SharedService} from "../../../../../shared/services/shared-service";
 
 @Component({
   moduleId: module.id,
@@ -23,6 +24,8 @@ export class CostHeadReportComponent implements OnInit  {
   costHeadName : string;
   generatedDate: Date = new Date();
 
+  constructor(private sharedService: SharedService) {}
+
   ngOnInit() {
 
     this.projectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
@@ -32,18 +35,7 @@ export class CostHeadReportComponent implements OnInit  {
   }
 
   downloadToPDF() {
-    console.log('categoryDetails -> '+JSON.stringify(this.categoryDetails));
-    let contentDiv = document.createElement('div');
-    let content = this.content.nativeElement.innerHTML;
-    contentDiv.innerHTML = content;
-    contentDiv.setAttribute('id','print-div');
-    document.getElementById('tpl-app').style.display = 'none';
-    window.document.body.appendChild(contentDiv);
-    window.document.close();
-    window.print();
-    var elem = document.querySelector('#print-div');
-    elem.parentNode.removeChild(elem);
-    document.getElementById('tpl-app').style.display = 'initial';
+    this.sharedService.downloadToPdf(this.content.nativeElement.innerHTML);
   }
 
   getProjectElements() {

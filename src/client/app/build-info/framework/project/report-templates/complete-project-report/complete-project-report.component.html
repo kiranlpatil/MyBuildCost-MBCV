@@ -38,8 +38,13 @@
     <thead style="display: table-header-group;">
     <tr style="page-break-inside: avoid;">
       <th style="text-align: center;padding: 10px 5px;width: 30%;" rowspan="2" >Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
-      <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
+      <th colspan="2" style="text-align: center;padding: 10px 5px;">
+        {{ getLabel().BUDGETED_COST }}
+        <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+      </th>
+      <th colspan="2" style="text-align: center;padding: 10px 5px;">
+        {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+      </th>
     </tr>
 
     <tr style="page-break-inside: avoid;">
@@ -108,8 +113,8 @@
   </table>
 </div>
 </div>
-<div  id="projectBudgetedReport"  #projectBudgetedReport style="display: none" >
 
+<div  id="projectBudgetedReport"  #projectBudgetedReport style="display: none" >
 <div  *ngFor="let buildingReport of buildingReports; let i=index" >
   <h2 *ngIf="i==0"  style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
     Budgeted Cost Report</h2>
@@ -149,7 +154,10 @@
     <thead style="display: table-header-group;">
     <tr style="page-break-inside: avoid;">
       <th rowspan="2" style="text-align: center;padding: 10px 15px;width: 40%;">Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 15px;"> By Thumbrule</th>
+      <th colspan="2" style="text-align: center;padding: 10px 15px;">
+        {{ getLabel().BUDGETED_COST }}
+        <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+      </th>
     </tr>
     <tr style="page-break-inside: avoid;">
       <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }} (
@@ -188,11 +196,9 @@
     <img src="http://mybuildcost.buildinfo.co.in/assets/build-info/header/buildinfo-logo.png" width="80" />
   </div>-->
 </div>
-
 </div>
 
 <div  id="projectEstimatedReport" #projectEstimatedReport style="display: none">
-
 <div *ngFor="let buildingReport of buildingReports; let i=index">
   <h2  *ngIf="i==0"  style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
     Estimated Cost Report</h2>
@@ -233,7 +239,9 @@
     <thead style="display: table-header-group;">
     <tr style="page-break-inside: avoid;">
       <th rowspan="2" style="text-align:center;padding: 10px 15px;width: 40%;">Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 15px;">Estimated</th>
+      <th colspan="2" style="text-align: center;padding: 10px 15px;">
+        {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+      </th>
     </tr>
     <tr style="page-break-inside: avoid;">
       <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }} (
@@ -299,8 +307,13 @@
     <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
       <th style="text-align:center;padding: 10px 5px;width: 30%;" rowspan="2" >Amenity Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 5px;">By Thumbrule</th>
-      <th colspan="2" style="text-align: center;padding: 10px 5px;">Estimated</th>
+      <th colspan="2" style="text-align: center;padding: 10px 5px;">
+        {{ getLabel().BUDGETED_COST }}
+        <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+      </th>
+      <th colspan="2" style="text-align: center;padding: 10px 5px;">
+        {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+      </th>
     </tr>
     <tr style="page-break-inside: avoid">
       <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{ costingByArea }} (
@@ -392,7 +405,6 @@
   </div>
 </div>
 
-
 <div *ngIf="amenitiesReport" id="budgetedReport" #budgetedReport style="display: none">
   <!--<h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
     Budgeted Cost Report</h2>
@@ -417,7 +429,10 @@
     <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
       <th style="text-align:center;padding: 10px 15px;width: 40%;" rowspan="2" >Amenity Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 15px;">By Thumbrule</th>
+      <th colspan="2" style="text-align: center;padding: 10px 15px;">
+        {{ getLabel().BUDGETED_COST }}
+        <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
+      </th>
     </tr>
     <tr style="page-break-inside: avoid">
       <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }}(
@@ -465,7 +480,6 @@
   </div>
 </div>
 
-
 <div *ngIf="amenitiesReport" id="estimatedReport" #estimatedReport style="display: none">
   <!--<h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
     Estimated Cost Report</h2>
@@ -490,7 +504,9 @@
     <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
       <th style="text-align:center;padding: 10px 15px;width: 40%;" rowspan="2" >Amenity Cost Head</th>
-      <th colspan="2" style="text-align: center;padding: 10px 15px;">Estimated</th>
+      <th colspan="2" style="text-align: center;padding: 10px 15px;">
+        {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+      </th>
     </tr>
     <tr style="page-break-inside: avoid">
       <th style="text-align: center;padding: 10px 15px;width: 30%;">{{ costingByArea }} (
@@ -556,8 +572,6 @@
     Powered by <span style="color:#716edc!important;font-size:11px;text-transform: uppercase;">My Build Cost</span>
   </div>
 </div>
-
-
 
 
 <div class="pdf-list">
