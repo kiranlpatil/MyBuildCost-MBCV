@@ -22,7 +22,7 @@
                   {{reportData.content[contentData].subContent[subContentData].columnTwo | number}} {{reportData.content[contentData].subContent[subContentData].columnThree}}
                 </td>
                 <td width="20%" align="right" style="padding: 5px 10px;font-weight: 600;">
-                  {{reportData.content[contentData].subContent[subContentData].columnFour}}
+                  ₹ {{reportData.content[contentData].subContent[subContentData].columnFour}}
                 </td>
               </tr>
               <!--subContent content-->
@@ -34,7 +34,7 @@
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnTwo | number}} {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnThree}}
                 </td>
                 <td width="20%" align="right" style="padding: 5px 10px;">
-                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFour }}
+                  ₹ {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFour }}
                 </td>
               </tr>
             </table>
@@ -52,7 +52,7 @@
     <tr>
       <td width="60%" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
       <td width="20%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnTwo | number}} {{reportData.footer.columnThree}}</td>
-      <td width="20%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnFour }} </td>
+      <td width="20%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">₹ {{reportData.footer.columnFour }} </td>
     </tr>
   </tbody>
 </table>

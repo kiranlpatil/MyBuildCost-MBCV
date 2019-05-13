@@ -384,12 +384,13 @@ class ReportService {
     let reportTotal = 0;
     let recordUnit;
 
-        let secondaryViewMaterialData = materialTakeOffReport.secondaryView;
+    let secondaryViewMaterialData = materialTakeOffReport.secondaryView;
     for (let secondaryViewData of Object.keys(secondaryViewMaterialData)) {
 
       //content
       let contentTotal = 0;
       let rateTotal = 0;
+      let totalAmount = 0;
       let table = secondaryViewMaterialData[secondaryViewData].table;
 
       for (let content of Object.keys(table.content)) {
@@ -410,11 +411,11 @@ class ReportService {
               }
             }
 
-
             tableSubContent[subContent].columnTwo =
               Math.ceil(tableSubContent[subContent].columnTwo);
             table.content[content].columnTwo = (parseFloat(table.content[content].columnTwo) +
               parseFloat(tableSubContent[subContent].columnTwo)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+            totalAmount = totalAmount + tableSubContent[subContent].columnTwo * tableSubContent[subContent].columnFour;
           }
           table.content[content].columnTwo = Math.ceil(table.content[content].columnTwo);
           contentTotal = contentTotal + table.content[content].columnTwo;
@@ -423,8 +424,8 @@ class ReportService {
 
         //footer
         table.footer.columnTwo = contentTotal;
-      //  table.footer.columnFour = rateTotal;
-        secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree; // todo ask swapnil for showing total in title
+         table.footer.columnFour = Math.round(totalAmount);
+        secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree + ' ' + '₹'+ Math.round(totalAmount); // todo ask swapnil for showing total in title
       }
 
       reportTotal = reportTotal + contentTotal; //todo rate total for all buildings
@@ -671,7 +672,7 @@ class ReportService {
                 for(let material of Object.keys(quantity.steelQuantityItems.totalWeightOfDiameter)) {
                   let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
                     workItemName, material, quantity.name, quantity.steelQuantityItems.totalWeightOfDiameter[material],
-                    quantity.steelQuantityItems.unit); // TODO lalita add rate here ask swapnil
+                    quantity.steelQuantityItems.unit,workItem.rate.total); // TODO lalita add rate here ask swapnil
                   materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
                 }
               }

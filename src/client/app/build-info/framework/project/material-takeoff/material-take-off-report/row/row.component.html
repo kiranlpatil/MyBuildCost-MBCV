@@ -12,6 +12,6 @@
   </div>
 
   <div class="col-sm-2 col-xs-2 text-right row-lists border-0">
-    {{rows.columnFour}}
+    <span *ngIf="rows.columnFour !== 'Rate'"> ₹ </span> {{rows.columnFour}}
   </div>
 </div>
