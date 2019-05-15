@@ -674,10 +674,19 @@ class ReportService {
 
           if(categoryName === Constants.STEEL) {
               if(quantity && quantity.steelQuantityItems && quantity.steelQuantityItems.totalWeightOfDiameter) {
+                let materialRate = 0 ;
+                if(workItem.rate.isEstimated && workItem.rate.rateItems && workItem.rate.rateItems.length > 0) { // todo ask swapnil about rate property
+                  if((buildingDetails.rates.findIndex((item: any) => item.itemName == workItem.rate.rateItems[0].itemName)) > -1) {
+                    materialRate = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName == workItem.rate.rateItems[0].itemName)].rate;
+                  }
+                } else {
+                  materialRate = workItem.rate.total;
+                }
+
                 for(let material of Object.keys(quantity.steelQuantityItems.totalWeightOfDiameter)) {
                   let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
                     workItemName, material, quantity.name, quantity.steelQuantityItems.totalWeightOfDiameter[material],
-                    quantity.steelQuantityItems.unit,workItem.rate.total); // TODO lalita add rate here ask swapnil
+                    quantity.steelQuantityItems.unit,materialRate);
                   materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
                 }
               }
