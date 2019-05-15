@@ -73,6 +73,23 @@
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
+  <style>
+    .report-close-btn {
+      text-align: left;
+      width: 750px;
+    }
+    @media only screen and (max-width: 767px) {
+      .report-close-btn {
+        width: calc(100% - 10px);
+      }
+    }
+
+    @media print {
+      .report-close-btn {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 <!--
@@ -130,6 +147,36 @@
     });
 </script>
 <% } %>
+
+<script>
+  function onClick(){
+    var elem = document.querySelector('#print-div');
+    if (elem) {
+      elem.parentNode.removeChild(elem);
+      document.getElementById('tpl-app').style.display = 'initial';
+    }
+    document.getElementById('close-report-btn').style.display = 'none';
+  }
+</script>
+<div class="container report-close-btn">
+  <div class="row">
+  <button  onClick="onClick()"
+           style="display: none;
+                height: 30px;
+                border: 1px solid #6598CA;
+                border-radius: 4px;
+                background: transparent;
+                color: #6598CA;
+                margin-top: 10px;
+                margin-left: 10px;
+                user-select: none;"
+           type="button"
+           id="close-report-btn">
+    Close
+  </button>
+  </div>
+</div>
+
 
 </body>
 </html>

@@ -74,6 +74,7 @@ export class SharedService {
       if (this.isMobile()) {
         setTimeout(() => {
           if (contentAddedCount === 0) {
+            document.getElementById('close-report-btn').style.display = 'initial';
             window.document.body.appendChild(contentDiv);
             window.document.close();
             contentAddedCount = 1;
@@ -88,13 +89,15 @@ export class SharedService {
       }
     }.bind(this));
 
-    window.addEventListener('afterprint', function(event) {
-      var elem = document.querySelector('#print-div');
-      if (elem) {
-        elem.parentNode.removeChild(elem);
-        document.getElementById('tpl-app').style.display = 'initial';
+    window.addEventListener('afterprint', function(event: any) {
+      if (!this.isMobile()) {
+        var elem = document.querySelector('#print-div');
+        if (elem) {
+          elem.parentNode.removeChild(elem);
+          document.getElementById('tpl-app').style.display = 'initial';
+        }
       }
-    });
+    }.bind(this));
 
     window.print();
   }
