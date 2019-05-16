@@ -23,7 +23,7 @@
             ₹ {{reportData.content[contentData].columnFour }}
           </td>
           <td width="15%" align="right" style="padding: 5px 10px;font-weight: bold;">
-            ₹ {{reportData.content[contentData].columnFive }}
+            ₹ {{reportData.content[contentData].columnFive | number }}
           </td>
         </tr>
 
@@ -42,7 +42,7 @@
                   ₹ {{reportData.content[contentData].subContent[subContentData].columnFour}}
                 </td>
                 <td width="15%" align="right" style="padding: 5px 10px; font-weight: 600;">
-                  ₹ {{reportData.content[contentData].subContent[subContentData].columnFive}}
+                  ₹ {{reportData.content[contentData].subContent[subContentData].columnFive | number}}
                 </td>
               </tr>
               <!--subContent content-->
@@ -57,7 +57,7 @@
                   ₹ {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFour }}
                 </td>
                 <td width="15%" align="right" style="padding: 5px 10px;">
-                  ₹ {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFive }}
+                  ₹ {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFive| number }}
                 </td>
               </tr>
             </table>
@@ -74,7 +74,7 @@
       <td width="50%" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
       <td width="20%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnTwo | number}} {{reportData.footer.columnThree}}</td>
       <td width="15%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">  {{reportData.footer.columnFour}} </td>
-      <td width="15%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;"> ₹ {{reportData.footer.columnFive}} </td>
+      <td width="15%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;"> ₹ {{reportData.footer.columnFive | number}} </td>
     </tr>
   </tbody>
 </table>

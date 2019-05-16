@@ -416,7 +416,9 @@ class ReportService {
             table.content[content].columnTwo = (parseFloat(table.content[content].columnTwo) +
               parseFloat(tableSubContent[subContent].columnTwo)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
             totalAmount = totalAmount + tableSubContent[subContent].columnTwo * tableSubContent[subContent].columnFour;
-            tableSubContent[subContent].columnFive = Math.ceil(tableSubContent[subContent].columnTwo) * tableSubContent[subContent].columnFour;
+            tableSubContent[subContent].columnFive = (Math.ceil(tableSubContent[subContent].columnTwo) *
+              tableSubContent[subContent].columnFour).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+
             table.content[content].columnFive = (parseFloat(table.content[content].columnFive) +
               parseFloat(tableSubContent[subContent].columnFive)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
           }

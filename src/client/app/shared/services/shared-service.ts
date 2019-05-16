@@ -79,7 +79,7 @@ export class SharedService {
             window.document.close();
             contentAddedCount = 1;
           }
-        }, 1);
+        }, 3);
       } else {
         if (contentAddedCount === 0) {
           window.document.body.appendChild(contentDiv);
