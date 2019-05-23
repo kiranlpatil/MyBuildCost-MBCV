@@ -324,7 +324,6 @@ class ReportService {
     for(let building: Building of buildings) {
       buildingName = building.name;
       this.addMaterialDTOForActiveCostHeadInDTOArray(building, buildingName, materialTakeOffFlatDetailsArray);
-
     }
     return materialTakeOffFlatDetailsArray;
   }
@@ -373,7 +372,7 @@ class ReportService {
           let responseData = {};
           responseData[element]= materialTakeOffReport;
           callback(null, responseData);
-        }else {
+        } else {
           callback(new CostControllException(Constants.MESSAGE_FOR_COSTHEADS_MISSING_COST_ESTIMATION + element , null), null);
         }
       }
@@ -385,11 +384,13 @@ class ReportService {
     let reportTotal = 0;
     let recordUnit;
 
-        let secondaryViewMaterialData = materialTakeOffReport.secondaryView;
+    let secondaryViewMaterialData = materialTakeOffReport.secondaryView;
     for (let secondaryViewData of Object.keys(secondaryViewMaterialData)) {
 
       //content
       let contentTotal = 0;
+      let rateTotal = 0;
+      let totalAmount = 0;
       let table = secondaryViewMaterialData[secondaryViewData].table;
 
       for (let content of Object.keys(table.content)) {
@@ -410,11 +411,16 @@ class ReportService {
               }
             }
 
-
             tableSubContent[subContent].columnTwo =
               Math.ceil(tableSubContent[subContent].columnTwo);
             table.content[content].columnTwo = (parseFloat(table.content[content].columnTwo) +
               parseFloat(tableSubContent[subContent].columnTwo)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+            totalAmount = totalAmount + tableSubContent[subContent].columnTwo * tableSubContent[subContent].columnFour;
+            tableSubContent[subContent].columnFive = (Math.ceil(tableSubContent[subContent].columnTwo) *
+              tableSubContent[subContent].columnFour).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+
+            table.content[content].columnFive = (parseFloat(table.content[content].columnFive) +
+              parseFloat(tableSubContent[subContent].columnFive)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
           }
           table.content[content].columnTwo = Math.ceil(table.content[content].columnTwo);
           contentTotal = contentTotal + table.content[content].columnTwo;
@@ -422,14 +428,16 @@ class ReportService {
 
         //footer
         table.footer.columnTwo = contentTotal;
-        secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree;
+         table.footer.columnFive = totalAmount.toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+        secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree; // todo ask swapnil for showing total in title
       }
 
-      reportTotal = reportTotal + contentTotal;
+      reportTotal = reportTotal + contentTotal; //todo rate total for all buildings
       recordUnit = table.footer.columnThree;
 
       if (elementWiseReport === Constants.STR_MATERIAL && building === Constants.STR_ALL_BUILDING) {
         materialTakeOffReport.subTitle.columnTwo = reportTotal;
+        materialTakeOffReport.subTitle.columnFour = rateTotal; // todo lalita ask swapnil
         materialTakeOffReport.subTitle.columnThree = recordUnit;
         materialTakeOffReport.subTitle.columnOne = ': ' + reportTotal + ' ' + materialTakeOffReport.subTitle.columnThree;
       }
@@ -442,8 +450,8 @@ class ReportService {
       if (materialTakeOffReport.secondaryView[record.header] === undefined ||
         materialTakeOffReport.secondaryView[record.header] === null) {
         materialTakeOffReport.title = building;
-        if(materialTakeOffReport.subTitle === null || materialTakeOffReport.subTitle === undefined){
-          let materialTakeOffReportSubTitle: MaterialTakeOffView = new MaterialTakeOffView('', 0, '');
+        if(materialTakeOffReport.subTitle === null || materialTakeOffReport.subTitle === undefined) { // todo review
+          let materialTakeOffReportSubTitle: MaterialTakeOffView = new MaterialTakeOffView('', 0, '',0,0);
           materialTakeOffReport.subTitle = materialTakeOffReportSubTitle;
         }
 
@@ -463,38 +471,41 @@ class ReportService {
         let columnOne: string = 'Item';
         let columnTwo: string = 'Quantity';
         let columnThree: string =  'Unit';
+        let columnFour: string =  'Rate';
+        let columnFive: string =  'Amount';
         if(elementWiseReport === Constants.STR_COSTHEAD && building === Constants.STR_ALL_BUILDING) {
           columnOne = 'Building';
         }
-        table.header = new MaterialTakeOffTableViewHeaders(columnOne, columnTwo, columnThree);
+        table.header = new MaterialTakeOffTableViewHeaders(columnOne, columnTwo, columnThree,columnFour,columnFive); // todo review
       }
 
       let materialTakeOffTableViewSubContent = null;
       if (record.subValue && record.subValue !== 'default' && record.subValue !== 'Direct') {
         materialTakeOffTableViewSubContent =
-          new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, record.unit);
+          new MaterialTakeOffTableViewSubContent(record.subValue, record.Total, record.unit,record.rate,((Math.ceil(record.Total))*record.rate).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT)); //todo lalita ask swapnil // todo review
       }
 
       if(table.content[record.costHeadName] === undefined || table.content[record.costHeadName] === null) {
-        table.content[record.costHeadName] = new MaterialTakeOffTableViewContent(record.costHeadName, 0, record.unit, {});
+        table.content[record.costHeadName] = new MaterialTakeOffTableViewContent(record.costHeadName, 0, record.unit,
+          record.rate,0, {}); // todo review
       }
 
 
       if(table.content[record.costHeadName].subContent[record.rowValue] === undefined ||
         table.content[record.costHeadName].subContent[record.rowValue] === null) {
         table.content[record.costHeadName].subContent[record.rowValue] =
-          new MaterialTakeOffTableViewContent(record.rowValue, 0, record.unit, {});
+          new MaterialTakeOffTableViewContent(record.rowValue, 0, record.unit,record.rate,0, {}); // todo review
       }
 
       let tableViewSubContent: MaterialTakeOffTableViewContent = table.content[record.costHeadName].subContent[record.rowValue];
-      tableViewSubContent.columnTwo = tableViewSubContent.columnTwo + record.Total;   // update total
+      tableViewSubContent.columnTwo = tableViewSubContent.columnTwo + record.Total;   // update total // update total // todo review
 
       let tableViewContent: MaterialTakeOffTableViewContent = table.content[record.costHeadName];
-      tableViewContent.columnTwo = tableViewContent.columnTwo + record.Total;   // update total
-
+      tableViewContent.columnTwo = tableViewContent.columnTwo + record.Total;   // update total // todo review
+   //   tableViewContent.columnFive = (tableViewContent.columnFive + (record.Total*record.rate)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);   // update total // todo review
       if(materialTakeOffTableViewSubContent) {
         materialTakeOffTableViewSubContent.columnTwo = parseFloat(
-          materialTakeOffTableViewSubContent.columnTwo).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+          materialTakeOffTableViewSubContent.columnTwo).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);// todo review
         tableViewContent.subContent[record.rowValue].subContent[record.subValue] = materialTakeOffTableViewSubContent;
       }
 
@@ -523,7 +534,7 @@ class ReportService {
       let materialTakeOffTableViewFooter: MaterialTakeOffTableViewFooter = null;
       if(table.footer === undefined || table.footer === null) {
         table.footer =
-          new MaterialTakeOffTableViewFooter('Total', 0, record.unit);
+          new MaterialTakeOffTableViewFooter('Total', 0, record.unit,null,0); // todo review
       }
     }
   }
@@ -543,7 +554,7 @@ class ReportService {
     return materialReportRowData;
   }
 
-  private alasqlQueryForMaterialTakeOffDataMaterialWise(building: string) {
+  private alasqlQueryForMaterialTakeOffDataMaterialWise(building: string) { // todo review query
     let select: string = Constants.STR_EMPTY;
     let from: string = Constants.ALASQL_FROM;
     let where: string = Constants.STR_EMPTY;
@@ -564,7 +575,7 @@ class ReportService {
     return sqlQuery;
   }
 
-  private alasqlQueryForMaterialTakeOffDataCostHeadWise(building: string) {
+  private alasqlQueryForMaterialTakeOffDataCostHeadWise(building: string) { // todo review query
     let select: string = Constants.STR_EMPTY;
     let from: string = Constants.ALASQL_FROM;
     let where: string = Constants.STR_EMPTY;
@@ -578,7 +589,7 @@ class ReportService {
         + Constants.STR_AND + Constants.ALASQL_SELECT_BUILDING_NAME + building + Constants.STR_DOUBLE_INVERTED_COMMA;
       groupBy = Constants.ALASQL_GROUP_MATERIAL_WORKITEM_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE;
       orderBy = Constants.ALASQL_ORDER_BY_MATERIAL_WORKITEM_COSTHEAD_WISE;
-    } else {
+    } else { //Todo lalita for all building change query for add rate ask swapnil
       select = Constants.ALASQL_SELECT_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS;
       where = Constants.ALASQL_WHERE_COSTHEAD_NAME_EQUALS_TO;
       groupBy = Constants.ALASQL_GROUP_MATERIAL_BUILDING_QUANTITY_MATERIAL_TAKEOFF_COSTHEAD_WISE_FOR_ALL_BUILDINGS;
@@ -624,57 +635,66 @@ class ReportService {
     for (let costHead: CostHead of building.costHeads) {
       if (costHead.active) {
         costHeadName = costHead.name;
-        this.addMaterialDTOForActiveCategoryInDTOArray(costHead, buildingName, costHeadName, materialTakeOffFlatDetailsArray);
+        this.addMaterialDTOForActiveCategoryInDTOArray(costHead, buildingName, costHeadName, materialTakeOffFlatDetailsArray,building);
       }
     }
   }
 
   private addMaterialDTOForActiveCategoryInDTOArray(costHead: CostHead, buildingName: string, costHeadName: string,
-                                                    materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+                                                    materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,buildingDetails?: any) {
     let categoryName: string;
     for (let category of costHead.categories) {
       if (category.active) {
         categoryName = category.name;
-        this.addMaterialDTOForActiveWorkitemInDTOArray(category, buildingName, costHeadName, categoryName, materialTakeOffFlatDetailsArray);
+        this.addMaterialDTOForActiveWorkitemInDTOArray(category, buildingName, costHeadName, categoryName, materialTakeOffFlatDetailsArray,buildingDetails);
       }
     }
   }
 
   private addMaterialDTOForActiveWorkitemInDTOArray(category: Category, buildingName: string, costHeadName: string,
-                      categoryName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+                      categoryName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>, buildingDetails?: any) {
     let workItemName: string;
     for (let workItem of category.workItems) {
       if (workItem.active) {
         workItemName = workItem.name;
         this.addEstimatedQuantityAndRateMaterialItemInDTOArray(workItem, buildingName, costHeadName, categoryName,
-          workItemName, materialTakeOffFlatDetailsArray);
+          workItemName, materialTakeOffFlatDetailsArray,buildingDetails);
       }
     }
   }
 
   private addEstimatedQuantityAndRateMaterialItemInDTOArray(workItem: WorkItem, buildingName: string, costHeadName: string,
-                  categoryName : string, workItemName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>) {
+                  categoryName : string, workItemName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,buildingDetails: any) {
     let quantityName: string;
     if(workItem.quantity.isDirectQuantity && workItem.rate.isEstimated) {
       quantityName = Constants.STR_DIRECT;
       this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
-        materialTakeOffFlatDetailsArray, workItem.quantity.total);
+        materialTakeOffFlatDetailsArray, workItem.quantity.total,buildingDetails);
     } else if (workItem.quantity.isEstimated && workItem.rate.isEstimated) {
         for (let quantity of workItem.quantity.quantityItemDetails) {
           quantityName = quantity.name;
 
           if(categoryName === Constants.STEEL) {
               if(quantity && quantity.steelQuantityItems && quantity.steelQuantityItems.totalWeightOfDiameter) {
+                let materialRate = 0 ;
+                if(workItem.rate.isEstimated && workItem.rate.rateItems && workItem.rate.rateItems.length > 0) { // todo ask swapnil about rate property
+                  if((buildingDetails.rates.findIndex((item: any) => item.itemName == workItem.rate.rateItems[0].itemName)) > -1) {
+                    materialRate = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName == workItem.rate.rateItems[0].itemName)].rate;
+                  }
+                } else {
+                  materialRate = workItem.rate.total;
+                }
+
                 for(let material of Object.keys(quantity.steelQuantityItems.totalWeightOfDiameter)) {
                   let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
                     workItemName, material, quantity.name, quantity.steelQuantityItems.totalWeightOfDiameter[material],
-                    quantity.steelQuantityItems.unit);
+                    quantity.steelQuantityItems.unit,materialRate);
                   materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
                 }
               }
           } else {
             this.createAndAddMaterialDTOObjectInDTOArray(workItem, buildingName, costHeadName, categoryName, workItemName, quantityName,
-              materialTakeOffFlatDetailsArray, quantity.total);
+              materialTakeOffFlatDetailsArray, quantity.total,buildingDetails);
           }
         }
     }
@@ -682,11 +702,17 @@ class ReportService {
 
   private createAndAddMaterialDTOObjectInDTOArray(workItem: WorkItem, buildingName: string, costHeadName: string, categoryName: string,
                   workItemName: string, quantityName: string, materialTakeOffFlatDetailsArray: Array<MaterialTakeOffFlatDetailsDTO>,
-                                                  quantity: number) {
+                                                  quantity: number,buildingDetails?: any) {
       for (let rateItem of workItem.rate.rateItems) {
         let workItemQuantity = this.getQuanityForWorkItem(workItem.unit, workItem.rate.unit, (quantity / workItem.rate.quantity) * rateItem.quantity);
+       let materialRate;
+       if((buildingDetails.rates.findIndex((item: any) => item.itemName == rateItem.itemName)) > -1) {
+         materialRate = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName == rateItem.itemName)].rate;
+       } else {
+         materialRate = rateItem.rate;
+       }
         let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-          workItemName, rateItem.itemName, quantityName, workItemQuantity, rateItem.unit);
+          workItemName, rateItem.itemName, quantityName, workItemQuantity, rateItem.unit, materialRate); // todo review
         materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
       }
   }

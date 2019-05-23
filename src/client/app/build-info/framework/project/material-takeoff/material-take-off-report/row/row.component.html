@@ -1,5 +1,5 @@
 <div class="row" ngClass="{{customClass}}" >
-  <div class="col-sm-8 col-xs-7 row-lists border-right item-description">
+  <div class="col-sm-5 col-xs-5 row-lists border-right item-description">
     {{rows.columnOne}}
   </div>
 
@@ -7,7 +7,15 @@
     {{rows.columnTwo}}
   </div>
 
-  <div class="col-sm-2 col-xs-2 text-left row-lists border-0">
+  <div class="col-sm-1 col-xs-1 text-left row-lists border-right">
     {{rows.columnThree}}
+  </div>
+
+  <div class="col-sm-2 col-xs-2 text-right row-lists border-right">
+    <span *ngIf="rows.columnFour !== 'Rate' && rows.columnFour !== null"> ₹ </span> {{rows.columnFour}}
+  </div>
+
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+    <span *ngIf="rows.columnFive !== 'Amount'"> ₹ </span> {{rows.columnFive}}
   </div>
 </div>

@@ -968,45 +968,47 @@ class UserService {
         let projectSubscriptionArray = Array<ProjectSubscriptionDetails>();
         let sampleProjectSubscriptionArray = Array<ProjectSubscriptionDetails>();
         let isAbleToCreateNewProject: boolean = false;
-        for (let project of projectList) {
-          for (let subscription of subscriptionList) {
-            if (subscription.projectId.length !== 0) {
-              if (subscription.projectId[0].equals(project._id)) {
-                let projectSubscription = new ProjectSubscriptionDetails();
-                projectSubscription.projectName = project.name;
-                projectSubscription.projectId = project._id;
-                projectSubscription.activeStatus = project.activeStatus;
-                projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
-                projectSubscription.numOfBuildingsAllocated = project.buildings.length;
-                if (project && project.projectImage)
-                  projectSubscription.projectImage = project.projectImage;
-                projectSubscription.packageName = this.checkCurrentPackage(subscription);
-                //activation date for project subscription
-                let activation_date = new Date(subscription.activationDate);
-                let expiryDate = new Date(subscription.activationDate);
-                projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
+        if(projectList && projectList.length>0) {
+          for (let project of projectList) {
+            for (let subscription of subscriptionList) {
+              if (subscription.projectId.length !== 0) {
+                if (subscription.projectId[0].equals(project._id)) {
+                  let projectSubscription = new ProjectSubscriptionDetails();
+                  projectSubscription.projectName = project.name;
+                  projectSubscription.projectId = project._id;
+                  projectSubscription.activeStatus = project.activeStatus;
+                  projectSubscription.numOfBuildingsRemaining = (subscription.numOfBuildings - project.buildings.length);
+                  projectSubscription.numOfBuildingsAllocated = project.buildings.length;
+                  if (project && project.projectImage)
+                    projectSubscription.projectImage = project.projectImage;
+                  projectSubscription.packageName = this.checkCurrentPackage(subscription);
+                  //activation date for project subscription
+                  let activation_date = new Date(subscription.activationDate);
+                  let expiryDate = new Date(subscription.activationDate);
+                  projectSubscription.expiryDate = new Date(expiryDate.setDate(activation_date.getDate() + subscription.validity));
 
-                //expiry date for project subscription
-                let current_date = new Date();
-                var newExipryDate = new Date(projectSubscription.expiryDate);
-                newExipryDate.setDate(projectSubscription.expiryDate.getDate() + 30);
-                let noOfDays = this.daysdifference(newExipryDate, current_date);
-                projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
+                  //expiry date for project subscription
+                  let current_date = new Date();
+                  var newExipryDate = new Date(projectSubscription.expiryDate);
+                  newExipryDate.setDate(projectSubscription.expiryDate.getDate() + 30);
+                  let noOfDays = this.daysdifference(newExipryDate, current_date);
+                  projectSubscription.numOfDaysToExpire = this.daysdifference(projectSubscription.expiryDate, current_date);
 
-                if (projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire > 0) {
-                  projectSubscription.warningMessage =
-                    'Expiring in ' + Math.round(projectSubscription.numOfDaysToExpire) + ' days,';
-                } else if (projectSubscription.numOfDaysToExpire <= 0 && noOfDays >= 0) {
-                  projectSubscription.expiryMessage = 'Project expired,';
-                } else if (noOfDays < 0) {
-                  projectSubscription.activeStatus = false;
+                  if (projectSubscription.numOfDaysToExpire < 30 && projectSubscription.numOfDaysToExpire > 0) {
+                    projectSubscription.warningMessage =
+                      'Expiring in ' + Math.round(projectSubscription.numOfDaysToExpire) + ' days,';
+                  } else if (projectSubscription.numOfDaysToExpire <= 0 && noOfDays >= 0) {
+                    projectSubscription.expiryMessage = 'Project expired,';
+                  } else if (noOfDays < 0) {
+                    projectSubscription.activeStatus = false;
+                  }
+
+                  projectSubscriptionArray.push(projectSubscription);
+
                 }
-
-                projectSubscriptionArray.push(projectSubscription);
-
+              } else {
+                isAbleToCreateNewProject = true;
               }
-            } else {
-              isAbleToCreateNewProject = true;
             }
           }
         }
@@ -1024,9 +1026,12 @@ class UserService {
           } else {
             let data = project;
             let sampleProjectSubscription = new ProjectSubscriptionDetails();
-            sampleProjectSubscription.projectName = project.name;
-            sampleProjectSubscription.projectId = project._id;
-            sampleProjectSubscription.activeStatus = project.activeStatus;
+           if(project) {
+             sampleProjectSubscription.projectName = project.name;
+             sampleProjectSubscription.projectId = project._id;
+             sampleProjectSubscription.activeStatus = project.activeStatus;
+           }
+
             if (project && project.projectImage)
               sampleProjectSubscription.projectImage = project.projectImage;
             sampleProjectSubscriptionArray.push(sampleProjectSubscription);

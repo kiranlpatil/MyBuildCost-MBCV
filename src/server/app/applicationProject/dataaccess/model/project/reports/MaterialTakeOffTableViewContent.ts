@@ -11,8 +11,8 @@ class MaterialTakeOffTableViewContent extends MaterialTakeOffView {
     this.subContent = subContent;
   }*/
 
-  constructor(columnOne: string, columnTwo: any, columnThree: string, subContent: MaterialTakeOffTableViewContent) {
-    super(columnOne, columnTwo, columnThree);
+  constructor(columnOne: string, columnTwo: any, columnThree: string, columnFour: any,columnFive: any, subContent: MaterialTakeOffTableViewContent) {
+    super(columnOne, columnTwo, columnThree, columnFour,columnFive);
     this.subContent = subContent;
   }
 }

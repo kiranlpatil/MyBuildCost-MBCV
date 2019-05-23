@@ -1,7 +1,8 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { SessionStorageService } from '../../../../../shared/services/session.service';
-import { SessionStorage } from '../../../../../shared/constants';
+import { Label, SessionStorage} from '../../../../../shared/constants';
 import { ProjectElements } from '../../../../../shared/constants';
+import { SharedService } from '../../../../../shared/services/shared-service';
 
 @Component({
   moduleId: module.id,
@@ -21,7 +22,7 @@ export class CostSummaryReportComponent {
   company_name: string;
   generatedDate: Date = new Date();
 
-  constructor() {
+  constructor(private sharedService: SharedService) {
     this.company_name = SessionStorageService.getSessionValue(SessionStorage.COMPANY_NAME);
     this.currentProjectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
   }
@@ -39,21 +40,14 @@ export class CostSummaryReportComponent {
         content = this.estimated.nativeElement.innerHTML;
         break;
     }
-    let contentDiv = document.createElement('div');
-    //let content = this.BudgetedAndEstimated.nativeElement.innerHTML;
-    contentDiv.innerHTML = content;
-    contentDiv.setAttribute('id','print-div');
-    document.getElementById('tpl-app').style.display = 'none';
-    window.document.body.appendChild(contentDiv);
-    window.document.close();
-    window.print();
-    var elem = document.querySelector('#print-div');
-    elem.parentNode.removeChild(elem);
-    document.getElementById('tpl-app').style.display = 'initial';
+    this.sharedService.downloadToPdf(content);
   }
 
   getProjectElements() {
     return ProjectElements;
+  }
+  getLabel() {
+    return Label;
   }
 }
 

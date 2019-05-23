@@ -21,6 +21,26 @@ steps:
                                                          OR 
                                                        for http2
                                 ~node app.server.dev.http2.js --NODE_ENV=development //Default. for backend configuration (ubuntu) which is using http2 protocol.
+                                
+       * If you get error "Error: findAndUpdate Failed. The featureCompatibilityVersion must be 3.6 to use arrayFilters."  for any API,
+         then 
+          1. check your feature compatibility version from mongo DB shell using command -
+             db.adminCommand( { getParameter: 1, featureCompatibilityVersion: 1 } )     
+          2. If version is not 3.6 then set it to 3.6 using command - 
+             db.adminCommand( { setFeatureCompatibilityVersion: "3.6" } )
+          and try again.
+          
+       * Steps to show sample project on Local enviroment   
+          1. Create new user(First) from the UI.
+          2. Create new project from the UI.
+          3. Create another user(Second) again from the UI.
+          4. Change sampleProject's userId and projectId from in development.json as  (Do not commit the file for this changes)
+          
+             "sampleProject" : {
+                 "userId": "User ID of Second user",
+                 "projectId":"Project ID of project created by First user"
+               }   
+          5. Login using credentials of Second user, sample project will be display.              
                                  
        5.For Staging Environment:
                             1. ~npm start

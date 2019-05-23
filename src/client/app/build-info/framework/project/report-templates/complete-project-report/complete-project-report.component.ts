@@ -1,7 +1,8 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { SessionStorage } from '../../../../../shared/constants';
+import {Label, SessionStorage} from '../../../../../shared/constants';
 import { SessionStorageService } from '../../../../../shared/services/session.service';
 import { ProjectElements } from '../../../../../shared/constants';
+import { SharedService } from '../../../../../shared/services/shared-service';
 
 @Component({
   moduleId: module.id,
@@ -32,39 +33,33 @@ export class CompleteProjectReportComponent {
   currentProjectName: string;
   company_name: string;
 
-  constructor() {
+  constructor(private sharedService: SharedService) {
     this.company_name = SessionStorageService.getSessionValue(SessionStorage.COMPANY_NAME);
     this.currentProjectName = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_NAME);
   }
 
   downloadToPdf(reportType: string) {
-    //setTimeout(function() {
-      let content: any;
-      switch (reportType) {
-        case 'budgetedAndEstimatedCostReport':
-          content = this.projectBothReport.nativeElement.innerHTML+this.bothReport.nativeElement.innerHTML ;
-          break;
-        case 'budgetedCostreport':
-          content = this.projectBudgetedReport.nativeElement.innerHTML +this.budgetedReport.nativeElement.innerHTML;
-          break;
-        case 'estimatedCostReport':
-          content =  this.projectEstimatedReport.nativeElement.innerHTML+this.estimatedReport.nativeElement.innerHTML ;
-          break;
-      }
-      let contentDiv = document.createElement('div');
-      contentDiv.innerHTML = content;
-      contentDiv.setAttribute('id', 'print-div');
-      document.getElementById('tpl-app').style.display = 'none';
-      window.document.body.appendChild(contentDiv);
-      window.document.close();
-      window.print();
-      var elem = document.querySelector('#print-div');
-      elem.parentNode.removeChild(elem);
-      document.getElementById('tpl-app').style.display = 'initial';
-   // },2000);
+    let content: any;
+    switch (reportType) {
+      case 'budgetedAndEstimatedCostReport':
+        content = this.projectBothReport.nativeElement.innerHTML + this.bothReport.nativeElement.innerHTML;
+        break;
+      case 'budgetedCostreport':
+        content = this.projectBudgetedReport.nativeElement.innerHTML + this.budgetedReport.nativeElement.innerHTML;
+        break;
+      case 'estimatedCostReport':
+        content = this.projectEstimatedReport.nativeElement.innerHTML + this.estimatedReport.nativeElement.innerHTML;
+        break;
+    }
+    this.sharedService.downloadToPdf(content);
+
   }
 
   getProjectElements() {
     return ProjectElements;
+  }
+
+  getLabel() {
+    return Label;
   }
 }

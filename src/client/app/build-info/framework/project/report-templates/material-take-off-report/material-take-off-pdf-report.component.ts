@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { MaterialTakeOffElements, PDFReportHeaders } from '../../../../../shared/constants';
-import { CommonService } from '../../../../../shared/services/common.service';
+import { SharedService } from '../../../../../shared/services/shared-service';
 
 @Component({
   moduleId: module.id,
@@ -16,12 +16,12 @@ export class MaterialTakeOffPdfReportComponent {
   @Input() materialTakeOffReport : any;
   public generatedDate: Date = new Date();
 
-  constructor(private commonService : CommonService) {
+  constructor(private sharedService : SharedService) {
   }
 
   downloadToPdf() {
     let content = this.content.nativeElement.innerHTML;
-    this.commonService.downloadToPdf(content);
+    this.sharedService.downloadToPdf(content);
   }
 
   getMaterialTakeOffElements() {
