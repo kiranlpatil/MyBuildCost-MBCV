@@ -10,120 +10,128 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">
-          <img alt="" class="logo-image" src="./assets/build-info/header/buildinfo-logo.png">
+          <img alt="My Build Cost Logo" class="logo-image" src="./assets/build-info/home-page/buildinfo-logo.png">
         </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="../navbar/">Features</a></li>
-          <li><a href="../navbar/">User's guide</a></li>
-          <li><a href="../navbar/">Pricing</a></li>
-          <li><a href="../navbar/">Estimation Services</a></li>
-          <li><a href="../navbar/">Customers</a></li>
-          <li><a href="../navbar/">Other Products</a></li>
+          <li><a>Features</a></li>
+          <li><a (click)="scrollToSection(usersGuideSection)">User's guide</a></li>
+          <li><a (click)="scrollToSection(pricingSection)">Pricing</a></li>
+          <li><a (click)="scrollToSection(estimationServicesSection)">Estimation Services</a></li>
+          <li><a (click)="scrollToSection(customersSection)">Customers</a></li>
+          <li><a (click)="scrollToSection(otherProductsSection)">Other Products</a></li>
           <!--<li>
             <a href="../navbar/">
               <img alt="" class="logo-image" src="./assets/build-info/header/buildinfo-logo.png">
             </a>
           </li>-->
-          <li><a href="../navbar/" class="login-link">login</a></li>
+          <li><a href="" class="login-link">login</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
   </nav>
 
   <section class="container">
-    <div class="col-xs-6">
-      <div class="left-row">
-        <ul>
-          <li class="fadein-sub-element">Budget</li>
-          <li class="fadein-sub-element">Estimate</li>
-          <li class="fadein-sub-element">Control</li>
-        </ul>
-      </div>
-      <h2> Your Construction Cost </h2>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="left-row">
+          <ul>
+            <li class="fadein-sub-element">Budget</li>
+            <li class="fadein-sub-element">Estimate</li>
+            <li class="fadein-sub-element">Control</li>
+          </ul>
+        </div>
+        <h2> Your Construction Cost </h2>
 
-      <div class="request-btn">
-        <button>
-          <span class="cricle">
-            <img height="19" src="./assets/build-info/home-page/landingpage-user.svg"/>
-          </span>
-          <span class="btn-label"> Request for online demo </span>
-        </button>
+        <div class="request-btn">
+          <button>
+            <span class="cricle">
+              <img height="19" src="./assets/build-info/home-page/landingpage-user.svg"/>
+            </span>
+            <span class="btn-label"> Request for online demo </span>
+          </button>
+        </div>
+
+        <div class="start-trial-btn">
+          <button>
+            <label> Start 15 Days Trial </label>
+          </button>
+          <span> No obligation. No card details required. </span>
+        </div>
       </div>
 
-      <div class="start-trial-btn">
-        <button>
-          <label> Start 15 Days Trial </label>
-        </button>
-        <span> No obligation. No card details required. </span>
+      <div class="col-xs-6">
+        <img alt="" height="571" width="100%" src="./assets/build-info/home-page/landing-img.svg">
       </div>
-    </div>
-
-    <div class="col-xs-6">
-      <img alt="" height="571" width="100%" src="./assets/build-info/home-page/landing-img.svg">
     </div>
   </section>
 
-  <section class="users-guide container">
+  <section class="users-guide container" #usersGuideSection>
     <h3>
       <span class="line"> </span>
       User's guide
     </h3>
 
-    <div class="col-xs-12">
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <div class="video-img">
-          </div>
-          <div class="caption">
-            <h4>Nigeria</h4>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-              metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <div class="video-img">
-          </div>
-          <div class="caption">
-            <h4>Greenland</h4>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-              metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <div class="video-img">
-          </div>
-          <div class="caption">
-            <h4>Russian Federation</h4>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-              metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <div class="video-img">
-          </div>
-          <div class="caption">
-            <h4>Nigeria </h4>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-              metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <div class="video-img">
-          </div>
-          <div class="caption">
-            <h4>Greenland</h4>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-              metus.</p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row guide-blocks">
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Nigeria</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Greenland</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Russian Federation</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Nigeria </h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Greenland</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -131,7 +139,7 @@
   </section>
 
   <section class="yellow-bg">
-    <section class="product-pricing">
+    <section class="product-pricing" #pricingSection>
       <div class="container">
         <h3>
           <span class="line"> </span>
@@ -150,57 +158,64 @@
             <img alt="" height="100" src="./assets/build-info/home-page/building-icon.svg">
           </div>
           <div class="price"> Rs 3499/-</div>
-          <div class="col-xs-12 card-list">
-            <div class="col-xs-7 text-right">
-              <label> No. of Projects </label>
-            </div>
-            <div class="col-xs-5 text-left">
-              <span> 1 </span>
-            </div>
-          </div>
-          <div class="col-xs-12 card-list">
-            <div class="col-xs-7 text-right">
-              <label> No. of Buildings </label>
-            </div>
-            <div class="col-xs-5 text-left">
-              <span> 5 </span>
+          <div class="row">
+            <div class="col-xs-12 card-list">
+              <div class="col-xs-7 text-right">
+                <label> No. of Projects </label>
+              </div>
+              <div class="col-xs-5 text-left">
+                <span> 1 </span>
+              </div>
             </div>
           </div>
-          <div class="col-xs-12 card-list">
-            <div class="col-xs-7 text-right">
-              <label> Package Duration </label>
-            </div>
-            <div class="col-xs-5 text-left">
-              <span> 1 year </span>
-            </div>
 
-            <div class="col-xs-12 padding-top-25">
-              <p>
-                No AMC cost
-              </p>
-              <p>
-                No support/training cost
-              </p>
-              <p>
-                No software upgradation cost
-              </p>
+          <div class="row">
+            <div class="col-xs-12 card-list">
+              <div class="col-xs-7 text-right">
+                <label> No. of Buildings </label>
+              </div>
+              <div class="col-xs-5 text-left">
+                <span> 5 </span>
+              </div>
             </div>
-
           </div>
 
-          <div class="col-xs-12">
-            <div class="buy-now-btn">
-              <button class="btn btn-primary"> BUY NOW</button>
+          <div class="row">
+            <div class="col-xs-12 card-list">
+              <div class="col-xs-7 text-right">
+                <label> Package Duration </label>
+              </div>
+              <div class="col-xs-5 text-left">
+                <span> 1 year </span>
+              </div>
+
+              <div class="col-xs-12 padding-top-25">
+                <p>
+                  No AMC cost
+                </p>
+                <p>
+                  No support/training cost
+                </p>
+                <p>
+                  No software upgradation cost
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="buy-now-btn">
+                <button class="btn btn-primary"> BUY NOW</button>
+              </div>
             </div>
           </div>
         </div>
-
-
       </div>
-
     </section>
 
-    <section class="estimation-services">
+    <section class="estimation-services" #estimationServicesSection>
       <h3>
         <span class="line"> </span>
         <span>
@@ -210,70 +225,138 @@
       </h3>
 
       <div class="container">
-        <div class="col-xs-12">
-          <div class="form-left">
-            <h4>
-              <p> Adding data seems complicated? </p>
-              <p> Don’t worry, <span> we will estimate your project </span></p>
-              <p> on behalf of you. </p>
-            </h4>
-          </div>
-          <div class="form-right">
-            <div class="col-md-8 col-md-offset-1">
-              <form>
-                <div class="form-group">
-                  <input type="text" id="name" class="form-control" placeholder="Name*"/>
-                </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-left">
+              <h4>
+                <p> Adding data seems complicated? </p>
+                <p> Don’t worry, <span> we will estimate your project </span></p>
+                <p> on behalf of you. </p>
+              </h4>
+            </div>
+            <div class="form-right">
+              <div class="col-md-8 col-md-offset-1">
+                <form>
+                  <div class="form-group">
+                    <input type="text" id="name" class="form-control" placeholder="Name*"/>
+                  </div>
 
-                <div class="form-group">
-                  <input type="email" id="email" class="form-control" placeholder="Email iD*"/>
-                </div>
+                  <div class="form-group">
+                    <input type="email" id="email" class="form-control" placeholder="Email iD*"/>
+                  </div>
 
-                <div class="form-group">
-                  <input type="text" id="number" class="form-control" placeholder="Contact Number*"/>
-                </div>
+                  <div class="form-group">
+                    <input type="text" id="number" class="form-control" placeholder="Contact Number*"/>
+                  </div>
 
-                <div class="form-group">
-                  <input type="text" id="company-name" class="form-control" placeholder="Company Name*"/>
-                </div>
+                  <div class="form-group">
+                    <input type="text" id="company-name" class="form-control" placeholder="Company Name*"/>
+                  </div>
 
-                <div class="form-group">
-                  <select class="form-control">
-                    <option selected>City</option>
-                    <option>Colombia</option>
-                    <option>Argentina</option>
-                    <option>Mexico</option>
-                    <option>Perú</option>
-                    <option>Ecuador</option>
-                  </select>
-                </div>
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option selected>City</option>
+                      <option>Colombia</option>
+                      <option>Argentina</option>
+                      <option>Mexico</option>
+                      <option>Perú</option>
+                      <option>Ecuador</option>
+                    </select>
+                  </div>
 
-                <button class="btn btn-primary">SUBMIT</button>
+                  <button class="btn btn-primary">SUBMIT</button>
 
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="our-customers">
+    <section class="our-customers" #customersSection>
       <div class="container">
         <h3>
           <span class="line"> </span>
           <span>
-        Our
-        <label> customers </label>
-      </span>
+            Our
+            <label> customers </label>
+          </span>
         </h3>
-        <div class="col-xs-12 ">
-          <h5> Trusted by leading <span> Developers, Contractors and Architects </span></h5>
+        <div class="row">
+          <div class="col-xs-12 ">
+            <h5> Trusted by leading <span> Developers, Contractors and Architects </span></h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs-wrapper">
+        <div class="customer-tabs-container">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active">
+                    <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                      <img src="./assets/build-info/home-page/our-customer-default.svg" alt="" class="img-responsive">
+                    </a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                      <img src="./assets/build-info/home-page/our-customer-default.svg" alt="" class="img-responsive">
+                    </a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+                      <img src="./assets/build-info/home-page/our-customer-default.svg" alt="" class="img-responsive">
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                  <div class="content-heading">Sandvik Asia Pvt Ltd - Heading 1</div>
+
+                  <div class="content-text-container">
+                    <div class="content-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                  <div class="content-heading">Sandvik Asia Pvt Ltd - Heading 2</div>
+
+                  <div class="content-text-container">
+                    <div class="content-text">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="messages">
+                  <div class="content-heading">Sandvik Asia Pvt Ltd - Heading 3</div>
+
+                  <div class="content-text-container">
+                    <div class="content-text">
+                        But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </section>
 
-  <section class="contact-us">
+  <section class="contact-us" #contactUsSection>
     <div class="container">
       <h3>
         <span class="line"> </span>
@@ -284,88 +367,90 @@
       </h3>
     </div>
     <div class="container">
-      <div class="col-xs-12">
-        <div class="form-left">
-          <div class="form-group">
-            <div class="col-xs-12">
-              <img alt="" height="36" src="./assets/build-info/home-page/mobilenumber.svg">
-              <p>
-                +91 985858558
-              </p>
-            </div>
-            <div class="col-xs-12">
-              <img alt="" height="36" src="./assets/build-info/home-page/mailid.svg">
-              <p>
-                bigslicetechnologies@gmail.com
-              </p>
-            </div>
-            <div class="col-xs-12">
-              <img alt="" height="36" src="./assets/build-info/home-page/location.svg">
-              <p>
-                102/A, Malave bhavan, behind Mangala theatre, Shivajinagar, Pune-411005
-              </p>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-left">
+            <div class="form-group">
+              <div class="col-xs-12">
+                <img alt="" height="36" src="./assets/build-info/home-page/mobilenumber.svg">
+                <p>
+                  +91 985858558
+                </p>
+              </div>
+              <div class="col-xs-12">
+                <img alt="" height="36" src="./assets/build-info/home-page/mailid.svg">
+                <p>
+                  bigslicetechnologies@gmail.com
+                </p>
+              </div>
+              <div class="col-xs-12">
+                <img alt="" height="36" src="./assets/build-info/home-page/location.svg">
+                <p>
+                  102/A, Malave bhavan, behind Mangala theatre, Shivajinagar, Pune-411005
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-right">
-          <form>
-          <div class="col-md-8 col-md-offset-1">
+          <div class="form-right">
+            <form>
+            <div class="col-md-8 col-md-offset-1">
 
-              <div class="form-group">
-                <input type="email" id="email1" class="form-control" placeholder="Email iD*"/>
-              </div>
+                <div class="form-group">
+                  <input type="email" id="email1" class="form-control" placeholder="Email iD*"/>
+                </div>
 
-              <div class="form-group">
-                <input type="text" id="number1" class="form-control" placeholder="Contact Number*"/>
-              </div>
+                <div class="form-group">
+                  <input type="text" id="number1" class="form-control" placeholder="Contact Number*"/>
+                </div>
 
-              <div class="form-group">
-                <input type="text" id="company-name1" class="form-control" placeholder="Company Name*"/>
-              </div>
-          </div>
-            <div class="col-md-11 col-md-offset-1">
-              <div class="form-group pull-left col-xs-12 no-padding">
-                <label class="col-xs-12 no-padding form-control"> Where do you want to send th is lead? </label>
-                <div class="toggleswitch">
-                  <div class="radio-button">
-                    <input id="opt_a" name="option" type="radio" value="opt_a">
-                    <label for="opt_a" class="r-btn">
-                      <img alt="" height="19" src="./assets/build-info/home-page/contactform-support.svg">
-                      <span> Support team </span>
-                    </label>
-                  </div>
+                <div class="form-group">
+                  <input type="text" id="company-name1" class="form-control" placeholder="Company Name*"/>
+                </div>
+            </div>
+              <div class="col-md-11 col-md-offset-1">
+                <div class="form-group pull-left col-xs-12 no-padding">
+                  <label class="col-xs-12 no-padding form-control"> Where do you want to send th is lead? </label>
+                  <div class="toggleswitch">
+                    <div class="radio-button">
+                      <input id="opt_a" name="option" type="radio" value="opt_a">
+                      <label for="opt_a" class="r-btn">
+                        <img alt="" height="19" src="./assets/build-info/home-page/contactform-support.svg">
+                        <span> Support team </span>
+                      </label>
+                    </div>
 
-                  <div class="radio-button">
-                    <input checked="checked" id="opt_b" name="option" type="radio" value="opt_b">
-                    <label for="opt_b" class="r-btn">
-                      <img alt="" height="22" src="./assets/build-info/home-page/contactform-sales.svg">
-                      <span> Sales </span>
-                    </label>
-                  </div>
+                    <div class="radio-button">
+                      <input checked="checked" id="opt_b" name="option" type="radio" value="opt_b">
+                      <label for="opt_b" class="r-btn">
+                        <img alt="" height="22" src="./assets/build-info/home-page/contactform-sales.svg">
+                        <span> Sales </span>
+                      </label>
+                    </div>
 
-                  <div class="radio-button">
-                    <input id="opt_c" name="option" type="radio" value="opt_c">
-                    <label for="opt_c" class="r-btn">
-                      <img alt="" height="19" src="./assets/build-info/home-page/contactform-estimate.svg">
-                      <span> Estimation services </span>
-                    </label>
+                    <div class="radio-button">
+                      <input id="opt_c" name="option" type="radio" value="opt_c">
+                      <label for="opt_c" class="r-btn">
+                        <img alt="" height="19" src="./assets/build-info/home-page/contactform-estimate.svg">
+                        <span> Estimation services </span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-xs-12 text-left col-md-offset-1">
-              <button class="btn btn-primary">SUBMIT</button>
-            </div>
+              <div class="col-xs-12 text-left col-md-offset-1">
+                <button class="btn btn-primary">SUBMIT</button>
+              </div>
 
-            </form>
+              </form>
 
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="other-products">
+  <section class="other-products" #otherProductsSection>
     <div class="container">
       <h3>
         <span class="line"> </span>
@@ -375,74 +460,76 @@
       </span>
       </h3>
 
-      <div class="col-xs-12">
-        <div class="build-info-section">
-          <img alt="" height="129" src="./assets/build-info/home-page/buildingo-logo.svg">
-          <h4 class="products-name">
-            BuildInfo
-          </h4>
-          <p>
-            Engaged in development of utility tools for the construction industry.
-          </p>
-        </div>
-
-        <div class="product-lists">
-          <img alt="" height="129" src="./assets/build-info/home-page/rateanalysis-logo.svg">
-          <h4 class="products-name">
-            Rate Analysis
-          </h4>
-          <p>
-            Featuring Rate Analysis of all major
-            Civil and Finishing items with updated
-            material and labour rates
-          </p>
-          <div class="app-links">
-            <span class="pull-left">
-              <img alt="" height="35" src="./assets/build-info/home-page/playstore-logo.svg">
-            </span>
-            <span class="pull-right">
-              <img alt="" height="35" src="./assets/build-info/home-page/appstore-logo.svg">
-            </span>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="build-info-section">
+            <img alt="" height="129" src="./assets/build-info/home-page/buildingo-logo.svg" class="img-responsive">
+            <h4 class="products-name">
+              BuildInfo
+            </h4>
+            <p>
+              Engaged in development of utility tools for the construction industry.
+            </p>
           </div>
-        </div>
 
-        <div class="product-lists">
-          <img alt="" height="129" src="./assets/build-info/home-page/mycivilcalc-logo.svg">
-          <h4 class="products-name">
-            Rate Analysis
-          </h4>
-          <p>
-            Featuring Rate Analysis of all major
-            Civil and Finishing items with updated
-            material and labour rates
-          </p>
-          <div class="app-links">
-            <span class="pull-left">
-              <img alt="" height="35" src="./assets/build-info/home-page/playstore-logo.svg">
-            </span>
-            <span class="pull-right">
-              <img alt="" height="35" src="./assets/build-info/home-page/appstore-logo.svg">
-            </span>
+          <div class="product-lists">
+            <img alt="" height="129" src="./assets/build-info/home-page/rateanalysis-logo.svg">
+            <h4 class="products-name">
+              Rate Analysis
+            </h4>
+            <p>
+              Featuring Rate Analysis of all major
+              Civil and Finishing items with updated
+              material and labour rates
+            </p>
+            <div class="app-links">
+              <span class="pull-left">
+                <img alt="" height="35" src="./assets/build-info/home-page/playstore-logo.svg">
+              </span>
+              <span class="pull-right">
+                <img alt="" height="35" src="./assets/build-info/home-page/appstore-logo.svg">
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div class="product-lists">
-          <img alt="" height="129" src="./assets/build-info/home-page/materialanalysis-logo.svg">
-          <h4 class="products-name">
-            Rate Analysis
-          </h4>
-          <p>
-            Featuring Rate Analysis of all major
-            Civil and Finishing items with updated
-            material and labour rates
-          </p>
-          <div class="app-links">
-            <span class="pull-left">
-              <img alt="" height="35" src="./assets/build-info/home-page/playstore-logo.svg">
-            </span>
-            <span class="pull-right">
-              <img alt="" height="35" src="./assets/build-info/home-page/appstore-logo.svg">
-            </span>
+          <div class="product-lists">
+            <img alt="" height="129" src="./assets/build-info/home-page/mycivilcalc-logo.svg">
+            <h4 class="products-name">
+              Rate Analysis
+            </h4>
+            <p>
+              Featuring Rate Analysis of all major
+              Civil and Finishing items with updated
+              material and labour rates
+            </p>
+            <div class="app-links">
+              <span class="pull-left">
+                <img alt="" height="35" src="./assets/build-info/home-page/playstore-logo.svg">
+              </span>
+              <span class="pull-right">
+                <img alt="" height="35" src="./assets/build-info/home-page/appstore-logo.svg">
+              </span>
+            </div>
+          </div>
+
+          <div class="product-lists">
+            <img alt="" height="129" src="./assets/build-info/home-page/materialanalysis-logo.svg">
+            <h4 class="products-name">
+              Rate Analysis
+            </h4>
+            <p>
+              Featuring Rate Analysis of all major
+              Civil and Finishing items with updated
+              material and labour rates
+            </p>
+            <div class="app-links">
+              <span class="pull-left">
+                <img alt="" height="35" src="./assets/build-info/home-page/playstore-logo.svg">
+              </span>
+              <span class="pull-right">
+                <img alt="" height="35" src="./assets/build-info/home-page/appstore-logo.svg">
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -450,8 +537,6 @@
     </div>
   </section>
 </div>
-
-
 
 <footer class="footer">
   <nav class="navbar navbar-default navbar-custom">
@@ -484,12 +569,11 @@
           </li>
         </ul>
       </div>
-
-
-
     </div>
-    <div class="col-xs-12 copyright-label">
-      Copyright © 2019 Big Slice Technologies Pvt Ltd (OPC) - All Right Reserved
+    <div class="container">
+      <div class="copyright-label">
+        Copyright © 2019 Big Slice Technologies Pvt Ltd (OPC) - All Right Reserved
+      </div>
     </div>
   </nav>
 </footer>

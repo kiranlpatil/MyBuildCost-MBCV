@@ -11,4 +11,12 @@ import { Router } from '@angular/router';
 
 export class HomePageComponent {
 
+  scrollToSection($element: any) {
+    $element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
+  }
+
 }
