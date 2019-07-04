@@ -1,0 +1,186 @@
+@import '../../../css/common';
+
+.container {
+  width: 1170px;
+}
+
+.page-background {
+  background: no-repeat fixed 50% 100%;
+  display: table;
+  height: 100vh;
+  margin: 0 auto;
+  width: 100%;
+
+  .inner-content {
+    display: table-cell;
+    height: 100vh;
+    vertical-align: middle;
+
+    .logo-image {
+      margin: 0 0 20px;
+    }
+
+    h4 {
+      color: $heading;
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    ul {
+      color: $heading;
+      font-size: 24px;
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding-left: 15px;
+        position: relative;
+        display: inline-block;
+        counter-increment: li;
+
+        &:before {
+          content: "•";
+          color: $theme-color;
+          display: inline-block;
+          width: 20px;
+          margin-left: -20px;
+        }
+
+        &:first-child {
+          padding-left: 0;
+
+          &:before {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .btn-primary {
+      margin: 20px 0 30px;
+    }
+
+    .content {
+      width: 390px;
+      margin: 0 auto;
+    }
+
+    form {
+      margin-top: 15px;
+    }
+  }
+}
+
+.mobile-background-image {
+  display: none;
+}
+
+.fadein-element .fadein-sub-element:nth-child(1) { animation-delay: 0.50s; }
+.fadein-element .fadein-sub-element:nth-child(2) { animation-delay: 0.56s; }
+.fadein-element .fadein-sub-element:nth-child(3) { animation-delay: 0.62s; }
+.tagline1 { animation-delay: 0.68s; }
+.btn-primary { animation-delay: 0.74s; }
+.tagline2 { animation-delay: 0.80s; }
+.btn-default { animation-delay: 0.86s; }
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+  .inner-content {
+    .logo-image {
+      width: 80%;
+    }
+    ul {
+      li {
+        font-size: 12px;
+      }
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    background: none;
+    padding: 0 25px;
+  }
+  .landing-page-wrapper {
+    .container {
+      background: initial;
+      padding: 0;
+      .page-background {
+        height: auto;
+        //background: url("../../../assets/build-info/page_background/page-bg.png") bottom/contain no-repeat !important;
+        .inner-content {
+          display: block;
+          height: auto;
+          position: absolute;
+          transform: translateY(-70%);
+          top: 50%;
+          width: 100%;
+          ul {
+            font-size: 14px;
+            font-weight: 600;
+          }
+          .btn {
+            padding: 5px 35px;
+          }
+          .btn-primary {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  .page-background {
+    .inner-content {
+      .content {
+        width: 100%;
+      }
+    }
+  }
+
+  .mobile-background-image {
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .landing-page-wrapper {
+    .container {
+      .page-background {
+        .inner-content {
+          display: block;
+          height: auto;
+          position: relative;
+          -webkit-transform: translateY(-25%);
+          transform: translateX(-50%) translateY(70%);
+          left: 50%;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1170px) {
+  .container {
+    width: 100%;
+  }
+}
+
+//@media only screen and (max-width: 480px) {
+//  .page-background {
+//    .inner-content {
+//      vertical-align: top;
+//
+//      .content {
+//        width: 90%;
+//        margin: 0 auto;
+//      }
+//    }
+//  }
+//}
