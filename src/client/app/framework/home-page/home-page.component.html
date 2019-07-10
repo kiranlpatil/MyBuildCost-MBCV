@@ -21,6 +21,7 @@
           <li><a (click)="scrollToSection(estimationServicesSection)">Estimation Services</a></li>
           <li><a (click)="scrollToSection(customersSection)">Customers</a></li>
           <li><a (click)="scrollToSection(otherProductsSection)">Other Products</a></li>
+          <li><a>About us</a></li>
           <!--<li>
             <a href="../navbar/">
               <img alt="" class="logo-image" src="./assets/build-info/header/buildinfo-logo.png">
@@ -66,8 +67,8 @@
         </div>
       </div>
 
-      <div class="col-xs-6">
-        <img alt="" height="571" width="100%" src="./assets/build-info/home-page/landing-img.svg">
+      <div class="col-xs-6 video-img">
+        <img alt="" height="571" data-toggle="modal" data-target="#video-modal" width="100%" src="./assets/build-info/home-page/landing-img.svg">
       </div>
     </div>
   </section>
@@ -588,3 +589,28 @@
     <div class="copyright-label">Copyright © 2019 Big Slice Technologies Pvt Ltd (OPC) - All Right Reserved</div>
   </nav>
 </footer>
+
+<div id="video-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <!--<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>-->
+      <div class="modal-body">
+        <video width="750" height="430" controls id="bi-video" >
+          <source  src="./assets/build-info/home-page/MBC_animation_gold.mp4" type="video/mp4">
+          <!--<source src="mov_bbb.ogg" type="video/ogg">-->
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <button type="button" class="close video-close" data-dismiss="modal">
+        &times;
+      </button>
+
+    </div>
+
+  </div>
+</div>

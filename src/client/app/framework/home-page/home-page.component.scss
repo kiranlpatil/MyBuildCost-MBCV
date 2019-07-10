@@ -727,6 +727,28 @@
   }
 }
 
+#video-modal {
+  .modal-content {
+    width: 780px;
+  }
+  .modal-dialog {
+    transform: translate(-15%, -50%);
+  }
+}
+
+.video-img {
+  cursor: pointer;
+}
+
+.video-close {
+  font-size: 30px;
+  position: absolute;
+  right: 22px;
+  top: 15px;
+  opacity: 0.6;
+  z-index: 99;
+}
+
 .padding-top-25 {
   padding-top: 25px;
 }
