@@ -42,34 +42,39 @@
             text-shadow: 0 0 0px $black;
           }
         }
+      }
+    }
 
+    .navbar-header,
+    .navbar-collapse {
+      .login-link-item {
         .login-link {
           color: $homepage-heading-subtext;
           font-size: 16px;
           font-weight: bold;
-
+    
           &:hover {
             color: $homepage-bright-yellow;
           }
         }
-
-        &.call-btn-item {
-          .call-btn-wrapper {
-            border-left: 1px solid $black;
-            margin: 0 0 0 30px;
-            padding: 0 0 0 30px;
-
-            .call-btn {
-              background: transparent url("../../../assets/build-info/home-page/call-icon.svg") right center no-repeat;
-              display: block;
-              height: 17px;
-              opacity: 0.5;
-              padding: 0;
-              width: 17px;
-
-              &:hover {
-                opacity: 1;
-              }
+      }
+  
+      .call-btn-item {
+        .call-btn-wrapper {
+          border-left: 1px solid $black;
+          margin: 0 0 0 30px;
+          padding: 0 0 0 30px;
+  
+          .call-btn {
+            background: transparent url("../../../assets/build-info/home-page/call-icon.svg") right center no-repeat;
+            display: block;
+            height: 17px;
+            opacity: 0.5;
+            padding: 0;
+            width: 17px;
+  
+            &:hover {
+              opacity: 1;
             }
           }
         }
@@ -283,7 +288,7 @@
     box-shadow: 0 8px 33px 0 rgba(0, 0, 0, 0.17);
     display: table;
     height: 506px;
-    margin: 68px auto 90px;
+    margin: 68px auto 70px;
     padding: 55px 37px 45px;
     width: 466px;
     .card-list {
@@ -415,7 +420,7 @@
       float: left;
       font-size: 70px;
       font-weight: 700;
-      margin: 0;
+      margin: 20px 0 0 0;
       text-align: center;
       width: 100%;
       span.line {
@@ -854,45 +859,42 @@ footer ul.footerleft {
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 359px) {
-}
+// iPad & Mobile Devices both
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+  }
 
-@media screen and (max-width: 767px) {
   .home-page {
     .navbar {
       .navbar-header {
+        align-items: center;
+        display: flex;
+        float: none;
+    
         .navbar-toggle {
-          margin: 12px 0;
+          display: block;
+          margin: 21px 0;
+          order: 2;
         }
-
-        .navbar-brand {
-          margin: 10px 0;
   
-          .logo-image {
-            height: auto;
-            width: 60px;
+        .call-login-btns {
+          align-items: center;
+          display: flex !important;
+          margin: 0 15px 0 0;
+          order: 1;
+  
+          .call-btn-wrapper {
+            border: none;
+            margin: 0 15px 0 0;
+            padding: 0;
           }
         }
-      }
-
-      .navbar-nav {
-        margin: 0;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .home-page {
-    .navbar {
-      .navbar-header {
-        .navbar-toggle {
-          margin: 21px 0;
-        }
-
+  
         .navbar-brand {
-          margin: 10px 0;
-
+          margin: 10px auto 10px 0;
+          order: 0;
+  
           .logo-image {
             height: auto;
             width: 90px;
@@ -904,53 +906,72 @@ footer ul.footerleft {
         margin: 0;
       }
     }
+    
+    .navbar-collapse {
+      background-color: #ffffff;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 12px 10px rgba(0, 0, 0, 0.05);
+      left: 0;
+      position: absolute;
+      width: 100%;
+  
+      &.collapse {
+        display: none !important;
+      }
+  
+      .navbar-nav {
+        display: block;
+        float: none !important;
+        margin-top: 7.5px;
+  
+        & > li {
+          display: block;
+          float: none;
+  
+          & > a {
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+        }
+  
+        &.navbar-left,
+        &.navbar-right {
+          float: none;
+        }
+      }
+  
+      &.collapse.in {
+        display: block !important;
+      }
+    }
   }
 }
 
-// Media Query for enabling hamburger menu on iPad
-@media (max-width: 1200px) {
-  .container {
-    width: 100%;
-  }
-
-  .navbar-header {
-    float: none;
-
-    .navbar-toggle {
-      display: block;
-    }
-  }
+// iPad Devices Only
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   
-  .navbar-collapse {
-    border-top: 1px solid transparent;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
 
-    &.collapse {
-      display: none !important;
-    }
+// Mobile Devices Only
+@media screen and (max-width: 767px) {
+  .home-page {
+    .navbar {
+      .navbar-header {
+        .navbar-toggle {
+          margin: 12px 0;
+        }
 
-    .navbar-nav {
-      float: none !important;
-      margin-top: 7.5px;
-
-      & > li {
-        display: block;
-        float: none;
-
-        & > a {
-          padding-top: 10px;
-          padding-bottom: 10px;
+        .navbar-brand {
+          .logo-image {
+            height: auto;
+            width: 60px;
+          }
         }
       }
 
-      &.navbar-left,
-      &.navbar-right {
-        float: none !important;
+      .navbar-nav {
+        margin: 0;
       }
-    }
-
-    &.collapse.in {
-      display: block !important;
     }
   }
 }

@@ -14,6 +14,8 @@ declare let $: any;
 export class HomePageComponent implements OnInit {
 
   scrollToSection($element: any) {
+    $('#navbar').collapse('hide');
+
     $element.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
