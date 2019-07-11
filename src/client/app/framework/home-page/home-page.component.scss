@@ -755,6 +755,10 @@
 
 .video-img {
   cursor: pointer;
+
+  img {
+    height: 571px;
+  }
 }
 
 .video-close {
@@ -942,6 +946,15 @@ footer ul.footerleft {
   
       &.collapse.in {
         display: block !important;
+      }
+    }
+
+    .video-section-row {
+      .video-img {
+        img {
+          height: auto;
+          width: 75%;
+        }
       }
     }
   }
