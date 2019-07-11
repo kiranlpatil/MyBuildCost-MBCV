@@ -248,6 +248,7 @@
       color: $homepage-heading;
       font-size: 20px;
       line-height: 27px;
+      margin: 0;
       padding: 0 0 0 50px;
       text-align: justify;
     }
@@ -264,7 +265,7 @@
       content: "";
       transform: skewY(-8deg) translateY(-50px);
       position: absolute;
-      top: 470px;
+      top: 740px;
       right: 0;
       left: 0;
       bottom: 45px;
@@ -282,7 +283,7 @@
     box-shadow: 0 8px 33px 0 rgba(0, 0, 0, 0.17);
     display: table;
     height: 506px;
-    margin: 100px auto 90px;
+    margin: 68px auto 90px;
     padding: 55px 37px 45px;
     width: 466px;
     .card-list {
