@@ -1159,7 +1159,7 @@ footer ul.footerleft {
 
 // iPad Devices Only
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-.home-page {
+  .home-page {
     .left-row {
       margin: 0;
 
@@ -1415,7 +1415,7 @@ footer ul.footerleft {
     border: none;
   }
   h4{
-    padding-top: 207px;
+    padding-top: 110px;
     padding-bottom: 39px;
     color: #3C3C3C;
     font-size: 39px;
@@ -1449,24 +1449,10 @@ footer ul.footerleft {
   }
 }
 
-.modal {
-  padding: 60px;
-
-  h3 {
-    font-size: 50px;
-    padding-left: 50px;
-    line-height: 105px;
-  }
-
-  ul li {
-    font-size: 21px;
-    line-height: 44px;
-  }
-}
 
 
 
-.estimation-modalone, .estimation-modaltwo, .estimation-modalthree {
+.why-estimation, .outsource-estimation, .cost-estimation {
   .estimation-modal-dialog {
     top: 0;
     transform: translate(0, 0);
@@ -1502,15 +1488,15 @@ footer ul.footerleft {
     .estimation-inner-lists {
       list-style: none;
       padding-left: 50px;
-        &>li:before{
-         content: "\2022";
-         color: #FFD15E;
-          font-weight: bold;
-          display: inline-block;
-          font-size: 38px;
-          position: absolute;
-          left: -35px;
-        }
+      &>li:before{
+        content: "\2022";
+        color: #FFD15E;
+        font-weight: bold;
+        display: inline-block;
+        font-size: 38px;
+        position: absolute;
+        left: -35px;
+      }
     }
 
     ol {
@@ -1527,17 +1513,32 @@ footer ul.footerleft {
       position: relative;
     }
   }
+  .modal {
+    padding: 60px;
+
+    h3 {
+      font-size: 50px;
+      padding-left: 50px;
+      line-height: 105px;
+    }
+
+    ul li {
+      font-size: 21px;
+      line-height: 44px;
+    }
+  }
+
 }
 
-.estimation-modalone .modal-content{
+.why-estimation .modal-content{
   background:#ffffff url(./assets/build-info/home-page/question.svg) no-repeat right top;
 }
 
-.estimation-modaltwo .modal-content{
+.outsource-estimation .modal-content{
   background:#ffffff url(./assets/build-info/home-page/Handbackground.svg) no-repeat right top;
 }
 
-.estimation-modalthree .modal-content{
+.cost-estimation .modal-content{
   background:#ffffff url(./assets/build-info/home-page/CombinedShape.svg) no-repeat right top;
 }
 
@@ -1595,13 +1596,22 @@ footer ul.footerleft {
       }
     }
   }
-  .estimation-modalone, .estimation-modaltwo, .estimation-modalthree{
+  .why-estimation, .outsource-estimation, .cost-estimation{
     .estimation-modal-dialog{
       top: 0;
       transform: translate(0, 0);
       width: 600px;
       padding-bottom: 40px;
       margin-left: 90px;
+      h4 {
+        font-size: 18px;
+        padding-top: 42px;
+        line-height: 26px;
+        padding-left: 0;
+      }
+      .estimation-inner-lists {
+        padding-left: 22px;
+      }
       .estimation-modal-close{
         right: 20px;
         top: 9px;
@@ -1611,7 +1621,7 @@ footer ul.footerleft {
   .middleline{
     margin-left: 250px;
   }
-  .estimation-modaltwo{
+  .outsource-estimation{
     li:before{
       left: -12px;
     }
@@ -1623,6 +1633,14 @@ footer ul.footerleft {
 }
 
 @media only screen and (max-width: 600px) {
+
+  .costcontrol-header {
+    h3 {
+      font-size: 16px;
+      padding-left: 0;
+    }
+  }
+
   .product-features{
     margin-top: 50px;
     h2{
@@ -1708,14 +1726,14 @@ footer ul.footerleft {
       padding-left: 8px;
     }
   }
-  .home-page[_ngcontent-c0] .estimation-services[_ngcontent-c0] .service-info[_ngcontent-c0] {
+/*  .home-page[_ngcontent-c0] .estimation-services[_ngcontent-c0] .service-info[_ngcontent-c0] {
     color: #3C3C3C;
     font-size: 16px;
     line-height: 27px;
     position: relative;
     margin: 40px 0 0px 0;
-  }
-  .estimation-modalone, .estimation-modaltwo, .estimation-modalthree{
+  }*/
+  .why-estimation, .outsource-estimation, .cost-estimation{
     .estimation-modal-dialog{
       top: 0;
       transform: translate(0, 0);
@@ -1730,24 +1748,34 @@ footer ul.footerleft {
         width: 22px;
         line-height: 0;
         position: relative;
-        right: 14px;
-        top: 11px;
+        right: 12px;
+        top: 18px;
         color: #000;
         border: none;
         background: none;
       }
-      li:before{
-        left: -26px;
-      }
+
       h3{
-        font-size: 33px;
+        font-size: 16px;
         padding-top: 42px;
-        line-height: 53px;
-        padding-left: 50px;
+        line-height: 26px;
+        padding-left: 0px;
+      }
+      h4 {
+        font-size: 16px;
+        line-height: 26px;
+        padding-left: 0;
+      }
+      .estimation-inner-lists {
+        padding-left: 10px;
+        li {
+          font-size: 14px;
+          line-height: 24px;
+          &:before{
+            left: -21px;
+          }
+        }
       }
     }
-  }
-  .estimation-modalone, .estimation-modaltwo, .estimation-modalthree{
-
   }
 }
