@@ -26,7 +26,7 @@ pipelines:
           - dist/**
     - step:
             script:
-              - apt-get update && apt-get upgrade # required to install zip
+              - apt-get update # required to install zip
               - apt-get install -y zip # required for packaging up the application
               - apt-get install python-pip -y
               - pip install boto3==1.3.0 # required for codedeploy_deploy.py
