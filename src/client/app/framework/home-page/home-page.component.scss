@@ -55,6 +55,8 @@
           color: $homepage-heading-subtext;
           font-size: 16px;
           font-weight: bold;
+          padding: 10px 0;
+          margin: 0 15px;
 
           &:hover {
             color: $homepage-bright-yellow;
@@ -192,8 +194,8 @@
   .users-guide {
     .guide-blocks {
       & > div[class*="col-"] {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
     }
 
@@ -1160,6 +1162,15 @@ footer ul.footerleft {
       }
     }
 
+    .users-guide {
+      margin-top: 60px;
+    }
+
+    .product-pricing {
+      padding-top: 0;
+      margin-top: 60px;
+    }
+
     .our-customers {
       .customer-tabs-container {
         .nav-tabs {
@@ -1311,6 +1322,10 @@ footer ul.footerleft {
       .navbar-nav {
         margin: 0;
       }
+    }
+
+    .video-section-row {
+      margin: 30px -15px;
     }
 
     .left-row {
