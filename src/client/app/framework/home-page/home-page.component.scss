@@ -1293,7 +1293,7 @@ footer ul.footerleft {
       padding-left: 15px;
       padding-right: 15px;
     }
-    
+
     .navbar {
       .navbar-header {
         .navbar-toggle {
@@ -1478,6 +1478,42 @@ footer ul.footerleft {
           }
         }
       }
+    }
+  }
+
+  footer {
+    .navbar-default {
+      padding: 0;
+    }
+
+    ul {
+      &.footerleft {
+        padding: 0 0 10px;
+
+        li {
+          display: block;
+          margin: 0 0 15px 0;
+        }
+      }
+    }
+
+    .navbar-right {
+      ul {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+
+        li {
+          display: inline-block;
+          float: none;
+          margin: 0 5px;
+        }
+      }
+    }
+
+    .copyright-label {
+      margin: 0;
+      padding: 20px;
     }
   }
 }
@@ -2235,4 +2271,4 @@ footer ul.footerleft {
       }
     }
   }
-}*/
+} z*/
