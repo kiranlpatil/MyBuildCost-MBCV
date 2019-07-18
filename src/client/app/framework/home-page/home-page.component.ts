@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationRoutes} from '../../shared/index';
+import {ImagePath, NavigationRoutes} from '../../shared/index';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactUs} from '../../user/models/contactUs';
 import {ContactService1} from './home-page.service';
+
+declare let $: any;
 
 @Component({
   moduleId: module.id,
@@ -19,15 +21,23 @@ export class HomePageComponent implements OnInit {
   submitStatus: boolean;
   private isFormSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder, private contactService: ContactService1) {
+  constructor(private _router: Router, private formBuilder: FormBuilder, private contactService: ContactService1) {
   }
 
   ngOnInit(): void {
     this.contactUs = new ContactUs();
     this.intializeForm();
+    $('#video-modal').on('hidden.bs.modal',() => {
+      $('video').trigger('pause');
+    });
+    $('#video-modal').on('show.bs.modal',() => {
+      $('video').trigger('play');
+    });
   }
 
   scrollToSection($element: any) {
+    $('#navbar').collapse('hide');
+
     $element.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -55,5 +65,12 @@ export class HomePageComponent implements OnInit {
     this.contactService.contact(this.model).subscribe(res => {
        console.log(res);
     });
+  }
+  addClick() {
+    this._router.navigate([NavigationRoutes.APP_LOGIN]);
+  }
+
+  onSignUp() {
+    this._router.navigate([NavigationRoutes.APP_REGISTRATION]);
   }
 }
