@@ -203,6 +203,10 @@ export class LoginComponent implements OnInit {
     this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD, {email: this.userForm.value.email}]);
   }
 
+  addClick() {
+    this._router.navigate([NavigationRoutes.APP_HOME]);
+  }
+
   OnRememberPassword(event: any) {
     if(event.target.checked) {
       this.isRememberPassword = true;

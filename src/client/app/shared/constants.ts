@@ -291,6 +291,7 @@ export class NavigationRoutes {
   public static FAILURE: string = 'failure';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
+  public static APP_HOME: string = '/home';
   public static VERIFY_PHONE: string = '/verify-phone';
 
 

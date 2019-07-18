@@ -147,6 +147,10 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this._router.navigate([NavigationRoutes.APP_LOGIN]);
   }
 
+  addClick() {
+    this._router.navigate([NavigationRoutes.APP_HOME]);
+  }
+
   getMessages() {
     return Messages;
   }
