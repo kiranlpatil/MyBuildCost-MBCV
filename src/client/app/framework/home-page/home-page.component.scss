@@ -6,6 +6,7 @@
     font-weight: 700;
     margin: 0;
     text-align: left;
+    color: #3C3C3C;
   }
 
   .navbar {
@@ -193,6 +194,7 @@
 
   .users-guide {
     margin-top: 60px;
+    margin-bottom: 60px;
     .guide-blocks {
       & > div[class*="col-"] {
         padding-left: 20px;
@@ -242,7 +244,6 @@
 
   .product-pricing {
     position: relative;
-    padding-top: 60px;
     z-index: 111;
 
     h3 {
@@ -813,6 +814,28 @@
   }
 }
 
+.about-us {
+  h3 {
+    color: $homepage-heading;
+    font-size: 80px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+
+    label {
+      color: $homepage-heading-subtext;
+      float: left;
+      font-size: 40px;
+      font-weight: 700;
+      width: 100%;
+    }
+  }
+
+  .decription {
+    margin-top: 90px;
+  }
+}
+
 #video-modal {
   .modal-content {
     width: 780px;
@@ -1115,7 +1138,8 @@ footer ul.footerleft {
     .estimation-services,
     .our-customers,
     .other-products,
-    .contact-us {
+    .contact-us,
+    .about-us {
       h3 {
         display: inline-block;
         font-size: 40px;
@@ -1188,6 +1212,16 @@ footer ul.footerleft {
     .estimation-services {
       .service-info {
         margin: 0 0 40px 0;
+      }
+    }
+
+    .about-us {
+      h5 {
+        margin: 15px 0;
+      }
+      p {
+        margin-top: 0;
+        text-align: justify;
       }
     }
 
@@ -1356,7 +1390,8 @@ footer ul.footerleft {
     .product-pricing,
     .estimation-services,
     .our-customers,
-    .other-products {
+    .other-products,
+    .about-us {
       h3 {
         label {
           margin: 5px 0 0;
@@ -1493,6 +1528,19 @@ footer ul.footerleft {
               right: -20px;
             }
           }
+        }
+      }
+    }
+
+    .about-us {
+      .founder-image {
+        .contact-grey-box {
+          height: calc(100vw - 55px);
+          width: calc(100vw - 55px);
+        }
+        .grey-yellow-box {
+          height: calc(100vw - 55px);
+          width: calc(100vw - 55px);
         }
       }
     }
@@ -1813,10 +1861,12 @@ footer ul.footerleft {
 
 .about-us{
   margin-top: 100px;
+  margin-bottom: 150px;
   .line{
     margin-bottom: 20px;
   }
   .primary-part{
+    color: #3C3C3C;
     font-size: 70px;
     font-weight: bold;
     line-height: 40px;
@@ -1826,9 +1876,11 @@ footer ul.footerleft {
     width: 324px;
     border-radius: 4px;
     background-color: #ECECEC;
-    position: relative;
     float: right;
     z-index: auto;
+  }
+  .founder-image{
+    position: relative;
   }
   .grey-yellow-box{
     height: 325px;
@@ -1840,13 +1892,11 @@ footer ul.footerleft {
     z-index: 1;
     top: 23px;
     right: 39px;
-    float: right;
-  }
+    }
   .decription{
     color: #3C3C3C;
     font-size: 18px;
     line-height: 28px;
-    padding-top: 52px;
   }
   h4{
     color: #E5B642;
@@ -1879,6 +1929,25 @@ footer ul.footerleft {
     margin-top: 70px;
   }
 }
+
+//Slider css
+
+ .customers-slider{
+   width: 100%;
+   .slide {
+     display: inline-block;
+     background-color: #fff;
+     padding: 15px;
+     margin-right: 20px;
+     margin-top: 20px;
+     border-radius: 5px;
+     box-shadow: 1px 3px 7px #868686;
+   }
+ }
+
+//slider css end
+
+
 
 // Mobile Devices Only
 @media screen and (max-width: 767px) {
@@ -2023,6 +2092,7 @@ footer ul.footerleft {
       margin-bottom: 0px;
       padding-bottom: 77px;
       padding-left: 8px;
+      color: #3C3C3C;
     }
     .services-info{
       font-size: 17px;
@@ -2126,8 +2196,47 @@ footer ul.footerleft {
     }
   }
   .about-us{
+    h4{
+      font-size: 30px;
+    }
     .primary-part{
       font-size: 40px;
+
+    }
+    .decription{
+      font-size: 14px;
+      text-align: justify;
+      padding-top: 35px;
+    }
+    p{
+      font-size: 14px;
+      text-align: justify;
+    }
+    .contact-grey-box{
+      height: 270px;
+      margin-left: 17px;
+      width: 270px;
+    }
+    .grey-yellow-box{
+      height: 270px;
+      left: 16px;
+      width: 266px;
+      top: 0;
+      right:0;
+    }
+    h5{
+      padding-top: 0;
+    }
+    .about-founder{
+      order: 2;
+      margin-top: 30px;
+    }
+    .founder-image{
+      order: 1;
+    }
+    .founder-row{
+      display: flex;
+      flex-direction: column;
     }
   }
 }
@@ -2225,7 +2334,7 @@ footer ul.footerleft {
   }
   .about-us{
     .description{
-      font-size: 16px;
+      font-size: 14px;
     }
     .contact-grey-box{
       height: 280px;
@@ -2237,9 +2346,8 @@ footer ul.footerleft {
       width: 275px;
     }
     p{
-      font-size: 16px;
+      font-size: 14px;
     }
-
   }
 }
 

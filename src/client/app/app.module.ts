@@ -5,10 +5,11 @@ import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRequestOptions, LoaderService, MessageService, SessionStorageService, ThemeChangeService,
   BaseService, CommonService } from './shared/index';
 import { ContactService } from './framework/dashboard/contact/contact.service';
+import { ContactService1 } from  './framework/home-page/home-page.service';
 import { ActivateUserComponent } from './framework/registration/activate-user/activate-user.component';
 import { ActiveUserService } from './framework/registration/activate-user/activate-user.service';
 import { RedirectRecruiterDashboardService } from './user/services/redirect-dashboard.service';
@@ -25,14 +26,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ValidationService} from './shared/customvalidations/validation.service';
 import {ErrorService} from './shared/services/error.service';
 import {UsageTrackingService} from './build-info/framework/usage-tracking.service';
-import {CreateProjectModule} from "./build-info/framework/create-project/create-project.module";
+import {CreateProjectModule} from './build-info/framework/create-project/create-project.module';
 import {DashboardModule} from './framework/dashboard/dashboard.module';
-import {BuildingModule} from "./build-info/framework/project/building/building.module";
-import {ResetPasswordModule} from "./framework/login/forgot-password/reset-password/reset-password.module";
-import {CreateBuildingModule} from "./build-info/framework/project/building/create-building/create-building.module";
+import {BuildingModule} from './build-info/framework/project/building/building.module';
+import {ResetPasswordModule} from './framework/login/forgot-password/reset-password/reset-password.module';
+import {CreateBuildingModule} from './build-info/framework/project/building/create-building/create-building.module';
 import {LoginModule} from './framework/login/login.module';
 import {CandidateSignUpModule} from './framework/registration/candidate-sign-up/candidate-sign-up.module';
-import {ForgotPasswordModule} from "./framework/login/forgot-password/forgot-password.module";
+import {ForgotPasswordModule} from './framework/login/forgot-password/forgot-password.module';
 
 @NgModule({
   imports: [
@@ -71,6 +72,7 @@ import {ForgotPasswordModule} from "./framework/login/forgot-password/forgot-pas
       useValue: '<%= APP_BASE %>'
     },
     ContactService,
+    ContactService1,
     ActiveUserService,
     RedirectRecruiterDashboardService,
     SharedService,

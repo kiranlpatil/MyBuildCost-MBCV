@@ -404,7 +404,7 @@
 
       <div class="container">
         <h4>Get the lowest quote for estimation</h4>
-        <button type="button" class="btn btn-lg estimation-enquire-btn">ENQUIRE NOW</button>
+        <button type="button" (click)="scrollToSection(contactUsSection)" class="btn btn-lg estimation-enquire-btn">ENQUIRE NOW</button>
       </div>
 
     </section>
@@ -425,7 +425,31 @@
         </div>
       </div>
 
-      <div class="tabs-wrapper">
+      <div class="container customers-slider">
+        <div class="row">
+          <img src="./assets/build-info/home-page/logo-1.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-2.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-3.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-4.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-5.png" class="slide" alt="">
+        </div>
+        <div class="row">
+          <img src="./assets/build-info/home-page/logo-6.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-7.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-8.png"  class="slide"alt="">
+          <img src="./assets/build-info/home-page/logo-9.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-10.png" class="slide" alt="">
+        </div>
+        <div class="row">
+          <img src="./assets/build-info/home-page/logo-11.png"  class="slide"alt="">
+          <img src="./assets/build-info/home-page/logo-12.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-13.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-14.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-15.png" class="slide" alt="">
+        </div>
+      </div>
+
+      <!--<div class="tabs-wrapper">
         <div class="customer-tabs-container">
           <div class="container">
             <div class="row">
@@ -452,7 +476,7 @@
           </div>
         </div>
 
-        <div class="container">
+       <div class="container">
           <div class="row">
             <div class="col-md-12">
               <div class="tab-content">
@@ -509,7 +533,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </section>
   </section>
 
@@ -551,10 +575,14 @@
             </p>
             <div class="app-links">
               <span class="store-image">
-                <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                <a href="https://play.google.com/store/apps/details?id=com.bigslice.RateAnalysisProVersion" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                </a>
               </span>
               <span class="store-image">
-                <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                <a href="https://apps.apple.com/us/app/rate-analysis/id1436965243" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                </a>
               </span>
             </div>
           </div>
@@ -571,10 +599,14 @@
             </p>
             <div class="app-links">
               <span class="store-image">
-                <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                <a href="https://play.google.com/store/apps/details?id=com.bigslice.CivilCalculator&hl=en" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                </a>
               </span>
               <span class="store-image">
-                <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                <a href="https://apps.apple.com/us/app/id952975707" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                </a>
               </span>
             </div>
           </div>
@@ -591,10 +623,14 @@
             </p>
             <div class="app-links">
               <span class="store-image">
-                <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                <a href="https://play.google.com/store/apps/details?id=com.bigslice.MaterialAnalysis&hl=en" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                </a>
               </span>
               <span class="store-image">
-                <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                <a href="https://apps.apple.com/in/app/material-analysis/id1101124989" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                </a>
               </span>
             </div>
           </div>
@@ -604,7 +640,7 @@
     </div>
   </section>
 
-  <section class="contact-us" #contactUsSection>
+  <section class="contact-us">
     <div class="container">
       <h3>
         <span class="line"></span>
@@ -640,19 +676,19 @@
             </div>
           </div>
           <div class="form-right">
-            <form>
-              <div class="col-md-8 col-md-offset-1">
+            <form class [formGroup]="contactUsForm" (submit)="onSubmit()">
+            <div class="col-md-8 col-md-offset-1">
 
                 <div class="form-group">
-                  <input type="email" id="email1" class="form-control" placeholder="Email iD*"/>
+                    <input type="email" formControlName="emailId" [(ngModel)]="contactUs.emailId" id="email1" class="form-control" placeholder="Email iD*"/>
                 </div>
 
                 <div class="form-group">
-                  <input type="text" id="number1" class="form-control" placeholder="Contact Number*"/>
+                  <input type="text" formControlName="contactNumber" [(ngModel)]="contactUs.contactNumber" id="number1" class="form-control" placeholder="Contact Number*"/>
                 </div>
 
                 <div class="form-group">
-                  <input type="text" id="company-name1" class="form-control" placeholder="Company Name*"/>
+                  <input type="text" formControlName="companyName" [(ngModel)]="contactUs.companyName" id="company-name1" class="form-control" placeholder="Company Name*"/>
                 </div>
               </div>
               <div class="col-md-11 col-md-offset-1">
@@ -660,7 +696,7 @@
                   <label class="col-xs-12 no-padding form-control"> Where do you want to send this lead? </label>
                   <div class="toggleswitch">
                     <div class="radio-button">
-                      <input id="opt_a" name="option" type="radio" value="opt_a">
+                      <input id="opt_a" type="radio"  value="Support Team"  formControlName="type" [(ngModel)]="contactUs.type">
                       <label for="opt_a" class="r-btn">
                         <img alt="" height="19" src="./assets/build-info/home-page/contactform-support.svg">
                         <span> Support team </span>
@@ -668,7 +704,7 @@
                     </div>
 
                     <div class="radio-button">
-                      <input checked="checked" id="opt_b" name="option" type="radio" value="opt_b">
+                      <input checked="checked" id="opt_b" type="radio" value="Sales" formControlName="type" [(ngModel)]="contactUs.type">
                       <label for="opt_b" class="r-btn">
                         <img alt="" height="22" src="./assets/build-info/home-page/contactform-sales.svg">
                         <span> Sales </span>
@@ -676,7 +712,7 @@
                     </div>
 
                     <div class="radio-button">
-                      <input id="opt_c" name="option" type="radio" value="opt_c">
+                      <input id="opt_c" type="radio" value="Estimation Service" formControlName="type" [(ngModel)]="contactUs.type">
                       <label for="opt_c" class="r-btn">
                         <img alt="" height="19" src="./assets/build-info/home-page/contactform-estimate.svg">
                         <span> Estimation services </span>
@@ -687,7 +723,7 @@
               </div>
 
               <div class="col-xs-12 text-left col-md-offset-1">
-                <button class="btn btn-primary">SUBMIT</button>
+                <button class="btn btn-primary" type="submit">SUBMIT</button>
               </div>
 
             </form>
@@ -700,11 +736,13 @@
 
   <section class="about-us" #aboutusSection>
     <div class="container">
-      <span class="line"></span>
-      <span class="primary-part">
+      <h3>
+        <span class="line"></span>
+        <span class="primary-part">
           About
-          <br><label>Us</label>
+          <label>Us</label>
         </span>
+      </h3>
       <p class="decription">
         Big Slice Technologies is the leading company in India engaged in development of B2B utility tools for the
         construction industry. As compared to other industries, very fewer amounts are spent on automation and software
@@ -717,7 +755,7 @@
       </p>
     </div>
     <div class="container">
-      <div class="row">
+      <div class="row founder-row">
         <div class="col-md-7 col-sm-7 about-founder">
           <h4>About the founder</h4>
           <h5>
