@@ -404,7 +404,7 @@
 
       <div class="container">
         <h4>Get the lowest quote for estimation</h4>
-        <button type="button" class="btn btn-lg estimation-enquire-btn">ENQUIRE NOW</button>
+        <button type="button" (click)="scrollToSection(contactUsSection)" class="btn btn-lg estimation-enquire-btn">ENQUIRE NOW</button>
       </div>
 
     </section>
@@ -736,11 +736,13 @@
 
   <section class="about-us" #aboutusSection>
     <div class="container">
-      <span class="line"></span>
-      <span class="primary-part">
+      <h3>
+        <span class="line"></span>
+        <span class="primary-part">
           About
-          <br><label>Us</label>
+          <label>Us</label>
         </span>
+      </h3>
       <p class="decription">
         Big Slice Technologies is the leading company in India engaged in development of B2B utility tools for the
         construction industry. As compared to other industries, very fewer amounts are spent on automation and software

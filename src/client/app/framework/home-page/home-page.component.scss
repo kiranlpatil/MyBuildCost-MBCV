@@ -194,6 +194,7 @@
 
   .users-guide {
     margin-top: 60px;
+    margin-bottom: 60px;
     .guide-blocks {
       & > div[class*="col-"] {
         padding-left: 20px;
@@ -243,7 +244,6 @@
 
   .product-pricing {
     position: relative;
-    padding-top: 60px;
     z-index: 111;
 
     h3 {
@@ -814,6 +814,28 @@
   }
 }
 
+.about-us {
+  h3 {
+    color: $homepage-heading;
+    font-size: 80px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+
+    label {
+      color: $homepage-heading-subtext;
+      float: left;
+      font-size: 40px;
+      font-weight: 700;
+      width: 100%;
+    }
+  }
+
+  .decription {
+    margin-top: 90px;
+  }
+}
+
 #video-modal {
   .modal-content {
     width: 780px;
@@ -1116,7 +1138,8 @@ footer ul.footerleft {
     .estimation-services,
     .our-customers,
     .other-products,
-    .contact-us {
+    .contact-us,
+    .about-us {
       h3 {
         display: inline-block;
         font-size: 40px;
@@ -1189,6 +1212,16 @@ footer ul.footerleft {
     .estimation-services {
       .service-info {
         margin: 0 0 40px 0;
+      }
+    }
+
+    .about-us {
+      h5 {
+        margin: 15px 0;
+      }
+      p {
+        margin-top: 0;
+        text-align: justify;
       }
     }
 
@@ -1357,7 +1390,8 @@ footer ul.footerleft {
     .product-pricing,
     .estimation-services,
     .our-customers,
-    .other-products {
+    .other-products,
+    .about-us {
       h3 {
         label {
           margin: 5px 0 0;
@@ -1494,6 +1528,19 @@ footer ul.footerleft {
               right: -20px;
             }
           }
+        }
+      }
+    }
+
+    .about-us {
+      .founder-image {
+        .contact-grey-box {
+          height: calc(100vw - 55px);
+          width: calc(100vw - 55px);
+        }
+        .grey-yellow-box {
+          height: calc(100vw - 55px);
+          width: calc(100vw - 55px);
         }
       }
     }
@@ -1850,7 +1897,6 @@ footer ul.footerleft {
     color: #3C3C3C;
     font-size: 18px;
     line-height: 28px;
-    padding-top: 52px;
   }
   h4{
     color: #E5B642;
