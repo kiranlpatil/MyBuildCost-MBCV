@@ -54,6 +54,10 @@ export class HomePageComponent implements OnInit {
       companyName: ['', [ValidationService.requireCompanyNameValidator]],
       type: ['', [ValidationService.requireContactTypeValidator]]
     });
+
+
+
+
   }
 
   onSubmit() {
@@ -91,3 +95,6 @@ export class HomePageComponent implements OnInit {
     this.contacted = false;
   }
 }
+
+
+

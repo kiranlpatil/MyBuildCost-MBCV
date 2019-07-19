@@ -195,6 +195,7 @@
   .users-guide {
     margin-top: 60px;
     margin-bottom: 60px;
+
     .guide-blocks {
       & > div[class*="col-"] {
         padding-left: 20px;
@@ -318,6 +319,7 @@
     margin: 68px auto 70px;
     max-width: 466px;
     padding: 55px 37px 45px;
+
     .card-list {
       color: $homepage-heading;
       font-size: 20px;
@@ -353,6 +355,7 @@
       .btn {
         color: $homepage-heading;
         font-size: 14px;
+        background-color: #FFD15E;
         font-weight: 700;
         height: 42px;
         padding: 0 15px;
@@ -436,11 +439,15 @@
 
     .btn-primary {
       font-size: 14px;
+      background-color: #FFD15E;
       font-weight: bold;
       height: 42px;
       text-transform: uppercase;
       padding: 6px 20px;
       width: auto;
+      &:hover{
+        background-color: #ffd64d;
+      }
     }
   }
 
@@ -487,6 +494,7 @@
       position: relative;
       margin: 40px 0 120px 0;
     }
+
     .estimation-icons {
       height: 60px;
     }
@@ -1219,6 +1227,7 @@ footer ul.footerleft {
       h5 {
         margin: 15px 0;
       }
+
       p {
         margin-top: 0;
         text-align: justify;
@@ -1399,10 +1408,12 @@ footer ul.footerleft {
       }
     }
 
+
     .other-products {
       h3 {
         margin: 20px 0;
       }
+
       .big-slice-logo {
         img {
           margin: 0 auto;
@@ -1538,6 +1549,7 @@ footer ul.footerleft {
           height: calc(100vw - 55px);
           width: calc(100vw - 55px);
         }
+
         .grey-yellow-box {
           height: calc(100vw - 55px);
           width: calc(100vw - 55px);
@@ -1579,6 +1591,11 @@ footer ul.footerleft {
     .copyright-label {
       margin: 0;
       padding: 20px;
+    }
+  }
+  .customers-slider {
+    .slide {
+      margin-left: 20px;
     }
   }
 }
@@ -1702,12 +1719,15 @@ footer ul.footerleft {
     text-align: left;
     line-height: 44px;
   }
-  .estimation-enquire-btn{
+
+  .estimation-enquire-btn {
     border-radius: 24.5px;
     background-color: #FFFFFF;
     border: none;
+    font-weight: bold;
   }
-  h4{
+
+  h4 {
     padding-top: 110px;
     padding-bottom: 39px;
     color: #3C3C3C;
@@ -1724,7 +1744,7 @@ footer ul.footerleft {
     line-height: 1;
     margin-left: -160px;
     position: relative;
-    padding: 0;
+    padding: 10px;
 
     &:before {
       content: '';
@@ -1739,10 +1759,13 @@ footer ul.footerleft {
       transform: translateX(-50%) translateY(-100%);
       -webkit-transform: translateX(-50%);
     }
+
+    &:hover {
+      background-color: #ffffff;
+      transition: all 1s;
+    }
   }
 }
-
-
 
 
 .why-estimation, .outsource-estimation, .cost-estimation {
@@ -1751,12 +1774,13 @@ footer ul.footerleft {
   h3 {
     font-size: 50px;
     padding-left: 50px;
-    line-height: 105px;
+    line-height: 75px;
+    padding-bottom: 22px;
   }
 
   ul li {
-    font-size: 21px;
-    line-height: 44px;
+    font-size: 19px;
+    line-height: 38px;
   }
 
   .estimation-modal-dialog {
@@ -1764,6 +1788,7 @@ footer ul.footerleft {
     transform: translate(0, 0);
     width: 1250px;
     padding-bottom: 40px;
+
     .modal-body {
       .estimation-modal-close {
         float: right;
@@ -1794,7 +1819,8 @@ footer ul.footerleft {
     .estimation-inner-lists {
       list-style: none;
       padding-left: 50px;
-      &>li:before{
+
+      & > li:before {
         content: "\2022";
         color: #FFD15E;
         font-weight: bold;
@@ -1819,6 +1845,7 @@ footer ul.footerleft {
       position: relative;
     }
   }
+
   /*.modal {
     padding: 60px;
 
@@ -1836,20 +1863,20 @@ footer ul.footerleft {
 
 }
 
-.why-estimation .modal-content{
-  background:#ffffff url(./assets/build-info/home-page/question.svg) no-repeat right top;
+.why-estimation .modal-content {
+  background: #ffffff url(./assets/build-info/home-page/question.svg) no-repeat right top;
 }
 
-.outsource-estimation .modal-content{
-  background:#ffffff url(./assets/build-info/home-page/Handbackground.svg) no-repeat right top;
+.outsource-estimation .modal-content {
+  background: #ffffff url(./assets/build-info/home-page/Handbackground.svg) no-repeat right top;
 }
 
-.cost-estimation .modal-content{
-  background:#ffffff url(./assets/build-info/home-page/CombinedShape.svg) no-repeat right top;
+.cost-estimation .modal-content {
+  background: #ffffff url(./assets/build-info/home-page/CombinedShape.svg) no-repeat right top;
 }
 
 
-.middleline{
+.middleline {
   height: 5px;
   width: 96px;
   background-color: #FFD15E;
@@ -1859,19 +1886,22 @@ footer ul.footerleft {
 
 /*About us section*/
 
-.about-us{
+.about-us {
   margin-top: 100px;
   margin-bottom: 150px;
-  .line{
+
+  .line {
     margin-bottom: 20px;
   }
-  .primary-part{
+
+  .primary-part {
     color: #3C3C3C;
     font-size: 70px;
     font-weight: bold;
     line-height: 40px;
   }
-  .contact-grey-box{
+
+  .contact-grey-box {
     height: 329px;
     width: 324px;
     border-radius: 4px;
@@ -1879,10 +1909,12 @@ footer ul.footerleft {
     float: right;
     z-index: auto;
   }
-  .founder-image{
+
+  .founder-image {
     position: relative;
   }
-  .grey-yellow-box{
+
+  .grey-yellow-box {
     height: 325px;
     width: 324px;
     padding: 15px;
@@ -1892,13 +1924,15 @@ footer ul.footerleft {
     z-index: 1;
     top: 23px;
     right: 39px;
-    }
-  .decription{
+  }
+
+  .decription {
     color: #3C3C3C;
     font-size: 18px;
     line-height: 28px;
   }
-  h4{
+
+  h4 {
     color: #E5B642;
     font-size: 40px;
     text-align: left;
@@ -1906,7 +1940,8 @@ footer ul.footerleft {
     line-height: 55px;
     margin: 0;
   }
-  h5{
+
+  h5 {
     color: #3C3C3C;
     padding-top: 20px;
     text-align: left;
@@ -1914,39 +1949,42 @@ footer ul.footerleft {
     line-height: 27px;
     font-weight: normal;
   }
-  p{
+
+  p {
     color: #3C3C3C;
     font-size: 18px;
     text-align: left;
     line-height: 28px;
   }
-  label{
+
+  label {
     color: #E5B642;
     font-size: 40px;
     font-weight: bold;
   }
-  .founder-image, .about-founder{
+
+  .founder-image, .about-founder {
     margin-top: 70px;
   }
 }
 
 //Slider css
 
- .customers-slider{
-   width: 100%;
-   .slide {
-     display: inline-block;
-     background-color: #fff;
-     padding: 15px;
-     margin-right: 20px;
-     margin-top: 20px;
-     border-radius: 5px;
-     box-shadow: 1px 3px 7px #868686;
-   }
- }
+.customers-slider {
+  width: 100%;
+
+  .slide {
+    display: inline-block;
+    background-color: #fff;
+    padding: 15px;
+    margin-right: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 3px 7px #868686;
+  }
+}
 
 //slider css end
-
 
 
 // Mobile Devices Only
@@ -2034,6 +2072,7 @@ footer ul.footerleft {
         margin-bottom: 25px;
       }
     }
+
     .product-pricing {
       padding-top: 10px;
     }
@@ -2045,98 +2084,119 @@ footer ul.footerleft {
     }
   }
 
-  .product-features{
+  .product-features {
     margin-top: 50px;
-    h2{
+
+    h2 {
       font-size: 50px;
     }
-    h3{
+
+    h3 {
       left: 0;
       font-size: 27px;
       line-height: 20px;
     }
-    .line{
+
+    .line {
       margin-left: 11px;
     }
-    .features{
+
+    .features {
       text-align: center;
       font-size: 14px;
     }
+
     .gray-bg {
       margin-bottom: 50px;
       min-height: auto;
     }
-    h4{
+
+    h4 {
       text-align: center;
       min-height: 0;
       font-size: 16px;
     }
-    p{
+
+    p {
       text-align: center;
       font-size: 14px;
     }
-    .stepsdivider{
+
+    .stepsdivider {
       padding: 0 !important;
 
       img {
         margin: 0 auto 10px;
       }
     }
+
     .description {
       padding-bottom: 30px !important;
     }
   }
-  .estimation-services{
-    .primary-part{
+  .estimation-services {
+    .primary-part {
       font-size: 50px;
       margin-bottom: 0px;
       padding-bottom: 77px;
       padding-left: 8px;
       color: #3C3C3C;
     }
-    .services-info{
+
+    .services-info {
       font-size: 17px;
       position: relative;
       padding-left: 8px;
       top: 30px;
     }
-    .estimation-services-service{
+
+    .estimation-services-service {
       margin-top: 60px;
       text-align: center;
-      p{
+
+      p {
         text-align: center;
         font-size: 20px;
         padding-left: 8px;
         line-height: 30px;
         padding-top: 30px;
       }
-      .estimation-learnmore{
+
+      .estimation-learnmore {
         margin-left: 0;
         margin-top: 8px;
         font-size: 16px;
+        &:hover {
+          background-color: #ffffff;
+        }
       }
-      img{
+
+      img {
         margin: 0 auto;
       }
-      .estimation-setp1{
+
+      .estimation-setp1 {
         margin-top: -40px;
       }
     }
   }
-  .costcontrol-header{
+  .costcontrol-header {
     h3 {
       padding: 0;
       text-align: center;
-      &:before{
+
+      &:before {
         right: 8px;
       }
     }
-    p{
+
+    p {
       padding-left: 8px;
     }
   }
-  .why-estimation, .outsource-estimation, .cost-estimation{
+  .why-estimation, .outsource-estimation, .cost-estimation {
     padding: 0;
+
     .estimation-modal-dialog {
       top: 0;
       transform: translate(0, 0);
@@ -2190,80 +2250,106 @@ footer ul.footerleft {
           }
         }
       }
+
       ol {
         margin-top: 10px;
       }
     }
   }
-  .about-us{
-    h4{
+  .about-us {
+    h4 {
+      font-size: 30px;
+      padding-top: 10px;
+    }
+
+    label {
       font-size: 30px;
     }
-    .primary-part{
+
+    .primary-part {
       font-size: 40px;
 
     }
-    .decription{
+
+    .decription {
       font-size: 14px;
       text-align: justify;
       padding-top: 35px;
     }
-    p{
+
+    p {
       font-size: 14px;
       text-align: justify;
     }
-    .contact-grey-box{
+
+    .contact-grey-box {
       height: 270px;
       margin-left: 17px;
       width: 270px;
+      margin-top: -40px;
     }
-    .grey-yellow-box{
+
+    .grey-yellow-box {
       height: 270px;
       left: 16px;
       width: 266px;
-      top: 0;
-      right:0;
+      top: -19px;
+      right: 0;
     }
-    h5{
+
+    h5 {
       padding-top: 0;
     }
-    .about-founder{
+
+    .about-founder {
       order: 2;
       margin-top: 30px;
     }
-    .founder-image{
+
+    .founder-image {
       order: 1;
     }
-    .founder-row{
+
+    .founder-row {
       display: flex;
       flex-direction: column;
     }
   }
+  .footer {
+    margin-top: -110px;
+  }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px){
-  .product-features{
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .product-features {
     margin-top: 60px;
-    h4{
+
+    h4 {
       font-size: 16px;
       min-height: auto;
     }
-    p{
+
+    p {
       font-size: 14px;
       line-height: 26px;
     }
-    .features{
+
+    .features {
       font-size: 14px;
     }
+
     .line {
       margin-left: 20px;
     }
+
     h3 {
       margin-left: 110px;
 
     }
+
     .stepsdivider {
       padding-top: 60px;
+
       &:last-child {
         .gray-bg {
           min-height: auto;
@@ -2276,81 +2362,90 @@ footer ul.footerleft {
     }
   }
 
-  .costcontrol-header{
+  .costcontrol-header {
     h3:before {
       right: 7px;
     }
   }
 
-  .estimation-services{
-    .estimation-services-service{
+  .estimation-services {
+    .estimation-services-service {
       margin-top: 60px;
-      p{
+
+      p {
         text-align: center;
       }
-      .estimation-learnmore{
+
+      .estimation-learnmore {
         margin-left: 0;
         margin-top: 8px;
       }
-      img{
+
+      img {
         margin: 0 auto;
       }
     }
   }
-  .why-estimation, .outsource-estimation, .cost-estimation{
-    .estimation-modal-dialog{
+  .why-estimation, .outsource-estimation, .cost-estimation {
+    .estimation-modal-dialog {
       top: 0;
       transform: translate(0, 0);
       width: 600px;
       padding-bottom: 40px;
       margin-left: 90px;
+
       h4 {
         font-size: 18px;
         padding-top: 42px;
         line-height: 26px;
         padding-left: 0;
       }
+
       .estimation-inner-lists {
         padding-left: 22px;
       }
-      .estimation-modal-close{
+
+      .estimation-modal-close {
         right: 20px;
         top: 9px;
       }
     }
   }
-  .middleline{
+  .middleline {
     margin-left: 250px;
   }
-  .outsource-estimation{
-    li:before{
+  .outsource-estimation {
+    li:before {
       left: -12px;
       font-size: 30px;
     }
-    h3{
+
+    h3 {
       line-height: 78px;
       padding-top: 30px;
     }
   }
-  .about-us{
-    .description{
+  .about-us {
+    .description {
       font-size: 14px;
     }
-    .contact-grey-box{
+
+    .contact-grey-box {
       height: 280px;
       width: 278px;
     }
-    .grey-yellow-box{
+
+    .grey-yellow-box {
       height: 278px;
       padding: 15px;
       width: 275px;
     }
-    p{
+
+    p {
       font-size: 14px;
     }
   }
 }
-
 
 
 
