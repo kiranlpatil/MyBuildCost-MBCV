@@ -9,7 +9,9 @@ class Messages {
   //Email subject
   public static EMAIL_SUBJECT_REGISTRATION: string = ' Registration successful';
   public static EMAIL_SUBJECT_CHANGE_EMAILID: string = 'Confirmation for change in email address.';
-  public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'Confirmation of user contact.';
+  public static EMAIL_SUBJECT_ESTIMATION: string = 'MBC : Request for estimation services';
+  public static EMAIL_SUBJECT_SALES: string = 'MBC : Request for sales services';
+  public static EMAIL_SUBJECT_SUPPORT: string = 'MBC : Support issue';
   public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'Reset your password';
   public static EMAIL_SUBJECT_CANDIDATE_REGISTRATION: string = 'Welcome to My Build Cost, an online solution for cost estimation of your construction projects.';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';

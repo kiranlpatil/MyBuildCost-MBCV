@@ -106,6 +106,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER = 'Please provide a valid mobile number.';
   public static MSG_ERROR_VALIDATION_PASSWORD = 'Password must be alphanumeric having minimum 6 characters';
   public static MSG_ERROR_VALIDATION_PIN_NUMBER = 'Pin code should not be greater than 20 characters.';
+  public static MSG_ERROR_VALIDATION_CONTACT_TYPE_REQUIRED = 'This field can\'t be left unselected.';
   public static MSG_ERROR_VALIDATION_ITEM_NAME_REQUIRED = 'Item name should not be blank. \nFill it.';
 
   //Project validation messages
@@ -295,6 +296,7 @@ export class NavigationRoutes {
   public static FAILURE: string = 'failure';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
+  public static APP_HOME: string = '/home';
   public static VERIFY_PHONE: string = '/verify-phone';
 
 
@@ -365,6 +367,7 @@ export class API {
   public static NOTIFICATION = 'notification';
   public static SEND_NOTIFICATION_TO_RECRUITER = 'notify_recruiter';
   public static SEND_MAIL = 'sendmail';
+  public static CONTACT_SEND_MAIL = 'addpoolcars/sendMail';
   public static SEND_TO_ADMIN_MAIL = 'sendmailtoadmin';
   public static USER_PROFILE = 'user';
   public static CANDIDATE_PROFILE = 'user';

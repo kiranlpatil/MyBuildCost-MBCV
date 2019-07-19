@@ -1,0 +1,1031 @@
+<div class="home-page">
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="visible-xs visible-sm call-login-btns">
+          <div class="call-btn-item">
+            <div class="call-btn-wrapper">
+              <a (click)="scrollToSection(contactUsSection)" class="call-btn"></a>
+            </div>
+          </div>
+          <div class="login-link-item"><a (click)="addClick();" class="login-link">login</a></div>
+        </div>
+        <a class="navbar-brand">
+          <img alt="My Build Cost Logo" class="logo-image" src="./assets/build-info/home-page/buildinfo-logo.png">
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a (click)="scrollToSection(productFeaturesSection)">Features</a></li>
+          <li><a (click)="scrollToSection(usersGuideSection)">User's guide</a></li>
+          <li><a (click)="scrollToSection(pricingSection)">Pricing</a></li>
+          <li><a (click)="scrollToSection(estimationServicesSection)">Estimation Services</a></li>
+          <li><a (click)="scrollToSection(customersSection)">Customers</a></li>
+          <li><a (click)="scrollToSection(otherProductsSection)">Other Products</a></li>
+          <li><a (click)="scrollToSection(aboutusSection)">About us</a></li>
+          <!--<li>
+            <a href="../navbar/">
+              <img alt="" class="logo-image" src="./assets/build-info/header/buildinfo-logo.png">
+            </a>
+          </li>-->
+          <li class="hidden-xs hidden-sm call-btn-item">
+            <div class="call-btn-wrapper">
+              <a (click)="scrollToSection(contactUsSection)" class="call-btn"></a>
+            </div>
+          </li>
+          <li class="hidden-xs hidden-sm login-link-item"><a (click)="addClick();" class="login-link">login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container costcontrol-header">
+    <div class="row video-section-row">
+      <div class="col-sm-12 col-md-6">
+        <div class="left-row">
+          <ul>
+            <li class="fadein-sub-element">Budget</li>
+            <li class="fadein-sub-element">Estimate</li>
+            <li class="fadein-sub-element">Control</li>
+          </ul>
+        </div>
+        <h2> Your Construction Cost </h2>
+        <h3 class="text-left">What is the project cost?</h3>
+        <p class="text-left">
+          This is the first question from the management that comes at the time of starting a new project.
+          Answering this incorrectly at the starting phase will surely land to cost overruns and time delays.
+          Any successful project needs well derived quantity and cost estimation. My Build Cost does exactly the
+          same!
+        </p>
+        <div class="request-btn">
+          <button>
+            <span class="cricle">
+              <img height="19" src="./assets/build-info/home-page/landingpage-user.svg"/>
+            </span>
+            <span class="btn-label" (click)="scrollToSection(contactUsSection)">Request for online demo</span>
+          </button>
+        </div>
+
+        <div class="start-trial-btn">
+          <button (click)="onSignUp();">FREE TRIAL</button>
+          <span>No obligation. No card details required.</span>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 video-img">
+        <img alt="" data-toggle="modal" data-target="#video-modal" width="100%"
+             src="./assets/build-info/home-page/landing-img.svg">
+      </div>
+    </div>
+  </section>
+
+  <section class="product-features" #productFeaturesSection>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>
+            <span class="line"></span>
+            <span class="primary-part">
+              Features
+              <label>of My Build Cost</label>
+            </span>
+          </h3>
+
+          <p class="description">
+            My Build Cost is the only Pre-construction platform to budget & estimate your project cost.
+            It is a solid tool to control your project cost within your budget. Now with My Build Cost available
+            as SaaS (Software as a Service), it’s time to say good bye to complicated spreadsheets.
+          </p>
+        </div>
+      </div>
+
+      <div class="row stepsdivider">
+        <div class="col-md-4 col-sm-4 text-left">
+          <img src="./assets/build-info/home-page/step-1.svg" class="img-responsive" alt="">
+          <div class="gray-bg">
+            <h4>
+              Inbuilt technical data | No extensive data entry is required
+            </h4>
+            <p>
+              My Build Cost is not just a software platform. It has in built Rate Analysis which has been verified
+              on various projects. My Build Cost is a ready to use platform where all cost heads, construction items
+              are already listed along with Rate analysis. You just have to select them & edit if required.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 text-left">
+          <img src="./assets/build-info/home-page/step-2.svg" class="img-responsive" alt="">
+          <div class="gray-bg">
+            <h4>
+              Easy to use, simple, yet powerful
+            </h4>
+            <p>
+              My Build Cost is very user friendly and self explanatory platform. No special training is required.
+              But still if you have any queries, we have provided demo videos for self learning. We also provide
+              online support at no extra cost.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 text-left">
+          <img src="./assets/build-info/home-page/step-3.svg" class="img-responsive" alt="">
+          <div class="gray-bg">
+            <h4>
+              Generates budget at a click!
+            </h4>
+            <p>
+              You just need to enter few project details and My Build Cost provides you the budget divided
+              into around 80 cost heads.You can then edit & freeze it as per your project location and economics.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row stepsdivider">
+        <div class="col-md-4 col-sm-4 text-left">
+          <img src="./assets/build-info/home-page/step-4.svg" class="img-responsive" alt="">
+          <div class="gray-bg">
+            <h4>
+              Matches your estimate with the budget
+            </h4>
+            <p>
+              Once your budget is frozen, My Build Cost allows you to do reverse engineering & match your
+              estimate with the budget.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 text-left">
+          <img src="./assets/build-info/home-page/step-5.svg" class="img-responsive" alt="">
+          <div class="gray-bg">
+            <h4>
+              Controls the project cost efficiently
+            </h4>
+            <p>
+              Once your budget is frozen and estimate is matched with the budget, you just need to refer and
+              follow My Build Cost and its reports while purchasing and contract allotting to keep your project
+              cost within the budget.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 text-left">
+          <img src="./assets/build-info/home-page/step-6.svg" class="img-responsive" alt="">
+          <div class="gray-bg">
+            <h4>
+              Access it online from anywhere
+            </h4>
+            <p>
+              My Build Cost is a cloud based web application. You can access it from anywhere on any computer.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row stepsdivider">
+        <div class="col-md-4 col-sm-8 text-center col-md-offset-4 col-sm-offset-2">
+          <img src="./assets/build-info/home-page/step-7.svg" class="img-responsive" alt="">
+          <div class="gray-bg">
+            <h4>
+              Detailed yet simple to read reports
+            </h4>
+            <p>
+              My Build Cost provides various reports about budgeted cost, estimated cost and material take off.
+              Reports are generated automatically at the back end which you can download. These reports are prefect
+              guide to your purchase, contracts and estimation team to control the project cost within the budget.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="users-guide container" #usersGuideSection>
+    <h3>
+      <span class="line"></span>
+      User's guide
+    </h3>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <!--<div class="row guide-blocks">
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Nigeria</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                    gravida at eget metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Greenland</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at
+                    eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Russian Federation</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at
+                    eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Nigeria </h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at
+                    eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <div class="video-img">
+                </div>
+                <div class="caption">
+                  <h4>Greenland</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at
+                    eget
+                    metus.</p>
+                </div>
+              </div>
+            </div>
+          </div>-->
+          <p class="description">
+            We are coming up with self learning videos soon. <br>Till then you can get in touch with our support team.
+            <br>
+            You can also request for an online demo.
+          </p>
+          <button type="button" (click)="scrollToSection(contactUsSection)"
+                  class="btn user-guide-btn">Request for online demo
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="yellow-bg">
+    <section class="product-pricing" #pricingSection>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3>
+              <span class="line"></span>
+              <span class="primary-part">
+                Product
+                <label>pricing</label>
+              </span>
+            </h3>
+
+            <p class="description">
+              My Build Cost is FREE for 15 days trial period. If you wish to continue your subscription
+              after free trial period, following paid package is available.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="pricing-card">
+              <div class="card-icon">
+                <img alt="" height="143" src="./assets/build-info/home-page/building-icon.svg">
+              </div>
+              <div class="price">Rs 3499/-</div>
+              <div class="row card-list">
+                <div class="col-xs-7 col-sm-6 col-sm-offset-1 text-left">No. of Projects</div>
+                <div class="col-xs-4 col-sm-5 text-left">
+                  <span>1</span>
+                </div>
+              </div>
+
+              <div class="row card-list">
+                <div class="col-xs-7 col-sm-6 col-sm-offset-1 text-left">No. of Buildings</div>
+                <div class="col-xs-4 col-sm-5 text-left">
+                  <span>5</span>
+                </div>
+              </div>
+
+              <div class="row card-list">
+                <div class="col-xs-7 col-sm-6 col-sm-offset-1 text-left">Package Duration</div>
+                <div class="col-xs-4 col-sm-5 text-left">
+                  <span>1 year</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <ul class="col-xs-12 padding-top-25 package-details">
+                  <li>No AMC cost</li>
+                  <li>No support/training cost</li>
+                  <li>No software upgradation cost</li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="buy-now-btn">
+                    <button class="btn btn-primary" (click)="onSignUp();">START YOUR FREE TRIAL</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="estimation-services" #estimationServicesSection>
+      <h3>
+        <span class="line"></span>
+        <span class="primary-part">
+          Estimation
+          <label>services</label>
+        </span>
+      </h3>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <div class="service-info">
+              Don't have in house estimation team? No worries!
+              <strong>Our team can provide you the estimates derived from the most advanced take off tools to ensure
+                accuracy. That too at very reasonable fees.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 estimation-services-service">
+            <div class="estimation-icons"><img src="./assets/build-info/home-page/questionmark.svg"
+                                               class="img-responsive center" alt=""></div>
+            <p>
+              <strong>Why</strong> to take our services for estimation?
+            </p>
+            <button type="button" class="btn btn-lg estimation-learnmore" data-target="#modalone" data-toggle="modal">
+              Learn more
+            </button>
+          </div>
+          <div class="col-md-4 col-sm-12 estimation-services-service">
+            <div class="estimation-icons"><img src="./assets/build-info/home-page/hand.svg" class="img-responsive"
+                                               alt=""></div>
+            <p>
+              <strong>Advantages</strong> of outsourcing the estimation services
+            </p>
+            <button type="button" class="btn btn-lg estimation-learnmore" data-target="#modaltwo" data-toggle="modal">
+              Learn more
+            </button>
+          </div>
+          <div class="col-md-4 col-sm-12 estimation-services-service">
+            <div class="estimation-icons"><img src="./assets/build-info/home-page/aim.svg" class="img-responsive"
+                                               alt=""></div>
+            <p>
+              <strong>Scope of work</strong> for estimation services
+            </p>
+            <button type="button" class="btn btn-lg estimation-learnmore" data-target="#modalthree" data-toggle="modal">
+              Learn more
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h4>Get the lowest quote for estimation</h4>
+        <button type="button" (click)="scrollToSection(contactUsSection)" class="btn btn-lg estimation-enquire-btn">
+          ENQUIRE NOW
+        </button>
+      </div>
+
+    </section>
+
+    <section class="our-customers" #customersSection>
+      <div class="container">
+        <h3>
+          <span class="line"></span>
+          <span class="primary-part">
+            Our
+            <label>customers</label>
+          </span>
+        </h3>
+        <div class="row">
+          <div class="col-xs-12 ">
+            <h5> Trusted by leading <span> Developers, Contractors and Architects </span></h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="container customers-slider">
+        <div class="row">
+          <img src="./assets/build-info/home-page/logo-1.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-2.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-3.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-4.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-5.png" class="slide" alt="">
+        </div>
+        <div class="row">
+          <img src="./assets/build-info/home-page/logo-6.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-7.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-8.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-9.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-15.png" class="slide" alt="">
+        </div>
+        <div class="row">
+          <img src="./assets/build-info/home-page/logo-11.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-12.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-13.png" class="slide" alt="">
+          <img src="./assets/build-info/home-page/logo-14.png" class="slide" alt="">
+        </div>
+      </div>
+
+      <!--<div class="tabs-wrapper">
+        <div class="customer-tabs-container">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active">
+                    <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                      <img src="./assets/build-info/home-page/our-customer-default.svg" alt="" class="img-responsive">
+                    </a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                      <img src="./assets/build-info/home-page/our-customer-default.svg" alt="" class="img-responsive">
+                    </a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+                      <img src="./assets/build-info/home-page/our-customer-default.svg" alt="" class="img-responsive">
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="home">
+                  <div class="content-heading">Sandvik Asia Pvt Ltd - Heading 1</div>
+
+                  <div class="content-text-container">
+                    <div class="content-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                      in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="profile">
+                  <div class="content-heading">Sandvik Asia Pvt Ltd - Heading 2</div>
+
+                  <div class="content-text-container">
+                    <div class="content-text">
+                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                      totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                      dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
+                      sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
+                      quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
+                      numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim
+                      ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
+                      ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+                      quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="messages">
+                  <div class="content-heading">Sandvik Asia Pvt Ltd - Heading 3</div>
+
+                  <div class="content-text-container">
+                    <div class="content-text">
+                      But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
+                      born and I will give you a complete account of the system, and expound the actual teachings of the
+                      great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or
+                      avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue
+                      pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone
+                      who loves or pursues or desires to obtain pain of itself, because it is pain, but because
+                      occasionally circumstances occur in which toil and pain can procure him some great pleasure. To
+                      take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain
+                      some advantage from it? But who has any right to find fault with a man who chooses to enjoy a
+                      pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant
+                      pleasure?
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+    </section>
+  </section>
+
+  <section class="other-products" #otherProductsSection>
+    <div class="container">
+      <h3>
+        <span class="line"></span>
+        <span class="primary-part">
+          Other products
+          <label>By Big Slice Technologies Pvt Ltd</label>
+        </span>
+      </h3>
+
+      <div class="big-slice-logo">
+        <img src="./assets/build-info/home-page/big-slice-logo.svg" alt="Big Slice Logo" class="img-responsive"/>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="build-info-section">
+            <a href="http://buildinfo.co.in/" target="_blank">
+              <img alt="" height="129" src="./assets/build-info/home-page/buildingo-logo.svg" class="img-responsive">
+              <h4 class="products-name">
+                Buildinfo.co.in
+              </h4>
+              <p>
+                Informative website for the construction indusrty
+              </p>
+            </a>
+          </div>
+
+          <div class="product-lists">
+            <img alt="" class="product-image" src="./assets/build-info/home-page/rateanalysis-logo.svg">
+            <h4 class="products-name">
+              Rate Analysis
+            </h4>
+            <p>
+              Featuring Rate Analysis of all major
+              Civil and Finishing items with updated
+              material and labour rates
+            </p>
+            <div class="app-links">
+              <span class="store-image">
+                <a href="https://play.google.com/store/apps/details?id=com.bigslice.RateAnalysisProVersion"
+                   target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                </a>
+              </span>
+              <span class="store-image">
+                <a href="https://apps.apple.com/us/app/rate-analysis/id1436965243" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <div class="product-lists">
+            <img alt="" class="product-image" src="./assets/build-info/home-page/mycivilcalc-logo.svg">
+            <h4 class="products-name">
+              My Civil CalC
+            </h4>
+            <p>
+              Everyday calculator with additional
+              unique feature of calculating with units like
+              feet, inch, metre and milimetre
+            </p>
+            <div class="app-links">
+              <span class="store-image">
+                <a href="https://play.google.com/store/apps/details?id=com.bigslice.CivilCalculator&hl=en"
+                   target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                </a>
+              </span>
+              <span class="store-image">
+                <a href="https://apps.apple.com/us/app/id952975707" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <div class="product-lists">
+            <img alt="" class="product-image" src="./assets/build-info/home-page/materialanalysis-logo.svg">
+            <h4 class="products-name">
+              Material Analysis
+            </h4>
+            <p>
+              A FREE app which gives material
+              take offs of all commonly used
+              construction and finishing items.
+            </p>
+            <div class="app-links">
+              <span class="store-image">
+                <a href="https://play.google.com/store/apps/details?id=com.bigslice.MaterialAnalysis&hl=en"
+                   target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/playstore-logo.svg">
+                </a>
+              </span>
+              <span class="store-image">
+                <a href="https://apps.apple.com/in/app/material-analysis/id1101124989" target="_blank">
+                  <img alt="" class="img-responsive" src="./assets/build-info/home-page/appstore-logo.svg">
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact-us" #contactUsSection>
+    <div class="container">
+      <h3>
+        <span class="line"></span>
+        <span class="primary-part">
+          Contact
+          <label>us</label>
+        </span>
+      </h3>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-left">
+            <div class="form-group">
+              <div class="col-xs-12">
+                <img alt="" height="36" src="./assets/build-info/home-page/mobilenumber.svg">
+                <p class="text-center">
+                  +91 9858585588
+                </p>
+              </div>
+              <div class="col-xs-12">
+                <img alt="" height="36" src="./assets/build-info/home-page/mailid.svg">
+                <p class="text-center">
+                  bigslicetechnologies@gmail.com
+                </p>
+              </div>
+              <div class="col-xs-12">
+                <img alt="" height="36" src="./assets/build-info/home-page/location.svg">
+                <p class="text-center">
+                  102/A, Malave bhavan, behind Mangala theatre, Shivajinagar, Pune-411005
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="form-right">
+            <form *ngIf="!contacted" class [formGroup]="contactUsForm" (submit)="onSubmit()">
+              <div class="col-md-8 col-md-offset-1">
+
+                <div class="form-group">
+                  <input type="email" required formControlName="emailId" id="emailId" maxlength="40"
+                         [(ngModel)]="contactUs.emailId" class="form-control" placeholder="Email iD*"/>
+                  <div class="control-messages-error">
+                    <control-messages [control]="contactUsForm.controls.emailId"
+                                      [submitStatus]="submitStatus"></control-messages>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" required formControlName="contactNumber" name="contactNumber" id="contactNumber"
+                         maxlength="10" minlength="10" [(ngModel)]="contactUs.contactNumber" class="form-control"
+                         placeholder="Contact Number*"/>
+                  <div class="control-messages-error">
+                    <control-messages [control]="contactUsForm.controls.contactNumber"
+                                      [submitStatus]="submitStatus"></control-messages>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" formControlName="companyName" required [(ngModel)]="contactUs.companyName"
+                         id="companyName" class="form-control" name="companyName" placeholder="Company Name*"/>
+                  <div class="control-messages-error">
+                    <control-messages [control]="contactUsForm.controls.companyName"
+                                      [submitStatus]="submitStatus"></control-messages>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-11 col-md-offset-1">
+                <div class="form-group pull-left col-xs-12 no-padding">
+                  <div class="control-messages-error m-110">
+                    <control-messages [control]="contactUsForm.controls.type"
+                                      [submitStatus]="submitStatus"></control-messages>
+                  </div>
+                  <label class="col-xs-12 no-padding form-control"> Where do you want to send this lead? </label>
+                  <div class="toggleswitch">
+                    <div class="radio-button">
+                      <input checked id="opt_a" type="radio" value="Support Team" formControlName="type"
+                             [(ngModel)]="contactUs.type">
+                      <label for="opt_a" class="r-btn">
+                        <img alt="" height="19" src="./assets/build-info/home-page/contactform-support.svg">
+                        <span> Support team </span>
+                      </label>
+                    </div>
+
+                    <div class="radio-button">
+                      <input id="opt_b" type="radio" value="Sales" formControlName="type" [(ngModel)]="contactUs.type">
+                      <label for="opt_b" class="r-btn">
+                        <img alt="" height="22" src="./assets/build-info/home-page/contactform-sales.svg">
+                        <span> Sales </span>
+                      </label>
+                    </div>
+
+                    <div class="radio-button">
+                      <input id="opt_c" type="radio" value="Estimation Service" formControlName="type"
+                             [(ngModel)]="contactUs.type">
+                      <label for="opt_c" class="r-btn">
+                        <img alt="" height="19" src="./assets/build-info/home-page/contactform-estimate.svg">
+                        <span> Estimation services </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 text-left col-md-offset-1">
+                <button class="btn btn-primary" type="submit">SUBMIT</button>
+              </div>
+
+            </form>
+            <div *ngIf="contacted" class="form-success">
+              <p>
+                <img alt="" height="66" width="66" src="./assets/build-info/home-page/done.svg">
+              </p>
+              <h1> Thank you!</h1>
+              <div class="success-msg"> We will get back to you soon</div>
+              <button (click)="showContactForm()" class="btn btn-primary form-right-btn">DONE</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-us" #aboutusSection>
+    <div class="container">
+      <h3>
+        <span class="line"></span>
+        <span class="primary-part">
+          About
+          <label>Us</label>
+        </span>
+      </h3>
+      <p class="decription">
+        Big Slice Technologies is the leading company in India engaged in development of B2B utility tools for the
+        construction industry. As compared to other industries, very fewer amounts are spent on automation and software
+        technology in Indian construction industry. The available softwares or ERPs cost in lacks and are affordable
+        only to big players. The overall industry is still unorganized mainly when it comes to controlling and managing
+        the construction cost. Our tools are either free or at few hundred or thousand rupees for annual subscription.
+        This allows all smaller and larger stake holders of the industry to make use of them. The result is we are
+        presently having more than 70000 users across India using our various apps. This is our bit of a contribution
+        in making the industry more organized.
+      </p>
+    </div>
+    <div class="container">
+      <div class="row founder-row">
+        <div class="col-md-7 col-sm-7 about-founder">
+          <h4>About the founder</h4>
+          <h5>
+            <strong>Indrajeet V Malave</strong><br>BE Civil
+          </h5>
+          <p>
+            Indrajeet is the founder and director of Big slice technologies pvt ltd. He is an ex COEPian and in the
+            business of construction and real estate since last 15 years. He is a techno savvy person and likes
+            handling on site construction, estimation, scheduling and other technical aspects of the projects.<br>
+            He believes in knowledge sharing and has developed the various tools mainly in educational interest.
+          </p>
+        </div>
+        <div class="col-md-5 col-sm-5 founder-image">
+          <div class="contact-grey-box"></div>
+          <div class="grey-yellow-box">
+            <img src="./assets/build-info/home-page/founder-image.jpg" class="img-responsive" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <nav class="navbar navbar-default navbar-custom">
+    <div class="container p-t-b-10">
+      <div class="nav navbar-nav navbar-left">
+        <ul class="footerleft">
+          <!-- <li>
+            <a href="">Other products </a>
+          </li> -->
+          <li>
+            <a href="http://buildinfo.co.in/Web-Listings/Privacy-Policy" target="_blank">Terms and conditions</a>
+          </li>
+          <li>
+            <a href="http://buildinfo.co.in/Web-Listings/Terms-and-Conditions" target="_blank">Privacy policy </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav navbar-nav navbar-right">
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=-l9Ad_8LdwQ" target="_blank">
+              <img alt="" height="41" src="./assets/build-info/home-page/youtube-footer.svg">
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/www.buildinfo.co.in?ref=ts&fref=ts&__nodl" target="_blank">
+              <img alt="" height="41" src="./assets/build-info/home-page/facebook-footer.svg">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright-label">Copyright © 2019 Big Slice Technologies Pvt Ltd (OPC) - All Right Reserved</div>
+  </nav>
+</footer>
+
+<div id="video-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <video width="750" height="430" controls id="bi-video">
+          <source src="./assets/build-info/home-page/MBC_animation_gold.mp4" type="video/mp4">
+        </video>
+      </div>
+      <button type="button" class="close video-close" data-dismiss="modal">
+        &times;
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal why-estimation" id="modalone" tabindex="-1">
+  <div class="modal-dialog estimation-modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button class="estimation-modal-close" data-dismiss="modal">&times;</button>
+        <h3 class="text-left"><strong>Why</strong> to take our services <br>for estimation?
+        </h3>
+        <ul class="estimation-inner-lists">
+          <li>
+            Reverse engineering: We just don't do the estimates. We study your targeted project cost, divide the<br>
+            project cost in around 80 cost heads & set the budget for each cost head to achieve your targeted cost. Then<br>
+            we do reverse engineering to match the actual estimate with budget by selecting rightly priced materials.
+          </li>
+          <li>
+            Technology advantage for cost estimation: Our competitors still use complex Excel spreadsheets<br> which are
+            difficult to use for controlling the project cost and you end up using them just to check the quantities. We
+            provide the estimation in our self developed Web app “ My Build Cost” at no extra cost. Using My Build Cost
+            you can easily monitor and control the construction cost throughout the project duration.
+          </li>
+          <li>
+            Technology advantage for material take off: We use international tools for quantity take off to get reliable
+            and accurate quantities. This provides us a big advantage over our competitors who still depend on CAD file
+            tools and do manual entries of quantities in Excel. More chances of manual errors! Our tools provide easy
+            cross checking and we do 3 level checking of the quantities before we deliver the estimates to you.
+          </li>
+          <li>
+            Cost effective estimation services: Use of technology enables us to take out the estimates in lesser time.
+            We pass on this technology advantage to our clients and so we can offer more reasonable services at as low
+            as Rs 1/- per sqft of slab area for the scope of work mentioned herein below. Much lesser than our
+            competitors!
+          </li>
+          <li>
+            Construction know how: Our directors and technical team have vast experience of on site construction. We
+            have knowledge about latest construction practises and ongoing material/ labour rates. Our Rate analysis is
+            based on practical on site data. All of these enables us to provide more accurate cost estimates than our
+            competitors.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal outsource-estimation" id="modaltwo" tabindex="-1">
+  <div class="modal-dialog estimation-modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button class="estimation-modal-close" data-dismiss="modal">&times;</button>
+        <h3 class="text-left">Few reasons for <strong>why you should<br> outsource</strong> the cost estimation
+        </h3>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <h4>In house estimation</h4>
+              <ul class="estimation-inner-lists">
+                <li>
+                  Third party auditing for Cost estimation is important as in case of material consumption variation or
+                  cost escalations, site technical team and estimation team end up in either making adjustments or
+                  arguments without any solutions.
+                </li>
+                <li>
+                  Your in house estimation team remains busy with the estimation etc and is less focused on the cost
+                  control which is more important.
+                </li>
+                <li>
+                  Many times the Estimations which are done in house are poorly documented in complicated Excel sheets.
+                  They miss some of the cost heads, have incorrect Rate analysis/ Quantity take offs, have issues about
+                  duplication of files etc. Its very difficult to control the Project cost using them. Many times its
+                  not reported to the Management level. And you end up getting Cost surprises towards the project
+                  completion.
+                </li>
+                <li>
+                  Having more experienced estimation team and lesser projects can sometimes prove more costlier than
+                  outsourcing.
+                </li>
+                <li>
+                  Job changes in the in house estimation team during project execution creates lot of problems for
+                  tracking of quantity and cost which results in cost escalation.
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <h4>Outsourced estimation to My Build Cost</h4>
+              <ul class="estimation-inner-lists">
+                <li>
+                  Outsourcing provides third party auditing of the Cost estimates and you can be most assured. We can
+                  easily assess and resolve the conflicts about excess material consumption and cost escalation if any
+                  at early stages so that the targeted project cost is not exceeded.
+                </li>
+                <li>
+                  Your in house estimation team can focus on Cost control during the project duration by referring our
+                  estimates. In house team can guide the Purchase and Contracts team and approve the PO’s/WO’s to
+                  achieve the targeted project cost perfectly.
+                </li>
+                <li>
+                  Our estimates are well stored on Cloud in My Build Cost. It has in built rate analysis and material
+                  take off. It creates various reports at the back end. It remains at one place. No issue about
+                  duplication of Excel files/ folders which creates confusion amongst teams.
+                </li>
+                <li>
+                  We have core expertise for estimation and can manage the operational costs better because of larger
+                  volume of work and in turn prove more cost effective.
+                </li>
+                <li>
+                  Our estimation expertise work in teams so that responsibility of quantity and cost estimation is
+                  perfectly carried through out the project duration.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal cost-estimation" id="modalthree" tabindex="-1">
+  <div class="modal-dialog estimation-modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button class="estimation-modal-close" data-dismiss="modal">&times;</button>
+        <h3 class="text-left">Our cost<br><strong>estimation services</strong>
+        </h3>
+        <ul class="estimation-inner-lists">
+          <li>
+            Area calculations
+          </li>
+          <li>
+            Calculation of following areas-
+            <ol>
+              <li>Carpet area as per RERA- Unit wise (With internal walls)</li>
+              <li>Slab area- Slab wise- For RCC labour contract</li>
+              <li>Built up area- Floor wise- For Brick work and plaster labour contract</li>
+            </ol>
+          </li>
+          <li>
+            <span class="estimation-modal-indicators"></span>Initial block estimate (Budget)<br>
+            Initial block estimate (Budget) with detailed cost break up will be given by thumb rule based on your<br>
+            targeted project cost, project location, preliminary project drawings, project specifications and<br>
+            amenities. This can also be used at the time of registering the project in RERA.
+          </li>
+          <li>
+            Detailed Quantity, Cost estimation of building construction items along with Rate analyses.
+          </li>
+          <li>
+            Cost head wise material take- For each building as well as for the project. ( For e.g. Total qty of all the
+            materials required to complete RCC)
+          </li>
+          <li>
+            Material wise take off report- For each building as well as for the project. ( For e.g. Total qty of Cement
+            required for RCC, Masonry, Flooring etc)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

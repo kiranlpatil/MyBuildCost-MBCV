@@ -4,7 +4,9 @@
       <div class="hidden-xs col-sm-6">
         <div class="page-background">
           <div class="inner-content content-background clearfix fadein-element" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
-            <img class="logo-image" src={{MY_LOGO}} alt="">
+            <a (click)="addClick()">
+              <img class="logo-image" src={{MY_LOGO}} alt="">
+            </a>
             <ul>
               <li class="fadein-sub-element">Budget</li>
               <li class="fadein-sub-element">Estimate</li>

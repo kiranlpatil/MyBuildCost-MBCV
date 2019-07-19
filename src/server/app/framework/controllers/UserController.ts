@@ -7,8 +7,6 @@ import UserModel = require('../dataaccess/model/UserModel');
 import UserService = require('../services/UserService');
 import Messages = require('../shared/messages');
 import ResponseService = require('../shared/response.service');
-import * as csvToJson from 'convert-csv-to-json';
-import {getFile} from "ts-node/dist";
 
 
 let config = require('config');

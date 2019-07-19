@@ -3,9 +3,11 @@ import { StartRoutes } from './framework/start/start.routes';
 import { ActivateUserRoutes } from './framework/registration/activate-user/activate-user.routes';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { LandingPageRoutes } from './framework/landing-page/landing-page.routes';
+import {HomePageRoutes} from './framework/home-page/home-page.routes';
 
 
 export const routes: Routes = [
+  ...HomePageRoutes,
   ...LandingPageRoutes,
   ...StartRoutes,
   ...ActivateUserRoutes,

@@ -6,6 +6,8 @@ import ReportRoutes = require('./../../../applicationProject/routes/ReportRoutes
 import RateAnalysisRoutes = require('./../../../applicationProject/routes/RateAnalysisRoutes');
 import SubscriptionRout = require('../../../applicationProject/routes/SubscriptionRoutes');
 import UsageTrackingRoutes = require('../../../applicationProject/routes/UsageTrackingRoutes');
+import AddPoolCarRoutes = require('../ContactRoutes');
+
 
 var app = express();
 
@@ -18,6 +20,7 @@ class BaseRoutes {
     app.use('/api/rateAnalysis/', new RateAnalysisRoutes().routes);
     app.use('/api/subscription/', new SubscriptionRout().routes);
     app.use('/api/usage/', new UsageTrackingRoutes().routes);
+    app.use('/api/addpoolcars/', new AddPoolCarRoutes().routes);
     app.use(sharedService.errorHandler);
     return app;
   }

@@ -4,6 +4,6 @@ export const StartRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/landing'
+    redirectTo: '/home'
   }
 ];
