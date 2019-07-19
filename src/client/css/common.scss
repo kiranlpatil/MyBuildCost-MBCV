@@ -1018,3 +1018,18 @@ textarea[disabled] {
     text-align: left;
   }
 }
+
+.control-messages-error {
+  control-messages div {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+    margin: 50px 0 6px;
+  }
+}
+
+.control-messages-error.m-110 {
+  control-messages div {
+    margin-top: 110px;
+  }
+}
