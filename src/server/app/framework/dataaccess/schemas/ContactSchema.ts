@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 import IAddPoolCar = require('../mongoose/ContactUs');
-import DataAccess = require('./../dataAccess');
+import DataAccess = require('../dataaccess');
 
 const mongoose = DataAccess.mongooseInstance;
 const mongooseConnection = DataAccess.mongooseConnection;
