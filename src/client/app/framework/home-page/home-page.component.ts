@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactUs} from '../../user/models/contactUs';
 import {ContactService1} from './home-page.service';
+import {ValidationService} from '../../shared/customvalidations/validation.service';
 
 declare let $: any;
 
@@ -19,6 +20,7 @@ export class HomePageComponent implements OnInit {
   contactUs: ContactUs;
   model = new ContactUs();
   submitStatus: boolean;
+  contacted: boolean = false;
   private isFormSubmitted = false;
 
   constructor(private _router: Router, private formBuilder: FormBuilder, private contactService: ContactService1) {
@@ -47,10 +49,10 @@ export class HomePageComponent implements OnInit {
 
   intializeForm() {
     this.contactUsForm = this.formBuilder.group({
-      emailId: ['', [Validators.required, Validators.minLength(5)]],
-      contactNumber: ['', [Validators.required, Validators.minLength(10)]],
-      companyName: ['', [Validators.required, Validators.minLength(5)]],
-      type: ['', [Validators.required]]
+      emailId: ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
+      contactNumber: ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator, Validators.minLength(10), Validators.maxLength(10)]],
+      companyName: ['', [ValidationService.requireCompanyNameValidator]],
+      type: ['', [ValidationService.requireContactTypeValidator]]
     });
   }
 
@@ -60,10 +62,16 @@ export class HomePageComponent implements OnInit {
       this.submitStatus = true;
       return;
     }
+
+    if (!this.contactUsForm.valid) {
+      return;
+    }
+
     this.model = this.contactUsForm.value;
     this.isFormSubmitted = true;
     this.contactService.contact(this.model).subscribe(res => {
        console.log(res);
+       this.contacted = true;
     });
   }
   addClick() {
@@ -72,5 +80,14 @@ export class HomePageComponent implements OnInit {
 
   onSignUp() {
     this._router.navigate([NavigationRoutes.APP_REGISTRATION]);
+  }
+
+  showContactForm() {
+    this.submitStatus = false;
+    this.isFormSubmitted = false;
+    this.contactUs = new ContactUs();
+    this.contactUsForm.reset();
+    this.intializeForm();
+    this.contacted = false;
   }
 }

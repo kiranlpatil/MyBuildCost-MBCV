@@ -676,27 +676,31 @@
             </div>
           </div>
           <div class="form-right">
-            <form class [formGroup]="contactUsForm" (submit)="onSubmit()">
+            <form *ngIf="!contacted" class [formGroup]="contactUsForm" (submit)="onSubmit()">
             <div class="col-md-8 col-md-offset-1">
 
                 <div class="form-group">
-                    <input type="email" formControlName="emailId" [(ngModel)]="contactUs.emailId" id="email1" class="form-control" placeholder="Email iD*"/>
+                  <control-messages [control]="contactUsForm.controls.emailId" [submitStatus]="submitStatus"></control-messages>
+                  <input type="email" required formControlName="emailId" id="emailId" maxlength="40" [(ngModel)]="contactUs.emailId" class="form-control" placeholder="Email iD*"/>
                 </div>
 
                 <div class="form-group">
-                  <input type="text" formControlName="contactNumber" [(ngModel)]="contactUs.contactNumber" id="number1" class="form-control" placeholder="Contact Number*"/>
+                  <control-messages [control]="contactUsForm.controls.contactNumber" [submitStatus]="submitStatus"></control-messages>
+                  <input type="text" required formControlName="contactNumber" name="contactNumber" id="contactNumber" maxlength="10" minlength="10" [(ngModel)]="contactUs.contactNumber" class="form-control" placeholder="Contact Number*"/>
                 </div>
 
                 <div class="form-group">
-                  <input type="text" formControlName="companyName" [(ngModel)]="contactUs.companyName" id="company-name1" class="form-control" placeholder="Company Name*"/>
+                  <control-messages [control]="contactUsForm.controls.companyName" [submitStatus]="submitStatus"></control-messages>
+                  <input type="text" formControlName="companyName" required [(ngModel)]="contactUs.companyName" id="companyName" class="form-control" name="companyName" placeholder="Company Name*"/>
                 </div>
               </div>
               <div class="col-md-11 col-md-offset-1">
                 <div class="form-group pull-left col-xs-12 no-padding">
+                  <control-messages [control]="contactUsForm.controls.type" [submitStatus]="submitStatus"></control-messages>
                   <label class="col-xs-12 no-padding form-control"> Where do you want to send this lead? </label>
                   <div class="toggleswitch">
                     <div class="radio-button">
-                      <input id="opt_a" type="radio"  value="Support Team"  formControlName="type" [(ngModel)]="contactUs.type">
+                      <input checked id="opt_a" type="radio"  value="Support Team"  formControlName="type" [(ngModel)]="contactUs.type">
                       <label for="opt_a" class="r-btn">
                         <img alt="" height="19" src="./assets/build-info/home-page/contactform-support.svg">
                         <span> Support team </span>
@@ -704,7 +708,7 @@
                     </div>
 
                     <div class="radio-button">
-                      <input checked="checked" id="opt_b" type="radio" value="Sales" formControlName="type" [(ngModel)]="contactUs.type">
+                      <input id="opt_b" type="radio" value="Sales" formControlName="type" [(ngModel)]="contactUs.type">
                       <label for="opt_b" class="r-btn">
                         <img alt="" height="22" src="./assets/build-info/home-page/contactform-sales.svg">
                         <span> Sales </span>
@@ -727,6 +731,9 @@
               </div>
 
             </form>
+            <div *ngIf="contacted">Contact Submitted Successfully
+              <button (click)="showContactForm()" class="btn btn-primary">DONE</button>
+            </div>
 
           </div>
         </div>

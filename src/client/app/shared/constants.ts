@@ -102,6 +102,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER = 'Please provide a valid mobile number.';
   public static MSG_ERROR_VALIDATION_PASSWORD = 'Password must be alphanumeric having minimum 6 characters';
   public static MSG_ERROR_VALIDATION_PIN_NUMBER = 'Pin code should not be greater than 20 characters.';
+  public static MSG_ERROR_VALIDATION_CONTACT_TYPE_REQUIRED = 'This field can\'t be left unselected.';
   public static MSG_ERROR_VALIDATION_ITEM_NAME_REQUIRED = 'Item name should not be blank. \nFill it.';
 
   //Project validation messages

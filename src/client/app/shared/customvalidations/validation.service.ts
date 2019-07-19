@@ -29,6 +29,7 @@ export class ValidationService {
       'invalidMobile': Messages.MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER,
       'invalidBirthYear': Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_INVALID,
       'invalidPin': Messages.MSG_ERROR_VALIDATION_PIN_NUMBER,
+      'requiredContactType': Messages.MSG_ERROR_VALIDATION_CONTACT_TYPE_REQUIRED,
 
       'requiredProjectName': Messages.MSG_ERROR_VALIDATION_PROJECT_NAME_REQUIRED,
       'requiredProjectAddress': Messages.MSG_ERROR_VALIDATION_PROJECT_ADDRESS_REQUIRED,
@@ -162,6 +163,14 @@ export class ValidationService {
   static requireCompanyDescriptionValidator(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredCompanyDescription': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requireContactTypeValidator(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredContactType': true};
     } else {
       return null;
     }
