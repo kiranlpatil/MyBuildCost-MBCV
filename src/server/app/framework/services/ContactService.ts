@@ -63,7 +63,7 @@ class ContactService {
   ['$email$', field.emailId], ['$first_name$', field.companyName], ['$message$', field.type], ['$contact_number$', field.contactNumber]]);
     let attachment = MailAttachments.AttachmentArray;
     let subject = '';
-    let mailto = 'contact@bigslicetechnologies.com';
+    let mailto = 'bigslicetechnologies@gmail.com';
     if (field.type === 'Support Team') {
       subject = Messages.EMAIL_SUBJECT_SUPPORT;
     } else if (field.type === 'Sales') {
