@@ -25,7 +25,7 @@ pipelines:
     - step:
            name : Create a MyBuildCost Production Artifact
            script:
-              - apt-get update && apt-get upgrade
+              - apt-get update
               - apt-get install -y zip
               - zip -r MBC_ProdArtifacts.zip dist/**
               - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/scripts/startApp.sh" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
