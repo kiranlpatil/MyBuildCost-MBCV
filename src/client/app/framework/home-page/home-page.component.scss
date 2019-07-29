@@ -1578,7 +1578,7 @@ footer ul.footerleft {
     }
 
     .about-us {
-      .founder-image {
+      /*.founder-image {
         .contact-grey-box {
           height: calc(100vw - 55px);
           width: calc(100vw - 55px);
@@ -1588,7 +1588,7 @@ footer ul.footerleft {
           height: calc(100vw - 55px);
           width: calc(100vw - 55px);
         }
-      }
+      }*/
     }
   }
 
@@ -1825,12 +1825,6 @@ footer ul.footerleft {
       font-size: 16px;
       padding-left: 20px;
     }
-    ol{
-      li:before{
-        content: '';
-        padding-left: 5px;
-      }
-    }
    ul{
       li{
         font-size: 14px;
@@ -1838,16 +1832,23 @@ footer ul.footerleft {
         list-style-type: none;
         margin-bottom: 0;
         margin-left: -20px;
+        padding-left: 5px;
+      }
+    }
+    ol{
+      li{
+        padding-left: 5px;
       }
     }
     h6{
       margin-left: -20px;
     }
     .privacy-modal-title{
-      font-size: 22px;
+      font-size: 18px;
       font-weight: bold;
       margin-left: 20px;
     }
+
   }
   .estimation-modal-dialog {
     top: 0;
@@ -1865,7 +1866,7 @@ footer ul.footerleft {
         width: 22px;
         line-height: 0;
         position: relative;
-        right: 38px;
+        right: 8px;
         top: 0px;
         color: #000;
         border: none;
@@ -1893,7 +1894,7 @@ footer ul.footerleft {
         display: inline-block;
         font-size: 38px;
         position: absolute;
-        left: -35px;
+        left: -20px;
       }
     }
 
@@ -1976,9 +1977,9 @@ footer ul.footerleft {
     z-index: auto;
   }
 
-  .founder-image {
+  /*.founder-image {
     position: relative;
-  }
+  }*/
 
   .grey-yellow-box {
     height: 325px;
@@ -2029,9 +2030,9 @@ footer ul.footerleft {
     font-weight: bold;
   }
 
-  .founder-image, .about-founder {
+  /*.founder-image, .about-founder {
     margin-top: 70px;
-  }
+  }*/
 }
 
 //Slider css
@@ -2280,8 +2281,8 @@ footer ul.footerleft {
           width: 22px;
           line-height: 0;
           position: relative;
-          right: 6px;
-          top: 0;
+          right: -2px;
+          top: -3px;
           color: #000;
           border: none;
           background: none;
@@ -2364,7 +2365,7 @@ footer ul.footerleft {
       text-align: justify;
     }
 
-    .contact-grey-box {
+    /*.contact-grey-box {
       height: 270px;
       margin-left: 17px;
       width: 270px;
@@ -2384,18 +2385,8 @@ footer ul.footerleft {
     }
 
     .about-founder {
-      order: 2;
       margin-top: 30px;
-    }
-
-    .founder-image {
-      order: 1;
-    }
-
-    .founder-row {
-      display: flex;
-      flex-direction: column;
-    }
+    }*/
   }
   .footer {
     margin-top: -110px;
