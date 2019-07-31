@@ -964,6 +964,10 @@ footer ul.footerleft {
   margin-top: 20px;
 }
 
+.bg-white {
+  background: #fff none !important;
+}
+
 @media screen and (min-width: 768px) {
   .navbar {
     .navbar-nav {
@@ -1578,7 +1582,7 @@ footer ul.footerleft {
     }
 
     .about-us {
-      .founder-image {
+      /*.founder-image {
         .contact-grey-box {
           height: calc(100vw - 55px);
           width: calc(100vw - 55px);
@@ -1588,7 +1592,7 @@ footer ul.footerleft {
           height: calc(100vw - 55px);
           width: calc(100vw - 55px);
         }
-      }
+      }*/
     }
   }
 
@@ -1816,7 +1820,40 @@ footer ul.footerleft {
     font-size: 19px;
     line-height: 38px;
   }
+  .privacy-modal-dialog{
+    h5{
+      padding-left: 20px;
+      padding-top: 20px;
+    }
+    h2{
+      font-size: 16px;
+      padding-left: 20px;
+    }
+   ul{
+      li{
+        font-size: 14px;
+        line-height: 30px;
+        list-style-type: none;
+        margin-bottom: 0;
+        margin-left: -20px;
+        padding-left: 5px;
+      }
+    }
+    ol{
+      li{
+        padding-left: 5px;
+      }
+    }
+    h6{
+      margin-left: -20px;
+    }
+    .privacy-modal-title{
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: 20px;
+    }
 
+  }
   .estimation-modal-dialog {
     top: 0;
     transform: translate(0, 0);
@@ -1833,8 +1870,8 @@ footer ul.footerleft {
         width: 22px;
         line-height: 0;
         position: relative;
-        right: 38px;
-        top: 23px;
+        right: 8px;
+        top: 0px;
         color: #000;
         border: none;
         background: none;
@@ -1861,7 +1898,7 @@ footer ul.footerleft {
         display: inline-block;
         font-size: 38px;
         position: absolute;
-        left: -35px;
+        left: -20px;
       }
     }
 
@@ -1940,12 +1977,14 @@ footer ul.footerleft {
     width: 324px;
     border-radius: 4px;
     background-color: #ECECEC;
-    float: right;
+    float: left;
     z-index: auto;
   }
 
   .founder-image {
-    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin: 0 0 10px;
   }
 
   .grey-yellow-box {
@@ -1957,7 +1996,7 @@ footer ul.footerleft {
     position: absolute;
     z-index: 1;
     top: 23px;
-    right: 39px;
+    left: 39px;
   }
 
   .decription {
@@ -1972,7 +2011,7 @@ footer ul.footerleft {
     text-align: left;
     font-weight: bold;
     line-height: 55px;
-    margin: 0;
+    margin: 15px 0 10px;
   }
 
   h5 {
@@ -1997,9 +2036,9 @@ footer ul.footerleft {
     font-weight: bold;
   }
 
-  .founder-image, .about-founder {
+  /*.founder-image, .about-founder {
     margin-top: 70px;
-  }
+  }*/
 }
 
 //Slider css
@@ -2248,8 +2287,8 @@ footer ul.footerleft {
           width: 22px;
           line-height: 0;
           position: relative;
-          right: 6px;
-          top: 0;
+          right: -2px;
+          top: -3px;
           color: #000;
           border: none;
           background: none;
@@ -2289,11 +2328,31 @@ footer ul.footerleft {
         margin-top: 10px;
       }
     }
+    .privacy-modal-dialog {
+      h2{
+        line-height: 25px;
+        margin-left: -10px;
+      }
+
+      li{
+        margin-left: -20px;
+      }
+      h5{
+        line-height: 23px;
+      }
+      .privacy-modal-title{
+        margin-left: 10px;
+      }
+    }
   }
   .about-us {
     h4 {
       font-size: 30px;
       padding-top: 10px;
+    }
+
+    h3 {
+      margin-bottom: 0 !important;
     }
 
     label {
@@ -2316,7 +2375,7 @@ footer ul.footerleft {
       text-align: justify;
     }
 
-    .contact-grey-box {
+    /*.contact-grey-box {
       height: 270px;
       margin-left: 17px;
       width: 270px;
@@ -2336,18 +2395,8 @@ footer ul.footerleft {
     }
 
     .about-founder {
-      order: 2;
       margin-top: 30px;
-    }
-
-    .founder-image {
-      order: 1;
-    }
-
-    .founder-row {
-      display: flex;
-      flex-direction: column;
-    }
+    }*/
   }
   .footer {
     margin-top: -110px;
@@ -2429,7 +2478,12 @@ footer ul.footerleft {
       }
     }
   }
+
   .why-estimation, .outsource-estimation, .cost-estimation {
+    .privacy-modal-close{
+      right: 16px;
+      top: 3px;
+    }
     .estimation-modal-dialog {
       top: 0;
       transform: translate(0, 0);
@@ -2486,6 +2540,22 @@ footer ul.footerleft {
 
     p {
       font-size: 14px;
+
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+  .about-us {
+    .contact-grey-box {
+      height: 260px;
+      width: 260px;
+    }
+    .grey-yellow-box {
+      height: 264px;
+      top: 7px;
+      left: 25px;
+      width: 264px;
     }
   }
 }
