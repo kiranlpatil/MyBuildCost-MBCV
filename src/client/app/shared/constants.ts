@@ -268,6 +268,9 @@ export class Messages {
 
   //Sample Project
   public static MSG_FOR_UPDATING_SAMPLE_PROJECT: string = 'Sample project helps you understand how the application works. Modified values will not be calculated or saved.';
+
+  //Admin Msg
+  public static EXPORT_FAILED: string = 'Failed to export files';
 }
 
 export class NavigationRoutes {
@@ -386,6 +389,10 @@ export class API {
   public static RESET_PASSWORD = 'user/resetpassword';
   public static GOOGLE_LOGIN = 'googlelogin';
   public static USER = 'User';
+  public static EXPORT_DATA = '/exportData';
+  public static EXPORT_APP_USAGE_DETAILS = '/exported-files/AppUsageDetails.csv';
+  public static EXPORT_MY_BUILD_COST_USER = '/exported-files/MyBuildCostUser.csv';
+  public static EXPORT_RATE_ANALYSIS_USER = '/exported-files/RateAnalysisUsers.csv';
 
 
   //Project

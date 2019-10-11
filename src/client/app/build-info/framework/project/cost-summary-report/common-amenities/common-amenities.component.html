@@ -5,6 +5,9 @@
       <h4 class="panel-title">
         <a id="collapse-cost-summary-panel{{totalNumberOfBuildings}}" class="collapsed" data-parent="#cost-summary-panel" data-toggle="collapse" href="#collapse{{totalNumberOfBuildings}}" (click)="showGrandTotalTable()">
           {{getHeadings().COMMON_DEVELOPMENT}}
+          <span class="slab-area">
+                  {{ getLabel().TOTAL }} {{(costingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((costingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ grandTotalOfArea| number: '1.0-0' }} {{ (costingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
+          </span>
           <span class="caret"></span>
         </a>
       </h4>
@@ -18,7 +21,8 @@
               <span><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Download/Print</span>
               <common-amenities-report-pdf [amenitiesReport]="amenitiesReport"
                                            [costingByUnit]="costingByUnit"
-                                           [costingByArea]="costingByArea">
+                                           [costingByArea]="costingByArea"
+                                           [grandTotalOfArea]="grandTotalOfArea">
               </common-amenities-report-pdf>
             </div>
           </li>

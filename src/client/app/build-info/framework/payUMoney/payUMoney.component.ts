@@ -10,6 +10,7 @@ import { Message } from '../../../shared/index';
 import { Messages } from '../../../shared/constants';
 import { MessageService } from '../../../shared/services/message.service';
 import {SessionStorageService} from "../../../shared/services/session.service";
+import {ProjectHeaderVisibilityService} from "../../../shared/services/project-header-visibility.service";
 
 @Component ({
   moduleId:module.id,
@@ -26,7 +27,8 @@ export class PayUMoneyComponent implements OnInit {
   public isShowErrorMessage: boolean = false;
 
   constructor(private payUMoneyService : PayUMoneyService,  private _router : Router, private commonService : CommonService,
-              private formBuilder : FormBuilder, private messageService :  MessageService) {
+              private formBuilder : FormBuilder, private messageService :  MessageService,
+              private projectHeaderVisibilityService:ProjectHeaderVisibilityService) {
 
     this.payUMoneyForm = this.formBuilder.group({
       firstname: ['', ValidationService.requireFirstNameValidator],
@@ -40,6 +42,7 @@ export class PayUMoneyComponent implements OnInit {
 
   ngOnInit() {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW,'paymentForm');
+    this.projectHeaderVisibilityService.change(false);
     this.subscription = this.commonService.updatepackageInfo$
       .subscribe(item => {
         if(item !== undefined || item !== null) {

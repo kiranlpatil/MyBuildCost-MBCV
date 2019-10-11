@@ -40,7 +40,7 @@ let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
 const fs = require('fs');
 let ObjectId = mongoose.Types.ObjectId;
-class ProjectService {
+export class ProjectService {
   APP_NAME: string;
   company_name: string;
   costHeadId: number;
@@ -3728,5 +3728,5 @@ class ProjectService {
   }
 }
 
-Object.seal(ProjectService);
-export = ProjectService;
+/*Object.seal(ProjectService);
+export = ProjectService;*/

@@ -20,6 +20,7 @@ import Any = jasmine.Any;
 import { SteelQuantityItems } from '../../../model/SteelQuantityItems';
 import { ErrorService } from '../../../../../shared/services/error.service';
 import {UpdateSubscriptionStatusService} from "../../../../../shared/services/update-subscription-status.service";
+import {ProjectHeaderVisibilityService} from "../../../../../shared/services/project-header-visibility.service";
 
 declare var $: any;
 
@@ -143,7 +144,8 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private _router: Router, private messageService: MessageService, private commonService : CommonService,
               private loaderService: LoaderService, private errorService:ErrorService,
-              private updateSubscriptionStatusService:UpdateSubscriptionStatusService) {
+              private updateSubscriptionStatusService:UpdateSubscriptionStatusService,
+              private projectHeaderVisibilityService:ProjectHeaderVisibilityService) {
     this.subscription = this.updateSubscriptionStatusService.changeSubscriptionStatus$.subscribe(
       (isAnySubscriptionAvailable:boolean )=> {
         this.anySubscriptionAvailable= isAnySubscriptionAvailable;}
@@ -163,6 +165,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
   ngOnInit() {
     this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
+    this.projectHeaderVisibilityService.change(false);
     this.activatedRoute.params.subscribe(params => {
 
       this.projectId = params['projectId'];

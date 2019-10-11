@@ -112,7 +112,9 @@ class UserRoutes {
     router.put('/verify/password', authInterceptor.requiresAuth, controller.verifyPassword);
       router.put('/:userId/updateSubscription', controller.updateSubscriptionDetails);
     router.post('/userList', controller.getUserData);
-      return router;
+
+    router.post('/exportData', controller.exportUserData);
+    return router;
 
     }
 }

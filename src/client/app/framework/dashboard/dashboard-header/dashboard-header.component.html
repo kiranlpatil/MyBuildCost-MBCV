@@ -27,6 +27,9 @@
           <li role="menuitem">
             <a href="http://buildinfo.co.in" target="_blank" class="dropdown-item Weblink">Build info</a>
           </li>
+          <li *ngIf="isAdmin" role="menuitem" [routerLinkActive]="['active']">
+            <a class="dropdown-item"  [routerLink]="['/admin']" (click)="navigateTo('/admin');">Admin</a>
+          </li>
         </ul>
         <bi-project-selector></bi-project-selector>
       </div>

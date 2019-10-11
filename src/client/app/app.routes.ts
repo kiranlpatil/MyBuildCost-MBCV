@@ -4,12 +4,14 @@ import { ActivateUserRoutes } from './framework/registration/activate-user/activ
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { LandingPageRoutes } from './framework/landing-page/landing-page.routes';
 import {HomePageRoutes} from './framework/home-page/home-page.routes';
+import { AdminRoutes } from './build-info/framework/admin/admin.routes';
 
 
 export const routes: Routes = [
   ...HomePageRoutes,
   ...LandingPageRoutes,
   ...StartRoutes,
+  ...AdminRoutes,
   ...ActivateUserRoutes,
   /*{
     path:'dashboard',

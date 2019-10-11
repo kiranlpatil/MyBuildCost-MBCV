@@ -33,7 +33,10 @@ import {ResetPasswordModule} from './framework/login/forgot-password/reset-passw
 import {CreateBuildingModule} from './build-info/framework/project/building/create-building/create-building.module';
 import {LoginModule} from './framework/login/login.module';
 import {CandidateSignUpModule} from './framework/registration/candidate-sign-up/candidate-sign-up.module';
-import {ForgotPasswordModule} from './framework/login/forgot-password/forgot-password.module';
+import {ForgotPasswordModule} from "./framework/login/forgot-password/forgot-password.module";
+import { AdminComponent } from './build-info/framework/admin/admin.component';
+import { AdminService } from './build-info/framework/admin/admin.service';
+import {ProjectHeaderVisibilityService} from "./shared/services/project-header-visibility.service";
 
 @NgModule({
   imports: [
@@ -57,7 +60,8 @@ import {ForgotPasswordModule} from './framework/login/forgot-password/forgot-pas
   declarations: [
     AppComponent,
     ActivateUserComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AdminComponent
   ],
   providers: [
     {
@@ -85,7 +89,9 @@ import {ForgotPasswordModule} from './framework/login/forgot-password/forgot-pas
     SessionStorageService,
     MessageService,
     SharedService,
-    ThemeChangeService, CommonService, BaseService, CustomHttp, ErrorService, SessionStorageService
+    ThemeChangeService, CommonService, BaseService, CustomHttp, ErrorService, SessionStorageService,
+    AdminService,
+    ProjectHeaderVisibilityService
   ],
   bootstrap: [AppComponent]
 })

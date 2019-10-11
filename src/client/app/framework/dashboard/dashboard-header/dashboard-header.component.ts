@@ -27,6 +27,7 @@ export class DashboardHeaderComponent {
   HEADER_LOGO: string;
   MOBILE_LOGO: string;
   first_letter:string;
+  isAdmin: boolean = false;
 
   @HostListener('document:click', ['$event']) onClick(event: any) {
     if (!this._eref.nativeElement.contains(event.target)) {
@@ -51,6 +52,10 @@ export class DashboardHeaderComponent {
           SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, user.company_name);
         }
       });
+    let userId =  SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    if( userId === AppSettings.SAMPLE_PROJECT_USER_ID) {
+      this.isAdmin = true;
+    }
   }
 
   getImagePath(imagePath: string) {

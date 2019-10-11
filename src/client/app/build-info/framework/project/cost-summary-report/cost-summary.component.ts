@@ -22,6 +22,7 @@ import { AddCostHeadButton } from '../../model/showHideCostHeadButton';
 import { ErrorService } from '../../../../shared/services/error.service';
 import { AppSettings } from '../../../../shared/index';
 import { ProjectHeaderComponent } from '../../project-header/project-header.component';
+import {ProjectHeaderVisibilityService} from "../../../../shared/services/project-header-visibility.service";
 
 declare let $: any;
 
@@ -95,7 +96,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
               private buildingService: BuildingService, private loaderService : LoaderService,
-              private errorService:ErrorService,private commonService: CommonService) {
+              private errorService:ErrorService,private commonService: CommonService,
+              private projectHeaderVisibilityService:ProjectHeaderVisibilityService) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -115,8 +117,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW, CurrentView.COST_SUMMARY);
+    this.projectHeaderVisibilityService.change(true);
     this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
       this.onBuildingChange(params);
@@ -217,7 +220,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING_NAME, buildingName);
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-
+    this.projectHeaderVisibilityService.change(false);
     this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_BUILDING,
       buildingName, NavigationRoutes.APP_COST_HEAD, estimatedItem.name,  estimatedItem.rateAnalysisId, NavigationRoutes.APP_CATEGORY]);
   }
