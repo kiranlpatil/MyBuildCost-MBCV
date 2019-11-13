@@ -33,6 +33,9 @@ let log4js = require('log4js');
 import * as mongoose from 'mongoose';
 import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
 import SteelQuantityItems = require('../dataaccess/model/project/building/SteelQuantityItems');
+import ItemGstRepository = require('../dataaccess/repository/ItemGstRepository');
+import ItemGst = require('../dataaccess/model/RateAnalysis/ItemGst');
+let xlsxj = require('xlsx-to-json');
 
 //import RateItemsAnalysisData = require("../dataaccess/model/project/building/RateItemsAnalysisData");
 
@@ -52,6 +55,7 @@ export class ProjectService {
   private authInterceptor: AuthInterceptor;
   private userService: UserService;
   private commonService: CommonService;
+  private itemGstRepository: ItemGstRepository;
 
 
   constructor() {
@@ -61,6 +65,7 @@ export class ProjectService {
     this.authInterceptor = new AuthInterceptor();
     this.userService = new UserService();
     this.commonService = new CommonService();
+    this.itemGstRepository = new ItemGstRepository();
   }
 
   createProject(data: Project, user: User, callback: (error: any, result: any) => void) {
@@ -3665,6 +3670,65 @@ export class ProjectService {
       cb(null, tempPath);
     });
   }
+
+  importGstData(callback:( error: any, result: any) => void) {
+    logger.info('Project service, exportGstData has been hit');
+    let fileNameOfGstItems = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.gstItems');
+
+    let readGstItemsFromFile = this.readGstItemsFromFile(fileNameOfGstItems);
+    readGstItemsFromFile.then(function (data: Array<any>) {
+       if(data.length> 0) {
+          let arrayOfItemGst = new Array<ItemGst>();
+          for(let item  of data ){
+            let itemGst = new ItemGst( item.itemName,  item.value);
+            arrayOfItemGst.push(itemGst);
+          }
+         let projectService =  new ProjectService();
+          projectService.saveGstData(arrayOfItemGst, (error:any, result:any)=> {
+             if(error) {
+               console.log('Error : '+JSON.stringify(error));
+               callback(error, null);
+             } else {
+               console.log('Result : '+JSON.stringify(result));
+               callback(null, result);
+             }
+         });
+       }
+    });
+
+  }
+
+  readGstItemsFromFile(pathOfFile: string) {
+    return new CCPromise(function (resolve: any, reject: any) {
+    xlsxj({
+      input: pathOfFile,
+      output: null
+    }, (err: any, result: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        if(result.length > 0) {
+          resolve(result);
+        }
+       }
+     });
+    }).catch(function (e: any) {
+      logger.error('creating Promise for file read has been hit : ' + pathOfFile + ':\n error :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  saveGstData(arrayOfItemGst: Array<ItemGst>, callback:(error:any, result:any) => void) {
+    this.itemGstRepository.insertMany(arrayOfItemGst, (err: any, response:any)=> {
+      if(err) {
+        callback(err, null);
+      } else {
+        callback(null, response);
+      }
+    });
+  }
+
   private calculateThumbRuleReportForCostHead(budgetedCostAmount: number, costHeadFromRateAnalysis: any,
                                               buildingData: any, costHeads: Array<CostHead>) {
     if (budgetedCostAmount >= 0) {

@@ -328,6 +328,8 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       controller.removeProjectImage, this._responseInterceptor.exit);
 
 
+    /* GST Routes */
+    router.get('/import/gstData', controller.importGstData, this._responseInterceptor.exit);
     return router;
   }
 }
