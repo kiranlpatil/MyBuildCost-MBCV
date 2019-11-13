@@ -68,7 +68,7 @@
     },
     "browser": {
       "IP": "http://stagingmybuildcost.buildinfo.co.in:8080/",
-      "rateAnalysisIP": "http://stagingmybuildcost.buildinfo.co.in:3000/"
+      "rateAnalysisIP": "http://stagingrateanalysis.buildinfo.co.in:3000/"
     },
     "filePathForMasterDataExcel": "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "filePathForProfileImage": "/server/prod/app/framework/public/profileimage",
