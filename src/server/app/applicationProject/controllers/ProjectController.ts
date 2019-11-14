@@ -1450,5 +1450,60 @@ class ProjectController {
       });
     }
   }
+
+  //update gst of workitems
+  updateGstOfBuildingWorkItems(req: express.Request, res: express.Response, next: any): void{
+    try{
+      logger.info('Project controller, update GST Of Building WorkItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let gst = req.body.gst;
+
+      let projectService = new ProjectService();
+      projectService.updateGstOfBuildingWorkItems(projectId,buildingId,costHeadId,
+        categoryId,workItemId,ccWorkItemId,gst,user,(error, result) => {
+          if (error) {
+            next(error);
+          } else {
+            logger.info('update GST Of Building WorkItems success');
+            next(new Response(200, result));
+          }
+        });
+    }
+    catch (e) {
+      (new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateGstOfProjectWorkItems(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, updateGstOfProjectWorkItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let gst = req.body.gst;
+
+      let projectService = new ProjectService();
+      projectService.updateGstOfProjectWorkItems( projectId, costHeadId,
+        categoryId, workItemId, ccWorkItemId, gst, user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('updateGstOfProjectWorkItems success');
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 export  = ProjectController;

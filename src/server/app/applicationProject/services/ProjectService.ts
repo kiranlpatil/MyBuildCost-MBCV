@@ -3790,6 +3790,49 @@ export class ProjectService {
       }
     }
   }
+
+  //Update GST of building workitems
+  updateGstOfBuildingWorkItems(projectId: string, buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
+                               ccWorkItemId: number, gst: number, user: User, callback: (error: any, result: any) => void){
+    logger.info('Project service, updateGstOfBuildingWorkItems has been hit');
+    let query = {_id: buildingId};
+    let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].gst':gst}};
+    let arrayFilter = [
+      {'costHead.rateAnalysisId':costHeadId},
+      {'category.rateAnalysisId': categoryId},
+      {'workItem.rateAnalysisId':workItemId, 'workItem.workItemId':ccWorkItemId}
+    ];
+    this.buildingRepository.findOneAndUpdate(query, updateQuery,{arrayFilters:arrayFilter, new: true}, (error, building) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  updateGstOfProjectWorkItems(projectId: string, costHeadId: number, categoryId: number, workItemId: number,
+                              ccWorkItemId: number, gst: number, user: User, callback: (error: any, result: any) => void) {
+    logger.info('Project service, updateGstOfProjectWorkItems has been hit');
+    let query = {_id: projectId};
+    let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].gst':gst}};
+
+    let arrayFilter = [
+      { 'costHead.rateAnalysisId': costHeadId },
+      { 'category.rateAnalysisId': categoryId },
+      { 'workItem.rateAnalysisId': workItemId, 'workItem.workItemId': ccWorkItemId }
+    ];
+    this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
 }
 
 /*Object.seal(ProjectService);
