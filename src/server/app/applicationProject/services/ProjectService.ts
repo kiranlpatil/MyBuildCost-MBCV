@@ -2032,8 +2032,14 @@ export class ProjectService {
           workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?', [quantityItems]);
         }
 
-        if (workItem.rate.isEstimated && workItem.quantity.isEstimated) {
-          workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+        if (workItem.rate.isEstimated && workItem.quantity.isEstimated ) {
+          if(workItem.isRateAnalysis) {
+            workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+          }else {
+            workItem.totalRate =  workItem.rate.total + (workItem.rate.total * workItem.gst) / 100;
+            workItem.amount = this.commonService.decimalConversion(workItem.totalRate * workItem.quantity.total);
+            workItem.gstComponent = workItem.amount - (workItem.rate.total * workItem.quantity.total);
+          }
           workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount + workItem.amount;
         }
         workItemsListWithRates.workItems.push(workItem);
