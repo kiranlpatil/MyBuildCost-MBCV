@@ -7,5 +7,6 @@ class RateItem {
   rate: number;
   totalAmount: number;
   type: string;
+  gst: Number;
 }
 export = RateItem;

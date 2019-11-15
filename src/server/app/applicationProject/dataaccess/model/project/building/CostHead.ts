@@ -9,6 +9,7 @@ class CostHead {
   active: boolean;
   thumbRuleRate: ThumbRuleRate;
   categories: Array<Category>;
+  gst: number;
 
   constructor() {
     this.active = true;

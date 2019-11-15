@@ -3687,7 +3687,7 @@ export class ProjectService {
        if(data.length> 0) {
           let arrayOfItemGst = new Array<ItemGst>();
           for(let item  of data ){
-            let itemGst = new ItemGst( item.itemName,  item.value);
+            let itemGst = new ItemGst( item.itemName,  item.value, item.type);
             arrayOfItemGst.push(itemGst);
           }
          let projectService =  new ProjectService();

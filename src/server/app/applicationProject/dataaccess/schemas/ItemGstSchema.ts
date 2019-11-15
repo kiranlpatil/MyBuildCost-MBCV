@@ -10,7 +10,8 @@ class ItemGstSchema {
 
     let schema = new Schema({
       itemName : String,
-      value : Number
+      value : Number,
+      type: String
     },{
       versionKey: false,
       timestamps:true
