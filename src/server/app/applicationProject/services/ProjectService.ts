@@ -455,7 +455,7 @@ export class ProjectService {
                   } else {
                     let regionName = config.get('costControlRegionCode');
                     let aggregateQuery = { 'region' : regionName };
-                    rateAnalysisService.getCostControlRateAnalysis(aggregateQuery,
+                    rateAnalysisService.getCostControlRateAnalysis('cloneBuilding',aggregateQuery,
                       {'buildingRates':1}, (err: any, data:any) => {
                       if(err) {
                         callback(error, null);
@@ -2317,7 +2317,7 @@ export class ProjectService {
     let buildingRepository = new BuildingRepository();
     let projectRepository = new ProjectRepository();
     let query = { 'region' : config.get('costControlRegionCode')};
-    rateAnalysisService.getCostControlRateAnalysis(query, {},(error: any, rateAnalysis: RateAnalysis) => {
+    rateAnalysisService.getCostControlRateAnalysis('addBuilding',query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateCostHeadsForBuildingAndProject : convertCostHeadsFromRateAnalysisToCostControl : '
             + JSON.stringify(error));
@@ -2365,7 +2365,7 @@ export class ProjectService {
       let buildingRepository = new BuildingRepository();
       logger.info('Inside updateBudgetRatesForBuildingCostHeads promise.');
       let query = { 'region' : config.get('costControlRegionCode')};
-      rateAnalysisService.getCostControlRateAnalysis( query, {},(error: any, rateAnalysis: RateAnalysis) => {
+      rateAnalysisService.getCostControlRateAnalysis( 'buildingCostHeads', query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in promise updateBudgetRatesForBuildingCostHeads : ' + JSON.stringify(error));
           reject(error);
@@ -2489,7 +2489,7 @@ export class ProjectService {
       let projectRepository = new ProjectRepository();
       logger.info('Inside updateBudgetRatesForProjectCostHeads promise.');
       let query = { 'region' : config.get('costControlRegionCode')};
-      rateAnalysisService.getCostControlRateAnalysis(query,{},(error: any, rateAnalysis: RateAnalysis) => {
+      rateAnalysisService.getCostControlRateAnalysis('projectCostHeads',query,{},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
           reject(error);
