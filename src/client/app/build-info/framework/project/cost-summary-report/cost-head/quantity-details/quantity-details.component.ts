@@ -275,7 +275,13 @@ export class QuantityDetailsComponent implements OnInit {
       quantityItemDetailsTotal = quantityItemDetailsTotal + quantityItemDetail.total;
     }
     this.workItemData.quantity.total = quantityItemDetailsTotal;
-    this.workItemData.amount = quantityItemDetailsTotal * this.workItemData.rate.total;
+    if( this.workItemData.isRateAnalysis) {
+      this.workItemData.amount = quantityItemDetailsTotal * this.workItemData.rate.total;
+    }else {
+      this.workItemData.totalRate =   this.workItemData.rate.total + ( this.workItemData.rate.total *  this.workItemData.gst) / 100;
+      this.workItemData.amount = this.commonService.decimalConversion(this.workItemData.totalRate * this.workItemData.quantity.total);
+      this.workItemData.gstComponent = this.commonService.decimalConversion(this.workItemData.amount - (this.workItemData.rate.total * this.workItemData.quantity.total));
+    }
     let categoryDetailsTotalAmount = 0;
     for(let categoryData of this.categoryDetails) {
       if(categoryData.rateAnalysisId === this.categoryRateAnalysisId) {
