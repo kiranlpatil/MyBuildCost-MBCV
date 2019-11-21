@@ -528,7 +528,7 @@ export class TableHeadings {
   public static GST_COMPONENT = 'GST Component';
   public static RATEANALYSIS: string = 'Rate Analysis';
   public static AMOUNT: string = 'Amount';
-  public static COST: string = 'Cost';
+  public static COST: string = ' Total Cost';
   public static TOTAL: string = 'Total';
   public static WEIGHT_IN_KG: string = 'Weight in kg';
 

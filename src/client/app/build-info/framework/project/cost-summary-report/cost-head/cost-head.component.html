@@ -40,8 +40,8 @@
                       <div *ngIf=" workItem.isDirectRate">{{getTableHeadings().BASIC_RATE_PER_UNIT}}</div>
                       <div *ngIf="!workItem.isDirectRate">{{getTableHeadings().RATE_PER_UNIT}}</div>
                     </th>
-                    <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().TOTAL_RATE}}</th>
                     <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().GST}}</th>
+                    <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().TOTAL_RATE}}</th>
                     <th>{{getTableHeadings().COST}}</th>
                     <th>{{getTableHeadings().RATEANALYSIS}}</th>
                     <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().GST_COMPONENT}}</th>
@@ -148,21 +148,21 @@
                                   </div>
                                 </td>
 
+                                <!--GST-->
+                                <td  *ngIf=" workItem.isDirectRate">
+                                  <span class="mobile-headings">{{getTableHeadings().GST}}</span>
+                                  <select  class="select-item" (change)="changeGst(category.rateAnalysisId, workItem,$event.target.value)">
+                                    <option>{{workItem.gst}} %</option>
+                                    <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
+                                  </select>
+                                </td>
+
                                  <!--Total Rate-->
                                <td *ngIf=" workItem.isDirectRate">
                                 <span class="mobile-headings">{{getTableHeadings().TOTAL_RATE}}</span>
                                   <div class="totalrate">
                                    {{workItem.totalRate}}
                                   </div>
-                              </td>
-
-                                <!--GST-->
-                              <td  *ngIf=" workItem.isDirectRate">
-                                <span class="mobile-headings">{{getTableHeadings().GST}}</span>
-                                <select  class="select-item" (change)="changeGst(category.rateAnalysisId, workItem,$event.target.value)">
-                                  <option>{{workItem.gst}} %</option>
-                                  <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
-                                </select>
                               </td>
 
                                 <!--Cost-->
