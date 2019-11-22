@@ -2021,6 +2021,7 @@ export class ProjectService {
         for(let rateItemIndex = 0; rateItemIndex < arrayOfRateItems.length; rateItemIndex++) {
           arrayOfRateItems[rateItemIndex].totalRate = arrayOfRateItems[rateItemIndex].rate + (arrayOfRateItems[rateItemIndex].rate * arrayOfRateItems[rateItemIndex].gst) / 100;
           arrayOfRateItems[rateItemIndex].totalAmount = (arrayOfRateItems[rateItemIndex].totalRate * arrayOfRateItems[rateItemIndex].quantity);
+          arrayOfRateItems[rateItemIndex].gstComponent = arrayOfRateItems[rateItemIndex].totalAmount - (arrayOfRateItems[rateItemIndex].rate * arrayOfRateItems[rateItemIndex].quantity);
         }
         let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?', [arrayOfRateItems]);
         let totalByUnit = totalOfAllRateItems / workItem.rate.quantity;
@@ -2035,6 +2036,8 @@ export class ProjectService {
 
         if (workItem.rate.isEstimated && workItem.quantity.isEstimated ) {
           if(workItem.isRateAnalysis) {
+            workItem.gstComponent = alasql('VALUE OF SELECT ROUND(SUM(gstComponent),2) FROM ?', [workItem.rate.rateItems]);
+            workItem.totalRate =  alasql('VALUE OF SELECT ROUND(SUM(totalRate),2) FROM ?', [workItem.rate.rateItems]);
             workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
           }else {
             workItem.totalRate =  workItem.rate.total + (workItem.rate.total * workItem.gst) / 100;

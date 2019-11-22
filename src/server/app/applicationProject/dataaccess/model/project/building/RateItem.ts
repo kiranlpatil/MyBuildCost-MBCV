@@ -9,5 +9,6 @@ class RateItem {
   type: string;
   gst: number;
   totalRate: number;
+  gstComponent: number;
 }
 export = RateItem;
