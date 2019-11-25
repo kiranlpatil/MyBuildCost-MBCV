@@ -3687,13 +3687,8 @@ export class ProjectService {
       + config.get('application.exportedFileNames.gstItems');
 
     let readGstItemsFromFile = this.readGstItemsFromFile(fileNameOfGstItems);
-    readGstItemsFromFile.then(function (data: Array<any>) {
-       if(data.length> 0) {
-          let arrayOfItemGst = new Array<ItemGst>();
-          for(let item  of data ){
-            let itemGst = new ItemGst( item.itemName,  item.value, item.type);
-            arrayOfItemGst.push(itemGst);
-          }
+    readGstItemsFromFile.then(function (arrayOfItemGst:  Array<ItemGst>) {
+       if(arrayOfItemGst.length> 0) {
          let projectService =  new ProjectService();
           projectService.saveGstData(arrayOfItemGst, (error:any, result:any)=> {
              if(error) {
