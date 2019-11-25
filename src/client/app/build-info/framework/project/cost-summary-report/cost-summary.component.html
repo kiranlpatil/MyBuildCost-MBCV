@@ -85,9 +85,9 @@
                 <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
                 <th class="text-center"><span class="sub-heading">{{ getLabel().BASIC_ESTIMATED_COST}}</span></th>
                 <th class="text-center"><span class="sub-heading">{{ getLabel().GST_COMPONENT}}</span></th>
+                <th><span class="sub-heading">{{ getLabel().TOTAL_ESTIMATED_COST }} </span></th>
                 <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} without {{getLabel().GST_COMPONENT}}</span></th>
-                <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}}</span></th>
-                <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
+                <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} with {{getLabel().GST_COMPONENT}}</span></th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -129,30 +129,33 @@
                       <span *ngIf="building.estimate.estimatedCosts[i].gstComponent === 0">-</span>
                       <span *ngIf="building.estimate.estimatedCosts[i].gstComponent !== 0">{{building.estimate.estimatedCosts[i].gstComponent}}</span>
                     </td>
-                    <td class="border-left">
-                      <span *ngIf="building.estimate.estimatedCosts[i].rateWithoutGst === 0">-</span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].rateWithoutGst !== 0">{{building.estimate.estimatedCosts[i].rateWithoutGst | number: '1.0-0' }}</span>
-                    </td>
-                    <td class="border-left">
-                      <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].rate === 0">-</span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].rate !== 0">
-                        {{ building.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
-                      </span>
-                    </td>
+
                     <td>
                       <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }} </span>
                       <div *ngIf="building.estimate.estimatedCosts[i].total != 0"
                            (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">
                         <span class="estimated-cost"
-                          [class.above-cost]="building.estimate.estimatedCosts[i].total > thumbRuleItem.amount"
-                          [class.below-cost]="building.estimate.estimatedCosts[i].total < thumbRuleItem.amount">
+                              [class.above-cost]="building.estimate.estimatedCosts[i].total > thumbRuleItem.amount"
+                              [class.below-cost]="building.estimate.estimatedCosts[i].total < thumbRuleItem.amount">
                           {{ building.estimate.estimatedCosts[i].total | number: '1.0-0' }}
                         </span>
                       </div>
                       <button title="Estimate Cost" *ngIf="building.estimate.estimatedCosts[i].total == 0"
                               type="button" class="btn-get-amount"
                               (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">Estimate Cost</button>
+                    </td>
+
+                    <td class="border-left">
+                      <span *ngIf="building.estimate.estimatedCosts[i].rateWithoutGst === 0">-</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].rateWithoutGst !== 0">{{building.estimate.estimatedCosts[i].rateWithoutGst | number: '1.0-0' }}</span>
+                    </td>
+
+                    <td class="border-left">
+                      <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].rate === 0">-</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].rate !== 0">
+                        {{ building.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
+                      </span>
                     </td>
                     <td class="delete-cost-head" >
                       <div title="Delete Cost Head" data-toggle="modal"

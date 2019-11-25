@@ -48,9 +48,9 @@
           <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
           <th class="border-left"><span class="sub-heading">{{getLabel().BASIC_ESTIMATED_COST}}</span></th>
           <th class="border-left"><span class="sub-heading">{{getLabel().GST_COMPONENT}}</span></th>
+          <th><span class="sub-heading">{{getLabel().TOTAL_ESTIMATED_COST}}</span></th>
           <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}} without {{getLabel().GST_COMPONENT}}</span></th>
-          <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
-          <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
+          <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}} with {{getLabel().GST_COMPONENT}}</span></th>
         </tr>
       </thead>
     </table>
@@ -95,6 +95,20 @@
                   {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent}}
                 </span>
               </td>
+              <td>
+                <span class="mobile-headings">{{ getLabel().TOTAL_ESTIMATED_COST }}</span>
+                <div *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
+                     (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
+                          <span  class="estimated-cost"
+                                 [class.above-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total > thumbRuleItem.amount"
+                                 [class.below-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total < thumbRuleItem.amount">
+                            {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number: '1.0-0' }}
+                          </span>
+                </div>
+                <button *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
+                      type="button" class="btn-get-amount" title="Estimate Cost"
+                        (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
+              </td>
               <td class="border-left" id="rateWithoutGst">
                 <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst === 0">-</span>
                 <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst !== 0">
@@ -117,20 +131,7 @@
                 <button type="button" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
                         class="btn-get-amount" (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
               </td>-->
-              <td>
-                <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }}</span>
-                <div *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
-                     (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
-                          <span  class="estimated-cost"
-                                 [class.above-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total > thumbRuleItem.amount"
-                                 [class.below-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total < thumbRuleItem.amount">
-                            {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number: '1.0-0' }}
-                          </span>
-                </div>
-                <button *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
-                        type="button" class="btn-get-amount" title="Estimate Cost"
-                        (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
-              </td>
+
               <td class="delete-cost-head">
                 <div data-toggle="modal"
                      data-target="#deleteCosthead"

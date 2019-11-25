@@ -623,6 +623,7 @@ export class Label {
   public static BUDGETED_COST: string = 'Budgeted Cost ';
   public static ESTIMATED_COST: string = 'Estimated Cost ';
   public static BASIC_ESTIMATED_COST: string = 'Basic Estimated Cost ';
+  public static TOTAL_ESTIMATED_COST: string = 'Total Estimated Cost ';
   public static COST_HEAD: string = 'Cost Head';
   public static AMENITY_COST_HEAD: string = 'Amenity Cost Head';
   public static REPORT_BY_THUMBRULE: string = 'By Thumbrule';
