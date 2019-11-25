@@ -83,6 +83,7 @@
               <tr class="cost-summary-row-list">
                 <th class="text-center"><span class="sub-heading">{{ defaultCostingByUnit }}<br/>Per {{defaultCostingByArea }}</span></th>
                 <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
+                <th class="text-center"><span class="sub-heading">{{ getLabel().BASIC_ESTIMATED_COST}}</span></th>
                 <th class="text-center"><span class="sub-heading">{{ getLabel().GST_COMPONENT}}</span></th>
                 <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}}</span></th>
                 <th><span class="sub-heading">{{ getLabel().ESTIMATED_COST }} </span></th>
@@ -119,8 +120,13 @@
                       </div>
                     </td>
                     <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
+                    <td class="border-left" name = "basicCost">
+                      <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost === 0">-</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost !== 0">{{building.estimate.estimatedCosts[i].basicEstimatedCost}}</span>
+                    </td>
                     <td class="border-left" name = "gstComponent">
-                      {{building.estimate.estimatedCosts[i].gstComponent}}
+                      <span *ngIf="building.estimate.estimatedCosts[i].gstComponent === 0">-</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].gstComponent !== 0">{{building.estimate.estimatedCosts[i].gstComponent}}</span>
                     </td>
                     <td class="border-left">
                       <span class="mobile-headings">{{ defaultCostingByUnit }} </span>

@@ -199,6 +199,7 @@ class ReportService {
     estimateReport.total = categoriesObj.categoriesAmount;
     estimateReport.gstComponent = categoriesObj.totalGstComponent;
     estimateReport.rate = estimateReport.total / area;
+    estimateReport.basicEstimatedCost = estimateReport.total - estimateReport.gstComponent;
     return estimateReport;
   }
 
