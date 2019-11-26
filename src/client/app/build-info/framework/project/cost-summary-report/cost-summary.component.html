@@ -313,11 +313,12 @@
                     </td>
                     <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
                     <td>
-                      <span class="mobile-headings">{{ defaultCostingByUnit }}</span>
-                      <span *ngIf="grandTotalOfEstimatedRate === 0">-</span>
-                      <span *ngIf="grandTotalOfEstimatedRate !== 0">
-                            {{ grandTotalOfEstimatedRate|number: '1.2-2' }}
-                      </span>
+                      <span *ngIf="grandTotalOfBasicEstimatedCost === 0">-</span>
+                      <span *ngIf="grandTotalOfBasicEstimatedCost !== 0">{{grandTotalOfBasicEstimatedCost|number: '1.0-0'}}</span>
+                    <td>
+                    <td>
+                      <span *ngIf="grandTotalOfGstComponent === 0">-</span>
+                      <span *ngIf="grandTotalOfGstComponent !== 0">{{grandTotalOfGstComponent|number : '1.0-0'}}</span>
                     </td>
                     <td style="padding-right: 40px;">
                       <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }}</span>
@@ -326,6 +327,18 @@
                         {{ grandTotalOfEstimatedCost|number: '1.0-0' }}
                       </span>
                     </td>
+                    <td>
+                      <span *ngIf="grandTotalOfRateWithoutGst=== 0">-</span>
+                      <span *ngIf="grandTotalOfRateWithoutGst!== 0">{{grandTotalOfRateWithoutGst |number: '1.2-2'}}</span>
+                    </td>
+                    <td>
+                      <span class="mobile-headings">{{ defaultCostingByUnit }}</span>
+                      <span *ngIf="grandTotalOfEstimatedRate === 0">-</span>
+                      <span *ngIf="grandTotalOfEstimatedRate !== 0">
+                            {{ grandTotalOfEstimatedRate|number: '1.2-2' }}
+                      </span>
+                    </td>
+
                   </tr>
                 </tbody>
               </table>
