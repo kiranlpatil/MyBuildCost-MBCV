@@ -75,7 +75,7 @@
                   <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
                   <div class="white-bg"></div>
                 </th>
-                <th colspan="2" class="border-left table-heading">
+                <th colspan="5" class="border-left table-heading">
                   {{ getLabel().ESTIMATED }} <span class="sub-heading">{{ getLabel().AS_PER_PROJECT }}</span>
                   <div class="white-bg"></div>
                 </th>
@@ -123,11 +123,11 @@
                     <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
                     <td class="border-left" name = "basicCost">
                       <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost === 0">-</span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost !== 0">{{building.estimate.estimatedCosts[i].basicEstimatedCost}}</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost !== 0">{{building.estimate.estimatedCosts[i].basicEstimatedCost | number: '1.2-2'}}</span>
                     </td>
                     <td class="border-left" name = "gstComponent">
                       <span *ngIf="building.estimate.estimatedCosts[i].gstComponent === 0">-</span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].gstComponent !== 0">{{building.estimate.estimatedCosts[i].gstComponent}}</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].gstComponent !== 0">{{building.estimate.estimatedCosts[i].gstComponent | number: '1.2-2'}}</span>
                     </td>
 
                     <td>
@@ -213,12 +213,17 @@
                   </span>
                 </td>
                 <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
-                <td class="border-left">
-                  <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
-                  <span class="estimated-cost" *ngIf="building.estimate.totalRate === 0">-</span>
-                  <span class="estimated-cost" *ngIf="building.estimate.totalRate !== 0">
-                    {{ building.estimate.totalRate|number: '1.2-2'}}
-                  </span>
+                <td>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalBasicEstimatedCost === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalBasicEstimatedCost !== 0">
+                        {{ building.estimate.totalBasicEstimatedCost|number: '1.0-0' }}
+                      </span>
+                </td>
+                <td>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalGstComponent === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalGstComponent!== 0">
+                        {{ building.estimate.totalGstComponent|number: '1.0-0' }}
+                      </span>
                 </td>
                 <td class="border-left">
                   <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }} </span>
@@ -227,6 +232,21 @@
                     {{ building.estimate.totalEstimatedCost|number : '1.0-0'}}
                   </span>
                 </td>
+
+                <td>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRateWithoutGst === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRateWithoutGst!== 0">
+                        {{ building.estimate.totalRateWithoutGst|number: '1.0-0' }}
+                      </span>
+                </td>
+                <td class="border-left">
+                  <span class="mobile-headings">{{ defaultCostingByUnit }} </span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRate === 0">-</span>
+                  <span class="estimated-cost" *ngIf="building.estimate.totalRate !== 0">
+                    {{ building.estimate.totalRate|number: '1.2-2'}}
+                  </span>
+                </td>
+
               </tr>
             </tbody>
           </table>

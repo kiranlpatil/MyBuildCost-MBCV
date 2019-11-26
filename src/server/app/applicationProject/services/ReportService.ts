@@ -143,11 +143,15 @@ class ReportService {
       thumbRule.totalBudgetedCost = Math.round(totalRates[0].totalAmount);
       thumbRule.thumbRuleReports = thumbRuleReports;
 
-      let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate FROM ?',
+      let totalEstimatedRates = alasql('SELECT ROUND(SUM(total),2) AS totalAmount, ROUND(SUM(rate),2) AS totalRate, ROUND(SUM(gstComponent),2) AS totalGstComponent, ' +
+        'ROUND(SUM(basicEstimatedCost),2) AS basicEstimatedCost, ROUND(SUM(rateWithoutGst),2) AS totalrateWithoutGst FROM ?',
         [estimatedReports]);
       estimate.totalRate = totalEstimatedRates[0].totalRate;
       estimate.totalEstimatedCost = totalEstimatedRates[0].totalAmount;
       estimate.estimatedCosts = estimatedReports;
+      estimate.totalBasicEstimatedCost =  totalEstimatedRates[0].basicEstimatedCost;
+      estimate.totalGstComponent = totalEstimatedRates[0].totalGstComponent;
+      estimate.totalRateWithoutGst = totalEstimatedRates[0].totalrateWithoutGst;
 
       buildingReport.thumbRule = thumbRule;
       buildingReport.estimate = estimate;
@@ -241,7 +245,15 @@ class ReportService {
       estimate.totalEstimatedCost = totalEstimatedRates[0].totalAmount;
       estimate.estimatedCosts = estimatedReports;
 
-      projectReport.thumbRule = thumbRule;
+      let totalGstBasicRateCost = alasql('SELECT ROUND(SUM(gstComponent),2) AS totalGstComponent, ROUND(SUM(basicEstimatedCost),2) AS totalBasicEstimatedCost ' +
+        ',ROUND(SUM(rateWithoutGst),2) AS totalRateWithoutGst FROM ?',
+        [estimatedReports]);
+
+      estimate.totalBasicEstimatedCost = totalGstBasicRateCost[0].totalBasicEstimatedCost;
+      estimate.totalRateWithoutGst = totalGstBasicRateCost[0].totalRateWithoutGst;
+      estimate.totalGstComponent = totalGstBasicRateCost[0].totalGstComponent;
+
+    projectReport.thumbRule = thumbRule;
       projectReport.estimate = estimate;
     commonAmenitiesReport.push(projectReport);
     console.log('SHow Hide List : '+JSON.stringify(this.costHeadsList));
