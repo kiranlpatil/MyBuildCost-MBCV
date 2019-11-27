@@ -866,22 +866,16 @@ class RateAnalysisService {
 
   getCostHeadWithGst(arrayOfCostHeadItemGst: Array<any>, arrayOfProjectCostHeads: any) {
     for (let itemGst of arrayOfCostHeadItemGst) {
-      let getCostHeadSQL = 'SEARCH / WHERE(name = "' + itemGst.itemName + '") FROM ?';
+      let getCostHeadSQL = 'SEARCH / WHERE(name = "' + itemGst.itemName + '")  SET (gst = '+itemGst.value+')FROM ?';
       let isCostHeadDetail = alasql(getCostHeadSQL, [arrayOfProjectCostHeads]);
-      if (isCostHeadDetail.length > 0) {
-        isCostHeadDetail[0].gst = itemGst.value;
-      } else {
-        console.log('CostHead is not present' + itemGst.itemName);
-      }
     }
   }
 
   getWorkItemWithGst(arrayOfWorkItemGst: Array<any>,  arrayOfWorkItem: any) {
     for(let itemGst of arrayOfWorkItemGst) {
-      let getWorkItemSQL = 'SEARCH // WHERE(name = "' + itemGst.itemName + '") FROM ?';
-      let isProjectWorkItemDetail = alasql(getWorkItemSQL, [arrayOfWorkItem]);
+      let getWorkItemSQL = 'SEARCH // WHERE(name = ?) SET (gst = '+itemGst.value+') FROM ?';
+      let isProjectWorkItemDetail = alasql(getWorkItemSQL, [itemGst.itemName,arrayOfWorkItem]);
       if (isProjectWorkItemDetail.length > 0) {
-        isProjectWorkItemDetail[0].gst = itemGst.value;
       } else {
         console.log('Project WorkItem is not present' + itemGst.itemName);
       }
@@ -890,12 +884,9 @@ class RateAnalysisService {
 
   getRateItemWithGst(arrayOfRateItemGst: Array<any>,  arrayOfRateItem: any) {
     for(let itemGst of arrayOfRateItemGst) {
-      let getRateItemSQL = 'SEARCH // WHERE(itemName = "' + itemGst.itemName + '") FROM ?';
-      let isRateItemDetail = alasql(getRateItemSQL, [arrayOfRateItem]);
+      let getRateItemSQL = 'SEARCH // WHERE(itemName = ?) SET (gst = '+itemGst.value+')FROM ?';
+      let isRateItemDetail = alasql(getRateItemSQL, [itemGst.itemName,arrayOfRateItem]);
       if (isRateItemDetail.length > 0) {
-        isRateItemDetail.forEach(function (rateItem: RateItem) {
-          rateItem.gst = itemGst.value;
-        });
       } else {
         console.log('RateItem is not present' + itemGst.itemName);
       }
