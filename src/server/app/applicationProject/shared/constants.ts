@@ -215,5 +215,6 @@ class Constants {
   public static MSG_ERROR_DUPLICATE_ITEM = 'Item with the same name already exists, Please update the name for item ';
   public static TRIAL_PERIOD = 5;
   public static PREMIUM_PERIOD = 30;
+  public static DEFAULT_GST = 18;
 }
 export=Constants;

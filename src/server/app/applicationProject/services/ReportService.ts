@@ -208,13 +208,16 @@ class ReportService {
     return estimateReport;
   }
 
-  getEstimatedReportForNonCategories(thumbRuleReport: ThumbRuleReport) {
+  getEstimatedReportForNonCategories(thumbRuleReport: ThumbRuleReport, totalArea:number) {
     let estimateReport = new EstimateReport();
     estimateReport.name = thumbRuleReport.name;
     estimateReport.rateAnalysisId = thumbRuleReport.rateAnalysisId;
     estimateReport.total = thumbRuleReport.amount;
     estimateReport.disableCostHeadView = true;
     estimateReport.rate = thumbRuleReport.rate;
+    estimateReport.gstComponent = (estimateReport.total* Constants.DEFAULT_GST)/100;
+    estimateReport.basicEstimatedCost = estimateReport.total - estimateReport.gstComponent;
+    estimateReport.rateWithoutGst = estimateReport.basicEstimatedCost/totalArea;
     return estimateReport;
   }
 
@@ -283,7 +286,7 @@ class ReportService {
       if(costHead.categories.length > 0) {
         estimateReport = this.getEstimatedReport(projectRates, costHead, totalArea, rateUnit);
       } else {
-        estimateReport = this.getEstimatedReportForNonCategories(thumbRuleReport);
+        estimateReport = this.getEstimatedReportForNonCategories(thumbRuleReport ,totalArea);
       }
 
       estimatedReports.push(estimateReport);
