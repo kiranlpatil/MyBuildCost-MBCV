@@ -108,10 +108,13 @@
         font-size: 12px;
         height: 26px;
         margin: 0;
-        padding: 3px 24px 3px 3px;
-        text-align: right;
+        //padding: 3px 24px 3px 3px;
+        //text-align: right;
+        padding: 3px;
         transition: opacity 0.5s ease-in-out;
-        width: 82px;
+        //width: 82px;
+        width: 60px;
+        text-align: center;
       }
 
       .calculator {
@@ -119,7 +122,8 @@
         //opacity: 0;
         position: absolute;
         top: 5px;
-        right: 0;
+        //right: 0;
+        left: 65px;
         transition: opacity 0.5s ease-in-out;
         width: 12px;
       }
@@ -257,8 +261,10 @@
     border-radius: 0;
     color: $heading;
     font-size: 12px;
-    padding: 2px 5px;
-    width: 100%;
+    //padding: 2px 5px;
+    //width: 100%;
+    width: 80%;
+    padding: 9px 0;
     font-weight: 400;
     &:focus {
       border: 0;

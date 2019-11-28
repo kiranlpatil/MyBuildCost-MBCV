@@ -528,14 +528,14 @@ export class TableHeadings {
   public static GST_COMPONENT = 'GST Component';
   public static RATEANALYSIS: string = 'Rate Analysis';
   public static AMOUNT: string = 'Amount';
-  public static COST: string = ' Total Cost';
+  public static COST: string = ' Total Cost including GST';
   public static TOTAL: string = 'Total';
   public static WEIGHT_IN_KG: string = 'Weight in kg';
 
   public static DESCRIPTION: string = 'Description';
-  public static RATE_PER_UNIT: string = 'Rate/Unit';
+  public static RATE_PER_UNIT: string = 'Rate/Unit including GST';
   public static DIAMETER: string = 'Diameter';
-  public static TOTAL_RATE: string = 'Total Rate/Unit';
+  public static TOTAL_RATE: string = 'Rate/Unit including GST';
   public static BASIC_RATE_PER_UNIT: string = 'Basic Rate/Unit';
   public static MM_UNIT: string = 'mm';
   public static MTR_UNIT: string = 'mtr';

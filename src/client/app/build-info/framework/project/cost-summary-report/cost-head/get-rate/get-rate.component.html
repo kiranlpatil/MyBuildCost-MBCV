@@ -42,7 +42,7 @@
                   <th>{{ getTableHeadings().GST }}</th>
                   <th>{{ getTableHeadings().TOTAL_RATE }}</th>
                   <th>{{ getTableHeadings().COST }}</th>
-                  <th>{{ getTableHeadings().GST_COMPONENT }}</th>
+                  <!--<th>{{ getTableHeadings().GST_COMPONENT }}</th>-->
                 </tr>
               </thead>
               <tbody>
@@ -84,10 +84,15 @@
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                   </td>
                   <td >
+                    <div class="gst-comp">
                     <select  class="select-item" [(ngModel)]="item.gst" (change)="calculateTotal()" [disabled]="disableRateField">
                       <option>{{rate.rateItems[i].gst}} %</option>
                       <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
                     </select>
+                    <div class="Gst-Component">
+                      {{item.gstComponent}}
+                    </div>
+                    </div>
                   </td>
                   <td >
                     <div class="total-rate">
@@ -98,19 +103,20 @@
                     <!--<input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>-->
                     <span *ngIf="anySubscriptionAvailable; else elseBlock"> {{item.totalAmount|number : '1.2-2'}}</span>
                   </td>
-                  <td >
+                  <!--<td >
                     <div class="Gst-Component">
                       {{item.gstComponent}}
                     </div>
-                  </td>
+                  </td>-->
                 </tr>
                </tbody>
               <tfoot>
               <tr>
-                <td colspan="5" class="total-amount">
+                <!--colspan="5"-->
+                <td  class="total-amount">
                   <label class="visible-xs">{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
-                <td class="hidden-xs total-amount">
+                <td class="hidden-xs total-amount" colspan="4">
                   <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
                 <td *ngIf="anySubscriptionAvailable">
@@ -134,13 +140,15 @@
       </tbody>
       <tfoot>
         <tr>
-          <td rowspan="2">
+          <td>
+            <!--rowspan="2"-->
             <button title="Cancel" *ngIf="innerView !== getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeRateTab()">{{getButton().CANCEL_BUTTON}}</button>
             <button title="Cancel" *ngIf="innerView === getLabel().GET_RATE_BY_QUANTITY" class="cancel hidden-xs" (click)="closeInnerViewTab()">{{getButton().CANCEL_BUTTON}}</button>
 
             <button title="Save" type="button" *ngIf="!disableRateField" class="save-btn hidden-xs" (click)="updateRate(rate)">{{ getButton().SAVE }}</button>
           </td>
-          <td class="grand-total-amount" colspan="4">
+          <td class="grand-total-amount" colspan="1">
+            <!--colspan="4"-->
             <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && !totalAmountOfMaterialAndLabour">{{ getLabel().TOTAL_A_B}}:</label>
             <label *ngIf="totalAmountOfMaterial && totalAmountOfLabour && totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A_B_C}}:</label>
             <label *ngIf="totalAmountOfMaterial && !totalAmountOfLabour && !totalAmountOfMaterialAndLabour ">{{ getLabel().TOTAL_A}}:</label>
@@ -148,7 +156,8 @@
           </td>
         </tr>
         <tr>
-          <td class="grand-total-gst--amount" colspan="4">
+          <td class="grand-total-gst--amount" rowspan="3">
+            <!--colspan="4"-->
             <label *ngIf="TotalGstOfMaterial && TotalGstOfLabour && !TotalGstOfMaterialAndLabour">{{ getLabel().TOTAL_GST_A_B}}:</label>
             <label *ngIf="TotalGstOfMaterial && TotalGstOfLabour && TotalGstOfMaterialAndLabour ">{{ getLabel().TOTAL_GST_A_B_C}}:</label>
             <label *ngIf="TotalGstOfMaterial && !TotalGstOfLabour && !TotalGstOfMaterialAndLabour ">{{ getLabel().TOTAL_GST_A}}:</label>
@@ -156,7 +165,7 @@
           </td>
         </tr>
         <tr>
-          <td class="grand-total-amount" colspan="4">
+          <td class="grand-total-amount" colspan="2">
             <label>Rate per {{rate.unit}}:</label>
             <span *ngIf="anySubscriptionAvailable; else elseBlock">{{ ratePerUnitAmount|number: '1.2-2'}}</span>
           </td>

@@ -1033,3 +1033,35 @@ textarea[disabled] {
     margin-top: 110px;
   }
 }
+
+#mytable {
+ &.workitem-rate-table {
+   tr {
+     td, th {
+       //width: 12%;
+       min-width: 110px;
+       &:first-child {
+         //width: 28%;
+         min-width: 270px;
+       }
+     }
+     tr td{
+        td, th {
+         min-width: 10px;
+          &:first-child{
+            min-width: 68px!important;
+          }
+          &:nth-child(5){
+            min-width: 85px!important;
+          }
+       }
+     }
+   }
+ }
+}
+
+.workitem-rate-table{
+  .get-quantity-section{
+    left: 41%!important;
+  }
+}
