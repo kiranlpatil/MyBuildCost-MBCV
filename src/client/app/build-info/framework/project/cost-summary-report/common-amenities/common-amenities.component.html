@@ -86,13 +86,13 @@
               <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
               <td class="border-left" id="basicEstimatedCost"><span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost === 0">-</span>
               <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost!== 0">
-                {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost | number: '.1-2'}}
+                {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost | number: '1.0-0'}}
               </span>
               </td>
               <td class="border-left" id="gstComponent">
                 <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent === 0">-</span>
                 <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent !== 0">
-                  {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent}}
+                  {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent| number: '1.0-0'}}
                 </span>
               </td>
               <td>

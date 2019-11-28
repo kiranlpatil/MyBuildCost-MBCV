@@ -212,12 +212,12 @@ class ReportService {
     let estimateReport = new EstimateReport();
     estimateReport.name = thumbRuleReport.name;
     estimateReport.rateAnalysisId = thumbRuleReport.rateAnalysisId;
-    estimateReport.total = thumbRuleReport.amount;
     estimateReport.disableCostHeadView = true;
-    estimateReport.rate = thumbRuleReport.rate;
-    estimateReport.gstComponent = (estimateReport.total* Constants.DEFAULT_GST)/100;
+    estimateReport.gstComponent = (thumbRuleReport.amount* Constants.DEFAULT_GST)/100;
+    estimateReport.total = thumbRuleReport.amount + estimateReport.gstComponent;
     estimateReport.basicEstimatedCost = estimateReport.total - estimateReport.gstComponent;
     estimateReport.rateWithoutGst = estimateReport.basicEstimatedCost/totalArea;
+    estimateReport.rate =  estimateReport.total/ totalArea ;
     return estimateReport;
   }
 
