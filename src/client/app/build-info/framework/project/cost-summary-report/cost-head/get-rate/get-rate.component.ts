@@ -96,12 +96,13 @@ export class GetRateComponent implements OnChanges {
 
   calculateGstAmount() {
     for (let rateItemsIndex in this.rate.rateItems) {
-      this.rate.rateItems[rateItemsIndex].totalRate = this.rate.rateItems[rateItemsIndex].rate + (this.rate.rateItems[rateItemsIndex].rate * this.rate.rateItems[rateItemsIndex].gst) / 100;
+      this.rate.rateItems[rateItemsIndex].rateWithGst = (this.rate.rateItems[rateItemsIndex].rate * this.rate.rateItems[rateItemsIndex].gst) / 100;
+      this.rate.rateItems[rateItemsIndex].totalRate = this.rate.rateItems[rateItemsIndex].rate + this.rate.rateItems[rateItemsIndex].rateWithGst ;
 
       this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(this.rate.rateItems[rateItemsIndex].totalRate *
-        this.rate.rateItems[rateItemsIndex].quantity)
+        this.rate.rateItems[rateItemsIndex].quantity);
 
-      this.rate.rateItems[rateItemsIndex].gstComponent = this.commonService.decimalConversion(this.rate.rateItems[rateItemsIndex].totalAmount - (this.rate.rateItems[rateItemsIndex].rate * this.rate.rateItems[rateItemsIndex].quantity))
+      this.rate.rateItems[rateItemsIndex].gstComponent = this.commonService.decimalConversion(this.rate.rateItems[rateItemsIndex].totalAmount - (this.rate.rateItems[rateItemsIndex].rate * this.rate.rateItems[rateItemsIndex].quantity));
     }
   }
 

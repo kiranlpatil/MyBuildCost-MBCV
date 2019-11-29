@@ -29,6 +29,7 @@ export class WorkItem {
   gst: number;
   gstComponent: number;
   totalRate:number;
+  rateWithGst: number;
   constructor(name: string, rateAnalysisId: number) {
     this.name = name;
     this.rateAnalysisId = rateAnalysisId;

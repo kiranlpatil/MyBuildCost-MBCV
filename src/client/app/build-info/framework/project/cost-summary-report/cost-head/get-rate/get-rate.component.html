@@ -42,7 +42,6 @@
                   <th>{{ getTableHeadings().GST }}</th>
                   <th>{{ getTableHeadings().TOTAL_RATE }}</th>
                   <th>{{ getTableHeadings().COST }}</th>
-                  <!--<th>{{ getTableHeadings().GST_COMPONENT }}</th>-->
                 </tr>
               </thead>
               <tbody>
@@ -90,7 +89,7 @@
                       <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
                     </select>
                     <div class="Gst-Component">
-                      {{item.gstComponent}}
+                      {{item.rateWithGst| number :'.1-2'}}
                     </div>
                     </div>
                   </td>
@@ -103,11 +102,6 @@
                     <!--<input type="number" [(ngModel)]="item.totalAmount" id="totalAmount get-total-amount text-right" class="form-control clear" readonly/>-->
                     <span *ngIf="anySubscriptionAvailable; else elseBlock"> {{item.totalAmount|number : '1.2-2'}}</span>
                   </td>
-                  <!--<td >
-                    <div class="Gst-Component">
-                      {{item.gstComponent}}
-                    </div>
-                  </td>-->
                 </tr>
                </tbody>
               <tfoot>
@@ -116,18 +110,13 @@
                 <td  class="total-amount">
                   <label class="visible-xs">{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
-                <td class="hidden-xs total-amount" colspan="4">
+                <td class="hidden-xs total-amount" colspan="5">
                   <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
                 <td *ngIf="anySubscriptionAvailable">
                   <div *ngIf="(rateItem.key === 'M')">{{ totalAmountOfMaterial|number : '1.2-2'}} </div>
                   <div *ngIf="(rateItem.key === 'L')">{{ totalAmountOfLabour|number : '1.2-2'}} </div>
                   <div *ngIf="(rateItem.key === 'M + L')">{{ totalAmountOfMaterialAndLabour|number : '1.2-2'}} </div>
-                </td>
-                <td class="hidden-xs gst-component">
-                  <div *ngIf="(rateItem.key === 'M')">{{TotalGstOfMaterial}}</div>
-                  <div *ngIf="(rateItem.key === 'L')">{{TotalGstOfLabour}}</div>
-                  <div *ngIf="(rateItem.key === 'M + L')">{{TotalGstOfMaterialAndLabour}}</div>
                 </td>
                 <td *ngIf="!anySubscriptionAvailable">
                 <div>-</div>

@@ -11,4 +11,5 @@ export class RateItem {
   gst: number;
   totalRate: number;
   gstComponent: number;
+  rateWithGst:number;
 }

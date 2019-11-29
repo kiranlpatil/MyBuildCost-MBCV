@@ -156,12 +156,12 @@
                                     <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
                                   </select>
                                   <div class="gst-component-section">
-                                    <span class="mobile-headings">{{getTableHeadings().GST_COMPONENT}}</span>
-                                    <div class="gst-component" *ngIf=" workItem.isDirectRate && !workItem.gstComponent">
+                                 <!--   <span class="mobile-headings">{{getTableHeadings().GST_COMPONENT}}</span>-->
+                                    <div class="gst-component" *ngIf=" workItem.isDirectRate && !workItem.rateWithGst">
                                       -
                                     </div>
-                                    <div class="gst-component" *ngIf=" workItem.isDirectRate && workItem.gstComponent">
-                                      {{workItem.gstComponent}}
+                                    <div class="gst-component" *ngIf=" workItem.isDirectRate && workItem.rateWithGst">
+                                      {{workItem.rateWithGst| number :'.1-2'}}
                                     </div>
                                   </div>
                                 </td>

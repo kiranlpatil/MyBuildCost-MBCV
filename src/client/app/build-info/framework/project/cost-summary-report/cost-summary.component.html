@@ -123,11 +123,11 @@
                     <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
                     <td class="border-left" name = "basicCost">
                       <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost === 0">-</span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost !== 0">{{building.estimate.estimatedCosts[i].basicEstimatedCost | number: '1.2-2'}}</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].basicEstimatedCost !== 0">{{building.estimate.estimatedCosts[i].basicEstimatedCost | number: '1.0-0' }}</span>
                     </td>
                     <td class="border-left" name = "gstComponent">
                       <span *ngIf="building.estimate.estimatedCosts[i].gstComponent === 0">-</span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].gstComponent !== 0">{{building.estimate.estimatedCosts[i].gstComponent | number: '1.2-2'}}</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].gstComponent !== 0">{{building.estimate.estimatedCosts[i].gstComponent | number: '1.0-0' }}</span>
                     </td>
 
                     <td>
@@ -147,7 +147,7 @@
 
                     <td class="border-left">
                       <span *ngIf="building.estimate.estimatedCosts[i].rateWithoutGst === 0">-</span>
-                      <span *ngIf="building.estimate.estimatedCosts[i].rateWithoutGst !== 0">{{building.estimate.estimatedCosts[i].rateWithoutGst | number: '1.0-0' }}</span>
+                      <span *ngIf="building.estimate.estimatedCosts[i].rateWithoutGst !== 0">{{building.estimate.estimatedCosts[i].rateWithoutGst | number: '1.2-2' }}</span>
                     </td>
 
                     <td class="border-left">
@@ -236,7 +236,7 @@
                 <td>
                   <span class="estimated-cost" *ngIf="building.estimate.totalRateWithoutGst === 0">-</span>
                   <span class="estimated-cost" *ngIf="building.estimate.totalRateWithoutGst!== 0">
-                        {{ building.estimate.totalRateWithoutGst|number: '1.0-0' }}
+                        {{ building.estimate.totalRateWithoutGst|number: '1.2-2' }}
                       </span>
                 </td>
                 <td class="border-left">

@@ -2019,7 +2019,8 @@ export class ProjectService {
 
         let arrayOfRateItems = workItem.rate.rateItems;
         for(let rateItemIndex = 0; rateItemIndex < arrayOfRateItems.length; rateItemIndex++) {
-          arrayOfRateItems[rateItemIndex].totalRate = arrayOfRateItems[rateItemIndex].rate + (arrayOfRateItems[rateItemIndex].rate * arrayOfRateItems[rateItemIndex].gst) / 100;
+          arrayOfRateItems[rateItemIndex].rateWithGst = (arrayOfRateItems[rateItemIndex].rate * arrayOfRateItems[rateItemIndex].gst) / 100;
+          arrayOfRateItems[rateItemIndex].totalRate = arrayOfRateItems[rateItemIndex].rate + arrayOfRateItems[rateItemIndex].rateWithGst;
           arrayOfRateItems[rateItemIndex].totalAmount = (arrayOfRateItems[rateItemIndex].totalRate * arrayOfRateItems[rateItemIndex].quantity);
           arrayOfRateItems[rateItemIndex].gstComponent = arrayOfRateItems[rateItemIndex].totalAmount - (arrayOfRateItems[rateItemIndex].rate * arrayOfRateItems[rateItemIndex].quantity);
         }
@@ -2042,7 +2043,8 @@ export class ProjectService {
             workItem.totalRate =  alasql('VALUE OF SELECT ROUND(SUM(totalRate),2) FROM ?', [workItem.rate.rateItems]);
             workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
           }else {
-            workItem.totalRate =  workItem.rate.total + (workItem.rate.total * workItem.gst) / 100;
+            workItem.rateWithGst = (workItem.rate.total * workItem.gst) / 100;
+            workItem.totalRate =  workItem.rate.total + workItem.rateWithGst;
             workItem.amount = this.commonService.decimalConversion(workItem.totalRate * workItem.quantity.total);
             workItem.gstComponent = workItem.amount - (workItem.rate.total * workItem.quantity.total);
           }

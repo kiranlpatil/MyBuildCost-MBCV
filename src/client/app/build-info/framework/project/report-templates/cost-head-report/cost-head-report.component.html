@@ -58,9 +58,9 @@
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.unit">{{workitem.unit}}</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.unit">-</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.isDirectRate && workitem.totalRate ===0">-</td>
-            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.isDirectRate && workitem.totalRate !== 0">{{workitem.totalRate|number :'1.0-0'}}
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.isDirectRate && workitem.totalRate !== 0">{{workitem.totalRate|number :'1.2-2'}}
             </td><td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.isDirectRate && workitem.rate.total ===0">-</td>
-            <td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.isDirectRate && workitem.rate.total !== 0">{{workitem.rate.total|number :'1.0-0'}}</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.isDirectRate && workitem.rate.total !== 0">{{workitem.rate.total|number :'1.2-2'}}</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.amount !== 0 ">{{workitem.amount|number :'1.0-0'}}</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.amount === 0 ">-</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.gstComponent">{{workitem.gstComponent|number :'1.0-0'}}</td>

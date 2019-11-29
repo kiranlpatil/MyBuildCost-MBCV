@@ -215,12 +215,12 @@
           <td>
             <span class="mobile-headings">{{ getLabel().BASIC_ESTIMATED_COST }}</span>
             <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost ===0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost !==0">{{amenitiesReport.estimate.totalBasicEstimatedCost}}</span>
+            <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost !==0">{{amenitiesReport.estimate.totalBasicEstimatedCost|number: '1.0-0'}}</span>
           </td>
           <td>
             <span class="mobile-headings">{{ getLabel().GST_COMPONENT }}</span>
             <span *ngIf="amenitiesReport.estimate.totalGstComponent ===0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalGstComponent !==0">{{amenitiesReport.estimate.totalGstComponent}}</span>
+            <span *ngIf="amenitiesReport.estimate.totalGstComponent !==0">{{amenitiesReport.estimate.totalGstComponent|number: '1.0-0'}}</span>
           </td>
           <td class="border-left">
             <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }} </span>
@@ -232,7 +232,7 @@
           <td>
             <span class="mobile-headings">{{ costingByUnit }} </span>
             <span *ngIf="amenitiesReport.estimate.totalRateWithoutGst ===0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalRateWithoutGst !==0">{{amenitiesReport.estimate.totalRateWithoutGst}}</span>
+            <span *ngIf="amenitiesReport.estimate.totalRateWithoutGst !==0">{{amenitiesReport.estimate.totalRateWithoutGst|number: '1.2-2'}}</span>
           </td>
           <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
           <td class="border-left">
