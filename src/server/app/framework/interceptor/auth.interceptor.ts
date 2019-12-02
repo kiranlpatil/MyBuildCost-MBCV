@@ -15,12 +15,6 @@ class AuthInterceptor {
 
   constructor() {
 
-    let fbClientId = config.get('application.facebookIds.clientId');
-    let fbClientSecretId = config.get('application.facebookIds.clientSecretId');
-    let googlePlusClientId = config.get('application.googlePlusIds.clientId');
-    let googlePlusClientSecretId = config.get('application.googlePlusIds.clientSecretId');
-
-
     passport.use(new BearerStrategy(function (token: any, done: any) {
       let decoded: any = null;
       let isShareApi: boolean = false;
@@ -57,107 +51,6 @@ class AuthInterceptor {
       }
     }));
 
-    passport.use(new FacebookTokenStrategy({
-        clientID: fbClientId,
-        clientSecret: fbClientSecretId
-      },
-
-      // facebook will send back the tokens and profile
-      function (access_token: any, refresh_token: any, profile: any, done: any) {
-        process.nextTick(function () {
-          // find the user in the database based on their facebook id
-          let userRepository: UserRepository = new UserRepository();
-          let query = {'email': profile.emails[0].value};
-          userRepository.retrieve(query, function (err, user) {
-
-            if (err) {
-              return done(err, null);
-            }
-            // if the user is found, then log them in
-            if (user.length > 0) {
-
-              return done(null, user[0]);
-            } else {
-              // if there is no user found with that facebook id, create them
-
-              if (profile.emails[0].value) {
-                let newUser: any = <UserModel>{};
-
-                newUser.first_name = profile.name.givenName;
-                newUser.last_name = profile.name.familyName;
-                newUser.email = profile.emails[0].value;
-                newUser.mobile_number = 12345678;
-                newUser.password = '12345678';
-                newUser.current_theme = 'container-fluid light-theme';
-
-                // save our user to the database
-                let userRepository: UserRepository = new UserRepository();
-                userRepository.create(newUser, (err: any, res: any) => {
-                  if (err) {
-                    return done(err, null);
-                  } else {
-                    return done(null, res);
-                  }
-                });
-              } else {
-                return done(null, null, true);
-              }
-            }
-          });
-        });
-      }));
-
-    passport.use(new GooglePlusTokenStrategy({
-        clientID: googlePlusClientId,
-        clientSecret: googlePlusClientSecretId,
-        // passReqToCallback: true
-
-      },
-
-      // Google will send back the tokens and profile
-      function (req: any, access_token: any, refresh_token: any, profile: any, done: any) {
-        process.nextTick(function () {
-          // find the user in the database based on their facebook id
-          let userRepository: UserRepository = new UserRepository();
-          let query = {'email': profile.emails[0].value};
-          userRepository.retrieve(query, function (err, user) {
-
-            if (err) {
-              return done(err, null);
-            }
-            // if the user is found, then log them in
-            if (user.length > 0) {
-
-              return done(null, user[0]);
-            } else {
-              // if there is no user found with that google id, create them
-
-              if (profile.emails[0].value) {
-                let newUser: any = <UserModel>{};
-                let randomMobileNumber = Math.floor(Math.random() * (10000000000 - 100000) + 1000000000);
-                newUser.first_name = profile.name.givenName;
-                newUser.last_name = profile.name.familyName;
-                //newUser.email = profile.emails[0].value;
-                newUser.email = profile.emails[0].value;
-                newUser.mobile_number = randomMobileNumber;
-                newUser.password = 'YH8n@4Sjj!tYk4q-';
-
-                // save our user to the database
-                let userRepository: UserRepository = new UserRepository();
-                userRepository.create(newUser, (err: any, res: any) => {
-                  if (err) {
-                    return done(err, null);
-                  } else {
-                    return done(null, res);
-                  }
-                });
-              } else {
-                return done(null, null, true);
-              }
-            }
-          });
-        });
-      }));
   }
 
   issueTokenWithUid(user: any, role?: string) {

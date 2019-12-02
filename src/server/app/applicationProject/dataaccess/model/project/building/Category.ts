@@ -7,9 +7,11 @@ class  Category {
   active: boolean;
   workItems : Array<WorkItem>;
 
-  constructor(name:string, rateAnalysisId: number) {
+  constructor(name:string, rateAnalysisId ?: number) {
     this.name = name;
-    this.rateAnalysisId = rateAnalysisId;
+    if(rateAnalysisId || rateAnalysisId === 0) {
+      this.rateAnalysisId = rateAnalysisId;
+    }
     this.amount = 0;
     this.active = true;
     this.workItems = new Array<WorkItem>();

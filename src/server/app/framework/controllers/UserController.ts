@@ -921,6 +921,26 @@ updateSubscriptionDetails(req: express.Request, res: express.Response, next: any
     }
   }
 
+  exportUserData(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let userService = new UserService();
+      userService.exportUserData((error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          res.send(result);
+        }
+      });
+    } catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
+
 }
 
 export = UserController;

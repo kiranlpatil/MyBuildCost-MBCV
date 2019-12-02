@@ -64,6 +64,14 @@ export class GetRateComponent implements OnChanges {
   selectedItemName: string;
   anySubscriptionAvailable : boolean;
   subscription :any;
+  gstval=ValueConstant.GST_VALUES;
+  gst:number;
+  TotalGstOfMaterial: number;
+  TotalGstOfLabour: number;
+  TotalGstOfMaterialAndLabour:number;
+  totalGstAmount : number;
+  totalRate: number = 0;
+  gstComponent : number = 0;
   //totalByUnit :  number = 0;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
@@ -78,6 +86,24 @@ export class GetRateComponent implements OnChanges {
   ngOnChanges() {
     console.log(this.rate);
     this.calculateTotal();
+    //this.getGst(this.gst);
+  }
+  /*getGst(val :number)
+  {
+    this.gst =val;
+    console.log("GST" +this.gst)
+  }*/
+
+  calculateGstAmount() {
+    for (let rateItemsIndex in this.rate.rateItems) {
+      this.rate.rateItems[rateItemsIndex].rateWithGst = (this.rate.rateItems[rateItemsIndex].rate * this.rate.rateItems[rateItemsIndex].gst) / 100;
+      this.rate.rateItems[rateItemsIndex].totalRate = this.rate.rateItems[rateItemsIndex].rate + this.rate.rateItems[rateItemsIndex].rateWithGst ;
+
+      this.rate.rateItems[rateItemsIndex].totalAmount = this.commonService.decimalConversion(this.rate.rateItems[rateItemsIndex].totalRate *
+        this.rate.rateItems[rateItemsIndex].quantity);
+
+      this.rate.rateItems[rateItemsIndex].gstComponent = this.commonService.decimalConversion(this.rate.rateItems[rateItemsIndex].totalAmount - (this.rate.rateItems[rateItemsIndex].rate * this.rate.rateItems[rateItemsIndex].quantity));
+    }
   }
 
   calculateTotal(choice?:string) {
@@ -87,6 +113,12 @@ export class GetRateComponent implements OnChanges {
     this.totalAmountOfLabour = 0;
     this.totalAmountOfMaterial=0;
     this.totalAmountOfMaterialAndLabour = 0;
+    this.totalRate = 0;
+    this.gstComponent = 0;
+    this.TotalGstOfMaterial = 0;
+    this.TotalGstOfLabour = 0;
+    this.TotalGstOfMaterialAndLabour = 0;
+    this.totalGstAmount = 0;
 
     for (let rateItemsIndex in this.rate.rateItems) {
      if(this.rate.rateItems[rateItemsIndex].quantity!==null && this.rate.rateItems[rateItemsIndex].rate !==null &&
@@ -102,31 +134,26 @@ export class GetRateComponent implements OnChanges {
       this.type = this.rate.rateItems[rateItemsIndex].type;
         switch (this.type) {
           case 'M' :
-              this.rate.rateItems[rateItemsIndex].totalAmount = this.rate.rateItems[rateItemsIndex].quantity *
-                this.rate.rateItems[rateItemsIndex].rate;
-
+               this.calculateGstAmount();
               this.totalAmountOfMaterial = this.totalAmountOfMaterial + this.rate.rateItems[rateItemsIndex].totalAmount;
-
+              this.TotalGstOfMaterial = this.commonService.decimalConversion(this.TotalGstOfMaterial +  this.rate.rateItems[rateItemsIndex].gstComponent);
                break;
 
           case 'L' :
-              this.rate.rateItems[rateItemsIndex].totalAmount = this.rate.rateItems[rateItemsIndex].quantity *
-                this.rate.rateItems[rateItemsIndex].rate;
-
+              this.calculateGstAmount();
               this.totalAmountOfLabour = this.totalAmountOfLabour + this.rate.rateItems[rateItemsIndex].totalAmount;
-
+            this.TotalGstOfLabour = this.TotalGstOfLabour +  this.rate.rateItems[rateItemsIndex].gstComponent;
               break;
 
           case 'M + L' :
-              this.rate.rateItems[rateItemsIndex].totalAmount = this.rate.rateItems[rateItemsIndex].quantity *
-                this.rate.rateItems[rateItemsIndex].rate;
-
+                this.calculateGstAmount();
               this.totalAmountOfMaterialAndLabour = this.totalAmountOfMaterialAndLabour +
                  this.rate.rateItems[rateItemsIndex].totalAmount;
-
+              this.TotalGstOfMaterialAndLabour = this.TotalGstOfMaterialAndLabour + this.rate.rateItems[rateItemsIndex].gstComponent;
               break;
               }
       this.totalAmount = this.totalAmountOfMaterial + this.totalAmountOfLabour +this.totalAmountOfMaterialAndLabour;
+      this.totalGstAmount = this.TotalGstOfMaterial + this.TotalGstOfLabour + this.TotalGstOfMaterialAndLabour;
     }
     this.ratePerUnitAmount = this.totalAmount / this.rate.quantity;
     this.rate.total = this.rateTotalByUnit();

@@ -20,11 +20,23 @@ import RAWorkItem = require('../dataaccess/model/RateAnalysis/RAWorkItem');
 import RACostHead = require('../dataaccess/model/RateAnalysis/RACostHead');
 import SavedRateRepository = require('../dataaccess/repository/SavedRateRepository');
 import RASavedRate = require('../dataaccess/model/RateAnalysis/RASavedRate');
+import BuildingRepository = require('../dataaccess/repository/BuildingRepository');
+import UserRepository = require('../../framework/dataaccess/repository/UserRepository');
+import ProjectRepository = require('../dataaccess/repository/ProjectRepository');
+import { ProjectService } from './ProjectService';
+import ConfigWorkItem = require('../dataaccess/model/project/building/ConfigWorkItem');
+import ItemGstRepository = require('../dataaccess/repository/ItemGstRepository');
+import RateItem = require('../dataaccess/model/project/building/RateItem');
+import ItemGst = require('../dataaccess/model/RateAnalysis/ItemGst');
+//var ProjectService = require('./ProjectService');
 let request = require('request');
 let config = require('config');
 var log4js = require('log4js');
 var logger = log4js.getLogger('Rate Analysis Service');
-
+const Json2csvParser = require('json2csv').Parser;
+var fs = require('fs');
+let path = require('path');
+let xlsxj = require('xlsx-to-json');
 let CCPromise = require('promise/lib/es6-extensions');
 
 class RateAnalysisService {
@@ -33,7 +45,12 @@ class RateAnalysisService {
   private authInterceptor: AuthInterceptor;
   private userService: UserService;
   private rateAnalysisRepository: RateAnalysisRepository;
+  private buildingRepository: BuildingRepository;
   private savedRateRepository : SavedRateRepository;
+  private userRepository : UserRepository;
+  private projectRepository :ProjectRepository;
+  private projectService : ProjectService;
+  private itemGstRepository : ItemGstRepository;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
@@ -41,6 +58,11 @@ class RateAnalysisService {
     this.userService = new UserService();
     this.rateAnalysisRepository = new RateAnalysisRepository();
     this.savedRateRepository = new SavedRateRepository();
+    this.buildingRepository = new BuildingRepository();
+    this.userRepository = new UserRepository();
+    this.projectRepository = new ProjectRepository();
+    this.projectService = new ProjectService();
+    this.itemGstRepository = new ItemGstRepository();
   }
 
   getCostHeads(url: string, user: User, callback: (error: any, result: any) => void) {
@@ -106,7 +128,7 @@ class RateAnalysisService {
         callback(new CostControllException(error.message, error.stack), null);
       } else if (!error && response) {
         try {
-          if(response.statusCode === 200) {
+          if (response.statusCode === 200) {
             let res = JSON.parse(body);
             callback(null, res);
           } else {
@@ -175,7 +197,8 @@ class RateAnalysisService {
     });
   }
 
-  convertCostHeadsFromRateAnalysisToCostControl(entity: string, region: any, callback: (error: any, data: any) => void) {
+  convertCostHeadsFromRateAnalysisToCostControl(entity: string, region: any, configCostHeads: Array<CostHead>,
+                                                callback: (error: any, data: any) => void) {
     logger.info('convertCostHeadsFromRateAnalysisToCostControl has been hit');
 
     let costHeadURL = config.get(Constants.RATE_ANALYSIS_API + entity + Constants.RATE_ANALYSIS_COSTHEADS)
@@ -254,7 +277,7 @@ class RateAnalysisService {
         let buildingCostHeads: Array<CostHead> = [];
         let rateAnalysisService = new RateAnalysisService();
 
-        rateAnalysisService.getCostHeadsFromRateAnalysis(costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
+        rateAnalysisService.getCostHeadsFromRateAnalysis(configCostHeads, costHeadsRateAnalysis, categoriesRateAnalysis, workItemsRateAnalysis,
           rateItemsRateAnalysis, unitsRateAnalysis, notesRateAnalysis, contractingAddOns, contractorAddOnResult, buildingCostHeads);
         logger.info('success in  convertCostHeadsFromRateAnalysisToCostControl.');
         callback(null, {
@@ -290,7 +313,7 @@ class RateAnalysisService {
     });*/
   }
 
-  getCostHeadsFromRateAnalysis(costHeadsRateAnalysis: any, categoriesRateAnalysis: any,
+  getCostHeadsFromRateAnalysis(configCostHeads: any, costHeadsRateAnalysis: any, categoriesRateAnalysis: any,
                                workItemsRateAnalysis: any, rateItemsRateAnalysis: any,
                                unitsRateAnalysis: any, notesRateAnalysis: any,
                                contractingAddOns: any, contractorAddOnResult: any,
@@ -302,7 +325,6 @@ class RateAnalysisService {
       if (config.has('budgetedCostFormulae.' + costHeadsRateAnalysis[costHeadIndex].C2)) {
         let costHead = new CostHead();
         costHead.name = costHeadsRateAnalysis[costHeadIndex].C2;
-        let configCostHeads = config.get('configCostHeads');
         let categories = new Array<Category>();
 
         if (configCostHeads.length > 0) {
@@ -335,7 +357,7 @@ class RateAnalysisService {
         costHead.thumbRuleRate = config.get(Constants.THUMBRULE_RATE);
         buildingCostHeads.push(costHead);
       } else {
-        console.log('CostHead Unavaialabel : ' + costHeadsRateAnalysis[costHeadIndex].C2);
+        console.log('CostHead Unavailaable : ' + costHeadsRateAnalysis[costHeadIndex].C2);
       }
     }
   }
@@ -642,27 +664,36 @@ class RateAnalysisService {
 
   SyncRateAnalysis(region: any) {
     let rateAnalysisService = new RateAnalysisService();
-    this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, region, (error: any, costHeadsData: any) => {
+    let query = {'appType': 'configCostHeads'};
+    this.rateAnalysisRepository.retrieve(query, (error: any, rateAnalysisArray: Array<RateAnalysis>) => {
       if (error) {
-        logger.error('RateAnalysis Sync Failed.');
+        logger.error('Unable to retrive synced RateAnalysis');
       } else {
-        if(costHeadsData) {
-          let buildingCostHeads = JSON.parse(JSON.stringify(costHeadsData.buildingCostHeads));
-          let projectCostHeads = JSON.parse(JSON.stringify(costHeadsData.buildingCostHeads));
-          let configCostHeads = config.get('configCostHeads');
-          let configProjectCostHeads = config.get('configProjectCostHeads');
-          let fixedCostConfigProjectCostHeads = config.get('fixedCostConfigProjectCostHeads');
-          this.convertConfigCostHeads(configCostHeads, buildingCostHeads);
-          this.convertConfigCostHeads(configProjectCostHeads, projectCostHeads);
-          this.convertConfigCostHeads(fixedCostConfigProjectCostHeads, projectCostHeads);
-          buildingCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [buildingCostHeads]);
-          projectCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [projectCostHeads]);
-          let buildingRates = this.getRates(costHeadsData, buildingCostHeads);
-          let projectRates = this.getRates(costHeadsData, projectCostHeads);
-          let rateAnalysis = new RateAnalysis(buildingCostHeads, buildingRates, projectCostHeads, projectRates);
-          rateAnalysis.appType = 'MyBuildCost';
-          this.saveRateAnalysis(rateAnalysis, region);
-        }
+        let configData = rateAnalysisArray[0];
+        let configCostHeads = configData.buildingCostHeads;
+        let configProjectCostHeads = configData.projectCostHeads;
+        let fixedCostConfigProjectCostHeads = configData.fixedAmountCostHeads;
+        this.convertCostHeadsFromRateAnalysisToCostControl(Constants.BUILDING, region,
+          configCostHeads, (error: any, costHeadsData: any) => {
+          if (error) {
+            logger.error('RateAnalysis Sync Failed.');
+          } else {
+            if(costHeadsData) {
+              let buildingCostHeads = JSON.parse(JSON.stringify(costHeadsData.buildingCostHeads));
+              let projectCostHeads = JSON.parse(JSON.stringify(costHeadsData.buildingCostHeads));
+              this.convertConfigCostHeads(configCostHeads, buildingCostHeads);
+              this.convertConfigCostHeads(configProjectCostHeads, projectCostHeads);
+              this.convertConfigCostHeads(fixedCostConfigProjectCostHeads, projectCostHeads);
+              buildingCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [buildingCostHeads]);
+              projectCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [projectCostHeads]);
+              let buildingRates = this.getRates(costHeadsData, buildingCostHeads);
+              let projectRates = this.getRates(costHeadsData, projectCostHeads);
+              let rateAnalysis = new RateAnalysis(buildingCostHeads, buildingRates, projectCostHeads, projectRates);
+              rateAnalysis.appType = 'MyBuildCost';
+              this.saveRateAnalysis(rateAnalysis, region);
+            }
+          }
+        });
       }
     });
   }
@@ -779,7 +810,7 @@ class RateAnalysisService {
     });
   }
 
-  getCostControlRateAnalysis(query: any, projection: any, callback: (error: any, rateAnalysis: RateAnalysis) => void) {
+  getCostControlRateAnalysis(type:String , query: any, projection: any, callback: (error: any, rateAnalysis: RateAnalysis) => void) {
     this.rateAnalysisRepository.retrieveWithProjection(query, projection, (error: any, rateAnalysisArray: Array<RateAnalysis>) => {
       if (error) {
         callback(error, null);
@@ -788,10 +819,78 @@ class RateAnalysisService {
           logger.error('ContControl RateAnalysis not found.');
           callback('ContControl RateAnalysis not found.', null);
         } else {
-          callback(null, rateAnalysisArray[0]);
+          let rateAnalysisData = rateAnalysisArray[0];
+          if (type === 'cloneBuilding') {
+            callback(null, rateAnalysisArray[0]);
+          } else {
+            this.itemGstRepository.retrieve({}, (error: any, res: any) => {
+              if (error) {
+                logger.error('Unable to retrive  Saved Rate');
+              } else {
+                if (res.length > 0) {
+                  let arrayOfItemGst = res;
+                  let arrayOfCostHeadItemGst = arrayOfItemGst.filter(function(itemGst: ItemGst){ return itemGst.type === 'costHead'; });
+                  let arrayOfWorkItemGst = arrayOfItemGst.filter(function(itemGst: ItemGst){ return itemGst.type === 'workItem'; });
+                  let arrayOfRateItemGst = arrayOfItemGst.filter(function(itemGst: ItemGst){ return itemGst.type === 'rateItem'; });
+                  let rateAnalysisService = new RateAnalysisService();
+                  switch (type) {
+                    case 'projectCostHeads':
+                            let arrayOfProjectCostHeads = rateAnalysisData.projectCostHeads;
+                            rateAnalysisService.getCostHeadWithGst(arrayOfCostHeadItemGst,arrayOfProjectCostHeads);
+                            rateAnalysisService.getItemWithGst(arrayOfProjectCostHeads,arrayOfWorkItemGst,arrayOfRateItemGst);
+                      break;
+                    case 'buildingCostHeads':
+                    case 'addBuilding':
+                            rateAnalysisService.getItemWithGst(rateAnalysisData.buildingCostHeads,arrayOfWorkItemGst,arrayOfRateItemGst);
+                      break;
+                  }
+                }
+              }
+              callback(null, rateAnalysisArray[0]);
+            });
+          }
         }
       }
     });
+  }
+
+  getItemWithGst(arrayOfCostHeads:Array<any>, arrayOfWorkItemGst:Array<any>, arrayOfRateItemGst: Array<any>) {
+      let rateAnalysisService = new RateAnalysisService();
+      let getWorkItemSQL = 'SEARCH /categories/workItems FROM ?';
+      let arrayOfWorkItem = alasql(getWorkItemSQL, [arrayOfCostHeads]);
+      rateAnalysisService.getWorkItemWithGst(arrayOfWorkItemGst, arrayOfWorkItem);
+      let getRateItemSQL = 'SEARCH ///rateItems FROM ?';
+      let arrayOfRateItem = alasql(getRateItemSQL,[arrayOfWorkItem]);
+      rateAnalysisService.getRateItemWithGst(arrayOfRateItemGst, arrayOfRateItem);
+  }
+
+  getCostHeadWithGst(arrayOfCostHeadItemGst: Array<any>, arrayOfProjectCostHeads: any) {
+    for (let itemGst of arrayOfCostHeadItemGst) {
+      let getCostHeadSQL = 'SEARCH / WHERE(name = "' + itemGst.itemName + '")  SET (gst = '+itemGst.value+')FROM ?';
+      let isCostHeadDetail = alasql(getCostHeadSQL, [arrayOfProjectCostHeads]);
+    }
+  }
+
+  getWorkItemWithGst(arrayOfWorkItemGst: Array<any>,  arrayOfWorkItem: any) {
+    for(let itemGst of arrayOfWorkItemGst) {
+      let getWorkItemSQL = 'SEARCH // WHERE(name = ?) SET (gst = '+itemGst.value+') FROM ?';
+      let isProjectWorkItemDetail = alasql(getWorkItemSQL, [itemGst.itemName,arrayOfWorkItem]);
+      if (isProjectWorkItemDetail.length > 0) {
+      } else {
+        console.log('Project WorkItem is not present' + itemGst.itemName);
+      }
+    }
+  }
+
+  getRateItemWithGst(arrayOfRateItemGst: Array<any>,  arrayOfRateItem: any) {
+    for(let itemGst of arrayOfRateItemGst) {
+      let getRateItemSQL = 'SEARCH // WHERE(itemName = ?) SET (gst = '+itemGst.value+')FROM ?';
+      let isRateItemDetail = alasql(getRateItemSQL, [itemGst.itemName,arrayOfRateItem]);
+      if (isRateItemDetail.length > 0) {
+      } else {
+        console.log('RateItem is not present' + itemGst.itemName);
+      }
+    }
   }
 
   getAggregateData(query: any, callback: (error: any, aggregateData: any) => void) {
@@ -808,14 +907,14 @@ class RateAnalysisService {
         logger.error(JSON.stringify(error));
         callback(error, null);
       } else if (!error && response) {
-        if(response.statusCode===200) {
+        if (response.statusCode === 200) {
           let resp = JSON.parse(body);
           regionListFromRateAnalysis = resp['Regions'];
           console.log('regionListFromRateAnalysis : ' + JSON.stringify(regionListFromRateAnalysis));
           callback(null, regionListFromRateAnalysis);
-        }else {
+        } else {
           console.log('regionListFromRateAnalysis : NOT FOUND. Internal server error!');
-          callback('regionListFromRateAnalysis : NOT FOUND. Internal server error!',null);
+          callback('regionListFromRateAnalysis : NOT FOUND. Internal server error!', null);
         }
       }
     });
@@ -823,7 +922,7 @@ class RateAnalysisService {
 
   getAllRegionNames(callback: (error: any, result: Array<any>) => void) {
     let query = [
-      {$match: {'appType':'RateAnalysis'}},
+      {$match: {'appType': 'RateAnalysis'}},
       {$unwind: '$region'},
       {$project: {'region': 1, _id: 0}}
     ];
@@ -1291,6 +1390,484 @@ class RateAnalysisService {
     });
   }
 
+  exportDataToCSV(callback : (error:any, res:any)=> void) {
+    this.writeBuildingCostHeads();
+    this.writeProjectCostHeads();
+    this.writeFixedAmountCostHeads();
+  }
+
+  writeBuildingCostHeads() {
+    const dataList = config.get('configCostHeads');
+    const fields = ['name', 'priorityId', 'rateAnalysisId', 'categories.name', 'categories.rateAnalysisId',
+      'categories.workItems.name','categories.workItems.rateAnalysisId','categories.workItems.isMeasurementSheet',
+      'categories.workItems.measurementUnit','categories.workItems.isRateAnalysis','categories.workItems.rateAnalysisPerUnit',
+      'categories.workItems.rateAnalysisUnit','categories.workItems.directRate','categories.workItems.directRatePerUnit',
+      'categories.workItems.isItemBreakdownRequired','categories.workItems.length','categories.workItems.breadthOrWidth',
+      'categories.workItems.height'];
+
+    const json2csvParser = new Json2csvParser({ fields , unwind: ['categories','categories.workItems']});
+    const csvData = json2csvParser.parse(dataList);
+    let fileName = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.buildingCostHeads');
+    this.writeExcelFile(fileName, csvData,(err: any, response: any) => {
+      if (err) {
+        console.log('Error ');
+      } else {
+        console.log('Success ');
+      }
+    });
+  }
+
+  writeProjectCostHeads() {
+    const dataList = config.get('configProjectCostHeads');
+    const fields = ['name', 'priorityId', 'rateAnalysisId', 'categories.name', 'categories.rateAnalysisId',
+      'categories.workItems.name','categories.workItems.rateAnalysisId','categories.workItems.isMeasurementSheet',
+      'categories.workItems.measurementUnit','categories.workItems.isRateAnalysis','categories.workItems.rateAnalysisPerUnit',
+      'categories.workItems.rateAnalysisUnit','categories.workItems.directRate','categories.workItems.directRatePerUnit',
+      'categories.workItems.isItemBreakdownRequired','categories.workItems.length','categories.workItems.breadthOrWidth',
+      'categories.workItems.height'];
+
+    const json2csvParser = new Json2csvParser({ fields , unwind: ['categories','categories.workItems']});
+    const csvData = json2csvParser.parse(dataList);
+    let fileName = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.projectCostHeads');
+    this.writeExcelFile(fileName, csvData,(err: any, response: any) => {
+      if (err) {
+        console.log('Error ');
+      } else {
+        console.log('Success ');
+      }
+    });
+  }
+
+  writeFixedAmountCostHeads() {
+    const dataList = config.get('fixedCostConfigProjectCostHeads');
+    const fields = ['name', 'priorityId', 'rateAnalysisId'];
+    const json2csvParser = new Json2csvParser({ fields });
+    const csvData = json2csvParser.parse(dataList);
+    let fileName = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.fixedAmountCostHeads');
+    this.writeExcelFile(fileName, csvData,(err: any, response: any) => {
+      if (err) {
+        console.log('Error ');
+      } else {
+        console.log('Success ');
+      }
+    });
+  }
+
+  writeExcelFile(fileName: string, data : any, callback : (error:any, result:any)=> void) {
+
+    fs.writeFile(fileName, data, 'utf-8', function (err: any, response: any) {
+      if (err) {
+        console.log('Error ');
+        callback(err, null);
+      } else {
+        console.log('Success ');
+        callback(null, { messge : 'Successfully created files' });
+      }
+    });
+  }
+
+  readFromExcel(callback : (error:any, res:any)=> void) {
+
+    let fileNameForProjectCostHeads = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.projectCostHeads');
+    let fileNameForBuildingCostHeads = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.buildingCostHeads');
+    let fileNameForFixedAmountCostHeads = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.fixedAmountCostHeads');
+
+    let createPromiseForReadingProjectCostHead = this.createPromiseToReadFile(fileNameForProjectCostHeads);
+    let createPromiseForReadingBuildingCostHead = this.createPromiseToReadFile(fileNameForBuildingCostHeads);
+    let createPromiseForReadingFixedAmountCostHead = this.createPromiseToReadFile(fileNameForFixedAmountCostHeads);
+
+    CCPromise.all([
+      createPromiseForReadingBuildingCostHead,
+      createPromiseForReadingProjectCostHead,
+      createPromiseForReadingFixedAmountCostHead
+    ]).then(function (data: Array<any>) {
+      logger.info('convertCostHeadsFromRateAnalysisToCostControl Promise.all API is success.');
+
+      if(data.length > 0) {
+
+        let buildingCostHeads = data[0];
+        let projectCostHeads = data[1];
+        let fixedAmountCostHeads = data[2];
+
+        let rateAnalysisModel = new RateAnalysis(buildingCostHeads,  null, projectCostHeads, null);
+        rateAnalysisModel.fixedAmountCostHeads = fixedAmountCostHeads;
+        let rateAnalysisService = new RateAnalysisService();
+        rateAnalysisService.saveConfigData(rateAnalysisModel, (error:any, result:any)=> {
+          if(error) {
+            console.log('Error : '+JSON.stringify(error));
+            callback(error, null);
+          } else {
+            console.log('Result : '+JSON.stringify(result));
+            callback(null, result);
+          }
+        });
+      }
+    }).catch(function (e: any) {
+      logger.error(' Promise failed for readFromExcel :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  createPromiseToReadFile(filePath: string) {
+    return new CCPromise(function (resolve: any, reject: any) {
+      logger.info('creating Promise for file read has been hit : ' + filePath);
+      xlsxj({
+        input: filePath,
+        output: null
+      }, (err: any, result: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          if(result.length > 0) {
+            let rateAnalysisService = new RateAnalysisService();
+            resolve(rateAnalysisService.convertJSON(result));
+          }
+        }
+      });
+    }).catch(function (e: any) {
+      logger.error('creating Promise for file read has been hit : ' + filePath + ':\n error :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  convertJSON(costHeadList: Array<any>) {
+    let costheadsList = new Array<any>();
+    let getAllDistinctCostHeads = 'select DISTINCT name from ?';
+    let distinctCostHeadList = alasql(getAllDistinctCostHeads, [costHeadList]);
+
+    for(let costHead of distinctCostHeadList) {
+      if(costHead.name !== null && costHead.name !== '') {
+          let costHeadDetailsSQL = 'SELECT * FROM ? WHERE name = ?';
+          let costHeadArray = alasql(costHeadDetailsSQL, [costHeadList, costHead.name]);
+          if(costHeadArray.length > 0) {
+            let costHead = costHeadArray[0];
+            let costheadObj = new CostHead();
+            costheadObj.name = costHead.name;
+            if(costHead.rateAnalysisId) {
+              costheadObj.rateAnalysisId = parseInt(costHead.rateAnalysisId);
+            }
+            costheadObj.priorityId = parseInt(costHead.priorityId);
+            costheadObj.categories = this.getDistinctCategories(costHeadArray, costHead.name);
+            costheadsList.push(costheadObj);
+          }
+        }
+      }
+    return costheadsList;
+  }
+
+  getDistinctCategories(distinctCostHeadList: Array<any>, costheadName : string) {
+    let categoriesList = new Array<any>();
+    let getAllDistinctCategories = 'select DISTINCT categoryName from ?';
+    let distinctCategoriesList = alasql(getAllDistinctCategories, [distinctCostHeadList]);
+
+    for(let category of distinctCategoriesList) {
+      if(category.categoryName !== null && category.categoryName !== '') {
+        let getCategoryObjectSQL = 'SELECT * from ? where categoryName = ?';
+        let categoryObjects = alasql(getCategoryObjectSQL,[distinctCostHeadList, category.categoryName]);
+
+        if(categoryObjects.length > 0) {
+          let categoryObj = categoryObjects[0];
+          let categoryId: number;
+          if(parseInt(categoryObj.categoryRateAnalysisId)) {
+            categoryId = parseInt(categoryObj.categoryRateAnalysisId);
+          }
+          let categoryObject = new Category(categoryObj.categoryName, categoryId);
+          categoryObject.workItems = this.getDistinctWorkItems(distinctCostHeadList, categoryObj.categoryName);
+          categoriesList.push(categoryObject);
+        }
+      }
+    }
+    return categoriesList;
+  }
+
+  getDistinctWorkItems(categoryList: Array<any>, categoryName: string) {
+    let workItemsList = new Array<any>();
+
+    let getWorkitemObjectSQL = 'SELECT * from ? where categoryName = ?';
+    let configWorkItemList = alasql(getWorkitemObjectSQL, [categoryList, categoryName]);
+
+    for(let configWorkItem of configWorkItemList) {
+      if(configWorkItem.workItemName !== null && configWorkItem.workItemName !== '') {
+        let workItemId: number;
+        if(parseInt(configWorkItem.WorkItemRateAnalysisId)) {
+          workItemId = parseInt(configWorkItem.WorkItemRateAnalysisId);
+        }
+        let workItemObj = new ConfigWorkItem(configWorkItem.workItemName, workItemId);
+        workItemObj.isRateAnalysis = (configWorkItem.isRateAnalysis.toUpperCase() === 'TRUE');
+        if(configWorkItem.directRate) {
+          workItemObj.directRate = parseInt(configWorkItem.directRate);
+        } else {
+          workItemObj.directRate = 0;
+        }
+        workItemObj.directRatePerUnit = configWorkItem.directRatePerUnit;
+        workItemObj.isMeasurementSheet = (configWorkItem.isMeasurementSheet.toUpperCase() === 'TRUE');
+        workItemObj.measurementUnit = configWorkItem.measurementUnit;
+        let rateAnalysisPerUnit : number = 0;
+        if(configWorkItem.rateAnalysisPerUnit) {
+          workItemObj.rateAnalysisPerUnit = rateAnalysisPerUnit;
+        }
+        workItemObj.rateAnalysisUnit = configWorkItem.rateAnalysisUnit;
+        workItemObj.isItemBreakdownRequired = (configWorkItem.isItemBreakdownRequired.toUpperCase() === 'TRUE');
+        if(!workItemObj.isItemBreakdownRequired) {
+          workItemObj.length = false;
+          workItemObj.breadthOrWidth = false;
+          workItemObj.height = false;
+        } else {
+          workItemObj.length = (configWorkItem.length.toUpperCase() === 'TRUE');
+          workItemObj.breadthOrWidth = (configWorkItem.breadthOrWidth.toUpperCase() === 'TRUE');
+          workItemObj.height = (configWorkItem.height.toUpperCase() === 'TRUE');
+        }
+        workItemsList.push(workItemObj);
+      }
+    }
+    return workItemsList;
+  }
+
+  saveConfigData(rateAnalysisModel: RateAnalysis, callback :(error:any, result: any) => void) {
+    let query = { appType: 'configCostHeads' };
+    this.rateAnalysisRepository.retrieve(query, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        if(result.length > 0) {
+          let query = { _id: result[0]._id };
+          this.rateAnalysisRepository.findOneAndUpdate(query, rateAnalysisModel, {},(error:any, result:any)=> {
+            if(error) {
+              callback(error, null);
+            } else {
+              callback(null, result);
+            }
+          });
+        } else {
+          rateAnalysisModel.appType = 'configCostHeads';
+          this.rateAnalysisRepository.create(rateAnalysisModel, (err: any, response:any)=> {
+            if(err) {
+              callback(err, null);
+            } else {
+              callback(null, response);
+            }
+          });
+        }
+      }
+    });
+  }
+
+  syncNewDataForAllUsers() {
+    this.getAllLatestCostHeadsFromRateAnalysis((error: any, success: any) => {
+      if (error) {
+        console.log('Failed for buildings');
+      } else if (success) {
+        console.log('Done for all buildings');
+      }
+    });
+  }
+
+  getAllLatestCostHeadsFromRateAnalysis(callback: (error: any, result: any) => void) {
+    let query = [
+      {$match: {appType: 'MyBuildCost'}},
+      {$project: {'buildingCostHeads': 1, 'buildingRates': 1, 'projectCostHeads': 1, 'projectRates': 1}}
+    ];
+    this.rateAnalysisRepository.aggregate(query, (error: any, rateAnalysisArray: any) => {
+      if (error) {
+        logger.error('Unable to retrive synced RateAnalysis');
+      } else {
+        if (rateAnalysisArray.length !== 0) {
+          let rateAnalysisCostHeads = rateAnalysisArray[0].buildingCostHeads;
+          let rateAnalysisRates = rateAnalysisArray[0].buildingRates;
+          let rateAnalysisProjectCostHeads = rateAnalysisArray[0].projectCostHeads;
+          let rateAnalysisProjectRates = rateAnalysisArray[0].projectRates;
+
+          let findAllUsers = {};
+          let populateQuery = {path: 'project', select: ['name', 'project']};
+          this.userRepository.findAndPopulate(findAllUsers, populateQuery, (error:any, userList : any)=> {
+            if(error) {
+              logger.error('Error : ' + JSON.stringify(error));
+            } else {
+              if (userList.length !== 0) {
+                for (let user of userList) {
+                  if (user.project.length !== 0) {
+                    for (let project of user.project) {
+                      let projectId = project._id;
+                      let query = projectId;
+                      let populate = {path: 'buildings'};
+                      this.projectRepository.findAndPopulate(query, populate, (error, projectData) => {
+                        if (error) {
+                          logger.error('Error : ' + JSON.stringify(error));
+                        } else {
+                          let buildingArray = projectData[0].buildings;
+                          let projectCostHeads = projectData[0].projectCostHeads;
+                          let projectRates = projectData[0].rates;
+
+                          let newProjectCostHeads = this.synchCostHedsWithLatestRateAnalysis(projectCostHeads, rateAnalysisProjectCostHeads);
+                          let projectCostHeadsWithBudgetedCost = this.projectService.calculateBudgetCostForCommonAmmenities(newProjectCostHeads, projectData[0]);
+                          let newRates = this.synchRatesWithLatestRateAnalysis(projectRates, rateAnalysisProjectRates);
+                          this.updateCostHeadsAndCentralizedRatesOfProject(projectId,projectCostHeadsWithBudgetedCost, newRates);
+
+                          if(buildingArray.length !==0) {
+                            for(let buildingId of buildingArray) {
+                              this.buildingRepository.findById(buildingId,(error: any, buildingData: any) => {
+                                if (error) {
+                                  logger.error('Error : ' + JSON.stringify(error));
+                                } else {
+                                  let costHeadList = buildingData.costHeads;
+                                  let buildingRates = buildingData.rates;
+                                  let newCostHeads = this.synchCostHedsWithLatestRateAnalysis(costHeadList, rateAnalysisCostHeads);
+                                  let costHeadsWithBudgetedCost = this.projectService.calculateBudgetCostForBuilding(newCostHeads, buildingData, projectData[0]);
+                                  let newRates = this.synchRatesWithLatestRateAnalysis(buildingRates, rateAnalysisRates);
+                                  this.updateCostHeadsAndCentralizedRatesOfBuilding(buildingId,costHeadsWithBudgetedCost, newRates);
+                                }
+                              });
+                            }
+                          }
+                        }
+                      });
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  }
+
+  synchCostHedsWithLatestRateAnalysis(costHeadsList: any, rateAnalysisCostHeads: any) {
+    for (let costHead of rateAnalysisCostHeads) {
+      let buildingCostHead = this.getFilterData(costHead.name, costHeadsList);
+      if (buildingCostHead !== null) {
+        let rateAnalysisCostHead = this.getFilterData(costHead.name, rateAnalysisCostHeads);
+        buildingCostHead[0].priorityId = rateAnalysisCostHead[0].priorityId;
+        this.checkCategoryExist(buildingCostHead[0].categories, rateAnalysisCostHead[0].categories);
+      } else {
+        costHeadsList.push(costHead);
+        logger.info(costHead.name);
+      }
+    }
+    return costHeadsList;
+  }
+
+  checkCategoryExist(buildingCategories: any, rateAnalysisCategories: any) {
+    if (rateAnalysisCategories.length !== 0) {
+      if (buildingCategories.length === 0) {
+        for (let category of rateAnalysisCategories) {
+          buildingCategories.push(category);
+        }
+      } else {
+        for (let category of rateAnalysisCategories) {
+          let buildingCategory = this.getFilterData(category.name, buildingCategories);
+          if (buildingCategory !== null) {
+            let rateAnalysisCategory = this.getFilterData(category.name, rateAnalysisCategories);
+            this.checkWorkItemExist(buildingCategory[0].workItems, rateAnalysisCategory[0].workItems);
+          } else {
+            buildingCategories.push(category);
+            logger.info(category.name);
+          }
+        }
+      }
+    }
+  }
+
+  checkWorkItemExist(buildingWorkItems: any, rateAnalysisWorkItems: any) {
+    if (rateAnalysisWorkItems.length !== 0) {
+      if (buildingWorkItems.length === 0) {
+        for (let workItem of rateAnalysisWorkItems) {
+          buildingWorkItems.push(workItem);
+        }
+      } else {
+        for (let workItem of rateAnalysisWorkItems) {
+          let buildingWorkItem = this.getFilterData(workItem.name, buildingWorkItems);
+          if (buildingWorkItem !== null) {
+            let rateAnalysisWorkItem = this.getFilterData(workItem.name, rateAnalysisWorkItems);
+            buildingWorkItem[0].unit = rateAnalysisWorkItem[0].unit;
+            this.checkRateItemExist(buildingWorkItem[0].rate, rateAnalysisWorkItem[0].rate);
+            this.checkRateItemExist(buildingWorkItem[0].systemRate, rateAnalysisWorkItem[0].systemRate);
+          } else {
+            buildingWorkItems.push(workItem);
+            logger.info(workItem.name);
+          }
+        }
+      }
+    }
+  }
+
+  checkRateItemExist(buildingRate: any, rateAnalysisRate: any) {
+    if (rateAnalysisRate.rateItems.length !== 0) {
+      if (buildingRate.rateItems.length === 0) {
+        for (let rateItem of rateAnalysisRate.rateItems) {
+          buildingRate.rateItems.push(rateItem);
+        }
+      }else {
+        if(buildingRate.unit !== rateAnalysisRate.unit) {
+          buildingRate.unit = rateAnalysisRate.unit;
+        }
+      }
+    }
+  }
+
+  getFilterData(element: string, arrayOfElement: any) {
+    const elementObject = arrayOfElement.filter(
+      function (elementObj: any) {
+        if ((elementObj.name).trim() === element) {
+          return elementObj.name === element;
+        } else {
+          return null;
+        }
+      });
+    if (elementObject.length !== 0) {
+      return elementObject;
+    } else {
+      return null;
+    }
+  }
+
+
+  synchRatesWithLatestRateAnalysis(buildingRateArray: any, rateAnalysisRates: any) {
+    for (let rate of rateAnalysisRates) {
+      let buildingCostHead = this.getFilterRateData(rate.itemName, buildingRateArray);
+      if (buildingCostHead === null) {
+        buildingRateArray.push(rate);
+        console.log(rate.itemName);
+      }
+    }
+    return buildingRateArray;
+  }
+
+  getFilterRateData(element: string, arrayOfElement: any) {
+    const elementObject = arrayOfElement.filter(
+      function (elementObj: any) {
+        if (elementObj.itemName === element) {
+          return elementObj.itemName === element;
+        } else {
+          return null;
+        }
+      });
+    if (elementObject.length !== 0) {
+      return elementObject;
+    } else {
+      return null;
+    }
+  }
+
+  updateCostHeadsAndCentralizedRatesOfBuilding(buildingId: string, costHeadList: Array<CostHead>, centralizedRates: Array<any>) {
+    let query = {'_id': buildingId};
+    let newData = {$set: {'costHeads': costHeadList, 'rates': centralizedRates}};
+    this.buildingRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
+    });
+  }
+
+  updateCostHeadsAndCentralizedRatesOfProject(projectId: string, projectCostHeads:Array<CostHead>, centralizedRates: Array<any>) {
+    let query = {'_id': projectId};
+    let newData = {$set: {'projectCostHeads': projectCostHeads, 'rates': centralizedRates}};
+    this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
+    });
+  }
 }
 
 Object.seal(RateAnalysisService);

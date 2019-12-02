@@ -22,6 +22,8 @@ import { AddCostHeadButton } from '../../model/showHideCostHeadButton';
 import { ErrorService } from '../../../../shared/services/error.service';
 import { AppSettings } from '../../../../shared/index';
 import { ProjectHeaderComponent } from '../../project-header/project-header.component';
+import {ProjectHeaderVisibilityService} from "../../../../shared/services/project-header-visibility.service";
+import {Estimate} from "../../model/estimate";
 
 declare let $: any;
 
@@ -49,7 +51,10 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   grandTotalOfTotalRate: number;
   grandTotalOfArea: number;
   grandTotalOfEstimatedCost : number;
+  grandTotalOfBasicEstimatedCost : number;
   grandTotalOfEstimatedRate : number;
+  grandTotalOfGstComponent : number;
+  grandTotalOfRateWithoutGst : number;
 
   buildingName : string;
   costHead: string;
@@ -95,7 +100,8 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private formBuilder: FormBuilder, private _router : Router, private messageService : MessageService,
               private buildingService: BuildingService, private loaderService : LoaderService,
-              private errorService:ErrorService,private commonService: CommonService) {
+              private errorService:ErrorService,private commonService: CommonService,
+              private projectHeaderVisibilityService:ProjectHeaderVisibilityService) {
 
     this.cloneBuildingForm = this.formBuilder.group({
       name : ['', ValidationService.requiredBuildingName],
@@ -115,8 +121,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_VIEW, CurrentView.COST_SUMMARY);
+    this.projectHeaderVisibilityService.change(true);
     this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
     this.activatedRoute.params.subscribe(params => {
       this.onBuildingChange(params);
@@ -217,7 +224,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING_NAME, buildingName);
     this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-
+    this.projectHeaderVisibilityService.change(false);
     this._router.navigate([NavigationRoutes.APP_PROJECT, this.projectId, NavigationRoutes.APP_BUILDING,
       buildingName, NavigationRoutes.APP_COST_HEAD, estimatedItem.name,  estimatedItem.rateAnalysisId, NavigationRoutes.APP_CATEGORY]);
   }
@@ -495,6 +502,9 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
     this.grandTotalOfEstimatedCost = 0;
     this.grandTotalOfEstimatedRate = 0;
+    this.grandTotalOfBasicEstimatedCost = 0;
+    this.grandTotalOfGstComponent = 0;
+    this.grandTotalOfRateWithoutGst = 0;
 
     //Calculate total of all building
     for (let buildindIndex = 0; buildindIndex < this.buildingsReport.length; buildindIndex++) {
@@ -502,6 +512,11 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       this.grandTotalOfBudgetedCost = this.grandTotalOfBudgetedCost + this.buildingsReport[buildindIndex].thumbRule.totalBudgetedCost;
 
       this.grandTotalOfArea = this.grandTotalOfArea + this.buildingsReport[buildindIndex].area;
+      this.grandTotalOfBasicEstimatedCost = this.grandTotalOfBasicEstimatedCost + this.buildingsReport[buildindIndex].estimate.totalBasicEstimatedCost;
+      this.grandTotalOfGstComponent = this.grandTotalOfGstComponent + this.buildingsReport[buildindIndex].estimate.totalGstComponent;
+      console.log("grandTotalOfGstComponent"+this.grandTotalOfGstComponent);
+      this.grandTotalOfRateWithoutGst = this.grandTotalOfRateWithoutGst + this.buildingsReport[buildindIndex].estimate.totalRateWithoutGst;
+
 
       this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost +
        this.buildingsReport[buildindIndex].estimate.totalEstimatedCost;
@@ -514,6 +529,14 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
     this.grandTotalOfEstimatedCost = this.grandTotalOfEstimatedCost + this.amenitiesReport.estimate.totalEstimatedCost;
 
+    this.grandTotalOfBasicEstimatedCost = this.grandTotalOfBasicEstimatedCost + this.amenitiesReport.estimate.totalBasicEstimatedCost;
+
+    this.grandTotalOfGstComponent = this.grandTotalOfGstComponent + this.amenitiesReport.estimate.totalGstComponent;
+
+
+    this.grandTotalOfRateWithoutGst = this.grandTotalOfRateWithoutGst + this.amenitiesReport.estimate.totalRateWithoutGst;
+
+    console.log("grandTotalOfRateWithoutGst"+this.grandTotalOfRateWithoutGst);
     this.grandTotalOfEstimatedRate = (this.grandTotalOfEstimatedCost / this.projectReport.totalAreaOfBuildings);
   }
 

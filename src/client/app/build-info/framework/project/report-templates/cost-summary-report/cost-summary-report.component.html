@@ -37,34 +37,36 @@
           {{ getLabel().BUDGETED_COST }}
           <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
         </th>
-        <th colspan="2" style="text-align: center;padding: 10px 5px;">
-          {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+        <th colspan="5" style="text-align: center;padding: 10px 5px;">
+          {{getLabel().ESTIMATED}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
         </th>
       </tr>
 
       <tr style="page-break-inside: avoid;">
-        <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Per {{ costingByArea }} (
-          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
-          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>)
-        </th>
-
         <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Budgeted Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
         <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Per {{ costingByArea }} (
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>)
         </th>
-        <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Estimated Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
+
+
+        <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{getLabel().BASIC_ESTIMATED_COST}} </th>
+        <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{getLabel().GST_COMPONENT}} </th>
+        <th style="text-align: center;padding: 10px 5px;width: 17.5%;">{{getLabel().TOTAL_ESTIMATED_COST}} ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
+        <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Per {{ costingByArea }} (
+          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
+          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>) without {{getLabel().GST_COMPONENT}}
+        </th>
+        <th style="text-align: center;padding: 10px 5px;width: 17.5%;">Per {{ costingByArea }} (
+          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
+          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>) with {{getLabel().GST_COMPONENT}}
+        </th>
+
       </tr>
     </thead>
     <tbody>
       <tr style="page-break-inside: avoid;" *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px 15px;width: 30%;">{{thumbRuleItem.name}}</td>
-        <td style="padding: 5px 15px;width: 17.5%;" align="right">
-          <span *ngIf="thumbRuleItem.rate !== 0">
-            {{ thumbRuleItem.rate | number: '1.2-2' }}
-          </span>
-          <span *ngIf="thumbRuleItem.rate === 0">-</span>
-        </td>
         <td style="padding: 5px 15px;width: 17.5%;" align="right">
           <span *ngIf="thumbRuleItem.amount !== 0">
             {{thumbRuleItem.amount| number : '1.0-0'}}
@@ -72,10 +74,22 @@
           <span *ngIf="thumbRuleItem.amount === 0">-</span>
         </td>
         <td style="padding: 5px 15px;width: 17.5%;" align="right">
-          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rate !== 0">
-            {{ buildingReport.estimate.estimatedCosts[i].rate | number : '1.2-2' }}
+          <span *ngIf="thumbRuleItem.rate !== 0">
+            {{ thumbRuleItem.rate | number: '1.2-2' }}
           </span>
-          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rate === 0">-</span>
+          <span *ngIf="thumbRuleItem.rate === 0">-</span>
+        </td>
+        <td style="padding: 5px 15px;width: 17.5%;" align="right">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].basicEstimatedCost !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].basicEstimatedCost | number : '1.0-0' }}
+          </span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].basicEstimatedCost === 0">-</span>
+        </td>
+        <td style="padding: 5px 15px;width: 17.5%;" align="right">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].gstComponent !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].gstComponent | number : '1.0-0' }}
+          </span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].gstComponent === 0">-</span>
         </td>
         <td style="padding: 5px 15px;width: 17.5%;" align="right">
           <span *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
@@ -83,6 +97,19 @@
           </span>
           <span *ngIf="buildingReport.estimate.estimatedCosts[i].total === 0">-</span>
         </td>
+        <td style="padding: 5px 15px;width: 17.5%;" align="right">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rateWithoutGst !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].rateWithoutGst | number : '1.2-2' }}
+          </span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rateWithoutGst === 0">-</span>
+        </td>
+        <td style="padding: 5px 15px;width: 17.5%;" align="right">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rate !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].rate | number : '1.2-2' }}
+          </span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rate === 0">-</span>
+        </td>
+
       </tr>
     </tbody>
   </table>
@@ -90,13 +117,19 @@
     <tbody>
       <tr style="page-break-inside: avoid;">
         <td style="border: none;padding: 5px 15px;font-weight: bold;width: 30%;">TOTAL</td>
-        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width=""><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</td>
         <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width=""><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</td>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width=""><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</td>
         <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">
-            <span *ngIf="buildingReport.estimate.totalRate !== 0">
-              <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalRate | number: '1.2-2'}}
+            <span *ngIf="buildingReport.estimate.totalBasicEstimatedCost !== 0">
+              <span [innerHTML]="getProjectElements().RS_SYMBOL"> </span>{{ buildingReport.estimate.totalBasicEstimatedCost | number: '1.0-0'}}
             </span>
-          <span *ngIf="buildingReport.estimate.totalRate === 0">-</span>
+          <span *ngIf="buildingReport.estimate.totalBasicEstimatedCost === 0">-</span>
+        </td>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">
+            <span *ngIf="buildingReport.estimate.totalGstComponent !== 0">
+               <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalGstComponent | number: '1.0-0'}}
+            </span>
+          <span *ngIf="buildingReport.estimate.totalGstComponent === 0">-</span>
         </td>
         <td style="border: none;padding: 5px;font-weight: bold;width: 17.5%;" align="right">
             <span *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
@@ -104,6 +137,19 @@
             </span>
           <span *ngIf="buildingReport.estimate.totalEstimatedCost === 0">-</span>
         </td>
+        <td style="border: none;padding: 5px;font-weight: bold;width: 17.5%;" align="right">
+            <span *ngIf="buildingReport.estimate.totalRateWithoutGst !== 0">
+              <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalRateWithoutGst| number: '1.2-2'}}
+            </span>
+          <span *ngIf="buildingReport.estimate.totalRateWithoutGst === 0">-</span>
+        </td>
+        <td style="border: none;padding: 5px 15px;font-weight: bold;width: 17.5%;" align="right" width="">
+            <span *ngIf="buildingReport.estimate.totalRate !== 0">
+              <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalRate | number: '1.2-2'}}
+            </span>
+          <span *ngIf="buildingReport.estimate.totalRate === 0">-</span>
+        </td>
+
       </tr>
     </tbody>
   </table>
@@ -152,25 +198,25 @@
         </th>
       </tr>
       <tr style="page-break-inside: avoid;">
+        <th style="text-align: center;padding: 10px 15px;width: 30%;"> Budgeted Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
         <th style="text-align: center;padding: 10px 15px;width: 30%;">Per {{ costingByArea }} (
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>)
         </th>
-        <th style="text-align: center;padding: 10px 15px;width: 30%;"> Budgeted Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
       </tr>
     </thead>
     <tbody>
       <tr style="page-break-inside: avoid;" *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
         <td style="padding: 5px 15px;">{{thumbRuleItem.name}}</td>
         <td style="padding: 5px 15px;" align="right">
+          <span *ngIf="thumbRuleItem.amount !== 0">{{thumbRuleItem.amount | number : '1.0-0'}}</span>
+          <span *ngIf="thumbRuleItem.amount === 0">-</span>
+        </td>
+        <td style="padding: 5px 15px;" align="right">
           <span *ngIf="thumbRuleItem.rate !== 0">
             {{ thumbRuleItem.rate | number: '1.2-2' }}
           </span>
           <span *ngIf="thumbRuleItem.rate === 0">-</span>
-        </td>
-        <td style="padding: 5px 15px;" align="right">
-          <span *ngIf="thumbRuleItem.amount !== 0">{{thumbRuleItem.amount | number : '1.0-0'}}</span>
-          <span *ngIf="thumbRuleItem.amount === 0">-</span>
         </td>
       </tr>
     </tbody>
@@ -179,8 +225,8 @@
     <tbody>
       <tr style="page-break-inside: avoid;">
         <th style="border: none;padding: 5px 15px;width: 40%;">TOTAL</th>
-        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</th>
         <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.thumbRule.totalBudgetedCost | number : '1.0-0'}}</th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.thumbRule.totalRate | number: '1.2-2' }}</th>
       </tr>
     </tbody>
   </table>
@@ -227,29 +273,61 @@
     <thead style="display: table-header-group;">
       <tr style="page-break-inside: avoid;">
         <th rowspan="2" style="text-align:center;padding: 10px 15px;width: 40%;">Cost Head</th>
-        <th colspan="2" style="text-align: center;padding: 10px 15px;">
-          {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+        <th colspan="5" style="text-align: center;padding: 10px 15px;">
+          {{getLabel().ESTIMATED}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
         </th>
       </tr>
       <tr style="page-break-inside: avoid;">
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{getLabel().BASIC_ESTIMATED_COST}} </th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{getLabel().GST_COMPONENT}} </th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{getLabel().TOTAL_ESTIMATED_COST}} ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
         <th style="text-align: center;padding: 10px 15px;width: 30%;">Per {{ costingByArea }} (
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
-          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>)
+          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>) without {{getLabel().GST_COMPONENT}}
         </th>
-        <th style="text-align: center;padding: 10px 15px;width: 30%;">Estimated Cost ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
+        <th style="text-align: center;padding: 10px 15px;width: 30%;">Per {{ costingByArea }} (
+          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
+          <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQMT"></span>) with {{getLabel().GST_COMPONENT}}
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr style="page-break-inside: avoid;" *ngFor="let thumbRuleItem of buildingReport.thumbRule.thumbRuleReports; let i = index">
+        <!--<td style="padding: 5px 15px;" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">-->
         <td style="padding: 5px 15px;" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
           {{thumbRuleItem.name}}
         </td>
-        <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].rate !== 0">
-          {{ buildingReport.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
+        <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].basicEstimatedCost === 0">-</span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].basicEstimatedCost !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].basicEstimatedCost | number: '1.0-0' }}
+          </span>
         </td>
         <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
-          {{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].gstComponent === 0">-</span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].gstComponent !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].gstComponent | number: '1.0-0' }}
+          </span>
         </td>
+
+        <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].total === 0">-</span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].total | number: '1.0-0' }}</span>
+        </td>
+        <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rateWithoutGst === 0">-</span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rateWithoutGst !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].rateWithoutGst | number: '1.2-2' }}
+          </span>
+        </td>
+        <td style="padding: 5px 15px;" align="right" *ngIf="buildingReport.estimate.estimatedCosts[i].total !== 0">
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rate === 0">-</span>
+          <span *ngIf="buildingReport.estimate.estimatedCosts[i].rate !== 0">
+            {{ buildingReport.estimate.estimatedCosts[i].rate | number: '1.2-2' }}
+          </span>
+        </td>
+
       </tr>
     </tbody>
   </table>
@@ -257,8 +335,17 @@
     <tbody>
       <tr style="page-break-inside: avoid;">
         <th style="border: none;padding: 5px 15px;width: 40%;">TOTAL</th>
-        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span>
+          {{ buildingReport.estimate.totalBasicEstimatedCost|number: '1.0-0'}}
+        </th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">
+          <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>{{ buildingReport.estimate.totalGstComponent|number: '1.2-2'}}
+        </th>
         <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalEstimatedCost|number: '1.0-0'}}</th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;">
+          <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalRateWithoutGst|number: '1.2-2'}}
+        </th>
+        <th style="border: none;padding: 5px 15px;text-align: right;width: 30%;"><span [innerHTML]="getProjectElements().RS_SYMBOL"></span> {{ buildingReport.estimate.totalRate|number: '1.2-2'}}</th>
       </tr>
     </tbody>
   </table>

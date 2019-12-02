@@ -4,15 +4,18 @@
       <th width="50%" style="padding: 5px 10px;text-align: left">{{reportData.header.columnOne}}</th>
       <th width="20%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnTwo}}</th>
       <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnFour}}</th>
+      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnSix}}</th>
+      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnSeven}}</th>
       <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnFive}}</th>
+      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnEight}}</th>
     </tr>
   </thead>
   <tbody>
   <tr *ngFor="let contentData of reportData.content | keys:getMaterialTakeOffElements().SORT"  width="100%" >
-    <td colspan="4">
+    <td colspan="7">
       <table width="100%" style="text-align: left">
         <tr *ngFor="let subContentData of reportData.content[contentData].subContent | keys:getMaterialTakeOffElements().SORT"  width="100%" >
-          <td colspan="3">
+          <td colspan="7">
             <table width="100%" style="text-align: left">
               <!--actual content-->
               <tr style="page-break-inside: avoid">
@@ -25,8 +28,21 @@
                 <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                   ₹ {{reportData.content[contentData].subContent[subContentData].columnFour}}
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;">
+
+                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                  {{reportData.content[contentData].subContent[subContentData].columnSix}} %
+                </td>
+
+                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                  {{reportData.content[contentData].subContent[subContentData].columnSeven}}
+                </td>
+
+                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                   ₹ {{reportData.content[contentData].subContent[subContentData].columnFive| number}}
+                </td>
+
+                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;">
+                   {{reportData.content[contentData].subContent[subContentData].columnEight}}
                 </td>
               </tr>
               <!--subContent content-->
@@ -40,8 +56,17 @@
                 <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   ₹ {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFour }}
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;">
+                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnSix }} %
+                </td>
+                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnSeven }}
+                </td>
+                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   ₹ {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFive| number }}
+                </td>
+                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnEight }}
                 </td>
               </tr>
             </table>

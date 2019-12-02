@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as multiparty from 'multiparty';
-import ProjectService = require('./../services/ProjectService');
+//import ProjectService = require('./../services/ProjectService');
 import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
 import Response = require('../interceptor/response/Response');
@@ -8,6 +8,7 @@ import CostControllException = require('../exception/CostControllException');
 import CostHead = require('../dataaccess/model/project/building/CostHead');
 import Rate = require('../dataaccess/model/project/building/Rate');
 import WorkItem = require('../dataaccess/model/project/building/WorkItem');
+import { ProjectService } from '../services/ProjectService';
 let config = require('config');
 let log4js = require('log4js');
 let logger=log4js.getLogger('Project Controller');
@@ -1427,6 +1428,81 @@ class ProjectController {
         stackTrace: e,
         code: 403
       });
+    }
+  }
+
+  importGstData(req : express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      let projectService = new ProjectService();
+      projectService.importGstData((error, response) => {
+        if(error){
+          next(error);
+        } else {
+          res.status(200).send({response});
+        }
+      });
+    }catch (e) {
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: e,
+        code: 403
+      });
+    }
+  }
+
+  //update gst of workitems
+  updateGstOfBuildingWorkItems(req: express.Request, res: express.Response, next: any): void{
+    try{
+      logger.info('Project controller, update GST Of Building WorkItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let buildingId = req.params.buildingId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let gst = req.body.gst;
+
+      let projectService = new ProjectService();
+      projectService.updateGstOfBuildingWorkItems(projectId,buildingId,costHeadId,
+        categoryId,workItemId,ccWorkItemId,gst,user,(error, result) => {
+          if (error) {
+            next(error);
+          } else {
+            logger.info('update GST Of Building WorkItems success');
+            next(new Response(200, result));
+          }
+        });
+    }
+    catch (e) {
+      (new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateGstOfProjectWorkItems(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, updateGstOfProjectWorkItems has been hit');
+      let user = req.user;
+      let projectId = req.params.projectId;
+      let costHeadId = parseInt(req.params.costHeadId);
+      let categoryId = parseInt(req.params.categoryId);
+      let workItemId = parseInt(req.params.workItemId);
+      let ccWorkItemId = parseInt(req.params.ccWorkItemId);
+      let gst = req.body.gst;
+
+      let projectService = new ProjectService();
+      projectService.updateGstOfProjectWorkItems( projectId, costHeadId,
+        categoryId, workItemId, ccWorkItemId, gst, user, (error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            logger.info('updateGstOfProjectWorkItems success');
+            next(new Response(200,result));
+          }
+        });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
     }
   }
 }

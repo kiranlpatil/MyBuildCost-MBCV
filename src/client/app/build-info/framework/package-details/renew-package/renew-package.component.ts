@@ -6,6 +6,7 @@ import { LoaderService, Message, MessageService} from '../../../../shared/index'
 import { SessionStorage, SessionStorageService } from '../../../../shared/index';
 import { SubscribedPackage } from '../../model/SubscribedPackage';
 import { CommonService } from '../../../../shared/services/common.service';
+import {ProjectHeaderVisibilityService} from "../../../../shared/services/project-header-visibility.service";
 @Component({
   moduleId: module.id,
   selector: 'bi-renew-package',
@@ -23,7 +24,8 @@ export class RenewPackageComponent implements OnInit {
   public expiryDate: Date = new Date();
 
   constructor(private packageDetailsService : PackageDetailsService, private _router: Router, private messageService : MessageService,
-              private route: ActivatedRoute, private commonService : CommonService, private loaderService: LoaderService) {
+              private route: ActivatedRoute, private commonService : CommonService, private loaderService: LoaderService,
+              private projectHeaderVisibilityService:ProjectHeaderVisibilityService) {
   }
 
   ngOnInit() {
@@ -90,6 +92,8 @@ export class RenewPackageComponent implements OnInit {
 
   cancel() {
     window.history.go(-1);
+    this.projectHeaderVisibilityService.change(true);
+
   }
 
   proceedToPay() {
@@ -101,5 +105,4 @@ export class RenewPackageComponent implements OnInit {
     //this._router.navigate([NavigationRoutes.APP_PACKAGE_DETAILS, NavigationRoutes.PAYMENT,this.getLabels().PACKAGE_RENEW_PROJECT,NavigationRoutes.SUCCESS]);
     }
   }
-
 }

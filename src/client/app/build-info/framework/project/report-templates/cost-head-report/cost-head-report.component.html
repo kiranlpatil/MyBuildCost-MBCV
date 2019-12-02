@@ -45,8 +45,9 @@
           <th width="52%" style="padding: 10px 5px;">WorkItem Name </th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Quantity</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Unit</th>
-          <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>  )</th>
-          <th width="12%" style="padding: 10px 5px;text-align:right">Amount ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>  )</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit Including GST(<span [innerHTML]="getProjectElements().RS_SYMBOL"></span>)</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">Amount Including GST(<span [innerHTML]="getProjectElements().RS_SYMBOL"></span>)</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">GST Component</th>
         </thead>
         <tbody>
         <tr style="page-break-inside: avoid;" *ngFor="let workitem of category.workItems">
@@ -56,9 +57,14 @@
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.quantity.total === 0 ">-</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.unit">{{workitem.unit}}</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.unit">-</td>
-            <td width="12%" align="right" style="padding: 5px;">{{workitem.rate.total |number :'1.0-0'}}</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.isDirectRate && workitem.totalRate ===0">-</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.isDirectRate && workitem.totalRate !== 0">{{workitem.totalRate|number :'1.2-2'}}
+            </td><td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.isDirectRate && workitem.rate.total ===0">-</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.isDirectRate && workitem.rate.total !== 0">{{workitem.rate.total|number :'1.2-2'}}</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.amount !== 0 ">{{workitem.amount|number :'1.0-0'}}</td>
             <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.amount === 0 ">-</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="workitem.gstComponent">{{workitem.gstComponent|number :'1.0-0'}}</td>
+            <td width="12%" align="right" style="padding: 5px;" *ngIf="!workitem.gstComponent">-</td>
           </div>
         </tr>
         </tbody>

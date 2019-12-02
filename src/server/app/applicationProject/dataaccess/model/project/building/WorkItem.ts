@@ -1,6 +1,5 @@
 import Quantity = require('./Quantity');
 import Rate = require('./Rate');
-import Constants = require('../../../../shared/constants');
 import { AttachmentDetailsModel } from './AttachmentDetails';
 import ContractingAddOn = require('./ContractingAddOn');
 
@@ -30,7 +29,10 @@ class WorkItem {
   active: boolean;
   attachmentDetails:AttachmentDetailsModel[];
   contractingAddOns: Array<ContractingAddOn>;
-
+  gst: number;
+  gstComponent: number;
+  totalRate: number;
+  rateWithGst: number;
 
   constructor(name:string, rateAnalysisId:number) {
     this.name = name;
@@ -47,6 +49,7 @@ class WorkItem {
     this.isSteelWorkItem = false;
     this.active=false;
     this.remarks = '';
+    this.gstComponent = 0;
   }
 }
 export = WorkItem;

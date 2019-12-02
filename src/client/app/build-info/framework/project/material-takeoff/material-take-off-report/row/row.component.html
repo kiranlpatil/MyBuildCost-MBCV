@@ -12,10 +12,22 @@
   </div>
 
   <div class="col-sm-2 col-xs-2 text-right row-lists border-right">
-    <span *ngIf="rows.columnFour !== 'Rate' && rows.columnFour !== null"> ₹ </span> {{rows.columnFour}}
+    <span *ngIf="rows.columnFour !== 'Basic Rate/Unit' && rows.columnFour !== null"> ₹ </span> {{rows.columnFour}}
   </div>
 
   <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
-    <span *ngIf="rows.columnFive !== 'Amount'"> ₹ </span> {{rows.columnFive}}
+    {{rows.columnSix}}<span *ngIf="rows.columnSix !== 'GST' && rows.columnSix !== null"> % </span>
+  </div>
+
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+    <span *ngIf="rows.columnSeven !== null"> {{rows.columnSeven}} </span>
+  </div>
+
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+    <span *ngIf="rows.columnFive !== 'Total Amount'"> ₹ </span> {{rows.columnFive}}
+  </div>
+
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+    <span *ngIf="rows.columnEight !== null"> {{rows.columnEight}} </span>
   </div>
 </div>

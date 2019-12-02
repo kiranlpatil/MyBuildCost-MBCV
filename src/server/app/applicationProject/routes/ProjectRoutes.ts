@@ -128,6 +128,13 @@ class ProjectRoutes {
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateDirectRateOfProjectWorkItems,
       controller.updateDirectRateOfProjectWorkItems, this._responseInterceptor.exit);
 
+    /* Project-Routes: GST */
+
+    //Update GST of Project workitems
+    router.put('/:projectId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/gst',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateGstOfProjectWorkItems,
+      controller.updateGstOfProjectWorkItems, this._responseInterceptor.exit);
+
     /* Attachment Routes */
 
     //update file in workItem
@@ -302,6 +309,15 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
     router.get('/:projectId/building/:buildingId/syncWithRateAnalysis', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       validator.syncProjectWithRateAnalysisData, controller.syncProjectWithRateAnalysisData, this._responseInterceptor.exit);
 
+    /*Building- Routes: GST*/
+
+    //Update GST of Building Workitems
+    router.put('/:projectId/building/:buildingId/costhead/:costHeadId/category/:categoryId/workitem/:workItemId/:ccWorkItemId/gst',
+      this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, validator.updateGstOfBuildingWorkItems,
+      controller.updateGstOfBuildingWorkItems, this._responseInterceptor.exit);
+
+
+
     /* Attachment Routes */
 
     //update file in workItem
@@ -328,6 +344,8 @@ this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controlle
       controller.removeProjectImage, this._responseInterceptor.exit);
 
 
+    /* GST Routes */
+    router.get('/import/gstData', controller.importGstData, this._responseInterceptor.exit);
     return router;
   }
 }

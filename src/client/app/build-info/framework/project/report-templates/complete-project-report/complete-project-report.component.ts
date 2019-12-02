@@ -26,6 +26,10 @@ export class CompleteProjectReportComponent {
   @Input() grandTotalOfBudgetedCost: any;
   @Input() grandTotalOfEstimatedRate: any;
   @Input() grandTotalOfEstimatedCost: any;
+  @Input() grandTotalOfBasicEstimatedCost: any;
+  @Input() grandTotalOfGstComponent: any;
+  @Input() grandTotalOfRateWithoutGst: any;
+
 
   isBudgeted: boolean = false;
   isEstimated: boolean = false;

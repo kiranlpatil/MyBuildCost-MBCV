@@ -26,6 +26,10 @@ export class WorkItem {
   isMeasurementSheet:boolean=false;
   isDetailedQuantity:boolean=false;
   isMeasurmentSheetPresent:boolean=false;
+  gst: number;
+  gstComponent: number;
+  totalRate:number;
+  rateWithGst: number;
   constructor(name: string, rateAnalysisId: number) {
     this.name = name;
     this.rateAnalysisId = rateAnalysisId;
@@ -37,6 +41,8 @@ export class WorkItem {
     this.unit = Units.UNIT;
     this.active=false;
     this.remarks = '';
+    this.gstComponent = 0;
+    this.gst = 0;
   }
 }
 

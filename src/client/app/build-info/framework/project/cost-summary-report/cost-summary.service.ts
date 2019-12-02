@@ -156,6 +156,15 @@ export class CostSummaryService extends BaseService {
 
     return this.httpDelegateService.putAPI(url, body);
   }
+
+  updateGstAmount( baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
+                   ccWorkItemId: number, gst : number){
+    var body = {gst : gst};
+    var url = baseUrl + '/'+ API.COSTHEAD +'/' + costHeadId + '/'+ API.CATEGORY +'/'+ categoryId +'/'
+      + API.WORKITEM + '/' + workItemId + '/'+ ccWorkItemId + '/' + API.GST;
+
+    return this.httpDelegateService.putAPI(url, body);
+  }
   updateQuantityDetails(baseUrl: string, costHeadId : number, categoryId : number, workItemId : number,
                         ccWorkItemId: number, quantityDetailsObj : QuantityDetails) {
 

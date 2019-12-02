@@ -14,6 +14,7 @@ class RateAnalysisSchema {
         buildingRates: [{}],
         projectCostHeads: [{}],
         projectRates: [{}],
+        fixedAmountCostHeads :[{}],
         appType: String
       },
       {

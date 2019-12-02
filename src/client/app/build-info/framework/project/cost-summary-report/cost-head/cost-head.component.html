@@ -29,15 +29,21 @@
           <div *ngIf="category.rateAnalysisId == categoryId" id="collapse{{category.rateAnalysisId}}" class="panel-collapse collapse">
             <div class="panel-body">
               <div class="bg-white"  *ngFor="let workItem of workItemsList; let workItemIndex = index">
-                <table class="table table-dashboard table-categories">
+                <table class="table table-dashboard table-categories" [class.workitem-rate-table]="!workItem.isDirectRate" id="mytable">
                   <thead *ngIf="workItemIndex === 0">
                   <tr>
                     <th>{{getTableHeadings().ITEM}}</th>
                     <!--<th>Details</th>-->
                     <th>{{getTableHeadings().QUANTITY}}</th>
                     <th>{{getTableHeadings().UNIT}}</th>
-                    <th>{{getTableHeadings().RATE_PER_UNIT}}</th>
+                    <th>
+                      <div *ngIf=" workItem.isDirectRate">{{getTableHeadings().BASIC_RATE_PER_UNIT}}</div>
+                      <div *ngIf="!workItem.isDirectRate">{{getTableHeadings().RATE_PER_UNIT}}</div>
+                    </th>
+                    <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().GST}}</th>
+                    <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().TOTAL_RATE}}</th>
                     <th>{{getTableHeadings().COST}}</th>
+                    <!--<th *ngIf=" workItem.isDirectRate">{{getTableHeadings().GST_COMPONENT}}</th>-->
                     <th>{{getTableHeadings().RATEANALYSIS}}</th>
                     <!--<th></th>-->
                   </tr>
@@ -116,7 +122,8 @@
                                   <span class="value" *ngIf="!workItem.unit">-</span>
                                 </td>
                                 <td>
-                                  <span class="mobile-headings">{{getTableHeadings().RATE_PER_UNIT}}</span>
+                                  <span class="mobile-headings" *ngIf="workItem.isDirectRate">{{getTableHeadings().BASIC_RATE_PER_UNIT}}</span>
+                                  <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().RATE_PER_UNIT}}</span>
                                   <div class="edit-field" [class.active-rate]="(showWorkItemTab == getLabel().WORKITEM_RATE_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
                                     <input amountValidate="true" title="Workitem Rate" *ngIf="workItem.isDirectRate" type = "number"
                                            [class.validate-amount] = 'workItem?.rate?.total?.toString().split(".")[0].length>7 ||
@@ -129,7 +136,7 @@
                                     <div class="edit-rate-null" *ngIf="!workItem.isDirectRate && !workItem.rate.isEstimated && anySubscriptionAvailable">
                                       -
                                     </div>
-                                    <div class="edit-rate-null" *ngIf="!anySubscriptionAvailable">
+                                    <div class="edit-rate-null" *ngIf="!anySubscriptionAvailable && !workItem.isDirectRate">
                                       -
                                     </div>
                                      <span title="Get Rate" class="calculator"
@@ -140,6 +147,35 @@
                                      </span>
                                   </div>
                                 </td>
+
+                                <!--GST-->
+                                <td  *ngIf=" workItem.isDirectRate">
+                                  <span class="mobile-headings">{{getTableHeadings().GST}}</span>
+                                  <select  class="select-item gst-select-item" (change)="changeGst(category.rateAnalysisId, workItem,$event.target.value)">
+                                    <option>{{workItem.gst}} %</option>
+                                    <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
+                                  </select>
+                                  <div class="gst-component-section">
+                                 <!--   <span class="mobile-headings">{{getTableHeadings().GST_COMPONENT}}</span>-->
+                                    <div class="gst-component" *ngIf=" workItem.isDirectRate && !workItem.rateWithGst">
+                                      -
+                                    </div>
+                                    <div class="gst-component" *ngIf=" workItem.isDirectRate && workItem.rateWithGst">
+                                      {{workItem.rateWithGst| number :'.1-2'}}
+                                    </div>
+                                  </div>
+                                </td>
+
+                                 <!--Total Rate-->
+                               <td *ngIf=" workItem.isDirectRate">
+                                <span class="mobile-headings">{{getTableHeadings().TOTAL_RATE}}</span>
+                                  <div class="totalrate total-rate-value" *ngIf="!workItem.totalRate">
+                                   -
+                                  </div>
+                                 <div class="totalrate total-rate-value" *ngIf="workItem.totalRate">
+                                   {{workItem.totalRate}}
+                                 </div>
+                              </td>
 
                                 <!--Cost-->
                                 <td>
@@ -156,6 +192,17 @@
                                     {{ (workItem.amount)|number : '1.0-0'}}
                                   </div>
                                 </td>
+
+                                <!--GST Component-->
+                                <!--<td>
+                                  <span class="mobile-headings">{{getTableHeadings().GST_COMPONENT}}</span>
+                                  <div class="gst-component" *ngIf=" workItem.isDirectRate && !workItem.gstComponent">
+                                    -
+                                  </div>
+                                  <div class="gst-component" *ngIf=" workItem.isDirectRate && workItem.gstComponent">
+                                    {{workItem.gstComponent}}
+                                  </div>
+                                </td>-->
 
                                 <!--RateAnalysis-->
                                 <td>

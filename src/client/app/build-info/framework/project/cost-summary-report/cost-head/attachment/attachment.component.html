@@ -3,7 +3,7 @@
  <li id="Attachments" *ngFor="let file of fileNamesList">
     <p>{{file.fileName}}</p>
     <div class="file-actions">
-      <a href="{{path}}{{file.assignedFileName}}" download="{{file.fileName}}">
+      <a href="./public/attachment-files/{{file.assignedFileName}}" download="{{file.fileName}}">
         <img alt="Delete Work Item" src="assets/build-info/dashboard/download-attachment.jpg" />
       </a> 
       <button class="delete-attachment" type="button" data-toggle="modal" data-target="#removeAttachment" (click)="setNameOfAttachment(file.assignedFileName)">

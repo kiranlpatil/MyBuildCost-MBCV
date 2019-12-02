@@ -33,6 +33,9 @@ let log4js = require('log4js');
 import * as mongoose from 'mongoose';
 import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
 import SteelQuantityItems = require('../dataaccess/model/project/building/SteelQuantityItems');
+import ItemGstRepository = require('../dataaccess/repository/ItemGstRepository');
+import ItemGst = require('../dataaccess/model/RateAnalysis/ItemGst');
+let xlsxj = require('xlsx-to-json');
 
 //import RateItemsAnalysisData = require("../dataaccess/model/project/building/RateItemsAnalysisData");
 
@@ -40,7 +43,7 @@ let CCPromise = require('promise/lib/es6-extensions');
 let logger=log4js.getLogger('Project service');
 const fs = require('fs');
 let ObjectId = mongoose.Types.ObjectId;
-class ProjectService {
+export class ProjectService {
   APP_NAME: string;
   company_name: string;
   costHeadId: number;
@@ -52,6 +55,7 @@ class ProjectService {
   private authInterceptor: AuthInterceptor;
   private userService: UserService;
   private commonService: CommonService;
+  private itemGstRepository: ItemGstRepository;
 
 
   constructor() {
@@ -61,6 +65,7 @@ class ProjectService {
     this.authInterceptor = new AuthInterceptor();
     this.userService = new UserService();
     this.commonService = new CommonService();
+    this.itemGstRepository = new ItemGstRepository();
   }
 
   createProject(data: Project, user: User, callback: (error: any, result: any) => void) {
@@ -450,7 +455,7 @@ class ProjectService {
                   } else {
                     let regionName = config.get('costControlRegionCode');
                     let aggregateQuery = { 'region' : regionName };
-                    rateAnalysisService.getCostControlRateAnalysis(aggregateQuery,
+                    rateAnalysisService.getCostControlRateAnalysis('cloneBuilding',aggregateQuery,
                       {'buildingRates':1}, (err: any, data:any) => {
                       if(err) {
                         callback(error, null);
@@ -2014,7 +2019,10 @@ class ProjectService {
 
         let arrayOfRateItems = workItem.rate.rateItems;
         for(let rateItemIndex = 0; rateItemIndex < arrayOfRateItems.length; rateItemIndex++) {
-          arrayOfRateItems[rateItemIndex].totalAmount = arrayOfRateItems[rateItemIndex].quantity * arrayOfRateItems[rateItemIndex].rate;
+          arrayOfRateItems[rateItemIndex].rateWithGst = (arrayOfRateItems[rateItemIndex].rate * arrayOfRateItems[rateItemIndex].gst) / 100;
+          arrayOfRateItems[rateItemIndex].totalRate = arrayOfRateItems[rateItemIndex].rate + arrayOfRateItems[rateItemIndex].rateWithGst;
+          arrayOfRateItems[rateItemIndex].totalAmount = (arrayOfRateItems[rateItemIndex].totalRate * arrayOfRateItems[rateItemIndex].quantity);
+          arrayOfRateItems[rateItemIndex].gstComponent = arrayOfRateItems[rateItemIndex].totalAmount - (arrayOfRateItems[rateItemIndex].rate * arrayOfRateItems[rateItemIndex].quantity);
         }
         let totalOfAllRateItems = alasql('VALUE OF SELECT SUM(totalAmount) FROM ?', [arrayOfRateItems]);
         let totalByUnit = totalOfAllRateItems / workItem.rate.quantity;
@@ -2027,9 +2035,21 @@ class ProjectService {
           workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?', [quantityItems]);
         }
 
-        if (workItem.rate.isEstimated && workItem.quantity.isEstimated) {
-          workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+        if (workItem.rate.isEstimated && workItem.quantity.isEstimated ) {
+          if(!workItem.isDirectRate) {
+            let quantity = this.changeQuantityByWorkItemUnit(workItem.quantity.total, workItem.unit,workItem.rate.unit);
+            let gstComponentTotal =  alasql('VALUE OF SELECT ROUND(SUM(gstComponent),2) FROM ?', [workItem.rate.rateItems]);
+            workItem.gstComponent = (quantity * gstComponentTotal)/workItem.rate.quantity;
+            workItem.totalRate =  alasql('VALUE OF SELECT ROUND(SUM(totalRate),2) FROM ?', [workItem.rate.rateItems]);
+            workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
+          }else {
+            workItem.rateWithGst = (workItem.rate.total * workItem.gst) / 100;
+            workItem.totalRate =  workItem.rate.total + workItem.rateWithGst;
+            workItem.amount = this.commonService.decimalConversion(workItem.totalRate * workItem.quantity.total);
+            workItem.gstComponent = workItem.amount - (workItem.rate.total * workItem.quantity.total);
+          }
           workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount + workItem.amount;
+          workItemsListWithRates.gstComponent = workItemsListWithRates.gstComponent + workItem.gstComponent;
         }
         workItemsListWithRates.workItems.push(workItem);
       }else {
@@ -2052,9 +2072,23 @@ class ProjectService {
     return workItem.rate.total;
   }
 
+  changeQuantityByWorkItemUnit(quantity: number, workItemUnit: string, rateUnit: string) {
+    let quantityTotal: number = 0;
+    if (workItemUnit === 'Sqm' && rateUnit !== 'Sqm') {
+      quantityTotal = quantity * 10.764;
+    } else if (workItemUnit === 'Rm' && rateUnit !== 'Rm') {
+      quantityTotal = quantity * 3.28;
+    } else if (workItemUnit === 'cum' && rateUnit !== 'cum') {
+      quantityTotal = quantity * 35.28;
+    } else {
+      quantityTotal = quantity;
+    }
+    return quantityTotal;
+  }
+
   getRatesFromCentralizedrates(rateItemsOfWorkItem: Array<RateItem>, centralizedRates: Array<any>) {
     let rateItemsSQL = 'SELECT rateItem.itemName, rateItem.originalItemName, rateItem.rateAnalysisId, rateItem.type,' +
-      'rateItem.quantity, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
+      'rateItem.quantity, rateItem.gst, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
       'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.itemName = centralizedRates.itemName';
     let rateItemsForWorkItem = alasql(rateItemsSQL, [rateItemsOfWorkItem, centralizedRates]);
     return rateItemsForWorkItem;
@@ -2233,13 +2267,16 @@ class ProjectService {
   //Get category list with centralized rate
   getCategoriesListWithCentralizedRates(categoriesOfCostHead: Array<Category>, centralizedRates: Array<CentralizedRate>) {
     let categoriesTotalAmount = 0;
+    let totalgstComponent = 0;
 
     let categoriesListWithRates: CategoriesListWithRatesDTO = new CategoriesListWithRatesDTO;
 
     for (let categoryData of categoriesOfCostHead) {
       let workItems = this.getWorkItemListWithCentralizedRates(categoryData.workItems, centralizedRates, true);
+
       categoryData.amount = workItems.workItemsAmount;
       categoriesTotalAmount = categoriesTotalAmount + workItems.workItemsAmount;
+      totalgstComponent = totalgstComponent + workItems.gstComponent;
       //delete categoryData.workItems;
       categoriesListWithRates.categories.push(categoryData);
     }
@@ -2248,6 +2285,10 @@ class ProjectService {
       categoriesListWithRates.categoriesAmount = categoriesTotalAmount;
     }
 
+    if (totalgstComponent !== 0)
+    {
+      categoriesListWithRates.totalGstComponent = totalgstComponent;
+    }
     return categoriesListWithRates;
   }
 
@@ -2305,7 +2346,7 @@ class ProjectService {
     let buildingRepository = new BuildingRepository();
     let projectRepository = new ProjectRepository();
     let query = { 'region' : config.get('costControlRegionCode')};
-    rateAnalysisService.getCostControlRateAnalysis(query, {},(error: any, rateAnalysis: RateAnalysis) => {
+    rateAnalysisService.getCostControlRateAnalysis('addBuilding',query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateCostHeadsForBuildingAndProject : convertCostHeadsFromRateAnalysisToCostControl : '
             + JSON.stringify(error));
@@ -2353,7 +2394,7 @@ class ProjectService {
       let buildingRepository = new BuildingRepository();
       logger.info('Inside updateBudgetRatesForBuildingCostHeads promise.');
       let query = { 'region' : config.get('costControlRegionCode')};
-      rateAnalysisService.getCostControlRateAnalysis( query, {},(error: any, rateAnalysis: RateAnalysis) => {
+      rateAnalysisService.getCostControlRateAnalysis( 'buildingCostHeads', query, {},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in promise updateBudgetRatesForBuildingCostHeads : ' + JSON.stringify(error));
           reject(error);
@@ -2477,7 +2518,7 @@ class ProjectService {
       let projectRepository = new ProjectRepository();
       logger.info('Inside updateBudgetRatesForProjectCostHeads promise.');
       let query = { 'region' : config.get('costControlRegionCode')};
-      rateAnalysisService.getCostControlRateAnalysis(query,{},(error: any, rateAnalysis: RateAnalysis) => {
+      rateAnalysisService.getCostControlRateAnalysis('projectCostHeads',query,{},(error: any, rateAnalysis: RateAnalysis) => {
         if (error) {
           logger.error('Error in updateBudgetRatesForProjectCostHeads promise : ' + JSON.stringify(error));
           reject(error);
@@ -3665,6 +3706,60 @@ class ProjectService {
       cb(null, tempPath);
     });
   }
+
+  importGstData(callback:( error: any, result: any) => void) {
+    logger.info('Project service, exportGstData has been hit');
+    let fileNameOfGstItems = path.resolve() + config.get('application.exportFilePathServer')
+      + config.get('application.exportedFileNames.gstItems');
+
+    let readGstItemsFromFile = this.readGstItemsFromFile(fileNameOfGstItems);
+    readGstItemsFromFile.then(function (arrayOfItemGst:  Array<ItemGst>) {
+       if(arrayOfItemGst.length> 0) {
+         let projectService =  new ProjectService();
+          projectService.saveGstData(arrayOfItemGst, (error:any, result:any)=> {
+             if(error) {
+               console.log('Error : '+JSON.stringify(error));
+               callback(error, null);
+             } else {
+               console.log('Result : '+JSON.stringify(result));
+               callback(null, result);
+             }
+         });
+       }
+    });
+
+  }
+
+  readGstItemsFromFile(pathOfFile: string) {
+    return new CCPromise(function (resolve: any, reject: any) {
+    xlsxj({
+      input: pathOfFile,
+      output: null
+    }, (err: any, result: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        if(result.length > 0) {
+          resolve(result);
+        }
+       }
+     });
+    }).catch(function (e: any) {
+      logger.error('creating Promise for file read has been hit : ' + pathOfFile + ':\n error :' + JSON.stringify(e.message));
+      CCPromise.reject(e.message);
+    });
+  }
+
+  saveGstData(arrayOfItemGst: Array<ItemGst>, callback:(error:any, result:any) => void) {
+    this.itemGstRepository.insertMany(arrayOfItemGst, (err: any, response:any)=> {
+      if(err) {
+        callback(err, null);
+      } else {
+        callback(null, response);
+      }
+    });
+  }
+
   private calculateThumbRuleReportForCostHead(budgetedCostAmount: number, costHeadFromRateAnalysis: any,
                                               buildingData: any, costHeads: Array<CostHead>) {
     if (budgetedCostAmount >= 0) {
@@ -3726,7 +3821,50 @@ class ProjectService {
       }
     }
   }
+
+  //Update GST of building workitems
+  updateGstOfBuildingWorkItems(projectId: string, buildingId: string, costHeadId: number, categoryId: number, workItemId: number,
+                               ccWorkItemId: number, gst: number, user: User, callback: (error: any, result: any) => void){
+    logger.info('Project service, updateGstOfBuildingWorkItems has been hit');
+    let query = {_id: buildingId};
+    let updateQuery = {$set:{'costHeads.$[costHead].categories.$[category].workItems.$[workItem].gst':gst}};
+    let arrayFilter = [
+      {'costHead.rateAnalysisId':costHeadId},
+      {'category.rateAnalysisId': categoryId},
+      {'workItem.rateAnalysisId':workItemId, 'workItem.workItemId':ccWorkItemId}
+    ];
+    this.buildingRepository.findOneAndUpdate(query, updateQuery,{arrayFilters:arrayFilter, new: true}, (error, building) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  updateGstOfProjectWorkItems(projectId: string, costHeadId: number, categoryId: number, workItemId: number,
+                              ccWorkItemId: number, gst: number, user: User, callback: (error: any, result: any) => void) {
+    logger.info('Project service, updateGstOfProjectWorkItems has been hit');
+    let query = {_id: projectId};
+    let updateQuery = {$set:{'projectCostHeads.$[costHead].categories.$[category].workItems.$[workItem].gst':gst}};
+
+    let arrayFilter = [
+      { 'costHead.rateAnalysisId': costHeadId },
+      { 'category.rateAnalysisId': categoryId },
+      { 'workItem.rateAnalysisId': workItemId, 'workItem.workItemId': ccWorkItemId }
+    ];
+    this.projectRepository.findOneAndUpdate(query, updateQuery, {arrayFilters:arrayFilter, new: true}, (error, building) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data: 'success', access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
 }
 
-Object.seal(ProjectService);
-export = ProjectService;
+/*Object.seal(ProjectService);
+export = ProjectService;*/

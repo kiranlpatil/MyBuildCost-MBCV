@@ -1,0 +1,24 @@
+<header class="create-new-header">
+  <button class="btn-back" (click)="goBack()"><img src="../../../../../../assets/build-info/create-new-project/back.png" /><span>Back</span></button>
+</header>
+
+<div *ngIf="isAdmin">
+  <br>
+  <br>
+  <h3> Export User and Usage Tracking Files of BuildInfo </h3>
+  <br>
+  <button (click)="createExcelFiles()"> Export Report</button>
+  <br>
+
+  <div *ngIf="displayLinks">
+      <h5> Files are successfully created, to download file click on each file</h5>
+      <br>
+      <a download="MyBuildCostUser.csv" href="./public/exported-files/MyBuildCostUser.csv">MyBuildCost UsersFile</a>
+      <br>
+      <a download="RateAnalysisUsers.csv" href="./public/exported-files/RateAnalysisUsers.csv">RateAnalysis UsersFile</a>
+      <br>
+      <a download="AppUsageDetails.csv" href="./public/exported-files/AppUsageDetails.csv">UsageTracking File</a>
+  </div>
+
+</div>
+<h3 *ngIf="!isAdmin"> This information only accessible to Admin </h3>

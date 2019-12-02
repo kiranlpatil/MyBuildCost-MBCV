@@ -5,6 +5,9 @@
       <h4 class="panel-title">
         <a id="collapse-cost-summary-panel{{totalNumberOfBuildings}}" class="collapsed" data-parent="#cost-summary-panel" data-toggle="collapse" href="#collapse{{totalNumberOfBuildings}}" (click)="showGrandTotalTable()">
           {{getHeadings().COMMON_DEVELOPMENT}}
+          <span class="slab-area">
+                  {{ getLabel().TOTAL }} {{(costingByArea === getProjectElements().SLAB_AREA) ? 'Slab Area' : ((costingByArea === getProjectElements().SALEABLE_AREA) ? 'Saleable Area' : 'Carpet Area')}} : {{ grandTotalOfArea| number: '1.0-0' }} {{ (costingByUnit === getProjectElements().RS_PER_SQFT) ? getProjectElements().SQUAREFEET : getProjectElements().SQUAREMETER }}
+          </span>
           <span class="caret"></span>
         </a>
       </h4>
@@ -18,7 +21,8 @@
               <span><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Download/Print</span>
               <common-amenities-report-pdf [amenitiesReport]="amenitiesReport"
                                            [costingByUnit]="costingByUnit"
-                                           [costingByArea]="costingByArea">
+                                           [costingByArea]="costingByArea"
+                                           [grandTotalOfArea]="grandTotalOfArea">
               </common-amenities-report-pdf>
             </div>
           </li>
@@ -34,16 +38,19 @@
             <span class="sub-heading">( {{ getLabel().REPORT_BY_THUMBRULE }} )</span>
             <div class="white-bg"></div>
           </th>
-          <th colspan="2" class="border-left table-heading">
-            {{getLabel().ESTIMATED_COST}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
+          <th colspan="5" class="border-left table-heading">
+            {{getLabel().ESTIMATED}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
             <div class="white-bg"></div>
           </th>
         </tr>
         <tr class="cost-summary-row-list">
           <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
           <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
-          <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
-          <th><span class="sub-heading">{{getLabel().ESTIMATED_COST}}</span></th>
+          <th class="border-left"><span class="sub-heading">{{getLabel().BASIC_ESTIMATED_COST}}</span></th>
+          <th class="border-left"><span class="sub-heading">{{getLabel().GST_COMPONENT}}</span></th>
+          <th><span class="sub-heading">{{getLabel().TOTAL_ESTIMATED_COST}}</span></th>
+          <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}} without {{getLabel().GST_COMPONENT}}</span></th>
+          <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}} with {{getLabel().GST_COMPONENT}}</span></th>
         </tr>
       </thead>
     </table>
@@ -77,6 +84,37 @@
                 </div>
               </td>
               <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
+              <td class="border-left" id="basicEstimatedCost"><span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost === 0">-</span>
+              <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost!== 0">
+                {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost | number: '1.0-0'}}
+              </span>
+              </td>
+              <td class="border-left" id="gstComponent">
+                <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent === 0">-</span>
+                <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent !== 0">
+                  {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent| number: '1.0-0'}}
+                </span>
+              </td>
+              <td>
+                <span class="mobile-headings">{{ getLabel().TOTAL_ESTIMATED_COST }}</span>
+                <div *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
+                     (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
+                          <span  class="estimated-cost"
+                                 [class.above-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total > thumbRuleItem.amount"
+                                 [class.below-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total < thumbRuleItem.amount">
+                            {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number: '1.0-0' }}
+                          </span>
+                </div>
+                <button *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
+                      type="button" class="btn-get-amount" title="Estimate Cost"
+                        (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
+              </td>
+              <td class="border-left" id="rateWithoutGst">
+                <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst === 0">-</span>
+                <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst !== 0">
+                  {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst | number: '1.2-2'}}
+                </span>
+              </td>
               <td class="border-left">
                 <span class="mobile-headings">{{ costingByUnit }} </span>
                 <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate === 0">-</span>
@@ -93,20 +131,7 @@
                 <button type="button" *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
                         class="btn-get-amount" (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
               </td>-->
-              <td>
-                <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }}</span>
-                <div *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
-                     (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
-                          <span  class="estimated-cost"
-                                 [class.above-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total > thumbRuleItem.amount"
-                                 [class.below-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total < thumbRuleItem.amount">
-                            {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number: '1.0-0' }}
-                          </span>
-                </div>
-                <button *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total == 0"
-                        type="button" class="btn-get-amount" title="Estimate Cost"
-                        (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">{{getButton().GET_AMOUNT}}</button>
-              </td>
+
               <td class="delete-cost-head">
                 <div data-toggle="modal"
                      data-target="#deleteCosthead"
@@ -187,13 +212,15 @@
               {{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}
             </span>
           </td>
-          <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
-          <td class="border-left">
-            <span class="mobile-headings">{{ costingByUnit }} </span>
-            <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
-              {{amenitiesReport.estimate.totalRate|number: '1.2-2'}}
-            </span>
+          <td>
+            <span class="mobile-headings">{{ getLabel().BASIC_ESTIMATED_COST }}</span>
+            <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost ===0">-</span>
+            <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost !==0">{{amenitiesReport.estimate.totalBasicEstimatedCost|number: '1.0-0'}}</span>
+          </td>
+          <td>
+            <span class="mobile-headings">{{ getLabel().GST_COMPONENT }}</span>
+            <span *ngIf="amenitiesReport.estimate.totalGstComponent ===0">-</span>
+            <span *ngIf="amenitiesReport.estimate.totalGstComponent !==0">{{amenitiesReport.estimate.totalGstComponent|number: '1.0-0'}}</span>
           </td>
           <td class="border-left">
             <span class="mobile-headings">{{ getLabel().ESTIMATED_COST }} </span>
@@ -202,6 +229,20 @@
               {{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}
             </span>
           </td>
+          <td>
+            <span class="mobile-headings">{{ costingByUnit }} </span>
+            <span *ngIf="amenitiesReport.estimate.totalRateWithoutGst ===0">-</span>
+            <span *ngIf="amenitiesReport.estimate.totalRateWithoutGst !==0">{{amenitiesReport.estimate.totalRateWithoutGst|number: '1.2-2'}}</span>
+          </td>
+          <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
+          <td class="border-left">
+            <span class="mobile-headings">{{ costingByUnit }} </span>
+            <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
+            <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
+              {{amenitiesReport.estimate.totalRate|number: '1.2-2'}}
+            </span>
+          </td>
+
         </tr>
       </tbody>
     </table>

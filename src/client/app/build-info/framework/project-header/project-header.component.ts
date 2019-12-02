@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AppSettings, CommonService, SessionStorage, SessionStorageService} from '../../../shared/index';
 import { Menus, NavigationRoutes, CurrentView, Button } from '../../../shared/constants';
 import { CostSummaryService } from '../project/cost-summary-report/cost-summary.service';
+import {ProjectHeaderVisibilityService} from "../../../shared/services/project-header-visibility.service";
 
 @Component({
   moduleId: module.id,
@@ -28,18 +29,26 @@ export class ProjectHeaderComponent implements OnInit {
   item :any;
   status : string ;
   view : string ;
-  projectHeaderviews = ['accountSummary','paymentForm'] ;
-
+  projectHeaderViews = ['accountSummary','paymentForm'] ;
+  isShowHeader :boolean = true;
 
 
   constructor(private _router: Router,private activatedRoute:ActivatedRoute,
-              private costSummaryService : CostSummaryService,private commonService:CommonService) {
+              private costSummaryService : CostSummaryService,private commonService:CommonService,
+              private projectHeaderVisibilityService:ProjectHeaderVisibilityService) {
+    this.subscription = this.projectHeaderVisibilityService.changeProjectHeaderVisibilityStatus$.subscribe(
+      (isShowHeader:boolean )=> {
+        this.isShowHeader= isShowHeader;
+        this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
+        this.view =SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
+      }
+    );
+
+
   }
 
   ngOnInit() {
     this.view =SessionStorageService.getSessionValue(SessionStorage.CURRENT_VIEW);
-    console.log(this.view);
-    console.log(this.projectHeaderviews.indexOf(this.view)<0);
     this.activatedRoute.params.subscribe(params=> {
       this.premiumPackageExist=params['premiumPackageExist'];
       this.premiumPackageAvailable = this.premiumPackageExist!=='false'?true:false;

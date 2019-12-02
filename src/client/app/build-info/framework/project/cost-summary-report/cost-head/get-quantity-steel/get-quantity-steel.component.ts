@@ -228,7 +228,7 @@ export class GetSteelQuantityComponent implements OnInit {
   onUpdateQuantityItemsFailure(error: any) {
     var message = new Message();
     message.isError = true;
-    message.error_msg = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR;
+    message.error_msg = error.err_msg;
     this.messageService.message(message);
     this.loaderService.stop();
   }
