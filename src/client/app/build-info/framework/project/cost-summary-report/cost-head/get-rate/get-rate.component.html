@@ -85,7 +85,7 @@
                   <td >
                     <div class="gst-comp">
                     <select  class="select-item" [(ngModel)]="item.gst" (change)="calculateTotal()" [disabled]="disableRateField">
-                      <option>{{rate.rateItems[i].gst}} %</option>
+                      <option>{{item.gst}} %</option>
                       <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
                     </select>
                     <div class="Gst-Component">

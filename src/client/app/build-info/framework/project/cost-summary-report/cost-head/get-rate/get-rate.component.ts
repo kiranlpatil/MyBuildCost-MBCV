@@ -72,7 +72,6 @@ export class GetRateComponent implements OnChanges {
   totalGstAmount : number;
   totalRate: number = 0;
   gstComponent : number = 0;
-  //totalByUnit :  number = 0;
 
   constructor(private costSummaryService: CostSummaryService,  private loaderService: LoaderService,
               private messageService: MessageService, private commonService: CommonService,
@@ -86,13 +85,7 @@ export class GetRateComponent implements OnChanges {
   ngOnChanges() {
     console.log(this.rate);
     this.calculateTotal();
-    //this.getGst(this.gst);
   }
-  /*getGst(val :number)
-  {
-    this.gst =val;
-    console.log("GST" +this.gst)
-  }*/
 
   calculateGstAmount() {
     for (let rateItemsIndex in this.rate.rateItems) {

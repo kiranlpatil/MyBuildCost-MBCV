@@ -514,7 +514,6 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
       this.grandTotalOfArea = this.grandTotalOfArea + this.buildingsReport[buildindIndex].area;
       this.grandTotalOfBasicEstimatedCost = this.grandTotalOfBasicEstimatedCost + this.buildingsReport[buildindIndex].estimate.totalBasicEstimatedCost;
       this.grandTotalOfGstComponent = this.grandTotalOfGstComponent + this.buildingsReport[buildindIndex].estimate.totalGstComponent;
-      console.log("grandTotalOfGstComponent"+this.grandTotalOfGstComponent);
       this.grandTotalOfRateWithoutGst = this.grandTotalOfRateWithoutGst + this.buildingsReport[buildindIndex].estimate.totalRateWithoutGst;
 
 
@@ -536,7 +535,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
 
     this.grandTotalOfRateWithoutGst = this.grandTotalOfRateWithoutGst + this.amenitiesReport.estimate.totalRateWithoutGst;
 
-    console.log("grandTotalOfRateWithoutGst"+this.grandTotalOfRateWithoutGst);
+
     this.grandTotalOfEstimatedRate = (this.grandTotalOfEstimatedCost / this.projectReport.totalAreaOfBuildings);
   }
 
