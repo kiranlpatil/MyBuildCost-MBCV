@@ -227,7 +227,21 @@ class RateAnalysisController {
       next(new CostControllException(e.message,e.stack));
     }
   }
-
+  updateDefaultGstToProjects(req: express.Request, res: express.Response, next: any): void{
+    try {
+      logger.info('Rate Analysis Controller, getAllProjectData has been hit');
+      let rateAnalysisService = new RateAnalysisService();
+      rateAnalysisService.updateDefaultGstToProjects((error: any, resp:any) =>{
+        if (error) {
+          next(error);
+        } else {
+          next(new Response(200, resp));
+        }
+      });
+    }catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 
 export  = RateAnalysisController;

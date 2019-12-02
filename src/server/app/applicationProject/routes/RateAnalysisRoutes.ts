@@ -57,6 +57,7 @@ class RateAnalysisRoutes {
 
     router.get('/import/radata', controller.importRateAnalysisData, this._responseInterceptor.exit);
     router.get('/sync/all/user/data', controller.migrateDataOfAllUsers);
+    router.get('/updateDefaultGstToProjects',controller.updateDefaultGstToProjects,this._responseInterceptor.exit);
     return router;
   }
 }

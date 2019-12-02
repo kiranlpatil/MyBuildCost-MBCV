@@ -1868,6 +1868,68 @@ class RateAnalysisService {
     this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
     });
   }
+
+  updateDefaultGstToProjects(callback: (error: any, result: any) => void) {
+    let findAllProjects = {};
+    this.projectRepository.retrieve(findAllProjects, (error:any, projectList : any)=> {
+      if (error) {
+         logger.error('Error : ' + JSON.stringify(error));
+       }
+       else
+      {
+        let resultArr: Array<any> = new Array<any>();
+        for(let project of projectList) {
+          let projectId = project._id;
+          let rates = project.rates;
+          let buildingArray = project.buildings;
+          let projectCostHeads = project.projectCostHeads;
+          let defaultCostHeads = projectCostHeads.filter(function (arr: any) {
+            return arr.categories.length == 0;
+          });
+          this.updateGstOfProjectCostHeads(defaultCostHeads);
+          this.updateGstOfWorkItemsOfExistingBuildingsAndProjects(projectCostHeads);
+          this.updateGstOfRateItemsOfExistingBuildingsAndProjects(projectCostHeads);
+          resultArr.push(projectCostHeads);
+          this.updateCostHeadsAndCentralizedRatesOfProject(projectId,projectCostHeads,rates);
+          if(buildingArray.length != 0) {
+            for (let buildingId of buildingArray) {
+              this.buildingRepository.findById(buildingId, (error: any, buildingData: any) => {
+                if (error) {
+                  logger.error('Error : ' + JSON.stringify(error));
+                }
+                let buildingRates = buildingData.rates;
+                let buildingCostHeads = buildingData.costHeads;
+                this.updateGstOfWorkItemsOfExistingBuildingsAndProjects(buildingCostHeads);
+                this.updateGstOfRateItemsOfExistingBuildingsAndProjects(buildingCostHeads);
+                resultArr.push(buildingCostHeads);
+                this.updateCostHeadsAndCentralizedRatesOfBuilding(buildingId,buildingCostHeads,buildingRates);
+              });
+            }
+          }
+        }
+        callback(null,{data:resultArr});
+      }
+
+    });
+
+  }
+  updateGstOfWorkItemsOfExistingBuildingsAndProjects(CostHeads:Array<any>)
+  {
+    let updateWorkItemGstSQL = 'SEARCH /categories/workItems/ WHERE(isDirectRate = true) SET (gst = 0) FROM ? ';
+    let arrayOfWorkItem = alasql(updateWorkItemGstSQL, [CostHeads]);
+  }
+  updateGstOfRateItemsOfExistingBuildingsAndProjects(CostHeads:Array<any>)
+  {
+    let getRateItemsSQL = 'SEARCH /categories/workItems/ WHERE(isDirectRate = false) FROM ?';
+    let arrayOfRateItem = alasql(getRateItemsSQL, [CostHeads]);
+      let updateRateItemSQL = 'SEARCH //rateItems/ SET (gst = 0) FROM ?';
+      let arrayOfupdatedRateItem = alasql(updateRateItemSQL,[arrayOfRateItem]);
+  }
+  updateGstOfProjectCostHeads(defaultCostHeads:Array<any>)
+  {
+    let getCostHeads = 'SEARCH / SET (gst = 0) FROM ?';
+    let arrayOfRateItem = alasql(getCostHeads, [defaultCostHeads]);
+  }
 }
 
 Object.seal(RateAnalysisService);
