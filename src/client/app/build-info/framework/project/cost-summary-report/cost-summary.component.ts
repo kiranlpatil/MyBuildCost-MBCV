@@ -533,7 +533,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
     this.grandTotalOfGstComponent = this.grandTotalOfGstComponent + this.amenitiesReport.estimate.totalGstComponent;
 
 
-    this.grandTotalOfRateWithoutGst = this.grandTotalOfRateWithoutGst + this.amenitiesReport.estimate.totalRateWithoutGst;
+    this.grandTotalOfRateWithoutGst = (this.grandTotalOfBasicEstimatedCost/ this.projectReport.totalAreaOfBuildings);
 
 
     this.grandTotalOfEstimatedRate = (this.grandTotalOfEstimatedCost / this.projectReport.totalAreaOfBuildings);
