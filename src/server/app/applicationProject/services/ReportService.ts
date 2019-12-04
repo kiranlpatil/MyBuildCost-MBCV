@@ -410,6 +410,7 @@ class ReportService {
       let contentTotal = 0;
       let rateTotal = 0;
       let totalAmount = 0;
+      let totalGst = 0;
       let table = secondaryViewMaterialData[secondaryViewData].table;
 
       for (let content of Object.keys(table.content)) {
@@ -443,6 +444,7 @@ class ReportService {
 
             table.content[content].columnEight =  (tableSubContent[subContent].columnFive - (tableSubContent[subContent].columnFour * tableSubContent[subContent].columnTwo)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
             tableSubContent[subContent].columnEight = (tableSubContent[subContent].columnFive - (tableSubContent[subContent].columnFour * tableSubContent[subContent].columnTwo)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+            totalGst = totalGst + (tableSubContent[subContent].columnFive - (tableSubContent[subContent].columnFour * tableSubContent[subContent].columnTwo));
           }
           table.content[content].columnTwo = Math.ceil(table.content[content].columnTwo);
           contentTotal = contentTotal + table.content[content].columnTwo;
@@ -451,6 +453,7 @@ class ReportService {
         //footer
         table.footer.columnTwo = contentTotal;
          table.footer.columnFive = totalAmount.toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+         table.footer.columnEight = totalGst.toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
         secondaryViewMaterialData[secondaryViewData].title = contentTotal + ' ' + table.footer.columnThree; // todo ask swapnil for showing total in title
       }
 
@@ -493,11 +496,11 @@ class ReportService {
         let columnOne: string = 'Item';
         let columnTwo: string = 'Quantity';
         let columnThree: string =  'Unit';
-        let columnFour: string =  'Basic Rate/Unit';
-        let columnFive: string =  'Total Amount';
+        let columnFour: string =  'Basic Rate/Unit (Rs)';
+        let columnFive: string =  'Total Cost including GST (Rs)';
         let columnSix: string = 'GST';
-        let columnSeven: string = 'Total Rate/Unit';
-        let columnEight: string = 'GST Component';
+        let columnSeven: string = 'Rate/Unit including GST (Rs)';
+        let columnEight: string = 'GST Component (Rs)';
         if(elementWiseReport === Constants.STR_COSTHEAD && building === Constants.STR_ALL_BUILDING) {
           columnOne = 'Building';
         }

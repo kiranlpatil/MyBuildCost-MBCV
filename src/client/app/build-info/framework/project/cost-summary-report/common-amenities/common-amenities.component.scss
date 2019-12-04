@@ -31,3 +31,16 @@
     }
   }
 }
+.cost-summary-table{
+  tr{
+    td{
+      overflow-wrap: break-word;
+      &:nth-child(1){
+        max-width: 115px;
+      }
+    }
+  }
+}
+.no-underline{
+  text-decoration: none!important;
+}

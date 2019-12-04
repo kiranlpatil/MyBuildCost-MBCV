@@ -73,7 +73,6 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   viewTypeValue: string;
   quantityName: string;
   baseUrl:string;
-  gst:number;
   viewType:string;
   keyQuantity:string;
   costHeadName: string;
@@ -670,10 +669,9 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   changeGst(categoryId : number, workItem : WorkItem, gst:number) {
-    this.gst = gst;
       this.loaderService.start();
       this.costSummaryService.updateGstAmount(this.baseUrl, this.costHeadId, categoryId,
-        workItem.rateAnalysisId, workItem.workItemId, this.gst).subscribe(
+        workItem.rateAnalysisId, workItem.workItemId, gst).subscribe(
         workItemList => this.onChangeGstSuccess(workItemList),
         error => this.onChangeGstFailure(error)
       );
