@@ -151,9 +151,8 @@
                                 <!--GST-->
                                 <td  *ngIf=" workItem.isDirectRate">
                                   <span class="mobile-headings">{{getTableHeadings().GST}}</span>
-                                  <select  class="select-item gst-select-item" (change)="changeGst(category.rateAnalysisId, workItem,$event.target.value)">
-                                    <option>{{workItem.gst}} %</option>
-                                    <option *ngFor="let gst of gstval" [value]="gst">{{gst}} %</option>
+                                  <select  class="select-item gst-select-item" [(ngModel)]="workItem.gst" (change)="changeGst(category.rateAnalysisId, workItem,$event.target.value)">
+                                    <option *ngFor="let gst of gstval" [value]="gst" [selected]="gst">{{gst}} %</option>
                                   </select>
                                   <div class="gst-component-section">
                                  <!--   <span class="mobile-headings">{{getTableHeadings().GST_COMPONENT}}</span>-->
@@ -173,7 +172,7 @@
                                    -
                                   </div>
                                  <div class="totalrate total-rate-value" *ngIf="workItem.totalRate">
-                                   {{workItem.totalRate}}
+                                   {{workItem.totalRate| number:'.1-2'}}
                                  </div>
                               </td>
 

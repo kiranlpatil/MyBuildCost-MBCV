@@ -44,8 +44,9 @@
           </th>
         </tr>
         <tr class="cost-summary-row-list">
-          <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
           <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
+          <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
+
           <th class="border-left"><span class="sub-heading">{{getLabel().BASIC_ESTIMATED_COST}}</span></th>
           <th class="border-left"><span class="sub-heading">{{getLabel().GST_COMPONENT}}</span></th>
           <th><span class="sub-heading">{{getLabel().TOTAL_ESTIMATED_COST}}</span></th>
@@ -63,12 +64,29 @@
             <tr *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index" class="delete-cost-head-cell">
               <td class="border-left">{{thumbRuleItem.name}}</td>
               <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
+
+              <td class="border-left" [class.validate-amount] = 'thumbRuleItem?.amount?.toString().split(".")[0]?.length>9 ||
+                                                          thumbRuleItem?.amount?.toString().split(".")[1]?.length>4'>
+                <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
+                <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0">
+                      {{thumbRuleItem.amount | number: '1.0-0'  }}
+                  </span>
+                <span class="budgeted-amount" *ngIf="thumbRuleItem.amount === 0">-</span>
+                <div class="edit-field">
+                  <input title="Edit Budgeted Cost" type="number" amountValidate="true"
+                         [(ngModel)]="thumbRuleItem.amount"
+                         id="thumbRuleItem.amount"
+                         (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
+                         class="form-control clear"/>
+                </div>
+              </td>
+
               <td class="border-left">
                 <span class="mobile-headings">{{ costingByUnit }} </span>
                 <span *ngIf="thumbRuleItem.rate !== 0">{{thumbRuleItem.rate| number: '1.2-2'}}</span>
                 <span *ngIf="thumbRuleItem.rate === 0">-</span>
               </td>
-              <td class="border-left" [class.validate-amount] = 'thumbRuleItem?.amount?.toString().split(".")[0]?.length>9 ||
+              <!--<td class="border-left" [class.validate-amount] = 'thumbRuleItem?.amount?.toString().split(".")[0]?.length>9 ||
                                                           thumbRuleItem?.amount?.toString().split(".")[1]?.length>4'>
                 <span class="mobile-headings">{{ getLabel().BUDGETED_COST }} </span>
                  <span class="budgeted-amount" *ngIf="thumbRuleItem.amount !== 0">
@@ -82,7 +100,7 @@
                          (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
                          class="form-control clear"/>
                 </div>
-              </td>
+              </td>-->
               <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
               <td class="border-left" id="basicEstimatedCost"><span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost === 0">-</span>
               <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost!== 0">
@@ -100,7 +118,8 @@
                 <div *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total != 0"
                      (click)="goToCostHeadView(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex])">
                           <span  class="estimated-cost"
-                                 [class.above-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total > thumbRuleItem.amount"
+                                 [class.above-cost]="(amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total > thumbRuleItem.amount)"
+                                 [class.no-underline]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].disableCostHeadView == true"
                                  [class.below-cost]="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total < thumbRuleItem.amount">
                             {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number: '1.0-0' }}
                           </span>
@@ -200,11 +219,7 @@
         <tr class="total" *ngIf="amenitiesReport.thumbRule && amenitiesReport.estimate">
           <td class="border-left">{{getLabel().TOTAL}}</td>
           <td class="visible-xs"><p>{{ getLabel().REPORT_BY_THUMBRULE }}</p></td>
-          <td class="border-left">
-            <span class="mobile-headings">{{ costingByUnit }} </span>
-            <span *ngIf="amenitiesReport.thumbRule.totalRate === 0">-</span>
-            <span *ngIf="amenitiesReport.thumbRule.totalRate !== 0">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</span>
-          </td>
+
           <td class="border-left">
             <span class="mobile-headings">{{ getLabel().BUDGETED_COST }}</span>
             <span class="estimated-cost" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost === 0">-</span>
@@ -212,6 +227,13 @@
               {{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}
             </span>
           </td>
+
+          <td class="border-left">
+            <span class="mobile-headings">{{ costingByUnit }} </span>
+            <span *ngIf="amenitiesReport.thumbRule.totalRate === 0">-</span>
+            <span *ngIf="amenitiesReport.thumbRule.totalRate !== 0">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</span>
+          </td>
+
           <td>
             <span class="mobile-headings">{{ getLabel().BASIC_ESTIMATED_COST }}</span>
             <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost ===0">-</span>

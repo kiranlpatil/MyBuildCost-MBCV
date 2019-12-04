@@ -46,8 +46,8 @@
           <th width="12%" style="padding: 10px 5px;text-align:right">Quantity</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Unit</th>
           <th width="12%" style="padding: 10px 5px;text-align:right">Rate/Unit Including GST(<span [innerHTML]="getProjectElements().RS_SYMBOL"></span>)</th>
-          <th width="12%" style="padding: 10px 5px;text-align:right">Amount Including GST(<span [innerHTML]="getProjectElements().RS_SYMBOL"></span>)</th>
-          <th width="12%" style="padding: 10px 5px;text-align:right">GST Component</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">Total Cost Including GST(<span [innerHTML]="getProjectElements().RS_SYMBOL"></span>)</th>
+          <th width="12%" style="padding: 10px 5px;text-align:right">GST Component(<span [innerHTML]="getProjectElements().RS_SYMBOL"></span>)</th>
         </thead>
         <tbody>
         <tr style="page-break-inside: avoid;" *ngFor="let workitem of category.workItems">
@@ -76,7 +76,6 @@
         <thead style="font-size:12px; font-weight: bold;page-break-inside: avoid;">
           <th style="border: none;padding: 5px;width:60%">Total</th>
           <th style="border: none;padding: 5px;width:40%;text-align: right" *ngIf="categoryDetailsTotalAmount !== 0">
-            <span [innerHTML]="getProjectElements().RS_SYMBOL"></span>
             {{categoryDetailsTotalAmount|number :'1.0-0'}}</th>
           <th style="border: none;padding: 5px;width:40%;text-align: right" *ngIf="categoryDetailsTotalAmount === 0">-</th>
         </thead>
