@@ -53,6 +53,8 @@ class SubscriptionRoutes {
 
     router.put('/user/:userId/paymentStatus/reset', this.authInterceptor.requiresAuth, controller.resetPaymentStatus);
 
+    router.put('/updatePackageCost',controller.updatePackageCost,this._responseInterceptor.exit);
+
     return router;
   }
 }

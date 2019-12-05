@@ -4,6 +4,10 @@ import messages  = require('../../applicationProject/shared/messages');
 import Constants = require('../shared/constants');
 import { PayUMoneyModel } from '../../framework/dataaccess/model/PayUMoneyModel';
 import UserService = require('../../framework/services/UserService');
+import Messages = require('../shared/messages');
+import SendMailService = require("../../framework/services/mailer.service");
+import MailAttachments = require("../../framework/shared/sharedarray");
+
 
 let payumoney = require('payumoney-node');
 let config = require('config');
@@ -151,6 +155,48 @@ class SubscriptionService {
     });
   }
 
+  updatePackageCost(packageName:string, packageCost:number, callback:(error:any,result:any)=>void) {
+    logger.info('Subscription service, updatePackageCost has been hit');
+    let query:any;
+    let updateQuery:any;
+    switch(packageName) {
+      case "Trial":
+      case "Premium":
+      case "RAPremium":
+      case "Free":
+        query = {'basePackage.name': packageName};
+        updateQuery = {$set: {'basePackage.cost': packageCost}};
+        break;
+      case "Add_building":
+      case "RenewProject":
+        query = {'addOnPackage.name': packageName};
+        updateQuery = {$set: {'addOnPackage.cost': packageCost}};
+        break;
+      default:
+        return callback(null,"No such package exists !");
+    }
+      this.subscriptionRepository.findOneAndUpdate(query, updateQuery, {new: true}, (error, Response) => {
+        logger.info('Project service, findOneAndUpdate has been hit');
+        let sendMailService = new SendMailService();
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(null, Response);
+          let htmlTemplate = 'changed-package-cost-mail.html';
+          let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
+            ['$name$', packageName], ['$cost$', packageCost], ['$link$', 'http://mybuildcost.co.in/']]);
+          let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+          sendMailService.send(config.get('application.mail.TPLGROUP_MAIL'), Messages.CHANGED_SUBSCRIPTION_COST, htmlTemplate, data, attachment,
+            (err: any, result: any) => {
+              if (err) {
+                logger.error(JSON.stringify(err));
+              }
+              logger.debug('Sending Mail : ' + JSON.stringify(result));
+            }, config.get('application.mail.BUILDINFO_ADMIN_MAIL'));
+          console.log(JSON.stringify(Response));
+        }
+      });
+    }
 }
 
 export = SubscriptionService;

@@ -197,6 +197,23 @@ class SubscriptionController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+  updatePackageCost(req: express.Request, res: express.Response, next: any) : void {
+      try {
+       let packageName = req.body.name;
+        let packageCost =req.body.cost;
+        let subscriptionService = new SubscriptionService();
+        subscriptionService.updatePackageCost(packageName,packageCost, (error, result) => {
+          if (error) {
+            next(error);
+          } else {
+            logger.info('update PackageCost success');
+            next(new Response(200, result));
+          }
+        });
+      }catch(e) {
+    next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 
 export = SubscriptionController;

@@ -20,7 +20,7 @@ class Messages {
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
   public static EMAIL_SUBJECT_RECRUITER_REGISTRATION: string = 'Recruiter registered with Jobmosis.';
   public static EMAIL_SUBJECT_CANDIDATE_APPLIED_FOR_JOB: string = 'Candidate applied for job.';
-  public static EMAIL_SUBJECT_CANDIDATE_ADDED_TO_CART: string = 'Shortlisted by recruiter.';
+  public static CHANGED_SUBSCRIPTION_COST: string = 'Changed Subscription Cost';
 
   //Sendmail
   public static MSG_SUCCESS_EMAIL_REGISTRATION: string = 'Email sent on registered email address.';
