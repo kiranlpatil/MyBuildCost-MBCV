@@ -105,7 +105,12 @@ export class HttpDelegateService extends BaseService {
   }
 
   validateAttachmentUrl(url: any) {
-    var currentId  = url.match('project/(.*)/building');
+    var currentId;
+    if(url.indexOf('/building') > -1) {
+      currentId = url.match('project/(.*)/building');
+    } else {
+      currentId = url.match('project/(.*)/costhead');
+    }
     var projectId = currentId[1];
     return projectId;
   }
