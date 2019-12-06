@@ -55,7 +55,8 @@
     td, th {
       border: 0;
       line-height: 14px;
-      padding: 6px 10px;
+      //padding: 6px 10px;
+      padding: 6px 6px;
       vertical-align: middle;
       &:last-child {
         border: none;
@@ -328,7 +329,7 @@
         vertical-align: middle;
 
         &:first-child {
-          font-size: 24px;
+          font-size: 21px;
           font-weight: 300;
         }
       }

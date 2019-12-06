@@ -76,7 +76,7 @@
                   <input title="Edit Budgeted Cost" type="number" amountValidate="true"
                          [(ngModel)]="thumbRuleItem.amount"
                          id="thumbRuleItem.amount"
-                         (blur)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
+                         (change)="changeBudgetedCostAmountOfProjectCostHead(thumbRuleItem.name, thumbRuleItem.amount)"
                          class="form-control clear"/>
                 </div>
               </td>

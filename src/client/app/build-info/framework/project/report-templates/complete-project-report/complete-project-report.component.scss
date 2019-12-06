@@ -20,3 +20,104 @@ th > .sub-heading {
   font-weight: 600;
   font-size: 10px;
 }
+.th-bg-color{
+  background-color: #ffdb4d;
+}
+.both-grand-table{
+  tr{
+    th{
+      &:first-child{
+        width: 12%!important;
+      }
+      width: 11%!important;
+    }
+    td{
+      &:first-child{
+        width: 8%!important;
+      }
+      width: 10%!important;
+    }
+  }
+}
+.both-grand-table-total{
+  tr{
+    td{
+      &:first-child{
+        width: 22%!important;
+      }
+      width: 10%!important;
+    }
+  }
+}
+.both-grand-table1{
+  tr{
+    th{
+      &:nth-child(1){
+        width: 8%!important;
+      }
+      width: 10%!important;
+    }
+    td{
+      &:first-child{
+        width: 20%!important;
+      }
+      width: 10%!important;
+    }
+  }
+}
+.both-grand-table-total1{
+  tr{
+    td{
+      &:first-child{
+        width: 20%!important;
+      }
+      width: 10%!important;
+    }
+  }
+}
+.estimated-table{
+  tr{
+    th{
+      width: 8%!important;
+    }
+    td{
+      width: 8%!important;
+    }
+  }
+}
+.estimated-table-total{
+  tr{
+    th{
+      &:nth-child(1){
+        width: 11%!important;
+      }
+      width: 8%!important;
+    }
+  }
+}
+.estimated-table2{
+  tr{
+    th{
+      /*&:first-child{
+        width: 10%!important;
+      }*/
+      width: 17%!important;
+    }
+    td{
+      /*&:first-child{
+        width: 10%!important;
+      }*/
+      width: 17%!important;
+    }
+  }
+}
+.estimated-table-total-2{
+  tr{
+    td{
+      &:first-child{
+        width: 14%!important;
+      }
+      width: 8%!important;
+    }
+  }
+}

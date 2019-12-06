@@ -28,7 +28,7 @@
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
       "ADMIN_MAIL": "buildinfo@techprimelab.com",
       "BUILDINFO_ADMIN_MAIL": "buildinfo@techprimelab.com",
-      "TPLGROUP_MAIL": "",
+      "TPLGROUP_MAIL": "buildinfo@techprimelab.com",
       "MAIL_SERVICE": "Gmail",
       "MAILCHIMP_CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
       "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_SUCCESS_LISTID": "a1b8d070ce",

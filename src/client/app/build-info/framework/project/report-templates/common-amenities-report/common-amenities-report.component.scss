@@ -20,3 +20,49 @@ th > .sub-heading {
   font-weight: 600;
   font-size: 10px;
 }
+.th-bg-color{
+  background-color: #ffdb4d;
+}
+.estimated-budgeted-th{
+  tr{
+    th{
+      width: 12%!important;
+    }
+    td{
+      width: 12%!important;
+    }
+  }
+}
+.estimated-budgeted-total{
+  tr{
+    th{
+      width: 12%!important;
+    }
+    td{
+      &:nth-child(1){
+        width: 28%!important;
+      }
+      width: 12%!important;
+    }
+  }
+}
+.estimated-th{
+  tr{
+    th{
+      width: 16%!important;
+    }
+    td{
+      width: 16%!important;
+    }
+  }
+}
+.total-estimated{
+  tr{
+    td{
+      &:nth-child(1){
+        width: 22%!important;
+      }
+      width: 16%!important;
+    }
+  }
+}

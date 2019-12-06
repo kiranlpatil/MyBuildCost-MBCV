@@ -111,17 +111,17 @@
       height: 26px;
       padding: 7px 24px 7px 0;
       //width: 120px;
-      width: 100%;
+      width: 100px;
     }
 
     td:nth-child(3) > .edit-field {
       display: none;
       //width: 120px;
-      width: 100%;
+      width: 100px;
       input {
         //text-align: right;
         text-align: center;
-        width: 100%;
+        width: 100px;
       }
     }
 
@@ -197,9 +197,13 @@
     }
 
     td {
+      width: 8%;
+      &:nth-child(1){
+        width: 14%;
+      }
       &:last-child {
         border-radius: 0 6px 6px 0;
-        text-align: right;
+        text-align: center;
         //width: 120px;
       }
     }
@@ -274,7 +278,8 @@
         th {
           &:nth-child(1) {
             //width: 190px;
-            width: 18%;
+            //width: 18%;
+            width: 16%;
           }
         }
       }
@@ -295,11 +300,13 @@
             width: 15%;
           }
           &:nth-child(5){
-            width: 12%;
+            //width: 12%;
+            width: 14%;
           }
           &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(6),&:nth-child(7) {
             //width: auto;
-            width: 11%;
+            //width: 11%;
+            width: 10%;
           }
         }
       }
@@ -546,8 +553,9 @@
       width: 10%!important;
       padding: 5px 12px;
       &:nth-child(1){
-        width: 31%!important;
+        width: 15%!important;
         padding: 0;
+        white-space: nowrap;
       }
     }
   }
