@@ -202,14 +202,20 @@ class SubscriptionController {
        let packageName = req.body.name;
         let packageCost =req.body.cost;
         let subscriptionService = new SubscriptionService();
-        subscriptionService.updatePackageCost(packageName,packageCost, (error, result) => {
-          if (error) {
-            next(error);
-          } else {
-            logger.info('update PackageCost success');
-            next(new Response(200, result));
-          }
-        });
+        if(packageCost > 0 || packageCost == null) {
+          subscriptionService.updatePackageCost(packageName, packageCost, (error, result) => {
+            if (error) {
+              next(error);
+            } else {
+              logger.info('update PackageCost success');
+              next(new Response(200, result));
+            }
+          });
+        }
+        else
+        {
+          next(new Response(200, "Value cannot be negative,zero or null"));
+        }
       }catch(e) {
     next(new CostControllException(e.message,e.stack));
     }
