@@ -1,8 +1,12 @@
 @import '../../../../../../../css/common';
 
+.columnOne{
+  width: 20%!important;
+}
 .row-list {
   //color: #8290A8;
-  display: table;
+  //display: table;
+  display: flex;
   font-size: 12px;
   margin: 0;
   padding: 0;
@@ -11,6 +15,14 @@
   .row-lists {
     display: table-cell;
     float: none;
+
+    font-weight: bold;
+    width: 12%;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px;
+    border-right: 1px solid #eaeaea;
+    text-align: center;
   }
 
   .border-right {
@@ -55,23 +67,33 @@
 
 .item-header-row{
   padding: 13px 0 13px 15px;
+  display: flex;
   .border-right {
     border-right: 1px solid $row-border;
   }
   .row-lists {
     font-size: 12px;
     margin: 0;
+    width: 12%;
+    padding: 5px;
+    border-right: 1px solid #eaeaea;
+    text-align: center;
   }
 }
 
 .item-footer-row {
   padding: 13px 0 13px 15px;
+  display: flex;
   .border-right {
     border-right: 1px solid $row-border;
   }
   .row-lists {
     font-size: 12px;
     margin: 0;
+    padding: 0 5px;
+    width: 12%;
+    border-right: 1px solid #eaeaea;
+    text-align: center;
   }
 }
 
@@ -81,7 +103,7 @@
   }
   .row-lists {
     font-weight: bold;
-    padding-left: 15px;
+    //padding-left: 15px;
   }
 }
 

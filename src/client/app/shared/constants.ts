@@ -648,6 +648,9 @@ export class Label {
   public static ATTACH_FILE: string = 'Attach File';
   public static DIRECT_QUANTITY: string = 'directQty';
   public static GST_COMPONENT = 'GST Component';
+  public static TOTAL_GST_B = 'Total GST Component(B)';
+  public static TOTAL_GST_C = 'Total GST Component(C)';
+  public static TOTAL_GST_COMPONENT = 'Total GST Component';
 
   //Quantity View
   public static DEFAULT_VIEW = 'default';
@@ -788,6 +791,8 @@ export class MaterialTakeOffElements {
   public static SORT = 'sort';
   public static CHECK_SUB_CONTENT_PRESENT = 'checkSubContentPresent';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
+  public static COST_HEAD_WISE_REPORT_HEADING = '(Cost Head Wise)';
+  public static MATERIAL_WISE_REPORT_HEADING = '(Material Wise)';
   public static REPORT_EMPTY_MESSAGE = 'There is no estimate entered against any cost head. Kindly enter estimate to generate material take off report.';
 }
 

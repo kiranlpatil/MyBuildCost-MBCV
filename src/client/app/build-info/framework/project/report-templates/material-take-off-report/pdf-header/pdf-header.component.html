@@ -2,6 +2,16 @@
   {{getMaterialTakeOffElements().MATERIAL_TAKE_OFF_REPORT_HEADING}}
 </h2>
 
+<h2 *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD"
+    style="font-size:14px;font-weight: bold;padding: 0;margin: 0 auto 0;text-align: center;width: 100%;max-width: 750px;">
+ {{getMaterialTakeOffElements().COST_HEAD_WISE_REPORT_HEADING}}
+</h2>
+
+<h2 *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL"
+    style="font-size:14px;font-weight: bold;padding: 0;margin: 0 auto 0;text-align: center;width: 100%;max-width: 750px;">
+  {{getMaterialTakeOffElements().MATERIAL_WISE_REPORT_HEADING}}
+</h2>
+
 <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
   <span style="float: left;"> {{generatedDate | date:'dd MMMM yyyy'}} </span>
   Powered by
