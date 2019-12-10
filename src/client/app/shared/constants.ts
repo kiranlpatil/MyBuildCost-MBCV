@@ -789,8 +789,8 @@ export class MaterialTakeOffElements {
   public static SORT = 'sort';
   public static CHECK_SUB_CONTENT_PRESENT = 'checkSubContentPresent';
   public static MATERIAL_TAKE_OFF_REPORT_HEADING = 'Material Take Off Report';
-  public static COST_HEAD_WISE_REPORT_HEADING = "Cost Head Wise";
-  public static MATERIAL_WISE_REPORT_HEADING = "Material Wise";
+  public static COST_HEAD_WISE_REPORT_HEADING = '(Cost Head Wise)';
+  public static MATERIAL_WISE_REPORT_HEADING = '(Material Wise)';
   public static REPORT_EMPTY_MESSAGE = 'There is no estimate entered against any cost head. Kindly enter estimate to generate material take off report.';
 }
 
