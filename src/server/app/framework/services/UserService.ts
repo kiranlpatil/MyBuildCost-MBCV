@@ -2084,6 +2084,51 @@ if(duplicateUser.hasOwnProperty("RAP")){
         }
       });
   }
+  updateUserSubscription(mobileno:number,activationDate:string,validity:number,callback:(error:any,result:any)=>void){
+    logger.info('User service, updateUserSubscription has been hit');
+    let query:any;
+    query={'mobile_number':mobileno,'typeOfApp':"RAapp"};
+    this.userRepository.retrieve(query,(error,res)=>{
+      if (error) {
+        callback(error, null);
+      } else if(res.length != 0) {
+        let updateQuery:any;
+        if(activationDate == undefined || activationDate == ""){
+          updateQuery = {$set: {'subscriptionForRA.validity': validity,
+              'subscriptionForRA.name': "RAPremium"}};
+        } else{
+          let activeDate = new Date(activationDate).toISOString();
+          updateQuery = {$set: {'subscriptionForRA.validity': validity,
+              'subscriptionForRA.activationDate':activeDate,
+              'subscriptionForRA.name': "RAPremium"}};
+        }
+          this.userRepository.findOneAndUpdate(query, updateQuery, {new: true}, (error, res) => {
+            logger.info('User service, findOneAndUpdate has been hit');
+            let sendMailService = new SendMailService();
+            if (error) {
+              callback(error, null);
+            }
+            else {
+              callback(null, res);
+              let htmlTemplate = 'changed_user_subscription_mail.html';
+              let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
+                ['$activationDate$', res.subscriptionForRA.activationDate], ['$validity$', validity], ['$link$', 'http://mybuildcost.co.in/'], ['$mobile$',mobileno]]);
+              let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+              sendMailService.send(config.get('application.mail.TPLGROUP_MAIL'), Messages.CHANGED_USER_SUBSCRIPTION, htmlTemplate, data, attachment,
+                (err: any, result: any) => {
+                  if (err) {
+                    logger.error(JSON.stringify(err));
+                  }
+                  logger.debug('Sending Mail : ' + JSON.stringify(result));
+                });
+              console.log(JSON.stringify(res));
+            }
+          });
+        } else {
+        callback(null, 'User not found');
+      }
+    });
+  }
 }
 
 Object.seal(UserService);

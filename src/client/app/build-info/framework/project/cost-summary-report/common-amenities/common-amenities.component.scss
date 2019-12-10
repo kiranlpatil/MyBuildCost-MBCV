@@ -44,3 +44,19 @@
 .no-underline{
   text-decoration: none!important;
 }
+.total-table-common-amenities {
+  tr {
+    td {
+        width: 11%;
+        &:nth-child(1) {
+          width: 17%;
+        }
+        &:nth-child(3) {
+          width: 15%;
+        }
+        &:nth-child(7) {
+          width: 14%!important;
+        }
+    }
+  }
+}

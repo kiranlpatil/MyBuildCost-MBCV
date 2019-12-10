@@ -1,14 +1,14 @@
-<table width="100%" border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto 10px auto;-fs-table-paginate: auto;">
+<table class="cost-head-wise" width="100%" border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto 10px auto;-fs-table-paginate: auto;">
   <thead style="display: table-header-group">
     <tr style="page-break-inside: avoid">
-      <th width="50%" style="padding: 5px 10px;text-align: left">{{reportData.header.columnOne}}</th>
-      <th width="20%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnTwo}}</th>
-      <th width="20%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnThree}}</th>
-      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnFour}}</th>
-      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnSix}}</th>
-      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnSeven}}</th>
-      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnFive}}</th>
-      <th width="15%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnEight}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: left">{{reportData.header.columnOne}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnTwo}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnThree}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnFour}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnSix}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnSeven}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnFive}}</th>
+      <th width="12%" style="padding: 5px 10px;text-align: right">{{reportData.header.columnEight}}</th>
     </tr>
   </thead>
   <tbody>
@@ -20,59 +20,59 @@
             <table width="100%" style="text-align: left">
               <!--actual content-->
               <tr style="page-break-inside: avoid">
-                <td width="50%" style="padding: 5px 10px;border-right: 1px solid #ccc;font-weight: 600;">
+                <td width="12%" style="padding: 5px 10px;border-right: 1px solid #ccc;font-weight: 600;">
                   {{reportData.content[contentData].subContent[subContentData].columnOne }}
                 </td>
-                <td width="20%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].columnTwo | number}}
                 </td>
-                <td width="20%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                    {{reportData.content[contentData].subContent[subContentData].columnThree}}
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].columnFour}}
                 </td>
 
-                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].columnSix}} %
                 </td>
 
-                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].columnSeven}}
                 </td>
 
-                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].columnFive| number}}
                 </td>
 
-                <td width="15%" align="right" style="padding: 5px 10px;font-weight: 600;">
+                <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;">
                    {{reportData.content[contentData].subContent[subContentData].columnEight}}
                 </td>
               </tr>
               <!--subContent content-->
               <tr style="page-break-inside: avoid" *ngFor="let innerSubContentData of reportData.content[contentData].subContent[subContentData].subContent | keys:getMaterialTakeOffElements().SORT">
-                <td width="50%" style="padding: 5px 10px 5px 20px; border-right: 1px solid #ccc;">
+                <td width="12%" style="padding: 5px 10px 5px 20px; border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnOne}}
                 </td>
-                <td width="20%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnTwo | number}}
                 </td>
-                <td width="20%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnThree}}
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFour }}
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                    {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnSix }} %
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnSeven }}
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFive| number }}
                 </td>
-                <td width="15%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
+                <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnEight }}
                 </td>
               </tr>
@@ -86,14 +86,15 @@
   </tr>
   </tbody>
 </table>
-<table border="1" bordercolor="#888" style="font-size:10px;margin: 0 auto 40px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;">
+<table border="1" bordercolor="#888" style="font-size:10px;margin: 0 auto 40px auto;text-align: left;width: 100%;max-width: 750px;background-color: #ccc!important;" class="cost-head-total-table">
   <tbody>
     <tr>
-      <td width="50%" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
-      <td width="20%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnTwo | number}} {{reportData.footer.columnThree}}</td>
-      <td width="15%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnFour }} </td>
-      <td width="15%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;"> {{reportData.footer.columnFive| number }} </td>
-      <td width="15%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnEight}} </td>
+      <td width="8%" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
+      <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnTwo | number}}</td>
+      <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnThree}}</td>
+      <td width="13%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnFour }} </td>
+      <td width="18%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;"> {{reportData.footer.columnFive| number }} </td>
+      <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnEight}} </td>
     </tr>
   </tbody>
 </table>

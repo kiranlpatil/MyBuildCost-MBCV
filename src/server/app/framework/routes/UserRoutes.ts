@@ -114,6 +114,7 @@ class UserRoutes {
     router.post('/userList', controller.getUserData);
 
     router.post('/exportData', controller.exportUserData);
+    router.post('/updateUserSubscription',controller.updateUserSubscription);
     return router;
 
     }

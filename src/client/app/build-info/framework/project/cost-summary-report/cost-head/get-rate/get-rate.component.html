@@ -149,6 +149,9 @@
             <label *ngIf="TotalGstOfMaterial && TotalGstOfLabour && !TotalGstOfMaterialAndLabour">{{ getLabel().TOTAL_GST_A_B}}:</label>
             <label *ngIf="TotalGstOfMaterial && TotalGstOfLabour && TotalGstOfMaterialAndLabour ">{{ getLabel().TOTAL_GST_A_B_C}}:</label>
             <label *ngIf="TotalGstOfMaterial && !TotalGstOfLabour && !TotalGstOfMaterialAndLabour ">{{ getLabel().TOTAL_GST_A}}:</label>
+            <label *ngIf="!TotalGstOfMaterial && TotalGstOfLabour && !TotalGstOfMaterialAndLabour ">{{ getLabel().TOTAL_GST_B}}:</label>
+            <label *ngIf="!TotalGstOfMaterial && !TotalGstOfLabour && TotalGstOfMaterialAndLabour ">{{ getLabel().TOTAL_GST_C}}:</label>
+            <label *ngIf="!TotalGstOfMaterial && !TotalGstOfLabour && !TotalGstOfMaterialAndLabour ">{{ getLabel().TOTAL_GST_COMPONENT}}:</label>
             <span *ngIf="anySubscriptionAvailable; else elseBlock">{{totalGstAmount|number: '1.2-2'}}</span>
           </td>
         </tr>
