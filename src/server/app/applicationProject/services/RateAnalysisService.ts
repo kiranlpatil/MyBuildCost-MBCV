@@ -833,15 +833,21 @@ class RateAnalysisService {
                   let arrayOfWorkItemGst = arrayOfItemGst.filter(function(itemGst: ItemGst){ return itemGst.type === 'workItem'; });
                   let arrayOfRateItemGst = arrayOfItemGst.filter(function(itemGst: ItemGst){ return itemGst.type === 'rateItem'; });
                   let rateAnalysisService = new RateAnalysisService();
+                  let mapOfGstWorkItems = {};
+                  rateAnalysisService.getMap(arrayOfWorkItemGst, mapOfGstWorkItems );
+                  let mapOfGstRateItems = {};
+                  rateAnalysisService.getMap(arrayOfRateItemGst, mapOfGstRateItems );
                   switch (type) {
                     case 'projectCostHeads':
                             let arrayOfProjectCostHeads = rateAnalysisData.projectCostHeads;
-                            rateAnalysisService.getCostHeadWithGst(arrayOfCostHeadItemGst,arrayOfProjectCostHeads);
-                            rateAnalysisService.getItemWithGst(arrayOfProjectCostHeads,arrayOfWorkItemGst,arrayOfRateItemGst);
+                            let mapOfGstCostHeads = {};
+                            rateAnalysisService.getMap(arrayOfCostHeadItemGst, mapOfGstCostHeads);
+                            rateAnalysisService.getItemWithGst(mapOfGstCostHeads,arrayOfProjectCostHeads);
+                            rateAnalysisService.getWorkItemWithGst(arrayOfProjectCostHeads,mapOfGstWorkItems ,mapOfGstRateItems );
                       break;
                     case 'buildingCostHeads':
                     case 'addBuilding':
-                            rateAnalysisService.getItemWithGst(rateAnalysisData.buildingCostHeads,arrayOfWorkItemGst,arrayOfRateItemGst);
+                            rateAnalysisService.getWorkItemWithGst(rateAnalysisData.buildingCostHeads,mapOfGstWorkItems ,mapOfGstRateItems );
                       break;
                   }
                 }
@@ -854,43 +860,41 @@ class RateAnalysisService {
     });
   }
 
-  getItemWithGst(arrayOfCostHeads:Array<any>, arrayOfWorkItemGst:Array<any>, arrayOfRateItemGst: Array<any>) {
+  getMap(arrayOfGstItems:any, mapOfItems:any) {
+    for (let item of arrayOfGstItems) {
+      mapOfItems[item.itemName] = item.value;
+    }
+  }
+
+  getWorkItemWithGst(arrayOfCostHeads:Array<any>, arrayOfWorkItemGst:any, arrayOfRateItemGst: any) {
       let rateAnalysisService = new RateAnalysisService();
-      let getWorkItemSQL = 'SEARCH /categories/workItems FROM ?';
-      let arrayOfWorkItem = alasql(getWorkItemSQL, [arrayOfCostHeads]);
-      rateAnalysisService.getWorkItemWithGst(arrayOfWorkItemGst, arrayOfWorkItem);
-      let getRateItemSQL = 'SEARCH ///rateItems FROM ?';
-      let arrayOfRateItem = alasql(getRateItemSQL,[arrayOfWorkItem]);
-      rateAnalysisService.getRateItemWithGst(arrayOfRateItemGst, arrayOfRateItem);
+      let getDirectRateWorkItemSQL = 'SEARCH /categories/workItems/ WHERE(isDirectRate =true) FROM ?';
+      let arrayOfDirectRateWorkItem = alasql(getDirectRateWorkItemSQL, [arrayOfCostHeads]);
+      rateAnalysisService.getItemWithGst(arrayOfWorkItemGst, arrayOfDirectRateWorkItem);
+
+      let getRAWorkItemSQL = 'SEARCH /categories/workItems/ WHERE(isDirectRate = false) FROM ?';
+      let arrayOfRAWorkItem = alasql(getRAWorkItemSQL, [arrayOfCostHeads]);
+      let getRateItemSQL = 'SEARCH //rateItems FROM ?';
+      let arrayOfRateItem = alasql(getRateItemSQL,[arrayOfRAWorkItem]);
+      let allRateItems  = 'SEARCH // FROM ?';
+      let isRateItemDetail = alasql(allRateItems, [arrayOfRateItem]);
+      rateAnalysisService.getRateItemWithGst(arrayOfRateItemGst, isRateItemDetail);
   }
 
-  getCostHeadWithGst(arrayOfCostHeadItemGst: Array<any>, arrayOfProjectCostHeads: any) {
-    for (let itemGst of arrayOfCostHeadItemGst) {
-      let getCostHeadSQL = 'SEARCH / WHERE(name = "' + itemGst.itemName + '")  SET (gst = '+itemGst.value+')FROM ?';
-      let isCostHeadDetail = alasql(getCostHeadSQL, [arrayOfProjectCostHeads]);
-    }
-  }
-
-  getWorkItemWithGst(arrayOfWorkItemGst: Array<any>,  arrayOfWorkItem: any) {
-    for(let itemGst of arrayOfWorkItemGst) {
-      let getWorkItemSQL = 'SEARCH // WHERE(name = ?) SET (gst = '+itemGst.value+') FROM ?';
-      let isProjectWorkItemDetail = alasql(getWorkItemSQL, [itemGst.itemName,arrayOfWorkItem]);
-      if (isProjectWorkItemDetail.length > 0) {
-      } else {
-        console.log('Project WorkItem is not present' + itemGst.itemName);
+  getItemWithGst(arrayOfItemGst: any, arrayOfItems: any) {
+    arrayOfItems.filter(item => {
+      if(arrayOfItemGst.hasOwnProperty(item.name.trim())) {
+        item.gst = arrayOfItemGst[item.name.trim()];
       }
-    }
+    });
   }
 
-  getRateItemWithGst(arrayOfRateItemGst: Array<any>,  arrayOfRateItem: any) {
-    for(let itemGst of arrayOfRateItemGst) {
-      let getRateItemSQL = 'SEARCH // WHERE(itemName = ?) SET (gst = '+itemGst.value+')FROM ?';
-      let isRateItemDetail = alasql(getRateItemSQL, [itemGst.itemName,arrayOfRateItem]);
-      if (isRateItemDetail.length > 0) {
-      } else {
-        console.log('RateItem is not present' + itemGst.itemName);
+  getRateItemWithGst(arrayOfRateItemGst:any,  arrayOfRateItem: any) {
+    arrayOfRateItem.filter(rateItem => {
+      if (arrayOfRateItemGst.hasOwnProperty(rateItem.itemName.trim())) {
+        rateItem.gst = arrayOfRateItemGst[rateItem.itemName.trim()];
       }
-    }
+    });
   }
 
   getAggregateData(query: any, callback: (error: any, aggregateData: any) => void) {
