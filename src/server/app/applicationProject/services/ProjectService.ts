@@ -3564,9 +3564,10 @@ export class ProjectService {
             fs.unlink('.'+ config.get('application.attachmentPath')+'/'+ assignedFileName, (err:Error) => {
               if (err) {
                 callback(error, null);
+              } else {
+                callback(null, {data: 'success'});
               }
             });
-            callback(null, {data :'success'});
           }
         });
       }
