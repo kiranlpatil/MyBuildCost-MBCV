@@ -965,6 +965,25 @@ updateSubscriptionDetails(req: express.Request, res: express.Response, next: any
       res.send(e);
     }
   }
+
+  blockRAUser(req: express.Request, res: express.Response, next: any):void {
+    try{
+      logger.info('into user controller');
+      let mobileNo = req.body.mobileno;
+      let userService = new UserService();
+      userService.blockRAUser(mobileNo,(error, result) =>{
+        if (error) {
+          next(error);
+        } else {
+          res.send(result);
+        }
+      });
+    }
+    catch (e) {
+      res.send(e);
+    }
+
+  }
 }
 
 export = UserController;

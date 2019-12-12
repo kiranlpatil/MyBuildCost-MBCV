@@ -2129,6 +2129,42 @@ if(duplicateUser.hasOwnProperty("RAP")){
       }
     });
   }
+
+  blockRAUser(mobileNo: number,callback:(error:any, result:any)=>void){
+    let query:any;
+    query={'mobile_number':mobileNo,'typeOfApp':"RAapp"};
+    this.userRepository.retrieve(query,(error,res)=> {
+      if (error) {
+        callback(error, null);
+      } else if (res.length != 0) {
+        let updateQuery = {$set:{'isActivated':false}};
+        this.userRepository.findOneAndUpdate(query,updateQuery,{new: true},(error,res) => {
+          logger.info('User service, findOneAndUpdate has been hit');
+          let sendMailService = new SendMailService();
+          if (error) {
+            callback(error, null);
+          }
+          else {
+            callback(null,res);
+            let htmlTemplate = 'ra-user-blocked-mail.html';
+            let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],['$link$', 'http://mybuildcost.co.in/'], ['$mobile$',mobileNo]]);
+            let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+            sendMailService.send(config.get('application.mail.TPLGROUP_MAIL'), Messages.ACCESS_BLOCKED, htmlTemplate, data, attachment,
+              (err: any, result: any) => {
+                if (err) {
+                  logger.error(JSON.stringify(err));
+                }
+                logger.debug('Sending Mail : ' + JSON.stringify(result));
+              });
+            console.log(JSON.stringify(res));
+          }
+        });
+      }
+      else {
+        callback(null,"User not found");
+      }
+    });
+  }
 }
 
 Object.seal(UserService);

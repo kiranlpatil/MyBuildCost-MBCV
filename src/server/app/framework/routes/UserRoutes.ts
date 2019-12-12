@@ -115,6 +115,7 @@ class UserRoutes {
 
     router.post('/exportData', controller.exportUserData);
     router.post('/updateUserSubscription',controller.updateUserSubscription);
+    router.post('/blockRAUser',controller.blockRAUser);
     return router;
 
     }

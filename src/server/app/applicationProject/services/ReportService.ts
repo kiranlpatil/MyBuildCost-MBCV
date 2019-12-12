@@ -428,6 +428,11 @@ class ReportService {
                   (parseFloat(tableSubContent[subContent].columnTwo) +
                     parseFloat(tableSubContent[subContent].subContent[innerSubContent].columnTwo)
                   ).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+                tableSubContent[subContent].subContent[innerSubContent].columnSeven = tableSubContent[subContent].subContent[innerSubContent].columnSeven.toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
+                tableSubContent[subContent].subContent[innerSubContent].columnFive = tableSubContent[subContent].subContent[innerSubContent].columnTwo *
+                  tableSubContent[subContent].subContent[innerSubContent].columnSeven;
+                tableSubContent[subContent].subContent[innerSubContent].columnEight = (tableSubContent[subContent].subContent[innerSubContent].columnFive
+                  -(tableSubContent[subContent].subContent[innerSubContent].columnFour * tableSubContent[subContent].subContent[innerSubContent].columnTwo)).toFixed(Constants.NUMBER_OF_FRACTION_DIGIT);
               }
             }
 

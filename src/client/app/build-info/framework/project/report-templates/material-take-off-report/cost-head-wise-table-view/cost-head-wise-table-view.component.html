@@ -24,7 +24,7 @@
                   {{reportData.content[contentData].subContent[subContentData].columnOne }}
                 </td>
                 <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
-                  {{reportData.content[contentData].subContent[subContentData].columnTwo | number}}
+                  {{reportData.content[contentData].subContent[subContentData].columnTwo}}
                 </td>
                 <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
                    {{reportData.content[contentData].subContent[subContentData].columnThree}}
@@ -42,11 +42,11 @@
                 </td>
 
                 <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;border-right: 1px solid #ccc;">
-                  {{reportData.content[contentData].subContent[subContentData].columnFive| number}}
+                  {{reportData.content[contentData].subContent[subContentData].columnFive| number:'1.1-2'}}
                 </td>
 
                 <td width="12%" align="right" style="padding: 5px 10px;font-weight: 600;">
-                   {{reportData.content[contentData].subContent[subContentData].columnEight}}
+                   {{reportData.content[contentData].subContent[subContentData].columnEight| number:'1.1-2'}}
                 </td>
               </tr>
               <!--subContent content-->
@@ -55,7 +55,7 @@
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnOne}}
                 </td>
                 <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
-                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnTwo | number}}
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnTwo}}
                 </td>
                 <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
                   {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnThree}}
@@ -67,13 +67,13 @@
                    {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnSix }} %
                 </td>
                 <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
-                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnSeven }}
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnSeven| number:'1.1-2' }}
                 </td>
                 <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
-                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFive| number }}
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnFive| number:'1.1-2' }}
                 </td>
                 <td width="12%" align="right" style="padding: 5px 10px;border-right: 1px solid #ccc;">
-                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnEight }}
+                  {{reportData.content[contentData].subContent[subContentData].subContent[innerSubContentData].columnEight| number:'1.1-2' }}
                 </td>
               </tr>
             </table>
@@ -90,11 +90,11 @@
   <tbody>
     <tr>
       <td width="8%" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnOne}}</td>
-      <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnTwo | number}}</td>
+      <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnTwo}}</td>
       <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnThree}}</td>
       <td width="13%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnFour }} </td>
-      <td width="18%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;"> {{reportData.footer.columnFive| number }} </td>
-      <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnEight}} </td>
+      <td width="18%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;"> {{reportData.footer.columnFive| number:'1.1-2'}} </td>
+      <td width="8%" align="right" style="border: none;padding: 5px 10px;font-weight: bold;">{{reportData.footer.columnEight| number:'1.1-2'}} </td>
     </tr>
   </tbody>
 </table>

@@ -138,7 +138,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
         this.onChangeCostingByUnit(this.defaultCostingByUnit);
       }
     });
-    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID) {
+    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID || this.costSummaryService.validateUser()) {
       this.getProjectSubscriptionDetails();
     }
 
@@ -150,7 +150,7 @@ export class CostSummaryComponent implements OnInit, AfterViewInit {
   getProjectSubscriptionDetails () {
     let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    if(projectId !== AppSettings.SAMPLE_PROJECT_ID) {
+    if(projectId !== AppSettings.SAMPLE_PROJECT_ID || this.costSummaryService.validateUser()) {
       this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
         status => this.checkLimitationOfBuildingSuccess(status),
         error => this.checkLimitationOfBuildingFailure(error)

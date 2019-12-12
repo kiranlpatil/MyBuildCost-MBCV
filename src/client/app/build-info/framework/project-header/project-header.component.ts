@@ -57,9 +57,12 @@ export class ProjectHeaderComponent implements OnInit {
     if(this.getCurrentProjectId() && this.getCurrentProjectId()!== AppSettings.SAMPLE_PROJECT_ID ) {
       this.getProjectSubscriptionDetails();
       this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
-    } else if(this.getCurrentProjectId()=== AppSettings.SAMPLE_PROJECT_ID ) {
+    } else if((this.getCurrentProjectId()=== AppSettings.SAMPLE_PROJECT_ID) &&
+        (SessionStorageService.getSessionValue(SessionStorage.USER_ID) !== AppSettings.SAMPLE_PROJECT_USER_ID)) {
       this.buttonDisableForSampleProject = true;
       this.status = SessionStorageService.getSessionValue(SessionStorage.STATUS);
+    }if(this.costSummaryService.validateUser()) {
+      this.getProjectSubscriptionDetails();
     }
    /* this.subscription = this.commonService.deleteEvent$
       .subscribe(item =>this.getProjectSubscriptionDetails()
@@ -73,12 +76,10 @@ export class ProjectHeaderComponent implements OnInit {
   getProjectSubscriptionDetails () {
     let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID);
-    if(projectId && userId && (projectId !== AppSettings.SAMPLE_PROJECT_ID)) {
       this.costSummaryService.checkLimitationOfBuilding(userId, projectId).subscribe(
         status=>this.checkLimitationOfBuildingSuccess(status),
         error=>this.checkLimitationOfBuildingFailure(error)
       );
-    }
   }
 
   goToCreateBuilding() {
@@ -93,13 +94,17 @@ export class ProjectHeaderComponent implements OnInit {
 
 
   checkLimitationOfBuildingSuccess(status:any) {
-    this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
-    this.activeStatus = status.activeStatus;
-    this.addBuildingButtonDisable =status.addBuildingDisable;
-    if(status.expiryMessage) {
-      this.subscriptionValidityMessage = status.expiryMessage;
-    } else if(status.warningMessage) {
-      this.subscriptionValidityMessage = status.warningMessage;
+    if(this.costSummaryService.validateUser()) {
+      this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+    } else {
+      this.numberOfRemainingBuildings = status.numOfBuildingsRemaining;
+      this.activeStatus = status.activeStatus;
+      this.addBuildingButtonDisable =status.addBuildingDisable;
+      if(status.expiryMessage) {
+        this.subscriptionValidityMessage = status.expiryMessage;
+      } else if(status.warningMessage) {
+        this.subscriptionValidityMessage = status.warningMessage;
+      }
     }
   }
 

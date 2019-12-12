@@ -19,6 +19,7 @@ class Messages {
   public static PROJECT_EXPIRY_WARNING: string = 'Project expiry warning';
   public static RA_NEW_USER_REGISTERED: string = 'RA new user registered';
   public static CHANGED_USER_SUBSCRIPTION: string = 'Changed User Subscription ';
+  public static ACCESS_BLOCKED:string = 'Access Blocked';
 
   //Sendmail
   public static MSG_SUCCESS_EMAIL_REGISTRATION: string = 'Email sent on registered email address.';

@@ -30,6 +30,20 @@
       }
     }
   }
+  .table-dashboard{
+    tbody{
+      tr{
+        td{
+          &:first-child{
+            min-width: 100%;
+          }
+          &:nth-child(7){
+            width: 100%!important;
+          }
+        }
+      }
+    }
+  }
 }
 .cost-summary-table{
   tr{

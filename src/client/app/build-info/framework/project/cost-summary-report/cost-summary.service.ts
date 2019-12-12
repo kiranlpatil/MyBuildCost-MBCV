@@ -304,4 +304,9 @@ export class CostSummaryService extends BaseService {
         });
     });
   }
+
+  validateUser() {
+    return (SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT_ID) === AppSettings.SAMPLE_PROJECT_ID) &&
+      (SessionStorageService.getSessionValue(SessionStorage.USER_ID) === AppSettings.SAMPLE_PROJECT_USER_ID);
+  }
 }
