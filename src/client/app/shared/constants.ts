@@ -829,7 +829,7 @@ export class ValueConstant {
   public static NUMBER_OF_FRACTION_DIGIT = 2;
   public static FILE_SIZE = 5000000;
   public static NO_OF_BUILDINGS_VALUES :Number[]= [2,3,4,5];
-  public static GST_VALUES :Number[]= [0,5,12,18,23];
+  public static GST_VALUES :Number[]= [0,5,12,18,28];
 
 }
 
