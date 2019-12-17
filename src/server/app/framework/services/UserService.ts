@@ -2084,31 +2084,30 @@ if(duplicateUser.hasOwnProperty("RAP")){
         }
       });
   }
-  updateUserSubscription(mobileno:number,activationDate:string,validity:number,callback:(error:any,result:any)=>void){
+  updateUserSubscription(mobileno:number,activationDate:string,validity:number,callback:(error:any,result:any)=>void) {
     logger.info('User service, updateUserSubscription has been hit');
     let query:any;
-    query={'mobile_number':mobileno,'typeOfApp':"RAapp"};
-    this.userRepository.retrieve(query,(error,res)=>{
+    query = {'mobile_number':mobileno,'typeOfApp':'RAapp'};
+    this.userRepository.retrieve(query,(error,res)=> {
       if (error) {
         callback(error, null);
-      } else if(res.length != 0) {
+      } else if(res.length !== 0) {
         let updateQuery:any;
-        if(activationDate == undefined || activationDate == ""){
+        if(activationDate === undefined || activationDate === '') {
           updateQuery = {$set: {'subscriptionForRA.validity': validity,
-              'subscriptionForRA.name': "RAPremium"}};
-        } else{
+              'subscriptionForRA.name': 'RAPremium'}};
+        } else {
           let activeDate = new Date(activationDate).toISOString();
           updateQuery = {$set: {'subscriptionForRA.validity': validity,
               'subscriptionForRA.activationDate':activeDate,
-              'subscriptionForRA.name': "RAPremium"}};
+              'subscriptionForRA.name': 'RAPremium'}};
         }
           this.userRepository.findOneAndUpdate(query, updateQuery, {new: true}, (error, res) => {
             logger.info('User service, findOneAndUpdate has been hit');
             let sendMailService = new SendMailService();
             if (error) {
               callback(error, null);
-            }
-            else {
+            } else {
               callback(null, res);
               let htmlTemplate = 'changed_user_subscription_mail.html';
               let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
@@ -2130,21 +2129,20 @@ if(duplicateUser.hasOwnProperty("RAP")){
     });
   }
 
-  blockRAUser(mobileNo: number,callback:(error:any, result:any)=>void){
+  blockRAUser(mobileNo: number,callback:(error:any, result:any)=>void) {
     let query:any;
-    query={'mobile_number':mobileNo,'typeOfApp':"RAapp"};
+    query = {'mobile_number':mobileNo,'typeOfApp':'RAapp'};
     this.userRepository.retrieve(query,(error,res)=> {
       if (error) {
         callback(error, null);
-      } else if (res.length != 0) {
+      } else if (res.length !== 0) {
         let updateQuery = {$set:{'isActivated':false}};
         this.userRepository.findOneAndUpdate(query,updateQuery,{new: true},(error,res) => {
           logger.info('User service, findOneAndUpdate has been hit');
           let sendMailService = new SendMailService();
           if (error) {
             callback(error, null);
-          }
-          else {
+          } else {
             callback(null,res);
             let htmlTemplate = 'ra-user-blocked-mail.html';
             let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],['$link$', 'http://mybuildcost.co.in/'], ['$mobile$',mobileNo]]);
@@ -2159,9 +2157,72 @@ if(duplicateUser.hasOwnProperty("RAP")){
             console.log(JSON.stringify(res));
           }
         });
+      } else {
+        callback(null,'User not found');
       }
-      else {
-        callback(null,"User not found");
+    });
+  }
+
+  updateProjectExpiryOfUser(email: string, projectName:string, activationDate:string, validity:number,
+                            callback:(error:any, result:any) => void) {
+    let query = {'email': email, 'typeOfApp':{ $exists: false }};
+    let projection = {path: 'project', select: ['name','activeStatus']};
+    this.userRepository.findAndPopulate(query,projection, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else if(result.length !== 0) {
+        let subscriptionList = result[0].subscription;
+        let projectDetails = result[0].project;
+        let isProjectPresent = false;
+        let newActivationDate = new Date();
+        if(projectDetails && projectDetails.length>0) {
+          for (let project of projectDetails) {
+            if ((project.name) === projectName) {
+              for (let subscription of subscriptionList) {
+                if (subscription.projectId.length !== 0 && (subscription.projectId[0].equals(project._id))) {
+                  if(activationDate !== undefined && activationDate !== '') {
+                    subscription.activationDate = new Date(activationDate);
+                  }
+                  subscription.validity = validity;
+                  newActivationDate = (subscription.activationDate).toISOString();
+                  isProjectPresent = true;
+                }
+              }
+            }
+          }
+        }
+        if(isProjectPresent) {
+          this.updateSubscriptionByEmail(email, subscriptionList, callback);
+          let sendMailService = new SendMailService();
+          let htmlTemplate = 'project-expire-email.html';
+          let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],['$project$',projectName],
+            ['$activationDate$', newActivationDate], ['$validity$', validity], ['$link$', 'http://mybuildcost.co.in/'], ['$email$',email]]);
+          let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+          sendMailService.send(config.get('application.mail.TPLGROUP_MAIL'), Messages.CHANGED_USER_SUBSCRIPTION_FOR_PROJECT,
+            htmlTemplate, data, attachment,
+            (err: any, result: any) => {
+              if (err) {
+                logger.error(JSON.stringify(err));
+              }
+              logger.debug('Sending Mail : ' + JSON.stringify(result));
+            });
+        } else {
+          callback(null, 'Project Not present');
+        }
+      } else {
+        callback(null, 'User not found');
+      }
+    });
+  }
+
+  private updateSubscriptionByEmail(email: string, subscriptionList:any, callback: (error: any, result: any) => void) {
+    let query = {'email': email, 'typeOfApp': {$exists: false}};
+    let newData = {$set: {'subscription': subscriptionList}};
+    this.userRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, {data: 'success'});
       }
     });
   }

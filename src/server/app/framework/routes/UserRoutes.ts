@@ -114,8 +114,13 @@ class UserRoutes {
     router.post('/userList', controller.getUserData);
 
     router.post('/exportData', controller.exportUserData);
+
+    // Admin routes for RA user
     router.post('/updateUserSubscription',controller.updateUserSubscription);
     router.post('/blockRAUser',controller.blockRAUser);
+
+    // Admin routes for MBC user
+     router.post('/updateProjectExpiryOfUser', controller.updateProjectExpiryOfUser);
     return router;
 
     }

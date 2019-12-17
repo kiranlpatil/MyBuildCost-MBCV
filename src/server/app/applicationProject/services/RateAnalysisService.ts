@@ -1875,65 +1875,89 @@ class RateAnalysisService {
 
   updateDefaultGstToProjects(callback: (error: any, result: any) => void) {
     let findAllProjects = {};
+    let i,j,chunk = 20;
+    let tempArray:Array<any>;
     this.projectRepository.retrieve(findAllProjects, (error:any, projectList : any)=> {
       if (error) {
          logger.error('Error : ' + JSON.stringify(error));
-       }
-       else
-      {
+       } else {
         let resultArr: Array<any> = new Array<any>();
-        for(let project of projectList) {
-          let projectId = project._id;
-          let rates = project.rates;
-          let buildingArray = project.buildings;
-          let projectCostHeads = project.projectCostHeads;
-          let defaultCostHeads = projectCostHeads.filter(function (arr: any) {
-            return arr.categories.length == 0;
-          });
-          this.updateGstOfProjectCostHeads(defaultCostHeads);
-          this.updateGstOfWorkItemsOfExistingBuildingsAndProjects(projectCostHeads);
-          this.updateGstOfRateItemsOfExistingBuildingsAndProjects(projectCostHeads);
-          resultArr.push(projectCostHeads);
-          this.updateCostHeadsAndCentralizedRatesOfProject(projectId,projectCostHeads,rates);
-          if(buildingArray.length != 0) {
-            for (let buildingId of buildingArray) {
-              this.buildingRepository.findById(buildingId, (error: any, buildingData: any) => {
-                if (error) {
-                  logger.error('Error : ' + JSON.stringify(error));
+          for(let i=0,j=projectList.length; i<j; i+=chunk) {
+            tempArray = projectList.slice(i,i+chunk);
+            for(let project of tempArray){
+              let projectId = project._id;
+              let buildingArray = project.buildings;
+              if(project.projectCostHeads && project.projectCostHeads.length > 0) {
+                let projectCostHeads = project.projectCostHeads;
+                let defaultCostHeads = projectCostHeads.filter(function (arr: any) {
+                  return arr.categories.length == 0;
+                });
+                this.updateGstOfProjectCostHeads(defaultCostHeads);
+                this.updateGstOfWorkItemsOfExistingBuildingsAndProjects(projectCostHeads);
+                this.updateGstOfRateItemsOfExistingBuildingsAndProjects(projectCostHeads);
+                resultArr.push(projectCostHeads);
+                this.updateCostHeadsOfProject(projectId, projectCostHeads);
+              }
+              if(buildingArray.length != 0) {
+                for (let buildingId of buildingArray) {
+                  this.buildingRepository.findById(buildingId, (error: any, buildingData: any) => {
+                    if (error) {
+                      logger.error('Error : ' + JSON.stringify(error));
+                    }
+                    if( buildingData.costHeads && buildingData.costHeads.length > 0 ) {
+                      let buildingCostHeads = buildingData.costHeads;
+                      this.updateGstOfWorkItemsOfExistingBuildingsAndProjects(buildingCostHeads);
+                      this.updateGstOfRateItemsOfExistingBuildingsAndProjects(buildingCostHeads);
+                      resultArr.push(buildingCostHeads);
+                      this.updateCostHeadsOfBuilding(buildingId, buildingCostHeads);
+                    }
+                  });
                 }
-                let buildingRates = buildingData.rates;
-                let buildingCostHeads = buildingData.costHeads;
-                this.updateGstOfWorkItemsOfExistingBuildingsAndProjects(buildingCostHeads);
-                this.updateGstOfRateItemsOfExistingBuildingsAndProjects(buildingCostHeads);
-                resultArr.push(buildingCostHeads);
-                this.updateCostHeadsAndCentralizedRatesOfBuilding(buildingId,buildingCostHeads,buildingRates);
-              });
+              }
             }
           }
-        }
         callback(null,{data:resultArr});
       }
 
     });
 
   }
-  updateGstOfWorkItemsOfExistingBuildingsAndProjects(CostHeads:Array<any>)
-  {
-    let updateWorkItemGstSQL = 'SEARCH /categories/workItems/ WHERE(isDirectRate = true) SET (gst = 0) FROM ? ';
+
+  updateGstOfWorkItemsOfExistingBuildingsAndProjects(CostHeads:Array<any>) {
+    let updateWorkItemGstSQL = 'SEARCH /categories/workItems/ WHERE(isDirectRate = true) FROM ? ';
     let arrayOfWorkItem = alasql(updateWorkItemGstSQL, [CostHeads]);
+    this.updateGstOfProjectCostHeads(arrayOfWorkItem);
   }
-  updateGstOfRateItemsOfExistingBuildingsAndProjects(CostHeads:Array<any>)
-  {
+  updateGstOfRateItemsOfExistingBuildingsAndProjects(CostHeads:Array<any>) {
     let getRateItemsSQL = 'SEARCH /categories/workItems/ WHERE(isDirectRate = false) FROM ?';
     let arrayOfRateItem = alasql(getRateItemsSQL, [CostHeads]);
-      let updateRateItemSQL = 'SEARCH //rateItems/ SET (gst = 0) FROM ?';
-      let arrayOfupdatedRateItem = alasql(updateRateItemSQL,[arrayOfRateItem]);
+    let updateRateItemSQL = 'SEARCH //rateItems FROM ?';
+    let arrayOfupdatedRateItem = alasql(updateRateItemSQL,[arrayOfRateItem]);
+    let allRateItems  = 'SEARCH // FROM ?';
+    let isRateItemDetail = alasql(allRateItems, [arrayOfupdatedRateItem]);
+    this.updateGstOfProjectCostHeads(isRateItemDetail);
   }
-  updateGstOfProjectCostHeads(defaultCostHeads:Array<any>)
-  {
-    let getCostHeads = 'SEARCH / SET (gst = 0) FROM ?';
-    let arrayOfRateItem = alasql(getCostHeads, [defaultCostHeads]);
+
+  updateGstOfProjectCostHeads(defaultCostHeads:Array<any>) {
+    defaultCostHeads.filter(rateItem => {
+      rateItem.gst = 0;
+    });
   }
+
+  updateCostHeadsOfProject(projectId: string, projectCostHeads:Array<CostHead>) {
+    let query = {'_id': projectId};
+    let newData = {$set: {'projectCostHeads': projectCostHeads}};
+    this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
+    });
+  }
+
+  updateCostHeadsOfBuilding(buildingId: string, costHeadList: Array<CostHead>) {
+    let query = {'_id': buildingId};
+    let newData = {$set: {'costHeads': costHeadList}};
+    this.buildingRepository.findOneAndUpdate(query, newData, {new: true}, (err, response) => {
+    });
+  }
+
 }
 
 Object.seal(RateAnalysisService);

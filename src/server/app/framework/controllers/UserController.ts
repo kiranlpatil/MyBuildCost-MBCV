@@ -949,7 +949,7 @@ updateSubscriptionDetails(req: express.Request, res: express.Response, next: any
       let activationDate = req.body.activationDate;
       let validity = req.body.validity;
       let userService = new UserService();
-      if (validity > 0 && typeof validity == "number") {
+      if (typeof validity === 'number') {
         userService.updateUserSubscription(mobileNo, activationDate, validity, (error, result) => {
           if (error) {
             next(error);
@@ -958,28 +958,49 @@ updateSubscriptionDetails(req: express.Request, res: express.Response, next: any
           }
         });
       } else {
-        res.send('Invalid Validity');
+        res.send('Validity should be in number');
       }
-    }
-    catch (e) {
+    } catch (e) {
       res.send(e);
     }
   }
 
   blockRAUser(req: express.Request, res: express.Response, next: any):void {
-    try{
+    try {
       logger.info('into user controller');
       let mobileNo = req.body.mobileno;
       let userService = new UserService();
-      userService.blockRAUser(mobileNo,(error, result) =>{
+      userService.blockRAUser(mobileNo,(error, result) => {
         if (error) {
           next(error);
         } else {
           res.send(result);
         }
       });
+    } catch (e) {
+      res.send(e);
     }
-    catch (e) {
+  }
+
+  updateProjectExpiryOfUser(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let email = req.body.email_id;
+      let projectName = req.body.project_name;
+      let activationDate =  req.body.activation_date;
+      let validity = req.body.validity;
+      let userService = new UserService();
+      if (typeof validity === 'number') {
+        userService.updateProjectExpiryOfUser(email, projectName, activationDate, validity,(error, result) => {
+          if(error) {
+            next(error);
+          } else {
+            res.send(result);
+          }
+        });
+      } else {
+        res.send('Validity should be in number');
+      }
+    }catch(e) {
       res.send(e);
     }
 
