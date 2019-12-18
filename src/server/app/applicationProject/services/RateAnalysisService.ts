@@ -1627,6 +1627,9 @@ class RateAnalysisService {
           workItemObj.breadthOrWidth = (configWorkItem.breadthOrWidth.toUpperCase() === 'TRUE');
           workItemObj.height = (configWorkItem.height.toUpperCase() === 'TRUE');
         }
+        if(configWorkItem.isSteelWorkItem) {
+          workItemObj.isSteelWorkItem = (configWorkItem.isSteelWorkItem.toUpperCase() === 'TRUE');
+        }
         workItemsList.push(workItemObj);
       }
     }

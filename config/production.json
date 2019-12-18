@@ -10,7 +10,8 @@
     "exportedFileNames" : {
       "buildingCostHeads" : "buildingCostHeads.xlsx",
       "projectCostHeads" : "projectCostHeads.xlsx",
-      "fixedAmountCostHeads" : "fixedAmountCostHeads.xlsx"
+      "fixedAmountCostHeads" : "fixedAmountCostHeads.xlsx",
+      "gstItems" : "gstItems.xlsx"
     },
     "exportFilePathServer": "/server/prod/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",
