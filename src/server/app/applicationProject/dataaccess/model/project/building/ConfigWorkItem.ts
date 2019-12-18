@@ -12,6 +12,7 @@ class ConfigWorkItem {
   length : boolean;
   breadthOrWidth : boolean;
   height : boolean;
+  isSteelWorkItem: boolean;
 
   constructor(name: string, rateAnalysisId?: number) {
     this.name = name;

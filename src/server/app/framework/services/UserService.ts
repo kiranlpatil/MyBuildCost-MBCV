@@ -27,7 +27,6 @@ import alasql = require('alasql');
 import Constants = require('../../applicationProject/shared/constants');
 import LoggerService = require('../shared/logger/LoggerService');
 import Mobile = require("../../applicationProject/dataaccess/model/Users/Mobile");
-import json2csv = require("json2csv");
 import UsageTrackingRepository = require("../../applicationProject/dataaccess/repository/UsageTrackingRepository");
 
 let CCPromise = require('promise/lib/es6-extensions');
@@ -39,6 +38,7 @@ let path = require('path');
 let request = require('request');
 let xlsxj = require('xlsx-to-json');
 var async =  require('async');
+let json2csv = require('json2csv');
 
 class UserService {
   APP_NAME: string;
