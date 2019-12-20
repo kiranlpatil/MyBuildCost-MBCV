@@ -7,7 +7,8 @@
   display: block;
   float: left;
   //left: 50%;
-  left: 35%;
+  //left: 35%;
+  left: 43%;
   margin: 0 auto 15px;
   padding: 5px;
   position: relative;
@@ -28,6 +29,7 @@
         font-size: 11px;
         text-align: center;
         padding: 3px 0;
+        width: 14%;
 
         &:first-child {
           border-radius: 5px 0 0 0;
@@ -268,4 +270,9 @@
 .validate-amount {
   border: 1px solid red !important;
 
+}
+@media (min-width:1500px) and (max-width: 1920px) {
+  .get-quantity-section::before,.get-quantity-section:after{
+    left: 19%;
+  }
 }

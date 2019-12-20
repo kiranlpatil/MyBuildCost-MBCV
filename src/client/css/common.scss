@@ -1037,7 +1037,7 @@ textarea[disabled] {
 #mytable {
  &.workitem-rate-table {
    tr {
-     td, th {
+     /*td, th {
        //width: 12%;
        min-width: 110px;
        &:first-child {
@@ -1055,13 +1055,13 @@ textarea[disabled] {
             min-width: 85px!important;
           }
        }
-     }
+     }*/
    }
  }
 }
 
-.workitem-rate-table{
+/*.workitem-rate-table{
   .get-quantity-section{
     left: 41%!important;
   }
-}
+}*/

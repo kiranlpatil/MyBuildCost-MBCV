@@ -1,5 +1,5 @@
 <header *ngIf="status && projectHeaderViews.indexOf(view)<0 && isShowHeader" class="header-container">
-  <div class="container">
+  <div class="container-fluid header-container-fluid">
     <div class="col-sm-9 padding-right30">
       <div *ngIf="subscriptionValidityMessage && activeStatus" class="project-expiring">
         <span>{{subscriptionValidityMessage}}</span>

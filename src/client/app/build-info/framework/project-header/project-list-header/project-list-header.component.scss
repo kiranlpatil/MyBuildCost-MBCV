@@ -1,7 +1,8 @@
 .select-project {
   position: absolute;
   top: 30px;
-  width: 100%;
+  //width: 100%;
+  width: calc(100% - 210px);
   z-index: 101;
 
   span {
