@@ -3,31 +3,31 @@
     {{rows.columnOne}}
   </div>
 
-  <div class="col-sm-2 col-xs-3 text-right row-lists border-right">
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-right column-mob">
     {{rows.columnTwo}}
   </div>
 
-  <div class="col-sm-1 col-xs-1 text-left row-lists border-right">
+  <div class="col-sm-1 col-xs-1 text-left row-lists border-right column-mob">
     {{rows.columnThree}}
   </div>
 
-  <div class="col-sm-2 col-xs-2 text-right row-lists border-right">
+  <div class="col-sm-2 col-xs-2 text-right row-lists border-right column-mob">
     <span *ngIf="rows.columnFour !== 'Basic Rate/Unit' && rows.columnFour !== null"> </span> {{rows.columnFour}}
   </div>
 
-  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-right column-mob">
     {{rows.columnSix}}<span *ngIf="rows.columnSix !== 'GST' && rows.columnSix !== null"> % </span>
   </div>
 
-  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-right column-mob">
     <span *ngIf="rows.columnSeven !== null"> {{rows.columnSeven}} </span>
   </div>
 
-  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-right column-mob">
     <span *ngIf="rows.columnFive !== 'Total Amount'">  </span> {{rows.columnFive}}
   </div>
 
-  <div class="col-sm-2 col-xs-3 text-right row-lists border-0">
+  <div class="col-sm-2 col-xs-3 text-right row-lists border-0 column-mob">
     <span *ngIf="rows.columnEight !== null"> {{rows.columnEight}} </span>
   </div>
 </div>

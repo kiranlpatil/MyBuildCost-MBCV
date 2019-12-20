@@ -29,7 +29,7 @@
       <tbody>
         <tr *ngFor="let rateItem of rate.rateItems | groupBy:'type';">
           <td class="rate-item" colspan="5">
-            <table>
+            <table class="table-rate-item">
               <thead>
                 <tr>
                   <th colspan="5">{{ (rateItem.key === 'M') ? 'A. Material' : ((rateItem.key === "L") ? "B. Labour" : "C. Material + Labour") }}</th>
@@ -82,7 +82,7 @@
                     [(ngModel)]="item.rate" id="itemRate" class="form-control text-right"
                            (change)="calculateTotal()" [disabled]="disableRateField"/>
                   </td>
-                  <td >
+                  <td class="gst-mobile-view">
                     <div class="gst-comp">
                     <select  class="select-item" [(ngModel)]="item.gst" (change)="calculateTotal()" [disabled]="disableRateField">
                       <option *ngFor="let gst of gstval" [value]="gst" [selected]="gst">{{gst}} %</option>

@@ -8,7 +8,13 @@
     padding: 0;
   }
 }
-
+.tt-price {
+  display: block;
+  //width: 75px;
+  width: 100%;
+  //min-width: 65px;
+  //max-width: 100px;
+}
 @media only screen and (max-width: 767px) {
   .panel-default {
     .panel-heading {
@@ -48,6 +54,7 @@
 .cost-summary-table{
   tr{
     td{
+      border-right: 1px solid #f3f3f3;
       overflow-wrap: break-word;
       &:nth-child(1){
         max-width: 115px;
@@ -60,17 +67,52 @@
 }
 .total-table-common-amenities {
   tr {
-    td {
-        width: 11%;
-        &:nth-child(1) {
-          width: 17%;
-        }
-        &:nth-child(3) {
-          width: 15%;
-        }
-        &:nth-child(7) {
-          width: 14%!important;
-        }
+    //td {
+    //    width: 11%;
+    //    &:nth-child(1) {
+    //      width: 17%;
+    //    }
+    //    &:nth-child(3) {
+    //      width: 15%;
+    //    }
+    //    &:nth-child(7) {
+    //      width: 14%!important;
+    //    }
+    //}
+    td{
+      text-align: right;
+      border-right: 1px solid #f3f3f3;
+      //width: 11%;
+      &:nth-child(1){
+        width: 13%!important;
+      }
+      &:nth-child(3){
+        width: 10%!important;
+      }
+      &:nth-child(4){
+        width: 7%!important;
+      }
+      &:nth-child(6){
+        width: 8%!important;
+      }
+      &:nth-child(7){
+        width: 8%!important;
+        border-radius: 0 !important;
+      }
+      &:nth-child(8){
+        width: 8%!important;
+      }
+      &:nth-child(9){
+        width: 10%!important;
+      }
+      &:nth-child(10){
+        width: 10%!important;
+      }
+      &:last-child {
+        border-radius: 0 6px 6px 0;
+        //text-align: center;
+        //width: 120px;
+      }
     }
   }
 }

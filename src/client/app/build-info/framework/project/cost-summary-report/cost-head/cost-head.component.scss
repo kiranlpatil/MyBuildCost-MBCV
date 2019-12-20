@@ -522,6 +522,10 @@
     min-height: calc(100vh - 50px);
     padding: 0;
 
+    .container{
+      width: 100%!important;
+    }
+
     .panel-group {
       padding: 0;
       .panel {
@@ -769,4 +773,9 @@
 .total-rate-value{
   padding: 9px 0;
 }
-
+.edit-field-quantity{
+  width: 82px;
+}
+.container{
+  width: 90%;
+}

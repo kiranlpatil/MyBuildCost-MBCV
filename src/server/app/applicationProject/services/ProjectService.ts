@@ -2035,7 +2035,7 @@ export class ProjectService {
           workItem.quantity.total = alasql('VALUE OF SELECT ROUND(SUM(total),2) FROM ?', [quantityItems]);
         }
 
-        if (workItem.rate.isEstimated && workItem.quantity.isEstimated ) {
+        if (workItem.rate.isEstimated || workItem.quantity.isEstimated ) {
           if(!workItem.isDirectRate) {
             let quantity = this.changeQuantityByWorkItemUnit(workItem.quantity.total, workItem.unit,workItem.rate.unit);
             let gstComponentTotal =  alasql('VALUE OF SELECT ROUND(SUM(gstComponent),2) FROM ?', [workItem.rate.rateItems]);

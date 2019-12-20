@@ -64,7 +64,7 @@
     }
 
     td {
-      text-align: center;
+      text-align: right;
 
       &:first-child {
         text-align: left;
@@ -113,9 +113,8 @@
         //text-align: right;
         padding: 7px 24px 7px 0;
         transition: opacity 0.5s ease-in-out;
-        //width: 82px;
-        width: 60px;
-        text-align: center;
+        width: 82px;
+        text-align: right;
       }
 
       .calculator {
@@ -253,9 +252,10 @@
 
   .estimated-cost {
     display: block;
-    //width: 100px;
+    //width: 75px;
+    width: 100%;
+    //min-width: 65px;
     //max-width: 100px;
-    max-width: 100%;
   }
 
   .select-item {

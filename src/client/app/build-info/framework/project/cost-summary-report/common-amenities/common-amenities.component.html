@@ -44,13 +44,13 @@
           </th>
         </tr>
         <tr class="cost-summary-row-list">
-          <th class="border-left"><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
-          <th class="text-center"><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
+          <th class=""><span class="sub-heading">{{getLabel().BUDGETED_COST}}</span></th>
+          <th class="text-center border-left"><span class="sub-heading">{{costingByUnit}} Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea ===getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}}</span></th>
 
-          <th class="border-left"><span class="sub-heading">{{getLabel().BASIC_ESTIMATED_COST}}</span></th>
-          <th class="border-left"><span class="sub-heading">{{getLabel().GST_COMPONENT}}</span></th>
+          <th class=""><span class="sub-heading">{{getLabel().BASIC_ESTIMATED_COST}}</span></th>
+          <th class=""><span class="sub-heading">{{getLabel().GST_COMPONENT}}</span></th>
           <th><span class="sub-heading">{{getLabel().TOTAL_ESTIMATED_COST}}</span></th>
-          <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}} without {{getLabel().GST_COMPONENT}}</span></th>
+          <th><span class="sub-heading">{{costingByUnit}} Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}} without {{getLabel().GST_COMPONENT}}</span></th>
           <th><span class="sub-heading">{{costingByUnit}}<br/>Per {{(costingByArea === getProjectElements().SLAB_AREA) ? getProjectElements().SLAB_AREA : ((costingByArea === getProjectElements().SALEABLE_AREA) ? getProjectElements().SALEABLE_AREA : getProjectElements().CARPET_AREA)}} with {{getLabel().GST_COMPONENT}}</span></th>
         </tr>
       </thead>
@@ -139,7 +139,7 @@
                   {{amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst | number: '1.2-2'}}
                 </span>
               </td>
-              <td class="border-left">
+              <td class="">
                 <span class="mobile-headings">{{ costingByUnit }} {{(costingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((costingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} with {{getLabel().GST_COMPONENT}}</span>
                 <!--<span class="mobile-headings">{{ costingByUnit }} </span>-->
                 <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate === 0">-</span>
@@ -174,10 +174,10 @@
                   </option>
                 </select>
               </td>
-              <td colspan="5">&nbsp;</td>
+              <td colspan="7">&nbsp;</td>
             </tr>
             <tr class="add-item-row hidden-xs">
-              <td colspan="5" class="add-items">
+              <td colspan="8" class="add-items">
                 <button title="Add Cost Head" type="button" class="btn btn-add-item"
                         (click)="getAllInActiveProjectCostHeads()" [disabled]="showHideCostHeadButtonList[showHideCostHeadButtonList.length-1].showHideAddCostHeadButton">
                   <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
@@ -228,8 +228,8 @@
 
           <td class="border-left">
             <span class="mobile-headings">{{ getLabel().BUDGETED_COST }}</span>
-            <span class="estimated-cost" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost === 0">-</span>
-            <span class="estimated-cost" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost !== 0">
+            <span class="estimated-cost tt-price" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost === 0">-</span>
+            <span class="estimated-cost tt-price" *ngIf="amenitiesReport.thumbRule.totalBudgetedCost !== 0">
               {{amenitiesReport.thumbRule.totalBudgetedCost|number: '1.0-0'}}
             </span>
           </td>
@@ -237,41 +237,41 @@
           <td class="border-left">
             <!--<span class="mobile-headings">{{ costingByUnit }} </span>-->
             <span class="mobile-headings">{{ costingByUnit }} Per {{costingByArea }}</span>
-            <span *ngIf="amenitiesReport.thumbRule.totalRate === 0">-</span>
-            <span *ngIf="amenitiesReport.thumbRule.totalRate !== 0">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</span>
+            <span class="tt-price" *ngIf="amenitiesReport.thumbRule.totalRate === 0">-</span>
+            <span class="tt-price" *ngIf="amenitiesReport.thumbRule.totalRate !== 0">{{amenitiesReport.thumbRule.totalRate|number: '1.2-2'}}</span>
           </td>
 
           <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
 
           <td>
             <span class="mobile-headings">{{ getLabel().BASIC_ESTIMATED_COST }}</span>
-            <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost ===0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost !==0">{{amenitiesReport.estimate.totalBasicEstimatedCost|number: '1.0-0'}}</span>
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost ===0">-</span>
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalBasicEstimatedCost !==0">{{amenitiesReport.estimate.totalBasicEstimatedCost|number: '1.0-0'}}</span>
           </td>
           <td>
             <span class="mobile-headings">{{ getLabel().GST_COMPONENT }}</span>
-            <span *ngIf="amenitiesReport.estimate.totalGstComponent ===0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalGstComponent !==0">{{amenitiesReport.estimate.totalGstComponent|number: '1.0-0'}}</span>
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalGstComponent ===0">-</span>
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalGstComponent !==0">{{amenitiesReport.estimate.totalGstComponent|number: '1.0-0'}}</span>
           </td>
           <td class="border-left">
             <span class="mobile-headings">{{ getLabel().TOTAL_ESTIMATED_COST }} </span>
-            <span class="estimated-cost" *ngIf="amenitiesReport.estimate.totalEstimatedCost === 0">-</span>
-            <span class="estimated-cost" *ngIf="amenitiesReport.estimate.totalEstimatedCost !== 0">
+            <span class="estimated-cost tt-price" *ngIf="amenitiesReport.estimate.totalEstimatedCost === 0">-</span>
+            <span class="estimated-cost tt-price" *ngIf="amenitiesReport.estimate.totalEstimatedCost !== 0">
               {{amenitiesReport.estimate.totalEstimatedCost|number: '1.0-0'}}
             </span>
           </td>
           <td>
             <!--<span class="mobile-headings">{{ costingByUnit }} </span>-->
             <span class="mobile-headings">{{ costingByUnit }} {{(costingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((costingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} without {{getLabel().GST_COMPONENT}}</span>
-            <span *ngIf="amenitiesReport.estimate.totalRateWithoutGst ===0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalRateWithoutGst !==0">{{amenitiesReport.estimate.totalRateWithoutGst|number: '1.2-2'}}</span>
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalRateWithoutGst ===0">-</span>
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalRateWithoutGst !==0">{{amenitiesReport.estimate.totalRateWithoutGst|number: '1.2-2'}}</span>
           </td>
 
           <td class="border-left">
             <!--<span class="mobile-headings">{{ costingByUnit }} </span>-->
             <span class="mobile-headings">{{ costingByUnit }} {{(costingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((costingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} with {{getLabel().GST_COMPONENT}}</span>
-            <span *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
-            <span *ngIf="amenitiesReport.estimate.totalRate !== 0">
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalRate === 0">-</span>
+            <span class="tt-price" *ngIf="amenitiesReport.estimate.totalRate !== 0">
               {{amenitiesReport.estimate.totalRate|number: '1.2-2'}}
             </span>
           </td>

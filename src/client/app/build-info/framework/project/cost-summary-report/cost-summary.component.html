@@ -2,7 +2,7 @@
 <span *ngIf="!status"><h1>Project Expired</h1></span>-->
 <section class="wrapper">
 
-  <div *ngIf="status" class="container">
+  <div *ngIf="status" class="container-fluid cost-container-fluid">
 
     <div class="col-sm-9 col-xs-12 padding-right30 left-content">
       <div class="dropdown filter-dropdrown">
@@ -81,14 +81,14 @@
                 </th>
               </tr>
               <tr class="cost-summary-row-list">
-                <th class="border-left"><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
-                <th class="text-center"><span class="sub-heading">{{ defaultCostingByUnit }}<br/>Per {{defaultCostingByArea }}</span></th>
+                <th class=""><span class="sub-heading">{{ getLabel().BUDGETED_COST }} </span></th>
+                <th class="border-left"><span class="sub-heading">{{ defaultCostingByUnit }} Per {{defaultCostingByArea }}</span></th>
 
                 <th class="text-center"><span class="sub-heading">{{ getLabel().BASIC_ESTIMATED_COST}}</span></th>
                 <th class="text-center"><span class="sub-heading">{{ getLabel().GST_COMPONENT}}</span></th>
                 <th><span class="sub-heading">{{ getLabel().TOTAL_ESTIMATED_COST }} </span></th>
-                <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} without {{getLabel().GST_COMPONENT}}</span></th>
-                <th><span class="sub-heading">{{ defaultCostingByUnit }}<br/>{{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} with {{getLabel().GST_COMPONENT}}</span></th>
+                <th><span class="sub-heading">{{ defaultCostingByUnit }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} without {{getLabel().GST_COMPONENT}}</span></th>
+                <th><span class="sub-heading">{{ defaultCostingByUnit }} <br/> {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} with {{getLabel().GST_COMPONENT}}</span></th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -151,7 +151,7 @@
                       <span *ngIf="building.estimate.estimatedCosts[i].gstComponent !== 0">{{building.estimate.estimatedCosts[i].gstComponent | number: '1.0-0' }}</span>
                     </td>
 
-                    <td>
+                    <td class="border-left">
                       <span class="mobile-headings">{{ getLabel().TOTAL_ESTIMATED_COST }} </span>
                       <div *ngIf="building.estimate.estimatedCosts[i].total != 0"
                            (click)="goToCostHeadView(building._id,building.name, building.estimate.estimatedCosts[i])">
@@ -196,10 +196,10 @@
                         </option>
                       </select>
                     </td>
-                    <td colspan="5">&nbsp;</td>
+                    <td colspan="7">&nbsp;</td>
                   </tr>
                   <tr class="add-item-row hidden-xs">
-                    <td colspan="5" class="add-items">
+                    <td colspan="8" class="add-items">
                       <button title="Add Cost Head"  type="button" class="btn btn-add-item"
                                [disabled]="showHideCostHeadButtonsList[i].showHideAddCostHeadButton" (click)="getAllInActiveCostHeads(building._id)" >
                         <span class="glyphicon glyphicon-plus"></span>{{ getButton().ADD }} {{ getButton().COSTHEAD }}
@@ -349,13 +349,13 @@
                     <td class="visible-xs padding-top0"><p class="border-top">{{ getLabel().ESTIMATED }}</p></td>
                     <td>
                       <span class="mobile-headings">{{ getLabel().BASIC_ESTIMATED_COST }} </span>
-                      <span *ngIf="grandTotalOfBasicEstimatedCost === 0">-</span>
-                      <span *ngIf="grandTotalOfBasicEstimatedCost !== 0">{{grandTotalOfBasicEstimatedCost|number: '1.0-0'}}</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfBasicEstimatedCost === 0">-</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfBasicEstimatedCost !== 0">{{grandTotalOfBasicEstimatedCost|number: '1.0-0'}}</span>
                     </td>
                     <td>
                       <span class="mobile-headings">{{ getLabel().GST_COMPONENT }} </span>
-                      <span *ngIf="grandTotalOfGstComponent === 0">-</span>
-                      <span *ngIf="grandTotalOfGstComponent !== 0">{{grandTotalOfGstComponent|number : '1.0-0'}}</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfGstComponent === 0">-</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfGstComponent !== 0">{{grandTotalOfGstComponent|number : '1.0-0'}}</span>
                     </td>
                     <td style="">
                       <span class="mobile-headings">{{ getLabel().TOTAL_ESTIMATED_COST }}</span>
@@ -367,14 +367,14 @@
                     <td>
                       <!--<span class="mobile-headings">Rs/Sqft<br> Per Slab Area without GST Component </span>-->
                       <span class="mobile-headings">{{ defaultCostingByUnit }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} without {{getLabel().GST_COMPONENT}}</span>
-                      <span *ngIf="grandTotalOfRateWithoutGst=== 0">-</span>
-                      <span *ngIf="grandTotalOfRateWithoutGst!== 0">{{grandTotalOfRateWithoutGst |number: '1.2-2'}}</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfRateWithoutGst=== 0">-</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfRateWithoutGst!== 0">{{grandTotalOfRateWithoutGst |number: '1.2-2'}}</span>
                     </td>
-                    <td>
+                    <td class="gtt-last-column">
                       <span class="mobile-headings">{{ defaultCostingByUnit }} {{(defaultCostingByArea === getProjectElements().SLAB_AREA) ? 'Per Slab Area' : ((defaultCostingByArea === getProjectElements().SALEABLE_AREA) ? 'Per Saleable Area' : 'Per Carpet Area')}} with {{getLabel().GST_COMPONENT}}</span>
                       <!--<span class="mobile-headings">{{ defaultCostingByUnit }}</span>-->
-                      <span *ngIf="grandTotalOfEstimatedRate === 0">-</span>
-                      <span *ngIf="grandTotalOfEstimatedRate !== 0">
+                      <span class="estimated-cost" *ngIf="grandTotalOfEstimatedRate === 0">-</span>
+                      <span class="estimated-cost" *ngIf="grandTotalOfEstimatedRate !== 0">
                             {{ grandTotalOfEstimatedRate|number: '1.2-2' }}
                       </span>
                     </td>

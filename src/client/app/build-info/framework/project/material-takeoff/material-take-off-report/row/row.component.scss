@@ -15,14 +15,12 @@
   .row-lists {
     display: table-cell;
     float: none;
-
+    //padding-left: 15px;
     font-weight: bold;
     width: 12%;
     font-size: 12px;
     margin: 0;
     padding: 5px;
-    border-right: 1px solid #eaeaea;
-    text-align: center;
   }
 
   .border-right {
@@ -76,8 +74,7 @@
     margin: 0;
     width: 12%;
     padding: 5px;
-    border-right: 1px solid #eaeaea;
-    text-align: center;
+
   }
 }
 
@@ -92,8 +89,6 @@
     margin: 0;
     padding: 0 5px;
     width: 12%;
-    border-right: 1px solid #eaeaea;
-    text-align: center;
   }
 }
 
@@ -103,13 +98,13 @@
   }
   .row-lists {
     font-weight: bold;
-    //padding-left: 15px;
+    padding-left: 15px;
   }
 }
 
 .sub-items {
   .item-description {
-    padding-left: 30px;
+    padding-left: 15px;
   }
 }
 
@@ -164,6 +159,14 @@
     }
     .row-lists {
       padding: 5px;
+    }
+  }
+  .material-row{
+    width: 100vw;
+    overflow: scroll;
+    .columnOne,.column-mob{
+      width: 100%!important;
+      padding: 0 6px!important;
     }
   }
 }

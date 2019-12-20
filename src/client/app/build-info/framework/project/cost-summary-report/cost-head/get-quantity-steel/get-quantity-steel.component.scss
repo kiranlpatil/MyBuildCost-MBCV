@@ -9,9 +9,16 @@
 }
 
 .get-quantity-section {
-  bottom: 75px;
-  left: 44%!important;
+  //ttom: 75px;
+  //left: 44%!important;
+  width: 100%;
+  left: 50%;
   table {
+    thead{
+      th{
+        width: 0;
+      }
+    }
     tr > th {
       span {
         font-weight: 500;
@@ -89,7 +96,7 @@
 }
 
 .get-quantity-section:after, .get-quantity-section:before {
-  left: 44%;
+  left: 33%;
 }
 
 @media only screen and (max-width: 767px) {
@@ -153,8 +160,18 @@
       }
     }
   }
+  .get-quantity-section:after, .get-quantity-section:before {
+    left: 33%;
+  }
 }
-
+@media (min-width:1500px) and (max-width: 1920px) {
+  .get-quantity-section::before,.get-quantity-section::after{
+    left: 30%!important;
+  }
+  .get-rate-section::before,.get-rate-section::after{
+    left: 46%;
+  }
+}
 @media only screen and (max-width: 670px) {
   .get-quantity-section {
     width: 600px;
@@ -196,3 +213,11 @@
   border: 1px solid red !important;
 
 }
+.get-rate-section{
+  right: 11%;
+}
+/*@media (min-width:1025px){
+  .get-quantity-section:before{
+    left: 31%;
+  }
+}*/
