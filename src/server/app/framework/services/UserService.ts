@@ -2139,7 +2139,7 @@ if(duplicateUser.hasOwnProperty("RAP")){
       if (error) {
         callback(error, null);
       } else if (res.length !== 0) {
-        let updateQuery = {$set:{'isActivated':false}};
+        let updateQuery = {$set:{'subscriptionForRA.validity':0}};
         this.userRepository.findOneAndUpdate(query,updateQuery,{new: true},(error,res) => {
           logger.info('User service, findOneAndUpdate has been hit');
           let sendMailService = new SendMailService();
