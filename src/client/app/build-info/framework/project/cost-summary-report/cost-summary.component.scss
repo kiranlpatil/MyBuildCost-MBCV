@@ -111,16 +111,16 @@
       height: 26px;
       padding: 7px 24px 7px 0;
       //width: 120px;
-      width: 100px;
+      width: 100%;
     }
 
     td:nth-child(3) > .edit-field {
       display: none;
       //width: 120px;
-      width: 100px;
+      width: 100%;
       input {
         text-align: right;
-        width: 100px;
+        width: 100%;
       }
     }
 

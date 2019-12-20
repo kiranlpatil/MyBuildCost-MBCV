@@ -60,17 +60,20 @@ export class CostDistributionChartComponent implements AfterViewInit, OnChanges 
         colorCount: 50,
         backgroundColor: '#f7f7f7',
         marginTop: 0,
-        marginBottom: 0,
+        marginBottom: 100,
         marginLeft: 0,
         marginRight: 0,
         spacingBottom: 0,
         height: 630,
+        reflow:true,
+        renderTo:this.chartID,
+        width:300
       },
       title: {
         text: ((this.buildingReport.name==='amenities')?'Common Amenities':this.buildingReport.name) + ',<br>Construction Cost:<br>' + '(Material+Labour)',
         align: 'center',
         verticalAlign: 'middle',
-        y: -100,
+        y: -135,
         style: {
           fontSize: '1em'
         }
