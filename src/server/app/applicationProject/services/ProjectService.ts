@@ -808,14 +808,14 @@ export class ProjectService {
             let rateObjectExistSQL = 'SELECT * FROM ? AS rates WHERE rates.itemName= ?';
             let rateExistArray = alasql(rateObjectExistSQL,[centralizedRates,rate.itemName]);
             if(rateExistArray.length > 0) {
-              if(rateExistArray[0].rate !== rate.rate) {
+              if((rateExistArray[0].rate !== rate.rate) || (rateExistArray[0].gst !== rate.gst)) {
                 //update rate of rateItem
-                let updateRatePromise = this.updateCentralizedRateForBuilding(buildingId, rate.itemName, rate.rate);
+                let updateRatePromise = this.updateCentralizedRateForBuilding(buildingId, rate.itemName, rate.rate, rate.gst);
                 promiseArrayForUpdateBuildingCentralizedRates.push(updateRatePromise);
               }
             } else {
               //create new rateItem
-              let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
+              let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate, rate.gst);
               let addNewRateItemPromise = this.addNewCentralizedRateForBuilding(buildingId, rateItem);
               promiseArrayForUpdateBuildingCentralizedRates.push(addNewRateItemPromise);
             }
@@ -915,14 +915,14 @@ export class ProjectService {
           let rateObjectExistSQL = 'SELECT * FROM ? AS rates WHERE rates.itemName= ?';
           let rateExistArray = alasql(rateObjectExistSQL,[centralizedRatesOfProjects,rate.itemName]);
           if(rateExistArray.length > 0) {
-            if(rateExistArray[0].rate !== rate.rate) {
+            if((rateExistArray[0].rate !== rate.rate) || (rateExistArray[0].gst !== rate.gst)) {
               //update rate of rateItem
-              let updateRateOfProjectPromise = this.updateCentralizedRateForProject(projectId, rate.itemName, rate.rate);
+              let updateRateOfProjectPromise = this.updateCentralizedRateForProject(projectId, rate.itemName, rate.rate, rate.gst);
               promiseArrayForProjectCentralizedRates.push(updateRateOfProjectPromise);
             }
           } else {
             //create new rateItem
-            let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate);
+            let rateItem : CentralizedRate = new CentralizedRate(rate.itemName,rate.originalItemName, rate.rate, rate.gst);
             let addNewRateOfProjectPromise = this.addNewCentralizedRateForProject(projectId, rateItem);
             promiseArrayForProjectCentralizedRates.push(addNewRateOfProjectPromise);
           }
@@ -2088,7 +2088,7 @@ export class ProjectService {
 
   getRatesFromCentralizedrates(rateItemsOfWorkItem: Array<RateItem>, centralizedRates: Array<any>) {
     let rateItemsSQL = 'SELECT rateItem.itemName, rateItem.originalItemName, rateItem.rateAnalysisId, rateItem.type,' +
-      'rateItem.quantity, rateItem.gst, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
+      'rateItem.quantity, centralizedRates.gst, centralizedRates.rate, rateItem.unit, rateItem.totalAmount, rateItem.totalQuantity ' +
       'FROM ? AS rateItem JOIN ? AS centralizedRates ON rateItem.itemName = centralizedRates.itemName';
     let rateItemsForWorkItem = alasql(rateItemsSQL, [rateItemsOfWorkItem, centralizedRates]);
     return rateItemsForWorkItem;
@@ -3387,13 +3387,13 @@ export class ProjectService {
     });
   }
 
-  updateCentralizedRateForBuilding(buildingId: string, rateItem: string, rateItemRate: number) {
+  updateCentralizedRateForBuilding(buildingId: string, rateItem: string, rateItemRate: number, rateItemGst: number) {
     return new CCPromise(function (resolve: any, reject: any) {
       logger.info('createPromiseForRateUpdate has been hit for buildingId : ' + buildingId + ', rateItem : ' + rateItem);
       //update rate
       let buildingRepository = new BuildingRepository();
       let queryUpdateRate = {'_id': buildingId, 'rates.itemName': rateItem};
-      let updateRate = {$set: {'rates.$.rate': rateItemRate}};
+      let updateRate = {$set: {'rates.$.rate': rateItemRate, 'rates.$.gst': rateItemGst}};
       buildingRepository.findOneAndUpdate(queryUpdateRate, updateRate, {new: true}, (error: Error, result: Building) => {
         if (error) {
           reject(error);
@@ -3429,13 +3429,13 @@ export class ProjectService {
     });
   }
 
-  updateCentralizedRateForProject(projectId: string, rateItem: string, rateItemRate: number) {
+  updateCentralizedRateForProject(projectId: string, rateItem: string, rateItemRate: number, rateItemGst:number) {
     return new CCPromise(function (resolve: any, reject: any) {
       logger.info('createPromiseForRateUpdateOfProjectRates has been hit for projectId : ' + projectId + ', rateItem : ' + rateItem);
       //update rate
       let projectRepository = new ProjectRepository();
       let queryUpdateRateForProject = {'_id': projectId, 'rates.itemName': rateItem};
-      let updateRateForProject = {$set: {'rates.$.rate': rateItemRate}};
+      let updateRateForProject = {$set: {'rates.$.rate': rateItemRate, 'rates.$.gst': rateItemGst}};
       projectRepository.findOneAndUpdate(queryUpdateRateForProject, updateRateForProject, {new: true}, (error: Error, result: Project) => {
         if (error) {
           reject(error);

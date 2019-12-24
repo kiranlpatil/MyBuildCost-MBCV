@@ -686,11 +686,24 @@ class RateAnalysisService {
               this.convertConfigCostHeads(fixedCostConfigProjectCostHeads, projectCostHeads);
               buildingCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [buildingCostHeads]);
               projectCostHeads = alasql('SELECT * FROM ? ORDER BY priorityId', [projectCostHeads]);
-              let buildingRates = this.getRates(costHeadsData, buildingCostHeads);
-              let projectRates = this.getRates(costHeadsData, projectCostHeads);
-              let rateAnalysis = new RateAnalysis(buildingCostHeads, buildingRates, projectCostHeads, projectRates);
-              rateAnalysis.appType = 'MyBuildCost';
-              this.saveRateAnalysis(rateAnalysis, region);
+              this.itemGstRepository.retrieve({}, (error: any, res: any) => {
+                if (error) {
+                  logger.error('Unable to retrive  Saved Rate');
+                } else {
+                  if (res.length > 0) {
+                    let arrayOfRateItemGst = res.filter(function (itemGst: ItemGst) {
+                      return itemGst.type === 'rateItem';
+                    });
+                    let mapOfGstRateItems = {};
+                    rateAnalysisService.getMap(arrayOfRateItemGst, mapOfGstRateItems );
+                    let buildingRates = this.getRates(costHeadsData, buildingCostHeads, mapOfGstRateItems);
+                    let projectRates = this.getRates(costHeadsData, projectCostHeads, mapOfGstRateItems);
+                    let rateAnalysis = new RateAnalysis(buildingCostHeads, buildingRates, projectCostHeads, projectRates);
+                    rateAnalysis.appType = 'MyBuildCost';
+                    this.saveRateAnalysis(rateAnalysis, region);
+                  }
+                }
+              });
             }
           }
         });
@@ -751,7 +764,7 @@ class RateAnalysisService {
     return costHeadsData;
   }
 
-  getRates(result: any, costHeads: Array<CostHead>) {
+  getRates(result: any, costHeads: Array<CostHead>, mapOfGstRateItems:any) {
     let getRatesListSQL = 'SELECT * FROM ? AS q WHERE q.C4 IN (SELECT t.rateAnalysisId ' +
       'FROM ? AS t)';
     let rateItems = alasql(getRatesListSQL, [result.rates, costHeads]);
@@ -766,7 +779,8 @@ class RateAnalysisService {
 
     let distinctItemsSQL = 'select DISTINCT itemName,originalItemName,rate FROM ?';
     var distinctRates = alasql(distinctItemsSQL, [rateItemsList]);
-
+    let rateAnalysisService = new RateAnalysisService();
+    rateAnalysisService.getRateItemWithGst(mapOfGstRateItems, distinctRates);
     return distinctRates;
   }
 
