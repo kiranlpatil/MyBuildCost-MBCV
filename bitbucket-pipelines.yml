@@ -7,13 +7,11 @@ image: node:8.8.1
 
 pipelines:
   custom: # Pipelines that are triggered automatically
-    build-info-staging:
+    BuilInfo-Staging-Artifacts:
     - step:
         caches:
           - node
         script: # Modify the commands below to build your repository..
-          - echo $APPLICATION_NAME
-          - echo $APPLICATION_NAME
           - node -v
           - npm -v
           - npm install --unsafe -perm
@@ -25,10 +23,10 @@ pipelines:
         artifacts:
           - dist/**
     - step:
-            script:
-              - apt-get update # required to install zip
-              - apt-get install -y zip # required for packaging up the application
-              - apt-get install python-pip -y
-              - pip install boto3==1.3.0 # required for codedeploy_deploy.py
-              - zip -r /tmp/artifact.zip dist/** appspec.yml package.json scripts # package up the application for deployment
-              - python codedeploy_deploy.py # run the deployment script
+           name : Create a MyBuildCost Staging Artifact
+           script:
+              - apt-get update
+              - apt-get install -y zip
+              - zip -r MBC_StageArtifacts.zip dist/**
+              - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/scripts/startApp.sh" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
+              - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"/opt/atlassian/pipelines/agent/build/MBC_StageArtifacts.zip" -u "AnilGadge:WYpAaN7ce8uwFzG3nzur"
