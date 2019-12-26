@@ -1975,6 +1975,58 @@ class RateAnalysisService {
     });
   }
 
+  verifyProjectData(callback: (error: any, result: any) => void) {
+    //let query = {_id:{ $in: arrayOfIds}};
+    //let populate = {path: 'building', select: ['rates',]};
+    this.projectRepository.find({}, (error, result) => {
+      logger.info('Project service, findAndPopulate has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        if(result.length !== 0) {
+          let projectArray = new Array();
+          let buildingArray = new Array();
+          let buildings = new Array();
+          for(let project of result) {
+            let projectRates = project.rates;
+            if (projectRates.length > 0) {
+              let updateRateItemSQL = 'SEARCH / WHERE(gst = 0) FROM ?';
+              let arrayOfUpdatedRateItem = alasql(updateRateItemSQL, [projectRates]);
+              if (arrayOfUpdatedRateItem.length == 0) {
+                projectArray.push(project._id);
+              }
+            }
+            buildings.push(project.buildings);
+          }
+          let updateRateItemSQL = 'SEARCH // FROM ?';
+          let arrayOfupdatedRateItem = alasql(updateRateItemSQL,[buildings]);
+
+          let query = {_id:{ $in: arrayOfupdatedRateItem}};
+          this.buildingRepository.find(query, (error, buildingresult) => {
+            logger.info('RateAnalysis service, findAndPopulate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              console.log('processing buildings ' + buildingresult.length);
+              if (buildingresult.length !== 0) {
+                for (let building of buildingresult) {
+                  let buildingRates = building.rates;
+                  if (buildingRates.length > 0) {
+                    let updateRateItemSQL = 'SEARCH / WHERE(gst = 0) FROM ?';
+                    let arrayOfUpdatedRateItem = alasql(updateRateItemSQL, [buildingRates]);
+                    if (arrayOfUpdatedRateItem.length == 0) {
+                      buildingArray.push(building._id);
+                    }
+                  }
+                }
+                callback(null, {data: {projectArray, buildingArray}});
+              }
+            }
+          });
+        }
+      }
+    });
+  }
 }
 
 Object.seal(RateAnalysisService);
