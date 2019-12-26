@@ -8,12 +8,14 @@
   float: left;
   //left: 50%;
   //left: 35%;
-  left: 43%;
+  //left: 43%;
+  left: 31%;
   margin: 0 auto 15px;
   padding: 5px;
   position: relative;
   transform: translateX(-50%);
-  width: 100%;
+  //width: 100%;
+  width: 70%;
 
   .close {
     margin: 0 4px 15px 5px;
@@ -29,7 +31,7 @@
         font-size: 11px;
         text-align: center;
         padding: 3px 0;
-        width: 14%;
+        //width: 14%;
 
         &:first-child {
           border-radius: 5px 0 0 0;
@@ -275,4 +277,7 @@
   .get-quantity-section::before,.get-quantity-section:after{
     left: 19%;
   }
+}
+.unit-text-center{
+  text-align: center;
 }

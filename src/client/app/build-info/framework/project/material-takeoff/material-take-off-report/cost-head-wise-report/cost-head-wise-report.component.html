@@ -9,16 +9,31 @@
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" class="collapsed" href="#collapsepanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}">
+                  <bi-table-row [customClass]="'item-mobile-header'"
+                                [rows]="rows">
+                  </bi-table-row>
                   <bi-table-row
                     [customClass]="'row-list'"
                     [rows]="costHeadWiseContent[content].subContent[subContent]">
                   </bi-table-row>
                   <span *ngIf="costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT" class="caret"></span>
+                  <div
+                    *ngIf="costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT"
+                    id="collapsepanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="collapse-list-item" *ngFor="let innerSubContent of costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().SORT;">
+                        <bi-table-row
+                          [customClass]="'row-list sub-items-list'"
+                          [rows]="costHeadWiseContent[content].subContent[subContent].subContent[innerSubContent]">
+                        </bi-table-row>
+                      </div>
+                    </div>
+                  </div>
                 </a>
 
 
                 <!--sub content-->
-                <div
+               <!-- <div
                   *ngIf="costHeadWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT"
                   id="collapsepanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}" class="panel-collapse collapse">
                   <div class="panel-body">
@@ -29,7 +44,7 @@
                       </bi-table-row>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
 
 

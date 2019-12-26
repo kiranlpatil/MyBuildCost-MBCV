@@ -14,6 +14,7 @@ export class MaterialWiseReportComponent  {
 
   @Input() materialWiseContent : any;
   @Input() secondaryViewDataIndex : number;
+  @Input() rows: any;
   viewSubContent : boolean = false;
   viewNestedSubContent : boolean = false;
   headerIndex : number;

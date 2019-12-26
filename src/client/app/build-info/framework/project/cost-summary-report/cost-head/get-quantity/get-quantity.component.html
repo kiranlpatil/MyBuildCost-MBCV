@@ -7,6 +7,7 @@
   </button>
   <table class="table">
     <thead>
+    <tr>
       <th>{{getTableHeadings().ITEM}}</th>
       <th>{{getTableHeadings().NUMBERS}}</th>
       <th [hidden]="!workItem.length">{{getTableHeadings().LENGTH}}</th>
@@ -16,6 +17,7 @@
       <th class="text-left">{{getTableHeadings().UNIT}}</th>
       <th class="hidden-xs">&nbsp;</th>
       <th class="hidden-xs">&nbsp;</th>
+    </tr>
     </thead>
   <tbody>
   <tr *ngFor="let quantityItem of quantityItems;  let quantityIndex= index ">
@@ -53,7 +55,7 @@
     <td class="get-amount-value">
       <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" disabled/>
     </td>
-    <td class="get-amount-value text-left get-unit">
+    <td class="get-amount-value text-left get-unit unit-text-center">
       {{workItemUnit}}
     </td>
     <td colspan="2" class="get-amount-value get-delete text-center hidden-xs">

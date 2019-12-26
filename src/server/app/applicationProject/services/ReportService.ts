@@ -208,12 +208,12 @@ class ReportService {
     return estimateReport;
   }
 
-  getEstimatedReportForNonCategories(thumbRuleReport: ThumbRuleReport, totalArea:number) {
+  getEstimatedReportForNonCategories(thumbRuleReport: ThumbRuleReport,costHead:CostHead, totalArea:number) {
     let estimateReport = new EstimateReport();
     estimateReport.name = thumbRuleReport.name;
     estimateReport.rateAnalysisId = thumbRuleReport.rateAnalysisId;
     estimateReport.disableCostHeadView = true;
-    estimateReport.gstComponent = (thumbRuleReport.amount* Constants.DEFAULT_GST)/100;
+    estimateReport.gstComponent = (thumbRuleReport.amount* costHead.gst)/100;
     estimateReport.total = thumbRuleReport.amount + estimateReport.gstComponent;
     estimateReport.basicEstimatedCost = estimateReport.total - estimateReport.gstComponent;
     estimateReport.rateWithoutGst = estimateReport.basicEstimatedCost/totalArea;
@@ -286,7 +286,7 @@ class ReportService {
       if(costHead.categories.length > 0) {
         estimateReport = this.getEstimatedReport(projectRates, costHead, totalArea, rateUnit);
       } else {
-        estimateReport = this.getEstimatedReportForNonCategories(thumbRuleReport ,totalArea);
+        estimateReport = this.getEstimatedReportForNonCategories(thumbRuleReport, costHead ,totalArea);
       }
 
       estimatedReports.push(estimateReport);
@@ -713,18 +713,21 @@ class ReportService {
           if(categoryName === Constants.STEEL) {
               if(quantity && quantity.steelQuantityItems && quantity.steelQuantityItems.totalWeightOfDiameter) {
                 let materialRate = 0 ;
+                let materialGst = 0 ;
                 if(workItem.rate.isEstimated && workItem.rate.rateItems && workItem.rate.rateItems.length > 0) { // todo ask swapnil about rate property
-                  if((buildingDetails.rates.findIndex((item: any) => item.itemName == workItem.rate.rateItems[0].itemName)) > -1) {
-                    materialRate = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName == workItem.rate.rateItems[0].itemName)].rate;
+                  if((buildingDetails.rates.findIndex((item: any) => item.itemName === workItem.rate.rateItems[0].itemName)) > -1) {
+                    materialRate = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName === workItem.rate.rateItems[0].itemName)].rate;
+                    materialGst = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName === workItem.rate.rateItems[0].itemName)].gst;
                   }
                 } else {
                   materialRate = workItem.rate.total;
+                  materialGst = workItem.gst;
                 }
 
                 for(let material of Object.keys(quantity.steelQuantityItems.totalWeightOfDiameter)) {
                   let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
                     workItemName, material, quantity.name, quantity.steelQuantityItems.totalWeightOfDiameter[material],
-                    quantity.steelQuantityItems.unit,workItem.gst,materialRate);
+                    quantity.steelQuantityItems.unit,materialGst,materialRate);
                   materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
                 }
               }
@@ -742,13 +745,16 @@ class ReportService {
       for (let rateItem of workItem.rate.rateItems) {
         let workItemQuantity = this.getQuanityForWorkItem(workItem.unit, workItem.rate.unit, (quantity / workItem.rate.quantity) * rateItem.quantity);
        let materialRate;
-       if((buildingDetails.rates.findIndex((item: any) => item.itemName == rateItem.itemName)) > -1) {
-         materialRate = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName == rateItem.itemName)].rate;
+       let materialGst;
+       if((buildingDetails.rates.findIndex((item: any) => item.itemName === rateItem.itemName)) > -1) {
+         materialRate = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName === rateItem.itemName)].rate;
+         materialGst = buildingDetails.rates[buildingDetails.rates.findIndex((item: any) => item.itemName === rateItem.itemName)].gst;
        } else {
          materialRate = rateItem.rate;
+         materialGst = rateItem.gst;
        }
         let materialTakeOffFlatDetailDTO = new MaterialTakeOffFlatDetailsDTO(buildingName, costHeadName, categoryName,
-          workItemName, rateItem.itemName, quantityName, workItemQuantity, rateItem.unit, rateItem.gst, materialRate); // todo review
+          workItemName, rateItem.itemName, quantityName, workItemQuantity, rateItem.unit, materialGst, materialRate); // todo review
         materialTakeOffFlatDetailsArray.push(materialTakeOffFlatDetailDTO);
       }
   }

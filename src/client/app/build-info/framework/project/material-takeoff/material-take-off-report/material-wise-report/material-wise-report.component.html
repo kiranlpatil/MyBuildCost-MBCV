@@ -8,6 +8,9 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a data-toggle="collapse" class="collapsed" href="#collapsepanel{{secondaryViewDataIndex}}{{contentIndex}}">
+              <bi-table-row [customClass]="'item-mobile-header'"
+                            [rows]="rows">
+              </bi-table-row>
               <bi-table-row
                 [customClass]="'row-list'"
                 [rows]="materialWiseContent[content]">
@@ -28,15 +31,31 @@
                 <div class="panel-heading">
                   <div class="panel-title">
                     <a data-toggle="collapse" class="collapsed" href="#collapseInnerPanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}">
-
+                      <bi-table-row [customClass]="'item-mobile-header'"
+                                    [rows]="rows">
+                      </bi-table-row>
                       <bi-table-row
                         [customClass]="'row-list sub-items'"
                         [rows]="materialWiseContent[content].subContent[subContent]">
                       </bi-table-row>
                       <span *ngIf="materialWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT" class="caret"></span>
+
+                      <div
+                        *ngIf="materialWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT"
+                        id="collapseInnerPanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <div class="collapse-list-item" *ngFor="let innerSubContent of materialWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().SORT;">
+                            <bi-table-row
+                              [customClass]="'row-list sub-items-list material-take-off-sub-items'"
+                              [rows]="materialWiseContent[content].subContent[subContent].subContent[innerSubContent]">
+                            </bi-table-row>
+                          </div>
+                        </div>
+                      </div>
+
                     </a>
                     <!--Inner sub content-->
-                    <div
+                    <!--<div
                       *ngIf="materialWiseContent[content].subContent[subContent].subContent | keys:getMaterialTakeOffElements().CHECK_SUB_CONTENT_PRESENT"
                       id="collapseInnerPanel{{secondaryViewDataIndex}}{{contentIndex}}{{subContentIndex}}" class="panel-collapse collapse">
                       <div class="panel-body">
@@ -47,7 +66,7 @@
                           </bi-table-row>
                         </div>
                       </div>
-                    </div>
+                    </div>-->
 
                   </div>
                 </div>

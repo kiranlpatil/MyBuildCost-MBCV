@@ -71,11 +71,13 @@
                     <!--content-->
                     <bi-cost-head-wise-report *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_COST_HEAD"
                                          [secondaryViewDataIndex]="secondaryViewDataIndex"
-                                         [costHeadWiseContent]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content">
+                                              [costHeadWiseContent]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content"
+                                              [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.header">
                     </bi-cost-head-wise-report>
                     <bi-material-wise-report *ngIf="elementType === getMaterialTakeOffElements().ELEMENT_WISE_REPORT_MATERIAL"
                                          [secondaryViewDataIndex]="secondaryViewDataIndex"
-                                         [materialWiseContent]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content">
+                                         [materialWiseContent]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.content"
+                                          [rows]="materialTakeOffReport[materialKey].secondaryView[secondaryViewKey].table.header">
                     </bi-material-wise-report>
 
                   <!--footer-->
