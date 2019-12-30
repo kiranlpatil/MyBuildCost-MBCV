@@ -29,6 +29,12 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .container-material-takeoff{
+    padding: 0 10px!important;
+  }
+  .disclaimer-container-fluid{
+    padding: 0 10px!important;;
+  }
   .wrapper {
     min-height: calc(100vh - 50px);
     .container-material-takeoff{

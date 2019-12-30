@@ -661,13 +661,16 @@
             //width: 50%;
             width: 100%!important;
             .mobile-headings{
-              width: 60%;
+              width: 60%!important;
               padding: 4px 10px 4px 0;
             }
             span{
-              width: 40%;
+              width: 40%!important;
               float: left;
               padding: 4px!important;
+            }
+            .edit-field{
+              width: 40%;
             }
           }
           &:nth-child(8),&:nth-child(9),&:nth-child(10){
