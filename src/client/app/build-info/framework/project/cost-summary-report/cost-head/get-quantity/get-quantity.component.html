@@ -1,4 +1,4 @@
-<div *ngIf="quantityItems!==undefined" class="get-quantity-section">
+<div *ngIf="quantityItems!==undefined" class="get-quantity-section" [class.get-quantity]="this.innerView==='quantity'">
   <button *ngIf="innerView !== getLabel().WORKITEM_QUANTITY_TAB" title="Close" class="close" (click)="closeQuantityTab()">
     <img src="assets/framework/images/close/close-black.svg" />
   </button>
