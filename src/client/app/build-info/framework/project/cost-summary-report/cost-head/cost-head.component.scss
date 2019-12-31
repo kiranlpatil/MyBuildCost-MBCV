@@ -235,7 +235,7 @@
     //text-align: center;
     &:nth-child(1) {
       //width: 310px;
-      width: 25%;
+      width: 22%;
     }
 
     &:nth-child(2) {
@@ -660,7 +660,7 @@
         &:nth-child(7) {
           float: left;
           min-height: 42px;
-          text-align: right;
+          //text-align: right;
           width: 50%;
         }
 
@@ -790,7 +790,13 @@
 .workitem-rate-table{
   tr{
     th,td{
-      width: 11%;
+      width: 13%;
+      &:nth-child(1){
+        width: 22%;
+      }
+    }
+    td{
+      text-align: center;
     }
   }
 }

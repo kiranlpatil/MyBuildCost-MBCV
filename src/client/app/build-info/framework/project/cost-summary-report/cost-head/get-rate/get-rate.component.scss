@@ -332,7 +332,7 @@
   content: " ";
   height: 0;
   //left: 47%;
-  left:46%;
+  left:48%;
   position: absolute;
   pointer-events: none;
   width: 0;
@@ -360,11 +360,11 @@
 }
 
 .get-cost-section:after, .get-cost-section:before {
-  left: 66% !important;
+  left: 65% !important;
 }
 
 .get-systemRA-section:after, .get-systemRA-section:before {
-  left: 80% !important;
+  left: 85% !important;
 }
 
 input[disabled],
@@ -491,13 +491,13 @@ textarea[disabled] {
 }
 @media (min-width:1500px) and (max-width: 1920px) {
   .get-rate-section::before,.get-rate-section::after{
-    left: 51%;
+    left: 52%;
   }
   .get-cost-section::before,.get-cost-section:after{
-    left: 72%!important;
+    left: 70%!important;
   }
   .get-systemRA-section::before,.get-systemRA-section::after{
-    left: 85%!important;
+    left: 86%!important;
   }
 }
 .get-cost-section,.get-systemRA-section{

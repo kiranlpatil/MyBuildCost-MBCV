@@ -9,7 +9,7 @@
   //left: 50%;
   //left: 35%;
   //left: 43%;
-  left: 31%;
+  left: 27%;
   margin: 0 auto 15px;
   padding: 5px;
   position: relative;
@@ -276,11 +276,11 @@
 }
 @media (min-width:1500px) and (max-width: 1920px) {
   .get-quantity-section::before,.get-quantity-section:after{
-    left: 24%;
+    left: 15%;
   }
   .get-quantity-section{
     width: 42%;
-    left: 23%;
+    left: 21%;
   }
 }
 .unit-text-center{

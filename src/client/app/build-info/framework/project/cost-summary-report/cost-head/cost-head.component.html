@@ -38,7 +38,7 @@
                     <th>{{getTableHeadings().UNIT}}</th>
                     <th>
                       <div *ngIf=" workItem.isDirectRate">{{getTableHeadings().BASIC_RATE_PER_UNIT}}</div>
-                      <div *ngIf="!workItem.isDirectRate">{{getTableHeadings().RATE_PER_UNIT}}</div>
+                      <div *ngIf="!workItem.isDirectRate">{{getTableHeadings().EDITABLE_RATE_PER_UNIT}}<br>{{getTableHeadings().RATE_PER_UNIT}}</div>
                     </th>
                     <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().GST}}</th>
                     <th *ngIf=" workItem.isDirectRate">{{getTableHeadings().TOTAL_RATE}}</th>
@@ -49,7 +49,7 @@
                     <!--<th *ngIf=" workItem.isDirectRate">{{getTableHeadings().GST_COMPONENT}}</th>-->
                     <th>
                       <div *ngIf=" workItem.isDirectRate">{{getTableHeadings().RATEANALYSIS}}</div>
-                      <div *ngIf="!workItem.isDirectRate">{{getTableHeadings().NON_EDITABLE_RATEANALYSIS}}</div>
+                      <div *ngIf="!workItem.isDirectRate">{{getTableHeadings().NON_EDITABLE_RATEANALYSIS}}<br>{{getTableHeadings().RATEANALYSIS}}</div>
                     </th>
                     <!--<th></th>-->
                   </tr>

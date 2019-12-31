@@ -96,7 +96,7 @@
 }
 
 .get-quantity-section:after, .get-quantity-section:before {
-  left: 33%;
+  left: 29%;
 }
 
 @media only screen and (max-width: 767px) {
@@ -166,7 +166,7 @@
 }
 @media (min-width:1500px) and (max-width: 1920px) {
   .get-quantity-section::before,.get-quantity-section::after{
-    left: 30%!important;
+    left: 26.5%!important;
   }
   .get-rate-section::before,.get-rate-section::after{
     left: 46%;
