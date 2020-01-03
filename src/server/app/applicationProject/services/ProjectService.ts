@@ -2045,8 +2045,9 @@ export class ProjectService {
           }else {
             workItem.rateWithGst = (workItem.rate.total * workItem.gst) / 100;
             workItem.totalRate =  workItem.rate.total + workItem.rateWithGst;
-            workItem.amount = this.commonService.decimalConversion(workItem.totalRate * workItem.quantity.total);
+            workItem.amount = workItem.totalRate * workItem.quantity.total;
             workItem.gstComponent = workItem.amount - (workItem.rate.total * workItem.quantity.total);
+            workItem.amount = this.commonService.decimalConversion(workItem.amount);
           }
           workItemsListWithRates.workItemsAmount = workItemsListWithRates.workItemsAmount + workItem.amount;
           workItemsListWithRates.gstComponent = workItemsListWithRates.gstComponent + workItem.gstComponent;
