@@ -1505,5 +1505,24 @@ class ProjectController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+  copyProject(req: express.Request, res: express.Response, next: any): void{
+    try {
+      logger.info('Rate Analysis Controller, copyProject has been hit');
+      let projectService = new ProjectService();
+      let sourceEmail = req.body.sourceEmail;
+      let destEmail = req.body.destEmail;
+      let oldProjectName = req.body.oldProjectName;
+      let newProjectName = req.body.newProjectName;
+      projectService.copyProject(sourceEmail,destEmail,oldProjectName,newProjectName,(error: any, resp:any) =>{
+        if (error) {
+          next(error);
+        } else {
+          next(new Response(200, resp));
+        }
+      });
+    }catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 export  = ProjectController;
