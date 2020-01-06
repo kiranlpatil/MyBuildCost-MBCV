@@ -41,7 +41,7 @@
 
         <td class="td-text-center">
           <span class="mobile-headings" *ngIf="workItem.isDirectRate">{{getTableHeadings().BASIC_RATE_PER_UNIT}}</span>
-          <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().RATE_PER_UNIT}}</span>
+          <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().EDITABLE_RATE_PER_UNIT}}<br>{{getTableHeadings().RATE_PER_UNIT}}</span>
           <span class="value" *ngIf="workItemData.rate.isEstimated">{{workItemData.rate.total|number : '1.2-2' }}</span>
           <span class="value"  *ngIf="!workItemData.rate.isEstimated">-</span>
         </td>
@@ -75,7 +75,7 @@
 
         <td class="">
           <span class="mobile-headings" *ngIf="workItem.isDirectRate">{{getTableHeadings().RATEANALYSIS}}</span>
-          <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().NON_EDITABLE_RATEANALYSIS}}</span>
+          <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().NON_EDITABLE_RATEANALYSIS}}<br>{{getTableHeadings().RATEANALYSIS}}</span>
           <span class="value">-</span>
         </td>
 

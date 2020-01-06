@@ -106,10 +106,10 @@
               <tfoot>
               <tr>
                 <!--colspan="5"-->
-                <td  class="total-amount">
+                <td  class="total-amount" colspan="5">
                   <label class="visible-xs">{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
-                <td class="hidden-xs total-amount" colspan="5">
+                <td class="hidden-xs total-amount" colspan="1">
                   <label>{{ getLabel().TOTAL }}{{(rateItem.key === 'M') ? '(A):' : ((rateItem.key === "L") ? "(B):" : "(C):")}}</label>
                 </td>
                 <td *ngIf="anySubscriptionAvailable">

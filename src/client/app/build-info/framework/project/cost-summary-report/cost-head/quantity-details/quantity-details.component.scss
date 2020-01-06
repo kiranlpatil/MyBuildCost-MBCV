@@ -1,6 +1,6 @@
 @import '../../../../../../../css/common';
 .quantity-details-wrapper {
-  padding: 0 0 0 20px;
+  //padding: 0 0 0 20px;
 }
 .table-categories {
   //border-bottom: 1px solid $border-color;
@@ -57,7 +57,7 @@
     width: 9%;
     &:nth-child(1) {
       //width: 288px;
-      width: 21%;
+      width: 22%;
     }
 
     &:nth-child(2),
@@ -271,7 +271,7 @@
     th,td{
       width: 13%;
       &:nth-child(1){
-        width: 21%;
+        width: 22%;
       }
     }
     td{

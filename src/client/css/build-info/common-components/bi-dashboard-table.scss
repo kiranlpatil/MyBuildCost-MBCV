@@ -64,7 +64,8 @@
     }
 
     td {
-      text-align: right;
+      //text-align: right;
+      text-align: center;
 
       &:first-child {
         text-align: left;
@@ -113,8 +114,8 @@
         //text-align: right;
         padding: 7px 24px 7px 0;
         transition: opacity 0.5s ease-in-out;
-        width: 82px;
-        text-align: right;
+        width: 100px;
+        text-align: center;
       }
 
       .calculator {
@@ -123,7 +124,8 @@
         position: absolute;
         top: 5px;
         //right: 0;
-        left: 65px;
+        //left: 65px;
+        right: 25px;
         transition: opacity 0.5s ease-in-out;
         width: 12px;
       }
@@ -153,7 +155,7 @@
       }
       .edit-field {
         float: left;
-        text-align: left!important;
+        text-align: center!important;
         width: calc(100% - 35px);
         textarea {
           background: url('../../../assets/build-info/dashboard/edit-bg.png') no-repeat 98% 46%;
@@ -184,6 +186,7 @@
         }
         span {
           text-align: left;
+          left: 82px;
         }
       }
     }
@@ -396,3 +399,10 @@
   }
 }
 
+@media (min-width:1500px) and (max-width: 1920px){
+  .edit-field{
+    span{
+      left: 104px!important;
+    }
+  }
+}
