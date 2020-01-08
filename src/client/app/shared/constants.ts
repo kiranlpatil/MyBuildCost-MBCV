@@ -223,6 +223,8 @@ export class Messages {
   public static MSG_SUCCESS_UPDATE_QUANTITY_NAME_WORKITEM: string = 'Title for Work Item updated successfully.';
   public static MSG_SUCCESS_UPDATE_WORKITEM_NAME: string = 'Workitem name updated successfully';
   public static MSG_SUCCESS_UPDATE_GST_OF_WORKITEM: string = 'GST for Work Item updated successfully';
+  public static MSG_QUANTITY_SHOULD_NOT_NULL: string = 'Quantity should not be blank.';
+  public static MSG_WORKITEM_NAME_SHOULD_NOT_NULL: string = 'Workitem name should not be blank.';
 
   //Quantity view required fields
   public static MSG_ERROR_VALIDATION_QUANTITY_ITEM_REQUIRED = 'Enter item';
