@@ -145,7 +145,7 @@
     border-top: 1px solid $gray-light;
     display: block;
     float: left;
-    width: 100%;
+    //width: 100%;
 
     .rate-item {
       padding: 0 !important;
@@ -332,7 +332,7 @@
   content: " ";
   height: 0;
   //left: 47%;
-  left:48%;
+  left:49%;
   position: absolute;
   pointer-events: none;
   width: 0;
@@ -491,7 +491,7 @@ textarea[disabled] {
 }
 @media (min-width:1500px) and (max-width: 1920px) {
   .get-rate-section::before,.get-rate-section::after{
-    left: 52%;
+    left: 55%;
   }
   .get-cost-section::before,.get-cost-section:after{
     left: 70%!important;
@@ -502,6 +502,7 @@ textarea[disabled] {
 }
 .get-cost-section,.get-systemRA-section{
   .get-rate-table{
+    width: 100%;
     tr{
       td{
         color:#999 !important;

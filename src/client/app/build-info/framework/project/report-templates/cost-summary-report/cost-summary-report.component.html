@@ -1,5 +1,5 @@
 <div *ngIf="buildingReport" id="budgetedAndEstimated" #budgetedAndEstimated style="display: none">
-  <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">
+  <h2 style="font-size:18px;font-weight: bold;padding: 0;margin: 10px auto;text-align: center;width: 75%;max-width: 750px;">
     Budgeted & Estimated Cost Report</h2>
   <h3 style="font-size:16px; padding: 0;margin: 10px auto;text-align: center;width: 100%;max-width: 750px;">for {{currentProjectName}}</h3>
   <div style="border-bottom: 1px solid #ccc;font-size:12px;padding-bottom:5px;text-align: right;width: 100%;max-width: 750px;margin: 0 auto;">
@@ -273,20 +273,20 @@
   <table class="estimated-th" border="1" bordercolor="#888" style="font-size:10px;text-align: left;width: 100%;max-width: 750px;margin: 0 auto;" *ngIf="buildingReport.estimate.totalEstimatedCost !== 0">
     <thead style="display: table-header-group;">
       <tr style="page-break-inside: avoid;">
-        <th rowspan="2" style="text-align:center;padding: 10px 15px;width: 40%;">Cost Head</th>
+        <th rowspan="2" style="text-align:center;padding: 10px 10px;width: 40%;">Cost Head</th>
         <th colspan="5" style="text-align: center;padding: 10px 15px;" class="th-bg-color">
           {{getLabel().ESTIMATED}} <span class="sub-heading">{{getLabel().AS_PER_PROJECT}}</span>
         </th>
       </tr>
       <tr style="page-break-inside: avoid;">
-        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{getLabel().BASIC_ESTIMATED_COST}} <br>( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
-        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{getLabel().GST_COMPONENT}}<br> ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
-        <th style="text-align: center;padding: 10px 15px;width: 30%;">{{getLabel().TOTAL_ESTIMATED_COST}} ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
-        <th style="text-align: center;padding: 10px 15px;width: 30%;">Cost per {{ costingByArea }} without GST <br>(
+        <th style="text-align: center;padding: 10px 5px;width: 30%;">{{getLabel().BASIC_ESTIMATED_COST}} <br>( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
+        <th style="text-align: center;padding: 10px 5px;width: 30%;">{{getLabel().GST_COMPONENT}}<br> ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
+        <th style="text-align: center;padding: 10px 10px;width: 30%;">{{getLabel().TOTAL_ESTIMATED_COST}} ( <span [innerHTML]="getProjectElements().RS_SYMBOL"></span> )</th>
+        <th style="text-align: center;padding: 10px 5px;width: 30%;">Cost per {{ costingByArea }} without GST <br>(
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)" >Rs/Sqm</span>)
         </th>
-        <th style="text-align: center;padding: 10px 15px;width: 30%;">Cost per {{ costingByArea }} including GST <br>(
+        <th style="text-align: center;padding: 10px 5px;width: 30%;">Cost per {{ costingByArea }} including GST <br>(
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQFT)" [innerHTML]="getProjectElements().RS_SYMBOL_PER_SQFT"></span>
           <span *ngIf="(costingByUnit === getProjectElements().RS_PER_SQMT)">Rs/Sqm</span>)
         </th>

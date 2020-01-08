@@ -140,7 +140,7 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
 
 
   private selectedWorkItemData : Array<WorkItem> = [];
-
+  private  workItemName: string;
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private _router: Router, private messageService: MessageService, private commonService : CommonService,
@@ -604,26 +604,37 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
     this.total = total;
   }
 
-  showUpdateDirectQuantityModal(workItem : WorkItem, categoryId : number, workItemIndex : number) {
-    let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
-    if(this.projectId !== AppSettings.SAMPLE_PROJECT_ID  ||  userId === AppSettings.SAMPLE_PROJECT_USER_ID ) {
-      this.currentWorkItemIndex = workItemIndex;
-      this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
+  setWorkItemName(workItemName: string) {
+    this.workItemName = workItemName;
+  }
 
-      if (workItem.quantity.quantityItemDetails.length !== 0 &&
-        ((workItem.quantity.quantityItemDetails[0].quantityItems && workItem.quantity.quantityItemDetails[0].quantityItems.length !== 0) ||
-          (workItem.quantity.quantityItemDetails[0].steelQuantityItems && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length !== 0))) {
-        $('#updateDirectQuantity' + workItemIndex).modal();
+  showUpdateDirectQuantityModal(workItem : WorkItem, categoryId : number, workItemIndex : number) {
+    if( workItem.quantity.total !== null) {
+      let userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+      if (this.projectId !== AppSettings.SAMPLE_PROJECT_ID || userId === AppSettings.SAMPLE_PROJECT_USER_ID) {
+        this.currentWorkItemIndex = workItemIndex;
+        this.currentQuantityType = this.checkCurrentQuanitityType(workItem);
+
+        if (workItem.quantity.quantityItemDetails.length !== 0 &&
+          ((workItem.quantity.quantityItemDetails[0].quantityItems && workItem.quantity.quantityItemDetails[0].quantityItems.length !== 0) ||
+            (workItem.quantity.quantityItemDetails[0].steelQuantityItems && workItem.quantity.quantityItemDetails[0].steelQuantityItems.steelQuantityItem.length !== 0))) {
+          $('#updateDirectQuantity' + workItemIndex).modal();
+        } else {
+          this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);
+        }
       } else {
-        this.changeDirectQuantity(categoryId, workItem.rateAnalysisId, workItem.workItemId, workItem.quantity.total);
+        workItem.quantity.total = this.total;
+        var errorInstance = new ErrorInstance();
+        errorInstance.err_msg = Messages.MSG_FOR_UPDATING_SAMPLE_PROJECT;
+        errorInstance.err_code = 404;
+        this.errorService.onError(errorInstance);
       }
-    } else {
-      workItem.quantity.total = this.total;
-      var errorInstance = new ErrorInstance();
-      errorInstance.err_msg = Messages.MSG_FOR_UPDATING_SAMPLE_PROJECT;
-      errorInstance.err_code = 404;
-      this.errorService.onError(errorInstance);
     }
+    workItem.quantity.total = this.total;
+    var message = new Message();
+    message.isError = true;
+    message.error_msg = Messages.MSG_QUANTITY_SHOULD_NOT_NULL;
+    this.messageService.message(message);
   }
 
   checkCurrentQuanitityType(workItem : WorkItem) {
@@ -738,14 +749,22 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   updateWorkItemName(categoryId: number, workItem : any) {
-    this.loaderService.start();
-    console.log('WorkItem name : ' + workItem.name);
-    let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
-    this.costSummaryService.updateWorkItemName( this.baseUrl, costHeadId, categoryId, workItem.rateAnalysisId,
-      workItem.workItemId, workItem.name).subscribe(
-      workItemsList => this.onUpdateWorkItemNameSuccess(workItemsList),
-      error => this.onUpdateWorkItemNameFailure(error)
-    );
+    if(workItem.name.trim() !== '') {
+      this.loaderService.start();
+      console.log('WorkItem name : ' + workItem.name);
+      let costHeadId = parseInt(SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID));
+      this.costSummaryService.updateWorkItemName(this.baseUrl, costHeadId, categoryId, workItem.rateAnalysisId,
+        workItem.workItemId, workItem.name).subscribe(
+        workItemsList => this.onUpdateWorkItemNameSuccess(workItemsList),
+        error => this.onUpdateWorkItemNameFailure(error)
+      );
+    } else {
+      workItem.name = this.workItemName;
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.MSG_WORKITEM_NAME_SHOULD_NOT_NULL;
+      this.messageService.message(message);
+    }
   }
 
   onUpdateWorkItemNameSuccess(workItem : any) {

@@ -66,6 +66,7 @@ export class QuantityDetailsComponent implements OnInit {
   currentQuantityName: string;
   showQuantityTab : string = null;
   flagForFloorwiseQuantity : string = null;
+  quantityTotal: number;
 
   constructor(private costSummaryService: CostSummaryService, private messageService: MessageService,
               private loaderService: LoaderService,private errorService:ErrorService, private commonService:CommonService) {
@@ -141,40 +142,52 @@ export class QuantityDetailsComponent implements OnInit {
     }
   }
 
+  setQuantity(total: number) {
+    this.quantityTotal = total;
+  }
+
   updateFloorwiseQunatityConfirmation(quantity :any, flag : string, quantityIndex ?: number) {
-    this.flagForFloorwiseQuantity = flag;
-    if(flag === Label.DIRECT_QUANTITY) {
-      quantity.isDirectQuantity = true;
-    }
-    if(quantity.quantityItems===undefined) {
-      quantity.quantityItems=[];
-    }
-    if((flag === Label.DIRECT_QUANTITY && quantity.quantityItems &&  quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
-      (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
-      if(flag === Label.DIRECT_QUANTITY) {
-        this.existingQuantityType = ProjectElements.DIRECT_QUANTITY;
-        this.currentQuantityType = ProjectElements.MEASUREMENT_SHEET;
-      } else {
-        this.existingQuantityType = ProjectElements.MEASUREMENT_SHEET;
-        this.currentQuantityType = ProjectElements.DIRECT_QUANTITY;
+    if(quantity.total !== null) {
+      this.flagForFloorwiseQuantity = flag;
+      if (flag === Label.DIRECT_QUANTITY) {
+        quantity.isDirectQuantity = true;
       }
-      $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
-    } else if((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !== 0 && quantity.total !== 0) ||
-      (flag === Label.WORKITEM_STEEL_QUANTITY_TAB && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length === 0 && quantity.total !== 0)) {
-      if(flag === Label.DIRECT_QUANTITY) {
-        this.existingQuantityType = ProjectElements.DIRECT_QUANTITY;
-        this.currentQuantityType = ProjectElements.MEASUREMENT_SHEET;
-      } else {
-        this.existingQuantityType = ProjectElements.MEASUREMENT_SHEET;
-        this.currentQuantityType = ProjectElements.DIRECT_QUANTITY;
+      if (quantity.quantityItems === undefined) {
+        quantity.quantityItems = [];
       }
-      $('#updateFloorwiseQuantityModal'+quantityIndex).modal();
+      if ((flag === Label.DIRECT_QUANTITY && quantity.quantityItems && quantity.quantityItems.length !== 0 && quantity.total !== 0) ||
+        (flag === Label.WORKITEM_QUANTITY_TAB && quantity.quantityItems && quantity.quantityItems.length === 0 && quantity.total !== 0)) {
+        if (flag === Label.DIRECT_QUANTITY) {
+          this.existingQuantityType = ProjectElements.DIRECT_QUANTITY;
+          this.currentQuantityType = ProjectElements.MEASUREMENT_SHEET;
+        } else {
+          this.existingQuantityType = ProjectElements.MEASUREMENT_SHEET;
+          this.currentQuantityType = ProjectElements.DIRECT_QUANTITY;
+        }
+        $('#updateFloorwiseQuantityModal' + quantityIndex).modal();
+      } else if ((flag === Label.DIRECT_QUANTITY && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length !== 0 && quantity.total !== 0) ||
+        (flag === Label.WORKITEM_STEEL_QUANTITY_TAB && quantity.steelQuantityItems && quantity.steelQuantityItems.steelQuantityItem.length === 0 && quantity.total !== 0)) {
+        if (flag === Label.DIRECT_QUANTITY) {
+          this.existingQuantityType = ProjectElements.DIRECT_QUANTITY;
+          this.currentQuantityType = ProjectElements.MEASUREMENT_SHEET;
+        } else {
+          this.existingQuantityType = ProjectElements.MEASUREMENT_SHEET;
+          this.currentQuantityType = ProjectElements.DIRECT_QUANTITY;
+        }
+        $('#updateFloorwiseQuantityModal' + quantityIndex).modal();
+      } else {
+        if (flag === Label.DIRECT_QUANTITY) {
+          this.updateQuantityDetails(quantity, flag, quantityIndex);
+        } else if (flag === Label.WORKITEM_QUANTITY_TAB || flag === Label.WORKITEM_STEEL_QUANTITY_TAB) {
+          this.getQuantity(quantity, quantityIndex, flag);
+        }
+      }
     } else {
-      if(flag === Label.DIRECT_QUANTITY) {
-        this.updateQuantityDetails(quantity, flag, quantityIndex);
-      } else if(flag === Label.WORKITEM_QUANTITY_TAB || flag === Label.WORKITEM_STEEL_QUANTITY_TAB ) {
-        this.getQuantity(quantity, quantityIndex, flag);
-      }
+      quantity.total = this.quantityTotal;
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.MSG_QUANTITY_SHOULD_NOT_NULL;
+      this.messageService.message(message);
     }
   }
 

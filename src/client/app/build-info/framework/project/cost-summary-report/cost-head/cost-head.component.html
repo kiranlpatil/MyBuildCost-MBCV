@@ -84,6 +84,7 @@
                                     <textarea [(ngModel)]="workItem.name"
                                               id="workItemName"
                                               (change)="updateWorkItemName(category.rateAnalysisId, workItem)"
+                                              (focus)="setWorkItemName(workItem.name)"
                                               class="form-control clear workItemNameTextarea"
                                               title="Change item name"></textarea>
                                     <!--<span [hidden]="workItemNameFocus" (click)="toggleInput()">{{ workItem.name }}</span>-->
@@ -129,7 +130,7 @@
                                 </td>
                                 <td>
                                   <span class="mobile-headings" *ngIf="workItem.isDirectRate">{{getTableHeadings().BASIC_RATE_PER_UNIT}}</span>
-                                  <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().RATE_PER_UNIT}}</span>
+                                  <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().EDITABLE_RATE_PER_UNIT}}<br>{{getTableHeadings().RATE_PER_UNIT}}</span>
                                   <div class="edit-field" [class.active-rate]="(showWorkItemTab == getLabel().WORKITEM_RATE_TAB) && (workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)" >
                                     <input amountValidate="true" title="Workitem Rate" *ngIf="workItem.isDirectRate" type = "number"
                                            [class.validate-amount] = 'workItem?.rate?.total?.toString().split(".")[0].length>7 ||
@@ -213,7 +214,7 @@
                                 <!--RateAnalysis-->
                                 <td class="rate-analysis-media">
                                   <span class="mobile-headings" *ngIf="workItem.isDirectRate">{{getTableHeadings().RATEANALYSIS}}</span>
-                                  <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().NON_EDITABLE_RATEANALYSIS}}</span>
+                                  <span class="mobile-headings" *ngIf="!workItem.isDirectRate">{{getTableHeadings().NON_EDITABLE_RATEANALYSIS}}<br>{{getTableHeadings().RATEANALYSIS}}</span>
                                   <div  *ngIf=" workItem.isDirectRate === false">
                                    <button class="btn-get-amount"
                                            [class.active]="(rateView==='systemRA' && workItemIndex===currentWorkItemIndex && currentCategoryIndex === categoryIndex)"
