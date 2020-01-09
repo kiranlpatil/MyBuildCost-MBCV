@@ -629,12 +629,13 @@ export class CostHeadComponent implements OnInit, OnChanges, AfterViewInit {
         errorInstance.err_code = 404;
         this.errorService.onError(errorInstance);
       }
+    }else {
+      workItem.quantity.total = this.total;
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.MSG_QUANTITY_SHOULD_NOT_NULL;
+      this.messageService.message(message);
     }
-    workItem.quantity.total = this.total;
-    var message = new Message();
-    message.isError = true;
-    message.error_msg = Messages.MSG_QUANTITY_SHOULD_NOT_NULL;
-    this.messageService.message(message);
   }
 
   checkCurrentQuanitityType(workItem : WorkItem) {
