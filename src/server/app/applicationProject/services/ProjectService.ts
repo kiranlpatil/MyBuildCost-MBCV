@@ -4022,7 +4022,7 @@ export class ProjectService {
     });
   }
 
-  copyProject(sourceEmail: string, destEmail: string, oldProjectName: string, newProjectName: string, callback: (error: any, result: any) => void) {
+  copyProject(sourceEmail: string, destEmail: string, oldProjectName: string, newProjectName: string, buildingArray: Array<any>, callback: (error: any, result: any) => void) {
     let query = {'email': sourceEmail};
     this.userRepository.retrieve(query, (error, users) => {
       logger.info('RateAnalysis service, find User has been hit');
@@ -4048,29 +4048,46 @@ export class ProjectService {
                   callback(error, null);
                 } else if (buildingData.length > 0) {
                   let arrayOfBuildingDetails = new Array();
-                  let arrayOfNewBuldingId = new Array();
                   let newBuildingName = "";
-                  for (let building of buildingData) {
-                    let buildingDetails = this.createCopyOfBuilding(building, newBuildingName);
-                    arrayOfBuildingDetails.push(buildingDetails);
-                  }
-                  this.buildingRepository.insertMany(arrayOfBuildingDetails, (error, result) => {
-                    if (error) {
-                      callback(error, null);
-                    } else if (result.length > 0) {
-                      for (let building of result) {
-                        arrayOfNewBuldingId.push(building._id);
-                      }
-                      let projectDetails = this.createCopyOfProject(project[0], arrayOfNewBuldingId, newProjectName);
-                      this.createCopyOfProjectAndSubscription(projectDetails, users, project, destEmail, (error: any, result: any) => {
-                        if (error) {
-                          callback(error, null);
-                        } else {
-                          callback(null, result);
+                  if(buildingArray.length > 0) {
+                    for (let buildingName of buildingArray) {
+                      let building = buildingData.filter(function (building: any) {
+                        if (building.name == buildingName) {
+                          return building;
                         }
                       });
+                      if(building.length > 0) {
+                        let buildingDetails = this.createCopyOfBuilding(building[0], newBuildingName);
+                        arrayOfBuildingDetails.push(buildingDetails);
+                      }
+                      else{
+                        callback(null,"Building not found");
+                      }
                     }
-                  });
+                  }else{
+                    for (let building of buildingData) {
+                    let buildingDetails = this.createCopyOfBuilding(building, newBuildingName);
+                    arrayOfBuildingDetails.push(buildingDetails);
+                    }
+                  }
+                  let arrayOfNewBuldingId = new Array();
+                    this.buildingRepository.insertMany(arrayOfBuildingDetails, (error, result) => {
+                      if (error) {
+                        callback(error, null);
+                      } else if (result.length > 0) {
+                        for (let building of result) {
+                          arrayOfNewBuldingId.push(building._id);
+                        }
+                        let projectDetails = this.createCopyOfProject(project[0], arrayOfNewBuldingId, newProjectName);
+                        this.createCopyOfProjectAndSubscription(projectDetails, users, project, destEmail, (error: any, result: any) => {
+                          if (error) {
+                            callback(error, null);
+                          } else {
+                            callback(null, result);
+                          }
+                        });
+                      }
+                    });
                 } else {
                   let arrayOfNewBuildingId = null;
                   let projectDetails = this.createCopyOfProject(project[0], arrayOfNewBuildingId, newProjectName);
