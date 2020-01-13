@@ -1513,7 +1513,8 @@ class ProjectController {
       let destEmail = req.body.destEmail;
       let oldProjectName = req.body.oldProjectName;
       let newProjectName = req.body.newProjectName;
-      projectService.copyProject(sourceEmail,destEmail,oldProjectName,newProjectName,(error: any, resp:any) =>{
+      let buildingArray = req.body.buildingArray;
+      projectService.copyProject(sourceEmail,destEmail,oldProjectName,newProjectName,buildingArray,(error: any, resp:any) =>{
         if (error) {
           next(error);
         } else {
