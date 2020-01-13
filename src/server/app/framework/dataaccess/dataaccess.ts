@@ -17,8 +17,8 @@ class DataAccess {
     let host = config.get('application.database.host');
     let name = config.get('application.database.name');
     Mongoose.set('debug',true);
-    this.mongooseInstance = Mongoose.connect('mongodb://admin:buildinfoadmin123@' + host + '/' + name + '');
-    //this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' + name+'');
+    //this.mongooseInstance = Mongoose.connect('mongodb://admin:buildinfoadmin123@' + host + '/' + name + '');
+    this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' + name+'');
     return this.mongooseInstance;
   }
 }
