@@ -216,5 +216,19 @@ class Constants {
   public static TRIAL_PERIOD = 5;
   public static PREMIUM_PERIOD = 30;
   public static DEFAULT_GST = 18;
+
+  //Copy Project And Building
+  public static PROJECT_COPIED_SUCCESSFULLY = 'Project copied successfully';
+  public static PROJECT_NOT_FOUND = 'Project not found';
+  public static SOURCE_PROJECT_NOT_FOUND = 'Source Project not found';
+  public static DEST_PROJECT_NOT_FOUND = 'Destination project not found';
+  public static USER_NOT_FOUND = 'User not found';
+  public static SOURCE_USER_NOT_FOUND = 'Source user not found';
+  public static DEST_USER_NOT_FOUND = 'Destination user not found';
+  public static BUILDING_COPIED_SUCCESSFULLY = 'Building Copied Successfully';
+  public static SOURCE_BUILDING_NOT_FOUND = 'Source Building not found';
+  public static GET_SUBSCRIPTION_FOR_BUILDING = 'Get subscription for building';
+
+
 }
 export=Constants;
