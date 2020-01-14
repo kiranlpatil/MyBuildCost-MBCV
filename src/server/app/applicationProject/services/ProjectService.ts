@@ -4023,7 +4023,7 @@ export class ProjectService {
   }
 
   copyProject(sourceEmail: string, destEmail: string, oldProjectName: string, newProjectName: string, buildingArray: Array<any>, callback: (error: any, result: any) => void) {
-    let query = {'email': sourceEmail};
+    let query = {'email': sourceEmail,'typeOfApp':{$exists:false}};
     this.userRepository.retrieve(query, (error, users) => {
       logger.info('RateAnalysis service, find User has been hit');
       if (error) {
@@ -4121,7 +4121,7 @@ export class ProjectService {
         for (let subscription of projectSubscription) {
           if (subscription.projectId[0].equals(project_Id)) {
             let copyOfSubscription = this.createCopyOfSubscription(res._id, subscription);
-            let updateQuery = {'email': destEmail};
+            let updateQuery = {'email': destEmail,'typeOfApp':{$exists:false}};
             let newData = {
               $push: {
                 'project': res._id,
