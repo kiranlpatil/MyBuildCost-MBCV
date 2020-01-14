@@ -59,40 +59,40 @@
     </thead>
     <tbody>
     <tr style="page-break-inside: avoid" *ngFor="let thumbRuleItem of amenitiesReport.thumbRule.thumbRuleReports; let currentAmenitieIndex = index">
-      <td style="padding: 5px 15px;width: 17.5%;">{{thumbRuleItem.name}}</td>
-      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+      <td style="padding: 5px;width: 17.5%;">{{thumbRuleItem.name}}</td>
+      <td style="padding: 5px;width: 17.5%;" align="right">
         <span *ngIf="thumbRuleItem.amount !== 0">{{thumbRuleItem.amount | number }}</span>
         <span *ngIf="thumbRuleItem.amount === 0">-</span>
       </td>
-      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+      <td style="padding: 5px;width: 17.5%;" align="right">
         <span *ngIf="thumbRuleItem.rate !== 0">{{ thumbRuleItem.rate | number: '1.2-2' }}</span>
         <span *ngIf="thumbRuleItem.rate === 0">-</span>
       </td>
-      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+      <td style="padding: 5px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost !== 0">
           {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost | number: '1.0-0' }}
         </span>
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].basicEstimatedCost === 0">-</span>
       </td>
-      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+      <td style="padding: 5px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent !== 0">
           {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent | number: '1.0-0' }}
         </span>
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].gstComponent === 0">-</span>
       </td>
-      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+      <td style="padding: 5px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total !== 0">
           {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total | number: '1.0-0' }}
         </span>
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].total === 0">-</span>
       </td>
-      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+      <td style="padding: 5px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst !== 0">
           {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst | number: '1.2-2' }}
         </span>
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rateWithoutGst === 0">-</span>
       </td>
-      <td style="padding: 5px 15px;width: 17.5%;" align="right">
+      <td style="padding: 5px;width: 17.5%;" align="right">
         <span *ngIf="amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate !== 0">
           {{ amenitiesReport.estimate.estimatedCosts[currentAmenitieIndex].rate | number: '1.2-2' }}
         </span>

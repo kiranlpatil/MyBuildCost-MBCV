@@ -655,6 +655,7 @@
         &:nth-child(7)
         {
           border-bottom: 1px solid $border-color;
+          height: 71px;
         }
 
         &:nth-child(7) {
@@ -688,7 +689,6 @@
           text-align: left;
         }
       }
-
       .file-attachment > span {
         float: right;
         margin: 0;
@@ -698,6 +698,7 @@
       }
 
       .file-attachment {
+        display: flex;
         .attachment-menu {
           padding: 15px;
           right: 0;
@@ -707,7 +708,7 @@
       }
 
       .attachment-menu:after, .attachment-menu:before {
-        left: 98%;
+        left: 55%;
       }
 
       .delete-cost-head,
@@ -730,7 +731,7 @@
     table {
       #show-embedded-table-row {
         td {
-          min-height: 71px;
+          //min-height: 71px;
           padding: 6px 9px;
         }
       }
