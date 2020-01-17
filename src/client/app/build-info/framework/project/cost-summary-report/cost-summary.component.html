@@ -59,9 +59,9 @@
                     </cost-summary-report-pdf>
                   </div>
                 </li>
-                <li class="dropdown-padding"><p *ngIf="!addBuildingButtonDisable" data-toggle="modal" (click)="cloneBuilding(building._id)">- {{getMenus().CLONE}}</p></li>
-                <li class="dropdown-padding"><p (click)="goToEditBuilding(building._id)">- {{getMenus().EDIT}}</p></li>
-                <li class="dropdown-padding"><p (click)="setIdForDeleteBuilding(building._id, building.estimate.totalEstimatedCost)">- {{getMenus().DELETE}}</p></li>
+                <li class="dropdown-padding"><p *ngIf="!addBuildingButtonDisable" data-toggle="modal" (click)="cloneBuilding(building._id)">{{getMenus().CLONE}}</p></li>
+                <li class="dropdown-padding"><p (click)="goToEditBuilding(building._id)">{{getMenus().EDIT}}</p></li>
+                <li class="dropdown-padding"><p (click)="setIdForDeleteBuilding(building._id, building.estimate.totalEstimatedCost)">{{getMenus().DELETE}}</p></li>
                 <!--<li><p (click)="downloadToPdf()">Print PDF</p></li>-->
               </ul>
             </div>
