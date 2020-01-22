@@ -228,6 +228,7 @@ class Constants {
   public static BUILDING_COPIED_SUCCESSFULLY = 'Building Copied Successfully';
   public static SOURCE_BUILDING_NOT_FOUND = 'Source Building not found';
   public static GET_SUBSCRIPTION_FOR_BUILDING = 'Get subscription for building';
+  public static BUILDING_NOT_FOUND = 'Building Not Found';
 
 
 }

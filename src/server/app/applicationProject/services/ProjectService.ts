@@ -4023,9 +4023,9 @@ export class ProjectService {
   }
 
   copyProject(sourceEmail: string, destEmail: string, oldProjectName: string, newProjectName: string, buildingArray: Array<any>, callback: (error: any, result: any) => void) {
-    let query = {'email': sourceEmail};
+    let query = {'email': sourceEmail,'typeOfApp':{$exists:false}};
     this.userRepository.retrieve(query, (error, users) => {
-      logger.info('RateAnalysis service, find User has been hit');
+      logger.info('ProjectService, find User has been hit');
       if (error) {
         callback(error, null);
       } else if (users.length > 0) {
@@ -4059,9 +4059,8 @@ export class ProjectService {
                       if(building.length > 0) {
                         let buildingDetails = this.createCopyOfBuilding(building[0], newBuildingName);
                         arrayOfBuildingDetails.push(buildingDetails);
-                      }
-                      else{
-                        callback(null,"Building not found");
+                      }else{
+                       return  callback(null, Constants.BUILDING_NOT_FOUND);
                       }
                     }
                   }else{
@@ -4070,34 +4069,15 @@ export class ProjectService {
                     arrayOfBuildingDetails.push(buildingDetails);
                     }
                   }
-                  let arrayOfNewBuldingId = new Array();
-                    this.buildingRepository.insertMany(arrayOfBuildingDetails, (error, result) => {
-                      if (error) {
-                        callback(error, null);
-                      } else if (result.length > 0) {
-                        for (let building of result) {
-                          arrayOfNewBuldingId.push(building._id);
-                        }
-                        let projectDetails = this.createCopyOfProject(project[0], arrayOfNewBuldingId, newProjectName);
-                        this.createCopyOfProjectAndSubscription(projectDetails, users, project, destEmail, (error: any, result: any) => {
-                          if (error) {
-                            callback(error, null);
-                          } else {
-                            callback(null, result);
-                          }
-                        });
-                      }
-                    });
-                } else {
-                  let arrayOfNewBuildingId = null;
-                  let projectDetails = this.createCopyOfProject(project[0], arrayOfNewBuildingId, newProjectName);
-                  this.createCopyOfProjectAndSubscription(projectDetails, users, project, destEmail, (error: any, result: any) => {
+                  this.createCopyOfProjectAndSubscription(arrayOfBuildingDetails, users, project, destEmail,newProjectName, (error: any, result: any) => {
                     if (error) {
                       callback(error, null);
                     } else {
-                      callback(null, Constants.PROJECT_COPIED_SUCCESSFULLY);
+                      callback(null, result);
                     }
                   });
+                }else{
+                  callback(null, Constants.BUILDING_NOT_FOUND);
                 }
               });
             } else {
@@ -4111,36 +4091,60 @@ export class ProjectService {
     });
   }
 
-  createCopyOfProjectAndSubscription(projectDetails: any, users: any, project: any, destEmail: any, callback: (error: any, result: any) => void) {
-    this.projectRepository.create(projectDetails, (error, res) => {
+  createCopyOfProjectAndSubscription(arrayOfBuildingDetails: Array<any>,users: any, project: any, destEmail: any,newProjectName:any, callback: (error: any, result: any) => void) {
+    let updateQuery = {'email': destEmail,'typeOfApp':{$exists:false}};
+    this.userRepository.find(updateQuery,(error,user) =>{
       if (error) {
         callback(error, null);
-      } else {
-        let projectSubscription = users[0].subscription;
-        let project_Id = project[0]._id;
-        for (let subscription of projectSubscription) {
-          if (subscription.projectId[0].equals(project_Id)) {
-            let copyOfSubscription = this.createCopyOfSubscription(res._id, subscription);
-            let updateQuery = {'email': destEmail};
-            let newData = {
-              $push: {
-                'project': res._id,
-                'subscription': copyOfSubscription
-              }
-            };
-            this.userRepository.findOneAndUpdate(updateQuery, newData, {new: true}, (err, response) => {
-              if (err) {
-                callback(err, null);
-              } else {
-                if (response !== null) {
-                  callback(null,Constants.PROJECT_COPIED_SUCCESSFULLY);
-                } else {
-                  callback(null,Constants.DEST_USER_NOT_FOUND);
+      } else if(user.length > 0) {
+        let arrayOfNewBuldingId = new Array();
+        if(arrayOfBuildingDetails.length > 0) {
+          this.buildingRepository.insertMany(arrayOfBuildingDetails, (error, result) => {
+            if (error) {
+              callback(error, null);
+            } else{
+              if (result.length > 0) {
+                for (let building of result) {
+                  arrayOfNewBuldingId.push(building._id);
                 }
               }
-            });
-          }
+            }
+          let projectDetails: any = this.createCopyOfProject(project[0], arrayOfNewBuldingId, newProjectName);
+          this.projectRepository.create(projectDetails, (error, res) => {
+            if (error) {
+              callback(error, null);
+             } else {
+              let projectSubscription = users[0].subscription;
+              let project_Id = project[0]._id;
+              for (let subscription of projectSubscription) {
+                if (subscription.projectId[0].equals(project_Id)) {
+                  let copyOfSubscription = this.createCopyOfSubscription(res._id, subscription);
+                   //let updateQuery = {'email': destEmail,'typeOfApp':{$exists:false}};
+                  let newData = {
+                    $push: {
+                      'project': res._id,
+                      'subscription': copyOfSubscription
+                    }
+                  };
+                  this.userRepository.findOneAndUpdate(updateQuery, newData, {new: true}, (err, response) => {
+                    if (err) {
+                      callback(err, null);
+                    } else {
+                      if (response !== null) {
+                        callback(null, Constants.PROJECT_COPIED_SUCCESSFULLY);
+                      } else {
+                        callback(null, Constants.DEST_USER_NOT_FOUND);
+                      }
+                    }
+                  });
+                }
+              }
+            }
+          });
+          });
         }
+      }else{
+        callback(null,Constants.DEST_USER_NOT_FOUND);
       }
     });
   }
