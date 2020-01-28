@@ -2178,7 +2178,6 @@ export class ProjectService {
             let quantity = this.changeQuantityByWorkItemUnit(workItem.quantity.total, workItem.unit, workItem.rate.unit);
             let gstComponentTotal = alasql('VALUE OF SELECT ROUND(SUM(gstComponent),2) FROM ?', [workItem.rate.rateItems]);
             workItem.gstComponent = (quantity * gstComponentTotal) / workItem.rate.quantity;
-            7
             workItem.totalRate = alasql('VALUE OF SELECT ROUND(SUM(totalRate),2) FROM ?', [workItem.rate.rateItems]);
             workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
           } else {
