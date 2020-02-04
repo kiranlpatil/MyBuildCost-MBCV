@@ -31,6 +31,7 @@ import ProjectModel = require('../dataaccess/model/project/Project');
 import UserSubscription = require('../dataaccess/model/project/Subscription/UserSubscription');
 import * as multiparty from 'multiparty';
 import { AttachmentDetailsModel } from '../dataaccess/model/project/building/AttachmentDetails';
+import SendMailService = require('./../../framework/services/mailer.service');
 let config = require('config');
 let log4js = require('log4js');
 import * as mongoose from 'mongoose';
@@ -38,6 +39,8 @@ import RateAnalysis = require('../dataaccess/model/RateAnalysis/RateAnalysis');
 import SteelQuantityItems = require('../dataaccess/model/project/building/SteelQuantityItems');
 import ItemGstRepository = require('../dataaccess/repository/ItemGstRepository');
 import ItemGst = require('../dataaccess/model/RateAnalysis/ItemGst');
+import MailAttachments = require("../../framework/shared/sharedarray");
+import Messages = require("../../framework/shared/messages");
 let xlsxj = require('xlsx-to-json');
 
 //import RateItemsAnalysisData = require("../dataaccess/model/project/building/RateItemsAnalysisData");
@@ -2175,7 +2178,6 @@ export class ProjectService {
             let quantity = this.changeQuantityByWorkItemUnit(workItem.quantity.total, workItem.unit, workItem.rate.unit);
             let gstComponentTotal = alasql('VALUE OF SELECT ROUND(SUM(gstComponent),2) FROM ?', [workItem.rate.rateItems]);
             workItem.gstComponent = (quantity * gstComponentTotal) / workItem.rate.quantity;
-            7
             workItem.totalRate = alasql('VALUE OF SELECT ROUND(SUM(totalRate),2) FROM ?', [workItem.rate.rateItems]);
             workItem.amount = this.commonService.decimalConversion(workItem.rate.total * workItem.quantity.total);
           } else {
@@ -4069,7 +4071,7 @@ export class ProjectService {
                     arrayOfBuildingDetails.push(buildingDetails);
                     }
                   }
-                  this.createCopyOfProjectAndSubscription(arrayOfBuildingDetails, users, project, destEmail,newProjectName, (error: any, result: any) => {
+                  this.createCopyOfProjectAndSubscription(arrayOfBuildingDetails, users, project,sourceEmail, destEmail,oldProjectName,newProjectName, (error: any, result: any) => {
                     if (error) {
                       callback(error, null);
                     } else {
@@ -4091,7 +4093,7 @@ export class ProjectService {
     });
   }
 
-  createCopyOfProjectAndSubscription(arrayOfBuildingDetails: Array<any>,users: any, project: any, destEmail: any,newProjectName:any, callback: (error: any, result: any) => void) {
+  createCopyOfProjectAndSubscription(arrayOfBuildingDetails: Array<any>,users: any, project: any,sourceEmail:any, destEmail: any,oldProjectName:any,newProjectName:any, callback: (error: any, result: any) => void) {
     let updateQuery = {'email': destEmail,'typeOfApp':{$exists:false}};
     this.userRepository.find(updateQuery,(error,user) =>{
       if (error) {
@@ -4131,7 +4133,14 @@ export class ProjectService {
                       callback(err, null);
                     } else {
                       if (response !== null) {
-                        callback(null, Constants.PROJECT_COPIED_SUCCESSFULLY);
+                        let msg = Messages.PROJECT_COPIED_SUCCESSFULLY;
+                        this.sendMail(sourceEmail,destEmail,oldProjectName,msg,(err,res)=>{
+                          if(err) {
+                            callback(err, null);
+                          }else if(res !=null){
+                            callback(null, Constants.PROJECT_COPIED_SUCCESSFULLY);
+                          }
+                        });
                       } else {
                         callback(null, Constants.DEST_USER_NOT_FOUND);
                       }
@@ -4148,7 +4157,22 @@ export class ProjectService {
       }
     });
   }
-
+  sendMail(sourceEmail:any,destEmail:any,name:any,msg:any,callback:(error:any,res:any)=>void){
+    let sendMailService = new SendMailService();
+    let htmlTemplate = 'project-copied-mail.html';
+    let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
+      ['$link$', 'http://mybuildcost.co.in/'], ['$source$',sourceEmail], ['$dest$',destEmail], ['$name$',name]]);
+    let attachment = MailAttachments.WelcomeAboardAttachmentArray;
+    sendMailService.send(config.get('application.mail.TPLGROUP_MAIL'), msg, htmlTemplate, data, attachment,
+      (err: any, result: any) => {
+        if (err) {
+          logger.error(JSON.stringify(err));
+         }else {
+          logger.debug('Sending Mail : ' + JSON.stringify(result));
+          callback(null,result);
+        }
+      });
+  }
   createCopyOfBuilding(building: any, newBuildingName: any) {
     let buildings = new BuildingModel();
     if (newBuildingName.trim() !== "") {
@@ -4274,7 +4298,15 @@ export class ProjectService {
                               if (error) {
                                 callback(error, null);
                               } else {
-                                callback(null, Constants.BUILDING_COPIED_SUCCESSFULLY)
+                                let msg = Messages.BUILDING_COPIED_SUCCESSFULLY;
+                                this.sendMail(sourceEmail,destEmail,oldBuildingName,msg,(error,res)=>{
+                                  if(error){
+                                    callback(error,null);
+                                  }else
+                                    if(res != null){
+                                      callback(null, Constants.BUILDING_COPIED_SUCCESSFULLY);
+                                    }
+                                });
                               }
                             });
                           } else {

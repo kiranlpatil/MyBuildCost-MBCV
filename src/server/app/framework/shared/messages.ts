@@ -21,6 +21,8 @@ class Messages {
   public static CHANGED_USER_SUBSCRIPTION: string = 'Changed User Subscription ';
   public static CHANGED_USER_SUBSCRIPTION_FOR_PROJECT: string = 'Changed validity Of Project';
   public static ACCESS_BLOCKED:string = 'Access Blocked';
+  public static PROJECT_COPIED_SUCCESSFULLY = 'Project Copied Successfully';
+  public static BUILDING_COPIED_SUCCESSFULLY = 'Building Copied Successfully';
 
   //Sendmail
   public static MSG_SUCCESS_EMAIL_REGISTRATION: string = 'Email sent on registered email address.';
