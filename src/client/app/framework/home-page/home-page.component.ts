@@ -21,6 +21,7 @@ export class HomePageComponent implements OnInit {
   model = new ContactUs();
   submitStatus: boolean;
   contacted: boolean = false;
+  year = new Date().getFullYear();
   private isFormSubmitted = false;
 
   constructor(private _router: Router, private formBuilder: FormBuilder, private contactService: ContactService1) {

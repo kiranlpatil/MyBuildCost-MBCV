@@ -28,7 +28,7 @@
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
       "ADMIN_MAIL": "swapnil.nakhate@techprimelab.com",
       "BUILDINFO_ADMIN_MAIL": "redminestatus@techprimelab.com",
-      "TPLGROUP_MAIL": "bigslice-support@techprimelab.com",
+      "TPLGROUP_MAIL": "buildinfo@techprimelab.com",
       "MAIL_SERVICE": "Gmail",
       "MAILCHIMP_CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
       "MAILCHIMP_RECRUITER_SIGN_IN_SUCCESS_LISTID": "222f48cf94",
