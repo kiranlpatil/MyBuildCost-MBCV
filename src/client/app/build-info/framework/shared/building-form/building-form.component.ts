@@ -53,6 +53,7 @@ export class BuildingFormComponent implements AfterViewInit {
   submitForm() {
     if (this.buildingForm.valid) {
       this.buildingModel = this.buildingForm.value;
+      this.buildingModel.name = this.buildingForm.value.name.trim();
       this.view === 'cloneBuilding' ? this.buildingModel.cloneItems = this.cloneItems : console.log();
       this.onSubmitEvent.emit(this.buildingModel);
     } else {

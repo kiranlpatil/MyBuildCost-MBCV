@@ -1836,34 +1836,65 @@ if(duplicateUser.hasOwnProperty("RAP")){
   }
 
   exportUserData(callback:(error: any, result: any)=> void) {
-   let rateAnalysisUsersFile =  this.createRateAnalysisUsersFile(callback);
-   let buildInfoUsersFile = this.createBuildInfoUsersFile(callback);
-   let usageTrackingFile = this.createUsageTrackingFile(callback);
-   Promise.all([
-     rateAnalysisUsersFile,
-     buildInfoUsersFile,
-     usageTrackingFile
-   ]).then((data: any) => {
-     callback(null, {
-       'status': 'Success',
-       'data': {'message': 'File created successfully'}
-     });
-   }).catch(function (e: any) {
-      logger.error(' Promise failed for creating Excel Files ! :' + JSON.stringify(e.message));
-     Promise.reject(e.message);
+    let findAllUsers = {};
+    let projection = {path: 'project', select: ['name','activeStatus']};
+    this.userRepository.findAndPopulate(findAllUsers, projection, (error: any, userList: any) => {
+      if (error) {
+        callback(error, null);
+      } else {
+
+        let raUsers = userList.filter(function (user: User) {
+          return user.typeOfApp ? user.typeOfApp = 'RAapp' : null;
+        });
+
+        let mbcUsers = userList.filter(function (user: User) {
+          return user.typeOfApp === undefined;
+        });
+
+        let userService = new  UserService();
+        let usageTrackingForUsers = {};
+        let query = {path: '_id', select: ['userId']};
+        this.usageTrackingRepository.findAndPopulate(usageTrackingForUsers, query, (err: any, userData: any) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            let mapOfUsers = {};
+            userService.getMap(raUsers, mapOfUsers);
+            userData.filter(user => {
+                if(mapOfUsers.hasOwnProperty(user.userId)) {
+                  user.mobileNumber = mapOfUsers[user.userId]['mobileNumber'];
+                  user.email = mapOfUsers[user.userId]['email'];
+                }
+              });
+
+            let rateAnalysisUsersFile = this.createRateAnalysisUsersFile(raUsers, callback);
+            let buildInfoUsersFile = this.createBuildInfoUsersFile(mbcUsers, callback);
+            let usageTrackingFile = this.createUsageTrackingFile(userData, callback);
+
+            Promise.all([
+               rateAnalysisUsersFile,
+               buildInfoUsersFile,
+               usageTrackingFile
+            ]).then((data: any) => {
+              callback(null, {
+                'status': 'Success',
+                'data': {'message': 'File created successfully'}
+              });
+            }).catch(function (e: any) {
+              logger.error(' Promise failed for creating Excel Files ! :' + JSON.stringify(e.message));
+              Promise.reject(e.message);
+            });
+          }
+        });
+      }
     });
   }
 
-  createRateAnalysisUsersFile(callback: (error: any, result: any) => void) {
+  createRateAnalysisUsersFile(userList: Array<any> , callback: (error: any, result: any) => void) {
     return new Promise((resolve: any, reject: any) => {
-      let findAllUsersOfRA = {'typeOfApp': 'RAapp'};
-      this.userRepository.retrieve(findAllUsersOfRA, (error: any, userList: any) => {
-        if (error) {
-          callback(error, null);
-        } else {
           for (let user of userList) {
             user.typeOfApp = 'RateAnalysis';
-            if (user.subscriptionForRA.name === "RAPremium") {
+            if (user.subscriptionForRA.name === 'RAPremium') {
               user.isPaidUser = true;
             } else {
               user.isPaidUser = false;
@@ -1892,22 +1923,26 @@ if(duplicateUser.hasOwnProperty("RAP")){
           var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'RateAnalysisUsers.csv';
           this.createCsvFile(pathOfFile, csv);
           resolve(userList);
-        }
-      });
-
     }).catch((error: Error) => {
       Promise.reject(error);
     });
   }
 
-  createBuildInfoUsersFile(callback: (error: any, result: any) => void) {
+  getMapOfProject(projects:any, mapOfProject:any) {
+    for(let project of projects) {
+      mapOfProject[String(project._id)] = project.name;
+    }
+ }
+
+  getMap(raUsers: any, mapOfUsers: any) {
+    for(let user of raUsers) {
+      mapOfUsers[String(user._id)] = {'email':  user.email, 'mobileNumber': user.mobile_number};
+    }
+  }
+
+  createBuildInfoUsersFile(userList : Array<any>, callback: (error: any, result: any) => void) {
     return new Promise((resolve: any, reject: any) => {
-      let findAllUsersOfMBC = {'typeOfApp': {$exists: false}};
-      this.userRepository.retrieve(findAllUsersOfMBC, (error: any, userList: any) => {
-        if (error) {
-          callback(error, null);
-        } else {
-          let arrayPromises: any = new Array(0);
+      let userService = new UserService();
           for (let user of userList) {
             user.typeOfApp = 'MyBuildCost';
             if (user.subscription[0].validity > 15 || user.subscription.length >= 2) {
@@ -1915,18 +1950,24 @@ if(duplicateUser.hasOwnProperty("RAP")){
             } else {
               user.isPaidUser = false;
             }
+            let mapOfProject = {};
+            let projectName = '';
+            if(user.project.length !== 0) {
+              userService.getMapOfProject(user.project, mapOfProject);
+            }
             for (let subscription of user.subscription) {
               if (subscription.projectId.length !== 0) {
-                let tempPromise = this.getProjectName(subscription, user);
-                arrayPromises.push(tempPromise);
+                subscription.projectId.filter(function (name: string) {
+                 if(mapOfProject.hasOwnProperty(subscription.projectId[0])) {
+                   projectName = mapOfProject[String(subscription.projectId[0])];
+                 }
+                });
+                this.projectSubscriptionDetails(subscription,user, projectName);
               } else {
                 this.projectSubscriptionDetails(subscription, user);
               }
             }
           }
-
-          Promise.all(arrayPromises)
-            .then((data: any) => {
               var csvData = ['Email,Mobile_Number,App_Type,IsPaidUser,Subscription_ProjectName,Subscription_PackageName,Subscription_ExpiryDate,Subscription_IsExpired'];
               for (let user of userList) {
                 var csvRow1 = {
@@ -1957,41 +1998,20 @@ if(duplicateUser.hasOwnProperty("RAP")){
               var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'MyBuildCostUser.csv';
               this.createCsvFile(pathOfFile, csv);
               resolve(userList);
-            })
-            .catch((error: Error) => {
-              Promise.reject(error);
-            });
-        }
-      });
     }).catch((error: Error) => {
       Promise.reject(error);
     });
   }
 
-  createUsageTrackingFile(callback: (error: any, result: any) => void) {
+  createUsageTrackingFile(userData: Array<any>, callback: (error: any, result: any) => void) {
     return new Promise((resolve: any, reject: any) => {
-      let usageTrackingForUsers = {};
-      let query = {path: '_id', select: ['userId']};
-      this.usageTrackingRepository.findAndPopulate(usageTrackingForUsers, query, (err: any, userData: any) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          let arrayPromise: any = new Array(0);
           for (let user of userData) {
-            if (user.userId) {
-              let tempPromise = this.getMobileAndEmail(user);
-              arrayPromise.push(tempPromise);
+              if (user.appType === undefined || user.appType === 'MyBuildCost') {
+                user.appType = 'MyBuildCost';
+              } else if (user.appType && user.appType === 'mcc') {
+                user.appType = 'MyCivilCalC';
+              }
             }
-            if (user.appType === undefined || user.appType === 'MyBuildCost') {
-              user.appType = 'MyBuildCost';
-            } else if (user.appType && user.appType === 'mcc') {
-              user.appType = 'MyCivilCalC';
-            }
-          }
-
-          Promise.all(arrayPromise)
-            .then((data: any) => {
-              console.log('created usageFile');
               var fields = [{label: 'Email', value: 'email'}, {label: 'Mobile Number', value: 'mobileNumber'},
                 {label: 'App Type', value: 'appType'}, {label: 'UserId', value: 'userId'},
                 {label: 'DeviceId', value: 'deviceId'}, {label: 'Platform', value: 'platform'},
@@ -2004,44 +2024,8 @@ if(duplicateUser.hasOwnProperty("RAP")){
               const csv = parser.parse(userData);
               var pathOfFile = path.resolve() + config.get('application.exportFilePathServer') + 'AppUsageDetails.csv';
               this.createCsvFile(pathOfFile, csv);
+              console.log('created usageFile');
               resolve(userData);
-            })
-            .catch((error: Error) => {
-              Promise.reject(error);
-            });
-        }
-      });
-    }).catch((error: Error) => {
-      Promise.reject(error);
-    });
-  }
-
-  getMobileAndEmail(user:any) {
-    return new Promise((resolve: any, reject: any) => {
-      let query = {_id: user.userId};
-      let populate = {path: '_id', select: ['mobile_number', 'email']};
-      this.userRepository.findAndPopulate(query, populate, (error, result) => {
-        if (result.length !== 0) {
-          user.mobileNumber = result[0].mobile_number;
-          user.email = result[0].email;
-        }
-          resolve(user);
-      });
-    }).catch((error: Error) => {
-      Promise.reject(error);
-    });
-  }
-
-  getProjectName(subscription:any, user:any) {
-    return new Promise((resolve: any, reject: any) => {
-      let query = {_id: subscription.projectId[0]};
-      let populate = {path: 'buildings', select: ['name']};
-      this.projectRepository.findAndPopulate(query, populate, (error, result) => {
-        if (result.length !== 0)
-        var projectName = result[0].name;
-        this.projectSubscriptionDetails(subscription,user, projectName);
-        resolve(subscription);
-      });
     }).catch((error: Error) => {
       Promise.reject(error);
     });

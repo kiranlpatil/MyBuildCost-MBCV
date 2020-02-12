@@ -361,7 +361,7 @@ export class ValidationService {
 
 
   static requiredBuildingName(control: any) {
-    if (control.value === '' || control.value === undefined) {
+    if (control.value.trim() === '' || control.value === undefined) {
       return {'requiredBuildingName': true};
     } else {
       return null;
