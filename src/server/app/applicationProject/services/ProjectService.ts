@@ -4093,7 +4093,9 @@ export class ProjectService {
     });
   }
 
-  createCopyOfProjectAndSubscription(arrayOfBuildingDetails: Array<any>,users: any, project: any,sourceEmail:any, destEmail: any,oldProjectName:any,newProjectName:any, callback: (error: any, result: any) => void) {
+  createCopyOfProjectAndSubscription(arrayOfBuildingDetails: Array<any>,users: any, project: any, sourceEmail:any,
+                                     destEmail: any,oldProjectName:any,newProjectName:any,
+                                     callback: (error: any, result: any) => void) {
     let updateQuery = {'email': destEmail,'typeOfApp':{$exists:false}};
     this.userRepository.find(updateQuery,(error,user) =>{
       if (error) {
@@ -4134,7 +4136,7 @@ export class ProjectService {
                     } else {
                       if (response !== null) {
                         let msg = Messages.PROJECT_COPIED_SUCCESSFULLY;
-                        this.sendMail(sourceEmail,destEmail,oldProjectName,msg,(err,res)=>{
+                        this.sendMail(sourceEmail,destEmail,oldProjectName, newProjectName, msg,(err,res)=> {
                           if(err) {
                             callback(err, null);
                           }else if(res !=null){
@@ -4157,11 +4159,13 @@ export class ProjectService {
       }
     });
   }
-  sendMail(sourceEmail:any,destEmail:any,name:any,msg:any,callback:(error:any,res:any)=>void){
+
+  sendMail(sourceEmail:any,destEmail:any,oldProjectName:string, newProjectName:string, msg:any, callback:(error:any,res:any)=>void){
     let sendMailService = new SendMailService();
     let htmlTemplate = 'project-copied-mail.html';
     let data: Map<string, string> = new Map([['$applicationLink$', config.get('application.mail.host')],
-      ['$link$', 'http://mybuildcost.co.in/'], ['$source$',sourceEmail], ['$dest$',destEmail], ['$name$',name]]);
+      ['$link$', 'http://mybuildcost.co.in/'], ['$source$',sourceEmail], ['$dest$',destEmail],
+      ['$oldProjectName$',oldProjectName], ['$newProjectName$',newProjectName]]);
     let attachment = MailAttachments.WelcomeAboardAttachmentArray;
     sendMailService.send(config.get('application.mail.TPLGROUP_MAIL'), msg, htmlTemplate, data, attachment,
       (err: any, result: any) => {
@@ -4173,6 +4177,7 @@ export class ProjectService {
         }
       });
   }
+
   createCopyOfBuilding(building: any, newBuildingName: any) {
     let buildings = new BuildingModel();
     if (newBuildingName.trim() !== "") {
@@ -4299,7 +4304,7 @@ export class ProjectService {
                                 callback(error, null);
                               } else {
                                 let msg = Messages.BUILDING_COPIED_SUCCESSFULLY;
-                                this.sendMail(sourceEmail,destEmail,oldBuildingName,msg,(error,res)=>{
+                                this.sendMail(sourceEmail,destEmail,oldBuildingName,newBuildingName,msg,(error,res)=>{
                                   if(error){
                                     callback(error,null);
                                   }else
